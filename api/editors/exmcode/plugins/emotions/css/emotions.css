@@ -1,0 +1,27 @@
+body{
+	margin: 15px;
+}
+img{
+	padding: 2px;
+	margin: 3px;
+	cursor: pointer;
+}
+table td{
+	text-align: center;
+	vertical-align: middle;
+	padding: 3px;
+	border-right: 1px dotted #CCC;
+	border-bottom: 1px dotted #CCC;
+}
+table tr td:last-child{
+	border-right: 0;
+}
+table tr:last-child td{
+	border-bottom: 0;
+}
+tr:hover{
+	background: #F0F0F0;
+}
+td:hover{
+	background: #C0FFFF;
+}

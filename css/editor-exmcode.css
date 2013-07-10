@@ -1,0 +1,251 @@
+/**
+* $Id: editor-exmcode.css 886 2011-12-28 22:12:33Z i.bitcero $
+* ExmCode Editor
+* $Author: i.bitcero $
+* $Rev: 886 $
+*/
+
+div.ed-container div.ed_buttons{
+	background: #e2e2e2;
+	overflow: hidden;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin-bottom: -2px;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+}
+div.ed-container textarea{
+    border: 1px solid #CCC;
+}
+div.ed-container div.ed_buttons div.row_top{
+	background: #E2E2E2 url(../images/ed-bg.png) repeat-x top;
+	overflow: hidden;
+	padding: 3px;
+	-moz-border-radius: 5px 5px 0 0;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom: 0;
+}
+div.ed-container div.ed_buttons div.row_bottom{
+	overflow: hidden;
+	display: none;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #ccc;
+	padding: 3px;
+	background: #E2E2E2 url(../images/ed-bg.png) repeat-x top;
+}
+div.ed-container div.ed_buttons span.buttons{
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    background-image: url(../images/butt2.png);
+    background-position: left top;
+    background-repeat: repeat-x;
+    padding: 3px;
+    font-size: 0.9em;
+    color: #333;
+    border: 1px solid #ACACAC;
+    margin: 2px 0px 2px 2px;
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    display: block;
+    float: left;
+    height: 18px;
+}
+div.ed-container div.ed_buttons span.buttons:hover{
+	border: 1px solid #A3BAD6;
+	background-position: left bottom;
+}
+div.ed-container div.ed_buttons span.buttons span{
+	display: block;
+	min-height: 16px;
+	min-width: 12px;
+	overflow: hidden;
+	padding: 2px 0 0 0;
+	width: auto;
+}
+div.ed-container div.ed_buttons span.buttons span span.dropdown{
+	float: right;
+	margin-left: 5px;
+	border-left: 1px solid #fff;
+	padding: 0;
+}
+div.ed-container div.ed_buttons span.buttons span span.dropdown img{
+	padding: 0 5px 0 6px;
+	border-left: 1px solid #ccc;
+}
+div.ed-container div.ed_buttons span.buttons span img{
+	float: left;
+	margin-top: -1px;
+}
+div.ed-container div.ed_buttons span.buttons:hover{
+	border-color: #999;
+	text-decoration: none;
+}
+div.ed-container div.ed_buttons span.separator{
+    display: block;
+    float: left;
+    background: url(../images/separator.gif) no-repeat center;
+    width: 6px;
+    height: 30px;
+    margin-left: 2px;
+    clear: none;
+}
+div.ed-container textarea{
+    font-family: Georgia, times, serif;
+	font-size: 1.05em;
+	color: #333;
+	padding: 3px;
+	-moz-border-radius: 0 0 5px 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -khtml-border-bottom-right-radius: 5px;
+    -khtml-border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: #FFF;
+}
+div.ed-container div.pops{
+	position: absolute;
+	display: none;
+	background: #FFF;
+	border: 1px solid #CCC;
+	padding: 3px;
+	max-height: 300px;
+	overflow: auto;
+	-moz-border-radius: 0 0 5px 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -khtml-border-bottom-right-radius: 5px;
+    -khtml-border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+div.ed-container div.pops ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+div.ed-container div.pops ul li{
+	list-style: none;
+	padding: 2px;
+	cursor: pointer;
+	border: 1px solid #fff;
+}
+div.ed-container div.pops ul li:hover{
+	background: #ebebeb;
+	border: 1px solid #CCC;
+}
+div.ed-container div.bottom{
+    line-height: 150%;
+    background: #f2f2f2;
+}
+div.ed-container div.pops label{
+    display: block;
+}
+div.ed-container div.pops input[type='text']{
+    margin: 2px 0 6px 0;
+}
+div.ed-container div.pops input[type='button']{
+    margin: 2px 2px 3px 0;
+}
+
+/* POPUPS */
+.popup{
+    border: 1px solid #999;
+    padding: 1px;
+    background: #FFF;
+    position: absolute;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: #000 0 0 25px;
+    -moz-box-shadow: #000 0 0 25px;
+}
+.maximized{
+    box-shadow: none;
+    -moz-box-shadow: none;
+}
+.popup .titlebar{
+    background: url(../images/bgpops.png) repeat-x top;
+    height: 30px;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -khtml-border-top-right-radius: 5px;
+    -khtml-border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.popup .content{
+    padding: 3px;
+    position: inline;
+}
+.popup .content iframe{
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+.popup .titlebar .buttons{
+    display: block;
+    float: right;
+    padding: 6px 5px 0 0;
+    overflow: hidden;
+}
+.popup .titlebar .buttons span{
+    background: url(../images/popbuts.png) no-repeat;
+    width: 17px;
+    height: 16px;
+    display: block;
+    cursor: pointer;
+    float: right;
+}
+.popup .titlebar .buttons .close{
+    background-position: -34px top;
+}
+.popup .titlebar .buttons .close:hover{
+    background-position: -34px bottom;
+}
+.popup .titlebar .buttons .maximize{
+    background-position: left top;
+    display: none;
+}
+.popup .titlebar .buttons .maximize:hover{
+    background-position: left bottom;
+}
+.popup .titlebar .buttons .restore{
+    background-position: -17px top;
+    display: none;
+}
+.popup .titlebar .buttons .restore:hover{
+    background-position: -17px bottom;
+}
+.popup .titlebar .buttons span span{
+    display: none;
+}
+.popup .titlebar .title{
+    font-weight: bold;
+    color: #FFF;
+    display: block;
+    padding: 6px 0 0 6px;
+    text-shadow: #000 1px 1px 2px;
+}
+.popblocker{
+    position:fixed; 
+    left:0; 
+    top:0; 
+    width:100%; 
+    height:100%;
+    border:1px solid #000; 
+    background:#000; top:0; left:0; opacity:0.8; -ms-filter:'alpha(opacity=80)'; filter:alpha(opacity=80)
+}

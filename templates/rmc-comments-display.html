@@ -1,0 +1,24 @@
+<div class="comments_container">
+    <{foreach item=comment from=$comments}>
+    <div class="comment_item outer"><a name="comment-<{$comment.id}>"></a>
+    	<div class="head">
+    		<{if $comment.poster.avatar=="$xoops_url/uploads/blank.gif" || $comment.poster.avatar==''}>
+                <img src="<{$xoops_url}>/modules/rmcommon/images/avatar.gif" title="<{$poster.name}>" />
+            <{else}>
+                <img src="<{$comment.poster.avatar}>" title="<{$poster.name}>" />
+            <{/if}>
+    	</div>
+        <div class="info">
+            <{if $comment.poster.id>0 && $comment.poster.url==''}>
+                <a href="<{$xoops_url}>/userinfo.php?uid=<{$comment.poster.id}>"><{$comment.poster.name}></a> says:
+            <{elseif $comment.poster.url!=''}>
+                <a href="<{$comment.poster.url}>" rel="external nofollow" target="_blank"><{$comment.poster.name}></a> says:
+            <{else}>
+                <{$comment.poster.name}> says:
+            <{/if}>
+            <span class="date"><{$comment.posted}><{if ($comment.edit!='')}> (<a href="<{$comment.edit}>"><{$lang_edit}></a>)<{/if}></span>
+        </div>
+    	<div class="text"><{$comment.text}></div>
+    </div>
+    <{/foreach}>
+</div>

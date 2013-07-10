@@ -1,0 +1,134 @@
+<?php
+// $Id$
+// --------------------------------------------------------------
+// Schooler Pro
+// A module for management of scores and notes for students
+// Author: Eduardo Cortes
+// Email: i.bitcero@gmail.com
+// License: GPL 2.0
+// URI: http://www.redmexico.com.mx
+// --------------------------------------------------------------
+
+abstract class RMController
+{
+    /**
+     * Controller data
+     */
+    private $data = array();
+    /**
+     * @var string Default action to use in this method. Can be changed in Controller::__construct method.
+     */
+    public $default = 'index';
+    /**
+     * @var The parent class for this module. Must be the module controller class.
+     */
+    public $parent;
+
+    protected $model;
+
+    protected function __construct(){
+
+        $this->data = array(
+            'controller'    => '',
+            'module'        => '',
+        );
+
+    }
+
+    /**
+     * @param string $property Property or method name
+     * @return mixed
+     */
+    public function __get($property){
+
+        $method = 'get_' . $property;
+
+        if ( isset( $this->data[$property] ) )
+            return $this->data[$property];
+        elseif ( method_exists( $this, $method ) )
+            return $this->$method();
+
+    }
+
+    /**
+     * @param string $property Property or method name
+     * @param mixed $value Value to assign
+     * @return mixed
+     */
+    public function __set($property, $value){
+
+        $method = 'set_' . $property;
+
+        if ( isset( $this->data[$property] ) )
+            $this->data[$property] = $value;
+        elseif ( method_exists( $this, $method ) )
+            return $this->$method($value);
+
+    }
+
+    protected function model(){
+
+        $class = ucfirst( $this->parent->controller );
+
+        if ( is_a( $this->model, $class ))
+            return $this->model;
+
+        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . '/models/' . ucfirst( $this->parent->controller ) . '.php';
+
+        if ( !file_exists( $file ) )
+            return false;
+
+        include_once $file;
+
+
+        $this->model = new $class();
+
+        return $this->model;
+
+    }
+
+    /**
+     * This function allows to format the URL for controller accourding to given parameters
+     * Example:
+     * <pre>
+     * $this->url( 'delete', array( 'id' => 1 ) );
+     * </pre>
+     *
+     * The result of this instruction will be:
+     * <pre>
+     * http://sitio.com/controller/delete/id/1/ // When url rewiting is enabled
+     *
+     * http://sitio.com/modules/module/?s=controller/delete&amp;id=1 // For normal URLs
+     * </pre>
+     *
+     * @param string $action Optional action to call
+     * @param array $parameters Parameters as associative array
+     * @return string
+     */
+    public function url( $action = '', $parameters = array() ){
+
+        $url = $this->parent->url . '/' . $this->controller . '/' . $action;
+        $url = trim($url, "/");
+        $query = '';
+
+        foreach ( $parameters as $var => $value ){
+            if ( $this->parent->settings->permalinks )
+                $query .= '/' . $var . '/' . $value;
+            else
+                $query .= '&amp;' . $var . '=' . $value;
+        }
+
+        return $url . $query;
+
+    }
+
+    protected function get_parameters(){
+
+        return $this->parent->parameters;
+
+    }
+
+}
+
+
+

@@ -1,0 +1,426 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Two·Six\n"
+"POT-Creation-Date: 2013-06-10 18:44-0600\n"
+"PO-Revision-Date: 2013-06-10 18:45-0600\n"
+"Last-Translator: Eduardo Cortes <i.bitcero@gmail.com>\n"
+"Language-Team: Xoops México <xoopsmexico@gmail.com>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\xoops\\modules\\rmcommon\\themes"
+"\\twop6\n"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:94
+msgid "Users management"
+msgstr "Kullanıcı yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:95
+msgid "Comments management"
+msgstr "Yorumlar yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:96
+msgid "Images manager"
+msgstr "Görüntü yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:97
+msgid "Modules manager"
+msgstr "Modüller yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:98
+msgid "Blocks manager"
+msgstr "Bloklar yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:99
+msgid "Plugins manager"
+msgstr "Eklentiler yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:109
+msgid "General preferences"
+msgstr "Genel tercihler"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:110
+msgid "Users settings"
+msgstr "Kullanıcılar ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:111
+msgid "Meta tags and footer"
+msgstr "Meta etiketleri ve altbilgi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:112
+msgid "Word censor"
+msgstr "Kelime sansür"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:113
+msgid "Search options"
+msgstr "Arama seçenekleri"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:114
+msgid "Email settings"
+msgstr "E-posta ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/admin_gui.php:115
+msgid "Authentication options"
+msgstr "Kimlik Doğrulama seçenekleri"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:35
+msgid "XOOPS"
+msgstr "XOOPS"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:39
+msgid "Common Utilities"
+msgstr "Ortak Araçlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:71
+msgid "System"
+msgstr "Sistem"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:104
+msgid "Theme"
+msgstr "Temalar"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:131
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:180
+msgid "Modules Box"
+msgstr "Modüller Kutusu"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:133
+msgid "Modules"
+msgstr "Modülleri" ürün bilgi formunu inceleyiniz."
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:186
+msgid "Go to..."
+msgstr "Git ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:193
+msgid "Quick Links"
+msgstr "Hızlı Linkler"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:201
+msgid "Help"
+msgstr "Yardım"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:217
+msgid "Social Links"
+msgstr "Sosyal Linkler"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:231
+msgid "Control Panel"
+msgstr "Control Panel"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:237
+msgid "View Home Page"
+msgstr "Ana Sayfa bilgileri"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:257
+msgid "About Two·Six"
+msgstr "İki Hakkında · Altı"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:265
+#, php-format
+msgid "%s updates available"
+msgstr "%s güncellemeleri mevcut"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:330
+msgid "Warning!"
+msgstr "Dikkat!"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:402
+#, php-format
+msgid "Powered by %s."
+msgstr "Powered by %s ."
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/theme.php:403
+#, php-format
+msgid "Reloaded by %s."
+msgstr "Tarafından Reloaded %s ."
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:58
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:105
+msgid "Preferences"
+msgstr "Ayarlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:179
+msgid "General Settings"
+msgstr "Genel Ayarlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:180
+msgid "User Info Settings"
+msgstr "Kullanıcı Bilgisi Ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:181
+msgid "Meta Tags and Footer"
+msgstr "Meta Tag ve Altbilgi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:182
+msgid "Word Censoring"
+msgstr "Kelime Sansürleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:183
+msgid "Search Options"
+msgstr "Arama Seçenekleri"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:184
+msgid "Email Setup"
+msgstr "E-posta Kurulumu"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:185
+msgid "Authentication Options"
+msgstr "Doğrulama Seçenekleri"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/class/twop6functions.class.php:186
+msgid "System Module Settings"
+msgstr "Sistem Modülü Ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:4
+msgid "Pages:"
+msgstr "[pages]"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:6
+msgid "First Page"
+msgstr "İlk Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:6
+msgid "First"
+msgstr "Ilk"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:10
+msgid "Previous Page"
+msgstr "Önceki Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:10
+msgid "&laquo;"
+msgstr "«"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:19
+#, php-format
+msgid "Page %u"
+msgstr "Sayfa% u"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:26
+msgid "Next Page"
+msgstr "Sonraki Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:26
+msgid "&raquo;"
+msgstr "»"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:30
+msgid "Last Page"
+msgstr "Son sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/navigation_pages.php:30
+msgid "Last"
+msgstr "Dün gece Hussin"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_breadcrumb.php:6
+msgid "You are here:"
+msgstr "Buradasınız:"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_breadcrumb.php:7
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:1
+msgid "Dashboard"
+msgstr "Gösterge Panosu"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:11
+msgid "System Tools"
+msgstr "Sistem Araçları"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:16
+msgid "Configure Common Utilities"
+msgstr "Ortak Araçlar yapılandırma"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:19
+msgid "Images Manager"
+msgstr "Görüntü Yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:25
+msgid "Comments Management"
+msgstr "Yorumlar Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:28
+msgid "Plugins Management"
+msgstr "Eklentiler Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:34
+msgid "XOOPS Modules"
+msgstr "XOOPS Modülleri"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:37
+msgid "Users Management"
+msgstr "Kullanıcılar Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:66
+msgid "Installed Modules"
+msgstr "Yüklü Modüller"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:73
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:117
+msgid ""
+"If you wish to manage or install new modules please go to Modules Management."
+msgstr "Yeni modüller yönetmek veya kurmak isterseniz Modülleri Yönetim gidin."
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:74
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:118
+msgid "Modules management"
+msgstr "Modüller yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:86
+#, php-format
+msgid "%s Updates Available!"
+msgstr "%s Güncellemeler Mevcut!"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:87
+#, php-format
+msgid "Please %s to view available updates."
+msgstr "Lütfen %s Kullanılabilir güncellemelerini görmek için."
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:87
+msgid "click here"
+msgstr "burayı tıklayın"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:92
+msgid "Support my Work"
+msgstr "Benim iş destek"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:95
+msgid ""
+"Do you like my work? Then maybe you want support me to continue developing "
+"new modules."
+msgstr "Eğer benim gibi mi? O zaman belki yeni modüller geliştirmeye devam etmek bana destek istiyorum."
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:105
+msgid "Available Modules"
+msgstr "Mevcut Modüller"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:113
+msgid "Install"
+msgstr "Yükle"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_dashboard.php:133
+msgid "Recent News"
+msgstr "Son Haberler"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:1
+msgid "Modules Management"
+msgstr "Modüller Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:4
+msgid "Do you really want to uninstall selected module?"
+msgstr "Gerçekten Seçilen modülü kaldırmak istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:5
+msgid "Do you really want to update selected module?"
+msgstr "Gerçekten Seçilen modülü güncellemek istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:6
+msgid "Do you really want to disable selected module?"
+msgstr "Gerçekten Seçilen modülü devre dışı bırakmak istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:7
+msgid "New name must be different from current name!"
+msgstr "Yeni adı şimdiki adı farklı olmalıdır!"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:8
+msgid "You must provide a new name!"
+msgstr "Yeni bir ad vermek gerekir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:21
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:30
+msgid "Image"
+msgstr "Imaj"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:22
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:31
+msgid "Name"
+msgstr "İsim"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:23
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:32
+msgid "Version"
+msgstr "Sürüm"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:24
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:33
+msgid "Author"
+msgstr "Hazırlayan"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:25
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:34
+msgid "Options"
+msgstr "Seçenekler"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:51
+msgid "Edit"
+msgstr "Edit"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:83
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:84
+msgid "Show Information"
+msgstr "Bilgi Göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:88
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:89
+msgid "Update"
+msgstr "Güncelleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:95
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:96
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:99
+msgid "Disable"
+msgstr "Devre dışı bırak"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:105
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:106
+msgid "Enable"
+msgstr "Etkinleştir"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:112
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:113
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:116
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:126
+msgid "Module Information"
+msgstr "Modül Bilgi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:136
+msgid "Current Version:"
+msgstr "Geçerli Sürüm:"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:137
+msgid "Directory:"
+msgstr "Dizin"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:144
+msgid "Author(s):"
+msgstr "Yazar (lar):"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:145
+msgid "Web site:"
+msgstr "Web Sitesi"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:148
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:149
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:157
+msgid "Not provided"
+msgstr "Sağlanmayan"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:152
+msgid "License:"
+msgstr "License"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:153
+msgid "Help:"
+msgstr "Yardım"
+
+#: C:\wamp\www\xoops\modules\rmcommon\themes\twop6/modules/rmcommon/rmc_modules.php:161
+msgid "Close Window"
+msgstr "Pencereyi Kapat"
+

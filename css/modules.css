@@ -1,0 +1,296 @@
+/** Table **/
+.tablesorter{
+    border: 1px solid #CCC;
+}
+.tablesorter tr td{
+    border-bottom: 1px solid #CCC;
+}
+
+/** Modules Widget **/
+.rmc_modules_widget{
+	
+}
+.rmc_modules_widget .even,
+.rmc_modules_widget .odd{
+	overflow: hidden;
+}
+.rmc_mod_info{
+	display: none;
+	font-size: 0.85em;
+	color: #666;
+}
+.rmc_mod_img{
+	display: block;
+	float: left;
+	height: 40px;
+	width: 40px;
+	margin: 0 5px 0 0px;
+	border: 1px solid #666;
+	-moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.rmc_mod_img span{
+	display: block;
+	height: 38px;
+	width: 38px;
+	border: 1px solid #fff;
+	-moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.rmc_available_options{
+	display: block;
+	font-size: 0.85em;
+}
+.rmc_available_options a{
+	color: #FF4400;
+}
+
+/** Modules Content **/
+#des-mods-container{
+	width: 100%;
+}
+#des-mods-container .logo img{
+
+    width: 48px;
+    display: block;
+}
+#des-mods-container .name a{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+#des-mods-container .name a.rename{
+    font-size: 0.7em;
+    font-weight: normal;
+    text-transform: uppercase;
+    background: #ebebeb url("../../images/edit.gif") no-repeat 2px;
+    display: inline-block;
+    padding: 3px 3px 3px 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    line-height: 100%;
+    margin-left: 5px;
+    box-shadow: inset -1px -1px 5px #fff;
+}
+#des-mods-container .renamer{
+    background: #fff;
+    display: block;
+    width: 250px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: inset 1px 1px 5px #ebebeb;
+}
+#des-mods-container .name a.savenewname,
+#des-mods-container .name a.cancelnewname{
+    background: url("../../images/save.gif") no-repeat center;
+    padding: 4px;
+    width: 8px; height: 20px;
+    display: inline-block;
+    float: right;
+}
+#des-mods-container .name a.cancelnewname{
+    background: url("../../images/cancel.gif") no-repeat center;
+}
+#des-mods-container .name .savenewname span,
+#des-mods-container .name .cancelnewname span{display: none;}
+#des-mods-container .renamer input{
+    padding: 5px 4px;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    width: 206px;
+}
+
+#des-mods-container .descriptions{
+	line-height: 120%;
+	display: block;
+    font-size: 0.9em;
+    margin: 0;
+    padding: 2px 0;
+}
+#des-mods-container .author{
+    font-size: 0.9em;
+    color: #666;
+}
+.inactive td{
+    border-bottom:1px dashed #ccc;
+    font-style: italic;
+    color: #666;
+}
+.rmc_item_module .data_storage{
+	display: none;
+}
+
+.hidden_data{display: none;}
+
+tr.even td.actions,
+tr.odd td.actions
+{
+    background: #ebebeb;
+    border-left: 1px solid #ccc;
+    box-shadow: inset 1px 1px 3px #FFF, inset -1px -1px 3px #dfdfdf;
+    vertical-align: middle;
+    text-align: center;
+}
+tr.even td.actions:hover,
+tr.odd td.actions:hover
+{
+    background: #e1e1e1;
+    border-left: 1px solid #ccc;
+    box-shadow: inset 1px 1px 3px #FFF;
+}
+td.actions img{
+    width: auto;
+    max-width: 24px!important;
+}
+.tablesorter tbody tr:last-child td{
+    border-bottom: 0;
+}
+
+.mod_preinstall_container{
+    overflow: hidden;
+}
+.mod_preinstall_container .left{
+    float: left;
+    width: 40%;
+    margin-right: 20px;
+}
+.mod_preinstall_container .th a{
+    float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(../../images/down.png) no-repeat center;
+    text-decoration: none;
+}
+.mod_preinstall_container .th a:hover{
+    text-decoration: none;
+}
+.mod_preinstall_container .container_hidden{
+    display: none;
+    line-height: 130%;
+}
+.mod_preinstall_container .descriptions{
+    color: #666;
+    font-size: 0.9em;
+}
+.mod_preinstall_container .left h2{
+    margin: 0 0 10px 0;
+    font-family: georgia, times, serif;
+    font-weight: normal;
+    font-style: italic;
+}
+.mod_preinstall_container .mod_data_container{
+	line-height: 130%;
+	font-size: 0.9em;
+}
+.mod_preinstall_container .mod_data_container table td{
+	padding: 3px;
+	vertical-align: top;
+}
+.mod_data_container input{
+	font-size: 1.5em;
+}
+.mod_options{
+    padding: 10px 0;
+    font-weight: bold;
+}
+.mod_log{
+    max-height: 500px;
+    overflow: auto;
+    background: #f4f4f4;
+    border: 1px solid #CCC;
+    padding: 10px;
+}
+.mod_log strong{
+    color: #BB5E00;
+}
+
+/* Rename */
+#info-blocker{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #000;
+	filter:alpha(opacity=70);
+	-moz-opacity:0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+	display: none;
+}
+#info-module{
+	position: fixed;
+	width: 420px;
+	padding: 0px;
+	background: #FFF;
+	top: 20%;
+	left: 50%;
+	margin-left: -210px;
+	line-height: 130%;
+	border: 0;
+	box-shadow: 0 0 10px #000;
+	display: none;
+    border-radius: 4px;
+}
+#info-module .th{
+    border-radius: 3px 3px 0 0;
+}
+#info-module .info_container{
+    padding: 10px;
+}
+#info-module .header{
+    padding: 0 0 6px 0;
+    overflow: hidden;
+}
+#info-module .header img{
+    float: left;
+}
+#info-module .header h3{
+    float: right;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+#info-module .header .desc{
+    color: #666;
+    font-size: 0.9em;
+    display: block;
+    float: right;
+    max-width: 300px;
+    text-align: right;
+}
+#info-module .info_sep{
+    height: 1px;
+    margin-bottom: 6px;
+}
+.thedata{
+    border: 0;
+    width: 100%;
+    border-collapse: separate;
+}
+.thedata td{
+    padding: 2px;
+}
+.thedata tr:nth-child(odd) td{
+    padding: 2px;
+}
+.thedata tr:nth-child(even) td{
+    background: #FFF;
+    padding: 2px;
+}
+.thedata td span{
+    border: 1px solid #ebebeb;
+    padding: 4px;
+    display: block;
+}
+.thedata .caption{
+    font-weight: bold;
+    border: 0;
+}

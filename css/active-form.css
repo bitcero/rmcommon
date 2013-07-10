@@ -1,0 +1,10 @@
+.active-form label.error{
+    display: block;
+    color: rgb(255, 101, 0);
+    font-size: 0.9em;
+}
+.active-form input.error,
+.active-form select.error,
+.active-form textarea.error{
+    color: rgb(255, 101, 0);
+}

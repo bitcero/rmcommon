@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="../../editor-popups.js"></script>
+<script type="text/javascript" src="<?php echo RMCURL; ?>/include/js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $eurl; ?>/plugins/link/css/links.css" />
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#title").val(exmPopup.selection().text);
+        
+        $("#insert").click(function(){
+            var title = $("#title").val();
+            title = title==''?'%replace%':title;
+            exmPopup.insertText('[url='+$("#url").val()+']'+title+'[/url]');
+            exmPopup.closePopup();
+        });
+        $("#cancel").click(function(){
+            exmPopup.closePopup();
+        })
+        
+    });
+</script>
+</head>
+<body>
+<table width="100%" cellpadding="3" cellspacing="0">
+    <tr>
+        <td><label for="title"><?php echo TITLE; ?></label></td>
+    </tr>
+    <tr>
+        <td><input type="text" id="title" size="50" /></td>
+    </tr>
+    <tr>
+        <td><label for="url"><?php echo URL; ?></label></td>
+    </tr>
+    <tr>
+        <td><input type="text" id="url" size="50" value="http://" /></td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="<?php echo INSERT; ?>" id="insert" />
+            <input type="button" value="<?php echo CANCEL; ?>" id="cancel" />
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+div#users-filter-options{
+	padding: 5px 0;
+	overflow: hidden;
+        border-bottom: 1px dotted #ccc;
+	color: #666;
+}
+div#users-filter-options div.basic_options{
+    overflow: hidden;
+}
+div#users-filter-options span.sections{
+	display: block;
+	float: left;
+	padding: 0 10px 0 0; 
+	margin-right: 10px;
+	border-right: 1px dotted #CCC;
+}
+div#users-filter-options span.sections_right{
+	float: left;
+	display: block;
+	padding: 5px 10px 0 0; 
+	margin-right: 10px;
+	font-weight: bold;
+}
+div#users-filter-options label{
+	cursor: pointer;
+	font-weight: bold;
+}
+div#users-filter-options label:hover{
+	background: #333;
+	color: #FFF;
+}
+div#users-advanced-options{
+    padding: 2px;
+    background: #f2f2f2;
+    display: none;
+    border: 1px solid #CCC;
+    margin-top: 10px;
+}
+td.users_cell_groups{
+	color: #666;
+	font-size: 0.9em;
+}
+div.users_navigation{
+	padding: 4px 0;
+	margin: 5px 0;
+	overflow: hidden;
+	border-bottom: 1px dotted #CCC;
+}
+div.users_navigation:last-child{
+	border-bottom: 0;
+	border-top: 1px dotted #CCC;
+}
+div.users_navigation div.exm_pages_navigation_container{
+	float: right;
+	border-left: 1px solid #CCC;
+	padding-left: 10px;
+}
+div.users_navigation div.users_nav_showing{
+	float: right;
+	padding: 5px 10px 5px 10px;
+	border-left: 1px solid #CCC;
+}
+div.users_navigation div.users_order_options{
+	float: right;
+	padding: 1px 10px 0 10px;
+	border-left: 1px solid #CCC;
+}
+.user_inactive{
+    background: #eee;
+    color: #ff6600;
+}

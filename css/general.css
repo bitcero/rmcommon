@@ -1,0 +1,34 @@
+span.rmc_options{
+	display: block;
+	font-size: 0.9em;
+	padding: 4px 0;
+	visibility: hidden;
+}
+.even:hover span.rmc_options, .odd:hover span.rmc_options{
+	visibility: visible;
+}
+div.rmc_bulkactions{
+	padding: 4px 0;
+	overflow: hidden;
+}
+div.rmc_bulkactions div.rmc_pages_navigation_container{
+	float: right;
+}
+.descriptions{
+	padding: 8px 0;
+	color: #666;
+}
+/* IMAGE MANAGER */
+.image_manager_launcher{
+    background-image: url(../images/images.png);
+    background-repeat: no-repeat;
+    background-position: 4px;
+    padding-left: 24px;
+}
+.imgmgr_container{
+    width: 700px;
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    margin-left: -350px;
+}

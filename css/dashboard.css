@@ -1,0 +1,166 @@
+/*
+$Id: dashboard.css 550 2010-11-15 01:44:13Z i.bitcero $
+*/
+
+.support-me{
+	background: #E7F5FB;
+	box-shadow: inset 0 0 2px #FFF;
+	color: #3A87AD;
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+}
+.support-me:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.support-me img.avatar{
+	float: left;
+	padding: 1px;
+	border: 1px solid #CCC;
+	border-radius: 2px;
+	margin: 0 5px 0 0;
+}
+
+.system_tools a{
+    display: block;
+    padding: 2px 0 2px 20px;
+    background-position: left;
+    background-repeat: no-repeat;
+}
+.mods_coint{
+    overflow: hidden;
+    font-size: 0.95em;
+}
+.mods_coint .module{
+    padding: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 180px;
+    height: 60px;
+    overflow: hidden;
+    line-height: 150%;
+    margin: 5px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ebebeb;
+    background-image: -moz-linear-gradient(top, #f2f2f2, #ebebeb);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#ebebeb));
+    background-image: -webkit-linear-gradient(top, #f2f2f2, #ebebeb);
+    background-image: -o-linear-gradient(top, #f2f2f2, #ebebeb);
+    background-image: linear-gradient(to bottom, #f2f2f2, #ebebeb);
+    background-repeat: repeat-x;
+    border-color: #d4d4d4;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fff2f2f2', endColorstr='#ebebeb', GradientType=0);
+    box-shadow:inset 0px 1px 0 0px #fff;
+        -moz-box-shadow:inset 0px 1px 0 0px #fff;
+        -webkit-box-shadow:inset 0px 1px 0 0px #fff;
+        -o-box-shadow:inset 0px 1px 0 0px #fff;
+    border: 1px solid #DDDDDD;
+    text-shadow: 1px 1px 0 #fff;
+}
+.mods_coint .module:hover{
+	background: #049CD9; /* Old browsers */
+    background: -moz-linear-gradient(top,  #049CD9 0%, #0490C8 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#049CD9), color-stop(100%,#0490C8)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #049CD9 0%,#0490C8 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #049CD9 0%,#0490C8 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #049CD9 0%,#0490C8 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #049CD9 0%,#0490C8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#049CD9', endColorstr='#0490C8',GradientType=0 ); /* IE6-9 */
+    box-shadow:inset 0px 1px 0 0px #5EBFE6;
+        -moz-box-shadow:inset 0px 1px 0 0px #5EBFE6;
+        -webkit-box-shadow:inset 0px 1px 0 0px #5EBFE6;
+        -o-box-shadow:inset 0px 1px 0 0px #5EBFE6;
+    border: 1px solid #03739F;
+    text-shadow: 1px 1px 0 #222222;
+    color: #f2f2f2;
+}
+.mods_coint .module:hover a{
+    color: #fff;
+}
+.mods_coint .module a.image{
+    display: block;
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.mods_coint .module a.image span{
+    display: none;
+}
+.mods_coint .module span.module_data{
+    display: block;
+    float: right;
+    width: 123px;
+}
+.description{
+    clear: both;
+    display: block;
+    color: #666;
+    line-height: 150%;
+    padding: 2px 10px;
+    border-top: 1px dotted #CCC;
+}
+#loading-mods{
+    float: left;
+    margin-right: 5px;
+}
+.th{
+    padding-top: 7px!important;
+    padding-bottom: 7px!important;
+}
+.moddesc{
+    color: #666;
+    font-size: 0.9em;
+}
+.modimg{
+    display: block;
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 0 5px 5px 10px;
+    border: 1px solid #999;
+}
+.news_item{
+    padding: 0 0 8px 0;
+    margin-bottom: 5px;
+    border-bottom: 1px dotted #CCC;
+    overflow: hidden;
+}
+#rmc-recent-news .news_item:last-child{
+    border-bottom: none;
+}
+.news_item h3{
+    margin: 0 0 10px 0;
+    font-size: 15px;
+}
+.news_item a.thumb{
+    display: none;
+}
+.news_item .news_content{
+    line-height: 150%;
+    color: #666;
+    font-size: 12px;
+}
+.news_item:nth-child(1) .link:before,
+.news_item:nth-child(2) .link:before{
+	content: '';
+	display: block;
+}
+.news_item:nth-child(n+3) .news_content{
+	display: none;
+}
+.news_item:nth-child(n+3) h3{
+	margin: 0;
+	display: inline-block;
+}
+.news_item:nth-child(n+3) .link{
+	display: inline-block;
+}

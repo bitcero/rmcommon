@@ -1,0 +1,47 @@
+.comments_form{
+    padding: 10px 0;
+}
+.comments_form label.label{
+    display: block;
+    padding: 0 0 5px 0;
+    margin: 10px 0 0 0;
+}
+.comments_form input[type='text']{
+    width: 50%;
+    display: block;
+}
+.comments_form textarea{
+    width: 80%;
+    height: 150px;
+    display: block;
+}
+.comments_form input[type='submit']{
+	margin: 10px 0 0 0;
+}
+.comments_form .error{
+	display: block;
+	color: #F00;
+}
+
+/** Item **/
+.comment_item{
+	margin: 0 0 10px 0;
+	padding: 0 0 10px 0;
+	overflow: hidden;
+    background: #FFF;
+}
+.comment_item .head{
+    float: left;
+    background: #FFF;
+    padding: 4px 15px 3px 4px;
+}
+.comment_item .info{
+    padding: 4px 0;
+}
+.comment_item .info .date{
+    font-size: 0.8em;
+    display: block;
+}
+.comment_item .text{
+    overflow: hidden;
+}

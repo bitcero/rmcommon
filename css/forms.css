@@ -1,0 +1,306 @@
+/**
+* This file containes all styles for display forms
+* @author: Eduardo Cortés (aka BitC3R0)
+* @since: EXm System 1.5
+*/
+
+/**
+* When you create a new Theme for admin o front sections
+* you can specify a new styles for forms based on your designs
+*/
+div.form_container{
+	margin: 20px auto;
+}
+table.table_form{
+	width: 85%;
+	margin: 0 auto;
+}
+.cell_fields{
+	margin: 0 0 20px 0;
+}
+.cell_fields td{
+	padding: 5px 5px 5px 0;
+	vertical-align: top;
+}
+.cell_fields td:last-child{
+	padding-left: 10px;
+}
+.inputForm, .cell_fields textarea.inputForm, select.inputForm{
+	width: 55%;
+	margin: 2px 0 0 0;
+	font-size: 1.1em;
+    display: block;
+}
+input[type='text'].inputBig{
+    font-size: 1.8em;
+    padding: 3px 5px;
+    font-family: Georgia, "Times New Roman", times, serif;
+}
+.cell_fields span.descriptions{
+	display: block;
+	padding: 2px 0 2px 1px;
+	color: #666;
+    font-size: 0.9em;
+}
+td.form_captions{
+	width: 250px;
+	max-width: 250px;
+	/*border-right: 1px dotted #ccc;*/
+}
+.form_captions label{
+	font-size: 1.1em;
+	cursor: pointer;
+	font-weight: bold;
+	padding: 4px 4px 4px 0;
+	display: block;
+}
+label.error{
+    color: #FF0000;
+    display: none;
+    padding: 3px;
+}
+div.separator{
+	clear: both;
+	border-bottom: 1px dotted #CCC;
+	margin-bottom: 10px;
+}
+td h2.form_subtitle{
+	font-size: 1.5em;
+	margin: 0;
+	border-bottom: 2px solid #CCC;
+}
+
+/* USERS FIELD */
+div.form_users_selected_list{
+	float: right;
+	width: 150px;
+	border: 1px solid #CCC;
+	background: #f2f2f2;
+	padding-bottom: 5px;
+}
+div.form_users_selected_list div.form_users_selected_title{
+	color: #333;
+	border-bottom: 1px dotted #CCC;
+	padding-bottom: 5px;
+	background: #ebebeb;
+	padding: 2px;
+	text-align: center;
+}
+div.form_users_selected_list div.form_users_selected_title strong{
+	color: #FF3300;
+}
+div.form_users_selected_list ul{
+	list-style: none;
+	padding: 3px;
+	margin: 5px 0;
+}
+div.form_users_selected_list ul li{
+	list-style: none;
+	color: #333;
+	padding: 2px 0;
+	cursor: pointer;
+}
+div.form_users_selected_list ul li label{
+	cursor: pointer;
+}
+tr.form_users_list td label, tr.form_users_list td span{
+	cursor: pointer;
+}
+img.form_user_waiting_img{
+	position:relative;
+	top: 50%;
+	left: 50%;
+	margin-top: -8px;
+	margin-left: -8px;
+}
+div.form_users_container{
+	overflow: hidden;
+}
+div.form_users_container ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+div.form_users_container ul li{
+	list-style: none;
+	float: left;
+	padding: 2px;
+	margin: 0 2px 2px 0;
+	border: 1px dotted #ebebeb;
+	font-size: 0.9em;
+	color: #666;
+}
+div.form_users_container ul li:hover{
+	border: 1px solid #CCC;
+	background: #f2f2f2;
+	color: #333;
+}
+div.form_users_container a{
+	float: right;
+	margin-left: 5px;
+	display: block;
+	width: 10px;
+	height: 16px;
+	background: url(../images/remove.gif) no-repeat left 5px;
+}
+div.form_users_container a span{
+	display: none;
+}
+div.form_users_container a:hover{
+	background-position: right 5px;
+}
+div.form_users_container ul li label{
+	overflow: hidden;
+	display: block;
+	margin: 0;
+}
+div.form_container label.hidden{
+    display: none;
+}
+
+/** Modules **/
+.modules-field{
+    background: #FFF;
+    border: 1px solid #CCC;
+    display: inline-block;
+}
+.modules-field h4{
+    background: #fff;
+    color: #1a1a1a;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 1em;
+}
+.modules-field > div{
+    display: inline-block;
+    vertical-align: text-top;
+}
+.modules-field > div:first-child{
+    border-right: 1px solid #CCC;
+}
+.modules-field > div:last-child{
+    width: 150px;
+    border-left: 1px solid #CCC;
+    margin-left: -1px;
+}
+.modules-field > div:last-child h4{
+    background: #ebebeb;
+}
+.modules-field ul{
+    list-style: none;
+    padding: 5px 10px;
+    margin: 0;
+}
+.modules_field ul li{
+    line-height: 20px;
+}
+.modules_field ul li input{
+    display: inline-block;
+    vertical-align: text-top;
+}
+.subpages-container{
+    display: none;
+    padding: 8px;
+    background: #f2f2f2;
+    border-left: 1px solid 1px solid rgba(0,0,0,0.05);
+}
+
+.subpages-container .sub-item{
+    
+}
+.subpages-container .sub-item label{
+    padding: 2px 0;
+    cursor: pointer;
+    display: block;
+}
+.subpages-container .sub-item label:hover{
+    background: #222;
+    color: #666;
+}
+
+/* Multioption (checkboxes, radios, etc) container */
+.rmoptions_container{
+    overflow: hidden;
+    list-style: none;
+    padding: 5px 0;
+}
+.rmoptions_container li{
+    float: left;
+    padding: 3px 5px;
+    list-style: none;
+}
+
+/* Images launcher */
+.rmimage_conainter{
+    text-align: center;
+}
+.rmimage_conainter img{
+    padding: 1px;
+    border: 1px solid #ccc;
+}
+
+.mgr_blocker{
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity:0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+    background: #FFF;
+    top: 0; left: 0; right: 0; bottom: 0;
+    position: fixed;
+    display: none;
+    z-index: 1080;
+}
+.imgmgr_container{
+    width: 750px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -350px;
+    border: 1px solid #999;
+    border-top: 0;
+    display: none;
+    z-index: 1081;
+}
+.imgmgr_container .th{
+    border: 0;
+    position: relative;
+}
+.imgmgr_container .th span{
+    display: block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 10px;
+    background: url(../../images/closeb.png) no-repeat center;
+    cursor: pointer;
+}
+.imgmgr_container iframe{
+    width: 100%;
+    margin: 0;
+}
+
+/* IMages Field */
+.rmimage_container{
+    padding: 10px;
+}
+.rmimage_container .thumbnail{
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.rmimage_container .thumbnail img{
+    padding: 1px;
+    border: 1px solid #CCC;
+}
+
+/** Groups **/
+.groups_field_list{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.groups_field_list input{
+	vertical-align: text-top;
+}

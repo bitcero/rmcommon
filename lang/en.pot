@@ -1,0 +1,3191 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Common Utilities\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-22 22:03-0600\n"
+"PO-Revision-Date: 2012-11-22 22:03-0600\n"
+"Last-Translator: Eduardo Cortés <i.bitcero@gmail.com>\n"
+"Language-Team: Red Mexico <xoopsmexico@gmail.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\xm\\modules\\rmcommon\n"
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:133
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:29
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:97
+msgid "Blocks"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:141
+msgid "Internal blocks manager is currenlty disabled!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:145
+msgid "Do you really wish to delete selected items?"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:146
+msgid "Select at least one item to delete it!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:147
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:75
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:35
+msgid "Save"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:148
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:287
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:469
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:229
+#: C:\wamp\www\xm\modules\rmcommon/users.php:303
+#: C:\wamp\www\xm\modules\rmcommon/users.php:418
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:122
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:80
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_edit.php:44
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:13
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:226
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:234
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:74
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:99
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:120
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:78
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:93
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:73
+msgid "Cancel"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:149
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:45
+msgid "Show Positions"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:150
+msgid "Show Blocks"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:193
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:247
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:277
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:308
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:28
+msgid "You are not allowed to do this action!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:201
+msgid "Please provide a name and tag for this new position!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:209
+msgid "You must specify a valid position ID!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:213
+msgid "Specified position does not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:231
+msgid "Already exists another position with same name or same tag!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:234
+#: C:\wamp\www\xm\modules\rmcommon/images.php:400
+#: C:\wamp\www\xm\modules\rmcommon/users.php:377
+msgid "Database updated successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:236
+msgid "Errors ocurred while trying to save data"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:254
+msgid "Select at least a block!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:262
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:299
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:330
+msgid "Database updated successfully"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:264
+msgid "Errors ocurred while trying to do this action"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:284
+msgid "You must select at least one block!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:297
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:328
+msgid "There was some errors:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks.php:315
+msgid "You must select at least one position!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:105
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:226
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:81
+msgid "Unknow"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:114
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:268
+#, php-format
+msgid "Posted on %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:131
+msgid "Do you really want to delete this comment?"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:146
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:168
+msgid "Invalid operation"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:158
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:197
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:308
+msgid "Sorry, session token expired!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:163
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:202
+msgid "Unrecognized data!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:174
+msgid "Comments updated successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:179
+msgid "Errors occurrs while trying to update comments!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:232
+msgid "Comments deleted successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:246
+msgid "Sorry, comment id is not valid"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:252
+msgid "Sorry, comment does not found"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:264
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:207
+msgid "Edit Comment"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:265
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:208
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:47
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:57
+msgid "In reply to"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:266
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:209
+msgid "Posted date"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:267
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:210
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:98
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:108
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:46
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:56
+msgid "Module"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:268
+msgid "IP"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:271
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:214
+msgid "Poster"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:274
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:219
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:18
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:45
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:55
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:14
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:23
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:122
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:133
+msgid "Status"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:275
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:220
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:28
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:30
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:92
+msgid "Approved"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:276
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:221
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:23
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:25
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:95
+msgid "Unapproved"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:279
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:225
+msgid "Content"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:286
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:228
+msgid "Update Comment"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:313
+msgid "Comment ID not specified!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:319
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:186
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:273
+msgid "Specified comment does not exist!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:354
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:315
+msgid "Comment updated successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/comments.php:356
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:317
+msgid "Errros ocurrs while trying to update comment!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:33
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:119
+msgid "There are not categories yet! Please create one in order to add images."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:132
+#, php-format
+msgid "Category %s is closed. Please, select another category."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:147
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:49
+msgid "All Images (*.jpg, *.png, *.gif)"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:149
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:51
+msgid "Browse Images..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:158
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:67
+msgid "Uploaded successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:265
+msgid "You must specify a category id to edit!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:272
+msgid "The specified category does not exist!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:320
+msgid "Specify a valid category id"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:326
+msgid "Specified category does not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:335
+msgid "Please specify a category name"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:351
+msgid "You must create one size for this category at least!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:358
+msgid "There is already a category with the same name!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:370
+msgid "Category updated successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:372
+msgid "There were some erros while trying to save this category."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:388
+msgid "Specify one category at least to change status!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:403
+msgid "There were some erros while updating database:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:428
+#: C:\wamp\www\xm\modules\rmcommon/images.php:439
+#: C:\wamp\www\xm\modules\rmcommon/images.php:443
+#: C:\wamp\www\xm\modules\rmcommon/images.php:447
+msgid "Unauthorized!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:432
+msgid "Invalid image!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:452
+#: C:\wamp\www\xm\modules\rmcommon/images.php:549
+msgid "Image not found!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:458
+msgid "Unauthorized"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:525
+#, php-format
+msgid "%s done!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:543
+msgid "Invalid image ID"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:614
+#: C:\wamp\www\xm\modules\rmcommon/images.php:763
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:32
+msgid "Operation not allowed!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:619
+msgid "Image ID not provided!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:624
+msgid "You must  provide a title for this image"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:630
+#: C:\wamp\www\xm\modules\rmcommon/images.php:721
+msgid "Image not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:636
+msgid "Category not exist!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:649
+msgid "the image could not be updated!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:655
+msgid "Image updated succesfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:697
+msgid "Image updated successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:711
+msgid "Please, speciy an image at least!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:747
+msgid "Errors ocurred during images deletion!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:749
+msgid "Images deleted successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:768
+msgid "Category ID not provided"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:774
+msgid "Category not found"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:807
+msgid "Category deleted successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/images.php:809
+msgid "Errors ocurred while deleting the category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/index.php:83
+msgid "Dashboard Help"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/index.php:99
+msgid "Theme changed successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/index.php:102
+msgid "Theme could not be changed!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/index.php:107
+msgid "Specified theme does not exist!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/loader.php:209
+msgid "Sorry, Red Mexico Common Utilities has not been installed yet!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:15
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:95
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:1
+msgid "Dashboard"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:22
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:96
+msgid "Modules"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:36
+#: C:\wamp\www\xm\modules\rmcommon/users.php:406
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:98
+msgid "Users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:41
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:53
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:60
+msgid "All users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:42
+msgid "New user"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:47
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:60
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:89
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:99
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:66
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:94
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:21
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:37
+msgid "Images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:52
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:1
+msgid "Categories"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:56
+msgid "New category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:64
+msgid "Add images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:72
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:461
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:100
+msgid "Comments"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:79
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:101
+msgid "Plugins"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/menu.php:86
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:105
+msgid "Updates"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:110
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:1
+msgid "Modules Management"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:129
+msgid "Specified module is not valid!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:136
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:172
+#, php-format
+msgid "%s is already installed!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:142
+msgid "Sepecified module is not a valid Xoops Module!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:165
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:219
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:654
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:700
+msgid "Sorry, this operation could not be completed!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:204
+#, php-format
+msgid "Installation log for %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:226
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:662
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:707
+#, php-format
+msgid "Module %s is not installed yet!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:251
+#, php-format
+msgid "Uninstall log for %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:279
+#, php-format
+msgid "Could not update %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:283
+#, php-format
+msgid "Updating module %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:298
+msgid "Updating templates..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:318
+#, php-format
+msgid "Template %s could not be inserted!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:321
+#, php-format
+msgid "Template %s inserted to the database."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:324
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:393
+#, php-format
+msgid "ERROR: Could not recompile template %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:326
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:395
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:454
+#, php-format
+msgid "Template %s recompiled"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:332
+#, php-format
+msgid "ERROR: Could not delete old template %s. Aborting update of this file."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:337
+msgid "Rebuilding blocks..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:368
+#, php-format
+msgid "ERROR: Could not update %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:370
+#, php-format
+msgid "Block %s updated."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:370
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:428
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:430
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:459
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:471
+#, php-format
+msgid "Block ID: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:388
+#, php-format
+msgid "ERROR: Could not update %s template."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:390
+#, php-format
+msgid "Template %s updated."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:410
+#, php-format
+msgid "ERROR: Could not create %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:428
+msgid "ERROR: Could not add block access right"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:428
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:430
+#, php-format
+msgid "Group ID: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:430
+msgid "Added block access right"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:446
+#, php-format
+msgid "ERROR: Could not insert template %s to the database."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:449
+#, php-format
+msgid "Template %s added to the database"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:452
+#, php-format
+msgid "ERROR: Template %s recompile failed"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:459
+#, php-format
+msgid "Block %s created"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:471
+#, php-format
+msgid "ERROR: Could not delete block %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:480
+msgid "ERROR: Could not remove deprecated block template."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:482
+#, php-format
+msgid "Block template %s deprecated"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:501
+msgid "Deleting module config options..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:504
+msgid "ERROR: Could not delete config data from the database"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:504
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:511
+#, php-format
+msgid "Config ID: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:511
+msgid "Config data deleted from the database."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:601
+msgid "Config option added"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:601
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:80
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:77
+msgid "Name:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:601
+msgid "Value:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:608
+#, php-format
+msgid "Config %s added to the database"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:610
+#, php-format
+msgid "ERROR: Could not insert config %s to the database."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:625
+#, php-format
+msgid "Failed to execute %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:627
+#, php-format
+msgid "%s executed successfully."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:635
+#, php-format
+msgid "Module %s updated successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:685
+#, php-format
+msgid "Update log for %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:716
+#, php-format
+msgid "Module %s could not be disabled!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:722
+#, php-format
+msgid "Module %s successfully disabled!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:733
+msgid "Sorry, you don't have access to this page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:734
+msgid "Click here to refresh"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:793
+#: C:\wamp\www\xm\modules\rmcommon/include/right_widgets.php:35
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:34
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:105
+msgid "Install"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:794
+#: C:\wamp\www\xm\modules\rmcommon/include/right_widgets.php:36
+msgid "More info"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:797
+#: C:\wamp\www\xm\modules\rmcommon/include/right_widgets.php:39
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:64
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:81
+msgid "Version:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:803
+#: C:\wamp\www\xm\modules\rmcommon/include/right_widgets.php:45
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:68
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:85
+msgid "Author:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:827
+msgid "You can not rename modules. Session token not valid!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:841
+msgid "Data provided is not valid"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:854
+msgid "Module name could not be changed!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/modules.php:864
+msgid "Module name changed successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:92
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:128
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:160
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:191
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:224
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:488
+msgid "You must specify a existing plugin"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:99
+msgid "Specified plugin is installed already!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:104
+#, php-format
+msgid "%s is not a valid plugin!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:109
+msgid "Plugin could not be installed, please try again."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:114
+msgid ""
+"The plugin has been inserted on database, but erros ocurred on this process."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:120
+msgid "Plugin installed succesfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:135
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:167
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:198
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:231
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:495
+msgid "Specified plugin is not installed yet!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:141
+msgid "Plugin could not be uninstalled, please try again."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:146
+msgid ""
+"The plugin has been deleted from database, but erros ocurred on this process."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:152
+msgid "Plugin uninstalled succesfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:172
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:205
+msgid "Plugin could not be updated, please try again."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:177
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:210
+msgid "The database has been updated, but erros ocurred on this process."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:183
+msgid "Plugin updated succesfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:216
+msgid "Plugin status changed succesfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:236
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:500
+msgid "Specified plugin is not active!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:243
+#, php-format
+msgid "%s configuration"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:359
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:365
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:371
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:377
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:203
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:59
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:65
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:58
+msgid "None"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:451
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:18
+msgid "Visual Editor"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:452
+msgid "EXMCode Editor"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:453
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:21
+msgid "Simple Editor"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:454
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:19
+msgid "HTML Editor"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:468
+msgid "Save Settings"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:505
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:295
+msgid "Session token expired!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/plugins.php:530
+msgid "Settings updated!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:21
+msgid "Sorry, comments has been disabled by administrator"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:57
+msgid "You must provide your name and email in order to can post comments"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:62
+msgid "Sorry, you are not allowed to post comments!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:69
+msgid "There are not params to save!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:76
+msgid "Object type missing!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:83
+msgid "Object name missing!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:90
+msgid "You must write a message!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:143
+msgid "Comment could not be posted!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:163
+msgid "Comment posted successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:174
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:193
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:257
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:262
+msgid "You are not allowed to edit this comment!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:180
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:267
+msgid "Please specify a comment"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:251
+msgid "Invalid Operation"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/post_comment.php:284
+msgid "You must provide a text for comment!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/rss.php:18
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_rss_center.php:1
+msgid "RSS Center"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/rss.php:38
+msgid "Choose an option to see its feed"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/rss.php:43
+msgid "This module does not support rss feeds"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:44
+msgid "Item updated!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:88
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:123
+msgid "Invalid parameters!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:136
+msgid "Unable to download update file!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:142
+msgid "ERROR: unable to open downloaded zip file!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:170
+#, php-format
+msgid "Target path \"%s\" odes not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:204
+msgid "FTP configuration not specified!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:208
+msgid "FTP configuration not valid!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:220
+#, php-format
+msgid "Unable to connect FTP server %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:248
+msgid "Executing files..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/updates.php:250
+#, php-format
+msgid "%s has been updated"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:177
+msgid "You have not selected any user!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:178
+msgid "Dou you really wish to delete selected users?"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:189
+#: C:\wamp\www\xm\modules\rmcommon/users.php:261
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:74
+msgid "Users Management"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:251
+#: C:\wamp\www\xm\modules\rmcommon/users.php:334
+msgid "The specified user is not valid!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:256
+#: C:\wamp\www\xm\modules\rmcommon/users.php:340
+msgid "The specified user does not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:261
+#: C:\wamp\www\xm\modules\rmcommon/users.php:264
+msgid "Editing User"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:267
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:35
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:90
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:94
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:118
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:129
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:190
+msgid "Username"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:268
+msgid "This field also will be the user login name."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:271
+msgid "Full name"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:272
+msgid "This field must contain firstname and lastname."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:275
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:321
+msgid "Email address"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:278
+msgid "New password"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:279
+msgid ""
+"The password should be at least eight characters long. To make it stronger, "
+"use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:280
+msgid "Repeat Password"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:281
+msgid "Type password again."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:284
+msgid "URL (Blog or personal website)"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:287
+msgid "Time zone"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:290
+msgid "Assign to groups"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:302
+msgid "Edit User"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:328
+msgid "Sorry, you don't have permission to add users."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:349
+msgid "Please fill all required fields and try again!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:355
+msgid "Passwords doesn't match. Please chek them."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:379
+msgid "The users could not be saved. Please try again!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:396
+msgid ""
+"You must select one user at least. Please click on \"Add Users\" and select "
+"as many users as you wish."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:401
+msgid "Sending email to users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:404
+msgid "Send Email to Users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:407
+msgid ""
+"Please note that the maximun users number that you can select depends of the "
+"limit of emails that you can send accourding to your email server policies "
+"(or hosting account policies)."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:409
+msgid "Message subject"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:410
+msgid "Subject must be descriptive."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:411
+msgid "Message type"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:412
+msgid "HTML"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:413
+msgid "Plain Text"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:414
+msgid "Message content"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:417
+msgid "Send E-Mail"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:448
+msgid "There was errors while sending this emails"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:455
+msgid "Message sent successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:473
+msgid "No users has been selected"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:484
+msgid "Users "
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:486
+msgid "Users could not be "
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:513
+#, php-format
+msgid "Admin user cannot be deleted: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:515
+#, php-format
+msgid "User cannot be deleted: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/users.php:525
+msgid "Users deleted successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:42
+msgid "Twitter"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:43
+msgid "LinkedIn"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:44
+msgid "Red México Twitter"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:45
+msgid "Red México Facebook"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:462
+msgid "Show comments from internal comments system"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:471
+msgid "Custom Block"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/xoops_version.php:472
+msgid "Allows to create a block with custom content."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:49
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:146
+#: C:\wamp\www\xm\modules\rmcommon/ajax/users.php:20
+#: C:\wamp\www\xm\modules\rmcommon/ajax/users.php:40
+msgid "Sorry, you are not allowed to view this page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:56
+msgid "The block specified seems to be invalid. Please try again."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:64
+msgid "The specified module does not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:83
+msgid "The specified block does not exists, please verify your selection."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:117
+#, php-format
+msgid "Block could not be created due to: %s. Please try again!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:132
+msgid "Block added successfully! Please configure it."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:154
+msgid "The block that you specified seems to be invalid. Please try again"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:159
+msgid "The block that you specified does not exists!. Please try again"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:193
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:239
+msgid "Session token expired. Please try again."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:198
+msgid "You must provide a block ID!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:204
+msgid "Specified block does not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:226
+msgid "Block updated successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:249
+msgid "Specified position is not valid!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:254
+msgid "You must fill name and tag input fields!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:260
+msgid "Specified block position does not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:270
+msgid "Already exists another block position with same name or tag!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:279
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:314
+msgid "Changes saved successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:282
+msgid "Changes could not be saved!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:300
+msgid "No items has been specified!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/blocks.php:311
+msgid "Blocks order saved successfully!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/ajax/users.php:94
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:141
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:142
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:145
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/groups.class.php:157
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/groups.class.php:191
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:113
+msgid "All"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/api/editors/tinymce/plugins/exmsystem/editor_plugin.php:92
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:4
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:78
+msgid "Insert Image"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:132
+msgid "Number of Comments:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:134
+msgid "Show module name:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:135
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:138
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:141
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:144
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/checks.class.php:212
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:28
+msgid "Yes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:136
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:139
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:142
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:145
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/checks.class.php:217
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:29
+msgid "No"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:137
+msgid "Show item name:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:140
+msgid "Show user name:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/blocks/comments.php:143
+msgid "Show date:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/flashuploader.php:32
+msgid "Select Files"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/flashuploader.php:37
+msgid "All Files"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/form.class.php:450
+msgid "Fields marked with (*) are required."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:80
+msgid "Users List"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:81
+msgid "Add User"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:85
+msgid "Categories List"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:86
+msgid "Add Category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:91
+msgid "Add Images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:278
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:34
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:43
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:193
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:76
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:160
+msgid "Edit"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:319
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:17
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:57
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:170
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:179
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:10
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:19
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:80
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:95
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:119
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:130
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:191
+msgid "Name"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:323
+msgid "Web site"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:324
+msgid "Your comment"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:325
+msgid "Submit Comment"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:326
+msgid "Submit a comment"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:346
+msgid "Please specify your name"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:347
+msgid "Please specify a valid email"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:348
+msgid "Please write a message"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/functions.php:349
+msgid "Please enter a valid URL"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/internalblock.php:329
+msgid "The configuration file for this block does not exists!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/internalblock.php:336
+msgid ""
+"There was a problem trying to show the configuration options for this block!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/pagenav.php:126
+#, php-format
+msgid ""
+"Showing <strong>%u</strong> to <strong>%u</strong> of <strong>%u</strong>."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/template.php:216
+msgid "Help"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:47
+msgid ""
+"You must provide a valid time and format value to use RMTimeFormatter::format"
+"() method"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:93
+msgid "Sunday"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:94
+msgid "Monday"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:95
+msgid "Tuesday"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:96
+msgid "Wednesday"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:97
+msgid "Thursday"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:98
+msgid "Friday"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:99
+msgid "Saturday"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:111
+msgid "January"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:112
+msgid "February"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:113
+msgid "March"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:114
+msgid "April"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:115
+msgid "May"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:116
+msgid "June"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:117
+msgid "July"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:118
+msgid "August"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:119
+msgid "September"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:120
+msgid "October"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:121
+msgid "November"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/timeformatter.php:122
+msgid "December"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/utilities.php:293
+#, php-format
+msgid "%s b"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/utilities.php:295
+#, php-format
+msgid "%s kb"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/utilities.php:297
+#, php-format
+msgid "%s MB"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/utilities.php:299
+#, php-format
+msgid "%s GB"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/utilities.php:346
+msgid "Remove Image"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/utilities.php:351
+msgid "Image manager..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/utilities.php:357
+msgid "Image Manager"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/date.class.php:93
+msgid "Choose Time"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/formuser.class.php:84
+msgid "All Users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/formuser.class.php:114
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/formuser.class.php:115
+msgid "Search Users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:142
+msgid "Home Page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:143
+msgid "User page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:144
+msgid "User profile page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:145
+msgid "Users registration"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:146
+msgid "Edit user"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:147
+msgid "Read PM"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:148
+msgid "Private messages"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/modules.class.php:157
+msgid "Inner pages"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/textoptions.class.php:114
+msgid "Allow HTML"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/textoptions.class.php:116
+msgid "Allow Xoops Code"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/textoptions.class.php:118
+msgid "Allow Smilies"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/textoptions.class.php:120
+msgid "Allow break lines"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/class/fields/textoptions.class.php:122
+msgid "Do images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/right_widgets.php:14
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:28
+msgid "Available Modules"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:112
+msgid "Sorry, unauthorized operation!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:124
+msgid "You must select a category before"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/tiny-images.php:202
+msgid "File URL"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/upload.php:34
+#: C:\wamp\www\xm\modules\rmcommon/include/upload.php:38
+msgid "You are not allowed to do this action"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/upload.php:42
+msgid "Sorry, category has not been specified!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/upload.php:47
+msgid "Sorry, the specified category has not been found!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/upload.php:51
+msgid "Sorry, the specified category is closed!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/upload.php:55
+msgid "Sorry, you can not upload images!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/include/upload.php:98
+msgid "File could not be inserted to database!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:15
+msgid "Language to use"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:16
+msgid "Arrange images by date"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:17
+msgid "Select the default editor"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:20
+msgid "XoopsCode Editor"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:22
+msgid "Limit for image categories list."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:23
+msgid "Image manager: number of images per page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:24
+msgid "Secret Key"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:25
+msgid "Provide a secret key used to encrypt information."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:26
+msgid "Admin theme"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:27
+msgid "Enable JQuery for front end"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:28
+msgid ""
+"When this option is enabled, Common Utilities will include JQuery "
+"automatically. Please, disable this option only when your theme include "
+"jquery by default."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:30
+msgid "Allow HTMl in text"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:31
+msgid "Allow smilies in text"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:32
+msgid "Allow XoopsCode"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:33
+msgid "Allow images in text"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:34
+msgid "Auto add line breaks in text"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:36
+msgid "Modules number on dashboard"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:39
+msgid "Enable comments"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:40
+msgid "Allow anonymous users to post comments"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:41
+msgid "Automatically approve comments by registered users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:42
+msgid "Automatically approve comments by anonymous users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:43
+msgid "Allow users to edit their comments"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:44
+msgid "Time limit to edit a comment (in hours)."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:47
+msgid "Image for RSS feeds"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:50
+msgid "Mailer method"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:51
+msgid "Common Utilities will use this method to send emails."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:52
+msgid "PHP Mail()"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:53
+msgid "SMTP"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:54
+msgid "Sendmail"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:55
+msgid "SMTP server to use"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:56
+msgid "Specify the server through with the emails will be sent."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:57
+msgid "SMTP encryption"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:58
+msgid ""
+"For SSL or TLS encryption to work, your PHP installation must have "
+"appropriate OpenSSL transports wrappers."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:60
+msgid "SSL"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:61
+msgid "TLS"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:62
+msgid "SMTP server port"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:63
+msgid ""
+"Note that you must to write the appropriate port based on your encryption "
+"type selection."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:64
+msgid "SMTP username"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:65
+msgid "SMTP password"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:66
+msgid "Sendmail path"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:67
+msgid ""
+"Input the command for sendmail, including the correct command line flags. "
+"The default to use is \"/usr/sbin/sendmail -bs\" if this is not specified."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:70
+msgid "Enable RSS Center"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:73
+msgid "Enable internal blocks manager"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:74
+msgid "Disable new GUI when working on non native modules?"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:75
+msgid "Activate updates"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:76
+msgid ""
+"When this option is enabled, Common Utilities will search automatically "
+"updates for modules and other components."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/language/english/modinfo.php:77
+msgid "Days between updates search"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:1
+msgid "Create New Category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:7
+msgid "Category Name:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:13
+msgid "Category Status:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:16
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:68
+msgid "Inactive"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:17
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:100
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:110
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:172
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:181
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:68
+msgid "Active"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:22
+msgid "Groups that can upload images:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:30
+msgid "Groups that can use this category:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:38
+msgid "Maximum file size:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:43
+msgid "Bytes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:44
+msgid "Kilobytes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:45
+msgid "Megabytes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:50
+msgid "Custom Sizes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:55
+msgid "This configurations stablish the sizes in wich images will be created."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:56
+msgid "You can specify all sizes that you wish according to your needs."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:63
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:91
+msgid "Size name"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:65
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:93
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:8
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:35
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:7
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:44
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:87
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:85
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:128
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:145
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:161
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:192
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:212
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:77
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:106
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:162
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:202
+msgid "Delete"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:72
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:100
+msgid "Width:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:74
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:102
+msgid "Height:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:80
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:108
+msgid "Scale"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:81
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:109
+msgid "Crop"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:82
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:110
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:49
+msgid "No Resize"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:115
+msgid "New Size"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/categories_form.php:121
+msgid "Update Category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:8
+msgid "Upload Files"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:9
+msgid "From URL"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:10
+msgid "From Library"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:16
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:90
+msgid "Select the category where you wish to upload images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:18
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:92
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:7
+msgid "Select..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:36
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:32
+msgid "Resizing images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:41
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:36
+msgid "Please, do not close the window until resizing process has finished!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:50
+msgid "Image URL"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:54
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_edit.php:24
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:34
+msgid "Title:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:58
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:38
+msgid "Alternative text:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:62
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:56
+msgid "Alignment:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:66
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:59
+msgid "Left"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:67
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:60
+msgid "Center"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:68
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:61
+msgid "Right"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/editor_image.php:72
+msgid "Link:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/forms.php:41
+msgid "This is a required field. Please fill it!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:12
+msgid "Selected:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:22
+msgid "Insert Users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:29
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:3
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:5
+msgid "Search:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:30
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:9
+msgid "Show:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:31
+msgid "Sort by:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:33
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:169
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:178
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:93
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:117
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:128
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:189
+msgid "ID"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:34
+msgid "Registered"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:37
+msgid "Go!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/form_users.php:45
+msgid "Existing Users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:7
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:6
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:14
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:117
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:102
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:198
+msgid "Bulk Actions..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:9
+msgid "Close Category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:10
+msgid "Open Category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:12
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:10
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:87
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:147
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:163
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:214
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:5
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:20
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:122
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:108
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:204
+msgid "Apply"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:19
+msgid "Sizes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:20
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:121
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:132
+msgid "Groups"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:25
+msgid ""
+"There are not categories yet! You must create at least one category in order "
+"to create images."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:35
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:44
+msgid "Do you really want to delete &quot;"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:36
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:41
+msgid "open"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:54
+msgid "Upload:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_categories.php:55
+msgid "Access:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_edit.php:2
+msgid "Edit Image"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_edit.php:20
+msgid "Original Size"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_edit.php:28
+msgid "Category:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_edit.php:38
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:42
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:101
+msgid "Description:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_edit.php:43
+msgid "Update Image!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:1
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:58
+msgid "Images Manager"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:8
+msgid "Update thumbnails"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:16
+msgid "Create Images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:21
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_files_list.php:5
+msgid "File"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:22
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:60
+msgid "Details"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:23
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:43
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:53
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:13
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:22
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:83
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:91
+msgid "Author"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:24
+msgid "Date"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_images.php:29
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:6
+msgid "There are not images yet!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:20
+msgid "Show"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:29
+msgid "Hide"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:46
+msgid "Link URL:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:65
+msgid "Image size:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:76
+msgid "Original"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_list_editor.php:86
+msgid "Insert image"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:2
+msgid "Upload Images"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:5
+msgid "Select Category:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:12
+msgid "Change Category"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:19
+msgid "Upload"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:20
+msgid "Clear All"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:38
+msgid "Done! Click to continue..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/images_uploadimages.php:39
+msgid "Done! Show images..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/navigation_pages.php:4
+msgid "Pages:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/navigation_pages.php:6
+msgid "First Page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/navigation_pages.php:10
+msgid "Previous Page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/navigation_pages.php:21
+#, php-format
+msgid "Page %u"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/navigation_pages.php:30
+msgid "Next Page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/navigation_pages.php:34
+msgid "Last Page"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:1
+msgid "Blocks Administration"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:7
+msgid "All modules"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:13
+msgid "All positions"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:20
+msgid "All blocks..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:21
+msgid "Hidden blocks..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:22
+msgid "Visible blocks..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:27
+msgid "Add New Block"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:59
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:5
+msgid "Input a name to identify this position (<em>eg. Left blocks</em>)"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:60
+msgid "Tag Name"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:62
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:8
+msgid ""
+"Specify a name for the smarty tag to use in templates (eg. left_blocks). "
+"This tag will be used as Smarty tag (eg. &lt;{$left_blocks}&gt)."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:63
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:9
+msgid "Add Position"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:67
+msgid "How to implement blocks"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:82
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:142
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:158
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:209
+msgid "Bulk actions..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:83
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:143
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:159
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:210
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:27
+msgid "Visible"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:84
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:144
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:160
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:211
+msgid "Hidden"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:89
+msgid "Sort Blocks"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:97
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:107
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_bknew.php:2
+msgid "Block"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:99
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:109
+msgid "Position"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:101
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:111
+msgid "Order"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:117
+msgid "There are not blocks configured with these options."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:127
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:49
+msgid "Settings"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:171
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:180
+msgid "Smarty Tag"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:224
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:232
+msgid "Save Order"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:225
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:233
+msgid "Saving..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:240
+msgid "Loading"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_blocks.php:240
+msgid "Loading data..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:3
+#, php-format
+msgid "%s settings"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:6
+msgid "General Settings"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:7
+msgid "Custom Options"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:8
+msgid "Permissions"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:11
+msgid "Block Title"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:14
+msgid "Block position"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:22
+msgid "Block weight"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:32
+msgid "Cache lifetime"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:34
+msgid "No Cache"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:35
+msgid "30 seconds"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:36
+msgid "1 minute"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:37
+msgid "5 minutes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:38
+msgid "30 minutes"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:39
+msgid "1 hour"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:40
+msgid "5 hours"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:41
+msgid "1 day"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:42
+msgid "3 days"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:43
+msgid "1 week"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:44
+msgid "1 month"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:48
+msgid "Visible in"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:57
+msgid "Content type:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:59
+msgid "Formatted text"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:60
+msgid "HTML block"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:61
+msgid "PHP block"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:62
+msgid "XOOPS code"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_block_form.php:69
+msgid "Read Permissions"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:5
+msgid "You need something to search!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:9
+msgid "Comments Manager"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:15
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:118
+msgid "Set unapproved"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:16
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:119
+msgid "Set approved"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:17
+msgid "Mark as SPAM"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:18
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:120
+msgid "Delete comments"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:21
+msgid "View all"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:34
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:36
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:99
+msgid "SPAM"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:44
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:54
+msgid "Comment"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:63
+msgid "There are not comments yet!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:79
+msgid "Unnaprove"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:81
+msgid "Approve"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_comments.php:84
+msgid "Spam"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:7
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:1
+msgid "Available Updates"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:14
+msgid "Installed Modules"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:20
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:38
+msgid ""
+"If you wish to manage or install new modules please go to Modules Management."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:21
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:39
+msgid "Modules management"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:50
+msgid "System Tools"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:55
+msgid "Configure Common Utilities"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:63
+msgid "Comments Management"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:66
+msgid "Plugins Management"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:71
+msgid "XOOPS Modules"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_dashboard.php:96
+msgid "Recent News"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mods_installed.php:6
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:30
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:8
+#, php-format
+msgid "Version: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mods_installed.php:7
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:86
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:47
+msgid "Update"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mods_installed.php:9
+msgid "View"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:4
+msgid "Do you really want to uninstall selected module?"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:5
+msgid "Do you really want to update selected module?"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:6
+msgid "Do you really want to disable selected module?"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:7
+msgid "New name must be different from current name!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:31
+#, php-format
+msgid "Updated: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:72
+msgid "Web:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:76
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:109
+msgid "License:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:87
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:41
+msgid "Uninstall"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:88
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:43
+msgid "Disable"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:89
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:45
+msgid "Enable"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:96
+msgid "Change name:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_modules.php:98
+msgid "Rename"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_log.php:3
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_log.php:14
+msgid "Go to Modules Management"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_log.php:6
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_log.php:17
+#, php-format
+msgid "%s Control Panel"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:1
+#, php-format
+msgid "Install %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:3
+msgid ""
+"This module will make next changes in Xoops system. Please review in a "
+"detailed way all them in order to decide if you really wish to install this "
+"module"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:10
+msgid "Module Templates"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:23
+msgid "Database Tables"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:36
+msgid "Option settings to insert"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:50
+msgid "Bloks to insert"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:67
+#, php-format
+msgid "%s Details"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:96
+msgid "Author Web:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:105
+msgid "Credits:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:113
+msgid "Help:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:115
+msgid "Click here"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_mod_preinstall.php:119
+msgid "Install Now"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:1
+msgid "Plugins Manager"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:3
+msgid ""
+"Plugins allows to Common Utilities to improve its features and capabilities. "
+"Following is a list with existing plugins, installed and available to "
+"install."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:6
+msgid "Installed Plugins"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:11
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:20
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:81
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:89
+msgid "Description"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:12
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:21
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:82
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:90
+msgid "Version"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:29
+msgid "There are not plugins installed yet!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:76
+msgid "Available Plugins"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:88
+msgid "Name and Description"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:97
+msgid "There are not available plugins yet!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_plugins.php:106
+msgid "Visit Web site"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_rss_center.php:3
+#, php-format
+msgid "All %s RSS feeds are listed below. Click an option for feed."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_rss_center.php:9
+msgid "URL:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:5
+msgid "Check for Updates"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:6
+msgid "FTP Settings"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:9
+#, php-format
+msgid "Last comprobation: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:16
+msgid "Server:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:20
+msgid "Port:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:24
+msgid "User:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:28
+msgid "Password:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:32
+msgid "XOOPS Directory:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:38
+msgid ""
+"XOOPS directory must match with this XOOPS installation, but only the "
+"relative patch to server root."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:44
+msgid "Notice"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:45
+msgid ""
+"Before to install updates be sure that target folders have writting "
+"permissions for web server. If you wish, you can configure the internal FTP "
+"Client in order to update without assign writting permissions."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:48
+msgid "Searching for updates..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:57
+msgid "Update Details"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:61
+msgid "Files"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:79
+msgid "Continue &raquo;"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:87
+msgid "User Credentials"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:91
+msgid "Password"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:92
+msgid "Login"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_updates.php:101
+msgid "Executing Files..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:13
+msgid "Go Now!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:16
+msgid "Advanced Search"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:22
+msgid "Email:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:23
+msgid "Web site:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:24
+msgid "Country/Location:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:32
+msgid "Registered between:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:33
+msgid "Last login between:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:34
+msgid "Posts between:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:37
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:38
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:41
+msgid "and"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:46
+msgid "Mail:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:47
+msgid "Status:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:48
+msgid "Search method:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:54
+msgid "Users that accept mail"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:55
+msgid "Users that do'nt accept mail"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:61
+msgid "Active users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:62
+msgid "Inactive users"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:72
+msgid "Search Now!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:78
+msgid ""
+"All these options are optional and will be additional to basic search "
+"keyword."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:91
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:187
+msgid "Order by:"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:96
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:120
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:131
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:192
+msgid "Email"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:98
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:194
+msgid "Sort"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:103
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:199
+msgid "Activate"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:104
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:200
+msgid "Deactivate"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:105
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:201
+msgid "Send email"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:140
+msgid "There are not any user registered with for this filter."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:161
+msgid "Send Email"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/rmc_users.php:166
+#, php-format
+msgid "Send email to %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_files_list.php:4
+msgid "#"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_files_list.php:6
+msgid "Mode"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_files_list.php:7
+msgid "Size"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_files_list.php:8
+msgid "Action"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_files_list.php:17
+#, php-format
+msgid "Path: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:7
+#, php-format
+msgid "Type: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:9
+#, php-format
+msgid "Released on: %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:11
+msgid "Login required"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:15
+msgid "Installing update..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:19
+#, php-format
+msgid "Downloading %s"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:24
+msgid "View details"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/ajax/rmc_updates_list.php:25
+msgid "Update now!"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_bknew.php:4
+msgid "Select block..."
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_bknew.php:12
+msgid "Add Block"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:3
+msgid "Position Name"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:6
+msgid "Position tag"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:12
+msgid "Existing positions"
+msgstr ""
+
+#: C:\wamp\www\xm\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:15
+msgid "edit"
+msgstr ""

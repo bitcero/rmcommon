@@ -1,0 +1,3425 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Common Utilities\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-10 22:49-0600\n"
+"PO-Revision-Date: 2013-06-10 22:51-0600\n"
+"Last-Translator: Eduardo Cortes <i.bitcero@gmail.com>\n"
+"Language-Team: Red Mexico <xoopsmexico@gmail.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\xoops\\modules\\rmcommon\n"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:132
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:133
+msgid "Blocks Management"
+msgstr "Bloklar Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:142
+msgid "Internal blocks manager is currenlty disabled!"
+msgstr "İç blok yöneticisi currenlty devre dışı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:187
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:244
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:270
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:28
+msgid "You are not allowed to do this action!"
+msgstr "Bu eylemi yapmak için izin verilmez!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:195
+msgid "Please provide a name and tag for this new position!"
+msgstr "Bu yeni pozisyon için bir isim ve etiket veriniz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:206
+msgid "You must specify a valid position ID!"
+msgstr "Geçerli bir konuma ID belirtmeniz gerekir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:210
+msgid "Specified position does not exists!"
+msgstr "Belirtilen konumu mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:228
+msgid "Already exists another position with same name or same tag!"
+msgstr "Zaten aynı isim veya aynı etiketi ile başka bir konuma var!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:231
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:428
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:380
+msgid "Database updated successfully!"
+msgstr "Veritabanı başarıyla güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:233
+msgid "Errors ocurred while trying to save data"
+msgstr "Verileri kaydetmek çalışırken hatalar oluştu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:251
+msgid "Select at least a block!"
+msgstr "En az bir bloğu seçin!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:259
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:292
+msgid "Database updated successfully"
+msgstr "Veritabanı başarıyla güncellendi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:261
+msgid "Errors ocurred while trying to do this action"
+msgstr "Bu eylem yapmak isterken hatalar oluştu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:277
+msgid "You must select at least one position!"
+msgstr "En az bir konum seçmek gerekir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks.php:290
+msgid "There was some errors:"
+msgstr "Bazı hatalar vardı:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:105
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:230
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:81
+msgid "Unknow"
+msgstr "Unknow"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:114
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:268
+#, php-format
+msgid "Posted on %s"
+msgstr "Posted on %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:125
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:127
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:297
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:9
+msgid "Comments Manager"
+msgstr "Yorumlar Müdürü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:135
+msgid "Do you really want to delete this comment?"
+msgstr "Bu indirimi silmek istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:150
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:168
+msgid "Invalid operation"
+msgstr "Geçersiz işlem"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:162
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:201
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:319
+msgid "Sorry, session token expired!"
+msgstr "Üzgünüm, oturum belirteci süresi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:167
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:206
+msgid "Unrecognized data!"
+msgstr "Tanınmayan veri!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:178
+msgid "Comments updated successfully!"
+msgstr "Yorumlar başarıyla güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:183
+msgid "Errors occurrs while trying to update comments!"
+msgstr "Hatalar occurrs yorumlar güncelleştirmeye çalışırken!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:236
+msgid "Comments deleted successfully!"
+msgstr "Yorum başarıyla silindi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:251
+msgid "Sorry, comment id is not valid"
+msgstr "Üzgünüz, yorum kimliği geçerli değil"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:257
+msgid "Sorry, comment does not found"
+msgstr "Üzgünüz, yorum bulunamadı değil"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:269
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:298
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:300
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:207
+msgid "Edit Comment"
+msgstr "Yorum Düzenleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:270
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:208
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:45
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:55
+msgid "In reply to"
+msgstr "Cevap olarak"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:271
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:209
+msgid "Posted date"
+msgstr "Tarih tarih"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:272
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:210
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:44
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:54
+msgid "Module"
+msgstr "Modül"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:273
+msgid "IP"
+msgstr "IP"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:276
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:214
+msgid "Poster"
+msgstr "Poster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:279
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:219
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:18
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:43
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:53
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:25
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:34
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:124
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:136
+msgid "Status"
+msgstr "Duru"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:280
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:220
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:30
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:90
+msgid "Approved"
+msgstr "Onaylı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:281
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:221
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:27
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:93
+msgid "Unapproved"
+msgstr "Onaylanmamış"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:284
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:225
+msgid "Content"
+msgstr "Content"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:291
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:228
+msgid "Update Comment"
+msgstr "Yorum Güncelleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:292
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:475
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:229
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:306
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:424
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:22
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:114
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:80
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:61
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:13
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:106
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:99
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:120
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:78
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:94
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:74
+msgid "Cancel"
+msgstr "Cancel"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:324
+msgid "Comment ID not specified!"
+msgstr "Belirtilmemiş ID Yorum!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:330
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:186
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:273
+msgid "Specified comment does not exist!"
+msgstr "Belirtilen yorum yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:365
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:315
+msgid "Comment updated successfully!"
+msgstr "Başarıyla güncellendi Yorum!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/comments.php:367
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:317
+msgid "Errros ocurrs while trying to update comment!"
+msgstr "Yorum güncellemek için çalışırken Errros ocurrs!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:33
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:119
+msgid "There are not categories yet! Please create one in order to add images."
+msgstr "Kategoriler henüz yok! Görüntü eklemek için bir oluşturun."
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:113
+msgid "Images Management"
+msgstr "Görüntü Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:116
+#, php-format
+msgid "Images Management: %s"
+msgstr "Görüntüler Yönetimi: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:137
+#, php-format
+msgid "Category %s is closed. Please, select another category."
+msgstr "Kategori %s kapalıdır. , Başka bir kategori seçiniz."
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:152
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:49
+msgid "All Images (*.jpg, *.png, *.gif)"
+msgstr "Tüm resimler (*. Jpg, *. Png, *. Gif)"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:154
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:51
+msgid "Browse Images..."
+msgstr "Görüntüler göz atın ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:163
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:67
+msgid "Uploaded successfully!"
+msgstr "Başarıyla yüklendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:196
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:260
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:309
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:620
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:1
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:58
+msgid "Images Manager"
+msgstr "Görüntü Yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:199
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:201
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:2
+msgid "Upload Images"
+msgstr "Görüntüler yükle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:261
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:62
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:1
+msgid "Categories"
+msgstr "Kategoriler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:263
+msgid "Images Manager: Categories"
+msgstr "Resimler Müdürü: Kategoriler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:287
+msgid "You must specify a category id to edit!"
+msgstr "Düzenlemek bir kategori id belirtmeniz gerekir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:294
+msgid "The specified category does not exist!"
+msgstr "Belirtilen kategori yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:310
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:312
+msgid "Edit Category"
+msgstr "Kategoriyi Düzenle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:310
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:86
+msgid "Add Category"
+msgstr "Kategori Ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:312
+#, php-format
+msgid "Images Manager: %s"
+msgstr "Resimler Müdürü: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:312
+msgid "Add category"
+msgstr "Kategori ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:348
+msgid "Specify a valid category id"
+msgstr "Geçerli bir kategori kimliği belirtin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:354
+msgid "Specified category does not exists!"
+msgstr "Belirtilen kategori mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:363
+msgid "Please specify a category name"
+msgstr "Bir kategori adını belirtin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:379
+msgid "You must create one size for this category at least!"
+msgstr "En az bu kategori için bir boyut oluşturmanız gerekir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:386
+msgid "There is already a category with the same name!"
+msgstr "Aynı adı taşıyan bir kategori zaten var!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:398
+msgid "Category updated successfully!"
+msgstr "Kategori başarıyla güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:400
+msgid "There were some erros while trying to save this category."
+msgstr "Bu kategoride kurtarmaya çalışırken bazı kusurları vardı."
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:416
+msgid "Specify one category at least to change status!"
+msgstr "En azından durumunu değiştirmek için bir kategori belirleyin!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:431
+msgid "There were some erros while updating database:"
+msgstr "Veritabanı güncelleme sırasında bazı kusurları vardı:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:456
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:467
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:471
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:475
+msgid "Unauthorized!"
+msgstr "Yetkisiz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:460
+msgid "Invalid image!"
+msgstr "Görüntü Geçersiz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:480
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:577
+msgid "Image not found!"
+msgstr "Resim bulunamadı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:486
+msgid "Unauthorized"
+msgstr "Yetkisiz"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:553
+#, php-format
+msgid "%s done!"
+msgstr "%s yapılır!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:571
+msgid "Invalid image ID"
+msgstr "Geçersiz resim ID"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:621
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:623
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:2
+msgid "Edit Image"
+msgstr "Resim Düzenleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:650
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:799
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:34
+msgid "Operation not allowed!"
+msgstr "İşleme izin verilmedi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:655
+msgid "Image ID not provided!"
+msgstr "Resim Adresi sağlanmaz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:660
+msgid "You must  provide a title for this image"
+msgstr "Bu görüntü için bir başlık sağlamalıdır"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:666
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:757
+msgid "Image not exists!"
+msgstr "Görüntü var değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:672
+msgid "Category not exist!"
+msgstr "Kategori yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:685
+msgid "the image could not be updated!"
+msgstr "görüntü güncellenen olamazdı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:691
+msgid "Image updated succesfully!"
+msgstr "Resim başarıyla güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:733
+msgid "Image updated successfully!"
+msgstr "Resim başarıyla güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:747
+msgid "Please, speciy an image at least!"
+msgstr "Lütfen, en azından speciy bir görüntü!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:783
+msgid "Errors ocurred during images deletion!"
+msgstr "Hatalar görüntüleri silme sırasında oluştu!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:785
+msgid "Images deleted successfully!"
+msgstr "Görüntüler başarıyla silindi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:804
+msgid "Category ID not provided"
+msgstr "Kategori Kimliği sağlanmayan"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:810
+msgid "Category not found"
+msgstr "Kategori bulunamadı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:843
+msgid "Category deleted successfully!"
+msgstr "Kategori başarıyla silindi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/images.php:845
+msgid "Errors ocurred while deleting the category"
+msgstr "Kategori silerken hatalar oluştu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/index.php:92
+msgid "Dashboard Help"
+msgstr "Dashboard Yardım"
+
+#: C:\wamp\www\xoops\modules\rmcommon/index.php:108
+msgid "Theme changed successfully!"
+msgstr "Tema başarıyla değiştirildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/index.php:111
+msgid "Theme could not be changed!"
+msgstr "Tema değiştirilemez olabilir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/index.php:116
+msgid "Specified theme does not exist!"
+msgstr "Belirtilen tema yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/loader.php:211
+msgid "Sorry, Red Mexico Common Utilities has not been installed yet!"
+msgstr "Üzgünüm, Kırmızı Meksika Ortak Araçlar henüz yüklü değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:15
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:95
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:1
+msgid "Dashboard"
+msgstr "Gösterge Panosu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:22
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:96
+msgid "Modules"
+msgstr "Modüller"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:29
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:97
+msgid "Blocks"
+msgstr "Bloklar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:36
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:412
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:98
+msgid "Users"
+msgstr "Kullanıcılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:42
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:54
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:61
+msgid "All users"
+msgstr "Bütün kullanıcılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:48
+msgid "New user"
+msgstr "Yeni Kullanıcı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:57
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:72
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:89
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:99
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:21
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:37
+msgid "Images"
+msgstr "Görüntüler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:67
+msgid "New category"
+msgstr "Yeni kategori"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:77
+msgid "Add images"
+msgstr "Resim ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:86
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:459
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:100
+msgid "Comments"
+msgstr "Yorumlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:93
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:101
+msgid "Plugins"
+msgstr "Eklentiler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/menu.php:100
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:102
+msgid "Updates"
+msgstr "Güncellemeler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:109
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:112
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:154
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:256
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:701
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:1
+msgid "Modules Management"
+msgstr "Modüller Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:131
+msgid "Specified module is not valid!"
+msgstr "Belirtilen modül geçerli değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:138
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:180
+#, php-format
+msgid "%s is already installed!"
+msgstr "%s zaten yüklü!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:144
+msgid "Sepecified module is not a valid Xoops Module!"
+msgstr "Sepecified modülü geçerli bir XOOPS Modülü değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:155
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:157
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:1
+#, php-format
+msgid "Install %s"
+msgstr "Install %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:173
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:227
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:668
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:720
+msgid "Sorry, this operation could not be completed!"
+msgstr "Üzgünüm, bu işlemi tamamlanamadı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:212
+#, php-format
+msgid "Installation log for %s"
+msgstr "Için Yükleme günlük %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:234
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:676
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:727
+#, php-format
+msgid "Module %s is not installed yet!"
+msgstr "Modül %s henüz yüklü değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:257
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:259
+#, php-format
+msgid "%s install log"
+msgstr "%s yükleme günlüğü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:265
+#, php-format
+msgid "Uninstall log for %s"
+msgstr "Için oturum Uninstall %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:293
+#, php-format
+msgid "Could not update %s"
+msgstr "Güncellenemedi %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:297
+#, php-format
+msgid "Updating module %s"
+msgstr "Modülü güncelleme %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:312
+msgid "Updating templates..."
+msgstr "Şablonları güncelleniyor ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:332
+#, php-format
+msgid "Template %s could not be inserted!"
+msgstr "Şablon %s takılı olamazdı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:335
+#, php-format
+msgid "Template %s inserted to the database."
+msgstr "Şablon %s veritabanına eklenen."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:338
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:407
+#, php-format
+msgid "ERROR: Could not recompile template %s"
+msgstr "HATA: şablonu yeniden derlemek bulunamadı %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:340
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:409
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:468
+#, php-format
+msgid "Template %s recompiled"
+msgstr "Şablon %s tekrar derlenmiş"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:346
+#, php-format
+msgid "ERROR: Could not delete old template %s. Aborting update of this file."
+msgstr "HATA: Eski şablonu silinemedi %s . Bu dosyanın güncelleştirme iptal."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:351
+msgid "Rebuilding blocks..."
+msgstr "Blokları Yeniden ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:382
+#, php-format
+msgid "ERROR: Could not update %s"
+msgstr "HATA: güncellenemedi %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:384
+#, php-format
+msgid "Block %s updated."
+msgstr "Blok %s güncellendi."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:384
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:442
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:444
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:473
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:485
+#, php-format
+msgid "Block ID: %s"
+msgstr "ID Blok: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:402
+#, php-format
+msgid "ERROR: Could not update %s template."
+msgstr "HATA: güncellenemedi %s şablonu."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:404
+#, php-format
+msgid "Template %s updated."
+msgstr "Şablon %s güncellendi."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:424
+#, php-format
+msgid "ERROR: Could not create %s"
+msgstr "HATA: oluşturulamadı %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:442
+msgid "ERROR: Could not add block access right"
+msgstr "HATA: sağ blok erişim eklenemedi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:442
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:444
+#, php-format
+msgid "Group ID: %s"
+msgstr "Grup Kimliği: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:444
+msgid "Added block access right"
+msgstr "Eklendi blok erişim hakkı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:460
+#, php-format
+msgid "ERROR: Could not insert template %s to the database."
+msgstr "HATA: şablon eklemek bulunamadı %s veritabanına."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:463
+#, php-format
+msgid "Template %s added to the database"
+msgstr "Şablon %s veritabanına eklendi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:466
+#, php-format
+msgid "ERROR: Template %s recompile failed"
+msgstr "HATA: Şablon %s yeniden derleme başarısız oldu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:473
+#, php-format
+msgid "Block %s created"
+msgstr "Blok %s oluşturuldu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:485
+#, php-format
+msgid "ERROR: Could not delete block %s"
+msgstr "HATA: blok silinemedi %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:494
+msgid "ERROR: Could not remove deprecated block template."
+msgstr "HATA: kaldırılmış blok şablonu kaldırılamadı."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:496
+#, php-format
+msgid "Block template %s deprecated"
+msgstr "Blok şablonu %s önerilmemektedir"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:515
+msgid "Deleting module config options..."
+msgstr "Modülü yapılandırma seçenekleri siliniyor ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:518
+msgid "ERROR: Could not delete config data from the database"
+msgstr "HATA: veritabanından yapılandırma veri silinemedi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:518
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:525
+#, php-format
+msgid "Config ID: %s"
+msgstr "Yapılandırma ID: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:525
+msgid "Config data deleted from the database."
+msgstr "Yapılandırma veri veritabanından silinir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:615
+msgid "Config option added"
+msgstr "Yapılandırma seçeneği eklendi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:615
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:80
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:77
+msgid "Name:"
+msgstr "Ad:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:615
+msgid "Value:"
+msgstr "Değer:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:622
+#, php-format
+msgid "Config %s added to the database"
+msgstr "Yapılandırma %s veritabanına eklendi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:624
+#, php-format
+msgid "ERROR: Could not insert config %s to the database."
+msgstr "HATA: config eklemek bulunamadı %s veritabanına."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:639
+#, php-format
+msgid "Failed to execute %s"
+msgstr "Çalıştırılamadı %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:641
+#, php-format
+msgid "%s executed successfully."
+msgstr "%s başarıyla yürütüldü."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:649
+#, php-format
+msgid "Module %s updated successfully!"
+msgstr "Modül %s başarıyla güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:699
+#, php-format
+msgid "Update log for %s"
+msgstr "Için günlük güncelleme %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:736
+#, php-format
+msgid "Module %s could not be disabled!"
+msgstr "Modül %s devre dışı olamazdı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:742
+#, php-format
+msgid "Module %s successfully disabled!"
+msgstr "Modül %s başarıyla devre dışı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:753
+msgid "Sorry, you don't have access to this page"
+msgstr "Üzgünüz, bu foruma erişiminiz yoktur."
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:754
+msgid "Click here to refresh"
+msgstr "Yenileme için tıklayın"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:813
+#: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:35
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:34
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:118
+msgid "Install"
+msgstr "Yükle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:814
+#: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:36
+msgid "More info"
+msgstr "Daha Fazla Bilgi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:817
+#: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:39
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:64
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:81
+msgid "Version:"
+msgstr "Sürüm:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:823
+#: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:45
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:68
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:85
+msgid "Author:"
+msgstr "Hazırlayan"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:847
+msgid "You can not rename modules. Session token not valid!"
+msgstr "Modül adını değiştiremezsiniz. Oturum belirteci geçerli değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:861
+msgid "Data provided is not valid"
+msgstr "Sağlanan verilerin geçerli değil"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:874
+msgid "Module name could not be changed!"
+msgstr "Modül adını değiştirdi olamazdı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/modules.php:884
+msgid "Module name changed successfully!"
+msgstr "Modül adı başarıyla değiştirildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:77
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:79
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:484
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:1
+msgid "Plugins Manager"
+msgstr "Eklentiler Yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:97
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:133
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:165
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:196
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:230
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:500
+msgid "You must specify a existing plugin"
+msgstr "Bir mevcut eklenti belirtmelisiniz"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:104
+msgid "Specified plugin is installed already!"
+msgstr "Belirtilen eklenti yüklü!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:109
+#, php-format
+msgid "%s is not a valid plugin!"
+msgstr "%s geçerli bir eklenti değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:114
+msgid "Plugin could not be installed, please try again."
+msgstr "Eklenti yüklenemedi, lütfen tekrar deneyin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:119
+msgid ""
+"The plugin has been inserted on database, but erros ocurred on this process."
+msgstr ""
+"Eklenti veritabanı üzerinde takılı, ama kusurları bu süreci oluştu "
+"edilmiştir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:125
+msgid "Plugin installed succesfully!"
+msgstr "Eklentisi başarıyla yüklü!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:140
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:172
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:203
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:237
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:507
+msgid "Specified plugin is not installed yet!"
+msgstr "Belirtilen eklenti henüz yüklü değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:146
+msgid "Plugin could not be uninstalled, please try again."
+msgstr "Eklenti kaldırılamaz olabilir, lütfen tekrar deneyin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:151
+msgid ""
+"The plugin has been deleted from database, but erros ocurred on this process."
+msgstr ""
+"Eklenti veritabanından silinir, ama kusurları bu süreci oluştu edilmiştir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:157
+msgid "Plugin uninstalled succesfully!"
+msgstr "Eklenti başarıyla kaldırıldı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:177
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:210
+msgid "Plugin could not be updated, please try again."
+msgstr "Eklenti güncelleştirilemedi, lütfen tekrar deneyin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:182
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:215
+msgid "The database has been updated, but erros ocurred on this process."
+msgstr "Veritabanı güncellenen, ama kusurları bu süreci oluştu edilmiştir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:188
+msgid "Plugin updated succesfully!"
+msgstr "Eklenti başarıyla güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:221
+msgid "Plugin status changed succesfully!"
+msgstr "Eklenti durumu başarıyla değişti!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:242
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:512
+msgid "Specified plugin is not active!"
+msgstr "Belirtilen eklenti aktif değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:249
+#, php-format
+msgid "%s configuration"
+msgstr "%s yapılandırma"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:365
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:371
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:377
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:383
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:203
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:59
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:65
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:58
+msgid "None"
+msgstr "Bu gerçekleşmedi,"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:457
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:18
+msgid "Visual Editor"
+msgstr "Görsel Editörü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:458
+msgid "EXMCode Editor"
+msgstr "EXMCode Editörü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:459
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:21
+msgid "Simple Editor"
+msgstr "Basit Editörü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:460
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:19
+msgid "HTML Editor"
+msgstr "HTML Editörü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:474
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:107
+msgid "Save Settings"
+msgstr "Ayarları kayde ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:485
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:487
+msgid "Configure Plugin "
+msgstr "Plugin yapılandırma "
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:517
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:271
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:312
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:344
+msgid "Session token expired!"
+msgstr "Oturum belirteci süresi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/plugins.php:542
+msgid "Settings updated!"
+msgstr "Ayarlar güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:21
+msgid "Sorry, comments has been disabled by administrator"
+msgstr "Üzgünüz, yorum yönetici tarafından devre dışı bırakıldı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:57
+msgid "You must provide your name and email in order to can post comments"
+msgstr "Yorum gönderebilmek için adınızı ve e-posta sağlamalıdır"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:62
+msgid "Sorry, you are not allowed to post comments!"
+msgstr "Üzgünüz, Yorum göndermek için izin verilmez!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:69
+msgid "There are not params to save!"
+msgstr "Kaydetmek için params yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:76
+msgid "Object type missing!"
+msgstr "Nesne türü kayıp!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:83
+msgid "Object name missing!"
+msgstr "Nesne adı eksik!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:90
+msgid "You must write a message!"
+msgstr "Bir mesaj yazmak gerekir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:143
+msgid "Comment could not be posted!"
+msgstr "Görüş gönderdi olamazdı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:163
+msgid "Comment posted successfully!"
+msgstr "Yorum başarıyla gönderildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:174
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:193
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:257
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:262
+msgid "You are not allowed to edit this comment!"
+msgstr "Bu yorumu düzenlemek için izin verilmez!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:180
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:267
+msgid "Please specify a comment"
+msgstr "Yorum belirtin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:251
+msgid "Invalid Operation"
+msgstr "Geçersiz Operasyonu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/post_comment.php:284
+msgid "You must provide a text for comment!"
+msgstr "Bu yorum için bir metin sağlamalıdır!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/rss.php:18
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_rss_center.php:1
+msgid "RSS Center"
+msgstr "RSS Merkezi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/rss.php:38
+msgid "Choose an option to see its feed"
+msgstr "Kendi yem görmek için bir seçenek seçin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/rss.php:43
+msgid "This module does not support rss feeds"
+msgstr "Bu modül rss desteklemiyor"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:44
+msgid "Item updated!"
+msgstr "Madde güncellendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:46
+msgid "Updates Help"
+msgstr "Güncellemeler Yardım"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:55
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:56
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:7
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:1
+msgid "Available Updates"
+msgstr "Mevcut Güncellemeler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:93
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:128
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:357
+msgid "Invalid parameters!"
+msgstr "Geçersiz parametreler!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:141
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:368
+msgid "Unable to download update file!"
+msgstr "Güncelleme dosyasını indirmek için açılamıyor!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:147
+msgid "ERROR: unable to open downloaded zip file!"
+msgstr "HATA: indirdiğiniz zip dosyasını açmak için mümkün!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:175
+#, php-format
+msgid "Target path \"%s\" does not exists!"
+msgstr "Hedef yolu \"%s\" mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:209
+msgid "FTP configuration not specified!"
+msgstr "FTP yapılandırma belirtilmemiş!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:213
+msgid "FTP configuration not valid!"
+msgstr "FTP yapılandırması geçerli değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:225
+#, php-format
+msgid "Unable to connect FTP server %s"
+msgstr "Bağlantı kurulamıyor FTP sunucusu %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:253
+msgid "Executing files..."
+msgstr "Dosyalarını çalıştırmak ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:255
+#, php-format
+msgid "%s has been updated"
+msgstr "%s güncellendi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:370
+msgid "Downloaded!"
+msgstr "İndirilme tarihi:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:385
+#: C:\wamp\www\xoops\modules\rmcommon/updates.php:391
+msgid "File not found!"
+msgstr "Dosya bulunamadı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:173
+msgid "You have not selected any user!"
+msgstr "Herhangi bir kullanıcı seçmediniz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:174
+msgid "Dou you really wish to delete selected users?"
+msgstr "Dou gerçekten seçilen kullanıcıları silmek istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:185
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:186
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:260
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:404
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:74
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:1
+msgid "Users Management"
+msgstr "Kullanıcılar Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:250
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:337
+msgid "The specified user is not valid!"
+msgstr "Belirtilen kullanıcı geçerli değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:255
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:343
+msgid "The specified user does not exists!"
+msgstr "Belirtilen kullanıcı mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:261
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:263
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:305
+msgid "Edit User"
+msgstr "Kullanıcı Düzenle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:261
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:263
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:81
+msgid "Add User"
+msgstr "Kullanıcı Ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:267
+msgid "Editing User"
+msgstr "Kullanıcı Düzenleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:270
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:35
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:91
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:95
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:119
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:131
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:194
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:271
+msgid "This field also will be the user login name."
+msgstr "Bu alan aynı zamanda kullanıcı oturum açma adı olacaktır."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:274
+msgid "Full name"
+msgstr "Tam Adı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:275
+msgid "This field must contain firstname and lastname."
+msgstr "Bu alan ad ve soyadı içermelidir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:278
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:321
+msgid "Email address"
+msgstr "E-Posta Adresi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:281
+msgid "New password"
+msgstr "Yeni Parola:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:282
+msgid ""
+"The password should be at least eight characters long. To make it stronger, "
+"use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &"
+msgstr ""
+"Şifre en az sekiz karakter uzunluğunda olmalıdır. Daha güçlü hale getirmek "
+"için, üst kullanımı ve küçük harfler, sayılar ve semboller gibi ! \" ? $ % ^ "
+"&"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:283
+msgid "Repeat Password"
+msgstr "Şifre Tekrar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:284
+msgid "Type password again."
+msgstr "Tekrar parolasını yazın."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:287
+msgid "URL (Blog or personal website)"
+msgstr "URL (Blog veya kişisel web sitesi)"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:290
+msgid "Time zone"
+msgstr "Saat Dilimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:293
+msgid "Assign to groups"
+msgstr "Gruplara atama"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:331
+msgid "Sorry, you don't have permission to add users."
+msgstr "Üzgünüz, kullanıcı eklemek için yetkiniz yok."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:352
+msgid "Please fill all required fields and try again!"
+msgstr "Tüm gerekli alanları doldurun ve tekrar deneyin!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:358
+msgid "Passwords doesn't match. Please chek them."
+msgstr "Şifreler eşleşmiyor. Chek onları memnun."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:382
+msgid "The users could not be saved. Please try again!"
+msgstr "Kullanıcı kaydedilemedi. Lütfen tekrar deneyin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:399
+msgid ""
+"You must select one user at least. Please click on \"Add Users\" and select "
+"as many users as you wish."
+msgstr ""
+"En az bir kullanıcı seçmelisiniz. Tıklayınız \"Kullanıcı Ekle\" ve "
+"istediğiniz gibi birçok kullanıcı olarak seçin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:405
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:423
+msgid "Send E-Mail"
+msgstr "E-Posta Gönder"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:406
+msgid "Sending email to users"
+msgstr "Kullanıcılara e-posta gönderme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:410
+msgid "Send Email to Users"
+msgstr "Kullanıcılar e-posta gönder"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:413
+msgid ""
+"Please note that the maximun users number that you can select depends of the "
+"limit of emails that you can send accourding to your email server policies "
+"(or hosting account policies)."
+msgstr ""
+"Seçebileceğiniz maximun kullanıcı sayısı size e-posta sunucusu politikaları "
+"(veya hesap politikaları hosting) için accourding gönderebileceğiniz e-"
+"postaların sınırı bağlı olduğunu lütfen unutmayın."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:415
+msgid "Message subject"
+msgstr "Mesaj Konusu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:416
+msgid "Subject must be descriptive."
+msgstr "Konu açıklayıcı olmalıdır."
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:417
+msgid "Message type"
+msgstr "Mesaj tipi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:418
+msgid "HTML"
+msgstr "HTML"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:419
+msgid "Plain Text"
+msgstr "Düz Metin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:420
+msgid "Message content"
+msgstr "Mesaj içeriği"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:454
+msgid "There was errors while sending this emails"
+msgstr "Bu e-posta gönderirken hataları vardı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:461
+msgid "Message sent successfully!"
+msgstr "Mesaj başarıyla gönderildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:479
+msgid "No users has been selected"
+msgstr "Hiçbir üye seçildi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:490
+msgid "Users "
+msgstr "Kullanıcılar "
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:492
+msgid "Users could not be "
+msgstr "Kullanıcılar olamazdı "
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:519
+#, php-format
+msgid "Admin user cannot be deleted: %s"
+msgstr "Yönetici kullanıcı silinemez: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:521
+#, php-format
+msgid "User cannot be deleted: %s"
+msgstr "Kullanıcı silinemez: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/users.php:531
+msgid "Users deleted successfully!"
+msgstr "Kullanıcılar başarıyla silindi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:41
+msgid "Twitter"
+msgstr "Twitter"
+
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:42
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:43
+msgid "Red México Twitter"
+msgstr "Kırmızı México Twitter"
+
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:44
+msgid "Red México Facebook"
+msgstr "Kırmızı México Facebook"
+
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:460
+msgid "Show comments from internal comments system"
+msgstr "İç yorumlar sistemi yorumlarına göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:469
+msgid "Custom Block"
+msgstr "Özel Blok"
+
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:470
+msgid "Allows to create a block with custom content."
+msgstr "Özel içerikli bir blok oluşturmasına izin verir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:49
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:136
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/users.php:20
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/users.php:40
+msgid "Sorry, you are not allowed to view this page"
+msgstr "Üzgünüz, bu sayfayı görme izniniz yok"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:52
+msgid "The block specified seems to be invalid. Please try again."
+msgstr "Belirtilen blok geçersiz gibi görünüyor. Lütfen tekrar deneyiniz."
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:56
+msgid "The specified module does not exists!"
+msgstr "Belirtilen modül mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:74
+msgid "The specified block does not exists, please verify your selection."
+msgstr "Belirtilen blok var değildir, seçiminizi doğrulayın."
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:108
+msgid "Block could not be created. Please try again!"
+msgstr "Blok oluşturulamadı. Lütfen tekrar deneyiniz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:125
+#, php-format
+msgid "Block \"%s\" was added successfully! Please configure it."
+msgstr "Blok \"%s\" başarıyla eklendi! Yapılandırmak lütfen."
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:141
+msgid "The block that you specified seems to be invalid. Please try again"
+msgstr "Belirttiğiniz blok geçersiz gibi görünüyor. Lütfen tekrar deneyin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:145
+msgid "Specified block does not exists!. Please try again"
+msgstr "Belirtilen blok var kaydı bulunamadı. Lütfen tekrar deneyin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:164
+#, php-format
+msgid "Configuration form for block \"%s\" was loaded successfully!"
+msgstr "Blok için yapılandırma formu \"%s\" başarıyla yüklendi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:178
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:224
+msgid "Session token expired. Please try again."
+msgstr "Oturum simge süresi doldu. Lütfen tekrar deneyiniz."
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:181
+msgid "You must provide a block ID!"
+msgstr "Bir blok ibraz etmeniz gerekmektedir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:185
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:319
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:353
+msgid "Specified block does not exists!"
+msgstr "Belirtilen blok mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:204
+#, php-format
+msgid "Settings for the block \"%s\" could not be saved!"
+msgstr "Blok için Settings \"%s\" kaydedilemedi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:213
+#, php-format
+msgid "Settings for block \"%s\" were saved successfully!"
+msgstr "Blok için Settings \"%s\" başarıyla kaydedildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:233
+msgid "Specified position is not valid!"
+msgstr "Belirtilen konumu geçerli değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:236
+msgid "You must fill name and tag input fields!"
+msgstr "Bu isim ve etiket giriş alanları doldurunuz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:240
+msgid "Specified blocks position does not exists!"
+msgstr "Belirtilen bloklar konumu mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:248
+msgid "Already exists another blocks position with same name or tag!"
+msgstr "Zaten aynı adı veya etiket ile başka bir blok pozisyon var!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:255
+#, php-format
+msgid "Position \"%s\" was saved successfylly!"
+msgstr "Konumu \"%s\" successfylly kaydedildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:257
+#, php-format
+msgid "Position \"%s\" could not be saved!"
+msgstr "Konumu \"%s\" kaydedilemedi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:271
+msgid "Blocks order could not be saved!"
+msgstr "Bloklar için kaydedilemedi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:274
+msgid "Position not specified!"
+msgstr "Pozisyon belirtilmemiş!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:293
+#, php-format
+msgid "Blocks order for position \"%s\" saved successfully!"
+msgstr "Pozisyon için Bloklar için \"%s\" başarıyla kaydedildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:296
+#, php-format
+msgid "Blocks order for position \"%s\" could not be saved!"
+msgstr "Pozisyon için Bloklar için \"%s\" kaydedilemedi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:312
+msgid "Block visibility could not be saved!"
+msgstr "Blok görüş kurtarılamadı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:315
+msgid "Block identifier not specified!"
+msgstr "Belirteci belirtilmemişse Blok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:324
+#, php-format
+msgid "The visibility of the block %s was changed successfully!"
+msgstr "Bloğun görünürlüğü %s başarıyla değiştirildi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:327
+#, php-format
+msgid "Visibility for block %s could not be changed!"
+msgstr "Blok için Görünürlük %s değiştirilemez olabilir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:349
+msgid "No block has been specified!"
+msgstr "Hiçbir blok belirtilmiş!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:357
+#, php-format
+msgid "The block \"%s\" could not be deleted!"
+msgstr "Blok \"%s\" silinemedi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/blocks.php:363
+#, php-format
+msgid "The block \"%s\" was deleted successfully!"
+msgstr "Blok \"%s\" başarıyla silindi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/ajax/users.php:94
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:141
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:142
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:145
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/groups.class.php:157
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/groups.class.php:191
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:113
+msgid "All"
+msgstr "Tüm"
+
+#: C:\wamp\www\xoops\modules\rmcommon/api/editors/tinymce/plugins/exmsystem/editor_plugin.php:92
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:4
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:78
+msgid "Insert Image"
+msgstr "Resim Eklemek"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:130
+msgid "Number of Comments:"
+msgstr "Yorum Sayısı:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:136
+msgid "Show module name:"
+msgstr "Modül adı göster:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:139
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:150
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:161
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:172
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/checks.class.php:212
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:64
+msgid "Yes"
+msgstr "Yes"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:142
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:153
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:164
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:175
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/checks.class.php:217
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:65
+msgid "No"
+msgstr "Hayır"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:147
+msgid "Show item name:"
+msgstr "Öğesi adı göster:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:158
+msgid "Show username:"
+msgstr "Kullanıcı adı göster:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/blocks/comments.php:169
+msgid "Show date:"
+msgstr "Tarihi göster:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/flashuploader.php:32
+msgid "Select Files"
+msgstr "Dosyalar seçin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/flashuploader.php:37
+msgid "All Files"
+msgstr "Tüm dosyalar (*.*)"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/form.class.php:450
+msgid "Fields marked with (*) are required."
+msgstr "(*) Ile işaretlenmiş alanların doldurulması zorunludur."
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:80
+msgid "Users List"
+msgstr "Kullanıcılar Listesi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:85
+msgid "Categories List"
+msgstr "Kategoriler Listesi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:91
+msgid "Add Images"
+msgstr "Görüntüler ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:278
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:34
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:43
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:157
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:74
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:163
+msgid "Edit"
+msgstr "Edit"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:319
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:17
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:83
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:123
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:132
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:21
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:30
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:93
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:96
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:120
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:132
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:195
+msgid "Name"
+msgstr "İsim"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:323
+msgid "Web site"
+msgstr "Web Sitesi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:324
+msgid "Your comment"
+msgstr "Yorumunuz"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:325
+msgid "Submit Comment"
+msgstr "Yorumu Gönder"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:326
+msgid "Submit a comment"
+msgstr "Yorum ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:346
+msgid "Please specify your name"
+msgstr "Adınızı belirtin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:347
+msgid "Please specify a valid email"
+msgstr "Geçerli bir e-posta belirtin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:348
+msgid "Please write a message"
+msgstr "Bir mesaj yazınız"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:349
+msgid "Please enter a valid URL"
+msgstr "Geçerli bir URL girin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/htaccess.class.php:83
+msgid "URL rewriting requires an Apache Server and mod_rewrite enabled!"
+msgstr "Yeniden URL Apache Sunucusu gerektirir ve mod_rewrite etkin!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/internalblock.php:338
+msgid "The configuration file for this block does not exists!"
+msgstr "Bu blok için yapılandırma dosyası mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/internalblock.php:345
+msgid ""
+"There was a problem trying to show the configuration options for this block!"
+msgstr ""
+"Bu blok için yapılandırma seçenekleri göstermeye çalışan bir sorun var!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/pagenav.php:126
+#, php-format
+msgid ""
+"Showing <strong>%u</strong> to <strong>%u</strong> of <strong>%u</strong>."
+msgstr ""
+"<strong>%u</strong> <strong>%u</strong> <strong>%u</strong> gösteriliyor."
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/template.php:222
+msgid "Help"
+msgstr "Yardım"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:49
+msgid ""
+"You must provide a valid time and format value to use RMTimeFormatter::format"
+"() method"
+msgstr ""
+"Sen RMTimeFormatter kullanmak için geçerli bir zaman ve biçim değeri :: "
+"format () yöntemi sağlamalıdır"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:97
+msgid "Sunday"
+msgstr "Pazar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:98
+msgid "Monday"
+msgstr "Pazartesi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:99
+msgid "Tuesday"
+msgstr "Salı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:100
+msgid "Wednesday"
+msgstr "Çarşamba"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:101
+msgid "Thursday"
+msgstr "Perşembe"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:102
+msgid "Friday"
+msgstr "Cuma"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:103
+msgid "Saturday"
+msgstr "Cumartesi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:115
+msgid "January"
+msgstr "Ocak"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:116
+msgid "February"
+msgstr "Şubat"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:117
+msgid "March"
+msgstr "Mart"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:118
+msgid "April"
+msgstr "Nisan"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:119
+msgid "May"
+msgstr "Mayıs"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:120
+msgid "June"
+msgstr "Haziran"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:121
+msgid "July"
+msgstr "Temmuz"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:122
+msgid "August"
+msgstr "Ağustos"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:123
+msgid "September"
+msgstr "Eylül"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:124
+msgid "October"
+msgstr "Ekim"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:125
+msgid "November"
+msgstr "Kasım"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/timeformatter.php:126
+msgid "December"
+msgstr "Aralık"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:293
+#, php-format
+msgid "%s b"
+msgstr "%s b"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:295
+#, php-format
+msgid "%s kb"
+msgstr "%s kb"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:297
+#, php-format
+msgid "%s MB"
+msgstr "%s MB"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:299
+#, php-format
+msgid "%s GB"
+msgstr "%s GB"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:346
+msgid "Remove Image"
+msgstr "Resim çıkarın"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:351
+msgid "Image manager..."
+msgstr "Resim yöneticisi ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:357
+msgid "Image Manager"
+msgstr "Görüntü Yöneticisi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/date.class.php:93
+msgid "Choose Time"
+msgstr "Zaman seçin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/formuser.class.php:84
+msgid "All Users"
+msgstr "Tüm Kullanıcılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/formuser.class.php:114
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/formuser.class.php:115
+msgid "Search Users"
+msgstr "Arama Kullanıcılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:127
+#: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:14
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:28
+msgid "Available Modules"
+msgstr "Mevcut Modüller"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:151
+msgid "Home Page"
+msgstr "Ana Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:152
+msgid "User page"
+msgstr "Kullanıcı sayfası"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:153
+msgid "User profile page"
+msgstr "Kullanıcı profil sayfası"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:154
+msgid "Users registration"
+msgstr "Kullanıcılar kaydı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:155
+msgid "Edit user"
+msgstr "Kullanıcı Düzenle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:156
+msgid "Read PM"
+msgstr "PM okuyun"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:157
+msgid "Private messages"
+msgstr "Özel mesajlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:193
+msgid "Inner Pages"
+msgstr "İç Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/textoptions.class.php:114
+msgid "Allow HTML"
+msgstr "HTML izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/textoptions.class.php:116
+msgid "Allow Xoops Code"
+msgstr "XOOPS Kodu izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/textoptions.class.php:118
+msgid "Allow Smilies"
+msgstr "İfadeler izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/textoptions.class.php:120
+msgid "Allow break lines"
+msgstr "Hatları kırmak izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/class/fields/textoptions.class.php:122
+msgid "Do images"
+msgstr "Görüntüleri mı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:16
+msgid "Do you really want to delete this block?"
+msgstr "Bu statik bloğu silmek istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:17
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:54
+msgid "Delete Block"
+msgstr "Blok Sil"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:18
+msgid "Hide Block"
+msgstr "Blok gizle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:19
+msgid "Show Block"
+msgstr "Blok göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:20
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:60
+msgid "Block Settings"
+msgstr "Blok Ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:21
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:35
+msgid "Save"
+msgstr "Save"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:23
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:24
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:7
+msgid "Show Positions"
+msgstr "Pozisyonlar göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:25
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:7
+msgid "Show Blocks"
+msgstr "Bloklar göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:26
+msgid "An error occurred while trying to add block to its position!"
+msgstr "Konumunu blok eklemek için çalışırken bir hata oluştu!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:27
+msgid "The position specified for this block does not exists!"
+msgstr "Bu blok için belirtilen konumu mevcut değil!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:28
+#, php-format
+msgid "%s Pages"
+msgstr "%s Sayfalar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:29
+msgid "Do you really want to delete selected positions?"
+msgstr "Gerçekten seçilen pozisyonları silmek istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/js-lang.php:30
+msgid "You must select at least one position before you can do this action!"
+msgstr "Bu eylemi yapmak için önce en az bir konum seçmek gerekir!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:112
+msgid "Sorry, unauthorized operation!"
+msgstr "Üzgünüm, izinsiz operasyon!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:124
+msgid "You must select a category before"
+msgstr "Daha önce bir kategori seçmelisiniz"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:202
+msgid "File URL"
+msgstr "Dosya URL"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/upload.php:34
+#: C:\wamp\www\xoops\modules\rmcommon/include/upload.php:38
+msgid "You are not allowed to do this action"
+msgstr "Bu eylemi yapmak için izin verilmez"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/upload.php:42
+msgid "Sorry, category has not been specified!"
+msgstr "Üzgünüz, kategori belirtilmedi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/upload.php:47
+msgid "Sorry, the specified category has not been found!"
+msgstr "Üzgünüm, belirtilen kategori bulunamamıştır!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/upload.php:51
+msgid "Sorry, the specified category is closed!"
+msgstr "Üzgünüm, belirtilen kategori kapalı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/upload.php:55
+msgid "Sorry, you can not upload images!"
+msgstr "Üzgünüz, resim yükleyemiyorum!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/upload.php:98
+msgid "File could not be inserted to database!"
+msgstr "Dosya veritabanına eklenen olamazdı!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:15
+msgid "Language to use"
+msgstr "Kullanmak Dil"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:16
+msgid "Arrange images by date"
+msgstr "Görüntüleri tarihe göre düzenlemek"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:17
+msgid "Select the default editor"
+msgstr "Varsayılan düzenleyici seçin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:20
+msgid "XoopsCode Editor"
+msgstr "XoopsCode Editörü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:22
+msgid "Limit for image categories list."
+msgstr "Görüntü kategori listesi için sınırlayın."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:23
+msgid "Image manager: number of images per page"
+msgstr "Resim yöneticisi: Sayfa başına görüntü sayısı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:24
+msgid "Secret Key"
+msgstr "Gizli Anahtarlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:25
+msgid "Provide a secret key used to encrypt information."
+msgstr "Bilgileri şifrelemek için kullanılan gizli bir anahtar sağlar."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:26
+msgid "Admin theme"
+msgstr "Yönetici tema"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:27
+msgid "Enable JQuery for front end"
+msgstr "Ön uç için JQuery etkinleştirin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:28
+msgid ""
+"When this option is enabled, Common Utilities will include JQuery "
+"automatically. Please, disable this option only when your theme include "
+"jquery by default."
+msgstr ""
+"Bu seçenek etkinleştirildiğinde, Ortak Araçlar otomatik olarak JQuery "
+"içerecektir. , Tema varsayılan olarak jquery dahil sadece bu seçeneği devre "
+"dışı lütfen."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:30
+msgid "Allow HTMl in text"
+msgstr "Metin HTML izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:31
+msgid "Allow smilies in text"
+msgstr "Metin gülümsemeleri izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:32
+msgid "Allow XoopsCode"
+msgstr "XoopsCode izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:33
+msgid "Allow images in text"
+msgstr "Metinde görüntülerin izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:34
+msgid "Auto add line breaks in text"
+msgstr "Metin Otomatik eklenti satır sonları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:36
+msgid "Modules number on dashboard"
+msgstr "Gösterge paneli üzerinde Modülleri sayısı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:39
+msgid "Enable comments"
+msgstr "Yorumlar etkinleştirin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:40
+msgid "Allow anonymous users to post comments"
+msgstr "Anonim kullanıcıların Yorum göndermek için izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:41
+msgid "Automatically approve comments by registered users"
+msgstr "Otomatik kayıtlı kullanıcılar tarafından yorumlar onaylamak"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:42
+msgid "Automatically approve comments by anonymous users"
+msgstr "Otomatik olarak anonim kullanıcılar tarafından yorumlar onaylamak"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:43
+msgid "Allow users to edit their comments"
+msgstr "Kullanıcıların görüşlerini düzenlemesine izin ver"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:44
+msgid "Time limit to edit a comment (in hours)."
+msgstr "Zaman sınırı Yorum (saat) düzenlemek için."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:47
+msgid "Image for RSS feeds"
+msgstr "RSS beslemeleri için Görüntü"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:50
+msgid "Mailer method"
+msgstr "Mailer yöntemi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:51
+msgid "Common Utilities will use this method to send emails."
+msgstr "Ortak Araçlar e-postalar göndermek için bu yöntemi kullanır."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:52
+msgid "PHP Mail()"
+msgstr "PHP Mail ()"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:53
+msgid "SMTP"
+msgstr "SMTP"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:54
+msgid "Sendmail"
+msgstr "Sendmail"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:55
+msgid "SMTP server to use"
+msgstr "Kullanmak için SMTP sunucusu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:56
+msgid "Specify the server through with the emails will be sent."
+msgstr "E-postaları gönderilecektir ile aracılığıyla sunucuya belirtin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:57
+msgid "SMTP encryption"
+msgstr "SMTP şifreleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:58
+msgid ""
+"For SSL or TLS encryption to work, your PHP installation must have "
+"appropriate OpenSSL transports wrappers."
+msgstr ""
+"Çalışmak için SSL veya TLS şifreleme için, PHP kurulum uygun OpenSSL taşıma "
+"sarma olmalıdır."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:60
+msgid "SSL"
+msgstr "SSL"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:61
+msgid "TLS"
+msgstr "TLS"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:62
+msgid "SMTP server port"
+msgstr "SMTP sunucusu bağlantı noktası"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:63
+msgid ""
+"Note that you must to write the appropriate port based on your encryption "
+"type selection."
+msgstr ""
+"Eğer şifreleme türü seçime göre uygun bağlantı noktası yazmak gerektiğini "
+"unutmayın."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:64
+msgid "SMTP username"
+msgstr "SMTP kullanıcı adı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:65
+msgid "SMTP password"
+msgstr "SMTP şifresi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:66
+msgid "Sendmail path"
+msgstr "Sendmail yolu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:67
+msgid ""
+"Input the command for sendmail, including the correct command line flags. "
+"The default to use is \"/usr/sbin/sendmail -bs\" if this is not specified."
+msgstr ""
+"Doğru komut satırı bayrakları dahil olmak üzere sendmail, için giriş komut. "
+"Kullanmak için varsayılan \"/usr/sbin/sendmail-bs\" Bu belirtilmemişse."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:70
+msgid "Enable RSS Center"
+msgstr "RSS Merkezi etkinleştirin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:73
+msgid "Enable internal blocks manager"
+msgstr "İç blok yöneticisi etkinleştirme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:74
+msgid "Disable new GUI when working on non native modules?"
+msgstr "Olmayan yerli modülleri çalışırken yeni GUI devre dışı?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:75
+msgid "Activate updates"
+msgstr "Güncellemeler etkinleştirin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:76
+msgid ""
+"When this option is enabled, Common Utilities will search automatically "
+"updates for modules and other components."
+msgstr ""
+"Bu seçenek etkinleştirildiğinde, Ortak Araçlar otomatik olarak modülleri ve "
+"diğer bileşenler için güncellemeler arayacaktır."
+
+#: C:\wamp\www\xoops\modules\rmcommon/language/english/modinfo.php:77
+msgid "Days between updates search"
+msgstr "Güncellemeler Arama arasındaki gün"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:1
+msgid "Create New Category"
+msgstr "Yeni Kategori Oluştur"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:6
+msgid "Category Name:"
+msgstr "Kategori Adı:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:13
+msgid "Category Status:"
+msgstr "Kategori Durum:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:16
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:79
+msgid "Inactive"
+msgstr "Pasif"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:19
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:125
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:134
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:79
+msgid "Active"
+msgstr "Aktif"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:25
+msgid "Groups that can upload images:"
+msgstr "Resim yükleyebilirsiniz Gruplar:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:32
+msgid "Groups that can use this category:"
+msgstr "Bu kategoride kullanabilirsiniz Gruplar:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:39
+msgid "Maximum file size:"
+msgstr "Maksimum dosya boyutu:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:43
+msgid "Bytes"
+msgstr "Bayt"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:44
+msgid "Kilobytes"
+msgstr "Kilobytes"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:45
+msgid "Megabytes"
+msgstr "Megabayt"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:51
+msgid "Custom Sizes"
+msgstr "Özel Boyutlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:53
+msgid "This configurations stablish the sizes in wich images will be created."
+msgstr "Bu yapılandırmaları wich görüntüler boyutları oluşturulur stablish."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:54
+msgid "You can specify all sizes that you wish according to your needs."
+msgstr ""
+"Sen kendi ihtiyaçlarınıza göre istediğiniz her boyutta belirtebilirsiniz."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:61
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:107
+msgid "Add New Size"
+msgstr "Yeni Boyutu Ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:68
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:88
+msgid "Size name"
+msgstr "Boyutu adı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:70
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:90
+msgid "Width:"
+msgstr "Genişlik:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:72
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:92
+msgid "Height:"
+msgstr "Yükseklik: İşleme yüksekliği"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:75
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:95
+msgid "Scale"
+msgstr "Bahsi geçen panellerin üzerinde bu sayıları bulabilirsiniz."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:76
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:96
+msgid "Crop"
+msgstr "Ürün"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:77
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:97
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:49
+msgid "No Resize"
+msgstr "Yeniden Boyutlandırma"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:80
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:100
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:8
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:35
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:7
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:44
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:87
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:114
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:156
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:176
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:75
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:107
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:165
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:206
+msgid "Delete"
+msgstr "Delete"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:89
+msgid "e.g. thumbnail"
+msgstr "örneğin küçük"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:91
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:93
+msgid "e.g. 150"
+msgstr "örneğin 150"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/categories_form.php:113
+msgid "Update Category"
+msgstr "Kategori güncelleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:8
+msgid "Upload Files"
+msgstr "Dosya Yükle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:9
+msgid "From URL"
+msgstr "URL'den"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:10
+msgid "From Library"
+msgstr "Kütüphanesinden"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:16
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:90
+msgid "Select the category where you wish to upload images"
+msgstr "Eğer resim yüklemek istediğiniz yere kategorisini seçin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:18
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:92
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:7
+msgid "Select..."
+msgstr "Select"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:36
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:34
+msgid "Resizing images"
+msgstr "Yeniden boyutlandırma"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:41
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:38
+msgid "Please, do not close the window until resizing process has finished!"
+msgstr "Yeniden boyutlandırma işlemi bitmeden, pencereyi kapatmak etmeyin!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:50
+msgid "Image URL"
+msgstr "Resim URL"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:54
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:34
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:34
+msgid "Title:"
+msgstr "Başlık:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:58
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:38
+msgid "Alternative text:"
+msgstr "Alternatif metin:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:62
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:56
+msgid "Alignment:"
+msgstr "Hizalama"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:66
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:59
+msgid "Left"
+msgstr "Sol"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:67
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:60
+msgid "Center"
+msgstr "Merkez"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:68
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:61
+msgid "Right"
+msgstr "Yetkiler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/editor_image.php:72
+msgid "Link:"
+msgstr "Bağlantı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/forms.php:41
+msgid "This is a required field. Please fill it!"
+msgstr "Bu gerekli bir alandır. Bu doldurunuz!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:12
+msgid "Selected:"
+msgstr "seçildi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:22
+msgid "Insert Users"
+msgstr "Kullanıcılar Ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:29
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:3
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:6
+msgid "Search:"
+msgstr "Search"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:30
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:10
+msgid "Show:"
+msgstr "Göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:31
+msgid "Sort by:"
+msgstr "Sırala"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:33
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:122
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:131
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:94
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:118
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:130
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:193
+msgid "ID"
+msgstr "ID"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:34
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:122
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:134
+msgid "Registered"
+msgstr "Kayıtlı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:37
+msgid "Go!"
+msgstr "Hadi!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/form_users.php:45
+msgid "Existing Users"
+msgstr "Mevcut Kullanıcılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:7
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:6
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:14
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:115
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:103
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:202
+msgid "Bulk Actions..."
+msgstr "Toplu Eylem ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:9
+msgid "Close Category"
+msgstr "Kapat Kategori"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:10
+msgid "Open Category"
+msgstr "Açık Kategori"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:12
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:10
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:116
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:178
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:5
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:20
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:120
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:109
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:208
+msgid "Apply"
+msgstr "Uygula"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:19
+msgid "Sizes"
+msgstr "Boyutları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:20
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:123
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:135
+msgid "Groups"
+msgstr "Gruplar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:25
+msgid ""
+"There are not categories yet! You must create at least one category in order "
+"to create images."
+msgstr ""
+"Kategoriler henüz yok! Bu görüntüler oluşturmak için en az bir kategori "
+"oluşturmanız gerekir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:35
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:44
+#, php-format
+msgid "Do you really want to delete &quot;%s&quot;?"
+msgstr "Eğer gerçekten &quot;%s&quot; silmek istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:36
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:41
+msgid "open"
+msgstr "\"Aç"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:54
+msgid "Upload:"
+msgstr "Yükleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_categories.php:55
+msgid "Access:"
+msgstr "Baglantilar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:9
+msgid "File:"
+msgstr "Dosya:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:16
+msgid "Image data:"
+msgstr "Resim verileri:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:24
+msgid "Available sizes:"
+msgstr "Mevcut bedenler:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:29
+msgid "Original Size"
+msgstr "Orijinal Boyutu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:41
+msgid "Category:"
+msgstr "Kategori"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:52
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:42
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:101
+msgid "Description:"
+msgstr "Açıklama"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_edit.php:60
+msgid "Update Image!"
+msgstr "Görüntü Güncelleme!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:8
+msgid "Update thumbnails"
+msgstr "Küçük Güncelleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:16
+msgid "Create Images"
+msgstr "Resim Oluşturma"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:21
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_files_list.php:5
+msgid "File"
+msgstr "Dosya"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:22
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:60
+msgid "Details"
+msgstr "Ayrıntılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:23
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:41
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:51
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:24
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:33
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:96
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:104
+msgid "Author"
+msgstr "Hazırlayan"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:24
+msgid "Date"
+msgstr "Tarih"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_images.php:29
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:6
+msgid "There are not images yet!"
+msgstr "Resim henüz yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:20
+msgid "Show"
+msgstr "Göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:29
+msgid "Hide"
+msgstr "Sakla"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:46
+msgid "Link URL:"
+msgstr "Bağlantı URL:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:65
+msgid "Image size:"
+msgstr "Görüntü boyutu:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:76
+msgid "Original"
+msgstr "Orijinal"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_list_editor.php:86
+msgid "Insert image"
+msgstr "Resim eklemek"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:5
+msgid "Select Category:"
+msgstr "Kategori Seçin:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:12
+msgid "Change Category"
+msgstr "Kategori Değiştir"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:19
+msgid "Upload"
+msgstr "Yükleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:20
+msgid "Clear All"
+msgstr "Tümünü Temizle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:41
+msgid "Done! Click to continue..."
+msgstr "Bitti! Devamı için tıklayınız ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/images_uploadimages.php:43
+msgid "Done! Show images..."
+msgstr "Bitti! Resimleri göster ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/navigation_pages.php:4
+msgid "Pages:"
+msgstr "[pages]"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/navigation_pages.php:6
+msgid "First Page"
+msgstr "İlk Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/navigation_pages.php:10
+msgid "Previous Page"
+msgstr "Önceki Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/navigation_pages.php:21
+#, php-format
+msgid "Page %u"
+msgstr "Sayfa% u"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/navigation_pages.php:30
+msgid "Next Page"
+msgstr "Sonraki Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/navigation_pages.php:34
+msgid "Last Page"
+msgstr "Son sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:1
+msgid "Blocks Administration"
+msgstr "Bloklar Yönetim"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:10
+msgid "Add New Block"
+msgstr "Yeni Blok Ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:32
+msgid "Messages Console"
+msgstr "Mesajlar Konsol"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:47
+msgid "Drag and drop blocks here"
+msgstr "Burada Sürükle ve blokları bırakın"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:56
+msgid "Hide block"
+msgstr "Bloğu gizle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:58
+msgid "Show block"
+msgstr "Bölümü göster"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:85
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:5
+msgid "Input a name to identify this position (<em>eg. Left blocks</em>)"
+msgstr ""
+"Giriş bu konumunu tanımlamak için bir isim (<em> örneğin. Sol blok </ em>)"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:87
+msgid "Tag Name"
+msgstr "Etiket Adı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:89
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:8
+msgid ""
+"Specify a name for the smarty tag to use in templates (eg. left_blocks). "
+"This tag will be used as Smarty tag (eg. &lt;{$left_blocks}&gt)."
+msgstr ""
+"Şablonları (örneğin left_blocks) kullanmak smarty etiket için bir ad "
+"belirtin. Bu etiket Smarty etiket (örneğin <{$ left_blocks}>) olarak "
+"kullanılacaktır."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:91
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:9
+msgid "Add Position"
+msgstr "Pozisyonu ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:96
+msgid "How to implement blocks"
+msgstr "Blokları nasıl uygulanır"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:111
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:173
+msgid "Bulk actions..."
+msgstr "Toplu eylemler ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:112
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:174
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:63
+msgid "Visible"
+msgstr "Görünür"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:113
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:175
+msgid "Hidden"
+msgstr "[Hidden]"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:124
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:133
+msgid "Smarty Tag"
+msgstr "Smarty Tag"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:143
+msgid "There are not positions created yet!"
+msgstr "Henüz oluşturulan pozisyon yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:186
+msgid "Loading"
+msgstr "Yükleniyor ......"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_blocks.php:186
+msgid "Loading data..."
+msgstr "Veri yükleme ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:1
+#, php-format
+msgid "%s settings"
+msgstr "%s ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:3
+msgid "General Settings"
+msgstr "Genel Ayarlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:5
+msgid "Custom Options"
+msgstr "Özel Seçenekler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:18
+msgid "Block Title"
+msgstr "Blok Başlık"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:24
+msgid "Block position"
+msgstr "Blok konumu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:34
+msgid "Block weight"
+msgstr "Blok ağırlık"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:41
+msgid "Cache lifetime"
+msgstr "Önbellek kullanım süresi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:43
+msgid "No Cache"
+msgstr "Hiçbir Önbellek"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:44
+msgid "30 seconds"
+msgstr "30 saniye"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:45
+msgid "1 minute"
+msgstr "1 dakika"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:46
+msgid "5 minutes"
+msgstr "5 dakika"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:47
+msgid "30 minutes"
+msgstr "30 dakika"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:48
+msgid "1 hour"
+msgstr "1 saat"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:49
+msgid "5 hours"
+msgstr "5 saat"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:50
+msgid "1 day"
+msgstr "1 gün"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:51
+msgid "3 days"
+msgstr "3 gün"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:52
+msgid "1 week"
+msgstr "1 hafta"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:53
+msgid "1 month"
+msgstr "1 ay"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:62
+msgid "Visibility Options"
+msgstr "Görünürlük Seçenekleri"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:67
+msgid "Visible in"
+msgstr "Görünür"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:72
+msgid "Block Permissions"
+msgstr "Blok İzinler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:73
+msgid "Read Permissions"
+msgstr "İzinleri Oku"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:87
+msgid "Custom Block Content"
+msgstr "Özel Blok İçerik"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:89
+msgid "Content type:"
+msgstr "Içerik türü:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:91
+msgid "Formatted text"
+msgstr "Biçimlendirilmiş metin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:92
+msgid "HTML block"
+msgstr "HTML blok"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:93
+msgid "PHP block"
+msgstr "PHP bloğu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_block_form.php:94
+msgid "XOOPS code"
+msgstr "XOOPS kodu"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_breadcrumb.php:4
+msgid "Home page"
+msgstr "Ana Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_breadcrumb.php:4
+msgid "Home"
+msgstr "Ana Sayfa"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:5
+msgid "You need something to search!"
+msgstr "Aramak için bir şey gerekiyor!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:15
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:116
+msgid "Set unapproved"
+msgstr "Onaylanmamış Set"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:16
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:117
+msgid "Set approved"
+msgstr "Onaylı Set"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:17
+msgid "Mark as SPAM"
+msgstr "Spam olarak işaretle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:18
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:118
+msgid "Delete comments"
+msgstr "Yorumlar Sil"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:24
+msgid "View all"
+msgstr "(tümünü göster)"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:33
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:97
+msgid "SPAM"
+msgstr "Reklam E-postası"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:42
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:52
+msgid "Comment"
+msgstr "Yorumlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:61
+msgid "There are not comments yet!"
+msgstr "Henüz yorum yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:77
+msgid "Unnaprove"
+msgstr "Unnaprove"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:79
+msgid "Approve"
+msgstr "Onayla"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_comments.php:82
+msgid "Spam"
+msgstr "Reklam E-postası"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:14
+msgid "Installed Modules"
+msgstr "Yüklü Modüller"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:20
+msgid ""
+"If you wish to manage or install new modules please go to Modules Management."
+msgstr "Yeni modüller yönetmek veya kurmak isterseniz Modülleri Yönetim gidin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:21
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:39
+msgid "Modules management"
+msgstr "Modüller yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:38
+msgid ""
+"If you want to manage or install new modules please go to Modules Management."
+msgstr ""
+"Yeni modüller yönetmek veya yüklemek istiyorsanız Modülleri Yönetim gidin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:50
+msgid "System Tools"
+msgstr "Sistem Araçları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:55
+msgid "Configure Common Utilities"
+msgstr "Ortak Araçlar yapılandırma"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:63
+msgid "Comments Management"
+msgstr "Yorumlar Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:66
+msgid "Plugins Management"
+msgstr "Eklentiler Yönetimi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:71
+msgid "XOOPS Modules"
+msgstr "XOOPS Modülleri"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_dashboard.php:96
+msgid "Recent News"
+msgstr "Son Haberler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mods_installed.php:6
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:30
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:8
+#, php-format
+msgid "Version: %s"
+msgstr "Sürüm: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mods_installed.php:7
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:86
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:58
+msgid "Update"
+msgstr "Güncelleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mods_installed.php:9
+msgid "View"
+msgstr "Görünüm"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:4
+msgid "Do you really want to uninstall selected module?"
+msgstr "Gerçekten Seçilen modülü kaldırmak istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:5
+msgid "Do you really want to update selected module?"
+msgstr "Gerçekten Seçilen modülü güncellemek istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:6
+msgid "Do you really want to disable selected module?"
+msgstr "Gerçekten Seçilen modülü devre dışı bırakmak istiyor musunuz?"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:7
+msgid "New name must be different from current name!"
+msgstr "Yeni adı şimdiki adı farklı olmalıdır!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:31
+#, php-format
+msgid "Updated: %s"
+msgstr "Güncelleme: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:72
+msgid "Web:"
+msgstr "İnternet"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:76
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:109
+msgid "License:"
+msgstr "License"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:87
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:52
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:88
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:54
+msgid "Disable"
+msgstr "Devre dışı bırak"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:89
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:56
+msgid "Enable"
+msgstr "Etkinleştir"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:96
+msgid "Change name:"
+msgstr "Adını değiştirin:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_modules.php:98
+msgid "Rename"
+msgstr "Yeniden Adlandır"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_log.php:3
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_log.php:14
+msgid "Go to Modules Management"
+msgstr "Modüller Yönetimi git"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_log.php:6
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_log.php:17
+#, php-format
+msgid "%s Control Panel"
+msgstr "%s Kontrol Paneli"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:3
+msgid ""
+"This module will make next changes in Xoops system. Please review in a "
+"detailed way all them in order to decide if you really wish to install this "
+"module"
+msgstr ""
+"Bu modül XOOPS sisteminde sonraki değişiklikler yapacaktır. Eğer gerçekten "
+"bu modül yüklemek istiyorsanız karar vermek için hepsini ayrıntılı bir "
+"şekilde gözden geçirin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:10
+msgid "Module Templates"
+msgstr "Modül Şablonlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:23
+msgid "Database Tables"
+msgstr "Veritabanı Tabloları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:36
+msgid "Option settings to insert"
+msgstr "Eklemek için Seçenek ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:50
+msgid "Bloks to insert"
+msgstr "Eklemek için Blok"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:67
+#, php-format
+msgid "%s Details"
+msgstr "%s Detayları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:96
+msgid "Author Web:"
+msgstr "Yazar Web:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:105
+msgid "Credits:"
+msgstr "Jenerik"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:113
+msgid "Help:"
+msgstr "Yardım"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:115
+msgid "Click here"
+msgstr "Buraya tıklayın"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_mod_preinstall.php:119
+msgid "Install Now"
+msgstr "Şimdi Yükle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:4
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:16
+msgid "Installed Plugins"
+msgstr "Yüklü Eklentiler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:5
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:89
+msgid "Available Plugins"
+msgstr "Mevcut Eklentiler"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:11
+msgid ""
+"Plugins allows to Common Utilities to improve its features and capabilities. "
+"Following is a list with existing plugins, installed and available to "
+"install."
+msgstr ""
+"Eklentiler özellikleri ve yetenekleri geliştirmek için Ortak Araçlar sağlar. "
+"Ardından, mevcut eklentileri ile bir listesi yüklü ve yüklemek için "
+"kullanılabilir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:22
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:31
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:94
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:102
+msgid "Description"
+msgstr "Açıklama"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:23
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:32
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:95
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:103
+msgid "Version"
+msgstr "Sürüm"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:40
+msgid "There are not plugins installed yet!"
+msgstr "Henüz yüklü eklentileri yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:60
+msgid "Settings"
+msgstr "Settings"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:101
+msgid "Name and Description"
+msgstr "Ad ve Açıklama"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:110
+msgid "There are not available plugins yet!"
+msgstr "Eklentileri henüz yok!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_plugins.php:119
+msgid "Visit Web site"
+msgstr "Web sitesini ziyaret edin"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_rss_center.php:3
+#, php-format
+msgid "All %s RSS feeds are listed below. Click an option for feed."
+msgstr ""
+"Tüm %s RSS beslemeleri aşağıda listelenmiştir. Besleme için bir seçeneği "
+"tıklatın."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_rss_center.php:9
+msgid "URL:"
+msgstr "URL"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:5
+msgid "Check for Updates"
+msgstr "Güncellemeleri Kontrol Et"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:6
+msgid "FTP Settings"
+msgstr "FTP Ayarları"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:9
+#, php-format
+msgid "Last comprobation: %s"
+msgstr "Son comprobation: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:16
+msgid "Server:"
+msgstr "[server]"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:20
+msgid "Port:"
+msgstr "Port"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:24
+msgid "User:"
+msgstr "Kullanıcı:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:28
+msgid "Password:"
+msgstr "Parola:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:32
+msgid "XOOPS Directory:"
+msgstr "XOOPS Dizin:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:38
+msgid ""
+"XOOPS directory must match with this XOOPS installation, but only the "
+"relative patch to server root."
+msgstr ""
+"XOOPS dizin bu XOOPS kurulumu ile maç, ancak sunucu kök sadece göreli yama "
+"gerekir."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:44
+msgid "Notice"
+msgstr "Uyarı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:45
+msgid ""
+"Before to install updates be sure that target folders have writting "
+"permissions for web server. If you wish, you can configure the internal FTP "
+"Client in order to update without assign writting permissions."
+msgstr ""
+"Yüklemek için önce güncellemeler hedef klasörleri web sunucusu izinleri "
+"yazma emin olun. Eğer isterseniz, atama writting izinleri olmadan "
+"güncellemek için iç FTP Client yapılandırabilirsiniz."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:48
+msgid "Searching for updates..."
+msgstr "Güncellemeler aranıyor ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:57
+msgid "Update Details"
+msgstr "Detaylar Güncelleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:61
+msgid "Files"
+msgstr "Dosyalar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:79
+msgid "Continue &raquo;"
+msgstr "Devam edin."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:87
+msgid "User Credentials"
+msgstr "Kullanıcı Kimlik Bilgileri"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:90
+msgid "Please provide your login credentials for site %site%."
+msgstr "Sitesi için oturum açma bilgilerinizi veriniz %s ite%."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:92
+msgid "Password"
+msgstr "Şifre"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:93
+msgid "Login"
+msgstr "Oturum"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_updates.php:102
+msgid "Executing Files..."
+msgstr "Dosyalar yürütme ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:14
+msgid "Go Now!"
+msgstr "Şimdi git!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:17
+msgid "Advanced Search"
+msgstr "Gelişmiş Arama"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:23
+msgid "Email:"
+msgstr "E-posta:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:24
+msgid "Web site:"
+msgstr "Web Sitesi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:25
+msgid "Country/Location:"
+msgstr "Ülke / konum"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:33
+msgid "Registered between:"
+msgstr "Arasında Kayıt:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:34
+msgid "Last login between:"
+msgstr "Arasında Son giriş:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:35
+msgid "Posts between:"
+msgstr "Arasında Mesajlar:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:38
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:39
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:42
+msgid "and"
+msgstr "VE:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:47
+msgid "Mail:"
+msgstr "{0}{/0} posta"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:48
+msgid "Status:"
+msgstr "Durum:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:49
+msgid "Search method:"
+msgstr "Arama yöntemi:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:55
+msgid "Users that accept mail"
+msgstr "Posta kabul Kullanıcılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:56
+msgid "Users that do'nt accept mail"
+msgstr "Do'nt posta kabul kullanıcıların"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:62
+msgid "Active users"
+msgstr "Etkin kullanıcılar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:63
+msgid "Inactive users"
+msgstr "Aktif olmayan kullanıcıların"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:73
+msgid "Search Now!"
+msgstr "Şimdi ara!"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:79
+msgid ""
+"All these options are optional and will be additional to basic search "
+"keyword."
+msgstr ""
+"Tüm bu seçenekler isteğe bağlıdır ve temel arama anahtar kelime için ek "
+"olacaktır."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:92
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:191
+msgid "Order by:"
+msgstr "Tarafindan:"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:97
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:121
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:133
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:196
+msgid "Email"
+msgstr "Eposta"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:99
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:198
+msgid "Sort"
+msgstr "Sırala"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:104
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:203
+msgid "Activate"
+msgstr "Aktif Et"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:105
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:204
+msgid "Deactivate"
+msgstr "Pasif Et"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:106
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:205
+msgid "Send email"
+msgstr "E-posta gönder"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:143
+msgid "There are not any user registered with for this filter."
+msgstr "Bu filtre için kayıtlı herhangi bir kullanıcı yok."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:164
+msgid "Send Email"
+msgstr "E-posta Gönder"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc_users.php:169
+#, php-format
+msgid "Send email to %s"
+msgstr "E-posta gönder %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_files_list.php:4
+msgid "#"
+msgstr "#"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_files_list.php:6
+msgid "Mode"
+msgstr "MOD"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_files_list.php:7
+msgid "Size"
+msgstr "Boyut"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_files_list.php:8
+msgid "Action"
+msgstr "Eylem"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_files_list.php:17
+#, php-format
+msgid "Path: %s"
+msgstr "Yol: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:7
+#, php-format
+msgid "Type: %s"
+msgstr "Türü: %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:9
+#, php-format
+msgid "Released on: %s"
+msgstr ": Yapım tarihi %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:11
+msgid "Login required"
+msgstr "Gerekli giriş"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:15
+msgid "Installing update..."
+msgstr "Güncelleştirmeyi yüklemek ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:19
+#, php-format
+msgid "Downloading %s"
+msgstr "Indirme %s"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:24
+msgid "View details"
+msgstr "Detayları Görüntüle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:25
+msgid "Update now!"
+msgstr "Şimdi güncelle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc_updates_list.php:26
+msgid "Install Later"
+msgstr "Yükleyin Daha sonra"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_bknew.php:2
+msgid "Block"
+msgstr "Engelleme"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_bknew.php:4
+msgid "Select block..."
+msgstr "Bloğu seçin ..."
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_bknew.php:12
+msgid "Add Block"
+msgstr "Blok Ekle"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:3
+msgid "Position Name"
+msgstr "Konum Adı"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:6
+msgid "Position tag"
+msgstr "Pozisyonu etiketi"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:12
+msgid "Existing positions"
+msgstr "Mevcut pozisyonlar"
+
+#: C:\wamp\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:15
+msgid "edit"
+msgstr "Düzenle"

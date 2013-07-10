@@ -1,0 +1,100 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+    outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+    text-decoration: none;
+}
+del {
+    text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+    margin: 6px;
+}
+input[type='text'],input[type='password'],textarea,select{
+    padding: 4px;
+    font-size: 1.1em;
+    font-family: tahoma, arial, sans-serif;
+    border: 1px solid #A3BAD6;
+    color: #666;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: #F7F7F7;
+}
+select{
+    padding: 2px;
+}
+option{
+    font-family: tahoma, arial, sans-serif;
+    font-size: 0.9em;
+    padding: 2px;
+    color: #333;
+}
+input[type='text']:focus,input[type='password']:focus,textarea:focus,select:focus{
+    background: #FFF;
+    color: #000;
+}
+input[type='button'],input[type='submit']{
+    background: url(../themes/default/images/bgwc.png) repeat-x top;
+    padding: 4px 6px;
+    border: 1px outset #CCC;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    color: #000;
+    text-shadow: 0 0 2px #fff;
+    font-family: tahoma, arial, helvetica, sans-serif; /*georgia, times, serif;*/
+    cursor: pointer;
+}
+input[type='submit'],input.formButton{
+    border: 1px outset #2D4760;
+    color: #FFF;
+    text-shadow: 0 0 2px #000;
+    background: url(../themes/default/images/bgw.png) repeat-x top;
+}

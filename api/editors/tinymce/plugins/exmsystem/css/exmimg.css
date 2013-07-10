@@ -1,0 +1,97 @@
+@charset "utf-8";
+/* CSS Document */
+
+div.xiSelectCat{
+	margin: 6px 0 6px 0;
+	padding: 4px;
+	font-size: 11px;
+	border-bottom: 1px solid #999;
+}
+.xiPanel{
+	/*height: 500px;*/
+}
+.xiImagesThumb span#th{
+	padding: 4px;
+	float: left;
+	border: 1px solid #c8c8c8;
+	margin: 4px;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+.xiImagesThumb img{
+	border: 1px solid #666;
+	padding: 1px;
+}
+.xiImagesThumb span#th:hover{
+	border: 1px solid #62A600;
+	background-color: #E1FFB5;
+}
+.xiImagesThumb img.options{
+	border: 0;
+	padding: 0;
+	margin: 2px 0;
+}
+div.xiPagesNumber{
+	text-align: center;
+	padding: 4px;
+}
+div.xiPagesNumber a.pageLink{
+	padding: 2px 4px 2px 4px;
+	border: 1px solid #CCC;
+	font-weight: bold;
+	text-decoration: none;
+	color: #666;
+}
+div.xiPagesNumber a.pageLink:hover{
+	background-color: #ADFF2F;
+	color: #333;
+	border: 1px solid #333;
+}
+div.xiPagesNumber span.pageCurrent{
+	padding: 2px 4px 2px 4px;
+	border: 1px solid #0092BF;
+	background-color: #00BFFF;
+	color: #fff;
+	font-weight: bold;
+}
+div.xiPagesNumber a img{
+	padding: 0;
+	border: 0;
+}
+.panel_wrapper div.current {
+	height: auto;
+}
+input.xiButtonChange{
+	background-color: #FF6600;
+	color: #FFF;
+	border: 1px solid #000;
+}
+div#xiPreview{
+	padding: 0;
+	float: right;
+	margin: 2px;
+}
+div#xiPreview img{
+	border: 1px solid #333;
+	padding: 2px;
+	margin: 2px;
+	width: 200px;
+}
+div#xiPreview div{
+	text-align: center;
+	font-weight: bold;
+	font-size: 12px;
+	color: #333;
+}
+.even, tr.even td{
+	padding: 3px;
+	border-bottom: 1px solid #ccc;
+}
+.odd, tr.odd td{
+	padding: 3px;
+	border-bottom: 1px solid #ccc;
+}
+table#xiTableBigs{
+	width: 340px;
+}
