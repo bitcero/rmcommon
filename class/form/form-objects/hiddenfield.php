@@ -15,7 +15,7 @@ class ActiveHiddenField
 
     public function render(){
 
-        $input = '<input name="' . $this->name . '" type="hidden" id="' . $this->element . '"';
+        $input = '<input name="' . $this->name . '" type="hidden" id="' . $this->id . '"';
         $class = '';
         $parameters = $this->parameters;
 

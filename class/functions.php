@@ -59,29 +59,30 @@ class RMFunctions
 
         if(RMCLOCATION=='users'){
 
-            RMTemplate::get()->add_tool(__('Users List','rmcommon'), 'users.php', 'images/users.png', 'allusers');
-            RMTemplate::get()->add_tool(__('Add User','rmcommon'), 'users.php?action=new', 'images/user_add.png', 'newuser');
+            RMTemplate::get()->add_tool(__('Users List','rmcommon'), 'users.php', '', 'allusers', array('class' => 'cu-tool tool-users-list'));
+            RMTemplate::get()->add_tool(__('Add User','rmcommon'), 'users.php?action=new', '', 'newuser', array('class' => 'cu-tool tool-user-add'));
 
         } elseif(RMCLOCATION=='imgmanager'){
 
-            RMTemplate::get()->add_tool(__('Categories List','rmcommon'), 'images.php?action=showcats', 'images/category.png', 'showcategories');
-            RMTemplate::get()->add_tool(__('Add Category','rmcommon'), 'images.php?action=newcat', 'images/category_add.png', 'newcategory');
+            RMTemplate::get()->add_tool(__('Categories List','rmcommon'), 'images.php?action=showcats', '', 'showcategories', array('class' => 'cu-tool tool-categories-images'));
+            RMTemplate::get()->add_tool(__('Add Category','rmcommon'), 'images.php?action=newcat', '', 'newcategory', array('class' => 'cu-tool tool-category-add'));
             $cat = rmc_server_var($_REQUEST,'category',0);
             if($cat>0){
-                RMTemplate::get()->add_tool(__('Images','rmcommon'), 'images.php?category='.$cat, 'images/image.png', 'showimages');
+                RMTemplate::get()->add_tool(__('Images','rmcommon'), 'images.php?category='.$cat, '', 'showimages', array('class' => 'cu-tool tool-images'));
             }
-            RMTemplate::get()->add_tool(__('Add Images','rmcommon'), 'images.php?action=new'.($cat>0?"&amp;category=$cat":''), 'images/image_add.png', 'addimages');
+            RMTemplate::get()->add_tool(__('Add Images','rmcommon'), 'images.php?action=new'.($cat>0?"&amp;category=$cat":''), '', 'addimages', array('class' => 'cu-tool tool-images-add'));
 
         } else {
 
-            RMTemplate::get()->add_tool(__('Dashboard','rmcommon'), 'index.php', 'images/dashboard.png', 'dashboard');
-            RMTemplate::get()->add_tool(__('Modules','rmcommon'), 'modules.php', 'images/modules.png', 'modules');
-            RMTemplate::get()->add_tool(__('Blocks','rmcommon'), 'blocks.php', 'images/blocks.png', 'blocks');
-            RMTemplate::get()->add_tool(__('Users','rmcommon'), 'users.php', 'images/users.png', 'users');
-            RMTemplate::get()->add_tool(__('Images','rmcommon'), 'images.php', 'images/images.png', 'imgmanager');
-            RMTemplate::get()->add_tool(__('Comments','rmcommon'), 'comments.php', 'images/comments.png', 'comments');
-            RMTemplate::get()->add_tool(__('Plugins','rmcommon'), 'plugins.php', 'images/plugin.png', 'plugins');
-	        RMTemplate::get()->add_tool(__('Updates','rmcommon'), 'updates.php', 'images/updates.png', 'updates');
+            RMTemplate::get()->add_tool(__('Dashboard','rmcommon'), 'index.php', '', 'dashboard', array('class' => 'cu-tool tool-dashboard'));
+            RMTemplate::get()->add_tool(__('Modules','rmcommon'), 'modules.php', '', 'modules', array('class' => 'cu-tool tool-modules'));
+            RMTemplate::get()->add_tool(__('Blocks','rmcommon'), 'blocks.php', '', 'blocks', array('class' => 'cu-tool tool-blocks'));
+            RMTemplate::get()->add_tool(__('Groups','rmcommon'), 'groups.php', '', 'groups', array('class' => 'cu-tool tool-groups'));
+            RMTemplate::get()->add_tool(__('Users','rmcommon'), 'users.php', '', 'users', array('class' => 'cu-tool tool-users'));
+            RMTemplate::get()->add_tool(__('Images','rmcommon'), 'images.php', '', 'imgmanager', array('class' => 'cu-tool tool-images'));
+            RMTemplate::get()->add_tool(__('Comments','rmcommon'), 'comments.php', '', 'comments', array('class' => 'cu-tool tool-comments'));
+            RMTemplate::get()->add_tool(__('Plugins','rmcommon'), 'plugins.php', '', 'plugins', array('class' => 'cu-tool tool-plugins'));
+	        RMTemplate::get()->add_tool(__('Updates','rmcommon'), 'updates.php', '', 'updates', array('class' => 'cu-tool tool-updates'));
 
         }
 
@@ -160,7 +161,7 @@ class RMFunctions
         define('COMMENTS_INCLUDED', 1);
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         
-        $rmc_config = RMFunctions::configs();
+        $rmc_config = RMSettings::cu_settings();
         
         $params = urlencode($params);
         $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_comments")." WHERE status='approved' AND id_obj='$obj' AND params='$params' AND type='$type' AND parent='$parent'".($user==null?'':" AND user='$user'")." ORDER BY posted";
@@ -194,7 +195,7 @@ class RMFunctions
                     'name'  => $user->getVar('uname'),
                     'email' => $user->getVar('email'),
                     'posts' => $user->getVar('posts'),
-                    'avatar'=> XOOPS_UPLOAD_URL.'/'.$user->getVar('user_avatar'),
+                    'avatar'=> XOOPS_UPLOAD_URL.'/'.$user->getVar('image'),
                     'rank'  => $user->rank(),
                     'url'   => $user->getVar('url')!='http://'?$user->getVar('url'):''
                 );
@@ -214,11 +215,11 @@ class RMFunctions
             }
             
             if ($xoopsUser && $xoopsUser->isAdmin()){
-				$editlink = RMCURL.'/comments.php?action=edit&amp;id='.$com->id().'&amp;ret='.urlencode(self::current_url());				
+				$editlink = RMCURL.'/comments.php?action=edit&amp;id='.$com->id().'&amp;ret='.urlencode(RMUris::current_url());
             }elseif($rmc_config['allow_edit']){
 				$time_limit = time() - $com->getVar('posted');
 	            if($xoopsUser && $xoopsUser->getVar('uid')==$editor->getVar('xuid') && $time_limit<($rmc_config['edit_limit']*3600)){
-					$editlink = RMCURL.'/post-comment.php?action=edit&amp;id='.$com->id().'&amp;ret='.urlencode(self::current_url());
+					$editlink = RMCURL.'/post-comment.php?action=edit&amp;id='.$com->id().'&amp;ret='.urlencode(RMUris::current_url());
 	            } else {
 					$editlink = '';
 	            }
@@ -288,7 +289,7 @@ class RMFunctions
             'lang_text'     => __('Your comment', 'rmcommon'),
             'lang_submit'   => __('Submit Comment', 'rmcommon'),
             'lang_title'    => __('Submit a comment', 'rmcommon'),
-            'uri'			=> urlencode(RMFunctions::current_url()),
+            'uri'			=> urlencode(RMUris::current_url()),
             'actionurl'		=> RMCURL.'/post-comment.php',
             'params'		=> urlencode($params),
             'update'        => urlencode(str_replace(XOOPS_ROOT_PATH, '', $file)),

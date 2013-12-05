@@ -179,7 +179,7 @@ class RMFormGroups extends RMFormElement
 			
 			$rtn = "<select name='$name'";
 			$rtn .= $this->_multi ? " multiple='multiple' size='5'" : "";
-			$rtn .= "><option value='0'";
+			$rtn .= " class=\"form-control ".$this->getClass()."\"><option value='0'";
 			if (is_array($this->_select)){
 				if (in_array(0, $this->_select)){
 					$rtn .= " selected='selected'";

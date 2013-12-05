@@ -1,4 +1,4 @@
-<h1 class="rmc_titles"><?php _e('Plugins Manager','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Plugins Manager','rmcommon'); ?></h1>
 
 <ul class="nav nav-tabs plugins-nav">
 	<li class="active"><a href="#plugins-installed" data-toggle="tab"><?php _e('Installed Plugins','rmcommon'); ?></a></li>
@@ -7,7 +7,7 @@
 
 <div class="tab-content">
 	<div class="page-header" style="margin: 0 0 5px 0;">
-		<span class="muted">
+		<span class="help-block">
 			<?php _e('Plugins allows to Common Utilities to improve its features and capabilities. Following is a list with existing plugins, installed and available to install.','rmcommon'); ?>
 		</span>
 	</div>
@@ -65,7 +65,7 @@
 						<span class="descriptions"><?php echo $plugin->get_info('description'); ?></span>
 					</td>
 					<td align="center">
-						<strong><?php echo is_array($plugin->get_info('version')) ? RMUtilities::format_version($plugin->get_info('version')) : $plugin->get_info('version'); ?></strong>
+						<strong><?php echo is_array($plugin->get_info('version')) ? RMModules::format_module_version($plugin->get_info('version')) : $plugin->get_info('version'); ?></strong>
 					</td>
 					<td align="center">
 						<?php if($plugin->get_info('web')!=''): ?>

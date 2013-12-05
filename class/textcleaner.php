@@ -48,9 +48,9 @@ class TextCleaner
 	*/
 	public function get_emotions(){
 		
-		$rmc_config = RMFunctions::get()->configs();
+		$rmc_config = RMSettings::cu_settings();
 		
-		if (!$rmc_config['dosmileys'])
+		if (!$rmc_config->dosmileys)
 			return false;
 		
 		if (!empty($this->emots))
@@ -595,30 +595,30 @@ class TextCleaner
 	 **/
 	function to_display($text, $dbr = true, $clean_tags = true, $paragraph = true){
 		
-        $rmc_config = empty($params) ? RMFunctions::get()->configs() : $params;
+        $rmc_config = empty($params) ? RMSettings::cu_settings() : $params;
 		
 		$original_text = $text;
-		if ($rmc_config['dohtml'] != 1){
+		if ($rmc_config->dohtml != 1){
 			$text = $this->specialchars($text);
         }
 		
 		// Convert [code] tag
-		$text = $this->codePreConv($text, $rmc_config['doxcode'] && !defined('XOOPS_CPFUNC_LOADED'));
+		$text = $this->codePreConv($text, $rmc_config->doxcode && !defined('XOOPS_CPFUNC_LOADED'));
 		
-		if ($rmc_config['dosmileys'] && !defined('XOOPS_CPFUNC_LOADED'))
+		if ($rmc_config->dosmileys && !defined('XOOPS_CPFUNC_LOADED'))
 			$text = $this->smiley($text);
 
 		// Decode exmcode
-		if ($rmc_config['doxcode'] && !defined('XOOPS_CPFUNC_LOADED'))
-			$text = $this->codeDecode($text, $rmc_config['doimage']);
+		if ($rmc_config->doxcode && !defined('XOOPS_CPFUNC_LOADED'))
+			$text = $this->codeDecode($text, $rmc_config->doimage);
 
 		// Replace breaklines
-		if ($rmc_config['dobr']) 
+		if ($rmc_config->dobr)
 			$text = $this->nl2Br($text);
 		
         if($clean_tags) $text = $this->clean_disabled_tags($text);
 		$text = $this->make_clickable($text);
-		$text = $this->codeConv($text, $rmc_config['doxcode']);	// Ryuji_edit(2003-11-18)
+		$text = $this->codeConv($text, $rmc_config->doxcode);	// Ryuji_edit(2003-11-18)
 		if($paragraph) $text = $this->double_br($text);
 
         // Custom Codes
@@ -707,8 +707,8 @@ class TextCleaner
 	*/
 	public function encrypt($string, $encode64 = true){
 		
-		$rmc_config = RMFunctions::get()->configs();
-		$crypt = new Crypt(Crypt::MODE_HEX, $rmc_config['secretkey']);
+		$rmc_config = RMSettings::cu_settings();
+		$crypt = new Crypt(Crypt::MODE_HEX, $rmc_config->secretkey);
 		$string = $crypt->encrypt($string);
 		//if ($encode64) $string = base64_encode($string);
 		return $string;
@@ -723,9 +723,9 @@ class TextCleaner
 	*/
 	public function decrypt($string, $encode64 = true){
 		
-		$rmc_config = RMFunctions::configs();
+		$rmc_config = RMSettings::cu_settings();
 		
-		$crypt = new Crypt(Crypt::MODE_HEX, $rmc_config['secretkey']);
+		$crypt = new Crypt(Crypt::MODE_HEX, $rmc_config->secretkey);
 		$string = $crypt->decrypt($string);
 		
 		return $string;

@@ -19,7 +19,7 @@ class RMBlocksFunctions
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         
         if($mods==null || empty($mods))
-            $mods = RMFunctions::get_modules_list();
+            $mods = RMModules::get_modules_list();
         
         $list = array(); // Block list to return
         
@@ -75,7 +75,7 @@ class RMBlocksFunctions
             list( $mid, $dirname ) = array( $xoopsModule->getVar('mid'), $xoopsModule->getVar('dirname') );
             $isStart = ( substr( $_SERVER['PHP_SELF'], -9 ) == 'index.php' && $xoopsConfig['startpage'] == $dirname );
 	    } else {
-            $sys = RMFunctions::load_module('system');
+            $sys = RMModules::load_module('system');
             list( $mid, $dirname ) = array( $sys->getVar('mid'), 'system' );
             $isStart = !@empty( $GLOBALS['xoopsOption']['show_cblock'] );
 	    }

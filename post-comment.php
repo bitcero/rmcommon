@@ -15,7 +15,7 @@ $action = rmc_server_var($_REQUEST, 'action', '');
 * This file handle comments from Common Utilties
 */
 
-$rmc_config = RMFunctions::configs();
+$rmc_config = RMSettings::cu_settings();
 
 if (!$rmc_config['enable_comments']){
     redirect_header(rmc_server_var($_REQUEST, 'comment_url', XOOPS_URL), 1, __('Sorry, comments has been disabled by administrator', 'rmcommon'));

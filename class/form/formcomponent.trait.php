@@ -41,8 +41,8 @@ trait RMFormComponent
 
         $columns = $model->columns;
 
-        if ( !isset( $columns[$element] ) && 'ActiveLabel' != __CLASS__ )
-            throw new RMException( sprintf( __( 'The element "%s" does not exists.', 'rmcommon' ), $element ) );
+        /*if ( !isset( $columns[$element] ) && 'ActiveLabel' != __CLASS__ )
+            throw new RMException( sprintf( __( 'The element "%s" does not exists.', 'rmcommon' ), $element ) );*/
 
         $columns = $model->columns;
 
@@ -50,12 +50,12 @@ trait RMFormComponent
             $this->required = true;
 
             if ( !isset($parameters['data-msg-required']) ){
-                $parameters['data-msg-required'] = __('This field is required.','rmcommon');
+                $parameters['data-msg-required'] = __('Este campo es obligatorio.','rmcommon');
                 $this->parameters = $parameters;
             }
 
         }else
-            $this->required = false;
+            $this->required = isset( $parameters['required'] ) ? $parameters['required'] : false;
 
     }
 
@@ -71,7 +71,13 @@ trait RMFormComponent
      */
     final protected function get_name(){
 
-        return $this->model_name . '[' . $this->element . ']';
+        return str_replace('Admin', '', $this->model_name ) . '[' . $this->element . ']';
+
+    }
+
+    final protected function get_id(){
+
+        return strtolower( str_replace('Admin', '', $this->model_name ) ) . '-' . $this->element;
 
     }
 

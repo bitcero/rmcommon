@@ -11,6 +11,7 @@
 if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER']=='') die("Not Allowed");
 
 $url = isset($_REQUEST['url']) ? $_REQUEST['url'] : '';
+
 $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 'text/html';
 
 include_once '../class/proxy.php';

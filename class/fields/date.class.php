@@ -101,7 +101,7 @@ class RMFormDate extends RMFormElement
         
         
         
-        $rtn = "<input type='text' class='exmdates_field' name='text_".$this->getName()."' id=\"exmdate-".$this->id()."\"' size='20' maxlength='19' value='".$date."' />
+        $rtn = "<input type='text' class='exmdates_field form-control".$this->getClass()."' name='text_".$this->getName()."' id=\"exmdate-".$this->id()."\"' size='20' maxlength='19' value='".$date."' />
                     <input type='hidden' name='".$this->getName()."' id='".$this->id()."' value='".$this->_date."' />";
 		return $rtn;
 	}

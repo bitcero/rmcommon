@@ -15,7 +15,7 @@ class ActiveTextField
 
     public function render(){
 
-        $input = '<input type="text" name="' . $this->name . '" id="' . $this->element . '"';
+        $input = '<input type="text" name="' . $this->name . '" id="' . $this->id . '"';
         $class = $this->required ? 'required' : '';
         $max = 0;
 
@@ -34,8 +34,8 @@ class ActiveTextField
         $input .= $this->required ? ' required' : '';
 
         $columns = $this->model->columns;
-        $max = 0 == $max ? $columns[$this->element]['len'] : $max;
-        $input .= $max > 0 ? ' maxlength="' . $max .'"' : '';
+        /*$max = 0 == $max ? $columns[$this->element]['len'] : $max;
+        $input .= $max > 0 ? ' maxlength="' . $max .'"' : '';*/
         $input .= '>';
 
         return $input;

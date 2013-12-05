@@ -1,4 +1,4 @@
-<?php if ($form->getTitle()!=''): ?><h1 class="rmc_titles"><?php echo $form->getTitle(); ?></h1><?php endif; ?>
+<?php if ($form->getTitle()!=''): ?><h1 class="cu-section-title"><?php echo $form->getTitle(); ?></h1><?php endif; ?>
 
 <form name="<?php echo $form->getName() ?>" id="<?php echo $form->getName(); ?>" method="<?php echo $form->method(); ?>" action="<?php echo $form->getAction(); ?>"<?php if($form->getExtra()!=''): echo " ".$form->getExtra(); endif;?>>
 

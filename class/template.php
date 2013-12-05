@@ -98,7 +98,7 @@ class RMTemplate
         global $xoopsConfig, $xoopsOption;
 
         if ( defined('XOOPS_CPFUNC_LOADED' ) )
-		    ob_start();
+		    xoops_cp_header(); //ob_start();
         else
             include XOOPS_ROOT_PATH . '/header.php';
     }
@@ -130,12 +130,12 @@ class RMTemplate
             $rm_theme_url = RMCURL.'/themes/'.$theme;
 
             // Check if there are redirect messages
-            $rmc_messages = array();
-            if ( isset( $_SESSION['rmMsg'] ) ){
-                foreach ( $_SESSION['rmMsg'] as $msg ){
-                    $rmc_messages[] = $msg;
+            $redirect_messages = array();
+            if ( isset( $_SESSION['redirect_message'] ) ){
+                foreach ( $_SESSION['redirect_message'] as $msg ){
+                    $redirect_messages[] = $msg;
                 }
-                unset( $_SESSION['rmMsg'] );
+                unset( $_SESSION['redirect_message'] );
             }
 
             include_once RMCPATH.'/themes/'.$theme.'/admin_gui.php';
@@ -146,6 +146,10 @@ class RMTemplate
             echo $output;
 
         } else {
+
+            $vars = $this->get_vars();
+
+            $xoopsTpl->assign( $vars );
 
             require XOOPS_ROOT_PATH . '/footer.php';
 
@@ -203,29 +207,6 @@ class RMTemplate
 		} else {
 			return XOOPS_ROOT_PATH.'/'.$where.'/templates/'.$file;
 		}
-		
-    }
-    
-    /**
-    * Get template path for front section
-    * @param string File path inside module folder
-    * @param string Module directory name
-    * @return string
-    */
-    public function tpl_path($file, $module, $subdir = 'templates'){
-		global $xoopsConfig;
-		
-		$theme = $xoopsConfig['theme_set'];
-		$subdir = $subdir == '' ? 'templates' : $subdir;
-
-		if(!is_dir(XOOPS_ROOT_PATH.'/modules/'.$module)) return;
-		
-		$tpath = XOOPS_THEME_PATH.'/'.$theme.'/modules/'.$module.'/'.($subdir!='templates'?$subdir.'/':'').$file;
-		
-		if(is_file($tpath))
-			return $tpath;
-			
-		return XOOPS_ROOT_PATH.'/modules/'.$module.'/'.$subdir.'/'.$file;
 		
     }
     
@@ -449,6 +430,7 @@ class RMTemplate
         if($file=='')
             return '';
 
+
         $version = $version=='' ? RMCVERSION : $version;
 
         if( $type == 'js' || $type == 'css' ){
@@ -488,7 +470,7 @@ class RMTemplate
 
         foreach($paths as $path){
 
-            if(!file_exists($path))
+            if(!file_exists(preg_replace("/(.*)(\?.*)$/", '$1', $path)))
                 continue;
 
             $url = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path);
@@ -596,7 +578,7 @@ class RMTemplate
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';
 
-        if( $element == '' && $owner == 'theme')
+        if( $owner == 'theme')
             $element = $element == '' ? ( defined( 'XOOPS_CPFUNC_LOADED' ) ? $cuSettings->theme : $xoopsConfig['theme_set']) : $element;
         else
             $element = $element == '' ? ($xoopsModule ? $xoopsModule->getVar('dirname') : '') : $element;
@@ -630,6 +612,19 @@ class RMTemplate
         unset($options['type']);
 
         $this->tpl_styles[$id] = array_merge($this->tpl_styles[$id], $options);
+
+    }
+
+    /**
+     * Get the redirection messages
+     * @return array
+     */
+    public function get_redirection_messages(){
+
+        if ( isset( $_SESSION['redirect_message'] ) )
+            return $_SESSION['redirect_message'];
+        else
+            return array();
 
     }
 
@@ -736,14 +731,33 @@ class RMTemplate
     public function get_menus(){
         return $this->menus;
     }
-    
-    public function add_tool($title, $link, $icon='', $location=''){
-		$this->toolbar[] = array(
-			'title'		=> $title,
-			'link'		=> $link,
-			'icon'		=> $icon,
-			'location'	=> $location
-		);
+
+    /**
+     * Add a new element to toolbar array
+     * @param string|array $data <p>Could be a title that will be uses as caption for button or you can pass an array with all button properties</p>
+     * @param string $link <p>URL for link</p>
+     * @param string $icon <p>The icon could be a image URL relative to module path or a full URL.</p>
+     * @param string $location
+     * @param array $attributes
+     */
+    public function add_tool($data, $link = '', $icon='', $location='', $attributes = array()){
+
+        if ( is_array($data) ){
+
+            $this->toolbar[] = $data;
+
+        } else {
+
+            $this->toolbar[] = array(
+                'title'		=> $data,
+                'link'		=> $link,
+                'icon'		=> $icon,
+                'location'	=> $location,
+                'attributes' => $attributes
+            );
+
+        }
+
     }
     
     public function get_toolbar(){

@@ -22,7 +22,7 @@ class ActiveLabel
 
     public function render(){
 
-        $label = '<label for="' . $this->element . '"';
+        $label = '<label for="' . $this->id . '"';
         $class = $this->required ? 'label-required' : '';
         $title = $this->model->title($this->element);
 
@@ -41,7 +41,6 @@ class ActiveLabel
 
         $columns = $this->model->columns;
         $label .= '><strong>' . $title . '</strong> ';
-        $label .= $this->required ? __('<em>(Required)</em>', 'rmcommon') : '';
         $label .= '</label>';
 
         return $label;

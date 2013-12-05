@@ -37,6 +37,30 @@ function rmc_autoloader($class){
 
 	if(class_exists($class)) return;
 
+    /**
+     * Nes autoloader method
+     * $class = new Module_ClassName();
+     * The class name must contain the module directory name separated with a "_"
+     * from the file name.
+     * Common Utilities will search for "PATH/module/classname.class.php" file
+     */
+    $data = explode("_", strtolower($class));
+    if(count($data) == 2){
+        if ( is_dir( XOOPS_ROOT_PATH . '/modules/' . $data[0] ) ){
+            // Existe el módulo
+            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace("_", "-", $class) ) . '.class.php';
+
+            if( is_file($file) ){
+                require $file;
+                return;
+            }
+        }
+
+    }
+
+    /**
+     * Old method maintained for backward compatibility
+     */
     $class = str_replace("\\", "/", $class);
 	
 	$class = strtolower($class);
@@ -48,6 +72,8 @@ function rmc_autoloader($class){
 	if (substr($class, strlen($class) - strlen('handler'))=='handler'){
 		$class = substr($class, 0, strlen($class) - 7);
 	}
+
+    $class = str_replace("_", "-", $class);
       
     $paths = array(
     	'/api',
@@ -105,11 +131,11 @@ function cu_render_output($output){
     $page = $output;
     if($xoopsTpl){
         if(defined('COMMENTS_INCLUDED') && COMMENTS_INCLUDED){
-            RMTemplate::get()->add_xoops_style('comments.css', 'rmcommon');
+            RMTemplate::get()->add_style('comments.css', 'rmcommon');
         }
     }
     
-    include_once RMTemplate::get()->tpl_path('rmc-header.php', 'rmcommon');
+    include_once RMTemplate::get()->get_template('rmc-header.php', 'module', 'rmcommon');
     $rtn .= $scripts;
     $rtn .= $styles;
     $rtn .= $heads;

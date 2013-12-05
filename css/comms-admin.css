@@ -18,3 +18,12 @@
     font-size: 0.9em;
     color: #666;
 }
+.comm-pagination{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+}
+.comm-search-control{
+    width: 250px;
+}
+

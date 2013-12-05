@@ -64,16 +64,13 @@ class RMFormButton extends RMFormElement
 	 * @return string C?digo HTML del Bot?n
 	 */
 	public function render(){
-		$ret = "<input type='".$this->_type."' name='".$this->getName()."' id='".$this->id()."' value='".$this->_value."' ";
-		if ($this->getClass()!='' || $this->_type = 'submit'){
-			if ($this->_type = 'submit' && $this->getClass()==''){
-				$ret .= "class='formButton' ";
-			} else {
-				$ret .= "class='".$this->getClass()."' ";
-			}
-		}
+		$ret = "<button type='".$this->_type."' name='".$this->getName()."' id='".$this->id()."' class=\"btn";
+        if ($this->_type == 'submit')
+            $ret .= " btn-primary " . $this->getClass() . "\" ";
+        else
+            $ret .= " btn-default " . $this->getClass() . "\" ";
 		
-		$ret .= $this->getExtra()." />";
+		$ret .= $this->getExtra().">" . $this->getValue() . '</button>';
 		return $ret;
 	}
 	
@@ -148,11 +145,6 @@ class RMFormButtonGroup extends RMFormElement
 		$ret = '';
 		
 		foreach ($this->buttons as $k => $button){
-			
-			if ($k==$this->ok)
-				$button->setClass('button formButton');
-			else
-				$button->setClass('button');
 			
 			if ($ret==''){
 				$ret = $button->render();

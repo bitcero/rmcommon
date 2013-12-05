@@ -33,7 +33,7 @@ class RMFormUser extends RMFormElement
 	* @param int Ancho de la ventana
 	* @param int Alto de la ventana
 	*/
-	public function __construct($caption, $name, $multi = false, $select=array(), $limit=36, $width=600,$height=300, $showall = 0, $enable=true){
+	public function __construct($caption, $name, $multi = false, $select=array(), $limit=20, $width=600,$height=300, $showall = 0, $enable=true){
 		$this->selected = is_array($select) ? $select : array($select);
 		$this->limit = $limit;
 		$this->multi = $multi;
@@ -64,25 +64,26 @@ class RMFormUser extends RMFormElement
 	*/
 	public function render(){
 		
-		RMTemplate::get()->add_script(RMCURL.'/include/js/forms.js');
-		RMTemplate::get()->add_script(RMCURL.'/include/js/jquery.validate.min.js');
+		RMTemplate::get()->add_script('forms.js', 'rmcommon', array('footer' => 1));
+		RMTemplate::get()->add_script('jquery.validate.min.js', 'rmcommon',  array('directory' => 'include', 'footer' => 1));
 		RMTemplate::get()->add_style('forms.css','rmcommon');
         
 		if (function_exists("xoops_cp_header")){
         	RMTemplate::get()->add_style('jquery.css','rmcommon');
 		} else {
-			RMTemplate::get()->add_xoops_style('jquery.css','rmcommon');
+			RMTemplate::get()->add_style('jquery.css','rmcommon');
 		}
 		
-		$rtn = "<div id='".$this->id()."-users-container'".($this->getExtra()!='' ? " ".$this->getExtra() : '')." class='form_users_container'>
+		$rtn = "<div id='".$this->id()."-users-container'".($this->getExtra()!='' ? " ".$this->getExtra() : '')." class='form_users_container ".($this->multi ? 'checkbox' : 'radio')."'>
 				<ul id='".$this->id()."-users-list'>";
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
 		
 		if ($this->showall && in_array(0, $this->selected)){
 			$rtn .= "<li id='".$this->id()."-exmuser-0'>\n
-                        <label><input type='".($this->multi ? 'checkbox' : 'radio')."' name='".($this->multi ? $this->getName().'[]' : $this->getName())."' id='".$this->id()."-0'
-				 		value='0' checked='checked' /> ".__('All Users','rmcommon')."
+                        <label>
                         <a href='javascript:;' onclick=\"users_field_name='".$this->id()."'; usersField.remove(0);\"><span>delete</span></a>
+                        <input type='".($this->multi ? 'checkbox' : 'radio')."' name='".($this->multi ? $this->getName().'[]' : $this->getName())."' id='".$this->id()."-0'
+				 		value='0' checked='checked' /> ".__('All Users','rmcommon')."
                         </label></li>";
 		}
 		
@@ -100,21 +101,31 @@ class RMFormUser extends RMFormElement
 			$selected = '';
 			while ($row = $db->fetchArray($result)){
 				$rtn .= "<li id='".$this->id()."-exmuser-$row[uid]'>\n
-						<label style='overflow: hidden;'>
-                        <input type='".($this->multi ? 'checkbox' : 'radio')."' name='".($this->multi ? $this->getName().'[]' : $this->getName())."' id='".$this->id()."-".$row['uid']."'
-				 		value='$row[uid]' checked='checked' /> 
-                        $row[uname]";
+						<label>";
                 $rtn .= $this->can_change ? " <a href='javascript:;' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]);\"><span>delete</span></a>" : '';
-                $rtn .= "</label></li>";
+                $rtn .= "<input type='".($this->multi ? 'checkbox' : 'radio')."' name='".($this->multi ? $this->getName().'[]' : $this->getName())."' id='".$this->id()."-".$row['uid']."'
+				 		value='$row[uid]' checked='checked' /> 
+                        $row[uname] ";
+                $rtn .= "</label></div></li>";
 			}
 		}
 		
-		$rtn .= "</ul></div><br />";
+		$rtn .= "</ul><br />";
 		if ($this->can_change){
-			$rtn .= "<input type='button' value='".__('Search Users','rmcommon')."' onclick=\"usersField.form_search_users('".$this->id()."',".$this->width.",".$this->height.",".$this->limit.",".intval($this->multi).",'".XOOPS_URL."');\" />
-					<div id='".$this->id()."-dialog-search' title='".__('Search Users','rmcommon')."' style='display: none;'>
-					
-					</div>";
+			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->width.",".$this->height.",".$this->limit.",".intval($this->multi).",'".XOOPS_URL."');\">".__('Usuarios...','rmcommon')."</button>";
+		    $rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
+					    <div class="modal-dialog">
+					        <div class="modal-content">
+					            <div class="modal-header">
+					                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					                <h4 class="modal-title">'.__('Seleccionar Usuarios', 'rmcommon').'</h4>
+					            </div>
+					            <div class="modal-body">
+
+					            </div>
+					        </div>
+					    </div>
+					</div>';
 		}
 		
 		return $rtn;

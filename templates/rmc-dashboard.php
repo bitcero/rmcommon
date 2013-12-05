@@ -1,8 +1,52 @@
-<h1 class="rmc_titles"><?php _e('Dashboard','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Dashboard','rmcommon'); ?></h1>
 
-<div class="row-fluid">
+<div class="row">
 
-    <div class="span5">
+    <div class="col-md-4 col-lg-5">
+
+        <!-- INstalled Modules -->
+        <div class="outer box-collapse">
+            <div class="th">
+                <i class="icon-caret-up control"></i>
+                <?php _e('Installed Modules','rmcommon'); ?>
+            </div>
+            <div class="even collapsable">
+                <div id="mods-list">
+                    <div class="row">
+                        <?php foreach($installed_modules as $mod): ?>
+                            <div class="col-sm-4 col-md-6 col-lg-4">
+                                <div class="installed-item">
+                                    <a href="<?php echo $mod->admin != '' ? $mod->admin : $mod->main; ?>" class="icon" title="<?php $mod->real_name; ?>">
+                                        <img src="<?php echo $mod->logo; ?>">
+                                    </a>
+                                    <span class="name">
+                                        <a href="<?php echo $mod->admin != '' ? $mod->admin : $mod->main; ?>" class="name"><?php echo $mod->name; ?></a>
+                                    </span>
+                                    <span class="version">
+                                        <?php echo $mod->version; ?>
+                                    </span>
+                                    <span class="options">
+                                        <?php if($mod->config != ''): ?>
+                                            <a href="<?php echo $mod->config; ?>"><i class="icon-wrench"></i></a>
+                                        <?php endif; ?>
+                                        <?php if($mod->admin != ''): ?>
+                                            <a href="<?php echo $mod->admin; ?>"><i class="icon-dashboard"></i></a>
+                                        <?php endif; ?>
+                                        <?php if($mod->admin != ''): ?>
+                                            <a href="<?php echo $mod->admin; ?>"><i class="icon-home"></i></a>
+                                        <?php endif; ?>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <span class="description">
+                    <?php _e('If you wish to manage or install new modules please go to Modules Management.','rmcommon'); ?><br />
+                    <a href="<?php echo XOOPS_URL; ?>/modules/rmcommon/modules.php"><?php _e('Modules management', 'rmcommon'); ?></a>
+                </span>
+            </div>
+        </div>
 
         <!-- System tools -->
         <div class="outer box-collapse">
@@ -58,28 +102,10 @@
         </div>
         <!--// End system tools -->
 
-        <!-- INstalled Modules -->
-        <div class="outer box-collapse">
-            <div class="th">
-                <img src="images/loading_2.gif" alt="" class="loading" id="loading-mods" />
-                <i class="icon-caret-up control"></i>
-                <?php _e('Installed Modules','rmcommon'); ?>
-            </div>
-            <div class="even mods_coint collapsable">
-                <div id="ajax-mods-list">
-
-                </div>
-                <span class="description">
-                    <?php _e('If you wish to manage or install new modules please go to Modules Management.','rmcommon'); ?><br />
-                    <a href="<?php echo XOOPS_URL; ?>/modules/system/admin.php?fct=modulesadmin"><?php _e('Modules management', 'rmcommon'); ?></a>
-                </span>
-            </div>
-        </div>
-
 
     </div>
 
-    <div class="span4">
+    <div class="col-md-4 col-lg-4">
 
         <!-- UPdates available -->
         <div class="alert alert-block" style="display: none;" id="updater-info">
@@ -105,14 +131,16 @@
                 <?php _e('Available Modules','rmcommon'); ?>
             </div>
             <div class="collapsable">
+                <div class="mods-list">
                 <?php foreach($available_mods as $module): ?>
                     <div class="<?php echo tpl_cycle("even,odd"); ?>">
-                        <span class="modimg" style="background: url(../<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('icon48')!='' ? $module->getInfo('icon48') : $module->getInfo('image'); ?>) no-repeat center;">&nbsp;</span>
-                        <strong><?php echo $module->getInfo('name'); ?></strong><br />
+                        <span class="modimg" style="background: url(../<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('icon32')!='' ? $module->getInfo('icon32') : $module->getInfo('image'); ?>) no-repeat center;">&nbsp;</span>
+                        <strong><?php echo $module->getInfo('name'); ?></strong> <em><?php echo is_array($module->getInfo('rmversion')) ? RMModules::format_module_version( $module->getInfo('rmversion') ) : $module->getInfo('version'); ?></em><br />
                         <span class="moddesc"><?php echo $module->getInfo('description'); ?></span><br />
                         <a href="modules.php?action=install&dir=<?php echo $module->getInfo('dirname'); ?>"><?php _e('Install', 'rmcommon'); ?></a>
                     </div>
                 <?php endforeach; ?>
+                </div>
                 <span class="description">
 	                <?php _e('If you wish to manage or install new modules please go to Modules Management.','rmcommon'); ?><br />
 	                <a href="modules.php"><?php _e('Modules management', 'rmcommon'); ?></a>
@@ -123,7 +151,7 @@
 
     </div>
 
-    <div class="span3">
+    <div class="col-md-4 col-lg-3">
 
         <!-- Recent News -->
         <div class="outer box-collapse">
@@ -142,7 +170,7 @@
 
 </div>
 
-<div class="row-fluid rmcw-container">
+<div class="row rmcw-container">
     <!-- Left widgets -->
     <div class="span6">
 

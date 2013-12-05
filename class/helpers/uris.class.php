@@ -44,10 +44,39 @@ class RMUris
     }
 
 
-    static function parameter($method, $key, $type, $default = ''){
+    static function anchor( $module, $controller = '', $action = '', $parameters = array() ){
+        global $cuSettings;
 
+        if($module=='')
+            return;
 
+        $url = XOOPS_URL;
 
+        if ( defined( 'XOOPS_CPFUNC_LOADED' ) )
+            $url .= $cuSettings->permalinks ? '/admin/' . $module : '/modules/' . $module . '/admin';
+        else
+            $url .= $cuSettings->permalinks ? '/' . $module : '/modules/' . $module;
+
+        if($controller == '')
+            return $url . '/';
+
+        $url .=  $cuSettings->permalinks ? '/' . $controller . '/' : '/index.php/' . $controller . '/';
+        $url .= $action != '' ? $action . '/' : '';
+        $query = '';
+        foreach( $parameters as $name => $value ){
+            $query .= ($query=='' ? '?' : '&') . $name . '=' . urlencode($value);
+        }
+
+        return $url . $query;
+
+    }
+
+    static function relative_anchor( $module, $controller, $action = '', $parameters = array() ){
+        $url = self::anchor( $module, $controller, $action, $parameters );
+
+        $url = str_replace( XOOPS_URL, '', $url );
+
+        return $url;
 
     }
 
@@ -60,12 +89,28 @@ class RMUris
      */
     static function redirect_with_message($message, $url, $level = RMMSG_WARN, $icon = ''){
 
-        $i = isset($_SESSION['rmMsg']) ? count($_SESSION['rmMsg']) + 1 : 0;
-        $_SESSION['rmMsg'][$i]['text'] = htmlentities($message);
-        $_SESSION['rmMsg'][$i]['level'] = $level;
-        $_SESSION['rmMsg'][$i]['icon'] = $icon;
+        $i = isset($_SESSION['cu_redirect_messages']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
+        $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
+        $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
+        $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
         header('location: '.preg_replace("/[&]amp;/i", '&', $url));
         die();
+
+    }
+
+    /**
+     * Crea la url para una imagen dada de acuerdo al módulo
+     * @param string $module Directorio del módulo
+     * @param string $image Nombre del archivo de la imagen
+     * @return string URL completa de la imagen
+     */
+    static function image($module, $image){
+
+        if ($module=='')
+            return false;
+
+        $url = XOOPS_URL . '/modules/' . $module . '/images/' . $image;
+        return $url;
 
     }
 

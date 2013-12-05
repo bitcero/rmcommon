@@ -63,7 +63,7 @@ function show_modules_list(){
             'id'            => $mod->getVar('mid'),
             'name'            => $mod->getVar('name'),
             'realname'        => $mod->getInfo('name'),
-            'version'        => $mod->getInfo('rmnative') ? RMUtilities::format_version($mod->getInfo('rmversion')) : $mod->getInfo('version'),
+            'version'        => $mod->getInfo('rmnative') ? RMModules::format_module_version($mod->getInfo('rmversion')) : $mod->getInfo('version'),
             'description'    => $mod->getInfo('description'),
             'icon'            => XOOPS_URL.'/modules/'.$mod->getVar('dirname').'/'.($mod->getInfo('icon48') ? $mod->getInfo('icon48') : $mod->getInfo('image')),
             'image'         => XOOPS_URL.'/modules/'.$mod->getVar('dirname').'/'.$mod->getInfo('image'),
@@ -108,7 +108,7 @@ function show_modules_list(){
 
 	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'));
 	
-	RMFunctions::create_toolbar();
+	////RMFunctions::create_toolbar();
 	RMTemplate::get()->assign('xoops_pagetitle', __('Modules Management','rmcommon'));
 	RMTemplate::get()->add_style('modules.css', 'rmcommon');
 	RMTemplate::get()->add_script('modules.js', 'rmcommon', array('directory' => 'include'));
@@ -147,9 +147,9 @@ function module_install(){
     
     $module = RMEvents::get()->run_event('rmcommon.preinstall.module', $module);
     
-    RMTEmplate::get()->add_script('modules.js', 'rmcommon');
+    RMTEmplate::get()->add_script('modules.js', 'rmcommon', array('directory' => 'include'));
     RMTemplate::get()->add_style('modules.css', 'rmcommon');
-    RMFunctions::create_toolbar();
+    //RMFunctions::create_toolbar();
 
 	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'), 'modules.php');
 	RMBreadCrumb::get()->add_crumb(sprintf(__('Install %s','rmcommon'), $module->getInfo('name')));
@@ -204,7 +204,7 @@ function module_install_now(){
     
     $module_log = RMEvents::get()->run_event('rmcommon.module.installed', $module_log, $mod);
 	
-	RMFunctions::create_toolbar();
+	//RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('modules.css', 'rmcommon');
 	xoops_cp_header();
 	
@@ -221,7 +221,7 @@ function module_install_now(){
 function module_uninstall_now(){
     global $xoopsSecurity, $xoopsConfig, $rmTpl;
     
-    $mod = rmc_server_var($_POST, 'module', '');
+    $dir = RMHttpRequest::post( 'module', 'string', '' );
     
     if (!$xoopsSecurity->check()){
         redirectMsg('modules.php', __('Sorry, this operation could not be completed!', 'rmcommon'), 1);
@@ -230,7 +230,7 @@ function module_uninstall_now(){
     
     $module_handler = xoops_gethandler('module');
     
-    if (!$module_handler->getByDirname($mod)){
+    if (!$mod = $module_handler->getByDirname($dir)){
         redirectMsg('modules.php', sprintf(__('Module %s is not installed yet!', 'rmcommon'), $mod), 1);
         die();
     }
@@ -246,11 +246,11 @@ function module_uninstall_now(){
     
     RMEvents::get()->run_event('rmcommon.uninstalling.module', $mod);
     
-    $module_log = xoops_module_uninstall($mod);
+    $module_log = xoops_module_uninstall($dir);
     
     $module_log = RMEvents::get()->run_event('rmcommon.module.uninstalled', $module_log, $mod);
     
-    RMFunctions::create_toolbar();
+    //RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('modules.css', 'rmcommon');
 
 	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'), 'modules.php');
@@ -692,7 +692,7 @@ function module_update_now(){
     
     $module_log = RMEvents::get()->run_event('rmcommon.module.updated', $module_log, $module_log);
     
-    RMFunctions::create_toolbar();
+    //RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('modules.css', 'rmcommon');
     xoops_cp_header();
     
@@ -816,7 +816,7 @@ function load_modules_page(){
             <span class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
                 <?php _e('Version:','rmcommon'); ?> 
                 <?php if($mod->getInfo('rmnative')): ?>
-                    <?php echo RMUtilities::format_version($mod->getInfo('rmversion')); ?>
+                    <?php echo RMModules::format_module_version($mod->getInfo('rmversion')); ?>
                 <?php else: ?>
                     <?php echo $mod->getInfo('version'); ?>
                 <?php endif; ?><br />

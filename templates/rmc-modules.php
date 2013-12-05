@@ -1,4 +1,4 @@
-<h1 class="rmc_titles" xmlns="http://www.w3.org/1999/html"><?php _e('Modules Management','rmcommon'); ?></h1>
+<h1 class="cu-section-title" xmlns="http://www.w3.org/1999/html"><?php _e('Modules Management','rmcommon'); ?></h1>
 <script type="text/javascript">
     <!--
     var message = "<?php _e('Do you really want to uninstall selected module?','rmcommon'); ?>";
@@ -109,7 +109,7 @@
             <?php endif; ?>
             <td class="actions">
                 <?php if($mod['dirname']!='system'): ?>
-                    <a href="#" class="uninstall_button" title="<?php _e('Uninstall','rmcommon'); ?>">
+                    <a href="#" class="uninstall_button" title="<?php _e('Uninstall','rmcommon'); ?>" data-dir="<?php echo $mod['dirname']; ?>">
                         <img src="<?php echo RMCURL; ?>/themes/twop6/images/uninstall.png" alt="<?php _e('Uninstall','rmcommon'); ?>" />
                     </a>
                 <?php else: ?>

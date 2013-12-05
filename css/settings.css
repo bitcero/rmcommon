@@ -1,0 +1,16 @@
+.settings-item{
+    display: inline-block;
+    vertical-align: text-top;
+    padding: 10px;
+    width: 150px;
+    margin: 5px;
+    text-align: center;
+    background-color: #f7f7f7;
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.settings-item > span{
+    font-weight: bold;
+    display: block;
+    padding: 4px 0;
+}

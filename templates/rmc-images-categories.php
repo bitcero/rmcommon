@@ -1,9 +1,9 @@
-<h1 class="rmc_titles"><?php _e('Categories','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Categories','rmcommon'); ?></h1>
 
 <form name="frmimgcats" id="form-img-cats" method="post" action="images.php" class="form-inline">
-<div class="rmc_bulkactions">
+<div class="cu-bulk-actions">
 <?php echo $nav->render(); ?>
-<select name="action">
+<select name="action" class="form-control">
 	<option value=""><?php _e('Bulk Actions...','rmcommon'); ?></option>
 	<option value="deletecat"><?php _e('Delete','rmcommon'); ?></option>
 	<option value="closecat"><?php _e('Close Category','rmcommon'); ?></option>
@@ -11,7 +11,7 @@
 </select>
 <input type="submit" value="<?php _e('Apply','rmcommon'); ?>" />
 </div>
-<table class="outer" cellspacing="0" width="100%">
+<table class="table table-bordered" cellspacing="0" width="100%">
 	<tr>
 		<th width="20"><input type="checkbox" name="checkall" id="checkall" onclick="$('#form-img-cats').toggleCheckboxes(':not(#checkall)');" /></th>
 		<th align="left"><?php _e('Name','rmcommon'); ?></th>
@@ -60,7 +60,7 @@
 	</tr>
 	<?php endforeach; ?>
 </table>
-<div class="rmc_bulkactions">
+<div class="cu-bulk-actions">
 	<?php echo $nav->render(); ?>
 </div>
 <input type="hidden" name="token" id="token" value="<?php echo $xoopsSecurity->createToken(); ?>" />

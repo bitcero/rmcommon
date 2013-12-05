@@ -30,11 +30,20 @@ div#users-filter-options label:hover{
 	color: #FFF;
 }
 div#users-advanced-options{
-    padding: 2px;
+    padding: 10px;
     background: #f2f2f2;
     display: none;
     border: 1px solid #CCC;
     margin-top: 10px;
+}
+div#users-advanced-options table td{
+    vertical-align: top;
+    padding-left: 5px;
+}
+#users-advanced-options .exmdates_field,
+#users-advanced-options .inline{
+    max-width: 150px;
+    display: inline-block;
 }
 td.users_cell_groups{
 	color: #666;
@@ -51,17 +60,14 @@ div.users_navigation:last-child{
 	border-top: 1px dotted #CCC;
 }
 div.users_navigation div.exm_pages_navigation_container{
-	float: right;
 	border-left: 1px solid #CCC;
 	padding-left: 10px;
 }
 div.users_navigation div.users_nav_showing{
-	float: right;
 	padding: 5px 10px 5px 10px;
 	border-left: 1px solid #CCC;
 }
 div.users_navigation div.users_order_options{
-	float: right;
 	padding: 1px 10px 0 10px;
 	border-left: 1px solid #CCC;
 }

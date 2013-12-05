@@ -35,6 +35,13 @@ class RMPageNav
         $this->current_page = $current_page;
         $this->steps = $steps;
         RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
+
+        $total_pages = ceil($total_results / $items_page);
+        $current_page = $current_page > $total_pages ? $total_pages : $current_page;
+        $current_page = $current_page==0 ? 1: $current_page;
+
+        $start = 1;
+        $this->start = $items_page * $current_page - $items_page;
     }
     
     /**
@@ -123,7 +130,7 @@ class RMPageNav
 		
 		$last_element = $current_page*$items_page;
 		$last_element = $last_element>$total_results ? $total_results : $last_element;
-		$this->showing = sprintf(__('Showing <strong>%u</strong> to <strong>%u</strong> of <strong>%u</strong>.','rmcommon'), $first_element, $last_element, $total_results);
+		$this->showing = sprintf(__('Mostrando <strong>%u</strong> a <strong>%u</strong> de <strong>%u</strong> resultados.','rmcommon'), $first_element, $last_element, $total_results);
 		
 		if ($total_pages<=1) return;
 		

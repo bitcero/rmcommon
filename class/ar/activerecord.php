@@ -8,7 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-include RMCPATH . '/class/ar/exception.class.php';
+include RMCPATH . '/class/exception.class.php';
 include RMCPATH . '/class/ar/db.class.php';
 
 /**
@@ -73,9 +73,12 @@ abstract class RMActiveRecord
      * @param string $objects Object name related to database tables
      * @param string $owner Object (e.g. rmcommon, mywords, rmcommon_plugin)
      */
-    public function __construct( $objects, $owner = null ){
+    public function __construct( $objects = null, $owner = null ){
 
         $objects = trim( $objects );
+
+        $this->db = new RMdb();
+        $this->xdb = XoopsDatabaseFactory::getDatabaseConnection();
 
         if ( '' == $objects || null == $objects ){
             $this->add_error( __('No objects name has been provided!','rmcommon') );
@@ -86,8 +89,6 @@ abstract class RMActiveRecord
             $this->add_error( __('No owner has been specified!','rmcommon') );
             return false;
         }
-
-        $this->db = new RMdb();
 
         if ( in_array( $objects, $this->system_tables ) )
             $this->db->table = $objects;
@@ -138,12 +139,10 @@ abstract class RMActiveRecord
 
         if ( method_exists( $this, $method ) )
             return $this->$method( $value );
-        elseif ( isset( $this->_properties[$name] ) )
-            return $this->_properties[$name] = $value;
-        if(method_exists($this,'get'.$name))
+        elseif( method_exists( $this,'get_'.$name ) )
             throw new RMException( sprintf( __( 'Property "%s.%s" is read only.', 'rmcommon' ), get_class( $this ), $name ) );
         else
-            throw new RMException( sprintf( __( 'Property "%s.%s" is not defined.', 'rmcommon' ), get_class( $this ), $name ) );
+            $this->_properties[$name] = $value;
 
     }
 
@@ -169,7 +168,6 @@ abstract class RMActiveRecord
 
         foreach ( $assignments as $column => $title ){
 
-            if ( isset( $this->db->columns[$column] ) )
                 $this->_properties['columns'][$column]['title'] = $title;
 
         }
@@ -508,11 +506,11 @@ abstract class RMActiveRecord
      * @param int $error_number Optional error number
      * @param bool $trigger Trigger a PHP error
      */
-    private function add_error( $error_message, $error_number=0, $trigger = true ){
+    public function add_error( $error_message, $error_number=0, $trigger = true ){
         if($error_number>0)
-            $this->errors[$error_number] = $error_message;
+            $this->_properties['errors'][$error_number] = $error_message;
         else
-            $this->errors[] = $error_message;
+            $this->_properties['errors'][] = $error_message;
 
         if ( $trigger )
             trigger_error( $error_message, E_USER_WARNING );
@@ -526,19 +524,12 @@ abstract class RMActiveRecord
     public function get_errors($as_html = true){
 
         if(false == $as_html)
-            return $this->errors;
+            return $this->_properties['errors'];
 
-        $ret = '';
-        foreach($this->errors as $error){
-
-            $ret = $ret=='' ? $error : "<br> \n".$error;
-
-        }
-
-        return $error;
+        return implode( "<br>\n", $this->_properties['errors']);
     }
 
-    protected function rules(){}
+    protected function rules( $action = 'new' ){}
 
     /**
      * Save current model data with a new registry
@@ -547,17 +538,80 @@ abstract class RMActiveRecord
 
         $attributes = $this->attributes;
         $fields = array();
-        $rules = $this->rules();
+
+        /**
+         * Name to get post/get/put vars
+         */
+        $vars_container = get_class($this);
+
+        /**
+         * Determinamos si se trata de un objeto existente
+         * o un objeto nuevo en base a la clave principal.
+         * Si el contenedor de la variables cuenta con un
+         * índice nombrado igual que la clave principal entonces
+         * es un objeto existente, si no, se trata de un objeto
+         * nuevo.
+         * Importante: el valor del índice nombrado como la clave
+         * principal siempre debe ser numérico.
+         */
+        if ( isset( $vars_container[$this->db->primary_key] ) )
+            $action_type = 'update';
+        else
+            $action_type = 'new';
+
+        $this->data = RMHttpRequest::post( $vars_container, 'array', array() );
 
         foreach ( $this->columns as $column => $data ){
-            if ( $column == $this->db->primary_key )
+
+            /**
+             * Si se trata de un objeto nuevo evitamos la verificación
+             * de la clave principal.
+             */
+            if ( $column == $this->db->primary_key && $action_type == 'new' )
                 continue;
+
+            /**
+             * Verificamos la integridad de los datos proporcionados.
+             */
+            if ( !$this->verify_http_data( $column ) )
+                return false;
 
             $fields[$column] = isset( $rules[$column] ) ? $rules[$column]( $attributes ) : ( isset( $attributes[$column] ) ? $attributes[$column] : null );
 
         }
 
         return $this->db->database->queryF($this->db->getInsert( $fields ));
+
+    }
+
+    /**
+     * Permite comprobar que los datos que han sido proporcionados vía
+     * HTTP correspondan con los datos requridos por la base de datos
+     * para poder insertarlos adecuadamente.
+     *
+     * @param string $column <p>Nombre del campo</p>
+     * @return bool
+     */
+    private function verify_http_data( $column ){
+
+        $values = $this->data;
+        $columns = $this->columns;
+
+        if ( !isset( $columns[$column] ) )
+            return false;
+
+        if ( $columns[$column]['null'] != 'null' && !isset( $values[$column] ) ){
+
+            if ( $columns['default'] != '' )
+                $values[$column] = $columns[$column]['default'];
+            else {
+                $this->add_error( sprintf(__('El campo "%s" no puede estar vacío.', 'rmcommon'), $columns[$column]['title'] ) );
+                return false;
+            }
+
+        }
+
+        return true;
 
     }
 

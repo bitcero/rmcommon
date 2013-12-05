@@ -16,10 +16,6 @@
 trait RMModuleAjax
 {
 
-    public function __construct(){
-        $GLOBALS['rmTpl']->add_script( 'ajax-interface.js', 'rmcommon', array( 'directory' => 'include' ) );
-    }
-
     /**
      * Prepares the system for an AJAX response.
      * This function deactivate the XoopsLogger rendering
@@ -52,13 +48,14 @@ trait RMModuleAjax
      * @param int $token <p>If this parameter is set to 1, then a security token will be sent to client.</p>
      * @param array $data <p>Array with data to send. Each array index must correspond to a parameter to send to client.</p>
      */
-    public function ajax_response($message, $level = 0, $token = 1, $data){
+    public function ajax_response($message, $level = 0, $token = 1, $data = array()){
         global $xoopsSecurity;
 
-        if($token)
-            $data['token'] = $xoopsSecurity->createToken();
+        if(1 == $token)
+            $data['token'] = $xoopsSecurity->createToken(0, 'SBTOKEN');
 
         $data['type'] = 1 == $level ? 'error' : 'success';
+        $data['message'] = $message;
         echo json_encode($data);
         die();
 

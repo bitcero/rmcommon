@@ -9,7 +9,7 @@
 // --------------------------------------------------------------
 
 include '../../../mainfile.php';
-include_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';
+//include_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';
 
 // Deactivate the logger
 error_reporting(0);

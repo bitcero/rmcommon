@@ -1,17 +1,29 @@
-.form-container{
-	margin: 0 60px;
-}
-.form-container label.control-label{
-	font-weight: bold;
-}
 .single-size{
 	border: 1px solid #ddd;
-	border-radius: 3px;
+	border-radius: 2px;
 	display: inline-block;
 	width: 250px;
 	padding: 15px;
 	margin: 0 5px 5px 0;
-	color: #666;
+	color: #333;
+    background-color: #f7f7f7;
+    position: relative;
+}
+.single-size .close{
+    font-size: 12px;
+    position: absolute;
+    top: 5px; right: 5px;
+    background: #FFF;
+    padding: 2px 4px;
+    display: block;
+    border-radius: 100%;
+    color: #970000;
+}
+.single-size .close:hover{
+    opacity: 1;
+    background: #970000;
+    color: #FFF;
+    text-shadow: none;
 }
 .form-container .form-actions{
 	padding: 10px!important;
@@ -29,6 +41,10 @@
 	padding: 15px 0 0 0;
 	border-top: 1px solid #eee;
 	margin-top: 20px;
+}
+#filesize, #sizeunit{
+    width: 48%;
+    display: inline-block;
 }
 
 a.delsize{
@@ -67,6 +83,10 @@ div.select_image_cat{
 	margin: 0 0 20px 0;
 	font-weight: bold;
 	margin-bottom: 10px;
+    padding: 5px 0;
+}
+.select_image_cat .form-control{
+    max-width: 200px;
 }
 #upload-errors{
 	padding: 10px;

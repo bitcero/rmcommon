@@ -38,7 +38,7 @@ function rmc_available_mods(){
 			<span class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
 				<?php _e('Version:','rmcommon'); ?> 
 				<?php if($mod->getInfo('rmnative')): ?>
-					<?php echo RMUtilities::format_version($mod->getInfo('rmversion')); ?>
+					<?php echo RMModules::format_module_version($mod->getInfo('rmversion')); ?>
 				<?php else: ?>
 					<?php echo $mod->getInfo('version'); ?>
 				<?php endif; ?><br />

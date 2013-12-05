@@ -110,6 +110,7 @@ if ($action==''){
     
     if (!$xoopsSecurity->check()){
         _e('Sorry, unauthorized operation!','rmcommon');
+        echo '<script type="text/javascript">window.location.href="tiny-images.php";</script>';
         die();
     }
     
@@ -145,7 +146,7 @@ if ($action==''){
     
     // Get categories
     $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_images")." ".(!$cat->isNew() ? "WHERE cat='".$cat->id()."'" : '')." ORDER BY id_img DESC LIMIT $start,$limit";
-    
+
     $result = $db->query($sql);
     $images = array();
     $categories = array();
@@ -164,7 +165,7 @@ if ($action==''){
             }
         }
     }
-    
+
     $mimes = include(XOOPS_ROOT_PATH.'/include/mimetypes.inc.php');
 
     while($row = $db->fetchArray($result)){
@@ -206,7 +207,7 @@ if ($action==''){
         
         $images[] = RMEvents::get()->run_event('rmcommon.loading.single.editorimgs', $ret, rmc_server_var($_REQUEST, 'url', ''));
     }
-    
+
     include RMTemplate::get()->get_template('rmc-images-list-editor.php','module','rmcommon');
     
 }

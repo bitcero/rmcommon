@@ -176,11 +176,15 @@ function show_users(){
     $form = new RMForm('', '', '');
     // Date Field
     $login1 = new RMFormDate('','login1', '');
+    $login1->addClass('form-control');
     $login2 = new RMFormDate('','login2', '') ;
+    $login2->addClass('form-control');
 
     // Registered Field
     $register1 = new RMFormDate('','registered1', '');
+    $register1->addClass('form-control');
     $register2 = new RMFormDate('','registered2', '');
+    $register2->addClass('form-control');
 
 	RMBreadCrumb::get()->add_crumb(__('Users Management','rmcommon'));
 	$rmTpl->assign('xoops_pagetitle', __('Users Management','rmcommon'));
@@ -190,28 +194,7 @@ function show_users(){
     // Show the theme
     xoops_cp_header();
 
-    $ar = new RMActiveRecord('users');
-    $ar->setTitles(array(
-        'uid'   => 'ID',
-        'name'  => 'Name',
-        'user_regdate'  => 'Registered on',
-    ));
-    $ar->setRelations(array(
-        'groups'    => array(
-            'relations-table'   => 'groups_users_link',
-            'foreign-table'     => 'groups',
-            'foreign-keys'      => array('groups_users_link' => 'uid', 'groups' => 'groupid'),
-            'use-keys'          => array('groupid','name'),
-            'method'            => 'CASCADE'
-        ),
-    ));
-    $ar->groupby = "uid";
-    $ar->setExcludedFields(array(
-        'user_icq', 'user_from', 'user_sig', 'user_viewemail', 'actkey', 'user_aim', 'user_yim',
-        'attachsig', 'rank', 'level', 'theme', 'timezone_offset', 'umode', 'uorder', 'notify_method',
-        'notify_mode', 'user_occ', 'bio', 'user_intrest', 'user_msnm'
-    ));
-    echo $ar->show(); die();
+
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();            
             
@@ -387,7 +370,7 @@ function save_data($edit = false){
     $user->setVar('uname', $uname);
     $user->setVar('display_name', $display_name);
     $user->setVar('email', $email);
-    if (!$edit) $user->assignVar('user_regdate', time());
+    if (!$edit) $user->assignVar('registered', time());
     if ($password!='') $user->assignVar('pass', md5($password));
     $user->setVar('level', 1);
     $user->setVar('timezone_offset', $timezone);

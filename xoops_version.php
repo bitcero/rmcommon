@@ -34,7 +34,7 @@ $modversion['icon16'] = "images/rmc16.png";
 $modversion['icon24'] = 'images/rmc24.png';
 $modversion['icon48'] = 'images/icon48.png';
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>1,'revision'=>90,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>5,'stage'=>-2,'name'=>'Common Utilities');
 $modversion['onUninstall'] = 'include/install.php';
 $modversion['onInstall'] = 'include/install.php';
 $modversion['onUpdate'] = 'include/install.php';
@@ -67,6 +67,16 @@ $modversion['templates'][1]['file'] = 'rmc-comments-display.html';
 $modversion['templates'][1]['description'] = 'Comments list';
 $modversion['templates'][2]['file'] = 'rmc-comments-form.html';
 $modversion['templates'][2]['description'] = 'Shows the comments form';
+
+// URL Rewriting
+$modversion['config'][] = array(
+    'name'          => 'permalinks',
+    'title'         => __( 'Activar redirección de URLs', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => '0',
+);
 
 /**
 * Language

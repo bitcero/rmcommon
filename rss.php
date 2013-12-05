@@ -53,7 +53,7 @@ function show_rss_content(){
 	include XOOPS_ROOT_PATH.'/modules/'.$module.'/rss.php';
     
     if (!isset($rss_channel['image'])){
-        $rmc_config = RMFunctions::configs();
+        $rmc_config = RMSettings::cu_settings();
         $rss_channel['image']['url'] = $rmc_config['rssimage'];
         $dimention = getimagesize(XOOPS_ROOT_PATH . '/images/logo.png');
         $rss_channel['image']['width'] = ($dimention[0] > 144) ? 144 : $dimention[0];

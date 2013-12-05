@@ -40,7 +40,7 @@ class ActiveSelect
 
     public function render(){
 
-        $input = '<select name="' . $this->name . '" id="' . $this->element . '"';
+        $input = '<select name="' . $this->name . '" id="' . $this->id . '"';
         $class = $this->required ? 'required' : '';
         $selected = '';
         $options = array();

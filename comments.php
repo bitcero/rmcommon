@@ -70,7 +70,7 @@ function show_comments(){
                 'name'  => $user->getVar('uname'),
                 'email' => $user->getVar('email'),
                 'posts' => $user->getVar('posts'),
-                'avatar'=> $user->getVar('user_avatar')!='' && $user->getVar('user_avatar')!='blank.gif' ? XOOPS_UPLOAD_URL.'/'.$user->getVar('user_avatar') : RMCURL.'/images/avatar.gif',
+                'avatar'=> $user->getVar('image')!='' && $user->getVar('image')!='blank.gif' ? XOOPS_UPLOAD_URL.'/'.$user->getVar('image') : RMCURL.'/images/avatar.gif',
                 'rank'  => $user->rank(),
             );
             
@@ -127,7 +127,7 @@ function show_comments(){
 	$rmTpl->assign('xoops_pagetitle', __('Comments Manager','rmcommon'));
 
     xoops_cp_header();
-    RMFunctions::create_toolbar();
+    //RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('comms-admin.css', 'rmcommon');
     RMTemplate::get()->add_style('general.css', 'rmcommon');
     RMTemplate::get()->add_script('include/js/jquery.checkboxes.js');
@@ -292,7 +292,7 @@ function edit_comment(){
 	$ele->addButton('cancel', __('Cancel','rmcommon'), 'button', 'onclick="history.go(-1);"');
 	$form->addElement($ele);
 	
-    RMFunctions::create_toolbar();
+    //RMFunctions::create_toolbar();
 
 	RMBreadCrumb::get()->add_crumb(__('Comments Manager','rmcommon'),'comments.php');
 	RMBreadCrumb::get()->add_crumb(__('Edit Comment','rmcommon'));

@@ -41,14 +41,23 @@
         ?>
         <title><?php if($this->get_var('xoops_pagetitle')!=''): ?><?php echo $this->get_var('xoops_pagetitle'); ?> - <?php endif; ?><?php echo isset($xoopsModule) ? $xoopsModule->getInfo('name').' - ' : ''; ?><?php echo $xoopsConfig['sitename']; ?></title>
     </head>
-    <body>
+    <body<?php if($this->get_toolbar()): ?> class="xo-body-toolbar"<?php endif; ?>>
         <!-- Menu bar -->
-        <div class="navbar navbar-inverse navbar-fixed-top" id="xo-menubar">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <ul class="nav">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="xo-menubar">
 
-	                    <a class="brand" href="<?php echo RMCURL; ?>"><img src="<?php echo TWOP6_URL; ?>/images/logo.png" alt="<?php _e('XOOPS','twop6'); ?>" /></a>
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".twop6-navbar-toolbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="<?php echo RMCURL; ?>"><img src="<?php echo TWOP6_URL; ?>/images/logo.png" alt="<?php _e('XOOPS','twop6'); ?>" /></a>
+            </div>
+
+            <div class="collapse navbar-collapse twop6-navbar-toolbar">
+
+                    <ul class="nav navbar-nav">
                         
                         <li class="dropdown<?php if($xoopsModule->dirname()=='rmcommon'): ?> active<?php endif; ?>">
                             <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
@@ -198,11 +207,12 @@
 	                        </ul>
                         </li>
                     </ul>
-                    <form class="navbar-search pull-left" action="">
-                        <input class="search-query span2" type="text" placeholder="<?php _e('Go to...','twop6'); ?>" />
-                    </form>
                     
-                    <ul class="nav pull-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="xo-upd-notifier">
+                            <!-- Updates notifier -->
+                            <a href="<?php echo RMCURL; ?>/updates.php"><?php echo sprintf(__('%s updates available','twop6'), '<span class="badge badge-warning">%s</span>'); ?></a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <i class="xo-icon xicon-ray"></i>
@@ -277,18 +287,26 @@
                         </li>
                     </ul>
 
-                    <!-- Updates notifier -->
-                    <a href="<?php echo RMCURL; ?>/updates.php" class="pull-right xo-upd-notifier"><?php echo sprintf(__('%s updates available','twop6'), '<span class="badge badge-warning">%s</span>'); ?></a>
-                </div>
             </div>
-        </div>
+        </nav>
         <!-- End menu bar //-->
         
         <!-- Toolbar with menus -->
 	       <div class="navbar navbar-fixed-top" id="xo-toolbar">
-	            <div class="navbar-inner xo-bluebar">
-	                <div class="container-fluid">
-	                    <a href="<?php echo XOOPS_URL; ?>/modules/<?php echo $xoopsModule->dirname(); ?>/<?php echo $xoopsModule->getInfo('adminindex'); ?>" class="brand"><?php echo $xoopsModule->name(); ?></a>
+
+               <div class="navbar-header">
+                   <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".twop6-toolbar-toolbar">
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                   </button>
+
+                   <a class="navbar-brand visible-xs" href="#"><?php _e('Menu', 'rmcommon'); ?></a>
+
+               </div>
+
+               <div class="collapse navbar-collapse xo-bluebar twop6-toolbar-toolbar">
+
 	                    <?php
 	                        if($xoopsModule->dirname()=='rmcommon')
 	                            $menus =& $rmcommon_menu;
@@ -297,9 +315,8 @@
 	                        else
 	                            $menus = $this->get_menus();
 	                    ?>
-	                    <ul class="nav">
+	                    <ul class="nav navbar-nav">
 	                        <?php foreach($menus as $menu): ?>
-	                        <li class="divider-vertical"></li>
 	                        <li<?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown"<?php endif; ?>>
 	                            <a href="<?php echo $menu['link']; ?>"<?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"<?php endif; ?>>
 	                                <?php echo $xoFunc->getIcon($menu); ?>
@@ -332,18 +349,46 @@
 	                        </li>
 	                        <?php endforeach; ?>
 	                    </ul>
-	                </div>
 	            </div>
 	        </div>
         <!-- End toolbar with menus //-->
+
+        <!-- rmcommon toolbar -->
+        <?php if($this->get_toolbar()): ?>
+            <nav class="navbar" id="rmc-toolbar">
+
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".twop6-toolbar-icons">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs" href="#"><?php _e('Toolbar', 'rmcommon'); ?></a>
+                </div>
+
+                <div class="navbar-collapse collapse twop6-toolbar-icons">
+                    <ul class="nav navbar-nav">
+                        <?php foreach($this->get_toolbar() as $menu): ?>
+                            <li<?php echo $menu['location']==RMCSUBLOCATION ? ' class = "active"' : ($menu['location']==RMCLOCATION ? ' class="active"' : ''); ?>>
+                                <a href="<?php echo $menu['link']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
+                                    <span><?php if($menu['icon']): ?><img src="<?php echo $menu['icon']; ?>"><?php endif; ?></span>
+                                    <?php echo $menu['title']; ?>
+                                </a>
+                            </li>
+                            <li class="divider-vertical"></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </nav>
+        <?php endif; ?>
+        <!-- End rmcommon toolbar //-->
 
 		<?php echo RMBreadCrumb::get()->render(); ?>
         
         <!-- System messages -->
         <?php foreach($rmc_messages as $message): ?>
-        <div class="container-fluid">
+        <div class="container">
             <div class="alert <?php echo $tp6Alerts[$message['level']]; ?>"<?php if($message['level']>4 && $message['icon']!=''): ?> style="background-image: url(<?php echo $message['icon']; ?>);"<?php endif; ?>>
-	            <?php echo $message['level']==RMMSG_WARN ? '<h4>'.__('Warning!','rmcommon').'</h4>' : ''; ?>
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <?php echo html_entity_decode($message['text']); ?>
             </div>
@@ -352,10 +397,10 @@
         <!-- End system messages //-->
         
         <!-- Content -->
-        <div class="container-fluid" id="xo-content">
-            <div class="row-fluid">
+        <div class="container" id="xo-content">
+            <div class="row">
                 <?php if($left_widgets): ?>
-                <aside class="span2">
+                <aside class="col-md-4 col-lg-2">
                     <?php foreach($left_widgets as $widget): ?>
                     <div class="xo-widget">
                         <h3 class="xo-blackbar">
@@ -368,32 +413,15 @@
                 </aside>
                 <?php endif; ?>
                 
-                <div class="span<?php echo $tp6Span; ?>">
-                    <div id="xo-contents"<?php if($this->get_toolbar()): ?> class="xo-contents-toolbar"<?php endif; ?>>
-	                    <!-- rmcommon toolbar -->
-				        <?php if($this->get_toolbar()): ?>
-						<nav class="navbar" id="rmc-toolbar">
-							<div class="navbar-inner">
-								<ul class="nav">
-								<?php foreach($this->get_toolbar() as $menu): ?>
-									<li<?php echo $menu['location']==RMCSUBLOCATION ? ' class = "active"' : ($menu['location']==RMCLOCATION ? ' class="active"' : ''); ?>>
-										<a href="<?php echo $menu['link']; ?>" title="<?php echo $menu['title']; ?>" rel="tooltip">
-											<?php if($menu['icon']): ?><i class="xo-icon" style="background-image: url(<?php echo $menu['icon']; ?>);"></i><?php endif; ?>
-										</a>
-									</li>
-									<li class="divider-vertical"></li>
-								<?php endforeach; ?>
-								</ul>
-							</div>
-						</nav>
-				        <?php endif; ?>
-				        <!-- End rmcommon toolbar //-->
+                <div class="<?php echo $xoFunc->calculate_cols($left_widgets, $right_widgets); ?>">
+                    <div id="xo-contents">
+
                         <?php echo $content; ?>
                     </div>
                 </div>
                 
                 <?php if($right_widgets): ?>
-                <aside class="span3">
+                <aside class="col-md-4 col-lg-3">
                     <?php foreach($right_widgets as $widget): ?>
                     <?php if(!isset($widget['title']) && !isset($widget['content'])) continue; ?>
                     <div class="xo-widget">
@@ -411,14 +439,14 @@
         <!-- End content //-->
         
         <!-- Footer -->
-        <div class="container-fluid xo-footer">
+        <div class="container xo-footer">
             <hr>
-            <footer class="row-fluid">
-                <div class="span6">
+            <footer class="row">
+                <div class="col-md-6 col-lg-6">
                     <?php echo sprintf(__('Powered by %s.','twop6'), '<a href="http://www.xoops.org">'.XOOPS_VERSION.'</a>'); ?>
                     <?php echo sprintf(__('Reloaded by %s.','twop6'), '<a href="http://www.xoopsmexico.net">Common Utilities '.RMCVERSION.'</a>'); ?>
                 </div>
-                <div class="span6 xo-foot-links">
+                <div class="col-md-6 col-lg-6 xo-foot-links">
                     <ul>
                         <li><a href="http://www.xoops.org">XOOPS</a></li>
                         <li><a href="http://www.xoopsmexico.net">Xoops Mexico</a></li>
@@ -431,7 +459,7 @@
         <!-- End footer //-->
         
         <?php if($xoopsConfig['debug_mode']==1): ?>
-        <div class="container-fluid">
+        <div class="container">
             <div class="well"><!--{xo-logger-output}--></div>
         </div>
         <?php endif; ?>

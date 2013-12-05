@@ -11,7 +11,8 @@ $(document).ready(function(){
     
     $("a.uninstall_button").click(function(){
 
-        var dir = $(this).parent().parent().attr('id').replace("module-",'');
+        var dir = $(this).data('dir');
+        alert(dir);
         if (dir=='system') return;
 
         if (!confirm(message)) return;

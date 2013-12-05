@@ -15,7 +15,7 @@ class ActiveButton
 
     public function render(){
 
-        $button = '<button id="' . $this->element . '" ';
+        $button = '<button id="' . $this->id . '" ';
         $class = '';
         $type = 'button';
         $caption = __('Button','rmcommon');

@@ -363,7 +363,7 @@ function save_category($edit = 0){
         redirectMsg($q, __('Please specify a category name','rmcommon'), 1);
         die();
     }
-    
+
     if (empty($read)) $read = array(0);
     if (empty($write)) $write = array(0);
     
@@ -374,19 +374,19 @@ function save_category($edit = 0){
         if ($size['type']!='none' && $size['width']<=0 && $size['height']<=0) continue;
         $schecked[] = $size;
     }
-    
+
     if (empty($schecked)){
         redirectMsg($q, __('You must create one size for this category at least!','rmcommon'), 1);
         die();
     }
-    
+
     // Check if there are a category with same name
     $num = RMFunctions::get_num_records('mod_rmcommon_images_categories', "name='$name'".($edit ? " AND id_cat<>'".$cat->id()."'" : ''));
     if($num>0){
 		redirectMsg($q, __('There is already a category with the same name!','rmcommon'), 1);
 		die();
     }
-    
+
     $cat->setVar('name', $name);
     $cat->setVar('status', $status);
     $cat->setVar('groups', array('write'=>$write,'read'=>$read));
@@ -395,9 +395,9 @@ function save_category($edit = 0){
     $cat->setVar('sizeunit', $sizeunit<=0 ? '1024' : $sizeunit);
     
     if ($cat->save()){
-        redirectMsg('images.php?action=showcats', __($edit ? 'Category updated successfully!' : 'Category saved successfully!','rmcommon'), 0);
+        RMUris::redirect_with_message(__($edit ? 'Category updated successfully!' : 'Category saved successfully!','rmcommon'), 'images.php?action=showcats', RMMSG_SUCCESS);
     } else {
-        redirectMsg($q, __('There were some erros while trying to save this category.','rmcommon').'<br />'.$cat->errors(), 1);
+        RMUris::redirect_with_message(__('There were some erros while trying to save this category.','rmcommon').'<br />'.$cat->errors(), $q, RMMSG_ERROR);
     }
     
 }
@@ -459,7 +459,7 @@ function resize_images(){
     if ($id<=0){
         send_error(__('Invalid image!','rmcommon'));
     }
-    
+
     $params = TextCleaner::decrypt($params);
     $data = explode('|', $params);
     
@@ -470,11 +470,11 @@ function resize_images(){
     if ($data[1]!=RMCURL.'/images.php'){
         send_error(__('Unauthorized!','rmcommon'));
     }
-    
+
     if (!$xoopsSecurity->check(false, $data[2])){
         send_error(__('Unauthorized!','rmcommon'));
     }
-    
+
     $image = new RMImage($id);
     if ($image->isNew()){
         send_error(__('Image not found!','rmcommon'));
@@ -485,7 +485,7 @@ function resize_images(){
     if (!$cat->user_allowed_toupload($xoopsUser)){
         send_error(__('Unauthorized','rmcommon'));
     }
-    
+
     $sizes = $cat->getVar('sizes');
     $updir = XOOPS_UPLOAD_PATH.'/'.date('Y', $image->getVar('date')).'/'.date('m',time());
     $upurl = XOOPS_UPLOAD_URL.'/'.date('Y', $image->getVar('date')).'/'.date('m',time());;
@@ -527,29 +527,28 @@ function resize_images(){
                 $size['height'] = $currentHeight;
             
         }
-        
-        if($resize){
-        switch($size['type']){
-            case 'crop':
-                $sizer->resizeAndCrop($size['width'], $size['height']);
-                break;
-            default:
-                if ($size['width']<=0 || $size['height']<=0){
-                    $sizer->resizeWidth($size['width']);
-                } else {
-                    $sizer->resizeWidthOrHeight($size['width'], $size['height']);
-                }                
-                break;
-        }
-        }
 
+        if($resize){
+            switch($size['type']){
+                case 'crop':
+                    $sizer->resizeAndCrop($size['width'], $size['height']);
+                    break;
+                default:
+                    if ($size['width']<=0 || $size['height']<=0){
+                        $sizer->resizeWidth($size['width']);
+                    } else {
+                        $sizer->resizeWidthOrHeight($size['width'], $size['height']);
+                    }
+                    break;
+            }
+        }
         if($size['width']<=$width || $width==0){
             $width = $size['width'];
             $tfile = str_replace(XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $name);
         }
         
     }
-    
+
     $ret['message'] = sprintf(__('%s done!', 'rmcommon'), $image->getVar('file'));
     $ret['done'] = 1;
     $ret['file'] = $tfile;

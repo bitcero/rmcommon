@@ -51,7 +51,7 @@ function insert_block(){
     if($mod=='' || $id=='')
         response(__('The block specified seems to be invalid. Please try again.','rmcommon'), array(), 1, 0);
 
-    $module = RMFunctions::load_module($mod);
+    $module = RMModules::load_module($mod);
     if(!$module)
         response(__('The specified module does not exists!','rmcommon'), array(), 1, 0);
 

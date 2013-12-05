@@ -18,18 +18,38 @@ class RMUser extends RMObject
         $this->_dbtable = $this->db->prefix("users");
         $this->setNew();
         $this->initVarsFromTable();
-        
-        if ($this->loadValues($id)){
+
+        // Customers data
+        $this->initVar( 'id_user', 'int' );
+        $this->initVar( 'email2', 'varchar', '', 100 );
+        $this->initVar( 'homephone', 'varchar', '', 20 );
+        $this->initVar( 'cellphone', 'varchar', '', 20 );
+        $this->initVar( 'state', 'varchar', '', 30 );
+        $this->initVar( 'city', 'varchar', '', 50 );
+        $this->initVar( 'address', 'text', '' );
+        $this->initVar( 'comments', 'text' );
+        $this->initVar( 'commlevel', 'varchar', 'default' );
+
+        if ($id != '' && $this->loadValues($id))
             $this->unsetNew();
-            return;
+        elseif ($id!='') {
+            $this->primary = 'uname';
+            if($this->loadValues($id))
+                $this->unsetNew ();
+            $this->primary = 'uid';
         }
-        
-        $this->primary = 'uname';
-        if($this->loadValues($id))
-            $this->unsetNew ();
-        
-        $this->primary = 'uid';
-        
+
+        // Si es un cliente, cargamos los datos
+        if ( $this->getVar("type") == 'user' || $this->isNew() )
+            return;
+
+        $sql = "SELECT * FROM " . $this->db->prefix("mod_customers_data") . " WHERE id_user=" . $this->id();
+        $result = $this->db->query( $sql );
+
+        while ( $row = $this->db->fetchArray( $result ) ){
+            $this->assignVars( $row );
+        }
+
     }
     
     function setGroups($groupsArr){
@@ -72,15 +92,16 @@ class RMUser extends RMObject
     
     function save(){
         $ret = true;
-	/**
+        $status = $this->isNew();
+	    /**
         * Guardmaos los datos del usuarios
         */
-	if ($this->isNew()){
-            $ret = $this->saveToTable();
-	} else {
-            $ret = $this->updateTable();
-	}
-	/**
+        if ($this->isNew()){
+                $ret = $this->saveToTable();
+        } else {
+                $ret = $this->updateTable();
+        }
+	    /**
         * Si ocurrió un error al guardar los datos
         * entonces salimos del método. No se pueden
         * guardar los grupos hasta que esto se haya realizado
@@ -102,9 +123,51 @@ class RMUser extends RMObject
 
             $this->db->queryF($sql);
         }
+
+        // Datos de cliente
+        if ( $this->getVar('type') == 'user' )
+            return $ret;
+
+        $sql = "SELECT COUNT(*) FROM " . $this->db->prefix("mod_customers_data") . " WHERE id_user = " . $this->id();
+        list( $num ) = $this->db->fetchRow( $this->db->query( $sql ) );
+
+        // El usuario ya existe
+        if ( $num > 0 )
+            $sql = "UPDATE " . $this->db->prefix("mod_customers_data") . " SET
+                    email2='". $this->getVar('email2')."',
+                    homephone='" . $this->getVar('homephone') . "',
+                    cellphone='" . $this->getVar('cellphone') . "',
+                    state='" . $this->getVar('state') . "',
+                    city='" . $this->getVar('city') . "',
+                    address='" . $this->getVar('address', 'e') . "',
+                    `comments`='" . $this->getVar('comments', 'e') . "',
+                    commlevel='" . $this->getVar('commlevel') . "'
+                    WHERE id_user = " . $this->id();
+        else
+            $sql = "INSERT INTO " . $this->db->prefix("mod_customers_data") . " (`id_user`,`email2`,`homephone`,`cellphone`,`state`,`city`,`address`,`individual`,`comments`,`commlevel`)
+                    VALUES ('" . $this->id() . "', '" . $this->getVar('RFC') . "',
+                    '" . $this->getVar('email2') . "',
+                    '" . $this->getVar('homephone') . "',
+                    '" . $this->getVar('cellphone') . "',
+                    '" . $this->getVar('state') . "',
+                    '" . $this->getVar('city') . "',
+                    '" . $this->getVar('address', 'e') . "',
+                    '" . $this->getVar("comments",'e') ."',
+                    '" . $this->getVar('commlevel') . "')";
+
+        $ret = $this->db->queryF( $sql );
+
+        if( !$ret )
+            $this->addError( $this->db->error() );
             
         return $ret;
 		
+    }
+
+    public function delete(){
+
+        $this->deleteFromTable();
+
     }
     
 }

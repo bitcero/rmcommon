@@ -78,7 +78,7 @@ function show_rm_plugins(){
 
 	$rmTpl->assign('xoops_pagetitle', __('Plugins Manager','rmcommon'));
 	
-	RMFunctions::create_toolbar();
+	//RMFunctions::create_toolbar();
 	xoops_cp_header();
 	
 	include RMTemplate::get()->get_template('rmc-plugins.php', 'module', 'rmcommon');
@@ -479,7 +479,7 @@ function configure_rm_plugin(){
     // Other components can add items to database
     $form = RMEvents::get()->run_event("rmcommon.settings.form", $form, $plugin);
     
-    RMFunctions::create_toolbar();
+    //RMFunctions::create_toolbar();
 
 	RMBreadCrumb::get()->add_crumb(__('Plugins Manager','rmcommon'), 'plugins.php');
 	RMBreadCrumb::get()->add_crumb(__('Configure Plugin ','rmcommon'));

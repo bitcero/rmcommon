@@ -18,23 +18,12 @@ table.table_form{
 .cell_fields{
 	margin: 0 0 20px 0;
 }
-.cell_fields td{
+.cell_fields > td{
 	padding: 5px 5px 5px 0;
 	vertical-align: top;
 }
-.cell_fields td:last-child{
+.cell_fields > td:last-child{
 	padding-left: 10px;
-}
-.inputForm, .cell_fields textarea.inputForm, select.inputForm{
-	width: 55%;
-	margin: 2px 0 0 0;
-	font-size: 1.1em;
-    display: block;
-}
-input[type='text'].inputBig{
-    font-size: 1.8em;
-    padding: 3px 5px;
-    font-family: Georgia, "Times New Roman", times, serif;
 }
 .cell_fields span.descriptions{
 	display: block;
@@ -71,37 +60,55 @@ td h2.form_subtitle{
 }
 
 /* USERS FIELD */
-div.form_users_selected_list{
-	float: right;
-	width: 150px;
-	border: 1px solid #CCC;
-	background: #f2f2f2;
-	padding-bottom: 5px;
+.users-form-selector{
+    overflow-y: hidden!important;
 }
-div.form_users_selected_list div.form_users_selected_title{
+.users-form-selector .pagination{
+    margin: 5px 0;
+}
+.form-users-options{
+    background: #f2f2f2;
+    margin: -15px -5px 15px -5px;
+    padding: 10px 0 0 0;
+    font-size: 0.9em;
+    border-bottom: 1px solid #ddd;
+}
+.form-users-options .form-group{
+    margin-bottom: 5px;
+}
+.form-users-options .form-control{
+    padding: 2px 6px;
+    height: 26px;
+}
+.form-users-selected-list{
+    font-size: 0.9em;
+    border-right: 1px solid #ddd;
+}
+div.form-users-selected-list div.form_users_selected_title{
 	color: #333;
-	border-bottom: 1px dotted #CCC;
+	border-bottom: 1px dotted #ddd;
 	padding-bottom: 5px;
-	background: #ebebeb;
 	padding: 2px;
 	text-align: center;
 }
-div.form_users_selected_list div.form_users_selected_title strong{
+div.form-users-selected-list div.form_users_selected_title strong{
 	color: #FF3300;
 }
-div.form_users_selected_list ul{
+div.form-users-selected-list ul{
 	list-style: none;
 	padding: 3px;
 	margin: 5px 0;
 }
-div.form_users_selected_list ul li{
+div.form-users-selected-list ul li{
 	list-style: none;
 	color: #333;
 	padding: 2px 0;
 	cursor: pointer;
 }
-div.form_users_selected_list ul li label{
+div.form-users-selected-list ul li label{
 	cursor: pointer;
+    font-weight: normal;
+    color: #666;
 }
 tr.form_users_list td label, tr.form_users_list td span{
 	cursor: pointer;
@@ -123,17 +130,24 @@ div.form_users_container ul{
 }
 div.form_users_container ul li{
 	list-style: none;
-	float: left;
-	padding: 2px;
+	padding: 4px;
 	margin: 0 2px 2px 0;
-	border: 1px dotted #ebebeb;
+	border: 1px dotted rgba(255,255,255,0);
+    border-radius: 2px;
 	font-size: 0.9em;
 	color: #666;
+    transition: all ease 250ms;
+    -moz-transition: all ease 250ms;
+    -webkit-transition: all ease 250ms;
+    display: inline-block;
 }
 div.form_users_container ul li:hover{
-	border: 1px solid #CCC;
-	background: #f2f2f2;
-	color: #333;
+	background: rgba(0,0,0,0.05);
+	color: #222;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+div.form_users_container ul li input{
+
 }
 div.form_users_container a{
 	float: right;
@@ -150,7 +164,6 @@ div.form_users_container a:hover{
 	background-position: right 5px;
 }
 div.form_users_container ul li label{
-	overflow: hidden;
 	display: block;
 	margin: 0;
 }

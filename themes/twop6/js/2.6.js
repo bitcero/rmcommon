@@ -23,20 +23,7 @@ $(document).ready(function(){
     $("table.outer").addClass("table").addClass("table-hover").addClass('table-bordered');
 
     $("#xo-contents").css('min-height', $(window).height()-290+'px');
-    $("#xo-menubar .search-query").typeahead({
-        items: 10,
-        updater: function(item){
-            for(i=0;i<sObject.names.length;i++){
-                if(sObject.names[i]==item){
-                    window.location.href = sObject.urls[i];
-                    return;
-                }
-            }
-            
-        },
-        source: sObject.names
-    });
-    
+
     // Modules chooser
     $("#xo-showmodules").click(function(){
         var html = '<div id="xo-chooser-blocker"></div>';

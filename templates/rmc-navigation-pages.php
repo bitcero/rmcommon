@@ -1,6 +1,6 @@
-<div class="pagination">
-    <ul>
-        <?php if($caption): ?><span class="pages_caption"><?php _e('Pages:','rmcommon'); ?></span><?php endif; ?>
+<div class="pagination-container">
+    <ul class="pagination">
+        <?php if($caption): ?><span class="pages_caption"><?php _e('Páginas:','rmcommon'); ?></span><?php endif; ?>
         <?php if($total_pages>$steps && $current_page>$steps-1): ?>
             <li><a href="<?php echo str_replace('{PAGE_NUM}', 1, $url); ?>" title="<?php _e('First Page','rmcommon'); ?>"><?php _e('First','twop6'); ?></a></li>
         <?php endif; ?>

@@ -64,7 +64,7 @@ class RMFormLanguageField extends RMFormElement
             
         }
 		if ($this->type){
-			$rtn = '<ul class="rmoptions_container">';
+			$rtn = '<div class="'.($this->multi ? 'checkbox' : 'radio').'"><ul class="rmoptions_container">';
 			$i = 1;
 			foreach ($langs as $k){
 				if ($this->multi){
@@ -74,16 +74,16 @@ class RMFormLanguageField extends RMFormElement
 				}
 				$i++;
 			}
-			$rtn .= "</ul>";
+			$rtn .= "</ul></div>";
 		} else {
 			if ($this->multi){
-				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."[]' size='$this->cols' multiple='multiple'>";
+				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."[]' size='$this->cols' multiple='multiple' class=\"form-control ".$this->getClass()."\">";
 				foreach ($langs as $k){
 					$rtn .= "<option value='$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " selected='selected'" : '') : '').">$k</option>";
 				}
 				$rtn .= "</select>";
 			} else {
-				$rtn = "<select name='".$this->getName()."' id='".$this->id()."'>";
+				$rtn = "<select name='".$this->getName()."' id='".$this->id()."' class=\"form-control ".$this->getClass()."\">";
 				foreach ($langs as $k){
 					$rtn .= "<option value='$k'".(!empty($this->selected) ? ($k==$this->selected ? " selected='selected'" : '') : '').">$k</option>";
 				}

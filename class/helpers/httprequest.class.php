@@ -42,6 +42,21 @@ class RMHttpRequest
         return self::get_http_parameter( 'delete', $key, $type, $default );
 
     }
+    
+    /**
+     * Permite obtener un valor de un array y filtrarlo para un manejo seguro
+     */
+    static public function array_value( $key, $haystack, $type, $default = '' ){
+        
+        if ( !is_array( $haystack ) )
+            return $default;
+        
+        if ( !isset( $haystack[$key] ) )
+            return $default;
+        
+        return self::clean_value( $haystack[$key], $type );
+        
+    }
 
     static public function method(){
 
@@ -107,7 +122,7 @@ class RMHttpRequest
      * @param $type
      * @return array|bool|float|int|string
      */
-    static protected function clean_value($value, $type){
+    static public function clean_value($value, $type){
 
         $return = null;
 
@@ -126,10 +141,10 @@ class RMHttpRequest
                 $return = is_float($value) ? floatval($value) : intval($value);
                 break;
             case 'string':
-                $return = strval($value);
+                $return = trim(strval($value));
                 break;
             case 'array':
-                $return = is_array($value) ? $value : array();
+                $return = is_array($value) ? $value : (array) $value;
                 break;
             default:
                 $return = $value;
@@ -137,6 +152,12 @@ class RMHttpRequest
         }
 
         return $return;
+
+    }
+
+    static public function uri_parameters(){
+
+        return $_SERVER['REQUEST_URI'];
 
     }
 }

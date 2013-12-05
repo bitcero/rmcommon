@@ -1,8 +1,11 @@
 $(document).ready(function(){
 
-    $(".image_manager_launcher").click(function(){
+    $("body").on("click", ".image_manager_launcher", function(){
         var id = $(this).parent().attr("id").replace("-container",'');
         var html = '<div id="blocker-'+id+'" class="mgr_blocker"></div><div id="window-'+id+'" class="imgmgr_container">';
+
+        var imgmgr_title = imgmgr_title == undefined ? 'Seleccionar imagen' : '';
+
         html += '<div class="th"><span></span>'+imgmgr_title+'</div>';
         html += '<div class="imgmgr_content"><iframe src="'+mgrURL+'?target=container&amp;idcontainer='+id+'" name="image"></iframe></div>'
         html += '</div>';

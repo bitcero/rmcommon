@@ -22,7 +22,7 @@
     </tr>
     <tr class="image_data" id="data-<?php echo $image['id']; ?>">
         <td colspan="3">
-        
+
         <table width="100%" cellpadding="2" cellspacing="0" class="the_data">
             <tr class="odd">
                 <td rowspan="3"><img src="<?php echo $image['thumb']; ?>" alt="" style="max-width: 150px;" /></td>
@@ -67,14 +67,14 @@
             		<?php foreach($cat->getVar('sizes') as $i => $size): ?>
             		<?php if($size['width']<=0) continue; ?>
                     <?php
-                        
+
                         $tfile = str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $image['url']).'/sizes/'.$image['file'].'_'.$size['width'].'x'.$size['height'].'.'.$image['extension'];
                         if(!is_file($tfile)) continue;
                     ?>
             		<label><input type="radio" rel="<?php echo $size['width']; ?>" name="size_<?php echo $image['id']; ?>" value="<?php echo $image['url']; ?>/sizes/<?php echo $image['file'].'_'.$size['width'].'x'.$size['height'].'.'.$image['extension']; ?>" /><br /><?php echo $size['name']; ?><br />(<?php echo $size['width'].($size['height']!='' ? ' x '.$size['height'] : ''); ?>)</label>
             		<?php endforeach; ?>
             		<label><input type="radio" rel="original" name="size_<?php echo $image['id']; ?>" value="<?php echo $image['url']; ?>/<?php echo $image['file'].'.'.$image['extension']; ?>" checked="checked" /><br /><?php _e('Original','rmcommon'); ?>
-                    <br />(<?php list($w,$h) = getimagesize($image['url'].'/'.$image['file'].'.'.$image['extension']); echo $w.' x '.$h; ?>)</label>
+                        <br />(<?php list($w,$h) = getimagesize(str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $image['url']).'/'.$image['file'].'.'.$image['extension']); echo $w.' x '.$h; ?>)</label>
             		<input type="hidden" id="extension_<?php echo $image['id']; ?>" value="<?php echo $image['extension']; ?>">
             	</td>
             </tr>
@@ -88,7 +88,7 @@
             	</td>
             </tr>
         </table>
-        
+
         </td>
     </tr>
     <?php endforeach; ?>

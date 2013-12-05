@@ -48,11 +48,11 @@ class RMFormFile extends RMFormElement
 	 * @return string
 	 */
 	public function render(){
-		$ret = '<input type="file" name="'.$this->getName().'" id="'.$this->id().'" size="'.$this->_size.'" ';
-		if ($this->getClass()!=''){
-			$ret .= "class='".$this->getClass()."' ";
-		}
-		$ret .= $this->getExtra()." />";
+		$ret = '<input type="file" name="'.$this->getName().'" id="'.$this->id().'" size="'.$this->_size.'" class="form-control ';
+		if ($this->getClass()!='')
+			$ret .= $this->getClass();
+
+		$ret .= '" ' . $this->getExtra().">";
 		if ($this->_limit>0){
 			$ret .= '<input type="hidden" name="MAX_FILE_SIZE" value="'.$this->_limit.'" />';
 		}

@@ -1,4 +1,4 @@
-<h1 class="rmc_titles"><?php echo sprintf(__('Install %s','rmcommon'), $module->getInfo('name')); ?></h1>
+<h1 class="cu-section-title"><?php echo sprintf(__('Install %s','rmcommon'), $module->getInfo('name')); ?></h1>
 
 <div class="descriptions"><?php _e('This module will make next changes in Xoops system. Please review in a detailed way all them in order to decide if you really wish to install this module','rmcommon'); ?></div>
 
@@ -79,7 +79,7 @@
                 </tr>
                 <tr class="odd">
                 	<td><strong><?php _e('Version:','rmcommon'); ?></strong>
-                	<td><?php echo $module->getInfo('rmnative') ? RMUtilities::format_version($module->getInfo('rmversion')) : $module->getInfo('version'); ?></td>
+                	<td><?php echo $module->getInfo('rmnative') ? RMModules::format_module_version($module->getInfo('rmversion')) : $module->getInfo('version'); ?></td>
                 </tr>
                 <tr class="even">
                 	<td><strong><?php _e('Author:','rmcommon'); ?></strong></td>
@@ -116,8 +116,8 @@
                 </tr>
                 <tr class="even">
                 	<td colspan="3" align="right">
-                		<input type="submit" value="<?php _e('Install Now','rmcommon'); ?>" id="install-ok" />
-                		<input type="button" value="<?php _e('Cancel','rmcommon'); ?>" onclick="window.location = 'modules.php';" />
+                		<button type="submit" id="install-ok" class="btn btn-primary btn-lg"><?php _e('Install Now','rmcommon'); ?></button>
+                		<button type="button" onclick="window.location = 'modules.php';" class="btn btn-default btn-lg"><?php _e('Cancel','rmcommon'); ?></button>
                 	</td>
                 </tr>
             </table>

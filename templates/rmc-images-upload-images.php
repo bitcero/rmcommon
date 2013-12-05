@@ -1,16 +1,16 @@
 <?php if(!$isupdate): ?>
-<h1 class="rmc_titles"><?php _e('Upload Images','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Upload Images','rmcommon'); ?></h1>
 <div class="select_image_cat">
 	<form name="frmcat" method="get" action="images.php" class="form-inline">
 	<?php _e('Select Category:','rmcommon'); ?> &nbsp;
-	<select name="category">
+	<select name="category" class="form-control">
 		<option value=""><?php _e('Select...','rmcommon'); ?></option>
 		<?php foreach($categories as $category): ?>
 		<option value="<?php echo $category['id']; ?>"<?php echo $cat->id()==$category['id'] ? ' selected="selected"' : '' ?>><?php echo $category['name']; ?></option>
 		<?php endforeach; ?>
 	</select>
 	<button type="submit" class="btn btn-info"><?php _e('Change Category','rmcommon'); ?></button>
-    <button type="button" class="btn"><?php _e('Cancel','rmcommon'); ?></button>
+    <button type="button" class="btn btn-default"><?php _e('Cancel','rmcommon'); ?></button>
 	<input type="hidden" name="action" value="new" />
 	</form>
 </div>

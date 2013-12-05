@@ -1,4 +1,4 @@
-<h1 class="rmc_titles"><?php echo $log_title; ?></h1>
+<h1 class="cu-section-title"><?php echo $log_title; ?></h1>
 <div class="mod_options">
     <a href="modules.php"><?php _e('Go to Modules Management','rmcommon'); ?></a>
     <?php if($action!='uninstall_module' && $module): ?>

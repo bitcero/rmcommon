@@ -35,10 +35,10 @@ class RmcommonRmcommonPreload
         // Get preloaders from current theme
         RMEvents::get()->load_extra_preloads(XOOPS_THEME_PATH.'/'.$xoopsConfig['theme_set'], ucfirst($xoopsConfig['theme_set'].'Theme'));
         
-		$url = RMFunctions::current_url();
+		$url = RMUris::current_url();
 		$p = parse_url($url);
         
-        $config = RMFunctions::configs();
+        $config = RMSettings::cu_settings();
 		
 		if(substr($p['path'], -11)=='backend.php' && $config['rss_enable']){
 			include_once RMCPATH.'/rss.php';

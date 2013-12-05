@@ -129,7 +129,7 @@ class RMFormModules extends RMFormElement
             
 		$i = 1;
 		foreach ($modules as $k => $v){
-            $app = RMFunctions::load_module($k);
+            $app = RMModules::load_module($k);
             $rtn .= "<li>";
             $name = $this->multi ? $this->getName()."[$k]" : $this->getName();
             if ($this->multi){

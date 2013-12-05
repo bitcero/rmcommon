@@ -35,7 +35,7 @@ class RMProxy
 		// Creamos la petición
 		$hdrs = array(
 			'http'=>array(
-				'method'=>"POST",
+				'method'=>"GET",
 				'header'=>"Accept-language: "._LANGCODE."\r\n" .
                                     "Referer: ".XOOPS_URL."\r\n"
 			)

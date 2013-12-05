@@ -17,7 +17,7 @@ class ActiveTextArea
 
     public function render(){
 
-        $input = '<textarea name="' . $this->name . '" id="' . $this->element . '"';
+        $input = '<textarea name="' . $this->name . '" id="' . $this->id . '"';
         $class = $this->required ? 'required' : '';
         $text = '';
 

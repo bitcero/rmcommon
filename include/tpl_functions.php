@@ -40,10 +40,11 @@ function tpl_cycle($values, $delimiter = ',', $reset = false){
 }
 
 /**
+ * @deprecated
 * GET Predefined Variable
 * @param var Server VAR ($_POST, $_GET, $_SERVER, etc.)
 * @param string Value key
-* @param any Default value to return if the var is not located.
+* @param mixed Default value to return if the var is not located.
 * @return any
 */
 function rmc_server_var($from, $key, $default=''){
@@ -51,11 +52,11 @@ function rmc_server_var($from, $key, $default=''){
 	return $ret;
 }
 
-function showMessage($msg, $level=0){
-	$_SESSION['rmMsg'][] = array(
-        'text' => htmlentities($msg),
-	    'level' => $level
-    );
+function showMessage($message, $level=0, $icon = ''){
+    $i = isset($_SESSION['cu_redirect_message']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
+    $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
+    $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
+    $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
 }
 
 

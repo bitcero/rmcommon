@@ -102,11 +102,11 @@ class RMFormText extends RMFormElement
             $this->_size = 50;
             
 		$ret = '<input type="'.($this->_password ? 'password' :'text').'" size="'.$this->_size.'" name="'.$this->getName().'" id="'.$this->id().'"'.($this->getMax()>0 ? ' maxlength="'.$this->getMax().'"' : '').' value="'.(isset($_REQUEST[$this->getName()]) ? $_REQUEST[$this->getName()] : $this->getValue()).'" ';
-		if ($this->getClass() != ''){
-			$ret .= 'class="'.$this->getClass().'" '.$this->getExtra();
-		} else {
-			$ret .= $this->getExtra();
-		}
+        $ret .= 'class="form-control ';
+		if ($this->getClass() != '')
+			$ret .= $this->getClass();
+
+        $ret .= '" '.$this->getExtra();
 		
 		$ret .= ($this->_enabled ? '' : ' disabled="disabled"').' />';
 		return $ret;
@@ -189,6 +189,7 @@ class RMFormTextArea extends RMFormElement
 		$this->setName($name);
 		$this->width = $width;
 		$this->height = $height;
+        $this->addClass('form-control');
 	}
 	/**
 	 * Establece el n?mero de filas del campo.

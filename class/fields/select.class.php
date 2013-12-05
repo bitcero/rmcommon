@@ -102,12 +102,13 @@ class RMFormSelect extends RMFormElement
 	function render(){
 		$rtn = "<select name='".$this->getName()."' id='".$this->id()."'";
 		if ($this->_multi){ $rtn .= " multiple='multiple' size='".$this->_rows."'"; }
+
+        $rtn .= ' class="form-control ';
         
-		if ($this->getClass() != ''){
-			$rtn .= 'class="'.$this->getClass().'" '.$this->getExtra();
-		} else {
-			$rtn .= $this->getExtra();
-		}
+		if ($this->getClass() != '')
+			$rtn .= $this->getClass();
+
+		$rtn .= '" ' . $this->getExtra();
 		
 		$rtn .= ">";
 		

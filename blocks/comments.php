@@ -47,7 +47,7 @@ function rmc_bkcomments_show($options){
                     'name'  => $user->getVar('uname'),
                     'email' => $user->getVar('email'),
                     'posts' => $user->getVar('posts'),
-                    'avatar'=> $user->getVar('user_avatar')!='' && $user->getVar('user_avatar')!='blank.gif' ? XOOPS_UPLOAD_URL.'/'.$user->getVar('user_avatar') : RMCURL.'/images/avatar.gif',
+                    'avatar'=> $user->getVar('image')!='' && $user->getVar('image')!='blank.gif' ? XOOPS_UPLOAD_URL.'/'.$user->getVar('image') : RMCURL.'/images/avatar.gif',
                     'rank'  => $user->rank(),
                 );
                 
@@ -86,7 +86,7 @@ function rmc_bkcomments_show($options){
         if(isset($mods[$row['id_obj']])){
             $mod = $mods[$row['id_obj']];
         } else {
-            $m = RMFunctions::load_module($row['id_obj']);
+            $m = RMModules::load_module($row['id_obj']);
             $mod = $m->getVar('name');
             $mods[$row['id_obj']] = $mod;
         }
@@ -114,7 +114,7 @@ function rmc_bkcomments_show($options){
 	$num = $options[2] + $options[3] + $options[4];
 	$block['data_width'] = floor(100/$num);
     
-    RMTemplate::get()->add_xoops_style('bk_comments.css', 'rmcommon');
+    RMTemplate::get()->add_style('bk_comments.css', 'rmcommon');
     
     return $block;
     

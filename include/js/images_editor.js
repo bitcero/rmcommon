@@ -20,6 +20,7 @@ $(document).ready(function(){
 });
 
 function send_resize(id,params){
+
     $.get(url, {data: params, img: id, action: 'resize'}, function(data){
         
         if (data['error']){

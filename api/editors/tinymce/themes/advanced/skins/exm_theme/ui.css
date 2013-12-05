@@ -99,6 +99,9 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     background-position: left top;
     background-repeat: repeat-x;
     border-radius: 2px;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
 }
 .exm_themeSkin a.mceButton span, .exm_themeSkin a.mceButton img {}
 .exm_themeSkin .mceOldBoxModel a.mceButton span, .exm_themeSkin .mceOldBoxModel a.mceButton img {margin:0 0 0 1px}

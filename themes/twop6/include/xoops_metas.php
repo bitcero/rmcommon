@@ -42,7 +42,15 @@ if (isset($GLOBALS['xoTheme'])){
 	            }
 	            break;
 	        case 'stylesheet':
+
         		foreach ($xoTheme->metas[$type] as $attrs) {
+
+                    if ($attrs['href'] == XOOPS_URL . '/xoops.css')
+                        continue;
+
+                    if (preg_match("/^" . str_replace("/", "\\/", XOOPS_URL) . "\/language\/.*\/style.css/", $attrs['href']))
+                        continue;
+
             		if (@$attrs['_']) {
                 		$str .= '<style' . $xoTheme->renderAttributes($attrs) . ">\n/* <![CDATA[ */\n" . $attrs['_'] . "\n/* //]]> */\n</style>";
 	                } else {

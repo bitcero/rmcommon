@@ -1,31 +1,38 @@
-<h1 class="rmc_titles"><?php _e('Comments Manager','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Comments Manager','rmcommon'); ?></h1>
 
-<div class="row-fluid">
-    <div class="span6">
+<div class="row comm-pagination">
+    <div class="col-md-6 col-lg-6">
         <?php $nav->display(false, true); ?>
     </div>
-    <div class="span6">
-        <form name="search_form" class="form-search pull-right" method="get" action="comments.php">
-            <div class="input-append">
-                <input type="text" name="w" id="wsearch" value="<?php echo isset($keyw) ? $keyw : '' ?>" size="20" class="search-query" />
-                <input type="button" value="<?php _e('Search','rmcommon'); ?>" onclick="$('#wsearch').val()==''?alert('<?php _e('You need something to search!','rmcommon'); ?>'):submit();" class="btn" />
+    <div class="col-md-6 col-lg-6">
+        <form name="search_form" class="pull-right" method="get" action="comments.php">
+            <div class="comm-search-control">
+                <div class="input-group">
+                    <input type="search" name="w" id="wsearch" value="<?php echo isset($keyw) ? $keyw : '' ?>" size="20" class="form-control input-sm" />
+                <span class="input-group-btn">
+                    <button type="button" title="<?php _e('Search','rmcommon'); ?>" onclick="$('#wsearch').val()==''?alert('<?php _e('You need something to search!','rmcommon'); ?>'):submit();" class="btn btn-info btn-sm">
+                        <i class="icon-search"></i>
+                    </button>
+                </span>
+                </div>
             </div>
-            <input type="hidden" name="action" value="" />
+
+            <input type="hidden" name="action" value="">
         </form>
     </div>
 </div>
 
 <form name="list_comments" method="post" action="comments.php" id="list-comments" class="form-inline">
-<div class="row-fluid rmc_bulkactions">
+<div class="row-fluid cu-bulk-actions">
 
-	<select name="action" id="action-select" onchange="$('#action-select2').val($(this).val());">
+	<select name="action" id="action-select" onchange="$('#action-select2').val($(this).val());" class="form-control">
 	    <option value="" selected="selected"><?php _e('Bulk Actions...','rmcommon'); ?></option>
 	    <option value="unapprove"><?php _e('Set unapproved','rmcommon'); ?></option>
 	    <option value="approve"><?php _e('Set approved','rmcommon'); ?></option>
 	    <option value="spam"><?php _e('Mark as SPAM','rmcommon'); ?></option>
 	    <option value="delete"><?php _e('Delete comments','rmcommon'); ?></option>
 	</select>
-	<button type="submit" class="btn btn-info" onclick="if($('#action-select').val()=='delete') return confirm('Do you really want to delete selected comments?');"><?php _e('Apply','rmcommon'); ?></button>
+	<button type="submit" class="btn btn-default" onclick="if($('#action-select').val()=='delete') return confirm('Do you really want to delete selected comments?');"><?php _e('Apply','rmcommon'); ?></button>
 
 	<ul class="nav nav-pills pull-right">
 		<li<?php if($filter==''): ?> class="active"<?php endif; ?>>
@@ -117,15 +124,15 @@
     <?php endif; ?>
     </tbody>
 </table>
-<div class="rmc_bulkactions">
+<div class="cu-bulk-actions">
 <?php $nav->display(false, true); ?>
-<select name="actionb" id="action-select2" onchange="$('#action-select').val($(this).val());">
+<select name="actionb" id="action-select2" onchange="$('#action-select').val($(this).val());" class="form-control">
     <option value="" selected="selected"><?php _e('Bulk Actions...','rmcommon'); ?></option>
     <option value="unapprove"><?php _e('Set unapproved','rmcommon'); ?></option>
     <option value="approve"><?php _e('Set approved','rmcommon'); ?></option>
     <option value="delete"><?php _e('Delete comments','rmcommon'); ?></option>
 </select>
-<button type="submit" onclick="if($('#action-select').val()=='delete') return confirm('Do you really want to delete selected comments?');" class="btn btn-info"><?php _e('Apply','rmcommon'); ?></button>
+<button type="submit" onclick="if($('#action-select').val()=='delete') return confirm('Do you really want to delete selected comments?');" class="btn btn-default"><?php _e('Apply','rmcommon'); ?></button>
 </div>
 <input type="hidden" name="filter" value="<?php echo $filter; ?>" />
 <input type="hidden" name="w" value="<?php echo $keyw; ?>" />

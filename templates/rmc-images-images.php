@@ -1,21 +1,21 @@
-<h1 class="rmc_titles"><?php _e('Images Manager','rmcommon'); echo ': '.$category->getVar('name'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Images Manager','rmcommon'); echo ': '.$category->getVar('name'); ?></h1>
 <form name="list_images" method="post" action="images.php" id="list-images" class="form-inline">
-<div class="rmc_bulkactions">
+<div class="cu-bulk-actions">
 <div class="pull-right"><?php echo $nav->display(false); ?></div>
-<select name="action" id="action-select">
+<select name="action" id="action-select" class="form-control">
     <option value=""><?php _e('Bulk Actions...','rmcommon'); ?></option>
     <option value="delete"><?php _e('Delete','rmcommon'); ?></option>
     <option value="thumbs"><?php _e('Update thumbnails','rmcommon'); ?></option>
 </select>
 <input type="submit" value="<?php _e('Apply','rmcommon'); ?>" onclick="if($('#action-select').val()=='delete') return confirm('Do you really want to delete selected images?');" /> &nbsp;&nbsp;
-<select name="category" onchange="window.location = 'images.php?category='+$(this).val();" id="category-select">
+<select name="category" onchange="window.location = 'images.php?category='+$(this).val();" id="category-select" class="form-control">
 	<?php foreach($categories as $catego): ?>
 	<option value="<?php echo $catego['id']; ?>"<?php echo $catego['id']==$cat ? ' selected="selected"' : ''; ?>><?php echo $catego['name']; ?></option>
 	<?php endforeach; ?>
 </select> &nbsp;&nbsp;
 <a href="javascript:;" onclick="window.location = 'images.php?action=new&category='+$('#category-select').val();"><?php _e('Create Images','rmcommon'); ?></a>
 </div>
-<table class="outer" cellspacing="0">
+<table class="table table-bordered" cellspacing="0">
 	<tr>
 		<th width="30" align="center"><input type="checkbox" name="checkall" id="checkall" onclick="$('#list-images').toggleCheckboxes(':not(#checkall)');" /></th>
 		<th align="left" width="70"><?php _e('File','rmcommon'); ?></th>

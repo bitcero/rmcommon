@@ -20,8 +20,8 @@ class RmcommonCorePreload extends XoopsPreloadItem
         /**
         * Use internal blocks manager if enabled
         */
-        $config = RMFunctions::configs();
-        if($config['blocks_enable']){
+        $config = RMSettings::cu_settings();
+        if($config->blocks_enable){
             global $xoopsTpl;
             $bks = RMBlocksFunctions::construct_blocks();
             $bks = RMEvents::get()->run_event('rmcommon.retrieve.xoops.blocks', $bks);
@@ -63,7 +63,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
             $db->queryF("UPDATE ".$db->prefix("config")." SET conf_value='redmexico' WHERE conf_modid=0 AND conf_catid=1 AND conf_name='cpanel'");
         }
 
-        if (RMFunctions::current_url()==RMCURL.'/include/upload.php' && $xoopsConfig['closesite']){
+        if (RMUris::current_url()==RMCURL.'/include/upload.php' && $xoopsConfig['closesite']){
             $security = rmc_server_var($_POST, 'rmsecurity', 0);
             $data = TextCleaner::getInstance()->decrypt($security, true);
             $data = explode("|", $data); // [0] = referer, [1] = session_id(), [2] = user, [3] = token
@@ -103,11 +103,28 @@ class RmcommonCorePreload extends XoopsPreloadItem
 	    // 3 = Add redirect
 	    // 4 = Allow external link
 	    RMEvents::get()->run_event('rmcommon.redirect.header', $params[0], $params[1], $params[2], $params[3], $params[4]);
-        if(!defined('XOOPS_CPFUNC_LOADED')) return;
-        
-        RMUris::redirect_with_message($params[0], $params[2]);
+        //if(!defined('XOOPS_CPFUNC_LOADED')) return;
+
+        RMUris::redirect_with_message($params[2], $params[0], RMMSG_INFO);
         die();
 		
+    }
+
+    function eventRmcommonClassGuiHeader($args)
+    {
+        /*if (!empty($_SESSION['redirect_message'])) {
+            $GLOBALS['xoTheme']->addStylesheet('xoops.css');
+            $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
+            $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/plugins/jquery.jgrowl.js');
+            $GLOBALS['xoTheme']->addScript('', array('type' => 'text/javascript'), '
+            (function($){
+            $(document).ready(function(){
+                $.jGrowl("' . $_SESSION['redirect_message'] . '", {  life:3000 , position: "center", speed: "slow" });
+            });
+            })(jQuery);
+            ');
+            unset($_SESSION['redirect_message']);
+        }*/
     }
 	
 	/**
@@ -127,11 +144,11 @@ class RmcommonCorePreload extends XoopsPreloadItem
     
     public function eventCoreHeaderAddmeta(){
         global $xoopsTpl, $xoopsConfig, $xoTheme, $rmc_config;
-        
+
         if(!$xoopsTpl) return;
-        
+
         $xoopsTpl->plugins_dir[] = RMCPATH.'/include';
-        
+
     }
     
     /**

@@ -7,7 +7,7 @@ Author: bitcero
 Author URI: http://www.bitcero.info
 */
 
-load_theme_locale('twop6','',true);
+load_theme_locale('twop6','xoops.css',true);
 
 global $xoopsUser, $xoopsSecurity;
 
@@ -49,25 +49,36 @@ if($right_widgets)
     $tp6Span -= 3;
 
 $this->add_style('bootstrap.min.css','rmcommon');
-$this->add_theme_style('2.6.css','twop6');
-$this->add_style('font-awesome.min.css','rmcommon');
-$this->add_theme_style('jquery.window.css','twop6');
-$this->add_script( 'bootstrap.min.js', 'rmcommon', array('directory' => 'include') );
-$this->add_theme_script('2.6.js', 'twop6');
-$this->add_theme_script('jquery.window.min.js', 'twop6');
+$this->add_style('bootstrap-theme.css','twop6', array(), 'theme');
+$this->add_style('general.css','rmcommon', array());
+$this->add_style('2.6.css','twop6', array(), 'theme');
+$this->add_style('font-awesome.min.css','rmcommon', array('footer' => 1));
+$this->add_style('jquery.window.css','twop6', array('footer' => 1), 'theme');
+$this->add_script( 'bootstrap.js', 'rmcommon' );
+$this->add_script('2.6.js', 'twop6', array('footer' => 1), 'theme');
+$this->add_script('jquery.window.min.js', 'twop6', array('footer' => 1), 'theme');
+$this->add_script('updates.js', 'rmcommon', array('footer' => 1));
 
 // Delete unused scripts and styles
 $content = preg_replace("/<script.*".str_replace("/",'\/', XOOPS_URL)."\/js\/.*/",'', $content);
 $content = preg_replace("/<link.*".str_replace("/",'\/', XOOPS_URL)."\/css\/.*\/>/",'', $content);
 
 $tp6Alerts = array(
-    RMMSG_ERROR => 'alert-error',
+    RMMSG_ERROR => 'alert-danger',
     RMMSG_INFO => 'alert-info',
     RMMSG_OTHER => '',
     RMMSG_SAVED => 'alert-success',
     RMMSG_SUCCESS => 'alert-success',
-    RMMSG_WARN => 'alert-block'
+    RMMSG_WARN => 'alert-warning'
 );
+
+$rmc_messages = array();
+if (isset($_SESSION['cu_redirect_messages'])){
+    foreach ($_SESSION['cu_redirect_messages'] as $msg){
+        $rmc_messages[] = $msg;
+    }
+    unset($_SESSION['cu_redirect_messages']);
+}
 
 $this->add_head_script("twop6_url = '".TWOP6_URL."';");
 $this->add_head_script("xoUrl = '".XOOPS_URL."';");

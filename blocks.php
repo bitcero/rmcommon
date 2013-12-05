@@ -71,7 +71,7 @@ function show_rm_blocks()
     define('RMCSUBLOCATION','blocks');
     $db = XoopsDatabaseFactory::getDatabaseConnection();
     
-    $modules = RMFunctions::get_modules_list(1);
+    $modules = RMModules::get_modules_list( 'active' );
 
     $from = rmc_server_var($_GET, 'from', '');
     
@@ -89,13 +89,12 @@ function show_rm_blocks()
     
     // Cargamos las posiciones de bloques
     $bpos = RMBlocksFunctions::block_positions();
-
     $sql = createSQL();
     $result = $db->query($sql);
     $blocks = array();
     $used_blocks = array();
     while ($row = $db->fetchArray($result)) {
-        $mod = RMFunctions::load_module($row['element']);
+        $mod = RMModules::load_module($row['element']);
         if(!$mod) continue;
         $used_blocks[$row['canvas']][] = array(
             'id' => $row['bid'],
@@ -133,13 +132,13 @@ function show_rm_blocks()
 	$rmTpl->assign('xoops_pagetitle', __('Blocks Management','rmcommon'));
 
     RMTemplate::get()->add_style('blocks.css', 'rmcommon');
-    RMTemplate::get()->add_script('blocks.js', 'rmcommon', array('directory' => 'include'));
+    RMTemplate::get()->add_script('blocks.js', 'rmcommon');
     RMTemplate::get()->add_script('jkmenu.js', 'rmcommon', array('directory' => 'include'));
     RMTemplate::get()->add_style('forms.css', 'rmcommon');
     RMTemplate::get()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
     
     if(!$rmc_config['blocks_enable']){
-        showMessage(__('Internal blocks manager is currenlty disabled!','rmcommon'), 0);
+        showMessage(__('Internal blocks manager is currenlty disabled!','rmcommon'), RMMSG_WARN);
     }
     
     RMTemplate::get()->add_script('jquery.checkboxes.js','rmcommon','include');

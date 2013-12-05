@@ -33,6 +33,9 @@ trait RMProperties
         if ( method_exists( $this, $method ))
             return $this->$method($value);
 
+        if(method_exists($this,'get_'.$name))
+            throw new RMException( sprintf( __( 'Property "%s.%s" is read only.', 'rmcommon' ), get_class( $this ), $name ) );
+
         self::$properties[$name] = $value;
 
     }

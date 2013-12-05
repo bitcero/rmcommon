@@ -1,4 +1,4 @@
-CREATE TABLE `rmc_img_cats` (
+CREATE TABLE `mod_rmcommon_images_categories` (
   `id_cat` int(11) NOT NULL auto_increment,
   `name` varchar(100) NOT NULL,
   `status` varchar(10) NOT NULL default 'active',
@@ -9,7 +9,7 @@ CREATE TABLE `rmc_img_cats` (
   PRIMARY KEY  (`id_cat`)
 ) ENGINE=MyISAM;
 
-CREATE TABLE `rmc_images` (
+CREATE TABLE `mod_rmcommon_images` (
 `id_img` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `title` VARCHAR( 100 ) NOT NULL ,
 `desc` TEXT NOT NULL ,
@@ -17,9 +17,9 @@ CREATE TABLE `rmc_images` (
 `file` VARCHAR( 150 ) NOT NULL ,
 `cat` INT NOT NULL,
 `uid` INT NOT NULL
-) ENGINE = MYISAM ;
+) ENGINE = InnoDB ;
 
-CREATE TABLE `rmc_comments` (
+CREATE TABLE `mod_rmcommon_comments` (
 `id_com` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `id_obj` VARCHAR( 50 ) NOT NULL ,
 `type` VARCHAR( 50 ) NOT NULL DEFAULT 'module',
@@ -31,26 +31,26 @@ CREATE TABLE `rmc_comments` (
 `posted` INT(10) NOT NULL DEFAULT '0',
 `status` VARCHAR(10) NOT NULL DEFAULT 'waiting',
 INDEX ( `id_obj` , `type` )
-) ENGINE = MYISAM;
+) ENGINE = InnoDB;
 
-CREATE TABLE `rmc_comusers` (
+CREATE TABLE `mod_rmcommon_comusers` (
 `id_user` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `xuid` INT NOT NULL DEFAULT '0',
 `name` VARCHAR( 150 ) NOT NULL ,
 `email` VARCHAR( 150 ) NOT NULL,
 `url`   VARCHAR(150) NOT NULL
-) ENGINE = MYISAM ;
+) ENGINE = InnoDB ;
 
-CREATE TABLE `rmc_plugins` (
+CREATE TABLE `mod_rmcommmon_plugins` (
 `id_plugin` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `name` VARCHAR( 150 ) NOT NULL ,
 `description` TEXT NOT NULL ,
 `dir` VARCHAR( 100 ) NOT NULL ,
 `version` TEXT NOT NULL ,
 `status` TINYINT( 1 ) NOT NULL DEFAULT '1'
-) ENGINE = MYISAM ;
+) ENGINE = InnoDB ;
 
-CREATE TABLE `rmc_settings` (
+CREATE TABLE `mod_rmcommon_settings` (
 `conf_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `element` VARCHAR( 50 ) NOT NULL ,
 `name` VARCHAR( 50 ) NOT NULL ,
@@ -58,9 +58,9 @@ CREATE TABLE `rmc_settings` (
 `value` TEXT NOT NULL ,
 `valuetype` VARCHAR( 20 ) NOT NULL ,
 INDEX ( `element` , `name` )
-) ENGINE = MYISAM ;
+) ENGINE = InnoDB ;
 
-CREATE TABLE `rmc_blocks` (
+CREATE TABLE `mod_rmcommon_blocks` (
   `bid` mediumint(8) unsigned NOT NULL auto_increment,
   `element` varchar(50)   NOT NULL,
   `element_type` varchar(20)   NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE `rmc_blocks` (
   KEY `visible` (`visible`)
 ) ENGINE=MyISAM;
 
-CREATE TABLE `rmc_blocks_positions` (
+CREATE TABLE `mod_rmcommon_blocks_positions` (
   `id_position` int(11) NOT NULL auto_increment,
   `name` varchar(150) collate latin1_general_ci NOT NULL,
   `tag` varchar(150) collate latin1_general_ci NOT NULL,
@@ -99,4 +99,4 @@ CREATE TABLE `mod_rmcommon_bkmod` (
 `mid` INT NOT NULL ,
 `page` VARCHAR( 50 ) NOT NULL ,
 INDEX ( `bid` , `mid` )
-) ENGINE = MYISAM ;
+) ENGINE = MyISAM ;

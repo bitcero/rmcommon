@@ -87,6 +87,21 @@ class RMObject
     public function id(){
         return $this->getVar($this->primary);
     }
+
+    public function __set( $name, $value ){
+
+        // Verificamos columnas
+        if ( isset( $this->_tblcolumns[$name] ) )
+            return $this->setVar($name, $value);
+
+    }
+
+    public function __get( $name ){
+        // Verificamos columnas
+        if ( isset( $this->_tblcolumns[$name] ) )
+            return $this->getVar( $name );
+    }
+
     /**#@+
     * used for new/clone objects
     * 
@@ -625,12 +640,10 @@ class RMObject
 		if (count($this->_errors)<=0){ return $html ? '' : array(); }
 		
 		if ($html){
-		
-			$ret .= "<div class='outer' style='padding: 1px;'>";
+
 			foreach ($this->_errors as $k){
-				$ret .= "<div class='odd'>$k</div>";
+				$ret .= "$k<br>";
 			}
-			$ret .= "</div>";
 		
 		} else {
 		
@@ -717,7 +730,7 @@ class RMObject
 						$this->primary = $row['Field'];
 						$primaryCols[get_class($this)] = $row['Field'];
 					}
-					$this->_tblcolumns[] = $row;
+					$this->_tblcolumns[$row['Field']] = $row;
 				}
 			}
 			$objectColumns[get_class($this)] = $this->_tblcolumns;

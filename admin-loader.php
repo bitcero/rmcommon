@@ -17,11 +17,11 @@
 // Usefull admin clases
 $tpl = RMTemplate::get();
 
-$rmc_config = RMFunctions::get()->configs();
-$rmc_theme = isset($rmc_config['theme']) ? $rmc_config['theme'] : 'designia';
+$rmc_config = RMSettings::cu_settings();
+$rmc_theme = isset($rmc_config->theme) ? $rmc_config->theme : 'twop6';
 
 if (!file_exists(RMCPATH.'/themes/'.$rmc_theme.'/admin_gui.php')){
-	$rmc_theme = 'default';
+	$rmc_theme = 'smartb';
 }
 
 RMTemplate::get()->add_style('general.css','rmcommon');

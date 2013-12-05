@@ -21,7 +21,7 @@ class RMSettings
 
     /**
      * Get the current settings for Common Utilities
-     * This method is a replace for deprecated RMFunctions::configs() method
+     * This method is a replace for deprecated RMSettings::cu_settings() method
      *
      * @param string $name
      * @return stdClass

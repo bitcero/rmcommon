@@ -79,9 +79,9 @@ class RMDb
             return $this->_properties[$name] = $value;
 
         if(method_exists($this,'get'.$name))
-            throw new RMException( sprintf( __( 'Property "%s.%s" is read only.', 'rmcommon' ), get_class( $this ), $name ) );
+            throw new RMException( sprintf( __( 'Property "%s::%s" is read only.', 'rmcommon' ), get_class( $this ), $name ) );
         else
-            throw new RMException( sprintf( __( 'Property "%s.%s" is not defined.', 'rmcommon' ), get_class( $this ), $name ) );
+            throw new RMException( sprintf( __( 'Property "%s::%s" is not defined.', 'rmcommon' ), get_class( $this ), $name ) );
 
     }
 
@@ -124,7 +124,8 @@ class RMDb
             return;
 
         // Get columns
-        $columns_result = $this->database->query( "SHOW COLUMNS IN ".$this->table );
+        $columns_result = $this->database->queryF( "SHOW COLUMNS IN ".$this->table );
+
         while ( $column = $this->database->fetchArray( $columns_result ) ){
 
             $this->_properties['columns'][$column['Field']] = array(
@@ -147,7 +148,7 @@ class RMDb
         unset ( $columns_result );
 
         // Get indexes
-        $indexes = $this->database->query( "SHOW INDEXES IN ".$this->table );
+        $indexes = $this->database->queryF( "SHOW INDEXES IN ".$this->table );
         while ( $row = $this->database->fetchArray( $indexes ) ) {
 
             $this->_properties['columns'][$row['Column_name']]['unique'] = $row['Non_unique']==0 ? 1 : 0;
@@ -275,6 +276,26 @@ class RMDb
     public function escape($string){
 
         return mysql_real_escape_string($string);
+
+    }
+
+    /**
+     * Escape an array
+     * @param array $array
+     * @return array
+     */
+    public function escape_array( $array ){
+
+        foreach( $array as $index => $value){
+
+            if (is_array($value))
+                $array[$index] = $this->escape_array($value);
+            else
+                $array[$index] = $this->escape( $value );
+
+        }
+
+        return $array;
 
     }
 

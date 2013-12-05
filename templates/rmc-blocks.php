@@ -1,7 +1,7 @@
-<h1 class="rmc_titles"><?php _e('Blocks Administration','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Blocks Administration','rmcommon'); ?></h1>
 
 <?php $from = rmc_server_var($_REQUEST,'from', '')=='positions'?true:false; ?>
-<div class="row-fluid blocks-nav">
+<div class="row blocks-nav">
     <ul class="nav nav-pills">
         <li>
             <a href="#" id="newpos"><?php empty($positions) ? _e('Show Blocks','rmcommon') : _e('Show Positions','rmcommon'); ?></a>
@@ -39,62 +39,70 @@
 </div>
 
 <!-- Positions Grid -->
-<div class="row-fluid<?php echo empty($positions) || $from=='positions' ? ' hidden-control' : ''; ?>" id="blocks-list">
-    <?php foreach($positions as $pos): ?>
-    <div id="position-<?php echo $pos['id']; ?>" class="dd rmc-position-item" data-pos="<?php echo $pos['id']; ?>">
-        <h3><?php echo $pos['name']; ?><img src="images/ok.png"></h3>
-        <?php if(!isset($used_blocks[$pos['id']])): ?>
-        <div class="dd-empty text-info"><?php _e('Drag and drop blocks here','rmcommon'); ?></div>
-        <?php else: ?>
-        <ol class="dd-list">
-            <?php foreach($used_blocks[$pos['id']] as $block): ?>
-            <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
-                <div class="row-fluid item-controls">
-                    <strong class="dd-handle"><?php echo $block['title']; ?></strong>
-                    <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" data-action="delete" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="icon-remove-sign"></i></a>
-                    <?php if($block['visible']): ?>
-                    <a href="#" class="pull-right text-warning control-visible" data-block="<?php echo $block['id']; ?>" data-action="hide" title="<?php _e('Hide block','rmcommon'); ?>"><i class="icon-eye-close"></i></a>
-                    <?php else: ?>
-                    <a href="#" class="pull-right text-success control-visible" data-block="<?php echo $block['id']; ?>" data-action="show" title="<?php _e('Show block','rmcommon'); ?>"><i class="icon-eye-open"></i></a>
-                    <?php endif; ?>
-                    <a href="#" class="pull-right control-settings" data-block="<?php echo $block['id']; ?>" data-action="settings" title="<?php _e('Block Settings','rmcommon'); ?>"><i class="icon-wrench"></i></a>
-                </div>
-                <div class="row-fluid block-data">
-                    <span class="text-info"><?php echo $block['module']['name']; ?></span>
-                    <p><?php echo $block['description']; ?></p>
-                </div>
-            </li>
-            <?php endforeach; ?>
-        </ol>
-        <?php endif; ?>
+<div class="row<?php echo empty($positions) || $from=='positions' ? ' hidden-control' : ''; ?>" id="blocks-list">
+
+    <div class="col-lg-12">
+
+        <?php foreach($positions as $pos): ?>
+            <div id="position-<?php echo $pos['id']; ?>" class="dd rmc-position-item" data-pos="<?php echo $pos['id']; ?>">
+                <h3><?php echo $pos['name']; ?><img src="images/ok.png"></h3>
+                <?php if(!isset($used_blocks[$pos['id']])): ?>
+                    <div class="dd-empty text-info"><?php _e('Drag and drop blocks here','rmcommon'); ?></div>
+                <?php else: ?>
+                    <ol class="dd-list">
+                        <?php foreach($used_blocks[$pos['id']] as $block): ?>
+                            <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
+                                <div class="row-fluid item-controls">
+                                    <strong class="dd-handle"><?php echo $block['title']; ?></strong>
+                                    <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" data-action="delete" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="icon-remove-sign"></i></a>
+                                    <?php if($block['visible']): ?>
+                                        <a href="#" class="pull-right text-warning control-visible" data-block="<?php echo $block['id']; ?>" data-action="hide" title="<?php _e('Hide block','rmcommon'); ?>"><i class="icon-eye-close"></i></a>
+                                    <?php else: ?>
+                                        <a href="#" class="pull-right text-success control-visible" data-block="<?php echo $block['id']; ?>" data-action="show" title="<?php _e('Show block','rmcommon'); ?>"><i class="icon-eye-open"></i></a>
+                                    <?php endif; ?>
+                                    <a href="#" class="pull-right control-settings" data-block="<?php echo $block['id']; ?>" data-action="settings" title="<?php _e('Block Settings','rmcommon'); ?>"><i class="icon-wrench"></i></a>
+                                </div>
+                                <div class="row-fluid block-data">
+                                    <span class="text-info"><?php echo $block['module']['name']; ?></span>
+                                    <p><?php echo $block['description']; ?></p>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                <?php endif; ?>
+
+            </div>
+        <?php endforeach; ?>
 
     </div>
-    <?php endforeach; ?>
+
 </div>
 <input type="hidden" value="<?php echo $xoopsSecurity->createToken(); ?>" id="token-positions" name="token_positions">
 <!--// End positions grid -->
 
 <div id="bks-and-pos" class="row-fluid<?php echo empty($positions) || $from=='positions' ? ' visible-control' : ' hidden-control'; ?>">
-<div id="form-pos" class="span4">
+<div id="form-pos" class="col-md-3 col-lg-3">
     <form name="frmaddpos" id="frm-add-pos" method="post" action="blocks.php" />
         <fieldset>
             <legend>Add Position</legend>
 
-            <label><strong><?php _e('Name','rmcommon'); ?></strong></label>
-            <input type="text" name="posname" value="" class="input-block-level required" />
-            <span class="help-block"><?php _e('Input a name to identify this position (<em>eg. Left blocks</em>)','rmcommon'); ?></span>
+            <div class="form-group">
+                <label><?php _e('Name','rmcommon'); ?></label>
+                <input type="text" name="posname" value="" class="form-control" required>
+                <span class="help-block"><?php _e('Input a name to identify this position (<em>eg. Left blocks</em>)','rmcommon'); ?></span>
+            </div>
 
-            <label><strong><?php _e('Tag Name','rmcommon'); ?></strong></label>
-            <input type="text" name="postag" value="" class="input-block-level required" />
-            <span class="help-block"><?php _e('Specify a name for the smarty tag to use in templates (eg. left_blocks). This tag will be used as Smarty tag (eg. &lt;{$left_blocks}&gt).','rmcommon'); ?></span>
+            <div class="form-group">
+                <label><?php _e('Tag Name','rmcommon'); ?></label>
+                <input type="text" name="postag" value="" class="form-control" required>
+                <span class="help-block"><?php _e('Specify a name for the smarty tag to use in templates (eg. left_blocks). This tag will be used as Smarty tag (eg. &lt;{$left_blocks}&gt).','rmcommon'); ?></span>
+            </div>
 
             <input type="submit" class="btn btn-info btn-large" name="bk_add_pos" id="add-position" value="<?php _e('Add Position','rmcommon'); ?>" />
             <input type="hidden" name="action" value="save_position" />
             <?php echo $xoopsSecurity->getTokenHTML(); ?>
 
-            <div class="page-header">
                 <h4><?php _e('How to implement blocks','rmcommon'); ?></h4>
-            </div>
                 <pre>&lt;{foreach item="block" from=$xoBlocks.<em><strong>tag_name</strong></em>}&gt;
     &lt;{$block.title}&gt;
     &lt;{$block.content}&gt;
@@ -104,18 +112,18 @@
 </div>
 
 <!-- Positions -->
-<div id="blocks-positions" class="span8">
+<div id="blocks-positions" class="col-md-9 col-lg-9">
     <form name="formPos" id="frm-positions" method="post" action="blocks.php" class="form-inline">
-        <div class="rmc_bulkactions">
-            <select name="action" id="bulk-topp">
+        <div class="cu-bulk-actions">
+            <select name="action" id="bulk-topp" class="form-control">
                 <option value=""><?php _e('Bulk actions...','rmcommon'); ?></option>
                 <option value="visiblepos"><?php _e('Visible','rmcommon'); ?></option>
                 <option value="hiddenpos"><?php _e('Hidden','rmcommon'); ?></option>
                 <option value="deletepos"><?php _e('Delete','rmcommon'); ?></option>
             </select>
-            <input type="button" id="the-op-topp" value="<?php _e('Apply','bxpress'); ?>" onclick="before_submit('frm-positions');" />
+            <button type="button" class="btn btn-default" id="the-op-topp" onclick="before_submit('frm-positions');"><?php _e('Apply','rmcommon'); ?></button>
         </div>
-        <table class="outer" border="0" id="table-positions">
+        <table class="table table-striped table-bordered" border="0" id="table-positions">
             <thead>
             <tr>
                 <th width="30"><input type="checkbox" id="checkallp" onclick="$('#frm-positions').toggleCheckboxes(':not(#checkallp)');" /></th>
@@ -156,7 +164,7 @@
                             <a href="#" onclick="select_option(<?php echo $pos['id']; ?>, 'delete', 'frm-positions')"><?php _e('Delete','rmcommon'); ?></a> |
                             <a href="#" class="edit_position"><?php _e('Edit','rmcommon'); ?></a>
                         </span>
-                        <span class="pos_data">
+                        <span class="pos_data hide">
                             <span class="name"><?php echo $pos['name']; ?></span>
                             <span class="ptag"><?php echo $pos['tag']; ?></span>
                             <span class="active"><?php echo $pos['active']; ?></span>
@@ -168,14 +176,14 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-        <div class="rmc_bulkactions">
-            <select name="actionb" id="bulk-bottomp">
+        <div class="cu-bulk-actions">
+            <select name="actionb" class="form-control" id="bulk-bottomp">
                 <option value=""><?php _e('Bulk actions...','rmcommon'); ?></option>
                 <option value="visiblepos"><?php _e('Visible','rmcommon'); ?></option>
                 <option value="hiddenpos"><?php _e('Hidden','rmcommon'); ?></option>
                 <option value="deletepos"><?php _e('Delete','rmcommon'); ?></option>
             </select>
-            <input type="button" id="the-op-bottomp" value="<?php _e('Apply','bxpress'); ?>" onclick="before_submit('frm-positions');" />
+            <button type="button" class="btn btn-default" id="the-op-topp" onclick="before_submit('frm-positions');"><?php _e('Apply','rmcommon'); ?></button>
         </div>
     </form>
 </div>

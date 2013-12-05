@@ -11,6 +11,7 @@
 
 abstract class RMController
 {
+    use RMProperties;
     /**
      * Controller data
      */
@@ -28,60 +29,27 @@ abstract class RMController
 
     protected function __construct(){
 
-        $this->data = array(
-            'controller'    => '',
-            'module'        => '',
-        );
 
-    }
-
-    /**
-     * @param string $property Property or method name
-     * @return mixed
-     */
-    public function __get($property){
-
-        $method = 'get_' . $property;
-
-        if ( isset( $this->data[$property] ) )
-            return $this->data[$property];
-        elseif ( method_exists( $this, $method ) )
-            return $this->$method();
-
-    }
-
-    /**
-     * @param string $property Property or method name
-     * @param mixed $value Value to assign
-     * @return mixed
-     */
-    public function __set($property, $value){
-
-        $method = 'set_' . $property;
-
-        if ( isset( $this->data[$property] ) )
-            $this->data[$property] = $value;
-        elseif ( method_exists( $this, $method ) )
-            return $this->$method($value);
 
     }
 
     protected function model(){
 
-        $class = ucfirst( $this->parent->controller );
+        $class = ucfirst( $this->parent->controller ) . ( defined("XOOPS_CPFUNC_LOADED") ? 'Admin' : '' );
 
         if ( is_a( $this->model, $class ))
             return $this->model;
 
-        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . '/models/' . ucfirst( $this->parent->controller ) . '.php';
+        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . ( defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '' ) . '/models/' . ucfirst( $this->parent->controller ) . '.php';
 
         if ( !file_exists( $file ) )
             return false;
 
         include_once $file;
 
-
         $this->model = new $class();
+        $this->model->controller = $this;
+        $this->model->module = $this->module;
 
         return $this->model;
 

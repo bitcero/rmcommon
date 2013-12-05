@@ -224,6 +224,7 @@ td.actions img{
 	-khtml-opacity: 0.7;
 	opacity: 0.7;
 	display: none;
+    z-index: 1033;
 }
 #info-module{
 	position: fixed;
@@ -238,6 +239,7 @@ td.actions img{
 	box-shadow: 0 0 10px #000;
 	display: none;
     border-radius: 4px;
+    z-index: 1034;
 }
 #info-module .th{
     border-radius: 3px 3px 0 0;

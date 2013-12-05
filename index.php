@@ -11,42 +11,45 @@
 define('RMCLOCATION','dashboard');
 include_once '../../include/cp_header.php';
 
-function get_modules_ajax(){
-    
-    XoopsLogger::getInstance()->activated = false;
-    XoopsLogger::getInstance()->renderingEnabled = false;
+function get_modules_list(){
     
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    $sql = "SELECT COUNT(*) FROM ".$db->prefix("modules");
-    $page = rmc_server_var($_POST, 'page', 1);
-    $limit = RMFunctions::configs('mods_number');
-    list($num) = $db->fetchRow($db->query($sql));
     
-    $tpages = ceil($num / $limit);
-    $page = $page > $tpages ? $tpages : $page;
-
-    $start = $num<=0 ? 0 : ($page - 1) * $limit;
-    $nav = new RMPageNav($num, $limit, $page, 5);
-    $nav->target_url('javascript:;" onclick="get_mods_page({PAGE_NUM})');
-    
-    $sql = 'SELECT * FROM ' . $db->prefix('modules')." ORDER BY mid, weight LIMIT $start,$limit";
+    $sql = 'SELECT * FROM ' . $db->prefix('modules')." ORDER BY mid, weight";
     $result = $db->query($sql);
     $installed_mods = array();
     while($row = $db->fetchArray($result)){
         $mod = new XoopsModule();
         $mod->assignVars($row);
-        $installed_mods[] = $mod;
+
+        $module_icon = $mod->getInfo('icon48') != '' ? XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('icon48') : '';
+        $module_logo = XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('image');
+
+        $this_module = array(
+            'name' => $mod->getVar('name'),
+            'dirname' => $mod->getVar('dirname'),
+            'real_name' => $mod->getInfo('name'),
+            'version' => is_array($mod->getInfo('rmversion')) ? RMModules::format_module_version($mod->getInfo('rmversion')) : $mod->getVar('version') / 100,
+            'icon' => $module_icon,
+            'logo' => $module_logo,
+            'admin' => $mod->getVar('hasadmin') ? XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('adminindex') : '',
+            'main' => $mod->mainLink(),
+            'updated' => RMTimeFormatter::get()->format( $mod->getVar('last_update'), __('%d% %T% %Y%', 'rmcommon')),
+            'config' => $mod->hasconfig() ? XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid() : '',
+            'description' => $mod->getInfo('description')
+        );
+
+        $installed_mods[] = (object) $this_module;
     }
-    
-    include RMTemplate::get()->get_template('rmc-modules-installed.php', 'module', 'rmcommon');
-    die();
+
+    return $installed_mods;
     
 }
 
 function show_dashboard(){
     global $xoopsModule;
     
-    RMFunctions::create_toolbar();
+    //RMFunctions::create_toolbar();
     
     $db = XoopsDatabaseFactory::getDatabaseConnection();
     $sql = 'SELECT * FROM ' . $db->prefix('modules');
@@ -84,10 +87,12 @@ function show_dashboard(){
                     <img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" onclick="$(\'#paypal-form\').submit()" alt="PayPal - The safer, easier way to pay online!" />
     </form>';
 
+    $installed_modules = get_modules_list();
+
     xoops_cp_header();
 
     RMTemplate::get()->add_style('dashboard.css', 'rmcommon');
-    RMTemplate::get()->add_script(RMCURL.'/include/js/dashboard.js');
+    RMTemplate::get()->add_script('dashboard.js', 'rmcommon');
     RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
     RMTemplate::get()->add_help(__('Dashboard Help','rmcommon'),'http://www.xoopsmexico.net/docs/common-utilities/uso-de-common-utilities/standalone/1/#dashboard');
     include RMTemplate::get()->get_template('rmc-dashboard.php', 'module', 'rmcommon');
@@ -122,9 +127,6 @@ function rm_change_theme(){
 $action = rmc_server_var($_REQUEST, 'action', '');
 
 switch($action){
-    case 'list':
-        get_modules_ajax();
-        die();
     case 'theme':
         rm_change_theme();
         break;

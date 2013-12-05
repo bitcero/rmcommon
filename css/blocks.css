@@ -289,7 +289,7 @@
 }
 
 .settings-nav{
-    padding: 5px 20px 0 20px;
+    padding: 5px 20px 0 20px!important;
     background: #f9f9f9;
     margin: 0 -10px 15px -10px!important;
     border-top: 1px solid rgba(255,255,255,0.3);
@@ -307,4 +307,7 @@
     background: #f2f2f2!important;
     color: #999;
     color: rgba(0,0,0,0.3);
+}
+#editor-row button{
+    margin: 5px 2px 0 0;
 }

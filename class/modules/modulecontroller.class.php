@@ -12,6 +12,7 @@
 abstract class RMModuleController {
 
     protected $module_data = array();
+    protected $module;
 
     protected function construct_module($module){
 
@@ -22,10 +23,13 @@ abstract class RMModuleController {
         else
             $moduleObject = RMModules::load_module($module);
 
+        if (!is_a($moduleObject, 'XoopsModule'))
+            throw new RMException(sprintf(__('No existe el módulo "%s"', 'rmcommon'), $module));
+
         // Initialize properties
         $this->module_data = array(
 
-            'settings'              => \RMSettings::module_settings($module),
+            'settings'              => RMSettings::module_settings($module),
             'path'                  => XOOPS_ROOT_PATH . '/modules/' . $module,
             'real_url'              => XOOPS_URL . '/modules/' . $module,
             'data'                  => (object) $moduleObject->getInfo(),
@@ -37,6 +41,7 @@ abstract class RMModuleController {
             'parameters'            => array(),
 
         );
+        $this->module = $moduleObject;
 
         if ( defined( 'XOOPS_CPFUNC_LOADED') )
             $this->module_data['menu'] = $moduleObject->getAdminMenu();
@@ -110,12 +115,14 @@ abstract class RMModuleController {
     protected function launch(){
 
         // Get data from URL
-        $parameters = RMHttpRequest::get( 's', 'string', '');
+        $parameters = RMUris::current_url();
+        $parameters = trim( str_replace( $this->get_url(), '', $parameters ), '/' );
+        $parameters = preg_replace("/(.*)\?.*?$/", '$1', $parameters);
 
         if( $parameters=='' ){
 
-            $controller_name = defined( 'XOOPS_CPFUNC_LOADED' ) ? 'main' : $this->default_controller;
-            $action = defined( 'XOOPS_CPFUNC_LOADED' ) ? 'dashboard' : $this->default_action;;
+            $controller_name = $this->default_controller;
+            $action = $this->default_action;
 
         } else {
 
@@ -125,14 +132,15 @@ abstract class RMModuleController {
 
         }
 
-        $class = ucfirst( $controller_name ) . 'Controller';
-        $file = $this->path . '/' . ( defined('XOOPS_CPFUNC_LOADED') ? 'admin' : 'controllers' ) . '/' . $class . '.php';
+        $action = str_replace("-", "_", $action);
+
+        $class = ucfirst( $controller_name ) . ( defined('XOOPS_CPFUNC_LOADED') ? 'Admin' : '' ) . 'Controller';
+        $file = $this->path . '/' . ( defined('XOOPS_CPFUNC_LOADED') ? 'admin/controllers' : 'controllers' ) . '/' . ucfirst( $controller_name ) . 'Controller.php';
 
         if( !file_exists($file) )
             return $this->send_status( 404, $controller_name, $action );
 
         include_once $file;
-
 
         if( !class_exists( $class ) )
             return $this->send_status( 404, $controller_name, $action );
@@ -143,7 +151,11 @@ abstract class RMModuleController {
             $parameters = array();
 
         $controller = new $class();
+
         $controller->parent = $this;
+        $controller->settings = $this->settings;
+        $controller->tpl = $GLOBALS['rmTpl'];
+        $controller->module = $this->module;
         $this->parameters = $parameters;
 
         if( !method_exists( $controller, $action ) )
@@ -167,18 +179,20 @@ abstract class RMModuleController {
      *
      * If the $name parameter is provided, then a file with this name will be requested.
      *
-     * @param string $name Name of template
-     * @return string File path
+     * @param string $view Name of template
+     * @return string $file File path
      */
-    public function get_view($name = ''){
+    public function get_view( $view = '' ){
 
-        if ( $name == '' )
-            $name = ( str_replace( 'controller', '', $this->controller ) ) . '/' . $this->action . '.php';
+        if ( $view == '' )
+            $name = ( str_replace( 'controller', '', $this->controller ) ) . '/' . str_replace("_", "-", $this->action) . '.php';
+        else
+            $name = str_replace( 'controller', '', $this->controller ) . '/' . $view . '.php';
 
         if ( defined( 'XOOPS_CPFUNC_LOADED' ) )
             $file = $GLOBALS['rmTpl']->get_template('backend/' . $name, 'module', $this->directory);
         else
-            $file = $GLOBALS['rmTpl']->get_template($name, 'module', $this->directory);
+            $file = $GLOBALS['rmTpl']->get_template('frontend/' . $name, 'module', $this->directory);
 
         return $file;
 
@@ -193,15 +207,16 @@ abstract class RMModuleController {
      * @return string URL formatted
      */
     public function anchor( $controller, $action = '', $parameters = array() ){
+        global $cuSettings;
 
         if($controller=='')
             return;
 
-        $url = $this->url . ( $this->settings->permalinks ? '/' . $controller . '/' : '/?s=' . $controller . '/');
+        $url = $this->url . '/' . $controller . '/';
         $url .= $action != '' ? $action . '/' : '';
 
         foreach( $parameters as $name => $value ){
-            $url .= $this->settings->permalinks ? $name . '/' . urlencode($value) . '/' : '&amp;' . $name . '=' . urlencode($value);
+            $url .= $cuSettings->permalinks ? $name . '/' . urlencode($value) . '/' : '&amp;' . $name . '=' . urlencode($value);
         }
 
         return $url;
@@ -217,6 +232,19 @@ abstract class RMModuleController {
 
         return true;
 
+    }
+
+    protected function logged(){
+        global $xoopsUser;
+
+        if ( $xoopsUser )
+            return true;
+
+        RMUris::redirect_with_message(
+            __( 'This area requires user login!', 'rmcommon' ),
+            XOOPS_URL . '/user.php',
+            RMMSG_INFO
+        );
     }
 
     abstract public function get_url();

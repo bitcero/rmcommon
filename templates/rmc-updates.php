@@ -1,53 +1,86 @@
-<h1 class="rmc_titles"><?php _e('Available Updates','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Available Updates','rmcommon'); ?></h1>
 
-<div class="row-fluid" style="margin-bottom: 10px;">
-    <div class="span8">
-        <button type="button" class="btn btn-inverse" id="refresh-updates"><i class="icon-refresh icon-white"></i> <?php _e('Check for Updates','rmcommon'); ?></button>
+<div class="row">
+    <div class="col-md-8 col-lg-8">
+        <button type="button" class="btn btn-warning" id="refresh-updates"><i class="icon-refresh icon-white"></i> <?php _e('Check for Updates','rmcommon'); ?></button>
         <button type="button" class="btn btn-info" id="upds-ftp"><i class="icon-upload"></i> <?php _e('FTP Settings','rmcommon'); ?></button>
     </div>
-    <div class="span4 rm-comprobation-legend text-success" align="right">
-        <?php echo sprintf(__('Last comprobation: %s','rmcommon'), '<strong>'.$tf->format($updates['date']).'</strong>'); ?>
+    <div class="col-md-4 col-lg-4 text-right">
+        <span class="label label-success"><?php echo sprintf(__('Last comprobation: %s','rmcommon'), '<strong>'.$tf->format($updates['date']).'</strong>'); ?></span>
     </div>
 </div>
-
+<br>
 <div id="ftp-settings">
-    <form class="form-inline" id="ftp-form">
-        <div class="input-prepend">
-            <span class="add-on"><?php _e('Server:','rmcommon'); ?></span>
-            <input type="text" class="input input-small" name="ftp_server" id="ftp-server" value="<?php echo $ftpserver; ?>" />
+
+    <div class="row">
+
+        <form id="ftp-form">
+
+            <div class="col-md-2 col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon" title="<?php _e('Server:','rmcommon'); ?>"><i class="icon-desktop"></i></span>
+                    <input type="text" class="form-control" name="ftp_server" id="ftp-server" value="<?php echo $ftpserver; ?>" />
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon"><?php _e('Port:','rmcommon'); ?></span>
+                    <input type="text" class="form-control" name="ftp_port" id="ftp-port" value="21" />
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon" title="<?php _e('User:','rmcommon'); ?>"><i class="icon-user"></i></span>
+                    <input type="text" class="form-control" name="ftp_user" id="ftp-user" value="" />
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon" title="<?php _e('Password:','rmcommon'); ?>"><i class="icon-keyboard"></i></span>
+                    <input type="password" class="form-control" name="ftp_pass" id="ftp-pass" value="" />
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon" title="<?php _e('XOOPS Directory:','rmcommon'); ?>"><i class="icon-folder-open"></i></span>
+                    <input type="text" class="form-control" name="ftp_dir" id="ftp-dir" value="<?php echo $ftpdir; ?>" />
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+                <button type="button" class="btn btn-warning btn-block"><i class="icon-ok"></i> <?php _e('Save','rmcommon'); ?></button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <span class="help-block">
+                <?php _e('XOOPS directory must match with this XOOPS installation, but only the relative patch to server root.','rmcommon'); ?>
+            </span>
         </div>
-        <div class="input-prepend">
-            <span class="add-on"><?php _e('Port:','rmcommon'); ?></span>
-            <input type="text" class="input input-small" name="ftp_port" id="ftp-port" value="21" />
-        </div>
-        <div class="input-prepend">
-            <span class="add-on"><?php _e('User:','rmcommon'); ?></span>
-            <input type="text" class="input input-small" name="ftp_user" id="ftp-user" value="" />
-        </div>
-        <div class="input-prepend">
-            <span class="add-on"><?php _e('Password:','rmcommon'); ?></span>
-            <input type="password" class="input input-small" name="ftp_pass" id="ftp-pass" value="" />
-        </div>
-        <div class="input-prepend">
-            <span class="add-on"><?php _e('XOOPS Directory:','rmcommon'); ?></span>
-            <input type="text" class="input input-small" name="ftp_dir" id="ftp-dir" value="<?php echo $ftpdir; ?>" />
-        </div>
-        <button type="button" class="btn btn-primary"><?php _e('Save','rmcommon'); ?></button>
-    </form>
-    <p>
-    <?php _e('XOOPS directory must match with this XOOPS installation, but only the relative patch to server root.','rmcommon'); ?>
-    </p>
+    </div>
+
 </div>
 
-
-<div class="alert alert-info alert-block">
-    <h4><?php _e('Notice','rmcommon'); ?></h4>
-    <p><?php _e('Before to install updates be sure that target folders have writting permissions for web server. If you wish, you can configure the internal FTP Client in order to update without assign writting permissions.','rmcommon'); ?></p>
+<div class="alert alert-info">
+    <button class="close" data-dismiss="alert">&times;</button>
+    <p><strong><?php _e('Important:','rmcommon'); ?></strong> <?php _e('Before to install updates be sure that target folders have writting permissions for web server. If you wish, you can configure the internal FTP Client in order to update without assign writting permissions.','rmcommon'); ?></p>
 </div>
 
-<span class="rm-loading text text-info"><?php _e('Searching for updates...','rmcommon'); ?></span>
-<div id="rmc-updates">
-    
+<div class="row">
+    <div class="col-lg-12">
+        <span class="rm-loading text text-info"><?php _e('Searching for updates...','rmcommon'); ?></span>
+        <div id="rmc-updates">
+
+        </div>
+    </div>
 </div>
 
 <div id="upd-info-blocker"></div>

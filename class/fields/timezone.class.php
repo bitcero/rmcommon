@@ -68,13 +68,13 @@ class RMFormTimeZoneField extends RMFormElement
 		} else {
 			if ($this->multi){
 				if (!is_array($this->selected)) $this->selected=array($this->selected);
-				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."[]' size='$this->size' multiple='multiple'>";
+				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."[]' size='$this->size' multiple='multiple' class=\"form-control ". $this->getClass() . "\">";
 				foreach ($zonas as $k => $v){
 					$rtn .= "<option value='$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " selected='selected'" : '') : '').">$v</option>";
 				}
 				$rtn .= "</select>";
 			} else {
-				$rtn = "<select name='".$this->getName()."' id='".$this->id()."'>";
+				$rtn = "<select name='".$this->getName()."' id='".$this->id()."' class=\"form-control ". $this->getClass() . "\">";
 				foreach ($zonas as $k => $v){
 					$rtn .= "<option value='$k'".($k==$this->selected ? " selected='selected'" : '').">$v</option>";
 				}

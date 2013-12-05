@@ -38,7 +38,7 @@ function show_available_updates(){
         $updates = unserialize(base64_decode(file_get_contents($updfile)));
         
     $rmTpl->add_style('updates.css', 'rmcommon');
-    $rmTpl->add_script('updates.js', 'rmcommon', array('directory' => 'include'));
+    $rmTpl->add_script('updates.js', 'rmcommon');
     $rmTpl->add_head_script('var xoToken = "'.$xoopsSecurity->createToken().'";');
     $rmTpl->add_head_script('var langUpdated = "'.__('Item updated!','rmcommon').'";');
 
@@ -73,7 +73,7 @@ function ajax_load_updates(){
     if(is_file($updfile))
         $updates = unserialize(base64_decode(file_get_contents($updfile)));
     
-    include $rmTpl->get_template('ajax/rmc_updates_list.php','module','rmcommon');
+    include $rmTpl->get_template('ajax/rmc-updates-list.php','module','rmcommon');
     die();
     
 }

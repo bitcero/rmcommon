@@ -66,12 +66,13 @@ $(document).ready(function(){
     });
     
     $("#install-ok").click(function(){
+        alert("Hola");
 		$("#install-form").submit();
     });
     
     $("a.uninstall_button").click(function(){
-        
-       var dir = $("#the-id").val();
+
+       var dir = $(this).data('dir');
        if (dir=='system') return;
        
        if (!confirm(message)) return;

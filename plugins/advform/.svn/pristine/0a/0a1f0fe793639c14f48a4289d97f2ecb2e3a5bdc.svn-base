@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AdvancedForms Plugin\n"
+"POT-Creation-Date: 2012-10-24 14:19-0600\n"
+"PO-Revision-Date: 2012-10-24 14:21-0600\n"
+"Last-Translator: Eduardo Cortés <i.bitcero@gmail.com>\n"
+"Language-Team: Xoops México <xoopsmexico@gmail.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\xm\\modules\\rmcommon\\plugins"
+"\\advform\n"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/advform-plugin.php:18
+msgid "AdvancedForms Plugin"
+msgstr "AdvancedForms Plugin"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/advform-plugin.php:19
+msgid "Improves rmcommon forms by addign new fields and controls"
+msgstr ""
+"Mejora los formularios de Common Utilities al agregar nuevos campos y "
+"controles."
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/imageurl.class.php:26
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/js/adv-lang.php:8
+msgid "Image Manager"
+msgstr "Administrador de Imágenes"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/imageurl.class.php:30
+msgid "Insert Image URL"
+msgstr "Insertar URL de Imagen"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/slider.class.php:36
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/js/adv-lang.php:3
+msgid "Edit"
+msgstr "Editar"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/slider.class.php:37
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/js/adv-lang.php:4
+msgid "Delete"
+msgstr "Eliminar"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/slider.class.php:56
+msgid "Inser Image"
+msgstr "Insertar Imagen"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/slider.class.php:73
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/js/adv-lang.php:5
+msgid "Close"
+msgstr "Cerrar"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/slider.class.php:82
+msgid "Add New"
+msgstr "Agregar"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/webfonts.class.php:56
+msgid "Select font..."
+msgstr "Seleccionar fuente..."
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/webfonts.class.php:61
+msgid "Choose Styles"
+msgstr "Elegir Estilos"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/webfonts.class.php:62
+msgid "Choose Character Sets"
+msgstr "Elegir Conjuntos de Caracteres"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/webfonts.class.php:63
+msgid "Font Preview"
+msgstr "Previsualización"
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/webfonts.class.php:63
+msgid "This is the font preview area."
+msgstr "Esta es el área de previsualización."
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/fields/webfonts.class.php:64
+msgid "Selected Font String"
+msgstr "Cadena de fuente seleccionada."
+
+#: C:\wamp\www\xm\modules\rmcommon\plugins\advform/js/adv-lang.php:6
+msgid "Insert Image"
+msgstr "Insertar Imagen"

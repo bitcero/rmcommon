@@ -47,7 +47,7 @@ class RMFormEditor extends RMFormElement
 	 */
 	function __construct($caption, $name, $width='100%', $height='300px', $default='', $type='', $change=1, $ele=array('op')){
         
-        $rmc_config = RMFunctions::get()->configs();
+        $rmc_config = RMSettings::cu_settings();
         
 		$tcleaner = TextCleaner::getInstance();
 		$this->setCaption($caption);
@@ -55,7 +55,7 @@ class RMFormEditor extends RMFormElement
 		$this->_width = $width;
 		$this->_height = $height;
 		$this->_default = isset($_REQUEST[$name]) ? $tcleaner->stripslashes($_REQUEST[$name]) : $tcleaner->stripslashes($default);
-		$this->_type = $type=='' ? $rmc_config['editor_type'] : $type;
+		$this->_type = $type=='' ? $rmc_config->editor_type : $type;
         $this->_type = strtolower($this->_type);
         $this->_change = $change;
         $this->_eles = $ele;
@@ -121,7 +121,7 @@ class RMFormEditor extends RMFormElement
             $rtn .= implode("", $plugins);
             $rtn .= "</div>";
         }
-        $rtn .= "<textarea class='xc-editor' id='".$this->getName()."' name='".$this->getName()."' style='width: 99%; height: ".$this->_height.";'>".$this->_default."</textarea>
+        $rtn .= "<textarea class='xc-editor form-control' id='".$this->getName()."' name='".$this->getName()."' style='width: 99%; height: ".$this->_height.";'>".$this->_default."</textarea>
                  </div>";
         return $rtn;
 	}
@@ -139,7 +139,7 @@ class RMFormEditor extends RMFormElement
 	private function renderTiny(){
 		global $rmc_config, $xoopsUser;
 		TinyEditor::getInstance()->add_config('elements',$this->id(), true);
-		RMTemplate::get()->add_xoops_style('mce_editor.css','rmcommon');
+		RMTemplate::get()->add_style('mce_editor.css','rmcommon');
 		RMTemplate::get()->add_script( 'editor.js','rmcommon', array('directory' => 'include') );
 		RMTemplate::get()->add_script( 'quicktags.js','rmcommon', array('directory' => 'include') );
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce.js');

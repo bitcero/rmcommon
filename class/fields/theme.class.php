@@ -86,7 +86,7 @@ class RMFormTheme extends RMFormElement
 			$rtn .= "</ul>";
 		} else {
 			if ($this->multi){
-				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."' size='6' multiple='multiple'>";
+				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."' size='6' multiple='multiple' class=\"form-control\">";
 				foreach ($themes as $k){
 					$rtn .= "<option value='$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " selected='selected'" : '') : '').">$k</option>";
 				}

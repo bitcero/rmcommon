@@ -68,12 +68,12 @@ class Twop6Functions
         global $xoopsModule, $xoopsUser;
         
         if(!is_a($xoopsModule, 'XoopsModule')){
-            $mod = RMFunctions::load_module($m);
+            $mod = RMModules::load_module($m);
         } else {
             if($xoopsModule->dirname()==$m)
                 $mod = $xoopsModule;
             else
-                $mod = RMFunctions::load_module($m);
+                $mod = RMModules::load_module($m);
         }
         
         if(!is_a($mod, 'XoopsModule')) return false;
@@ -229,7 +229,7 @@ class Twop6Functions
         if(!is_a($xoopsModule, 'XoopsModule')) return false;
         
         if($xoopsModule->dirname()!=$module){
-            $mod = RMFunctions::load_module($module);
+            $mod = RMModules::load_module($module);
         } else {
             $mod = $xoopsModule;
         }
@@ -311,11 +311,11 @@ class Twop6Functions
         if(isset($menu['type']) || (isset($menu['icon']) && $menu['icon']=='option'))
             return '<i class="xo-icon xicon-settings"></i> ';
         
-        if (isset($menu['location']) && isset($accepted[$menu['location']]))
+        /*if (isset($menu['location']) && isset($accepted[$menu['location']]))
             return '<i class="xo-icon '.$accepted[$menu['location']].'"></i> ';
             
         if(isset($menu['selected']) && isset($accepted[$menu['selected']]))
-            return '<i class="xo-icon '.$accepted[$menu['selected']].'"></i> ';
+            return '<i class="xo-icon '.$accepted[$menu['selected']].'"></i> ';*/
         
         $modurl = XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/';
 
@@ -346,5 +346,48 @@ class Twop6Functions
 		return $this->getIcon($menu, true);
 
 	}
+
+    /**
+     * Calculate the width of columns according to left and right widgets prescense
+     *
+     */
+    public function calculate_cols($left, $right){
+
+        $md = 12; $lg = 12;
+
+        if ($left){
+            $md -= 4;
+            $lg -= 2;
+        }
+
+        if ($right){
+            $md -= 4;
+            $lg -= 3;
+        }
+
+        return "col-md-$md col-lg-$lg";
+
+    }
+
+    /**
+     * Render attributes
+     * @param array $attrs <p>Attributes to render</p>
+     * @return string
+     */
+    public function render_attributes( $attrs ){
+
+        if ( empty( $attrs ) )
+            return '';
+
+        $rtn = '';
+        foreach( $attrs as $name => $value ){
+
+            $rtn .= ($rtn == '' ? '' : ' ') . $name .'="' . $value . '"';
+
+        }
+
+        return $rtn;
+
+    }
     
 }
