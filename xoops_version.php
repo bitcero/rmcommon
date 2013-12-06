@@ -68,6 +68,13 @@ $modversion['templates'][1]['description'] = 'Comments list';
 $modversion['templates'][2]['file'] = 'rmc-comments-form.html';
 $modversion['templates'][2]['description'] = 'Shows the comments form';
 
+// Settings categories
+$modversion['categories'] = array(
+    'general' => __('General', 'rmcommon'),
+    'appearance' => __('Appearance', 'rmcommon'),
+    'email' => __('Email', 'rmcommon'),
+);
+
 // URL Rewriting
 $modversion['config'][] = array(
     'name'          => 'permalinks',

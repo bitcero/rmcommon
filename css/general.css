@@ -90,3 +90,12 @@ This classes are used with ajax loader
     padding: 6px 6px 6px 40px;
     background: url(../images/loader-gray.gif) no-repeat 6px 14px;
 }
+
+/*
+CU Top Tabs
+*/
+.cu-top-tabs{
+    background: #f2f2f2;
+    padding: 10px 15px 0 15px!important;
+    margin: -5px -15px 15px -15px;
+}

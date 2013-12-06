@@ -178,4 +178,172 @@ class RMSettings
         }
     }
 
+    /**
+     * Prepares the form field that will be shown on settings form
+     * and returns the HTML code.
+     * <br><br>
+     * <p><strong>Usage:</strong></p>
+     * <code>echo RMSettings::render_field( string 'field_id', array $field );</code>
+     *
+     * @param stdClass $field <p>An object with all field values, including caption, id, description, type, value, etc.</p>
+     * @return string
+     */
+    public static function render_field( $field ){
+
+        if ( empty( $field ) )
+            return;
+
+        $tc = TextCleaner::getInstance();
+
+        switch ( $field->field ) {
+
+            case 'textarea':
+                if ($field->type == 'array') {
+                    // this is exceptional.. only when value type is arrayneed a smarter way for this
+                    $ele = ($field->value != '') ? new RMFormTextArea($field->caption, $field->id, $tc->specialchars(implode('|', $field->value)), 5, 50) : new RMFormTextArea($field->title, $field->id, '', 5, 50);
+                } else {
+                    $ele = new RMFormTextArea($field->caption, $field->id, $tc->specialchars($field->value), 5, 50);
+                }
+                break;
+
+            case 'select':
+                $ele = new RMFormSelect($field->caption, $field->id, 0, array($field->value));
+                foreach( $field->options as $value => $caption ){
+                    $ele->addOption( $value, $caption );
+                }
+                break;
+/*
+            case 'select_multi':
+                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput(), 5, true);
+                $options = $config_handler->getConfigOptions(new Criteria('conf_id', $config[$i]->getVar('conf_id')));
+                $opcount = count($options);
+                for ($j = 0; $j < $opcount; $j++) {
+                    $optval = defined($options[$j]->getVar('confop_value')) ? constant($options[$j]->getVar('confop_value')) : $options[$j]->getVar('confop_value');
+                    $optkey = defined($options[$j]->getVar('confop_name')) ? constant($options[$j]->getVar('confop_name')) : $options[$j]->getVar('confop_name');
+                    $ele->addOption($optval, $optkey);
+                }
+                break;
+
+            case 'yesno':
+                $ele = new XoopsFormRadioYN($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput(), _YES, _NO);
+                break;
+
+            case 'theme':
+            case 'theme_multi':
+                $ele = ($config[$i]->getVar('conf_formtype')
+                    != 'theme_multi') ? new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput()) : new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput(), 5, true);
+                require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+                $dirlist = XoopsLists::getThemesList();
+                if (!empty($dirlist)) {
+                    asort($dirlist);
+                    $ele->addOptionArray($dirlist);
+                }
+                $valueForOutput = $config[$i]->getConfValueForOutput();
+                $form->addElement(new XoopsFormHidden('_old_theme', (is_array($valueForOutput) ? $valueForOutput[0] : $valueForOutput)));
+                break;
+
+            case 'tplset':
+                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                $tplset_handler =& xoops_gethandler('tplset');
+                $tplsetlist = $tplset_handler->getList();
+                asort($tplsetlist);
+                foreach ($tplsetlist as $key => $name) {
+                    $ele->addOption($key, $name);
+                }
+                // old theme value is used to determine whether to update cache or not. kind of dirty way
+                $form->addElement(new XoopsFormHidden('_old_theme', $config[$i]->getConfValueForOutput()));
+                break;
+
+            case 'cpanel':
+                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                xoops_load("cpanel", "system");
+                $list = XoopsSystemCpanel::getGuis();
+                $ele->addOptionArray( $list );
+                break;
+
+            case 'timezone':
+                $ele = new XoopsFormSelectTimezone($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                break;
+
+            case 'language':
+                $ele = new XoopsFormSelectLang($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                break;
+
+            case 'startpage':
+                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                $module_handler =& xoops_gethandler('module');
+                $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
+                $criteria->add(new Criteria('isactive', 1));
+                $moduleslist = $module_handler->getList($criteria, true);
+                $moduleslist['--'] = _MD_AM_NONE;
+                $ele->addOptionArray($moduleslist);
+                break;
+
+            case 'group':
+                $ele = new XoopsFormSelectGroup($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 1, false);
+                break;
+
+            case 'group_multi':
+                $ele = new XoopsFormSelectGroup($title, $config[$i]->getVar('conf_name'), true, $config[$i]->getConfValueForOutput(), 5, true);
+                break;
+
+            // RMV-NOTIFY - added 'user' and 'user_multi'
+            case 'user':
+                $ele = new XoopsFormSelectUser($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 1, false);
+                break;
+
+            case 'user_multi':
+                $ele = new XoopsFormSelectUser($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 5, true);
+                break;
+
+            case 'module_cache':
+                $module_handler =& xoops_gethandler('module');
+                $modules = $module_handler->getObjects(new Criteria('hasmain', 1), true);
+                $currrent_val = $config[$i]->getConfValueForOutput();
+                $cache_options = array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK);
+                if (count($modules) > 0) {
+                    $ele = new XoopsFormElementTray($title, '<br />');
+                    foreach (array_keys($modules) as $mid) {
+                        $c_val = isset($currrent_val[$mid]) ? intval($currrent_val[$mid]) : null;
+                        $selform = new XoopsFormSelect($modules[$mid]->getVar('name'), $config[$i]->getVar('conf_name')."[$mid]", $c_val);
+                        $selform->addOptionArray($cache_options);
+                        $ele->addElement($selform);
+                        unset($selform);
+                    }
+                } else {
+                    $ele = new XoopsFormLabel($title, _MD_AM_NOMODULE);
+                }
+                break;
+
+            case 'site_cache':
+                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                $ele->addOptionArray(array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK));
+                break;
+
+            case 'password':
+                $myts =& MyTextSanitizer::getInstance();
+                $ele = new XoopsFormPassword($title, $config[$i]->getVar('conf_name'), 50, 255, $myts->htmlspecialchars($config[$i]->getConfValueForOutput()));
+                break;
+
+            case 'color':
+                $myts =& MyTextSanitizer::getInstance();
+                $ele = new XoopsFormColorPicker($title, $config[$i]->getVar('conf_name'), $myts->htmlspecialchars($config[$i]->getConfValueForOutput()));
+                break;
+
+            case 'hidden':
+                $myts =& MyTextSanitizer::getInstance();
+                $ele = new XoopsFormHidden( $config[$i]->getVar('conf_name'), $myts->htmlspecialchars( $config[$i]->getConfValueForOutput() ) );
+                break;*/
+
+            case 'textbox':
+            default:
+                $ele = new RMFormText($field->caption, $field->id, 50, 255, $tc->specialchars($field->value));
+                break;
+
+        }
+
+        return $ele->render();
+
+    }
+
 }

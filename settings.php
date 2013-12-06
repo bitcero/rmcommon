@@ -73,7 +73,68 @@ function show_module_preferences(){
             RMMSG_INFO
         );
 
+    /*
+    Cargamos los valores y los datos para formar los campos
+    */
     $values = RMSettings::module_settings( $module->getVar('dirname') );
+    $configs = $module->getInfo('config');
+    $settings_categories = $module->getInfo('categories');
+    $categories = array();
+
+    if ( empty( $settings_categories ) )
+        $categories = array(
+            'all' => array(
+                'caption' => __( 'Preferences', 'rmcommon' )
+            )
+        );
+    else{
+        foreach($settings_categories as $category => $caption){
+            $categories[$category] = array('caption' => $caption);
+        }
+    }
+
+    unset($settings_categories);
+
+    $fields = array(); // Container for all fields and values
+    foreach( $configs as $option ){
+
+        $id = $option['name'];
+
+        $field = new stdClass();
+        $field->id = $id;
+        $field->value = isset( $values->$id) ? $values->$id : $option['default'];
+        $field->caption = defined($option['title']) ? constant( $option['title'] ) : $option['title'];
+        $field->description = defined($option['description']) ? constant( $option['description'] ) : $option['description'];
+        $field->field = $option['formtype'];
+        $field->type = $option['valuetype'];
+        $field->options = isset($option['options']) ? $option['options'] : null;
+
+        $category = isset($option['category']) ? $option['category'] : 'all';
+
+        if ( isset( $categories[$category] ) )
+            $categories[$category]['fields'][$id] = $field;
+        else{
+            if ( !isset( $categories['all'] ) )
+                $categories['all'] = array('caption' => __('Preferences', 'rmcommon'));
+
+            $categories['all']['fields'][$id] = $field;
+        }
+
+    }
+
+    $categories = RMEvents::get()->run_event( 'rmcommon.settings.fields', $categories, $module );
+
+    $rmTpl->add_style('settings.css', 'rmcommon', array('footer' => 1));
+
+    /* Breadcrumb */
+    $bc = RMBreadCrumb::get();
+    if ($module->getVar('hasadmin'))
+        $bc->add_crumb( $module->getVar('name'), XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/' . $module->getVar('adminindex') );
+    else
+        $bc->add_crumb( $module->getVar('name'), '' );
+
+    $bc->add_crumb( __('Settings', 'rmcommon') );
+
 
     $rmTpl->header();
 

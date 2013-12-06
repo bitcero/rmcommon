@@ -185,4 +185,15 @@ class RMModules
         return $modules;
     }
 
+    /**
+     * Create the files to store the modules list
+     */
+    static function build_modules_cache(){
+
+        $modules = XoopsLists::getModulesList();
+
+        print_r($modules);
+
+    }
+
 }
