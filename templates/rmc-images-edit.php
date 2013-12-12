@@ -34,28 +34,22 @@
 			</div>
 
 			<div class="form-group">
-				<label class="control-label"><?php _e('Category:','rmcommon'); ?></label>
-				<div class="controls">
-					<select name="cat">
-						<?php foreach($categories as $catego): ?>
-							<option value="<?php echo $catego['id']; ?>"<?php echo $catego['id']==$cat->id() ? ' selected="selected"' : ''; ?>><?php echo $catego['name']; ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
+				<label for="cat"><?php _e('Category:','rmcommon'); ?></label>
+                <select name="cat" id="cat" class="form-control">
+                    <?php foreach($categories as $catego): ?>
+                        <option value="<?php echo $catego['id']; ?>"<?php echo $catego['id']==$cat->id() ? ' selected="selected"' : ''; ?>><?php echo $catego['name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label"><?php _e('Description:','rmcommon'); ?></label>
-				<div class="controls">
-					<textarea name="desc" class="input-block-level"><?php echo $image_data['desc']; ?></textarea>
-				</div>
+				<label for="desc"><?php _e('Description:','rmcommon'); ?></label>
+                <textarea name="desc" id="desc" class="form-control" rows="4"><?php echo $image_data['desc']; ?></textarea>
 			</div>
 
 			<div class="form-group">
-				<div class="controls">
-					<button type="submit" class="btn btn-primary btn-large"><?php _e('Update Image!','rmcommon'); ?></button>
-					<button type="button" class="btn btn-warning btn-large" onclick="window.location = 'images.php?category=<?php echo $cat->id(); ?>&page=<?php echo $page; ?>';"><?php _e('Cancel','rmcommon'); ?></button>
-				</div>
+                <button type="submit" class="btn btn-primary btn-lg"><?php _e('Update Image!','rmcommon'); ?></button>
+                <button type="button" class="btn btn-default btn-lg" onclick="window.location = 'images.php?category=<?php echo $cat->id(); ?>&page=<?php echo $page; ?>';"><?php _e('Cancel','rmcommon'); ?></button>
 			</div>
 
 			<?php echo $rmEvents->run_event('rmcommon.image.edit.form'); ?>

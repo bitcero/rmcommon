@@ -14,6 +14,7 @@ Smart-B ERP
 class RMPrivileges
 {
     use RMModuleAjax, RMSingleton;
+
     /**
      * Determines if the current user have access to specified action
      * @param string $module Module name
@@ -22,24 +23,24 @@ class RMPrivileges
      * @param bool $redirect
      * @return mixed
      */
-    public function verify($module, $action, $method = '', $redirect = true){
+    static public function verify($module, $action, $method = '', $redirect = true){
 
         global $xoopsUser, $xoopsDB;
 
+        $mod = RMModules::load_module( $module );
+
         if (!$xoopsUser){
-            if ( $redirect )
-                $this->response( $method );
-            else
-                return false;
+            $groups = array( XOOPS_GROUP_ANONYMOUS );
+        } else {
+
+            if ( $xoopsUser->isAdmin( $mod->getVar( 'mid' ) ) )
+                return true;
+
+            $groups = $xoopsUser->getGroups();
+
         }
 
-
-        if ( $xoopsUser->uid() == SMARTB_SUPER_ADMIN )
-            return true;
-
-        $groups = $xoopsUser->getGroups();
-
-        $sql = "SELECT COUNT(*) FROM " . $xoopsDB->prefix("mod_users_permissions") ." WHERE
+        $sql = "SELECT COUNT(*) FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
                 `group` IN (" . implode( ",", $groups ) . ") AND element='$module' AND
                 `key`='$action'";
 
@@ -52,6 +53,83 @@ class RMPrivileges
             self::response( $method );
         else
             return false;
+
+
+    }
+
+    /**
+     * Retrieves the permissions defined by module
+     * <strong>Use:</strong>
+     * <code>$permissions = RMPrivileges::module_privileges( 'dirname' );</code>
+     * Return:
+     * <code>Array
+     * (
+     *     [item1] => Array
+     *        (
+     *            [caption] => Item Caption
+     *            [default] => allow or deny
+     *        )
+     *     [item2] => Array
+     *        (
+     *            [caption] => Item 2 Caption
+     *            [default] => allow or deny
+     *        )
+     *     [item3] => Array
+     *        (
+     *            [caption] => Item 3 Caption
+     *            [default] => allow or deny
+     *        )
+     * )</code>
+     * @param string $directory MOdule directory
+     * @return array|bool|mixed
+     */
+    static public function module_permissions( $directory ){
+
+        if ( $directory == '' ) return false;
+
+        $module = RMModules::load_module( $directory );
+
+        if ( !$module )
+            return false;
+
+        if ( !$module->getInfo( 'permissions' ) )
+            return false;
+
+        $file = XOOPS_ROOT_PATH . '/modules/' . $directory . '/' . $module->getInfo( 'permissions' );
+
+        if ( !is_file( $file ) )
+            return false;
+
+        $permissions = include( $file );
+
+        return $permissions;
+
+    }
+
+    static public function read_permissions( $directory, $group ){
+        global $xoopsDB;
+
+        if ( $directory == '' ) return false;
+
+        $module = RMModules::load_module( $directory );
+
+        if ( !$module )
+            return false;
+
+        // Permissions on DB
+        $sql = "SELECT * FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
+                `group` = $group AND element='$directory'";
+
+        $result = $xoopsDB->query( $sql );
+        $permissions = new stdClass();
+
+        while ( $row = $xoopsDB->fetchArray( $result ) ){
+
+            $permissions->$row['key'] = 1;
+
+        }
+
+        return $permissions;
 
 
     }
@@ -73,6 +151,6 @@ class RMPrivileges
 
         }
 
-
     }
+
 }

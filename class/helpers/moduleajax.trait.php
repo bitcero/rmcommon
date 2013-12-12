@@ -52,7 +52,7 @@ trait RMModuleAjax
         global $xoopsSecurity;
 
         if(1 == $token)
-            $data['token'] = $xoopsSecurity->createToken(0, 'SBTOKEN');
+            $data['token'] = $xoopsSecurity->createToken(0, 'CUTOKEN');
 
         $data['type'] = 1 == $level ? 'error' : 'success';
         $data['message'] = $message;

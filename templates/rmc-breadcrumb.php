@@ -1,5 +1,6 @@
 <?php global $xoopsModule; ?>
 <?php $total_crumbs = count($this->crumbs); ?>
+<?php if ( $total_crumbs > 0 ): ?>
 <!-- Breadcrumb -->
 <div class="container">
     <ul class="breadcrumb rmc-breadcrumb">
@@ -23,3 +24,4 @@
     </ul>
 </div>
 <!--// ENd breadcrumb -->
+<?php endif; ?>

@@ -31,6 +31,7 @@ include_once RMCPATH.'/class/fields/textoptions.class.php';
 include_once RMCPATH.'/class/fields/formuser.class.php';
 include_once RMCPATH.'/class/fields/date.class.php';
 include_once RMCPATH.'/class/fields/formimage.class.php';
+include_once RMCPATH.'/class/fields/rewrite.class.php';
 include_once RMCPATH.'/api/editors/tinymce/tinyeditor.php';
 
 $rmEvents->run_event("rmcommon.form.loader");

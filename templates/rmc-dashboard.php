@@ -55,29 +55,29 @@
                 <?php _e('System Tools','rmcommon'); ?>
             </div>
             <div class="even system_tools collapsable">
-                <div class="row-fluid">
-                    <div class="span6">
+                <div class="row">
+                    <div class="col-sm-6 col-md-12 col-lg-6">
                         <a style="background-image: url(images/configure.png);" href="<?php echo XOOPS_URL; ?>/modules/system/admin.php?fct=preferences&op=showmod&mod=<?php echo $xoopsModule->mid(); ?>"><?php _e('Configure Common Utilities','rmcommon'); ?></a>
                     </div>
-                    <div class="span6">
+                    <div class="col-sm-6 col-md-12 col-lg-6">
                         <a style="background-image: url(images/images.png);" href="images.php"><?php _e('Images Manager','rmcommon'); ?></a>
                     </div>
                 </div>
 
-                <div class="row-fluid">
-                    <div class="span6">
+                <div class="row">
+                    <div class="col-sm-6 col-md-12 col-lg-6">
                         <a style="background-image: url(images/comments.png);" href="comments.php"><?php _e('Comments Management','rmcommon'); ?></a>
                     </div>
-                    <div class="span6">
+                    <div class="col-sm-6 col-md-12 col-lg-6">
                         <a style="background-image: url(images/plugin.png);" href="plugins.php"><?php _e('Plugins Management','rmcommon'); ?></a>
                     </div>
                 </div>
 
-                <div class="row-fluid">
-                    <div class="span6">
+                <div class="row">
+                    <div class="col-sm-6 col-md-12 col-lg-6">
                         <a style="background-image: url(images/modules.png);" href="modules.php"><?php _e('XOOPS Modules','rmcommon'); ?></a>
                     </div>
-                    <div class="span6">
+                    <div class="col-sm-6 col-md-12 col-lg-6">
                         <a style="background-image: url(images/users.png);" href="users.php"><?php _e('Users Management','rmcommon'); ?></a>
                     </div>
                 </div>
@@ -87,13 +87,13 @@
                 $i = 1;
                 ?>
                 <?php if($system_tools): ?>
-                    <div class="row-fluid">
+                    <div class="row">
                     <?php foreach ($system_tools as $tool): ?>
                         <?php if($i>2): ?>
-                            </div><div class="row-fluid">
+                            </div><div class="row">
                             <?php $i=1; ?>
                         <?php endif; ?>
-                        <div class="span6"><a href="<?php echo $tool['link']; ?>" style="background-image: url(<?php echo $tool['icon']; ?>);"><?php echo $tool['caption']; ?></a></div>
+                        <div class="col-sm-6 col-md-12 col-lg-6"><a href="<?php echo $tool['link']; ?>" style="background-image: url(<?php echo $tool['icon']; ?>);"><?php echo $tool['caption']; ?></a></div>
                         <?php $i++; endforeach; ?>
                     </div>
                 <?php endif; ?>

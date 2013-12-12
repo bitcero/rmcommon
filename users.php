@@ -541,18 +541,18 @@ function delete_users(){
 
 
 // get the action
-$action = rmc_server_var($_REQUEST, 'action', '');
+$action = RMHttpRequest::request( 'action', 'string', '' );
 
 switch($action){
     case 'new':
-	user_form();
-	break;
+	    user_form();
+	    break;
     case 'edit':
         user_form(true);
         break;
     case 'save':
         save_data();
-	break;
+	    break;
     case 'saveedit':
         save_data(true);
         break;

@@ -15,7 +15,7 @@ define("RMCPATH",XOOPS_ROOT_PATH.'/modules/rmcommon');
 define("RMCURL",XOOPS_URL.'/modules/rmcommon');
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
-define('RMCVERSION','2.1.9.0');
+define('RMCVERSION','2.2.0.5 beta');
 
 /**
  * Messages Levels
@@ -38,17 +38,18 @@ function rmc_autoloader($class){
 	if(class_exists($class)) return;
 
     /**
-     * Nes autoloader method
+     * New autoloader method
      * $class = new Module_ClassName();
      * The class name must contain the module directory name separated with a "_"
      * from the file name.
      * Common Utilities will search for "PATH/module/classname.class.php" file
      */
     $data = explode("_", strtolower($class));
-    if(count($data) == 2){
+    if(count($data) >= 2){
+
         if ( is_dir( XOOPS_ROOT_PATH . '/modules/' . $data[0] ) ){
             // Existe el módulo
-            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace("_", "-", $class) ) . '.class.php';
+            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace("_", ".", $class) ) . '.class.php';
 
             if( is_file($file) ){
                 require $file;
@@ -291,5 +292,11 @@ if($cuSettings->updates && $xoopsOption['pagetype']=='admin'){
     }
     
 }
+
+/**
+ * Add ajax controller script
+ */
+$rmTpl->add_script( 'cu-settings.php', 'rmcommon', array('footer' => 1) );
+$rmTpl->add_script( 'jquery.validate.min.js', 'rmcommon', array('footer' => 1) );
 
 include_once RMCPATH.'/include/tpl_functions.php';

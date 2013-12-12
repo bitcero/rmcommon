@@ -13,7 +13,7 @@
 	<?php foreach($feed['options'] as $option): ?>
 		<li class="feed_option">
 			<?php if(isset($option['params'])): ?>
-			<a class="name" href="<?php echo XOOPS_URL; ?>/backend.php?action=showfeed&amp;mod=<?php echo $feed['data']['module']; ?>&amp;<?php echo $option['params']; ?>"><?php echo $option['title']; ?></a>
+			<a class="name" href="backend.php?action=showfeed&amp;mod=<?php echo $feed['data']['module']; ?>&amp;<?php echo $option['params']; ?>"><?php echo $option['title']; ?></a>
 			<?php else: ?>
 			<span class="name"><?php echo $option['title']; ?></span>
 			<?php endif; ?>

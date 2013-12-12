@@ -19,25 +19,31 @@ $modversion['version'] = 2.1;
 $modversion['releasedate'] = "";
 $modversion['status'] = "Beta";
 $modversion['description'] = 'Container a lot of classes and functions used by Red México Modules';
-$modversion['author'] = "BitC3R0";
-$modversion['authormail'] = "i.bitcero@gmail.com";
-$modversion['authorweb'] = "Red México";
-$modversion['authorurl'] = "http://redmexico.com.mx";
-$modversion['updateurl'] = "http://www.xoopsmexico.net/modules/vcontrol/?action=check&id=1";
 $modversion['credits'] = "Red México, BitC3R0";
 $modversion['help'] = "http://www.redmexico.com.mx/docs/common-utilities/";
 $modversion['license'] = "GPL 2";
 $modversion['official'] = 0;
 $modversion['image'] = "images/logo.png";
 $modversion['dirname'] = "rmcommon";
-$modversion['icon16'] = "images/rmc16.png";
-$modversion['icon24'] = 'images/rmc24.png';
-$modversion['icon48'] = 'images/icon48.png';
-$modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>5,'stage'=>-2,'name'=>'Common Utilities');
 $modversion['onUninstall'] = 'include/install.php';
 $modversion['onInstall'] = 'include/install.php';
 $modversion['onUpdate'] = 'include/install.php';
+
+/**
+ * Information for Common Utilities
+ */
+$modversion['rmnative'] = 1;
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>5,'stage'=>-2,'name'=>'Common Utilities');
+$modversion['rewrite'] = 1;
+$modversion['author'] = "BitC3R0";
+$modversion['authormail'] = "i.bitcero@gmail.com";
+$modversion['authorweb'] = "Red México";
+$modversion['authorurl'] = "http://redmexico.com.mx";
+$modversion['updateurl'] = "http://www.xoopsmexico.net/modules/vcontrol/?action=check&id=1";
+$modversion['icon16'] = "images/rmc16.png";
+$modversion['icon24'] = 'images/rmc24.png';
+$modversion['icon32'] = 'images/rmc32.png';
+$modversion['icon48'] = 'images/icon48.png';
 
 $modversion['social'][0] = array('title' => __('Twitter', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/bitcero/');
 $modversion['social'][1] = array('title' => __('LinkedIn', 'rmcommon'),'type' => 'linkedin','url' => 'http://www.linkedin.com/bitcero/');
@@ -72,6 +78,7 @@ $modversion['templates'][2]['description'] = 'Shows the comments form';
 $modversion['categories'] = array(
     'general' => __('General', 'rmcommon'),
     'appearance' => __('Appearance', 'rmcommon'),
+    'comments' => __('Comentarios', 'rmcommon'),
     'email' => __('Email', 'rmcommon'),
 );
 
@@ -83,391 +90,377 @@ $modversion['config'][] = array(
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
     'default'       => '0',
+    'category'      => 'general'
+);
+
+// Modules path rewriting
+$modversion['config'][] = array(
+    'name'          => 'modules_path',
+    'title'         => __( 'New rewrite paths for supported modules', 'rmcommon' ),
+    'description'   => __( 'Indicate the new paths for supported modules. This path must be used to form new rewrited URLs for modules.', 'rmcommon' ),
+    'formtype'      => 'modules-rewrite',
+    'valuetype'    => 'array',
+    'default'       => '',
+    'category'      => 'general'
 );
 
 /**
 * Language
 */
-
-$files = XoopsLists::getFileListAsArray(XOOPS_ROOT_PATH.'/modules/rmcommon/lang', '');
-$options = array();
-$options['en_US'] = 'en';
-foreach($files as $file => $v){
-    
-    if(substr($file, -3)!='.mo') continue;
-    
-    $options[substr($file, 0, -3)] = substr($file, 0, -3);
-    
-}
 $modversion['config'][] = array(
     'name'          => 'lang',
-    'title'         => '_MI_RMC_LANG',
+    'title'         => __('Language to use','rmcommon'),
     'description'   => '',
-    'formtype'      => 'select',
+    'formtype'      => 'cu-language',
     'valuetype'     => 'text',
     'default'       => 'en',
-    'options'       => $options
+    'category'      => 'general'
 );
-
-// Update config options
-$fct = isset($_GET['fct']) ? $_GET['fct'] : '';
-$mid = isset($_GET['mod']) ? $_GET['mod'] : '';
-
-$mh = xoops_gethandler('module');
-$mod = $mh->getByDirname('rmcommon');
-
-if($fct=='preferences' && $mid==$mod->mid()){
-    $db = XoopsDatabaseFactory::getDatabaseConnection();
-
-    $sql = "SELECT conf_id FROM ".$db->prefix("config")." WHERE conf_modid=".$mod->mid()." AND conf_name='lang'";
-    
-    list($id) = $db->fetchRow($db->query($sql));
-    if($id>0){
-        $db->queryF("DELETE FROM ".$db->prefix("configoption")." WHERE conf_id=$id");
-        $sql = "INSERT INTO ".$db->prefix("configoption")." (`confop_name`,`confop_value`,`conf_id`) VALUES ";
-        foreach($options as $opt){
-            $sql .= "('$opt','$opt','$id'),";
-        }
-        $db->queryF(rtrim($sql,','));
-    }
-}
-unset($options, $files, $file, $v);
-
-// Available themes
-$dirs = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH.'/modules/rmcommon/themes', '');
-$options = array();
-foreach($dirs as $dir => $v){
-
-    if(!file_exists(XOOPS_ROOT_PATH.'/modules/rmcommon/themes/'.$dir.'/admin_gui.php')) continue;
-
-    $options[$dir] = $dir;
-
-}
 
 $modversion['config'][] = array(
     'name'          => 'theme',
-    'title'         => '_MI_RMC_ADMTHEME',
+    'title'         => __('Admin theme','rmcommon'),
     'description'   => '',
-    'formtype'      => 'select',
+    'formtype'      => 'cu-theme',
     'valuetype'     => 'text',
     'default'       => 'twop6',
-    'options'       => $options
+    'category'      => 'appearance'
 );
-
-// Update config options
-$fct = isset($_GET['fct']) ? $_GET['fct'] : '';
-$mid = isset($_GET['mod']) ? $_GET['mod'] : '';
-
-$mh = xoops_gethandler('module');
-$mod = $mh->getByDirname('rmcommon');
-
-if($fct=='preferences' && $mid==$mod->mid()){
-    $db = XoopsDatabaseFactory::getDatabaseConnection();
-
-    $sql = "SELECT conf_id FROM ".$db->prefix("config")." WHERE conf_modid=".$mod->mid()." AND conf_name='theme'";
-
-    list($id) = $db->fetchRow($db->query($sql));
-    if($id>0){
-        $db->queryF("DELETE FROM ".$db->prefix("configoption")." WHERE conf_id=$id");
-        $sql = "INSERT INTO ".$db->prefix("configoption")." (`confop_name`,`confop_value`,`conf_id`) VALUES ";
-        foreach($options as $opt){
-            $sql .= "('$opt','$opt','$id'),";
-        }
-        $db->queryF(rtrim($sql,','));
-    }
-}
-unset($options, $files, $file, $v);
 
 $modversion['config'][] = array(
     'name'          => 'gui_disable',
-    'title'         => '_MI_RMC_GUIENABLE',
+    'title'         => __('Disable new GUI when working on non native modules?','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'appearance'
 );
 
 // Editor
 $modversion['config'][] = array(
     'name'          => 'editor_type',
-    'title'         => '_MI_RMC_EDITOR',
+    'title'         => __('Select the default editor','rmcommon'),
     'description'   => '',
     'formtype'      => 'select',
     'valuetype'     => 'text',
     'default'       => 'tiny',
-    'options'       => array('_MI_RMC_EDITOR_VISUAL'=>'tiny','_MI_RMC_EDITOR_HTML'=>'html','_MI_RMC_EDITOR_XOOPS'=>'xoops','_MI_RMC_EDITOR_SIMPLE'=>'simple')
+    'options'       => array(
+        __('Visual Editor','rmcommon')=>'tiny',
+        __('HTML Editor','rmcommon')=>'html',
+        __('XoopsCode Editor','rmcommon')=>'xoops',
+        __('Simple Editor','rmcommon')=>'simple'
+    ),
+    'category'      => 'general'
 );
 
 // JQuery inclusion
 $modversion['config'][] = array(
     'name'          => 'jquery',
-    'title'         => '_MI_RMC_ADDJQUERY',
-    'description'   => '_MI_RMC_ADDJQUERYD',
+    'title'         => __('Enable JQuery for front end','rmcommon'),
+    'description'   => __('When this option is enabled, Common Utilities will include JQuery automatically. Please, disable this option only when your theme include jquery by default.','rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => '1'
+    'default'       => '1',
+    'category'      => 'general'
 );
 
 // Images store type
 $modversion['config'][] = array(
     'name'          => 'imagestore',
-    'title'         => '_MI_RMC_IMAGESTORE',
+    'title'         => __('Arrange images by date','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'general'
 );
 
 // Images Categories list limit number
 $modversion['config'][] = array(
     'name'          => 'catsnumber',
-    'title'         => '_MI_RMC_IMGCATSNUMBER',
+    'title'         => __('Limit for image categories list.','rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
-    'default'       => 10
+    'default'       => 10,
+    'category'      => 'general'
 );
 
 $modversion['config'][] = array(
     'name'          => 'imgsnumber',
-    'title'         => '_MI_RMC_IMGSNUMBER',
+    'title'         => __('Image manager: number of images per page','rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
-    'default'       => 20
+    'default'       => 20,
+    'category'      => 'general'
 );
 
 // Secure Key
 if (!isset($xoopsSecurity)) $xoopsSecurity = new XoopsSecurity();
 $modversion['config'][] = array(
     'name'          => 'secretkey',
-    'title'         => '_MI_RMC_SECREY',
-    'description'   => '_MI_RMC_SECREYD',
+    'title'         => __('Secret Key','rmcommon'),
+    'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => $xoopsSecurity->createToken()
+    'default'       => $xoopsSecurity->createToken(),
+    'category'      => 'general'
 );
 
 // Formato HTML5
 $modversion['config'][] = array(
     'name'          => 'dohtml',
-    'title'         => '_MI_RMC_DOHTML',
+    'title'         => __('Allow HTMl in text','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'appearance'
 );
 
 $modversion['config'][] = array(
     'name'          => 'dosmileys',
-    'title'         => '_MI_RMC_DOSMILE',
+    'title'         => __('Allow smilies in text','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'appearance'
 );
 
 $modversion['config'][] = array(
     'name'          => 'doxcode',
-    'title'         => '_MI_RMC_DOXCODE',
+    'title'         => __('Allow XoopsCode','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'appearance'
 );
 
 $modversion['config'][] = array(
     'name'          => 'doimage',
-    'title'         => '_MI_RMC_DOIMAGE',
+    'title'         => __('Allow images in text','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 0
+    'default'       => 0,
+    'category'      => 'appearance'
 );
 
 $modversion['config'][] = array(
     'name'          => 'dobr',
-    'title'         => '_MI_RMC_DOBR',
+    'title'         => __('Auto add line breaks in text','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 0
+    'default'       => 0,
+    'category'      => 'appearance'
 );
 
 // Comments
 $modversion['config'][] = array(
     'name'          => 'enable_comments',
-    'title'         => '_MI_RMC_ENABLECOMS',
+    'title'         => __('Enable comments','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'comments'
 );
 
 $modversion['config'][] = array(
     'name'          => 'anonymous_comments',
-    'title'         => '_MI_RMC_ANONCOMS',
+    'title'         => __('Allow anonymous users to post comments','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'comments'
 );
 
 $modversion['config'][] = array(
     'name'          => 'approve_reg_coms',
-    'title'         => '_MI_RMC_APPROVEREG',
+    'title'         => __('Automatically approve comments by registered users','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'comments'
 );
 
 $modversion['config'][] = array(
     'name'          => 'approve_anon_coms',
-    'title'         => '_MI_RMC_APPROVEANON',
+    'title'         => __('Automatically approve comments by anonymous users','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 0
+    'default'       => 0,
+    'category'      => 'comments'
 );
 
 $modversion['config'][] = array(
     'name'          => 'allow_edit',
-    'title'         => '_MI_RMC_ALLOWEDIT',
+    'title'         => __('Allow users to edit their comments','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 0
+    'default'       => 0,
+    'category'      => 'comments'
 );
 
 $modversion['config'][] = array(
     'name'          => 'edit_limit',
-    'title'         => '_MI_RMC_EDITLIMIT',
+    'title'         => __('Time limit to edit a comment (in hours).','rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'comments'
 );
 
 $modversion['config'][] = array(
     'name'          => 'mods_number',
-    'title'         => '_MI_RMC_MODSNUMBER',
+    'title'         => __('Modules number on dashboard','rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
-    'default'       => 6
+    'default'       => 6,
+    'category'      => 'appearance'
 );
 
 
 $modversion['config'][] = array(
     'name'          => 'rssimage',
-    'title'         => '_MI_RMC_RSSIMAGE',
+    'title'         => __('Image for RSS feeds','rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => XOOPS_URL.'/modules/rmcommon/images/rssimage.png'
+    'default'       => XOOPS_URL.'/modules/rmcommon/images/rssimage.png',
+    'category'      => 'appearance'
 );
 
 /** Mailer Configurations **/
 $modversion['config'][] = array(
     'name'          => 'transport',
-    'title'         => '_MI_RMC_MAILERMETH',
-    'description'   => '_MI_RMC_MAILERMETHD',
+    'title'         => __('Mailer method','rmcommon'),
+    'description'   => __('Common Utilities will use this method to send emails.'),
     'formtype'      => 'select',
     'valuetype'     => 'text',
-    'options'       => array('_MI_RMC_PHPMAIL'=>'mail','_MI_RMC_SMTP'=>'smtp', '_MI_RMC_SENDMAIL'=>'sendmail'),
-    'default'       => XOOPS_URL.'/modules/rmcommon/images/rssimage.png'
+    'options'       => array(
+        __('PHP Mail()','rmcommon') => 'mail',
+        __('SMTP','rmcommon') => 'smtp',
+        __('Sendmail','rmcommon') => 'sendmail'
+    ),
+    'default'       => XOOPS_URL.'/modules/rmcommon/images/rssimage.png',
+    'category'      => 'email'
 );
 
 $modversion['config'][] = array(
     'name'          => 'smtp_server',
-    'title'         => '_MI_RMC_SMTPSERVER',
-    'description'   => '_MI_RMC_SMTPSERVERD',
+    'title'         => __('SMTP server to use','rmcommon'),
+    'description'   => __('Specify the server through with the emails will be sent.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => ''
+    'default'       => '',
+    'category'      => 'email'
 );
 
 $modversion['config'][] = array(
     'name'          => 'smtp_crypt',
-    'title'         => '_MI_RMC_ENCRYPT',
-    'description'   => '_MI_RMC_ENCRYPTD',
+    'title'         => __('SMTP encryption','rmcommon'),
+    'description'   => __('For SSL or TLS encryption to work, your PHP installation must have appropriate OpenSSL transports wrappers.','rmcommon'),
     'formtype'      => 'select',
     'valuetype'     => 'text',
-    'options'       => array('_MI_RMC_CRYPTNONE'=>'none', '_MI_RMC_CRYPTSSL'=>'ssl', '_MI_RMC_CRYPTTLS'=>'tls'),
-    'default'       => 'none'
+    'options'       => array(
+        __('None','rmcommon') => 'none',
+        __('SSL','rmcommon') => 'ssl',
+        __('TLS','rmcommon') => 'tls'
+    ),
+    'default'       => 'none',
+    'category'      => 'email'
 );
 
 $modversion['config'][] = array(
     'name'          => 'smtp_port',
-    'title'         => '_MI_RMC_SMTPPORT',
-    'description'   => '_MI_RMC_SMTPPORTD',
+    'title'         => __('SMTP server port','rmcommon'),
+    'description'   => __('Note that you must to write the appropriate port based on your encryption type selection.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => 25
+    'default'       => 25,
+    'category'      => 'email'
 );
 
 $modversion['config'][] = array(
     'name'          => 'smtp_user',
-    'title'         => '_MI_RMC_SMTPUSER',
+    'title'         => __('SMTP username','rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => ''
+    'default'       => '',
+    'category'      => 'email'
 );
 
 $modversion['config'][] = array(
     'name'          => 'smtp_pass',
-    'title'         => '_MI_RMC_SMTPPASS',
+    'title'         => __('SMTP password','rmcommon'),
     'description'   => '',
     'formtype'      => 'password',
     'valuetype'     => 'text',
-    'default'       => ''
+    'default'       => '',
+    'category'      => 'email'
 );
 
 $modversion['config'][] = array(
     'name'          => 'sendmail_path',
-    'title'         => '_MI_RMC_SENDMAILPATH',
-    'description'   => '',
+    'title'         => __('Sendmail path','rmcommon'),
+    'description'   => __('Input the command for sendmail, including the correct command line flags. The default to use is "/usr/sbin/sendmail -bs" if this is not specified.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => '/usr/sbin/sendmail -bs'
+    'default'       => '/usr/sbin/sendmail -bs',
+    'category'      => 'email'
 );
 
 $modversion['config'][] = array(
     'name'          => 'rss_enable',
-    'title'         => '_MI_RMC_RSSENABLE',
+    'title'         => __('Enable RSS Center','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'general'
 );
 
 $modversion['config'][] = array(
     'name'          => 'blocks_enable',
-    'title'         => '_MI_RMC_BLOCKSENABLE',
+    'title'         => __('Enable internal blocks manager','rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 0
+    'default'       => 0,
+    'category'      => 'general'
 );
 
 $modversion['config'][] = array(
     'name'          => 'updates',
-    'title'         => '_MI_RMC_UPDATES',
-    'description'   => '_MI_RMC_UPDATESD',
+    'title'         => __('Activate updates','rmcommon'),
+    'description'   => __('When this option is enabled, Common Utilities will search automatically updates for modules and other components.','rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'general'
 );
 
 $modversion['config'][] = array(
     'name'          => 'updatesinterval',
-    'title'         => '_MI_RMC_UPDATESINTERVAL',
+    'title'         => __('Days between updates search','rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
-    'default'       => 1
+    'default'       => 1,
+    'category'      => 'general'
 );
 
 // BLOCKS

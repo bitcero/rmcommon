@@ -55,7 +55,7 @@ class Twop6Functions
         }
         
         if($mod->hasconfig()){
-            $rmTpl->add_menu(__('Preferences','rmcommon'), XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid(), 'option','');
+            $rmTpl->add_menu(__('Options','rmcommon'), $mod->getInfo('rmnative') ? RMCURL .'/settings.php?mod='.$mod->mid().'&amp;action=configure&amp;popup=1' : XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid(), 'option','');
         }
         
     }
@@ -101,9 +101,10 @@ class Twop6Functions
         }
         
         if($mod->hasconfig()){
+            $return_menu[] = array( 'divider' => 1 ); // Divisor for options
             $return_menu[] = array(
-                'title' => __('Preferences','rmcommon'),
-                'link' => XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid(),
+                'title' => __('Options','rmcommon'),
+                'link' => $mod->getInfo( 'rmnative' ) ? XOOPS_URL . '/modules/rmcommon/settings.php?mod=' . $mod->mid() . '&amp;popup=1&amp;action=configure' : XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid(),
                 'icon' => '',
                 'type' => 1
             );
@@ -121,7 +122,7 @@ class Twop6Functions
         if(!is_array($submenu)) return array();
 
         foreach($submenu as $i => $menu){
-            if($menu=='divider') continue;
+            if(isset($menu['divider']) || $menu == 'divider' ) continue;
             $submenu[$i]['link'] = strpos($menu['link'], 'http://')!==FALSE && strpos($menu['link'], 'ftp://')!==FALSE ? $menu['link'] : XOOPS_URL.'/modules/'.$mod->getVar('dirname','n').'/'.$menu['link'];
         }
         

@@ -19,10 +19,10 @@ class RMFormSelect extends RMFormElement
     private $_selected = null;
     
 	/**
-	 * Constructor de la clase
 	 * @param string $caption Texto de la etiqueta
 	 * @param string $name Nombre del elemento
 	 * @param int $multi Seleccion múltiple (0 = Inactivo, 1 = Activo)
+     * @param array $selected Selected option
 	 */
 	function __construct($caption, $name, $multi=0, $selected = null){
 		$this->setCaption($caption);

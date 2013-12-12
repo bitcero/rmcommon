@@ -19,17 +19,6 @@ class RMUser extends RMObject
         $this->setNew();
         $this->initVarsFromTable();
 
-        // Customers data
-        $this->initVar( 'id_user', 'int' );
-        $this->initVar( 'email2', 'varchar', '', 100 );
-        $this->initVar( 'homephone', 'varchar', '', 20 );
-        $this->initVar( 'cellphone', 'varchar', '', 20 );
-        $this->initVar( 'state', 'varchar', '', 30 );
-        $this->initVar( 'city', 'varchar', '', 50 );
-        $this->initVar( 'address', 'text', '' );
-        $this->initVar( 'comments', 'text' );
-        $this->initVar( 'commlevel', 'varchar', 'default' );
-
         if ($id != '' && $this->loadValues($id))
             $this->unsetNew();
         elseif ($id!='') {
@@ -42,13 +31,6 @@ class RMUser extends RMObject
         // Si es un cliente, cargamos los datos
         if ( $this->getVar("type") == 'user' || $this->isNew() )
             return;
-
-        $sql = "SELECT * FROM " . $this->db->prefix("mod_customers_data") . " WHERE id_user=" . $this->id();
-        $result = $this->db->query( $sql );
-
-        while ( $row = $this->db->fetchArray( $result ) ){
-            $this->assignVars( $row );
-        }
 
     }
     

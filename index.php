@@ -25,6 +25,9 @@ function get_modules_list(){
         $module_icon = $mod->getInfo('icon48') != '' ? XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('icon48') : '';
         $module_logo = XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('image');
 
+        if ( $mod->hasconfig() )
+            $config_link = $mod->getInfo( 'rmnative' ) ? XOOPS_URL . '/modules/rmcommon/settings.php?action=configure&amp;mod=' . $mod->mid() : XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid();
+
         $this_module = array(
             'name' => $mod->getVar('name'),
             'dirname' => $mod->getVar('dirname'),
@@ -35,7 +38,7 @@ function get_modules_list(){
             'admin' => $mod->getVar('hasadmin') ? XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('adminindex') : '',
             'main' => $mod->mainLink(),
             'updated' => RMTimeFormatter::get()->format( $mod->getVar('last_update'), __('%d% %T% %Y%', 'rmcommon')),
-            'config' => $mod->hasconfig() ? XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid() : '',
+            'config' => isset($config_link) ? $config_link : '',
             'description' => $mod->getInfo('description')
         );
 

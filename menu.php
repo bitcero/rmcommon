@@ -39,7 +39,22 @@ $adminmenu[] = array(
     'location' => 'users',
     'options' => array(
         array(
-            'title'     => __('All users','rmcommon'),
+            'title'     => __('Groups','rmcommon'),
+            'link'      => 'groups.php',
+            'selected'  => 'allgroups',
+            'icon'      => 'images/group.png',
+        ),
+        array(
+            'title'     => __('Add Group','rmcommon'),
+            'link'      => 'groups.php?action=new-group',
+            'selected'  => 'addgroup',
+            'icon'      => 'images/group_add.png',
+        ),
+        array(
+            'divider'   => 1,
+        ),
+        array(
+            'title'     => __('Users','rmcommon'),
             'link'      => 'users.php',
             'selected'  => 'allusers',
             'icon'      => 'images/users.png',
@@ -69,6 +84,8 @@ $adminmenu[] = array(
                     'selected'	=> 'rmc_imgnewcat',
                     'icon'      => 'images/category_add.png',
             ), 2 => array(
+                    'divider'   => 1
+            ), 3 => array(
                     'title'		=>	__('Images','rmcommon'),
                     'link'		=> 'images.php',
                     'selected'	=> 'rmc_images',

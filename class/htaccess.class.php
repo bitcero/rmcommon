@@ -129,12 +129,19 @@ class RMHtaccess
 
     }
 
-	public function removeRule($rule){
-		$count = 0;
-		$replace = str_replace("\n# begin $this->module\n$rule\n# end $this->module\n", '', $this->content, $count);
+	public function removeRule(){
+		/*$count = 0;
+		$replace = str_replace( "# begin $this->module\n$rule\n# end $this->module\n", '', $this->content, $count );*/
 
-		if($count<=0)
-			return false;
+        $initial = strpos( $this->content, "# begin " . $this->module );
+        if (false === $initial )
+            return true;
+
+        $final = strpos( $this->content, "# end " . $this->module );
+
+        $replace = substr( $this->content, 0, $initial );
+        if ( false !== $final )
+            $replace .= substr( $this->content, $final + strlen( "# end $this->module") + 1 );
 
 		file_put_contents($this->file, $replace);
 		return true;
@@ -157,6 +164,8 @@ class RMHtaccess
 
         $this->rules = $rules;
         $code = $this->makeCode($rules);
+
+        $this->removeRule();
 
         // Verificamos si existe el código generado
         $exists = $this->verifyCode($code);

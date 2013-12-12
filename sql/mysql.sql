@@ -7,7 +7,7 @@ CREATE TABLE `mod_rmcommon_images_categories` (
   `sizeunit` MEDIUMINT(9) not null default '1024',
   `sizes` text NOT NULL,
   PRIMARY KEY  (`id_cat`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 CREATE TABLE `mod_rmcommon_images` (
 `id_img` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
@@ -83,7 +83,7 @@ CREATE TABLE `mod_rmcommon_blocks` (
   PRIMARY KEY  (`bid`),
   KEY `element` (`element`),
   KEY `visible` (`visible`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 CREATE TABLE `mod_rmcommon_blocks_positions` (
   `id_position` int(11) NOT NULL auto_increment,
@@ -92,11 +92,18 @@ CREATE TABLE `mod_rmcommon_blocks_positions` (
   `active` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`id_position`),
   UNIQUE KEY `tag` (`tag`)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 CREATE TABLE `mod_rmcommon_bkmod` (
 `bid` INT NOT NULL ,
 `mid` INT NOT NULL ,
 `page` VARCHAR( 50 ) NOT NULL ,
 INDEX ( `bid` , `mid` )
-) ENGINE = MyISAM ;
+) ENGINE = InnoDB ;
+
+CREATE TABLE `x48c_mod_rmcommon_permissions` (
+  `group` int(11) NOT NULL,
+  `element` varchar(50) NOT NULL,
+  `key` varchar(50) NOT NULL,
+  KEY `group` (`group`,`element`,`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -71,7 +71,7 @@ $(document).ready(function(){
             title: $(this).attr('title'),
             headerClass: "th bg_dark",
             url: $(this).attr('href'),
-            width: '40%',
+            width: '80%',
             minWidth: '300px',
             height: 500,
             resizable: true,
@@ -80,6 +80,7 @@ $(document).ready(function(){
             y: 10,
             x: $(window).width()-510,
         });
+
         return false;
 
     });

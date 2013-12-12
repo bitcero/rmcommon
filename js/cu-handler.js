@@ -23,11 +23,11 @@ var cuHandler = {
      */
     loadRemoteDialog: function( launcher ){
 
-        var url = $(launcher).data('url');
+        var url = $(launcher).attr("href") != undefined && $(launcher).attr("href") != '' ? $(launcher).attr("href") : $(launcher).data('url');
         var handler = $(launcher).data("handler");
         var window_id = $(launcher).data("window-id");
         var params_retriever = $(launcher).data('retriever');
-        var params_setter = $(launcher).data('setter');
+        var params_setter = $(launcher).data('parameters');
 
         if ( params_retriever != undefined )
             var params = eval(params_retriever+'(launcher)');
@@ -37,7 +37,7 @@ var cuHandler = {
 
         }
         else
-            var params = {SBTOKEN_REQUEST: $("#smartb-token").val()};
+            var params = {CUTOKEN_REQUEST: $("#cu-token").val()};
 
         if (params==false)
             return false;
@@ -53,12 +53,12 @@ var cuHandler = {
 
                 cuHandler.closeLoader();
 
-                bootbox.dialog({
+                cuDialog.dialog({
                     message: response.content,
                     title: response.message,
                     icon: response.icon != undefined ? response.icon : '',
                     width: response.width != undefined ? response.width : '',
-                    id: window_id,
+                    id: response.windowId != undefined ? response.windowId : window_id,
                     animate: false,
                     closeButton: response.closeButton != undefined ? response.closeButton : true
                 });
@@ -70,7 +70,7 @@ var cuHandler = {
 
             }
 
-            $(".sb-data-table").each( function(){
+            $(".cu-data-table").each( function(){
                 cuHandler.createDataTable( $(this) );
             });
 
@@ -79,6 +79,8 @@ var cuHandler = {
             return false;
 
         }, 'json');
+
+        return false;
 
     },
 
@@ -90,7 +92,7 @@ var cuHandler = {
         cuHandler.showLoader();
 
         var params = form.serialize();
-        params += "&SBTOKEN_REQUEST=" + $("#smartb-token").val();
+        params += "&CUTOKEN_REQUEST=" + $("#cu-token").val();
 
         var action = form.attr("action");
         var method = form.attr("method");
@@ -110,17 +112,16 @@ var cuHandler = {
         if (response.type=='error'){
 
             if (response.modal_message!=undefined)
-                bootbox.alert({
+                cuDialog.alert({
                     message: response.message
                 });
             else
                 alert(response.message);
 
-        }else
-            cuHandler.showInPanel(3, response.message, false);
+        }
 
         if( response.token!='' )
-            $("#smartb-token").val(response.token);
+            $("#cu-token").val(response.token);
 
         cuHandler.closeLoader();
 
@@ -139,6 +140,12 @@ var cuHandler = {
          * Ejecución de otras acciones
          */
 
+        // Reload
+        if ( data.reload != undefined ){
+            window.location.reload();
+            return;
+        }
+
         // closeWindow: "#window-id"
         if(data.closeWindow != undefined)
             $(data.closeWindow).modal('hide');
@@ -154,7 +161,7 @@ var cuHandler = {
         
         if(data.openDialog != undefined){
             
-            bootbox.dialog({
+            cuDialog.dialog({
                 message: data.content,
                 title: data.message,
                 icon: data.icon != undefined ? data.icon : '',
@@ -175,13 +182,13 @@ var cuHandler = {
         $(".cu-window-blocker").hide();
 
         var html = '<div class="cu-window-blocker"></div>';
-        html += '<div id="cu-window-loader">' +
+        html += '<div class="cu-window-loader">' +
             '<div class="loader-container text-center">' +
             '<button class="close" type="button">&times;</button>' +
             '<span>Operación en progreso...</span>' +
             '</div></div>';
 
-        $(body).append(html);
+        $('body').append(html);
 
         $(".cu-window-blocker").fadeIn(0, function(){
             $(".cu-window-loader").fadeIn(1);
@@ -190,8 +197,13 @@ var cuHandler = {
     },
 
     closeLoader: function( handler ){
-        $("#cu-window-loader").fadeOut(1, function(){
-            $("#cu-window-blocker").fadeOut(0, handler);
+        $(".cu-window-loader").fadeOut(1, function(){
+            $(".cu-window-blocker").fadeOut(0, function(){
+                $(".cu-window-loader").remove();
+                $(".cu-window-blocker").remove();
+                if (handler != 'undefined')
+                    handler;
+            });
         });
     },
 
@@ -199,15 +211,19 @@ var cuHandler = {
 
         var url = xoUrl;
 
-        if( cu_rewrite ){
+        if( cu_modules[module] != undefined && controller != undefined && controller != '' ){
 
             url += zone=='backend'?'/admin':'';
-            url += '/' + module + '/' + controller + '/' + action + '/';
+            url += cu_modules[module] + '/' + controller + '/' + action + '/';
 
         } else {
 
             url += '/modules/' + module;
+
             url += zone=='backend'?'/admin':'';
+            if ( controller == '' || controller == undefined )
+                return url;
+
             url += '/index.php/' + controller + '/' + action + '/';
 
         }
@@ -248,7 +264,7 @@ var cuHandler = {
 
     /**
      * Controlar la barra de estado
-     */
+     *
     showInPanel: function( panel, message, process ){
 
         process = process == undefined ? false : process;
@@ -262,12 +278,12 @@ var cuHandler = {
 
     getPanel: function(panel){
         return $("#status-" + panel).html();
-    },
+    },*/
 
     /**
      * Ejecuta una acción asociada a un elemento específico
      */
-    runAction: function( e) {
+    runAction: function( e ) {
 
         var action = $(e).data("action");
 
@@ -290,13 +306,15 @@ var cuHandler = {
 
     },
 
-    enableCommands: function(){
+    enableCommands: function( id_activator, type ){
 
-        var total = $(".tr-checked").length;
+        var commands = $("*[data-activator='"+id_activator+"']");
 
-        $(".on-checked").each(function(index){
+        var total = $("#" + id_activator + " :"+type+"[data-switch]:checked").length;
 
-            var required = $(this).data("count")!=undefined ? $(this).data("count") : ' >= 1';
+        $(commands).each(function(index){
+
+            var required = $(this).data("oncount")!=undefined ? $(this).data("oncount") : ' >= 1';
 
             if ( eval('total ' + required)){
                 $(this).attr("disabled", false);
@@ -344,31 +362,12 @@ jQuery.fn.disable = function(){
 $(document).ready(function(){
 
     /**
-     * Calcularmos las dimensiones del contenido
-     */
-    cuHandler.adjustDimensions();
-    $(window).resize( $.debounce( 500, function( e ){
-        cuHandler.adjustDimensions();
-    } ) );
-
-    /**
      * Cargar diálogos de otros módulos
      */
     $('body').on('click', '*[data-action]', function(){
 
         cuHandler.runAction( $(this) )
-
-    });
-
-    $("body").on("click touch", ".table-checker tbody tr td", function(){
-        cuHandler.selectRow( $(this).parents("tr") );
-        cuHandler.enableCommands();
-    });
-
-    $("body").on("click touch", ".table-checker-live tbody tr td", function(){
-
-        cuHandler.selectRow( $(this).parents("tr") );
-        cuHandler.enableCommands();
+        return false;
 
     });
 
@@ -377,70 +376,64 @@ $(document).ready(function(){
         return false;
     });
 
-    $("#smartb-loader .close").click(function(){
+    $('body').on("click", ".cu-window-loader .close", function(){
         cuHandler.closeLoader();
     });
 
-    $(".sb-data-table").each( function(){
+    $(".cu-data-table").each( function(){
         cuHandler.createDataTable( $(this) );
     });
 
     $("*[data-rel='tooltip']").tooltip();
 
-    $("body").on("dblclick", ".table-checker > tbody > tr > td, .table-checker-live > tbody > tr > td", function(){
+    /**
+     * Activar comandos
+     */
+    $("body").on('change', '.activator-container :checkbox[data-switch], .activator-container :radio[data-switch]', function(){
 
-        cuHandler.selectRow( $(this) );
-        var ele = $("*[data-capture='.tr-checked']");
-        if (ele.length > 0){
-            $(ele).enable();
-            $(ele).click();
-        }
+        var id_container = $(this).parents(".activator-container").attr("id");
 
-
-    });
-
-    $("body").on("click", "#sb-system-alerts", function(){
-
-        $("#sb-system-alerts").remove();
-
-        $.get( xoUrl + '/themes/smarterp/include/alerts.php', function(data){
-
-            bootbox.dialog({
-                message: data,
-                title: 'Alertas del Sistema',
-                width: 'large',
-                id: 'sb-dialog-alerts',
-                animate: false,
-                closeButton: true
-            });
-
-        }, 'html' );
+        cuHandler.enableCommands( id_container, $(this).attr("type") );
 
     });
 
-    $("body").on("click", ".discard-alert", function(){
-        var ele = $(this);
-        var params = {
-            id: $(this).data("id"),
-            action: 'discard'
-        };
-
-        $.post(xoUrl + '/themes/smarterp/include/alerts.php', params, function(data){
-            if (data==0)
-                return false;
-
-            $(ele).parents(".sb-alert-item").remove();
-
-        }, 'html');
+    $("body").on('click', '*[disabled]', function(){
+        return false;
     });
 
-    if($("#sb-system-alerts").length > 0){
+    /**
+     * Select all checkbox
+     */
+    $("body").on("change", ":checkbox[data-checkbox]", function(){
 
-        setTimeout(function(){
-            $("#sb-system-alerts").remove();
-        }, 10000);
+        var checkbox_class = $(this).data("checkbox");
 
-    }
+        $(":checkbox[data-oncheck='" + checkbox_class + "']").prop('checked', $(this).prop('checked'));
+
+    });
+
+
+    $("body").on("change", ':checkbox', function(){
+
+        if( this.hasAttribute('data-checkbox') )
+            return;
+
+        if( !this.hasAttribute('data-oncheck') )
+            return;
+
+        var existing = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']");
+        var checked = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']:checked");
+
+        var activator = $(":checkbox[data-checkbox='" + $(this).data('oncheck') + "']");
+        if ( activator.length <= 0 )
+            return;
+
+        if ( checked.length < existing.length )
+            $(activator).removeAttr( 'checked' );
+        else if ( checked.length == existing.length )
+            $(activator).prop( 'checked', 'checked' );
+
+    });
 
 });
 

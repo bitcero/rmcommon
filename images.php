@@ -582,7 +582,7 @@ function edit_image(){
     $current_size = array();
     
     $fd = pathinfo($image->getVar('file'));
-    $updir = '/'.date('Y', $image->getVar('date')).'/'.date('m',time());
+    $updir = '/'.date('Y', $image->getVar('date')).'/'.date('m', $image->getVar('date'));
     
     foreach ($sizes as $size){
     	if ($size['width']<=0) continue;

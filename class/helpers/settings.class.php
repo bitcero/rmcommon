@@ -200,140 +200,132 @@ class RMSettings
             case 'textarea':
                 if ($field->type == 'array') {
                     // this is exceptional.. only when value type is arrayneed a smarter way for this
-                    $ele = ($field->value != '') ? new RMFormTextArea($field->caption, $field->id, $tc->specialchars(implode('|', $field->value)), 5, 50) : new RMFormTextArea($field->title, $field->id, '', 5, 50);
+                    $ele = ($field->value != '') ? new RMFormTextArea($field->caption, $field->id, 4, 45, $tc->specialchars(implode('|', $field->value))) : new RMFormTextArea($field->title, $field->id, 4, 45);
                 } else {
-                    $ele = new RMFormTextArea($field->caption, $field->id, $tc->specialchars($field->value), 5, 50);
+                    $ele = new RMFormTextArea($field->caption, $field->id, 4, 50, $tc->specialchars($field->value) );
                 }
                 break;
 
             case 'select':
                 $ele = new RMFormSelect($field->caption, $field->id, 0, array($field->value));
-                foreach( $field->options as $value => $caption ){
-                    $ele->addOption( $value, $caption );
+                foreach( $field->options as $caption => $value ){
+                    $ele->addOption( $value, defined( $caption ) ? constant( $caption ) : $caption );
                 }
                 break;
-/*
+
             case 'select_multi':
-                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput(), 5, true);
-                $options = $config_handler->getConfigOptions(new Criteria('conf_id', $config[$i]->getVar('conf_id')));
-                $opcount = count($options);
-                for ($j = 0; $j < $opcount; $j++) {
-                    $optval = defined($options[$j]->getVar('confop_value')) ? constant($options[$j]->getVar('confop_value')) : $options[$j]->getVar('confop_value');
-                    $optkey = defined($options[$j]->getVar('confop_name')) ? constant($options[$j]->getVar('confop_name')) : $options[$j]->getVar('confop_name');
-                    $ele->addOption($optval, $optkey);
+                $ele = new RMFormSelect($field->caption, $field->id, 1, array($field->value));
+                $options = $field->options;
+                foreach ( $options as $value => $caption ) {
+                    $value = defined( $value ) ? constant( $value ) : $value;
+                    $caption = defined( $caption ) ? constant( $caption ) : $caption;
+                    $ele->addOption( $value, $caption );
                 }
                 break;
 
             case 'yesno':
-                $ele = new XoopsFormRadioYN($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput(), _YES, _NO);
+                $ele = new RMFormYesNo( $field->caption, $field->id, $field->value );
                 break;
 
             case 'theme':
             case 'theme_multi':
-                $ele = ($config[$i]->getVar('conf_formtype')
-                    != 'theme_multi') ? new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput()) : new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput(), 5, true);
-                require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-                $dirlist = XoopsLists::getThemesList();
-                if (!empty($dirlist)) {
-                    asort($dirlist);
-                    $ele->addOptionArray($dirlist);
-                }
-                $valueForOutput = $config[$i]->getConfValueForOutput();
-                $form->addElement(new XoopsFormHidden('_old_theme', (is_array($valueForOutput) ? $valueForOutput[0] : $valueForOutput)));
+
+                $ele = new RMFormTheme( $field->caption, $field->id, $field->field == 'theme_multi' ? 1 : 0, 0, $field->value );
+                break;
+
+            case 'cu-theme':
+            case 'cu-theme-multi':
+                $ele = new RMFormTheme( $field->caption, $field->id, $field->field == 'cu-theme-multi' ? 1 : 0, 0, $field->value, 1, 'GUI' );
                 break;
 
             case 'tplset':
-                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                $ele = new RMFormSelect( $field->caption, $field->id, 0, array( $field->value ) );
                 $tplset_handler =& xoops_gethandler('tplset');
                 $tplsetlist = $tplset_handler->getList();
                 asort($tplsetlist);
                 foreach ($tplsetlist as $key => $name) {
                     $ele->addOption($key, $name);
                 }
-                // old theme value is used to determine whether to update cache or not. kind of dirty way
-                $form->addElement(new XoopsFormHidden('_old_theme', $config[$i]->getConfValueForOutput()));
                 break;
 
             case 'cpanel':
-                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                $ele = new RMFormSelect( $field->caption, $field->id, 0, array($field->value) );
                 xoops_load("cpanel", "system");
                 $list = XoopsSystemCpanel::getGuis();
                 $ele->addOptionArray( $list );
                 break;
 
             case 'timezone':
-                $ele = new XoopsFormSelectTimezone($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                $ele = new RMFormTimeZoneField( $field->caption, $field->id, $field->value );
                 break;
 
             case 'language':
-                $ele = new XoopsFormSelectLang($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+            case 'language_multi':
+                $langs = XoopsLists::getLangList();
+                $ele = new RMFormSelect( $field->caption, $field->id, $field->field == 'language_multi' ? 1 : 0, $field->value );
+                foreach ( $langs as $caption => $value ){
+                    $ele->addOption( $value, $caption );
+                }
+                break;
+
+            case 'cu-language':
+            case 'cu-language-multi':
+
+                $ele = new RMFormLanguageField( $field->caption, $field->id, $field->field == 'cu-language-multi' ? 1 : 0, 0, $field->value );
                 break;
 
             case 'startpage':
-                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
+                $ele = new RMFormSelect( $field->caption, $field->id, 0, array($field->value) );
                 $module_handler =& xoops_gethandler('module');
                 $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
                 $criteria->add(new Criteria('isactive', 1));
                 $moduleslist = $module_handler->getList($criteria, true);
                 $moduleslist['--'] = _MD_AM_NONE;
-                $ele->addOptionArray($moduleslist);
+                $ele->addOptionsArray($moduleslist);
                 break;
 
             case 'group':
-                $ele = new XoopsFormSelectGroup($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 1, false);
-                break;
-
             case 'group_multi':
-                $ele = new XoopsFormSelectGroup($title, $config[$i]->getVar('conf_name'), true, $config[$i]->getConfValueForOutput(), 5, true);
+                $ele = new RMFormGroups( $field->caption, $field->id, $field->field == 'group_multi' ? 1 : 0, 0, 1, $field->value );
                 break;
 
-            // RMV-NOTIFY - added 'user' and 'user_multi'
             case 'user':
-                $ele = new XoopsFormSelectUser($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 1, false);
-                break;
-
             case 'user_multi':
-                $ele = new XoopsFormSelectUser($title, $config[$i]->getVar('conf_name'), false, $config[$i]->getConfValueForOutput(), 5, true);
+                $ele = new RMFormUser( $field->caption, $field->id, $field->field == 'user_multi' ? 1 : 0, $field->value );
                 break;
 
             case 'module_cache':
-                $module_handler =& xoops_gethandler('module');
-                $modules = $module_handler->getObjects(new Criteria('hasmain', 1), true);
-                $currrent_val = $config[$i]->getConfValueForOutput();
-                $cache_options = array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK);
-                if (count($modules) > 0) {
-                    $ele = new XoopsFormElementTray($title, '<br />');
-                    foreach (array_keys($modules) as $mid) {
-                        $c_val = isset($currrent_val[$mid]) ? intval($currrent_val[$mid]) : null;
-                        $selform = new XoopsFormSelect($modules[$mid]->getVar('name'), $config[$i]->getVar('conf_name')."[$mid]", $c_val);
-                        $selform->addOptionArray($cache_options);
-                        $ele->addElement($selform);
-                        unset($selform);
-                    }
-                } else {
-                    $ele = new XoopsFormLabel($title, _MD_AM_NOMODULE);
-                }
+
+                $ele = new RMFormCacheModuleField( $field->caption, $field->id, $field->value );
                 break;
 
             case 'site_cache':
-                $ele = new XoopsFormSelect($title, $config[$i]->getVar('conf_name'), $config[$i]->getConfValueForOutput());
-                $ele->addOptionArray(array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK));
+                $ele = new RMFormSelect( $field->caption, $field->id, 0, $field->value );
+                $ele->addOptionArray(array(
+                    '0' => __('No cache', 'rmcommon'),
+                    '30' => sprintf( __('%u seconds', 'rmcommon'), 30),
+                    '60' => __('1 minute', 'rmcommon'),
+                    '300' => sprintf( __('%u minutes', 'rmcommon'), 5),
+                    '1800' => sprintf( __('%u minutes', 'rmcommon'), 30),
+                    '3600' => __('One hour', 'rmcommon'),
+                    '18000' => sprintf( __('%u hours', 'rmcommon'), 5),
+                    '86400' => __('One day', 'rmcommon'),
+                    '259200' => sprintf( __('%u days', 'rmcommon'), 3),
+                    '604800' => __('One week', 'rmcommon')
+                ));
                 break;
 
             case 'password':
-                $myts =& MyTextSanitizer::getInstance();
-                $ele = new XoopsFormPassword($title, $config[$i]->getVar('conf_name'), 50, 255, $myts->htmlspecialchars($config[$i]->getConfValueForOutput()));
-                break;
-
-            case 'color':
-                $myts =& MyTextSanitizer::getInstance();
-                $ele = new XoopsFormColorPicker($title, $config[$i]->getVar('conf_name'), $myts->htmlspecialchars($config[$i]->getConfValueForOutput()));
+                $ele = new RMFormText( $field->caption, $field->id, 50, 255, $field->value, true );
                 break;
 
             case 'hidden':
-                $myts =& MyTextSanitizer::getInstance();
-                $ele = new XoopsFormHidden( $config[$i]->getVar('conf_name'), $myts->htmlspecialchars( $config[$i]->getConfValueForOutput() ) );
-                break;*/
+                $ele = new RMFormHidden( $field->id, $field->value );
+                break;
+
+            case 'modules-rewrite':
+                $ele = new RMFormRewrite( $field->caption, $field->id, $field->value );
+                break;
 
             case 'textbox':
             default:
@@ -342,7 +334,34 @@ class RMSettings
 
         }
 
+        /**
+         * Allow to plugins and other modules create new form
+         * elements types in settings form
+         */
+        $ele = RMEvents::get()->run_event( 'rmcommon.load.form.field', $ele, $field );
+
         return $ele->render();
+
+    }
+
+    public static function write_rewrite_js( $paths ){
+
+        if (empty($paths))
+            $paths = array();
+
+        $settings = RMSettings::cu_settings();
+
+        $file = XOOPS_CACHE_PATH . '/cu-rewrite.js';
+
+        $content = "/**\nRewrite configuration for installed modules\n**/\nvar cu_modules = {\n";
+
+        foreach( $paths as $module => $path ){
+            $content .= "$module: '" . rtrim($path, '/') . "',\n";
+        }
+
+        $content .= "};\n";
+
+        file_put_contents( $file, $content );
 
     }
 

@@ -15,7 +15,7 @@ body{
 #xo-menubar{
     box-shadow: 0 0 5px #333;
 }
-.xo-bluebar{
+.cu-titlebar{
     background: #049CD9; /* Old browsers */
     background: -moz-linear-gradient(top,  #049CD9 0%, #0490C8 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#049CD9), color-stop(100%,#0490C8)); /* Chrome,Safari4+ */
@@ -28,6 +28,8 @@ body{
         -moz-box-shadow:inset 0px 1px 0 0px #5EBFE6;
         -webkit-box-shadow:inset 0px 1px 0 0px #5EBFE6;
         -o-box-shadow:inset 0px 1px 0 0px #5EBFE6;
+    color: #FFF;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
 }
 .xo-blackbar{
     background-color: #1b1b1b;
@@ -193,6 +195,7 @@ h4 small {
     border-bottom: 1px solid #DDD;
     border-radius: 0;
     min-height: 36px;
+    z-index: 1000;
 }
 #rmc-toolbar > .navbar-collapse{
 	border-top: 0;
@@ -286,7 +289,7 @@ h4 small {
 ---------------------------------*/
 #xo-contents{
     background: #fff;
-    padding: 45px 15px 10px 15px;
+    padding: 55px 15px 10px 15px;
     border: 1px solid #D4D4D4;
     border-radius: 3px;
         -moz-border-radius: 3px;
@@ -398,17 +401,7 @@ h4 small {
 
 /*          XOOPS BASICS
 ------------------------------------*/
-table{
-    width: 100%;
-}
-.outer{
-    border: 1px solid #DDD;
-    border-radius: 2px;
-        -webkit-border-radius: 2px;
-        -moz-border-radius: 2px;
-    margin-bottom: 20px;
-}
-th, .th, .table th{
+.table-bordered th{
     background-color: #ebebeb;
     background-image: -moz-linear-gradient(top, #f2f2f2, #ebebeb);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#ebebeb));
@@ -416,17 +409,18 @@ th, .th, .table th{
     background-image: -o-linear-gradient(top, #f2f2f2, #ebebeb);
     background-image: linear-gradient(to bottom, #f2f2f2, #ebebeb);
     background-repeat: repeat-x;
-    border-color: #d4d4d4;
     filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fff2f2f2', endColorstr='#ebebeb', GradientType=0);
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    padding: 8px;
+    text-shadow: 1px 1px 0 #FFF;
+    border-color: #d4d4d4;
     box-shadow:inset 0px 1px 0 0px #fff;
         -moz-box-shadow:inset 0px 1px 0 0px #fff;
         -webkit-box-shadow:inset 0px 1px 0 0px #fff;
         -o-box-shadow:inset 0px 1px 0 0px #fff;
-    color: #333;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px;
-    text-shadow: 1px 1px 0 #FFF;
+
 }
 div.th{
     border-radius: 4px 4px 0 0;
@@ -599,6 +593,16 @@ div.table-bordered td{
 	background: #f2f2f2;
 	padding: 8px 15px 0 15px;
 	margin: -10px -15px 10px -15px;
+}
+
+/* Enabled and disabled commands */
+*[disabled]{
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    cursor: default;
+    transition: all 0.2s ease-in-out 0s;
 }
 
 /* Blocks custom options form */

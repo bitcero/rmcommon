@@ -66,9 +66,9 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <?php foreach($rmcommon_menu as $menu): ?>
-                                <?php if(isset($menu['type'])): ?>
+                                <?php if(isset($menu['divider'])): ?>
                                 <li class="divider"></li>
-                                <?php endif; ?>
+                                <?php else: ?>
                                 <li<?php if(isset($menu['options'])): ?> class="dropdown-submenu"<?php endif; ?>>
                                     <a href="<?php echo $menu['link']; ?>"<?php if(isset($menu['options'])): ?> tabindex="-1"<?php endif; ?>>
                                         <?php echo $xoFunc->getIcon($menu); ?>
@@ -77,6 +77,9 @@
                                     <?php if(isset($menu['options'])): ?>
                                     <ul class="dropdown-menu">
                                     <?php foreach($menu['options'] as $sub): ?>
+                                        <?php if( isset( $sub['divider'] ) ): ?>
+                                            <li class="divider"></li>
+                                        <?php continue; endif; ?>
                                         <li>
                                             <a href="<?php echo $sub['link']; ?>">
                                                 <?php echo $xoFunc->submenuIcon($sub, 'rmcommon'); ?>
@@ -87,6 +90,7 @@
                                     </ul>
                                     <?php endif; ?>
                                 </li>
+                                <?php endif; ?>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
@@ -98,9 +102,9 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <?php foreach($system_menu as $menu): ?>
-                                <?php if(isset($menu['type'])): ?>
+                                <?php if(isset($menu['divider'])): ?>
                                 <li class="divider"></li>
-                                <?php endif; ?>
+                                <?php else: ?>
                                 <li<?php if(isset($menu['options'])): ?> class="dropdown-submenu"<?php endif; ?>>
                                     <a href="<?php echo $menu['link']; ?>"<?php if(isset($menu['options'])): ?> tabindex="-1"<?php endif; ?>>
                                         <?php echo $xoFunc->getIcon($menu); ?>
@@ -119,6 +123,7 @@
                                     </ul>
                                     <?php endif; ?>
                                 </li>
+                                <?php endif; ?>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
@@ -131,9 +136,9 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <?php foreach($other_menu as $menu): ?>
-                                <?php if(isset($menu['type'])): ?>
+                                <?php if(isset($menu['divider'])): ?>
                                 <li class="divider"></li>
-                                <?php endif; ?>
+                                <?php else: ?>
                                 <li<?php if(isset($menu['options'])): ?> class="dropdown-submenu"<?php endif; ?>>
                                     <a href="<?php echo $menu['link']; ?>"<?php if(isset($menu['options'])): ?> tabindex="-1"<?php endif; ?>>
                                         <?php echo $xoFunc->getIcon($menu); ?>
@@ -147,6 +152,7 @@
                                     </ul>
                                     <?php endif; ?>
                                 </li>
+                                <?php endif; ?>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
@@ -170,9 +176,9 @@
 				                        <?php if(!empty($submenu)): ?>
 				                        <ul class="dropdown-menu">
 	                                        <?php foreach($submenu as $sub): ?>
-		                                    <?php if(isset($sub['type']) || (isset($sub['icon']) && $sub['icon']=='option')): ?>
+		                                    <?php if(isset($sub['divider'])): ?>
 			                                <li class="divider"></li>
-			                                <?php endif; ?>
+			                                <?php else: ?>
 											<li<?php echo isset($sub['options']) ? ' class="dropdown-submenu"' : ''; ?>>
 		                                        <a href="<?php echo $sub['link']; ?>"<?php echo isset($sub['options']) ? ' tabindex="-1"' : ''; ?>>
 			                                        <?php echo $xoFunc->submenuIcon($sub); ?>
@@ -181,7 +187,7 @@
 												<?php if(isset($sub['options'])): ?>
 												<ul class="dropdown-menu">
 													<?php foreach($sub['options'] as $subsub): ?>
-                                                        <?php if($subsub=='divider'): ?>
+                                                        <?php if(isset($subsub['divider']) || $subsub=='divider'): ?>
                                                             <li class="divider"></li>
                                                         <?php else: ?>
                                                             <li>
@@ -195,6 +201,7 @@
 												</ul>
 												<?php endif; ?>
 											</li>
+                                            <?php endif; ?>
 		                                    <?php endforeach; ?>
 	                                    </ul>
 				                        <?php endif; ?>
@@ -207,7 +214,7 @@
 	                        </ul>
                         </li>
                     </ul>
-                    
+
                     <ul class="nav navbar-nav navbar-right">
                         <li class="xo-upd-notifier">
                             <!-- Updates notifier -->
@@ -305,7 +312,7 @@
 
                </div>
 
-               <div class="collapse navbar-collapse xo-bluebar twop6-toolbar-toolbar">
+               <div class="collapse navbar-collapse cu-titlebar twop6-toolbar-toolbar">
 
 	                    <?php
 	                        if($xoopsModule->dirname()=='rmcommon')
@@ -317,8 +324,11 @@
 	                    ?>
 	                    <ul class="nav navbar-nav">
 	                        <?php foreach($menus as $menu): ?>
+                                <?php if( isset($menu['divider'] ) ): ?>
+                                    <li class="divider"></li>
+                                <?php continue; endif; ?>
 	                        <li<?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown"<?php endif; ?>>
-	                            <a href="<?php echo $menu['link']; ?>"<?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"<?php endif; ?>>
+	                            <a href="<?php echo $menu['link']; ?>"<?php if ( $menu['title'] == __('Options', 'rmcommon') ): ?> data-action="load-remote-dialog"<?php endif; ?><?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"<?php endif; ?>>
 	                                <?php echo $xoFunc->getIcon($menu); ?>
 		                            <?php echo $menu['title']; ?>
 	                                <?php if(isset($menu['options']) && $menu['options']): ?><b class="caret"></b><?php endif; ?>
@@ -326,7 +336,7 @@
 	                            <?php if(isset($menu['options']) && $menu['options']): ?>
 	                            <ul class="dropdown-menu">
 	                                <?php foreach($menu['options'] as $sub): ?>
-                                        <?php if($sub=='divider'): ?>
+                                        <?php if( isset( $sub['divider'] ) ): ?>
                                             <li class="divider"></li>
                                         <?php else: ?>
                                         <li<?php if(isset($sub['options']) && $sub['options']): ?> class="dropdown-submenu"<?php endif; ?>>
@@ -463,5 +473,6 @@
             <div class="well"><!--{xo-logger-output}--></div>
         </div>
         <?php endif; ?>
+        <input type="hidden" name="cu_token" id="cu-token" value="<?php echo $xoopsSecurity->createToken(0, 'CUTOKEN'); ?>">
     </body>
 </html>

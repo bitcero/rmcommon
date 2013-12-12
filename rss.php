@@ -33,7 +33,7 @@ function show_rss_content(){
 	include_once $GLOBALS['xoops']->path('class/template.php');
 	$tpl = new XoopsTpl();
 	$module = rmc_server_var($_GET,'mod','');
-	
+
 	if($module==''){
 		redirect_header('backend.php', 1, __('Choose an option to see its feed','rmcommon'));
 		die();
@@ -54,7 +54,7 @@ function show_rss_content(){
     
     if (!isset($rss_channel['image'])){
         $rmc_config = RMSettings::cu_settings();
-        $rss_channel['image']['url'] = $rmc_config['rssimage'];
+        $rss_channel['image']['url'] = $rmc_config->rssimage;
         $dimention = getimagesize(XOOPS_ROOT_PATH . '/images/logo.png');
         $rss_channel['image']['width'] = ($dimention[0] > 144) ? 144 : $dimention[0];
         $rss_channel['image']['height'] = ($dimention[1] > 400) ? 400 : $dimention[1];
@@ -64,7 +64,7 @@ function show_rss_content(){
 	
 }
 
-$action = rmc_server_var($_GET, 'action', '');
+$action = RMHttpRequest::get( 'action', 'string', '' );
 
 switch($action){
 	case 'showfeed':

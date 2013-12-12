@@ -59,8 +59,41 @@ class RMFunctions
 
         if(RMCLOCATION=='users'){
 
-            RMTemplate::get()->add_tool(__('Users List','rmcommon'), 'users.php', '', 'allusers', array('class' => 'cu-tool tool-users-list'));
+            RMTemplate::get()->add_tool(__('Users','rmcommon'), 'users.php', '', 'allusers', array('class' => 'cu-tool tool-users-list'));
             RMTemplate::get()->add_tool(__('Add User','rmcommon'), 'users.php?action=new', '', 'newuser', array('class' => 'cu-tool tool-user-add'));
+
+        } elseif( RMCLOCATION == 'groups' ){
+
+            RMTemplate::get()->add_tool(__('Groups','rmcommon'), 'groups.php', '', 'allgroups', array('class' => 'cu-tool tool-groups'));
+            RMTemplate::get()->add_tool(
+                __('Add Group','rmcommon'), '#', '', 'newgroup', array(
+                'class' => 'cu-tool tool-group-add',
+                'data-action' => 'load-remote-dialog',
+                'data-url' => 'groups.php?action=new-group',
+                'data-parameters' => '{action: \'new-group\'}'
+            ));
+
+            /*
+             * Next buttons are available only when groups list is shown
+             */
+            RMTemplate::get()->add_tool(
+                __('Edit Group', 'rmcommon'),
+                '#', '', 'editgroup', array(
+                    'class' => 'cu-tool tool-group-edit',
+                    'data-activator' => 'groups-list',
+                    'data-oncount' => '== 1',
+                    'disabled' => 'disabled'
+                )
+            );
+            RMTemplate::get()->add_tool(
+                __('Delete Group', 'rmcommon'),
+                '#', '', 'deletegroup', array(
+                    'class' => 'cu-tool tool-group-delete',
+                    'data-activator' => 'groups-list',
+                    'data-oncount' => '> 0',
+                    'disabled' => 'disabled'
+                )
+            );
 
         } elseif(RMCLOCATION=='imgmanager'){
 
