@@ -23,7 +23,7 @@ var cuHandler = {
      */
     loadRemoteDialog: function( launcher ){
 
-        var url = $(launcher).attr("href") != undefined && $(launcher).attr("href") != '' ? $(launcher).attr("href") : $(launcher).data('url');
+        var url = $(launcher).attr("href") != undefined && $(launcher).attr("href") != '#' ? $(launcher).attr("href") : $(launcher).data('url');
         var handler = $(launcher).data("handler");
         var window_id = $(launcher).data("window-id");
         var params_retriever = $(launcher).data('retriever');
@@ -139,12 +139,8 @@ var cuHandler = {
         /**
          * Ejecución de otras acciones
          */
-
-        // Reload
-        if ( data.reload != undefined ){
-            window.location.reload();
-            return;
-        }
+        if ( data.showMessage != undefined )
+            alert( data.message );
 
         // closeWindow: "#window-id"
         if(data.closeWindow != undefined)
@@ -172,6 +168,12 @@ var cuHandler = {
                 closeButton: data.closeButton != undefined ? data.closeButton : true
             });
             
+        }
+
+        // Reload
+        if ( data.reload != undefined ){
+            window.location.reload();
+            return;
         }
 
     },
@@ -302,6 +304,9 @@ var cuHandler = {
                 if(url!=undefined && url!='')
                     window.location.href = url;
                 break;
+            default:
+                eval( action + "(e)" );
+                break;
         }
 
     },
@@ -316,13 +321,11 @@ var cuHandler = {
 
             var required = $(this).data("oncount")!=undefined ? $(this).data("oncount") : ' >= 1';
 
-            if ( eval('total ' + required)){
-                $(this).attr("disabled", false);
-                $(this).addClass("disabled");
-            } else {
-                $(this).attr("disabled", true);
-                $(this).removeClass("disabled");
-            }
+            if ( eval('total ' + required))
+                $(this).enable();
+            else
+                $(this).disable();
+
 
         });
 
@@ -331,7 +334,7 @@ var cuHandler = {
 };
 
 /**
- * formato para monedas
+ * Currenty format
  */
 Number.prototype.formatMoney = function(c, d, t){
     var n = this,
@@ -345,17 +348,19 @@ Number.prototype.formatMoney = function(c, d, t){
 };
 
 /**
- * Plugin para habilitar o desabilitar un element
+ * jQuery plugin to enable or disable an element
  */
 jQuery.fn.enable = function(){
     this.each(function(){
         jQuery(this).attr("disabled", false);
+        jQuery(this).removeClass("disable");
     });
 }
 
 jQuery.fn.disable = function(){
     this.each(function(){
         jQuery(this).attr("disabled", true);
+        jQuery(this).addClass("disable");
     });
 }
 
@@ -365,7 +370,6 @@ $(document).ready(function(){
      * Cargar diálogos de otros módulos
      */
     $('body').on('click', '*[data-action]', function(){
-
         cuHandler.runAction( $(this) )
         return false;
 
@@ -395,10 +399,6 @@ $(document).ready(function(){
 
         cuHandler.enableCommands( id_container, $(this).attr("type") );
 
-    });
-
-    $("body").on('click', '*[disabled]', function(){
-        return false;
     });
 
     /**

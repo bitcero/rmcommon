@@ -66,7 +66,7 @@ class RMFunctions
 
             RMTemplate::get()->add_tool(__('Groups','rmcommon'), 'groups.php', '', 'allgroups', array('class' => 'cu-tool tool-groups'));
             RMTemplate::get()->add_tool(
-                __('Add Group','rmcommon'), '#', '', 'newgroup', array(
+                __('Add','rmcommon'), '#', '', 'newgroup', array(
                 'class' => 'cu-tool tool-group-add',
                 'data-action' => 'load-remote-dialog',
                 'data-url' => 'groups.php?action=new-group',
@@ -77,21 +77,27 @@ class RMFunctions
              * Next buttons are available only when groups list is shown
              */
             RMTemplate::get()->add_tool(
-                __('Edit Group', 'rmcommon'),
-                '#', '', 'editgroup', array(
-                    'class' => 'cu-tool tool-group-edit',
-                    'data-activator' => 'groups-list',
-                    'data-oncount' => '== 1',
-                    'disabled' => 'disabled'
+                __('Edit', 'rmcommon'),
+                    '#', '', 'editgroup', array(
+                        'class' => 'cu-tool tool-group-edit',
+                        'data-activator' => 'groups-list',
+                        'data-oncount' => '== 1',
+                        'data-action' => 'load-remote-dialog',
+                        'data-retriever' => 'groupsController.retrieveSingle',
+                        'data-url' => 'groups.php?action=new-group',
+                        'disabled' => 'disabled',
+                        'title' => __('Edit Group','rmcommon')
                 )
             );
             RMTemplate::get()->add_tool(
-                __('Delete Group', 'rmcommon'),
+                __('Delete', 'rmcommon'),
                 '#', '', 'deletegroup', array(
                     'class' => 'cu-tool tool-group-delete',
                     'data-activator' => 'groups-list',
                     'data-oncount' => '> 0',
-                    'disabled' => 'disabled'
+                    'disabled' => 'disabled',
+                    'title' => __('Delete Groups','rmcommon'),
+                    'data-action' => 'groupsController.delete'
                 )
             );
 

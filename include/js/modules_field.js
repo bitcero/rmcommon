@@ -49,7 +49,7 @@ $(document).ready(function(){
         if($(".subpages-"+id).length<=0)
             $("#"+theParent+" > div:last-child h4").html('');
 
-        $(".subpages-"+id).fadeIn('fast').parent().children('h4').html(rmJsLang.modulePages.replace("%s", $(this).html()));
+        $(".subpages-"+id).fadeIn('fast').parent().children('h4').html(cuLanguage.modulePages.replace("%s", $(this).html()));
 
     });
 

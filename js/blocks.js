@@ -119,7 +119,7 @@ var blocksAjax = {
                     if(data.data.visible==1){
                         $("#block-"+data.data.id+" a.control-visible")
                             .data("action", 'hide')
-                            .attr("title", rmJsLang.hideBlock)
+                            .attr("title", cuLanguage.hideBlock)
                             .removeClass("text-success")
                             .addClass("text-warning")
                             .children("i")
@@ -129,7 +129,7 @@ var blocksAjax = {
                     }else{
                         $("#block-"+data.data.id+" a.control-visible")
                             .data("action", 'show')
-                            .attr("title", rmJsLang.showBlock)
+                            .attr("title", cuLanguage.showBlock)
                             .removeClass("text-warning")
                             .addClass("text-success")
                             .children("i")
@@ -200,21 +200,21 @@ var blocksAjax = {
     addBlockToPosition: function(block){
 
         if(block.id == undefined || block.id<=0){
-            blocksAjax.addMessage(rmJsLang.errorShowInPosition, 'alert-error');
+            blocksAjax.addMessage(cuLanguage.errorShowInPosition, 'alert-error');
             return false;
         }
 
         var html = '<li class="dd-item" data-id="'+block.id+'" id="block-'+block.id+'" data-position="'+block.position+'">';
         html += '<div class="row-fluid item-controls">';
         html += '<strong class="dd-handle">'+block.title+'</strong>';
-        html += '<a href="#" class="pull-right text-error" data-block="'+block.id+'" data-action="delete" title="'+rmJsLang.deleteBlock+'"><i class="icon-remove-sign"></i></a>';
+        html += '<a href="#" class="pull-right text-error" data-block="'+block.id+'" data-action="delete" title="'+cuLanguage.deleteBlock+'"><i class="icon-remove-sign"></i></a>';
 
         if(block.visible)
-            html += '<a href="#" class="pull-right text-warning" data-block="'+block.id+'" data-action="hide" title="'+rmJsLang.hideBlock+'"><i class="icon-eye-close"></i></a>';
+            html += '<a href="#" class="pull-right text-warning" data-block="'+block.id+'" data-action="hide" title="'+cuLanguage.hideBlock+'"><i class="icon-eye-close"></i></a>';
         else
-            html += '<a href="#" class="pull-right text-success" data-block="'+block.id+'" data-action="show" title="'+rmJsLang.showBlock+'"><i class="icon-eye-open"></i></a>';
+            html += '<a href="#" class="pull-right text-success" data-block="'+block.id+'" data-action="show" title="'+cuLanguage.showBlock+'"><i class="icon-eye-open"></i></a>';
 
-        html += '<a href="#" class="pull-right" data-block="'+block.id+'" data-action="settings" title="'+rmJsLang.blockSettings+'"><i class="icon-wrench"></i></a>';
+        html += '<a href="#" class="pull-right" data-block="'+block.id+'" data-action="settings" title="'+cuLanguage.blockSettings+'"><i class="icon-wrench"></i></a>';
         html += '</div>';
         html += '<div class="row-fluid block-data">';
         html += '<span class="text-info">'+block.module+'</span>';
@@ -223,7 +223,7 @@ var blocksAjax = {
         html += '</li>';
 
         if($("#position-"+block.canvas.id_position).length<=0){
-            blocksAjax.addMessage(rmJsLang.errorNoPosition, 'alert-error');
+            blocksAjax.addMessage(cuLanguage.errorNoPosition, 'alert-error');
             return false;
         }
 
@@ -278,7 +278,7 @@ var blocksAjax = {
             var visible = data.data.visible;
 
             $("#block-"+block.data("id")+" .control-visible").data("action", visible==1 ? 'hide' : 'show')
-                .attr("title", visible==1 ? rmJsLang.hideBlock : rmJsLang.showBlock)
+                .attr("title", visible==1 ? cuLanguage.hideBlock : cuLanguage.showBlock)
                 .removeClass(visible==1 ? 'text-success' : 'text-warning')
                 .addClass(visible==1 ? 'text-warning' : 'text-success')
                 .html('<i class="'+(visible==1 ? 'icon-eye-close' : 'icon-eye-open')+'"></i>');
@@ -324,7 +324,7 @@ var blocksAjax = {
 
     deleteBlock: function(block){
 
-        if(!confirm(rmJsLang.deleteBlockMessage))
+        if(!confirm(cuLanguage.deleteBlockMessage))
             return;
 
         var params = {
@@ -370,7 +370,7 @@ $(document).ready(function(){
             $("#bks-and-pos").fadeOut('fast', function(){
 
                 $("#blocks-list").fadeIn('fast');
-                $("#newpos").html(rmJsLang.showPositions).parent().removeClass("active");
+                $("#newpos").html(cuLanguage.showPositions).parent().removeClass("active");
 
             });
 
@@ -379,7 +379,7 @@ $(document).ready(function(){
             $("#blocks-list").fadeOut('fast', function(){
 
                 $("#bks-and-pos").fadeIn('fast');
-                $("#newpos").html(rmJsLang.showBlocks).parent().addClass("active");
+                $("#newpos").html(cuLanguage.showBlocks).parent().addClass("active");
 
             });
 
@@ -470,8 +470,8 @@ $(document).ready(function(){
         var html = '<tr id="editor-row" style="display:none;" class="'+$(id).attr("class")+' editor" valign="top"><td>&nbsp;</td>';
         html += '<td><strong class="the_id">'+$(id).attr("id").replace("ptr-",'')+'</strong></td>';
         html += '<td><input type="text" name="name" id="ed-name" class="form-control" value="'+$(data).children('.name').html()+'"><br />';
-        html += '<button type="submit" class="save_button btn btn-primary">'+rmJsLang.save+'</button>';
-        html += '<button type="button" class="cancel_button btn btn-default">'+rmJsLang.cancel+'</button>';
+        html += '<button type="submit" class="save_button btn btn-primary">'+cuLanguage.save+'</button>';
+        html += '<button type="button" class="cancel_button btn btn-default">'+cuLanguage.cancel+'</button>';
         html += '</td>';
         html += '<td align="center"><input type="text" name="tag" id="ed-tag" class="form-control" value="'+$(data).children('.ptag').html()+'"></td>';
         html += '<td align="center"><input type="checkbox" name="active" id="ed-active" value="1" '+($(data).children('.active').html()=='1'?' checked="checked"' : '')+'" /></td>';
@@ -550,12 +550,12 @@ function before_submit(id){
 	}
 
 	if (!go){
-		alert(rmJsLang.selectBefore);
+		alert(cuLanguage.selectBefore);
 		return false;
 	}
 
 	if ($("#bulk-topp").val()=='deletepos'){
-		if (confirm(rmJsLang.confirmPositionDeletion)){
+		if (confirm(cuLanguage.confirmPositionDeletion)){
             $("#"+id).append('<input type="hidden" name="XOOPS_TOKEN_REQUEST" value="'+$("#XOOPS_TOKEN_REQUEST").val()+'">');
 			$("#"+id).submit();
         }

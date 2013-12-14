@@ -14,12 +14,12 @@ $form = new RMActiveForm(array(
 
             <div class="form-group">
                 <label for="group-name"><?php _e('Group Name','rmcommon') ; ?></label>
-                <input type="text" name="name" id="group-name" class="form-control required">
+                <input type="text" name="name" id="group-name" class="form-control required" value="<?php echo $group->getVar('name'); ?>">
             </div>
 
             <div class="form-group">
                 <label for="group-description"><?php _e('Description','rmcommon') ; ?></label>
-                <textarea type="text" name="description" id="group-description" class="form-control required" rows="4"></textarea>
+                <textarea type="text" name="description" id="group-description" class="form-control required" rows="4"><?php echo $group->getVar('description', 'e'); ?></textarea>
             </div>
 
             <p class="help-block"><?php _e("Add <strong>admin rights</strong> and <strong>access rights</strong> to new group. Remember that specifix permissions allows to control with more detail the operation sthat users can do according to the groups that they belongs.",'rmcommon'); ?></p>
@@ -53,7 +53,12 @@ $form = new RMActiveForm(array(
                                 <?php if ( !$module->hasadmin ) continue; ?>
                                 <div class="checkbox">
                                     <label>
-                                        <input data-oncheck="admin-module" type="checkbox" name="admin_modules[<?php echo $module->mid; ?>]" value="<?php echo $module->mid; ?>">
+                                        <input
+                                            data-oncheck="admin-module"
+                                            type="checkbox"
+                                            name="admin_modules[<?php echo $module->mid; ?>]"
+                                            value="<?php echo $module->mid; ?>"
+                                            <?php echo $module->admin ? ' checked' : ''; ?>>
                                         <?php echo $module->name; ?>
                                     </label>
                                 </div>
@@ -75,7 +80,12 @@ $form = new RMActiveForm(array(
                                 <?php if ( !$module->hasmain ) continue; ?>
                                 <div class="checkbox">
                                     <label>
-                                        <input data-oncheck="read-module" type="checkbox" name="read_modules[<?php echo $module->mid; ?>]" value="<?php echo $module->mid; ?>">
+                                        <input
+                                            data-oncheck="read-module"
+                                            type="checkbox"
+                                            name="read_modules[<?php echo $module->mid; ?>]"
+                                            value="<?php echo $module->mid; ?>"
+                                            <?php echo $module->read ? ' checked' : ''; ?>>
                                         <?php echo $module->name; ?>
                                     </label>
                                 </div>

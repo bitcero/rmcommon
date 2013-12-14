@@ -226,24 +226,25 @@ h4 small {
 #rmc-toolbar .nav > li{
     border-right: 1px solid rgba(255,255,255,0.5);
 }
-#rmc-toolbar .nav > li > a{
+#rmc-toolbar .nav > li > button{
     padding: 5px 10px;
 	text-align: center;
+    border: 0;
     border-right: 1px solid rgba(0,0,0,0.05);
     color: #4b4b4b;
     text-shadow: 1px 1px 0 rgba(255,255,255,0.6);
 }
-#rmc-toolbar .nav > li > a > i{
+#rmc-toolbar .nav > li > button > i{
 	display: block;
 	text-align: center;
 	margin: 0 auto;
 }
-#rmc-toolbar .nav > li > a > span{
+#rmc-toolbar .nav > li > button > span{
     display: block;
     width: 32px; height: 32px;
     margin: 0 auto 3px auto;
 }
-#rmc-toolbar .nav > li > a > span > img{
+#rmc-toolbar .nav > li > button > span > img{
     width: 32px;
     height: 32px;
 }

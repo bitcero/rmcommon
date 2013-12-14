@@ -39,7 +39,11 @@ function show_groups_list(){
     $bc->add_crumb( __('Users Management', 'rmcommon'), RMCURL . '/users.php' );
     $bc->add_crumb( __('Groups', 'rmcommon') );
 
+    RMTemplate::get()->assign('xoops_pagetitle', __('Groups Management', 'rmcommon'));
+
     RMFunctions::get()->create_toolbar();
+    RMTemplate::get()->add_script( 'cu-groups.js', 'rmcommon', array('footer' => 1) );
+    include RMCPATH . '/js/cu-js-language.php';
 
     RMTemplate::get()->header();
 
@@ -72,11 +76,16 @@ function show_group_form(){
     $result = $xoopsDB->query( "SELECT * FROM " . $xoopsDB->prefix("modules") . " ORDER BY name ASC" );
     $modules = array();
 
+    $admin_rights = $group->load_permissions( 'module_admin' );
+    $access_rights = $group->load_permissions( 'module_read' );
+
     while ( $row = $xoopsDB->fetchArray( $result ) ){
 
         $modules[$row['mid']] = (object) $row;
         $modules[$row['mid']]->permissions = RMPrivileges::module_permissions( $row['dirname'] );
         $modules[$row['mid']]->privileges = RMPrivileges::read_permissions( $row['dirname'], $group->id() );
+        $modules[$row['mid']]->admin = isset( $admin_rights[ $row['mid'] ] );
+        $modules[$row['mid']]->read = isset( $access_rights[ $row['mid'] ] );
 
     }
 
@@ -193,6 +202,81 @@ function save_group_data(){
 }
 
 
+function delete_group_data() {
+    global $xoopsSecurity, $xoopsDB;
+
+    $ajax = new Rmcommon_Ajax();
+    $ajax->prepare_ajax_response();
+
+    if(!$xoopsSecurity->validateToken(false, true, 'CUTOKEN'))
+        $ajax->ajax_response(
+            __('Session token expired!', 'rmcommon'),
+            1, 0, array('action' => 'reload')
+        );
+
+    $ids = RMHttpRequest::post( 'ids', 'array', array() );
+
+    if( empty( $ids ) )
+        $ajax->ajax_response( __('You must select at least one group. Please, try again.', 'rmcommon'), 1, 1 );
+
+    $to_delete = array_search( XOOPS_GROUP_ADMIN, $ids );
+
+    if ( FALSE !== $to_delete )
+        unset( $ids[$to_delete] );
+
+    $to_delete = array_search( XOOPS_GROUP_USERS, $ids );
+
+    if ( FALSE !== $to_delete )
+        unset( $ids[$to_delete] );
+
+    $to_delete = array_search( XOOPS_GROUP_ANONYMOUS, $ids );
+
+    if ( FALSE !== $to_delete )
+        unset( $ids[$to_delete] );
+
+    if( empty( $ids ) )
+        $ajax->ajax_response(
+            __( 'No valid groups has been selected. Note that system groups could not be deleted.', 'rmcommon'),
+            1, 1
+        );
+
+    $errors = '';
+    // Eliminar permisos del grupo
+    $sql = "DELETE FROM " . $xoopsDB->prefix("group_permission")." WHERE gperm_groupid IN (" . implode(",", $ids).")";
+
+    if( !$xoopsDB->queryF( $sql ) )
+        $errors .= $xoopsDB->error();
+
+    // Eliminar permisos específicos
+    $sql = "DELETE FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") . " WHERE `group` IN (" . implode(",", $ids) . ")";
+    if( !$xoopsDB->queryF( $sql ) )
+        $errors .= '<br>' . $xoopsDB->error();
+
+    // Eliminar relaciones con usuarios
+    $sql = "DELETE FROM " . $xoopsDB->prefix("groups_users_link") . " WHERE `groupid` IN (" . implode(",", $ids) . ")";
+    if( !$xoopsDB->queryF( $sql ) )
+        $errors .= '<br>' . $xoopsDB->error();
+
+    // Eliminar datos del grupo
+    $sql = "DELETE FROM " . $xoopsDB->prefix("groups") . " WHERE `groupid` IN (" . implode(",", $ids) . ")";
+    if( !$xoopsDB->queryF( $sql ) )
+        $errors .= '<br>' . $xoopsDB->error();
+
+    if ( '' == $errors ){
+
+        showMessage( __('Selected groups has been deleted.', 'rmcommon' ), RMMSG_SUCCESS, 'icon-remove-circle' );
+
+        $ajax->ajax_response( '', 0, 1, array( 'action' => 'reload' ) );
+
+    } else {
+
+        $ajax->ajax_response( __('Errors ocurred while trying to delete selected groups.', 'rmcommon') . "\n" . $errors, 1, 1 );
+
+    }
+
+}
+
+
 // get the action
 $action = RMHttpRequest::request( 'action', 'string', '' );
 
@@ -204,6 +288,10 @@ switch ( $action ){
 
     case 'save-group':
         save_group_data();
+        break;
+
+    case 'delete-group':
+        delete_group_data();
         break;
 
     default:

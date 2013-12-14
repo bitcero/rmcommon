@@ -142,7 +142,7 @@ function show_rm_blocks()
     }
     
     RMTemplate::get()->add_script('jquery.checkboxes.js','rmcommon','include');
-    RMTemplate::get()->add_head_script(include('include/js-lang.php'));
+    include RMCPATH . '/js/cu-js-language.php';
     
     xoops_cp_header();
     

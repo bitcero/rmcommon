@@ -380,10 +380,10 @@
                     <ul class="nav navbar-nav">
                         <?php foreach($this->get_toolbar() as $menu): ?>
                             <li<?php echo $menu['location']==RMCSUBLOCATION ? ' class = "active"' : ($menu['location']==RMCLOCATION ? ' class="active"' : ''); ?>>
-                                <a href="<?php echo $menu['link']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
+                                <button type="button" href="<?php echo $menu['link']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
                                     <span><?php if($menu['icon']): ?><img src="<?php echo $menu['icon']; ?>"><?php endif; ?></span>
                                     <?php echo $menu['title']; ?>
-                                </a>
+                                </button>
                             </li>
                             <li class="divider-vertical"></li>
                         <?php endforeach; ?>

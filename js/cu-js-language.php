@@ -1,5 +1,5 @@
 <?php
-// $Id: blocks.php 1037 2012-09-07 21:19:12Z i.bitcero $
+// $Id$
 // --------------------------------------------------------------
 // Red México Common Utilities
 // A framework for Red México Modules
@@ -8,10 +8,31 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
+/**
+ * This file contains all Javascript language and can be used
+ * by including it in HEAD section of HTML code
+ *
+ * Example:
+ * <code>include_once (RMCPATH . '/js/cu-js-language.php';</code>
+ *
+ * This, will include the next HTML script:
+ * <code>
+ * var cuLanguage = {};
+ * stringIdentifier: 'Language String';
+ * stringIdentifier: 'Language String';
+ * </code>
+ */
+
 ob_start();
 ?>
 
-var rmJsLang = {
+var cuLanguage = {
+
+<?php if ( RMCLOCATION == 'groups' ): ?>
+
+    confirmDelete: '<?php _e('Do you really want to delete selected groups?\n\nPlease note that this action can not be undo.', 'rmcommon' ); ?>',
+
+<?php elseif ( RMCLOCATION == 'blocks' ): ?>
 
     deleteBlockMessage: "<?php _e('Do you really want to delete this block?','rmcommon'); ?>",
     deleteBlock: "<?php _e('Delete Block','rmcommon'); ?>",
@@ -29,8 +50,11 @@ var rmJsLang = {
     confirmPositionDeletion: "<?php _e('Do you really want to delete selected positions?','rmcommon'); ?>",
     selectBefore: "<?php _e('You must select at least one position before you can do this action!','rmcommon'); ?>",
 
+<?php endif; ?>
+
 };
 
 <?php
 
-return ob_get_clean();
+$script = ob_get_clean();
+RMTemplate::get()->add_head_script( $script );

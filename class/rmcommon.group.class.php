@@ -145,7 +145,7 @@ class Rmcommon_Group extends RMObject
         $return = array();
         $result = $this->db->query($sql);
         while( $row = $this->db->fetchArray( $result ) ){
-            $return[$row['gperm_name']][] = $row['gperm_itemid'];
+            $return[$row['gperm_name']][$row['gperm_itemid']] = $row['gperm_itemid'];
         }
 
         $this->admin_perms = isset($return['module_admin']) ? $return['module_admin'] : array();
