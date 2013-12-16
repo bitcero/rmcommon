@@ -49,7 +49,7 @@ if($right_widgets)
     $tp6Span -= 3;
 
 $this->add_style('bootstrap.min.css','rmcommon');
-$this->add_style('bootstrap-theme.css','twop6', array(), 'theme');
+$this->add_style('theme-default.css','twop6', array(), 'theme');
 $this->add_style('general.css','rmcommon', array());
 $this->add_style('2.6.css','twop6', array(), 'theme');
 $this->add_style('font-awesome.min.css','rmcommon', array('footer' => 1));
@@ -58,6 +58,7 @@ $this->add_script( 'bootstrap.js', 'rmcommon' );
 $this->add_script('2.6.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('jquery.window.min.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('updates.js', 'rmcommon', array('footer' => 1));
+$this->add_script('jquery.debounce.min.js', 'rmcommon', array('footer' => 1));
 
 // Delete unused scripts and styles
 $content = preg_replace("/<script.*".str_replace("/",'\/', XOOPS_URL)."\/js\/.*/",'', $content);

@@ -15,23 +15,11 @@
 
 class RMBreadCrumb
 {
+    use RMSingleton;
+
     private $crumbs = array();
     
     public function construct(){
-        
-    }
-    
-    /**
-    * Singleton
-    */
-    static function get(){
-        static $instance;
-
-        if (!isset($instance)) {
-            $instance = new RMBreadCrumb();
-        }
-
-        return $instance;
         
     }
     
@@ -90,7 +78,11 @@ class RMBreadCrumb
     public function clear(){
         $this->crumbs = array();
     }
-    
+
+    public function count(){
+        return count( $this->crumbs );
+    }
+
     /**
     * Render the current crumbs array
     * 

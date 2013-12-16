@@ -296,6 +296,8 @@ var cuHandler = {
                 break;
             case 'goto':
                 var url = $(e).data("url");
+                if ( url == undefined )
+                    url = $(e).attr("href");
                 var retriever = $(e).data("retriever");
 
                 if (retriever != undefined)

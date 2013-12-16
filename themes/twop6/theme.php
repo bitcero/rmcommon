@@ -41,7 +41,11 @@
         ?>
         <title><?php if($this->get_var('xoops_pagetitle')!=''): ?><?php echo $this->get_var('xoops_pagetitle'); ?> - <?php endif; ?><?php echo isset($xoopsModule) ? $xoopsModule->getInfo('name').' - ' : ''; ?><?php echo $xoopsConfig['sitename']; ?></title>
     </head>
-    <body<?php if($this->get_toolbar()): ?> class="xo-body-toolbar"<?php endif; ?>>
+    <body class="<?php if($this->get_toolbar()): ?>xo-body-toolbar<?php endif; ?>">
+        <div class="cu-breadcrumb-container">
+            <?php echo RMBreadCrumb::get()->render(); ?>
+            <span class="breadcrumb-puller pull-right" title="<?php _e('Show breadcrumb', 'rmcommon'); ?>"><span class="glyphicon glyphicon-chevron-down"></span></span>
+        </div>
         <!-- Menu bar -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="xo-menubar">
 
@@ -213,13 +217,7 @@
 		                        </li>
 	                        </ul>
                         </li>
-                    </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="xo-upd-notifier">
-                            <!-- Updates notifier -->
-                            <a href="<?php echo RMCURL; ?>/updates.php"><?php echo sprintf(__('%s updates available','twop6'), '<span class="badge badge-warning">%s</span>'); ?></a>
-                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <i class="xo-icon xicon-ray"></i>
@@ -228,20 +226,20 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <?php if($this->help()): ?>
-                                <li class="dropdown-submenu">
-                                    <a href="#" tabindex="-1" onclick="return false;">
-                                        <i class="xo-icon xicon-faq"></i>
-                                        <?php _e('Help','rmcommon'); ?>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <?php foreach($this->help() as $help): ?>
-                                        <li>
-                                        <a href="<?php echo $help['link']; ?>" class="help_button rm_help_button" style="background-image: url(<?php echo TWOP6_URL; ?>/images/help.png);" target="_blank" title="<?php echo $help['caption']; ?>"><?php echo $help['caption']; ?></a>
-                                        </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </li>
-                                <li class="divider"></li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#" tabindex="-1" onclick="return false;">
+                                            <i class="xo-icon xicon-faq"></i>
+                                            <?php _e('Help','rmcommon'); ?>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <?php foreach($this->help() as $help): ?>
+                                                <li>
+                                                    <a href="<?php echo $help['link']; ?>" class="help_button rm_help_button" style="background-image: url(<?php echo TWOP6_URL; ?>/images/help.png);" target="_blank" title="<?php echo $help['caption']; ?>"><?php echo $help['caption']; ?></a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                    <li class="divider"></li>
                                 <?php endif; ?>
                                 <?php if($xoopsModule->getInfo('social')): ?>
                                     <li class="dropdown-submenu">
@@ -251,9 +249,9 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <?php foreach($xoopsModule->getInfo('social') as $net): ?>
-                                            <li class="nav_item">
-                                                <a href="<?php echo $net['url']; ?>" target="_blank"><?php echo $net['title']; ?></a>
-                                            </li>
+                                                <li class="nav_item">
+                                                    <a href="<?php echo $net['url']; ?>" target="_blank"><?php echo $net['title']; ?></a>
+                                                </li>
                                             <?php endforeach; ?>
                                         </ul>
                                     </li>
@@ -292,6 +290,11 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="xo-upd-notifier">
+                            <!-- Updates notifier -->
+                            <a href="<?php echo RMCURL; ?>/updates.php"><?php echo sprintf(__('%s updates available','twop6'), '<span class="badge badge-warning">%s</span>'); ?></a>
+                        </li>
                     </ul>
 
             </div>
@@ -299,7 +302,7 @@
         <!-- End menu bar //-->
         
         <!-- Toolbar with menus -->
-	       <div class="navbar navbar-fixed-top" id="xo-toolbar">
+	       <div class="navbar navbar-fixed-top cu-titlebar" id="xo-toolbar">
 
                <div class="navbar-header">
                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".twop6-toolbar-toolbar">
@@ -312,7 +315,7 @@
 
                </div>
 
-               <div class="collapse navbar-collapse cu-titlebar twop6-toolbar-toolbar">
+               <div class="collapse navbar-collapse twop6-toolbar-toolbar">
 
 	                    <?php
 	                        if($xoopsModule->dirname()=='rmcommon')
@@ -380,7 +383,7 @@
                     <ul class="nav navbar-nav">
                         <?php foreach($this->get_toolbar() as $menu): ?>
                             <li<?php echo $menu['location']==RMCSUBLOCATION ? ' class = "active"' : ($menu['location']==RMCLOCATION ? ' class="active"' : ''); ?>>
-                                <button type="button" href="<?php echo $menu['link']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
+                                <button type="button" <?php echo $menu['link']!='' && $menu['link'] != '#' ? ' data-action="goto"' : ''; ?> href="<?php echo $menu['link']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
                                     <span><?php if($menu['icon']): ?><img src="<?php echo $menu['icon']; ?>"><?php endif; ?></span>
                                     <?php echo $menu['title']; ?>
                                 </button>
@@ -393,8 +396,7 @@
         <?php endif; ?>
         <!-- End rmcommon toolbar //-->
 
-		<?php echo RMBreadCrumb::get()->render(); ?>
-        
+
         <!-- System messages -->
         <?php foreach($rmc_messages as $message): ?>
         <div class="container">
@@ -412,12 +414,15 @@
                 <?php if($left_widgets): ?>
                 <aside class="col-md-4 col-lg-2">
                     <?php foreach($left_widgets as $widget): ?>
-                    <div class="xo-widget">
-                        <h3 class="xo-blackbar">
-                            <?php echo isset($widget['icon']) && $widget['icon']!='' ? ' <i class="xo-icon" style="background-image: url('.$widget['icon'].');"></i> ' : ''; ?>
-                            <?php echo $widget['title']; ?>
-                        </h3>
-                        <div class="xo-widget-content"><?php echo $widget['content']; ?></div>
+                    <div class="cu-box">
+                        <div class="box-header">
+                            <i class="icon-caret-up box-handler"></i>
+                            <h3>
+                                <?php echo isset($widget['icon']) && $widget['icon']!='' ? ' <i class="xo-icon" style="background-image: url('.$widget['icon'].');"></i> ' : ''; ?>
+                                <?php echo $widget['title']; ?>
+                            </h3>
+                        </div>
+                        <div class="box-content"><?php echo $widget['content']; ?></div>
                     </div>
                     <?php endforeach; ?>
                 </aside>
@@ -427,6 +432,7 @@
                     <div id="xo-contents">
 
                         <?php echo $content; ?>
+
                     </div>
                 </div>
                 
@@ -434,12 +440,16 @@
                 <aside class="col-md-4 col-lg-3">
                     <?php foreach($right_widgets as $widget): ?>
                     <?php if(!isset($widget['title']) && !isset($widget['content'])) continue; ?>
-                    <div class="xo-widget">
-                        <h3 class="xo-blackbar">
-                            <?php echo isset($widget['icon']) && $widget['icon']!='' ? ' <i class="xo-icon" style="background-image: url('.$widget['icon'].');"></i> ' : ''; ?>
-                            <?php echo $widget['title']; ?>
-                        </h3>
-                        <div class="xo-widget-content"><?php echo $widget['content']; ?></div>
+                    <div class="cu-box">
+                        <div class="box-header">
+                            <i class="icon-caret-up box-handler"></i>
+                            <h3>
+                                <?php echo isset($widget['icon']) && $widget['icon']!='' ? ' <i class="xo-icon" style="background-image: url('.$widget['icon'].');"></i> ' : ''; ?>
+                                <?php echo $widget['title']; ?>
+                            </h3>
+                        </div>
+
+                        <div class="box-content"><?php echo $widget['content']; ?></div>
                     </div>
                     <?php endforeach; ?>
                 </aside>

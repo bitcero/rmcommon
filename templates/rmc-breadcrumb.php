@@ -2,9 +2,8 @@
 <?php $total_crumbs = count($this->crumbs); ?>
 <?php if ( $total_crumbs > 0 ): ?>
 <!-- Breadcrumb -->
-<div class="container">
     <ul class="breadcrumb rmc-breadcrumb">
-        <li><a href="<?php echo RMCURL; ?>" title="<?php _e('Dashboard','rmcommon'); ?>"><i class="icon-dashboard"></i></a></li>
+        <li><a href="<?php echo RMCURL; ?>" title="<?php _e('Dashboard','rmcommon'); ?>"><span class="glyphicon glyphicon-home"></span></a></li>
         <?php if($xoopsModule->dirname()!='rmcommon'): ?>
             <li>
                 <a href="<?php echo $xoopsModule->hasadmin() ? XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/'.$xoopsModule->getInfo('adminindex') : ''; ?>">
@@ -22,6 +21,6 @@
             <?php endif; ?>
         <?php endforeach; ?>
     </ul>
-</div>
+
 <!--// ENd breadcrumb -->
 <?php endif; ?>

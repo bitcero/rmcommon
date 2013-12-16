@@ -7,7 +7,9 @@ Author URI: http://www.bitcero.info
 */
 
 $(document).ready(function(){
-    
+
+    var bc_on = false;
+
     $(".tooltip").each(function(){
         $(this).removeClass("tooltip");
     });
@@ -55,8 +57,8 @@ $(document).ready(function(){
         
     });
 
-    $(".box-collapse .control").click(function(){
-        $(this).parent().parent().children(".collapsable").slideToggle('fast');
+    $(".cu-box .box-handler").click(function(){
+        $(this).parent().parent().children(".box-content").slideToggle('fast');
 
         if($(this).hasClass("icon-caret-down"))
             $(this).removeClass("icon-caret-down").addClass('icon-caret-up');
@@ -84,6 +86,35 @@ $(document).ready(function(){
         return false;
 
     });
+
+    $(".cu-breadcrumb-container > .breadcrumb-puller, .cu-breadcrumb-container > .rmc-breadcrumb").hover(function(){
+
+        bc_on = true;
+
+        if ( !$(".cu-breadcrumb-container").hasClass( 'displayed' ) ){
+            $(".cu-breadcrumb-container").animate({
+                top: '0px'
+            }, 100)
+                .addClass( "displayed" );
+
+            return true;
+        }
+
+        return false;
+
+    });
+
+    $(".cu-breadcrumb-container > .rmc-breadcrumb").mouseleave( $.debounce( 1000, function( e ){
+
+        bc_on = false;
+
+        if ( $(".cu-breadcrumb-container").hasClass( 'displayed' ) && bc_on == false ){
+            $(".cu-breadcrumb-container").animate({
+                top: '-32px'
+            }, 100)
+                .removeClass( "displayed" );
+        }
+    } ) );
     
 });
 
