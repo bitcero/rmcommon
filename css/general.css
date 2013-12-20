@@ -29,13 +29,6 @@ div.cu-bulk-actions .form-control{
     background-position: 4px;
     padding-left: 24px;
 }
-.imgmgr_container{
-    width: 700px;
-    position: fixed;
-    top: 0px;
-    left: 50%;
-    margin-left: -350px;
-}
 
 /* Admin Toolbar */
 #rmc-toolbar .nav > li > .cu-tool > span{

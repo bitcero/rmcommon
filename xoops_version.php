@@ -40,9 +40,9 @@ $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Red México";
 $modversion['authorurl'] = "http://redmexico.com.mx";
 $modversion['updateurl'] = "http://www.xoopsmexico.net/modules/vcontrol/?action=check&id=1";
-$modversion['icon16'] = "images/rmc16.png";
-$modversion['icon24'] = 'images/rmc24.png';
-$modversion['icon32'] = 'images/rmc32.png';
+$modversion['icon16'] = "images/icon16.png";
+$modversion['icon24'] = 'images/icon24.png';
+$modversion['icon32'] = 'images/icon32.png';
 $modversion['icon48'] = 'images/icon48.png';
 
 $modversion['social'][0] = array('title' => __('Twitter', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/bitcero/');

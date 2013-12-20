@@ -14,7 +14,7 @@
                 <div id="mods-list">
                     <div class="row">
                         <?php foreach($installed_modules as $mod): ?>
-                            <div class="col-sm-4 col-md-6 col-lg-4">
+                            <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
                                 <div class="installed-item">
                                     <a href="<?php echo $mod->admin != '' ? $mod->admin : $mod->main; ?>" class="icon" title="<?php $mod->real_name; ?>">
                                         <img src="<?php echo $mod->logo; ?>">
@@ -48,60 +48,19 @@
             </div>
         </div>
 
-        <!-- System tools -->
+
+        <!-- Recent News -->
         <div class="cu-box">
             <div class="box-header">
                 <i class="icon-caret-up box-handler"></i>
-                <h3><?php _e('System Tools','rmcommon'); ?></h3>
+                <img src="images/loading_2.gif" alt="" class="loading" id="loading-news" />
+                <h3><?php _e('Recent News','rmcommon'); ?></h3>
             </div>
-            <div class="box-content system_tools collapsable">
-                <div class="row">
-                    <div class="col-sm-6 col-md-12 col-lg-6">
-                        <a style="background-image: url(images/configure.png);" href="<?php echo XOOPS_URL; ?>/modules/system/admin.php?fct=preferences&op=showmod&mod=<?php echo $xoopsModule->mid(); ?>"><?php _e('Configure Common Utilities','rmcommon'); ?></a>
-                    </div>
-                    <div class="col-sm-6 col-md-12 col-lg-6">
-                        <a style="background-image: url(images/images.png);" href="images.php"><?php _e('Images Manager','rmcommon'); ?></a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6 col-md-12 col-lg-6">
-                        <a style="background-image: url(images/comments.png);" href="comments.php"><?php _e('Comments Management','rmcommon'); ?></a>
-                    </div>
-                    <div class="col-sm-6 col-md-12 col-lg-6">
-                        <a style="background-image: url(images/plugin.png);" href="plugins.php"><?php _e('Plugins Management','rmcommon'); ?></a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6 col-md-12 col-lg-6">
-                        <a style="background-image: url(images/modules.png);" href="modules.php"><?php _e('XOOPS Modules','rmcommon'); ?></a>
-                    </div>
-                    <div class="col-sm-6 col-md-12 col-lg-6">
-                        <a style="background-image: url(images/users.png);" href="users.php"><?php _e('Users Management','rmcommon'); ?></a>
-                    </div>
-                </div>
-
-                <?php
-                $system_tools = RMEvents::get()->run_event('rmcommon.get.system.tools', array());
-                $i = 1;
-                ?>
-                <?php if($system_tools): ?>
-                    <div class="row">
-                    <?php foreach ($system_tools as $tool): ?>
-                        <?php if($i>2): ?>
-                            </div><div class="row">
-                            <?php $i=1; ?>
-                        <?php endif; ?>
-                        <div class="col-sm-6 col-md-12 col-lg-6"><a href="<?php echo $tool['link']; ?>" style="background-image: url(<?php echo $tool['icon']; ?>);"><?php echo $tool['caption']; ?></a></div>
-                        <?php $i++; endforeach; ?>
-                    </div>
-                <?php endif; ?>
+            <div class="box-content collapsable" id="rmc-recent-news">
 
             </div>
         </div>
-        <!--// End system tools -->
-
+        <!--// End recent news -->
 
     </div>
 
@@ -132,17 +91,18 @@
                 <i class="icon-caret-up box-handler"></i>
                 <h3><?php _e('Available Modules','rmcommon'); ?></h3>
             </div>
-            <div class="box-content collapsable">
-                <div class="mods-list">
+            <div class="box-content">
+                <ul class="available-list list-unstyled">
                 <?php foreach($available_mods as $module): ?>
-                    <div class="<?php echo tpl_cycle("even,odd"); ?>">
-                        <span class="modimg" style="background: url(../<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('icon32')!='' ? $module->getInfo('icon32') : $module->getInfo('image'); ?>) no-repeat center;">&nbsp;</span>
-                        <strong><?php echo $module->getInfo('name'); ?></strong> <em><?php echo is_array($module->getInfo('rmversion')) ? RMModules::format_module_version( $module->getInfo('rmversion') ) : $module->getInfo('version'); ?></em><br />
-                        <span class="moddesc"><?php echo $module->getInfo('description'); ?></span><br />
+                    <li>
+                        <img class="module-icon" src="../<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('icon48')!='' ? $module->getInfo('icon48') : $module->getInfo('image'); ?>" alt="<?php echo $module->getInfo('name'); ?>">
+                        <strong><?php echo $module->getInfo('name'); ?></strong>
+                        <small><?php echo is_array($module->getInfo('rmversion')) ? RMModules::format_module_version( $module->getInfo('rmversion') ) : $module->getInfo('version'); ?></small><br />
+                        <span class="module-description"><?php echo $module->getInfo('description'); ?></span>
                         <a href="modules.php?action=install&dir=<?php echo $module->getInfo('dirname'); ?>" class="btn btn-warning btn-sm"><?php _e('Install', 'rmcommon'); ?></a>
-                    </div>
+                    </li>
                 <?php endforeach; ?>
-                </div>
+                </ul>
                 <span class="help-block">
 	                <?php _e('If you wish to manage or install new modules please go to Modules Management.','rmcommon'); ?><br />
 	                <a href="modules.php" class="btn btn-info"><?php _e('Modules management', 'rmcommon'); ?></a>
@@ -155,18 +115,69 @@
 
     <div class="col-md-4 col-lg-3">
 
-        <!-- Recent News -->
+        <!-- System tools -->
         <div class="cu-box">
             <div class="box-header">
                 <i class="icon-caret-up box-handler"></i>
-                <img src="images/loading_2.gif" alt="" class="loading" id="loading-news" />
-                <h3><?php _e('Recent News','rmcommon'); ?></h3>
+                <h3><?php _e('System Tools','rmcommon'); ?></h3>
             </div>
-            <div class="box-content collapsable" id="rmc-recent-news">
+            <div class="box-content system-tools collapsable">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="<?php echo RMCURL; ?>/settings.php?action=configure&amp;&mod=<?php echo $xoopsModule->mid(); ?>">
+                            <img src="images/configure.png" alt="<?php _e('Configure Common Utilities','rmcommon'); ?>">
+                            <?php _e('Configure Common Utilities','rmcommon'); ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="images.php">
+                            <img src="images/images.png" alt="<?php _e('Images Manager','rmcommon'); ?>">
+                            <?php _e('Images Manager','rmcommon'); ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="comments.php">
+                            <img src="images/comments.png" alt="<?php _e('Comments Management','rmcommon'); ?>">
+                            <?php _e('Comments Management','rmcommon'); ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="plugins.php">
+                            <img src="images/plugin.png" alt="<?php _e('Plugins Management','rmcommon'); ?>">
+                            <?php _e('Plugins Management','rmcommon'); ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="modules.php">
+                            <img src="images/modules.png" alt="<?php _e('XOOPS Modules','rmcommon'); ?>">
+                            <?php _e('XOOPS Modules','rmcommon'); ?>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.php">
+                            <img src="images/users.png" alt="<?php _e('Users Management','rmcommon'); ?>">
+                            <?php _e('Users Management','rmcommon'); ?>
+                        </a>
+                    </li>
+                    <?php
+                    $system_tools = RMEvents::get()->run_event('rmcommon.get.system.tools', array());
+                    $i = 1;
+                    ?>
+                    <?php if($system_tools): ?>
+                        <?php foreach ($system_tools as $tool): ?>
+                            <li>
+                                <a href="<?php echo $tool['link']; ?>">
+                                    <img src="<?php echo $tool['icon']; ?>" alt="<?php echo $tool['caption']; ?>">
+                                    <?php echo $tool['caption']; ?>
+                                </a>
+                            </li>
+                            <?php $i++; endforeach; ?>
+                    <?php endif; ?>
+                </ul>
 
             </div>
         </div>
-        <!--// End recent news -->
+        <!--// End system tools -->
 
     </div>
 

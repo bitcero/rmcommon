@@ -255,44 +255,49 @@ div.form_container label.hidden{
 }
 
 .mgr_blocker{
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-    filter: alpha(opacity=80);
-    -moz-opacity:0.8;
-    -khtml-opacity: 0.8;
-    opacity: 0.8;
     background: #FFF;
+    background: rgba(0,0,0,0.8);
     top: 0; left: 0; right: 0; bottom: 0;
     position: fixed;
     display: none;
     z-index: 1080;
 }
 .imgmgr_container{
-    width: 750px;
     position: fixed;
-    top: 0;
-    left: 50%;
-    margin-left: -350px;
-    border: 1px solid #999;
-    border-top: 0;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    padding: 2.5%;
+    min-width: 300px;
+    border: 0;
     display: none;
     z-index: 1081;
 }
-.imgmgr_container .th{
+.imgmgr_container .window-title{
     border: 0;
     position: relative;
+    padding: 10px;
+    font-weight: normal;
+    font-size: 1.2em;
 }
-.imgmgr_container .th span{
+.imgmgr_container .window-title span{
     display: block;
     width: 18px;
     height: 18px;
     position: absolute;
     right: 10px;
-    background: url(../../images/closeb.png) no-repeat center;
+    background: url(../images/closeb.png) no-repeat center;
     cursor: pointer;
 }
+.imgmgr_container .imgmgr_content{
+    position: relative;
+    top: 50px;
+    left: 0; right: 0; bottom: 0;
+    background: #F00;
+}
 .imgmgr_container iframe{
+    border: 0;
     width: 100%;
-    margin: 0;
+    height: 100%;
 }
 
 /* IMages Field */

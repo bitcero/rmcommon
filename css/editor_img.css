@@ -1,8 +1,9 @@
+@import url('http://fonts.googleapis.com/css?family=Roboto%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=3.8');
 body{
 	margin: 0;
-	font-family: arial, helvetica, sans-serif;
-	font-size: 0.9em;
     background: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
 }
 a{
     text-decoration: none;
@@ -20,16 +21,13 @@ input[type='text'],input[type='password'],textarea,select{
     padding: 4px;
     font-size: 1em;
     font-family: tahoma, arial, sans-serif;
-    border: 1px solid #A3BAD6;
+    border: 1px solid #ddd;
     color: #666;
-    -moz-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 0px;
     background: #F7F7F7;
 }
 select{
-    padding: 2px;
+    padding: 4px;
 }
 option{
     font-family: tahoma, arial, sans-serif;
@@ -79,10 +77,7 @@ td input[type='text']{
 	font-weight: bold;
 	float: left;
 	text-transform: uppercase;
-	-moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 0px;
     margin: 0 3px;
     border: 1px solid #ccc;
 }
@@ -165,10 +160,7 @@ td input[type='text']{
     float: left;
     display: block;
     padding: 2px 10px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    border-radius: 8px;
+    border-radius: 0px;
     background: #fff;
     border: 1px solid #CCC;
     margin: 3px 1px;
@@ -196,10 +188,7 @@ td input[type='text']{
 	float: left;
 	padding: 3px 15px;
 	margin: 0 5px;
-	-moz-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    border-radius: 0px;
     background: #999;
     color: #FFF;
     text-transform: uppercase;
@@ -232,10 +221,7 @@ td input[type='text']{
     border: 0;
     width: 99%;
     border: 1px solid #CCC;
-    -moz-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 0px;
     padding: 1px;
 }
 th, .th{

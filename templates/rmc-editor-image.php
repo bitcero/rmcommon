@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $rmc_config['lang']; ?>" lang="<?php echo $rmc_config['lang']; ?>">
 <head>
 <title><?php _e('Insert Image','rmcommon'); ?></title>
+    <!-- RMTemplateHeader -->
 </head>
 <body style="background: #FFF;">
 <div id="img-toolbar">
@@ -11,10 +12,10 @@
     <?php echo RMEvents::get()->run_event('rmcommon.imgmgr.editor.options', ''); ?>
 </div>
 <div id="upload-container" class="container">
-    <div class="categories_selector">
+    <div class="form-group">
         <form name="selcat" id="select-category" method="post" action="tiny-images.php">
         <?php _e('Select the category where you wish to upload images','rmcommon'); ?>
-        <select name="category" onchange="$('#select-category').submit();">
+        <select name="category" onchange="$('#select-category').submit();" class="form-control">
             <option value="0"<?php echo $cat->isNew() ? ' selected="selected"' : ''; ?>><?php _e('Select...','rmcommon'); ?></option>
             <?php foreach($categories as $catego): ?>
                 <?php if(!$catego->user_allowed_toupload($xoopsUser)) continue; ?>

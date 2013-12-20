@@ -3,6 +3,14 @@
 border:0; margin:0; padding:0; white-space:nowrap; text-decoration:none; font-weight:normal; cursor:default; vertical-align:baseline; width:auto; border-collapse:separate;
 }
 
+.exm_themeSkin a.mce_forecolor{
+    height: 24px!important;
+    width: 24px!important;
+}
+.exm_themeSkin td.mceLast > a > span.mce_forecolor{
+    width: 24px!important;
+    height: 24px!important;
+}
 
 x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-decoration:none; font-weight:normal; cursor:default;}
 .exm_themeSkin .mceSplitButton a.mceAction:hover{
@@ -25,36 +33,16 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 .exm_themeSkin tr.mceFirst .mceToolbar tr td,
 .exm_themeSkin tr.mceLast .mceToolbar tr td {border:0; margin:0; padding:0;}
 .exm_themeSkin tr.mceFirst td.mceToolbar {
-    /*background-image: url(img/ed-bg.png);
-    background-position: left top;
-    background-repeat: repeat-x;*/
-    background: #f2f2f2;
-    border-width: 0 0 1px;
-    border-style: none none solid;
-    border-radius: 3px 3px 0 0;
-        -moz-border-radius: 3px 3px 0 0;
-        -webkit-border-radius: 3px 3px 0 0;
-        -o-border-radius: 3px 3px 0 0;
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #ffffff 0%,#e5e5e5 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+    border: 0;
+    padding: 4px;
 }
 
 .exm_themeSkin tr.mceFirst td.mceToolbar table tr:nth-child(2n+1) td{
     background: transparent;
 }
 
-.exm_themeSkin table.mceLayout {
-    border: 1px solid #e1e1e1;
-    border-radius: 3px;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -o-border-radius: 3px;
+.exm_themeSkin table.mceLayout table {
+    box-shadow: none!important;
 }
 .exm_themeSkin .mceIframeContainer {background: #FFF; padding: 0;}
 .exm_themeSkin .mceStatusbar {
@@ -62,10 +50,10 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     font-family: 'MS Sans Serif',sans-serif,Verdana,Arial;
     font-size: 9pt;
     color: #666;
-    line-height: 16px;
-    overflow: visible;
-    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
     border-top: 1px dotted #000;
+    padding: 4px;
 }
 .exm_themeSkin .mceStatusbar div {float:left; padding:2px;}
 .exm_themeSkin .mceStatusbar a.mceResize {
@@ -81,8 +69,8 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     top: 5px;
 }
 .exm_themeSkin .mceStatusbar a:hover {text-decoration:underline}
-.exm_themeSkin table.mceToolbar {margin: 0 2px 2px;}
-.exm_themeSkin #content_toolbar1 {margin-top: 2px;}
+.exm_themeSkin table.mceToolbar {margin: 0; background: transparent; }
+.exm_themeSkin #content_toolbar1 {background: transparent;}
 .exm_themeSkin .mceToolbar .mceToolbarEndListBox span {display:none}
 .exm_themeSkin span.mceIcon, .exm_themeSkin img.mceIcon {display:block; width:20px; height:20px}
 .exm_themeSkin .mceIcon {background:url(../../img/icons.gif) no-repeat 20px 20px}
@@ -90,15 +78,11 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 /* Button */
 .exm_themeSkin .mceButton {
     display:block; 
-    width: 20px; 
-    height: 20px; 
+    line-height: 20px;
     cursor: default; 
-    padding: 1px 2px; 
-    margin: 1px; 
-    background-image: url(img/butt2.png);
-    background-position: left top;
-    background-repeat: repeat-x;
-    border-radius: 2px;
+    padding: 4px;
+    margin: 1px;
+    border-radius: 0px;
     box-sizing: content-box;
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
@@ -117,13 +101,12 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 /* Separator */
 .exm_themeSkin .mceSeparator { 
     height: 24px; 
-    width: 0;
+    width: 1px;
     display: block;
-    background: transparent;
+    background: rgba(0,0,0,0.1);
     overflow: hidden; 
     margin: 0 2px; 
-    border-left: 1px solid #DDDDDD;
-    border-right: 1px solid #FFF;
+    border: 0;
 }
 
 /* ListBox */
@@ -132,13 +115,9 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     padding: 1px 2px 1px 5px;
     text-align:left; 
     text-decoration: none !important;
-    width:70px;  
-    background-image: url(img/butt2.png);
-    background-position: left top;
-    background-repeat: repeat-x;
+    width:70px;
     font-family: Tahoma,Verdana,Arial,Helvetica; 
-    font-size: 11px; 
-    height: 20px; 
+    font-size: 11px;
     line-height: 20px; 
     overflow: hidden;
 }
@@ -147,10 +126,8 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     direction: ltr;
 }
 .exm_themeSkin .mceListBox .mceOpen {
-    width: 14px;
-    height: 20px; 
+    width: auto;
     border-collapse: separate;
-    background-image: url(img/butt2.png);
     background-position: left top;
     background-repeat: repeat-x;
     padding: 1px;
@@ -158,10 +135,10 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 }
 .exm_themeSkin .mceListBox .mceOpen span {
     display: block;
-    width:14px;
-    height:20px;
+    width:16px;
+    height: 20px;
     background-image: url(img/down_arrow.gif);
-    background-position: 2px 1px;
+    background-position: center;
     background-repeat: no-repeat;
 }
 .exm_themeSkin table.mceListBoxEnabled:hover .mceText, 
@@ -185,12 +162,11 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     direction: ltr;
 }
 .exm_themeSkin table.mceSplitButton td {
-    padding: 2px;
+
 }
 .exm_themeSkin .mceSplitButton a.mceAction {
     height:20px;
     width:20px;
-    background-image: url(img/butt2.png);
     background-position: left top;
     background-repeat: repeat-x;
     padding: 1px 2px;
@@ -200,21 +176,21 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     width:20px; 
 }
 .exm_themeSkin .mceSplitButton a.mceOpen {
-    width:10px;
-    height:20px;
+    width:20px;
     border-collapse:separate;
-    background-image: url(img/butt2.png);
     background-position: left top;
     background-repeat: repeat-x;
     padding: 1px;
+    border: 1px solid rgba(0,0,0,0.1);
     border-left: 0 none !important;
 }
 .exm_themeSkin .mceSplitButton span.mceOpen {
-    width:10px; 
+    width:20px;
     background-image: url(img/down_arrow.gif);
-    background-position: 0px 1px;
+    background-position: center;
     background-repeat: no-repeat;
     border-collapse:separate;
+    border: 0;
     border-left: 0 none !important;
 }
 .exm_themeSkin .mceSplitButton a.mceOpen:hover,
@@ -251,7 +227,7 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 .exm_themeSkin .mceNoIcons a .mceText {padding-left:10px}
 .exm_themeSkin .mceMenu table {}
 .exm_themeSkin .mceMenu a, .exm_themeSkin .mceMenu span, .exm_themeSkin .mceMenu {display:block}
-.exm_themeSkin .mceMenu td {height:20px;overflow:hidden;}
+.exm_themeSkin .mceMenu td {;overflow:hidden;}
 .exm_themeSkin .mceMenu a {
     position:relative;
     padding:3px 0 4px 0;
@@ -423,7 +399,7 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 .exm_themeSkin .mceMenu {
     border-style: solid; 
     border-width: 1px;
-    border-color: #999;
+    border-color: rgba(0,0,0,0.1);
 }
 
 /* TinyMCE */
@@ -457,39 +433,38 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 
 /* Button */
 .exm_themeSkin .mceButton {
-    border-color: #ccc ;
-    box-shadow: 1px 1px 0 #fff;
+    border-color: transparent ;
 }
 
 .exm_themeSkin a.mceButtonEnabled:hover,
 .exm_themeSkin a.mceButtonActive,
 .exm_themeSkin a.mceButtonSelected {
-    background-color: #d5d5d5;
-    border-color: #777 !important;
+    border-color: rgba(0,0,0,0.1) !important;
+    background: rgba(0,0,0,0.05);
 }
 
 .exm_themeSkin .mceButtonDisabled {
-    border-color: #ccc !important;
+    border-color: transparent !important;
 }
 
 /* ListBox */
 .exm_themeSkin .mceListBox .mceText,
 .exm_themeSkin .mceListBox .mceOpen  {
-    border-color: #B2B2B2;
-    background-color: #d5d5d5;
+    border-color: rgba(0,0,0,0.1);
+    background-color: transparent;
 }
 
 .exm_themeSkin table.mceListBoxEnabled:hover .mceOpen,
 .exm_themeSkin .mceListBoxHover .mceOpen,
 .exm_themeSkin .mceListBoxSelected .mceOpen,
 .exm_themeSkin .mceListBoxSelected .mceText {
-    border-color: #777 !important;
-    background-color: #d5d5d5;
+    border-color: rgba(0,0,0,0.2) !important;
+    background-color: transparent;
 }
 
 .exm_themeSkin table.mceListBoxEnabled:hover .mceText,
 .exm_themeSkin .mceListBoxHover .mceText {
-    border-color: #777 !important;
+    border-color: rgba(0,0,0,0.2) !important;
 }
 
 .exm_themeSkin select.mceListBox {
@@ -500,16 +475,16 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 /* SplitButton */
 .exm_themeSkin .mceSplitButton a.mceAction,
 .exm_themeSkin .mceSplitButton a.mceOpen {
-    background-color: #e8e8e8;
-    border-color: #B2B2B2;
+    background-color: transparent;
+    padding: 0;
 }
 
 .exm_themeSkin .mceSplitButton a.mceOpen:hover,
 .exm_themeSkin .mceSplitButtonSelected a.mceOpen,
 .exm_themeSkin table.mceSplitButtonEnabled:hover a.mceAction,
 .exm_themeSkin .mceSplitButton a.mceAction:hover {
-    background-color: #d5d5d5;
-    border-color: #777 !important;
+    background-color: transparent;
+    border-color: rgba(0,0,0,0.1) !important;
 }
 
 .exm_themeSkin .mceSplitButtonActive {

@@ -42,7 +42,7 @@
         <title><?php if($this->get_var('xoops_pagetitle')!=''): ?><?php echo $this->get_var('xoops_pagetitle'); ?> - <?php endif; ?><?php echo isset($xoopsModule) ? $xoopsModule->getInfo('name').' - ' : ''; ?><?php echo $xoopsConfig['sitename']; ?></title>
     </head>
     <body class="<?php if($this->get_toolbar()): ?>xo-body-toolbar<?php endif; ?>">
-        <div class="cu-breadcrumb-container">
+        <div class="cu-breadcrumb-container hidden-xs">
             <?php echo RMBreadCrumb::get()->render(); ?>
             <span class="breadcrumb-puller pull-right" title="<?php _e('Show breadcrumb', 'rmcommon'); ?>"><span class="glyphicon glyphicon-chevron-down"></span></span>
         </div>

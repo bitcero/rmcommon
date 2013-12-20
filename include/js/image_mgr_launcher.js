@@ -6,8 +6,8 @@ $(document).ready(function(){
 
         var imgmgr_title = imgmgr_title == undefined ? 'Seleccionar imagen' : '';
 
-        html += '<div class="th"><span></span>'+imgmgr_title+'</div>';
-        html += '<div class="imgmgr_content"><iframe src="'+mgrURL+'?target=container&amp;idcontainer='+id+'" name="image"></iframe></div>'
+        html += '<div class="window-title cu-titlebar"><button type="button" class="close">&times;</button>'+imgmgr_title+'</div>';
+        html += '<iframe src="'+mgrURL+'?target=container&amp;idcontainer='+id+'" name="image"></iframe>'
         html += '</div>';
         $("body").append(html);
 
@@ -16,16 +16,17 @@ $(document).ready(function(){
 
         $("#blocker-"+id).fadeIn('fast', function(){
             $("body").css('overflow','hidden');
-            var h = $(window).height();
-            var nh = h-$("#window-"+id+" .th").height()-30;
-            $("#window-"+id+" iframe").css('height', nh+'px');
+            //var h = $("body").find("#window-"+id).height();
+            //alert(h);
+            //var nh = h-$("#window-"+id+" .window-title").height()-30;
+            //$("#window-"+id+" iframe").css('height', nh+'px');
             $("#window-"+id).fadeIn('fast', function(){
 
             });
 
         });
 
-        $("#blocker-"+id+", #window-"+id+" .th span").click(function(){
+        $("#blocker-"+id+", #window-"+id+" .window-title .close").click(function(){
 
             $("#window-"+id).fadeOut('fast', function(){
 

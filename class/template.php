@@ -431,7 +431,7 @@ class RMTemplate
             return '';
 
 
-        $version = $version=='' ? RMCVERSION : $version;
+        $version = $version=='' ? str_replace(" ", "-", RMCVERSION) : $version;
 
         if( $type == 'js' || $type == 'css' ){
             // Possibles paths in order of importance

@@ -16,13 +16,12 @@ $Id: dashboard.css 550 2010-11-15 01:44:13Z i.bitcero $
 	border: 1px solid #CCC;
 	border-radius: 2px;
 	margin: 0 5px 0 0;
+    width: 80px;
 }
 
-.system_tools a{
+.system-tools > .nav-pills > li > a{
     display: block;
-    padding: 2px 0 2px 20px;
-    background-position: left;
-    background-repeat: no-repeat;
+    padding: 6px 10px;
 }
 
 .description{
@@ -148,4 +147,25 @@ $Id: dashboard.css 550 2010-11-15 01:44:13Z i.bitcero $
 }
 .news_item:nth-child(n+3) .link{
 	display: inline-block;
+}
+
+.available-list li{
+    position: relative;
+    padding: 10px 5px 10px 58px;
+    min-height: 58px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.available-list li:first-child{
+    padding-top: 0;
+}
+.available-list li > .module-icon{
+    position: absolute;
+    left: 0; top: 5px;
+    width: 48px;
+}
+.available-list li > .module-description{
+    font-size: 0.9em;
+    color: #575757;
+    display: block;
+    margin-bottom: 5px;
 }

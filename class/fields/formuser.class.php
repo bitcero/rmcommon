@@ -102,11 +102,11 @@ class RMFormUser extends RMFormElement
 			while ($row = $db->fetchArray($result)){
 				$rtn .= "<li id='".$this->id()."-exmuser-$row[uid]'>\n
 						<label>";
-                $rtn .= $this->can_change ? " <a href='javascript:;' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]);\"><span>delete</span></a>" : '';
+                $rtn .= $this->can_change ? " <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]);\"><span>delete</span></a>" : '';
                 $rtn .= "<input type='".($this->multi ? 'checkbox' : 'radio')."' name='".($this->multi ? $this->getName().'[]' : $this->getName())."' id='".$this->id()."-".$row['uid']."'
 				 		value='$row[uid]' checked='checked' /> 
                         $row[uname] ";
-                $rtn .= "</label></div></li>";
+                $rtn .= "</label></li>";
 			}
 		}
 		
@@ -127,7 +127,7 @@ class RMFormUser extends RMFormElement
 					    </div>
 					</div>';
 		}
-		
+		$rtn .= '</div>';
 		return $rtn;
 	}
 }
