@@ -146,8 +146,8 @@ class RMFormEditor extends RMFormElement
 		RMTemplate::get()->add_head_script(TinyEditor::getInstance()->get_js());
         
 		$rtn = "\n
-		<div class=\"ed-container\" id=\"ed-cont-".$this->id()."\" style=\"width: $this->_width\">
-        <div class=\"es-editor\" style=\"width: $this->_width;\">
+		<div class=\"ed-container\" id=\"ed-cont-".$this->id()."\" style=\"width: 100%;\">
+        <div class=\"es-editor\" style=\"width: 100%;\">
         <a class=\"edButtonHTML\" onclick=\"switchEditors.go('".$this->id()."', 'html');\">HTML</a>
         <a class=\"edButtonPreview\" onclick=\"switchEditors.go('".$this->id()."', 'tinymce');\">Visual</a>
         </div>
