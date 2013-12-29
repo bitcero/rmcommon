@@ -28,7 +28,7 @@
         </li>
         <li>
             <a href="#" id="blocks-console-control">
-                <i class="fa-bell-alt"></i>
+                <span class="fa fa-bell"></span>
                 <?php _e('Messages Console','rmcommon'); ?>
             </a>
             <div id="blocks-console">
@@ -54,13 +54,13 @@
                             <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
                                 <div class="row-fluid item-controls">
                                     <strong class="dd-handle"><?php echo $block['title']; ?></strong>
-                                    <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" data-action="delete" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="fa-remove-sign"></i></a>
+                                    <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" data-action="delete" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="fa fa-minus-circle"></i></a>
                                     <?php if($block['visible']): ?>
-                                        <a href="#" class="pull-right text-warning control-visible" data-block="<?php echo $block['id']; ?>" data-action="hide" title="<?php _e('Hide block','rmcommon'); ?>"><i class="fa-eye-close"></i></a>
+                                        <a href="#" class="pull-right text-warning control-visible" data-block="<?php echo $block['id']; ?>" data-action="hide" title="<?php _e('Hide block','rmcommon'); ?>"><i class="fa fa-eye-slash"></i></a>
                                     <?php else: ?>
-                                        <a href="#" class="pull-right text-success control-visible" data-block="<?php echo $block['id']; ?>" data-action="show" title="<?php _e('Show block','rmcommon'); ?>"><i class="fa-eye-open"></i></a>
+                                        <a href="#" class="pull-right text-success control-visible" data-block="<?php echo $block['id']; ?>" data-action="show" title="<?php _e('Show block','rmcommon'); ?>"><i class="fa fa-eye"></i></a>
                                     <?php endif; ?>
-                                    <a href="#" class="pull-right control-settings" data-block="<?php echo $block['id']; ?>" data-action="settings" title="<?php _e('Block Settings','rmcommon'); ?>"><i class="fa-wrench"></i></a>
+                                    <a href="#" class="pull-right control-settings" data-block="<?php echo $block['id']; ?>" data-action="settings" title="<?php _e('Block Settings','rmcommon'); ?>"><i class="fa fa-wrench"></i></a>
                                 </div>
                                 <div class="row-fluid block-data">
                                     <span class="text-info"><?php echo $block['module']['name']; ?></span>

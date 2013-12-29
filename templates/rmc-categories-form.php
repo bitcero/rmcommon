@@ -75,7 +75,7 @@
 		<div id="sizes-container-all">
 
 			<div class="form-group">
-				<button type="button" class="btn btn-info new-size-button"><i class="fa-plus"></i> <?php _e('Add New Size','rmcommon'); ?></button>
+				<button type="button" class="btn btn-info new-size-button"><i class="fa fa-plus"></i> <?php _e('Add New Size','rmcommon'); ?></button>
 			</div>
 
 			<?php if($edit): ?>
@@ -83,7 +83,7 @@
 				<?php foreach($cat->getVar('sizes') as $size): ?>
 					<div class="single-size" id="single-size-<?php echo $scounter; ?>">
 
-                        <a href="#" class="close" id="delete-0" onclick="return delete_size(this);"><i class="fa-remove"></i> <?php _e('Delete','rmcommon'); ?></a>
+                        <a href="#" class="close" id="delete-0" onclick="return delete_size(this);"><i class="fa fa-minus-circle"></i> <?php _e('Delete','rmcommon'); ?></a>
 
                         <div class="form-group">
                             <label><?php _e('Size name','rmcommon'); ?></label>
@@ -118,7 +118,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <a href="#" class="btn btn-danger" id="delete-0" onclick="return delete_size(this);"><i class="fa-remove"></i> <?php _e('Delete','rmcommon'); ?></a>
+                            <a href="#" class="btn btn-danger" id="delete-0" onclick="return delete_size(this);"><i class="fa fa-minus-circle"></i> <?php _e('Delete','rmcommon'); ?></a>
                         </div>
 					</div>
 					<?php $scounter++; ?>
@@ -127,7 +127,7 @@
 
 				<div class="single-size" id="single-size-0">
 
-                    <a href="#" class="close" id="delete-0" onclick="return delete_size(this);"><i class="fa-remove"></i></a>
+                    <a href="#" class="close" id="delete-0" onclick="return delete_size(this);"><i class="fa fa-minus-circle"></i></a>
 
                     <div class="form-group">
                         <label><?php _e('Size name','rmcommon'); ?></label>
@@ -166,7 +166,7 @@
 			<?php endif; ?>
 
 			<div class="form-group">
-				<button type="button" class="btn btn-info new-size-button"><i class="fa-plus"></i> <?php _e('Add New Size','rmcommon'); ?></button>
+				<button type="button" class="btn btn-info new-size-button"><i class="fa fa-plus"></i> <?php _e('Add New Size','rmcommon'); ?></button>
 			</div>
 
 		</div>

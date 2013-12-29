@@ -294,26 +294,21 @@ table > tbody > tr:nth-child(odd) > td{
     text-shadow: none;
     border-radius: 0;
     border: 0;
-    border: 1px dashed rgba(255,255,255,0.6);
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,0,0,0.1);
 }
 .alert-info{
-    background: #46B5D1;
-    color: rgba(255,255,255,0.9);
-    box-shadow: 0 0 0 3px #46B5D1;
+    background: #A1D9E8;
+    color: #307B8E;
 }
 .alert-success{
-    background: #6FB556;
-    color: rgba(255,255,255,0.9);
-    box-shadow: 0 0 0 3px #6FB556;
+    background: #B6D9A9;
+    color: #4B7B3A;
 }
 .alert-warning {
-    background: #DD823B;
-    color: rgba(255,255,255,0.9);
-    box-shadow: 0 0 0 3px #DD823B;
+    background: #EED27D;
+    color: #967100;
 }
 .alert-danger {
-    background: #D9534F;
-    color: rgba(255,255,255,0.9);
-    box-shadow: 0 0 0 3px #D9534F;
+    background: #ECA7A5;
+    color: #6F2A28;
 }

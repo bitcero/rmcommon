@@ -28,6 +28,7 @@ $(document).ready(function(){
     });
     
     $("#refresh-updates").click(function(){
+        $(this).children("span").addClass('fa-spin');
         $(".rm-loading").fadeIn('fast');
         $("#rmc-updates > div").each(function(){
             $(this).fadeOut('fast', function(){
@@ -35,8 +36,9 @@ $(document).ready(function(){
             });
         });
         $.get(xoUrl+'/modules/rmcommon/ajax/updates.php', {XOOPS_TOKEN_REQUEST: xoToken}, function(data){
-        
+
             loadUpdates();
+            $("#refresh-updates > span").removeClass('fa-spin');
             
         }, 'json');
     });

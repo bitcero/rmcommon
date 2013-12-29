@@ -2,8 +2,8 @@
 
 <div class="row">
     <div class="col-md-8 col-lg-8">
-        <button type="button" class="btn btn-warning" id="refresh-updates"><i class="fa-refresh fa-white"></i> <?php _e('Check for Updates','rmcommon'); ?></button>
-        <button type="button" class="btn btn-info" id="upds-ftp"><i class="fa-upload"></i> <?php _e('FTP Settings','rmcommon'); ?></button>
+        <button type="button" class="btn btn-warning" id="refresh-updates"><span class="fa fa-refresh"></span> <?php _e('Check for Updates','rmcommon'); ?></button>
+        <button type="button" class="btn btn-info" id="upds-ftp"><span class="icon icon-settings"></span> <?php _e('FTP Settings','rmcommon'); ?></button>
     </div>
     <div class="col-md-4 col-lg-4 text-right">
         <span class="label label-success"><?php echo sprintf(__('Last comprobation: %s','rmcommon'), '<strong>'.$tf->format($updates['date']).'</strong>'); ?></span>
@@ -18,7 +18,7 @@
 
             <div class="col-md-2 col-lg-2">
                 <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('Server:','rmcommon'); ?>"><i class="fa-desktop"></i></span>
+                    <span class="input-group-addon" title="<?php _e('Server:','rmcommon'); ?>"><i class="fa fa-desktop"></i></span>
                     <input type="text" class="form-control" name="ftp_server" id="ftp-server" value="<?php echo $ftpserver; ?>" />
                 </div>
             </div>
@@ -32,27 +32,27 @@
 
             <div class="col-md-2 col-lg-2">
                 <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('User:','rmcommon'); ?>"><i class="fa-user"></i></span>
+                    <span class="input-group-addon" title="<?php _e('User:','rmcommon'); ?>"><i class="fa fa-user"></i></span>
                     <input type="text" class="form-control" name="ftp_user" id="ftp-user" value="" />
                 </div>
             </div>
 
             <div class="col-md-2 col-lg-2">
                 <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('Password:','rmcommon'); ?>"><i class="fa-keyboard"></i></span>
+                    <span class="input-group-addon" title="<?php _e('Password:','rmcommon'); ?>"><i class="fa fa-keyboard-o"></i></span>
                     <input type="password" class="form-control" name="ftp_pass" id="ftp-pass" value="" />
                 </div>
             </div>
 
             <div class="col-md-2 col-lg-2">
                 <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('XOOPS Directory:','rmcommon'); ?>"><i class="fa-folder-open"></i></span>
+                    <span class="input-group-addon" title="<?php _e('XOOPS Directory:','rmcommon'); ?>"><i class="fa fa-folder-open"></i></span>
                     <input type="text" class="form-control" name="ftp_dir" id="ftp-dir" value="<?php echo $ftpdir; ?>" />
                 </div>
             </div>
 
             <div class="col-md-2 col-lg-2">
-                <button type="button" class="btn btn-warning btn-block"><i class="fa-ok"></i> <?php _e('Save','rmcommon'); ?></button>
+                <button type="button" class="btn btn-warning btn-block"><i class="fa fa-check"></i> <?php _e('Save','rmcommon'); ?></button>
             </div>
 
         </form>
@@ -76,7 +76,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <span class="rm-loading text text-info"><?php _e('Searching for updates...','rmcommon'); ?></span>
+        <span class="rm-loading text-primary"><span class="fa fa-refresh fa-spin"></span> <?php _e('Searching for updates...','rmcommon'); ?></span>
         <div id="rmc-updates">
 
         </div>
@@ -117,7 +117,7 @@
 <div id="upd-login" data-next="">
     <div class="title xo-bluebar">
         <button class="close" type="button">&times;</button>
-        <i class="fa-user fa-white"></i> <?php _e('User Credentials','rmcommon'); ?>
+        <i class="fa fa-user"></i> <?php _e('User Credentials','rmcommon'); ?>
     </div>
     <div class=" controls">
         <p><?php _e('Please provide your login credentials for site %site%.','rmcommon'); ?></p>

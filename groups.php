@@ -189,7 +189,7 @@ function save_group_data(){
             )
         );
 
-    showMessage(__( 'Data saved successfully.', 'rmcommon'), RMMSG_SUCCESS, 'fa-hd');
+    showMessage(__( 'Data saved successfully.', 'rmcommon'), RMMSG_SUCCESS, 'fa fa-hd');
 
     // ëxito en las operaciones
     $ajax->ajax_response(
@@ -264,7 +264,7 @@ function delete_group_data() {
 
     if ( '' == $errors ){
 
-        showMessage( __('Selected groups has been deleted.', 'rmcommon' ), RMMSG_SUCCESS, 'fa-remove-circle' );
+        showMessage( __('Selected groups has been deleted.', 'rmcommon' ), RMMSG_SUCCESS, 'fa fa-remove-circle' );
 
         $ajax->ajax_response( '', 0, 1, array( 'action' => 'reload' ) );
 

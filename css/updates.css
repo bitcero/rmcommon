@@ -21,9 +21,7 @@
     font-size: 12px;
 }
 .rm-loading{
-    display: inline-block;
-    padding: 2px 0 2px 20px;
-    background: url(../images/wait.gif) no-repeat left; 
+    display: none;
 }
 .upd-item{display: none; padding: 0 15px;}
 .upd-item-process > div{
