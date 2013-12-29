@@ -18,7 +18,7 @@ $modversion['name'] = 'Common Utilities';
 $modversion['version'] = 2.1;
 $modversion['releasedate'] = "";
 $modversion['status'] = "Beta";
-$modversion['description'] = 'Container a lot of classes and functions used by Red México Modules';
+$modversion['description'] = 'Contains a lot of classes and functions used by Red México Modules';
 $modversion['credits'] = "Red México, BitC3R0";
 $modversion['help'] = "http://www.redmexico.com.mx/docs/common-utilities/";
 $modversion['license'] = "GPL 2";
@@ -47,8 +47,9 @@ $modversion['icon48'] = 'images/icon48.png';
 
 $modversion['social'][0] = array('title' => __('Twitter', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/bitcero/');
 $modversion['social'][1] = array('title' => __('LinkedIn', 'rmcommon'),'type' => 'linkedin','url' => 'http://www.linkedin.com/bitcero/');
-$modversion['social'][2] = array('title' => __('Red México Twitter', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/redmexico/');
-$modversion['social'][3] = array('title' => __('Red México Facebook', 'rmcommon'),'type' => 'facebook','url' => 'http://www.facebook.com/redmexico/');
+$modversion['social'][2] = array('title' => __('Google+', 'rmcommon'),'type' => 'google+','url' => 'http://plus.google.com/100655708852776329288');
+$modversion['social'][3] = array('title' => __('Red México', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/redmexico/');
+$modversion['social'][4] = array('title' => __('Red México', 'rmcommon'),'type' => 'facebook','url' => 'http://www.facebook.com/redmexico/');
 
 $modversion['hasAdmin'] = 1;
 $modversion['adminindex'] = "index.php";

@@ -166,14 +166,14 @@ class Twop6Functions
         $id = preg_replace("/^.*\/system_(.*)\.png$/i","$1",$image);
 
         $replacements_icons = array(
-            'main'  => 'icon-cogs',
-            'user'  => 'icon-user',
-            'meta'  => 'icon-info-sign',
-            'word'  => 'icon-filter',
-            'search'  => 'icon-search',
-            'mail'  => 'icon-envelope',
-            'auth'  => 'icon-key',
-            'mods'  => 'icon-cog',
+            'main'  => 'fa-cogs',
+            'user'  => 'fa-user',
+            'meta'  => 'fa-info-sign',
+            'word'  => 'fa-filter',
+            'search'  => 'fa-search',
+            'mail'  => 'fa-envelope',
+            'auth'  => 'fa-key',
+            'mods'  => 'fa-cog',
         );
 
         $replacements_titles = array(

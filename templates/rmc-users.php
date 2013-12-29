@@ -1,4 +1,4 @@
-<h1 class="cu-section-title"><i class="icon-user"></i> <?php _e('Users Management','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><i class="fa-user"></i> <?php _e('Users Management','rmcommon'); ?></h1>
 <div id="users-filter-options">
     <form name="filterForm" id="filter-form" method="get" action="users.php">
     <div class="basic_options">

@@ -11,7 +11,7 @@
                     <input type="search" name="w" id="wsearch" value="<?php echo isset($keyw) ? $keyw : '' ?>" size="20" class="form-control input-sm" />
                 <span class="input-group-btn">
                     <button type="button" title="<?php _e('Search','rmcommon'); ?>" onclick="$('#wsearch').val()==''?alert('<?php _e('You need something to search!','rmcommon'); ?>'):submit();" class="btn btn-info btn-sm">
-                        <i class="icon-search"></i>
+                        <i class="fa-search"></i>
                     </button>
                 </span>
                 </div>

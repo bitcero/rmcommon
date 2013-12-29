@@ -7,30 +7,48 @@
 }
 
 /** Modules Widget **/
-.rmc_modules_widget{
-	
+.rmc_modules_widget ul{
+    position: relative;
 }
-.rmc_modules_widget .even,
-.rmc_modules_widget .odd{
+.rmc_modules_widget ul > li{
 	overflow: hidden;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 .rmc_mod_info{
-	display: none;
+    display: none;
+	padding: 10px;
 	font-size: 0.85em;
-	color: #666;
+	color: #999;
+    background: rgba(34, 34, 34,0.95);
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+.rmc_mod_info h4{
+    color: #FFF;
+    margin: 0 0 10px 0;
+}
+.rmc_mod_info table,
+.rmc_mod_info table tr td{
+    background: transparent!important;
+    padding: 2px 2px 2px 0!important;
+}
+.rmc_mod_info table tr td:last-child{
+    color: #FFF;
+}
+.rmc_mod_info .contact-options{
+    font-size: 28px;
 }
 .rmc_mod_img{
 	display: block;
 	float: left;
-	height: 40px;
-	width: 40px;
+	height: 52px;
+	width: 92px;
 	margin: 0 5px 0 0px;
-	border: 1px solid #666;
-	-moz-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
     cursor: pointer;
+    background-size: 92px;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .rmc_mod_img span{
 	display: block;
@@ -47,12 +65,11 @@
 	font-size: 0.85em;
 }
 .rmc_available_options a{
-	color: #FF4400;
+    color: #333;
 }
-
 /** Modules Content **/
 #des-mods-container{
-	width: 100%;
+
 }
 #des-mods-container .logo img{
 
@@ -67,11 +84,10 @@
     font-size: 0.7em;
     font-weight: normal;
     text-transform: uppercase;
-    background: #ebebeb url("../../images/edit.gif") no-repeat 2px;
+    background: #ebebeb url("../images/edit.gif") no-repeat 2px;
     display: inline-block;
-    padding: 3px 3px 3px 14px;
+    padding: 3px;
     border: 1px solid #ccc;
-    border-radius: 3px;
     line-height: 100%;
     margin-left: 5px;
     box-shadow: inset -1px -1px 5px #fff;
@@ -79,22 +95,28 @@
 #des-mods-container .renamer{
     background: #fff;
     display: block;
+    position: relative;
     width: 250px;
-    border: 1px solid #CCC;
-    border-radius: 3px;
+    border: 0;
     overflow: hidden;
-    box-shadow: inset 1px 1px 5px #ebebeb;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
 }
 #des-mods-container .name a.savenewname,
 #des-mods-container .name a.cancelnewname{
-    background: url("../../images/save.gif") no-repeat center;
+    background: #F5F5F5 url("../images/save.png") no-repeat center;
     padding: 4px;
-    width: 8px; height: 20px;
-    display: inline-block;
-    float: right;
+    width: 22px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    border-left: 1px solid rgba(0,0,0,0.1);
+}
+#des-mods-container .name a.savenewname{
+    top: 0; right: 0px; bottom: 0;
 }
 #des-mods-container .name a.cancelnewname{
-    background: url("../../images/cancel.gif") no-repeat center;
+    background: #F5F5F5 url("../images/cancels.png") no-repeat center;
+    top: 0; right: 22px; bottom: 0;
 }
 #des-mods-container .name .savenewname span,
 #des-mods-container .name .cancelnewname span{display: none;}
@@ -104,6 +126,7 @@
     border: 0;
     background: transparent;
     width: 206px;
+    border-radius: 0;
 }
 
 #des-mods-container .descriptions{
@@ -128,28 +151,16 @@
 
 .hidden_data{display: none;}
 
-tr.even td.actions,
-tr.odd td.actions
+.actions
 {
-    background: #ebebeb;
-    border-left: 1px solid #ccc;
-    box-shadow: inset 1px 1px 3px #FFF, inset -1px -1px 3px #dfdfdf;
-    vertical-align: middle;
     text-align: center;
-}
-tr.even td.actions:hover,
-tr.odd td.actions:hover
-{
-    background: #e1e1e1;
-    border-left: 1px solid #ccc;
-    box-shadow: inset 1px 1px 3px #FFF;
-}
-td.actions img{
-    width: auto;
-    max-width: 24px!important;
+    min-width: 180px;
 }
 .tablesorter tbody tr:last-child td{
     border-bottom: 0;
+}
+.actions a{
+    font-size: 1.3em;
 }
 
 .mod_preinstall_container{
@@ -165,7 +176,7 @@ td.actions img{
     display: block;
     width: 16px;
     height: 16px;
-    background: url(../../images/down.png) no-repeat center;
+    background: url(../images/down.png) no-repeat center;
     text-decoration: none;
 }
 .mod_preinstall_container .th a:hover{
@@ -210,89 +221,16 @@ td.actions img{
 .mod_log strong{
     color: #BB5E00;
 }
-
-/* Rename */
-#info-blocker{
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: #000;
-	filter:alpha(opacity=70);
-	-moz-opacity:0.7;
-	-khtml-opacity: 0.7;
-	opacity: 0.7;
-	display: none;
-    z-index: 1033;
-}
-#info-module{
-	position: fixed;
-	width: 420px;
-	padding: 0px;
-	background: #FFF;
-	top: 20%;
-	left: 50%;
-	margin-left: -210px;
-	line-height: 130%;
-	border: 0;
-	box-shadow: 0 0 10px #000;
-	display: none;
-    border-radius: 4px;
-    z-index: 1034;
-}
-#info-module .th{
-    border-radius: 3px 3px 0 0;
-}
-#info-module .info_container{
-    padding: 10px;
-}
-#info-module .header{
-    padding: 0 0 6px 0;
-    overflow: hidden;
-}
-#info-module .header img{
-    float: left;
-}
 #info-module .header h3{
-    float: right;
     font-weight: bold;
     padding: 0;
     margin: 0;
 }
 #info-module .header .desc{
-    color: #666;
+    display: block;
+    margin: 0;
     font-size: 0.9em;
-    display: block;
-    float: right;
-    max-width: 300px;
-    text-align: right;
 }
-#info-module .info_sep{
-    height: 1px;
-    margin-bottom: 6px;
-}
-.thedata{
-    border: 0;
-    width: 100%;
-    border-collapse: separate;
-}
-.thedata td{
-    padding: 2px;
-}
-.thedata tr:nth-child(odd) td{
-    padding: 2px;
-}
-.thedata tr:nth-child(even) td{
-    background: #FFF;
-    padding: 2px;
-}
-.thedata td span{
-    border: 1px solid #ebebeb;
-    padding: 4px;
-    display: block;
-}
-.thedata .caption{
-    font-weight: bold;
-    border: 0;
+#info-module .social a{
+    font-size: 32px;
 }

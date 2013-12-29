@@ -147,7 +147,7 @@ class RMPrivileges
             );
         } else {
 
-            RMUris::redirect_with_message( __('¡No tienes permiso para realizar esta operación!', 'rmcommon'), XOOPS_URL, RMMSG_WARN, 'icon-warning' );
+            RMUris::redirect_with_message( __('¡No tienes permiso para realizar esta operación!', 'rmcommon'), XOOPS_URL, RMMSG_WARN, 'fa-warning' );
 
         }
 

@@ -331,7 +331,7 @@ function save_module_settings(){
             )
         );
     else
-        RMUris::redirect_with_message( __('Settings saved successfully!', 'rmcommon'), $goto, RMMSG_SUCCESS, 'icon-ok' );
+        RMUris::redirect_with_message( __('Settings saved successfully!', 'rmcommon'), $goto, RMMSG_SUCCESS, 'fa-ok' );
 
 }
 

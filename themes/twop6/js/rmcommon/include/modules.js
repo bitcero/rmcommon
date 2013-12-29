@@ -12,7 +12,6 @@ $(document).ready(function(){
     $("a.uninstall_button").click(function(){
 
         var dir = $(this).data('dir');
-        alert(dir);
         if (dir=='system') return;
 
         if (!confirm(message)) return;
@@ -25,7 +24,7 @@ $(document).ready(function(){
     });
     
     $("a.update_button").click(function(){
-        var dir = $(this).parent().parent().attr('id').replace("module-",'');
+        var dir = $(this).parent().parent().parent().attr('id').replace("module-",'');
         if (!confirm(message_upd)) return;
        
         $("#mod-action").val("update_module");
@@ -34,7 +33,7 @@ $(document).ready(function(){
     });
     
     $("a.disable_button").click(function(){
-        var dir = $(this).parent().parent().attr('id').replace("module-",'');
+        var dir = $(this).parent().parent().parent().attr('id').replace("module-",'');
        
         if (!confirm(message_dis)) return;
        
@@ -44,7 +43,7 @@ $(document).ready(function(){
     });
     
     $("a.enable_button").click(function(){
-        var dir = $(this).parent().parent().attr('id').replace("module-",'');
+        var dir = $(this).parent().parent().parent().attr('id').replace("module-",'');
        
         $("#mod-action").val("enable_module");
         $("#mod-dir").val(dir);
@@ -53,14 +52,14 @@ $(document).ready(function(){
 
     $("a.data_button").click(function(){
 
-        var id = $(this).parent().parent().attr("id");
+        var id = $(this).parent().parent().parent().attr("id");
         var sdata = "#"+id+" .hidden_data";
 
         $("#info-module .header img").attr("src", $(sdata+" .image").html());
         $("#info-module .header h3").html($(sdata+" .oname").html());
         $("#info-module .header .desc").html($("#"+id+" .name .descriptions").html());
-        $("#info-module .thedata .version span").html($(sdata+" .version").html());
-        $("#info-module .thedata .dirname span").html($(sdata+" .dirname").html());
+        $("#info-module .version").html($(sdata+" .version").html());
+        $("#info-module .dirname").html($(sdata+" .dirname").html());
 
         var author = '';
         if($(sdata+" .mail").html()!=''){
@@ -70,22 +69,22 @@ $(document).ready(function(){
         }
 
         if(author!='')
-            $("#info-module .thedata .author span").html(author);
+            $("#info-module .author").html(author);
 
         var web = '';
         if($(sdata+" .url").html()!=''){
             web = '<a href="'+$(sdata+" .url").html()+'" target="_blank">'+$(sdata+" .web").html()+'</a>';
-            $("#info-module .thedata .web span").html(web);
+            $("#info-module .web").html(web);
         }
 
-        $("#info-module .thedata .license span").html($(sdata+" .license").html());
+        $("#info-module .license").html($(sdata+" .license").html());
 
         if($(sdata+" .help").html()!='')
-            $("#info-module .thedata .help span").html('<a href="'+$(sdata+" .help").html()+'" target="_blank">'+$(sdata+" .oname").html()+'</a>');
+            $("#info-module .help").html('<a href="'+$(sdata+" .help").html()+'" target="_blank">'+$(sdata+" .oname").html()+'</a>');
 
-        $("#info-blocker").fadeIn('fast', function(){
-            $("#info-module").fadeIn('fast');
-        });
+        $("#info-module .social").html($(sdata+" .social").html());
+
+        $("#info-module").modal();
 
         return false;
 

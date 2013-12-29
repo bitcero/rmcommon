@@ -94,4 +94,41 @@ class RMFormat
 
     }
 
+    /**
+     * Get the icon for a specific social network
+     * The icon is formatted according to FontAwesome icons
+     *
+     * @param string $type <p>Identifier type of social network</p>
+     * @return string
+     */
+    public static function social_icon( $type ){
+
+        $networks = array(
+
+            'twitter' => 'fa-twitter-square',
+            'linkedin' => 'fa-linkedin-square',
+            'github' => 'fa-github-alt',
+            'pinterest' => 'fa-pinterest-square',
+            'google+' => 'fa-google-plus-square',
+            'youtube' => 'fa-youtube-square',
+            'rss' => 'fa-rss-square',
+            'xing' => 'fa-xing-square',
+            'dropbox' => 'fa-dropbox',
+            'instagram' => 'fa-instagram',
+            'flickr' => 'fa-flickr',
+            'tumblr' => 'fa-tumblr-square',
+            'dribbble' => 'fa-dribbble',
+            'skype' => 'fa-skype',
+            'foursquare' => 'fa-foursquare',
+            'vimeo' => 'fa-vimeo-square',
+
+        );
+
+        if ( isset( $networks[$type] ) )
+            return $networks[$type];
+        else
+            return 'fa-chain';
+
+    }
+
 }

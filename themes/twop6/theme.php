@@ -51,9 +51,9 @@
 
             <div class="navbar-header">
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".twop6-navbar-toolbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="fa-bar"></span>
+                    <span class="fa-bar"></span>
+                    <span class="fa-bar"></span>
                 </button>
 
                 <a class="navbar-brand" href="<?php echo RMCURL; ?>"><img src="<?php echo TWOP6_URL; ?>/images/logo.png" alt="<?php _e('XOOPS','twop6'); ?>" /></a>
@@ -306,9 +306,9 @@
 
                <div class="navbar-header">
                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".twop6-toolbar-toolbar">
-                       <span class="icon-bar"></span>
-                       <span class="icon-bar"></span>
-                       <span class="icon-bar"></span>
+                       <span class="fa-bar"></span>
+                       <span class="fa-bar"></span>
+                       <span class="fa-bar"></span>
                    </button>
 
                    <a class="navbar-brand visible-xs" href="#"><?php _e('Menu', 'rmcommon'); ?></a>
@@ -372,9 +372,9 @@
 
                 <div class="navbar-header">
                     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".twop6-toolbar-icons">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                        <span class="fa-bar"></span>
+                        <span class="fa-bar"></span>
+                        <span class="fa-bar"></span>
                     </button>
                     <a class="navbar-brand visible-xs" href="#"><?php _e('Toolbar', 'rmcommon'); ?></a>
                 </div>
@@ -416,7 +416,7 @@
                     <?php foreach($left_widgets as $widget): ?>
                     <div class="cu-box">
                         <div class="box-header">
-                            <i class="icon-caret-up box-handler"></i>
+                            <i class="fa fa-caret-up box-handler"></i>
                             <h3>
                                 <?php echo isset($widget['icon']) && $widget['icon']!='' ? ' <i class="xo-icon" style="background-image: url('.$widget['icon'].');"></i> ' : ''; ?>
                                 <?php echo $widget['title']; ?>
@@ -442,7 +442,7 @@
                     <?php if(!isset($widget['title']) && !isset($widget['content'])) continue; ?>
                     <div class="cu-box">
                         <div class="box-header">
-                            <i class="icon-caret-up box-handler"></i>
+                            <i class="fa fa-caret-up box-handler"></i>
                             <h3>
                                 <?php echo isset($widget['icon']) && $widget['icon']!='' ? ' <i class="xo-icon" style="background-image: url('.$widget['icon'].');"></i> ' : ''; ?>
                                 <?php echo $widget['title']; ?>

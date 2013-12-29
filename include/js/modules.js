@@ -66,7 +66,6 @@ $(document).ready(function(){
     });
     
     $("#install-ok").click(function(){
-        alert("Hola");
 		$("#install-form").submit();
     });
     

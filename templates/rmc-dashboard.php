@@ -7,7 +7,7 @@
         <!-- INstalled Modules -->
         <div class="cu-box box-collapse">
             <div class="box-header">
-                <i class="icon-caret-up box-handler"></i>
+                <i class="fa-caret-up box-handler"></i>
                 <h3><?php _e('Installed Modules','rmcommon'); ?></h3>
             </div>
             <div class="box-content collapsable">
@@ -27,13 +27,13 @@
                                     </span>
                                     <span class="options">
                                         <?php if($mod->config != ''): ?>
-                                            <a href="<?php echo $mod->config; ?>"><i class="icon-wrench"></i></a>
+                                            <a href="<?php echo $mod->config; ?>"><i class="fa-wrench"></i></a>
                                         <?php endif; ?>
                                         <?php if($mod->admin != ''): ?>
-                                            <a href="<?php echo $mod->admin; ?>"><i class="icon-dashboard"></i></a>
+                                            <a href="<?php echo $mod->admin; ?>"><i class="fa-dashboard"></i></a>
                                         <?php endif; ?>
                                         <?php if($mod->admin != ''): ?>
-                                            <a href="<?php echo $mod->admin; ?>"><i class="icon-home"></i></a>
+                                            <a href="<?php echo $mod->admin; ?>"><i class="fa-home"></i></a>
                                         <?php endif; ?>
                                     </span>
                                 </div>
@@ -52,7 +52,7 @@
         <!-- Recent News -->
         <div class="cu-box">
             <div class="box-header">
-                <i class="icon-caret-up box-handler"></i>
+                <i class="fa-caret-up box-handler"></i>
                 <img src="images/loading_2.gif" alt="" class="loading" id="loading-news" />
                 <h3><?php _e('Recent News','rmcommon'); ?></h3>
             </div>
@@ -75,7 +75,7 @@
         <!-- Support me -->
         <div class="cu-box">
             <div class="box-header">
-                <h3><i class="icon-thumbs-up"></i> <strong><?php _e('Support my Work','rmcommon'); ?></strong></h3>
+                <h3><i class="fa-thumbs-up"></i> <strong><?php _e('Support my Work','rmcommon'); ?></strong></h3>
             </div>
             <div class="box-content support-me">
                 <img class="avatar" src="http://www.gravatar.com/avatar/a888698732624c0a1d4da48f1e5c6bb4?s=80" alt="Eduardo Cortés (bitcero)" />
@@ -88,7 +88,7 @@
         <!-- Available Modules -->
         <div class="cu-box">
             <div class="box-header">
-                <i class="icon-caret-up box-handler"></i>
+                <i class="fa-caret-up box-handler"></i>
                 <h3><?php _e('Available Modules','rmcommon'); ?></h3>
             </div>
             <div class="box-content">
@@ -118,7 +118,7 @@
         <!-- System tools -->
         <div class="cu-box">
             <div class="box-header">
-                <i class="icon-caret-up box-handler"></i>
+                <i class="fa-caret-up box-handler"></i>
                 <h3><?php _e('System Tools','rmcommon'); ?></h3>
             </div>
             <div class="box-content system-tools collapsable">

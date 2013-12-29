@@ -60,10 +60,10 @@ $(document).ready(function(){
     $(".cu-box .box-handler").click(function(){
         $(this).parent().parent().children(".box-content").slideToggle('fast');
 
-        if($(this).hasClass("icon-caret-down"))
-            $(this).removeClass("icon-caret-down").addClass('icon-caret-up');
+        if($(this).hasClass("fa-caret-down"))
+            $(this).removeClass("fa-caret-down").addClass('fa-caret-up');
         else
-            $(this).removeClass("icon-caret-up").addClass('icon-caret-down');
+            $(this).removeClass("fa-caret-up").addClass('fa-caret-down');
 
     });
 

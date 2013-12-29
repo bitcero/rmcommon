@@ -77,7 +77,8 @@ function show_modules_list(){
             'license'        => $mod->getInfo('license'),
             'dirname'        => $mod->getInfo('dirname'),
             'active'        => $mod->getVar('isactive'),
-            'help'        => $mod->getInfo('help')
+            'help'        => $mod->getInfo('help'),
+            'social'        => $mod->getInfo('social')
         );
     }
     
@@ -784,12 +785,12 @@ function load_modules_page(){
     unset($dirlist);
     unset($module_handler);
     
-    $limit = 10;
+    $limit = 7;
     $tpages = ceil(count($available_mods)/$limit);
     $page = rmc_server_var($_POST, 'page', 1);
     if ($page>$tpages) $page = 1;
     $start = ($page<=0 ? 0 : $page-1) * $limit;
-    
+
     $nav = new RMPageNav(count($available_mods), $limit, $page, 3);
     $nav->target_url('javascript:;" onclick="load_page({PAGE_NUM});');
     
@@ -801,33 +802,135 @@ function load_modules_page(){
     
     ob_start();
 ?>
-    <div class="rmc_widget_content_reduced rmc_modules_widget">
-        <img id="img-load" src="images/loading.gif" style="display: none; margin: 15px auto;" />
-        <div id="mods-widget-container">
+    <ul class="list-unstyled">
         <?php for($i=$start;$i<$end;$i++): ?>
         <?php $mod = $available_mods[$i]; ?>
-        <div class="<?php echo tpl_cycle("even,odd"); ?>">
-            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="rmc_mod_img" style="background: url(<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>) no-repeat center;"><span>&nbsp;</span></a>
-            <strong><a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php echo $mod->getInfo('name'); ?></a></strong>
-            <span class="rmc_available_options">
-                <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php _e('Install','rmcommon'); ?></a> |
-                <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');"><?php _e('More info','rmcommon'); ?></a>
-            </span>
-            <span class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
-                <?php _e('Version:','rmcommon'); ?> 
-                <?php if($mod->getInfo('rmnative')): ?>
-                    <?php echo RMModules::format_module_version($mod->getInfo('rmversion')); ?>
-                <?php else: ?>
-                    <?php echo $mod->getInfo('version'); ?>
-                <?php endif; ?><br />
-                <?php _e('Author:', 'rmcommon'); ?> <?php echo substr(strip_tags($mod->getInfo('author')), 0, 12); ?>
-            </span>
-        </div>
-        <input type="hidden" id="token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
+                        <li>
+                            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="rmc_mod_img">
+                                <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
+                            </a>
+                            <strong><a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php echo $mod->getInfo('name'); ?></a></strong>
+                        <span class="rmc_available_options">
+                            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php _e('Install','rmcommon'); ?></a> |
+                            <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');"><?php _e('More info','rmcommon'); ?></a>
+                        </span>
+                            <div class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
+                                <h4><?php echo $mod->getInfo('name'); ?></h4>
+                            <span class="help-block">
+                                <?php echo $mod->getInfo('description'); ?>
+                            </span>
+                                <table class="table">
+                                    <tr>
+                                        <td><?php _e('Version:','rmcommon'); ?></td>
+                                        <td>
+                                            <?php if($mod->getInfo('rmnative')): ?>
+                                                <strong><?php echo RMModules::format_module_version($mod->getInfo('rmversion')); ?></strong>
+                                            <?php else: ?>
+                                                <strong><?php echo $mod->getInfo('version'); ?></strong>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <?php _e('Author:', 'rmcommon'); ?>
+                                        </td>
+                                        <td>
+                                            <strong><?php echo substr(strip_tags($mod->getInfo('author')), 0, 12); ?></strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <?php _e('Web site:', 'rmcommon'); ?>
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="<?php echo $mod->getInfo('authorurl'); ?>"><?php echo $mod->getInfo('authorweb'); ?></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php _e('Updatable:', 'rmcommon'); ?></td>
+                                        <td>
+                                            <?php if( $mod->getInfo('updateurl') != '' ): ?>
+                                                <span class="fa fa-check"></span>
+                                            <?php else: ?>
+                                                <span class="fa fa-times"></span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php _e('License:', 'rmcommon'); ?></td>
+                                        <td>
+                                            <?php echo $mod->getInfo('license'); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php _e('XOOPS Official:', 'rmcommon'); ?></td>
+                                        <td>
+                                            <?php if ( $mod->getInfo('official') ): ?>
+                                                <span class="fa fa-check"></span>
+                                            <?php else: ?>
+                                                <span class="fa fa-times"></span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php _e('C.U. Native:', 'rmcommon'); ?></td>
+                                        <td>
+                                            <?php if ( $mod->getInfo('rmnative') ): ?>
+                                                <span class="fa fa-check"></span>
+                                            <?php else: ?>
+                                                <span class="fa fa-times"></span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php _e('Directory:', 'rmcommon'); ?></td>
+                                        <td>
+                                            <strong><?php echo $mod->getInfo('dirname'); ?></strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><?php _e('Released:', 'rmcommon'); ?></td>
+                                        <td>
+                                            <?php if ( $mod->getInfo('releasedate') != '' ): ?>
+                                                <?php
+                                                $time = strtotime( $mod->getInfo('releasedate') );
+                                                echo formatTimestamp( $time, 's' );
+                                                ?>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <?php if ( $mod->getInfo('help') != '' && $mod->getInfo('rmnative') ): ?>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <strong><a href="<?php echo $mod->getInfo('help'); ?>" target="_blank"><?php _e('Get Help', 'rmcommon'); ?></a></strong>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <tr>
+                                        <td colspan="2" class="contact-options text-center">
+                                            <?php if ( $mod->getInfo('authormail') != '' ): ?>
+                                                <a target="_blank" href="mailto:<?php echo $mod->getInfo('authormail'); ?>"><span class="fa fa-envelope"></span></a>
+                                            <?php endif; ?>
+                                            <?php foreach( $mod->getInfo('social') as $social ): ?>
+                                                <a target="_blank" href="<?php echo $social['url']; ?>"><span class="fa fa-<?php echo $social['type']; ?>-square"></span></a>
+                                            <?php endforeach; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="btn btn-success btn-sm"><?php _e('Install','rmcommon'); ?></a>
+                                            <a href="#" onclick="$(this).parents('.rmc_mod_info').slideToggle('fast'); return false;" class="btn btn-warning btn-sm"><?php _e('Close','rmcommon'); ?></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+
         <?php endfor; ?>
-        <?php $nav->display(false); ?>
-        </div>
-    </div>
+    </ul>
+    <?php $nav->display(false); ?>
+    <input type="hidden" id="token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
 <?php
     $ret = ob_get_clean();
     echo $ret;
