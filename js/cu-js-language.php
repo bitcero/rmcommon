@@ -52,6 +52,9 @@ var cuLanguage = {
 
 <?php endif; ?>
 
+    downloadNews: '<?php _e('Downloading News...', 'rmcommon' ); ?>',
+    downloadNewsError: '<?php _e('Error ocurred while trying to load news.', 'rmcommon' ); ?>',
+
 };
 
 <?php

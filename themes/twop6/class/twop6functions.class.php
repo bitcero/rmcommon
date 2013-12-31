@@ -310,7 +310,7 @@ class Twop6Functions
 	    }
         
         if(isset($menu['type']) || (isset($menu['icon']) && $menu['icon']=='option'))
-            return '<i class="xo-icon xicon-settings"></i> ';
+            return '<span class="fa fa-wrench"></span> ';
         
         /*if (isset($menu['location']) && isset($accepted[$menu['location']]))
             return '<i class="xo-icon '.$accepted[$menu['location']].'"></i> ';
@@ -321,8 +321,14 @@ class Twop6Functions
         $modurl = XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/';
 
         if(isset($menu['icon']) && $menu['icon']!=''){
-			//return '<i class="xo-icon" style="background-image: url('.preg_replace("/^[\.]+/",'',$menu['icon']).'); background-size: 16px 16px;"></i> ';
-            return '<i class="xo-icon" style="background-image: url('.$menu['icon'].'); background-size: 16px 16px;"></i> ';
+            $pos_fa = strpos( $menu['icon'], 'fa fa-' );
+            $pos_moon = strpos( $menu['icon'], 'icon icon-' );
+            $pos_boot = strpos( $menu['icon'], 'glyphicon glyphicon-' );
+
+            if ( false !== $pos_fa || false !== $pos_moon || false !== $pos_boot )
+                return '<span class="' . $menu['icon']. '"></span> ';
+            else
+                return '<i class="xo-icon" style="background-image: url('.$menu['icon'].'); background-size: 16px 16px;"></i> ';
         }
         
         // Check system menu

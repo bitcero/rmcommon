@@ -410,7 +410,7 @@ $(document).ready(function(){
 
         var checkbox_class = $(this).data("checkbox");
 
-        $(":checkbox[data-oncheck='" + checkbox_class + "']").prop('checked', $(this).prop('checked'));
+        $(":checkbox." + checkbox_class).prop('checked', $(this).prop('checked'));
 
     });
 
@@ -436,6 +436,59 @@ $(document).ready(function(){
             $(activator).prop( 'checked', 'checked' );
 
     });
+
+    /**
+     * Check if there are a "News" box in current page
+     * and then, load the news for this module
+     */
+    if ( $("*[data-load='news']").length == 1 ){
+
+        var container = $("*[data-load='news']");
+        var module = container.data('module');
+        var target = $(container.data('target'));
+
+        target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
+        
+        var params = {
+            module: module,
+            CU_TOKEN: $("#cu-token").val()
+        };
+
+        $.get( xoUrl + '/modules/rmcommon/ajax/module-info.php', params, function( response ){
+
+            if ( response.type == 'error' ){
+                target.html( '<div class="text-danger"><span class="fa fa-exclamation-triangle"></span> '+cuLanguage.downloadNewsError+'</div>')
+                return;
+            }
+
+            /**
+             * Get News
+             */
+            if ( response.news != undefined ){
+
+                news = $("<ul>").addClass("cu-ajax-news list-unstyled");
+                for( i=0; i < response.news.length; i++ ){
+
+                    var html = '<li>' +
+                        '<small>'+response.news[i].date+'</small>' +
+                        '<h5><a href="'+response.news[i].link+'" target="_blank">'+response.news[i].title+'</a></h5>';
+                    if ( response.news[i].image )
+                        html += '<img src="'+response.news[i].image+'">';
+
+                    html += '<p class="help-block">'+response.news[i].content+'</p>' +
+                        '</li>';
+                    news.append( html );
+
+                }
+                target.html('').append(news);
+                news.fadeIn('fast');
+
+            }
+
+
+        }, 'json' );
+
+    }
 
 });
 

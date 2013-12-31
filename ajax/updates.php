@@ -37,7 +37,7 @@ while($row = $xoopsDB->fetchArray($result)){
     else
         $version = $v['number'].'.'.($v['revision']/100).'.'.$v['status'];
     
-    $urls[$mod->dirname()] = strpos($info['updateurl'], '?')===false ? $info['updateurl'].'?version='.$version : $info['updateurl'].'&version='.$version;
+    $urls[$mod->dirname()] = $info['updateurl'] . (strpos($info['updateurl'], '?')===false ? '?' : '&') . 'action=check&id='.$mod->mid().'&version='.$version;
     
 }
 

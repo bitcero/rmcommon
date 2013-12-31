@@ -87,53 +87,6 @@ $this->add_head_script("xoUrl = '".XOOPS_URL."';");
 
 $xoModules = include('include/modules.php');
 
-$sUrls = '';
-$sNames = '';
-foreach($xoModules as $mod){
-    $sUrls .= $sUrls=='' ? '"'.$mod['admin_link'].'"' : ',"'.$mod['admin_link'].'"';
-    $sNames .= $sNames=='' ? '"'.$mod['name'].'"' : ',"'.$mod['name'].'"';
-}
-
-// rmcommon pages
-$sUrls .= ',
-          "'.XOOPS_URL.'/modules/rmcommon/users.php",
-          "'.XOOPS_URL.'/modules/rmcommon/comments.php",
-          "'.XOOPS_URL.'/modules/rmcommon/images.php",
-          "'.XOOPS_URL.'/modules/rmcommon/modules.php",
-          "'.XOOPS_URL.'/modules/rmcommon/blocks.php",
-          "'.XOOPS_URL.'/modules/rmcommon/plugins.php"';
-          
-$sNames .= ',
-           "'.__('Users management','twop6').'",
-           "'.__('Comments management','twop6').'",
-           "'.__('Images manager','twop6').'",
-           "'.__('Modules manager','twop6').'",
-           "'.__('Blocks manager','twop6').'",
-           "'.__('Plugins manager','twop6').'"';
-
-// system preferences
-$sUrls .= ',"'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=show&confcat_id=1",
-          "'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=show&confcat_id=2",
-          "'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=show&confcat_id=3",
-          "'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=show&confcat_id=4",
-          "'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=show&confcat_id=5",
-          "'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=show&confcat_id=6",
-          "'.XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=show&confcat_id=7"';
-$sNames .= ',"'.__('General preferences','twop6').'",
-           "'.__('Users settings','twop6').'",
-           "'.__('Meta tags and footer','twop6').'",
-           "'.__('Word censor','twop6').'",
-           "'.__('Search options','twop6').'",
-           "'.__('Email settings','twop6').'",
-           "'.__('Authentication options','twop6').'"';
-
-global $rmEvents;
-$sData = $rmEvents->run_event('twop6.get.typeahead', array('names' => $sNames, 'urls' => $sUrls));
-
-$this->add_head_script('var sObject = {urls: ['.$sData['urls'].'], names: ['.$sData['names'].']};');
-
-unset($sUrls, $sNames);
-
 // Has main?
 if($xoopsModule->hasmain()){
     $mainLink = XOOPS_URL.'/modules/'.$xoopsModule->dirname();
@@ -146,6 +99,9 @@ if($xoopsModule->hasmain()){
         }
     }
 }
+
+// JS Language
+include RMCPATH . '/js/cu-js-language.php';
 
 // Display theme
 include_once TWOP6_PATH.'/theme.php';

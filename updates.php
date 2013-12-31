@@ -405,7 +405,7 @@ function get_file_now(){
 }
 
 
-$action = rmc_server_var($_REQUEST, 'action', '');
+$action = RMHttpRequest::request( 'action', 'string','' );
 
 switch($action){
     case 'ajax-updates':
