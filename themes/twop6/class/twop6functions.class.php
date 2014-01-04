@@ -342,12 +342,16 @@ class Twop6Functions
 
 	public function submenuIcon($menu, $dir=''){
 
-		if(isset($menu['location']) && $menu['location']!='' && isset($menu['icon']) && $menu['icon']!=''){
-			$menu['icon'] = ($dir!='' ? XOOPS_URL.'/modules/'.$dir.'/' : '').str_replace("../",'', $menu['icon']);
-		}
+        if (!isset( $menu['location'] ) && !isset( $menu['selected'] ) )
+            return $this->getIcon( $menu, true );
 
-		if(isset($menu['selected']) && $menu['selected']!='' && isset($menu['icon']) && $menu['icon']!=''){
-			$menu['icon'] = ($dir!='' ? XOOPS_URL.'/modules/'.$dir.'/' : '').str_replace("../",'', $menu['icon']);
+		if( isset($menu['icon']) && $menu['icon']!='' ){
+            $pos_fa = strpos( $menu['icon'], 'fa fa-' );
+            $pos_moon = strpos( $menu['icon'], 'icon icon-' );
+            $pos_boot = strpos( $menu['icon'], 'glyphicon glyphicon-' );
+
+            if ( false === $pos_fa && false === $pos_moon && false === $pos_boot )
+                $menu['icon'] = ($dir!='' ? XOOPS_URL.'/modules/'.$dir.'/' : '').str_replace("../",'', $menu['icon']);
 		}
 
 		return $this->getIcon($menu, true);
