@@ -30,7 +30,7 @@ $(document).ready(function(){
     $("#xo-showmodules").click(function(){
         var html = '<div id="xo-chooser-blocker"></div>';
         html += '<div id="xo-chooser">';
-        html += '<div class="chooser-title xo-bluebar"><button type="button" class="close">&times;</button>'+$(this).attr("title")+'</div>';
+        html += '<div class="chooser-title cu-titlebar"><button type="button" class="close">&times;</button>'+$(this).data("title")+'</div>';
         html += '<div class="chooser-modules xo-loader"></div>';
         html += '</div>';
         

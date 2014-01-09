@@ -163,7 +163,7 @@
                         <?php endif; ?>
                         
                         <li class="dropdown">
-                            <a href="#" title="<?php _e('Modules Box','twop6'); ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                            <a href="#" title="<?php _e('Modules','twop6'); ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <i class="xo-icon xicon-modules"></i>
                                 <?php _e('Modules','twop6'); ?>
 	                            <b class="caret"></b>
@@ -213,7 +213,7 @@
 		                        <?php endforeach; ?>
 		                        <li class="divider"></li>
 		                        <li>
-			                        <a href="#" id="xo-showmodules"><i class="xo-icon xicon-modules"></i> <?php _e('Modules Box','twop6'); ?></a>
+			                        <a href="#" id="xo-showmodules" data-title="<?php _e('Modules Box','twop6'); ?>"><i class="xo-icon xicon-modules"></i> <?php _e('Modules Box','twop6'); ?></a>
 		                        </li>
 	                        </ul>
                         </li>

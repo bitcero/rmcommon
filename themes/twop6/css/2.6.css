@@ -357,12 +357,7 @@ table th{
     display: none;
     position: fixed;
     top: 0; left: 0; bottom: 0; right: 0;
-    background: #000;
-    opacity: 0.9; 
-        -moz-opacity: 0.9;
-        -webkit-opacity: 0.9;
-        -o-opacity: 0.9;
-        filter: alpha(opacity=90);
+    background: rgba(255,255,255,0.8);
     z-index: 1040;
 }
 #xo-chooser{
@@ -370,21 +365,13 @@ table th{
     position: fixed;
     top: 20%; left: 20%; right: 20%; bottom: 20%;
     z-index: 1041;
-    border-radius: 3px;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -o-border-radius: 3px;
     box-shadow: 0 0 15px 0 #000;
         -moz-box-shadow: 0 0 15px 0 #000;
         -webkit-box-shadow: 0 0 15px 0 #000;
         -o-box-shadow: 0 0 15px 0 #000;
 }
 #xo-chooser .chooser-title{
-    color: #FFF;
     padding: 5px 10px;
-    text-shadow: 0 0 3px #000;
-    font-weight: bold;
-    border-radius: 3px 3px 0 0;
     height: 30px;
 }
 #xo-chooser .chooser-modules{
@@ -393,44 +380,24 @@ table th{
     top: 30px; left: 0; bottom: 0; right: 0;
     position: absolute;
     padding: 15px;
-    border-radius: 0 0 3px 3px;
-        -moz-border-radius: 0 0 3px 3px;
-        -webkit-border-radius: 0 0 3px 3px;
-        -o-border-radius: 0 0 3px 3px;
 }
 #xo-chooser .chooser-modules a{
     display: inline-block;
     vertical-align: text-top;
     padding: 10px;
-    -moz-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    background-color: #ebebeb;
-    background-image: -moz-linear-gradient(top, #f2f2f2, #ebebeb);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#ebebeb));
-    background-image: -webkit-linear-gradient(top, #f2f2f2, #ebebeb);
-    background-image: -o-linear-gradient(top, #f2f2f2, #ebebeb);
-    background-image: linear-gradient(to bottom, #f2f2f2, #ebebeb);
-    background-repeat: repeat-x;
-    border-color: #d4d4d4;
-    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fff2f2f2', endColorstr='#ebebeb', GradientType=0);
-    box-shadow:inset 0px 1px 0 0px #fff;
-        -moz-box-shadow:inset 0px 1px 0 0px #fff;
-        -webkit-box-shadow:inset 0px 1px 0 0px #fff;
-        -o-box-shadow:inset 0px 1px 0 0px #fff;
-    border: 1px solid #DDDDDD;
-    text-shadow: 1px 1px 0 #fff;
+    background-color: rgba(0,0,0,0.09);
+    border: 1px solid rgba(0,0,0,0.1);
     margin: 3px;
     text-align: center;
-    width: 92px;
+    color: #222;
 }
 #xo-chooser .chooser-modules a > img{
     display: inline-block;
+    margin: 0 0 5px 0;
 }
 #xo-chooser .chooser-modules a > span{
     display: block;
-    font-size: 11px;
+    font-size: 12px;
 }
 .xo-loader{
     background-image: url(../images/loader.gif);
