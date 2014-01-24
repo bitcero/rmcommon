@@ -331,7 +331,7 @@
                                     <li class="divider"></li>
                                 <?php continue; endif; ?>
 	                        <li<?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown"<?php endif; ?>>
-	                            <a href="<?php echo $menu['link']; ?>"<?php if ( $menu['title'] == __('Options', 'rmcommon') ): ?> data-action="load-remote-dialog"<?php endif; ?><?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"<?php endif; ?>>
+	                            <a href="<?php echo $menu['link']; ?>"<?php if ( $menu['title'] == __('Options', 'rmcommon') ): ?> data-action="load-remote-dialog"<?php endif; ?><?php if(isset($menu['options']) && $menu['options']): ?> class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"<?php endif; ?> <?php echo isset($menu['attributes']) ? $xoFunc->render_attributes( $menu['attributes'] ) : ''; ?>>
 	                                <?php echo $xoFunc->getIcon($menu); ?>
 		                            <?php echo $menu['title']; ?>
 	                                <?php if(isset($menu['options']) && $menu['options']): ?><b class="caret"></b><?php endif; ?>
@@ -343,14 +343,14 @@
                                             <li class="divider"></li>
                                         <?php else: ?>
                                         <li<?php if(isset($sub['options']) && $sub['options']): ?> class="dropdown-submenu"<?php endif; ?>>
-                                            <a href="<?php echo strpos($sub['link'], 'http://')===FALSE ?  XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/'.$sub['link'] : $sub['link']; ?>"<?php if(isset($sub['options']) && $sub['options']): ?> tabindex="-1"<?php endif; ?>>
+                                            <a href="<?php echo strpos($sub['link'], 'http://')===FALSE ?  XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/'.$sub['link'] : $sub['link']; ?>"<?php if(isset($sub['options']) && $sub['options']): ?> tabindex="-1"<?php endif; ?> <?php echo isset($sub['attributes']) ? $xoFunc->render_attributes( $sub['attributes'] ) : ''; ?>>
                                                 <?php echo $xoFunc->getIcon($sub); ?>
                                                 <?php echo $sub['title']; ?>
                                             </a>
                                             <?php if(isset($sub['options']) && $sub['options']): ?>
                                                 <ul class="dropdown-menu">
                                                     <?php foreach($sub['options'] as $submenu): ?>
-                                                        <li><a href="<?php echo $submenu['link']; ?>"><?php echo $xoFunc->getIcon($submenu); ?><?php echo $submenu['title']; ?></a></li>
+                                                        <li><a href="<?php echo $submenu['link']; ?>" <?php echo $xoFunc->render_attributes( $submenu['attributes'] ); ?>><?php echo $xoFunc->getIcon($submenu); ?><?php echo $submenu['title']; ?></a></li>
                                                     <?php endforeach; ?>
                                                 </ul>
                                             <?php endif; ?>

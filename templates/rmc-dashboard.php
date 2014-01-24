@@ -50,10 +50,9 @@
 
 
         <!-- Recent News -->
-        <div class="cu-box">
+        <div class="cu-box" data-load="news" data-module="rmcommon" data-target="#rmc-recent-news">
             <div class="box-header">
                 <span class="fa fa-caret-up box-handler"></span>
-                <img src="images/loading_2.gif" alt="" class="loading" id="loading-news" />
                 <h3><?php _e('Recent News','rmcommon'); ?></h3>
             </div>
             <div class="box-content collapsable" id="rmc-recent-news">
@@ -178,6 +177,8 @@
             </div>
         </div>
         <!--// End system tools -->
+
+        <div data-load="boxes"></div>
 
     </div>
 

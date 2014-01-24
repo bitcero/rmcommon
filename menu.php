@@ -49,6 +49,9 @@ $adminmenu[] = array(
             'link'      => 'groups.php?action=new-group',
             'selected'  => 'addgroup',
             'icon'      => 'images/group_add.png',
+            'attributes' => array(
+                'data-action' => 'load-remote-dialog'
+            )
         ),
         array(
             'divider'   => 1,

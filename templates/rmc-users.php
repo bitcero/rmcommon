@@ -223,7 +223,7 @@
         <td class="text-center"><?php echo $user['uid']; ?></td>
         <td>
             <strong><?php echo $user['uname']; ?></strong>
-            <span class="rmc_options">
+            <span class="cu-item-options">
                 <a href="users.php?action=edit&amp;uid=<?php echo $user['uid']; ?>&amp;query=<?php echo base64_encode($qstring); ?>"><?php _e('Edit','rmcommon'); ?></a> | 
                 <a href="users.php?action=mailer&amp;uid=<?php echo $user['uid']; ?>&amp;query=<?php echo base64_encode($qstring); ?>"><?php _e('Send Email','rmcommon'); ?></a> | 
                 <a href="#" onclick="select_option(<?php echo $user['uid']; ?>,'delete','form-users');"><?php _e('Delete','rmcommon'); ?></a>

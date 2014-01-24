@@ -85,7 +85,7 @@
         <?php echo $com['ip']; ?></span></td>
         <td><span class="comment_date"><?php echo $com['posted']; ?></span>
         <?php echo $com['text']; ?>
-        <span class="rmc_options">
+        <span class="cu-item-options">
         	<a href="comments.php?id=<?php echo $com['id']; ?>&amp;action=edit&amp;page=<?php echo $page; ?>&amp;filter=<?php echo $filter; ?>&amp;w=<?php echo $keyw; ?>"><?php _e('Edit','rmcommon'); ?></a> | 
         	<a href="javascript:;" onclick="confirm_delete(<?php echo $com['id']; ?>);"><?php _e('Delete','rmcommon'); ?></a> | 
         	<?php if($com['status']=='approved'): ?>

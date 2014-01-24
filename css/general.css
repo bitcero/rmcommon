@@ -1,10 +1,10 @@
-span.rmc_options{
+span.cu-item-options{
 	display: block;
 	font-size: 0.9em;
 	padding: 4px 0;
 	visibility: hidden;
 }
-.table > tbody > tr > td:hover span.rmc_options{
+.table > tbody > tr > td:hover span.cu-item-options{
 	visibility: visible;
 }
 div.cu-bulk-actions{

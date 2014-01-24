@@ -784,7 +784,7 @@ class RMTemplate
 
     /**
      * This function add a script directly from an element
-     * @deprecated Use add_script() method instead.
+     * @deprecated
      */
     public function add_local_script($file, $element='rmcommon', $subfolder='', $type='text/javascript', $more='', $footer = false){
 

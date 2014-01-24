@@ -30,7 +30,7 @@
 		<td align="center" valign="top"><input type="checkbox" name="cats[]" value="<?php echo $cat['id']; ?>" /></td>
 		<td>
 			<strong><?php echo $cat['name']; ?></strong>
-			<span class="rmc_options">
+			<span class="cu-item-options">
 				<a href="images.php?action=editcat&amp;id=<?php echo $cat['id']; ?>"><?php _e('Edit','rmcommon'); ?></a> |
 				<a href="javascript:;" onclick="if(confirm('<?php echo sprintf(__('Do you really want to delete &quot;%s&quot;?', 'rmcommon'), $cat['name']); ?>')) window.location = 'images.php?action=delcat&id=<?php echo $cat['id']; ?>&XOOPS_TOKEN_REQUEST='+$('#token').val();"><?php _e('Delete','rmcommon'); ?></a> |
 				<a href="images.php?action=<?php echo $cat['status']=='open' ? 'closecat' : 'opencat'; ?>&amp;id=<?php echo $cat['id']; ?>"><?php _e($cat['status']=='open' ? 'Close' : 'Open','rmcommon'); ?></a> |

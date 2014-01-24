@@ -160,7 +160,7 @@
                     <td align="left"><strong><?php echo $pos['id']; ?></strong></td>
                     <td>
                         <span class="name"><?php echo $pos['name']; ?></span>
-                        <span class="rmc_options">
+                        <span class="cu-item-options">
                             <a href="#" onclick="select_option(<?php echo $pos['id']; ?>, 'delete', 'frm-positions')"><?php _e('Delete','rmcommon'); ?></a> |
                             <a href="#" class="edit_position"><?php _e('Edit','rmcommon'); ?></a>
                         </span>

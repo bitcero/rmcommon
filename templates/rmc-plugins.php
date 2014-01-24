@@ -48,7 +48,7 @@
 						<?php else: ?>
 							<strong><?php echo $plugin->getVar('name'); ?></strong>
 						<?php endif; ?>
-						<span class="rmc_options">
+						<span class="cu-item-options">
                 <a href="plugins.php?action=uninstall&amp;plugin=<?php echo $plugin->get_info('dir'); ?>"><?php _e('Uninstall','rmcommon'); ?></a> |
 							<?php if($plugin->getVar('status')): ?>
 								<a href="plugins.php?action=disable&amp;plugin=<?php echo $plugin->get_info('dir'); ?>"><?php _e('Disable','rmcommon'); ?></a> |
@@ -114,7 +114,7 @@
 				<tr class="<?php echo tpl_cycle("even,odd"); ?>" valign="top">
 					<td>
 						<strong><?php echo $plugin->get_info('name'); ?></strong>
-			<span class="rmc_options">
+			<span class="cu-item-options">
 				<a href="plugins.php?action=install&amp;plugin=<?php echo $plugin->get_info('dir'); ?>"><?php _e('Install','rmcommon'); ?></a> |
 				<a href="<?php echo $plugin->get_info('web'); ?>"><?php _e('Visit Web site','rmcommon'); ?></a>
 			</span>

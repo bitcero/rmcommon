@@ -39,7 +39,7 @@
             <?php if($image['desc']!=''): ?>
             <span class="description"><?php echo $image['desc']; ?></span>
             <?php endif; ?>
-            <span class="rmc_options">
+            <span class="cu-item-options">
                 <a href="images.php?action=edit&amp;id=<?php echo $image['id']; ?>&amp;page=<?php echo $page; ?>"><?php _e('Edit','rmcommon'); ?></a> | 
                 <a href="images.php?action=delete&amp;imgs[]=<?php echo $image['id']; ?>&amp;page=<?php echo $page; ?>" onclick="return confirm('<?php echo sprintf(__('Do you really want to delete &quot;%s&quot;?', 'rmcommon'), $image['title']); ?>');"><?php _e('Delete','rmcommon'); ?></a>
             </span>

@@ -444,8 +444,18 @@ $(document).ready(function(){
     if ( $("*[data-load='news']").length == 1 ){
 
         var container = $("*[data-load='news']");
+        if (container.length <= 0)
+            container = $("*[data-load='boxes']");
+
+        if ( container.length <= 0 )
+            return false;
+
         var module = container.data('module');
         var target = $(container.data('target'));
+
+        target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
+
+        var bcontainer = $("*[data-load='boxes']");
 
         target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
         
@@ -482,6 +492,23 @@ $(document).ready(function(){
                 }
                 target.html('').append(news);
                 news.fadeIn('fast');
+
+            }
+
+            /**
+             * Get boxes
+             */
+            if ( response.boxes != undefined && bcontainer != undefined ){
+
+                for ( i=0; i < response.boxes.length; i++ ){
+
+                    var box = $("<div>").addClass('cu-box').css("display", 'none');
+                    box.append('<div class="box-header"><span class="fa fa-caret-up box-handler"></span><h3>'+ response.boxes[i].title +'</h3></div>');
+                    box.append('<div class="box-content">'+response.boxes[i].content+'</div>');
+                    bcontainer.append(box);
+                    box.fadeIn('fast');
+
+                }
 
             }
 

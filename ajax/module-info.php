@@ -29,5 +29,6 @@ if ( !$module )
 $url = $module->getInfo('updateurl');
 $url .= false === strpos( $url, '?' ) ? '?' : '&';
 $url .= 'action=data&id=' . $module->dirname();
+
 echo file_get_contents( $url );
 

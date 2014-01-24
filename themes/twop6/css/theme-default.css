@@ -224,6 +224,9 @@ a:hover{
 .btn-success, .label-success{
     background: #6FB556;
 }
+.btn-link{
+    box-shadow: none;
+}
 
 /* FORMS */
 .form-control{
