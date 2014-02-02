@@ -306,6 +306,11 @@ table th{
     padding: 10px;
     color: #4e4e4e;
 }
+.cu-box .box-footer{
+    padding: 4px 15px;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(0,0,0,0.1)
+}
 
 #pref_form table label{display: inline-block; vertical-align: text-top; padding: 0 4px;}
 .rmmenuicon:after{

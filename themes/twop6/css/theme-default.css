@@ -315,3 +315,7 @@ table > tbody > tr:nth-child(odd) > td{
     background: #ECA7A5;
     color: #6F2A28;
 }
+
+.thumbnail{
+    border-radius: 0;
+}

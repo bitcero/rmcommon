@@ -58,7 +58,7 @@ $(document).ready(function(){
     });
 
     $("body").on("click", '.cu-box .box-handler', function(){
-        $(this).parent().parent().children(".box-content").slideToggle('fast');
+        $(this).parent().parent().find(".box-content").slideToggle('fast');
 
         if($(this).hasClass("fa-caret-down"))
             $(this).removeClass("fa-caret-down").addClass('fa-caret-up');
