@@ -64,7 +64,7 @@ class RMUris
 
 
         }else
-            $url .= $cuSettings->permalinks ? '/' . $path : '/modules/' . $module;
+            $url .= $cuSettings->permalinks ? $path : '/modules/' . $module;
 
         if($controller == '')
             return $url . '/';

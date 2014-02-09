@@ -154,9 +154,9 @@ var cuHandler = {
 
         if(data.function != undefined)
             eval(data.function);
-        
+
         if(data.openDialog != undefined){
-            
+
             cuDialog.dialog({
                 message: data.content,
                 title: data.message,
@@ -167,7 +167,7 @@ var cuHandler = {
                 animate: false,
                 closeButton: data.closeButton != undefined ? data.closeButton : true
             });
-            
+
         }
 
         // Reload
@@ -458,7 +458,7 @@ $(document).ready(function(){
         var bcontainer = $("*[data-load='boxes']");
 
         target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
-        
+
         var params = {
             module: module,
             CU_TOKEN: $("#cu-token").val()

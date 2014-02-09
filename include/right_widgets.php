@@ -133,12 +133,16 @@ function rmc_available_mods(){
                                 <?php endif; ?>
                                 <tr>
                                     <td colspan="2" class="contact-options text-center">
-                                        <?php if ( $mod->getInfo('authormail') != '' ): ?>
-                                            <a target="_blank" href="mailto:<?php echo $mod->getInfo('authormail'); ?>"><span class="fa fa-envelope"></span></a>
+                                        <?php if ( $mod->getInfo('authormail') ): ?>
+                                            <?php if ( $mod->getInfo('authormail') != '' ): ?>
+                                                <a target="_blank" href="mailto:<?php echo $mod->getInfo('authormail'); ?>"><span class="fa fa-envelope"></span></a>
+                                            <?php endif; ?>
                                         <?php endif; ?>
+                                        <?php if ( $mod->getInfo('social') ): ?>
                                         <?php foreach( $mod->getInfo('social') as $social ): ?>
                                             <a target="_blank" href="<?php echo $social['url']; ?>"><span class="fa fa-<?php echo $social['type']; ?>-square"></span></a>
                                         <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                                 <tr>

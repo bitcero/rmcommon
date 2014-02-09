@@ -20,7 +20,7 @@ function get_mods_page(num){
 }
 
 $(document).ready(function(){
-    
+
     var url=encodeURIComponent("http://www.xoopsmexico.net/modules/vcontrol/?id=1&limit=4");
 
     $.get('include/proxy.php', {url: url}, function(data){
@@ -28,5 +28,5 @@ $(document).ready(function(){
         $("#rmc-recent-news").append(data);
         $("#loading-news").hide();
     }, 'html');
-    
+
 });

@@ -195,5 +195,27 @@ class RMModules
         print_r($modules);
 
     }
+    
+    /**
+     * Get the main menu for a module
+     * @param string $dirname Directory name of module
+     * @return array|bool
+     */
+    static function main_menu( $dirname ){
+        global $xoopsModule;
+        
+        if ( $xoopsModule && $xoopsModule->getVar('dirname') == $dirname )
+            $mod = $xoopsModule;
+        else
+            $mod = self::load_module( $dirname );
+
+        if ($mod->getInfo('main_menu') && $mod->getInfo('main_menu') != '' && file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu') )) {
+            $main_menu = array();
+            include XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu');
+            return $main_menu;
+        }
+
+        return false;
+    }
 
 }

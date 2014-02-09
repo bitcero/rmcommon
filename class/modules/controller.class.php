@@ -35,7 +35,7 @@ abstract class RMController
 
     protected function model(){
 
-        $class = ucfirst( $this->parent->controller ) . ( defined("XOOPS_CPFUNC_LOADED") ? 'Admin' : '' );
+        $class = ucfirst($this->parent->directory) . '_' . ucfirst( $this->parent->controller ) . '_' . ( defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '' ) . 'Model';
 
         if ( is_a( $this->model, $class ))
             return $this->model;

@@ -36,7 +36,7 @@ function get_modules_list(){
             'icon' => $module_icon,
             'logo' => $module_logo,
             'admin' => $mod->getVar('hasadmin') ? XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('adminindex') : '',
-            'main' => $mod->mainLink(),
+            'main' => RMUris::anchor( $mod->getVar('dirname') ),
             'updated' => RMTimeFormatter::get()->format( $mod->getVar('last_update'), __('%d% %T% %Y%', 'rmcommon')),
             'config' => isset($config_link) ? $config_link : '',
             'description' => $mod->getInfo('description')

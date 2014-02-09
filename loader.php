@@ -296,7 +296,7 @@ if($cuSettings->updates && $xoopsOption['pagetype']=='admin'){
 /**
  * Add ajax controller script
  */
-if ( defined("XOOPS_CPFUNC_LOADED") ){
+if ( defined("XOOPS_CPFUNC_LOADED") || $xoopsOption['pagetype'] == 'admin' ){
     $rmTpl->add_script( 'cu-settings.php', 'rmcommon', array('footer' => 1) );
     $rmTpl->add_script( 'jquery.validate.min.js', 'rmcommon', array('footer' => 1) );
 }

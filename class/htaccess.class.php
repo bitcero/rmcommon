@@ -114,19 +114,18 @@ class RMHtaccess
     public function verifyCode($code = ''){
 
         if($code!=''){
-
             if(strpos($this->content, $code)!==FALSE)
                 return true;
             else
                 return false;
 
         }
-
-        if(!preg_match("/\# begin $this->module\n(.*)\n\# end $this->module/i", $this->content, $match))
-            return false;
+    echo $this->content; die();
+        if( preg_match_all("/# begin rmcommon\n(.*)\n# end rmcommon$/is", $this->content, $match) === false )
+            print_r($match);
         else
-            return $match[0];
-
+            print_r($match);
+die();
     }
 
 	public function removeRule(){
@@ -137,13 +136,13 @@ class RMHtaccess
         if (false === $initial )
             return true;
 
-        $final = strpos( $this->content, "# end " . $this->module );
+        $final = strpos( $this->content, "# end " . $this->module . "\n" );
 
         $replace = substr( $this->content, 0, $initial );
         if ( false !== $final )
             $replace .= substr( $this->content, $final + strlen( "# end $this->module") + 1 );
 
-		file_put_contents($this->file, $replace);
+		$this->content = $replace;
 		return true;
 
 	}
@@ -168,26 +167,12 @@ class RMHtaccess
         $this->removeRule();
 
         // Verificamos si existe el código generado
-        $exists = $this->verifyCode($code);
         $oldExists = false;
-
-        if(!$exists){
-            // Si no existe verificamos la existencia de código antiguo
-            // para el módulo actual
-            $oldExists = $this->verifyCode();
-        } else {
-
-            return true;
-
-        }
 
         if(!is_writable($this->file))
             return $this->bCode.$code;
 
-        if($oldExists!==false)
-            $this->content = str_replace($oldExists, $code, $this->content);
-        else
-            $this->content .= "\n$code";
+        $this->content .= "$code";
 
         if(file_put_contents($this->file, $this->content))
             return true;
