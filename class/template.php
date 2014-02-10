@@ -466,7 +466,7 @@ class RMTemplate
         }
 
         // Allow other components to add new paths where scripts can be searched
-        $paths = $rmEvents->run_event('rmcommon.scripts.paths', $paths, $file, $element, $directory, $version);
+        $paths = RMEvents::get()->run_event('rmcommon.scripts.paths', $paths, $file, $element, $directory, $version);
 
         foreach($paths as $path){
 

@@ -194,41 +194,41 @@ class RMFunctions
     * @param int User that has been posted the comments
     * @return array
     */
-    public function get_comments($obj,$params,$type='module',$parent=0,$user=null,$assign=true){
-        global $xoopsUser;
-        
+    static public function get_comments($obj,$params,$type='module',$parent=0,$user=null,$assign=true){
+        global $xoopsUser, $xoopsDB;
+
         define('COMMENTS_INCLUDED', 1);
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        
+
         $rmc_config = RMSettings::cu_settings();
-        
+
         $params = urlencode($params);
         $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_comments")." WHERE status='approved' AND id_obj='$obj' AND params='$params' AND type='$type' AND parent='$parent'".($user==null?'':" AND user='$user'")." ORDER BY posted";
         $result = $db->query($sql);
-        
+
         $ucache = array();
         $ecache = array();
 
         while($row = $db->fetchArray($result)){
-            
+
             $com = new RMComment();
             $com->assignVars($row);
-            
+
             // Editor data
             if(!isset($ecache[$com->getVar('user')])){
                 $ecache[$com->getVar('user')] = new RMCommentUser($com->getVar('user'));
             }
-            
+
             $editor = $ecache[$com->getVar('user')];
-            
+
             if($editor->getVar('xuid')>0){
-            
+
                 if(!isset($ucache[$editor->getVar('xuid')])){
                     $ucache[$editor->getVar('xuid')] = new XoopsUser($editor->getVar('xuid'));
                 }
-                
+
                 $user = $ucache[$editor->getVar('xuid')];
-                
+
                 $poster = array(
                     'id' => $user->getVar('uid'),
                     'name'  => $user->getVar('uname'),
@@ -238,9 +238,9 @@ class RMFunctions
                     'rank'  => $user->rank(),
                     'url'   => $user->getVar('url')!='http://'?$user->getVar('url'):''
                 );
-            
+
             } else {
-                
+
                 $poster = array(
                     'id'    => 0,
                     'name'  => $editor->getVar('name'),
@@ -250,9 +250,9 @@ class RMFunctions
                     'rank'  => '',
                     'url'  => $editor->getVar('url')!='http://'?$editor->getVar('url'):''
                 );
-                
+
             }
-            
+
             if ($xoopsUser && $xoopsUser->isAdmin()){
 				$editlink = RMCURL.'/comments.php?action=edit&amp;id='.$com->id().'&amp;ret='.urlencode(RMUris::current_url());
             }elseif($rmc_config['allow_edit']){
@@ -263,7 +263,7 @@ class RMFunctions
 					$editlink = '';
 	            }
 			}
-            
+
             $comms[] = array(
                 'id'        => $row['id_com'],
                 'text'      => TextCleaner::getInstance()->clean_disabled_tags(TextCleaner::getInstance()->popuplinks(TextCleaner::getInstance()->nofollow($com->getVar('content')))),
@@ -271,15 +271,15 @@ class RMFunctions
                 'posted'    => sprintf(__('Posted on %s'), formatTimestamp($com->getVar('posted'), 'l')),
                 'ip'        => $com->getVar('ip'),
                 'edit'		=> $editlink
-            );  
-            
+            );
+
             unset($editor);
         }
-        
+
         $comms = RMEvents::get()->run_event('rmcommon.loading.comments', $comms, $obj, $params, $type, $parent, $user);
         global $xoopsTpl;
         $xoopsTpl->assign('lang_edit', __('Edit','rmcommon'));
-        
+
         if ($assign){
             $xoopsTpl->assign('comments', $comms);
             return true;
