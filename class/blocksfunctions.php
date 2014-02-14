@@ -169,7 +169,9 @@ class RMBlocksFunctions
             'module' => $bobj->getVar('dirname') ,
             'title' => $bobj->getVar('name') ,
             // 'name'        => strtolower( preg_replace( '/[^0-9a-zA-Z_]/', '', str_replace( ' ', '_', $bobj->getVar( 'name' ) ) ) ),
-            'weight' => $bobj->getVar('weight'));
+            'weight' => $bobj->getVar('weight'),
+            'type'  => $bobj->getVar('element_type')
+        );
 
         $bcachetime = intval($bobj->getVar('bcachetime'));
         if (empty($bcachetime)) {
@@ -181,6 +183,8 @@ class RMBlocksFunctions
         $template->setCompileId($bobj->getVar('dirname', 'n'));
         if($bobj->getVar('element_type')=='plugin'){
             $tplName = XOOPS_ROOT_PATH.'/modules/'.$bobj->getVar('element').'/plugins/'.$bobj->getVar('dirname').'/templates/blocks/'.$bobj->getVar('template');
+        } elseif ( $bobj->getVar('element_type')=='theme'){
+            $tplName = XOOPS_ROOT_PATH.'/themes/'.$bobj->getVar('dirname').'/templates/blocks/'.$bobj->getVar('template');
         } else {
             $tplName = ($tplName = $bobj->getVar('template')) ? "db:$tplName" : 'db:system_block_dummy.html';
         }

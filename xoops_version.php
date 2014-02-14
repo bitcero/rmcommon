@@ -491,7 +491,7 @@ if(in_array("rmcommon",$amod)){
         $p = RMFunctions::load_plugin($plugin);
         if(!method_exists($p, 'blocks')) continue;
         foreach($p->blocks() as $block){
-            $block['plugin'] = 1;
+            $block['type'] = 'plugin';
             $modversion['blocks'][] = $block;
         }
         

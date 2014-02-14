@@ -100,7 +100,7 @@ function show_rm_blocks()
             'id' => $row['bid'],
             'title' => $row['name'],
             'module' => array('id' => $mod->mid(), 'dir' => $mod->dirname(), 'name' => $mod->name()),
-            'canvas' => $bpos[$row['canvas']],
+            'canvas' => isset($bpos[$row['canvas']]) ? $bpos[$row['canvas']] : array(),
             'weight' => $row['weight'],
             'visible'=>$row['visible'],
             'active'=>$row['isactive'],

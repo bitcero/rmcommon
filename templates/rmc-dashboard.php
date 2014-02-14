@@ -61,6 +61,8 @@
         </div>
         <!--// End recent news -->
 
+        <?php RMEvents::get()->run_event('rmcommon.dashboard.left.widgets'); ?>
+
     </div>
 
     <div class="col-md-4 col-lg-4">
@@ -109,6 +111,8 @@
             </div>
         </div>
         <!-- End available modules -->
+
+        <?php RMEvents::get()->run_event('rmcommon.dashboard.center.widgets'); ?>
 
     </div>
 
@@ -178,35 +182,10 @@
         </div>
         <!--// End system tools -->
 
+        <?php RMEvents::get()->run_event('rmcommon.dashboard.right.widgets'); ?>
+
         <div data-load="boxes"></div>
 
     </div>
 
-</div>
-
-<div class="row rmcw-container">
-    <!-- Left widgets -->
-    <div class="span6">
-
-
-        <!-- Recent news -->
-
-        <!-- End recent news -->
-
-        <?php RMEvents::get()->run_event('rmcommon.dashboard.left.widgets'); ?>
-
-    </div>
-    <!-- End left widgets -->
-
-    <!-- Right widgets -->
-    <div class="span6" id="rmc-central-right-widgets">
-
-
-
-
-
-
-        <?php RMEvents::get()->run_event('rmcommon.dashboard.right.widgets'); ?>
-    </div>
-    <!-- / End right widgets -->
 </div>

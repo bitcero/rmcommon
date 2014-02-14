@@ -123,8 +123,8 @@ var blocksAjax = {
                             .removeClass("text-success")
                             .addClass("text-warning")
                             .children("i")
-                            .removeClass("icon-eye-open")
-                            .addClass("icon-eye-close");
+                            .removeClass("fa-eye")
+                            .addClass("fa-eye-slash");
                         $("#block-"+data.data.id).removeClass("invisible-block");
                     }else{
                         $("#block-"+data.data.id+" a.control-visible")
@@ -133,8 +133,8 @@ var blocksAjax = {
                             .removeClass("text-warning")
                             .addClass("text-success")
                             .children("i")
-                            .removeClass("icon-eye-close")
-                            .addClass("icon-eye-open");
+                            .removeClass("fa-eye-slash")
+                            .addClass("fa-eye");
                         $("#block-"+data.data.id).addClass("invisible-block");
                     }
 
@@ -207,14 +207,14 @@ var blocksAjax = {
         var html = '<li class="dd-item" data-id="'+block.id+'" id="block-'+block.id+'" data-position="'+block.position+'">';
         html += '<div class="row-fluid item-controls">';
         html += '<strong class="dd-handle">'+block.title+'</strong>';
-        html += '<a href="#" class="pull-right text-error" data-block="'+block.id+'" data-action="delete" title="'+cuLanguage.deleteBlock+'"><i class="icon-remove-sign"></i></a>';
+        html += '<a href="#" class="pull-right text-error" data-block="'+block.id+'" data-action="delete" title="'+cuLanguage.deleteBlock+'"><i class="fa fa-minus-circle text-danger"></i></a>';
 
         if(block.visible)
-            html += '<a href="#" class="pull-right text-warning" data-block="'+block.id+'" data-action="hide" title="'+cuLanguage.hideBlock+'"><i class="icon-eye-close"></i></a>';
+            html += '<a href="#" class="pull-right text-warning" data-block="'+block.id+'" data-action="hide" title="'+cuLanguage.hideBlock+'"><i class="fa fa-eye-slash"></i></a>';
         else
-            html += '<a href="#" class="pull-right text-success" data-block="'+block.id+'" data-action="show" title="'+cuLanguage.showBlock+'"><i class="icon-eye-open"></i></a>';
+            html += '<a href="#" class="pull-right text-success" data-block="'+block.id+'" data-action="show" title="'+cuLanguage.showBlock+'"><i class="fa fa-eye-slash"></i></a>';
 
-        html += '<a href="#" class="pull-right" data-block="'+block.id+'" data-action="settings" title="'+cuLanguage.blockSettings+'"><i class="icon-wrench"></i></a>';
+        html += '<a href="#" class="pull-right" data-block="'+block.id+'" data-action="settings" title="'+cuLanguage.blockSettings+'"><i class="fa fa-wrench"></i></a>';
         html += '</div>';
         html += '<div class="row-fluid block-data">';
         html += '<span class="text-info">'+block.module+'</span>';
@@ -281,7 +281,7 @@ var blocksAjax = {
                 .attr("title", visible==1 ? cuLanguage.hideBlock : cuLanguage.showBlock)
                 .removeClass(visible==1 ? 'text-success' : 'text-warning')
                 .addClass(visible==1 ? 'text-warning' : 'text-success')
-                .html('<i class="'+(visible==1 ? 'icon-eye-close' : 'icon-eye-open')+'"></i>');
+                .html('<i class="fa '+(visible==1 ? 'fa-eye-slash' : 'fa-eye')+'"></i>');
 
             if(visible)
                 $(block).removeClass("invisible-block");

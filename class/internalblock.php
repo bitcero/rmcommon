@@ -244,6 +244,9 @@ class RMInternalBlock extends RMObject
             if ($this->getVar('element_type')=='plugin'){
                 $file = XOOPS_ROOT_PATH.'/modules/'.$this->getVar('element').'/plugins/'.$this->getVar('dirname').'/blocks/'.$this->getVar('file');
                 load_plugin_locale($this->getVar('dirname'), '', $this->getVar('element'));
+            } elseif ( $this->getVar('element_type') == 'theme' ){
+                $file = XOOPS_ROOT_PATH.'/themes/'.$this->getVar('dirname').'/blocks/'.$this->getVar('file');
+                load_theme_locale( $this->getVar('dirname'), '', $this->getVar('element') );
             } else {
                 $file = XOOPS_ROOT_PATH."/modules/".$this->getVar('dirname')."/blocks/".$this->getVar('file');
                 if ( file_exists(XOOPS_ROOT_PATH."/modules/".$this->getVar('dirname')."/language/".$xoopsConfig['language']."/blocks.php") ) {
@@ -330,7 +333,11 @@ class RMInternalBlock extends RMObject
             case 'plugin':
                 $file = XOOPS_ROOT_PATH.'/modules/'.$this->getVar('element').'/plugins/'.$this->getVar('dirname').'/blocks/'.$this->getVar('file');
                 $lang = 'load_plugin_locale';
-                break;            
+                break;
+            case 'theme':
+                $file = XOOPS_ROOT_PATH.'/themes/'.$this->getVar('dirname').'/blocks/'.$this->getVar('file');
+                $lang = 'load_plugin_locale';
+                break;
         }
         
         // Check if widget file exists

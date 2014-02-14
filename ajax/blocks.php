@@ -40,10 +40,10 @@ if(!$xoopsSecurity->checkReferer(1))
 function insert_block(){
     global $xoopsSecurity;
     
-    $mod = rmc_server_var($_POST, 'module', '');
-    $id = rmc_server_var($_POST, 'block', '');
-    $token = rmc_server_var($_POST, 'XOOPS_TOKEN_REQUEST', '');
-    $canvas = rmc_server_var($_POST, 'canvas', '');
+    $mod = RMHttpRequest::post( 'module', 'string', '' );
+    $id = RMHttpRequest::post( 'block', 'string', '' );
+    $token = RMHttpRequest::post( 'XOOPS_TOKEN_REQUEST', 'string', '' );
+    $canvas = RMHttpRequest::post( 'canvas', 'integer', 0 );
 
     if (!$xoopsSecurity->check())
         response(__('Sorry, you are not allowed to view this page','rmcommon'), array(), 1, 0);
@@ -89,12 +89,12 @@ function insert_block(){
     $block->setReadGroups(array(0));
     $block->setVar('name', $bk['name']);
     $block->setVar('element', $mod);
-    $block->setVar('element_type', $bk['plugin']==1 ? 'plugin' : 'module');
+    $block->setVar('element_type', $bk['type']=='' ? 'module' : ($bk['type'] == 'theme' || $bk['type'] == 'plugin' ? $bk['type'] : 'module'));
     $block->setVar('canvas', $canvas);
     $block->setVar('visible', 0);
     $block->setVar('type', $bk['type']);
     $block->setVar('isactive', 1);
-    $block->setVar('dirname', isset($bk['dir']) ? $bk['dir'] : $mod);
+    $block->setVar('dirname', isset($bk['dirname']) ? $bk['dirname'] : $mod);
     $block->setVar('file', $bk['file']);
     $block->setVar('show_func', $bk['show_func']);
     $block->setVar('edit_func', $bk['edit_func']);

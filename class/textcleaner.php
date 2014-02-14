@@ -308,11 +308,11 @@ class TextCleaner
      * @param mixed $text
      * @return
      */
-    public function truncate($text, $len){
+    public function truncate($text, $len, $continue = '[...]'){
         $text = preg_replace("[\n|\r|\n\r]", ' ', $text);
         $ret = substr(strip_tags($text), 0, $len);
         
-        if (strlen($text)>$len) $ret .= '...';
+        if (strlen($text)>$len) $ret .= ' ' . $continue;
         return $ret;
     }
 
