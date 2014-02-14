@@ -2,7 +2,7 @@
 ========
 
 **Common Utilities** is a framework oriented to develop advanced XOOPS modules by providing useful objects and new methods for developers.
-Development work turns more easy while Common Utilities provide new capabilities to created a new kind of components for XOOPS.
+Development work turns more easy while Common Utilities provide new capabilities to create a new kind of components for XOOPS.
 
 Also, **Common Utilities** transform the XOOPS default GUI into a new styled adn improved Admin GUI, with the target of improve the usability
 and the look and feel of all modules.
@@ -83,6 +83,10 @@ Currently exists some native modules developed by me. I think that all these are
 
 * [**MyWords**](http://github.com/bitcero/mywords). A blogging and news module.
 * [**bXpress**](http://github.com/bitcero/bxpress). A light weight forum module.
-* **xThemes**. A very flexible and powerfull themes framework and themes manager.
+* [**xThemes**](http://github.com/bitcero/xthemes). A very flexible and powerful themes framework and themes manager.
 * **D-Transport**. An awesome downloads center module.
 * **QuickPages**. A static pages creator with advanced features.
+
+---
+
+If you want to contact me, please do it trough [my web site](http://www.eduardocortes.mx).
