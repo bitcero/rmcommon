@@ -66,8 +66,11 @@ class TinyEditor
 							if (tinyMCE.activeEditor.isDirty())
 								ed.save();
 						});
-					}
-					});';
+					},
+					oninit: function(ed){
+				        switchEditors.go("'.$this->configuration['elements'].'", "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
+					}});
+				';
         
         return $rtn;
     }

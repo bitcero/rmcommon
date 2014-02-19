@@ -47,9 +47,9 @@ class RMBlocksFunctions
     /**
     * Get blocks positions
     */
-    public function block_positions(){
+    public function block_positions( $active = '' ){
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $result = $db->query("SELECT * FROM " . $db->prefix("mod_rmcommon_blocks_positions"));
+        $result = $db->query("SELECT * FROM " . $db->prefix("mod_rmcommon_blocks_positions") . ( $active != '' ? ' WHERE active=' . $active : ''));
         $pos = array();
         while($row = $db->fetchArray($result)){
             $pos[$row['id_position']] = $row;
@@ -65,7 +65,7 @@ class RMBlocksFunctions
         
         $sides = array();
         
-        foreach(self::block_positions() as $id => $row){
+        foreach(self::block_positions( 1 ) as $id => $row){
             $sides[$id] = $row['tag'];
             $blocks[$row['tag']] = array();
         }
@@ -88,7 +88,10 @@ class RMBlocksFunctions
         $barray = self::get_blocks($groups, $mid, $isStart, XOOPS_BLOCK_VISIBLE, '', 1, $subpage);
         
         foreach($barray as $block){
-            
+
+            if ( !isset( $sides[$block->getVar('canvas')] ) )
+                continue;
+
             $side = $sides[$block->getVar('canvas')];
             if($content = self::buildBlock($block)){
                 $blocks[$side][$content['id']] = $content;
@@ -104,10 +107,19 @@ class RMBlocksFunctions
     public function get_blocks($groupid, $mid=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.wid', $isactive=1, $subpage=''){
         
         $orderby = $orderby=='' ? 'b.weight,b.bid' : $orderby;
-    	
+
+        // Get authorized blocks
         $db =& XoopsDatabaseFactory::getDatabaseConnection();
         $ret = array();
-        $sql = "SELECT DISTINCT gperm_itemid FROM ".$db->prefix('group_permission')." WHERE (gperm_name = 'rmblock_read') AND gperm_modid = 1";
+        $sql = "SELECT DISTINCT
+                    gperm_itemid
+                FROM
+                    ".$db->prefix('group_permission')."
+                WHERE
+                    (gperm_name = 'rmblock_read')
+                AND
+                    gperm_modid = 1";
+
         if ( is_array($groupid) ) {
             $sql .= ' AND gperm_groupid IN ('.implode(',', $groupid).',0)';
         } else {
@@ -122,8 +134,10 @@ class RMBlocksFunctions
         while ( $myrow = $db->fetchArray($result) ) {
             $blockids[] = $myrow['gperm_itemid'];
         }
-        
+
+
         if (!empty($blockids)) {
+
             $sql = 'SELECT b.* FROM '.$db->prefix('mod_rmcommon_blocks').' b, '.$db->prefix('mod_rmcommon_blocks_assignations').' m WHERE m.bid=b.bid';
             $sql .= ' AND b.isactive='.$isactive;
             if (isset($visible)) {
@@ -153,6 +167,7 @@ class RMBlocksFunctions
                 $ret[$myrow['bid']] = $block;
                 unset($block);
             }
+
         }
 
         return $ret;

@@ -24,7 +24,7 @@ class TextCleaner
     * Tags that will be disbled when dohtml is activated
     */
     private $disable_tags = array(
-        '@<iframe[^>]*?>.*?</iframe>@si',
+        /*'@<iframe[^>]*?>.*?</iframe>@si',*/
         '@<script[^>]*?>.*?</script>@si',
         '@<style[^>]*?>.*?</style>@si',
         '@<html[^>]*?>.*?</html>@si',

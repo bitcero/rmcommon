@@ -116,10 +116,11 @@ class RMFormEditor extends RMFormElement
 		$rtn = "<div class=\"ed-container\" style=\"width: $this->_width\">";
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.simple.editor.plugins', $plugins, $this->getName());
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'plain');
         if (!empty($plugins)){
-            $rtn .= '<div class="ed-plugins">';
-            $rtn .= implode("", $plugins);
-            $rtn .= "</div>";
+            $rtn .= '<div class="ed-plugins"><span class="plugin">';
+            $rtn .= implode('</span><span class="plugin">', $plugins);
+            $rtn .= "</span></div>";
         }
         $rtn .= "<textarea class='xc-editor form-control' id='".$this->getName()."' name='".$this->getName()."' style='width: 99%; height: ".$this->_height.";'>".$this->_default."</textarea>
                  </div>";
@@ -144,15 +145,23 @@ class RMFormEditor extends RMFormElement
 		RMTemplate::get()->add_script( 'quicktags.js','rmcommon', array('directory' => 'include') );
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce.js');
 		RMTemplate::get()->add_head_script(TinyEditor::getInstance()->get_js());
-        
-		$rtn = "\n
-		<div class=\"ed-container\" id=\"ed-cont-".$this->id()."\" style=\"width: 100%;\">
-        <div class=\"es-editor\" style=\"width: 100%;\">
-        <a class=\"edButtonHTML\" onclick=\"switchEditors.go('".$this->id()."', 'html');\">HTML</a>
-        <a class=\"edButtonPreview\" onclick=\"switchEditors.go('".$this->id()."', 'tinymce');\">Visual</a>
+
+        $plugins = array();
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'tinymce');
+
+		$rtn = '
+		<div class="ed-container" id="ed-cont-'.$this->id().'" style="width: 100%;">
+        <div class="es-editor" style="width: 100%;">
+        <div class="es-plugins">
+            <span class="plugin">'.implode('</span><span class="plugin">', $plugins).'</span>
         </div>
-        <div class=\"quicktags\"><script type=\"text/javascript\">edToolbar('".$this->id()."')</script></div>
-        <textarea onchange=\"tinyMCE.activeEditor.save();\" id='".$this->id()."' name='".$this->getName()."' style='width: 100%; height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea></div>";
+        <a class="edButtonHTML'.(isset($_COOKIE['editor']) && $_COOKIE['editor'] == 'html' ? ' active' : '').'" onclick="switchEditors.go(\''.$this->id().'\', \'html\'); return false;"><span class="fa fa-code"></span> HTML</a>
+        <a class="edButtonPreview'.(isset($_COOKIE['editor']) && $_COOKIE['editor'] == 'tinymce' ? ' active' : '').'" onclick="switchEditors.go(\''.$this->id().'\', \'tinymce\'); return false;"><span class="fa fa-eye"></span> Visual</a>
+        </div>
+        <div'.(isset($_COOKIE['editor']) && $_COOKIE['editor'] == 'html' ? ' class="showing"' : '').'>
+        <div class="quicktags"><script type="text/javascript">edToolbar(\''.$this->id().'\')</script></div>
+        <textarea onchange="tinyMCE.activeEditor.save();" id="'.$this->id().'" name="'.$this->getName().'" style="width: 100%; height: '.$this->_height.';" class="'.$this->getClass().'">'.$this->_default.'</textarea></div>
+        </div>';
 		return $rtn;
 	}
 	
@@ -167,8 +176,9 @@ class RMFormEditor extends RMFormElement
         $plugins = array();
         // Get external plugins
         $plugins = RMEvents::get()->run_event('rmcommon.html.editor.plugins', $plugins, $this->id());
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'html');
         
-		$rtn .= "<div class=\"quicktags\"><script type=\"text/javascript\">edToolbar('".$this->id()."')</script>".(!empty($plugins) ? "<div class='ed_plugins'>".implode(" ", $plugins)."</div>" : '')."</div>
+		$rtn .= "<div class=\"quicktags\"><script type=\"text/javascript\">edToolbar('".$this->id()."')</script>".(!empty($plugins) ? "<div class='ed_plugins'><span class='plugin'>".implode('</span><span class="plugin">', $plugins)."</span></div>" : '')."</div>
 		<div class='txtarea_container'><textarea id='".$this->id()."' name='".$this->getName()."' style='width: ".$this->_width."; height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea></div>
 		</div>";
 		return $rtn;
@@ -179,7 +189,12 @@ class RMFormEditor extends RMFormElement
 		RMTemplate::get()->add_script(RMCURL."/include/js/colorpicker.js");
 		RMTemplate::get()->add_style('editor-exmcode.css','rmcommon');
 		RMTemplate::get()->add_style('colorpicker.css','rmcommon');
+
+        $plugins = array();
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'exmcode');
+
 		$rtn = 	"<div class='ed-container' id='".$this->id()."-ed-container' width='$this->_width'>";
+		$rtn .= "<div class='ed-plugins' id='".$this->id()."-ed-plugins'><span class='plugin'>".implode('</span> <span class="plugin">', $plugins).'</span></div>';
 		$rtn .= "<div class='ed_buttons' id='".$this->id()."-ec-container'>";
         $rtn .= "<div class='row_top'></div><div class='row_bottom'></div>";
 		$rtn .= "</div>";

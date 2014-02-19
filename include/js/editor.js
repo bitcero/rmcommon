@@ -7,7 +7,9 @@ var switchEditors = {
 	},
 
 	edInit : function() {
-		var h = tinymce.util.Cookie.getHash("TinyMCE_content_size"), H = this.I('edButtonHTML'), P = this.I('edButtonPreview');
+		var h = tinymce.util.Cookie.getHash("TinyMCE_content_size"),
+            H = this.I('edButtonHTML'),
+            P = this.I('edButtonPreview');
 
 		// Activate TinyMCE if it's the user's default editor
         try {
@@ -86,8 +88,7 @@ var switchEditors = {
 
 	go : function(id, mode) {
 		id = id || 'content';
-		mode = mode || this.mode || '';
-
+		mode = mode || this.mode || 'tinymce';
 		var ed = tinyMCE.get(id) || false;
 		var qt = $('#ed-cont-'+id+' .quicktags');
 		var H = $('#ed-cont-'+id+' .edButtonHTML');
@@ -106,12 +107,14 @@ var switchEditors = {
 			H.removeClass('active');
 			edCloseAllTags(id); // :-(
 
-			qt.hide();
+			qt.hide().parent().removeClass("showing");
 
 			ta.val(this.esautop(ta.val()));
 
 			if ( ed ) ed.show();
 			else tinyMCE.execCommand("mceAddControl", false, id);
+
+            tinyMCE.util.Cookie.set('editor', 'tinymce');
 
 		} else {
 			if ( ! ed || ed.isHidden() )
@@ -124,10 +127,11 @@ var switchEditors = {
 			ta.css('height', ed.getContentAreaContainer().offsetHeight + 6 + 'px');
 
 			ed.hide();
-			qt.css('display','block');
+			qt.css('display','block').parent().addClass("showing");
             //qt.css('width', ta.css('width'));
 
 			ta.css('color','');
+            tinyMCE.util.Cookie.set('editor', 'html');
 
 		}
 		return false;
