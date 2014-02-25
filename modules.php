@@ -112,7 +112,7 @@ function show_modules_list(){
 	////RMFunctions::create_toolbar();
 	RMTemplate::get()->assign('xoops_pagetitle', __('Modules Management','rmcommon'));
 	RMTemplate::get()->add_style('modules.css', 'rmcommon');
-	RMTemplate::get()->add_script('modules.js', 'rmcommon', array('directory' => 'include'));
+	RMTemplate::get()->add_script('modules.js', 'rmcommon');
         RMTemplate::get()->set_help('http://www.redmexico.com.mx/docs/common-utilities/uso-de-common-utilities/standalone/1/#administrador-de-modulos');
 	xoops_cp_header();
 	include RMTemplate::get()->get_template('rmc-modules.php', 'module', 'rmcommon');
@@ -148,7 +148,7 @@ function module_install(){
     
     $module = RMEvents::get()->run_event('rmcommon.preinstall.module', $module);
     
-    RMTEmplate::get()->add_script('modules.js', 'rmcommon', array('directory' => 'include'));
+    RMTEmplate::get()->add_script('modules.js', 'rmcommon');
     RMTemplate::get()->add_style('modules.css', 'rmcommon');
     //RMFunctions::create_toolbar();
 

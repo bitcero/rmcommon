@@ -159,15 +159,26 @@ h4 small {
 .cu-breadcrumb-container{
     position: fixed;
     top: -32px; left: 0; right: 0;
+    height: 32px;
     padding: 0;
     z-index: 1080;
 }
 .cu-breadcrumb-container .breadcrumb-puller{
     display: inline-block;
     width: auto;
-    padding: 1px 5px;
+    padding: 3px 10px 3px 10px;
     margin-right: 10px;
     cursor: pointer;
+}
+.cu-breadcrumb-container .breadcrumb-puller span.glyphicon{
+    transition: all 250ms;
+}
+.cu-breadcrumb-container .breadcrumb-puller.showing span.glyphicon{
+    transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
 }
 .rmc-breadcrumb{
     margin: 0;
