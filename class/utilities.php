@@ -183,8 +183,7 @@ class RMUtilities
             $ret .= '<input type="hidden" name="'.$name.'" id="'.$id.'" value="" />';
         }
         $ret .= '</div>';
-        $ret .= '<span class="image_manager_launcher button buttonGreen btn btn-success">'.__('Image manager...',
-            'rmcommon').'</span>';
+        $ret .= '<span class="image_manager_launcher btn btn-success">'.__('Image manager...','rmcommon').'</span>';
         $ret .= '</div>';
 
         $tpl = RMTemplate::get();

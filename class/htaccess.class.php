@@ -120,17 +120,20 @@ class RMHtaccess
                 return false;
 
         }
-    echo $this->content; die();
+
         if( preg_match_all("/# begin rmcommon\n(.*)\n# end rmcommon$/is", $this->content, $match) === false )
             print_r($match);
         else
             print_r($match);
-die();
+
     }
 
 	public function removeRule(){
 		/*$count = 0;
 		$replace = str_replace( "# begin $this->module\n$rule\n# end $this->module\n", '', $this->content, $count );*/
+
+        $this->content = preg_replace("/\# begin " . $this->module . ".*\# end " . $this->module . "\n?/sm", '', $this->content );
+        return true;
 
         $initial = strpos( $this->content, "# begin " . $this->module );
         if (false === $initial )
@@ -154,9 +157,11 @@ die();
 
     }
 
-    public function write($rules){
+    public function write($rules = ''){
 
-        if($rules=='') return false;
+        if($rules==''){
+            return file_put_contents($this->file, $this->content);
+        }
 
         if(!$this->apache || !$this->rewrite)
             return;

@@ -100,7 +100,7 @@
                         </li>
                         <li class="dropdown<?php if($xoopsModule->dirname()=='system'): ?> active<?php endif; ?>">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                <i class="xo-icon xicon-gear"></i>
+                                <span class="fa fa-cog"></span>
                                 <?php _e('System','twop6'); ?>
                                 <b class="caret"></b>
                             </a>
@@ -164,7 +164,7 @@
                         
                         <li class="dropdown">
                             <a href="#" title="<?php _e('Modules','twop6'); ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                <i class="xo-icon xicon-modules"></i>
+                                <span class="fa fa-th"></span>
                                 <?php _e('Modules','twop6'); ?>
 	                            <b class="caret"></b>
                             </a>
@@ -220,7 +220,7 @@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                <i class="xo-icon xicon-ray"></i>
+                                <span class="fa fa-flash"></span>
                                 <?php _e('Quick Links','rmcommon'); ?>
                                 <b class="caret"></b>
                             </a>
@@ -228,13 +228,13 @@
                                 <?php if($this->help()): ?>
                                     <li class="dropdown-submenu">
                                         <a href="#" tabindex="-1" onclick="return false;">
-                                            <i class="xo-icon xicon-faq"></i>
+                                            <span class="fa fa-question-circle"></span>
                                             <?php _e('Help','rmcommon'); ?>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <?php foreach($this->help() as $help): ?>
                                                 <li>
-                                                    <a href="<?php echo $help['link']; ?>" class="help_button rm_help_button" style="background-image: url(<?php echo TWOP6_URL; ?>/images/help.png);" target="_blank" title="<?php echo $help['caption']; ?>"><?php echo $help['caption']; ?></a>
+                                                    <a href="<?php echo $help['link']; ?>" class="help_button rm_help_button" target="_blank" title="<?php echo $help['caption']; ?>"><span class="fa fa-question"></span> <?php echo $help['caption']; ?></a>
                                                 </li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -244,13 +244,18 @@
                                 <?php if($xoopsModule->getInfo('social')): ?>
                                     <li class="dropdown-submenu">
                                         <a href="#" tabindex="-1" onclick="return false;">
-                                            <i class="xo-icon xicon-world"></i>
+                                            <span class="fa fa-users"></span>
                                             <?php _e('Social Links','rmcommon'); ?>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <?php foreach($xoopsModule->getInfo('social') as $net): ?>
                                                 <li class="nav_item">
-                                                    <a href="<?php echo $net['url']; ?>" target="_blank"><?php echo $net['title']; ?></a>
+                                                    <a href="<?php echo $net['url']; ?>" target="_blank">
+                                                        <?php if(isset($net['type'])): ?>
+                                                        <span class="fa fa-<?php echo $net['type']; ?>"></span>
+                                                        <?php endif; ?>
+                                                        <?php echo $net['title']; ?>
+                                                    </a>
                                                 </li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -258,13 +263,13 @@
                                 <?php endif; ?>
                                 <li>
                                     <a href="<?php echo RMCURL; ?>">
-                                        <i class="xo-icon xicon-cp"></i>
+                                        <span class="fa fa-dashboard"></span>
                                         <?php _e('Control Panel','twop6'); ?>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="<?php echo XOOPS_URL; ?>" target="_blank">
-                                        <i class="xo-icon xicon-home"></i>
+                                        <span class="fa fa-home"></span>
                                         <?php _e('View Home Page','twop6'); ?>
                                     </a>
                                 </li>
@@ -284,7 +289,7 @@
                                 <li class="divider"></li>
                                 <li>
                                     <a href="<?php echo RMCURL; ?>/?twop6=about">
-                                        <i class="xo-icon xicon-idea"></i>
+                                        <span class="fa fa-lightbulb-o"></span>
                                         <?php _e('About Two·Six','twop6'); ?>
                                     </a>
                                 </li>
@@ -383,12 +388,28 @@
                     <ul class="nav navbar-nav">
                         <?php foreach($this->get_toolbar() as $menu): ?>
                             <li<?php echo $menu['location']==RMCSUBLOCATION ? ' class = "active"' : ($menu['location']==RMCLOCATION ? ' class="active"' : ''); ?>>
+                            <?php if(empty($menu['options'])): ?>
                                 <button type="button" <?php echo $menu['link']!='' && $menu['link'] != '#' ? ' data-action="goto"' : ''; ?> href="<?php echo $menu['link']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
-                                    <span><?php if($menu['icon']): ?><img src="<?php echo $menu['icon']; ?>"><?php endif; ?></span>
+                                    <?php echo $xoFunc->getIcon( $menu, false, 'tool-icon' ); ?>
                                     <?php echo $menu['title']; ?>
                                 </button>
+                            <?php else: ?>
+                                <div class="btn-group">
+                                    <button type="button" class="dropdown-toggle" data-toggle="dropdown" href="<?php echo $menu['link']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
+                                        <?php echo $xoFunc->getIcon( $menu, false, 'tool-icon' ); ?>
+                                        <?php echo $menu['title']; ?>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php foreach($menu['options'] as $sub): ?>
+                                        <li>
+                                            <a href="<?php echo $sub['url']; ?>" <?php echo $xoFunc->render_attributes( $menu['attributes'] ); ?>>
+                                                <?php echo $xoFunc->getIcon( $sub ); ?> <?php echo $sub['caption']; ?>
+                                            </a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             </li>
-                            <li class="divider-vertical"></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>

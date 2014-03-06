@@ -1,8 +1,8 @@
 <h1 class="cu-section-title"><?php _e('Dashboard','rmcommon'); ?></h1>
 
-<div class="row">
+<div class="row" data-news="load" data-boxes="load" data-module="rmcommon" data-target="#rmc-recent-news">
 
-    <div class="col-md-4 col-lg-5">
+    <div class="col-md-4 col-lg-5" data-box="rmcommon-left">
 
         <!-- INstalled Modules -->
         <div class="cu-box box-collapse">
@@ -50,7 +50,7 @@
 
 
         <!-- Recent News -->
-        <div class="cu-box" data-load="news" data-module="rmcommon" data-target="#rmc-recent-news">
+        <div class="cu-box">
             <div class="box-header">
                 <span class="fa fa-caret-up box-handler"></span>
                 <h3><?php _e('Recent News','rmcommon'); ?></h3>
@@ -65,7 +65,7 @@
 
     </div>
 
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-4 col-lg-4" data-box="rmcommon-center">
 
         <!-- UPdates available -->
         <div class="alert alert-block" style="display: none;" id="updater-info">
@@ -116,7 +116,7 @@
 
     </div>
 
-    <div class="col-md-4 col-lg-3">
+    <div class="col-md-4 col-lg-3" data-box="rmcommon-right">
 
         <!-- System tools -->
         <div class="cu-box">
@@ -183,8 +183,6 @@
         <!--// End system tools -->
 
         <?php RMEvents::get()->run_event('rmcommon.dashboard.right.widgets'); ?>
-
-        <div data-load="boxes"></div>
 
     </div>
 

@@ -33,6 +33,9 @@ div.cu-bulk-actions .form-control{
 #rmc-toolbar .nav > li > .cu-tool > span{
     background: url(../images/sprites/toolbar.png);
     background-repeat: no-repeat;
+    display: block;
+    width: 32px; height: 32px;
+    margin: 0 auto;
 }
 #rmc-toolbar .nav > li > .tool-dashboard > span{ background-position: 0 0; }
 #rmc-toolbar .nav > li > .tool-modules > span{ background-position: -32px 0; }

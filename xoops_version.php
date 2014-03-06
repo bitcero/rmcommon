@@ -47,7 +47,7 @@ $modversion['icon48'] = 'images/icon48.png';
 
 $modversion['social'][0] = array('title' => __('Twitter', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/bitcero/');
 $modversion['social'][1] = array('title' => __('LinkedIn', 'rmcommon'),'type' => 'linkedin','url' => 'http://www.linkedin.com/in/bitcero/');
-$modversion['social'][2] = array('title' => __('Google+', 'rmcommon'),'type' => 'google+','url' => 'http://plus.google.com/100655708852776329288');
+$modversion['social'][2] = array('title' => __('Google+', 'rmcommon'),'type' => 'google-plus','url' => 'http://plus.google.com/100655708852776329288');
 
 $modversion['hasAdmin'] = 1;
 $modversion['adminindex'] = "index.php";

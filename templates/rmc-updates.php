@@ -17,37 +17,47 @@
         <form id="ftp-form">
 
             <div class="col-md-2 col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('Server:','rmcommon'); ?>"><i class="fa fa-desktop"></i></span>
-                    <input type="text" class="form-control" name="ftp_server" id="ftp-server" value="<?php echo $ftpserver; ?>" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" title="<?php _e('Server:','rmcommon'); ?>"><i class="fa fa-desktop"></i></span>
+                        <input type="text" class="form-control" name="ftp_server" id="ftp-server" value="<?php echo $ftpserver; ?>" />
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-2 col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon"><?php _e('Port:','rmcommon'); ?></span>
-                    <input type="text" class="form-control" name="ftp_port" id="ftp-port" value="21" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><?php _e('Port:','rmcommon'); ?></span>
+                        <input type="text" class="form-control" name="ftp_port" id="ftp-port" value="21" />
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-2 col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('User:','rmcommon'); ?>"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="ftp_user" id="ftp-user" value="" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" title="<?php _e('User:','rmcommon'); ?>"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" name="ftp_user" id="ftp-user" value="" />
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-2 col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('Password:','rmcommon'); ?>"><i class="fa fa-keyboard-o"></i></span>
-                    <input type="password" class="form-control" name="ftp_pass" id="ftp-pass" value="" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" title="<?php _e('Password:','rmcommon'); ?>"><i class="fa fa-keyboard-o"></i></span>
+                        <input type="password" class="form-control" name="ftp_pass" id="ftp-pass" value="" />
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-2 col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon" title="<?php _e('XOOPS Directory:','rmcommon'); ?>"><i class="fa fa-folder-open"></i></span>
-                    <input type="text" class="form-control" name="ftp_dir" id="ftp-dir" value="<?php echo $ftpdir; ?>" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" title="<?php _e('XOOPS Directory:','rmcommon'); ?>"><i class="fa fa-folder-open"></i></span>
+                        <input type="text" class="form-control" name="ftp_dir" id="ftp-dir" value="<?php echo $ftpdir; ?>" />
+                    </div>
                 </div>
             </div>
 

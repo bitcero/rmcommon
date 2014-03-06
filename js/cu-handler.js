@@ -441,11 +441,11 @@ $(document).ready(function(){
      * Check if there are a "News" box in current page
      * and then, load the news for this module
      */
-    if ( $("*[data-load='news']").length == 1 ){
+    if ( $("*[data-news='load']").length == 1 || $("*[data-boxes='load']").length > 0 ){
 
-        var container = $("*[data-load='news']");
+        var container = $("*[data-news='load']");
         if (container.length <= 0)
-            container = $("*[data-load='boxes']");
+            container = $("*[data-boxes='load']");
 
         if ( container.length <= 0 )
             return false;
@@ -453,11 +453,10 @@ $(document).ready(function(){
         var module = container.data('module');
         var target = $(container.data('target'));
 
-        target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
+        if ( target != undefined )
+            target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
 
-        var bcontainer = $("*[data-load='boxes']");
-
-        target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
+        var bcontainer = $("*[data-boxes='load']");
 
         var params = {
             module: module,
@@ -474,7 +473,7 @@ $(document).ready(function(){
             /**
              * Get News
              */
-            if ( response.news != undefined ){
+            if ( response.news != undefined && target != undefined ){
 
                 news = $("<ul>").addClass("cu-ajax-news list-unstyled");
                 for( i=0; i < response.news.length; i++ ){
@@ -505,8 +504,17 @@ $(document).ready(function(){
                     var box = $("<div>").addClass('cu-box').css("display", 'none');
                     box.append('<div class="box-header"><span class="fa fa-caret-up box-handler"></span><h3>'+ response.boxes[i].title +'</h3></div>');
                     box.append('<div class="box-content">'+response.boxes[i].content+'</div>');
-                    bcontainer.append(box);
-                    box.fadeIn('fast');
+                    // Get the box position
+                    if (response.boxes[i].container != undefined){
+                        var box_container = $(response.boxes[i].container);
+                        if (box_container.length > 0){
+                            $(box_container).each(function(){
+                                var newbox = box.clone();
+                                $(this).append(newbox);
+                                newbox.fadeIn('fast');
+                            });
+                        }
+                    }
 
                 }
 

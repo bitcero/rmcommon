@@ -389,7 +389,7 @@ class RMTemplate
 
         } else{
 
-            $id = TextCleaner::getInstance()->sweetstring($file);
+            $id = TextCleaner::getInstance()->sweetstring($element.$file);
             $script_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-js' : 'js', $directory, $version);
 
         }
@@ -590,7 +590,7 @@ class RMTemplate
 
         } else {
 
-            $id = TextCleaner::getInstance()->sweetstring($file);
+            $id = TextCleaner::getInstance()->sweetstring($element.$file);
             $style_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-css' : 'css', $directory, $version);
 
         }
@@ -734,13 +734,32 @@ class RMTemplate
 
     /**
      * Add a new element to toolbar array
+     * Example:
+     * <code>RMTemplate::get()->add_tool(
+     *     array(
+     *         'title'    => 'Caption of tool',
+     *         'link'     => 'http://...',
+     *         'icon'     => 'url_to_icon',
+     *         'location' => 'name of page where tool will be activated',
+     *         'attributes' => 'array with html attributes to add to tag',
+     *         'options'  => array(
+     *              array(
+     *                  'caption' => 'Text',
+     *                  'url'     => 'Link for item',
+     *                  'icon'    => 'url to icon',
+     *                  'attributes' => 'array with HTML attributes'
+     *             )
+     *         )
+     *     )
+     * );</code>
      * @param string|array $data <p>Could be a title that will be uses as caption for button or you can pass an array with all button properties</p>
      * @param string $link <p>URL for link</p>
      * @param string $icon <p>The icon could be a image URL relative to module path or a full URL.</p>
      * @param string $location
-     * @param array $attributes
+     * @param array $attributes <p>HTML attributes</p>
+     * @param array $options <p>Options to add to this tool</p>
      */
-    public function add_tool($data, $link = '', $icon='', $location='', $attributes = array()){
+    public function add_tool( $data, $link = '', $icon='', $location='', $attributes = array(), $options = array() ){
 
         if ( is_array($data) ){
 
@@ -749,11 +768,12 @@ class RMTemplate
         } else {
 
             $this->toolbar[] = array(
-                'title'		=> $data,
-                'link'		=> $link,
-                'icon'		=> $icon,
-                'location'	=> $location,
-                'attributes' => $attributes
+                'title'		 => $data,
+                'link'		 => $link,
+                'icon'		 => $icon,
+                'location'	 => $location,
+                'attributes' => $attributes,
+                'options'    => $options
             );
 
         }

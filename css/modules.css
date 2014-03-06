@@ -15,28 +15,60 @@
     padding: 10px 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
-.rmc_mod_info{
+.rmc_mod_info{display: none;}
+#mod-info-blocker{
+    background: #FFF;
+    background: rgba(0,0,0,0.4);
     display: none;
-	padding: 10px;
-	font-size: 0.85em;
-	color: #999;
-    background: rgba(34, 34, 34,0.95);
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
 }
-.rmc_mod_info h4{
-    color: #FFF;
-    margin: 0 0 10px 0;
+#mod-info-data{
+    display: none;
+	padding: 90px 15px 0;
+	font-size: 0.85em;
+	color: #FFF;
+    background: #222222;
+    position: fixed;
+    top: 100px; left: 2%; right: 2%;
 }
-.rmc_mod_info table,
-.rmc_mod_info table tr td{
+#mod-info-data > .header{
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 82px;
+}
+#mod-info-data > .header > .logo{
+    width: 122px;
+    background: #038AAC;
+    padding: 15px;
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+}
+#mod-info-data > .header > .name{
+    position: absolute;
+    top: 0; left: 122px; right: 0; bottom: 0;
+    background: #8CBF26;
+    padding: 10px 15px;
+}
+#mod-info-data > .header > .name > h4{
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0 0 3px 0;
+}
+#mod-info-data > .header > .name > .help-block{
+    margin: 0;
+    color: #EBF4DA;
+}
+#mod-info-data table,
+#mod-info-data table tr td{
     background: transparent!important;
     padding: 2px 2px 2px 0!important;
+    color: #7b7b7b;
 }
-.rmc_mod_info table tr td:last-child{
+#mod-info-data table tr td:last-child{
     color: #FFF;
 }
-.rmc_mod_info .contact-options{
+#mod-info-data .contact-options{
     font-size: 28px;
 }
 .rmc_mod_img{
@@ -164,49 +196,15 @@
 }
 
 .mod_preinstall_container{
-    overflow: hidden;
+
 }
-.mod_preinstall_container .left{
-    float: left;
-    width: 40%;
-    margin-right: 20px;
+
+.table-module-details td.head{
+    background: #ebebeb;
+    text-align: center;
+    vertical-align: middle;
 }
-.mod_preinstall_container .th a{
-    float: right;
-    display: block;
-    width: 16px;
-    height: 16px;
-    background: url(../images/down.png) no-repeat center;
-    text-decoration: none;
-}
-.mod_preinstall_container .th a:hover{
-    text-decoration: none;
-}
-.mod_preinstall_container .container_hidden{
-    display: none;
-    line-height: 130%;
-}
-.mod_preinstall_container .descriptions{
-    color: #666;
-    font-size: 0.9em;
-}
-.mod_preinstall_container .left h2{
-    margin: 0 0 10px 0;
-    font-family: georgia, times, serif;
-    font-weight: normal;
-    font-style: italic;
-}
-.mod_preinstall_container .mod_data_container{
-	line-height: 130%;
-	font-size: 0.9em;
-}
-.mod_preinstall_container .mod_data_container table td{
-	padding: 3px;
-	vertical-align: top;
-}
-.mod_data_container input{
-	font-size: 1.5em;
-}
+
 .mod_options{
     padding: 10px 0;
     font-weight: bold;
@@ -238,6 +236,9 @@
     min-height: 600px;
     position: relative;
 }
+#mods-widget-container > ul{
+    min-height: 510px;
+}
 #mods-widget-container .pagination-container{
     position: absolute;
     left: 0; right: 0;
@@ -250,4 +251,12 @@
 }
 #mods-widget-container .pagination-container .pagination{
     margin: 0;
+}
+
+
+/* Queries */
+@media (min-width: 768px) {
+    #mod-info-data{
+        left: 30%; right: 30%;
+    }
 }

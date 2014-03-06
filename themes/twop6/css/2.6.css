@@ -61,7 +61,7 @@ h4 small {
 --------------------------------*/
 .xo-icon{
     display: inline-block;
-    vertical-align: text-top;
+    vertical-align: middle;
     width: 16px;
     height: 16px;
     padding: 0; margin: 0;

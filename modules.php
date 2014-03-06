@@ -181,6 +181,8 @@ function module_install_now(){
 		redirectMsg('modules.php', sprintf(__('%s is already installed!', 'rmcommon'), $module->name()), 1);
 		die();
 	}
+
+    xoops_loadLanguage( 'admin', 'system' );
 	
 	$file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/modulesadmin.php';
 	if (file_exists($file)){
@@ -188,14 +190,6 @@ function module_install_now(){
 	} else {
 		include_once str_replace($xoopsConfig['language'], 'english', $file);
 	}
-        
-        $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/admin.php';
-	if (file_exists($file)){
-		include_once $file;
-	} else {
-		include_once str_replace($xoopsConfig['language'], 'english', $file);
-	}
-	
 	
 	include_once XOOPS_ROOT_PATH.'/modules/system/admin/modulesadmin/modulesadmin.php';
     
@@ -815,10 +809,17 @@ function load_modules_page(){
                             <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');"><?php _e('More info','rmcommon'); ?></a>
                         </span>
                             <div class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
-                                <h4><?php echo $mod->getInfo('name'); ?></h4>
-                            <span class="help-block">
-                                <?php echo $mod->getInfo('description'); ?>
-                            </span>
+                                <div class="header">
+                                    <div class="logo">
+                                        <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
+                                    </div>
+                                    <div class="name">
+                                        <h4><?php echo $mod->getInfo('name'); ?></h4>
+                                    <span class="help-block">
+                                        <?php echo $mod->getInfo('description'); ?>
+                                    </span>
+                                    </div>
+                                </div>
                                 <table class="table">
                                     <tr>
                                         <td><?php _e('Version:','rmcommon'); ?></td>
@@ -835,7 +836,7 @@ function load_modules_page(){
                                             <?php _e('Author:', 'rmcommon'); ?>
                                         </td>
                                         <td>
-                                            <strong><?php echo substr(strip_tags($mod->getInfo('author')), 0, 12); ?></strong>
+                                            <strong><?php echo strip_tags($mod->getInfo('author')); ?></strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -852,7 +853,7 @@ function load_modules_page(){
                                             <?php if( $mod->getInfo('updateurl') != '' ): ?>
                                                 <span class="fa fa-check"></span>
                                             <?php else: ?>
-                                                <span class="fa fa-times"></span>
+                                                <span class="fa fa-times text-danger"></span>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -868,7 +869,7 @@ function load_modules_page(){
                                             <?php if ( $mod->getInfo('official') ): ?>
                                                 <span class="fa fa-check"></span>
                                             <?php else: ?>
-                                                <span class="fa fa-times"></span>
+                                                <span class="fa fa-times text-danger"></span>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -878,7 +879,7 @@ function load_modules_page(){
                                             <?php if ( $mod->getInfo('rmnative') ): ?>
                                                 <span class="fa fa-check"></span>
                                             <?php else: ?>
-                                                <span class="fa fa-times"></span>
+                                                <span class="fa fa-times text-danger"></span>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -909,18 +910,22 @@ function load_modules_page(){
                                     <?php endif; ?>
                                     <tr>
                                         <td colspan="2" class="contact-options text-center">
-                                            <?php if ( $mod->getInfo('authormail') != '' ): ?>
-                                                <a target="_blank" href="mailto:<?php echo $mod->getInfo('authormail'); ?>"><span class="fa fa-envelope"></span></a>
+                                            <?php if ( $mod->getInfo('authormail') ): ?>
+                                                <?php if ( $mod->getInfo('authormail') != '' ): ?>
+                                                    <a target="_blank" href="mailto:<?php echo $mod->getInfo('authormail'); ?>"><span class="fa fa-envelope"></span></a>
+                                                <?php endif; ?>
                                             <?php endif; ?>
-                                            <?php foreach( $mod->getInfo('social') as $social ): ?>
-                                                <a target="_blank" href="<?php echo $social['url']; ?>"><span class="fa fa-<?php echo $social['type']; ?>-square"></span></a>
-                                            <?php endforeach; ?>
+                                            <?php if ( $mod->getInfo('social') ): ?>
+                                                <?php foreach( $mod->getInfo('social') as $social ): ?>
+                                                    <a target="_blank" href="<?php echo $social['url']; ?>"><span class="fa fa-<?php echo $social['type']; ?>-square"></span></a>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="text-center">
                                             <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="btn btn-success btn-sm"><?php _e('Install','rmcommon'); ?></a>
-                                            <a href="#" onclick="$(this).parents('.rmc_mod_info').slideToggle('fast'); return false;" class="btn btn-warning btn-sm"><?php _e('Close','rmcommon'); ?></a>
+                                            <a href="#" onclick="closeInfo();" class="btn btn-warning btn-sm"><?php _e('Close','rmcommon'); ?></a>
                                         </td>
                                     </tr>
                                 </table>

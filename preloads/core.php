@@ -157,30 +157,37 @@ class RmcommonCorePreload extends XoopsPreloadItem
     public function eventCoreIndexStart(){
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'home-page';
+        RMEvents::get()->run_event('rmcommon.index.start');
     }
     public function eventCoreEdituserStart(){
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'edit-user';
+        RMEvents::get()->run_event('rmcommon.edituser.start');
     }
     public function eventCoreReadpmsgStart(){
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'readpm';
+        RMEvents::get()->run_event('rmcommon.readpm.start');
     }
     public function eventCoreRegisterStart(){
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'register';
+        RMEvents::get()->run_event('rmcommon.register.start');
     }
     public function eventCoreUserStart(){
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'user';
+        RMEvents::get()->run_event('rmcommon.user.start');
     }
     public function eventCoreUserinfoStart(){
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'profile';
+        RMEvents::get()->run_event('rmcommon.userinfo.start');
     }
     public function eventCoreViewpmsgStart(){
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'pm';
+        RMEvents::get()->run_event('rmcommon.viewpm.start');
     }
 	
 }

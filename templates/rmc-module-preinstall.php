@@ -12,9 +12,9 @@
             </div>
 
             <div class="box-content">
-                <table class="table">
+                <table class="table table-module-details">
                     <tr class="even">
-                        <td rowspan="3" class="head"><img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('image'); ?>" alt="<?php echo $module->getInfo('name'); ?>" /></td>
+                        <td rowspan="2" class="head"><img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('image'); ?>" alt="<?php echo $module->getInfo('name'); ?>" /></td>
                         <td><strong><?php _e('Name:','rmcommon'); ?></strong></td>
                         <td><?php echo $module->getInfo('name'); ?></td>
                     </tr>
@@ -24,7 +24,7 @@
                     </tr>
                     <tr class="even">
                         <td><strong><?php _e('Author:','rmcommon'); ?></strong></td>
-                        <td>
+                        <td colspan="2">
                             <?php if($module->getInfo('rmnative')): ?>
                                 <a href="mailto:<?php echo $module->getInfo('authormail'); ?>"><?php echo $module->getInfo('author'); ?></a>
                             <?php else: ?>
@@ -56,7 +56,7 @@
                             <?php if($module->getInfo('help')!=''): ?><a href="<?php echo $module->getInfo('help'); ?>" target="_blank"><?php _e('Click here','rmcommon'); ?></a><?php endif; ?></td>
                     </tr>
                 </table>
-                <button type="submit" id="install-ok" class="btn btn-primary btn-lg"><?php _e('Install Now','rmcommon'); ?></button>
+                <button type="submit" id="install-ok" class="btn btn-primary btn-lg"><span class="fa fa-check"></span> <?php _e('Install Now','rmcommon'); ?></button>
                 <button type="button" onclick="window.location = 'modules.php';" class="btn btn-default btn-lg"><?php _e('Cancel','rmcommon'); ?></button>
                 <form method="post" id="install-form" action="modules.php">
                     <input name="module" value="<?php echo $module->getInfo('dirname'); ?>" type="hidden">
@@ -147,7 +147,7 @@
                     <?php foreach($module->getInfo('blocks') as $item): ?>
                         <div class="<?php echo tpl_cycle("even,odd"); ?>">
                             <li><strong><?php echo defined($item['name']) ? constant($item['name']) : $item['name']; ?></strong><br />
-                                <?php if($item['description']!=''): ?><span class="descriptions"><?php echo defined($item['description']) ? constant($item['description']) : $item['description']; ?></span><?php endif; ?></li>
+                                <?php if($item['description']!=''): ?><span class="help-block"><small><?php echo defined($item['description']) ? constant($item['description']) : $item['description']; ?></small></span><?php endif; ?></li>
                         </div>
                     <?php endforeach; ?>
                 </ol>

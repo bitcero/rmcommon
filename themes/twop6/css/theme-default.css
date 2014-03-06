@@ -32,6 +32,8 @@ a:hover{
 .dropdown-menu{
     box-shadow: 0 3px 3px rgba(0,0,0,0.175);
     border: 0;
+    border-radius: 0;
+    background: #f1f1f1;
 }
 #xo-menubar {
     background: #222222;
@@ -110,9 +112,10 @@ a:hover{
 #rmc-toolbar{
     position: fixed;
     top: 87px; left: 0; right: 0;
-    background: #D9D9D9;
+    background: #f1f1f1;
     z-index: 1000;
     border-radius: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
 }
 #rmc-toolbar > .navbar-collapse{
     border-top: 0;
@@ -122,28 +125,44 @@ a:hover{
     padding: 0;
     min-height: 30px;
 }
-#rmc-toolbar .nav > li > button{
+#rmc-toolbar .nav > li button{
     padding: 5px 10px;
     text-align: center;
     border: 0;
     color: #4b4b4b;
     background: transparent;
 }
-#rmc-toolbar .nav > li > button > i{
+#rmc-toolbar .nav > li button > i{
     display: block;
     text-align: center;
     margin: 0 auto;
 }
-#rmc-toolbar .nav > li > button > span{
+#rmc-toolbar .nav > li button > span.tool-icon{
     display: block;
     width: 32px; height: 32px;
+    background-size: 32px 32px;
+    font-size: 32px;
     margin: 0 auto 3px auto;
 }
-#rmc-toolbar .nav > li > button > span > img{
+#rmc-toolbar .nav > li button > span > img{
     width: 32px;
     height: 32px;
 }
-
+#rmc-toolbar .btn-group.open .dropdown-toggle{
+    box-shadow: none;
+    background: #CF4944;
+    color: #FFF;
+}
+#rmc-toolbar .dropdown-menu{
+    background: #CF4944;
+    margin: 0;
+}
+#rmc-toolbar .dropdown-menu > li > a{
+    color: #FFF;
+}
+#rmc-toolbar .dropdown-menu > li > a:hover{
+    background: rgba(0,0,0,0.3);
+}
 
 #xo-menubar .navbar-nav > .active > a,
 #xo-menubar .navbar-nav > .active.open > a {

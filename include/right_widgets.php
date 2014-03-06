@@ -39,10 +39,17 @@ function rmc_available_mods(){
                             <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');"><?php _e('More info','rmcommon'); ?></a>
                         </span>
                         <div class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
-                            <h4><?php echo $mod->getInfo('name'); ?></h4>
-                            <span class="help-block">
-                                <?php echo $mod->getInfo('description'); ?>
-                            </span>
+                            <div class="header">
+                                <div class="logo">
+                                    <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
+                                </div>
+                                <div class="name">
+                                    <h4><?php echo $mod->getInfo('name'); ?></h4>
+                                    <span class="help-block">
+                                        <?php echo $mod->getInfo('description'); ?>
+                                    </span>
+                                </div>
+                            </div>
                             <table class="table">
                                 <tr>
                                     <td><?php _e('Version:','rmcommon'); ?></td>
@@ -59,7 +66,7 @@ function rmc_available_mods(){
                                         <?php _e('Author:', 'rmcommon'); ?>
                                     </td>
                                     <td>
-                                        <strong><?php echo substr(strip_tags($mod->getInfo('author')), 0, 12); ?></strong>
+                                        <strong><?php echo strip_tags($mod->getInfo('author')); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -76,7 +83,7 @@ function rmc_available_mods(){
                                         <?php if( $mod->getInfo('updateurl') != '' ): ?>
                                             <span class="fa fa-check"></span>
                                         <?php else: ?>
-                                            <span class="fa fa-times"></span>
+                                            <span class="fa fa-times text-danger"></span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -92,7 +99,7 @@ function rmc_available_mods(){
                                         <?php if ( $mod->getInfo('official') ): ?>
                                             <span class="fa fa-check"></span>
                                         <?php else: ?>
-                                            <span class="fa fa-times"></span>
+                                            <span class="fa fa-times text-danger"></span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -102,7 +109,7 @@ function rmc_available_mods(){
                                         <?php if ( $mod->getInfo('rmnative') ): ?>
                                             <span class="fa fa-check"></span>
                                         <?php else: ?>
-                                            <span class="fa fa-times"></span>
+                                            <span class="fa fa-times text-danger"></span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -148,7 +155,7 @@ function rmc_available_mods(){
                                 <tr>
                                     <td colspan="2" class="text-center">
                                         <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="btn btn-success btn-sm"><?php _e('Install','rmcommon'); ?></a>
-                                        <a href="#" onclick="$(this).parents('.rmc_mod_info').slideToggle('fast'); return false;" class="btn btn-warning btn-sm"><?php _e('Close','rmcommon'); ?></a>
+                                        <a href="#" onclick="closeInfo();" class="btn btn-warning btn-sm"><?php _e('Close','rmcommon'); ?></a>
                                     </td>
                                 </tr>
                             </table>

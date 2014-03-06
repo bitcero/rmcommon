@@ -194,7 +194,22 @@ $(document).ready(function(){
 });
 
 function show_module_info(id){
-	$("#mod-"+id).slideDown('fast');
+    $("body").append('<div id="mod-info-blocker"></div>');
+    $("#mod-info-blocker").fadeIn('fast');
+    $("body").append('<div id="mod-info-data"></div>');
+    $("#mod-info-data").html($("#mod-"+id).html()).fadeIn('fast');
+    $("body").css("overflow", 'hidden');
+	//$("#mod-"+id).slideDown('fast');
+}
+
+function closeInfo( id ){
+    $("#mod-info-data").fadeOut('fast', function(){
+        $("#mod-info-blocker").fadeOut('fast', function(){
+            $(this).remove();
+            $("body").css("overflow", 'auto');
+        });
+        $(this).remove();
+    });
 }
 
 function load_page(num){

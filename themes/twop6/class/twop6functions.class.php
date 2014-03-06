@@ -31,11 +31,11 @@ class Twop6Functions
         if ($amenu){
             foreach ($amenu as $menu){
                 if(isset($menu['icon']) && $menu['icon']!=''){
-                    if(preg_match("/^http.*/", $menu['icon']))
+                    if(self::is_absolute_url( $menu['icon']) || self::is_font_icon( $menu['icon'] ) )
                         $icon = $menu['icon'];
                     else{
                         $m = array();
-                        
+
                         $icon = XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/'.(preg_match("/^(\.\.\/){2,}/", $menu['icon']) ? $menu['icon'] : preg_replace("/^\.\.\/{1}/",'', $menu['icon']));
                     }
                 } else {
@@ -59,6 +59,31 @@ class Twop6Functions
         }
         
     }
+
+    static function is_absolute_url( $url ){
+
+        return preg_match( "/^[http:\/\/|https:\/\/|ftp:\/\/]/", $url );
+
+    }
+
+    static function is_font_icon( $icon ){
+
+        $pos = strpos( $icon, 'fa fa-' );
+        if (false !== $pos)
+            return true;
+
+        $pos = strpos( $icon, 'icon icon-' );
+        if (false !== $pos)
+            return true;
+
+        $pos = strpos( $icon, 'glyphicon glyphicon-' );
+        if (false !== $pos)
+            return true;
+
+        return false;
+
+    }
+
     
     /**
      * Get the menu for a specified module
@@ -207,9 +232,9 @@ class Twop6Functions
         global $xoopsModule;
         
         $available = array(
-            'mylinks'           => 'xicon-link',
+            'mylinks'           => 'fa fa-link',
             'news'              => 'xicon-consulting',
-            'contact'           => 'xicon-email',
+            //'contact'           => 'xicon-email',
             'extgallery'        => 'xicon-picture',
             'date'              => 'xicon-date',
             'fmcontent'         => 'xicon-library',
@@ -272,40 +297,35 @@ class Twop6Functions
     /**
     * Generate menu icon
     */
-    public function getIcon($menu, $noaccept = false){
+    public function getIcon($menu, $noaccept = false, $class = ''){
         global $xoopsModule;
         
         // Icon equivalences
 	    if($noaccept){
-		    $accepted = array('preferences'   => 'xicon-settings');
+		    $accepted = array('preferences'   => 'fa fa-wrench');
 	    } else {
 	        $accepted = array(
-	            'dashboard'     => 'xicon-home',
-	            'modules'       => 'xicon-plus',
-	            'blocks'        => 'xicon-block',
-	            'users'         => 'xicon-user',
-	            'imgmanager'    => 'xicon-picture',
-	            'comments'      => 'xicon-comment',
-	            'plugins'       => 'xicon-plugin',
-	            'avatars'       => 'xicon-account',
-	            'banners'       => 'xicon-offer',
-	            'blocksadmin'   => 'xicon-block',
-	            'groups'        => 'xicon-users',
-	            'images'        => 'xicon-picture',
-	            'mailusers'     => 'xicon-email',
-	            'modulesadmin'  => 'xicon-plus',
-	            'maintenance'   => 'xicon-publish',
-	            'preferences'   => 'xicon-settings',
-	            'smilies'       => 'xicon-smile',
-	            'tplsets'       => 'xicon-invoice',
-	            'userrank'      => 'xicon-star',
-	            'allusers'      => 'xicon-users',
-	            'newuser'       => 'xicon-plus',
-	            'rmc_imgcats'   => 'xicon-category',
-	            'rmc_imgnewcat' => 'xicon-addfolder',
-	            'rmc_images'    => 'xicon-picture',
-	            'rmc_newimages' => 'xicon-addpicture',
-	            'updates'       => 'xicon-refresh',
+	            'dashboard'     => 'fa fa-dashboard',
+	            'modules'       => 'fa fa-folder',
+	            'blocks'        => 'fa fa-th-large',
+	            'users'         => 'fa fa-user',
+	            'imgmanager'    => 'fa fa-picture-o',
+	            'comments'      => 'fa fa-comments',
+	            'plugins'       => 'fa fa-expand',
+	            'avatars'       => 'fa fa-male',
+	            'banners'       => 'fa fa-toggle-right',
+	            'blocksadmin'   => 'fa fa-th-large',
+	            'groups'        => 'fa fa-group',
+	            'images'        => 'fa fa-picture-o',
+	            'mailusers'     => 'fa fa-envelope',
+	            'modulesadmin'  => 'fa fa-folder',
+	            'maintenance'   => 'fa fa-fire-extinguisher',
+	            'preferences'   => 'fa fa-wrench',
+	            'smilies'       => 'fa fa-smile-o',
+	            'tplsets'       => 'fa fa-files-o',
+	            'userrank'      => 'fa fa-star',
+	            'allusers'      => 'fa fa-users',
+	            'newuser'       => 'xicon-plus'
 	        );
 	    }
         
@@ -321,14 +341,10 @@ class Twop6Functions
         $modurl = XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/';
 
         if(isset($menu['icon']) && $menu['icon']!=''){
-            $pos_fa = strpos( $menu['icon'], 'fa fa-' );
-            $pos_moon = strpos( $menu['icon'], 'icon icon-' );
-            $pos_boot = strpos( $menu['icon'], 'glyphicon glyphicon-' );
-
-            if ( false !== $pos_fa || false !== $pos_moon || false !== $pos_boot )
-                return '<span class="' . $menu['icon']. '"></span> ';
+            if ( self::is_font_icon( $menu['icon'] ) )
+                return '<span class="' . $menu['icon']. ' ' . $class . '"></span> ';
             else
-                return '<i class="xo-icon" style="background-image: url('.$menu['icon'].'); background-size: 16px 16px;"></i> ';
+                return '<span class="xo-icon ' . $class . '" style="background-image: url('.$menu['icon'].');"></span> ';
         }
         
         // Check system menu
@@ -336,7 +352,9 @@ class Twop6Functions
         preg_match("/.*admin\.php\?fct=(.*)/", $menu['link'], $matches);
 
         if (!empty($matches) && isset($accepted[$matches[1]]))
-            return '<i class="xo-icon '.$accepted[$matches[1]].'"></i> ';
+            return '<span class="'.$accepted[$matches[1]]. ' ' . $class . '"></span> ';
+
+        return '<span></span>';
         
     }
 

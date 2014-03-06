@@ -60,7 +60,7 @@ class RMFunctions
         if(RMCLOCATION=='users'){
 
             RMTemplate::get()->add_tool(__('Users','rmcommon'), 'users.php', '', 'allusers', array('class' => 'cu-tool tool-users-list'));
-            RMTemplate::get()->add_tool(__('Add User','rmcommon'), 'users.php?action=new', '', 'newuser', array('class' => 'cu-tool tool-user-add'));
+            RMTemplate::get()->add_tool(__('Add','rmcommon'), 'users.php?action=new', '', 'newuser', array('class' => 'cu-tool tool-user-add'));
 
         } elseif( RMCLOCATION == 'groups' ){
 
@@ -103,13 +103,13 @@ class RMFunctions
 
         } elseif(RMCLOCATION=='imgmanager'){
 
-            RMTemplate::get()->add_tool(__('Categories List','rmcommon'), 'images.php?action=showcats', '', 'showcategories', array('class' => 'cu-tool tool-categories-images'));
-            RMTemplate::get()->add_tool(__('Add Category','rmcommon'), 'images.php?action=newcat', '', 'newcategory', array('class' => 'cu-tool tool-category-add'));
+            RMTemplate::get()->add_tool(__('Categories','rmcommon'), 'images.php?action=showcats', '', 'showcategories', array('class' => 'cu-tool tool-categories-images'));
+            RMTemplate::get()->add_tool(__('New','rmcommon'), 'images.php?action=newcat', '', 'newcategory', array('class' => 'cu-tool tool-category-add'));
             $cat = rmc_server_var($_REQUEST,'category',0);
             if($cat>0){
                 RMTemplate::get()->add_tool(__('Images','rmcommon'), 'images.php?category='.$cat, '', 'showimages', array('class' => 'cu-tool tool-images'));
             }
-            RMTemplate::get()->add_tool(__('Add Images','rmcommon'), 'images.php?action=new'.($cat>0?"&amp;category=$cat":''), '', 'addimages', array('class' => 'cu-tool tool-images-add'));
+            RMTemplate::get()->add_tool(__('Add','rmcommon'), 'images.php?action=new'.($cat>0?"&amp;category=$cat":''), '', 'addimages', array('class' => 'cu-tool tool-images-add'));
 
         } else {
 
