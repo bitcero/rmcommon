@@ -295,7 +295,7 @@
                                 </li>
                                 <li class="dropdown-submenu">
                                     <a href="#" tabindex="-1" onclick="return false;">
-                                        <span class="fa fa-question-circle"></span>
+                                        <span class="xo-icon" style="background-image: url('<?php echo TWOP6_URL; ?>/images/colors.png');"></span>
                                         <?php _e('Two &bull; P6 Colors','rmcommon'); ?>
                                     </a>
                                     <ul class="dropdown-menu">
