@@ -111,6 +111,19 @@ $(document).ready(function(){
         return false;
 
     });
+
+    $(".twop6-scheme").click(function(){
+
+        var file = $(this).data('file');
+        if (file==undefined || file=='')
+            return;
+
+        var url = xoUrl + '/modules/rmcommon/themes/twop6/css/schemes/' + file;
+        $("#color-scheme").attr("href", url);
+
+        $.cookie('color_scheme', file, { expires: 365, path: '/' });
+
+    });
     
 });
 

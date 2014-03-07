@@ -213,7 +213,7 @@
 		                        <?php endforeach; ?>
 		                        <li class="divider"></li>
 		                        <li>
-			                        <a href="#" id="xo-showmodules" data-title="<?php _e('Modules Box','twop6'); ?>"><i class="xo-icon xicon-modules"></i> <?php _e('Modules Box','twop6'); ?></a>
+			                        <a href="#" id="xo-showmodules" data-title="<?php _e('Modules Box','twop6'); ?>"><span class="fa fa-th"></span> <?php _e('Modules Box','twop6'); ?></a>
 		                        </li>
 	                        </ul>
                         </li>
@@ -292,6 +292,19 @@
                                         <span class="fa fa-lightbulb-o"></span>
                                         <?php _e('About Two·Six','twop6'); ?>
                                     </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" tabindex="-1" onclick="return false;">
+                                        <span class="fa fa-question-circle"></span>
+                                        <?php _e('Two &bull; P6 Colors','rmcommon'); ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <?php foreach($color_schemes as $file => $name): ?>
+                                        <li><a href="#" class="twop6-scheme" data-file="<?php echo $file; ?>"><?php echo $name; ?></a></li>
+                                        <?php endforeach; ?>
+                                        <li class="divider"></li>
+                                        <li><a href="<?php echo RMCURL; ?>?twop6=colortest"><?php _e('Color Test', 'rmcommon'); ?></a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>

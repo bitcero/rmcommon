@@ -48,14 +48,32 @@ if($left_widgets)
 if($right_widgets)
     $tp6Span -= 3;
 
+/* Load color schemes */
+$files = XoopsLists::getFileListAsArray( TWOP6_PATH . '/css/schemes' );
+$color_schemes = array();
+foreach ( $files as $scheme ){
+    $content_color = file_get_contents( TWOP6_PATH . '/css/schemes/' . $scheme, null, null, null, 100 );
+    $info_color = array();
+    preg_match( "/^\/\*\s(.*)\s\*\//s", $content_color, $info_color);
+    if ( isset($info_color[1]) && $info_color[1] != '' )
+        $color_schemes[$scheme] = $info_color[1];
+}
+unset($content_color, $info_color);
+
 $this->add_style('bootstrap.min.css','rmcommon');
-$this->add_style('theme-default.css','twop6', array(), 'theme');
 $this->add_style('general.css','rmcommon', array());
 $this->add_style('2.6.css','twop6', array(), 'theme');
+
+$color_scheme = isset($_COOKIE['color_scheme']) ? $_COOKIE['color_scheme'] : 'theme-default.css';
+$this->add_style('schemes/' . $color_scheme,'twop6', array('id'=>'color-scheme'), 'theme');
+
+unset($color_scheme);
+
 $this->add_style('font-awesome.min.css','rmcommon', array('footer' => 1));
 $this->add_style('icomoon.css','rmcommon', array('footer' => 1));
 $this->add_style('jquery.window.css','twop6', array('footer' => 1), 'theme');
 $this->add_script( 'bootstrap.js', 'rmcommon' );
+$this->add_script( 'jquery.ck.js', 'rmcommon', array('directory' => 'include') );
 $this->add_script('2.6.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('jquery.window.min.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('updates.js', 'rmcommon', array('footer' => 1));

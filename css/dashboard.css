@@ -15,26 +15,13 @@ $Id: dashboard.css 550 2010-11-15 01:44:13Z i.bitcero $
 	padding: 1px;
 	border: 1px solid #CCC;
 	border-radius: 2px;
-	margin: 0 5px 0 0;
+	margin: 0 10px 0 0;
     width: 80px;
 }
 
 .system-tools > .nav-pills > li > a{
     display: block;
     padding: 6px 10px;
-}
-
-.description{
-    clear: both;
-    display: block;
-    color: #666;
-    line-height: 150%;
-    padding: 2px 10px;
-    border-top: 1px dotted #CCC;
-}
-#loading-mods{
-    float: left;
-    margin-right: 5px;
 }
 .th{
     padding-top: 7px!important;
@@ -60,7 +47,7 @@ $Id: dashboard.css 550 2010-11-15 01:44:13Z i.bitcero $
     text-align: center;
 }
 .installed-item:hover{
-    background: #f2f2f2;
+    background: rgba(255,255,255,0.05);
 }
 .installed-item > a{
     text-decoration: none;
@@ -72,12 +59,10 @@ $Id: dashboard.css 550 2010-11-15 01:44:13Z i.bitcero $
 }
 .installed-item > .name{
     font-style: italic;
-    color: #666;
 }
 .installed-item > .name > a{
     font-weight: bold;
     font-style: normal;
-    color: #000;
 }
 .installed-item > .version{
     display: block;
@@ -90,16 +75,10 @@ $Id: dashboard.css 550 2010-11-15 01:44:13Z i.bitcero $
 .installed-item > .options > a{
     display: inline-block;
     padding: 0px 4px;
-    color: #333;
     width: 24px;
     line-height: 18px;
     border-radius: 2px;
-    border: 1px solid rgba(0,0,0,0.1);
-    background: #FFF;
     text-decoration: none;
-}
-.installed-item > .options > a:hover{
-    color: #0495CE;
 }
 .modimg{
     width: 42px;

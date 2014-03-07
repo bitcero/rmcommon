@@ -45,9 +45,9 @@
 
         <?php foreach($positions as $pos): ?>
             <div id="position-<?php echo $pos['id']; ?>" class="dd rmc-position-item" data-pos="<?php echo $pos['id']; ?>">
-                <h3><?php echo $pos['name']; ?><img src="images/ok.png"></h3>
+                <h3 class="bg-warning"><?php echo $pos['name']; ?><img src="images/ok.png"></h3>
                 <?php if(!isset($used_blocks[$pos['id']])): ?>
-                    <div class="dd-empty text-info"><?php _e('Drag and drop blocks here','rmcommon'); ?></div>
+                    <div class="dd-empty"><?php _e('Drag and drop blocks here','rmcommon'); ?></div>
                 <?php else: ?>
                     <ol class="dd-list">
                         <?php foreach($used_blocks[$pos['id']] as $block): ?>
@@ -63,8 +63,8 @@
                                     <a href="#" class="pull-right control-settings" data-block="<?php echo $block['id']; ?>" data-action="settings" title="<?php _e('Block Settings','rmcommon'); ?>"><i class="fa fa-wrench"></i></a>
                                 </div>
                                 <div class="row-fluid block-data">
-                                    <span class="text-info"><?php echo $block['module']['name']; ?></span>
-                                    <p><?php echo $block['description']; ?></p>
+                                    <strong class="text-primary"><?php echo $block['module']['name']; ?></strong>
+                                    <p class="help-block"><small><?php echo $block['description']; ?></small></p>
                                 </div>
                             </li>
                         <?php endforeach; ?>

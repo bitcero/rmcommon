@@ -17,12 +17,9 @@
     padding: 2px 4px;
     display: block;
     border-radius: 100%;
-    color: #970000;
 }
 .single-size .close:hover{
     opacity: 1;
-    background: #970000;
-    color: #FFF;
     text-shadow: none;
 }
 .form-container .form-actions{
@@ -74,7 +71,6 @@ td.sizes_data{
 }
 td.sizes_data em{
 	font-style: normal;
-	color: #800000;
 }
 
 /** IMAGES **/

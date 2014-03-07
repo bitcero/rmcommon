@@ -18,15 +18,3 @@ function get_mods_page(num){
     },'html');   
     
 }
-
-$(document).ready(function(){
-
-    var url=encodeURIComponent("http://www.xoopsmexico.net/modules/vcontrol/?id=1&limit=4");
-
-    $.get('include/proxy.php', {url: url}, function(data){
-        if(data.indexOf("<html")>0 && data.indexOf("</html>")>0) return;
-        $("#rmc-recent-news").append(data);
-        $("#loading-news").hide();
-    }, 'html');
-
-});

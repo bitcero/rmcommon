@@ -49,7 +49,7 @@
                         <?php echo $mod['name']; ?>
                     <?php endif; ?>
                     </span>
-                    <a href="#" class="rename"><span class="fa fa-edit"></span> <?php _e('Edit','rmcommon'); ?></a>
+                    <a href="#" class="rename text-info"><span class="fa fa-edit"></span> <?php _e('Edit','rmcommon'); ?></a>
                     <span class="descriptions"><?php echo $mod['description']; ?></span>
                 </td>
                 <td align="center">

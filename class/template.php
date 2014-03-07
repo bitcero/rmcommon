@@ -595,6 +595,11 @@ class RMTemplate
 
         }
 
+        if ( isset($options['id']) && $options['id'] != '' ){
+            $id = $options['id'];
+            unset($options['id']);
+        }
+
         if( $style_url == '' )
             return;
 

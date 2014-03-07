@@ -15,7 +15,7 @@
 
 		<h3><?php _e('Installed Plugins', 'rmcommon'); ?></h3>
 
-		<table class="outer" cellspacing="0" cellpadding="0">
+		<table class="table" cellspacing="0" cellpadding="0">
 			<thead>
 			<tr>
 				<th align="left"><?php _e('Name','rmcommon'); ?></th>
@@ -87,7 +87,7 @@
 
 	<div class="tab-pane" id="plugins-noinstalled">
 		<h3><?php _e('Available Plugins'); ?></h3>
-		<table class="outer" cellspacing="0" cellpadding="0">
+		<table class="table" cellspacing="0" cellpadding="0">
 			<thead>
 			<tr>
 				<th align="left"><?php _e('Name','rmcommon'); ?></th>

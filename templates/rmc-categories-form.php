@@ -83,7 +83,7 @@
 				<?php foreach($cat->getVar('sizes') as $size): ?>
 					<div class="single-size" id="single-size-<?php echo $scounter; ?>">
 
-                        <a href="#" class="close" id="delete-0" onclick="return delete_size(this);"><i class="fa fa-minus-circle"></i> <?php _e('Delete','rmcommon'); ?></a>
+                        <a href="#" class="close text-danger" id="delete-0" onclick="return delete_size(this);"><i class="fa fa-minus-circle"></i> <?php _e('Delete','rmcommon'); ?></a>
 
                         <div class="form-group">
                             <label><?php _e('Size name','rmcommon'); ?></label>

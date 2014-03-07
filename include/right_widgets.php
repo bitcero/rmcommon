@@ -35,8 +35,8 @@ function rmc_available_mods(){
                         </a>
                         <strong><a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php echo $mod->getInfo('name'); ?></a></strong>
                         <span class="rmc_available_options">
-                            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php _e('Install','rmcommon'); ?></a> |
-                            <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');"><?php _e('More info','rmcommon'); ?></a>
+                            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="text-warning"><?php _e('Install','rmcommon'); ?></a> |
+                            <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');" class="text-warning"><?php _e('More info','rmcommon'); ?></a>
                         </span>
                         <div class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
                             <div class="header">

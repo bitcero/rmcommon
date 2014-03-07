@@ -47,8 +47,8 @@
 #mod-info-data > .header > .name{
     position: absolute;
     top: 0; left: 122px; right: 0; bottom: 0;
-    background: #8CBF26;
     padding: 10px 15px;
+    background: #8CBF26;
 }
 #mod-info-data > .header > .name > h4{
     font-weight: bold;
@@ -96,9 +96,6 @@
 	display: block;
 	font-size: 0.85em;
 }
-.rmc_available_options a{
-    color: #333;
-}
 /** Modules Content **/
 #des-mods-container{
 
@@ -116,16 +113,12 @@
     font-size: 0.7em;
     font-weight: normal;
     text-transform: uppercase;
-    background: #ebebeb url("../images/edit.gif") no-repeat 2px;
     display: inline-block;
     padding: 3px;
-    border: 1px solid #ccc;
     line-height: 100%;
     margin-left: 5px;
-    box-shadow: inset -1px -1px 5px #fff;
 }
 #des-mods-container .renamer{
-    background: #fff;
     display: block;
     position: relative;
     width: 250px;
@@ -156,7 +149,6 @@
     padding: 5px 4px;
     margin: 0;
     border: 0;
-    background: transparent;
     width: 206px;
     border-radius: 0;
 }

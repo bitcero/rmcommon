@@ -1,109 +1,114 @@
-CREATE TABLE `mod_rmcommon_images_categories` (
-  `id_cat` int(11) NOT NULL auto_increment,
-  `name` varchar(100) NOT NULL,
-  `status` varchar(10) NOT NULL default 'active',
-  `groups` text NOT NULL,
-  `filesize` int(11) NOT NULL default '0',
-  `sizeunit` MEDIUMINT(9) not null default '1024',
-  `sizes` text NOT NULL,
-  PRIMARY KEY  (`id_cat`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `mod_rmcommon_images` (
-`id_img` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`title` VARCHAR( 100 ) NOT NULL ,
-`desc` TEXT NOT NULL ,
-`date` INT( 10 ) NOT NULL ,
-`file` VARCHAR( 150 ) NOT NULL ,
-`cat` INT NOT NULL,
-`uid` INT NOT NULL
-) ENGINE = InnoDB ;
-
-CREATE TABLE `mod_rmcommon_comments` (
-`id_com` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`id_obj` VARCHAR( 50 ) NOT NULL ,
-`type` VARCHAR( 50 ) NOT NULL DEFAULT 'module',
-`parent` BIGINT NOT NULL DEFAULT '0',
-`params` VARCHAR( 200 ) NOT NULL ,
-`content` TEXT NOT NULL ,
-`user` INT NOT NULL ,
-`ip` VARCHAR(40) NOT NULL,
-`posted` INT(10) NOT NULL DEFAULT '0',
-`status` VARCHAR(10) NOT NULL DEFAULT 'waiting',
-INDEX ( `id_obj` , `type` )
-) ENGINE = InnoDB;
-
-CREATE TABLE `mod_rmcommon_comusers` (
-`id_user` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`xuid` INT NOT NULL DEFAULT '0',
-`name` VARCHAR( 150 ) NOT NULL ,
-`email` VARCHAR( 150 ) NOT NULL,
-`url`   VARCHAR(150) NOT NULL
-) ENGINE = InnoDB ;
-
-CREATE TABLE `mod_rmcommmon_plugins` (
-`id_plugin` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`name` VARCHAR( 150 ) NOT NULL ,
-`description` TEXT NOT NULL ,
-`dir` VARCHAR( 100 ) NOT NULL ,
-`version` TEXT NOT NULL ,
-`status` TINYINT( 1 ) NOT NULL DEFAULT '1'
-) ENGINE = InnoDB ;
-
-CREATE TABLE `mod_rmcommon_settings` (
-`conf_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`element` VARCHAR( 50 ) NOT NULL ,
-`name` VARCHAR( 50 ) NOT NULL ,
-`type` VARCHAR( 20 ) NOT NULL ,
-`value` TEXT NOT NULL ,
-`valuetype` VARCHAR( 20 ) NOT NULL ,
-INDEX ( `element` , `name` )
-) ENGINE = InnoDB ;
-
 CREATE TABLE `mod_rmcommon_blocks` (
-  `bid` mediumint(8) unsigned NOT NULL auto_increment,
-  `element` varchar(50)   NOT NULL,
-  `element_type` varchar(20)   NOT NULL,
-  `options` text   NOT NULL,
-  `name` varchar(150)   NOT NULL default '',
-  `description` varchar(255)   NOT NULL,
-  `canvas` tinyint(1) unsigned NOT NULL default '0',
-  `weight` smallint(5) unsigned NOT NULL default '0',
-  `visible` tinyint(1) unsigned NOT NULL default '0',
-  `type` varchar(6)   NOT NULL,
-  `content_type` varchar(20)   NOT NULL,
+  `bid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `element` varchar(50) NOT NULL,
+  `element_type` varchar(20) NOT NULL,
+  `options` text NOT NULL,
+  `name` varchar(150) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL,
+  `canvas` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `weight` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `visible` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `type` varchar(6) NOT NULL,
+  `content_type` varchar(20) NOT NULL,
   `content` text NOT NULL,
-  `isactive` tinyint(1) unsigned NOT NULL default '0',
-  `dirname` varchar(50)   NOT NULL default '',
-  `file` varchar(150)   NOT NULL,
-  `show_func` varchar(50) NOT NULL default '',
-  `edit_func` varchar(50) NOT NULL default '',
+  `isactive` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `dirname` varchar(50) NOT NULL DEFAULT '',
+  `file` varchar(150) NOT NULL,
+  `show_func` varchar(50) NOT NULL DEFAULT '',
+  `edit_func` varchar(50) NOT NULL DEFAULT '',
   `template` varchar(150) NOT NULL,
   `bcachetime` int(10) NOT NULL,
-  PRIMARY KEY  (`bid`),
+  PRIMARY KEY (`bid`),
   KEY `element` (`element`),
   KEY `visible` (`visible`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mod_rmcommon_blocks_assignations` (
+  `bid` int(11) NOT NULL,
+  `mid` int(11) NOT NULL,
+  `page` varchar(50) NOT NULL,
+  KEY `bid` (`bid`,`mid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `mod_rmcommon_blocks_positions` (
-  `id_position` int(11) NOT NULL auto_increment,
-  `name` varchar(150) collate latin1_general_ci NOT NULL,
-  `tag` varchar(150) collate latin1_general_ci NOT NULL,
-  `active` tinyint(1) NOT NULL default '1',
-  PRIMARY KEY  (`id_position`),
+  `id_position` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `tag` varchar(150) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_position`),
   UNIQUE KEY `tag` (`tag`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `mod_rmcommon_bkmod` (
-`bid` INT NOT NULL ,
-`mid` INT NOT NULL ,
-`page` VARCHAR( 50 ) NOT NULL ,
-INDEX ( `bid` , `mid` )
-) ENGINE = InnoDB ;
+CREATE TABLE `mod_rmcommon_comments` (
+  `id_com` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_obj` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'module',
+  `parent` bigint(20) NOT NULL DEFAULT '0',
+  `params` varchar(200) NOT NULL,
+  `content` text NOT NULL,
+  `user` int(11) NOT NULL,
+  `ip` varchar(40) NOT NULL,
+  `posted` int(10) NOT NULL DEFAULT '0',
+  `status` varchar(10) NOT NULL DEFAULT 'waiting',
+  PRIMARY KEY (`id_com`),
+  KEY `id_obj` (`id_obj`,`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `x48c_mod_rmcommon_permissions` (
+CREATE TABLE `mod_rmcommon_comments_assignations` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `xuid` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `url` varchar(150) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mod_rmcommon_images` (
+  `id_img` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `desc` text NOT NULL,
+  `date` int(10) NOT NULL,
+  `file` varchar(150) NOT NULL,
+  `cat` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  PRIMARY KEY (`id_img`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mod_rmcommon_images_categories` (
+  `id_cat` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'active',
+  `groups` text NOT NULL,
+  `filesize` int(11) NOT NULL DEFAULT '0',
+  `sizeunit` mediumint(9) NOT NULL DEFAULT '1024',
+  `sizes` text NOT NULL,
+  PRIMARY KEY (`id_cat`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mod_rmcommon_permissions` (
   `group` int(11) NOT NULL,
   `element` varchar(50) NOT NULL,
   `key` varchar(50) NOT NULL,
   KEY `group` (`group`,`element`,`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mod_rmcommon_plugins` (
+  `id_plugin` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  `description` text NOT NULL,
+  `dir` varchar(100) NOT NULL,
+  `version` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_plugin`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mod_rmcommon_settings` (
+  `conf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `element` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `value` text NOT NULL,
+  `valuetype` varchar(20) NOT NULL,
+  PRIMARY KEY (`conf_id`),
+  KEY `element` (`element`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

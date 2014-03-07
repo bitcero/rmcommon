@@ -31,9 +31,8 @@ div#users-filter-options label:hover{
 }
 div#users-advanced-options{
     padding: 10px;
-    background: #f2f2f2;
+    background: rgba(0,0,0,0.05);
     display: none;
-    border: 1px solid #CCC;
     margin-top: 10px;
 }
 div#users-advanced-options table td{

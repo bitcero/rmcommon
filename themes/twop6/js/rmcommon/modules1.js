@@ -101,7 +101,7 @@ $(document).ready(function(){
         var id = el.attr("id");
         $(this).fadeOut('fast');
         $("#"+el.attr("id")+" .the_name").fadeOut('fast', function(){
-            var html = '<span class="renamer"><input type="text" name="newname" value="'+$("#"+id+" .hidden_data .name").html()+'" class="form-control newname" />';
+            var html = '<span class="renamer"><input type="text" name="newname" value="'+$("#"+id+" .hidden_data .name").html()+'" class="newname" />';
             html += '<a href="#" class="cancelnewname" onclick="cancel_rename(\''+id+'\');"><span>Cancel</span></a>';
             html += '<a href="#" class="savenewname"><span>Save</span></a></span>';
             $("#"+el.attr("id")+" .the_name").html(html);
@@ -194,22 +194,7 @@ $(document).ready(function(){
 });
 
 function show_module_info(id){
-    $("body").append('<div id="mod-info-blocker"></div>');
-    $("#mod-info-blocker").fadeIn('fast');
-    $("body").append('<div id="mod-info-data"></div>');
-    $("#mod-info-data").html($("#mod-"+id).html()).fadeIn('fast');
-    $("body").css("overflow", 'hidden');
-	//$("#mod-"+id).slideDown('fast');
-}
-
-function closeInfo( id ){
-    $("#mod-info-data").fadeOut('fast', function(){
-        $("#mod-info-blocker").fadeOut('fast', function(){
-            $(this).remove();
-            $("body").css("overflow", 'auto');
-        });
-        $(this).remove();
-    });
+	$("#mod-"+id).slideDown('fast');
 }
 
 function load_page(num){

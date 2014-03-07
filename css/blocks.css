@@ -9,14 +9,11 @@
     min-width: 300px;
     width: 19%;
     border: 1px solid #2a2a2a;
-    border: 1px solid rgba(0,0,0,0.5);
-    border-radius: 2px;
-        -moz-border-radius: 2px;
-        -webkit-border-radius: 2px;
+    border: 1px solid rgba(0,0,0,0.2);
     display: inline-block;
     vertical-align: text-top;
     padding: 1px;
-    background-color: #fafafa;
+    background: rgba(0,0,0,0.1);
     margin: 0 5px 10px 0;
     box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
@@ -24,13 +21,6 @@
     margin: 0;
     padding: 5px;
     font-size: 1.1em;
-    color: #FFF;
-    border-radius: 2px 2px 0 0;
-        -moz-border-radius: 2px 2px 0 0;
-        -webkit-border-radius: 2px 2px 0 0;
-    border-bottom: 1px solid rgba(0,0,0,0.5);
-    text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
-    background-color: #2a2a2a;
     /*background-color: rgba(0,85,128,0.05);*/
 }
 .rmc-position-item h3 > img{
@@ -45,11 +35,8 @@
 }
 .rmc-position-item ol li{
     border: 1px solid #ddd;
-    border-radius: 2px;
-        -moz-border-radius: 2px;
-        -webkit-border-radius: 2px;
     margin: 0 0 6px 0;
-    background-color: #fff;
+    background: #FFF;
 }
 .rmc-position-item ol li > .row-fluid > a{
     display: inline-block;
@@ -67,16 +54,8 @@
 }
 .rmc-position-item ol li > .item-controls{
     border-bottom: 1px solid #ddd;
-    box-shadow: 0 1px 1px rgba(255,255,255,0.5);
-    border-radius: 2px 2px 0 0;
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #ffffff 0%,#e5e5e5 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+    background: #ebebeb;
+    color: #222;
 }
 .rmc-position-item ol li .dd-handle{
     line-height: 30px;
@@ -93,7 +72,6 @@
     padding: 5px;
 }
 .rmc-position-item ol li > .block-data > p{
-    font-size: 12px;
     color: #666;
     margin: 0;
 }
@@ -111,18 +89,16 @@
     margin: 5px 0;
     padding: 0;
     min-height: 30px;
-    background: #f2fbff;
-    border: 1px dashed #b6bcbf;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     text-align: center;
+    line-height: 30px;
 }
 
 .dd-dragel { position: absolute; pointer-events: none; z-index: 9999; }
 .dd-dragel > .dd-item .dd-handle { margin-top: 0; }
 .dd-dragel .dd-handle {
-    -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
-    box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
+    color: #222;
 }
 
 .disabled{
@@ -196,7 +172,6 @@
 .description{
     display: block;
     padding: 3px 0;
-    font-size: 0.9em;
     font-style: italic;
 }
 

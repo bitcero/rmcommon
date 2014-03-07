@@ -44,15 +44,15 @@
 			<?php foreach ($cat['sizes'] as $size): ?>
 				<?php echo $size['name']; ?>
 				<?php if($size['type']!='none'): ?>
-					(<em><?php echo $size['type']; ?>: <?php echo $size['width']; ?><?php echo $size['height']>0 ? ' x '.$size['height'] : ''; ?></em>)
+					(<em class="text-info"><?php echo $size['type']; ?>: <?php echo $size['width']; ?><?php echo $size['height']>0 ? ' x '.$size['height'] : ''; ?></em>)
 				<?php else: ?>
-					(<em><?php echo _e('No Resize','rmcommon'); ?></em>)
+					(<em class="text-info"><?php echo _e('No Resize','rmcommon'); ?></em>)
 				<?php endif; ?><br />
 			<?php endforeach; ?>
 		</td>
 		<td class="sizes_data">
-			<?php _e('Upload:','rmcommon'); ?> <em><?php echo $cat['gwrite']; ?></em><br />
-			<?php _e('Access:','rmcommon'); ?> <em><?php echo $cat['gread']; ?></em><br />
+			<?php _e('Upload:','rmcommon'); ?> <em class="text-info"><?php echo $cat['gwrite']; ?></em><br />
+			<?php _e('Access:','rmcommon'); ?> <em class="text-info"><?php echo $cat['gread']; ?></em><br />
 		</td>
 		<td align="center">
 			<strong><?php echo $cat['images']; ?></strong>

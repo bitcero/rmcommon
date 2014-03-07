@@ -41,10 +41,6 @@
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <span class="description">
-                    <?php _e('If you wish to manage or install new modules please go to Modules Management.','rmcommon'); ?><br />
-                    <a href="<?php echo XOOPS_URL; ?>/modules/rmcommon/modules.php"><?php _e('Modules management', 'rmcommon'); ?></a>
-                </span>
             </div>
         </div>
 
@@ -99,15 +95,15 @@
                         <img class="module-icon" src="../<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('icon48')!='' ? $module->getInfo('icon48') : $module->getInfo('image'); ?>" alt="<?php echo $module->getInfo('name'); ?>">
                         <strong><?php echo $module->getInfo('name'); ?></strong>
                         <small><?php echo is_array($module->getInfo('rmversion')) ? RMModules::format_module_version( $module->getInfo('rmversion') ) : $module->getInfo('version'); ?></small><br />
-                        <span class="module-description"><?php echo $module->getInfo('description'); ?></span>
+                        <span class="help-block"><small><?php echo $module->getInfo('description'); ?></small></span>
                         <a href="modules.php?action=install&dir=<?php echo $module->getInfo('dirname'); ?>" class="btn btn-warning btn-sm"><?php _e('Install', 'rmcommon'); ?></a>
                     </li>
                 <?php endforeach; ?>
                 </ul>
                 <span class="help-block">
-	                <?php _e('If you wish to manage or install new modules please go to Modules Management.','rmcommon'); ?><br />
-	                <a href="modules.php" class="btn btn-info"><?php _e('Modules management', 'rmcommon'); ?></a>
+	                <span class="fa fa-info-circle text-info"></span> <?php _e('If you wish to manage or install new modules please go to Modules Management.','rmcommon'); ?><br />
 	            </span>
+                <a href="modules.php" class="btn btn-info"><?php _e('Modules management', 'rmcommon'); ?></a>
             </div>
         </div>
         <!-- End available modules -->

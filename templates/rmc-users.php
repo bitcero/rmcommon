@@ -16,7 +16,7 @@
 	</span>
 	<span class="sections_right pull-right">
         <label>&nbsp;</label>
-		<a href="javascript:;" id="show-search" class="btn btn-link form-control"><?php _e('Advanced Search','rmcommon'); ?></a>
+		<a href="javascript:;" id="show-search" class="btn btn-link"><?php _e('Advanced Search','rmcommon'); ?></a>
 	</span>
     </div>
     <div id="users-advanced-options">

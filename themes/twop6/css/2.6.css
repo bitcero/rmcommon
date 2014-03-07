@@ -392,7 +392,7 @@ table th{
 }
 #xo-chooser .chooser-modules{
     overflow: auto!important;
-    background: #FFF;
+    background: #f2f2f2;
     top: 30px; left: 0; bottom: 0; right: 0;
     position: absolute;
     padding: 15px;
@@ -401,11 +401,10 @@ table th{
     display: inline-block;
     vertical-align: text-top;
     padding: 10px;
-    background-color: rgba(0,0,0,0.09);
-    border: 1px solid rgba(0,0,0,0.1);
     margin: 3px;
     text-align: center;
     color: #222;
+    -webkit-transition: background-color 250ms ease;-moz-transition: background-color 250ms ease;-ms-transition: background-color 250ms ease;-o-transition: background-color 250ms ease;transition: background-color 250ms ease;
 }
 #xo-chooser .chooser-modules a > img{
     display: inline-block;
@@ -414,6 +413,10 @@ table th{
 #xo-chooser .chooser-modules a > span{
     display: block;
     font-size: 12px;
+}
+#xo-chooser .chooser-modules a:hover{
+    background-color: #2E9CD9;
+    color: #FFF;
 }
 .xo-loader{
     background-image: url(../images/loader.gif);
