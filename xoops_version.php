@@ -15,7 +15,7 @@ if (!function_exists("__")){
 }
 
 $modversion['name'] = 'Common Utilities';
-$modversion['version'] = 2.1;
+$modversion['version'] = 2.2;
 $modversion['releasedate'] = "";
 $modversion['status'] = "Beta";
 $modversion['description'] = 'Contains a lot of classes and functions used by Red México Modules';
@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>5,'stage'=>-2,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>38,'stage'=>-2,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['author'] = "BitC3R0";
 $modversion['authormail'] = "i.bitcero@gmail.com";

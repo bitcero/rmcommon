@@ -63,7 +63,7 @@ function show_module_preferences(){
         $ajax->prepare_ajax_response();
         if ( !$xoopsSecurity->validateToken(false, true, 'CUTOKEN') )
             $ajax->ajax_response(
-                __('Operación no permitida', 'rmcommon'), 1, 0
+                __('Unauthorized action', 'rmcommon'), 1, 0
             );
     }
 

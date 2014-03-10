@@ -14,10 +14,23 @@ class Twop6RmcommonPreload
 
             RMTemplate::get()->header();
 
-            require RMCPATH .'/themes/twop6/test-color.php';
+            require RMCPATH .'/themes/twop6/include/test-color.php';
 
             RMTemplate::get()->footer();
             die();
+        }
+
+        if ( $w == 'about' ){
+
+            include_once XOOPS_ROOT_PATH .'/include/cp_functions.php';
+
+            RMTemplate::get()->header();
+
+            require RMCPATH .'/themes/twop6/include/about.php';
+
+            RMTemplate::get()->footer();
+            die();
+
         }
 
     }

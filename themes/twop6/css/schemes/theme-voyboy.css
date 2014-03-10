@@ -440,11 +440,10 @@ table > tbody > tr:nth-child(odd) > td,
     color: #6F110E;
 }
 
-.thumbnail{
+/* OTHER CONTROLS */
+.img-thumbnail{
     border-radius: 0;
 }
-
-/* OTHER CONTROLS */
 hr{
     border-top: 1px solid rgba(255,255,255,0.3);
 }

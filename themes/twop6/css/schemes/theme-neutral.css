@@ -428,13 +428,12 @@ table > tfoot > tr > th,
     border: 1px solid rgba(0,0,0,0.1);
 }
 
-.thumbnail{
+/* OTHER CONTROLS */
+.img-thumbnail{
     border-radius: 0;
 }
-
-/* OTHER CONTROLS */
 hr{
-    border-top: 1px solid rgba(255,255,255,0.3);
+    border-top: 1px solid rgba(0,0,0,0.1);
 }
 .text-primary{ color: #000;}
 .bg-primary{ background-color: #5d5d5d; color: #FFF;}

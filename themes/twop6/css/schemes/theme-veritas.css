@@ -243,7 +243,7 @@ a:hover{
 }
 .cu-modal .cu-content-footer,
 .modal .modal-footer{
-    border-top: 1px solid rgba(0,0,0,,0.1);
+    border-top: 1px solid rgba(0,0,0,0.1);
     padding: 10px 15px;
 }
 .container{

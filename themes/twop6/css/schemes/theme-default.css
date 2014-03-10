@@ -314,6 +314,13 @@ table > tbody > tr:nth-child(odd) > td{
 }
 
 /* ALERTS */
+.img-thumbnail{
+    border-radius: 0;
+}
+hr{
+    border-top-color: rgba(0,0,0,0.1);
+}
+pre{border-radius: 0;}
 .alert {
     text-shadow: none;
     border-radius: 0;
