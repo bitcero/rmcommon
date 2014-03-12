@@ -47,29 +47,34 @@
         <div class="row">
             <div class="col-xs-6 col-sm-3 col-md-2">
                 <a href="#" class="twop6-scheme img-thumbnail" data-file="theme-default.css">
-                    <img class="img-responsive" src="<?php echo RMCURL; ?>/themes/twop6/images/schemes/default.png" title="Default Color Sheme" data-rel="tooltip">
+                    <img class="img-responsive" src="http://www.xoopsmexico.net/about/rmcommon/schemes/default.png" title="Default Color Sheme" data-rel="tooltip">
                 </a>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-2">
                 <a href="#" class="twop6-scheme img-thumbnail" data-file="theme-cardio.css">
-                    <img class="img-responsive" src="<?php echo RMCURL; ?>/themes/twop6/images/schemes/cardio.png" title="Cardio Color Sheme" data-rel="tooltip">
+                    <img class="img-responsive" src="http://www.xoopsmexico.net/about/rmcommon/schemes/cardio.png" title="Cardio Color Sheme" data-rel="tooltip">
                 </a>
             </div>
             <div class="clearfix visible-xs"></div>
             <div class="col-xs-6 col-sm-3 col-md-2">
                 <a href="#" class="twop6-scheme img-thumbnail" data-file="theme-neutral.css">
-                    <img class="img-responsive" src="<?php echo RMCURL; ?>/themes/twop6/images/schemes/neutral.png" title="Neutral Color Sheme" data-rel="tooltip">
+                    <img class="img-responsive" src="http://www.xoopsmexico.net/about/rmcommon/schemes/neutral.png" title="Neutral Color Sheme" data-rel="tooltip">
                 </a>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-2">
                 <a href="#" class="twop6-scheme img-thumbnail" data-file="theme-veritas.css">
-                    <img class="img-responsive" src="<?php echo RMCURL; ?>/themes/twop6/images/schemes/veritas.png" title="Veritas Color Sheme" data-rel="tooltip">
+                    <img class="img-responsive" src="http://www.xoopsmexico.net/about/rmcommon/schemes/veritas.png" title="Veritas Color Sheme" data-rel="tooltip">
                 </a>
             </div>
             <div class="clearfix visible-sm"></div>
             <div class="col-xs-6 col-sm-3 col-md-2">
                 <a href="#" class="twop6-scheme img-thumbnail" data-file="theme-voyboy.css">
-                    <img class="img-responsive" src="<?php echo RMCURL; ?>/themes/twop6/images/schemes/voyboy.png" title="Voy-Boy Color Sheme" data-rel="tooltip">
+                    <img class="img-responsive" src="http://www.xoopsmexico.net/about/rmcommon/schemes/voyboy.png" title="Voy-Boy Color Sheme" data-rel="tooltip">
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <a href="#" class="twop6-scheme img-thumbnail" data-file="theme-winner.css">
+                    <img class="img-responsive" src="http://www.xoopsmexico.net/about/rmcommon/schemes/thewinner.png" title="The Winner Color Sheme" data-rel="tooltip">
                 </a>
             </div>
         </div>

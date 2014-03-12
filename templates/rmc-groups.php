@@ -1,4 +1,4 @@
-<h1 class="cu-section-title"><?php _e('Grupos Existentes', 'rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Existing Groups', 'rmcommon'); ?></h1>
 
 <div class="table-responsive">
 

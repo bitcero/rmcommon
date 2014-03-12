@@ -202,14 +202,14 @@ class Twop6Functions
         );
 
         $replacements_titles = array(
-            'main'  => __('General Settings','twop6'),
-            'user'  => __('User Info Settings','twop6'),
-            'meta'  => __('Meta Tags and Footer','twop6'),
-            'word'  => __('Word Censoring','twop6'),
-            'search'  => __('Search Options','twop6'),
-            'mail'  => __('Email Setup','twop6'),
-            'auth'  => __('Authentication Options','twop6'),
-            'mods'  => __('System Module Settings','twop6'),
+            'main'  => __('General Settings','rmcommon'),
+            'user'  => __('User Info Settings','rmcommon'),
+            'meta'  => __('Meta Tags and Footer','rmcommon'),
+            'word'  => __('Word Censoring','rmcommon'),
+            'search'  => __('Search Options','rmcommon'),
+            'mail'  => __('Email Setup','rmcommon'),
+            'auth'  => __('Authentication Options','rmcommon'),
+            'mods'  => __('System Module Settings','rmcommon'),
         );
 
         switch($data){

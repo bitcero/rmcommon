@@ -813,7 +813,7 @@ class RMTemplate
      */
     public function add_local_script($file, $element='rmcommon', $subfolder='', $type='text/javascript', $more='', $footer = false){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_script' ), E_USER_DEPRECATED );
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_script' ), E_USER_DEPRECATED );
 
         $this->add_script(
             $file,
@@ -833,7 +833,7 @@ class RMTemplate
      */
     public function add_theme_script($script, $theme='', $subfolder='', $type='text/javascript', $more='', $footer = false){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_script' ), E_USER_DEPRECATED );
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_script' ), E_USER_DEPRECATED );
 
         $this->add_script(
             $script,
@@ -853,7 +853,7 @@ class RMTemplate
      */
     public function add_xoops_style($sheet, $element='rmcommon', $subfolder='', $media='all', $more='', $footer = false){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_style()' ), E_USER_DEPRECATED );
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_style()' ), E_USER_DEPRECATED );
 
         $this->add_style(
             $sheet,
@@ -873,7 +873,7 @@ class RMTemplate
      */
     public function add_theme_style($sheet, $theme='', $subfolder='', $media='all', $more='', $footer=false){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_style()' ), E_USER_DEPRECATED );
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'add_style()' ), E_USER_DEPRECATED );
 
         $this->add_style(
             $sheet,
@@ -894,7 +894,7 @@ class RMTemplate
      */
     public function style_url($sheet, $element='rmcommon', $subfolder=''){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'generate_url()' ), E_USER_DEPRECATED );
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'generate_url()' ), E_USER_DEPRECATED );
 
         return $this->generate_url($sheet, $element, 'css');
     }

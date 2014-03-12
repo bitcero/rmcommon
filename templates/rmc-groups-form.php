@@ -22,7 +22,7 @@ $form = new RMActiveForm(array(
                 <textarea type="text" name="description" id="group-description" class="form-control required" rows="4"><?php echo $group->getVar('description', 'e'); ?></textarea>
             </div>
 
-            <p class="help-block"><?php _e("Add <strong>admin rights</strong> and <strong>access rights</strong> to new group. Remember that specifix permissions allows to control with more detail the operation sthat users can do according to the groups that they belongs.",'rmcommon'); ?></p>
+            <p class="help-block"><?php _e("Add <strong>admin rights</strong> and <strong>access rights</strong> to new group. Remember that specific permissions allows to control with more detail the operations that users can do according to the groups that they belongs.",'rmcommon'); ?></p>
 
         </div>
         <div class="col-lg-8">
@@ -45,7 +45,7 @@ $form = new RMActiveForm(array(
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="admin_check" value="0" class="check-all" data-checkbox="admin-module">
-                                    <strong><?php _e("Todos los módulos",'rmcommon'); ?></strong>
+                                    <strong><?php _e("All Modules",'rmcommon'); ?></strong>
                                 </label>
                             </div>
 
@@ -73,7 +73,7 @@ $form = new RMActiveForm(array(
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="read_check" value="0" class="check-all" data-checkbox="read-module">
-                                    <strong><?php _e("Todos los módulos",'rmcommon'); ?></strong>
+                                    <strong><?php _e("All modules",'rmcommon'); ?></strong>
                                 </label>
                             </div>
                             <?php foreach ( $modules as $module ): ?>
@@ -107,7 +107,7 @@ $form = new RMActiveForm(array(
                             <div class="checkbox">
                                 <label>
                                     <input class="check-all" type="checkbox" value="0" name="<?php echo $item->dirname; ?>_perms[]" data-checkbox="<?php echo $item->dirname; ?>-perms">
-                                    <strong><?php _e('Todos','rmcommon'); ?></strong>
+                                    <strong><?php _e('All','rmcommon'); ?></strong>
                                 </label>
                             </div>
                             <?php foreach ($item->permissions as $id => $perm): ?>
@@ -131,8 +131,8 @@ $form = new RMActiveForm(array(
 
     <div class="cu-content-footer">
 
-        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Cerrar','rmcommon'); ?></button>
-        <button type="submit" class="btn btn-primary"><?php _e('Guardar Datos','rmcommon'); ?></button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close','rmcommon'); ?></button>
+        <button type="submit" class="btn btn-primary"><?php _e('Save Data','rmcommon'); ?></button>
 
     </div>
     <input type="hidden" name="id" id="group-id" value="<?php echo $group->id(); ?>">

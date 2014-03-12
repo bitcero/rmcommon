@@ -123,6 +123,9 @@ $(document).ready(function(){
 
         $.cookie('color_scheme', file, { expires: 365, path: '/' });
 
+        $(".twop6-scheme span.fa").remove();
+        $(".twop6-scheme[data-file='" + $(this).data("file") + "']").prepend('<span class="fa fa-check"></span>');
+
     });
     
 });

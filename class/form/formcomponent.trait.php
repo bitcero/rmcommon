@@ -50,7 +50,7 @@ trait RMFormComponent
             $this->required = true;
 
             if ( !isset($parameters['data-msg-required']) ){
-                $parameters['data-msg-required'] = __('Este campo es obligatorio.','rmcommon');
+                $parameters['data-msg-required'] = __('This field is required.','rmcommon');
                 $this->parameters = $parameters;
             }
 

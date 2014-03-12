@@ -1,10 +1,10 @@
-<h1><?php _e('Color Test for Two&bull;P6', 'twop6'); ?></h1>
+<h1><?php _e('Color Test for Two&bull;P6', 'rmcommon'); ?></h1>
 <hr>
 
 <div class="row">
 
     <div class="col-xs-12">
-        <h2><strong><?php _e('Buttons', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Buttons', 'rmcommon'); ?></strong></h2>
 
         <button type="button" class="btn btn-default">btn-default</button>
         <button type="button" class="btn btn-info">btn-info</button>
@@ -19,7 +19,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h2><strong><?php _e('Form Controls', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Form Controls', 'rmcommon'); ?></strong></h2>
     </div>
 </div>
 <div class="row">
@@ -40,14 +40,14 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <h2><strong><?php _e('Info boxes', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Info boxes', 'rmcommon'); ?></strong></h2>
         <div class="cu-box">
             <div class="box-header">
                 <span class="fa fa-caret-up box-handler"></span>
-                <h3><?php _e('Title', 'twop6'); ?></h3>
+                <h3><?php _e('Title', 'rmcommon'); ?></h3>
             </div>
             <div class="box-content collapsable">
-                <?php _e('Content fo the box', 'twop6'); ?>
+                <?php _e('Content fo the box', 'rmcommon'); ?>
             </div>
         </div>
     </div>
@@ -55,12 +55,12 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h2><strong><?php _e('Modals', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Modals', 'rmcommon'); ?></strong></h2>
         <button class="btn btn-info" data-toggle="modal" data-target="#myModal">
-            <?php _e('Launch demo modal', 'twop6'); ?>
+            <?php _e('Launch demo modal', 'rmcommon'); ?>
         </button>
         <button class="btn btn-info" data-toggle="modal" data-target="#MyCuModal">
-            <?php _e('Launch demo modal 2', 'twop6'); ?>
+            <?php _e('Launch demo modal 2', 'rmcommon'); ?>
         </button>
 
     </div>
@@ -69,13 +69,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"><?php _e('Modal title', 'twop6'); ?></h4>
+                    <h4 class="modal-title" id="myModalLabel"><?php _e('Modal title', 'rmcommon'); ?></h4>
                 </div>
                 <div class="modal-body">
-                    <?php _e('Modal content', 'twop6'); ?>
+                    <?php _e('Modal content', 'rmcommon'); ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><?php _e('Close', 'twop6'); ?></button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><?php _e('Close', 'rmcommon'); ?></button>
                 </div>
             </div>
         </div>
@@ -85,13 +85,13 @@
             <div class="cu-dialog-content">
                 <div class="cu-dialog-header cu-titlebar">
                     <button type="button" class="close" data-dismiss="cu-modal" aria-hidden="true">&times;</button>
-                    <h4 class="cu-dialog-title" id="mycu-modalLabel"><?php _e('Modal Title', 'twop6'); ?></h4>
+                    <h4 class="cu-dialog-title" id="mycu-modalLabel"><?php _e('Modal Title', 'rmcommon'); ?></h4>
                 </div>
                 <div class="cu-dialog-body">
-                    <?php _e('Dialog content', 'twop6'); ?>
+                    <?php _e('Dialog content', 'rmcommon'); ?>
                 </div>
                 <div class="cu-dialog-footer">
-                    <button type="button" class="btn btn-primary" onclick="$('#MyCuModal').modal('hide');"><?php _e('Close', 'twop6'); ?></button>
+                    <button type="button" class="btn btn-primary" onclick="$('#MyCuModal').modal('hide');"><?php _e('Close', 'rmcommon'); ?></button>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h2><strong><?php _e('Alerts', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Alerts', 'rmcommon'); ?></strong></h2>
         <div class="alert alert-success">.alert-success</div>
         <div class="alert alert-info">.alert-info</div>
         <div class="alert alert-warning">.alert-warning</div>
@@ -110,7 +110,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h2><strong><?php _e('Progess', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Progess', 'rmcommon'); ?></strong></h2>
         <div class="progress">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                 40% Complete (success)
@@ -136,7 +136,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h2><strong><?php _e('Tables', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Tables', 'rmcommon'); ?></strong></h2>
     </div>
 </div>
 
@@ -242,7 +242,7 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h2><strong><?php _e('Other Elements', 'twop6'); ?></strong></h2>
+        <h2><strong><?php _e('Other Elements', 'rmcommon'); ?></strong></h2>
         <p>Simple text</p>
         <p><a href="#">Links</a></p>
         <p class="text-info">Information text</p>

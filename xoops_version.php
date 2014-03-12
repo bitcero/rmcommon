@@ -45,6 +45,9 @@ $modversion['icon24'] = 'images/icon24.png';
 $modversion['icon32'] = 'images/icon32.png';
 $modversion['icon48'] = 'images/icon48.png';
 
+// PERMISSIONS
+$modversion['permissions'] = 'include/permissions.php';
+
 $modversion['social'][0] = array('title' => __('Twitter', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/bitcero/');
 $modversion['social'][1] = array('title' => __('LinkedIn', 'rmcommon'),'type' => 'linkedin','url' => 'http://www.linkedin.com/in/bitcero/');
 $modversion['social'][2] = array('title' => __('Google+', 'rmcommon'),'type' => 'google-plus','url' => 'http://plus.google.com/100655708852776329288');
@@ -84,7 +87,7 @@ $modversion['categories'] = array(
 // URL Rewriting
 $modversion['config'][] = array(
     'name'          => 'permalinks',
-    'title'         => __( 'Activar redirección de URLs', 'rmcommon' ),
+    'title'         => __( 'Enable URL rewriting', 'rmcommon' ),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',

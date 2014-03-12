@@ -516,7 +516,7 @@ class RMFunctions
      */
     public function configs($name=''){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMSettings', 'cu_settings' ));
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMSettings', 'cu_settings' ));
 
         $ret = RMSettings::cu_settings($name);
 
@@ -537,7 +537,7 @@ class RMFunctions
      */
     public function urlencode_array( $array, $name, $separator='&' ){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMUris', 'url_encode_array' ));
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMUris', 'url_encode_array' ));
 
         RMUris::url_encode_array($array, $name, $separator);
 
@@ -550,7 +550,7 @@ class RMFunctions
      */
     public function current_url() {
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMUris', 'current_url' ), E_USER_DEPRECATED);
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMUris', 'current_url' ), E_USER_DEPRECATED);
         return RMUris::current_url();
 
     }
@@ -582,7 +582,7 @@ class RMFunctions
      */
     public function load_module($mod){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMModules', 'load_module' ));
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMModules', 'load_module' ));
 
         return RMModules::load_module( $mod );
     }
@@ -593,7 +593,7 @@ class RMFunctions
      */
     public function get_modules_list($active=-1){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMModules', 'get_modules_list' ));
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMModules', 'get_modules_list' ));
 
         $status = 'all';
         if ( $active == 0 )

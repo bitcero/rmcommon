@@ -139,7 +139,7 @@ class RMPrivileges
         if ( $method == 'ajax' ){
             $this->prepare_ajax_response();
             $this->ajax_response(
-                __('¡No tienes permiso para realizar esta operación!', 'rmcommon'),
+                __('You don\'t have required rights to do this action!', 'rmcommon'),
                 1, 0, array(
                     'action' => 'go-to',
                     'url' => XOOPS_URL
@@ -147,7 +147,7 @@ class RMPrivileges
             );
         } else {
 
-            RMUris::redirect_with_message( __('¡No tienes permiso para realizar esta operación!', 'rmcommon'), XOOPS_URL, RMMSG_WARN, 'fa fa-warning' );
+            RMUris::redirect_with_message( __('You don\'t have required rights to do this action!', 'rmcommon'), XOOPS_URL, RMMSG_WARN, 'fa fa-warning' );
 
         }
 

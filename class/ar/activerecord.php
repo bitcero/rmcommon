@@ -605,7 +605,7 @@ abstract class RMActiveRecord
             if ( $columns['default'] != '' )
                 $values[$column] = $columns[$column]['default'];
             else {
-                $this->add_error( sprintf(__('El campo "%s" no puede estar vacío.', 'rmcommon'), $columns[$column]['title'] ) );
+                $this->add_error( sprintf(__('The field "%s" could not be empty.', 'rmcommon'), $columns[$column]['title'] ) );
                 return false;
             }
 

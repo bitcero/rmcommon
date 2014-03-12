@@ -112,13 +112,13 @@ class RMFormUser extends RMFormElement
 		
 		$rtn .= "</ul><br />";
 		if ($this->can_change){
-			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->width.",".$this->height.",".$this->limit.",".intval($this->multi).",'".XOOPS_URL."');\">".__('Usuarios...','rmcommon')."</button>";
+			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->width.",".$this->height.",".$this->limit.",".intval($this->multi).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
 		    $rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
 					    <div class="modal-dialog">
 					        <div class="modal-content">
 					            <div class="modal-header">
 					                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					                <h4 class="modal-title">'.__('Seleccionar Usuarios', 'rmcommon').'</h4>
+					                <h4 class="modal-title">'.__('Select users', 'rmcommon').'</h4>
 					            </div>
 					            <div class="modal-body">
 

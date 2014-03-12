@@ -56,7 +56,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="<?php echo RMCURL; ?>"><img src="<?php echo TWOP6_URL; ?>/images/logo.png" alt="<?php _e('XOOPS','twop6'); ?>" /></a>
+                <a class="navbar-brand" href="<?php echo RMCURL; ?>"><img src="<?php echo TWOP6_URL; ?>/images/logo.png" alt="XOOPS" /></a>
             </div>
 
             <div class="collapse navbar-collapse twop6-navbar-toolbar">
@@ -65,7 +65,7 @@
                         
                         <li class="dropdown<?php if($xoopsModule->dirname()=='rmcommon'): ?> active<?php endif; ?>">
                             <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                <i class="xo-icon xicon-cu"></i> <?php _e('Common Utilities','twop6'); ?>
+                                <i class="xo-icon xicon-cu"></i> <?php _e('Common Utilities','rmcommon'); ?>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -101,7 +101,7 @@
                         <li class="dropdown<?php if($xoopsModule->dirname()=='system'): ?> active<?php endif; ?>">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <span class="fa fa-cog"></span>
-                                <?php _e('System','twop6'); ?>
+                                <?php _e('System','rmcommon'); ?>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -135,7 +135,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <i class="xo-icon xicon-gear"></i>
-                                <?php _e('Theme','twop6'); ?>
+                                <?php _e('Theme','rmcommon'); ?>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -163,9 +163,9 @@
                         <?php endif; ?>
                         
                         <li class="dropdown">
-                            <a href="#" title="<?php _e('Modules','twop6'); ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                            <a href="#" title="<?php _e('Modules','rmcommon'); ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <span class="fa fa-th"></span>
-                                <?php _e('Modules','twop6'); ?>
+                                <?php _e('Modules','rmcommon'); ?>
 	                            <b class="caret"></b>
                             </a>
 	                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -213,7 +213,7 @@
 		                        <?php endforeach; ?>
 		                        <li class="divider"></li>
 		                        <li>
-			                        <a href="#" id="xo-showmodules" data-title="<?php _e('Modules Box','twop6'); ?>"><span class="fa fa-th"></span> <?php _e('Modules Box','twop6'); ?></a>
+			                        <a href="#" id="xo-showmodules" data-title="<?php _e('Modules Box','rmcommon'); ?>"><span class="fa fa-th"></span> <?php _e('Modules Box','rmcommon'); ?></a>
 		                        </li>
 	                        </ul>
                         </li>
@@ -264,13 +264,13 @@
                                 <li>
                                     <a href="<?php echo RMCURL; ?>">
                                         <span class="fa fa-dashboard"></span>
-                                        <?php _e('Control Panel','twop6'); ?>
+                                        <?php _e('Control Panel','rmcommon'); ?>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="<?php echo XOOPS_URL; ?>" target="_blank">
                                         <span class="fa fa-home"></span>
-                                        <?php _e('View Home Page','twop6'); ?>
+                                        <?php _e('View Home Page','rmcommon'); ?>
                                     </a>
                                 </li>
                                 <li class="divider"></li>
@@ -290,7 +290,7 @@
                                 <li>
                                     <a href="<?php echo RMCURL; ?>/?twop6=about">
                                         <span class="fa fa-lightbulb-o"></span>
-                                        <?php _e('About Two·Six','twop6'); ?>
+                                        <?php _e('About Two·Six','rmcommon'); ?>
                                     </a>
                                 </li>
                                 <li class="dropdown-submenu">
@@ -300,7 +300,14 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <?php foreach($color_schemes as $file => $name): ?>
-                                        <li><a href="#" class="twop6-scheme" data-file="<?php echo $file; ?>"><?php echo $name; ?></a></li>
+                                        <li>
+                                            <a href="#" class="twop6-scheme" data-file="<?php echo $file; ?>">
+                                                <?php if ( isset($_COOKIE['color_scheme']) && $_COOKIE['color_scheme'] == $file ): ?>
+                                                <span class="fa fa-check"></span>
+                                                <?php endif; ?>
+                                                <?php echo $name; ?>
+                                            </a>
+                                        </li>
                                         <?php endforeach; ?>
                                         <li class="divider"></li>
                                         <li><a href="<?php echo RMCURL; ?>?twop6=colortest"><?php _e('Color Test', 'rmcommon'); ?></a></li>
@@ -311,7 +318,7 @@
 
                         <li class="xo-upd-notifier">
                             <!-- Updates notifier -->
-                            <a href="<?php echo RMCURL; ?>/updates.php"><?php echo sprintf(__('%s updates available','twop6'), '<span class="badge badge-warning">%s</span>'); ?></a>
+                            <a href="<?php echo RMCURL; ?>/updates.php"><?php echo sprintf(__('%s updates available','rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></a>
                         </li>
                     </ul>
 
@@ -497,8 +504,8 @@
             <hr>
             <footer class="row">
                 <div class="col-md-6 col-lg-6">
-                    <?php echo sprintf(__('Powered by %s.','twop6'), '<a href="http://www.xoops.org">'.XOOPS_VERSION.'</a>'); ?>
-                    <?php echo sprintf(__('Reloaded by %s.','twop6'), '<a href="http://www.xoopsmexico.net">Common Utilities '.RMCVERSION.'</a>'); ?>
+                    <?php echo sprintf(__('Powered by %s.','rmcommon'), '<a href="http://www.xoops.org">'.XOOPS_VERSION.'</a>'); ?>
+                    <?php echo sprintf(__('Reloaded by %s.','rmcommon'), '<a href="http://www.xoopsmexico.net">Common Utilities '.RMCVERSION.'</a>'); ?>
                 </div>
                 <div class="col-md-6 col-lg-6 xo-foot-links">
                     <ul>

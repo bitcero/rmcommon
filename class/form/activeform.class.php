@@ -85,7 +85,7 @@ class RMActiveForm
     public function __call($object, $arguments){
 
         if ( count( $arguments ) <= 0 )
-            throw new RMException( sprintf( __( 'Form element "%s" must be called with a required parameters.', 'rmcommon' ), $object ) );
+            throw new RMException( sprintf( __( 'Form element "%s" must be called providing required parameters.', 'rmcommon' ), $object ) );
 
         $model = $arguments[0];
         $field = $arguments[1];

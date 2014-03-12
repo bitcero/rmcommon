@@ -7,24 +7,24 @@
 <form name="<?php echo $field; ?>_users_form">
     <div class="row form-users-options">
         <div class="col-lg-4 form-group">
-            <label for="<?php echo $field ?>-kw"><?php _e('Buscar usuario:', 'rmcommon'); ?></label>
-            <input type="text" class="form-control" id="<?php echo $field ?>-kw" placeholder="<?php _e('Buscar usuario', 'rmcommon'); ?>" value="<?php echo $kw; ?>" />
+            <label for="<?php echo $field ?>-kw"><?php _e('Search user:', 'rmcommon'); ?></label>
+            <input type="text" class="form-control" id="<?php echo $field ?>-kw" placeholder="<?php _e('Search user', 'rmcommon'); ?>" value="<?php echo $kw; ?>" />
         </div>
         <div class="col-lg-3 form-group">
-            <label for="<?php echo $field ?>-limit"><?php _e('Resultados:', 'rmcommon'); ?></label>
-            <input type="text" class="form-control" id="<?php echo $field ?>-limit" placeholder="<?php _e('Resultados', 'rmcommon'); ?>" value="<?php echo $limit; ?>" />
+            <label for="<?php echo $field ?>-limit"><?php _e('Results:', 'rmcommon'); ?></label>
+            <input type="text" class="form-control" id="<?php echo $field ?>-limit" placeholder="<?php _e('Results', 'rmcommon'); ?>" value="<?php echo $limit; ?>" />
         </div>
         <div class="col-lg-3 form-group">
-            <label for="<?php echo $field ?>-ord"><?php _e('Ordenar por:','rmcommon'); ?></label>
+            <label for="<?php echo $field ?>-ord"><?php _e('Sort by:','rmcommon'); ?></label>
             <select id="<?php echo $field ?>-ord" class="form-control">
                 <option value="2"<?php echo $ord==2 ? ' selected="selected"' : ''; ?>><?php _e('ID','rmcommon'); ?></option>
-                <option value="0"<?php echo $ord==0 ? ' selected="selected"' : ''; ?>><?php _e('Fecha de Registro','rmcommon'); ?></option>
-                <option value="1"<?php echo $ord==1 ? ' selected="selected"' : ''; ?>><?php _e('Nombre','rmcommon'); ?></option>
+                <option value="0"<?php echo $ord==0 ? ' selected="selected"' : ''; ?>><?php _e('Date of register','rmcommon'); ?></option>
+                <option value="1"<?php echo $ord==1 ? ' selected="selected"' : ''; ?>><?php _e('Name','rmcommon'); ?></option>
             </select>
         </div>
         <div class="col-lg-2 form-group">
             <br>
-            <button class="btn btn-primary" type="button" onclick="usersField.submit_search(<?php echo $type; ?>);"><?php _e('Buscar', 'rmcommon'); ?></button>
+            <button class="btn btn-primary" type="button" onclick="usersField.submit_search(<?php echo $type; ?>);"><?php _e('Search', 'rmcommon'); ?></button>
         </div>
     </div>
 

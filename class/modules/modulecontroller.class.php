@@ -24,7 +24,7 @@ abstract class RMModuleController {
             $moduleObject = RMModules::load_module($module);
 
         if (!is_a($moduleObject, 'XoopsModule'))
-            throw new RMException(sprintf(__('No existe el módulo "%s"', 'rmcommon'), $module));
+            throw new RMException(sprintf(__('The module "%s" does not exists!', 'rmcommon'), $module));
 
         // Initialize properties
         $this->module_data = array(

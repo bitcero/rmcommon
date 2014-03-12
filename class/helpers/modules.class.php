@@ -147,6 +147,9 @@ class RMModules
         else
             $module = $module_handler->getByDirname( $id );
 
+        if ( $module )
+            load_mod_locale( $module->getVar('dirname') );
+
         return $module;
     }
 

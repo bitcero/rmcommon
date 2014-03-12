@@ -224,7 +224,7 @@ class RMUtilities
      */
     public function format_version($version, $name = false){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMModules', 'format_module_version' ), E_USER_DEPRECATED );
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMModules', 'format_module_version' ), E_USER_DEPRECATED );
         return RMModules::format_module_version($version, $name);
 
     }
@@ -241,7 +241,7 @@ class RMUtilities
      */
     public function module_config($directory, $option=''){
 
-        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s. instead.', 'rmcommon' ), __METHOD__, 'RMSettings', 'module_settings()' ), E_USER_DEPRECATED );
+        trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMSettings', 'module_settings()' ), E_USER_DEPRECATED );
         $settings = RMSettings::module_settings($directory, $option);
 
         if( is_object( $settings ) )

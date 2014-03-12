@@ -46,6 +46,7 @@ RMTemplate::get()->header(); ?>
         <div class="cu-box">
             <div class="box-content">
                 <h2>Aspecto visual mejorado</h2>
+                <img src="//www.xoopsmexico.net/about/rmcommon/schemes/all.jpg" class="img-responsive " alt="Aspecto mejorado">
                 <p>El tema por defecto de Common Utilities (Two·P6) ha sido mejorado y le hemos otorgado un aspecto
                     mas moderno y limpio.</p>
                 <hr>
@@ -54,35 +55,42 @@ RMTemplate::get()->header(); ?>
                     tus propias combinaciones.</p>
                 <div class="row">
                     <div class="col-xs-4  col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" data-file="theme-default.css" style="background-image: url('<?php echo RMCURL; ?>/themes/twop6/images/schemes/default.png');" title="Default Color Sheme" data-rel="tooltip">
+                        <a href="#" class="twop6-scheme thumbnail" data-file="theme-default.css" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/default.png');" title="Default Color Sheme" data-rel="tooltip">
                             <span>Default</span>
                         </a>
                         <strong>Default</strong>
                     </div>
-                    <div class="clearfix visible-sm"><hr></div>
+                    <div class="clearfix visible-sm"></div>
                     <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('<?php echo RMCURL; ?>/themes/twop6/images/schemes/cardio.png');" data-file="theme-cardio.css">
+                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/cardio.png');" data-file="theme-cardio.css">
                             <span>Cardio</span>
                         </a>
                         <strong>Cardio</strong>
                     </div>
-                    <div class="clearfix visible-sm visible-md visible-lg"><hr></div>
+                    <div class="clearfix visible-sm visible-md visible-lg"></div>
                     <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('<?php echo RMCURL; ?>/themes/twop6/images/schemes/neutral.png');" data-file="theme-neutral.css">
+                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/neutral.png');" data-file="theme-neutral.css">
                             <span>Neutral Flavor</span>
                         </a>
                         <strong>Neutral Flavor</strong>
                     </div>
-                    <div class="clearfix visible-xs visible-sm"><hr></div>
+                    <div class="clearfix visible-xs visible-sm"></div>
                     <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('<?php echo RMCURL; ?>/themes/twop6/images/schemes/veritas.png');" data-file="theme-veritas.css">
+                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/veritas.png');" data-file="theme-veritas.css">
                             <span>Veritas</span>
                         </a>
                         <strong>Veritas</strong>
                     </div>
-                    <div class="clearfix visible-sm visible-md visible-lg"><hr></div>
+                    <div class="clearfix visible-sm visible-md visible-lg"></div>
                     <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('<?php echo RMCURL; ?>/themes/twop6/images/schemes/voyboy.png');" data-file="theme-voyboy.css">
+                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/voyboy.png');" data-file="theme-voyboy.css">
+                            <span>Voy-Boy</span>
+                        </a>
+                        <strong>Voy-Boy</strong>
+                    </div>
+                    <div class="clearfix visible-sm visible-md visible-sm"></div>
+                    <div class="col-xs-4 col-sm-12 col-md-6 text-center">
+                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/thewinner.png');" data-file="theme-winner.css">
                             <span>Voy-Boy</span>
                         </a>
                         <strong>Voy-Boy</strong>
@@ -95,7 +103,7 @@ RMTemplate::get()->header(); ?>
 
     <div class="col-sm-8">
 
-        <h2 class="text-success text-center">Módulos mejores y modernos</h2>
+        <h2 class="text-success text-center">Módulos mejores y más modernos</h2>
         <p class="lead text-center">
             Common Utilities ofrece las herramientas necesarias para crear mejores módulos con características modernas. Su soporte MVC
             hace la creación de módulos más sencilla que nunca.
@@ -142,7 +150,7 @@ RMTemplate::get()->header(); ?>
                 </p>
             </div>
             <div class="col-sm-6">
-                Hola
+                <a href="settings.php"><img src="//www.xoopsmexico.net/about/rmcommon/settings.png" alt="Nuevo sistema de confgiuración" class="img-responsive img-thumbnail"></a>
             </div>
         </div>
 
@@ -151,6 +159,7 @@ RMTemplate::get()->header(); ?>
         <div class="row">
             <div class="col-md-6">
                 <h3>Actualizaciones inmediatas</h3>
+                <img src="//www.xoopsmexico.net/about/rmcommon/updates.png" alt="Actualizaciones automáticas" class="img-responsive img-thumbnail">
                 <p class="help-block">
                     ¡Se acabaron los sufrimientos para mantener actualizado el sistema! Con el sistema de actualizaciones de
                     Common Utilities, las actualizaciones están <strong class="text-success">a un solo click de distancia</strong>.
@@ -158,6 +167,7 @@ RMTemplate::get()->header(); ?>
             </div>
             <div class="col-md-6">
                 <h3>Seguridad mejorada</h3>
+                <img src="//www.xoopsmexico.net/about/rmcommon/security.png" alt="Seguridad mejorada" class="img-responsive img-thumbnail">
                 <p class="help-block">
                     Módulos con un mejor control sobre cada una de sus características mediante el nuevo sistema de seguridad
                     mejorado. Ahora es posible asignar <strong class="text-warning">permisos individuales a cada acción</strong>.
