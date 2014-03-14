@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Common Utilities\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 15:53-0600\n"
-"PO-Revision-Date: 2014-03-12 15:54-0600\n"
+"POT-Creation-Date: 2014-03-12 23:36-0600\n"
+"PO-Revision-Date: 2014-03-12 23:36-0600\n"
 "Last-Translator: Eduardo Cortés <me@eduardocortes.mx>\n"
 "Language-Team: Red Mexico <xoopsmexico@gmail.com>\n"
 "Language: en\n"
@@ -189,6 +189,7 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:142
 #: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:143
 #: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:146
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:110
 msgid "All"
 msgstr ""
 
@@ -340,7 +341,7 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/ar/activerecord.php:608
 #, php-format
-msgid "El campo \"%s\" no puede estar vacío."
+msgid "The field \"%s\" could not be empty."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/ar/db.class.php:82
@@ -370,11 +371,11 @@ msgid "All Users"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/fields/formuser.class.php:115
-msgid "Usuarios..."
+msgid "Users..."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/fields/formuser.class.php:121
-msgid "Seleccionar Usuarios"
+msgid "Select users"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/fields/modules.class.php:127
@@ -449,7 +450,7 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/form/activeform.class.php:88
 #, php-format
-msgid "Form element \"%s\" must be called with a required parameters."
+msgid "Form element \"%s\" must be called providing required parameters."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/form/activeform.class.php:97
@@ -467,7 +468,7 @@ msgid "Button"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/form/formcomponent.trait.php:53
-msgid "Este campo es obligatorio."
+msgid "This field is required."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:62
@@ -573,7 +574,7 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/functions.php:122
 #: C:\wamp\www\xoops\modules\rmcommon/menu.php:106
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:469
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:472
 msgid "Comments"
 msgstr ""
 
@@ -597,6 +598,7 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-blocks.php:90
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-blocks.php:131
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-blocks.php:140
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:22
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups.php:10
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:17
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:23
@@ -658,10 +660,11 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/class/template.php:856
 #: C:\wamp\www\xoops\modules\rmcommon/class/template.php:876
 #: C:\wamp\www\xoops\modules\rmcommon/class/template.php:897
+#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:212
 #: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:227
 #: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:244
 #, php-format
-msgid "Method %s is deprecated. Use %s::%s. instead."
+msgid "Method %s is deprecated. Use %s::%s instead."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/helpers/httprequest.class.php:90
@@ -672,7 +675,7 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/helpers/privileges.class.php:142
 #: C:\wamp\www\xoops\modules\rmcommon/class/helpers/privileges.class.php:150
-msgid "¡No tienes permiso para realizar esta operación!"
+msgid "You don't have required rights to do this action!"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/helpers/settings.class.php:305
@@ -732,7 +735,7 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/modules/modulecontroller.class.php:27
 #, php-format
-msgid "No existe el módulo \"%s\""
+msgid "The module \"%s\" does not exists!"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/modules/modulecontroller.class.php:69
@@ -748,8 +751,8 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/class/pagenav.php:133
 #, php-format
 msgid ""
-"Mostrando <strong>%u</strong> a <strong>%u</strong> de <strong>%u</strong> "
-"resultados."
+"Showing results <strong>%u</strong> to <strong>%u</strong> from <strong>%u</"
+"strong>."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/template.php:228
@@ -869,11 +872,6 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:191
 msgid "Image Manager"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/class/utilities.php:212
-#, php-format
-msgid "Method %s is deprecated. Use %s::%s instead."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/comments.php:125
@@ -1031,38 +1029,6 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/comments.php:367
 #: C:\wamp\www\xoops\modules\rmcommon/post-comment.php:317
 msgid "Errros ocurrs while trying to update comment!"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:25
-msgid "Administrar módulos (Instalar, desintalar y actualizar)"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:26
-msgid "Administrar imágenes"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:27
-msgid "Administrar comentarios"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:28
-msgid "Administrar Plugins"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:29
-msgid "Crear, editar, eliminar grupos"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:30
-msgid "Permitir modificar la configuración del sistema y los módulos"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:31
-msgid "Ver alertas del sistema"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/events/erp.php:35
-msgid "Control ERP"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/events/rmcommon.php:79
@@ -1374,6 +1340,30 @@ msgstr ""
 msgid "Errors ocurred while deleting the category"
 msgstr ""
 
+#: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:17
+msgid "Modules management (Install, uninstall and update)"
+msgstr ""
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:22
+msgid "Images management"
+msgstr ""
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:27
+msgid "Comments management"
+msgstr ""
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:32
+msgid "Plugins management (Install, uninstall and update)"
+msgstr ""
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:37
+msgid "Groups management (create, delete and update)"
+msgstr ""
+
+#: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:42
+msgid "Grant access to system and modules configuration."
+msgstr ""
+
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:38
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:157
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:808
@@ -1447,6 +1437,7 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:158
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:928
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:134
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:189
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:78
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:94
@@ -1472,7 +1463,7 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/plugins.php:383
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-editor-image.php:66
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-images-list-editor.php:58
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:377
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:380
 msgid "None"
 msgstr ""
 
@@ -1985,7 +1976,7 @@ msgid "%s configuration"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/plugins.php:457
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:148
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:151
 msgid "Visual Editor"
 msgstr ""
 
@@ -1994,12 +1985,12 @@ msgid "EXMCode Editor"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/plugins.php:459
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:151
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:154
 msgid "Simple Editor"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/plugins.php:460
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:149
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:152
 msgid "HTML Editor"
 msgstr ""
 
@@ -2532,6 +2523,7 @@ msgid "Update Category"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-comments.php:13
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:27
 msgid "Search"
 msgstr ""
 
@@ -2747,39 +2739,31 @@ msgid "Link:"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:10
-msgid "Buscar usuario:"
+msgid "Search user:"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:11
-msgid "Buscar usuario"
+msgid "Search user"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:14
-msgid "Resultados:"
+msgid "Results:"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:15
-msgid "Resultados"
+msgid "Results"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:18
-msgid "Ordenar por:"
+msgid "Sort by:"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:21
-msgid "Fecha de Registro"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:22
-msgid "Nombre"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:27
-msgid "Buscar"
+msgid "Date of register"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:35
-msgid "Seleccionados:"
+msgid "Selected:"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:45
@@ -2806,8 +2790,8 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:25
 msgid ""
 "Add <strong>admin rights</strong> and <strong>access rights</strong> to new "
-"group. Remember that specifix permissions allows to control with more detail "
-"the operation sthat users can do according to the groups that they belongs."
+"group. Remember that specific permissions allows to control with more detail "
+"the operations that users can do according to the groups that they belongs."
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:31
@@ -2823,28 +2807,23 @@ msgid "Admin Rights"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:48
-#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:76
-msgid "Todos los módulos"
+msgid "All Modules"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:71
 msgid "Access Rights"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:110
-msgid "Todos"
-msgstr ""
-
-#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:134
-msgid "Cerrar"
+#: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:76
+msgid "All modules"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:135
-msgid "Guardar Datos"
+msgid "Save Data"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups.php:1
-msgid "Grupos Existentes"
+msgid "Existing Groups"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups.php:19
@@ -3138,7 +3117,7 @@ msgid "Not provided"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:3
-msgid "Páginas:"
+msgid "Pages:"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:5
@@ -3427,7 +3406,7 @@ msgstr ""
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-users.php:185
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-users.php:197
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-users.php:259
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:81
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:84
 msgid "Email"
 msgstr ""
 
@@ -3546,7 +3525,7 @@ msgid "Title"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:50
-msgid "Content fo the box"
+msgid "Content for the box"
 msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:58
@@ -3898,251 +3877,251 @@ msgstr ""
 msgid "Users deleted successfully!"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:48
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:51
 msgid "Twitter"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:49
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:52
 msgid "LinkedIn"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:50
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:53
 msgid "Google+"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:78
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:81
 msgid "General"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:79
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:82
 msgid "Appearance"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:80
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:83
 msgid "Comentarios"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:87
-msgid "Activar redirección de URLs"
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:90
+msgid "Enable URL rewriting"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:98
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:101
 msgid "New rewrite paths for supported modules"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:99
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:102
 msgid ""
 "Indicate the new paths for supported modules. This path must be used to form "
 "new rewrited URLs for modules."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:111
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:114
 msgid "Language to use"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:121
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:124
 msgid "Admin theme"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:131
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:134
 msgid "Disable new GUI when working on non native modules?"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:142
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:145
 msgid "Select the default editor"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:150
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:153
 msgid "XoopsCode Editor"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:159
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:162
 msgid "Enable JQuery for front end"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:160
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:163
 msgid ""
 "When this option is enabled, Common Utilities will include JQuery "
 "automatically. Please, disable this option only when your theme include "
 "jquery by default."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:170
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:173
 msgid "Arrange images by date"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:181
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:184
 msgid "Limit for image categories list."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:191
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:194
 msgid "Image manager: number of images per page"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:203
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:206
 msgid "Secret Key"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:204
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:207
 msgid "Provide a secret key used to encrypt information."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:214
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:217
 msgid "Allow HTMl in text"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:224
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:227
 msgid "Allow smilies in text"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:234
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:237
 msgid "Allow XoopsCode"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:244
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:247
 msgid "Allow images in text"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:254
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:257
 msgid "Auto add line breaks in text"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:265
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:268
 msgid "Enable comments"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:275
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:278
 msgid "Allow anonymous users to post comments"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:285
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:288
 msgid "Automatically approve comments by registered users"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:295
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:298
 msgid "Automatically approve comments by anonymous users"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:305
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:308
 msgid "Allow users to edit their comments"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:315
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:318
 msgid "Time limit to edit a comment (in hours)."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:325
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:328
 msgid "Modules number on dashboard"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:336
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:339
 msgid "Image for RSS feeds"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:347
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:350
 msgid "Mailer method"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:348
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:351
 msgid "Common Utilities will use this method to send emails."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:352
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:355
 msgid "PHP Mail()"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:353
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:356
 msgid "SMTP"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:354
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:357
 msgid "Sendmail"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:362
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:365
 msgid "SMTP server to use"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:363
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:366
 msgid "Specify the server through with the emails will be sent."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:372
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:375
 msgid "SMTP encryption"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:373
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:376
 msgid ""
 "For SSL or TLS encryption to work, your PHP installation must have "
 "appropriate OpenSSL transports wrappers."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:378
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:381
 msgid "SSL"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:379
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:382
 msgid "TLS"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:387
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:390
 msgid "SMTP server port"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:388
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:391
 msgid ""
 "Note that you must to write the appropriate port based on your encryption "
 "type selection."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:397
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:400
 msgid "SMTP username"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:407
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:410
 msgid "SMTP password"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:417
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:420
 msgid "Sendmail path"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:418
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:421
 msgid ""
 "Input the command for sendmail, including the correct command line flags. "
 "The default to use is \"/usr/sbin/sendmail -bs\" if this is not specified."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:427
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:430
 msgid "Enable RSS Center"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:437
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:440
 msgid "Enable internal blocks manager"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:447
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:450
 msgid "Activate updates"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:448
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:451
 msgid ""
 "When this option is enabled, Common Utilities will search automatically "
 "updates for modules and other components."
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:457
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:460
 msgid "Days between updates search"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:470
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:473
 msgid "Show comments from internal comments system"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:479
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:482
 msgid "Custom Block"
 msgstr ""
 
-#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:480
+#: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:483
 msgid "Allows to create a block with custom content."
 msgstr ""

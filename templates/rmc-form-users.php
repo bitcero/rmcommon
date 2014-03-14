@@ -32,7 +32,7 @@
         <?php if ($field_type=='checkbox'): ?>
             <div class="col-lg-5 form-users-selected-list">
                 <div id="<?php echo $field; ?>-selected-title" class="form_users_selected_title">
-                    <?php _e('Seleccionados:','rmcommon'); ?> (<strong><span><?php echo count($selected); ?></span></strong>)
+                    <?php _e('Selected:','rmcommon'); ?> (<strong><span><?php echo count($selected); ?></span></strong>)
                 </div>
                 <ul id="<?php echo $field; ?>-selected-list">
                     <?php foreach($selecteds as $sel): ?>

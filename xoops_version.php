@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>38,'stage'=>-2,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>45,'stage'=>-2,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['author'] = "BitC3R0";
 $modversion['authormail'] = "i.bitcero@gmail.com";
@@ -60,15 +60,18 @@ $modversion['hasMain'] = 1;
 
 $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
 
-$modversion['tables'][0] = 'mod_rmcommon_images_categories';
-$modversion['tables'][1] = 'mod_rmcommon_comments';
-$modversion['tables'][2] = 'mod_rmcommon_comments_assignations';
-$modversion['tables'][3] = 'mod_rmcommon_images';
-$modversion['tables'][4] = 'mod_rmcommon_plugins';
-$modversion['tables'][5] = 'mod_rmcommon_settings';
-$modversion['tables'][6] = 'mod_rmcommon_blocks';
-$modversion['tables'][7] = 'mod_rmcommon_blocks_positions';
-$modversion['tables'][8] = 'mod_rmcommon_blocks_assignations';
+$modversion['tables'] = array(
+    'mod_rmcommon_images_categories',
+    'mod_rmcommon_comments',
+    'mod_rmcommon_comments_assignations',
+    'mod_rmcommon_images',
+    'mod_rmcommon_plugins',
+    'mod_rmcommon_permissions',
+    'mod_rmcommon_settings',
+    'mod_rmcommon_blocks',
+    'mod_rmcommon_blocks_positions',
+    'mod_rmcommon_blocks_assignations'
+);
 
 // Templates
 $modversion['templates'][1]['file'] = 'rmc-comments-display.html';

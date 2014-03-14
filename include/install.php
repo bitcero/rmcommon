@@ -27,6 +27,11 @@ function xoops_module_uninstall_rmcommon($mod){
 }
 
 function xoops_module_install_rmcommon($mod){
+
+    // Prepare welcome screen
+    $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);
+    setcookie( "rmcwelcome", 1, time() + (365 * 86400), '/', $domain );
+
     // Restore previous configurations
     $db = XoopsDatabaseFactory::getDatabaseConnection();
     
@@ -58,6 +63,16 @@ function xoops_module_update_rmcommon($mod, $prev){
     $db->queryF('RENAME TABLE `'.$db->prefix("rmc_img_cats").'` TO  `'.$db->prefix("mod_rmcommon_images_categories").'` ;');
     $db->queryF('RENAME TABLE `'.$db->prefix("rmc_plugins").'` TO  `'.$db->prefix("mod_rmcommon_plugins").'` ;');
     $db->queryF('RENAME TABLE `'.$db->prefix("rmc_settings").'` TO  `'.$db->prefix("mod_rmcommon_settings").'` ;');
+
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks_assignations").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks_positions").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_comments").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_comments_assignations").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_images").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_images_categories").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_plugins").'` ENGINE = INNODB');
+    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_settings").'` ENGINE = INNODB');
 
     return true;
 

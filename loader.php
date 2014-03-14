@@ -15,7 +15,17 @@ define("RMCPATH",XOOPS_ROOT_PATH.'/modules/rmcommon');
 define("RMCURL",XOOPS_URL.'/modules/rmcommon');
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
-define('RMCVERSION','2.2.3.8 beta');
+define('RMCVERSION','2.2.4.5 beta');
+
+/**
+ * Welcome Screen
+ */
+if ( isset( $_COOKIE['rmcwelcome'] ) ){
+    $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);
+    setcookie( "rmcwelcome", 1, time() - 3600, '/', $domain );
+    header('location: ' . RMCURL . '/about.php' );
+    die();
+}
 
 /**
  * Messages Levels

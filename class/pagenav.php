@@ -130,7 +130,7 @@ class RMPageNav
 		
 		$last_element = $current_page*$items_page;
 		$last_element = $last_element>$total_results ? $total_results : $last_element;
-		$this->showing = sprintf(__('Mostrando <strong>%u</strong> a <strong>%u</strong> de <strong>%u</strong> resultados.','rmcommon'), $first_element, $last_element, $total_results);
+		$this->showing = sprintf(__('Showing results <strong>%u</strong> to <strong>%u</strong> from <strong>%u</strong>.','rmcommon'), $first_element, $last_element, $total_results);
 		
 		if ($total_pages<=1) return;
 		

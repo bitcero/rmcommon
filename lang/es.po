@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XOOPS Modules\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 16:57-0600\n"
-"PO-Revision-Date: 2014-03-12 16:59-0600\n"
+"POT-Creation-Date: 2014-03-12 23:28-0600\n"
+"PO-Revision-Date: 2014-03-12 23:53-0600\n"
 "Last-Translator: Eduardo Cortés <me@eduardocortes.mx>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.net/projects/p/xoops-"
 "mods-i18n/language/es_ES/)\n"
@@ -715,7 +715,6 @@ msgid "%u minutes"
 msgstr "%u minutos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/helpers/settings.class.php:310
-#, fuzzy
 msgid "One hour"
 msgstr "1 hora"
 
@@ -725,7 +724,6 @@ msgid "%u hours"
 msgstr "%u horas"
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/helpers/settings.class.php:312
-#, fuzzy
 msgid "One day"
 msgstr "1 día"
 
@@ -735,7 +733,6 @@ msgid "%u days"
 msgstr "%u dias"
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/helpers/settings.class.php:314
-#, fuzzy
 msgid "One week"
 msgstr "1 semana"
 
@@ -763,21 +760,22 @@ msgstr "El módulo \"%s\" no existe."
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/modules/modulecontroller.class.php:69
 #: C:\wamp\www\xoops\modules\rmcommon/class/modules/modulecontroller.class.php:89
-#, fuzzy, php-format
+#, php-format
 msgid "Property %s.%s does not exists."
-msgstr "¡La ruta destino \"%s\" no existe!"
+msgstr "La propiedad %s.%s no existe."
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/modules/modulecontroller.class.php:244
 msgid "This area requires user login!"
 msgstr "Esta sección requiere del ingreso del usuario."
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/pagenav.php:133
-#, fuzzy, php-format
+#, php-format
 msgid ""
+"Showing results <strong>%u</strong> to <strong>%u</strong> from <strong>%u</"
+"strong>."
+msgstr ""
 "Mostrando <strong>%u</strong> a <strong>%u</strong> de <strong>%u</strong> "
 "resultados."
-msgstr ""
-"Mostrar <strong>%u</strong> to <strong>%u</strong> of <strong>%u</strong>."
 
 #: C:\wamp\www\xoops\modules\rmcommon/class/template.php:228
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:232
@@ -1058,9 +1056,9 @@ msgid "Errros ocurrs while trying to update comment!"
 msgstr "¡Ocurrieron errores mientras se actualizaba el comentario!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/events/rmcommon.php:79
-#, fuzzy
 msgid "An error ocurred while trying to delete .htaccess rules!"
-msgstr "¡Ocurrió un error al intentar asignar el bloque a esta posición!"
+msgstr ""
+"¡Ocurrió un error al intentar eliminar las reglas del archivo .htaccess!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/events/rmcommon.php:80
 msgid ""
@@ -1071,9 +1069,8 @@ msgstr ""
 "code> y termina con <code># end rmcommon</code>"
 
 #: C:\wamp\www\xoops\modules\rmcommon/events/rmcommon.php:91
-#, fuzzy
 msgid "An error ocurred while trying to write .htaccess file!"
-msgstr "Se han producido errores al intentar guardar los datos"
+msgstr "¡Ocurrió un error al intentar escribir el archivo .htaccess!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/events/rmcommon.php:92
 msgid "Please try to add manually next lines:"
@@ -1091,19 +1088,16 @@ msgid "Users Management"
 msgstr "Administración de Usuarios"
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:42
-#, fuzzy
 msgid "Groups Management"
-msgstr "Manejador de Módulos"
+msgstr "Administración de Módulos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:70
-#, fuzzy
 msgid "The specified group does not exists!"
-msgstr "El módulo especificado no existe."
+msgstr "El grupo especificado no existe"
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:97
-#, fuzzy
 msgid "Create new group"
-msgstr "Crear Nueva Categoria"
+msgstr "Crear nuevo grupo"
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:97
 #, php-format
@@ -1111,54 +1105,45 @@ msgid "Edit group \"%s\""
 msgstr "Editar grupo \"%s\""
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:118
-#, fuzzy
 msgid "Session token expired"
-msgstr "¡El identificador de sesión expiró!"
+msgstr "El identificador de sesión expiró"
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:130
-#, fuzzy
 msgid "No name has been provided."
-msgstr "¡No se ha especificado un bloque!"
+msgstr "No se ha especificado un nombre."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:136
 msgid "Description has not been provided."
 msgstr "No se ha proporcionado la dirección."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:144
-#, fuzzy
 msgid "Specified group does not exists. Please try again."
-msgstr "¡El bloque especificado no existe! Por favor inténtalo de nuevo."
+msgstr "El grupo especificado no existe. Por favor inténtalo de nuevo."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:158
-#, fuzzy
 msgid "Errors ocurred while trying to save group data."
-msgstr "Se han producido errores al intentar guardar los datos"
+msgstr "Ocurrieron errores al intentar almacenar los datos del grupo."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:166
-#, fuzzy
 msgid "Administrative rights could not be saved."
-msgstr "¡No se pudo guardar la posición \"%s\"!"
+msgstr "No se guardaron los permisos administrativos."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:176
-#, fuzzy
 msgid "Access rights could not be saved."
-msgstr "¡No se pudo guardar el orden de los bloques!"
+msgstr "No se almacenaron los permisos de acceso."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:186
-#, fuzzy
 msgid "Specific permissions could not be saved."
-msgstr "¡No se pudo guardar la posición \"%s\"!"
+msgstr "No se almacenaron los permisos específicos."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:192
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:196
-#, fuzzy
 msgid "Data saved successfully."
-msgstr "La Base de datos se ha actualizado correctamente"
+msgstr "Los datos se almacenaron correctamente."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:220
-#, fuzzy
 msgid "You must select at least one group. Please, try again."
-msgstr "Debe seleccionar al menos una posición!"
+msgstr "Debes seleccionar al menos un grupo. Por favor inténtalo de nuevo."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:239
 msgid ""
@@ -1169,14 +1154,12 @@ msgstr ""
 "eliminados."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:267
-#, fuzzy
 msgid "Selected groups has been deleted."
-msgstr "No se ha seleccionado ningún usuario"
+msgstr "Los grupos seleccionados han sido eliminados."
 
 #: C:\wamp\www\xoops\modules\rmcommon/groups.php:273
-#, fuzzy
 msgid "Errors ocurred while trying to delete selected groups."
-msgstr "Se han producido errores al intentar realizar esta acción"
+msgstr "Ocurrieron errores al intentar eliminar los grupos seleccionados."
 
 #: C:\wamp\www\xoops\modules\rmcommon/images.php:33
 #: C:\wamp\www\xoops\modules\rmcommon/include/tiny-images.php:120
@@ -1391,14 +1374,12 @@ msgid "Modules management (Install, uninstall and update)"
 msgstr "Administración de módulos (instalar, desinstalar y actualizar)"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:22
-#, fuzzy
 msgid "Images management"
-msgstr "Administrador de Imágenes"
+msgstr "Administración de imágenes"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:27
-#, fuzzy
 msgid "Comments management"
-msgstr "Administrador de Comentarios"
+msgstr "Administración de comentarios"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/permissions.php:32
 msgid "Plugins management (Install, uninstall and update)"
@@ -1447,9 +1428,8 @@ msgstr "Sitio Web:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:81
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:851
-#, fuzzy
 msgid "Updatable:"
-msgstr "Actualizar"
+msgstr "Actualizable:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:91
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:861
@@ -1471,21 +1451,18 @@ msgstr "Nativo de C.U.:"
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:117
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:887
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:158
-#, fuzzy
 msgid "Directory:"
-msgstr "Directorio XOOPS:"
+msgstr "Directorio:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:123
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:893
-#, fuzzy
 msgid "Released:"
-msgstr "Liberado el %s"
+msgstr "Liberado:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:137
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:907
-#, fuzzy
 msgid "Get Help"
-msgstr "%s ayuda"
+msgstr "Obtener Ayuda"
 
 #: C:\wamp\www\xoops\modules\rmcommon/include/right_widgets.php:158
 #: C:\wamp\www\xoops\modules\rmcommon/modules.php:928
@@ -1546,7 +1523,7 @@ msgstr "¡El archivo no pudo ser insertado en la base de datos!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/index.php:40
 msgid "%d% %T% %Y%"
-msgstr ""
+msgstr "%d% %T% %Y%"
 
 #: C:\wamp\www\xoops\modules\rmcommon/index.php:100
 msgid "Dashboard Help"
@@ -1565,11 +1542,13 @@ msgid "Specified theme does not exist!"
 msgstr "¡El tema especificado no existe!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/js/cu-js-language.php:33
-#, fuzzy
 msgid ""
 "Do you really want to delete selected groups?\\n\\nPlease note that this "
 "action can not be undo."
-msgstr "¿Realmente deseas eliminar las posiciones seleccionadas?"
+msgstr ""
+"¿Realmente deseas eliminar los grupos seleccionados?\n"
+"\n"
+"Ten en cuenta que esta acción no puede ser deshecha."
 
 #: C:\wamp\www\xoops\modules\rmcommon/js/cu-js-language.php:37
 msgid "Do you really want to delete this block?"
@@ -1632,14 +1611,12 @@ msgstr ""
 "¡Debes seleccionar al menos una posición antes de realizar esta acción!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/js/cu-js-language.php:55
-#, fuzzy
 msgid "Downloading News..."
-msgstr "Descargando %s"
+msgstr "Cargando Noticias..."
 
 #: C:\wamp\www\xoops\modules\rmcommon/js/cu-js-language.php:56
-#, fuzzy
 msgid "Error ocurred while trying to load news."
-msgstr "Se han producido errores al intentar guardar los datos"
+msgstr "Ocurrieron errores al intentar cargar las noticias."
 
 #: C:\wamp\www\xoops\modules\rmcommon/loader.php:270
 msgid "Sorry, Red Mexico Common Utilities has not been installed yet!"
@@ -1647,9 +1624,8 @@ msgstr ""
 "Lo sentimos, Common utilities de Red Mexico no ha sido instalado todavía!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/menu.php:48
-#, fuzzy
 msgid "Add Group"
-msgstr "Grupos"
+msgstr "Crear Grupo"
 
 #: C:\wamp\www\xoops\modules\rmcommon/menu.php:66
 msgid "New user"
@@ -2145,24 +2121,20 @@ msgid "This module does not support rss feeds"
 msgstr "Este módulo no soporta menús rss"
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:66
-#, fuzzy
 msgid "Unauthorized action"
-msgstr "¡No autorizado!"
+msgstr "Acción no autorizada"
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:73
-#, fuzzy
 msgid "You have not specified a module!"
-msgstr "No ha seleccionado ningún usuario!"
+msgstr "¡No has especificado un módulo!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:81
-#, fuzzy
 msgid "You have not specified a valid module ID!"
-msgstr "Debe especificar un ID de posición válida!"
+msgstr "¡No has especificado un ID de módulo válido!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:89
-#, fuzzy
 msgid "This module can not be configured with Common Utilities"
-msgstr "Configurar Common Utilities"
+msgstr "Este módulo no puede ser configurado con Common Utilities"
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:107
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:139
@@ -2177,26 +2149,23 @@ msgstr "Opciones"
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:159
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:175
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-settings-form.php:3
-#, fuzzy, php-format
+#, php-format
 msgid "%s Settings"
-msgstr "%s configuraciones"
+msgstr "Opciones de %s"
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:203
-#, fuzzy
 msgid "A module has not been specified!"
-msgstr "¡No se ha especificado un bloque!"
+msgstr "¡No se ha especificado un módulo!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:218
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:221
-#, fuzzy
 msgid "The specified module does not exists."
 msgstr "El módulo especificado no existe."
 
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:329
 #: C:\wamp\www\xoops\modules\rmcommon/settings.php:334
-#, fuzzy
 msgid "Settings saved successfully!"
-msgstr "Cambios guardados correctamente!"
+msgstr "Opciones almacenadas correctamente"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/ajax/rmc-updates-list.php:7
 #, php-format
@@ -2274,9 +2243,9 @@ msgid "ERROR 404. Document not Found!"
 msgstr "ERROR 404 ¡Documento no encontrado!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rm-error-404.php:7
-#, fuzzy, php-format
+#, php-format
 msgid "Request document %s could not be found in this server!"
-msgstr "No se pudo insertar la plantilla %s!"
+msgstr "El documento %s no se encontró en el servidor"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-block-form.php:1
 #, php-format
@@ -2355,7 +2324,6 @@ msgid "Visible"
 msgstr "Visible"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-block-form.php:82
-#, fuzzy
 msgid "Access Permissions"
 msgstr "Permisos de Lectura"
 
@@ -2606,9 +2574,8 @@ msgstr "Actualizar Categoría"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-comments.php:13
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:27
-#, fuzzy
 msgid "Search"
-msgstr "Buscar:"
+msgstr "Buscar"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-comments.php:13
 msgid "You need something to search!"
@@ -2703,9 +2670,8 @@ msgid "Please %s to view available updates."
 msgstr "Por favor %s para ver las actualizaciones disponibles."
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:69
-#, fuzzy
 msgid "click here"
-msgstr "Click aquí"
+msgstr "click aquí"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:75
 msgid "Support my Work"
@@ -2829,14 +2795,12 @@ msgid "Link:"
 msgstr "Enlace:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:10
-#, fuzzy
 msgid "Search user:"
-msgstr "Buscar Usuarios"
+msgstr "Buscar usuario:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:11
-#, fuzzy
 msgid "Search user"
-msgstr "Buscar Usuarios"
+msgstr "Buscar usuario"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:14
 msgid "Results:"
@@ -2855,9 +2819,8 @@ msgid "Date of register"
 msgstr "Fecha de registro"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:35
-#, fuzzy
-msgid "Seleccionados:"
-msgstr "Seleccionado:"
+msgid "Selected:"
+msgstr "Seleccionados:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-form-users.php:45
 msgid "Insert Users"
@@ -2868,9 +2831,8 @@ msgid "This is a required field. Please fill it!"
 msgstr "¡Este es un campo requerido. Por favor llenalo!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:16
-#, fuzzy
 msgid "Group Name"
-msgstr "Grupos"
+msgstr "Nombre del Grupo"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:21
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups.php:11
@@ -2882,7 +2844,6 @@ msgid "Description"
 msgstr "Descripción"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:25
-#, fuzzy
 msgid ""
 "Add <strong>admin rights</strong> and <strong>access rights</strong> to new "
 "group. Remember that specific permissions allows to control with more detail "
@@ -2894,48 +2855,40 @@ msgstr ""
 "realizar de acuerdo a los grupos a los que pertenecen."
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:31
-#, fuzzy
 msgid "Basic Permissions"
-msgstr "Permisos del Bloque"
+msgstr "Permisos Básicos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:32
-#, fuzzy
 msgid "Specific Permissions"
-msgstr "Permisos de Lectura"
+msgstr "Permisos Específicos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:43
-#, fuzzy
 msgid "Admin Rights"
-msgstr "Tema del panel de control"
+msgstr "Permisos Administrativos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:48
-#, fuzzy
 msgid "All Modules"
-msgstr "Todos los módulos"
+msgstr "Todos los Módulos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:71
-#, fuzzy
 msgid "Access Rights"
-msgstr "Acceso"
+msgstr "Permisos de Lectura"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:76
 msgid "All modules"
 msgstr "Todos los módulos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups-form.php:135
-#, fuzzy
 msgid "Save Data"
-msgstr "Guardar"
+msgstr "Guardar Datos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups.php:1
-#, fuzzy
 msgid "Existing Groups"
-msgstr "Usuarios Existentes"
+msgstr "Grupos Existentes"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-groups.php:19
-#, fuzzy
 msgid "There are not groups registered yet."
-msgstr "¡Aún no se han creado posiciones!"
+msgstr "Todavía no hay grupos registrados."
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:9
 msgid "Close Category"
@@ -2959,9 +2912,9 @@ msgstr ""
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:35
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-images-images.php:44
-#, fuzzy, php-format
+#, php-format
 msgid "Do you really want to delete &quot;%s&quot;?"
-msgstr "¿Realmente quieres eliminar &quot;?"
+msgstr "¿Realmente quieres eliminar &quot;%s&quot;?"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:36
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:41
@@ -3165,15 +3118,13 @@ msgid "New name must be different from current name!"
 msgstr "¡El nombre nuevo debe ser diferente del nombre actual!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:8
-#, fuzzy
 msgid "You must provide a new name!"
-msgstr "¡Debes proporcionar un texto para comentar!"
+msgstr "¡Debes proporcionar un nombre nuevo!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:22
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:31
-#, fuzzy
 msgid "Image"
-msgstr "Imágenes"
+msgstr "Imagen"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:24
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:33
@@ -3189,14 +3140,12 @@ msgstr "Versión"
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:58
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:131
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:359
-#, fuzzy
 msgid "Options"
-msgstr "Opciones personalizadas"
+msgstr "Opciones"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:94
-#, fuzzy
 msgid "Show Information"
-msgstr "Mostrar posiciones"
+msgstr "Mostrar Información"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:102
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-plugins.php:54
@@ -3214,26 +3163,22 @@ msgid "Uninstall"
 msgstr "Desinstalar"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:138
-#, fuzzy
 msgid "Module Information"
-msgstr "Mostrar posiciones"
+msgstr "Información del Módulo"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:154
-#, fuzzy
 msgid "Current Version:"
-msgstr "Versión:"
+msgstr "Versión Actual:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:164
-#, fuzzy
 msgid "Author(s):"
-msgstr "Autor:"
+msgstr "Autor(es):"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:165
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:169
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-modules.php:179
-#, fuzzy
 msgid "Not provided"
-msgstr "Aprobado"
+msgstr "No porporcionado"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:3
 msgid "Pages:"
@@ -3244,18 +3189,16 @@ msgid "First Page"
 msgstr "Primera Página"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:5
-#, fuzzy
 msgid "First"
-msgstr "Primera Página"
+msgstr "Primera"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:9
 msgid "Previous Page"
 msgstr "Página anterior"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:9
-#, fuzzy
 msgid "&laquo;"
-msgstr "Continuar &raquo;"
+msgstr "&laquo;"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:18
 #, php-format
@@ -3267,18 +3210,16 @@ msgid "Next Page"
 msgstr "Siguiente Página"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:25
-#, fuzzy
 msgid "&raquo;"
-msgstr "Continuar &raquo;"
+msgstr "&raquo;"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:29
 msgid "Last Page"
 msgstr "Última Página"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-navigation-pages.php:29
-#, fuzzy
 msgid "Last"
-msgstr "Última Página"
+msgstr "Última"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-plugins.php:4
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-plugins.php:16
@@ -3328,14 +3269,12 @@ msgid "URL:"
 msgstr "URL:"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-settings-form.php:34
-#, fuzzy
 msgid "There are not fields in this category."
-msgstr "¡Aún no se han creado posiciones!"
+msgstr "No hay campos en esta categoría."
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-settings-form.php:67
-#, fuzzy
 msgid "Save Changes"
-msgstr "Guardar Configuraciones"
+msgstr "Guardar Cambios"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-settings.php:2
 msgid "Configurable Items"
@@ -3537,9 +3476,8 @@ msgstr "Buscar ahora!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-users.php:147
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-users.php:255
-#, fuzzy
 msgid "Order by..."
-msgstr "Ordenar por:"
+msgstr "Ordenar por..."
 
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-users.php:151
 #: C:\wamp\www\xoops\modules\rmcommon/templates/rmc-users.php:185
@@ -3616,39 +3554,32 @@ msgid "edit"
 msgstr "editar"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:206
-#, fuzzy
 msgid "User Info Settings"
-msgstr "Usuarios"
+msgstr "Opciones de Información de Usuario"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:207
-#, fuzzy
 msgid "Meta Tags and Footer"
-msgstr "Encabezado y pie de página"
+msgstr "Encabezado y Pie de Página"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:208
-#, fuzzy
 msgid "Word Censoring"
 msgstr "Censor de Palabras"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:209
-#, fuzzy
 msgid "Search Options"
-msgstr "Búsquedas"
+msgstr "Opciones de Búsqueda"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:210
-#, fuzzy
 msgid "Email Setup"
-msgstr "Correo electrónico"
+msgstr "Configuración de Email"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:211
-#, fuzzy
 msgid "Authentication Options"
-msgstr "Autentificación"
+msgstr "Opciones de Autenticación"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:212
-#, fuzzy
 msgid "System Module Settings"
-msgstr "Módulos"
+msgstr "Opciones del Módulos Sistema"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:1
 msgid "Color Test for Two&bull;P6"
@@ -3667,14 +3598,12 @@ msgid "Info boxes"
 msgstr "Cajas de Información"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:47
-#, fuzzy
 msgid "Title"
-msgstr "Título:"
+msgstr "Título"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:50
-#, fuzzy
-msgid "Content fo the box"
-msgstr "Tipo de contenido:"
+msgid "Content for the box"
+msgstr "Contenido de la Caja"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:58
 msgid "Modals"
@@ -3693,19 +3622,16 @@ msgid "Modal title"
 msgstr "Título del Cuadro"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:75
-#, fuzzy
 msgid "Modal content"
-msgstr "Contenido del mensaje"
+msgstr "Contenido del cuadro de diálogo"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:88
-#, fuzzy
 msgid "Modal Title"
-msgstr "Título del Bloque"
+msgstr "Título del Cuadro de Diálogo"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:91
-#, fuzzy
 msgid "Dialog content"
-msgstr "Contenido del mensaje"
+msgstr "Contenido del cuadro de diálogo"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:103
 msgid "Alerts"
@@ -3716,9 +3642,8 @@ msgid "Progess"
 msgstr "Progreso"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:139
-#, fuzzy
 msgid "Tables"
-msgstr "Habilitar"
+msgstr "Tablas"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/include/test-color.php:245
 msgid "Other Elements"
@@ -3729,9 +3654,8 @@ msgid "Show breadcrumb"
 msgstr "Mostrar  ruta de navegación"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:68
-#, fuzzy
 msgid "Common Utilities"
-msgstr "Configurar Common Utilities"
+msgstr "Common Utilities"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:104
 msgid "System"
@@ -3742,28 +3666,24 @@ msgid "Theme"
 msgstr "Tema"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:216
-#, fuzzy
 msgid "Modules Box"
-msgstr "Modulos"
+msgstr "Cajón de Módulos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:224
-#, fuzzy
 msgid "Quick Links"
-msgstr "Links Sociales"
+msgstr "Enlaces Rápidos"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:248
 msgid "Social Links"
 msgstr "Links Sociales"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:267
-#, fuzzy
 msgid "Control Panel"
-msgstr "%s Panel de Control"
+msgstr "Panel de Control"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:273
-#, fuzzy
 msgid "View Home Page"
-msgstr "Página Inicial"
+msgstr "Ver Página Principal"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:293
 msgid "About Two·Six"
@@ -3791,14 +3711,14 @@ msgid "Toolbar"
 msgstr "Barra de herramientas"
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:507
-#, fuzzy, php-format
+#, php-format
 msgid "Powered by %s."
-msgstr "Publicado en %s"
+msgstr "Impulsado por %s."
 
 #: C:\wamp\www\xoops\modules\rmcommon/themes/twop6/theme.php:508
-#, fuzzy, php-format
+#, php-format
 msgid "Reloaded by %s."
-msgstr "Publicado en %s"
+msgstr "Recargado por %s."
 
 #: C:\wamp\www\xoops\modules\rmcommon/updates.php:43
 msgid "Item updated!"
@@ -3824,7 +3744,7 @@ msgid "ERROR: unable to open downloaded zip file!"
 msgstr "¡No se pudo descargar el archivo de actualización!"
 
 #: C:\wamp\www\xoops\modules\rmcommon/updates.php:174
-#, fuzzy, php-format
+#, php-format
 msgid "Target path \"%s\" does not exists!"
 msgstr "¡La ruta destino \"%s\" no existe!"
 
@@ -4055,7 +3975,6 @@ msgid "Google+"
 msgstr "Google+"
 
 #: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:81
-#, fuzzy
 msgid "General"
 msgstr "General"
 
@@ -4064,7 +3983,6 @@ msgid "Appearance"
 msgstr "Apariencia"
 
 #: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:83
-#, fuzzy
 msgid "Comentarios"
 msgstr "Comentarios"
 
@@ -4307,6 +4225,10 @@ msgstr "Bloque Personalizado"
 #: C:\wamp\www\xoops\modules\rmcommon/xoops_version.php:483
 msgid "Allows to create a block with custom content."
 msgstr "Permite crear un bloque con contenido personalizado."
+
+#, fuzzy
+#~ msgid "Seleccionados:"
+#~ msgstr "Seleccionado:"
 
 #~ msgid "Usuarios..."
 #~ msgstr "Usuarios..."

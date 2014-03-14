@@ -47,7 +47,7 @@
                 <h3><?php _e('Title', 'rmcommon'); ?></h3>
             </div>
             <div class="box-content collapsable">
-                <?php _e('Content fo the box', 'rmcommon'); ?>
+                <?php _e('Content for the box', 'rmcommon'); ?>
             </div>
         </div>
     </div>

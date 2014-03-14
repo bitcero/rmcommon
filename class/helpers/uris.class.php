@@ -52,7 +52,7 @@ class RMUris
 
         $url = XOOPS_URL;
 
-        $paths = $cuSettings->modules_path;
+        $paths = isset($cuSettings->modules_path) ? $cuSettings->modules_path : array();
         $path = isset( $paths[$module] ) ? $paths[$module] : '/' . $module;
 
         if ( defined( 'XOOPS_CPFUNC_LOADED' ) ){
