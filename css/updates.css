@@ -29,7 +29,7 @@
     border: 1px dashed #d4d4d4!important;
 }
 
-#upd-info-blocker, #login-blocker, #files-blocker{
+#login-blocker, #files-blocker{
     position: fixed;
     top: 0; left:0; right: 0; bottom: 0;
     background: #000;
@@ -40,7 +40,12 @@
         -webkit-opacity: 0.8;
         -o-opacity: 0.8;
 }
-#upd-info, #upd-run{
+#files{
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+#upd-run{
     position: fixed;
     top: 25%; left: 15%; right: 15%; bottom: 25%;
     background: #f2f2f2;
@@ -55,7 +60,7 @@
         -webkit-box-shadow: 0 0 15px #000;
         -o-box-shadow: 0 0 15px #666;
 }
-#upd-info > .title, #upd-run > .title{
+#upd-run > .title{
     padding: 5px;
     color: #FFF;
     text-shadow: 0 0 3px #000;
@@ -66,20 +71,7 @@
     font-size: 16px;
     border-bottom: 1px solid #FFF;
 }
-#upd-info > .nav{
-    margin: 10px 15px 0 15px;
-    margin-bottom: 0!important;
-}
-#upd-info .tab-container{
-    background: #FFF;
-    border: 1px solid #DDD;
-    border-top: 0;
-    padding: 20px;
-    border-radius: 0 0 4px 4px;
-    position: absolute;
-    top: 79px; left: 15px; right: 15px; bottom: 15px;
-    overflow: auto;
-}
+
 #upd-info .loading{
     background: #FFF url("../images/wait.gif") no-repeat center;
 }
@@ -134,13 +126,8 @@
     position: fixed;
     top: 20%;
     left: 50%;
-    margin-left: -150px;
-    width: 300px;
-    border-radius: 4px;
-        -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
-        -o-border-radius: 4px;
-    background: #FFF;
+    margin-left: -200px;
+    width: 400px;
     box-shadow: 0 0 10px #000;
         -moz-box-shadow: 0 0 10px #000;
         -webkit-box-shadow: 0 0 10px #000;
@@ -149,13 +136,11 @@
     z-index: 1052;
 }
 #upd-login .title{
-    padding: 5px;
+    padding: 10px;
     font-weight: bold;
-    color: #FFF;
-    border-radius: 4px 4px 0 0;
-        -moz-border-radius: 4px 4px 0 0;
-        -webkit-border-radius: 4px 4px 0 0;
-        -o-border-radius: 4px 4px 0 0;
+}
+#upd-login .title > h4{
+    margin: 0;
 }
 #upd-login .controls{
     padding: 10px;

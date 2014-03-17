@@ -93,22 +93,27 @@
     </div>
 </div>
 
-<div id="upd-info-blocker"></div>
-<div id="upd-info">
-    <div class="xo-bluebar title window">
-        <button type="button" class="close" onclick="$('#upd-info-blocker').click();">&times;</button>
-        <?php _e('Update Details','rmcommon'); ?>
-    </div>
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#details" data-toggle="tab"><?php _e('Details','rmcommon'); ?></a></li>
-        <li><a href="#files" data-toggle="tab"><?php _e('Files','rmcommon'); ?></a></li>
-    </ul>
-    <div class="tab-content tab-container">
-        <div class="tab-item tab-pane fade active in" id="details">
-            
-        </div>
-        <div class="tab-item tab-pane fade" id="files">
-            
+<div id="upd-info" class="modal fade">
+    <div class="modal-dialog xlarge">
+        <div class="modal-content">
+            <div class="modal-header cu-titlebar">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><?php _e('Update Details','rmcommon'); ?></h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#details" data-toggle="tab"><?php _e('Details','rmcommon'); ?></a></li>
+                    <li><a href="#files" data-toggle="tab"><?php _e('Files','rmcommon'); ?></a></li>
+                </ul>
+                <div class="tab-content tab-container">
+                    <div class="tab-item tab-pane fade active in" id="details">
+
+                    </div>
+                    <div class="tab-item tab-pane fade" id="files">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -124,17 +129,31 @@
 </div>
 
 <div id="login-blocker"></div>
-<div id="upd-login" data-next="">
-    <div class="title xo-bluebar">
+<div id="upd-login" data-next="" class="modal-content">
+    <div class="title cu-titlebar">
         <button class="close" type="button">&times;</button>
-        <i class="fa fa-user"></i> <?php _e('User Credentials','rmcommon'); ?>
+        <h4><i class="fa fa-user"></i> <?php _e('User Credentials','rmcommon'); ?></h4>
     </div>
-    <div class=" controls">
-        <p><?php _e('Please provide your login credentials for site %site%.','rmcommon'); ?></p>
-        <input type="text" name="uname" id="uname" value="" class="input-block-level" placeholder="<?php _e('Username','rmcommon'); ?>" />
-        <input type="password" name="uname" id="upass" value="" class="input-block-level" placeholder="<?php _e('Password','rmcommon'); ?>" />
-        <button type="button" class="btn btn-primary ok-login"><?php _e('Login','rmcommon'); ?></button>
-        <button type="button" class="btn cancel-login"><?php _e('Cancel','rmcommon'); ?></button>
+    <div class="controls">
+        <p class="help-block"><?php _e('Please provide your login credentials for site %site%.','rmcommon'); ?></p>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label><?php _e('Username:','rmcommon'); ?></label>
+                    <input type="text" name="uname" id="uname" value="" class="form-control" placeholder="<?php _e('Username','rmcommon'); ?>" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label><?php _e('Password:', 'rmcommon'); ?></label>
+                    <input type="password" name="uname" id="upass" class="form-control" placeholder="<?php _e('Password','rmcommon'); ?>" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary ok-login"><?php _e('Login','rmcommon'); ?></button> &nbsp;
+            <button type="button" class="btn btn-default cancel-login"><?php _e('Cancel','rmcommon'); ?></button>
+        </div>
     </div>
 </div>
 

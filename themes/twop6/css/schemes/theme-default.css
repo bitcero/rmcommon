@@ -196,7 +196,7 @@ a:hover{
 }
 
 /* MODAL */
-.modal .modal-content{
+.modal .modal-content,.modal-content{
     border-radius: 2px;
 }
 .modal .modal-header{

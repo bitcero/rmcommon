@@ -112,7 +112,7 @@ a:hover{
 #rmc-toolbar{
     position: fixed;
     top: 87px; left: 0; right: 0;
-    background: rgba(255,255,255,0.1);
+    background: #CAD8D1;
     z-index: 1000;
     border-radius: 0;
     border-bottom: 1px solid rgba(0,0,0,0.03);
@@ -202,7 +202,7 @@ a:hover{
 }
 
 /* MODAL */
-.modal .modal-content{
+.modal .modal-content,.modal-content{
     border-radius: 2px;
 }
 .modal .modal-header{

@@ -1,7 +1,7 @@
 <?php foreach($updates['updates'] as $i => $upd): ?>
     <div class="row upd-item" id="upd-<?php echo $i; ?>">
         <div>
-            <div class="col-md-8 col-lg-8">
+            <div class="col-md-7">
                 <h4><?php echo $upd['data']['title']; ?></h4>
                 <div class="rmc-upd-info">
                     <?php echo sprintf(__('Type: %s','rmcommon'), '<span class="label label-info">'.$upd['data']['type'].'</span>'); ?> |
@@ -19,11 +19,11 @@
                     <span class="text-info status"><?php echo sprintf(__('Downloading %s','rmcommon'), $rmUtil->formatBytesSize($upd['data']['size'])); ?></span>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4">
+            <div class="col-md-5">
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default" onclick="loadUpdateDetails(<?php echo $i; ?>);"><i class="fa fa-info-circle"></i> <?php _e('View details','rmcommon'); ?></button>
-                    <button type="button" class="btn btn-default" onclick="installUpdate(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-arrow-circle-down"></i> <?php _e('Update now!','rmcommon'); ?></button>
-                    <button type="button" class="btn button-default btn-warning" onclick="installLater(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-clock-o"></i> <?php _e('Install Later','rmcommon'); ?></button>
+                    <button type="button" class="btn btn-info" onclick="loadUpdateDetails(<?php echo $i; ?>);"><i class="fa fa-info-circle"></i> <?php _e('Details','rmcommon'); ?></button>
+                    <button type="button" class="btn btn-warning" onclick="installUpdate(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-arrow-circle-down"></i> <?php _e('Update now!','rmcommon'); ?></button>
+                    <button type="button" class="btn btn-default" onclick="installLater(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-clock-o"></i> <?php _e('Later','rmcommon'); ?></button>
                 </div>
             </div>
         </div>

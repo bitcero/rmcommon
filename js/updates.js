@@ -154,15 +154,7 @@ function loadUpdateDetails(id){
     $("#files").html('');
     $("#upd-info .tab-container").addClass('loading');
     
-    $("#upd-info-blocker").fadeIn('fast', function(){
-        $("#upd-info").fadeIn('fast');
-        $("body").css('overflow','hidden');
-    }).click(function(){
-        $("#upd-info").fadeOut('fast', function(){
-            $("#upd-info-blocker").fadeOut('fast');
-            $("body").css('overflow','');
-        });
-    });
+    $("#upd-info").modal();
 
     $.get('updates.php', {action: 'update-details', url: url}, function(data){
         
@@ -298,7 +290,7 @@ function showLogin(update){
         var a = document.createElement('a');
         a.href = update.url;
         $("#upd-login").fadeIn('fast');
-        $("#upd-login p").html($("#upd-login p").html().replace("%site%", a.hostname));
+        $("#upd-login p").html($("#upd-login p").html().replace("%site%", '<a href="http://'+a.hostname+'" target="_blank">' + a.hostname + '</a>'));
 
     });
     

@@ -33,11 +33,11 @@ while($row = $xoopsDB->fetchArray($result)){
     $v = $info['rmversion'];
 
     if(isset($v['major']))
-        $version = $v['major'].'.'.$v['minor'].'.'.($v['revision']/10).'.'.$v['stage'];
+        $version = $v['major'].'.'.$v['minor'].'.'.$v['revision'].'.'.$v['stage'];
     else
-        $version = $v['number'].'.'.($v['revision']/100).'.'.$v['status'];
+        $version = $v['number'].'.'.($v['revision']/10).'.'.$v['status'];
     
-    $urls[$mod->dirname()] = $info['updateurl'] . (strpos($info['updateurl'], '?')===false ? '?' : '&') . 'action=check&id='.$mod->mid().'&version='.$version;
+    $urls[$mod->dirname()] = $info['updateurl'] . (strpos($info['updateurl'], '?')===false ? '?' : '&') . 'action=check&id='.$mod->dirname().'&version='.$version;
     
 }
 
@@ -76,9 +76,11 @@ while($row = $xoopsDB->fetchArray($result)){
     if(!is_array($v))
         $version = '0.0.0.0';
     else
-        $version = $v['major'].'.'.$v['minor'].'.'.($v['revision']/10).'.'.$v['stage'];
+        $version = $v['major'].'.'.$v['minor'].'.'.$v['revision'].'.'.$v['stage'];
+
+    $params = "type=plugin&verion=$version&id=$row[dir]";
     
-    $urls[$row['dir']] = strpos($info['updateurl'], '?')===false ? $info['updateurl'].'?version='.$version : $info['updateurl'].'&version='.$version;
+    $urls[$row['dir']] = strpos($info['updateurl'], '?')===false ? $info['updateurl']."?$params" : $info['updateurl']."&$params";
     
 }
 

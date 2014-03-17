@@ -228,7 +228,7 @@ a:hover{
 
 /* MODAL */
 .modal .modal-content,
-.cu-modal .cu-dialog-content{
+.cu-modal .cu-dialog-content,.modal-content{
     border-radius: 0px;
     background-color: #F0F1EE;
 }
