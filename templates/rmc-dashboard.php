@@ -2,7 +2,7 @@
 
 <div class="row" data-news="load" data-boxes="load" data-module="rmcommon" data-target="#rmc-recent-news">
 
-    <div class="col-md-4 col-lg-5" data-box="rmcommon-left">
+    <div class="col-md-4 col-lg-5" data-box="module-box-left">
 
         <!-- INstalled Modules -->
         <div class="cu-box box-collapse">
@@ -61,7 +61,7 @@
 
     </div>
 
-    <div class="col-md-4 col-lg-4" data-box="rmcommon-center">
+    <div class="col-md-4 col-lg-4" data-box="module-box-center">
 
         <!-- UPdates available -->
         <div class="alert alert-block" style="display: none;" id="updater-info">
@@ -112,7 +112,7 @@
 
     </div>
 
-    <div class="col-md-4 col-lg-3" data-box="rmcommon-right">
+    <div class="col-md-4 col-lg-3" data-box="module-box-right">
 
         <!-- System tools -->
         <div class="cu-box">
