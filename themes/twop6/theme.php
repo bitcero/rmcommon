@@ -437,20 +437,19 @@
         <?php endif; ?>
         <!-- End rmcommon toolbar //-->
 
-
-        <!-- System messages -->
-        <?php foreach($rmc_messages as $message): ?>
-        <div class="container">
-            <div class="alert <?php echo $tp6Alerts[$message['level']]; ?>"<?php if($message['level']>4 && $message['icon']!=''): ?> style="background-image: url(<?php echo $message['icon']; ?>);"<?php endif; ?>>
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <?php echo html_entity_decode($message['text']); ?>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        <!-- End system messages //-->
         
         <!-- Content -->
         <div class="container" id="xo-content">
+            <!-- System messages -->
+            <?php foreach($rmc_messages as $message): ?>
+                <div class="row">
+                    <div class="alert <?php echo $tp6Alerts[$message['level']]; ?>"<?php if($message['level']>4 && $message['icon']!=''): ?> style="background-image: url(<?php echo $message['icon']; ?>);"<?php endif; ?>>
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <?php echo html_entity_decode($message['text']); ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <!-- End system messages //-->
             <div class="row">
                 <?php if($left_widgets): ?>
                 <aside class="col-md-4 col-lg-2">
