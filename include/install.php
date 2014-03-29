@@ -74,6 +74,10 @@ function xoops_module_update_rmcommon($mod, $prev){
     $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_plugins").'` ENGINE = INNODB');
     $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_settings").'` ENGINE = INNODB');
 
+    // Prepare welcome screen
+    $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);
+    setcookie( "rmcwelcome", 1, time() + (365 * 86400), '/', $domain );
+
     return true;
 
 }

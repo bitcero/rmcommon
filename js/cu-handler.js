@@ -481,8 +481,8 @@ $(document).ready(function(){
                     var html = '<li>' +
                         '<small>'+response.news[i].date+'</small>' +
                         '<h5><a href="'+response.news[i].link+'" target="_blank">'+response.news[i].title+'</a></h5>';
-                    if ( response.news[i].image )
-                        html += '<img src="'+response.news[i].image+'">';
+                    /*if ( response.news[i].image )
+                        html += '<img src="'+response.news[i].image+'" class="img-responsive">';*/
 
                     html += '<p class="help-block">'+response.news[i].content+'</p>' +
                         '</li>';

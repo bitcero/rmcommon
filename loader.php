@@ -15,7 +15,7 @@ define("RMCPATH",XOOPS_ROOT_PATH.'/modules/rmcommon');
 define("RMCURL",XOOPS_URL.'/modules/rmcommon');
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
-define('RMCVERSION','2.2.4.5 beta');
+define('RMCVERSION','2.2.5.1 beta');
 
 /**
  * Welcome Screen
