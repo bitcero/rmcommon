@@ -53,7 +53,7 @@ Next is a brief list of the current features of Common Utilities. Note that new 
 
 #### At top level
 * A new awesome look for Control Panel of XOOPS.
-* A new modules manager, more friendly.
+* A new modules manager, more friendly ([See the video](http://youtu.be/csaNwMyNeYA)).
 * A new block manager with drag and drop capabilities.
 * New graphical components: menus, toolbars, breadcrumbs, admin blocks.
 * All graphical components are integrated.
