@@ -13,9 +13,13 @@ between modules will be a reality.
 **Common Utilities** counts with a integrated update system that will be more easy to maintain modules and plugins updated. The advantages are obvious:
 More security, more stability and the last features with every module.
 
+---
+
 ### Requirements
 * PHP >= 5.3
 * XOOPS >= 2.5 installed and running
+ 
+---
 
 ### Install
 
@@ -41,6 +45,8 @@ between rmcommon and XOOPS.
 
 6. Done! Common Utilities is installed.
 
+---
+
 ### A brief list of its features
 
 Next is a brief list of the current features of Common Utilities. Note that new features and improvements are added frequently.
@@ -60,7 +66,7 @@ Next is a brief list of the current features of Common Utilities. Note that new 
 * A RSS center that can group all rss feeds from your modules.
 * Inline help subsystem.
 
-### At low level
+#### At low level
 * A **totally new** security sub-system. More versatile and useful that allows to control every single action if you wish.
 * Also, the new groups management system allows to assign very specific permissions to each group.
 * Methods and objects more intuitive.
@@ -72,12 +78,16 @@ Next is a brief list of the current features of Common Utilities. Note that new 
 
 And much more...
 
+---
+
 ### What next?
 
 You can download modules and plugins from [XOOPS Mexico download center](http://www.xoopsmexico.net/downloads/) or directly from my repositories in GitHub.
 
 If you need help with **Common Utilities** you can go to [XOOPS Official Site](http://www.xoops.org) and get help in English. But if you are a
 Spanish speaker, then you can go to [Xoops Mexico](http://www.xoopsmexico.net) and get help in your own language.
+
+---
 
 ### Modules
 
