@@ -19,6 +19,8 @@ More security, more stability and the last features with every module.
 
 ### Install
 
+>[See the tutorial video](http://youtu.be/3cotY5aVZMc)
+
 Prior to install **Common Utilities**, an installation of XOOPS must exists.
 
 **Important:** Enable ***debug*** inline before to install Common Utilities.
