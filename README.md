@@ -53,11 +53,11 @@ Next is a brief list of the current features of Common Utilities. Note that new 
 
 #### At top level
 * A new awesome look for Control Panel of XOOPS.
-* A new modules manager, more friendly.
+* A new modules manager, more friendly ([See the video](http://youtu.be/csaNwMyNeYA)).
 * A new block manager with drag and drop capabilities.
 * New graphical components: menus, toolbars, breadcrumbs, admin blocks.
 * All graphical components are integrated.
-* Support for Admin GUI themes.
+* Support for Admin GUI themes ([See the video](http://youtu.be/3Bh2zsNt3AM)).
 * A very versatile new **Images Manager** that allows to create categories and specific images sizes for every category.
 * A new comment system, more easy to integrate with modules and other components.
 * Support for **plugins** that can _extend_ system features, _add_ new features or _interact_ with themes or modules.
