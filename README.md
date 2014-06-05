@@ -58,7 +58,7 @@ Next is a brief list of the current features of Common Utilities. Note that new 
 * New graphical components: menus, toolbars, breadcrumbs, admin blocks.
 * All graphical components are integrated.
 * Support for Admin GUI themes ([See the video](http://youtu.be/3Bh2zsNt3AM)).
-* A very versatile new **Images Manager** that allows to create categories and specific images sizes for every category.
+* A very versatile new **Images Manager** that allows to create categories and specific images sizes for every category ([See the video](http://youtu.be/Nzd4MWdQJzA)).
 * A new comment system, more easy to integrate with modules and other components.
 * Support for **plugins** that can _extend_ system features, _add_ new features or _interact_ with themes or modules.
 * An **awesome updates system** that will maintain the system updated.
