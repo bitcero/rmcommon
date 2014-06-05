@@ -12,14 +12,15 @@
  * This file loads some other scripts that allow to rmcommon
  * work with ajax and other stuff
  */
-
+error_reporting(0);
 $xoopsOption['nocommon'] = 1;
 include '../../../mainfile.php';
 
 /**
  * Load rewrite modules configuration
  */
-include XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js';
+if (file_exists( XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js' ) )
+    include XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js';
 
 /**
  * Load the ajax modules controller
