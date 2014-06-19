@@ -499,3 +499,13 @@ pre{
 .well{
     background-color: #1E2124;
 }
+
+.support-me + .box-footer > a{
+    background: #C23519;
+    color: #101417;
+    transition: all ease 250ms;
+}
+.support-me + .box-footer > a:hover{
+    background-color: #FFF;
+    color: #C23519;
+}

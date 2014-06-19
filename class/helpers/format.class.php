@@ -121,6 +121,7 @@ class RMFormat
             'skype' => 'fa-skype',
             'foursquare' => 'fa-foursquare',
             'vimeo' => 'fa-vimeo-square',
+            'vimeo' => 'fa-vimeo-square',
 
         );
 

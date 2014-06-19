@@ -221,4 +221,19 @@ class RMModules
         return false;
     }
 
+    static function icon( $dirname, $size ){
+
+        global $xoopsModule;
+
+        if ( $xoopsModule && $xoopsModule->getVar('dirname') == $dirname )
+            $mod = $xoopsModule;
+        else
+            $mod = self::load_module( $dirname );
+
+        $icon = XOOPS_URL . '/modules/' . $dirname . '/';
+        $icon .= $mod->getInfo( 'icon' . $size );
+        return $icon;
+
+    }
+
 }

@@ -76,13 +76,13 @@
                         <span class="web"><?php echo $mod['author_web']; ?></span>
                         <span class="url"><?php echo $mod['author_url']; ?></span>
                         <span class="license"><?php echo $mod['license']; ?></span>
-                        <span class="help"><?php echo $mod['help']; ?></span>
+                        <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
                         <span class="active"><?php echo $mod['active']; ?></span>
                         <span class="social">
                             <?php if( $mod['social'] ): ?>
                                 <?php foreach( $mod['social'] as $social ): ?>
                                 <a href="<?php echo $social['url']; ?>" target="_blank" title="<?php echo $social['title']; ?>">
-                                    <span class="fa <?php echo RMFormat::social_icon( $social['type'] ); ?>"></span>
+                                    <span class="fa fa-<?php echo $social['type']; ?>"></span>
                                 </a>
                                 <?php endforeach; ?>
                             <?php endif; ?>

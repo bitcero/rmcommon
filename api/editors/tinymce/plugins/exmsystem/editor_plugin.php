@@ -2,11 +2,13 @@
 // $Id: editor_plugin.php 1015 2012-08-23 05:36:42Z i.bitcero $
 /**
 * Este archivo permite la inclusión de nuevos plugins desde otros módulos
-*/ 
+*/
+header('Content-type: text/javascript');
 include_once '../../../../../../../mainfile.php';
 require_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';
 global $xoopsLogger;
 $xoopsLogger->activated = false;
+
 ?>
 /**
  * EXM System plugin

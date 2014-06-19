@@ -461,3 +461,12 @@ pre{
 .installed-item > .options > a:hover{
     color: #C73935;
 }
+
+.support-me + .box-footer > a{
+    background: #BABABA;
+    color: #F2F2F2;
+    transition: all ease 250ms;
+}
+.support-me + .box-footer > a:hover{
+    color: #5D5D5D;
+}

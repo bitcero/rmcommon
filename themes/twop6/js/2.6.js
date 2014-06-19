@@ -73,14 +73,14 @@ $(document).ready(function(){
             title: $(this).attr('title'),
             headerClass: "th bg_dark",
             url: $(this).attr('href'),
-            width: '80%',
+            width: '40%',
             minWidth: '300px',
             height: 500,
             resizable: true,
             maximizable: true,
             minimizable: false,
             y: 10,
-            x: $(window).width()-510,
+            x: '60%'
         });
 
         return false;

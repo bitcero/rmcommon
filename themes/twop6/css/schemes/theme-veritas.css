@@ -470,3 +470,12 @@ pre{
 .installed-item > .options > a:hover{
     color: #1352A2;
 }
+
+.support-me + .box-footer > a{
+    background: #FB6964;
+    color: #fff;
+    transition: all ease 250ms;
+}
+.support-me + .box-footer > a:hover{
+    background-color: #1352A2;
+}

@@ -12,6 +12,7 @@
  * This file loads some other scripts that allow to rmcommon
  * work with ajax and other stuff
  */
+header('Content-type: text/javascript');
 error_reporting(0);
 $xoopsOption['nocommon'] = 1;
 include '../../../mainfile.php';

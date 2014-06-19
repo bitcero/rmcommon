@@ -645,9 +645,13 @@ class TextCleaner
 	 * from Xoops
 	 */
 	function codePreConv($text) {
-		$patterns = "/\[code([^\]]*?)\](.*)\[\/code\]/esU";
-		$replacements = "'[code$1]'.base64_encode('$2').'[/code]'";
-		$text =  preg_replace($patterns, $replacements, $text);
+		$patterns = "/\[code([^\]]*?)\](.*)\[\/code\]/sU";
+		/*$replacements = "'[code$1]'.base64_encode('$2').'[/code]'";
+		$text =  preg_replace($patterns, $replacements, $text);*/
+
+        $text = preg_replace_callback($patterns, function($m){
+            return '[code' . $m[1] . ']' . base64_encode($m[2]) . '[/code]';
+        }, $text);
 		return $text;
 	}
 	
@@ -656,9 +660,13 @@ class TextCleaner
 		if ($exmcode==0)
 			return $text;
 		
-		$patterns = "/\[code([^\]]*?)\](.*)\[\/code\]/esU";
-		$replacements = "'<div class=\"xoopsCode\"><code>'.\$this->call_code_modifiers(\$this->specialchars(str_replace('\\\"', '\"', base64_decode('$2'))), '$1').'</code></div>'";
-		$text =  preg_replace($patterns, $replacements, $text);
+		$patterns = "/\[code([^\]]*?)\](.*)\[\/code\]/sU";
+		/*$replacements = "'<div class=\"xoopsCode\"><code>'.\$this->call_code_modifiers(\$this->specialchars(str_replace('\\\"', '\"', base64_decode('$2'))), '$1').'</code></div>'";
+		$text =  preg_replace($patterns, $replacements, $text);*/
+
+        $text = preg_replace_callback( $patterns, function( $m ){
+            return '<div class="xoopsCode"><code>' . $this->call_code_modifiers($this->specialchars(str_replace('"', '"', base64_decode($m[2]))), $m[1]).'</code></div>';
+        }, $text);
 		return $text;
 	}
 	

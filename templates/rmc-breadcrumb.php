@@ -7,17 +7,27 @@
         <?php if($xoopsModule->dirname()!='rmcommon'): ?>
             <li>
                 <a href="<?php echo $xoopsModule->hasadmin() ? XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/'.$xoopsModule->getInfo('adminindex') : ''; ?>">
-                    <?php echo $xoopsModule->name(); ?>
+                    <strong><?php echo $xoopsModule->name(); ?></strong>
                 </a>
             </li>
         <?php endif; ?>
         <?php foreach($this->crumbs as $i => $item): ?>
             <?php if($item['link']!=''): ?>
                 <li>
-                    <a href="<?php echo $item['link']; ?>"><?php echo $item['caption']; ?></a>
+                    <a href="<?php echo $item['link']; ?>">
+                        <?php if( $item['icon'] != '' ): ?>
+                        <span class="<?php echo $item['icon']; ?>"></span>
+                        <?php endif; ?>
+                        <?php echo $item['caption']; ?>
+                    </a>
                 </li>
             <?php else: ?>
-                <li class="active"><?php echo $item['caption']; ?></li>
+                <li class="active">
+                    <?php if( $item['icon'] != '' ): ?>
+                        <span class="<?php echo $item['icon']; ?>"></span>
+                    <?php endif; ?>
+                    <?php echo $item['caption']; ?>
+                </li>
             <?php endif; ?>
         <?php endforeach; ?>
     </ul>

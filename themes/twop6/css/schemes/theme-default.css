@@ -31,11 +31,16 @@ a:hover{
     -o-box-shadow:inset 0px 1px 0 0px #6B6B6B;
 }
 
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus{
+    background-color: #FFF;
+    color: #04A4CC;
+}
 .dropdown-menu{
     box-shadow: 0 3px 3px rgba(0,0,0,0.175);
     border: 0;
     border-radius: 0;
-    background: #f1f1f1;
 }
 #xo-menubar {
     background: #222222;
@@ -346,4 +351,13 @@ pre{border-radius: 0;}
 
 .thumbnail{
     border-radius: 0;
+}
+
+.support-me + .box-footer > a{
+    background: #CF4944;
+    color: #FFF;
+    transition: all ease 250ms;
+}
+.support-me + .box-footer > a:hover{
+    background-color: #04A4CC;
 }

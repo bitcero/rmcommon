@@ -365,3 +365,12 @@ hr{
 .text-primary{ color: #E94C6F;}
 .bg-primary{ background-color: #E94C6F;}
 .bg-info{ background-color: #F8C2CE;}
+
+.support-me + .box-footer > a{
+    background: #E94C6F;
+    color: #FFF;
+    transition: all ease 250ms;
+}
+.support-me + .box-footer > a:hover{
+    background-color: #5A6A62;
+}

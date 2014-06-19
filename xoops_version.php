@@ -48,9 +48,12 @@ $modversion['icon48'] = 'images/icon48.png';
 // PERMISSIONS
 $modversion['permissions'] = 'include/permissions.php';
 
-$modversion['social'][0] = array('title' => __('Twitter', 'rmcommon'),'type' => 'twitter','url' => 'http://www.twitter.com/bitcero/');
-$modversion['social'][1] = array('title' => __('LinkedIn', 'rmcommon'),'type' => 'linkedin','url' => 'http://www.linkedin.com/in/bitcero/');
-$modversion['social'][2] = array('title' => __('Google+', 'rmcommon'),'type' => 'google-plus','url' => 'http://plus.google.com/100655708852776329288');
+$modversion['social'][0] = array('title' => __('Twitter', 'mywords'),'type' => 'twitter','url' => 'http://www.twitter.com/bitcero/');
+$modversion['social'][1] = array('title' => __('Facebook', 'mywords'),'type' => 'facebook-square','url' => 'http://www.facebook.com/eduardo.cortes.hervis/');
+$modversion['social'][2] = array('title' => __('Instagram', 'mywords'),'type' => 'instagram','url' => 'http://www.instagram.com/eduardocortesh/');
+$modversion['social'][3] = array('title' => __('LinkedIn', 'mywords'),'type' => 'linkedin-square','url' => 'http://www.linkedin.com/in/bitcero/');
+$modversion['social'][4] = array('title' => __('GithHub', 'mywords'),'type' => 'github','url' => 'http://www.github.com/bitcero/');
+$modversion['social'][5] = array('title' => __('My Blog', 'mywords'),'type' => 'quote-left','url' => 'http://eduardocortes.mx');
 
 $modversion['hasAdmin'] = 1;
 $modversion['adminindex'] = "index.php";
