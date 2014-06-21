@@ -1,47 +1,24 @@
-.comments_form{
-    padding: 10px 0;
+/** Item **/
+.comment-item .head{
+    background: #FFF;
+    margin-bottom: 6px;
 }
-.comments_form label.label{
-    display: block;
-    padding: 0 0 5px 0;
-    margin: 10px 0 0 0;
+.comment-item .head > img{
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 2px;
+    margin: 0 10px 0 0;
 }
-.comments_form input[type='text']{
-    width: 50%;
-    display: block;
+.comment-item .head > .data{
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-left: 50px;
 }
-.comments_form textarea{
-    width: 80%;
-    height: 150px;
-    display: block;
-}
-.comments_form input[type='submit']{
-	margin: 10px 0 0 0;
-}
-.comments_form .error{
-	display: block;
-	color: #F00;
+.comment-item .head > .data > small{
+    margin: 0;
 }
 
-/** Item **/
-.comment_item{
-	margin: 0 0 10px 0;
-	padding: 0 0 10px 0;
-	overflow: hidden;
-    background: #FFF;
-}
-.comment_item .head{
-    float: left;
-    background: #FFF;
-    padding: 4px 15px 3px 4px;
-}
-.comment_item .info{
-    padding: 4px 0;
-}
-.comment_item .info .date{
-    font-size: 0.8em;
-    display: block;
-}
-.comment_item .text{
-    overflow: hidden;
+.comment-item .text{
+    padding-left: 50px;
 }
