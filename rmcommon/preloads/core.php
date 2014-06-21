@@ -12,7 +12,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 {
     
     public function eventCoreHeaderStart(){
-        
+        RMEvents::get()->run_event('rmcommon.core.header.start');
     }
     
     public function eventCoreHeaderEnd(){

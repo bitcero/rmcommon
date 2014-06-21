@@ -160,6 +160,28 @@ class RMImage extends RMObject
         return '';
         
     }
+
+    public function get_by_size( $width ){
+
+        $sizes = $this->get_sizes_data();
+        $sorted = array();
+        foreach ( $sizes as $size ){
+
+            $sorted[ $size['width'] ] = $size['name'];
+
+        }
+
+        arsort( $sorted );
+        foreach( $sorted as $size => $name ){
+
+            if ( $size >= $width )
+                return $this->get_version( $name );
+
+        }
+
+        return $this->getOriginal();
+
+    }
     
     public function getOriginal(){
         $url = XOOPS_UPLOAD_URL.'/'.date('Y', $this->getVar('date')).'/'.date('m',$this->getVar('date')).'/';

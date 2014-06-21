@@ -17,7 +17,7 @@ $action = rmc_server_var($_REQUEST, 'action', '');
 
 $rmc_config = RMSettings::cu_settings();
 
-if (!$rmc_config['enable_comments']){
+if (!$rmc_config->enable_comments){
     redirect_header(rmc_server_var($_REQUEST, 'comment_url', XOOPS_URL), 1, __('Sorry, comments has been disabled by administrator', 'rmcommon'));
     die();
 }
@@ -58,7 +58,7 @@ if ($action=='save'){
 		die();
 	}
 
-    if (!$xoopsUser && !$rmc_config['anonymous_comments']){
+    if (!$xoopsUser && !$rmc_config->anonymous_comments){
         redirect_header($uri, 2, __('Sorry, you are not allowed to post comments!', 'rmcommon'));
         die();
     }
@@ -130,9 +130,9 @@ if ($action=='save'){
 	$comment->setVar('posted', time());
 
 	// Check if comment must be approved
-	if ($xoopsUser && $rmc_config['approve_reg_coms']){
+	if ($xoopsUser && $rmc_config->approve_reg_coms){
 		$comment->setVar('status', 'approved');
-	} elseif(!$xoopsUser && $rmc_config['approve_anon_coms']){
+	} elseif(!$xoopsUser && $rmc_config->approve_anon_coms){
 		$comment->setVar('status', 'approved');
 	} elseif($xoopsUser && $xoopsUser->isAdmin()){
 		$comment->setVar('status', 'approved');

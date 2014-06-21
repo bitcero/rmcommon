@@ -229,7 +229,7 @@ function insert_image(id,t,target,container){
             }
         }
 
-        if(!$(sizes[i]).attr('checked')) continue;
+        if(!$(sizes[i]).is(':checked')) continue;
         
         // File URL
         if(target=='container'){
