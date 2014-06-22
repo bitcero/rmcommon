@@ -1,15 +1,13 @@
 <?php
 /**
-----------------------------------------
-Smart-B ERP
-@package:   Sistema Base
-@author     Red México
-@author     http://www.redmexico.com.mx
-@author     Eduardo Cortés
-@copyright  2013 Red México
-@version    $Id$
-----------------------------------------
-**/
+ * $Id$
+ * --------------------------------------------------------------
+ * Common Utilities
+ * Author: Eduardo Cortes
+ * Email: i.bitcero@gmail.com
+ * License: GPL 2.0
+ * URI: http://www.ecortes.mx
+ */
 
 /**
  * Esta clase contiene métodos útiles para dar formato a diversos datos
