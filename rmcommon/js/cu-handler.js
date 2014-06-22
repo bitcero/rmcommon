@@ -510,7 +510,10 @@ $(document).ready(function(){
                         if (box_container.length > 0){
                             $(box_container).each(function(){
                                 var newbox = box.clone();
-                                $(this).append(newbox);
+                                if ( response.boxes[i].position == 'top' )
+                                    $(this).prepend(newbox);
+                                else
+                                    $(this).append(newbox);
                                 newbox.fadeIn('fast');
                             });
                         }

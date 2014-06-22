@@ -69,19 +69,6 @@
             <p><?php echo sprintf(__('Please %s to view available updates.','rmcommon'), '<a href="updates.php">'.__('click here','rmcommon').'</a>'); ?></p>
         </div>
 
-        <!-- Support me -->
-        <div class="cu-box">
-            <div class="box-header">
-                <h3><span class="fa fa-thumbs-up"></span> <strong><?php _e('Support my Work','rmcommon'); ?></strong></h3>
-            </div>
-            <div class="box-content support-me">
-                <img class="avatar" src="http://www.gravatar.com/avatar/a888698732624c0a1d4da48f1e5c6bb4?s=80" alt="Eduardo Cortés (bitcero)" />
-                <p><?php _e('Do you like my work? Then maybe you want support me to continue developing new modules.','rmcommon'); ?></p>
-                <?php echo $donateButton; ?>
-            </div>
-        </div>
-        <!--// End support me -->
-
         <!-- Available Modules -->
         <div class="cu-box">
             <div class="box-header">
