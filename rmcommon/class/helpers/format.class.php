@@ -130,4 +130,66 @@ class RMFormat
 
     }
 
+    /**
+     * Format a given array with version information for a module.
+     *
+     * @param array $version Array with version values
+     * @param bool $name Include module name in return string
+     * @return string
+     */
+    public static function version( $version, $name = false ){
+
+        $rtn = '';
+
+        if ( $name )
+            $rtn .= ( defined( $version['name'] ) ? constant( $version['name'] ) : $version['name'] ) . ' ';
+
+        // New versioning
+        if ( isset( $version['major'] ) ){
+            $rtn .= $version['major'];
+            $rtn .= '.'.$version['minor'];
+            $rtn .= '.'.($version['revision']/10);
+            switch( $version['stage'] ){
+                case -3:
+                    $rtn .= ' alfa';
+                    break;
+                case -2:
+                    $rtn .= ' beta';
+                    break;
+                case -1:
+                    $rtn .= ' RC';
+                    break;
+                default:
+                    $rtn .= ' production';
+                    break;
+            }
+            return $rtn;
+        }
+
+        // Format version of a module with previous versioning system
+        $rtn .= $version['number'];
+
+        if ( $version['revision'] > 0 )
+            $rtn .= '.' . ( $version['revision'] / 100 );
+        else
+            $rtn .= '.0';
+
+        switch( $version['status'] ){
+            case '-3':
+                $rtn .= ' alfa';
+                break;
+            case '-2':
+                $rtn .= ' beta';
+                break;
+            case '-1':
+                $rtn .= ' final';
+                break;
+            case '0':
+                break;
+        }
+
+        return $rtn;
+
+    }
+
 }

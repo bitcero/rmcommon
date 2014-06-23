@@ -18,21 +18,21 @@
 		<table class="table" cellspacing="0" cellpadding="0">
 			<thead>
 			<tr>
-				<th align="left"><?php _e('Name','rmcommon'); ?></th>
-				<th align="left"><?php _e('Description', 'rmcommon'); ?></th>
-				<th><?php _e('Version','rmcommon'); ?></th>
-				<th><?php _e('Author','rmcommon'); ?></th>
-				<th><?php _e('Status','rmcommon'); ?></th>
+				<th><?php _e('Name','rmcommon'); ?></th>
+				<th><?php _e('Description', 'rmcommon'); ?></th>
+				<th class="text-center"><?php _e('Version','rmcommon'); ?></th>
+				<th class="text-center"><?php _e('Author','rmcommon'); ?></th>
+				<th class="text-center"><?php _e('Status','rmcommon'); ?></th>
 			</tr>
 			</thead>
 			<tfoot>
-			<tr>
-				<th align="left"><?php _e('Name','rmcommon'); ?></th>
-				<th align="left"><?php _e('Description', 'rmcommon'); ?></th>
-				<th><?php _e('Version','rmcommon'); ?></th>
-				<th><?php _e('Author','rmcommon'); ?></th>
-				<th><?php _e('Status','rmcommon'); ?></th>
-			</tr>
+            <tr>
+                <th><?php _e('Name','rmcommon'); ?></th>
+                <th><?php _e('Description', 'rmcommon'); ?></th>
+                <th class="text-center"><?php _e('Version','rmcommon'); ?></th>
+                <th class="text-center"><?php _e('Author','rmcommon'); ?></th>
+                <th class="text-center"><?php _e('Status','rmcommon'); ?></th>
+            </tr>
 			</tfoot>
 			<tbody>
 			<?php if(empty($installed_plugins)): ?>
@@ -90,19 +90,19 @@
 		<table class="table" cellspacing="0" cellpadding="0">
 			<thead>
 			<tr>
-				<th align="left"><?php _e('Name','rmcommon'); ?></th>
-				<th align="left"><?php _e('Description', 'rmcommon'); ?></th>
-				<th><?php _e('Version','rmcommon'); ?></th>
-				<th><?php _e('Author','rmcommon'); ?></th>
+				<th><?php _e('Name','rmcommon'); ?></th>
+				<th><?php _e('Description', 'rmcommon'); ?></th>
+				<th class="text-center"><?php _e('Version','rmcommon'); ?></th>
+				<th class="text-center"><?php _e('Author','rmcommon'); ?></th>
 			</tr>
 			</thead>
 			<tfoot>
-			<tr>
-				<th align="left"><?php _e('Name and Description','rmcommon'); ?></th>
-				<th align="left"><?php _e('Description', 'rmcommon'); ?></th>
-				<th><?php _e('Version','rmcommon'); ?></th>
-				<th><?php _e('Author','rmcommon'); ?></th>
-			</tr>
+            <tr>
+                <th><?php _e('Name','rmcommon'); ?></th>
+                <th><?php _e('Description', 'rmcommon'); ?></th>
+                <th class="text-center"><?php _e('Version','rmcommon'); ?></th>
+                <th class="text-center"><?php _e('Author','rmcommon'); ?></th>
+            </tr>
 			</tfoot>
 			<tbody>
 			<?php if(empty($available_plugins)): ?>
@@ -123,7 +123,7 @@
 						<span class="descriptions"><?php echo $plugin->get_info('description'); ?></span>
 					</td>
 					<td align="center">
-						<strong><?php echo $plugin->get_info('version'); ?></strong>
+						<strong><?php echo RMFormat::version( $plugin->get_info('version') ); ?></strong>
 					</td>
 					<td align="center">
 						<?php if($plugin->get_info('web')!=''): ?>

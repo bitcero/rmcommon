@@ -81,56 +81,7 @@ class RMModules
      */
     static public function format_module_version($version, $name = false){
 
-        $rtn = '';
-
-        if ( $name )
-            $rtn .= ( defined( $version['name'] ) ? constant( $version['name'] ) : $version['name'] ) . ' ';
-
-        // New versioning
-        if ( isset( $version['major'] ) ){
-            $rtn .= $version['major'];
-            $rtn .= '.'.$version['minor'];
-            $rtn .= '.'.($version['revision']/10);
-            switch( $version['stage'] ){
-                case -3:
-                    $rtn .= ' alfa';
-                    break;
-                case -2:
-                    $rtn .= ' beta';
-                    break;
-                case -1:
-                    $rtn .= ' RC';
-                    break;
-                default:
-                    $rtn .= ' production';
-                    break;
-            }
-            return $rtn;
-        }
-
-        // Format version of a module with previous versioning system
-        $rtn .= $version['number'];
-
-        if ( $version['revision'] > 0 )
-            $rtn .= '.' . ( $version['revision'] / 100 );
-        else
-            $rtn .= '.0';
-
-        switch( $version['status'] ){
-            case '-3':
-                $rtn .= ' alfa';
-                break;
-            case '-2':
-                $rtn .= ' beta';
-                break;
-            case '-1':
-                $rtn .= ' final';
-                break;
-            case '0':
-                break;
-        }
-
-        return $rtn;
+        return RMFormat::version( $version, $name );
     }
 
     /**
