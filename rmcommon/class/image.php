@@ -165,17 +165,16 @@ class RMImage extends RMObject
 
         $sizes = $this->get_sizes_data();
         $sorted = array();
-        foreach ( $sizes as $size ){
+        foreach ( $sizes as $i => $size ){
 
-            $sorted[ $size['width'] ] = $size['name'];
+            $sorted[ $i ] = $size['width'];
 
         }
 
-        arsort( $sorted );
-        foreach( $sorted as $size => $name ){
-
+        asort( $sorted );
+        foreach( $sorted as $id => $size ){
             if ( $size >= $width )
-                return $this->get_version( $name );
+                return $this->get_version( $sizes[$id]['name'] );
 
         }
 

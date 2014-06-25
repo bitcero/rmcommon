@@ -124,7 +124,17 @@ function show_library(pag){
 }
 
 function show_image_data(id){
-    
+
+    var $form = $("#image-inserter");
+    var $data = $("#data-img-" + id);
+    $("#inserter-blocker").fadeIn(250);
+    $form.fadeIn(250);
+    $("body").css('overflow', 'hidden');
+
+    $("#image-inserter > .content > .image").css("background-image", "url('" + $data.find(".medium").html() + "')");
+    $("#image-inserter > .content .img-title").val($data.find(".title").html());
+    $("#image-inserter > .content .img-description").val($data.find(".desc").html());
+
     $(".image_list").show();
     $(".image_data").hide();
     $("#list-"+id).hide();

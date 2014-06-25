@@ -1,47 +1,57 @@
-<table width="100%" cellspacing="0">
+<?php if( empty( $images ) ): ?>
 
-    <?php if(empty($images)): ?>
-    <tr class="even error">
-        <td colspan="3">
-            <?php _e('There are not images yet!','rmcommon'); ?>
-        </td>
-    </tr>
-    <?php endif; ?>
+    <div class="alert alert-info text-center">
+        <?php _e('There are not images yet!','rmcommon'); ?>
+    </div>
+
+<?php endif; ?>
+
+<?php foreach( $images as $image ): ?>
+
+    <a href="#" onclick="show_image_data(<?php echo $image['id']; ?>); return false;" class="thumbnail-item" style="background-image: url('<?php echo $image['thumb']; ?>');">
+        <span class="thumbnail-cover"></span>
+    </a>
+
+    <div id="data-img-<?php echo $image['id']; ?>" class="hidden">
+        <?php foreach( $image as $key => $data ): ?>
+        <span class="<?php echo $key; ?>"><?php echo is_array($data) ? json_encode( $data ) : $data; ?></span>
+        <?php endforeach; ?>
+    </div>
+
+<?php endforeach; ?>
+
+<div id="inserter-blocker"></div>
+<div id="image-inserter">
+    <div class="title"><?php _e("Insert Image", 'rmcommon'); ?></div>
+    <div class="content">
+        <span class="image"></span>
+        <div class="form-group">
+            <label><?php _e('Title:', 'rmcommon'); ?></label>
+            <input class="form-control input-sm img-title" type="text">
+        </div>
+        <div class="form-group">
+            <label><?php _e('Alternative text:','rmcommon'); ?></label>
+            <input class="form-control input-sm img-alt" type="text">
+        </div>
+        <div class="form-group">
+            <label><?php _e('Description:','rmcommon'); ?></label>
+            <textarea class="form-control input-sm img-description"></textarea>
+        </div>
+        <div class="form-group">
+            <label><?php _e('Link URL:','rmcommon'); ?></label>
+            <input class="form-control input-sm img-link" type="text">
+
+        </div>
+
+    </div>
+</div>
+
+<table width="100%" cellspacing="0">
     <?php foreach($images as $image): ?>
-    <tr class="<?php echo tpl_cycle("even,odd"); ?> image_list" valign="top" id="list-<?php echo $image['id']; ?>">
-        <td width="35"><img src="<?php echo $image['thumb']; ?>" alt="" width="35" height="30" /></td>
-        <td>
-            <strong><?php echo $image['title']; ?></strong>
-            <?php if($image['desc']!=''): ?>
-            <span class="description"><?php echo $image['desc']; ?></span>
-            <?php endif; ?>
-        </td>
-        <td align="center">
-            <a href="javascript:;" class="data_show" onclick="show_image_data(<?php echo $image['id']; ?>);"><?php _e('Show','rmcommon'); ?></a>
-        </td>
-    </tr>
     <tr class="image_data" id="data-<?php echo $image['id']; ?>">
         <td colspan="3">
 
         <table width="100%" cellpadding="2" cellspacing="0" class="the_data">
-            <tr class="odd">
-                <td rowspan="3"><img src="<?php echo $image['thumb']; ?>" alt="" style="max-width: 150px;" /></td>
-                <td><a href="javascript:;" class="data_hide" onclick="hide_image_data(<?php echo $image['id']; ?>);"><?php _e('Hide','rmcommon'); ?></a><strong><?php echo $image['title']; ?></strong></td>
-            </tr>
-            <tr class="even"><td><?php echo $image['mime']; ?></td></tr>
-            <tr class="odd"><td><?php echo $image['date']; ?></td></tr>
-            <tr class="even">
-                <td><strong>*<?php _e('Title:','rmcommon'); ?></strong></td>
-                <td><input type="text" id="image-name-<?php echo $image['id']; ?>" size="50" value="<?php echo $image['title']; ?>" /></td>
-            </tr>
-            <tr class="odd">
-                <td><strong><?php _e('Alternative text:','rmcommon'); ?></strong></td>
-                <td><input type="text" id="image-alt-<?php echo $image['id']; ?>" size="50" value="" /></td>
-            </tr>
-            <tr class="even" valign="top">
-                <td><strong><?php _e('Description:','rmcommon'); ?></strong></td>
-                <td><textarea id="image-desc-<?php echo $image['id']; ?>" style="width: 90%; height: 100px;"><?php echo $image['desc']; ?></textarea></td>
-            </tr>
             <tr class="odd">
                 <td><strong><?php _e('Link URL:','rmcommon'); ?></strong></td>
                 <td class="image_link">
@@ -94,5 +104,5 @@
     <?php endforeach; ?>
 </table>
 <input type="hidden" name="token" id="ret-token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
-<?php echo $nav->display(); ?>
+<?php echo $nav->display( false ); ?>
 <input type="hidden" id="filesurl" value="<?php echo $filesurl; ?>" />

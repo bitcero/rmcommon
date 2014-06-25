@@ -91,6 +91,7 @@ if ($action==''){
 
     $categories = RMFunctions::load_images_categories("WHERE status='open' ORDER BY id_cat DESC", true);
 
+    RMTemplate::get()->add_style('bootstrap.min.css', 'rmcommon');
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
     RMTemplate::get()->add_style('editor_img.css', 'rmcommon');
@@ -133,7 +134,7 @@ if ($action==''){
      */
     $page = intval(rmc_server_var($_REQUEST, 'page', 1));
     $page = $page<=0 ? $page = 1 : $page;
-    $limit = 10;
+    $limit = 30;
     list($num) = $db->fetchRow($db->query($sql));
     
     $tpages = ceil($num / $limit);
@@ -195,6 +196,7 @@ if ($action==''){
             'cat'        => $categories[$img->getVar('cat')]->getVar('name'),
             'author'    => $authors[$img->getVar('uid')],
             'thumb'      => XOOPS_UPLOAD_URL.'/'.$thumb,
+            'medium'    => $img->get_by_size( 300 ),
             'url'		=> $filesurl,
             'file'      => $fd['filename'],
             'extension' => $fd['extension'],
