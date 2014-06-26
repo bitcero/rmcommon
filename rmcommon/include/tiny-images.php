@@ -21,15 +21,15 @@ function send_message($message){
     
 }
 
-$category = rmc_server_var($_POST,'category', 0);
-$action = rmc_server_var($_POST,'action', '');
+$category = RMHttpRequest::post('category', 'integer', 0);
+$action = RMHttpRequest::post( 'action', 'string', '' );
 $cat = new RMImageCategory($category);
-$type = rmc_server_var($_REQUEST, 'type', 'tiny');
-$en = rmc_server_var($_REQUEST, 'name', '');
+$type = RMHttpRequest::request( 'type', 'string', 'tiny' );
+$en = RMHttpRequest::request( 'name', 'string', '' );
 
 // Check if target is different from editor
-$target = rmc_server_var($_REQUEST, 'target', '');
-$container = rmc_server_var($_REQUEST, 'idcontainer', '');
+$target = RMHttpRequest::request( 'target', 'string', '' );
+$container = RMHttpRequest::request( 'idcontainer', 'string', '' );
 
 if ($action==''){
 	
@@ -134,7 +134,7 @@ if ($action==''){
      */
     $page = intval(rmc_server_var($_REQUEST, 'page', 1));
     $page = $page<=0 ? $page = 1 : $page;
-    $limit = 30;
+    $limit = 35;
     list($num) = $db->fetchRow($db->query($sql));
     
     $tpages = ceil($num / $limit);
@@ -143,7 +143,7 @@ if ($action==''){
     $start = $num<=0 ? 0 : ($page - 1) * $limit;
     
     $nav = new RMPageNav($num, $limit, $page, 5);
-    $nav->target_url('javascript:;" onclick="show_library({PAGE_NUM});');
+    $nav->target_url('#" onclick="show_library({PAGE_NUM}); return false;');
     
     // Get categories
     $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_images")." ".(!$cat->isNew() ? "WHERE cat='".$cat->id()."'" : '')." ORDER BY id_img DESC LIMIT $start,$limit";
@@ -156,7 +156,7 @@ if ($action==''){
     $category = $cat;
     $sizes = $category->getVar('sizes');
     $current_size = array();
-    
+
     foreach ($sizes as $size){
         if (empty($current_size)){
             $current_size = $size;
@@ -167,19 +167,12 @@ if ($action==''){
         }
     }
 
-    $mimes = include(XOOPS_ROOT_PATH.'/include/mimetypes.inc.php');
+
 
     while($row = $db->fetchArray($result)){
         $img = new RMImage();
         $img->assignVars($row);
-        if (!isset($categories[$img->getVar('cat')])){
-            $categories[$img->getVar('cat')] = new RMImageCategory($img->getVar('cat'));
-        }
-        
-        if (!isset($authors[$img->getVar('uid')])){
-            $authors[$img->getVar('uid')] = new XoopsUser($img->getVar('uid'));
-        }
-        
+
         $fd = pathinfo($img->getVar('file'));
         $filesurl = XOOPS_UPLOAD_URL.'/'.date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date'));
         
@@ -187,29 +180,113 @@ if ($action==''){
         if(!file_exists(XOOPS_UPLOAD_PATH.'/'.$thumb)){
             $thumb = date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/'.$fd['filename'].'.'.$fd['extension'];
         }
-        
-        $ret = array(
+
+        $images[] = array(
             'id'        => $img->id(),
             'title'        => $img->getVar('title'),
-            'date'        => formatTimestamp($img->getVar('date'), 'l'),
-            'desc'      => $img->getVar('desc', 'n'),
-            'cat'        => $categories[$img->getVar('cat')]->getVar('name'),
-            'author'    => $authors[$img->getVar('uid')],
             'thumb'      => XOOPS_UPLOAD_URL.'/'.$thumb,
-            'medium'    => $img->get_by_size( 300 ),
-            'url'		=> $filesurl,
-            'file'      => $fd['filename'],
-            'extension' => $fd['extension'],
-            'mime'      => isset($mimes[$fd['extension']]) ? $mimes[$fd['extension']] : 'application/octet-stream',
-            'links'     => array(
-                    'file'=>array('caption'=>__('File URL','rmcommon'),'value'=>XOOPS_UPLOAD_URL.'/'.date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/'.$img->getVar('file')),
-                    'none'=>array('caption'=>__('None','rmcommon'),'value'=>'')
-            )
+
         );
-        
-        $images[] = RMEvents::get()->run_event('rmcommon.loading.single.editorimgs', $ret, rmc_server_var($_REQUEST, 'url', ''));
+
     }
 
     include RMTemplate::get()->get_template('rmc-images-list-editor.php','module','rmcommon');
     
+} elseif ( $action == 'image-details' ){
+
+    function images_send_json( $data ){
+
+        header('Cache-Control: no-cache, must-revalidate');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Content-type: application/json');
+        echo json_encode( $data );
+        die();
+
+    }
+
+    if (!$xoopsSecurity->check()){
+        images_send_json(array(
+            'messaje'   => _e('Sorry, unauthorized operation!','rmcommon'),
+            'error'     => 1
+        ));
+    }
+
+    $id = RMHttpRequest::post( 'id', 'integer', 0 );
+    if ( $id <= 0 )
+        images_send_json( array(
+            'message'   => __('No image specified', 'rmcommon'),
+            'error'     => 1,
+            'token'     => $xoopsSecurity->createToken()
+        ) );
+    
+    $image = new RMImage( $id );
+    if ( $image->isNew() )
+        images_send_json( array(
+            'message'   => __('Specified image does not exists', 'rmcommon'),
+            'error'     => 1,
+            'token'     => $xoopsSecurity->createToken()
+        ) );
+
+    $author = new RMUser( $image->uid );
+    $original = pathinfo( $image->get_files_path() . '/' . $image->file );
+    $dimensions = getimagesize( $image->get_files_path() . '/' . $image->file );
+    $mimes = include(XOOPS_ROOT_PATH.'/include/mimetypes.inc.php');
+
+    $category_sizes = $cat->getVar('sizes');
+    $sizes = array();
+    foreach($category_sizes as $i => $size){
+        if($size['width']<=0) continue;
+        $tfile = str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $filesurl).'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'];
+        if(!is_file($tfile)) continue;
+        $sizes[] = array(
+            'width' => $size['width'],
+            'url'   => $filesurl . '/sizes/' . $fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'],
+            'name'  => $size['name'],
+        );
+    }
+
+    $links = array(
+        'none'=>array('caption'=>__('None','rmcommon'),'value'=>''),
+        'file'=>array('caption'=>__('File URL','rmcommon'),'value'=>XOOPS_UPLOAD_URL.'/'.date('Y',$image->getVar('date')).'/'.date('m',$image->getVar('date')).'/'.$image->getVar('file'))
+    );
+    $links = RMEvents::get()->run_event( 'rmcommon.image.insert.links', $links, $image, RMHttpRequest::request( 'url', 'string', '' ) );
+    
+    // Image data
+    $data = array(
+        'id'        => $image->id(),
+        'title'        => $image->title,
+        'date'        => formatTimestamp($image->date, 'l'),
+        'description'      => $image->getVar('desc', 'n'),
+        'author'    => array(
+            'uname' => $author->uname,
+            'uid' => $author->uid,
+            'avatar' => RMEvents::get()->run_event( 'rmcommon.get.avatar', $author->email, 40 ),
+            'url'   => XOOPS_URL . '/userinfo.php?uid=' . $author->email
+        ),
+        'medium'    => $image->get_by_size( 300 ),
+        'url'		=> $image->get_files_url(),
+        'original'  => array(
+            'file'      => $original['basename'],
+            'url'       => $image->getOriginal(),
+            'size'      => RMFormat::bytes_format( filesize( $image->get_files_path() . '/' . $image->file ) ),
+            'width'     => $dimensions[0],
+            'height'    => $dimensions[1]
+        ),
+        'mime'      => isset($mimes[$original['extension']]) ? $mimes[$original['extension']] : 'application/octet-stream',
+        'sizes'     => $sizes,
+        'links'     => array(
+            'file'=>array('caption'=>__('File URL','rmcommon'),'value'=>XOOPS_UPLOAD_URL.'/'.date('Y',$image->getVar('date')).'/'.date('m',$image->getVar('date')).'/'.$image->getVar('file')),
+            'none'=>array('caption'=>__('None','rmcommon'),'value'=>''),
+        )
+
+    );
+
+    $data = RMEvents::get()->run_event('rmcommon.loading.image.details', $data, $image, RMHttpRequest::request( 'url', 'string', '' ) );
+    $data['token'] = $xoopsSecurity->createToken();
+    $data['error'] = 0;
+
+    images_send_json(
+        $data
+    );
+
 }

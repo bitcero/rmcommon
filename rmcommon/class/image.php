@@ -81,6 +81,28 @@ class RMImage extends RMObject
     }
 
     /**
+     * Get the url where files will be stored
+     * @return string
+     */
+    public function get_files_url(){
+
+        $url = XOOPS_UPLOAD_URL.'/'.date('Y', $this->getVar('date')).'/'.date('m',$this->getVar('date'));
+        return $url;
+
+    }
+
+    /**
+     * Get the path where files will be stored
+     * @return string
+     */
+    public function get_files_path(){
+
+        $path = XOOPS_UPLOAD_PATH.'/'.date('Y', $this->getVar('date')).'/'.date('m',$this->getVar('date'));
+        return $path;
+
+    }
+
+    /**
      * Constructs the URL for image according to defined size
      * @param int Specific size to construct the url
      * @return string
@@ -183,8 +205,8 @@ class RMImage extends RMObject
     }
     
     public function getOriginal(){
-        $url = XOOPS_UPLOAD_URL.'/'.date('Y', $this->getVar('date')).'/'.date('m',$this->getVar('date')).'/';
-        $url .= $this->getVar('file');
+        $url = $this->get_files_url();
+        $url .= '/' . $this->getVar('file');
         return $url;
     }
     

@@ -8,41 +8,76 @@
 
 <?php foreach( $images as $image ): ?>
 
-    <a href="#" onclick="show_image_data(<?php echo $image['id']; ?>); return false;" class="thumbnail-item" style="background-image: url('<?php echo $image['thumb']; ?>');">
+    <a href="#" data-id="<?php echo $image['id']; ?>" class="thumbnail-item" style="background-image: url('<?php echo $image['thumb']; ?>');" alt="<?php echo $image['title']; ?>">
         <span class="thumbnail-cover"></span>
+        <span href="#" class="add"><span class="glyphicon glyphicon-plus"></span></span>
+        <span href="#" class="insert"><span class="glyphicon glyphicon-ok"></span></span>
     </a>
-
-    <div id="data-img-<?php echo $image['id']; ?>" class="hidden">
-        <?php foreach( $image as $key => $data ): ?>
-        <span class="<?php echo $key; ?>"><?php echo is_array($data) ? json_encode( $data ) : $data; ?></span>
-        <?php endforeach; ?>
-    </div>
 
 <?php endforeach; ?>
 
 <div id="inserter-blocker"></div>
 <div id="image-inserter">
-    <div class="title"><?php _e("Insert Image", 'rmcommon'); ?></div>
-    <div class="content">
-        <span class="image"></span>
-        <div class="form-group">
-            <label><?php _e('Title:', 'rmcommon'); ?></label>
-            <input class="form-control input-sm img-title" type="text">
-        </div>
-        <div class="form-group">
-            <label><?php _e('Alternative text:','rmcommon'); ?></label>
-            <input class="form-control input-sm img-alt" type="text">
-        </div>
-        <div class="form-group">
-            <label><?php _e('Description:','rmcommon'); ?></label>
-            <textarea class="form-control input-sm img-description"></textarea>
-        </div>
-        <div class="form-group">
-            <label><?php _e('Link URL:','rmcommon'); ?></label>
-            <input class="form-control input-sm img-link" type="text">
+    <div class="row content">
+
+        <div class="image-info">
+            <span class="image"></span>
+
+            <div class="media author-info">
+                <a href="#" class="pull-left" target="_blank">
+                    <img class="author-avatar img-thumbnail">
+                </a>
+                <div class="media-body">
+                    <h5 class="media-heading"><strong>Uploaded by <a href="#" target="_blank"></a></strong></h5>
+                    <small>on <span class="info-date"></span></small><br>
+                </div>
+            </div>
+            <ul class="list-unstyled">
+                <li>
+                    <small>Title: <code><span class="info-title"></span></code></small>
+                </li>
+                <li>
+                    <small>Description: <code><span class="info-description"></span></code></small>
+                </li>
+                <li>
+                    <small>MIME type: <code><span class="info-mime"></span></code></small>
+                </li>
+                <li>
+                    <small>Original: <code><span class="info-original"></span></code></small>
+                </li>
+                <li>
+                    <small>File size: <code><span class="info-size"></span></code></small>
+                </li>
+                <li>
+                    <small>Dimensions: <code><span class="info-dimensions"></span></code></small>
+                </li>
+            </ul>
 
         </div>
 
+        <!-- Insert form -->
+        <div class="image-form">
+            <div class="form-group">
+                <label><?php _e('Title:', 'rmcommon'); ?></label>
+                <input class="form-control input-sm img-title" type="text">
+            </div>
+            <div class="form-group">
+                <label><?php _e('Alternative text:','rmcommon'); ?></label>
+                <input class="form-control input-sm img-alt" type="text">
+            </div>
+            <div class="form-group">
+                <label><?php _e('Description:','rmcommon'); ?></label>
+                <textarea class="form-control input-sm img-description"></textarea>
+            </div>
+            <div class="form-group">
+                <label><?php _e('Link URL:','rmcommon'); ?></label>
+                <input class="form-control input-sm img-link" type="text">
+                <div class="btn-group btn-group-xs img-links">
+
+                </div>
+            </div>
+        </div>
+        <!-- Insert form /-->
     </div>
 </div>
 
@@ -52,16 +87,6 @@
         <td colspan="3">
 
         <table width="100%" cellpadding="2" cellspacing="0" class="the_data">
-            <tr class="odd">
-                <td><strong><?php _e('Link URL:','rmcommon'); ?></strong></td>
-                <td class="image_link">
-                	<input type="hidden" id="fileurl_<?php echo $image['id']; ?>" value="<?php echo $image['links']['file']['value']; ?>" />
-                    <input type="text" id="image-link-<?php echo $image['id']; ?>" size="50" value="<?php echo $image['links']['file']['value']; ?>" />
-                    <?php foreach ($image['links'] as $link): ?>
-                    <a href="javascript:;" onclick="$('#image-link-<?php echo $image['id']; ?>').val('<?php echo $link['value']; ?>');"><?php echo $link['caption']; ?></a>
-                    <?php endforeach; ?>
-                </td>
-            </tr>
             <tr class="even">
                 <td><strong><?php _e('Alignment:','rmcommon'); ?></strong></td>
                 <td><strong>

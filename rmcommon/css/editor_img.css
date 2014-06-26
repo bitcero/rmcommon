@@ -3,6 +3,7 @@ body{
 	margin: 0;
     background: #FFF;
     font-family: 'Roboto', sans-serif;
+    padding-top: 50px;
 }
 .container{
     width: 96%;
@@ -13,6 +14,10 @@ body{
 	color: #000;
 	overflow: hidden;
 	padding: 8px 6px;
+    position: fixed;
+    right: 0; left: 0; top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #FFF;
 }
 #img-toolbar a{
 	display: block;
@@ -85,8 +90,8 @@ body{
 /** THUMBNAILS **/
 .thumbnail-item{
     display: inline-block;
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     border: 1px solid #FFF;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
     margin: 4px;
@@ -97,12 +102,36 @@ body{
 .thumbnail-item > .thumbnail-cover{
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     transition: ease all 250ms;
 }
-.thumbnail-item:hover > span{
+.thumbnail-item:hover > .thumbnail-cover{
     background: rgba(0,0,0,0);
 }
+.thumbnail-item > .add,
+.thumbnail-item > .insert{
+    display: inline-block;
+    padding: 6px;
+    width: 30px; height: 30px;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    color: #FFF;
+    font-size: 18px;
+    position: absolute;
+    bottom: 1px;
+    transition: ease all 250ms;
+}
+.thumbnail-item > .add{
+    right: 32px;
+}
+.thumbnail-item > .insert{
+    right: 1px;
+}
+.thumbnail-item:hover > .add,
+.thumbnail-item:hover > .insert{
+    opacity: 1;
+}
+
 #inserter-blocker{
     display: none;
     position: fixed;
@@ -112,9 +141,8 @@ body{
 #image-inserter{
     display: none;
     position: absolute;
-    top: 0; right: 0; bottom: 0;
-    max-width: 320px;
-    background: #f2f2f2;
+    top: 10%; right: 10%; bottom: 10%; left: 10%;
+    background: #FFF;
     border: 1px solid rgba(0,0,0,0.3);
 }
 #image-inserter > .title{
@@ -124,9 +152,23 @@ body{
     font-weight: bold;
 }
 #image-inserter > .content{
-    padding: 10px;
+    padding: 15px;
 }
-#image-inserter > .content > .image{
+#image-inserter > .content > .image-info{
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 340px;
+    padding: 20px;
+    float: left;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.05);
+}
+#image-inserter > .content > .image-form{
+    padding: 5px 20px;
+    font-size: 0.9em;
+    margin-left: 340px;
+}
+#image-inserter > .content .image{
     display: block;
     border: 1px solid #FFF;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
@@ -136,6 +178,14 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 5px;
+}
+#image-inserter .author-info{
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;;
+    margin-bottom: 5px;
+}
+#image-inserter .img-links{
+    margin-top: 5px;
 }
 
 #resizer-bar span.message{

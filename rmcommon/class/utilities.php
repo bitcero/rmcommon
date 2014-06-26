@@ -120,19 +120,7 @@ class RMUtilities
 	 */
 	public function formatBytesSize($size){
 
-		$kb = 1024;
-		$mb = $kb * 1024;
-		$gb = $mb * 1024;
-		
-		if ($size<$kb){
-			return sprintf(__('%s b','rmcommon'), $size);
-		} elseif ($size<$mb){
-			return sprintf(__('%s kb','rmcommon'), number_format($size / $kb, 2));
-		} elseif ($size<$gb){
-			return sprintf(__('%s MB','rmcommon'), number_format($size / $mb, 2));
-		} else {
-			return sprintf(__('%s GB','rmcommon'), number_format($size / $mb, 2));
-		}
+		return RMFormat::bytes_format( $size, 'bytes' );
 		
 	}
 	

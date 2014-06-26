@@ -192,4 +192,81 @@ class RMFormat
 
     }
 
+    /**
+     * Format bytes to MB, GB, KB, etc
+     * @param int $size value to format
+     * @param string $origin type of input. Can be b, kb, mb, gb, tb, or ''
+     * @param string $target type of output. Can be b, kb, mb, gb, kb or ''
+     * @param bool $abr True enable abbreviations (e.g. kb, mb, gb, etc)
+     * @return string
+     */
+    public static function bytes_format($size, $origin = '', $target = '', $abr = true){
+
+        $kb = 1024;
+        $mb = $kb * 1024;
+        $gb = $mb * 1024;
+        $tb = $gb * 1024;
+
+        $units = array(
+            'b' => 1,
+            'kb' => $kb,
+            'mb' => $mb,
+            'gb' => $gb,
+            'tb' => $tb
+        );
+
+        $string = array(
+
+            'b' => $abr ? __('%s b','rmcommon') : __('%s Bytes','rmcommon'),
+            'kb' => $abr ? __('%s Kb','rmcommon') : __('%s Kilobytes','rmcommon'),
+            'mb' => $abr ? __('%s Mb','rmcommon') : __('%s Megabytes','rmcommon'),
+            'gb' => $abr ? __('%s Gb','rmcommon') : __('%s Gigabytes','rmcommon'),
+            'tb' => $abr ? __('%s Tb','rmcommon') : __('%s Terabytes','rmcommon'),
+
+        );
+
+        $origin = $origin == '' || !isset( $units[ $origin ] ) ? 'b' : $origin;
+        $target = !isset( $units[ $target ] ) ? '' : $target;
+
+        if ( $target != '' && $units[$target] == $units[$origin] )
+            return sprintf( $string[ $origin ], $size );
+
+        // Convert size to bytes
+        $bytes = $size * $units[ $origin ];
+        // Get bytes in target format only if $target has been provided
+        if ( $target != '' )
+            $result = number_format($bytes / $units[ $target ], 2);
+        else {
+
+            switch( $size ){
+
+                case $size < $kb:
+                    $result = $bytes;
+                    $target = 'b';
+                    break;
+                case $size < $mb:
+                    $result = number_format($size / $kb, 2);
+                    $target = 'kb';
+                    break;
+                case $size < $gb:
+                    $result = number_format($size / $mb, 2);
+                    $target = 'mb';
+                    break;
+                case $size < $tb:
+                    $result = number_format($size / $gb, 2);
+                    $target = 'gb';
+                    break;
+                default:
+                    $result = number_format($size / $tb, 2);
+                    $target = 'tb';
+                    break;
+
+            }
+
+        }
+
+        return sprintf( $string[ $target ], $result );
+
+    }
+
 }
