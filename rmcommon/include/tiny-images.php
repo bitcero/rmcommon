@@ -206,7 +206,7 @@ if ($action==''){
 
     if (!$xoopsSecurity->check()){
         images_send_json(array(
-            'messaje'   => _e('Sorry, unauthorized operation!','rmcommon'),
+            'message'   => _e('Sorry, unauthorized operation!','rmcommon'),
             'error'     => 1
         ));
     }
@@ -236,21 +236,32 @@ if ($action==''){
     $sizes = array();
     foreach($category_sizes as $i => $size){
         if($size['width']<=0) continue;
-        $tfile = str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $filesurl).'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'];
+        $tfile = $image->get_files_path() . '/sizes/' . $original['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$original['extension'];
         if(!is_file($tfile)) continue;
+
+        $t_dim = getimagesize( $tfile );
+
         $sizes[] = array(
-            'width' => $size['width'],
-            'url'   => $filesurl . '/sizes/' . $fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'],
+            'width' => $t_dim[0],
+            'height' => $t_dim[1],
+            'url'   => $image->get_files_url() . '/sizes/' . $original['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$original['extension'],
             'name'  => $size['name'],
         );
     }
+
+    $sizes[] = array(
+        'width' => $dimensions[0],
+        'height' => $dimensions[1],
+        'url'   => $image->getOriginal(),
+        'name'  => __('Original', 'rmcommon')
+    );
 
     $links = array(
         'none'=>array('caption'=>__('None','rmcommon'),'value'=>''),
         'file'=>array('caption'=>__('File URL','rmcommon'),'value'=>XOOPS_UPLOAD_URL.'/'.date('Y',$image->getVar('date')).'/'.date('m',$image->getVar('date')).'/'.$image->getVar('file'))
     );
-    $links = RMEvents::get()->run_event( 'rmcommon.image.insert.links', $links, $image, RMHttpRequest::request( 'url', 'string', '' ) );
-    
+    $links = RMEvents::get()->run_event( 'rmcommon.image.insert.links', $links, $image, RMHttpRequest::post( 'url', 'string', '' ) );
+
     // Image data
     $data = array(
         'id'        => $image->id(),
@@ -274,16 +285,11 @@ if ($action==''){
         ),
         'mime'      => isset($mimes[$original['extension']]) ? $mimes[$original['extension']] : 'application/octet-stream',
         'sizes'     => $sizes,
-        'links'     => array(
-            'file'=>array('caption'=>__('File URL','rmcommon'),'value'=>XOOPS_UPLOAD_URL.'/'.date('Y',$image->getVar('date')).'/'.date('m',$image->getVar('date')).'/'.$image->getVar('file')),
-            'none'=>array('caption'=>__('None','rmcommon'),'value'=>''),
-        )
-
+        'links'     => $links
     );
 
     $data = RMEvents::get()->run_event('rmcommon.loading.image.details', $data, $image, RMHttpRequest::request( 'url', 'string', '' ) );
     $data['token'] = $xoopsSecurity->createToken();
-    $data['error'] = 0;
 
     images_send_json(
         $data

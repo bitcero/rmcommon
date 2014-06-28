@@ -2,6 +2,7 @@ var total = 0;
 var ids = new Array();
 var url = '';
 var current = 0;
+var selected = new Array();
 
 $(document).ready(function(){
     $("div.container").hide();
@@ -17,15 +18,85 @@ $(document).ready(function(){
         
     });
 
-    $("body").on('click', 'a.thumbnail-item', function(){
+    $("body").on('click', '.thumbnail-item > .insert', function(){
 
-        show_image_data( $(this).data("id") );
+        show_image_data( $(this).parent().data("id") );
+        return false;
 
     })
+
+    $("body").on('click', '.thumbnail-item > .add', function(){
+        add_image_tray( $(this).parent().data("id") );
+        return false;
+
+    })
+
+    /**
+     * Enable border on thumbnail hover
+     */
+
+    $("body").on('mouseover', '.thumbnail-item', function() {
+
+        $("#images-tray .img[data-id='"+$(this).data("id")+"']").addClass("mini-hover");
+
+    });
+
+    $("body").on('mouseout', '.thumbnail-item', function() {
+
+        $("#images-tray .img[data-id='"+$(this).data("id")+"']").removeClass("mini-hover");
+
+    });
+
+    /**
+     * Enable border on mini thumbnail hover
+     */
+    $("body").on('mouseover', '#images-tray .tray-added .img', function() {
+
+        $(".thumbnail-item[data-id='"+$(this).data("id")+"']").addClass("thumbnail-hover");
+
+    });
+
+    $("body").on('mouseout', '#images-tray .tray-added .img', function() {
+
+        $(".thumbnail-item[data-id='"+$(this).data("id")+"']").removeClass("thumbnail-hover");
+
+    });
+
+    /**
+     * Remove selection
+     */
+    $("body").on('click', '.thumbnail-item.thumb-selected', function() {
+
+        remove_from_tray( $(this).data("id") );
+
+    });
+
 
     $("body").on( 'click', '#image-inserter > .content .img-links button', function(){
 
         $("#image-inserter > .content .img-link").val( $(this).data("link") );
+
+    });
+
+    $("body").on('click', "#image-inserter .btn-close", function(){
+        $("#inserter-blocker").click();
+    });
+
+    $("body").on('click', "#images-tray .btn-clear", function(){
+        $("#images-tray .tray-added .img").fadeOut( 250, function(){
+            $(this).remove();
+            $(".thumb-selected")
+                .removeClass('thumb-selected')
+                .find(".add")
+                .removeClass("hidden")
+                .fadeIn(250);
+            selected = new Array();
+            $("#images-tray").fadeOut(250, function(){
+                $("body").animate({
+                    paddingBottom: 10
+                });
+            });
+        } );
 
     });
     
@@ -144,7 +215,8 @@ function show_image_data(id){
         category: $("#category-field").val(),
         action: 'image-details',
         XOOPS_TOKEN_REQUEST: $("#xoops-token").val(),
-        id: id
+        id: id,
+        url: window.parent.location.href
     };
 
     $.post( 'tiny-images.php', params, function( data ){
@@ -152,6 +224,7 @@ function show_image_data(id){
         $("#inserter-blocker").fadeIn(250).click(function(){
             $("#image-inserter").fadeOut(250, function(){
                 $("#inserter-blocker").fadeOut(250);
+                $("body").css('overflow', 'auto');
             });
         });
 
@@ -183,6 +256,17 @@ function show_image_data(id){
 
             $("#image-inserter > .content .img-links").append(
                 '<button type="button" class="btn btn-default" data-link="'+ data.links[key].value + '">' + data.links[key].caption + '</button>'
+            );
+
+        }
+
+        $("#image-inserter > .content .img-sizes").html('');
+        for ( var key in data.sizes ){
+
+            $("#image-inserter > .content .img-sizes").append(
+                '<label><input type="radio" name="size" value="'+data.sizes[key].url+'"><span>' +
+                    '<strong>'+data.sizes[key].name+'</strong><br>' +
+                    '<small>('+data.sizes[key].width+' x '+data.sizes[key].height+')</small></span></label>'
             );
 
         }
@@ -396,4 +480,125 @@ function insert_from_url(t){
     ed.execCommand("mceInsertContent", true, html);
     tinyMCEPopup.close();
     
+}
+
+/**
+ * Add an image to images tray
+ * @param integer id
+ */
+function add_image_tray( id ){
+
+    if ( id == undefined || id <= 0 ){
+        alert('No image to add');
+        return false;
+    }
+
+    /**
+     * Add image to tray
+     */
+    var src = $("#thumbnail-" + id);
+    if ( src.length <= 0 )
+        return false;
+
+    $("#inserter-blocker").fadeIn(250);
+
+    var img = $('<span class="img">');
+    //img.css('background-image', src.css("background-image"));
+    var bg_image = src.css("background-image");
+    img.css('background-image', 'url(../images/wait.gif)');
+    img.css('background-size', '16px 16px');
+    img.attr("data-id", id);
+
+    $("#images-tray > .tray-added > .images").append( img );
+    img.fadeIn(350);
+    src.find(".add").fadeOut(250).addClass('hidden');
+
+    if ($("#ret-token").length>0)
+        $("#xoops-token").val($("#ret-token").val());
+
+    var params = {
+        category: $("#category-field").val(),
+        action: 'image-details',
+        XOOPS_TOKEN_REQUEST: $("#xoops-token").val(),
+        id: id,
+        url: window.parent.location.href
+    };
+
+    /** Get data from server */
+    $.post( 'tiny-images.php', params, function( data ){
+
+        if ( data.error != undefined){
+
+            alert( data.message != undefined ? data.message : 'An error ocurred' );
+            src.find(".add").removeClass('hidden').fadeIn(250);
+            remove_from_tray( id );
+            return false;
+
+        }
+
+        selected[id] = data;
+
+        if ( data.token != undefined )
+            $("#ret-token").val( data.token );
+
+        src.addClass('thumb-selected');
+        img.css('background-size', '36px 36px');
+        img.css( 'background-image', bg_image );
+
+        $("#inserter-blocker").fadeOut(250);
+
+
+    });
+
+    $("#images-tray").fadeIn('fast', function(){
+
+        $("body").animate(
+            {paddingBottom: 100}
+        );
+
+    });
+
+    return false;
+
+}
+
+
+/**
+ * Remove an image from images tray
+ * @param id
+ */
+function remove_from_tray( id ){
+
+    if ( id == undefined || id <= 0 )
+        return false;
+
+    var tray = $("#images-tray .img[data-id='" + id + "']");
+    if ( tray.length <= 0 )
+        return false;
+
+    $(tray).fadeOut( 250, function(){
+
+        $(tray).remove();
+        $("#thumbnail-" + id).removeClass( "thumb-selected" );
+        $("#thumbnail-" + id + " .add").removeClass('hidden').fadeIn(250);
+        delete selected[id];
+
+        if ($("#images-tray .img").length <= 0)
+            $("#images-tray").fadeOut(250, function(){
+                $("body").animate({
+                    paddingBottom: 10
+                });
+            });
+
+    } );
+
+}
+
+/**
+ * Get the image data and populate the array with information
+ */
+function load_image_data( id ){
+
+
+
 }

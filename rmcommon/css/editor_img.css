@@ -4,6 +4,7 @@ body{
     background: #FFF;
     font-family: 'Roboto', sans-serif;
     padding-top: 50px;
+    padding-bottom: 10px;
 }
 .container{
     width: 96%;
@@ -96,8 +97,15 @@ body{
     box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
     margin: 4px;
     background-position: center;
-    background-size: 150px 150px;
+    background-size: 140px 140px;
     position: relative;
+}
+.thumbnail-item:hover, .thumbnail-hover, .mini-hover{
+    box-shadow: 0 0 0 2px rgba(255, 105, 63,0.9);
+}
+.mini-hover{
+    box-shadow: none;
+    border: 1px solid rgb(255, 105, 63);
 }
 .thumbnail-item > .thumbnail-cover{
     position: absolute;
@@ -105,7 +113,9 @@ body{
     background: rgba(0,0,0,0.6);
     transition: ease all 250ms;
 }
-.thumbnail-item:hover > .thumbnail-cover{
+.thumbnail-item:hover > .thumbnail-cover,
+.thumbnail-hover > .thumbnail-cover,
+.thumbnail-item.thumb-selected > .thumbnail-cover{
     background: rgba(0,0,0,0);
 }
 .thumbnail-item > .add,
@@ -118,17 +128,44 @@ body{
     color: #FFF;
     font-size: 18px;
     position: absolute;
-    bottom: 1px;
+    bottom: 0px;
     transition: ease all 250ms;
 }
 .thumbnail-item > .add{
-    right: 32px;
+    left: 31px;
 }
 .thumbnail-item > .insert{
-    right: 1px;
+    left: 0px;
 }
+.thumbnail-item > .check{
+    background: rgb(3, 184, 201);
+    bottom: 0; right: 0;
+    padding: 6px;
+    width: 30px; height: 30px;
+    opacity: 0;
+    color: #FFF;
+    font-size: 18px;
+    position: absolute;
+    border-radius: 2px 0 0 0;
+    transition: ease all 250ms;
+}
+.thumbnail-item > .add:hover{
+    background-color: rgba(253, 98, 46, 0.7);
+}
+.thumbnail-item > .insert:hover{
+    background-color: rgba(44, 204, 56, 0.7);
+}
+
 .thumbnail-item:hover > .add,
 .thumbnail-item:hover > .insert{
+    opacity: 1;
+}
+.thumbnail-item.thumb-selected{
+    border: 1px solid #FFFFFF;
+    box-shadow: inset 0 0 16px rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+.thumbnail-item.thumb-selected > .check{
     opacity: 1;
 }
 
@@ -140,7 +177,7 @@ body{
 }
 #image-inserter{
     display: none;
-    position: absolute;
+    position: fixed;
     top: 10%; right: 10%; bottom: 10%; left: 10%;
     background: #FFF;
     border: 1px solid rgba(0,0,0,0.3);
@@ -186,6 +223,58 @@ body{
 }
 #image-inserter .img-links{
     margin-top: 5px;
+}
+#image-inserter .img-sizes label{
+    display: inline-block;
+    text-align: center;
+    font-weight: normal;
+    padding: 4px 8px;
+}
+#image-inserter .img-sizes label > span{
+    display: block;
+}
+
+/** IMAGES TRAY **/
+#images-tray{
+    background: #CCCCCC;
+    padding: 5px;
+    border-top: 1px solid #FFF;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: none;
+    overflow: hidden;
+    z-index: 101;
+}
+#images-tray .tray-commands{
+    text-align: center;
+}
+#images-tray .tray-added{
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+#images-tray .tray-added .images{
+    height: 45px;
+    padding: 5px 5px 0 0;
+    overflow: hidden;
+    display: inline-block;
+}
+#images-tray .tray-added .img{
+    width: 40px; height: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 36px 36px;
+    background-color: #FFF;
+    display: inline-block;
+    padding: 1px;
+    border: 1px solid rgba(0,0,0,0.5);
+    margin: 0 2px 0 0;
+    cursor: pointer;
+    position: relative;
+}
+.img.mini-hover{
+    border: 1px solid rgb(255, 105, 63)!important;
 }
 
 #resizer-bar span.message{
