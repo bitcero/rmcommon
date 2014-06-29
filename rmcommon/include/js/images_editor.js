@@ -288,7 +288,7 @@ function populate_inserter_data( id, data ){
     for ( var key in data.sizes ){
 
         $("#image-inserter > .content .img-sizes").append(
-            '<label><input class="img-size" data-width="'+data.sizes[key].width+'" data-height="'+data.sizes[key].height+'" type="radio" name="size" value="'+data.sizes[key].url+'"><span>' +
+            '<label><input class="img-size" data-width="'+data.sizes[key].width+'" data-name="'+data.sizes[key].name+'" data-height="'+data.sizes[key].height+'" type="radio" name="size" value="'+data.sizes[key].url+'"><span>' +
                 '<strong>'+data.sizes[key].name+'</strong><br>' +
                 '<small>('+data.sizes[key].width+' x '+data.sizes[key].height+')</small></span></label>'
         );
@@ -466,17 +466,18 @@ function insert_image( data, multiple ){
     if(target!=undefined && target=='container'){
          //window.parent.$("#"+container+" .thumbnail").hide();
         var accept = window.parent.$("#"+container+"-container").data("accept");
+
         if ( multiple )
             //window.parent.$("#"+container+"-container .thumbnail").append(
             return '<div style="margin-bottom: 10px; text-align: center;">' +
                     '<a href="'+data.size+'" target="_blank">' +
                     '<img src="'+(accept == 'thumbnail' ? data.thumbnail : data.size)+'">' +
                     '</a>' +
-                    '<input type="hidden" name="'+container+'[]" id="'+container+'" value="'+id+':'+0+':'+encodeURIComponent(data.link)+':'+encodeURIComponent(data.title)+'">' +
+                    '<input type="hidden" name="'+container+'[]" id="'+container+'" value="'+id+':'+data.name+':'+encodeURIComponent(data.link)+':'+encodeURIComponent(data.title)+'">' +
                     '<a href="#" class="btn btn-warning btn-xs" onclick="$(this).parent().remove(); return false;">Remove Image</a></div>';
         else
             //window.parent.$("#"+container+"-container .thumbnail").html(
-            return '<a href="'+data.size+'" target="_blank"><img src="'+(accept == 'thumbnail' ? data.thumbnail : data.size)+'" /></a><input type="hidden" name="'+container+'" id="'+container+'" value="'+id+':'+0+':'+encodeURIComponent(data.link)+':'+encodeURIComponent(data.title)+'" /><br /><a href="#" class="removeButton removeButton-'+container+'">Remove Image</a>';
+            return '<a href="'+data.size+'" target="_blank"><img src="'+(accept == 'thumbnail' ? data.thumbnail : data.size)+'" /></a><input type="hidden" name="'+container+'" id="'+container+'" value="'+id+':'+data.name+':'+encodeURIComponent(data.link)+':'+encodeURIComponent(data.title)+'" /><br /><a href="#" class="removeButton removeButton-'+container+'">Remove Image</a>';
 
     }
 
@@ -502,7 +503,10 @@ function send_to_element( data ){
 
     } else if ( target!=undefined && target=='container' ){
 
-        window.parent.$("#"+container+"-container .thumbnail").append( data );
+        if ( $("#multi").val() == 'yes' )
+            window.parent.$("#"+container+"-container .thumbnail").append( data );
+        else
+            window.parent.$("#"+container+"-container .thumbnail").html( data );
 
     } else {
 
@@ -763,7 +767,8 @@ function read_inserter_data( id ){
         description: $("#image-inserter .img-description").val(),
         link: $("#image-inserter .img-link").val(),
         align: $("#image-inserter .img-align:checked").val(),
-        size: $("#image-inserter .img-size:checked").val()
+        size: $("#image-inserter .img-size:checked").val(),
+        name: $("#image-inserter .img-size:checked").data('name')
     };
 
     var width = 0;

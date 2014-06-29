@@ -30,11 +30,11 @@
 <?php endif; ?>
 <?php endif; ?>
 <div id="resizer-bar">
-<span class="message"></span>
-<strong><?php _e('Resizing images','rmcommon'); ?></strong>
-<div class="progress progress-striped active thebar">
-<div class="bar indicator" id="bar-indicator">0</div>
-</div>
+    <span class="message"></span>
+    <strong><?php _e('Resizing images','rmcommon'); ?></strong>
+    <div class="progress thebar">
+        <div class="progress-bar progress-bar-danger progress-bar-striped active indicator" id="bar-indicator">0</div>
+    </div>
 <span><?php _e('Please, do not close the window until resizing process has finished!','rmcommon'); ?></span>
     <div class="donebutton">
         <?php if(!$isupdate): ?>

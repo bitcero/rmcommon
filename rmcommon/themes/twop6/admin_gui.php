@@ -72,7 +72,7 @@ unset($color_scheme);
 $this->add_style('font-awesome.min.css','rmcommon', array('footer' => 1));
 $this->add_style('icomoon.css','rmcommon', array('footer' => 1));
 $this->add_style('jquery.window.css','twop6', array('footer' => 1), 'theme');
-$this->add_script( 'bootstrap.js', 'rmcommon' );
+$this->add_script( 'bootstrap.min.js', 'rmcommon' );
 $this->add_script( 'jquery.ck.js', 'rmcommon', array('directory' => 'include') );
 $this->add_script('2.6.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('jquery.window.min.js', 'twop6', array('footer' => 1), 'theme');

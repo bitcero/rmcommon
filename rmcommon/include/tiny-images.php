@@ -179,7 +179,7 @@ if ($action==''){
         $fd = pathinfo($img->getVar('file'));
         $filesurl = XOOPS_UPLOAD_URL.'/'.date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date'));
         
-        $thumb = date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/sizes/'.$fd['filename'].'_'.$current_size['width'].'x'.$current_size['height'].'.'.$fd['extension'];
+        $thumb = date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/sizes/'.$fd['filename'].'-'.$current_size['name'].'.'.$fd['extension'];
         if(!file_exists(XOOPS_UPLOAD_PATH.'/'.$thumb)){
             $thumb = date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/'.$fd['filename'].'.'.$fd['extension'];
         }
@@ -239,7 +239,7 @@ if ($action==''){
     $sizes = array();
     foreach($category_sizes as $i => $size){
         if($size['width']<=0) continue;
-        $tfile = $image->get_files_path() . '/sizes/' . $original['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$original['extension'];
+        $tfile = $image->get_files_path() . '/sizes/' . $original['filename'].'-'.$size['name'].'.'.$original['extension'];
         if(!is_file($tfile)) continue;
 
         $t_dim = getimagesize( $tfile );
@@ -247,7 +247,7 @@ if ($action==''){
         $sizes[] = array(
             'width' => $t_dim[0],
             'height' => $t_dim[1],
-            'url'   => $image->get_files_url() . '/sizes/' . $original['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$original['extension'],
+            'url'   => $image->get_files_url() . '/sizes/' . $original['filename'].'-'.$size['name'].'.'.$original['extension'],
             'name'  => $size['name'],
         );
     }

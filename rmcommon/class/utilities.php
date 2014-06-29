@@ -172,7 +172,7 @@ class RMUtilities
         $ret .= '>';
         $ret .= '<div class="thumbnail">';
         if($default!='' && !$img->isNew()){
-            $ret .= '<a href="'.$img->url().'" target="_blank"><img src="'.$img->get_smallest().'" /></a>';
+            $ret .= '<a href="'.$img->url().'" target="_blank"><img src="'.$img->get_by_size( 300 ).'" /></a>';
             $ret .= '<input type="hidden" name="'.$name.'" id="'.$id.'" value="'.$default.'" />';
             $ret .= '<br /><a href="#" class="removeButton removeButton-'.$id.'">'.__('Remove Image','rmcommon').'</a>';
         } else {

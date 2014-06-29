@@ -98,7 +98,7 @@ function show_images(){
             'desc'      => $img->getVar('desc', 'n'),
 			'cat'		=> $categories[$img->getVar('cat')]->getVar('name'),
 			'author'	=> $authors[$img->getVar('uid')],
-            'file'      => XOOPS_UPLOAD_URL.'/'.date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/sizes/'.$fd['filename'].'_'.$current_size['width'].'x'.$current_size['height'].'.'.$fd['extension'],
+            'file'      => XOOPS_UPLOAD_URL.'/'.date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/sizes/'.$fd['filename'].'-'.$current_size['name'].'.'.$fd['extension'],
             'big'		=> XOOPS_UPLOAD_URL.'/'.date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/'.$fd['filename'].'.'.$fd['extension']
 		);
 	}
@@ -499,7 +499,7 @@ function resize_images(){
         
         $fd = pathinfo($updir.'/'.$image->getVar('file'));
         
-        $name = $updir.'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'];
+        $name = $updir.'/sizes/'.$fd['filename'].'-'.$size['name'].'.'.$fd['extension'];
 
         $ret['sizes'][$size['name']] = str_replace(XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $name);;
         
@@ -594,17 +594,17 @@ function edit_image(){
             }
         }
 
-	    if(!file_exists(XOOPS_UPLOAD_PATH.$updir.'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension']))
+	    if(!file_exists(XOOPS_UPLOAD_PATH.$updir.'/sizes/'.$fd['filename'].'-'.$size['name'].'.'.$fd['extension']))
 		    continue;
 
         $image_data['sizes'][] = array(
-            'file' => XOOPS_UPLOAD_URL.$updir.'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'],
+            'file' => XOOPS_UPLOAD_URL.$updir.'/sizes/'.$fd['filename'].'-'.$size['name'].'.'.$fd['extension'],
             'name' => $size['name']
         );
     }
     
     
-    $image_data['thumbnail'] = XOOPS_UPLOAD_URL.$updir.'/sizes/'.$fd['filename'].'_'.$current_size['width'].'x'.$current_size['height'].'.'.$fd['extension'];
+    $image_data['thumbnail'] = XOOPS_UPLOAD_URL.$updir.'/sizes/'.$fd['filename'].'-'.$current_size['name'].'.'.$fd['extension'];
     $mimes = include(XOOPS_ROOT_PATH.'/include/mimetypes.inc.php');
     $image_data['mime'] = isset($mimes[$fd['extension']]) ? $mimes[$fd['extension']] : 'application/octet-stream';
     $image_data['file'] = $image->getVar('file');
@@ -697,7 +697,7 @@ function update_image(){
     // Delete current image files
     foreach ($pcat->getVar('sizes') as $size){
 		if ($size['width']<=0) continue;
-		$file = $updir.'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'];
+		$file = $updir.'/sizes/'.$fd['filename'].'-'.$size['name'].'.'.$fd['extension'];
 		@unlink($file);
 		
     }
@@ -706,7 +706,7 @@ function update_image(){
     foreach ($cat->getVar('sizes') as $size){
 		if ($size['width']<=0 && $size['height']<=0) continue;
         
-        $name = $updir.'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'];
+        $name = $updir.'/sizes/'.$fd['filename'].'-'.$size['name'].'.'.$fd['extension'];
         $sizer = new RMImageResizer($updir.'/'.$image->getVar('file'), $name);
         
         switch($size['type']){
@@ -765,7 +765,7 @@ function delete_image(){
 	    // Delete current image files
 	    foreach ($cat->getVar('sizes') as $size){
 			if ($size['width']<=0) continue;
-			$file = $updir.'/sizes/'.$fd['filename'].'_'.$size['width'].'x'.$size['height'].'.'.$fd['extension'];
+			$file = $updir.'/sizes/'.$fd['filename'].'-'.$size['name'].'.'.$fd['extension'];
 			@unlink($file);
 	    }
 	    
@@ -814,7 +814,7 @@ function delete_category(){
 	foreach ($cat->getVar('sizes') as $size){
 		if ($size['width']<=0) continue;
 		
-		$sizes[] = '_'.$size['width'].'x'.$size['height'];
+		$sizes[] = '-'.$size['name'];
 		
 	}
 	

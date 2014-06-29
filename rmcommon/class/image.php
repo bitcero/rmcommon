@@ -18,7 +18,7 @@ class RMImage extends RMObject
      * Used when a default size is specified
      * @var int
      */
-    private $selected_size = 0;
+    private $selected_size = '';
     /**
      * Stores all sizes for category
      * @param array
@@ -45,8 +45,8 @@ class RMImage extends RMObject
 
     /**
      * Load data from database table according to given parameters
-     * @param string Params must be passed as string separated by ":" (e.g. 1:3) where second parameter is selected size if any
-     * return bool
+     * @param string $params must be passed as string separated by ":" (e.g. 1:thumbnail:url:title) where second parameter is selected size if any
+     * @return bool|string
      */
     public function load_from_params($params){
 
@@ -107,25 +107,31 @@ class RMImage extends RMObject
      * @param int Specific size to construct the url
      * @return string
      */
-    public function url($size=-1){
+    public function url($size = ''){
 
-        if($size<0 && $this->selected_size>0)
+        if($size != '' && $this->selected_size != '')
             $size = $this->selected_size;
 
         if($this->isNew()) return false;
 
         $this->get_sizes_data();
         
-        $url = XOOPS_UPLOAD_URL.'/'.date('Y', $this->getVar('date')).'/'.date('m',$this->getVar('date')).'/';
-        if($size>=count($this->sizes)){
-            $url .= $this->getVar('file');
-            return $url;
-        }
-
+        $url = $this->get_files_url();
         $info = pathinfo($this->getVar('file'));
 
-        $url .= 'sizes/'.$info['filename'].'_'.$this->sizes[$size]['width'].'x'.(isset($this->sizes[$size]['height'])?$this->sizes[$size]['height']:'');
-        $url .= '.'.$info['extension'];
+        foreach( $this->sizes as $item ){
+
+            if ( $item['name'] == $size ){
+                $url .= '/sizes/'.$info['filename'].'-'.$item['name'];
+                $url .= '.'.$info['extension'];
+                return $url;
+            }
+
+        }
+
+        $url .= '/' . $this->getVar('file');
+
+
         return $url;
 
     }
@@ -176,7 +182,7 @@ class RMImage extends RMObject
         $ret = array();
         foreach($this->sizes as $k => $size){
             if($size['name'] == $name)
-                return $this->url($k);
+                return $this->url($name);
         }
         
         return '';
@@ -196,7 +202,7 @@ class RMImage extends RMObject
         asort( $sorted );
         foreach( $sorted as $id => $size ){
             if ( $size >= $width )
-                return $this->get_version( $sizes[$id]['name'] );
+                return $this->url( $sizes[$id]['name'] );
 
         }
 
@@ -226,7 +232,7 @@ class RMImage extends RMObject
         
         $info = pathinfo($this->getVar('file'));
         foreach($sizes as $size){
-            unlink($path.'sizes/'.$info['filename'].'_'.$this->sizes[$size]['width'].'x'.(isset($this->sizes[$size]['height'])?$this->sizes[$size]['height']:'').'.'.$info['extension']);
+            unlink($path.'sizes/'.$info['filename'].'-'.$this->sizes[$size]['name'].'.'.$info['extension']);
         }
         unlink($path.$this->getVar('file'));
         
