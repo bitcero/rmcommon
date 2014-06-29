@@ -25,6 +25,9 @@ $category = RMHttpRequest::post('category', 'integer', 0);
 $action = RMHttpRequest::post( 'action', 'string', '' );
 $cat = new RMImageCategory($category);
 $type = RMHttpRequest::request( 'type', 'string', 'tiny' );
+$multi = RMHttpRequest::request( 'multi', 'string', 'yes' );
+
+$multi = $multi == 'yes' ? true : false;
 $en = RMHttpRequest::request( 'name', 'string', '' );
 
 // Check if target is different from editor
@@ -108,7 +111,7 @@ if ($action==''){
 } elseif($action=='load-images'){
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    
+
     if (!$xoopsSecurity->check()){
         _e('Sorry, unauthorized operation!','rmcommon');
         echo '<script type="text/javascript">window.location.href="tiny-images.php";</script>';

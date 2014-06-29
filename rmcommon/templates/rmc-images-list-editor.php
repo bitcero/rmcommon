@@ -10,9 +10,11 @@
 
     <div id="thumbnail-<?php echo $image['id']; ?>" data-id="<?php echo $image['id']; ?>" class="thumbnail-item" style="background-image: url('<?php echo $image['thumb']; ?>');" alt="<?php echo $image['title']; ?>">
         <span class="thumbnail-cover"></span>
+        <?php if( $multi ): ?>
         <a href="#" class="add"><span class="glyphicon glyphicon-th"></span></a>
-        <a href="#" class="insert"><span class="glyphicon glyphicon-plus"></span></a>
         <span class="check"><span class="glyphicon glyphicon-ok"></span></span>
+        <?php endif; ?>
+        <a href="#" class="insert"><span class="glyphicon glyphicon-plus"></span></a>
     </div>
 
 <?php endforeach; ?>
@@ -80,27 +82,29 @@
             <div class="form-group">
                 <label><?php _e('Alignment:','rmcommon'); ?></label><br>
                 <label class="radio-inline">
-                    <input type="radio" name="align" value="" checked="checked" /> <?php _e('None','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="" checked="checked" /> <?php _e('None','rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="align" value="left" /> <?php _e('Left','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="left" /> <?php _e('Left','rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="align" value="center" /> <?php _e('Center','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="center" /> <?php _e('Center','rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="align" value="right" /> <?php _e('Right','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="right" /> <?php _e('Right','rmcommon'); ?>
                 </label>
             </div>
             <div class="form-group img-sizes">
 
             </div>
             <div class="form-group">
-                <input type="hidden" name="id" value="" id="image-id">
+                <input type="hidden" name="id" value="" class="img-id">
                 <input type="hidden" name="type" value="<?php echo $type!=''?$type:'tiny'; ?>" id="insert-type">
                 <input type="hidden" name="target" value="<?php echo $target; ?>" id="insert-target">
                 <input type="hidden" name="container" value="<?php echo $container; ?>" id="insert-container">
                 <button type="button" class="btn btn-primary btn-insert"><?php _e('Send Image', 'rmcommon'); ?></button>
+                <button type="button" class="btn btn-primary btn-edit"><span class="glyphicon glyphicon-ok"></span> <?php _e('Set Changes', 'rmcommon'); ?></button>
+                <button type="button" class="btn btn-success btn-edit-next"><?php _e('Save and Next', 'rmcommon'); ?> <span class="glyphicon glyphicon-chevron-right"></span></button>
                 <button type="button" class="btn btn-default btn-close"><?php _e('Close', 'rmcommon'); ?></button>
             </div>
         </div>
@@ -115,8 +119,8 @@
         </div>
     </div>
     <div class="tray-commands">
+        <button type="button" class="btn btn-primary btn-sm btn-insert"><span class="glyphicon glyphicon-ok"></span> <?php _e('Insert Images', 'rmcommon'); ?></button>
         <button type="button" class="btn btn-warning btn-sm btn-clear"><span class="glyphicon glyphicon-trash"></span> <?php _e('Clear Selected', 'rmcommon'); ?></button>
-        <button type="button" class="btn btn-primary btn-sm insert"><span class="glyphicon glyphicon-ok"></span> <?php _e('Insert Images', 'rmcommon'); ?></button>
     </div>
 </div>
 

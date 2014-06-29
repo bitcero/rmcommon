@@ -5,9 +5,11 @@ $(document).ready(function(){
         var html = '<div id="blocker-'+id+'" class="mgr_blocker"></div><div id="window-'+id+'" class="imgmgr_container">';
 
         var imgmgr_title = imgmgr_title == undefined ? 'Seleccionar imagen' : '';
+        var multiple = $("#"+id+'-container').data('multiple');
+        multiple = multiple == undefined || multiple == 'no' ? 'no' : 'yes';
 
         html += '<div class="window-title cu-titlebar"><button type="button" class="close">&times;</button>'+imgmgr_title+'</div>';
-        html += '<iframe src="'+mgrURL+'?target=container&amp;idcontainer='+id+'" name="image"></iframe>'
+        html += '<iframe src="'+mgrURL+'?target=container&amp;idcontainer='+id+'&amp;multi='+multiple+'" name="image"></iframe>'
         html += '</div>';
         $("body").append(html);
 
@@ -16,10 +18,6 @@ $(document).ready(function(){
 
         $("#blocker-"+id).fadeIn('fast', function(){
             $("body").css('overflow','hidden');
-            //var h = $("body").find("#window-"+id).height();
-            //alert(h);
-            //var nh = h-$("#window-"+id+" .window-title").height()-30;
-            //$("#window-"+id+" iframe").css('height', nh+'px');
             $("#window-"+id).fadeIn('fast', function(){
 
             });

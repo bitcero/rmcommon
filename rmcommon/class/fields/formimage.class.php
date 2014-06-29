@@ -15,12 +15,14 @@
 class RMFormImage extends RMFormElement
 {
     private $default = '';
+    private $data = array();
     
-    public function __construct($caption, $name, $default=''){
+    public function __construct($caption, $name, $default='', $data = array() ){
         
         $this->setCaption($caption);
         $this->setName($name);
         $this->default = $default;
+        $this->data = $data;
         
         !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
     }
@@ -28,7 +30,7 @@ class RMFormImage extends RMFormElement
     public function render(){
         
         $util = RMUtilities::get();
-        return $util->image_manager($this->getName(), $this->id(), $this->default);
+        return $util->image_manager( $this->getName(), $this->id(), $this->default, $this->data );
         
     }
 }

@@ -99,7 +99,47 @@ $(document).ready(function(){
         } );
 
     });
-    
+
+    /**
+     * Insert image button
+     */
+    $("body").on('click', "#image-inserter .btn-insert", function(){
+
+        send_to_element( insert_image( read_inserter_data( $("#image-inserter .img-id").val() ) ) );
+        window.parent.$("#blocker-" + $("#idcontainer").val() ).click();
+
+    });
+
+    /**
+     * Insert multiple images
+     */
+    $("body").on('click', ".tray-commands .btn-insert", function(){
+
+        insert_multiple_images();
+        window.parent.$("#blocker-" + $("#idcontainer").val() ).click();
+
+    });
+
+    /**
+     * Edit data image button
+     */
+    $("body").on('click', "#image-inserter .btn-edit", function(){
+
+        set_image_data( 'no' );
+
+    });
+
+
+    /**
+     * Edit an image in tray
+     */
+    $("body").on('click', ".tray-added .img", function(){
+
+        edit_image_ontray( $(this).data("id") );
+
+    });
+
+
 });
 
 function send_resize(id,params){
@@ -185,6 +225,7 @@ function show_library(pag){
         type: $("#type").val(),
         name: $("#name").val(),
         target: $("#target").val(),
+        multi: $("#multi").val(),
         idcontainer: $("#idcontainer").val(),
         custom: $("#parameters input").serialize()
     }
@@ -206,6 +247,100 @@ function show_library(pag){
     
 }
 
+/**
+ * Populates the fields of the image insert dialog.
+ * @param id The identifier of the image
+ * @param data The data as object
+ */
+function populate_inserter_data( id, data ){
+
+    $("#image-inserter > .content .image").css("background-image", "url('" + data.medium + "')");
+    $("#image-inserter > .content .img-id").val(id);
+    /* Author Info */
+    $("#image-inserter .author-info .author-avatar").attr("src", data.author.avatar);
+    $("#image-inserter .author-info a").attr("href", data.author.url);
+    $("#image-inserter .author-info .media-heading a").html(data.author.uname);
+    $("#image-inserter .author-info .info-date").html(data.date);
+
+    /* IMage Info */
+    $("#image-inserter .image-info .info-title").html(data.title);
+    $("#image-inserter .image-info .info-description").html(data.description);
+    $("#image-inserter .image-info .info-mime").html(data.mime);
+    $("#image-inserter .image-info .info-original").html('<a href="'+data.original.url+'" target="_blank">' + data.original.file + '</a>');
+    $("#image-inserter .image-info .info-size").html(data.original.size);
+    $("#image-inserter .image-info .info-dimensions").html(data.original.width + ' x ' + data.original.height);
+
+    $("#image-inserter > .content .img-title").val(data.title);
+    $("#image-inserter > .content .img-description").val(data.description);
+    $("#image-inserter > .content .img-link").val(data.original.url);
+
+    $("#image-inserter > .content .img-links").html('');
+
+    for ( var key in data.links ){
+
+        $("#image-inserter > .content .img-links").append(
+            '<button type="button" class="btn btn-default" data-link="'+ data.links[key].value + '">' + data.links[key].caption + '</button>'
+        );
+
+    }
+
+    $("#image-inserter > .content .img-sizes").html('');
+    for ( var key in data.sizes ){
+
+        $("#image-inserter > .content .img-sizes").append(
+            '<label><input class="img-size" data-width="'+data.sizes[key].width+'" data-height="'+data.sizes[key].height+'" type="radio" name="size" value="'+data.sizes[key].url+'"><span>' +
+                '<strong>'+data.sizes[key].name+'</strong><br>' +
+                '<small>('+data.sizes[key].width+' x '+data.sizes[key].height+')</small></span></label>'
+        );
+
+    }
+
+    $("#image-inserter > .content .img-sizes label:last-child input").prop( 'checked', 'checked' );
+
+    if ( data.token != undefined )
+        $("#ret-token").val( data.token );
+
+}
+
+/**
+ * Shows the insert image dialog
+ * @param action Specify if the dialog will insert the image or only edit information for an image in tray.
+ */
+function show_image_inserter( action ){
+
+    action = action == undefined || action == 'insert' ? 'insert' : 'edit';
+
+    $("#inserter-blocker").fadeIn(250).click(function(){
+        $("#image-inserter").fadeOut(250, function(){
+            $("#inserter-blocker").fadeOut(250);
+            $("body").css('overflow', 'auto');
+        });
+    });
+
+    $("#image-inserter").fadeIn(250);
+    $("body").css('overflow', 'hidden');
+
+    if ( action == 'edit' ){
+        $("#image-inserter .btn-insert").hide();
+        $("#image-inserter .btn-edit").show();
+        $("#image-inserter .btn-edit-next").show();
+    } else {
+        $("#image-inserter .btn-edit").hide();
+        $("#image-inserter .btn-edit-next").hide();
+        $("#image-inserter .btn-insert").show();
+    }
+
+}
+
+function hide_image_inserter(){
+
+    $("#image-inserter").fadeOut(250, function(){
+        $("#inserter-blocker").fadeOut(250);
+        $("body").css('overflow', 'auto');
+    });
+
+}
+
 function show_image_data(id){
 
     if ($("#ret-token").length>0)
@@ -221,58 +356,18 @@ function show_image_data(id){
 
     $.post( 'tiny-images.php', params, function( data ){
 
-        $("#inserter-blocker").fadeIn(250).click(function(){
-            $("#image-inserter").fadeOut(250, function(){
-                $("#inserter-blocker").fadeOut(250);
-                $("body").css('overflow', 'auto');
-            });
-        });
+        if ( data.error != undefined){
 
-        $("#image-inserter").fadeIn(250);
-        $("body").css('overflow', 'hidden');
-
-        $("#image-inserter > .content .image").css("background-image", "url('" + data.medium + "')");
-        /* Author Info */
-        $("#image-inserter .author-info .author-avatar").attr("src", data.author.avatar);
-        $("#image-inserter .author-info a").attr("href", data.author.url);
-        $("#image-inserter .author-info .media-heading a").html(data.author.uname);
-        $("#image-inserter .author-info .info-date").html(data.date);
-
-        /* IMage Info */
-        $("#image-inserter .image-info .info-title").html(data.title);
-        $("#image-inserter .image-info .info-description").html(data.description);
-        $("#image-inserter .image-info .info-mime").html(data.mime);
-        $("#image-inserter .image-info .info-original").html('<a href="'+data.original.url+'" target="_blank">' + data.original.file + '</a>');
-        $("#image-inserter .image-info .info-size").html(data.original.size);
-        $("#image-inserter .image-info .info-dimensions").html(data.original.width + ' x ' + data.original.height);
-
-        $("#image-inserter > .content .img-title").val(data.title);
-        $("#image-inserter > .content .img-description").val(data.description);
-        $("#image-inserter > .content .img-link").val(data.original.url);
-
-        $("#image-inserter > .content .img-links").html('');
-
-        for ( var key in data.links ){
-
-            $("#image-inserter > .content .img-links").append(
-                '<button type="button" class="btn btn-default" data-link="'+ data.links[key].value + '">' + data.links[key].caption + '</button>'
-            );
+            alert( data.message != undefined ? data.message : 'An error ocurred' );
+            src.find(".add").removeClass('hidden').fadeIn(250);
+            remove_from_tray( id );
+            return false;
 
         }
 
-        $("#image-inserter > .content .img-sizes").html('');
-        for ( var key in data.sizes ){
+        populate_inserter_data( id, data );
 
-            $("#image-inserter > .content .img-sizes").append(
-                '<label><input type="radio" name="size" value="'+data.sizes[key].url+'"><span>' +
-                    '<strong>'+data.sizes[key].name+'</strong><br>' +
-                    '<small>('+data.sizes[key].width+' x '+data.sizes[key].height+')</small></span></label>'
-            );
-
-        }
-
-        if ( data.token != undefined )
-            $("#ret-token").val( data.token );
+        show_image_inserter( 'insert' );
 
     } );
 
@@ -287,134 +382,136 @@ function hide_image_data(id){
     
 }
 
-function insert_image(id,t,target,container){
+/**
+ * Insert or sends an image to the specified target
+ * @param id Image identirifer
+ * @param t Type of target: xoops (XOOPS Editor), external (External target) or any other (tiny, html, etc.)
+ * @param target Target function where data will be send
+ * @param container Local container where selected image will be inserted
+ */
+function insert_image( data, multiple ){
 
-    if(t=='xoops'){
+    if ( data == undefined )
+        return false;
+
+    multiple = multiple == undefined || multiple == 'no' ? false : true;
+
+    var id = data.id;
+    var type = $("#type").val();
+    var target = $("#target").val();
+    var container = $("#idcontainer").val();
+
+    if(type == 'exmcode'){
         
         var rtn = '';
         var ext = $("#extension_"+id).val();
         
-        if ($("#image-link-"+id).val()!=''){
-            html = '[url='+$("#image-link-"+id).val()+']';
+        if (data.link != ''){
+            html = '[url='+data.link+']';
         }
         
         // Image
         html += '[img';
-        var align = $("input[name='align_"+id+"']");
-        for(i=0;i<align.length;i++){
-            if(!$(align[i]).attr('checked')) continue;
-            if(!$(align[i]).val()=='') continue;
-            // File URL
-            html += ' align='+$(align[i]).val();
-        }
+        html += data.align != '' ? ' align='+data.align : '';
         html += ']';
         
-        var sizes = $("input[name='size_"+id+"']");
-        for(i=0;i<sizes.length;i++){
-            if(!$(sizes[i]).attr('checked')) continue;
-            
-            // File URL
-            html += $(sizes[i]).val();
-        }
+        var sizes = data.size;
+        html += sizes;
         
         html += '[/img]';
-        if ($("#image-link-"+id).val()!=''){
+        if (data.link){
             html += '[/url]';
         }
+
+        return html;
         
-        exmPopup.insertText(html);
-        exmPopup.closePopup();
-        
-        return;
     }
 	
-    if(t=='external'){
+    if(type == 'external'){
         
-        var rtn = '';
-        var ext = $("#extension_"+id).val();
-        
-        var sizesInput = $("input[name='size_"+id+"']");
-        var sizes = new Array();
-        var selected = '';
-        
-        $(sizesInput).each(function(i){
-            sizes[i] = $(this).val();
-            if($(this).is(":checked"))
-                selected = $(this).val();
-        });
-        
-        var data = {
-            link: $("#image-link-"+id).val(),
-            sizes: sizes,
-            url: selected
+        var insert_data = {
+            link: data.link,
+            url: data.size,
+            title: data.title,
+            alt: data.alt,
+            description: data.description,
+            align: data.align
         }
-        
-        eval("window.parent."+target+"(data, container)");
-        return;
+
+        return insert_data;
+
     }
 	
 	var html = '';
-	var ext = $("#extension_"+id).val();
 	
 	// Link
-	if ($("#image-link-"+id).val()!=''){
-		html = '<a href="'+$("#image-link-"+id).val()+'" title="'+$("#image-name-"+id).val()+'">';
+	if (data.link!=''){
+		html = '<a href="'+data.link+'" title="'+data.title+'">';
 	}
 	
 	// Image
-	html += '<img src="';
-	var sizes = $("input[name='size_"+id+"']");
-    var th = ''; var pw = 0;
-    for(i=0;i<sizes.length;i++){
-
-        if(pw==0){
-            pw = $(sizes[i]).attr('rel');
-            th = $(sizes[i]).val();
-        } else {
-            if ($(sizes[i]).attr('rel')<pw){
-                pw = $(sizes[i]).attr('rel');
-                th = $(sizes[i]).val();
-            }
-        }
-
-        if(!$(sizes[i]).is(':checked')) continue;
-        
-        // File URL
-        if(target=='container'){
-            var sizeid = i;
-            var imgcontainer = $(sizes[i]).val();
-        }
-        html += $(sizes[i]).val() + '"';
-    }
+	html += '<img src="' + data.size + '"';
 
     // Alignment
-    var align = $("input[name='align_"+id+"']");
-    for(i=0;i<align.length;i++){
-        if(!$(align[i]).attr('checked')) continue;
-        
-        // File URL
-        html += ' class="'+$(align[i]).val()+'"';
-    }
-    
-    html += ' alt="'+$("#image-alt-"+id).val()+'" />';
+    html += data.align != '' ? ' class="'+data.align+'"' : '';
 
-    if ($("#image-link-"+id).val()!=''){
+    html += data.alt != '' ? ' alt="'+data.alt+'"' : '';
+
+    html += '>';
+
+    if (data.link != ''){
 		html += '</a>';
 	}
 
     if(target!=undefined && target=='container'){
          //window.parent.$("#"+container+" .thumbnail").hide();
-        window.parent.$("#"+container+"-container .thumbnail").html('<a href="'+imgcontainer+'" target="_blank"><img src="'+th+'" /></a><input type="hidden" name="'+container+'" id="'+container+'" value="'+id+':'+sizeid+':'+encodeURIComponent($("#image-link-"+id).val())+':'+encodeURIComponent($("#image-name-"+id).val())+'" /><br /><a href="#" class="removeButton removeButton-'+container+'">Remove Image</a>');
-
-        window.parent.$("#blocker-"+container).click();
-
-        return;
+        var accept = window.parent.$("#"+container+"-container").data("accept");
+        if ( multiple )
+            //window.parent.$("#"+container+"-container .thumbnail").append(
+            return '<div style="margin-bottom: 10px; text-align: center;">' +
+                    '<a href="'+data.size+'" target="_blank">' +
+                    '<img src="'+(accept == 'thumbnail' ? data.thumbnail : data.size)+'">' +
+                    '</a>' +
+                    '<input type="hidden" name="'+container+'[]" id="'+container+'" value="'+id+':'+0+':'+encodeURIComponent(data.link)+':'+encodeURIComponent(data.title)+'">' +
+                    '<a href="#" class="btn btn-warning btn-xs" onclick="$(this).parent().remove(); return false;">Remove Image</a></div>';
+        else
+            //window.parent.$("#"+container+"-container .thumbnail").html(
+            return '<a href="'+data.size+'" target="_blank"><img src="'+(accept == 'thumbnail' ? data.thumbnail : data.size)+'" /></a><input type="hidden" name="'+container+'" id="'+container+'" value="'+id+':'+0+':'+encodeURIComponent(data.link)+':'+encodeURIComponent(data.title)+'" /><br /><a href="#" class="removeButton removeButton-'+container+'">Remove Image</a>';
 
     }
 
-    ed = tinyMCEPopup.editor;
-	ed.execCommand("mceInsertContent", true, html);
-	tinyMCEPopup.close();
+    return html;
+
+}
+
+function send_to_element( data ){
+
+    var id = data.id;
+    var type = $("#type").val();
+    var target = $("#target").val();
+    var container = $("#idcontainer").val();
+
+    if ( type == 'exmcode' ){
+
+        exmPopup.insertText(data);
+        exmPopup.closePopup();
+
+    } else if ( type == 'external' ){
+
+        eval("window.parent."+target+"(data, container)");
+
+    } else if ( target!=undefined && target=='container' ){
+
+        window.parent.$("#"+container+"-container .thumbnail").append( data );
+
+    } else {
+
+        ed = tinyMCEPopup.editor;
+        ed.execCommand("mceInsertContent", true, data);
+        tinyMCEPopup.close();
+
+    }
+
 }
 
 function insert_from_url(t){
@@ -547,6 +644,9 @@ function add_image_tray( id ){
 
         $("#inserter-blocker").fadeOut(250);
 
+        populate_inserter_data( id , data );
+        show_image_inserter( 'edit' );
+
 
     });
 
@@ -594,11 +694,103 @@ function remove_from_tray( id ){
 
 }
 
+function edit_image_ontray( id ){
+
+    if ( selected[id] == undefined )
+        return;
+
+    var data = selected[id];
+    populate_inserter_data( id, data );
+    show_image_inserter( 'edit' );
+
+}
+
 /**
- * Get the image data and populate the array with information
+ * Set the image data when multi files will be inserted
+ * @param next Specify if the inserter dialog must show the next image when save data
  */
-function load_image_data( id ){
+function set_image_data( next ){
+
+    next = next == undefined || next == 'no' ? false : true;
+    var id = $("#image-inserter .img-id").val();
+
+    var inserter = {
+        id: id,
+        type: $("#type").val(),
+        func: $("#target").val(),
+        container: $("#idcontainer").val()
+    };
+
+    var data = read_inserter_data( inserter.id );
+
+    // Set new data
+    selected[id].title = data.title;
+    selected[id].alt = data.alt;
+    selected[id].description = data.description;
+    selected[id].link = data.link;
+    selected[id].align = data.align;
+    selected[id].size = data.size;
+    selected[id].thumbnail = data.thumbnail;
+
+    if ( next ){
+
+    } else{
+
+        hide_image_inserter();
+
+    }
 
 
+}
+
+/**
+ * Reads the current insert imaga dialog fields values
+ * @param id
+ * @returns {*}
+ */
+function read_inserter_data( id ){
+
+    if ( !$("#image-inserter").is(":visible") )
+        return false;
+
+    if ( $("#image-inserter .img-id").val() != id )
+        return false;
+
+    var data = {
+        id: $("#image-inserter .img-id").val(),
+        title: $("#image-inserter .img-title").val(),
+        alt: $("#image-inserter .img-alt").val(),
+        description: $("#image-inserter .img-description").val(),
+        link: $("#image-inserter .img-link").val(),
+        align: $("#image-inserter .img-align:checked").val(),
+        size: $("#image-inserter .img-size:checked").val()
+    };
+
+    var width = 0;
+    $("#image-inserter .img-size").each(function( i ){
+
+        if ( i == 0 || $(this).data('width') < width )
+            data.thumbnail = $(this).val();
+
+    });
+
+    return data;
+
+}
+
+function insert_multiple_images(){
+
+    var data = '';
+
+    for ( var key in selected ){
+
+        if ( selected[key] == undefined )
+            continue;
+
+        data += insert_image( selected[key], 'yes' );
+
+    }
+
+    send_to_element( data );
 
 }

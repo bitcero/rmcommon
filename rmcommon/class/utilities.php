@@ -150,9 +150,13 @@ class RMUtilities
     /**
      * Muestra los controles para lanzar el administrador de imágenes
      * desde cualqueir punto
-     * @param string Element name for inputs
+     * @param string $name Element name for inputs
+     * @param string $id ID for this element
+     * @param string $default Default value for field
+     * @param array $data Array of data that will be inserted as data-{key} in HTML code
+     * @return string
      */
-    public function image_manager($name, $id='', $default=''){
+    public function image_manager($name, $id='', $default='', $data = array()){
         
         $id = $id=='' ? $name : $id;
         
@@ -161,7 +165,11 @@ class RMUtilities
             $img->load_from_params($default);
         }
 
-        $ret = '<div id="'.$id.'-container" class="rmimage_container">';
+        $ret = '<div id="'.$id.'-container" class="rmimage_container"';
+        foreach( $data as $key => $value ){
+            $ret .= ' data-' . $key . '="' . $value . '"';
+        }
+        $ret .= '>';
         $ret .= '<div class="thumbnail">';
         if($default!='' && !$img->isNew()){
             $ret .= '<a href="'.$img->url().'" target="_blank"><img src="'.$img->get_smallest().'" /></a>';

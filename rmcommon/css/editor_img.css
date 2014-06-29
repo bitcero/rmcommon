@@ -1,4 +1,7 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=3.8');
+html{
+    height: 100%;
+}
 body{
 	margin: 0;
     background: #FFF;
@@ -138,16 +141,17 @@ body{
     left: 0px;
 }
 .thumbnail-item > .check{
-    background: rgb(3, 184, 201);
+    background: #FFF; /*rgb(3, 184, 201);*/
     bottom: 0; right: 0;
     padding: 6px;
     width: 30px; height: 30px;
     opacity: 0;
-    color: #FFF;
+    color: #000;/*#FFF;*/
     font-size: 18px;
     position: absolute;
     border-radius: 2px 0 0 0;
     transition: ease all 250ms;
+    box-shadow: -3px -3px 4px rgba(0,0,0,0.3);
 }
 .thumbnail-item > .add:hover{
     background-color: rgba(253, 98, 46, 0.7);
@@ -178,7 +182,7 @@ body{
 #image-inserter{
     display: none;
     position: fixed;
-    top: 10%; right: 10%; bottom: 10%; left: 10%;
+    top: 10%; right: 10%; bottom: 15%; left: 10%;
     background: #FFF;
     border: 1px solid rgba(0,0,0,0.3);
 }

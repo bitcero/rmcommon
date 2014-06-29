@@ -25,6 +25,7 @@
         <input type="hidden" name="type" value="<?php echo $type; ?>" />
         <input type="hidden" name="name" value="<?php echo $en; ?>" />
             <input type="hidden" name="target" value="<?php echo $target; ?>" />
+            <input type="hidden" name="multi" value="<?php echo $multi ? 'yes' : 'no'; ?>" />
             <input type="hidden" name="idcontainer" value="<?php echo $container; ?>" />
         </form>
     </div>
@@ -106,6 +107,7 @@
 <input type="hidden" name="type" id="type" value="<?php echo $type; ?>" />
 <input type="hidden" name="name" id="name" value="<?php echo $en; ?>" />
 <input type="hidden" name="target" id="target" value="<?php echo $target; ?>" />
+<input type="hidden" name="multi" id="multi" value="<?php echo $multi ? 'yes' : 'no'; ?>" />
 <input type="hidden" name="idcontainer" id="idcontainer" value="<?php echo $container; ?>" />
 <span id="parameters">
 <?php
