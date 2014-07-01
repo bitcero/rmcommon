@@ -1,8 +1,8 @@
 /**
-* $Id: editor-exmcode.php 825 2011-12-09 00:06:11Z i.bitcero $
+* $Id$
 * ExmCode Editor
-* @author: Eduardo Cortés <i.bitcero@gmail.com>
-* http://exmsystem.net
+* Author: Eduardo Cortés <i.bitcero@gmail.com>
+* http://eduardocortes.mx
 */
 <?php
 	require '../../../../../mainfile.php'; 
@@ -260,13 +260,15 @@ var exmCode<?php echo ucfirst($id); ?> = {
             
         var cursorPos = 0;
         if (selected.text==''){
-            cursorPos = selected.start + what.indexOf("%replace%");
+            cursorPos = what.indexOf("%replace%");
+            cursorPos = e.selectionStart + (cursorPos < 0 ? text.length : cursorPos);
+            e.selectionStart = cursorPos;
         } else {
             cursorPos = selected.start + text.length;
         }
         
-        cursorPos = cursorPos<0 || cursorPos<=selected.start ? (selected.start + text.length) : cursorPos;
-        
+        //cursorPos = cursorPos<0 || cursorPos<=selected.start ? (selected.start + text.length) : cursorPos;
+
         e.selectionEnd = cursorPos;
         e.scrollTop = scrollTop;
         $("#"+x.ed).focus();
@@ -276,7 +278,7 @@ var exmCode<?php echo ucfirst($id); ?> = {
         x = this;
         if ($("#"+x.ed+"-ed-container .popup").length<=0){
             var pop = '<div class="popblocker"></div><div class="popup">';
-            pop += '<div class="titlebar">';
+            pop += '<div class="titlebar window-title cu-titlebar">';
             pop += '<span class="buttons">';
             pop += '<span class="close" onclick="'+x.name+'.closePopup()"><span>Close</span></span>';
             pop += '<span class="maximize" onclick="'+x.name+'.maximize()"><span>Maximize</span></span>';
@@ -308,7 +310,6 @@ var exmCode<?php echo ucfirst($id); ?> = {
         	var params = '&id='+x.ed+'&name='+x.name+'&eurl='+url+'&lang=<?php echo _LANGCODE; ?>';
         	params += '&theme=<?php echo $rmc_config['theme']; ?>';
         	params += '&version=<?php echo RMCVERSION; ?>';
-        
         	$(pn+' iframe').attr('src', x.url+'/urls.php?url='+d.url+params);
         } else {
             
@@ -377,5 +378,4 @@ var exmCode<?php echo ucfirst($id); ?> = {
 $(document).ready(function(){
 	exmCode<?php echo ucfirst($id); ?>.init();
 	//exmCode.make_buttons('<?php echo rmc_server_var($_GET, 'id'); ?>');
-	$("#<?php echo rmc_server_var($_GET, 'id'); ?>").css('width', ($("#<?php echo rmc_server_var($_GET, 'id'); ?>-ec-container").width()-6)+'px');
 });

@@ -112,17 +112,17 @@ class RMFormEditor extends RMFormElement
 	}
 	
 	public function renderTArea(){
-        RMTemplate::get()->add_style('xoops-editor.css', 'rmcommon');
+        RMTemplate::get()->add_style('editor-simple.css', 'rmcommon');
 		$rtn = "<div class=\"ed-container\" style=\"width: $this->_width\">";
         $plugins = array();
-        $plugins = RMEvents::get()->run_event('rmcommon.simple.editor.plugins', $plugins, $this->getName());
-        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'plain');
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'simple', $this->id());
+        $plugins = RMEvents::get()->run_event('rmcommon.simple.editor.plugins', $plugins, $this->id());
         if (!empty($plugins)){
             $rtn .= '<div class="ed-plugins"><span class="plugin">';
             $rtn .= implode('</span><span class="plugin">', $plugins);
             $rtn .= "</span></div>";
         }
-        $rtn .= "<textarea class='xc-editor form-control' id='".$this->getName()."' name='".$this->getName()."' style='width: 99%; height: ".$this->_height.";'>".$this->_default."</textarea>
+        $rtn .= "<textarea class='xc-editor' id='".$this->getName()."' name='".$this->getName()."' style='height: ".$this->_height.";'>".$this->_default."</textarea>
                  </div>";
         return $rtn;
 	}
@@ -142,12 +142,12 @@ class RMFormEditor extends RMFormElement
 		TinyEditor::getInstance()->add_config('elements',$this->id(), true);
 		RMTemplate::get()->add_style('mce_editor.css','rmcommon');
 		RMTemplate::get()->add_script( 'editor.js','rmcommon', array('directory' => 'include') );
-		RMTemplate::get()->add_script( 'quicktags.js','rmcommon', array('directory' => 'include') );
+		RMTemplate::get()->add_script( 'quicktags.js','rmcommon' );
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce.js');
 		RMTemplate::get()->add_head_script(TinyEditor::getInstance()->get_js());
 
         $plugins = array();
-        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'tinymce');
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'tiny', $this->id());
 
 		$rtn = '
 		<div class="ed-container" id="ed-cont-'.$this->id().'" style="width: 100%;">
@@ -170,16 +170,24 @@ class RMFormEditor extends RMFormElement
 	* @since 1.5
 	*/
 	private function renderHTML(){
-		RMTemplate::get()->add_script(RMCURL."/include/js/quicktags.js");
-		RMTemplate::get()->add_style('editor_html.css','rmcommon');
+		RMTemplate::get()->add_script("quicktags.js", 'rmcommon');
+		RMTemplate::get()->add_style('editor-html.css','rmcommon');
 		$rtn = "\n<div class='ed-container html_editor_container' style='width: $this->_width;' id='".$this->id()."-ed-container'>";
         $plugins = array();
+
         // Get external plugins
+        $plugins = array();
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'html', $this->id());
+
+        if ( !empty( $plugins ) )
+            $rtn .= '<div class="ed-plugins"><span class="plugin">'.implode('</span><span class="plugin">', $plugins).'</span></div>';
+
+        $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.html.editor.plugins', $plugins, $this->id());
-        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'html');
         
-		$rtn .= "<div class=\"quicktags\"><script type=\"text/javascript\">edToolbar('".$this->id()."')</script>".(!empty($plugins) ? "<div class='ed_plugins'><span class='plugin'>".implode('</span><span class="plugin">', $plugins)."</span></div>" : '')."</div>
-		<div class='txtarea_container'><textarea id='".$this->id()."' name='".$this->getName()."' style='width: ".$this->_width."; height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea></div>
+		$rtn .= "<div class=\"quicktags\">
+		<script type=\"text/javascript\">edToolbar('".$this->id()."')</script>".(!empty($plugins) ? "<div class='ed-qt-plugins'><span class='plugin'>".implode('</span><span class="plugin">', $plugins)."</span></div>" : '')."</div>
+		<div class='txtarea_container'><textarea id='".$this->id()."' name='".$this->getName()."' style='height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea></div>
 		</div>";
 		return $rtn;
 	}
@@ -191,14 +199,14 @@ class RMFormEditor extends RMFormElement
 		RMTemplate::get()->add_style('colorpicker.css','rmcommon');
 
         $plugins = array();
-        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'exmcode');
+        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'exmcode', $this->id());
 
 		$rtn = 	"<div class='ed-container' id='".$this->id()."-ed-container' width='$this->_width'>";
 		$rtn .= "<div class='ed-plugins' id='".$this->id()."-ed-plugins'><span class='plugin'>".implode('</span> <span class="plugin">', $plugins).'</span></div>';
 		$rtn .= "<div class='ed_buttons' id='".$this->id()."-ec-container'>";
         $rtn .= "<div class='row_top'></div><div class='row_bottom'></div>";
 		$rtn .= "</div>";
-		$rtn .= "<textarea id='".$this->id()."' name='".$this->getName()."' style='width: 99%; height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea>";
+		$rtn .= "<textarea id='".$this->id()."' name='".$this->getName()."' style='height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea>";
 		$rtn .= "</div>";
         // buttons
         $tplugins = RMEvents::get()->run_event('rmcommon.exmcode.plugins', $this->ex_plugins);

@@ -95,4 +95,19 @@ class RmcommonRmcommonPreload
         RMSettings::write_rewrite_js( $save['modules_path'] );
 
     }
+
+    public function eventRmcommonEditorTopPlugins( $plugins, $type, $id ){
+
+        RMTemplate::get()->add_script( 'cu-image-mgr.js', 'rmcommon' );
+
+        $plugins[] = '<a href="#"
+                        onclick="launch_image_manager($(this));"
+                        data-id="'.$id.'" data-multiple="yes"
+                        data-title="'.__('Images Manager','rmcommon').'"
+                        data-type="'.$type.'"><span class="fa fa-image"></span> ' . __('Images', 'rmcommon') . '</a>';
+
+        return $plugins;
+
+    }
+
 }

@@ -1,0 +1,30 @@
+.ed-plugins{
+    padding: 6px 6px;
+    background: #F9F9F9;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 0;
+    margin: 0;
+    overflow: hidden;
+}
+.ed-plugins .plugin{
+    display: inline-block;
+    padding: 3px 6px;
+    margin: 0 2px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+.ed-plugins .plugin *{
+    color: #797979;
+}
+.ed-plugins .plugin:hover{
+    border-color: rgba(0,0,0,0.3);
+}
+.ed-plugins .plugin:hover *{
+    color: #333;
+}
+.xc-editor{
+    margin: 0;
+    border-color: rgba(0,0,0,0.15);
+    padding: 4px;
+    width: 100%;
+}

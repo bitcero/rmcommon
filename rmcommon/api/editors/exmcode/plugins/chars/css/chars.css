@@ -1,20 +1,15 @@
-body{
-	margin: 0px;
+body, html{
+    height: 100%;
 }
-.right{
-	float: right;
-	width: 110px;
-	padding: 2px 5px 2px 2px;
-	overflow: hidden;
+.container{
+    width: 100%;
 }
 #preview{
 	font-size: 60px;
 	border: 1px solid #CCC;
 	text-align: center;
-	width: 110px;
-	height: 110px;
-	display: table-cell;
-	vertical-align: middle;
+	height: 120px;
+	line-height: 120px;
 }
 #description{
 	display: block;
@@ -24,21 +19,21 @@ body{
 	height: 30px;
 }
 #charmap{
-	overflow: hidden;
-	width: 500px;
-	font-family: tahoma, verdana, arial;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 0;
 }
 #charmap a{
-	display: block;
-	padding: 2px;
+	display: inline-block;
 	color: #000;
 	margin: 1px;
-	float: left;
 	text-decoration: none;
 	border: 1px solid #CCC;
-	width: 14px;
-	height: 14px;
 	text-align: center;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
 }
 .preview{
 	text-align: center;

@@ -84,20 +84,6 @@ $xoopsLogger->activated = false;
                 }
             });
             
-            // EXM Image Manager
-            ed.addCommand('mceEXMImg', function() {
-                ed.windowManager.open({
-                    file : '<?php echo RMCURL; ?>/include/tiny-images.php',
-                    width : 600 + parseInt(ed.getLang('exmsystem.delta_width', 0)),
-                    height : 600 + parseInt(ed.getLang('exmsystem.delta_height', 0)),
-                    inline : 1,
-                    title: '<?php _e('Insert Image','rmcommon'); ?>',
-                    maximizable: 'true'
-                }, {
-                    plugin_url : url
-                });
-            });
-            
             // EXM Icons plugin
             // Register commands
             ed.addCommand('mceExmIcons', function() {
@@ -128,13 +114,6 @@ $xoopsLogger->activated = false;
                 title : 'exmsystem.exm_adv_desc',
                 image : url + '/img/toolbars.gif',
                 cmd : 'EXM_Adv'
-            });
-            
-            // Image Manager
-            ed.addButton('exm_img', {
-                title : 'exmsystem.exm_img_desc', 
-                cmd : 'mceEXMImg', 
-                image : url+'/img/exmimg.png'
             });
             
             // Icons plugin

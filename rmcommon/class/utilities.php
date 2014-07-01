@@ -185,7 +185,7 @@ class RMUtilities
         $tpl = RMTemplate::get();
 
         $tpl->add_head_script('var imgmgr_title = "'.__('Image Manager','rmcommon').'"'."\n".'var mgrURL = "'.RMCURL.'/include/tiny-images.php";');
-        $tpl->add_script( 'image_mgr_launcher.js', 'rmcommon', array('directory' => 'include') );
+        $tpl->add_script( 'cu-image-mgr.js', 'rmcommon' );
 
         return $ret;
     }

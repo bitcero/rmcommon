@@ -223,6 +223,7 @@ function show_library(pag){
         url: window.parent.location.href,
         page: pag,
         type: $("#type").val(),
+        editor: $("#editor").val(),
         name: $("#name").val(),
         target: $("#target").val(),
         multi: $("#multi").val(),
@@ -497,9 +498,17 @@ function send_to_element( data ){
         exmPopup.insertText(data);
         exmPopup.closePopup();
 
+    } else if ( type == 'html'){
+
+        window.parent.edInsertContent( container, data );
+
     } else if ( type == 'external' ){
 
         eval("window.parent."+target+"(data, container)");
+
+    } else if ( type == 'simple' ){
+
+        insert_at_cursor( window.parent.$("#" + container), data );
 
     } else if ( target!=undefined && target=='container' ){
 
@@ -510,9 +519,14 @@ function send_to_element( data ){
 
     } else {
 
-        ed = tinyMCEPopup.editor;
-        ed.execCommand("mceInsertContent", true, data);
-        tinyMCEPopup.close();
+        if ( tinyMCEPopup.editor != null ){
+            ed = tinyMCEPopup.editor;
+            ed.execCommand("mceInsertContent", true, data);
+            tinyMCEPopup.close();
+        } else {
+            ed = tinyMCE.get( $("#idcontainer").val() );
+        }
+
 
     }
 
@@ -798,4 +812,29 @@ function insert_multiple_images(){
 
     send_to_element( data );
 
+}
+
+/**
+ * Added for simple editor support
+ * @param myField
+ * @param myValue
+ */
+function insert_at_cursor(element, text) {
+    //IE support
+    if (document.selection) {
+        element.focus();
+        sel = document.selection.createRange();
+        sel.text = text;
+    }
+
+    //MOZILLA/NETSCAPE support
+    else if ($(element)[0].selectionStart || $(element)[0].selectionStart == '0') {
+        var startPos = $(element)[0].selectionStart;
+        var endPos = $(element)[0].selectionEnd;
+        $(element).val( $(element).val().substring(0, startPos)
+            + text
+            + $(element).val().substring(endPos, $(element).val().length));
+    } else {
+        $(element).val(text);
+    }
 }

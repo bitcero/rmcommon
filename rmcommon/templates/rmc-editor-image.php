@@ -105,6 +105,7 @@
 </div>
 
 <input type="hidden" name="type" id="type" value="<?php echo $type; ?>" />
+<input type="hidden" name="editor" id="editor" value="<?php echo $editor; ?>" />
 <input type="hidden" name="name" id="name" value="<?php echo $en; ?>" />
 <input type="hidden" name="target" id="target" value="<?php echo $target; ?>" />
 <input type="hidden" name="multi" id="multi" value="<?php echo $multi ? 'yes' : 'no'; ?>" />

@@ -336,22 +336,22 @@ function edShowButton(which, button, i) {
     }
     switch (button.id) {
         case 'ed_img':
-            document.write('<input type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertImage(\'' + which + '\');" value="' + button.display + '" />');
+            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertImage(\'' + which + '\');">' + button.display + '</button>');
             break;
         case 'ed_link':
-            document.write('<input type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertLink(\'' + which + '\', ' + i + ');" value="' + button.display + '" />');
+            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertLink(\'' + which + '\', ' + i + ');">' + button.display + '</button>');
             break;
         case 'ed_ext_link':
-            document.write('<input type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertExtLink(\'' + which + '\', ' + i + ');" value="' + button.display + '" />');
+            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertExtLink(\'' + which + '\', ' + i + ');">' + button.display + '</button>');
             break;
         case 'ed_footnote':
-            document.write('<input type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertFootnote(\'' + which + '\');" value="' + button.display + '" />');
+            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertFootnote(\'' + which + '\');">' + button.display + '</button>');
             break;
         case 'ed_via':
-            document.write('<input type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertVia(\'' + which + '\');" value="' + button.display + '" />');
+            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertVia(\'' + which + '\');">' + button.display + '</button>');
             break;
         default:
-            document.write('<input type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertTag(\'' + which + '\', ' + i + ');" value="' + button.display + '"  />');
+            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertTag(\'' + which + '\', ' + i + ');">' + button.display + '</button>');
             break;
     }
 }
@@ -452,22 +452,22 @@ function edToolbar(which) {
     }
     if (edShowExtraCookie()) {
         document.write(
-            '<input type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');" value="Close Tags" />'
-            + '<input type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');" value="Dict" />'
-            + '<input type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')" value="&raquo;" style="visibility: hidden;" />'
+            '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
+            + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');">Dict</button>'
+            + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')"  style="visibility: hidden;">&raquo;</button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '">'
-            + '<input type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');" value="&laquo;" />'
+            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');">&laquo;</button>'
         );
     }
     else {
         document.write(
-            '<input type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');" value="Close Tags" />'
-            + '<input type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');" value="Dict" />'
-            + '<input type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')" value="&raquo;" />'
+            '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
+            + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');">Dict</button>'
+            + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')">&raquo;</button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '" style="display: none;">'
-            + '<input type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');" value="&laquo;" />'
+            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');">&laquo;</button>'
         );
     }
     for (i = extendedStart; i < edButtons.length; i++) {
@@ -718,19 +718,4 @@ function edShowExtraCookie() {
         }
     }
     return false;
-}
-
-if (jQuery){
-    $(document).ready(function(){
-        if ($(".html_editor_container").length==1){
-            var name = ".html_editor_container ";
-            $(name+' textarea').css('width', $(name+' .quicktags').width()+'px');
-        }
-        
-        $(window).resize(function(){
-			var name = ".html_editor_container ";
-            $(name+' textarea').css('width', $(name+' .quicktags').width()+'px');
-		});
-        
-    });
 }

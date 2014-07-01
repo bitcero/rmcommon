@@ -1,8 +1,8 @@
 x.add_plugin('chars', {
     show: function(){
         x.popup({
-            width: 620,
-            height: 310,
+            width: 720,
+            height: 330,
             title: 'Insert Custom Character',
             url: x.url+'/plugins/chars/chars.html'
         });

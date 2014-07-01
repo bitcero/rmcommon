@@ -32,13 +32,15 @@ $en = RMHttpRequest::request( 'name', 'string', '' );
 
 // Check if target is different from editor
 $target = RMHttpRequest::request( 'target', 'string', '' );
+// Used when tiny must be loaded
+$editor = RMHttpRequest::request( 'editor', 'string', '' );
 $container = RMHttpRequest::request( 'idcontainer', 'string', '' );
 
 if ($action==''){
 	
 	RMTemplate::get()->add_script('jquery.min.js', 'rmcommon', array('directory' => 'include'));
     RMTemplate::get()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
-    RMTemplate::get()->add_script('images_editor.js', 'rmcommon', array('directory' => 'include'));
+    RMTemplate::get()->add_script('popup-images-manager.js', 'rmcommon' );
 	
     if (!$cat->isNew()){
         $uploader = new RMFlashUploader('files-container', 'upload.php');
@@ -94,6 +96,7 @@ if ($action==''){
 
     $categories = RMFunctions::load_images_categories("WHERE status='open' ORDER BY id_cat DESC", true);
 
+
     RMTemplate::get()->add_style('bootstrap.min.css', 'rmcommon');
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
@@ -101,7 +104,7 @@ if ($action==''){
     if($type=='tiny' && $target!='container'){
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce_popup.js');
     } elseif($target!='container'&&$type!='external') {
-        RMTemplate::get()->add_head('<script type="text/javascript">var exmPopup = window.parent.'.$en.';</script>');
+        RMTemplate::get()->add_head_script('var exmPopup = window.parent.exmCode'.ucfirst($container).';');
     }
 
     RMEvents::get()->run_event('rmcommon.loading.editorimages', '');

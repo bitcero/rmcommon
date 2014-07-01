@@ -21,17 +21,19 @@ if(is_file($path['dirname'].'/lang/'.$lang.'.php')){
 define('RMCPATH', XOOPS_ROOT_PATH.'/modules/rmcommon');
 define('RMCURL', XOOPS_URL.'/modules/rmcommon');
 
+ob_start();
 include str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $url);
-$rmc_config['theme'] = $theme;
-define('RMCVERSION', $version);
+$content = ob_get_clean();
 
-include XOOPS_ROOT_PATH.'/modules/rmcommon/class/template.php';
-
+ob_start();
 ?>
 <script type="text/javascript">
     var exmPopup = window.parent.<?php echo $name; ?>;
     $(document).ready(function(){
-        $("head").prepend('<link rel="stylesheet" type="text/css" href="<?php echo RMTemplate::get()->generate_url('editor-popups.css', 'rmcommon', 'css'); ?>" />');
+        $("head").prepend('<link rel="stylesheet" type="text/css" href="<?php echo XOOPS_URL; ?>/modules/rmcommon/css/editor-popups.css">');
     });
 </script>
+<?php
+    $script = ob_get_clean();
 
+    echo str_replace( "</body>", $script . "\n" . '</body>', $content );

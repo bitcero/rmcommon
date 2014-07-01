@@ -263,7 +263,7 @@ var charmap = [
 
 $(document).ready(function(){
 	for(i=0;i<charmap.length;i++){
-		$("#charmap").append('<a href="javascript:;" id="'+i+'">'+charmap[i][0]+'</a>');
+		$("#charmap").append('<a href="#" id="'+i+'">'+charmap[i][0]+'</a>');
 	}
 	
 	$("#charmap a").hover(function(){
@@ -276,6 +276,7 @@ $(document).ready(function(){
 	$("#charmap a").click(function(){
 		exmPopup.insertText(charmap[$(this).attr("id")][0]);
 		exmPopup.closePopup();
+        return false;
 	});
 	
 });

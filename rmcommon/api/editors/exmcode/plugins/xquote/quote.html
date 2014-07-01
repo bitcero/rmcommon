@@ -7,7 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="../../editor-popups.js"></script>
 <script type="text/javascript" src="<?php echo RMCURL; ?>/include/js/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $eurl; ?>/plugins/link/css/links.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo RMCURL; ?>/css/bootstrap.min.css">
+<style type="text/css">
+    .container{
+        width: 100%;
+    }
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#quote").val(exmPopup.selection().text);
@@ -28,9 +33,25 @@
 </script>
 </head>
 <body>
-<label for="quote"><?php echo INPUT; ?></label>
-<textarea id="quote" style="width: 100%; height: 120px; margin: 5px 0;"></textarea>
-<input type="button" id="insert" value="<?php echo INSERT; ?>" class="formButton" />
-<input type="button" id="cancel" value="<?php echo CANCEL; ?>" class="" />
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="quote"><?php echo INPUT; ?></label>
+                <textarea rows="5" cols="50" class="form-control" id="quote"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" id="insert" class="btn btn-primary"><?php echo INSERT; ?></button>
+                <button type="button" id="cancel" class="btn btn-default"><?php echo CANCEL; ?></button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>

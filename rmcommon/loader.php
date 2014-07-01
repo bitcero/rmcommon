@@ -11,8 +11,10 @@
 /**
  * rmcommon constants
  */
-define("RMCPATH",XOOPS_ROOT_PATH.'/modules/rmcommon');
-define("RMCURL",XOOPS_URL.'/modules/rmcommon');
+if ( !defined( 'RMCPATH' ) )
+    define("RMCPATH",XOOPS_ROOT_PATH.'/modules/rmcommon');
+if ( !defined( 'RMCURL' ) )
+    define("RMCURL",XOOPS_URL.'/modules/rmcommon');
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
 define('RMCVERSION','2.2.5.1 beta');

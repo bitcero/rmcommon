@@ -6,63 +6,37 @@
 */
 
 div.ed-container div.ed_buttons{
-	background: #e2e2e2;
+	background: #f9f9f9;
 	overflow: hidden;
-    -moz-border-radius: 5px 5px 0 0;
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
     margin-bottom: -2px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,0.1);
     border-bottom: 0;
 }
 div.ed-container textarea{
-    border: 1px solid #CCC;
+    border: 1px solid rgba(0,0,0,0.1);
 }
 div.ed-container div.ed_buttons div.row_top{
-	background: #E2E2E2 url(../images/ed-bg.png) repeat-x top;
+	background: #f9f9f9;
 	overflow: hidden;
 	padding: 3px;
-	-moz-border-radius: 5px 5px 0 0;
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
     border-bottom: 0;
 }
 div.ed-container div.ed_buttons div.row_bottom{
 	overflow: hidden;
 	display: none;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #ccc;
 	padding: 3px;
-	background: #E2E2E2 url(../images/ed-bg.png) repeat-x top;
 }
 div.ed-container div.ed_buttons span.buttons{
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    border-radius: 3px;
-    background-image: url(../images/butt2.png);
-    background-position: left top;
-    background-repeat: repeat-x;
     padding: 3px;
-    font-size: 0.9em;
     color: #333;
-    border: 1px solid #ACACAC;
-    margin: 2px 0px 2px 2px;
-    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin: 0 2px;
     display: block;
     float: left;
-    height: 18px;
+    font-size: 0.9em;
 }
 div.ed-container div.ed_buttons span.buttons:hover{
-	border: 1px solid #A3BAD6;
+	border: 1px solid rgba(0,0,0,0.3);
 	background-position: left bottom;
 }
 div.ed-container div.ed_buttons span.buttons span{
@@ -105,14 +79,13 @@ div.ed-container textarea{
 	font-size: 1.05em;
 	color: #333;
 	padding: 3px;
-	-moz-border-radius: 0 0 5px 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -khtml-border-bottom-right-radius: 5px;
-    -khtml-border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+	border-radius: 0 0 2px 2px;
     background: #FFF;
+    width: 100%;
+}
+div.ed-container textarea:focus{
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: none;
 }
 div.ed-container div.pops{
 	position: absolute;
@@ -122,13 +95,6 @@ div.ed-container div.pops{
 	padding: 3px;
 	max-height: 300px;
 	overflow: auto;
-	-moz-border-radius: 0 0 5px 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -khtml-border-bottom-right-radius: 5px;
-    -khtml-border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
 div.ed-container div.pops ul{
 	list-style: none;
@@ -159,33 +125,39 @@ div.ed-container div.pops input[type='button']{
     margin: 2px 2px 3px 0;
 }
 
+/** TOP PLUGINS */
+.ed-plugins{
+    padding: 3px 0;
+}
+.ed-plugins .plugin{
+    display: inline-block;
+    padding: 3px 6px;
+    border: 1px solid rgba(0,0,0,0.15);
+    background-color: #f9f9f9;
+    font-size: 0.95em;
+}
+.ed-plugins .plugin *{
+    color: #646464;
+}
+.ed-plugins .plugin:hover{
+    background-color: #FFF;
+    border-color: rgba(0,0,0,0.3);
+}
+
 /* POPUPS */
 .popup{
-    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,0.2);
     padding: 1px;
     background: #FFF;
-    position: absolute;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
-    box-shadow: #000 0 0 25px;
-    -moz-box-shadow: #000 0 0 25px;
+    z-index: 1082;
 }
 .maximized{
     box-shadow: none;
     -moz-box-shadow: none;
 }
 .popup .titlebar{
-    background: url(../images/bgpops.png) repeat-x top;
-    height: 30px;
-    -moz-border-radius: 5px 5px 0 0;
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -khtml-border-top-right-radius: 5px;
-    -khtml-border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    padding: 10px;
+    text-shadow: none;
 }
 .popup .content{
     padding: 3px;
@@ -199,7 +171,6 @@ div.ed-container div.pops input[type='button']{
 .popup .titlebar .buttons{
     display: block;
     float: right;
-    padding: 6px 5px 0 0;
     overflow: hidden;
 }
 .popup .titlebar .buttons span{
@@ -233,13 +204,6 @@ div.ed-container div.pops input[type='button']{
 .popup .titlebar .buttons span span{
     display: none;
 }
-.popup .titlebar .title{
-    font-weight: bold;
-    color: #FFF;
-    display: block;
-    padding: 6px 0 0 6px;
-    text-shadow: #000 1px 1px 2px;
-}
 .popblocker{
     position:fixed; 
     left:0; 
@@ -247,5 +211,6 @@ div.ed-container div.pops input[type='button']{
     width:100%; 
     height:100%;
     border:1px solid #000; 
-    background:#000; top:0; left:0; opacity:0.8; -ms-filter:'alpha(opacity=80)'; filter:alpha(opacity=80)
+    background:#000; top:0; left:0; opacity:0.8; -ms-filter:'alpha(opacity=80)'; filter:alpha(opacity=80);
+    z-index: 1081;
 }

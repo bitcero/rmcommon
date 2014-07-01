@@ -13,6 +13,7 @@
 */
 include XOOPS_ROOT_PATH."/include/common.php";
 include_once RMCPATH.'/loader.php';
+
 XoopsLogger::getInstance()->activated = false;
 XoopsLogger::getInstance()->renderingEnabled = false;
 
@@ -42,31 +43,30 @@ RMEvents::get()->run_event('rmcommon.load_emotions',$emotions,'exmcode');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="editor-popups.js"></script>
 <script type="text/javascript" src="<?php echo RMCURL; ?>/include/js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo RMCURL; ?>/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $eurl; ?>/plugins/emotions/css/emotions.css" />
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("img").click(function(){
-			exmPopup.insertText($(this).attr("alt"));
+		$("a").click(function(){
+			exmPopup.insertText($(this).data("code"));
 			exmPopup.closePopup();
+            return false;
 		});
 	});
 </script>
 </head>
 <body>
-<table width="100%" cellpadding="2" cellspacing="0">
-<tr align="center">
-<?php $i = 0; ?>
-<?php foreach($emotions as $icon): ?>
-<?php if($i>=6): ?>
-	</tr><tr>
-<?php 
-	$i=0;
-	endif; ?>
-<td><img src="<?php echo $icon['file']; ?>" title="<?php echo $icon['desc']; ?>" alt="<?php echo $icon['code']; ?>" /><br /><?php echo $icon['code']; ?></td>
-<?php 
-	$i++;
-endforeach; ?>
-</tr>
-</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 emotions">
+            <?php foreach($emotions as $icon): ?>
+                <a href="#" data-code="<?php echo $icon['code']; ?>">
+                    <img src="<?php echo $icon['file']; ?>" title="<?php echo $icon['desc']; ?>" alt="<?php echo $icon['code']; ?>" />
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
 </body>
 </html>

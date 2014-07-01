@@ -1,8 +1,8 @@
 x.add_plugin('link', {
     show: function(){
         x.popup({
-            width: 300,
-            height: 220,
+            width: 400,
+            height: 250,
             title: 'Insert Link',
             url: x.url+'/plugins/link/links.html'
         });

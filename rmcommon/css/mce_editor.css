@@ -6,8 +6,8 @@
     float: left;
     height: 41px;
 }
-.es-editor > .es-plugins > .plugin{ padding: 0 5px; background: #f7f7f7; border: 1px solid rgba(0,0,0,0.05); display: inline-block; -webkit-transition: all 250ms ease;-moz-transition: all 250ms ease;-ms-transition: all 250ms ease;-o-transition: all 250ms ease;transition: all 250ms ease; }
-.es-editor > .es-plugins > .plugin:hover{ background-color: #FFF; border-color: rgba(0,0,0,0.2); }
+.es-editor > .es-plugins > .plugin{ padding: 0 5px; background: #f9f9f9; border: 1px solid rgba(0,0,0,0.1); display: inline-block; -webkit-transition: all 250ms ease;-moz-transition: all 250ms ease;-ms-transition: all 250ms ease;-o-transition: all 250ms ease;transition: all 250ms ease; }
+.es-editor > .es-plugins > .plugin:hover{ background-color: #FFF; border-color: rgba(0,0,0,0.25); }
 .es-editor > .es-plugins > img{width: 20px; height: 20px;}
 .es-editor > .es-plugins a .fa{ font-size: 18px; color: #aeaeae; width: 24px; vertical-align: middle; }
 .es-editor > .es-plugins a{line-height: 30px; color: #999; display: inline-block; }
