@@ -100,7 +100,7 @@ if ($action==''){
     RMTemplate::get()->add_style('bootstrap.min.css', 'rmcommon');
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
-    RMTemplate::get()->add_style('editor_img.css', 'rmcommon');
+    RMTemplate::get()->add_style('popup-images-manager.css', 'rmcommon');
     if($type=='tiny' && $target!='container'){
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce_popup.js');
     } elseif($target!='container'&&$type!='external') {

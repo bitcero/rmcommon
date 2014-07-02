@@ -182,9 +182,11 @@ body{
 #image-inserter{
     display: none;
     position: fixed;
-    top: 10%; right: 10%; bottom: 15%; left: 10%;
+    top: 50px; right: 5%; bottom: 5%; left: 5%;
     background: #FFF;
     border: 1px solid rgba(0,0,0,0.3);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 #image-inserter > .title{
     background: #ebebeb;

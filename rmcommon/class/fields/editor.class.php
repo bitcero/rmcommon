@@ -140,7 +140,7 @@ class RMFormEditor extends RMFormElement
 	private function renderTiny(){
 		global $rmc_config, $xoopsUser;
 		TinyEditor::getInstance()->add_config('elements',$this->id(), true);
-		RMTemplate::get()->add_style('mce_editor.css','rmcommon');
+		RMTemplate::get()->add_style('editor-tiny.css','rmcommon');
 		RMTemplate::get()->add_script( 'editor.js','rmcommon', array('directory' => 'include') );
 		RMTemplate::get()->add_script( 'quicktags.js','rmcommon' );
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce.js');

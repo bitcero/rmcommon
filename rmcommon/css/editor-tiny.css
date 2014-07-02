@@ -44,21 +44,21 @@ a.edButtonHTML:hover, a.edButtonPreview:hover{
 	display: none;
     border-bottom: 0;
 }
-div.quicktags input{
+div.quicktags button{
     border-radius: 0;
     padding: 4px 6px;
     font-size: 1em;
     font-weight: normal;
     color: #666;
-    border: 1px solid transparent;
+    border: 1px solid rgba(0,0,0,0.1);
     margin: 2px;
     text-shadow: none;
     background: transparent;
     box-shadow: none;
 }
-div.quicktags input:hover{
+div.quicktags button:hover{
     background: rgba(0,0,0,0.05);
-    border-color: rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.2);
 }
 div.ed-container textarea{
 	font-size: 1.05em;
