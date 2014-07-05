@@ -374,7 +374,7 @@ class RMTemplate
             return;
 
         // Check if file is a full URL
-        $remote_script = preg_match( "/^(http:\/\/)|(https:\/\/)/", $file );
+        $remote_script = preg_match( "/^(\/\/)|(http:\/\/)|(https:\/\/)/", $file );
 
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';

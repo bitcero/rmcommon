@@ -18,9 +18,20 @@
             echo '<link id="'.$id.'" rel="stylesheet" type="text/css" href="'.$url.'"'.$extra.'>'."\n";
         }
 
+        $jquery_and_bootstrap = array();
+        $scripts_all = '';
+
         foreach ($this->tpl_scripts as $id => $script){
             $type = $script['type'];
             $url = $script['url'];
+
+            if ( preg_match( "/jquery(\.min)?\.js|jquery-latest/i", $url ) ){
+                $jquery_and_bootstrap[0] = '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
+                continue;
+            }elseif ( preg_match( "/bootstrap(\.min)?\.js/i", $url ) ){
+                $jquery_and_bootstrap[1] = '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
+                continue;
+            }
 
             unset($script['type'], $script['url'], $script['footer']);
 
@@ -28,9 +39,10 @@
             foreach($script as $name => $value){
                 $extra .= ' ' . $name . '="' . $value . '"';
             }
-            echo '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
+            $scripts_all .= '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
         }
 
+        echo implode( "", $jquery_and_bootstrap ) . $scripts_all;
         echo $this->head_scripts();
         
         foreach ($this->tpl_head as $head){

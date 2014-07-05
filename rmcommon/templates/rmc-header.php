@@ -4,6 +4,7 @@ $tpl = RMTemplate::get();
 
 $scripts = '';
 $tscript = '';
+$jquery_and_bootstrap = array();
 $fscripts = '';
 $temp = $tpl->get_scripts();
 
@@ -23,13 +24,24 @@ foreach ($temp as $id => $script){
     }
 
     if ( strpos($script['url'], 'jquery-latest.js')!==FALSE || strpos($script['url'], 'jquery.min.js')!==FALSE )
-        $tscript = sprintf( $script_tpl, $id, $type, $url, $extra ) . $tscript;
+
+        $jquery_and_bootstrap[0] = sprintf( $script_tpl, $id, $type, $url, $extra ) . $tscript;
+
+    elseif ( preg_match( "/bootstrap(\.min)?\.js/i", $script['url'] ) )
+
+        $jquery_and_bootstrap[1] = sprintf( $script_tpl, $id, $type, $url, $extra ) . $tscript;
+
     elseif ( $footer )
+
         $fscripts .= sprintf( $script_tpl, $id, $type, $url, $extra );
+
     else
+
         $tscript .= sprintf( $script_tpl, $id, $type, $url, $extra );
 
 }
+
+$tscript = implode("\n", $jquery_and_bootstrap) . $tscript;
 
 $scripts = $tscript.$scripts;
 unset($tscript);

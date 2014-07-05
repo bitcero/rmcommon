@@ -29,9 +29,10 @@ trait RMModels
             return false;
 
         $path = XOOPS_ROOT_PATH . '/modules/' . $module . ( $cp ? '/admin' : '' ) . '/models';
-        $class = ucfirst( $model ) . ( $cp ? 'Admin' : '' );
+        $class = ucfirst( $module ) . '_' . ucfirst( $model ) . '_Model' .  ( $cp ? '_Admin' : '' );
+
         if ( is_file( $path .'/' . ucfirst( $model ) . '.php' ) ){
-            include_once $path . '/' . str_replace('Admin','',$class) . '.php';
+            include_once  $path .'/' . ucfirst( $model ) . '.php';
             $model = new $class();
         } else
             return false;
