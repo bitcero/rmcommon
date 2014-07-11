@@ -135,7 +135,7 @@ class RMHtaccess
         $this->content = preg_replace("/\# begin " . $this->module . ".*\# end " . $this->module . "\n?/sm", '', $this->content );
         return true;
 
-        $initial = strpos( $this->content, "# begin " . $this->module );
+        /*$initial = strpos( $this->content, "# begin " . $this->module );
         if (false === $initial )
             return true;
 
@@ -146,7 +146,7 @@ class RMHtaccess
             $replace .= substr( $this->content, $final + strlen( "# end $this->module") + 1 );
 
 		$this->content = $replace;
-		return true;
+		return true;*/
 
 	}
 
