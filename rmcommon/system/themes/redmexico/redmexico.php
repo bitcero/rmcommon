@@ -12,6 +12,7 @@ global $xoopsModule;
 xoops_load('gui', 'system');
 
 global $xoopsConfig, $rmc_config;
+
 //include_once XOOPS_ROOT_PATH.'/modules/rmcommon/admin_loader.php';
 
 if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
@@ -23,7 +24,7 @@ if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
     * @author      BitC3R0       <i.bitcero@gmail.com>
     * @version     1.0
     */
-    class XoopsGuiRedmexico extends  XoopsSystemGui
+    class XoopsGuiRedmexico
     {
 	    function __construct(){
 		    
@@ -33,8 +34,7 @@ if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
 	    
 	    public function header(){
 		    global $xoopsConfig, $xoopsUser, $xoopsModule, $xoTheme, $xoopsTpl;
-		    parent::header();
-		    
+
 		    if ($xoopsModule && !$xoopsModule->getInfo('rmnative'))
 			    RMTemplate::get()->add_script(XOOPS_URL.'/include/xoops.js');
 		    
