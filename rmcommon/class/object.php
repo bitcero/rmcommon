@@ -934,9 +934,8 @@ class RMObject
 		}
 		
 		$sql .= $fields . " WHERE `$this->primary`='".$this->getVar($this->primary)."'";
-        
-		$this->db->queryF($sql);
-		if ($this->db->error()!=''){
+
+		if ( !$this->db->queryF($sql) ){
 			$this->addError($this->db->error());
 			return false;
 		} else {
@@ -949,8 +948,8 @@ class RMObject
 	protected function deleteFromTable(){
 		
 		$sql = "DELETE FROM $this->_dbtable WHERE `$this->primary`='".$this->getVar($this->primary)."'";
-		$this->db->queryF($sql);
-		if ($this->db->error()!=''){
+
+		if ( !$this->db->queryF($sql) ){
 			$this->addError($this->db->error());
 			return false;
 		} else {

@@ -80,6 +80,12 @@ class RmcommonCorePreload extends XoopsPreloadItem
     }
 	
     public function eventCoreFooterEnd(){
+        $xoops = Xoops::getInstance();
+        //include_once $xoops->path('modules/system/themes/redmexico/redmexico.php');
+        if ( class_exists( 'XoopsGuiRedmexico' ) ){
+            $gui = new XoopsGuiRedmexico();
+            $gui->footer();
+        }
         ob_end_flush();
     }
 	

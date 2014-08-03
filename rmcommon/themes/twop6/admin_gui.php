@@ -78,6 +78,8 @@ $this->add_script('2.6.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('jquery.window.min.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('updates.js', 'rmcommon', array('footer' => 1));
 $this->add_script('jquery.debounce.min.js', 'rmcommon', array('footer' => 1));
+$this->add_script( 'cu-settings.php', 'rmcommon', array('footer' => 1) );
+$this->add_script( 'jquery.validate.min.js', 'rmcommon', array('footer' => 1) );
 
 // Delete unused scripts and styles
 $content = preg_replace("/<script.*".str_replace("/",'\/', XOOPS_URL)."\/js\/.*/",'', $content);
