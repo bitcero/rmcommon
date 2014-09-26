@@ -54,7 +54,7 @@ function rmc_autoloader($class){
      * $class = new Module_ClassName();
      * The class name must contain the module directory name separated with a "_"
      * from the file name.
-     * Common Utilities will search for "PATH/module/classname.class.php" file
+     * Common Utilities will search for "PATH/module/module.classname.class.php" file
      */
     $data = explode("_", strtolower($class));
     if(count($data) >= 2){
@@ -62,7 +62,6 @@ function rmc_autoloader($class){
         if ( is_dir( XOOPS_ROOT_PATH . '/modules/' . $data[0] ) ){
             // Existe el módulo
             $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace("_", ".", $class) ) . '.class.php';
-
             if( is_file($file) ){
                 require $file;
                 return;

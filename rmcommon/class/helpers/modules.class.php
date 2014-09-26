@@ -65,7 +65,7 @@ class RMModules
         $version = $mod->getInfo( 'rmversion' );
         $version = is_array( $version ) ? $version : array('major'=>$version, 'minor'=>0, 'revision'=>0, 'stage' => 0, 'name'=>$mod->getInfo('name'));
 
-        if ($type==1)
+        if ($type=='raw')
             return $version;
 
         return self::format_module_version($version, $name);

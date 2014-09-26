@@ -17,6 +17,12 @@ div.cu-bulk-actions .form-control{
     max-width: 200px!important;
     display: inline-block;
 }
+div.cu-bulk-actions .input-group{
+    max-width: 300px;
+}
+div.cu-bulk-actions .input-group .form-control{
+    max-width: 100%!important;
+}
 .descriptions{
 	padding: 8px 0;
 	color: #666;

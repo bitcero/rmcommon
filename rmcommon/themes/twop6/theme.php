@@ -464,7 +464,7 @@
             <!-- End system messages //-->
             <div class="row">
                 <?php if($left_widgets): ?>
-                <aside class="col-md-4 col-lg-2">
+                <aside class="col-md-3">
                     <?php foreach($left_widgets as $widget): ?>
                     <div class="cu-box">
                         <div class="box-header">
@@ -489,14 +489,14 @@
                 </div>
                 
                 <?php if($right_widgets): ?>
-                <aside class="col-md-4 col-lg-3">
+                <aside class="col-md-3">
                     <?php foreach($right_widgets as $widget): ?>
                     <?php if(!isset($widget['title']) && !isset($widget['content'])) continue; ?>
                     <div class="cu-box">
                         <div class="box-header">
                             <i class="fa fa-caret-up box-handler"></i>
                             <h3>
-                                <?php echo isset($widget['icon']) && $widget['icon']!='' ? ' <i class="xo-icon" style="background-image: url('.$widget['icon'].');"></i> ' : ''; ?>
+                                <?php echo isset($widget['icon']) && $widget['icon']!='' ? $xoFunc->icon( $widget['icon'] ) : ''; ?>
                                 <?php echo $widget['title']; ?>
                             </h3>
                         </div>

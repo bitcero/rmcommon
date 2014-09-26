@@ -166,7 +166,7 @@ class RMFormGroups extends RMFormElement
 				$rtn .= "> $row[name]</label>";
 				
 				if ($this->_showdesc){
-					$rtn .= "<br /><span style='font-size: 10px;' class='description'>$row[description]</span>";
+					$rtn .= "<br /><small style='font-size: 10px;' class='description'>$row[description]</small>";
 				}
 				
 				$rtn .= "</li>";

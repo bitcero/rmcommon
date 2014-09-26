@@ -16,11 +16,10 @@ class RMTimeFormatter
     /**
     * Initialize this class
     * 
-    * @param int Unix timestamp
-    * @param string Format for time (e.g. Created on %M% %d%, %Y%)
-    * @return RMTimeFormater
+    * @param int|string $time <p>Unix timestamp or date in string format</p>
+    * @param string $format <p>Format for time (e.g. Created on %M% %d%, %Y%)</p>
     */
-    function __construct($time=0, $format=''){
+    public function __construct($time=0, $format=''){
         $this->time = $time;
         $this->format = $format;
     }
@@ -37,9 +36,26 @@ class RMTimeFormatter
 
         return $instance;
     }
-    
+
+    /**
+     * Format a given date
+     *
+     * Given date can be a timestamp (int) or a string date.
+     * Example 1:
+     *      $tf->format( time() )
+     *
+     * Example 2:
+     *      $tf->format( '2014-05-25' );
+     *
+     * @param int|string $time <p>Time to format</p>
+     * @param string $format <p>This value is optional. Represents the format for the returned value.</p>
+     * @return mixed
+     */
     public function format($time=0, $format=''){
 		global $xoopsConfig;
+
+        if ( is_string( $time ) )
+            $time = strtotime( $time );
 
         $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
 

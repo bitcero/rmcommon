@@ -47,43 +47,66 @@
 </div>
 
 <div id="fromurl-container" class="container">
-    <table width="100%" cellpadding="3" cellspacing="0">
-        <tr>
-            <td><?php _e('Image URL','rmcommon'); ?></td>
-            <td><input type="text" id="imgurl" size="50" value="" /></td>
-        <tr>
-        <tr>
-            <td><?php _e('Title:','rmcommon'); ?></td>
-            <td><input type="text" id="url-title" value="" /></td>
-        </tr>
-        <tr>
-            <td><?php _e('Alternative text:','rmcommon'); ?></td>
-            <td><input type="text" id="url-alt" value="" /></td>
-        </tr>
-        <tr>
-            <td><?php _e('Alignment:','rmcommon'); ?></td>
-            <td>
-            <strong>
-                    <label><input type="radio" name="align_url" value="" checked="checked" /> <?php _e('None','rmcommon'); ?></label>
-                    <label><input type="radio" name="align_url" value="left" /> <?php _e('Left','rmcommon'); ?></label>
-                    <label><input type="radio" name="align_url" value="center" /> <?php _e('Center','rmcommon'); ?></label>
-                    <label><input type="radio" name="align_url" value="right" /> <?php _e('Right','rmcommon'); ?></label></strong>
-            </td>
-        </tr>
-        <tr>
-            <td><?php _e('Link:','rmcommon'); ?></td>
-            <td><input type="text" id="url-link" value="" /></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-            <a href="javascript:;" class="insert_button" onclick="<?php if($type=='exmcode'): ?>insert_from_url('xoops');<?php else: ?>insert_from_url('tiny');<?php endif; ?>"><?php _e('Insert Image','rmcommon'); ?></a>
+    <div class="form-group row">
+        <div class="col-sm-4 col-md-2">
+            <label for="imgurl"><?php _e('Image URL','rmcommon'); ?></label>
+        </div>
+        <div class="col-sm-8 col-md-10">
+            <input type="text" id="imgurl" class="form-control" size="50" value="">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4 col-md-2">
+            <label for="url-title"><?php _e('Title:','rmcommon'); ?></label>
+        </div>
+        <div class="col-sm-8 col-md-10">
+            <input type="text" id="url-title" class="form-control" value="" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-4 col-md-2">
+            <label for="url-alt"><?php _e('Alternative text:','rmcommon'); ?></label>
+        </div>
+        <div class="col-sm-8 col-md-10">
+            <input type="text" id="url-alt" class="form-control" value="" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-4 col-md-2">
+            <label><?php _e('Alignment:','rmcommon'); ?></label>
+        </div>
+        <div class="col-sm-8 col-md-10">
+            <label class="radio-inline"><input type="radio" name="align_url" value="" checked="checked"> <?php _e('None','rmcommon'); ?></label>
+            <label class="radio-inline"><input type="radio" name="align_url" value="left"> <?php _e('Left','rmcommon'); ?></label>
+            <label class="radio-inline"><input type="radio" name="align_url" value="center"> <?php _e('Center','rmcommon'); ?></label>
+            <label class="radio-inline"><input type="radio" name="align_url" value="right"> <?php _e('Right','rmcommon'); ?></label>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-4 col-md-2">
+            <label for="url-alt"><?php _e('Link:','rmcommon'); ?></label>
+        </div>
+        <div class="col-sm-8 col-md-10">
+            <input type="text" id="url-link" class="form-control" value="">
+        </div>
+    </div>
+
+    <div class="form-group row">
+
+        <div class="col-sm-4 col-md-2">
+            &nbsp;
+        </div>
+        <div class="col-sm-8 col-md-10">
+            <a href="javascript:;" class="btn btn-primary" onclick="<?php if($type=='exmcode'): ?>insert_from_url('xoops');<?php else: ?>insert_from_url('tiny');<?php endif; ?>"><?php _e('Insert Image','rmcommon'); ?></a>
             <?php if($type=='exmcode'): ?>
-            <a href="javascript:;" onclick="exmPopup.closePopup();"><?php _e('Cancel','rmcommon'); ?></a>
+                <a href="javascript:;" onclick="exmPopup.closePopup();" class="btn btn-default"><?php _e('Cancel','rmcommon'); ?></a>
             <?php endif; ?>
-            </td>
-        </tr>
-    </table>
+        </div>
+
+    </div>
 </div>
 
 

@@ -53,7 +53,8 @@
                     <tr class="odd">
                         <td><strong><?php _e('Help:','rmcommon'); ?></strong></td>
                         <td colspan="2">
-                            <?php if($module->getInfo('help')!=''): ?><a href="<?php echo $module->getInfo('help'); ?>" target="_blank"><?php _e('Click here','rmcommon'); ?></a><?php endif; ?></td>
+                            <?php if($module->getInfo('help')!=''): ?>
+                                <a href="<?php echo preg_match("/http:|https:/is", $module->getInfo('help')) ? $module->getInfo('help') : XOOPS_URL . '/modules/' . $module->getInfo( 'dirname' ) . '/' . $module->getInfo('help'); ?>" target="_blank"><?php _e('Click here','rmcommon'); ?></a><?php endif; ?></td>
                     </tr>
                 </table>
                 <button type="submit" id="install-ok" class="btn btn-primary btn-lg"><span class="fa fa-check"></span> <?php _e('Install Now','rmcommon'); ?></button>
@@ -82,7 +83,8 @@
                 <ol>
                     <?php foreach($module->getInfo('templates') as $tpl): ?>
                         <div class="<?php echo tpl_cycle("even,odd"); ?>">
-                            <li><?php echo $tpl['file']; ?></li>
+                            <li><?php echo $tpl['file']; ?>
+                                <?php if($tpl['description']!=''): ?><span class="help-block"><small><?php echo defined($tpl['description']) ? constant($tpl['description']) : $tpl['description']; ?></small></span><?php endif; ?></li>
                         </div>
                     <?php endforeach; ?>
                 </ol>

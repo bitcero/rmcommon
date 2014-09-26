@@ -123,4 +123,31 @@ class RMUris
 
     }
 
+    /**
+     * Crea la URL para un archivo cualquiera dentro de XOOPS
+     * @param string $module The module directory
+     * @param string $file Name of file inside module/directory
+     * @param string $directory Directory inside module
+     * @return string
+     */
+    static function file( $module, $file, $directory = '' ){
+
+        if ( $module == '' || $file == '' )
+            return '';
+
+        $partial = trim( $module, '/' );
+        $partial = trim( $partial, '\\' );
+
+        if ( $directory != '' )
+            $partial .= trim( $directory, '/' );
+
+        $partial .= $file;
+
+        if ( !file_exists( XOOPS_ROOT_PATH . '/' . $partial ) )
+            return '';
+
+        return XOOPS_URL . '/' . $partial;
+
+    }
+
 }

@@ -14,6 +14,7 @@
 
 class RMImage extends RMObject
 {
+    use RMSingleton;
     /**
      * Used when a default size is specified
      * @var int

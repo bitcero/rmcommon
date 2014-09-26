@@ -13,7 +13,7 @@ $(document).ready(function(){
         var id = $(this).parent().attr("id").replace("-container",'');
         var html = '<div id="blocker-'+id+'" class="mgr_blocker"></div><div id="window-'+id+'" class="imgmgr_container">';
 
-        var imgmgr_title = imgmgr_title == undefined ? 'Seleccionar imagen' : '';
+        var imgmgr_title = imgmgr_title == undefined ? 'Select image' : '';
         var multiple = $("#"+id+'-container').data('multiple');
         multiple = multiple == undefined || multiple == 'no' ? 'no' : 'yes';
 
@@ -64,14 +64,16 @@ function launch_image_manager( launcher ){
 
     var id = launcher.data("id");
     var html = '<div id="blocker-'+id+'" class="mgr_blocker"></div><div id="window-'+id+'" class="imgmgr_container">';
-    var imgmgr_title = launcher.data("title") || '';
-    var multiple = launcher.data('multiple');
+    var imgmgr_title = launcher.data("title") || 'Select image';
+    var multiple = launcher.data('multiple') || 0;
     var type = launcher.data('type');
+    var target = launcher.data('target') || 'tiny';
     multiple = multiple == undefined || multiple == 'no' ? 'no' : 'yes';
 
     html += '<div class="window-title cu-titlebar"><button type="button" class="close">&times;</button>'+imgmgr_title+'</div>';
-    html += '<iframe src="'+mgrURL+'?type='+type+'&amp;idcontainer='+id+'&amp;editor='+id+'&amp;target=tiny&amp;&amp;multi='+multiple+'" name="image"></iframe>'
+    html += '<iframe src="'+mgrURL+'?type='+type+'&amp;idcontainer='+id+'&amp;editor='+id+'&amp;target='+target+'&amp;&amp;multi='+multiple+'" name="image"></iframe>'
     html += '</div>';
+
     $("body").append(html);
 
     // window height

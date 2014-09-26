@@ -19,54 +19,10 @@ body{
     vertical-align: middle;
     width: 16px;
     height: 16px;
+    font-size: 16px;
     padding: 0; margin: 0;
     background-repeat: no-repeat;
-    background-image: url("../images/xo-icons.png");
 }
-.xicon-featured{background-position: 0 0;}
-.xicon-settings{background-position: -26px 0;}
-.xicon-home{background-position: -52px 0;}
-.xicon-plus{background-position: -78px 0;}
-.xicon-block{background-position: -104px 0;}
-.xicon-user{background-position: -130px 0;}
-.xicon-picture{background-position: -156px 0;}
-.xicon-comment{background-position: -182px 0;}
-.xicon-plugin{background-position: -208px 0;}
-.xicon-gear{background-position: -234px 0;}
-.xicon-account{background-position: -260px 0;}
-.xicon-offer{background-position: -286px 0;}
-.xicon-users{background-position: -312px 0;}
-.xicon-email{background-position: -338px 0;}
-.xicon-publish{background-position: -364px 0;}
-.xicon-smile{background-position: -390px 0;}
-.xicon-invoice{background-position: -416px 0;}
-.xicon-star{background-position: -442px 0;}
-.xicon-cu{background-position: 0 -26px;}
-.xicon-category{background-position: -26px -26px;}
-.xicon-addfolder{background-position: -52px -26px;}
-.xicon-addpicture{background-position: -78px -26px;}
-.xicon-link{background-position: -104px -26px;}
-.xicon-consulting{background-position: -130px -26px;}
-.xicon-date{background-position: -156px -26px;}
-.xicon-library{background-position: -182px -26px;}
-.xicon-advertising{background-position: -208px -26px;}
-.xicon-cloud{background-position: -234px -26px;}
-.xicon-download{background-position: -260px -26px;}
-.xicon-profile{background-position: -286px -26px;}
-.xicon-shield{background-position: -312px -26px;}
-.xicon-tag{background-position: -338px -26px;}
-.xicon-form{background-position: -364px -26px;}
-.xicon-faq{background-position: -390px -26px;}
-.xicon-me{background-position: -416px -26px;}
-.xicon-statistics{background-position: -442px -26px;}
-.xicon-modules{background-position: 0px -52px;}
-.xicon-refresh{background-position: -26px -52px;}
-.xicon-world{background-position: -52px -52px;}
-.xicon-ray{background-position: -78px -52px;}
-.xicon-cp{background-position: -104px -52px;}
-.xicon-xoops{background-position: -130px -52px;}
-.xicon-xm{background-position: -156px -52px;}
-.xicon-idea{background-position: -182px -52px;}
 
 /*          TOOLBAR
 ---------------------------------*/

@@ -385,12 +385,12 @@ class Twop6Functions
         $md = 12; $lg = 12;
 
         if ($left){
-            $md -= 4;
-            $lg -= 2;
+            $md -= 3;
+            $lg -= 3;
         }
 
         if ($right){
-            $md -= 4;
+            $md -= 3;
             $lg -= 3;
         }
 
@@ -416,6 +416,21 @@ class Twop6Functions
         }
 
         return $rtn;
+
+    }
+
+    /**
+     * Get general icon
+     * @param string $icon
+     * @return string
+     */
+    public function icon( $icon ){
+
+        // Check if this is a font icon item
+        if ( preg_match( "/^[fa|icon|glyphicon]/is", $icon ))
+            return '<span class="' . $icon . '"></span>';
+
+        return '<span class="xicon" style="background-image: url(' . $icon . ');"></span>';
 
     }
     

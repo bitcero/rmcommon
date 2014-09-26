@@ -416,7 +416,7 @@ function configure_rm_plugin(){
                 $form->addElement($ele);
                 break;
             case 'textarea':
-                $ele = new RMFormTextArea($option['caption'], 'conf_' . $config,  5, $option['size']>0 ? $option['size'] : 50, $option['valuetype']=='array' ? $cleaner->htmlspecialchars(implode('|', $option['value'])) : $cleaner->htmlspecialchars($option['value']));
+                $ele = new RMFormTextArea($option['caption'], 'conf_' . $config,  5, $option['size']>0 ? $option['size'] : 50, $option['valuetype']=='array' ? TextCleaner::getInstance()->specialchars(implode('|', $option['value'])) : TextCleaner::getInstance()->specialchars($option['value']));
                 if ($option['desc']!='') $ele->setDescription($option['desc']);
                 $form->addElement($ele);
                 break;
@@ -468,6 +468,9 @@ function configure_rm_plugin(){
                 $form->addElement($ele, false, $option['valuetype']=='int' || $option['valuetype']=='float' ? 'num' : '');
                 break;
         }
+
+
+
     }
     
     $ele = new RMFormButtonGroup();

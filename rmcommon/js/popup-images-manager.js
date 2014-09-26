@@ -413,7 +413,7 @@ function insert_image( data, multiple ){
         
         // Image
         html += '[img';
-        html += data.align != '' ? ' align='+data.align : '';
+        html += data.align != '' ? ' align=' + data.align : '';
         html += ']';
         
         var sizes = data.size;
@@ -429,14 +429,16 @@ function insert_image( data, multiple ){
     }
 	
     if(type == 'external'){
-        
+
         var insert_data = {
             link: data.link,
             url: data.size,
             title: data.title,
             alt: data.alt,
             description: data.description,
-            align: data.align
+            align: data.align,
+            thumbnail: data.thumbnail,
+            id: id
         }
 
         return insert_data;
@@ -800,17 +802,23 @@ function read_inserter_data( id ){
 function insert_multiple_images(){
 
     var data = '';
+    var dobj = [];
+    var temp;
 
     for ( var key in selected ){
 
         if ( selected[key] == undefined )
             continue;
 
-        data += insert_image( selected[key], 'yes' );
+        temp = insert_image( selected[key], 'yes' );
+        if ( temp !== null && typeof temp === 'object' )
+            dobj[dobj.length] = temp;
+        else
+            data += temp;
 
     }
 
-    send_to_element( data );
+    send_to_element( dobj.length>0?dobj:data );
 
 }
 

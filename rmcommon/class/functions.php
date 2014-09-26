@@ -302,19 +302,16 @@ class RMFunctions
     public function comments_form($obj, $params, $type='module', $file=array()){
         global $xoopsTpl, $xoopsRequestUri, $xoopsUser;
         
-        $config = self::configs();
+        $config = RMSettings::cu_settings();
         
-        if (!$config['enable_comments']){
+        if ( !$config->enable_comments )
 			 return;
-        }
         
-        if (!$xoopsUser && !$config['anonymous_comments']){
+        if ( !$xoopsUser && !$config->anonymous_comments )
 			return;
-        }
-        
-        if (!defined('COMMENTS_INCLUDED')){
+
+        if (!defined('COMMENTS_INCLUDED'))
 			define('COMMENTS_INCLUDED', 1);
-        }
         
         $xoopsTpl->assign('enable_comments_form', 1);
 
@@ -342,7 +339,7 @@ class RMFunctions
         
         $form = RMEvents::get()->run_event('rmcommon.comments.form', $form, $obj, $params, $type);
         RMTemplate::get()->add_jquery();
-        RMTemplate::get()->add_script(RMCURL.'/include/js/jquery.validate.min.js');
+        RMTemplate::get()->add_script( 'jquery.validate.min.js', 'rmcommon' );
         RMTemplate::get()->add_head('<script type="text/javascript">
         $(document).ready(function(){
         	$("#rmc-comment-form").validate({

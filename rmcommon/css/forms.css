@@ -322,3 +322,6 @@ div.form_container label.hidden{
 .groups_field_list input{
 	vertical-align: text-top;
 }
+.groups_field_list label{
+    font-weight: normal;
+}
