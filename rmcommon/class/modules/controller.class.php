@@ -40,7 +40,7 @@ abstract class RMController
         if ( is_a( $this->model, $class ))
             return $this->model;
 
-        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . ( defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '' ) . '/models/' . ucfirst( $this->parent->controller ) . '.php';
+        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . ( defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '' ) . '/models/' . strtolower( $this->parent->controller ) . '-model.php';
 
         if ( !file_exists( $file ) )
             return false;

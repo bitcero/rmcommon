@@ -324,7 +324,7 @@ function user_form($edit = false){
 * @param bool Indicates when is a edit
 */
 function save_data($edit = false){
-    global $xoopsSecurity;
+    global $xoopsSecurity, $xoopsDB;
 	
     $q = ''; // Query String
     foreach ($_POST as $k => $v){
@@ -364,6 +364,15 @@ function save_data($edit = false){
 	redirectMsg('users.php?action='.($edit ? 'edit' : 'new').'&'.$q, __('Passwords doesn\'t match. Please chek them.','rmcommon'), 1);
 	die();
     }
+
+    // Check if user exists
+    $sql = "SELECT COUNT(*) FROM " . $xoopsDB->prefix( "users" ) . " WHERE (uname = '$uname' OR email = '$email')" . ( $edit ? " AND uid != " . $user->uid : '' );
+    list( $exists ) = $xoopsDB->fetchRow( $xoopsDB->query( $sql ) );
+
+    if ( $exists > 0 )
+        RMUris::redirect_with_message(
+            __('Another user with same username or email already exists!', 'rmcommon'), 'users.php?action='.($edit ? 'edit' : 'new').'&'.$q, RMMSG_ERROR
+        );
 	
     // Save user data
     $user->setVar('name', $name);

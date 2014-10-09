@@ -135,7 +135,7 @@ abstract class RMModuleController {
         $action = str_replace("-", "_", $action);
 
         $class = ucfirst( $this->directory ) . '_' . ucfirst( $controller_name ) . '_' . ( defined('XOOPS_CPFUNC_LOADED') ? 'Admin_' : '' ) . 'Controller';
-        $file = $this->path . '/' . ( defined('XOOPS_CPFUNC_LOADED') ? 'admin/controllers' : 'controllers' ) . '/' . ucfirst( $controller_name ) . 'Controller.php';
+        $file = $this->path . '/' . ( defined('XOOPS_CPFUNC_LOADED') ? 'admin/controllers' : 'controllers' ) . '/' . strtolower( $controller_name ) . '-controller.php';
 
         if( !file_exists($file) )
             return $this->send_status( 404, $controller_name, $action );

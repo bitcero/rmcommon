@@ -160,4 +160,49 @@ class RMHttpRequest
         return $_SERVER['REQUEST_URI'];
 
     }
+
+    /**
+     * Gets values from a collection of parameters passes trough post, get or request method.
+     *
+     * <strong>How to use:</strong>
+     *
+     * <pre> $data = {@link RMHttpRequest}::collect_data( "post", array(
+     *     "name" => "string",
+     *     "qty"  => "integer"
+     * ) );</pre>
+     *
+     * This function must extract two parameters from $_POST var: name and qty. Note that we have
+     * specified the type of value for these two parameters: string and integer. You can get all
+     * required values by specifying a list of name/value pairs in the array:
+     *
+     * <pre>array( 'var_name' => 'value_type[string, integer, array, float]' );</pre>
+     *
+     * You can use the obtained data as follow:
+     * <pre>echo $data->name;</pre>
+     *
+     * @param string $source <p>Source for data. Can be 'post', 'get' or 'request'.</p>
+     * @param array $parameters <p>List of parameters that will be loaded from any of previous three methods.</p>
+     * @return stdClass
+     */
+    static public function collect_data( $source = "post", $parameters = array() ){
+
+        if ( empty( $parameters ) )
+            return false;
+
+        $collected = new stdClass();
+
+        foreach( $parameters as $var => $type ){
+
+            if ( $source == 'post' )
+                $collected->$var = self::post( $var, $type, '' );
+            elseif ( $source == 'request' )
+                $collected->$var = self::request( $var, $type, '' );
+            else
+                $collected->$var = self::get( $var, $type, '' );
+
+        }
+
+        return $collected;
+
+    }
 }

@@ -86,7 +86,7 @@ class RMBlocksFunctions
         $barray = array(); // Array of retrieved blocks
         
         $barray = self::get_blocks($groups, $mid, $isStart, XOOPS_BLOCK_VISIBLE, '', 1, $subpage);
-        
+
         foreach($barray as $block){
 
             if ( !isset( $sides[$block->getVar('canvas')] ) )
@@ -99,7 +99,7 @@ class RMBlocksFunctions
         }
         
         unset($side,$sides,$content,$subpage,$barray,$groups,$startMod);
-        
+
         return $blocks;
         
     }

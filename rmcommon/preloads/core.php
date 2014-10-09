@@ -16,7 +16,6 @@ class RmcommonCorePreload extends XoopsPreloadItem
     }
     
     public function eventCoreHeaderEnd(){
-        
         /**
         * Use internal blocks manager if enabled
         */
@@ -37,7 +36,6 @@ class RmcommonCorePreload extends XoopsPreloadItem
     
 	static function eventCoreIncludeCommonStart($args){
         global $xoopsOption;
-        
         if(substr($_SERVER['REQUEST_URI'], -10)=='/admin.php' && strpos($_SERVER['REQUEST_URI'], 'modules')===FALSE){
             header('location: '.XOOPS_URL.'/modules/rmcommon/');
             die();

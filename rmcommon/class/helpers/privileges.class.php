@@ -16,6 +16,35 @@ class RMPrivileges
     use RMModuleAjax, RMSingleton;
 
     /**
+     * Loads all user permissions and stores in a stdClass
+     * that will functioning as cache
+     */
+    private function load_user_permissions(){
+
+        global $xoopsUser, $xoopsDB;
+
+        $privileges = UserPrivileges::get();
+        $privileges->allowed = array();
+
+        // User must not have any permission
+        if ( !$xoopsUser )
+            return;
+
+        $groups = $xoopsUser->getGroups();
+
+        $sql = "SELECT * FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
+                `group` IN (" . implode( ",", $groups ) . ")";
+        $result = $xoopsDB->query( $sql );
+
+        while ( $row = $xoopsDB->fetchArray( $result ) ){
+
+            $privileges->allowed[$row['element']][$row['key']] = 'allow';
+
+        }
+
+    }
+
+    /**
      * Determines if the current user have access to specified action
      * @param string $module Module name
      * @param string $action Action identifier
@@ -27,33 +56,32 @@ class RMPrivileges
 
         global $xoopsUser, $xoopsDB;
 
-        $mod = RMModules::load_module( $module );
-
         if (!$xoopsUser){
-            $groups = array( XOOPS_GROUP_ANONYMOUS );
-        } else {
 
-            if ( $xoopsUser->isAdmin( $mod->getVar( 'mid' ) ) )
-                return true;
-
-            $groups = $xoopsUser->getGroups();
+            if ($redirect)
+                self::response( $method );
+            else
+                return false;
 
         }
 
-        $sql = "SELECT COUNT(*) FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
-                `group` IN (" . implode( ",", $groups ) . ") AND element='$module' AND
-                `key`='$action'";
+        // Super admin
+        if ( $xoopsUser->uid() == 1 )
+            return true;
 
-        list( $num ) = $xoopsDB->fetchRow( $xoopsDB->query( $sql ) );
+        $privileges = UserPrivileges::get();
 
-        if ( $num > 0 )
+        if ( empty( $privileges->allowed ) )
+            self::load_user_permissions();
+
+
+        if ( isset( $privileges->allowed[$module][$action] ) )
             return true;
 
         if ($redirect)
             self::response( $method );
         else
             return false;
-
 
     }
 
@@ -137,12 +165,11 @@ class RMPrivileges
     private function response( $method ){
 
         if ( $method == 'ajax' ){
-            $this->prepare_ajax_response();
-            $this->ajax_response(
+            self::prepare_ajax_response();
+            self::ajax_response(
                 __('You don\'t have required rights to do this action!', 'rmcommon'),
                 1, 0, array(
-                    'action' => 'go-to',
-                    'url' => XOOPS_URL
+                    'goto' => XOOPS_URL
                 )
             );
         } else {
@@ -152,5 +179,18 @@ class RMPrivileges
         }
 
     }
+
+}
+
+
+class UserPrivileges
+{
+    use RMSingleton;
+
+    /**
+     * Stores all privileges for current user
+     * @var array
+     */
+    public $allowed;
 
 }

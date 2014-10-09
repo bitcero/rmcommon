@@ -434,27 +434,7 @@ $(document).ready(function(){
         
     });
     
-    $("ol.dd-list").on('click', '.item-controls a', function(){
 
-        var block = $("#block-"+$(this).data("block"));
-
-        switch ($(this).data("action")){
-            case 'settings':
-                blocksAjax.loadForm($(this).data("block"));
-                break;
-            case 'show':
-                blocksAjax.changeVisibility(block, 'show-block');
-                break;
-            case 'hide':
-                blocksAjax.changeVisibility(block, 'hide-block');
-                break;
-            case 'delete':
-                blocksAjax.deleteBlock(block);
-                break;
-        }
-
-        return false;
-    });
     
     $("a.edit_position").click(function(){
         
@@ -538,6 +518,27 @@ $(document).ready(function(){
     });
 
 });
+
+function control_action( action, block ){
+
+    switch ( action ){
+        case 'settings':
+            blocksAjax.loadForm( block );
+            break;
+        case 'show':
+            blocksAjax.changeVisibility( block, 'show-block' );
+            break;
+        case 'hide':
+            blocksAjax.changeVisibility( block, 'hide-block' );
+            break;
+        case 'delete':
+            blocksAjax.deleteBlock( block );
+            break;
+    }
+
+    return false;
+
+}
 
 function before_submit(id){
 

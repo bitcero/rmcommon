@@ -110,12 +110,12 @@ class RMFormModules extends RMFormElement
         $criteria->add(new Criteria('isactive', 1));
         if($this->subpages) $criteria->add(new Criteria('dirname', 'system'), 'OR');
         $modules = array();
-        $modules[0] = __('All','rmcommon');
+        $modules[-1] = __('All','rmcommon');
         if (is_array($this->inserted)) $modules = $this->inserted;
         foreach ($module_handler->getList($criteria, $this->dirnames) as $k => $v){
         	$modules[$k] = $v;
         }
-		
+
         if ($this->type){
             // Add js script
             RMTemplate::get()->add_script( 'modules_field.js', 'rmcommon', array('directory' => 'include') );
@@ -130,10 +130,14 @@ class RMFormModules extends RMFormElement
 		$i = 1;
 		foreach ($modules as $k => $v){
             $app = RMModules::load_module($k);
+
             $rtn .= "<li>";
             $name = $this->multi ? $this->getName()."[$k]" : $this->getName();
             if ($this->multi){
-			    $rtn .= "<input type='checkbox' value='$k' name='".$name."' id='".$this->id()."-$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " checked='checked'" : '') : '')."> ";
+			    $rtn .= "<input type='checkbox' value='$k'".($k == 0 ? "
+			    data-checkbox='module-item'" : " data-oncheck='module-item'")."
+			    name='".$name."'
+			    id='".$this->id()."-$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " checked='checked'" : '') : '').( $k != -1 ? " data-checkbox='module-item-".$k."'" : '' )."> ";
                 if($this->subpages)
                     $rtn .= '<a href="#">'.$v.'</a>';
                 else
@@ -169,7 +173,7 @@ class RMFormModules extends RMFormElement
                     if (!is_array($subpages)) $subpages = array();
 
                     foreach ($subpages as $page=>$caption){
-                        $rtns .= "<li><input type='checkbox' name='".$name."[subpages][$page]' id='subpages[$k][$page]' value='$page'".(is_array($subpages) && @in_array($page, $selected[$k]) ? " checked='checked'" : '')." /> $caption</li>";
+                        $rtns .= "<li><input type='checkbox' data-oncheck='module-item-".$k."' name='".$name."[subpages][$page]' id='subpages[$k][$page]' value='$page'".(is_array($subpages) && @in_array($page, $selected[$k]) ? " checked='checked'" : '')." /> $caption</li>";
                         $j++;
                         $cr++;
                     }

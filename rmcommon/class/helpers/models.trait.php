@@ -31,8 +31,8 @@ trait RMModels
         $path = XOOPS_ROOT_PATH . '/modules/' . $module . ( $cp ? '/admin' : '' ) . '/models';
         $class = ucfirst( $module ) . '_' . ucfirst( $model ) . '_Model' .  ( $cp ? '_Admin' : '' );
 
-        if ( is_file( $path .'/' . ucfirst( $model ) . '.php' ) ){
-            include_once  $path .'/' . ucfirst( $model ) . '.php';
+        if ( is_file( $path .'/' . strtolower( $model ) . '-model.php' ) ){
+            include_once  $path .'/' . strtolower( $model ) . '-model.php';
             $model = new $class();
         } else
             return false;

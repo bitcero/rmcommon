@@ -401,6 +401,27 @@ $(document).ready(function(){
 
         cuHandler.enableCommands( id_container, $(this).attr("type") );
 
+        if ( $(this).is(":checked") )
+            $(this).parents("tr").addClass( 'tr-checked' );
+        else
+            $(this).parents("tr").removeClass( 'tr-checked' );
+
+    });
+
+    /**
+     * Select rows
+     */
+    $("body").on('click', '.activator-container > tbody > tr > td', function(){
+
+        var input = $(this).parent().find("input[data-switch]");
+
+        if ( input.is(":checked") )
+            input.removeAttr( "checked" );
+        else
+            input.prop( "checked", 'checked' );
+
+        input.change();
+
     });
 
     /**
@@ -410,7 +431,10 @@ $(document).ready(function(){
 
         var checkbox_class = $(this).data("checkbox");
 
-        $(":checkbox." + checkbox_class).prop('checked', $(this).prop('checked'));
+        if ( checkbox_class == undefined )
+            return;
+
+        $(":checkbox[data-oncheck='"+checkbox_class+"']").prop('checked', $(this).prop('checked'));
 
     });
 
@@ -430,9 +454,9 @@ $(document).ready(function(){
         if ( activator.length <= 0 )
             return;
 
-        if ( checked.length < existing.length )
+        if ( checked.length <= 0 )
             $(activator).removeAttr( 'checked' );
-        else if ( checked.length == existing.length )
+        else if ( checked.length > 0 && !$(activator).is(":checked") )
             $(activator).prop( 'checked', 'checked' );
 
     });

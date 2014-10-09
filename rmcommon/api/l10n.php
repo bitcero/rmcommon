@@ -28,7 +28,8 @@ function get_locale(){
 		$exm_locale = 'en_US';
 	
 	// Get default locale
-	$exm_locale = RMEvents::get()->run_event('rmcommon.get_locale', $exm_locale);
+    if ( class_exists( 'RMEvents' ) )
+	    $exm_locale = RMEvents::get()->run_event('rmcommon.get_locale', $exm_locale);
 
 	return $exm_locale;
 }
@@ -121,6 +122,9 @@ function load_theme_locale($theme, $prefix='', $gui=false){
 */
 function translate($text, $domain = 'system'){
 	global $l10n;
+
+    if ( !class_exists( 'RMEvents' ) )
+        return $l10n[$domain]->translate($text);
        
 	if (isset($l10n[$domain])){
 		return RMEvents::get()->run_event('rmcommon.get_locale_text', $l10n[$domain]->translate($text), $text, $domain); 

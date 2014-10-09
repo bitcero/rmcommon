@@ -164,7 +164,7 @@ class RMInternalBlock extends RMObject
         $result = $this->db->query($sql);
         $ret = array();
         while ($row = $this->db->fetchArray($result)){
-            $ret[$row['mid']][] = $row['subpage'];
+            $ret[$row['mid']][] = $row['page'];
             
         }
         return $ret;
