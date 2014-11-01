@@ -107,8 +107,14 @@ class RMFormText extends RMFormElement
 			$ret .= $this->getClass();
 
         $ret .= '" '.$this->getExtra();
+
+        foreach( $this->attrs as $name => $value ){
+
+            $ret .= $name . '="' . $value . '" ';
+
+        }
 		
-		$ret .= ($this->_enabled ? '' : ' disabled="disabled"').' />';
+		$ret .= ($this->_enabled ? '' : ' disabled="disabled"').'>';
 		return $ret;
 	}
 }
@@ -153,9 +159,21 @@ class RMFormSubTitle extends RMFormElement
 	 */
 	function render(){
             if($this->_type>0){
-                $rtn = "<h4 class='form_subtitle ".$this->getClass()."'>".$this->getCaption()."</h4>";
+                $rtn = "<h4 class='form_subtitle ".$this->getClass()."'";
+                foreach( $this->attrs as $name => $value ){
+
+                    $rtn .= $name . '="' . $value . '" ';
+
+                }
+                $rtn .= ">".$this->getCaption()."</h4>";
             } else {
-                $rtn = "<span class='".$this->getClass()."'>".$this->getCaption()."</span>";
+                $rtn = "<span class='".$this->getClass()."'";
+                foreach( $this->attrs as $name => $value ){
+
+                    $rtn .= $name . '="' . $value . '" ';
+
+                }
+                $rtn .= ">".$this->getCaption()."</span>";
             }
 		return $rtn;
 	}
@@ -245,7 +263,13 @@ class RMFormTextArea extends RMFormElement
 		if ($this->width!='' || $this->height!=''){
 			$ret .= "style='".($this->width!='' ? "width: $this->width; " : '').($this->height!='' ? "height: $this->height; " : '')."'";
 		}
-		$ret .= $this->getExtra().">".(isset($_REQUEST[$this->getName()]) ? $_REQUEST[$this->getName()] : $this->_value)."</textarea>";
+		$ret .= $this->getExtra();
+        foreach( $this->attrs as $name => $value ){
+
+            $ret .= $name . '="' . $value . '" ';
+
+        }
+        $ret .= ">".(isset($_REQUEST[$this->getName()]) ? $_REQUEST[$this->getName()] : $this->_value)."</textarea>";
 		return $ret;
 	}
 }

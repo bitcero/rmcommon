@@ -23,6 +23,9 @@ body{
     padding: 0; margin: 0;
     background-repeat: no-repeat;
 }
+.xo-icon.cu-icon{
+    background: url(../images/cu.png) no-repeat center;
+}
 
 /*          TOOLBAR
 ---------------------------------*/

@@ -7,7 +7,7 @@ Author: bitcero
 Author URI: http://www.bitcero.info
 */
 
-load_theme_locale('twop6','xoops.css',true);
+load_theme_locale('twop6', '',true);
 
 global $xoopsUser, $xoopsSecurity;
 

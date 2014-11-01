@@ -23,6 +23,7 @@ abstract class RMFormElement
 	private $_formname = '';
     private $_id = '';
     static $elementsIds = array();
+    protected $attrs = array();
 	
 	/**
 	 * Establece el nombre de un elemento espec?fico del formulario
@@ -151,6 +152,17 @@ abstract class RMFormElement
 	public function getForm(){
 		return $this->_formname;
 	}
+
+    public function attrs( $attrs ){
+        if ( empty( $attrs ) || !is_array( $attrs ) )
+            $this->attrs = array();
+        else
+            $this->attrs = $attrs;
+    }
+    public function get_attrs(){
+        return $this->attrs;
+    }
+
 	/**
 	 * Obtenemos la tabla html formateada
 	 * Este m?todo es abstracto y solo puede ser

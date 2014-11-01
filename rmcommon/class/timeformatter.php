@@ -54,9 +54,7 @@ class RMTimeFormatter
     public function format($time=0, $format=''){
 		global $xoopsConfig;
 
-        $time = intval( $time );
-
-        if ( $time <= 0 )
+        if ( $time <= 0 || strpos( $time, "-" ) !== false )
             $time = strtotime( $time );
 
         $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');

@@ -185,7 +185,7 @@ class RMImageResizer
      * Creamos la im?gen en memoria
      * @return object
      */
-    public function createImage($format){
+    private function createImage($format){
         switch($format){
             case 'image/jpeg':
                 return imagecreatefromjpeg($this->file);
@@ -201,7 +201,7 @@ class RMImageResizer
     /**
      * Guarda la im?gen modificada
      */
-    public function imageFromFormat($format, $image, $quality=90){
+    private function imageFromFormat($format, $image, $quality=90){
         switch ($format){
             case 'image/jpeg':
                 return imagejpeg($image, $this->filetarget, $quality);
@@ -228,5 +228,123 @@ class RMImageResizer
         }
         
         return $format;
+    }
+
+
+    public function resize( $file, stdClass $params ){
+
+        if ( empty( $file ) ) {
+            trigger_error(__('Resize Image: You must provide a valid file for image.', 'rmcommon'), E_WARNING);
+            return false;
+        }
+
+        /*
+         * Default method for resize images is "crop"
+         */
+        $params->method = !isset( $params->method ) ? 'crop' : $params->method;
+        /*
+         * Default directory target for resized images id "uploads/resizer"
+         */
+        $params->target = !isset( $params->target ) ? 'resizer' : $params->target;
+        /*
+         * Enable or disable cache verification
+         */
+        $params->cache = !isset( $params->cache ) ? true : $params->cache;
+
+        $file = str_replace( XOOPS_URL, XOOPS_ROOT_PATH, $file);
+
+        try{
+            $data = getimagesize( $file );
+        } catch ( Exception $e ){
+            trigger_error( $e->getMessage() );
+            return false;
+        }
+
+        $file_info = pathinfo( $file );
+
+        $formats = array( 'gif', 'jpg', 'png', 'swf', 'psd', 'bmp', 'tiff', 'tiff', 'jpc', 'jp2', 'jpx', 'jb2', 'swc', 'iff', 'wbmp', 'xbm' );
+
+        $image = new stdClass();
+        $image->width = $data[0];
+        $image->height = $data[1];
+        $image->type = $formats[ $data[2] - 1 ];
+        $image->mime = $data['mime'];
+
+        $ratio = $image->width / $image->height;
+
+        if ( !$params->width )
+            $params->width = intval( $params->height * $ratio );
+
+        if ( !$params->height )
+            $params->height = intval( $params->width * $ratio );
+
+        $size_ratio = max( $params->width / $image->width, $params->height / $image->height );
+
+        $crop_w = round( $params->width / $size_ratio );
+        $crop_h = round( $params->height / $size_ratio );
+        $s_x = floor( ( $image->width - $crop_w ) / 2 );
+        $s_y = floor( ( $image->height - $crop_h ) / 2 );
+
+        $accepted_formats = array( 'gif', 'jpg', 'png' );
+        if ( !in_array( $image->type, $accepted_formats ) ){
+            trigger_error( __('Image format could not be accepted for resize', 'rmcommon'), E_WARNING );
+            return false;
+        }
+
+        // Check cache
+        if ( $params->cache ){
+
+            $cache_file = XOOPS_UPLOAD_PATH . '/' . $params->target . '/' . $file_info['filename'] . '-' . $params->width . '.' . $params->height . '.' . $file_info['extension'];
+            if ( file_exists( $cache_file ) ){
+
+                $image_resize = new stdClass();
+                $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $cache_file );
+                $image_resize->path      = $cache_file;
+                $image_resize->width     = $params->width;
+                $image_resize->height    = $params->height;
+
+                return $image_resize;
+
+            }
+
+        }
+
+        if ( $image->type == 'gif' ){
+            $original = imagecreatefromgif( $file );
+        } elseif ( $image->type == 'jpg' ){
+            $original = imagecreatefromjpeg( $file );
+        } elseif ( $image->type == 'png' ){
+            $original = imagecreatefrompng( $file );
+        }
+
+        $target = imagecreatetruecolor( $params->width, $params->height );
+        if ( $image->type == 'png' ){
+            imagealphablending( $target, false );
+            imagesavealpha( $target, true );
+        }
+
+        imagecopyresampled( $target, $original, 0, 0, (int) $s_x, (int) $s_y, (int) $params->width, (int) $params->height, (int) $crop_w, (int) $crop_h );
+
+        $target_file = XOOPS_UPLOAD_PATH . '/' . $params->target;
+        if ( !is_dir( $target_file ) )
+            mkdir( $target_file, 0777 );
+
+        $target_file .= '/' . $file_info['filename'] . '-' . $params->width . '.' . $params->height . '.' . $file_info['extension'];
+
+        if ( $image->type == 'gif' )
+            imagegif( $target, $target_file );
+        elseif ( $image->type == 'jpg' )
+            imagejpeg( $target, $target_file );
+        elseif ( $image->type == 'png' )
+            imagepng( $target, $target_file );
+
+        $image_resize = new stdClass();
+        $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $cache_file );
+        $image_resize->path      = $cache_file;
+        $image_resize->width     = $params->width;
+        $image_resize->height    = $params->height;
+
+        return $image_resize;
+
     }
 }

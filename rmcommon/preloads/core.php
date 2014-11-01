@@ -93,7 +93,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
         	
     }
 
-    public function eventCoreIncludeFunctionsRedirectheader($params){
+    public function eventCoreIncludeFunctionsRedirectheaderStart($params){
 		
         // 0 = URL
 	    // 1 = Time

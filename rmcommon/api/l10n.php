@@ -45,7 +45,7 @@ function get_locale(){
 */
 function load_locale_file($domain, $file) {
 	global $l10n;
-    
+
     if(isset($l10n[$domain]))
         return;
     
@@ -125,7 +125,7 @@ function translate($text, $domain = 'system'){
 
     if ( !class_exists( 'RMEvents' ) )
         return $l10n[$domain]->translate($text);
-       
+
 	if (isset($l10n[$domain])){
 		return RMEvents::get()->run_event('rmcommon.get_locale_text', $l10n[$domain]->translate($text), $text, $domain); 
 	}else{

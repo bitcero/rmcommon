@@ -123,7 +123,7 @@ class RMTemplate
             $cuSettings = RMSettings::cu_settings();
             $theme = isset( $cuSettings->theme ) ? $cuSettings->theme : 'default';
 
-            if ( !file_exists( RMCPATH.'/themes/'.$theme.'/admin_gui.php' ) ){
+            if ( !file_exists( RMCPATH.'/themes/'.$theme.'/admin-gui.php' ) ){
                 $theme = 'twop6';
             }
 
@@ -138,7 +138,7 @@ class RMTemplate
                 unset( $_SESSION['redirect_message'] );
             }
 
-            include_once RMCPATH.'/themes/'.$theme.'/admin_gui.php';
+            include_once RMCPATH.'/themes/'.$theme.'/admin-gui.php';
             $output = ob_get_clean();
 
             $output = RMEvents::get()->run_event( 'rmcommon.admin.output', $output );

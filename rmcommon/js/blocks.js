@@ -261,8 +261,8 @@ var blocksAjax = {
 
         var params = {
             XOOPS_TOKEN_REQUEST: $("#token-positions").val(),
-            action: a=='show-block' ? a : 'hide-block',
-            id: $(block).data("id")
+            action: $('#block-' + block).data("action") == 'show-block' ? $('#block-' + block).data("action") : 'hide-block',
+            id: block
         };
 
         $.post('ajax/blocks.php', params, function(data){
@@ -273,20 +273,20 @@ var blocksAjax = {
             if(data.message!='')
                 blocksAjax.addMessage(data.message, 'alert-info');
 
-            blocksAjax.showOkIcon($(block).data("position"));
+            blocksAjax.showOkIcon($('#block-' + block).data("position"));
 
             var visible = data.data.visible;
 
-            $("#block-"+block.data("id")+" .control-visible").data("action", visible==1 ? 'hide' : 'show')
-                .attr("title", visible==1 ? cuLanguage.hideBlock : cuLanguage.showBlock)
+            $("#block-"+block).data("action", visible==1 ? 'hide-block' : 'show-block');
+            $("#block-"+block+" .control-visible").attr("title", visible==1 ? cuLanguage.hideBlock : cuLanguage.showBlock)
                 .removeClass(visible==1 ? 'text-success' : 'text-warning')
                 .addClass(visible==1 ? 'text-warning' : 'text-success')
                 .html('<i class="fa '+(visible==1 ? 'fa-eye-slash' : 'fa-eye')+'"></i>');
 
             if(visible)
-                $(block).removeClass("invisible-block");
+                $('#block-' + block).removeClass("invisible-block");
             else
-                $(block).addClass("invisible-block");
+                $('#block-' + block).addClass("invisible-block");
 
         }, 'json');
 
@@ -328,7 +328,7 @@ var blocksAjax = {
             return;
 
         var params = {
-            id: $(block).data("id"),
+            id: block,
             XOOPS_TOKEN_REQUEST: $("#XOOPS_TOKEN_REQUEST").val(),
             action: 'delete-block'
         };
@@ -342,8 +342,8 @@ var blocksAjax = {
 
             blocksAjax.addToken(data.token, true);
 
-            var position = $(block).data('position');
-            $(block).remove();
+            var position = $("#block-" + block).data('position');
+            $("#block-" + block).remove();
             blocksAjax.saveOrder($("#position-"+position));
 
             return true;

@@ -65,36 +65,40 @@ class RMFormTheme extends RMFormElement
         foreach($dirs as $dir => $v){
             
             if($this->section=='GUI'){
-                if(!file_exists(XOOPS_ROOT_PATH.'/modules/rmcommon/themes/'.$dir.'/admin_gui.php')) die($dir);
+                if(!file_exists(XOOPS_ROOT_PATH.'/modules/rmcommon/themes/'.$dir.'/admin-gui.php')) continue;
             }else{
                 if(!file_exists(XOOPS_ROOT_PATH.'/themes/'.$dir.'/theme.html')) continue;
             }
-            
-            $themes[] = $dir;
+
+            // Read theme name
+            $file = file_get_contents( XOOPS_ROOT_PATH.'/modules/rmcommon/themes/'.$dir.'/admin-gui.php' );
+            preg_match("/Theme name:\s{0,}(.*)?\r/m", $file, $name );
+            $themes[$dir] = $name[1];
 
         }
+        unset( $name );
     
 		if ($this->type){
 			$rtn = '<ul class="rmoptions_container">';
-			foreach ($themes as $k){
+			foreach ($themes as $k => $name){
 				if ($this->multi){
-					$rtn .= "<li><label><input type='checkbox' value='$k' name='".$this->getName()."[]' id='".$this->id()."'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " checked='checked'" : '') : '')." /> $k</label></li>";
+					$rtn .= "<li><label><input type='checkbox' value='$k' name='".$this->getName()."[]' id='".$this->id()."'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " checked='checked'" : '') : '')." /> $name</label></li>";
 				} else {
-					$rtn .= "<li><label><input type='radio' value='$k' name='".$this->getName()."' id='".$this->id()."'".(!empty($this->selected) ? ($k == $this->selected ? " checked='checked'" : '') : '')." /> $k</label></li>";
+					$rtn .= "<li><label><input type='radio' value='$k' name='".$this->getName()."' id='".$this->id()."'".(!empty($this->selected) ? ($k == $this->selected ? " checked='checked'" : '') : '')." /> $name</label></li>";
 				}
 			}
 			$rtn .= "</ul>";
 		} else {
 			if ($this->multi){
 				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."' size='6' multiple='multiple' class=\"form-control ".$this->getClass()."\">";
-				foreach ($themes as $k){
-					$rtn .= "<option value='$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " selected='selected'" : '') : '').">$k</option>";
+				foreach ($themes as $k => $name){
+					$rtn .= "<option value='$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " selected='selected'" : '') : '').">$name</option>";
 				}
 				$rtn .= "</select>";
 			} else {
 				$rtn = "<select name='".$this->getName()."' id='".$this->id()."' class=\"form-control ".$this->getClass()."\">";
-				foreach ($themes as $k){
-					$rtn .= "<option value='$k'".(!empty($this->selected) ? ($k==$this->selected ? " selected='selected'" : '') : '').">$k</option>";
+				foreach ($themes as $k => $name){
+					$rtn .= "<option value='$k'".(!empty($this->selected) ? ($k==$this->selected ? " selected='selected'" : '') : '').">$name</option>";
 				}
 				$rtn .= "</select>";
 			}

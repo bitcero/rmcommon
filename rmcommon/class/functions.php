@@ -208,6 +208,7 @@ class RMFunctions
 
         $ucache = array();
         $ecache = array();
+        $comms = array();
 
         while($row = $db->fetchArray($result)){
 

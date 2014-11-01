@@ -109,7 +109,7 @@ function rm_change_theme(){
     
     $theme = rmc_server_var($_GET,'theme','');
     
-    if (is_file(RMCPATH.'/themes/'.$theme.'/admin_gui.php')){
+    if (is_file(RMCPATH.'/themes/'.$theme.'/admin-gui.php')){
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $sql = "UPDATE ".$db->prefix("config")." SET conf_value='$theme' WHERE conf_name='theme' AND conf_modid='".$xoopsModule->mid()."'";
         if ($db->queryF($sql)){

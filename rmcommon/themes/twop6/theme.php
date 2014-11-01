@@ -77,7 +77,7 @@
                         
                         <li class="dropdown<?php if($xoopsModule->dirname()=='rmcommon'): ?> active<?php endif; ?>">
                             <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                                <i class="xo-icon xicon-cu"></i> <?php _e('Common Utilities','rmcommon'); ?>
+                                <i class="xo-icon cu-icon"></i> <?php _e('Common Utilities','rmcommon'); ?>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">

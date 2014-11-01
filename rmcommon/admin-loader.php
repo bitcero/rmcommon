@@ -20,8 +20,8 @@ $tpl = RMTemplate::get();
 $rmc_config = RMSettings::cu_settings();
 $rmc_theme = isset($rmc_config->theme) ? $rmc_config->theme : 'twop6';
 
-if (!file_exists(RMCPATH.'/themes/'.$rmc_theme.'/admin_gui.php')){
-	$rmc_theme = 'smartb';
+if (!file_exists(RMCPATH.'/themes/'.$rmc_theme.'/admin-gui.php')){
+	$rmc_theme = 'twop6';
 }
 
 RMTemplate::get()->add_style('general.css','rmcommon');

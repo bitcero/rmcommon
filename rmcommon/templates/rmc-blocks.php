@@ -51,7 +51,7 @@
                 <?php else: ?>
                     <ol class="dd-list">
                         <?php foreach($used_blocks[$pos['id']] as $block): ?>
-                            <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
+                            <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-action="<?php echo $block['visible'] ? 'hide-block' : ' show-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
                                 <div class="row-fluid item-controls">
                                     <strong class="dd-handle"><?php echo $block['title']; ?></strong>
                                     <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'delete', <?php echo $block['id']; ?> );" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="fa fa-minus-circle text-danger"></i></a>
