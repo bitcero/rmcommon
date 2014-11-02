@@ -78,7 +78,7 @@ while($row = $xoopsDB->fetchArray($result)){
     else
         $version = $v['major'].'.'.$v['minor'].'.'.$v['revision'].'.'.$v['stage'];
 
-    $params = "type=plugin&verion=$version&id=$row[dir]";
+    $params = "action=check&type=plugin&version=$version&id=$row[dir]";
     
     $urls[$row['dir']] = strpos($info['updateurl'], '?')===false ? $info['updateurl']."?$params" : $info['updateurl']."&$params";
     

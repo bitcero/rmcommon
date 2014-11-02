@@ -328,9 +328,11 @@
                             </ul>
                         </li>
 
-                        <li class="xo-upd-notifier">
+                        <li class="xo-upd-notifier" style="display: none;">
                             <!-- Updates notifier -->
-                            <a href="<?php echo RMCURL; ?>/updates.php"><?php echo sprintf(__('%s updates available','rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></a>
+                            <a href="<?php echo RMCURL; ?>/updates.php">
+                                <?php echo sprintf(__('%s UPDATES','rmcommon'), '<span class="badge badge-warning">%s</span>'); ?>
+                            </a>
                         </li>
                     </ul>
 

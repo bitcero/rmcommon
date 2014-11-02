@@ -115,10 +115,10 @@
 <div id="blocks-positions" class="col-md-9 col-lg-9">
     <form name="formPos" id="frm-positions" method="post" action="blocks.php" class="form-inline">
         <div class="cu-bulk-actions">
-            <select name="action" id="bulk-topp" class="form-control">
+            <select name="action" id="bulk-top" class="form-control">
                 <option value=""><?php _e('Bulk actions...','rmcommon'); ?></option>
-                <option value="visiblepos"><?php _e('Visible','rmcommon'); ?></option>
-                <option value="hiddenpos"><?php _e('Hidden','rmcommon'); ?></option>
+                <option value="active"><?php _e('Active','rmcommon'); ?></option>
+                <option value="inactive"><?php _e('Inactive','rmcommon'); ?></option>
                 <option value="deletepos"><?php _e('Delete','rmcommon'); ?></option>
             </select>
             <button type="button" class="btn btn-default" id="the-op-topp" onclick="before_submit('frm-positions');"><?php _e('Apply','rmcommon'); ?></button>
@@ -171,7 +171,7 @@
                         </span>
                     </td>
                     <td align="center">&lt;{$xoBlocks.<span class="ptag"><?php echo $pos['tag']; ?></span>}&gt;</td>
-                    <td align="center"><img class="active" src="images/<?php echo $pos['active'] ? 'done.png' : 'closeb.png'; ?>" alt="" /></td>
+                    <td align="center"><span class="fa <?php echo $pos['active'] == 1 ? 'fa-check text-success' : 'fa-times text-danger'; ?>"></span></td>
                 </tr>    
             <?php endforeach; ?>
             </tbody>
@@ -179,12 +179,13 @@
         <div class="cu-bulk-actions">
             <select name="actionb" class="form-control" id="bulk-bottomp">
                 <option value=""><?php _e('Bulk actions...','rmcommon'); ?></option>
-                <option value="visiblepos"><?php _e('Visible','rmcommon'); ?></option>
-                <option value="hiddenpos"><?php _e('Hidden','rmcommon'); ?></option>
+                <option value="active"><?php _e('Active','rmcommon'); ?></option>
+                <option value="inactive"><?php _e('Inactive','rmcommon'); ?></option>
                 <option value="deletepos"><?php _e('Delete','rmcommon'); ?></option>
             </select>
             <button type="button" class="btn btn-default" id="the-op-topp" onclick="before_submit('frm-positions');"><?php _e('Apply','rmcommon'); ?></button>
         </div>
+        <?php echo $xoopsSecurity->getTokenHTML(); ?>
     </form>
 </div>
 </div>

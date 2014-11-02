@@ -126,11 +126,11 @@ function rmCheckUpdates(){
 }
 
 function rmCallNotifier(total){
-    
+
     if(total<=0) return;
     if(typeof updatesNotifier == 'function')
         updatesNotifier(total);
-        
+
     if($("#updater-info").length<=0) return false;
         
     $("#updater-info").html($("#updater-info").html().replace("%s", total));

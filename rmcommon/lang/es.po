@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XOOPS Modules\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-09 17:37-0600\n"
-"PO-Revision-Date: 2014-10-09 17:41-0600\n"
+"POT-Creation-Date: 2014-11-02 14:25-0600\n"
+"PO-Revision-Date: 2014-11-02 14:26-0600\n"
 "Last-Translator: Eduardo Cortés <me@eduardocortes.mx>\n"
 "Language-Team: Red México\n"
 "Language: es_MX\n"
@@ -385,7 +385,7 @@ msgstr "Seleccionar usuarios"
 
 #: Y:\www\xoops\modules\rmcommon/class/fields/modules.class.php:127
 #: Y:\www\xoops\modules\rmcommon/include/right_widgets.php:14
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:76
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:80
 msgid "Available Modules"
 msgstr "Modulos Disponibles"
 
@@ -503,7 +503,7 @@ msgid "Groups"
 msgstr "Grupos"
 
 #: Y:\www\xoops\modules\rmcommon/class/functions.php:80
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:281
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:282
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:165
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:89
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:34
@@ -594,13 +594,13 @@ msgstr "Plugins"
 msgid "Updates"
 msgstr "Actualizaciones"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:271
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:272
 #: Y:\www\xoops\modules\rmcommon/comments.php:114
 #, php-format
 msgid "Posted on %s"
 msgstr "Publicado en %s"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:320
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:321
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:90
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:131
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:140
@@ -620,48 +620,48 @@ msgstr "Publicado en %s"
 msgid "Name"
 msgstr "Nombre"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:322
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:323
 #: Y:\www\xoops\modules\rmcommon/users.php:284
 msgid "Email address"
 msgstr "Dirección de correo electrónico"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:324
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:325
 msgid "Web site"
 msgstr "Sitio Web"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:325
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:326
 msgid "Your comment"
 msgstr "Tu comentario"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:326
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:327
 msgid "Submit Comment"
 msgstr "Enviar Comentario"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:327
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:328
 msgid "Submit a comment"
 msgstr "Enviar un comentario"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:347
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:348
 msgid "Please specify your name"
 msgstr "Por favor especifica tu nombre"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:348
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:349
 msgid "Please specify a valid email"
 msgstr "Por favor especifica un correo válido"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:349
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:350
 msgid "Please write a message"
 msgstr "Por favor escribe un mensage"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:350
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:351
 msgid "Please enter a valid URL"
 msgstr "Por favor introduce una URL válida"
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:516
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:537
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:550
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:582
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:593
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:517
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:538
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:551
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:583
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:594
 #: Y:\www\xoops\modules\rmcommon/class/template.php:816
 #: Y:\www\xoops\modules\rmcommon/class/template.php:836
 #: Y:\www\xoops\modules\rmcommon/class/template.php:856
@@ -786,6 +786,15 @@ msgstr ""
 "¡La reescritura de URLs requiere un servidor Apache o compatible y "
 "mod_rewirte activado!"
 
+#: Y:\www\xoops\modules\rmcommon/class/imageresizer.php:237
+msgid "Resize Image: You must provide a valid file for image."
+msgstr ""
+"Redimensión de Imagen: Debes proporcionar un archivo válido para la imagen."
+
+#: Y:\www\xoops\modules\rmcommon/class/imageresizer.php:290
+msgid "Image format could not be accepted for resize"
+msgstr "El formato de imagen no se acepta para redimensionar"
+
 #: Y:\www\xoops\modules\rmcommon/class/internalblock.php:345
 msgid "The configuration file for this block does not exists!"
 msgstr "No existe el archivo de configuración para este bloque!"
@@ -826,7 +835,7 @@ msgstr ""
 msgid "Help"
 msgstr "Ayuda"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:67
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:65
 msgid ""
 "You must provide a valid time and format value to use RMTimeFormatter::"
 "format() method"
@@ -834,79 +843,79 @@ msgstr ""
 "Debes proporcionar una fecha y un formato válidos para usar el método "
 "RMTimeFormatter::format()"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:115
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:113
 msgid "Sunday"
 msgstr "Domingo"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:116
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:114
 msgid "Monday"
 msgstr "Lunes"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:117
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:115
 msgid "Tuesday"
 msgstr "Martes"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:118
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:116
 msgid "Wednesday"
 msgstr "Miércoles"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:119
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:117
 msgid "Thursday"
 msgstr "Jueves"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:120
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:118
 msgid "Friday"
 msgstr "Viernes"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:121
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:119
 msgid "Saturday"
 msgstr "Sábado"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:133
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:131
 msgid "January"
 msgstr "Enero"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:134
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:132
 msgid "February"
 msgstr "Febrero"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:135
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:133
 msgid "March"
 msgstr "Marzo"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:136
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:134
 msgid "April"
 msgstr "Abril"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:137
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:135
 msgid "May"
 msgstr "Mayo"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:138
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:136
 msgid "June"
 msgstr "Junio"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:139
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:137
 msgid "July"
 msgstr "Julio"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:140
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:138
 msgid "August"
 msgstr "Agosto"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:141
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:139
 msgid "September"
 msgstr "Septiembre"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:142
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:140
 msgid "October"
 msgstr "Octubre"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:143
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:141
 msgid "November"
 msgstr "Noviembre"
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:144
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:142
 msgid "December"
 msgstr "Diciembre"
 
@@ -1105,15 +1114,15 @@ msgstr "Por favor intenta agregar manualmente las siguientes línea:"
 #: Y:\www\xoops\modules\rmcommon/images.php:260
 #: Y:\www\xoops\modules\rmcommon/images.php:309
 #: Y:\www\xoops\modules\rmcommon/images.php:619
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:120
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:121
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:124
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:125
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-images.php:1
 msgid "Images Manager"
 msgstr "Administrador de imágenes"
 
 #: Y:\www\xoops\modules\rmcommon/groups.php:39
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:144
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:145
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:148
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:149
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-users.php:1
 #: Y:\www\xoops\modules\rmcommon/users.php:189
 #: Y:\www\xoops\modules\rmcommon/users.php:190
@@ -1422,7 +1431,7 @@ msgstr "Conceder acceso a la configuración del sistema y los módulos."
 #: Y:\www\xoops\modules\rmcommon/include/right_widgets.php:157
 #: Y:\www\xoops\modules\rmcommon/modules.php:808
 #: Y:\www\xoops\modules\rmcommon/modules.php:927
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:86
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:90
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:118
 msgid "Install"
 msgstr "Instalar"
@@ -2703,49 +2712,49 @@ msgstr "Noticias Recientes"
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:68
 #, php-format
 msgid "%s Updates Available!"
-msgstr "¡%s Actualizaciones Disponibles!"
+msgstr "%s Actualizaciones Disponibles"
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:69
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:71
 #, php-format
 msgid "Please %s to view available updates."
 msgstr "Por favor %s para ver las actualizaciones disponibles."
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:69
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:71
 msgid "click here"
 msgstr "click aquí"
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:91
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:95
 msgid ""
 "If you wish to manage or install new modules please go to Modules Management."
 msgstr ""
 "Si deseas administrar o instalar modulos, por favor ve  Administración de "
 "Módulos."
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:93
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:97
 msgid "Modules management"
 msgstr "Administración de Módulos"
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:108
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:112
 msgid "System Tools"
 msgstr "Herramientas del Sistema"
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:114
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:115
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:118
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:119
 msgid "Configure Common Utilities"
 msgstr "Configurar Common Utilities"
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:126
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:127
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:130
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:131
 msgid "Comments Management"
 msgstr "Administrador de Comentarios"
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:132
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:133
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:136
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:137
 msgid "Plugins Management"
 msgstr "Administrador de Plugins"
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:138
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:139
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:142
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:143
 msgid "XOOPS Modules"
 msgstr "Módulos Xoops"
 
@@ -3171,7 +3180,7 @@ msgstr "Versión"
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-modules.php:35
 #: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:58
 #: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:131
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:371
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:373
 msgid "Options"
 msgstr "Opciones"
 
@@ -3309,8 +3318,8 @@ msgid "Configurable Items"
 msgstr "Elementos Configurables"
 
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-updates.php:1
+#: Y:\www\xoops\modules\rmcommon/updates.php:53
 #: Y:\www\xoops\modules\rmcommon/updates.php:54
-#: Y:\www\xoops\modules\rmcommon/updates.php:55
 msgid "Available Updates"
 msgstr "Actualizaciones Disponibles"
 
@@ -3730,85 +3739,85 @@ msgstr "Colores de Two·Six"
 msgid "Color Test"
 msgstr "Prueba de Color"
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:333
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:334
 #, php-format
-msgid "%s updates available"
-msgstr "%s actualizaciones disponibles"
+msgid "%s UPDATES"
+msgstr "%s ACTUALIZACIONES"
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:351
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:353
 msgid "Menu"
 msgstr "Menú"
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:416
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:418
 msgid "Toolbar"
 msgstr "Barra de herramientas"
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:518
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:520
 #, php-format
 msgid "Powered by %s."
 msgstr "Impulsado por %s."
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:519
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:521
 #, php-format
 msgid "Reloaded by %s."
 msgstr "Recargado por %s."
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:43
+#: Y:\www\xoops\modules\rmcommon/updates.php:42
 msgid "Item updated!"
 msgstr "¡Elemento actualizado!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:45
+#: Y:\www\xoops\modules\rmcommon/updates.php:44
 msgid "Updates Help"
 msgstr "Ayuda para las Actualziaciones"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:92
-#: Y:\www\xoops\modules\rmcommon/updates.php:127
-#: Y:\www\xoops\modules\rmcommon/updates.php:356
+#: Y:\www\xoops\modules\rmcommon/updates.php:91
+#: Y:\www\xoops\modules\rmcommon/updates.php:126
+#: Y:\www\xoops\modules\rmcommon/updates.php:355
 msgid "Invalid parameters!"
 msgstr "¡Parámetros no válidos!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:140
-#: Y:\www\xoops\modules\rmcommon/updates.php:367
+#: Y:\www\xoops\modules\rmcommon/updates.php:139
+#: Y:\www\xoops\modules\rmcommon/updates.php:366
 msgid "Unable to download update file!"
 msgstr "¡No se pudo descargar el archivo de actualización!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:146
+#: Y:\www\xoops\modules\rmcommon/updates.php:145
 msgid "ERROR: unable to open downloaded zip file!"
 msgstr "¡No se pudo descargar el archivo de actualización!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:174
+#: Y:\www\xoops\modules\rmcommon/updates.php:173
 #, php-format
 msgid "Target path \"%s\" does not exists!"
 msgstr "¡La ruta destino \"%s\" no existe!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:208
+#: Y:\www\xoops\modules\rmcommon/updates.php:207
 msgid "FTP configuration not specified!"
 msgstr "¡No se configuró el cliente FTP!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:212
+#: Y:\www\xoops\modules\rmcommon/updates.php:211
 msgid "FTP configuration not valid!"
 msgstr "¡No es válida la configuración FTP!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:224
+#: Y:\www\xoops\modules\rmcommon/updates.php:223
 #, php-format
 msgid "Unable to connect FTP server %s"
 msgstr "Incapaz de conectarse al servidor FTP %s"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:252
+#: Y:\www\xoops\modules\rmcommon/updates.php:251
 msgid "Executing files..."
 msgstr "Ejecutando archivos..."
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:254
+#: Y:\www\xoops\modules\rmcommon/updates.php:253
 #, php-format
 msgid "%s has been updated"
 msgstr "Se actualizó %s"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:369
+#: Y:\www\xoops\modules\rmcommon/updates.php:368
 msgid "Downloaded!"
 msgstr "¡Descargado!"
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:384
-#: Y:\www\xoops\modules\rmcommon/updates.php:390
+#: Y:\www\xoops\modules\rmcommon/updates.php:383
+#: Y:\www\xoops\modules\rmcommon/updates.php:389
 msgid "File not found!"
 msgstr "¡Archivo no encontrado!"
 
@@ -4275,6 +4284,9 @@ msgstr "Bloque Personalizado"
 #: Y:\www\xoops\modules\rmcommon/xoops_version.php:489
 msgid "Allows to create a block with custom content."
 msgstr "Permite crear un bloque con contenido personalizado."
+
+#~ msgid "%s updates available"
+#~ msgstr "%s actualizaciones disponibles"
 
 #~ msgid "GithHub"
 #~ msgstr "GitHub"

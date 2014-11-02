@@ -63,11 +63,15 @@
 
     <div class="col-md-4 col-lg-4" data-box="rmcommon-box-center">
 
-        <!-- UPdates available -->
-        <div class="alert alert-block" style="display: none;" id="updater-info">
-            <h4><?php echo sprintf(__('%s Updates Available!','rmcommon'), '<span class="badge badge-important">%s</span>'); ?></h4>
-            <p><?php echo sprintf(__('Please %s to view available updates.','rmcommon'), '<a href="updates.php">'.__('click here','rmcommon').'</a>'); ?></p>
+        <div class="cu-box" id="updater-info">
+            <div class="box-header">
+                <h3><?php echo sprintf(__('%s Updates Available!','rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></h3>
+            </div>
+            <div class="box-content">
+                <p class="text-warning"><?php echo sprintf(__('Please %s to view available updates.','rmcommon'), '<a href="updates.php">'.__('click here','rmcommon').'</a>'); ?></p>
+            </div>
         </div>
+        <!-- UPdates available -->
 
         <!-- Available Modules -->
         <div class="cu-box">

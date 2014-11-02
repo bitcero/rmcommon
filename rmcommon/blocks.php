@@ -88,7 +88,7 @@ function show_rm_blocks()
     }
     
     // Cargamos las posiciones de bloques
-    $bpos = RMBlocksFunctions::block_positions( 1 );
+    $bpos = RMBlocksFunctions::block_positions( '' );
     $sql = createSQL();
     $result = $db->query($sql);
     $blocks = array();
@@ -293,6 +293,40 @@ function delete_positions(){
 }
 
 
+function activate_position( $status ){
+    global $xoopsSecurity, $xoopsDB;
+
+    if ( !$xoopsSecurity->check() )
+        RMUris::redirect_with_message(
+            __('Session token is not valid!', 'rmcommon'),
+            'blocks.php', RMMSG_ERROR
+        );
+
+    $ids = RMHttpRequest::post( 'ids', 'array', array() );
+
+    if ( !is_array( $ids ) || empty( $ids ) )
+        RMUris::redirect_with_message(
+            __('No position id has been provided', 'rmcommon'),
+            'blocks.php', RMMSG_WARN
+        );
+
+    $sql = "UPDATE " . $xoopsDB->prefix("mod_rmcommon_blocks_positions") . " SET active = " . ( $status == 'active' ? 1 : 0 ) . "
+            WHERE id_position IN (" . implode( ',', $ids ) . ")";
+
+    if ( $xoopsDB->queryF( $sql ) )
+        RMUris::redirect_with_message(
+            __( 'Database updated successully!', 'rmcommon' ),
+            'blocks.php', RMMSG_SUCCESS
+        );
+    else
+        RMUris::redirect_with_message(
+            __('Errors ocurrs while trying to update data:', 'rmcommon') . $xoopsDB->error(),
+            'blocks.php', RMMSG_ERROR
+        );
+
+}
+
+
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
 switch($action){
@@ -313,6 +347,10 @@ switch($action){
         break;
     case 'upload-widget':
         upload_widget();
+        break;
+    case 'active':
+    case 'inactive':
+        activate_position( $action );
         break;
     default:
         show_rm_blocks();

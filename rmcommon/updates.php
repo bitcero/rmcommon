@@ -1,5 +1,4 @@
 <?php
-// $Id$
 // --------------------------------------------------------------
 // Red México Common Utilities
 // A framework for Red México Modules

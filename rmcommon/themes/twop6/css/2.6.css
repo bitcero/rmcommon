@@ -260,9 +260,10 @@ table th{
     text-align: center!important;
 }
 .xo-upd-notifier{
-    display: none!important;
+    display: none;
 }
-.xo-upd-notifier .badge{
+.xo-upd-notifier .badge,
+#updater-info .badge{
     background-color: #FC6F00;
 }
 .xo-upd-notifier a{
