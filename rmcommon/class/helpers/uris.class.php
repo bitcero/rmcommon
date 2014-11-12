@@ -150,4 +150,30 @@ class RMUris
 
     }
 
+    /**
+     * Gets an URL for a Common Utilities page
+     * @param string $page Page to link
+     * @return string
+     */
+    static function system_url( $page ){
+        global $cuSettings;
+
+        $url = XOOPS_URL;
+
+        switch ( $page ){
+
+            case 'rss':
+                $url .= $cuSettings->permalinks ? '/rss/' : '/backend.php';
+                break;
+
+            default:
+                $url .= '/' . $page;
+                break;
+
+        }
+
+        return $url;
+
+    }
+
 }

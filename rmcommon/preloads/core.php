@@ -94,7 +94,12 @@ class RmcommonCorePreload extends XoopsPreloadItem
     }
 
     public function eventCoreIncludeFunctionsRedirectheaderStart($params){
-		
+        global $xoopsModule;
+        global $cuSettings;
+
+        if ( $xoopsModule &&  !$xoopsModule->getInfo('rmnative') && $cuSettings->gui_disable )
+            return;
+
         // 0 = URL
 	    // 1 = Time
 	    // 2 = Message

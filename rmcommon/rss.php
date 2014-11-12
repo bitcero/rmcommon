@@ -8,6 +8,9 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
+if ( !defined( 'XOOPS_MAINFILE_INCLUDED' ) )
+    require '../../mainfile.php';
+
 /**
 * Show all RSS options
 */

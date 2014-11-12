@@ -63,7 +63,7 @@
 
     <div class="col-md-4 col-lg-4" data-box="rmcommon-box-center">
 
-        <div class="cu-box" id="updater-info">
+        <div class="cu-box" id="updater-info" style="display: none;">
             <div class="box-header">
                 <h3><?php echo sprintf(__('%s Updates Available!','rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></h3>
             </div>
