@@ -25,33 +25,33 @@ class RMFunctions
         $this->uris = new RMUris;
 
     }
-    
+
 	static function get(){
 		static $instance;
-		
+
 		if (!isset($instance))
 			$instance = new RMFunctions();
-		
+
 		return $instance;
-		
+
 	}
 
 	/**
 	* Check the number of images category on database
 	*/
 	public function get_num_records($table, $filters=''){
-		
+
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
-		
+
 		$sql = "SELECT COUNT(*) FROM ".$db->prefix($table);
 		$sql .= $filters!='' ? " WHERE $filters" : '';
-		
+
 		list($num) = $db->fetchRow($db->query($sql));
-		
+
 		return $num;
-		
+
 	}
-	
+
 	/**
 	* Create the module toolbar. This function must be called only from rmcommon module administration
 	*/
@@ -126,9 +126,9 @@ class RMFunctions
         }
 
         RMEvents::get()->run_event('rmcommon.create.toolbar');
-		
+
 	}
-    
+
     /**
 	* This functions allows to get the groups names for a single category
 	* @param array Groups ids
@@ -136,27 +136,27 @@ class RMFunctions
 	* @return array|list
 	*/
 	public function get_groups_names($groups, $list = true){
-		
+
 		$ret = array();
 		if (count($groups)==1 && $groups[0] == 0){
 			$ret[] = __('All','rmcommon');
 			return $list ? __('All','rmcommon') : $ret;
 		}
-		
+
 		if(in_array(0, $groups)) $ret[] = __('All','rmcommon');
-		
-		
+
+
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
 		$sql = "SELECT name FROM ".$db->prefix("groups")." WHERE groupid IN(".implode(',',$groups).")";
 		$result = $db->query($sql);
 		while($row = $db->fetchArray($result)){
 			$ret[] = $row['name'];
 		}
-		
+
 		if ($list) return implode(', ',$ret);
 		return $ret;
 	}
-	
+
 	/**
 	* Load all categories from database
 	* @param string SQL Filters
@@ -178,12 +178,12 @@ class RMFunctions
                 );
             } else {
                 $categories[] = $tc;
-            }			
+            }
 		}
-		
+
 		return $categories;
 	}
-    
+
     /**
      * @Todo Move this method to RMComments functions class
     * Get all comments for given parameters
@@ -287,9 +287,9 @@ class RMFunctions
         } else {
             return $comms;
         }
-        
+
     }
-    
+
     /**
     * @Todo Move this method to RMComments class
     * Create the comments form
@@ -302,18 +302,18 @@ class RMFunctions
     */
     public function comments_form($obj, $params, $type='module', $file=array()){
         global $xoopsTpl, $xoopsRequestUri, $xoopsUser;
-        
+
         $config = RMSettings::cu_settings();
-        
+
         if ( !$config->enable_comments )
 			 return;
-        
+
         if ( !$xoopsUser && !$config->anonymous_comments )
 			return;
 
         if (!defined('COMMENTS_INCLUDED'))
 			define('COMMENTS_INCLUDED', 1);
-        
+
         $xoopsTpl->assign('enable_comments_form', 1);
 
         $form = array(
@@ -334,10 +334,10 @@ class RMFunctions
             'object'		=> $obj,
             'action'		=> 'save'
         );
-        
+
         // You can include new content into Comments form
         // eg. Captcha checker, etc
-        
+
         $form = RMEvents::get()->run_event('rmcommon.comments.form', $form, $obj, $params, $type);
         RMTemplate::get()->add_jquery();
         RMTemplate::get()->add_script( 'jquery.validate.min.js', 'rmcommon' );
@@ -352,11 +352,11 @@ class RMFunctions
         		}
         	});
         });</script>');
-        
+
         $xoopsTpl->assign('cf', $form);
-        
+
     }
-    
+
     /**
     * @Todo Move this method to RMComments class
     * Delete comments assigned to a object
@@ -364,65 +364,65 @@ class RMFunctions
     * @param string Params
     */
     public function delete_comments($module, $params){
-		
+
 		if ($module=='' || $params == '') return;
-		
+
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
 		$sql = "DELETE FROM ".$db->prefix("mod_rmcommon_comments")." WHERE id_obj='$module' AND params='$params'";
-        
+
         // Event
         RMEvents::get()->run_event('rmcommon.deleting.comments', $module, $params);
-        
+
 		return $db->queryF($sql);
-		
+
     }
 
-    
+
     /**
     * Check if a plugin is installed and active in Common Utilities
     */
     public function plugin_installed($dir){
-		
+
 		if (isset($GLOBALS['installed_plugins'][$dir]))
 			return true;
 		else
 			return false;
-		
+
     }
-    
+
     /**
     * Get a existing plugin
     */
     public function load_plugin($name){
-		
+
 		$name = strtolower($name);
 		if (!file_exists(RMCPATH.'/plugins/'.$name.'/'.$name.'-plugin.php'))
 			return false;
-		
+
 		include_once RMCPATH.'/plugins/'.$name.'/'.$name.'-plugin.php';
 		$class = ucfirst($name).'CUPlugin';
-		
+
 		if (!class_exists($class))
 			return false;
-		
+
 		$plugin = new $class();
 		return $plugin;
-		
+
     }
-    
-    public function installed_plugins(){
-        
+
+    public static function installed_plugins(){
+
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $result = $db->query("SELECT dir FROM ".$db->prefix("mod_rmcommon_plugins").' WHERE status=1');
         $plugins = array();
         while($row = $db->fetchArray($result)){
             $plugins[] = $row['dir'];
         }
-        
+
         $plugins = RMEvents::get()->run_event("rmcommon.installed.plugins", $plugins);
-        
+
         return $plugins;
-        
+
     }
 
     /**
@@ -455,14 +455,14 @@ class RMFunctions
         }
 
         $file .= 'sizes/'.substr($img->getVar('file'), 0, -4).'_'.$s['width'].'x'.$s['height'].substr($img->getVar('file'), -4);
-        
+
         if(!is_file(str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $file)))
             return $img->getOriginal();
-        
+
         return $file;
 
     }
-    
+
     /**
     * Add keywords and description metas
     * @param string Description for meta content
@@ -470,9 +470,9 @@ class RMFunctions
     * @param int Limit of keywrods to generate
     */
     public function add_keywords_description($description, $keywords='', $limit=50){
-        
+
         if($description=='') return;
-        
+
         $tpl = RMTemplate::get();
         $tc = TextCleaner::getInstance();
         $description = strip_tags($description);
@@ -481,20 +481,20 @@ class RMFunctions
             $tpl->add_meta('keywords', $keywords);
             return;
         }
-        
+
         $description = preg_replace("/[^[[:alnum:]]]|[\.,:]/",'', $description);
         $description = preg_replace("/[[:space:]][[:alnum:]]{0,4}[[:space:]]/",' ',$description);
-        
+
         $words = explode(" ", $description);
         asort($words);
         $keys = array_rand($words, $limit>count($words) ? count($words) : $limit);
-        
+
         foreach($keys as $id){
             $keywords .= $keywords=='' ? $words[$id] : ', '.$words[$id];
         }
-        
+
         $tpl->add_meta('keywords', $keywords);
-        
+
     }
 
     /*
@@ -602,5 +602,5 @@ class RMFunctions
         return RMModules::get_modules_list( $status );
 
     }
-	
+
 }
