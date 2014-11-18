@@ -485,6 +485,7 @@ class RMTemplate
 
         }
 
+        return null;
     }
 
     /**

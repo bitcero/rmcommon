@@ -365,7 +365,7 @@ class RMFunctions
     */
     public function delete_comments($module, $params){
 
-		if ($module=='' || $params == '') return;
+		if ($module=='' || $params == '') return null;
 
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
 		$sql = "DELETE FROM ".$db->prefix("mod_rmcommon_comments")." WHERE id_obj='$module' AND params='$params'";
