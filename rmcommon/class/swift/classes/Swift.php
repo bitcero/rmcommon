@@ -10,20 +10,20 @@
 
 /**
  * General utility class in Swift Mailer, not to be instantiated.
- * 
+ *
  * @package Swift
- * 
+ *
  * @author Chris Corbyn
  */
 abstract class Swift
 {
-  
+
   /** Swift Mailer Version number generated during dist release process */
   const VERSION = '4.0.6';
-  
+
   /**
    * Internal autoloader for spl_autoload_register().
-   * 
+   *
    * @param string $class
    */
   public static function autoload($class)
@@ -42,16 +42,17 @@ abstract class Swift
     }
 
     require_once $path;
+    return null;
   }
-  
+
   /**
    * Configure autoloading using Swift Mailer.
-   * 
+   *
    * This is designed to play nicely with other autoloaders.
    */
   public static function registerAutoload()
   {
     spl_autoload_register(array('Swift', 'autoload'));
   }
-  
+
 }

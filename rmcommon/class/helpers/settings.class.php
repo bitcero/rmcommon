@@ -69,14 +69,14 @@ class RMSettings
      */
     static function plugin_settings($dir, $values = false){
 
-        if ($dir=='') return;
+        if ($dir=='') return null;
 
         if (!isset(self::$plugin_settings[$dir])){
 
             $db = XoopsDatabaseFactory::getDatabaseConnection();
             $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_settings")." WHERE element='$dir'";
             $result = $db->query($sql);
-            if($db->getRowsNum($result)<=0) return;
+            if($db->getRowsNum($result)<=0) return null;
             $configs = array();
             while ($row = $db->fetchArray($result)){
                 $configs[$row['name']] = $row;
@@ -176,6 +176,7 @@ class RMSettings
 
             }
         }
+        return null;
     }
 
     /**
@@ -191,7 +192,7 @@ class RMSettings
     public static function render_field( $field ){
 
         if ( empty( $field ) )
-            return;
+            return null;
 
         $tc = TextCleaner::getInstance();
 

@@ -184,6 +184,7 @@ class Swift_KeyCache_DiskKeyCache implements Swift_KeyCache
       }
       return $str;
     }
+    return null;
   }
 
   /**

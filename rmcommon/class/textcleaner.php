@@ -41,21 +41,21 @@ class TextCleaner
 		}
 		return $instance;
 	}
-	
+
 	/**
 	* Get all emotions icons, including plugins with this capability
 	* @return array
 	*/
 	public function get_emotions(){
-		
+
 		$rmc_config = RMSettings::cu_settings();
-		
+
 		if (!$rmc_config->dosmileys)
 			return false;
-		
+
 		if (!empty($this->emots))
 			return $this->emots;
-		
+
 		// Only a few icons due to these can be extended by plugins or modules
 		$url = RMCURL.'/images/emots';
 		$this->emots[] = array('code'=>array(':-)'),'icon'=>$url.'/smile.png');
@@ -72,13 +72,13 @@ class TextCleaner
 		$this->emots[] = array('code'=>array('>:(','>:-('),'icon'=>$url.'/mad.png');
 		$this->emots[] = array('code'=>array(':oops:'),'icon'=>$url.'/red.png');
 		$this->emots[] = array('code'=>array(':roll:'),'icon'=>$url.'/roll.png');
-		$this->emots[] = array('code'=>array('X-D','x-D'),'icon'=>$url.'/yell.png');    
-		
+		$this->emots[] = array('code'=>array('X-D','x-D'),'icon'=>$url.'/yell.png');
+
 		// Get another emoticons from plugins or modules
 		$this->emots = RMEvents::get()->run_event('rmcommon.get_emotions', $this->emots);
-		
+
 		return $this->emots;
-		
+
 	}
     /**
      * Replace emots codes for ther image
@@ -117,7 +117,7 @@ class TextCleaner
 		$string = trim($string);
 		return $string;
 	}
-	
+
 	function nofollow( $text ) {
 		global $wpdb;
 		// This is a pre save filter, so text is already escaped.
@@ -125,28 +125,28 @@ class TextCleaner
 		$text = preg_replace_callback('|<a (.+?)>|i', 'rel_nofollow', $text);
 		return $text;
 	}
-	
+
 	function popuplinks($text) {
 		$text = preg_replace('/<a (.+?)>/i', "<a $1 target='_blank' rel='external'>", $text);
 		return $text;
 	}
-	
+
 	/**
 	* Next set of three functions are a set of callbacks to manege url and uri matches
-	* 
+	*
 	* @param array Matches
 	* @return string
 	*/
-	public function url_clickable($matches){
+	public static function url_clickable($matches){
 		$url = $matches[2];
 		$url = self::clean_url($url);
 		if ( empty($url) )
 			return $matches[0];
-		
+
 		return $matches[1] . "<a href=\"$url\" rel=\"nofollow\">$url</a>";
 	}
-	
-	public function ftp_clickable($matches){
+
+	public static function ftp_clickable($matches){
 		$ret = '';
 		$dest = $matches[2];
 		$dest = 'http://' . $dest;
@@ -160,16 +160,16 @@ class TextCleaner
 		}
 		return $matches[1] . "<a href=\"$dest\" rel=\"nofollow\">$dest</a>" . $ret;
 	}
-	public function mail_clickable($matches){
+	public static function mail_clickable($matches){
 		$email = $matches[2] . '@' . $matches[3];
 		return $matches[1] . "<a href=\"mailto:$email\">$email</a>";
 	}
-	
+
 	/**
 	* Checks and Clean a URL
-	* 
+	*
 	* Taked from Wordpress
-	* 
+	*
 	* @param string $url The URL to be cleaned.
 	* @param array $protocols Optional. An array of acceptable protocols.
 	*		Defaults to 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' if not set.
@@ -178,7 +178,7 @@ class TextCleaner
 	*/
 	public function clean_url( $url, $protocols = null, $context = 'display' ) {
         global $aprotocols;
-        
+
 		$original_url = $url;
 
 		if ('' == $url) return $url;
@@ -202,15 +202,15 @@ class TextCleaner
 
 		if ( !is_array($protocols) )
 			$protocols = array('http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet');
-            
+
         $aprotocols = $protocols;
-        
+
 		if ( TextCleaner::bad_protocol( $url, $protocols ) != $url )
 			return '';
 
 		return RMEvents::get()->run_event('rmcommon.clean_url', $url, $original_url, $context);
 	}
-    
+
     private function bad_protocol($string, $allowed_protocols) {
         $string = TextCleaner::no_null($string);
         $string2 = $string.'a';
@@ -222,7 +222,7 @@ class TextCleaner
 
         return $string;
     }
-    
+
     private function bad_protocol_once($string, $allowed_protocols) {
 
         $string2 = preg_split('/:|&#58;|&#x3a;/i', $string, 2);
@@ -233,11 +233,11 @@ class TextCleaner
 
         return $string;
     }
-    
-    function bad_protocol_once2($matches) {
+
+    static function bad_protocol_once2($matches) {
         global $aprotocols;
         $allowed_protocols = $aprotocols;
-        
+
         if ( is_array($matches) ) {
             if ( ! isset($matches[1]) || empty($matches[1]) )
                 return '';
@@ -264,29 +264,29 @@ class TextCleaner
         else
             return '';
     }
-    
+
     function decode_entities($string) {
         $string = preg_replace_callback('/&#([0-9]+);/', 'decode_entities_chr', $string);
         $string = preg_replace_callback('/&#[Xx]([0-9A-Fa-f]+);/', 'decode_entities_chr_hexdec', $string);
 
         return $string;
     }
-    
-    public function decode_entities_chr( $match ) {
+
+    public static function decode_entities_chr( $match ) {
         return chr( $match[1] );
     }
-    
-    public function decode_entities_chr_hexdec( $match ) {
+
+    public static function decode_entities_chr_hexdec( $match ) {
         return chr( hexdec( $match[1] ) );
     }
-    
+
     public function no_null($string) {
         $string = preg_replace('/\0+/', '', $string);
         $string = preg_replace('/(\\\\0)+/', '', $string);
 
         return $string;
     }
-    
+
     public function replace($search, $subject){
         $found = true;
         while($found) {
@@ -301,17 +301,17 @@ class TextCleaner
 
         return $subject;
     }
-	
+
 	/**
      * MyTextSanitizer::truncate()
      *
      * @param mixed $text
      * @return
      */
-    public function truncate($text, $len, $continue = '[...]'){
+    public static function truncate($text, $len, $continue = '[...]'){
         $text = preg_replace("[\n|\r|\n\r]", ' ', $text);
         $ret = substr(strip_tags($text), 0, $len);
-        
+
         if (strlen($text)>$len) $ret .= ' ' . $continue;
         return $ret;
     }
@@ -348,7 +348,7 @@ class TextCleaner
 		$patterns['replacements'][] = '<span style="font-family: \\2;">\\3</span>';
 		$patterns['patterns'][] = "/\[email]([^;<>\*\(\)\"']*)\[\/email\]/sU";
 		$patterns['replacements'][] = '<a href="mailto:\\1">\\1</a>';
-		
+
 		$patterns['patterns'][] = "/\[b](.*)\[\/b\]/sU";
 		$patterns['replacements'][] = '<b>\\1</b>';
 		$patterns['patterns'][] = "/\[i](.*)\[\/i\]/sU";
@@ -357,15 +357,15 @@ class TextCleaner
 		$patterns['replacements'][] = '<u>\\1</u>';
 		$patterns['patterns'][] = "/\[d](.*)\[\/d\]/sU";
 		$patterns['replacements'][] = '<del>\\1</del>';
-		
+
 		$patterns['patterns'][] = "/\[quote(=(.*)){0,1}\](.*)\[\/quote\]/";
 		$patterns['replacements'][] = '<blockquote>$3<p class="citeby">$2</p></blockquote>';
-		
+
 		$patterns['patterns'][] = "/\[img align=(['\"]?)(left|center|right)\\1]([^\"\(\)'<>]*)\[\/img\]/sU";
 		$patterns['patterns'][] = "/\[img]([^\"\(\)'<>]*)\[\/img\]/sU";
 		$patterns['patterns'][] = "/\[img align=(['\"]?)(left|center|right)\\1 id=(['\"]?)([0-9]*)\\3]([^\"\(\)\?\&'<>]*)\[\/img\]/sU";
 		$patterns['patterns'][] = "/\[img id=(['\"]?)([0-9]*)\\1]([^\"\(\)\?\&'<>]*)\[\/img\]/sU";
-		
+
 		if ($allowimage != 1) {
 			$patterns['replacements'][] = '<a href="\\3" target="_blank">\\3</a>';
 			$patterns['replacements'][] = '<a href="\\1" target="_blank">\\1</a>';
@@ -377,19 +377,19 @@ class TextCleaner
 			$patterns['replacements'][] = '<img src="'.XOOPS_ROOT_PATH.'/image.php?id=\\4" align="\\2" alt="\\4" />';
 			$patterns['replacements'][] = '<img src="'.XOOPS_ROOT_PATH.'/image.php?id=\\2" alt="\\3" />';
 		}
-		
+
 		$text = str_replace( "\x00", "", $text );
 		$c = "[\x01-\x1f]*";
 		$patterns['patterns'][] = "/j{$c}a{$c}v{$c}a{$c}s{$c}c{$c}r{$c}i{$c}p{$c}t{$c}:/si";
 		$patterns['replacements'][] = "(script removed)";
 		$patterns['patterns'][] = "/a{$c}b{$c}o{$c}u{$c}t{$c}:/si";
 		$patterns['replacements'][] = "about :";
-		
+
 		// More patterns with plugins
 		$patterns = RMEvents::get()->run_event('rmcommon.get.replace.patterns', $patterns, $this);
-		
+
 		$text = preg_replace($patterns['patterns'], $patterns['replacements'], $text);
-		
+
 		$text = RMEvents::get()->run_event('rmcommon.code.decode',$text);
 
 		return $text;
@@ -427,7 +427,7 @@ class TextCleaner
     *
     * @return	string
 	*/
-	function stripslashes($text)
+	static function stripslashes($text)
 	{
 		if (get_magic_quotes_gpc()) {
 			$text = stripslashes($text);
@@ -447,28 +447,28 @@ class TextCleaner
 		if ( 0 === strlen( $string ) ) {
 			return '';
 		}
-		
+
 		if ( !preg_match( '/[&<>"\']/', $string ) ) {
 			return $string;
 		}
-		
+
 		if ( empty( $quote_style ) ) {
 			$quote_style = ENT_NOQUOTES;
 		} elseif ( !in_array( $quote_style, array( 0, 2, 3, 'single', 'double' ), true ) ) {
 			$quote_style = ENT_QUOTES;
 		}
-		
+
 		if ( in_array( $charset, array( 'utf8', 'utf-8', 'UTF8' ) ) ) {
 			$charset = 'UTF-8';
 		}
-		
+
 		if ( $quote_style === 'double' ) {
 			$quote_style = ENT_COMPAT;
 			$_quote_style = ENT_COMPAT;
 		} elseif ( $quote_style === 'single' ) {
 			$quote_style = ENT_NOQUOTES;
 		}
-		
+
 		$string = @htmlspecialchars( $string, $quote_style, $charset );
 
 		//return preg_replace("/&amp;/i", '&', htmlspecialchars($text, ENT_QUOTES));
@@ -491,13 +491,13 @@ class TextCleaner
 		if ( strpos( $string, '&' ) === false ) {
 			return $string;
 		}
-        
+
         if ( empty( $quote_style ) ) {
             $quote_style = ENT_NOQUOTES;
         } elseif ( !in_array( $quote_style, array( 0, 2, 3, 'single', 'double' ), true ) ) {
             $quote_style = ENT_QUOTES;
         }
-        
+
         // More complete than get_html_translation_table( HTML_SPECIALCHARS )
         $single = array( '&#039;'  => '\'', '&#x27;' => '\'' );
         $single_preg = array( '/&#0*39;/'  => '&#039;', '/&#x0*27;/i' => '&#x27;' );
@@ -505,7 +505,7 @@ class TextCleaner
         $double_preg = array( '/&#0*34;/'  => '&#034;', '/&#x0*22;/i' => '&#x22;' );
         $others = array( '&lt;'   => '<', '&#060;'  => '<', '&gt;'   => '>', '&#062;'  => '>', '&amp;'  => '&', '&#038;'  => '&', '&#x26;' => '&' );
         $others_preg = array( '/&#0*60;/'  => '&#060;', '/&#0*62;/'  => '&#062;', '/&#0*38;/'  => '&#038;', '/&#x0*26;/i' => '&#x26;' );
-        
+
         if ( $quote_style === ENT_QUOTES ) {
             $translation = array_merge( $single, $double, $others );
             $translation_preg = array_merge( $single_preg, $double_preg, $others_preg );
@@ -519,12 +519,12 @@ class TextCleaner
             $translation = $others;
             $translation_preg = $others_preg;
         }
-        
+
         $string = preg_replace( array_keys( $translation_preg ), array_values( $translation_preg ), $string );
-		
+
 		return strtr( $string, $translation );
 	}
-	
+
 	/**
 	* Replaces double line-breaks with paragraph elements.
 	*
@@ -534,7 +534,7 @@ class TextCleaner
 	* or 'false'.
 	*
 	* Taked from Wordpress
-	* 
+	*
 	* @license GPL 2
 	* @param string $string The text which has to be formatted.
  	* @param int|bool $br Optional. If set, this will convert all remaining line-breaks after paragraphing. Default true.
@@ -579,13 +579,13 @@ class TextCleaner
 			$string = preg_replace_callback('!(<pre[^>]*>)(.*?)</pre>!is', 'TextCleaner::clean_pre', $string );
 		//$string = preg_replace( "|\n</p>$|", '</p>', $string );
 		//$string = preg_replace('/<p>\s*?(' . get_shortcode_regex() . ')\s*<\/p>/s', '$1', $string); // don't auto-p wrap shortcodes that stand alone
-		
+
 		return $string;
 	}
 
 	/**
 	 * Filters textarea form data in DB for display
-	 * 
+	 *
 	 * based on Xoops displayTarea
 	 *
 	 * @param   string  $text
@@ -594,17 +594,17 @@ class TextCleaner
 	 * @return  string
 	 **/
 	function to_display($text, $dbr = true, $clean_tags = true, $paragraph = true){
-		
+
         $rmc_config = empty($params) ? RMSettings::cu_settings() : $params;
-		
+
 		$original_text = $text;
 		if ($rmc_config->dohtml != 1){
 			$text = $this->specialchars($text);
         }
-		
+
 		// Convert [code] tag
 		$text = $this->codePreConv($text, $rmc_config->doxcode && !defined('XOOPS_CPFUNC_LOADED'));
-		
+
 		if ($rmc_config->dosmileys && !defined('XOOPS_CPFUNC_LOADED'))
 			$text = $this->smiley($text);
 
@@ -615,7 +615,7 @@ class TextCleaner
 		// Replace breaklines
 		if ($rmc_config->dobr)
 			$text = $this->nl2Br($text);
-		
+
         if($clean_tags) $text = $this->clean_disabled_tags($text);
 		$text = $this->make_clickable($text);
 		$text = $this->codeConv($text, $rmc_config->doxcode);	// Ryuji_edit(2003-11-18)
@@ -630,14 +630,14 @@ class TextCleaner
 		// Before to send the formatted string we send it to interceptor methods
 		return RMEvents::get()->run_event('rmcommon.text.todisplay', $text, $original_text);
 	}
-	
+
 	function clean_disabled_tags($text){
-		
+
 		$this->disable_tags = RMEvents::get()->run_event('rmcommon.more.disabled.tags', $this->disable_tags);
-		
+
 		$text = preg_replace_callback($this->disable_tags,"preg_striptags",$text);
 		return $text;
-		
+
 	}
 
 	/**
@@ -654,12 +654,12 @@ class TextCleaner
         }, $text);
 		return $text;
 	}
-	
+
 	function codeConv($text, $exmcode = 1){
-		
+
 		if ($exmcode==0)
 			return $text;
-		
+
 		$patterns = "/\[code([^\]]*?)\](.*)\[\/code\]/sU";
 		/*$replacements = "'<div class=\"xoopsCode\"><code>'.\$this->call_code_modifiers(\$this->specialchars(str_replace('\\\"', '\"', base64_decode('$2'))), '$1').'</code></div>'";
 		$text =  preg_replace($patterns, $replacements, $text);*/
@@ -669,10 +669,10 @@ class TextCleaner
         }, $text);
 		return $text;
 	}
-	
+
 	/**
 	* This function is only a holder for event exmevent_format_code
-	* 
+	*
 	* @param string Code to format
 	* @param string Language name
 	* @return srtring
@@ -681,7 +681,7 @@ class TextCleaner
 		// Event to call methods thatr can handle code to display (eg. highlighters)
 		return RMEvents::get()->run_event('rmcommon.format.code', $code, $lang);
 	}
-	
+
 	/**
 	* Accepts matches array from preg_replace_callback in wpautop() or a string.
 	*
@@ -705,64 +705,64 @@ class TextCleaner
 
 		return $text;
 	}
-	
+
 	/**
 	* Encrypt a string
-	* 
+	*
 	* @param string Text to crypt
 	* @param bool Apply base64_encode?
 	* @return string
 	*/
 	public function encrypt($string, $encode64 = true){
-		
+
 		$rmc_config = RMSettings::cu_settings();
 		$crypt = new Crypt(Crypt::MODE_HEX, $rmc_config->secretkey);
 		$string = $crypt->encrypt($string);
 		//if ($encode64) $string = base64_encode($string);
 		return $string;
-		
+
 	}
-	
+
 	/**
 	* Decrypt a string
-	* 
+	*
 	* @param strign Text to decrypt
 	* @param bool Apply base64_decode? default true
 	*/
-	public function decrypt($string, $encode64 = true){
-		
+	public static function decrypt($string, $encode64 = true){
+
 		$rmc_config = RMSettings::cu_settings();
-		
+
 		$crypt = new Crypt(Crypt::MODE_HEX, $rmc_config->secretkey);
 		$string = $crypt->decrypt($string);
-		
+
 		return $string;
-		
+
 	}
-    
+
     /**
-     * Clean an string by deleting all blank spaces and other 
+     * Clean an string by deleting all blank spaces and other
      * chars
      */
-    public function sweetstring($value, $lower = true) {
-        // Tranformamos todo a minusculas        
+    public static function sweetstring($value, $lower = true) {
+        // Tranformamos todo a minusculas
         $rtn = $lower ? strtolower(utf8_decode($value)) : $value;
-        
+
         //Rememplazamos caracteres especiales latinos
-        $find = array('á', 'é', 'í', 'ó', 'ú', 'ñ');        
-        $repl = array('a', 'e', 'i', 'o', 'u', 'n');        
+        $find = array('á', 'é', 'í', 'ó', 'ú', 'ñ');
+        $repl = array('a', 'e', 'i', 'o', 'u', 'n');
         $rtn = str_replace ($find, $repl, utf8_encode($rtn));
 
-        // Añadimos los guiones        
+        // Añadimos los guiones
         $find = array(' ', '&', '\r\n', '\n', '+');
         $rtn = str_replace ($find, '-', $rtn);
-        
-        // Eliminamos y Reemplazamos demás caracteres especiales        
-        $find = array('/[^a-zA-Z0-9\-<>_]/', '/[\-]+/', '/<[^>]*>/');        
-        $repl = array('', '-', '');        
+
+        // Eliminamos y Reemplazamos demás caracteres especiales
+        $find = array('/[^a-zA-Z0-9\-<>_]/', '/[\-]+/', '/<[^>]*>/');
+        $repl = array('', '-', '');
         $url = preg_replace ($find, $repl, $rtn);
         return $url;
-        
+
     }
 
 }

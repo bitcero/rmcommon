@@ -14,11 +14,11 @@ XoopsLogger::getInstance()->renderingEnabled = false;
 
 function send_message($message){
     global $xoopsSecurity;
-    
+
     echo $message;
     echo '<input type="hidden" id="ret-token" value="'.$xoopsSecurity->createToken().'" />';
     die();
-    
+
 }
 
 $category = RMHttpRequest::post('category', 'integer', 0);
@@ -36,13 +36,13 @@ $target = RMHttpRequest::request( 'target', 'string', '' );
 $editor = RMHttpRequest::request( 'editor', 'string', '' );
 $container = RMHttpRequest::request( 'idcontainer', 'string', '' );
 
-if ($action==''){
-	
-	RMTemplate::get()->add_script('jquery.min.js', 'rmcommon', array('directory' => 'include'));
+if ($action=='') {
+
+    RMTemplate::get()->add_script('jquery.min.js', 'rmcommon', array('directory' => 'include'));
     RMTemplate::get()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
     RMTemplate::get()->add_script('popup-images-manager.js', 'rmcommon' );
-	
-    if (!$cat->isNew()){
+
+    if (!$cat->isNew()) {
         $uploader = new RMFlashUploader('files-container', 'upload.php');
         $uploader->add_setting('scriptData', array(
             'action'=>'upload',
@@ -64,13 +64,14 @@ if ($action==''){
         }");
         $uploader->add_setting('onUploadSuccess',"function(file, resp, data){
             eval('ret = '+resp);
-            if (ret.error){
+            if (ret.error) {
                 \$('#upload-errors').append('<span class=\"failed\"><strong>'+file.name+'</strong>: '+ret.message+'</span>');
             } else {
                 total++;
                 ids[total-1] = ret.id;
                 \$('#upload-errors').append('<span class=\"done\"><strong>'+file.name+'</strong>: ".__('Uploaded successfully!','rmcommon')."</span>');
             }
+
             return true;
         }");
         $uploader->add_setting('onQueueComplete', "function(event, data){
@@ -82,28 +83,27 @@ if ($action==''){
                 \$('#resizer-bar').show('slow');
                 \$('#resizer-bar').effect('highlight',{},1000);
                 \$('#gen-thumbnails').show();
-                    
+
                 var increments = 1/total*100;
                 url = '".RMCURL."/images.php".($target!=''?"?taget=$target&amp;id=$container":'')."';
-                    
+
                 params = '".TextCleaner::getInstance()->encrypt($xoopsUser->uid().'|'.RMCURL.'/images.php'.'|'.$xoopsSecurity->createToken(), true)."';
                 resize_image(params);
-                    
+
         }");
-        
+
         RMTemplate::get()->add_head($uploader->render());
     }
 
     $categories = RMFunctions::load_images_categories("WHERE status='open' ORDER BY id_cat DESC", true);
 
-
     RMTemplate::get()->add_style('bootstrap.min.css', 'rmcommon');
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
     RMTemplate::get()->add_style('popup-images-manager.css', 'rmcommon');
-    if($type=='tiny' && $target!='container'){
+    if ($type=='tiny' && $target!='container') {
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce_popup.js');
-    } elseif($target!='container'&&$type!='external') {
+    } elseif ($target!='container'&&$type!='external') {
         RMTemplate::get()->add_head_script('var exmPopup = window.parent.exmCode'.ucfirst($container).';');
     }
 
@@ -111,28 +111,28 @@ if ($action==''){
 
     include RMTemplate::get()->get_template('rmc-editor-image.php', 'module', 'rmcommon');
 
-} elseif($action=='load-images'){
+} elseif ($action=='load-images') {
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
-    if (!$xoopsSecurity->check()){
+    if (!$xoopsSecurity->check()) {
         _e('Sorry, unauthorized operation!','rmcommon');
         echo '<script type="text/javascript">window.location.href="tiny-images.php";</script>';
         die();
     }
-    
+
     // Check if some category exists
     $catnum = RMFunctions::get_num_records("mod_rmcommon_images_categories");
-    if ($catnum<=0){
+    if ($catnum<=0) {
         send_message(__('There are not categories yet! Please create one in order to add images.','rmcommon'));
         die();
     }
-    
-    if ($cat->isNew()){
+
+    if ($cat->isNew()) {
         send_message(__('You must select a category before','rmcommon'));
         die();
     }
-    
+
     $sql = "SELECT COUNT(*) FROM ".$db->prefix("mod_rmcommon_images");
     if (!$cat->isNew()) $sql .= " WHERE cat='".$cat->id()."'";
     /**
@@ -142,15 +142,15 @@ if ($action==''){
     $page = $page<=0 ? $page = 1 : $page;
     $limit = 35;
     list($num) = $db->fetchRow($db->query($sql));
-    
+
     $tpages = ceil($num / $limit);
     $page = $page > $tpages ? $tpages : $page;
 
     $start = $num<=0 ? 0 : ($page - 1) * $limit;
-    
+
     $nav = new RMPageNav($num, $limit, $page, 5);
     $nav->target_url('#" onclick="show_library({PAGE_NUM}); return false;');
-    
+
     // Get categories
     $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_images")." ".(!$cat->isNew() ? "WHERE cat='".$cat->id()."'" : '')." ORDER BY id_img DESC LIMIT $start,$limit";
 
@@ -158,32 +158,30 @@ if ($action==''){
     $images = array();
     $categories = array();
     $authors = array();
-    
+
     $category = $cat;
     $sizes = $category->getVar('sizes');
     $current_size = array();
 
-    foreach ($sizes as $size){
-        if (empty($current_size)){
+    foreach ($sizes as $size) {
+        if (empty($current_size)) {
             $current_size = $size;
         } else {
-            if ($current_size['width']>=$size['width'] && $size['width']>0){
+            if ($current_size['width']>=$size['width'] && $size['width']>0) {
                 $current_size = $size;
             }
         }
     }
 
-
-
-    while($row = $db->fetchArray($result)){
+    while ($row = $db->fetchArray($result)) {
         $img = new RMImage();
         $img->assignVars($row);
 
         $fd = pathinfo($img->getVar('file'));
         $filesurl = XOOPS_UPLOAD_URL.'/'.date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date'));
-        
+
         $thumb = date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/sizes/'.$fd['filename'].'-'.$current_size['name'].'.'.$fd['extension'];
-        if(!file_exists(XOOPS_UPLOAD_PATH.'/'.$thumb)){
+        if (!file_exists(XOOPS_UPLOAD_PATH.'/'.$thumb)) {
             $thumb = date('Y',$img->getVar('date')).'/'.date('m',$img->getVar('date')).'/'.$fd['filename'].'.'.$fd['extension'];
         }
 
@@ -197,8 +195,8 @@ if ($action==''){
     }
 
     include RMTemplate::get()->get_template('rmc-images-list-editor.php','module','rmcommon');
-    
-} elseif ( $action == 'image-details' ){
+
+} elseif ($action == 'image-details') {
 
     function images_send_json( $data ){
 
@@ -210,7 +208,7 @@ if ($action==''){
 
     }
 
-    if (!$xoopsSecurity->check()){
+    if (!$xoopsSecurity->check()) {
         images_send_json(array(
             'message'   => _e('Sorry, unauthorized operation!','rmcommon'),
             'error'     => 1
@@ -224,7 +222,7 @@ if ($action==''){
             'error'     => 1,
             'token'     => $xoopsSecurity->createToken()
         ) );
-    
+
     $image = new RMImage( $id );
     if ( $image->isNew() )
         images_send_json( array(
@@ -240,7 +238,7 @@ if ($action==''){
 
     $category_sizes = $cat->getVar('sizes');
     $sizes = array();
-    foreach($category_sizes as $i => $size){
+    foreach ($category_sizes as $i => $size) {
         if($size['width']<=0) continue;
         $tfile = $image->get_files_path() . '/sizes/' . $original['filename'].'-'.$size['name'].'.'.$original['extension'];
         if(!is_file($tfile)) continue;
@@ -281,7 +279,7 @@ if ($action==''){
             'url'   => XOOPS_URL . '/userinfo.php?uid=' . $author->email
         ),
         'medium'    => $image->get_by_size( 300 ),
-        'url'		=> $image->get_files_url(),
+        'url'        => $image->get_files_url(),
         'original'  => array(
             'file'      => $original['basename'],
             'url'       => $image->getOriginal(),

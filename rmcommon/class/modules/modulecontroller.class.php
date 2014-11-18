@@ -210,7 +210,7 @@ abstract class RMModuleController {
         global $cuSettings;
 
         if($controller=='')
-            return;
+            return null;
 
         $url = $this->url . '/' . $controller . '/';
         $url .= $action != '' ? $action . '/' : '';
@@ -245,6 +245,7 @@ abstract class RMModuleController {
             XOOPS_URL . '/user.php',
             RMMSG_INFO
         );
+        return null;
     }
 
     abstract public function get_url();

@@ -66,4 +66,3 @@ class phMagick_text{
 }
 
 
-?>

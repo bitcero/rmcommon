@@ -13,9 +13,9 @@ class Twop6Functions
      * Get the menu for the current module
      */
     public function currentModuleMenu($m=''){
-        
+
         global $xoopsModule, $xoopsUser, $rmTpl;
-        
+
         if(!is_a($xoopsModule, 'XoopsModule')){
             return false;
         } else {
@@ -23,9 +23,9 @@ class Twop6Functions
         }
         // Check user
         if(!is_a($xoopsUser, 'XoopsUser')) return false;
-        
+
         if(!$xoopsUser->isAdmin($mod->mid())) return false;
-        
+
         $amenu = $mod->getAdminMenu();
         $amenu = RMEvents::get()->run_event('rmcommon.current.module.menu', $amenu);
         if ($amenu){
@@ -53,11 +53,12 @@ class Twop6Functions
                 //$rmTpl->add_tool($menu['title'], $menu['link'], isset($menu['icon']) ? $menu['icon'] : '');
             }
         }
-        
+
         if($mod->hasconfig()){
             $rmTpl->add_menu(__('Options','rmcommon'), $mod->getInfo('rmnative') ? RMCURL .'/settings.php?mod='.$mod->mid().'&amp;action=configure&amp;popup=1' : XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid(), 'option','');
         }
-        
+
+        return null;
     }
 
     static function is_absolute_url( $url ){
@@ -84,14 +85,14 @@ class Twop6Functions
 
     }
 
-    
+
     /**
      * Get the menu for a specified module
      */
     public function moduleMenu($m){
-        
+
         global $xoopsModule, $xoopsUser;
-        
+
         if(!is_a($xoopsModule, 'XoopsModule')){
             $mod = RMModules::load_module($m);
         } else {
@@ -100,21 +101,21 @@ class Twop6Functions
             else
                 $mod = RMModules::load_module($m);
         }
-        
+
         if(!is_a($mod, 'XoopsModule')) return false;
-        
+
         // Check user
         if(!is_a($xoopsUser, 'XoopsUser')) return false;
-        
+
         if(!$xoopsUser->isAdmin($mod->mid())) return false;
-        
+
         $amenu = $mod->getAdminMenu();
 
         $amenu = RMEvents::get()->run_event($mod->dirname().'.module.menu', $amenu);
         if(empty($amenu)) return false;
-        
+
         $return_menu = array();
-        
+
         foreach ($amenu as $menu){
             $return_menu[] = array(
                 'title' => $menu['title'],
@@ -124,7 +125,7 @@ class Twop6Functions
                 'options' => isset($menu['options']) ? self::moduleSubmenu($menu['options'], $mod) : ($m=='system' && $menu['title']==_AM_SYSTEM_PREF ? self::systemPreferences() : null)
             );
         }
-        
+
         if($mod->hasconfig()){
             $return_menu[] = array( 'divider' => 1 ); // Divisor for options
             $return_menu[] = array(
@@ -134,11 +135,11 @@ class Twop6Functions
                 'type' => 1
             );
         }
-        
+
         return $return_menu;
-        
+
     }
-    
+
     /**
      * Prepare menu options
      */
@@ -150,9 +151,9 @@ class Twop6Functions
             if(isset($menu['divider']) || $menu == 'divider' ) continue;
             $submenu[$i]['link'] = preg_match("/^(http:\/\/|https:\/\/|ftp:\/\/|mailto:)/i", $menu['link']) ? $menu['link'] : XOOPS_URL.'/modules/'.$mod->getVar('dirname','n').'/'.$menu['link'];
         }
-        
+
         return $submenu;
-        
+
     }
 
     /**
@@ -222,15 +223,16 @@ class Twop6Functions
                 return $title;
         }
 
+        return null;
     }
 
     /**
      * Get the module icon
      */
     public function moduleIcon($module, $size = '16'){
-        
+
         global $xoopsModule;
-        
+
         $available = array(
             'mylinks'           => 'fa fa-link',
             'news'              => 'xicon-consulting',
@@ -251,32 +253,32 @@ class Twop6Functions
             'xoopspartners'     => 'xicon-me',
             'system'            => 'xicon-gear'
         );
-        
+
         if(!is_a($xoopsModule, 'XoopsModule')) return false;
-        
+
         if($xoopsModule->dirname()!=$module){
             $mod = RMModules::load_module($module);
         } else {
             $mod = $xoopsModule;
         }
-        
+
         if(isset($available[$mod->dirname()]))
             return '<i class="xo-icon '.$available[$mod->dirname()].'"></i> ';
-        
+
         $icon = $mod->getInfo('icon'.$size);
         $path = XOOPS_ROOT_PATH.'/modules/'.$mod->dirname().'/'.$icon;
         if(!is_file($path)){
             $path = TWOP6_PATH.'/images/modules/'.$mod->dirname().'-'.$size.'.png';
-            
+
             if(!is_file($path))
                 $path = TWOP6_PATH.'/images/module.png';
-            
+
         }
-        
+
         $icon = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path);
-                
+
         return '<i class="xo-icon" style="background-image: url('.$icon.');"></i> ';
-        
+
     }
 
     /**
@@ -293,13 +295,13 @@ class Twop6Functions
 
         }
     }
-    
+
     /**
     * Generate menu icon
     */
     public function getIcon($menu, $noaccept = false, $class = ''){
         global $xoopsModule;
-        
+
         // Icon equivalences
 	    if($noaccept){
 		    $accepted = array('preferences'   => 'fa fa-wrench');
@@ -328,16 +330,16 @@ class Twop6Functions
 	            'newuser'       => 'xicon-plus'
 	        );
 	    }
-        
+
         if(isset($menu['type']) || (isset($menu['icon']) && $menu['icon']=='option'))
             return '<span class="fa fa-wrench"></span> ';
-        
+
         /*if (isset($menu['location']) && isset($accepted[$menu['location']]))
             return '<i class="xo-icon '.$accepted[$menu['location']].'"></i> ';
-            
+
         if(isset($menu['selected']) && isset($accepted[$menu['selected']]))
             return '<i class="xo-icon '.$accepted[$menu['selected']].'"></i> ';*/
-        
+
         $modurl = XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/';
 
         if(isset($menu['icon']) && $menu['icon']!=''){
@@ -346,7 +348,7 @@ class Twop6Functions
             else
                 return '<span class="xo-icon ' . $class . '" style="background-image: url('.$menu['icon'].');"></span> ';
         }
-        
+
         // Check system menu
         $matches = array();
         preg_match("/.*admin\.php\?fct=(.*)/", $menu['link'], $matches);
@@ -355,7 +357,7 @@ class Twop6Functions
             return '<span class="'.$accepted[$matches[1]]. ' ' . $class . '"></span> ';
 
         return '<span></span>';
-        
+
     }
 
 	public function submenuIcon($menu, $dir=''){
@@ -433,5 +435,5 @@ class Twop6Functions
         return '<span class="xicon" style="background-image: url(' . $icon . ');"></span>';
 
     }
-    
+
 }

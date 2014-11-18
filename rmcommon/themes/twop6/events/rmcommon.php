@@ -8,7 +8,7 @@ class Twop6RmcommonPreload
 
         if ($w == '') return;
 
-        if ( $w == 'colortest' ){
+        if ($w == 'colortest') {
 
             include_once XOOPS_ROOT_PATH .'/include/cp_functions.php';
 
@@ -20,7 +20,7 @@ class Twop6RmcommonPreload
             die();
         }
 
-        if ( $w == 'about' ){
+        if ($w == 'about') {
 
             include_once XOOPS_ROOT_PATH .'/include/cp_functions.php';
 

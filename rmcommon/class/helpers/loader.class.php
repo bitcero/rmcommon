@@ -24,5 +24,6 @@ class RMLoader
 
         include_once $dir . '/' . $class . '.class.php';
 
+    return null;
     }
 }

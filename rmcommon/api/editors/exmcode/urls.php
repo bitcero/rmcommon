@@ -4,7 +4,7 @@ $xoopsOption["nocommon"] = 1;
 
 include_once('../../../../../mainfile.php');
 
-foreach($_GET as $k => $v){
+foreach ($_GET as $k => $v) {
     $$k = $v;
 }
 
@@ -12,7 +12,7 @@ $path = pathinfo(str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $url));
 $base = str_replace($path['filename'].'.'.$path['extension'], '', $url);
 $base = str_replace('tpls/', '', $base);
 $path['dirname'] = str_replace('/tpls', '', $path['dirname']);
-if(is_file($path['dirname'].'/lang/'.$lang.'.php')){
+if (is_file($path['dirname'].'/lang/'.$lang.'.php')) {
     include $path['dirname'].'/lang/'.$lang.'.php';
 } else {
     @include $path['dirname'].'/lang/en.php';

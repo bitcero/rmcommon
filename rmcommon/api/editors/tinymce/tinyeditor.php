@@ -15,15 +15,15 @@
 class TinyEditor
 {
     public $configuration = array();
-    
-    function getInstance(){
+
+    static function getInstance(){
         static $instance;
         if (!isset($instance)) {
             $instance = new TinyEditor();
         }
         return $instance;
     }
-    
+
     // Configuración
     public function add_config($names,$values, $replace=false){
     	if (is_array($names) && is_array($values)){
@@ -42,23 +42,23 @@ class TinyEditor
 	        else
 	        	$this->configuration[$names] .= isset($this->configuration[$names]) ? ",$values" : $values;
 	    }
-	
+
     }
-    
+
     public function remove_config($name){
         if (empty($this->configuration)) return;
-        
+
         unset($this->configuration[$name]);
-        
+
     }
-    
+
     public function get_js(){
-        
+
         $rtn = 'tinyMCE.init({';
                     $configs = ''; $i = 0;
                     foreach ($this->configuration as $name => $value){
                         $i++;
-                        $configs .= $name.' : "'.$value.'"'.($i>count($this->configuration) ? '' : ',')."\n"; 
+                        $configs .= $name.' : "'.$value.'"'.($i>count($this->configuration) ? '' : ',')."\n";
                     }
                     $rtn .= $configs . '
 					setup: function(ed){
@@ -71,7 +71,7 @@ class TinyEditor
 				        switchEditors.go("'.$this->configuration['elements'].'", "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
 					}});
 				';
-        
+
         return $rtn;
     }
 }

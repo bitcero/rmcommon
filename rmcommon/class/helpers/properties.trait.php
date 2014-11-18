@@ -24,6 +24,7 @@ trait RMProperties
         if ( isset( self::$properties[$name] ) )
             return self::$properties[$name];
 
+        return null;
     }
 
     public function __set( $name, $value ){
@@ -38,5 +39,6 @@ trait RMProperties
 
         self::$properties[$name] = $value;
 
+        return null;
     }
 }

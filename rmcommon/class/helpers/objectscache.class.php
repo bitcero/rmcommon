@@ -32,7 +32,7 @@ class ObjectsCache
      * Verify if an object is cached. If yes, can return the value or simply bool true
      * @param $module <p>Directory of module.</p>
      * @param $key <p>Identifier for object.</p>
-     * @param string $return <p>Kind of value that funtion will return: 'value' or ''.</p>
+     * @param  string      $return <p>Kind of value that funtion will return: 'value' or ''.</p>
      * @return object|bool
      */
     public function cached( $module, $key, $return = 'value' ){

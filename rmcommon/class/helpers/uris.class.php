@@ -48,7 +48,7 @@ class RMUris
         global $cuSettings;
 
         if($module=='')
-            return;
+            return null;
 
         $url = XOOPS_URL;
 

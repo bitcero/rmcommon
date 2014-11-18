@@ -30,7 +30,7 @@ function show_configurable_items(){
     $mh = xoops_gethandler( 'module' );
     $modules = array();
 
-    while( $row = $db->fetchArray( $result ) ){
+    while ( $row = $db->fetchArray( $result ) ) {
 
         $mod = $mh->get( $row['mid'] );
         $modules[] = array(
@@ -59,7 +59,7 @@ function show_module_preferences(){
 
     $is_popup = $quick == 1 && $token != '';
 
-    if ( $is_popup ){
+    if ($is_popup) {
         $ajax->prepare_ajax_response();
         if ( !$xoopsSecurity->validateToken(false, true, 'CUTOKEN') )
             $ajax->ajax_response(
@@ -91,8 +91,6 @@ function show_module_preferences(){
             RMMSG_INFO
         );
 
-
-
     /*
     Cargamos los valores y los datos para formar los campos
     */
@@ -108,7 +106,7 @@ function show_module_preferences(){
             )
         );
     else{
-        foreach($settings_categories as $category => $caption){
+        foreach ($settings_categories as $category => $caption) {
             $categories[$category] = array('caption' => $caption);
         }
     }
@@ -116,7 +114,7 @@ function show_module_preferences(){
     unset($settings_categories);
 
     $fields = array(); // Container for all fields and values
-    foreach( $configs as $option ){
+    foreach ($configs as $option) {
 
         $id = ucfirst($module->getVar('dirname')).'['.$option['name'].']';
         $name = $option['name'];
@@ -158,8 +156,7 @@ function show_module_preferences(){
 
     $rmTpl->assign( 'xoops_pagetitle', sprintf( __('%s Settings', 'rmcommon'), $module->getVar('name') ) );
 
-
-    if ( !$is_popup ){
+    if (!$is_popup) {
 
         $rmTpl->header();
         require $rmTpl->get_template('rmc-settings-form.php', 'module', 'rmcommon');
@@ -194,7 +191,7 @@ function save_module_settings(){
     $mod = RMHttpRequest::post( 'mod', 'string', '' );
     $via_ajax = RMHttpRequest::post( 'via_ajax', 'integer', 0 );
 
-    if ($via_ajax){
+    if ($via_ajax) {
         $ajax = new AjaxResponse();
         $ajax->prepare_ajax_response();
     }
@@ -202,7 +199,7 @@ function save_module_settings(){
     if ( $mod == '' )
         RMUris::redirect_with_message( __('A module has not been specified!', 'rmcommon' ), 'settings.php', RMMSG_ERROR );
 
-    if ( !$xoopsSecurity->check() ){
+    if ( !$xoopsSecurity->check() ) {
         if ($via_ajax)
             $ajax->ajax_response(
                 __('Session token expired. Please try again.', 'rmcommon'), 1, 0
@@ -212,7 +209,7 @@ function save_module_settings(){
     }
 
     $module = RMModules::load_module( $mod );
-    if ( !$module ){
+    if (!$module) {
         if ($via_ajax)
             $ajax->ajax_response(
                 __('The specified module does not exists.', 'rmcommon'), 1, 1
@@ -221,13 +218,12 @@ function save_module_settings(){
             RMUris::redirect_with_message( __('The specified module does not exists.', 'rmcommon'), 'settings.php', RMMSG_ERROR );
     }
 
-
     $current_settings = (array) RMSettings::module_settings( $module->getVar('dirname') );
     $new_settings = RMHttpRequest::post( ucfirst( $module->getVar('dirname') ), 'array', array() );
 
     $configs = $module->getInfo( 'config' );
     $fields = array(); // Container for all fields and values
-    foreach( $configs as $option ){
+    foreach ($configs as $option) {
 
         $id = $option['name'];
 
@@ -264,7 +260,7 @@ function save_module_settings(){
      * First for all, remove unused items
      */
     $keys = array_keys( $to_delete );
-    if ( !empty( $keys ) ){
+    if ( !empty( $keys ) ) {
         $sql = "DELETE FROM " . $xoopsDB->prefix("config") . " WHERE conf_modid = " . $module->mid() . " AND (conf_name = '" . implode("' OR conf_name='", $keys) . "')";
         if ( !$xoopsDB->queryF( $sql ) )
             $errors .= $xoopsDB->error() . '<br>';
@@ -273,12 +269,12 @@ function save_module_settings(){
     /**
      * Save existing items
      */
-    if ( !empty( $to_save ) ){
+    if ( !empty( $to_save ) ) {
 
-        foreach( $to_save as $name => $value ){
+        foreach ($to_save as $name => $value) {
 
             $item = new Rmcommon_Config_Item( $name, $module->mid() );
-            if ( isset( $fields[$name] ) ){
+            if ( isset( $fields[$name] ) ) {
                 $item->setVar( 'conf_valuetype', $fields[$name]->type );
                 $item->setVar( 'conf_title', $fields[$name]->caption );
                 $item->setVar( 'conf_desc', $fields[$name]->description );
@@ -294,12 +290,12 @@ function save_module_settings(){
     /**
      * Add new items
      */
-    if ( !empty( $to_add ) ){
+    if ( !empty( $to_add ) ) {
 
-        foreach( $to_add as $name => $value ){
+        foreach ($to_add as $name => $value) {
 
             $item = new Rmcommon_Config_Item( $name, $module->mid() );
-            if ( isset( $fields[$name] ) ){
+            if ( isset( $fields[$name] ) ) {
                 $item->setVar( 'conf_modid', $module->mid() );
                 $item->setVar( 'conf_name', $name );
                 $item->setVar( 'conf_valuetype', $fields[$name]->type );
@@ -335,10 +331,9 @@ function save_module_settings(){
 
 }
 
-
 $action = RMHttpRequest::request( 'action', 'string', '' );
 
-switch( $action ){
+switch ($action) {
 
     /**
      * Show options for a specific element

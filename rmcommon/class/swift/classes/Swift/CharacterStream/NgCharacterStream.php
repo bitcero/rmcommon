@@ -53,49 +53,49 @@ Class Swift_CharacterStream_NgCharacterStream
    * @access private
    */
   private $_charset;
-  
+
   /**
    * The datas stored as is
    *
    * @var string
    */
   private $_datas = "";
-  
+
   /**
    * Number of bytes in the stream
    *
    * @var int
    */
   private $_datasSize = 0;
-  
+
   /**
    * Map
    *
    * @var mixed
    */
   private $_map;
-  
+
   /**
    * Map Type
    *
    * @var int
    */
   private $_mapType = 0;
-  
+
   /**
    * Number of characters in the stream
    *
    * @var int
    */
   private $_charCount = 0;
-  
+
   /**
    * Position in the stream
    *
    * @var unknown_type
    */
   private $_currentPos = 0;
-  
+
   /**
    * The constructor
    *
@@ -108,7 +108,7 @@ Class Swift_CharacterStream_NgCharacterStream
     $this->setCharacterReaderFactory($factory);
     $this->setCharacterSet($charset);
   }
-  
+
   /* -- Changing parameters of the stream -- */
 
   /**
@@ -119,7 +119,7 @@ Class Swift_CharacterStream_NgCharacterStream
   {
     $this->_charset = $charset;
     $this->_charReader = null;
-  	$this->_mapType = 0;
+    $this->_mapType = 0;
   }
 
   /**
@@ -138,13 +138,13 @@ Class Swift_CharacterStream_NgCharacterStream
    */
   public function flushContents()
   {
-  	$this->_datas = null;
-  	$this->_map = null;
-  	$this->_charCount = 0;
-  	$this->_currentPos = 0;
-  	$this->_datasSize = 0;
+    $this->_datas = null;
+    $this->_map = null;
+    $this->_charCount = 0;
+    $this->_currentPos = 0;
+    $this->_datasSize = 0;
   }
-  
+
   /**
    * @see Swift_CharacterStream::importByteStream()
    *
@@ -158,7 +158,7 @@ Class Swift_CharacterStream_NgCharacterStream
     while(false!==($read = $os->read($blocks)))
       $this->write($read);
   }
-  
+
   /**
    * @see Swift_CharacterStream::importString()
    *
@@ -169,7 +169,7 @@ Class Swift_CharacterStream_NgCharacterStream
     $this->flushContents();
     $this->write($string);
   }
-  
+
   /**
    * @see Swift_CharacterStream::read()
    *
@@ -178,16 +178,16 @@ Class Swift_CharacterStream_NgCharacterStream
    */
   public function read($length)
   {
-  	if ($this->_currentPos>=$this->_charCount)
-  	{
-  	  return false;
-  	}
-  	$ret=false;
-  	$length = ($this->_currentPos+$length > $this->_charCount)
-  	  ? $this->_charCount - $this->_currentPos
-  	  : $length;
-  	  switch ($this->_mapType)
-  	{
+    if ($this->_currentPos>=$this->_charCount)
+    {
+      return false;
+    }
+    $ret=false;
+    $length = ($this->_currentPos+$length > $this->_charCount)
+      ? $this->_charCount - $this->_currentPos
+      : $length;
+      switch ($this->_mapType)
+    {
       case Swift_CharacterReader::MAP_TYPE_FIXED_LEN:
         $len = $length*$this->_map;
         $ret = substr($this->_datas,
@@ -195,7 +195,7 @@ Class Swift_CharacterStream_NgCharacterStream
             $len);
         $this->_currentPos += $length;
         break;
-      
+
       case Swift_CharacterReader::MAP_TYPE_INVALID:
         $end = $this->_currentPos + $length;
         $end = $end > $this->_charCount
@@ -214,7 +214,7 @@ Class Swift_CharacterStream_NgCharacterStream
           }
         }
         break;
-      
+
       case Swift_CharacterReader::MAP_TYPE_POSITIONS:
         $end = $this->_currentPos + $length;
         $end = $end > $this->_charCount
@@ -230,18 +230,19 @@ Class Swift_CharacterStream_NgCharacterStream
         for (; $this->_currentPos < $end; ++$this->_currentPos)
         {
           if (isset($this->_map['i'][$this->_currentPos])) {
-          	$ret .= substr($this->_datas, $start, $to - $start).'?';
-          	$start = $this->_map['p'][$this->_currentPos];
+              $ret .= substr($this->_datas, $start, $to - $start).'?';
+              $start = $this->_map['p'][$this->_currentPos];
           } else {
-          	$to = $this->_map['p'][$this->_currentPos];
+              $to = $this->_map['p'][$this->_currentPos];
           }
         }
         $ret .= substr($this->_datas, $start, $to - $start);
         break;
-  	}
-  	return $ret;
+    }
+
+    return $ret;
   }
-  
+
   /**
    * @see Swift_CharacterStream::readBytes()
    *
@@ -251,14 +252,16 @@ Class Swift_CharacterStream_NgCharacterStream
   public function readBytes($length)
   {
     $read=$this->read($length);
-  	if ($read!==false)
-  	{
+    if ($read!==false)
+    {
       $ret = array_map('ord', str_split($read, 1));
+
       return $ret;
-  	}
-  	return false;
+    }
+
+    return false;
   }
-  
+
   /**
    * @see Swift_CharacterStream::setPointer()
    *
@@ -266,12 +269,12 @@ Class Swift_CharacterStream_NgCharacterStream
    */
   public function setPointer($charOffset)
   {
-  	if ($this->_charCount<$charOffset){
-  		$charOffset=$this->_charCount;
-  	}
-  	$this->_currentPos = $charOffset;
+    if ($this->_charCount<$charOffset) {
+        $charOffset=$this->_charCount;
+    }
+    $this->_currentPos = $charOffset;
   }
-  
+
   /**
    * @see Swift_CharacterStream::write()
    *
@@ -279,15 +282,15 @@ Class Swift_CharacterStream_NgCharacterStream
    */
   public function write($chars)
   {
-  	if (!isset($this->_charReader))
+    if (!isset($this->_charReader))
     {
       $this->_charReader = $this->_charReaderFactory->getReaderFor(
         $this->_charset);
       $this->_map = array();
       $this->_mapType = $this->_charReader->getMapType();
     }
-  	$ignored='';
-  	$this->_datas .= $chars;
+    $ignored='';
+    $this->_datas .= $chars;
     $this->_charCount += $this->_charReader->getCharPositions(substr($this->_datas, $this->_datasSize), $this->_datasSize, $this->_map, $ignored);
     if ($ignored!==false) {
       $this->_datasSize=strlen($this->_datas)-strlen($ignored);

@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <?php
-        
+
         !defined('RMCLOCATION') ? define('RMCLOCATION', '') : true;
         !defined('RMCSUBLOCATION') ? define('RMCSUBLOCATION', '') : true;
-        
-        foreach ($this->tpl_styles as $id => $style){
+
+        foreach ($this->tpl_styles as $id => $style) {
             $url = $style['url'];
             unset($style['url'], $style['footer'], $style['type']);
 
             $extra = '';
-            foreach($style as $name => $value){
+            foreach ($style as $name => $value) {
                 $extra .= ' ' . $name . '="' . $value . '"';
             }
             echo '<link id="'.$id.'" rel="stylesheet" type="text/css" href="'.$url.'"'.$extra.'>'."\n";
@@ -21,14 +21,14 @@
         $jquery_and_bootstrap = array();
         $scripts_all = '';
 
-        foreach ($this->tpl_scripts as $id => $script){
+        foreach ($this->tpl_scripts as $id => $script) {
             $type = $script['type'];
             $url = $script['url'];
 
-            if ( preg_match( "/jquery(\.min)?\.js|jquery-latest/i", $url ) ){
+            if ( preg_match( "/jquery(\.min)?\.js|jquery-latest/i", $url ) ) {
                 $jquery_and_bootstrap[0] = '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
                 continue;
-            }elseif ( preg_match( "/bootstrap(\.min)?\.js/i", $url ) ){
+            } elseif ( preg_match( "/bootstrap(\.min)?\.js/i", $url ) ) {
                 $jquery_and_bootstrap[1] = '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
                 continue;
             }
@@ -36,7 +36,7 @@
             unset($script['type'], $script['url'], $script['footer']);
 
             $extra = '';
-            foreach($script as $name => $value){
+            foreach ($script as $name => $value) {
                 $extra .= ' ' . $name . '="' . $value . '"';
             }
             $scripts_all .= '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
@@ -44,11 +44,11 @@
 
         echo implode( "", $jquery_and_bootstrap ) . $scripts_all;
         echo $this->head_scripts();
-        
-        foreach ($this->tpl_head as $head){
+
+        foreach ($this->tpl_head as $head) {
             echo $head."\n";
         }
-        
+
         include_once 'include/xoops_metas.php';
         ?>
         <title><?php if($this->get_var('xoops_pagetitle')!=''): ?><?php echo $this->get_var('xoops_pagetitle'); ?> - <?php endif; ?><?php echo isset($xoopsModule) ? $xoopsModule->getInfo('name').' - ' : ''; ?><?php echo $xoopsConfig['sitename']; ?></title>
@@ -74,7 +74,7 @@
             <div class="collapse navbar-collapse twop6-navbar-toolbar">
 
                     <ul class="nav navbar-nav">
-                        
+
                         <li class="dropdown<?php if($xoopsModule->dirname()=='rmcommon'): ?> active<?php endif; ?>">
                             <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <i class="xo-icon cu-icon"></i> <?php _e('Common Utilities','rmcommon'); ?>
@@ -173,7 +173,7 @@
                             </ul>
                         </li>
                         <?php endif; ?>
-                        
+
                         <li class="dropdown">
                             <a href="#" title="<?php _e('Modules','rmcommon'); ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                                 <span class="fa fa-th"></span>
@@ -339,7 +339,7 @@
             </div>
         </nav>
         <!-- End menu bar //-->
-        
+
         <!-- Toolbar with menus -->
 	       <div class="navbar navbar-fixed-top cu-titlebar" id="xo-toolbar">
 
@@ -357,13 +357,13 @@
                <div class="collapse navbar-collapse twop6-toolbar-toolbar">
 
 	                    <?php
-	                        if($xoopsModule->dirname()=='rmcommon')
-	                            $menus =& $rmcommon_menu;
-	                        elseif($xoopsModule->dirname()=='system')
-	                            $menus =& $system_menu;
-	                        else
-	                            $menus = $this->get_menus();
-	                    ?>
+                            if($xoopsModule->dirname()=='rmcommon')
+                                $menus =& $rmcommon_menu;
+                            elseif($xoopsModule->dirname()=='system')
+                                $menus =& $system_menu;
+                            else
+                                $menus = $this->get_menus();
+                        ?>
 	                    <ul class="nav navbar-nav">
 	                        <?php foreach($menus as $menu): ?>
                                 <?php if( isset($menu['divider'] ) ): ?>
@@ -451,7 +451,7 @@
         <?php endif; ?>
         <!-- End rmcommon toolbar //-->
 
-        
+
         <!-- Content -->
         <div class="container" id="xo-content">
             <!-- System messages -->
@@ -481,7 +481,7 @@
                     <?php endforeach; ?>
                 </aside>
                 <?php endif; ?>
-                
+
                 <div class="<?php echo $xoFunc->calculate_cols($left_widgets, $right_widgets); ?>">
                     <div id="xo-contents">
 
@@ -489,7 +489,7 @@
 
                     </div>
                 </div>
-                
+
                 <?php if($right_widgets): ?>
                 <aside class="col-md-3">
                     <?php foreach($right_widgets as $widget): ?>
@@ -511,7 +511,7 @@
             </div>
         </div>
         <!-- End content //-->
-        
+
         <!-- Footer -->
         <div class="container xo-footer">
             <hr>
@@ -531,7 +531,7 @@
             <hr>
         </div>
         <!-- End footer //-->
-        
+
         <?php if($xoopsConfig['debug_mode']==1): ?>
         <div class="container">
             <div class="well"><!--{xo-logger-output}--></div>

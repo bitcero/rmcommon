@@ -44,4 +44,3 @@ class phMagick_convert{
 		return $p->convert($p);
 	}
 }
-?>

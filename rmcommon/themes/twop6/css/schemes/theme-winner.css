@@ -24,10 +24,10 @@ a:hover{
 .xo-blackbar{
     background-color: #1b1b1b;
     border-color: #252525;
-    box-shadow:inset 0px 1px 0 0px #6B6B6B;
-    -moz-box-shadow:inset 0px 1px 0 0px #6B6B6B;
-    -webkit-box-shadow:inset 0px 1px 0 0px #6B6B6B;
-    -o-box-shadow:inset 0px 1px 0 0px #6B6B6B;
+    box-shadow:inset 0 1px 0 0 #6B6B6B;
+    -moz-box-shadow:inset 0 1px 0 0 #6B6B6B;
+    -webkit-box-shadow:inset 0 1px 0 0 #6B6B6B;
+    -o-box-shadow:inset 0 1px 0 0 #6B6B6B;
 }
 
 .dropdown-menu{
@@ -241,7 +241,7 @@ a:hover{
 /* MODAL */
 .modal .modal-content,
 .cu-modal .cu-dialog-content, .modal-content{
-    border-radius: 0px;
+    border-radius: 0;
     background-color: #192727;
 }
 .modal .modal-header{

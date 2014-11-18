@@ -7,8 +7,8 @@
 // Email: i.bitcero@gmail.com
 // License: GPL 2.0
 // --------------------------------------------------------------
- 
- 
+
+
 global $xoopsModule, $xoopsConfig, $rmEvents;
 
 include_once RMCPATH.'/class/fields/formelement.class.php';
@@ -43,31 +43,31 @@ $tiny =& TinyEditor::getInstance();
 $tiny->configuration = array('mode'=>'exact',
                     'theme'=>'advanced',
                     'skin'=>"exm_theme",
-                    'inlinepopups_skin'=>'exm', 
+                    'inlinepopups_skin'=>'exm',
                     //'plugins'=>"inlinepopups,spellchecker,media,fullscreen,exmsystem",
                     'plugins' => $rmEvents->run_event('rmcommon.tiny.plugins.editor',"exmsystem,autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template"),
                     'theme_advanced_buttons1'=>RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar1', "bold,italic,strikethrough,|,bullist,numlist,blockquote,|,justifyleft,justifycenter,justifyright,|,link,unlink,|,image,fullscreen,|,exm_more,exm_adv"),
-                    'theme_advanced_buttons2'=>RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar2', "underline,justifyfull,forecolor,|,removeformat,|,media,charmap,|,outdent,indent,|,undo,redo,|,exm_page,exm_img,exm_icons"), 
-                    'theme_advanced_buttons3'=>RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar3', "styleselect,formatselect,insertimage,|,tablecontrols"), 
-                    'theme_advanced_buttons4'=>RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar4', ""), 
-                    'spellchecker_languages'=>"+English=en,Danish=da,Dutch=nl,Finnish=fi,French=fr,German=de,Italian=it,Polish=pl,Portuguese=pt,Spanish=es,Swedish=sv", 
-                    'theme_advanced_toolbar_location'=>"top", 
-                    'theme_advanced_toolbar_align'=>"left", 
-                    'theme_advanced_statusbar_location'=>"bottom", 
-                    'theme_advanced_resizing'=>"1", 
-                    'theme_advanced_resize_horizontal'=>"", 
-                    'dialog_type'=>"modal", 
-                    'relative_urls'=>"", 
-                    'remove_script_host'=>"", 
-                    'convert_urls'=>"", 
-                    'apply_source_formatting'=>"", 
-                    'remove_linebreaks'=>"1", 
-                    'paste_convert_middot_lists'=>"1", 
-                    'paste_remove_spans'=>"1", 
-                    'paste_remove_styles'=>"1", 
-                    'gecko_spellcheck'=>"1", 
-                    'entities'=>"38,amp,60,lt,62,gt", 
-                    'accessibility_focus'=>"1", 
+                    'theme_advanced_buttons2'=>RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar2', "underline,justifyfull,forecolor,|,removeformat,|,media,charmap,|,outdent,indent,|,undo,redo,|,exm_page,exm_img,exm_icons"),
+                    'theme_advanced_buttons3'=>RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar3', "styleselect,formatselect,insertimage,|,tablecontrols"),
+                    'theme_advanced_buttons4'=>RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar4', ""),
+                    'spellchecker_languages'=>"+English=en,Danish=da,Dutch=nl,Finnish=fi,French=fr,German=de,Italian=it,Polish=pl,Portuguese=pt,Spanish=es,Swedish=sv",
+                    'theme_advanced_toolbar_location'=>"top",
+                    'theme_advanced_toolbar_align'=>"left",
+                    'theme_advanced_statusbar_location'=>"bottom",
+                    'theme_advanced_resizing'=>"1",
+                    'theme_advanced_resize_horizontal'=>"",
+                    'dialog_type'=>"modal",
+                    'relative_urls'=>"",
+                    'remove_script_host'=>"",
+                    'convert_urls'=>"",
+                    'apply_source_formatting'=>"",
+                    'remove_linebreaks'=>"1",
+                    'paste_convert_middot_lists'=>"1",
+                    'paste_remove_spans'=>"1",
+                    'paste_remove_styles'=>"1",
+                    'gecko_spellcheck'=>"1",
+                    'entities'=>"38,amp,60,lt,62,gt",
+                    'accessibility_focus'=>"1",
                     'tab_focus'=>"'=>prev,'=>next",
                     'save_callback'=>"switchEditors.saveCallback",
                     'content_css'=>RMTemplate::get()->generate_url('editor.css','rmcommon', 'css'));
@@ -84,7 +84,7 @@ class RMForm
     protected $_extra = '';
     protected $_method = '';
     protected $_title = '';
-    
+
     private $_tableClass = 'outer';
     private $_thClass = '';
     private $_headClass = 'head';
@@ -97,19 +97,19 @@ class RMForm
     private $_evenStyle='';
     private $_headStyle='';
     private $_thStyle='';
-    private $_footStyle='';    
+    private $_footStyle='';
 
     private $_othervalidates = '';
     private $_alertColor = '#FF0000';
     private $_okColor = '#000';
-    
+
     private $editores = ''; // LIsta de editores Tiny
     private $_tinytheme = 'advanced';
     private $_tinycss = '';
     private $tiny_valid_tags = 'a[name|href|target|title|onclick],code[class,id],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|longdesc|style],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]';
-    
+
     private $row_extras = array();
-    
+
     /**
      * @param string $title Titulo que se desplegar en la tabla del formulario
      * @param string $name Nombre del formulario
@@ -119,7 +119,7 @@ class RMForm
     function __construct($title, $name, $action, $method='post',$addtoken=true)
     {
     	global $xoopsSecurity;
-    	
+
         static $instance;
         $instance = $this;
         $this->_name = $name;
@@ -127,17 +127,17 @@ class RMForm
         $this->_method = $method;
         $this->_title = $title;
         $this->_addtoken = $addtoken;
-    	
+
     	RMTemplate::get()->add_style('forms.css', 'rmcommon');
     	RMTemplate::get()->add_style('js-widgets.css','rmcommon');
         RMTemplate::get()->add_jquery(true);
     	RMTemplate::get()->add_script( 'jquery.validate.min.js', 'rmcommon' );
     	RMTemplate::get()->add_script( 'forms.js','rmcommon' );
-    	
+
     	if ($addtoken) $this->addElement(new RMFormHidden('XOOPS_TOKEN_REQUEST', $xoopsSecurity->createToken()));
-    
+
     }
-    
+
     /**
      * Establece o modifica el ttulo del formulario
      * @param string $value
@@ -210,7 +210,7 @@ class RMForm
     public function getAction(){
         return $this->_action;
     }
-    
+
     /**
     * Return the path for default style sheet
     */
@@ -245,33 +245,34 @@ class RMForm
         $ret['field'] = $element;
         $ret['class'] = get_class($element);
         if (get_class($element)=='RMFormEditor'){
-            if ($element->getType()=='tiny') $this->editores[] = $element->getName(); 
+            if ($element->getType()=='tiny') $this->editores[] = $element->getName();
         }
-        
+
         if ($required)
         	$element->addClass('required');
-    	
+
     	if ($css_type!='')
     		$element->addClass($css_type);
-        
+
         if ($element->getName()!=''){
             $this->_fields[$element->getName()] = $ret;
         }else{
             $this->_fields[] = $ret;
         }
-        
+
         return $element;
-        
+
     }
-    
+
     public function elements(){
 		return $this->_fields;
     }
-    
+
     public function &element($name){
 		if (isset($this->_fields[$name])){
 			return $this->_fields[$name]['field'];
 		}
+        return null;
     }
     /**
      * Las siguientes funciones dan formato a la tabla
@@ -291,7 +292,7 @@ class RMForm
     public function thClass($value){
         if ($value!='') $this->_thClass = $value;
     }
-    /** 
+    /**
      * Establece la clase 'CSS' para usar para las celdas marcadas como 'pseudo-encabezados'
      * @param string $value Nombre de la clase
      */
@@ -345,10 +346,10 @@ class RMForm
             case 'oddspan':
                 $this->_oddSpanStyle = $style;
                 break;
-        }    
-        
+        }
+
     }
-    
+
 
     /**
      * Agrega una cadena para comprobar un campo
@@ -356,9 +357,9 @@ class RMForm
     public function addValidateField($name, $type='', $required=0, $text=''){
         if ($name=='') return;
         if ($text=='') return;
-        
+
         $this->_othervalidates = ($this->_othervalidates=='' ? "" : ",")."$name|$type|$required|$text";
-        
+
     }
     /**
      * Set de funciones útiles únicamente con el editor TinyMCE
@@ -397,7 +398,7 @@ class RMForm
         ob_start();
         include RMTemplate::get_template('rmc-forms.php','module','rmcommon');
         return ob_get_clean();
-        
+
     }
     /**
     * Crea el formulario y lo asigna a una matriz
@@ -407,13 +408,13 @@ class RMForm
     * @param bool Incluir javascript
     */
     public function renderForTemplate(){
-        
+
         $form = array();
-        
+
         $req = '';
         $callmethod = '';
         foreach ($this->_fields as $field){
-            
+
             $element = $field['field'];
             $form['fields'][] = array(
                 'type'=>get_class($element),
@@ -422,22 +423,22 @@ class RMForm
                 'desc'=>$element->getDescription(),
                 'name'=>$element->getName()
             );
-            
+
             if (is_a($element, 'RMFormEditor')){
                 if ($element->getType()=='tiny'){
                     $callmethod = 'tinyMCE.triggerSave(); ';
                 }
             }
-            
+
         }
-        
+
         if ($this->_addtoken){
             $form['fields'][] = array('type'=>'RMFormHidden','content'=>$GLOBALS['xoopsSecurity']->getTokenHTML(),
                     'caption'=>'','desc'=>'');
         }
-        
+
         $req .= $req=='' ? ($this->_othervalidates!='' ? $this->_othervalidates : '') : ($this->_othervalidates!='' ? ','.$this->_othervalidates : '');
-        
+
         $rtn = "<form name='".$this->_name."' id='".$this->_name."' action='".$this->_action."' method='".$this->_method."'";
         if ($req!=''){
             $rtn .= " onsubmit=\"".$callmethod."rmValidateForm(this, '$req');return document.rmValidateReturnValue;\"";
@@ -449,12 +450,12 @@ class RMForm
         $form['title'] = $this->_title;
         $form['tag'] = $rtn;
         $form['lang_req'] = __('Fields marked with (*) are required.','rmcommon');
-        
+
         return $form;
-        
+
     }
     /**
-     * Funcin para devolver el tipo correcto de 
+     * Funcin para devolver el tipo correcto de
      * campo para la validacin del Formulario
      * Esta funcin acepta como parmetro uno de los siguientes valores:
      * Email, Num, Range y Select.
@@ -498,5 +499,5 @@ class RMForm
     * @desc Imprime el código javascript para Tiny
     * @param array $editores Array con los nombres de los campos editores
     */
-   
+
 }

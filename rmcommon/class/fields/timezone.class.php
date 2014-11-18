@@ -14,7 +14,7 @@ class RMFormTimeZoneField extends RMFormElement
 	private $type = 0;
 	private $selected = null;
 	private $size = 5;
-	
+
 	public function __construct($caption, $name, $type = 0, $multi = 0, $selected = null, $size=5){
 		$this->setName($name);
 		$this->setCaption($caption);
@@ -46,11 +46,11 @@ class RMFormTimeZoneField extends RMFormElement
 	public function setSize($value){
 		return $this->size = $value;
 	}
-	
+
 	public function render(){
 		include_once XOOPS_ROOT_PATH."/class/xoopslists.php";
 		$zonas = XoopsLists::getTimeZoneList();
-		
+
 		if ($this->type){
 			$rtn = "<table cellpadding='2' cellspacing='1' border='0'>";
 			foreach ($zonas as $k => $v){
@@ -81,11 +81,10 @@ class RMFormTimeZoneField extends RMFormElement
 				$rtn .= "</select>";
 			}
 		}
-		
+
 		return $rtn;
-		
+
 	}
-	
+
 }
 
-?>

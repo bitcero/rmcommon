@@ -74,7 +74,7 @@ class RMFormat
      */
     static function date( $date, $format = '', $local = false ){
 
-        if($date=='') return;
+        if($date=='') return null;
 
         $time = strtotime($date);
 

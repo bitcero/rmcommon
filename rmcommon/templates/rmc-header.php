@@ -10,7 +10,7 @@ $temp = $tpl->get_scripts();
 
 $script_tpl = '<script id="%s" type="%s" src="%s"%s></script>' . "\n";
 
-foreach ($temp as $id => $script){
+foreach ($temp as $id => $script) {
 
     $type = $script['type'];
     $url = $script['url'];
@@ -19,7 +19,7 @@ foreach ($temp as $id => $script){
     unset($script['type'], $script['url'], $script['footer']);
 
     $extra = '';
-    foreach($script as $name => $value){
+    foreach ($script as $name => $value) {
         $extra .= ' ' . $name . '="' . $value . '"';
     }
 
@@ -52,14 +52,14 @@ $temp = $tpl->get_styles();
 
 $style_tpl = '<link id="%s" type="text/css" rel="stylesheet" href="%s"%s>';
 
-foreach ( $temp as $id => $style ){
+foreach ($temp as $id => $style) {
 
     $url = $style['url'];
     $footer = isset($style['footer']) ? $style['footer'] : 0;
     unset($style['url'], $style['footer'], $style['type']);
 
     $extra = '';
-    foreach($style as $name => $value){
+    foreach ($style as $name => $value) {
         $extra .= ' ' . $name . '="' . $value . '"';
     }
 
@@ -70,7 +70,7 @@ foreach ( $temp as $id => $style ){
 }
 
 $heads = '';
-foreach ($tpl->tpl_head as $head){
+foreach ($tpl->tpl_head as $head) {
     $heads .= $head."\n";
 }
 $heads .= $tpl->head_scripts();

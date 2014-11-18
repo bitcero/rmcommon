@@ -100,6 +100,7 @@ class FileReader {
       $this->error = 2; // File doesn't exist
       return false;
     }
+    return null;
   }
 
   function read($bytes) {
@@ -160,8 +161,7 @@ class CachedFileReader extends StringReader {
       $this->error = 2; // File doesn't exist
       return false;
     }
+    return null;
   }
 };
 
-
-?>

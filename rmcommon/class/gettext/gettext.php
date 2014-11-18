@@ -102,7 +102,7 @@ class gettext_reader {
     // If there isn't a StreamReader, turn on short circuit mode.
     if (! $Reader || isset($Reader->error) ) {
       $this->short_circuit = true;
-      return;
+      return null;
     }
 
     // Caching can be turned off
@@ -128,13 +128,14 @@ class gettext_reader {
     $this->total = $this->readint();
     $this->originals = $this->readint();
     $this->translations = $this->readint();
+    return null;
   }
 
   /**
    * Loads the translation tables from the MO file into the cache
    * If caching is enabled, also loads all strings into a cache
    * to speed up translation lookups
-   * 
+   *
    * @access private
    */
   function load_tables() {
@@ -394,5 +395,3 @@ class gettext_reader {
   }
 
 }
-
-?>

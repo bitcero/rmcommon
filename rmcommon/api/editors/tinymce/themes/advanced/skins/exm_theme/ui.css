@@ -77,12 +77,12 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 
 /* Button */
 .exm_themeSkin .mceButton {
-    display:block; 
+    display:block;
     line-height: 20px;
-    cursor: default; 
+    cursor: default;
     padding: 4px;
     margin: 1px;
-    border-radius: 0px;
+    border-radius: 0;
     box-sizing: content-box;
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
@@ -99,13 +99,13 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 .exm_themeSkin .mceButtonDisabled {}
 
 /* Separator */
-.exm_themeSkin .mceSeparator { 
-    height: 24px; 
+.exm_themeSkin .mceSeparator {
+    height: 24px;
     width: 1px;
     display: block;
     background: rgba(0,0,0,0.1);
-    overflow: hidden; 
-    margin: 0 2px; 
+    overflow: hidden;
+    margin: 0 2px;
     border: 0;
 }
 
@@ -113,12 +113,12 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 .exm_themeSkin .mceListBox, .exm_themeSkin .mceListBox a {display:block}
 .exm_themeSkin .mceListBox .mceText {
     padding: 1px 2px 1px 5px;
-    text-align:left; 
+    text-align:left;
     text-decoration: none !important;
     width:70px;
-    font-family: Tahoma,Verdana,Arial,Helvetica; 
+    font-family: Tahoma,Verdana,Arial,Helvetica;
     font-size: 11px;
-    line-height: 20px; 
+    line-height: 20px;
     overflow: hidden;
 }
 .exm_themeSkin .mceListBox {
@@ -141,11 +141,11 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     background-position: center;
     background-repeat: no-repeat;
 }
-.exm_themeSkin table.mceListBoxEnabled:hover .mceText, 
-.exm_themeSkin .mceListBoxHover .mceText, 
+.exm_themeSkin table.mceListBoxEnabled:hover .mceText,
+.exm_themeSkin .mceListBoxHover .mceText,
 .exm_themeSkin .mceListBoxSelected .mceText,
-.exm_themeSkin table.mceListBoxEnabled:hover .mceOpen, 
-.exm_themeSkin .mceListBoxHover .mceOpen, 
+.exm_themeSkin table.mceListBoxEnabled:hover .mceOpen,
+.exm_themeSkin .mceListBoxHover .mceOpen,
 .exm_themeSkin .mceListBoxSelected .mceOpen {
     background-image: none;
 }
@@ -156,7 +156,7 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 
 /* SplitButton */
 .exm_themeSkin .mceSplitButton a, .exm_themeSkin .mceSplitButton span {display:block; height:20px}
-.exm_themeSkin .mceSplitButton { 
+.exm_themeSkin .mceSplitButton {
     display:block;
     margin: 1px;
     direction: ltr;
@@ -173,7 +173,7 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 }
 .exm_themeSkin .mceSplitButton span.mceAction {
     background: url(../../img/icons.gif) 20px 20px;
-    width:20px; 
+    width:20px;
 }
 .exm_themeSkin .mceSplitButton a.mceOpen {
     width:20px;
@@ -199,8 +199,8 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 .exm_themeSkin .mceSplitButton a.mceAction:hover {
     background-image: none;
 }
-.exm_themeSkin table.mceSplitButtonEnabled:hover span.mceOpen, 
-.exm_themeSkin .mceSplitButtonHover span.mceOpen, 
+.exm_themeSkin table.mceSplitButtonEnabled:hover span.mceOpen,
+.exm_themeSkin .mceSplitButtonHover span.mceOpen,
 .exm_themeSkin .mceSplitButtonSelected span.mceOpen {
 }
 .exm_themeSkin .mceSplitButtonDisabled .mceAction {
@@ -234,17 +234,17 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
     text-decoration: none !important;
 }
 .exm_themeSkin .mceMenu .mceText {
-    position:relative; 
-    display:block; 
-    font-family:Tahoma,Verdana,Arial,Helvetica; 
-    cursor:default; 
-    margin:0; 
+    position:relative;
+    display:block;
+    font-family:Tahoma,Verdana,Arial,Helvetica;
+    cursor:default;
+    margin:0;
     padding:0 25px;
 }
 .exm_themeSkin .mceMenu span.mceText, .exm_themeSkin .mceMenu .mcePreview {font-size:11px}
 .exm_themeSkin .mceMenu pre.mceText {font-family:Monospace}
 .exm_themeSkin .mceMenu .mceIcon {position:absolute; top:0; left:0; width:22px;}
-.exm_themeSkin .mceMenu .mceMenuItemEnabled a:hover, 
+.exm_themeSkin .mceMenu .mceMenuItemEnabled a:hover,
 .exm_themeSkin .mceMenu .mceMenuItemActive {}
 .exm_themeSkin td.mceMenuItemSeparator {height:1px}
 .exm_themeSkin .mceMenuItemTitle a {
@@ -371,33 +371,33 @@ x.exm_themeSkin a:link, .exm_themeSkin a:visited, .exm_themeSkin a:active {text-
 .exm_themeSkin .mce_spellchecker span.mceAction {background-position:-540px -20px}
 
 /* border */
-.exm_themeSkin .mceExternalToolbar, 
-.exm_themeSkin .mceButton, 
-.exm_themeSkin a.mceButtonEnabled:hover, 
-.exm_themeSkin a.mceButtonActive, 
-.exm_themeSkin a.mceButtonSelected, 
-.exm_themeSkin .mceListBox .mceText, 
-.exm_themeSkin .mceListBox .mceOpen, 
-.exm_themeSkin table.mceListBoxEnabled:hover .mceText, 
-.exm_themeSkin .mceListBoxHover .mceText, 
-.exm_themeSkin .mceListBoxSelected .mceText, 
-.exm_themeSkin table.mceListBoxEnabled:hover .mceOpen, 
-.exm_themeSkin .mceListBoxHover .mceOpen, 
-.exm_themeSkin .mceListBoxSelected .mceOpen, 
-.exm_themeSkin select.mceListBox, 
-.exm_themeSkin .mceSplitButton a.mceAction, 
+.exm_themeSkin .mceExternalToolbar,
+.exm_themeSkin .mceButton,
+.exm_themeSkin a.mceButtonEnabled:hover,
+.exm_themeSkin a.mceButtonActive,
+.exm_themeSkin a.mceButtonSelected,
+.exm_themeSkin .mceListBox .mceText,
+.exm_themeSkin .mceListBox .mceOpen,
+.exm_themeSkin table.mceListBoxEnabled:hover .mceText,
+.exm_themeSkin .mceListBoxHover .mceText,
+.exm_themeSkin .mceListBoxSelected .mceText,
+.exm_themeSkin table.mceListBoxEnabled:hover .mceOpen,
+.exm_themeSkin .mceListBoxHover .mceOpen,
+.exm_themeSkin .mceListBoxSelected .mceOpen,
+.exm_themeSkin select.mceListBox,
+.exm_themeSkin .mceSplitButton a.mceAction,
 .exm_themeSkin .mceSplitButton a.mceOpen,
-.exm_themeSkin .mceSplitButton a.mceOpen:hover, 
-.exm_themeSkin .mceSplitButtonSelected a.mceOpen, 
-.exm_themeSkin table.mceSplitButtonEnabled:hover a.mceAction, 
-.exm_themeSkin .mceSplitButton a.mceAction:hover, 
-.exm_themeSkin div.mceColorSplitMenu table, 
-.exm_themeSkin .mceColorSplitMenu a, 
-.exm_themeSkin .mceColorSplitMenu a.mceMoreColors, 
-.exm_themeSkin .mceColorSplitMenu a.mceMoreColors:hover, 
-.exm_themeSkin a.mceMoreColors:hover, 
+.exm_themeSkin .mceSplitButton a.mceOpen:hover,
+.exm_themeSkin .mceSplitButtonSelected a.mceOpen,
+.exm_themeSkin table.mceSplitButtonEnabled:hover a.mceAction,
+.exm_themeSkin .mceSplitButton a.mceAction:hover,
+.exm_themeSkin div.mceColorSplitMenu table,
+.exm_themeSkin .mceColorSplitMenu a,
+.exm_themeSkin .mceColorSplitMenu a.mceMoreColors,
+.exm_themeSkin .mceColorSplitMenu a.mceMoreColors:hover,
+.exm_themeSkin a.mceMoreColors:hover,
 .exm_themeSkin .mceMenu {
-    border-style: solid; 
+    border-style: solid;
     border-width: 1px;
     border-color: rgba(0,0,0,0.1);
 }

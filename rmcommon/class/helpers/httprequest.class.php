@@ -42,20 +42,20 @@ class RMHttpRequest
         return self::get_http_parameter( 'delete', $key, $type, $default );
 
     }
-    
+
     /**
      * Permite obtener un valor de un array y filtrarlo para un manejo seguro
      */
     static public function array_value( $key, $haystack, $type, $default = '' ){
-        
+
         if ( !is_array( $haystack ) )
             return $default;
-        
+
         if ( !isset( $haystack[$key] ) )
             return $default;
-        
+
         return self::clean_value( $haystack[$key], $type );
-        
+
     }
 
     static public function method(){
@@ -79,12 +79,12 @@ class RMHttpRequest
     static protected function get_http_parameter( $method, $key, $type, $default = '' ){
 
         if ( $key == '' )
-            return;
+            return null;
 
         $method = strtolower( $method );
 
         if( !in_array( $method, array( 'get', 'post', 'request', 'put', 'delete' ) ) )
-            return;
+            return null;
 
         if ( $type == '' )
             trigger_error( __('Get values from URL parameters without specify a valid type, can result in security issues. Please consider to specify a type before to get URL params.', 'rmcommon'), E_WARNING );

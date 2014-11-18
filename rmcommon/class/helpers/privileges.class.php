@@ -83,6 +83,7 @@ class RMPrivileges
         else
             return false;
 
+        return null;
     }
 
     /**

@@ -112,4 +112,3 @@ class phMagick_resize{
 
     }
 }
-?>

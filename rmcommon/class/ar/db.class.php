@@ -122,7 +122,7 @@ class RMDb
     public function load_columns( $force = false ){
 
         if ( !$force && !( empty($this->columns ) ) )
-            return;
+            return null;
 
         // Get columns
         $columns_result = $this->database->queryF( "SHOW COLUMNS IN ".$this->table );
@@ -254,7 +254,7 @@ class RMDb
     public function getInsert( $data ){
 
         if( empty( $data ) )
-            return;
+            return null;
 
         $fields = array();
         $values = array();

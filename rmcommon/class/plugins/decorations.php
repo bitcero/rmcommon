@@ -170,4 +170,3 @@ class phmagick_decorations{
     }
 
 }
-?>

@@ -15,8 +15,8 @@ XoopsLogger::getInstance()->renderingEnabled = false;
 function error($message){
     $data['error'] = 1;
     $data['message'] = $message;
-	echo json_encode($data);
-	die();
+    echo json_encode($data);
+    die();
 }
 
 /**
@@ -30,44 +30,44 @@ $data = explode("|", $data); // [0] = referer, [1] = session_id(), [2] = user, [
 
 $xoopsUser = new XoopsUser($data[0]);
 
-if (!isset($data[1]) || strpos($data[1], RMCURL)===FALSE){
-	error(__('You are not allowed to do this action','rmcommon'));
-}
-
-if (!$xoopsUser){
+if (!isset($data[1]) || strpos($data[1], RMCURL)===FALSE) {
     error(__('You are not allowed to do this action','rmcommon'));
 }
 
-if ($category<=0){
-	error(__('Sorry, category has not been specified!','rmcommon'));
+if (!$xoopsUser) {
+    error(__('You are not allowed to do this action','rmcommon'));
+}
+
+if ($category<=0) {
+    error(__('Sorry, category has not been specified!','rmcommon'));
 }
 
 $cat = new RMImageCategory($category);
-if ($cat->isNew()){
+if ($cat->isNew()) {
     error(__('Sorry, the specified category has not been found!','rmcommon'));
 }
 
-if ($cat->getVar('status')!='open'){
-	error(__('Sorry, the specified category is closed!','rmcommon'));
+if ($cat->getVar('status')!='open') {
+    error(__('Sorry, the specified category is closed!','rmcommon'));
 }
 
-if (!$cat->user_allowed_toupload($xoopsUser)){
+if (!$cat->user_allowed_toupload($xoopsUser)) {
     error(__('Sorry, you can not upload images!','rmcommon'));
 }
 
 // Cargamos la imágen
 $updir = XOOPS_UPLOAD_PATH.'/'.date('Y', time());
-if (!file_exists($updir)){
+if (!file_exists($updir)) {
     mkdir($updir);
     chmod($updir, octdec('0777'));
 }
 $updir .= '/'.date('m',time());
-if (!file_exists($updir)){
+if (!file_exists($updir)) {
     mkdir($updir);
     chmod($updir, octdec('0777'));
 }
 
-if (!file_exists($updir.'/sizes')){
+if (!file_exists($updir.'/sizes')) {
     mkdir($updir.'/sizes');
     chmod($updir.'/sizes', octdec('0777'));
 }
@@ -77,11 +77,11 @@ include RMCPATH.'/class/uploader.php';
 $uploader = new RMFileUploader($updir, $cat->max_file_size(), array('gif', 'jpg', 'jpeg', 'png'));
 
 $err = array();
-if (!$uploader->fetchMedia('Filedata')){
+if (!$uploader->fetchMedia('Filedata')) {
     error($uploader->getErrors());
 }
 
-if (!$uploader->upload()){
+if (!$uploader->upload()) {
     error($uploader->getErrors());
 }
 
@@ -93,7 +93,7 @@ $image->setVar('file', $uploader->savedFileName);
 $image->setVar('cat', $cat->id());
 $image->setVar('uid', $xoopsUser->uid());
 
-if (!$image->save()){
+if (!$image->save()) {
     unlink($uploader->savedDestination);
     error(__('File could not be inserted to database!','rmcommon'));
 }

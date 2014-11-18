@@ -16,14 +16,14 @@
 
 
 /**
- * Base class for all objects in the Xoops kernel (and beyond) 
+ * Base class for all objects in the Xoops kernel (and beyond)
  **/
 class RMObject
 {
 
     /**
      * holds all variables(properties) of an object
-     * 
+     *
      * @var array
      * @access protected
      **/
@@ -31,7 +31,7 @@ class RMObject
 
     /**
     * variables cleaned for store in DB
-    * 
+    *
     * @var array
     * @access protected
     */
@@ -39,7 +39,7 @@ class RMObject
 
     /**
     * is it a newly created object?
-    * 
+    *
     * @var bool
     * @access private
     */
@@ -47,7 +47,7 @@ class RMObject
 
     /**
     * has any of the values been modified?
-    * 
+    *
     * @var bool
     * @access private
     */
@@ -55,7 +55,7 @@ class RMObject
 
     /**
     * errors
-    * 
+    *
     * @var array
     * @access private
     */
@@ -63,7 +63,7 @@ class RMObject
 
     /**
     * additional filters registered dynamically by a child class object
-    * 
+    *
     * @access private
     */
     private $_filters = array();
@@ -77,13 +77,13 @@ class RMObject
 	protected $_dbtable = '';
 	private $_tblcolumns = array();
 	private $_uniquefield = '';
-	
+
 	/**
 	 * Almacena las columnas (variables) de un objeto
 	 */
 	private $objectColumns = array();
 	private $primaryCols = array();
-    
+
     public function id(){
         return $this->getVar($this->primary);
     }
@@ -94,17 +94,19 @@ class RMObject
         if ( isset( $this->_tblcolumns[$name] ) )
             return $this->setVar($name, $value);
 
+        return null;
     }
 
     public function __get( $name ){
         // Verificamos columnas
         if ( isset( $this->_tblcolumns[$name] ) )
             return $this->getVar( $name );
+        return null;
     }
 
     /**#@+
     * used for new/clone objects
-    * 
+    *
     * @access public
     */
     function setNew()
@@ -123,7 +125,7 @@ class RMObject
 
     /**#@+
     * mark modified objects as dirty
-    * 
+    *
     * used for modified objects only
     * @access public
     */
@@ -143,7 +145,7 @@ class RMObject
 
     /**
     * initialize variables for the object
-    * 
+    *
     * @access public
     * @param string $key
     * @param int $data_type  set to one of XOBJ_DTYPE_XXX constants (set to XOBJ_DTYPE_OTHER if no data type ckecking nor text sanitizing is required)
@@ -186,7 +188,7 @@ class RMObject
 	}
     /**
     * assign a value to a variable
-    * 
+    *
     * @access public
     * @param string $key name of the variable to assign
     * @param mixed $value value to assign
@@ -200,7 +202,7 @@ class RMObject
 
     /**
     * assign values to multiple variables in a batch
-    * 
+    *
     * @access private
     * @param array $var_array associative array of values to assign
     */
@@ -215,7 +217,7 @@ class RMObject
 
     /**
     * assign a value to a variable
-    * 
+    *
     * @access public
     * @param string $key name of the variable to assign
     * @param mixed $value value to assign
@@ -233,7 +235,7 @@ class RMObject
 
     /**
     * assign values to multiple variables in a batch
-    * 
+    *
     * @access private
     * @param array $var_arr associative array of values to assign
     * @param bool $not_gpc
@@ -268,7 +270,7 @@ class RMObject
 
     /**
     * returns all variables for the object
-    * 
+    *
     * @param bool Return formated vars?
     * @param string Format type (s,e,p,f)
     * @return array associative array of key->value pairs
@@ -278,14 +280,14 @@ class RMObject
         if (!$formated){
 			return $this->vars;
         }
-        
+
         $ret = array();
         foreach ($this->vars as $key => $var){
 			$ret[$key] = $this->getVar($key, $format);
         }
-        
+
         return $ret;
-        
+
     }
 	/**
 	* Returns the values of the specified variables
@@ -315,7 +317,7 @@ class RMObject
     }
     /**
     * returns a specific variable for the object in a proper format
-    * 
+    *
     * @access public
     * @param string $key key of the object's variable to be returned
     * @param string $format format to use for the output
@@ -445,9 +447,9 @@ class RMObject
     }
 
     /**
-     * clean values of all variables of the object for storage. 
+     * clean values of all variables of the object for storage.
      * also add slashes whereever needed
-     * 
+     *
      * @return bool true if successful
      * @access public
      */
@@ -478,7 +480,7 @@ class RMObject
                         $this->setErrors( sprintf( _XOBJ_ERR_REQUIRED, $k ) );
                         continue;
                     }
-                    
+
                     $cleanv = TextCleaner::stripslashes($cleanv);
                     break;
                 case XOBJ_DTYPE_SOURCE:
@@ -523,7 +525,7 @@ class RMObject
             $this->cleanVars[$k] =& $cleanv;
             unset($cleanv);
         }
-        
+
         if (count($this->_errors) > 0) {
 	        $this->_errors = array_merge($existing_errors, $this->_errors);
             return false;
@@ -532,7 +534,7 @@ class RMObject
         $this->unsetDirty();
         return true;
     }
-    
+
     /**
     * Clear all vars to start a new object
     */
@@ -547,7 +549,7 @@ class RMObject
 
     /**
      * dynamically register additional filter for the object
-     * 
+     *
      * @param string $filtername name of the filter
      * @access public
      */
@@ -558,7 +560,7 @@ class RMObject
 
     /**
      * load all additional filters that have been registered to the object
-     * 
+     *
      * @access private
      */
     function _loadFilters()
@@ -571,7 +573,7 @@ class RMObject
 
     /**
      * create a clone(copy) of the current object
-     * 
+     *
      * @access public
      * @return object clone
      */
@@ -588,8 +590,8 @@ class RMObject
     }
 
     /**
-     * add an error 
-     * 
+     * add an error
+     *
      * @param string $value error to add
      * @access public
      */
@@ -600,7 +602,7 @@ class RMObject
 
     /**
      * return the errors for this object as an array
-     * 
+     *
      * @return array an array of errors
      * @access public
      */
@@ -611,7 +613,7 @@ class RMObject
 
     /**
      * return the errors for this object as html
-     * 
+     *
      * @return string html listing the errors
      * @access public
      */
@@ -636,21 +638,21 @@ class RMObject
 	 */
 	public function errors($html=true){
 		$ret = '';
-		
+
 		if (count($this->_errors)<=0){ return $html ? '' : array(); }
-		
+
 		if ($html){
 
 			foreach ($this->_errors as $k){
 				$ret .= "$k<br>";
 			}
-		
+
 		} else {
-		
+
 			return $this->_errors;
-		
+
 		}
-		
+
 		return $ret;
 	}
 	/**
@@ -693,19 +695,19 @@ class RMObject
 		if (!$ashtml){
 			return $this->_log;
 		}
-		
+
 		$rtn = '';
-		foreach ($this->_log as $k){		
+		foreach ($this->_log as $k){
 			$rtn .= "<div style='padding: 2px;";
 			if ($k['style']!=''){
 				if (stripos($k['style'],'text-align:')==''){
-					$rtn .= ' text-align: left;';	
+					$rtn .= ' text-align: left;';
 				}
 				$rtn .= ' ' . $k['style'];
 			}
 			$rtn .= "'>".(trim($k['event'])=='' ? '&nbsp;' : $k['event'])."</div>\n";
 		}
-		
+
 		return $rtn;
 	}
 	/**
@@ -715,7 +717,7 @@ class RMObject
 	 * @return array
 	 */
 	protected function getColumns(){
-		
+
 		static $objectColumns;
 		static $primaryCols;
 		if (!empty($objectColumns[get_class($this)])){
@@ -742,7 +744,7 @@ class RMObject
 	 * a partir de las columnas de una tabla
 	 */
 	protected function initVarsFromTable(){
-        
+
 		foreach ($this->getColumns() as $k => $v){
 			$efes = array();
 			preg_match("/(.+)(\(([,0-9]+)\))/", $v['Type'], $efes);
@@ -804,14 +806,14 @@ class RMObject
 					$type = XOBJ_DTYPE_OTHER;
 					$lon = null;
 					break;
-								
-				
+
+
 			}
-			
+
 			$this->initVar($v['Field'], $type, $v['Default'], false, $lon);
 		}
 	}
-	
+
 	/**
 	 * Cargaa los valores de un objeto desde la base de datos
 	 * en base a su clave primaria
@@ -819,43 +821,43 @@ class RMObject
 	 * @return bool
 	 */
 	protected function loadValues($id){
-		
+
 		if (get_magic_quotes_gpc())
         	$id = stripslashes($id);
-			
+
 		$id = mysql_real_escape_string($id);
-		
+
 		$sql = "SELECT * FROM $this->_dbtable WHERE `$this->primary`='$id'";
 		$result = $this->db->query($sql);
 		if ($this->db->getRowsNum($result)<=0) return false;
-		
+
 		$row = $this->db->fetchArray($result);
 		foreach ($row as $k => $v){
 			$this->setVar($k, $v);
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	* Load the object values from database with a filtered query
 	*/
 	protected function loadValuesFiltered($filter=''){
-		
+
 		if (get_magic_quotes_gpc())
         	$filter = stripslashes($filter);
-		
+
 		$sql = "SELECT * FROM $this->_dbtable WHERE $filter";
 		$result = $this->db->query($sql);
 		if ($this->db->getRowsNum($result)<=0) return false;
-		
+
 		$row = $this->db->fetchArray($result);
 		$this->assignVars($row);
-		
+
 		return true;
-		
+
 	}
-	
+
 	/**
 	 * Carga valores de la base de datos
 	 * @param array $values Array de valores
@@ -874,22 +876,22 @@ class RMObject
 			$values[$k] = mysql_real_escape_string($v);
 			$query .= $query=='' ? "`$k`='$v'" : " AND `$k`='$v'";
 		}
-		
+
 		$sql = "SELECT * FROM $this->_dbtable WHERE $query";
 		$result = $this->db->queryF($sql);
 		if ($this->db->getRowsNum($result)<=0) return false;
-		
+
 		$row = $this->db->fetchArray($result);
 		$myts =& TextCleaner::getInstance();
 		foreach ($row as $k => $v){
 			$this->setVar($k, $myts->stripslashes($v));
 		}
-		
+
 		return true;
-		
+
 	}
 	/**
-	 * Almacena los valores como un registro nuevo 
+	 * Almacena los valores como un registro nuevo
 	 * en una tabla
 	 */
 	protected function saveToTable(){
@@ -903,9 +905,9 @@ class RMObject
 			$fields .= ($fields == '') ? "`$k[Field]`" : ", `$k[Field]`";
 			$values .= ($values=='') ? "'".addslashes($this->cleanVars[$k['Field']])."'" : ", '".addslashes($this->cleanVars[$k['Field']])."'";
 		}
-		
+
 		$sql .= $fields .") VALUES (". $values .")";
-		
+
 		if (!$this->db->queryF($sql)){
 			$this->addError($this->db->error());
 			return false;
@@ -914,27 +916,27 @@ class RMObject
 			$this->unsetNew();
 			return true;
 		}
-		
+
 	}
 	/**
 	 * Almacena las modificaciones hechas a un registro de una tabla
 	 */
 	protected function updateTable(){
 		if (empty($this->_tblcolumns)) $this->getColumns();
-		
+
 		$myts =& TextCleaner::getInstance();
 		$sql = "UPDATE $this->_dbtable SET ";
 		$fields = '';
-		
+
 		$this->cleanVars();
-		
+
 		foreach ($this->_tblcolumns as $k){
 			if ($k['Extra'] == 'auto_increment') continue;
 			$fields .= $fields == '' ? "`$k[Field]`='".addslashes($this->cleanVars[$k['Field']])."'" : ", `$k[Field]`='".addslashes($this->cleanVars[$k['Field']])."'";
 		}
-		
+
 		$sql .= $fields . " WHERE `$this->primary`='".$this->getVar($this->primary)."'";
-        
+
 		$this->db->queryF($sql);
 		if ($this->db->error()!=''){
 			$this->addError($this->db->error());
@@ -947,7 +949,7 @@ class RMObject
 	 * Elimina un registro de la base de datos
 	 */
 	protected function deleteFromTable(){
-		
+
 		$sql = "DELETE FROM $this->_dbtable WHERE `$this->primary`='".$this->getVar($this->primary)."'";
 		$this->db->queryF($sql);
 		if ($this->db->error()!=''){
@@ -956,6 +958,6 @@ class RMObject
 		} else {
 			return true;
 		}
-		
+
 	}
 }
