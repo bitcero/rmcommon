@@ -20,13 +20,14 @@ class Rmcommon_Group extends RMObject
         $this->initVarsFromTable();
 
         if ( null == $id || 0 >= $id )
-            return;
+            return null;
 
         if (!$this->loadValues( $id ))
             return false;
 
         $this->unsetNew();
 
+        return null;
     }
 
     public function save(){

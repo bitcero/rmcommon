@@ -7,13 +7,13 @@
 // Email: i.bitcero@gmail.com
 // License: GPL 2.0
 // --------------------------------------------------------------
- 
+
 class RMUtilities
 {
 	/**
 	 * Obtiene una ?nica instancia de esta clase
 	 */
-	function get(){
+	static function get(){
 		static $instance;
 		if (!isset($instance)) {
 			$instance = new RMUtilities();
@@ -28,11 +28,11 @@ class RMUtilities
 	 */
 	public function delete_file($filepath){
 		if ($filepath == '') return false;
-		
+
 		if (!file_exists($filepath)) return true;
-		
+
 		return unlink($filepath);
-		
+
 	}
 	/**
 	 * Comprueba si existe un elemento en una tabla expec?fica
@@ -68,7 +68,7 @@ class RMUtilities
         $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
         return array('r'=>$r,'g'=>$g,'b'=>$b);
     }
-	
+
 	/**
 	 * Genera una cadena aleatoria en base a par?metros especificados
 	 */
@@ -77,14 +77,14 @@ class RMUtilities
 		$am = "abcdefghijklmnopqrstuvwxyz";
 		$d = "0123456789";
 		$s = "?@#\$%&()=???!.:,;-_+*[]{}";
-		
+
 		$que = array();
 		if ($alpha) $que[] = 'alpha';
 		if ($digit) $que[] = 'digit';
 		if ($special) $que[] = 'special';
-		
+
 		$rtn = '';
-		
+
 		for ($i=1;$i<=$size;$i++){
 			$op = $que[rand(0, count($que) - 1)];
 			switch($op){
@@ -100,11 +100,11 @@ class RMUtilities
 					break;
 			}
 		}
-		
+
 		return $rtn;
-		
+
 	}
-	
+
 	/**
 	* Add a slash (/) to the end of string
 	*/
@@ -112,7 +112,7 @@ class RMUtilities
 		$string = rtrim($string, "/");
 		return $string.'/';
 	}
-	
+
 	/**
 	 * Format bytes to MB, GB, KB, etc
 	 * @param int $size Tamaño de bytes
@@ -121,9 +121,9 @@ class RMUtilities
 	public function formatBytesSize($size){
 
 		return RMFormat::bytes_format( $size, 'bytes' );
-		
+
 	}
-	
+
 	/**
 	 * Elimina directorios y todos los archivos contenidos
 	 * @param string $path Ruta del directorio
@@ -157,9 +157,9 @@ class RMUtilities
      * @return string
      */
     public function image_manager($name, $id='', $default='', $data = array()){
-        
+
         $id = $id=='' ? $name : $id;
-        
+
         if($default!=''){
             $img = new RMImage();
             $img->load_from_params($default);
@@ -246,5 +246,5 @@ class RMUtilities
             return $settings;
 
     }
-		
+
 }

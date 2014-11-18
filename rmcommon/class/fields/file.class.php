@@ -7,7 +7,7 @@
 // Email: i.bitcero@gmail.com
 // License: GPL 2.0
 // --------------------------------------------------------------
- 
+
 /**
  * Clase para la creaci?n y manejo de elementos "FILE" para formularios
  * Esta clase se deriba de {@link EXMFormElement}
@@ -60,4 +60,3 @@ class RMFormFile extends RMFormElement
 	}
 }
 
-?>

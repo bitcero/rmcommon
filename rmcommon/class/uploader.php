@@ -14,14 +14,14 @@ class RMFileUploader extends XoopsMediaUploader
 {
     /**
     * Generate the uploader object
-    * 
+    *
     * @param string $dir
     * @param mixed $maxsize
     * @param mixed $allowedtypes
     * @return RMFileUploader
     */
     public function __construct($uploadDir, $maxFileSize, $allowed_exts = array()){
-        
+
         //$this->XoopsMediaUploader($dir, $allowedtypes, $maxsize);
         $this->extensionToMime = include $GLOBALS['xoops']->path('include/mimetypes.inc.php');
         $ev = RMEvents::get();
@@ -32,12 +32,12 @@ class RMFileUploader extends XoopsMediaUploader
         }
         if (is_array($allowed_exts)) {
             foreach($allowed_exts as $ext){
-                
+
                 $this->allowedMimeTypes[] = $this->extensionToMime[$ext];
-                
+
             }
         }
-        
+
         $this->uploadDir = $uploadDir;
         $this->maxFileSize = intval($maxFileSize);
         if (isset($maxWidth)) {
@@ -50,11 +50,12 @@ class RMFileUploader extends XoopsMediaUploader
         if (!@include_once $GLOBALS['xoops']->path('language/' . $GLOBALS['xoopsConfig']['language'] . '/uploader.php')) {
             include_once $GLOBALS['xoops']->path('language/english/uploader.php');
         }
-        
+
+        return null;
     }
-    
+
     function _copyFile($chmod){
-        
+
         $matched = array();
         if (!preg_match("/\.([a-zA-Z0-9]+)$/", $this->mediaName, $matched)) {
             $this->setErrors(_ER_UP_INVALIDFILENAME);
@@ -67,11 +68,11 @@ class RMFileUploader extends XoopsMediaUploader
         } else {
             $this->savedFileName = strtolower($this->mediaName);
         }
-        
+
         $fdata = pathinfo($this->savedFileName);
         $this->savedFileName = TextCleaner::sweetstring($fdata['filename']).($fdata['extension']!='' ? '.'.$fdata['extension'] : '');
         $fdata = pathinfo($this->savedFileName);
-        
+
         if (file_exists($this->uploadDir . '/' . $this->savedFileName)){
             $num = 1;
             while(file_exists($this->uploadDir . '/' . $this->savedFileName)){
@@ -97,11 +98,11 @@ class RMFileUploader extends XoopsMediaUploader
         }
         @chmod($this->savedDestination, $chmod);
         return true;
-        
+
     }
-    
+
     public function getMIME($extension){
         print_r($this->extensionToMime); die();
     }
-    
+
 }

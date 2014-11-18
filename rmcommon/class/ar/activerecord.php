@@ -97,6 +97,7 @@ abstract class RMActiveRecord
 
         $this->columns = $this->db->load_columns();
 
+        return null;
     }
 
     /**
@@ -144,6 +145,7 @@ abstract class RMActiveRecord
         else
             $this->_properties[$name] = $value;
 
+        return null;
     }
 
 
@@ -184,12 +186,12 @@ abstract class RMActiveRecord
     public function title( $field ){
 
         if($field=='')
-            return;
+            return null;
 
         if(isset($this->_properties['columns'][$field]))
             return $this->_properties['columns'][$field]['title'];
         else
-            return;
+            return null;
 
     }
 
@@ -344,12 +346,12 @@ abstract class RMActiveRecord
 
         if ( !is_array( $array ) || empty( $array ) ){
             trigger_error( __('Invalid argument in RMActiveRecord::do_pairs. Array is required.', 'rmcommon'), E_USER_ERROR);
-            return;
+            return null;
         }
 
         if ( $key == '' || $value == '' ){
             trigger_error( __('Invalid argument in RMActiveRecord::do_pairs. A key and value are required.', 'rmcommon'), E_USER_ERROR);
-            return;
+            return null;
         }
 
         $new_array = array();
@@ -475,7 +477,7 @@ abstract class RMActiveRecord
     protected function order_statement(){
 
         if( $this->order_results=='' )
-            return;
+            return null;
 
         $sql = " ORDER BY ";
 
@@ -490,7 +492,7 @@ abstract class RMActiveRecord
     protected function limit_statement( $start = null ){
 
         if ( $this->results_x_page <= 0 )
-            return;
+            return null;
 
         if ( $start == null )
             $start = RMHttpRequest::request( 'start', 'integer', 0 );

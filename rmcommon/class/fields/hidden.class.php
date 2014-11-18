@@ -47,4 +47,3 @@ class RMFormHidden extends RMFormElement
 	}
 }
 
-?>

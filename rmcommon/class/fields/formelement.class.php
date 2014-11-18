@@ -24,14 +24,14 @@ abstract class RMFormElement
     private $_id = '';
     static $elementsIds = array();
     protected $attrs = array();
-	
+
 	/**
 	 * Establece el nombre de un elemento espec?fico del formulario
 	 * @param string $name Nombre del elemento
 	 */
 	public function setName($name){
 		$this->_name = trim($name);
-        
+
         return $this;
 	}
 	/**
@@ -41,17 +41,17 @@ abstract class RMFormElement
 	public function getName(){
 		return $this->_name;
 	}
-    
+
     public function setId($id){
         $this->_id = $id;
     }
-    
+
     /**
     * Get element unique id
     * @return string
     */
     public function id(){
-        
+
         // If not id has been provided then generate one
         if($this->_id==''){
             $name = $this->_name;
@@ -61,15 +61,15 @@ abstract class RMFormElement
                     self::$elementsIds[$name]++;
                 else
                     self::$elementsIds[$name] = 1;
-                
+
                 $name .= '-'.self::$elementsIds[$name];
             }
             $this->_id = $name;
         }
-        
+
         return $this->_id;
     }
-    
+
 	/**
 	 * Establece el nombre de la clase CSS que se usará en un
 	 * elemento específico del formulario
@@ -124,7 +124,7 @@ abstract class RMFormElement
 	public function getDescription(){
 		return $this->_description;
 	}
-	/** 
+	/**
 	 * Establece texto adicional para el elemento del formulario.
 	 * Este texto se insertar? dentro de la etiqueta <input ... /> o la
 	 * que corresponda. Puede insertarse c?digo para funciones JavaScript (onclick, onfocus, etc)
@@ -170,4 +170,3 @@ abstract class RMFormElement
 	 */
 	abstract function render();
 }
-?>

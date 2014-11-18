@@ -17,7 +17,7 @@ class RMFormSelect extends RMFormElement
 	private $_multi = 0;
 	private $_options = array();
     private $_selected = null;
-    
+
 	/**
 	 * @param string $caption Texto de la etiqueta
 	 * @param string $name Nombre del elemento
@@ -104,14 +104,14 @@ class RMFormSelect extends RMFormElement
 		if ($this->_multi){ $rtn .= " multiple='multiple' size='".$this->_rows."'"; }
 
         $rtn .= ' class="form-control ';
-        
+
 		if ($this->getClass() != '')
 			$rtn .= $this->getClass();
 
 		$rtn .= '" ' . $this->getExtra();
-		
+
 		$rtn .= ">";
-		
+
 		foreach ($this->_options as $k => $v){
 			$rtn .= "<option value='$v[value]'";
 			if ($v['select'] || (is_array($this->_selected) && in_array($v['value'], $this->_selected))){ $rtn .= " selected='selected'"; }
@@ -119,10 +119,10 @@ class RMFormSelect extends RMFormElement
 			if ($v['style']!='') $rtn .= " style='$v[style]'";
 			$rtn .= ">$v[text]</option>";
 		}
-		
+
 		$rtn .= "</select>";
 		return $rtn;
 	}
 }
 
-?>
+

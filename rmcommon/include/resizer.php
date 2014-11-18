@@ -415,6 +415,7 @@ class timthumb {
                 return true;
             }
         }
+        return null;
     }
     protected function error($err){
         $this->debug(3, "Adding error message: $err");
@@ -467,7 +468,7 @@ class timthumb {
     }
     protected function cleanCache(){
         if (FILE_CACHE_TIME_BETWEEN_CLEANS < 0) {
-            return;
+            return null;
         }
         $this->debug(3, "cleanCache() called");
         $lastCleanFile = $this->cacheDirectory . '/timthumb_cacheLastCleanTime.touch';
@@ -478,7 +479,7 @@ class timthumb {
             if (!touch($lastCleanFile)) {
                 $this->error("Could not create cache clean timestamp file.");
             }
-            return;
+            return null;
         }
         if(@filemtime($lastCleanFile) < (time() - FILE_CACHE_TIME_BETWEEN_CLEANS) ){ //Cache was last cleaned more than 1 day ago
             $this->debug(1, "Cache was last cleaned more than " . FILE_CACHE_TIME_BETWEEN_CLEANS . " seconds ago. Cleaning now.");

@@ -39,7 +39,7 @@ class RMFunctions
 	/**
 	* Check the number of images category on database
 	*/
-	public function get_num_records($table, $filters=''){
+	public static function get_num_records($table, $filters=''){
 
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
 
@@ -55,7 +55,7 @@ class RMFunctions
 	/**
 	* Create the module toolbar. This function must be called only from rmcommon module administration
 	*/
-	public function create_toolbar(){
+	public static function create_toolbar(){
 
         if(RMCLOCATION=='users'){
 
@@ -135,7 +135,7 @@ class RMFunctions
 	* @param bool Return as list
 	* @return array|list
 	*/
-	public function get_groups_names($groups, $list = true){
+	public static function get_groups_names($groups, $list = true){
 
 		$ret = array();
 		if (count($groups)==1 && $groups[0] == 0){
@@ -163,7 +163,7 @@ class RMFunctions
     * @param bool $object Determines if the return data is an array with objects (true) or values
 	* @return array
 	*/
-	public function load_images_categories($filters='ORDER BY id_cat DESC', $object = false){
+	public static function load_images_categories($filters='ORDER BY id_cat DESC', $object = false){
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
 		$sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_images_categories")." $filters";
 		$result = $db->query($sql);
@@ -381,7 +381,7 @@ class RMFunctions
     /**
     * Check if a plugin is installed and active in Common Utilities
     */
-    public function plugin_installed($dir){
+    public static function plugin_installed($dir){
 
 		if (isset($GLOBALS['installed_plugins'][$dir]))
 			return true;
@@ -393,7 +393,7 @@ class RMFunctions
     /**
     * Get a existing plugin
     */
-    public function load_plugin($name){
+    public static function load_plugin($name){
 
 		$name = strtolower($name);
 		if (!file_exists(RMCPATH.'/plugins/'.$name.'/'.$name.'-plugin.php'))
@@ -533,7 +533,7 @@ class RMFunctions
      * @param string Var name to generate url
      * @param string URL separator
      */
-    public function urlencode_array( $array, $name, $separator='&' ){
+    public static function urlencode_array( $array, $name, $separator='&' ){
 
         trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMUris', 'url_encode_array' ));
 
@@ -561,7 +561,7 @@ class RMFunctions
      * @param bool $values Retrieves only key => value (true) or the full array (false)
      * @return array
      */
-    public function plugin_settings($dir, $values = false){
+    public static function plugin_settings($dir, $values = false){
 
         $settings = RMSettings::plugin_settings($dir, $values);
 

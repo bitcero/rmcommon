@@ -22,7 +22,7 @@
 class Crypt {
 
     // {{{ Constants
-    
+
     /* Returning modes */
     const MODE_BIN = 0;     // same length of the original data
     const MODE_B64 = 1;     // about 66% bigger
@@ -197,7 +197,7 @@ class Crypt {
      * @param       $mode       integer
      * @return      void
      */
-    public static function _isSupportedMode($mode) { 
+    public static function _isSupportedMode($mode) {
         return in_array($mode, Crypt::supportedModes());
     }
 
@@ -274,4 +274,4 @@ class Crypt {
 }
 
 // }}}
-?>
+

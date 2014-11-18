@@ -137,7 +137,7 @@ class TextCleaner
 	* @param array Matches
 	* @return string
 	*/
-	public function url_clickable($matches){
+	public static function url_clickable($matches){
 		$url = $matches[2];
 		$url = self::clean_url($url);
 		if ( empty($url) )
@@ -146,7 +146,7 @@ class TextCleaner
 		return $matches[1] . "<a href=\"$url\" rel=\"nofollow\">$url</a>";
 	}
 
-	public function ftp_clickable($matches){
+	public static function ftp_clickable($matches){
 		$ret = '';
 		$dest = $matches[2];
 		$dest = 'http://' . $dest;
@@ -160,7 +160,7 @@ class TextCleaner
 		}
 		return $matches[1] . "<a href=\"$dest\" rel=\"nofollow\">$dest</a>" . $ret;
 	}
-	public function mail_clickable($matches){
+	public static function mail_clickable($matches){
 		$email = $matches[2] . '@' . $matches[3];
 		return $matches[1] . "<a href=\"mailto:$email\">$email</a>";
 	}
@@ -234,7 +234,7 @@ class TextCleaner
         return $string;
     }
 
-    function bad_protocol_once2($matches) {
+    static function bad_protocol_once2($matches) {
         global $aprotocols;
         $allowed_protocols = $aprotocols;
 
@@ -272,11 +272,11 @@ class TextCleaner
         return $string;
     }
 
-    public function decode_entities_chr( $match ) {
+    public static function decode_entities_chr( $match ) {
         return chr( $match[1] );
     }
 
-    public function decode_entities_chr_hexdec( $match ) {
+    public static function decode_entities_chr_hexdec( $match ) {
         return chr( hexdec( $match[1] ) );
     }
 
@@ -308,7 +308,7 @@ class TextCleaner
      * @param mixed $text
      * @return
      */
-    public function truncate($text, $len, $continue = '[...]'){
+    public static function truncate($text, $len, $continue = '[...]'){
         $text = preg_replace("[\n|\r|\n\r]", ' ', $text);
         $ret = substr(strip_tags($text), 0, $len);
 
@@ -729,7 +729,7 @@ class TextCleaner
 	* @param strign Text to decrypt
 	* @param bool Apply base64_decode? default true
 	*/
-	public function decrypt($string, $encode64 = true){
+	public static function decrypt($string, $encode64 = true){
 
 		$rmc_config = RMSettings::cu_settings();
 
@@ -744,7 +744,7 @@ class TextCleaner
      * Clean an string by deleting all blank spaces and other
      * chars
      */
-    public function sweetstring($value, $lower = true) {
+    public static function sweetstring($value, $lower = true) {
         // Tranformamos todo a minusculas
         $rtn = $lower ? strtolower(utf8_decode($value)) : $value;
 

@@ -41,6 +41,7 @@ class RMHtaccess
 
         $this->checkHealth();
 
+        return null;
     }
 
 	/**
@@ -109,6 +110,7 @@ class RMHtaccess
 
 
 
+        return null;
     }
 
     public function verifyCode($code = ''){
@@ -126,6 +128,7 @@ class RMHtaccess
         else
             print_r($match);
 
+        return null;
     }
 
 	public function removeRule(){
@@ -164,7 +167,7 @@ class RMHtaccess
         }
 
         if(!$this->apache || !$this->rewrite)
-            return;
+            return null;
 
         $this->rules = $rules;
         $code = $this->makeCode($rules);

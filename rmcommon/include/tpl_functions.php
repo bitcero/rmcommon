@@ -15,19 +15,19 @@ function tpl_cycle($values, $delimiter = ',', $reset = false){
     static $cycle_index;
 
     if (trim($values)=='') {
-        return;
+        return null;
     }
-    
+
     if(is_array($values)) {
         $cycle_array = $values;
     } else {
         $cycle_array = explode($delimiter,$values);
     }
-    
+
     if(!isset($cycle_index) || $reset) {
     	$cycle_index = 0;
     }
-          
+
     $retval = $cycle_array[$cycle_index];
 
     if ( $cycle_index >= count($cycle_array) -1 ) {

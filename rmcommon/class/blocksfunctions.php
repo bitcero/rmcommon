@@ -12,42 +12,42 @@ class RMBlocksFunctions
 {
     /**
     * Get the available widgets list
-    * 
+    *
     * @return array
     */
-    public function get_available_list($mods = null){
+    public static function get_available_list($mods = null){
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        
+
         if($mods==null || empty($mods))
             $mods = RMModules::get_modules_list();
-        
+
         $list = array(); // Block list to return
-        
+
         foreach($mods as $mod){
-            
+
             if(!file_exists(XOOPS_ROOT_PATH.'/modules/'.$mod['dirname'].'/xoops_version.php'))
                 continue;
-            
+
             load_mod_locale($mod['dirname']);
             $module = new XoopsModule();
             $module->loadInfoAsVar($mod['dirname']);
-            
+
             $list[$mod['dirname']] = array(
                 'name' => $mod['name'],
                 'blocks' => $module->getInfo('blocks')
             );
-            
+
         }
-                
+
         // Event generated to modify the available widgets list
         $list = RMEvents::get()->run_event('rmcommon.available.widgets', $list);
         return $list;
     }
-    
+
     /**
     * Get blocks positions
     */
-    public function block_positions( $active = '' ){
+    public static function block_positions( $active = '' ){
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $result = $db->query("SELECT * FROM " . $db->prefix("mod_rmcommon_blocks_positions") . ( $active != '' ? ' WHERE active=' . $active : ''));
         $pos = array();
@@ -56,20 +56,20 @@ class RMBlocksFunctions
         }
         return $pos;
     }
-    
+
     /**
      * Get blocks
      */
-    public function construct_blocks(){
+    public static function construct_blocks(){
         global $xoopsConfig, $xoopsModule, $xoopsUser, $xoopsOption;
-        
+
         $sides = array();
-        
+
         foreach(self::block_positions( 1 ) as $id => $row){
             $sides[$id] = $row['tag'];
             $blocks[$row['tag']] = array();
         }
-        
+
         $startMod = ( $xoopsConfig['startpage'] == '--' ) ? 'system' : $xoopsConfig['startpage'];
 	    if ( @is_object( $xoopsModule ) ) {
             list( $mid, $dirname ) = array( $xoopsModule->getVar('mid'), $xoopsModule->getVar('dirname') );
@@ -81,10 +81,10 @@ class RMBlocksFunctions
 	    }
 
 	    $groups = @is_object( $xoopsUser ) ? $xoopsUser->getGroups() : array( XOOPS_GROUP_ANONYMOUS );
-        
+
         $subpage = isset($xoopsOption['module_subpage']) ? $xoopsOption['module_subpage'] : '';
         $barray = array(); // Array of retrieved blocks
-        
+
         $barray = self::get_blocks($groups, $mid, $isStart, XOOPS_BLOCK_VISIBLE, '', 1, $subpage);
 
         foreach($barray as $block){
@@ -97,15 +97,15 @@ class RMBlocksFunctions
                 $blocks[$side][$content['id']] = $content;
             }
         }
-        
+
         unset($side,$sides,$content,$subpage,$barray,$groups,$startMod);
 
         return $blocks;
-        
+
     }
-    
+
     public function get_blocks($groupid, $mid=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.wid', $isactive=1, $subpage=''){
-        
+
         $orderby = $orderby=='' ? 'b.weight,b.bid' : $orderby;
 
         // Get authorized blocks
@@ -129,7 +129,7 @@ class RMBlocksFunctions
         }
 
         $result = $db->query($sql);
-        
+
         $blockids = array();
         while ( $myrow = $db->fetchArray($result) ) {
             $blockids[] = $myrow['gperm_itemid'];
@@ -171,14 +171,14 @@ class RMBlocksFunctions
         }
 
         return $ret;
-        
+
     }
-    
+
     function buildBlock($bobj){
-        
+
         global $xoopsTpl, $xoTheme;
         $template = $xoopsTpl;
-        
+
         $block = array(
             'id' => $bobj->getVar('bid') ,
             'module' => $bobj->getVar('dirname') ,
@@ -225,5 +225,5 @@ class RMBlocksFunctions
         $template->setCompileId();
         return $block;
     }
-    
+
 }

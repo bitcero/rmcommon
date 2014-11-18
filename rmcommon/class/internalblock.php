@@ -21,14 +21,14 @@ class RMInternalBlock extends RMObject
      */
     private $rgroups = array();
     /**
-     * Grupos con permiso de escritura 
+     * Grupos con permiso de escritura
      */
     private $wgroups = array();
     /**
      * Secciones en las que se muestra el bloque
      */
     private $sections = array();
-    
+
     /**
      * Carga un nuevo objecto EXMBlock
      * @param $id = Identificador del Bloque existente en la base de datos
@@ -56,11 +56,11 @@ class RMInternalBlock extends RMObject
 		    @include_once $file;
 	    else
 		    @include_once str_replace('/'.$xoopsConfig['language'].'/', '/english/', $file);
-        
-        // Cargamos los grupos con permisos    
+
+        // Cargamos los grupos con permisos
         //$this->readGroups();
     }
-    
+
     public function id(){
         return $this->getVar('bid');
     }
@@ -70,20 +70,20 @@ class RMInternalBlock extends RMObject
      * de los grupos con permiso de lectura
      */
     public function readGroups(){
-        
+
         if (empty($this->rgroups)){
             $sql = "SELECT gperm_groupid FROM ".$this->db->prefix("group_permission")." WHERE gperm_itemid='".$this->id()."' AND gperm_name='rmblock_read'";
             $result = $this->db->query($sql);
             $ret = array();
             while ($row = $this->db->fetchArray($result)){
-                
+
                 $this->rgroups[] = $row['gperm_groupid'];
-                
+
             }
         }
 
         return $this->rgroups;
-        
+
     }
     /**
      * Establece los grupos con permiso de acceso al bloque
@@ -96,30 +96,30 @@ class RMInternalBlock extends RMObject
      * de los grupos con permiso de administrador
      */
     public function adminGroups($object = false){
-        
+
         if (empty($this->wgroups)){
             $sql = "SELECT gperm_groupid FROM ".$this->db->prefix("group_permission")." WHERE gperm_itemid='".$this->id()."' AND gperm_name='block_admin'";
             $result = $this->db->query($sql);
             $ret = array();
             while ($row = $this->db->fetchArray($result)){
-                
+
                 $this->wgroups[] = $row['gperm_groupid'];
-                
+
             }
         }
-        
+
         if ($object){
-            // Devolvemos los objectos EXMGroup en un array            
+            // Devolvemos los objectos EXMGroup en un array
             $ret = array();
             foreach ($this->wgroups as $k){
                 $ret[] = new EXMGroup($row['gperm_groupid']);
             }
-            return $ret;            
+            return $ret;
         } else {
             // Devolvemos unicamente los ids
             return $this->wgroups;
         }
-        
+
     }
     /**
      * Establece los grupos con permiso de acceso al bloque
@@ -127,13 +127,13 @@ class RMInternalBlock extends RMObject
     public function setAdminGroups($groups){
         $this->wgroups = $groups;
     }
-    /** 
+    /**
      * Gets or sets the sections for this widget
      * @param array Sections with subpages
      * @return nothing|array
      */
     public function sections(){
-        
+
         if (func_num_args()<=0){
             // Load all sections
             if (empty($this->sections)){
@@ -141,19 +141,20 @@ class RMInternalBlock extends RMObject
                 $result = $this->db->query($sql);
                 $ret = array();
                 while ($row = $this->db->fetchArray($result)){
-                    
+
                     $this->sections[] = $row['mid'];
-                    
+
                 }
             }
-            
+
             return $this->sections;
-            
+
         } else {
             $value = func_get_arg(0);
             $this->sections = $value;
         }
-        
+
+        return null;
     }
     /**
     * @desc Devuelve las subpáginas seleccionadas para una
@@ -165,13 +166,13 @@ class RMInternalBlock extends RMObject
         $ret = array();
         while ($row = $this->db->fetchArray($result)){
             $ret[$row['mid']][] = $row['page'];
-            
+
         }
         return $ret;
     }
     /**
      * Comprueba si un grupo especifico cuenta con
-     * permisos de admnistración/lectura para un 
+     * permisos de admnistración/lectura para un
      * bloque específico
      * @param int $gid Identificador del grupo
      * @param int $level Nivel de Acceso
@@ -181,11 +182,11 @@ class RMInternalBlock extends RMObject
         global $xoopsUser;
 
         if ($gid<=0 && empty($xoopsUser)) $gid = XOOPS_GROUP_ANONYMOUS;
-        
+
         $pHand =& xoops_gethandler('groupperm');
         return $pHand->checkRight($level ? 'block_admin' : 'rmblock_read', $this->id(), $gid>0 ? $gid : $xoopsUser->getGroups());
     }
-    
+
     /**
     * Devuelve el contenido de un bloque
     *
@@ -195,9 +196,9 @@ class RMInternalBlock extends RMObject
     */
     public function getContent($format = 'S')
     {
-        
+
         $c_type = $this->getVar('content_type');
-        
+
         switch ( $format ) {
             case 'S':
                 if ( $c_type == 'HTML' ) {
@@ -238,9 +239,9 @@ class RMInternalBlock extends RMObject
             if ( !$show_func ) {
                 return false;
             }
-               
+
             // Bloque de Módulo
-            // Comprobamos si se trata de un bloque de plugin de sistema               
+            // Comprobamos si se trata de un bloque de plugin de sistema
             if ($this->getVar('element_type')=='plugin'){
                 $file = XOOPS_ROOT_PATH.'/modules/'.$this->getVar('element').'/plugins/'.$this->getVar('dirname').'/blocks/'.$this->getVar('file');
                 load_plugin_locale($this->getVar('dirname'), '', $this->getVar('element'));
@@ -257,7 +258,7 @@ class RMInternalBlock extends RMObject
                     load_mod_locale($this->getVar('dirname'));
                 }
             }
-                        
+
             include_once $file;
             $options = $this->getVar("options");
             $option = is_array($options) ? $options : explode('|', $options);
@@ -265,20 +266,20 @@ class RMInternalBlock extends RMObject
                 $block = $show_func($option);
                 if (!$block) return false;
             }
-                
-            
+
+
         } else {
-            
+
             // Bloque Personalizado. Solo devolvemos el contenido
             $block['content'] = $this->getContent("S",$this->getVar("content_type"));
             if (empty($block['content'])) {
                 return false;
             }
         }
-        
+
         return $block;
     }
-    
+
     /*
     * Aligns the content of a block
     * If position is 0, content in DB is positioned
@@ -313,7 +314,7 @@ class RMInternalBlock extends RMObject
         }
         return false;
     }
-    
+
     /**
      * Obtiene el código HTML desde la función de edición
      * del bloque siempre y cuando esta exista
@@ -321,10 +322,10 @@ class RMInternalBlock extends RMObject
     function getOptions()
     {
         global $xoopsConfig;
-        
+
         $edit_func = $this->getVar('edit_func');
-        if (trim($edit_func)=='') return;
-        
+        if (trim($edit_func)=='') return null;
+
         switch($this->getVar('element_type')){
             case 'module':
                 $file = XOOPS_ROOT_PATH.'/modules/'.$this->getVar('element').'/blocks/'.$this->getVar('file');
@@ -339,26 +340,26 @@ class RMInternalBlock extends RMObject
                 $lang = 'load_plugin_locale';
                 break;
         }
-        
+
         // Check if widget file exists
         if (!is_file($file)){
             return __('The configuration file for this block does not exists!','rmcommon');
         }
-        
+
         include_once $file;
-        
+
         // Check if edit function exists
         if (!function_exists($edit_func)){
             return __('There was a problem trying to show the configuration options for this block!','rmcommon');
         }
-        
+
         // Get language for this widget
         $lang($this->getVar('element'));
-        
+
         return $edit_func($this->getVar('options'));
-        
+
     }
-    
+
     /**
      * Almacenamos los valores del bloque en
      * la base de datos
@@ -369,14 +370,14 @@ class RMInternalBlock extends RMObject
         } else {
             if (!$this->updateTable()) return false;
         }
-        
+
         // Guardamos las secciones
         if (count($this->sections)>0){
-            
+
             if (!$this->isNew()){
                 $this->db->queryF("DELETE FROM ".$this->db->prefix("mod_rmcommon_blocks_assignations")." WHERE bid='".$this->id()."'");
             }
-            
+
             $sql = "INSERT INTO ".$this->db->prefix("mod_rmcommon_blocks_assignations")." (`bid`,`mid`,`page`) VALUES ";
             $sql1 = '';
             foreach ($this->sections as $id => $k){
@@ -387,7 +388,7 @@ class RMInternalBlock extends RMObject
                 } else {
                     $sql1 .= $sql1=='' ? "('".$this->id()."','$id','--')" : ", ('".$this->id()."','$id','--')";
                 }
-                
+
             }
             if (!$this->db->queryF($sql . $sql1)) $this->addError($this->db->error());
         }
@@ -396,32 +397,32 @@ class RMInternalBlock extends RMObject
             if (!$this->isNew()){
                 $this->db->queryF("DELETE FROM ".$this->db->prefix("group_permission")." WHERE gperm_itemid='".$this->id()."' AND gperm_name='rmblock_read'");
             }
-            
+
             $sql = "INSERT INTO ".$this->db->prefix("group_permission")." (`gperm_groupid`,`gperm_itemid`,`gperm_modid`,`gperm_name`) VALUES ";
             $sql1 = '';
             foreach ($this->rgroups as $k){
                 $sql1 .= $sql1=='' ? "('$k','".$this->id()."','1','rmblock_read')" : ", ('$k','".$this->id()."','1','rmblock_read')";
             }
-            
+
             if (!$this->db->queryF($sql . $sql1)) $this->addError($this->db->error());
         }
-        
+
         if ($this->errors()!=''){return false;} else {return true;}
-        
+
     }
-    
+
     /**
      * Elimina todos los datos del bloque
      */
     function delete(){
-        
+
         if (!$this->db->queryF("DELETE FROM ".$this->db->prefix("mod_rmcommon_blocks_assignations")." WHERE bid='".$this->id()."'")){
             $this->addError($this->db->error());
         }
         if (!$this->db->queryF("DELETE FROM ".$this->db->prefix("group_permission")." WHERE gperm_itemid='".$this->id()."' AND gperm_name='rmblock_read'")){
             $this->addError($this->db->error());
         }
-        
+
         $this->deleteFromTable();
         if ($this->errors()!=''){ return false; } else { return true; }
     }
@@ -431,9 +432,9 @@ class RMInternalBlockHandler
 {
     function getAllByGroupModule($groupid, $app_id=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.bid', $isactive=1, $subpage='')
     {
-        
+
         $orderby = $orderby=='' ? 'b.weight,b.bid' : $orderby;
-        
+
         $db =& XoopsDatabaseFactory::getDatabaseConnection();
         $ret = array();
         $sql = "SELECT DISTINCT gperm_itemid FROM ".$db->prefix('group_permission')." WHERE gperm_name = 'rmblock_read' AND gperm_modid = 1";
@@ -485,17 +486,17 @@ class RMInternalBlockHandler
 
         return $ret;
     }
-    
+
     function getByModule($moduleid, $asobject=true)
     {
         $db =& XoopsDatabaseFactory::getDatabaseConnection();
-        
+
         if (!is_numeric($moduleid)){
             $col = 'dirname';
         } else {
             $col = 'mid';
         }
-        
+
         if ( $asobject == true ) {
             $sql = $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_blocks")." WHERE $col='".$moduleid."'";
         } else {

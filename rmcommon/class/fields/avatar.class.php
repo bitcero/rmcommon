@@ -12,12 +12,12 @@
 // modify it under the terms of the GNU General Public License as
 // published by the Free Software Foundation; either version 2 of
 // the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public
 // License along with this program; if not, write to the Free
 // Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
@@ -56,10 +56,10 @@ class RMFormAvatarField extends RMFormElement
 		$this->_showtype = $type;
 		$this->_cols = $cols;
         $this->_onlyuser = $user;
-		
+
 		if (isset($_REQUEST[$this->getName()])){
 			$this->_select = $_REQUEST[$this->getName()];
-		} else {		
+		} else {
 			$this->_select = $select;
 		}
 	}
@@ -114,13 +114,13 @@ class RMFormAvatarField extends RMFormElement
 	/**
 	 * Devuelve el identificador de la forma en que se muestran los elementos
 	 * @return int
-	 */ 
+	 */
 	public function getShowType(){
 		return $this->_showtype;
 	}
 	/**
 	 * Establece el número de columnas para el menu.
-	 * Cuando los grupos se mostrarán en forma de menú esta opción 
+	 * Cuando los grupos se mostrarán en forma de menú esta opción
 	 * permite especificar el número de columnas en las que se ordenarán.
 	 * @param int $value Número de columnas
 	 */
@@ -153,7 +153,7 @@ class RMFormAvatarField extends RMFormElement
 		$result = $db->query($sql);
 		$rtn = '';
 		$col = 1;
-		
+
 		$typeinput = $this->_multi ? 'checkbox' : 'radio';
 		$name = $this->_multi ? $this->getName().'[]' : $this->getName();
 
@@ -165,12 +165,12 @@ class RMFormAvatarField extends RMFormElement
 			$rtn .= ">"._RMS_CF_NOAVATAR."</label></td>";
 			$col++;
 			while ($row = $db->fetchArray($result)){
-				
+
 				if ($col>$this->_cols){
 					$rtn .= "</tr><tr>";
 					$col = 1;
 				}
-				
+
 				$rtn .= "<td align='left'><label><img src='".ABSURL."/uploads/avatars/$row[avatar_file]' align='absmiddle' /> <input type='$typeinput' name='$name' id='$name' value='$row[avatar_file]'";
 				if (is_array($this->_select)){
 					if (in_array($row['avatar_file'], $this->_select)){
@@ -178,11 +178,11 @@ class RMFormAvatarField extends RMFormElement
 					}
 				}
 				$rtn .= ">$row[avatar_name]</label>";
-				
+
 				$rtn .= "</td>";
-				
+
 				$col++;
-				
+
 			}
 			$rtn .= "</tr>";
 			$rtn .= "</table></div>";
@@ -194,8 +194,8 @@ class RMFormAvatarField extends RMFormElement
 							div = $('avatarimg');
 							div.innerHTML = \"<img src='".ABSURL."/uploads/avatars/\"+img+\"' />\";
 						}
-						
-						
+
+
 					</script>";
 			$rtn .= "<div id='avatarimg' style='float: right;'>";
 			if (count($this->_select)>0){
@@ -212,9 +212,9 @@ class RMFormAvatarField extends RMFormElement
 			} else {
 				$rtn .= " selected='selected'";
 			}
-			
+
 			$rtn .= ">"._RMS_CF_ALL."</option>";
-			
+
 			while ($row = $db->fetchArray($result)){
 				$rtn .= "<option value='$row[avatar_file]'";
 				if (is_array($this->_select)){
@@ -224,12 +224,11 @@ class RMFormAvatarField extends RMFormElement
 				}
 				$rtn .= ">".$row['avatar_name']."</option>";
 			}
-			
+
 			$rtn .= "</select>";
 		}
-		
+
 		return $rtn;
 	}
 }
 
-?>

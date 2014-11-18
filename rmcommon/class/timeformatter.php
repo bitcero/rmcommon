@@ -12,10 +12,10 @@ class RMTimeFormatter
 {
     private $time = 0;
     private $format = '';
-    
+
     /**
     * Initialize this class
-    * 
+    *
     * @param int|string $time <p>Unix timestamp or date in string format</p>
     * @param string $format <p>Format for time (e.g. Created on %M% %d%, %Y%)</p>
     */
@@ -23,11 +23,11 @@ class RMTimeFormatter
         $this->time = $time;
         $this->format = $format;
     }
-    
+
     /**
     * Singleton Method
     */
-    public function get(){
+    public static function get(){
         static $instance;
 
         if (!isset($instance)) {
@@ -60,12 +60,12 @@ class RMTimeFormatter
         $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
 
         $format = $format=='' ? $this->format : $format;
-        
+
         if ($format=='' || $time<0){
             trigger_error(__('You must provide a valid time and format value to use RMTimeFormatter::format() method','rmcommon'));
-            return;
+            return null;
         }
-        
+
         $find = array(
             '%d%', // Day number
             '%D%', // Day name
@@ -78,7 +78,7 @@ class RMTimeFormatter
             '%i%', // Minute
             '%s%' // Second
         );
-        
+
         $replace = array(
             date('d', $time),
             $this->days($time),
@@ -93,22 +93,22 @@ class RMTimeFormatter
         );
 
 
-        
+
         return str_replace($find, $replace, $format);
-        
+
     }
-    
+
     /**
     * Day name for time formatting
-    * 
+    *
     * @param int $time
     * @return string Day name
     */
     public function days($time = 0){
-        
+
         $time = $time<=0 ? $this->time : $time;
-        if($time<=0) return;
-        
+        if($time<=0) return null;
+
         $days = array(
             __('Sunday','rmcommon'),
             __('Monday','rmcommon'),
@@ -118,15 +118,15 @@ class RMTimeFormatter
             __('Friday','rmcommon'),
             __('Saturday','rmcommon')
         );
-        
+
         return $days[date("w", $time)];
-        
+
     }
-    
+
     public function months($time=0){
         $time = $time<=0 ? $this->time : $time;
-        if($time<=0) return;
-        
+        if($time<=0) return null;
+
         $months = array(
             __('January', 'rmcommon'),
             __('February', 'rmcommon'),
@@ -141,10 +141,10 @@ class RMTimeFormatter
             __('November', 'rmcommon'),
             __('December', 'rmcommon'),
         );
-        
+
         return $months[date('n', $time)-1];
-        
+
     }
-    
-    
+
+
 }
