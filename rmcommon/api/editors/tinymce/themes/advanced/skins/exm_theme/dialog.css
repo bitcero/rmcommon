@@ -27,9 +27,9 @@ input.checkbox {border:1px none #000000; background:transparent; vertical-align:
 
 /* Buttons */
 #insert, #cancel, #apply, .mceActionPanel .button, input.mceButton, .updateButton {
-    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -moz-box-shadow:inset 0 1px 0 0 #ffffff;
+    -webkit-box-shadow:inset 0 1px 0 0 #ffffff;
+    box-shadow:inset 0 1px 0 0 #ffffff;
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f8f8f8), color-stop(1, #e6e6e6) );
     background:-moz-linear-gradient( center top, #f8f8f8 5%, #e6e6e6 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8', endColorstr='#e6e6e6');
@@ -45,7 +45,7 @@ input.checkbox {border:1px none #000000; background:transparent; vertical-align:
     font-weight:bold;
     padding:4px 10px;
     text-decoration:none;
-    text-shadow:1px 1px 0px #ffffff;
+    text-shadow:1px 1px 0 #ffffff;
     text-transform: uppercase;
     cursor: pointer;
     line-height: 1.4em;
@@ -59,16 +59,16 @@ input.checkbox {border:1px none #000000; background:transparent; vertical-align:
     background-color:#e6e6e6;
 }
 #insert{
-    -moz-box-shadow:inset 0px 1px 0px 0px #ffcb90;
-    -webkit-box-shadow:inset 0px 1px 0px 0px #ffcb90;
-    box-shadow:inset 0px 1px 0px 0px #ffcb90;
+    -moz-box-shadow:inset 0 1px 0 0 #ffcb90;
+    -webkit-box-shadow:inset 0 1px 0 0 #ffcb90;
+    box-shadow:inset 0 1px 0 0 #ffcb90;
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe9620), color-stop(1, #f57003) );
     background:-moz-linear-gradient( center top, #fe9620 5%, #f57003 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe9620', endColorstr='#f57003');
     background-color:#fe9620;
     border:1px solid #a3630a;
     color:#471f01;
-    text-shadow:1px 1px 0px #f0bb90;
+    text-shadow:1px 1px 0 #f0bb90;
 }
 #insert:hover{
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f57003), color-stop(1, #fe9620) );
@@ -77,16 +77,16 @@ input.checkbox {border:1px none #000000; background:transparent; vertical-align:
     background-color:#f57003;
 }
 #apply{
-    -moz-box-shadow:inset 0px 1px 0px 0px #bfdbf3;
-    -webkit-box-shadow:inset 0px 1px 0px 0px #bfdbf3;
-    box-shadow:inset 0px 1px 0px 0px #bfdbf3;
+    -moz-box-shadow:inset 0 1px 0 0 #bfdbf3;
+    -webkit-box-shadow:inset 0 1px 0 0 #bfdbf3;
+    box-shadow:inset 0 1px 0 0 #bfdbf3;
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7db6e5), color-stop(1, #528ece) );
     background:-moz-linear-gradient( center top, #7db6e5 5%, #528ece 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db6e5', endColorstr='#528ece');
     background-color:#7db6e5;
     border:1px solid #0076a9;
     color:#163c61;
-    text-shadow:1px 1px 0px #99bddb;
+    text-shadow:1px 1px 0 #99bddb;
 }
 #apply:hover{
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #528ece), color-stop(1, #7db6e5) );

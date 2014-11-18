@@ -144,7 +144,7 @@ div.form_users_container ul li{
 div.form_users_container ul li:hover{
 	background: rgba(0,0,0,0.05);
 	color: #222;
-    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
 }
 div.form_users_container ul li input{
 
@@ -221,7 +221,7 @@ div.form_container label.hidden{
 }
 
 .subpages-container .sub-item{
-    
+
 }
 .subpages-container .sub-item label{
     padding: 2px 0;

@@ -381,7 +381,7 @@ th, .th{
     color: #fff;
     font-weight: bold;
     background: #436D92 url(../images/bgth.png) repeat-x top;
-    text-shadow: 0px 0px 2px #000;
+    text-shadow: 0 0 2px #000;
     font-family: tahoma, verdana, arial, sans-serif;
 }
 .outer div.th:first-child{

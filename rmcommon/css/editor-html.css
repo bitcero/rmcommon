@@ -4,7 +4,7 @@
 * @author: Eduardo Cortés <i.bitcero@gmail.com>
 */
 div.ed-container{
-	
+
 }
 div.ed-container div.quicktags{
 	background: #f9f9f9;
@@ -19,14 +19,14 @@ div.ed-container div.quicktags button{
     font-size: 0.9em;
     color: #333;
     border: 1px solid rgba(0,0,0,0.1);
-    margin: 2px 0px 2px 2px;
+    margin: 2px 0 2px 2px;
     font-family: Tahoma, Arial, Helvetica, sans-serif;
 }
 div.ed-container div.quicktags button:hover{
     border-color: rgba(0,0,0,0.25);
 }
 div.ed-container div.txtarea_container{
-	
+
 }
 div.ed-container textarea{
     font-family: Tahoma, Geneva, sans-serif;
