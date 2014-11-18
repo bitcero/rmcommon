@@ -71,7 +71,7 @@ class RMTemplate
 	    if (!function_exists("xoops_cp_header") && !$cuSettings->jquery) return;
         $this->version = str_replace(" ", '-', RMCVERSION);
         $this->add_jquery(true);
-        
+
     }
 
     /**
@@ -87,11 +87,11 @@ class RMTemplate
 	    }
 
         return $instance;
-        
+
     }
 
     /**
-    * 
+    *
     */
     public function header(){
 
@@ -104,7 +104,7 @@ class RMTemplate
     }
 
 
-    
+
     public function footer(){
         global $xoopsModule,
                $cuSettings,
@@ -156,7 +156,7 @@ class RMTemplate
         }
 
     }
-    
+
     /**
     * Get a template from Current RMCommon Theme
     * @param string Template file name
@@ -165,59 +165,59 @@ class RMTemplate
     * @param string Plugin name, only when type = plugin
     * @return string Template path
     */
-    public function get_template($file, $type='module',$module='rmcommon',$plugin=''){
+    public static function get_template($file, $type='module',$module='rmcommon',$plugin=''){
 		global $cuSettings, $xoopsConfig;
-        
-        
+
+
         $type = $type=='' ? 'module' : $type;
-        
+
         if (!function_exists("xoops_cp_header")){
-            
+
             $theme = $xoopsConfig['theme_set'];
             $where = XOOPS_THEME_PATH.'/'.$theme;
             $where .= $type=='module' ? '/modules/' : '/'.$plugin.'s/';
             $where .= $module.($plugin!='' ? '/'.$plugin : '');
 
             if(is_file($where.'/'.$file)) return $where.'/'.$file;
-            
+
             $where = XOOPS_ROOT_PATH.'/modules/'.$module.'/templates';
             $where .= $type!='module' ? "/$type" : '';
             $where .= "/$file";
-            
-            
+
+
             if(is_file($where)) return $where;
 
         }
-		
+
 		$theme = isset($cuSettings->theme) ? $cuSettings->theme : 'default';
-		
+
 		$where = $type=='module' ? 'modules/'.$module : ($type=='plugin' ? $module.'/'.$plugin : 'modules/rmcommon');
-        
+
 		$lpath = RMCPATH.'/themes/'.$theme.'/'.$where.'/'.$file;
 
 		if (!is_dir(RMCPATH.'/themes/'.$theme)){
 			$theme = 'default';
 		}
-		
+
 		if (file_exists($lpath))
 			return $lpath;
-		
+
 		if ($type=='plugin'){
 			return RMCPATH.'/plugins/'.$plugin.'/templates/'.$file;
 		} else {
 			return XOOPS_ROOT_PATH.'/'.$where.'/templates/'.$file;
 		}
-		
+
     }
-    
+
     /**
     * Set the location identifier for current page
     * This identifier will help to RMCommon to find widgets, forms, etc
     */
     public function location_id($id){
-		
+
     }
-    
+
     /**
     * Add a help lint to manage diferents sections
     * @param string Link to help resource
@@ -227,7 +227,7 @@ class RMTemplate
         //$this->add_help($caption, $link);
         $this->add_help(__('Help','rmcommon'),$link);
     }
-    
+
     public function help($single = 0){
         if($single)
 			return $this->help_link[0]['link'];
@@ -247,7 +247,7 @@ class RMTemplate
             'link' => $link
         );
     }
-    
+
     /**
     * Add a message to show in theme
     * @param string Message to show
@@ -539,7 +539,7 @@ class RMTemplate
             $this->add_script( 'jquery.min.js', 'rmcommon', array( 'directory' => 'include' ) );
         else
             $this->add_script( "http://code.jquery.com/jquery-latest.js" );
-            
+
         if ($ui)
             $this->add_script( 'jquery-ui.min.js', 'rmcommon', array( 'directory' => 'include' ) );
     }
@@ -675,7 +675,7 @@ class RMTemplate
     }
     /**
     * Get a single template var
-    * 
+    *
     * @param string Var name
     * @return any
     */
@@ -685,11 +685,11 @@ class RMTemplate
 		}
 		return false;
     }
-    
+
     /**
     * Add option to menu. This method is only functional in admin section or with the themes
     * that support this feature
-    * 
+    *
     * @param string Menu parent name
     * @param string Caption
     * @param string Option link url
@@ -698,14 +698,14 @@ class RMTemplate
     */
     public function add_menu_option($caption, $link, $icon='', $class='', $target=''){
         if ($caption=='' || $link=='') return;
-        
+
         $id = crc32($link);
-        
+
         if (isset($this->tpl_menus[$id])) return;
-        
+
         $this->tpl_menus[$id] = array('caption'=>$caption,'link'=>$link,'icon'=>$icon,'class'=>$class,'target'=>$target, 'type'=>'normal');
     }
-    
+
     public function add_separator(){
 		$this->tpl_menus = array('type'=>'separator');
     }
@@ -713,12 +713,12 @@ class RMTemplate
     * Get all menu options
     */
     public function menu_options(){
-    	
+
     	$this->tpl_menus = RMEvents::get()->run_event('rmcommon.menus_options',$this->tpl_menus, $this);
-    	
+
 		return $this->tpl_menus;
     }
-    
+
     /**
     * Menu Widgets
     */
@@ -732,7 +732,7 @@ class RMTemplate
             'options'   => $options
         );
     }
-    
+
     public function get_menus(){
         return $this->menus;
     }
@@ -784,18 +784,18 @@ class RMTemplate
         }
 
     }
-    
+
     public function get_toolbar(){
 		return $this->toolbar;
     }
-    
+
     /**
     * Add metas to head
     */
     public function add_meta($name, $content){
-        
+
         $this->metas[$name] = $content;
-        
+
     }
     public function get_metas(){
         return $this->metas;
@@ -898,5 +898,5 @@ class RMTemplate
 
         return $this->generate_url($sheet, $element, 'css');
     }
-    
+
 }
