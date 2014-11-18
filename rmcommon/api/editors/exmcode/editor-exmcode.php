@@ -5,10 +5,10 @@
 * http://eduardocortes.mx
 */
 <?php
-	require '../../../../../mainfile.php'; 
-	XoopsLogger::getInstance()->activated = false;
-	XoopsLogger::getInstance()->renderingEnabled = false;
-	$lang = is_file(ABSPATH.'/api/editors/exmcode/language/'.EXMLANG.'.js') ? EXMLANG : 'en_US';
+    require '../../../../../mainfile.php';
+    XoopsLogger::getInstance()->activated = false;
+    XoopsLogger::getInstance()->renderingEnabled = false;
+    $lang = is_file(ABSPATH.'/api/editors/exmcode/language/'.EXMLANG.'.js') ? EXMLANG : 'en_US';
     $id = rmc_server_var($_GET, 'id', '');
 ?>
 
@@ -114,20 +114,20 @@ var exmCode<?php echo ucfirst($id); ?> = {
         // Cargamos los plugins
         $path = RMCPATH.'/api/editors/exmcode/plugins';
         $dir = opendir($path);
-        while(FALSE !== ($file = readdir($dir))){
+        while (FALSE !== ($file = readdir($dir))) {
             if ($file=='.' || $file=='..') continue;
             if (!is_dir($path.'/'.$file)) continue;
             if (!is_file($path.'/'.$file.'/plugin.js')) continue;
-            
+
             include $path.'/'.$file.'/plugin.js';
-            
+
         }
-        
+
         // New plugins from other components
         RMEvents::get()->run_event('rmcommon.load.exmcode.plugins', $id);
-        
+
         ?>
-        
+
         //x.add_separator('top');
         x.add_button('bottom', {
             name : 'bottom',
@@ -154,54 +154,54 @@ var exmCode<?php echo ucfirst($id); ?> = {
             cmd_type : 'auto'
         });
         //x.add_separator('bottom');
-        
+
         var buttons = new Array();
         buttons = buttons.concat(<?php echo $id; ?>_buttons.split(','));
         plugs = <?php echo $id; ?>_plugins;
-        
-        for(i=0;i<buttons.length;i++){
-            
+
+        for (i=0;i<buttons.length;i++) {
+
             buttons[i] = buttons[i].replace(/^\s*|\s*$/g,"");
-            
-            if (buttons[i]=='separator_t' || buttons[i]=='separator_b'){
+
+            if (buttons[i]=='separator_t' || buttons[i]=='separator_b') {
                 x.add_separator(buttons[i]=='separator_t'?'top':'bottom');
                 continue;
             }
-            
+
             if (x.buttons[buttons[i]]==undefined) continue;
             d = x.buttons[buttons[i]];
 
             if (d.plugin!=undefined && plugs[d.plugin]==undefined) continue;
-            
+
                 var b = '<span class="buttons" id="<?php echo $id; ?>-'+d.name+'" accesskey="'+d.key+'" title="'+d.title+'" onclick="'+x.name+'.button_press(\''+d.name+'\');">';
                 b += "<span>";
-                if (d.icon!=undefined){
+                if (d.icon!=undefined) {
                     b += "<img src='"+d.icon+"' alt='' />";
                 }
-                if (d.type=='dropdown'){
+                if (d.type=='dropdown') {
                     b += "<span class='dropdown'><img src='"+x.editor_path+"/images/down.png' alt='' /></span>";
                 }
                 b += (d.text!=undefined ? d.text : '')+"</span>";
                 b += "</span>";
-                
-                if (d.row == 'top'){
+
+                if (d.row == 'top') {
                     $("#<?php echo $id; ?>-ec-container .row_top").append(b);
                 } else {
                     $("#<?php echo $id; ?>-ec-container .row_bottom").append(b);
                 }
-        
+
         }
-        
+
 	},
     add_button : function(n,d){
-        
+
         var x = this;
         x.buttons = x.buttons || {};
         x.buttons[n] = d;
-        
+
     },
     add_separator : function(w){
-        if (w == 'top'){
+        if (w == 'top') {
             $("#<?php echo $id; ?>-ec-container .row_top").append('<span class="separator"></span>');
         } else {
             $("#<?php echo $id; ?>-ec-container .row_bottom").append('<span class="separator"></span>');
@@ -210,33 +210,34 @@ var exmCode<?php echo ucfirst($id); ?> = {
     add_plugin : function(n,d){
         var x = this;
         if (x[n]!=undefined) return;
-        
+
         plugs = <?php echo $id; ?>_plugins;
         if (plugs[n]==undefined) return;
-        
+
         x[n] = d;
 
         if (x[n].init!=undefined) x[n].init(x);
-        
+
     },
     button_press : function(n){
         var x = this;
         if (x.buttons[n]=='undefined') return;
-        
-        if (x.buttons[n].cmd_type=='auto'){
+
+        if (x.buttons[n].cmd_type=='auto') {
             x.buttons[n].cmd(x);
+
             return;
         }
-        
+
         plugin = x.buttons[n].plugin;
         x.command(plugin, x.buttons[n].cmd);
-        
+
     },
     command : function(n, c, p){
         var x = this;
-        
+
         if (x[n]==undefined) return;
-        
+
         eval("x."+n+"."+c+"(x,p)");
     },
     execute : function(c){
@@ -245,6 +246,7 @@ var exmCode<?php echo ucfirst($id); ?> = {
     },
     selection: function(){
     	x = this;
+
         return $("#"+x.ed).getSelection();
     },
     insertText: function(what){
@@ -254,29 +256,29 @@ var exmCode<?php echo ucfirst($id); ?> = {
         selected = $("#"+x.ed).getSelection();
         if(selected.text==null)
             selected.text = '';
-            
+
         text = what.replace('%replace%', selected.text);
         $("#"+x.ed).replaceSelection(text, true);
-            
+
         var cursorPos = 0;
-        if (selected.text==''){
+        if (selected.text=='') {
             cursorPos = what.indexOf("%replace%");
             cursorPos = e.selectionStart + (cursorPos < 0 ? text.length : cursorPos);
             e.selectionStart = cursorPos;
         } else {
             cursorPos = selected.start + text.length;
         }
-        
+
         //cursorPos = cursorPos<0 || cursorPos<=selected.start ? (selected.start + text.length) : cursorPos;
 
         e.selectionEnd = cursorPos;
         e.scrollTop = scrollTop;
         $("#"+x.ed).focus();
-        
+
     },
     popup : function(d){
         x = this;
-        if ($("#"+x.ed+"-ed-container .popup").length<=0){
+        if ($("#"+x.ed+"-ed-container .popup").length<=0) {
             var pop = '<div class="popblocker"></div><div class="popup">';
             pop += '<div class="titlebar window-title cu-titlebar">';
             pop += '<span class="buttons">';
@@ -294,38 +296,38 @@ var exmCode<?php echo ucfirst($id); ?> = {
         $(pn).css('width', w+'px');
         $(pn).css('height', h+'px');
         $(pn).css({
-            top: '50%', 
-            left: '50%', 
-            'margin-left': '-'+(w/2)+'px', 
+            top: '50%',
+            left: '50%',
+            'margin-left': '-'+(w/2)+'px',
             'margin-top': '-'+(h/2)+'px',
             'position': 'fixed'
         });
         $(pn+' .title').html(d.title!=undefined?d.title:'');
         $(pn+' .content').css('height',(h-39)+'px');
-        
-        if (!d.single){
+
+        if (!d.single) {
         	d.url = encodeURIComponent(d.url).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
         	var url = encodeURIComponent(x.url).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
-        
+
         	var params = '&id='+x.ed+'&name='+x.name+'&eurl='+url+'&lang=<?php echo _LANGCODE; ?>';
         	params += '&theme=<?php echo $rmc_config['theme']; ?>';
         	params += '&version=<?php echo RMCVERSION; ?>';
         	$(pn+' iframe').attr('src', x.url+'/urls.php?url='+d.url+params);
         } else {
-            
+
             var con = d.url.indexOf('?') != -1 ? '&' : '?';
-            
+
         	$(pn+' iframe').attr('src', d.url+con+'type=exmcode&name='+x.name);
         }
         if (d.maximizable!=undefined&&d.maximizable) $(pn+' .maximize').show();
-        
+
         $("#"+x.ed+"-ed-container .popblocker").show(10, function(){
             $(pn).show();
         });
-        
+
         w = $(pn).width();
         h = $(pn).height();
-        
+
         $(pn+' .restore').click(function(){
             x.restore(w,h);
         });
@@ -342,7 +344,7 @@ var exmCode<?php echo ucfirst($id); ?> = {
         var pn = "#"+x.ed+"-ed-container .popup";
         $(pn+' .maximize').hide();
         $(pn+' .restore').show();
-        
+
         $(pn).animate({
             'width': '100%',
             'height': '100%',
@@ -353,14 +355,14 @@ var exmCode<?php echo ucfirst($id); ?> = {
             $(pn+' .content').css('height',$(window).height()-39+'px');
         });
         $(pn).addClass('maximized');
-        
+
     },
     restore: function(w,h){
         x = this;
         var pn = "#"+x.ed+"-ed-container .popup";
         $(pn+' .maximize').show();
         $(pn+' .restore').hide();
-        
+
         $(pn).animate({
             'width': w+'px',
             'height': h+'px',

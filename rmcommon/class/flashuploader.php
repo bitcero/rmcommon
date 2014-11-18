@@ -14,7 +14,7 @@ class RMFlashUploader
     public $name = '';
     /**
     * Constructor
-    * 
+    *
     * @param string Name of instance
     * @param string Target uploader url (e.g. uploader.php)
     * @param array SWFUploader settings
@@ -70,16 +70,16 @@ class RMFlashUploader
             'onUploadStart'         => '',
             'onUploadSuccess'       => ''
         );
-        
-        foreach ($settings as $key => $value){
+
+        foreach ($settings as $key => $value) {
             if (!isset($this->settings[$key])) continue;
             $this->settings[$key] = $value;
         }
-        
+
         $this->name = $name;
-        
+
     }
-    
+
     public function add_setting($name, $value){
 
         $convert = array(
@@ -101,41 +101,42 @@ class RMFlashUploader
 
         if (!isset($this->settings[$name])) return false;
         $this->settings[$name] = $value;
+
         return true;
-        
+
     }
-    
+
     public function get_setting($name){
         if (!isset($this->settings[$name])) return false;
-        
         return $this->settings[$name];
     }
-    
+
     /**
     * Add several settings items at once
-    * 
+    *
     * @param array $settings
     */
     public function add_settings($settings){
-        foreach ($settings as $key => $value){
+        foreach ($settings as $key => $value) {
             if (!isset($this->settings[$key])) continue;
             $this->settings[$key] = $value;
         }
     }
-    
+
     public function settings(){
         return $this->settings;
     }
-    
+
     public function render(){
-        
+
         RMTemplate::get()->add_script('swfobject.js', 'rmcommon', array('directory' => 'include') );
         RMTemplate::get()->add_script('jquery.uploadify.js', 'rmcommon', array('directory' => 'include') );
         RMTemplate::get()->add_style('uploadify.css', 'rmcommon');
-        
+
         ob_start();
         include RMTemplate::get()->get_template('uploadify.js.php', 'module', 'rmcommon');
         $script = ob_get_clean();
+
         return $script;
     }
 }

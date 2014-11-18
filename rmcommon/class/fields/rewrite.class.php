@@ -22,7 +22,6 @@ class RMFormRewrite extends RMFormElement
     }
 
     public function id(){
-
         return TextCleaner::getInstance()->sweetstring( $this->getName() );
 
     }
@@ -36,7 +35,7 @@ class RMFormRewrite extends RMFormElement
         $objects = $module_handler->getObjects();
         $modules = array();
 
-        foreach( $objects as $mod ){
+        foreach ($objects as $mod) {
 
             if( !$mod->getInfo('rewrite') || $mod->getVar('dirname') == 'rmcommon' )
                 continue;

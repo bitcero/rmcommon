@@ -123,7 +123,7 @@
         <input type="hidden" name="XOOPS_TOKEN_REQUEST" id="xoops-token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
     </div>
     <div id="library-content" class="loading">
-        
+
     </div>
 </div>
 

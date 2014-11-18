@@ -48,7 +48,7 @@ class ActiveSelect
 
         $parameters = $this->parameters;
 
-        foreach ( $parameters as $attr => $value ){
+        foreach ($parameters as $attr => $value) {
             if ( 'class' == $attr )
                 $class .= $class != '' ? ' '.$value : $value;
             elseif ( 'value' == $attr )
@@ -68,7 +68,7 @@ class ActiveSelect
         if ( $default_option != '' )
             $input .= '<option value=""' . ( $selected == '' ? ' selected' : '').'>' . $default_option . '</option>';
 
-        foreach ( $options as $value => $text ){
+        foreach ($options as $value => $text) {
             $input .= '<option value="' . $value . '"' . ( $selected == $value ? ' selected' : '').'>' . $text . '</option>';
         }
 

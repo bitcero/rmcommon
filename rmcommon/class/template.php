@@ -68,7 +68,7 @@ class RMTemplate
     function __construct(){
         global $cuSettings;
 
-	    if (!function_exists("xoops_cp_header") && !$cuSettings->jquery) return;
+        if (!function_exists("xoops_cp_header") && !$cuSettings->jquery) return;
         $this->version = str_replace(" ", '-', RMCVERSION);
         $this->add_jquery(true);
 
@@ -84,7 +84,7 @@ class RMTemplate
 
         if (!isset($instance)) {
             $instance = new RMTemplate();
-	    }
+        }
 
         return $instance;
 
@@ -98,12 +98,10 @@ class RMTemplate
         global $xoopsConfig, $xoopsOption;
 
         if ( defined('XOOPS_CPFUNC_LOADED' ) )
-		    xoops_cp_header(); //ob_start();
+            xoops_cp_header(); //ob_start();
         else
             include XOOPS_ROOT_PATH . '/header.php';
     }
-
-
 
     public function footer(){
         global $xoopsModule,
@@ -115,7 +113,7 @@ class RMTemplate
                $xoopsUser,
                $xoopsTpl;
 
-        if( defined( 'XOOPS_CPFUNC_LOADED' ) ){
+        if ( defined( 'XOOPS_CPFUNC_LOADED' ) ) {
 
             $content = ob_get_clean();
             ob_start();
@@ -123,7 +121,7 @@ class RMTemplate
             $cuSettings = RMSettings::cu_settings();
             $theme = isset( $cuSettings->theme ) ? $cuSettings->theme : 'default';
 
-            if ( !file_exists( RMCPATH.'/themes/'.$theme.'/admin-gui.php' ) ){
+            if ( !file_exists( RMCPATH.'/themes/'.$theme.'/admin-gui.php' ) ) {
                 $theme = 'twop6';
             }
 
@@ -131,8 +129,8 @@ class RMTemplate
 
             // Check if there are redirect messages
             $redirect_messages = array();
-            if ( isset( $_SESSION['redirect_message'] ) ){
-                foreach ( $_SESSION['redirect_message'] as $msg ){
+            if ( isset( $_SESSION['redirect_message'] ) ) {
+                foreach ($_SESSION['redirect_message'] as $msg) {
                     $redirect_messages[] = $msg;
                 }
                 unset( $_SESSION['redirect_message'] );
@@ -166,12 +164,11 @@ class RMTemplate
     * @return string Template path
     */
     public static function get_template($file, $type='module',$module='rmcommon',$plugin=''){
-		global $cuSettings, $xoopsConfig;
-
+        global $cuSettings, $xoopsConfig;
 
         $type = $type=='' ? 'module' : $type;
 
-        if (!function_exists("xoops_cp_header")){
+        if (!function_exists("xoops_cp_header")) {
 
             $theme = $xoopsConfig['theme_set'];
             $where = XOOPS_THEME_PATH.'/'.$theme;
@@ -184,29 +181,28 @@ class RMTemplate
             $where .= $type!='module' ? "/$type" : '';
             $where .= "/$file";
 
-
             if(is_file($where)) return $where;
 
         }
 
-		$theme = isset($cuSettings->theme) ? $cuSettings->theme : 'default';
+        $theme = isset($cuSettings->theme) ? $cuSettings->theme : 'default';
 
-		$where = $type=='module' ? 'modules/'.$module : ($type=='plugin' ? $module.'/'.$plugin : 'modules/rmcommon');
+        $where = $type=='module' ? 'modules/'.$module : ($type=='plugin' ? $module.'/'.$plugin : 'modules/rmcommon');
 
-		$lpath = RMCPATH.'/themes/'.$theme.'/'.$where.'/'.$file;
+        $lpath = RMCPATH.'/themes/'.$theme.'/'.$where.'/'.$file;
 
-		if (!is_dir(RMCPATH.'/themes/'.$theme)){
-			$theme = 'default';
-		}
+        if (!is_dir(RMCPATH.'/themes/'.$theme)) {
+            $theme = 'default';
+        }
 
-		if (file_exists($lpath))
-			return $lpath;
+        if (file_exists($lpath))
+            return $lpath;
 
-		if ($type=='plugin'){
-			return RMCPATH.'/plugins/'.$plugin.'/templates/'.$file;
-		} else {
-			return XOOPS_ROOT_PATH.'/'.$where.'/templates/'.$file;
-		}
+        if ($type=='plugin') {
+            return RMCPATH.'/plugins/'.$plugin.'/templates/'.$file;
+        } else {
+            return XOOPS_ROOT_PATH.'/'.$where.'/templates/'.$file;
+        }
 
     }
 
@@ -230,16 +226,17 @@ class RMTemplate
 
     public function help($single = 0){
         if($single)
-			return $this->help_link[0]['link'];
-		else
-			return $this->help_link;
+
+            return $this->help_link[0]['link'];
+        else
+            return $this->help_link;
     }
 
     /**
      * Add a help item to list of help links. This links will be shown in admin GUI only.
      *
      * @param string $caption Title of link
-     * @param string $link URL to load when this link is clicked
+     * @param string $link    URL to load when this link is clicked
      */
     public function add_help($caption, $link){
         $this->help_link[] = array(
@@ -254,14 +251,14 @@ class RMTemplate
     * @param int Level of message (1 will show error)
     */
     public function add_message($message, $level=0){
-		$this->messages[] = array('text'=>$message, 'level'=>$level);
+        $this->messages[] = array('text'=>$message, 'level'=>$level);
     }
     /**
     * Get all messages
     * @return array
     */
     public function get_messages(){
-		return $this->messages;
+        return $this->messages;
     }
 
     /**
@@ -270,7 +267,7 @@ class RMTemplate
      * @param string|array $head Elements to add
      */
     public function add_head($head){
-	// Dynamic header (It must be be an array)
+    // Dynamic header (It must be be an array)
         if (is_array($head)):
             array_merge($this->tpl_head, $head);
         else:
@@ -282,7 +279,7 @@ class RMTemplate
     * @return array
     */
     public function get_head(){
-		return $this->tpl_head;
+        return $this->tpl_head;
     }
 
     /**
@@ -359,10 +356,10 @@ class RMTemplate
      * &lt;script type="text/javascript" src="script url" data-something="arbitrary-content" rel="script"&gt;&lt;/script&gt;
      * </pre>
      *
-     * @param string $file File name or full URL
+     * @param string $file    File name or full URL
      * @param string $element Owner element name
-     * @param array $options Array with options to be added to script
-     * @param string $owner Owner type for the script|style. Can be 'theme' or empty
+     * @param array  $options Array with options to be added to script
+     * @param string $owner   Owner type for the script|style. Can be 'theme' or empty
      */
     public function add_script($file, $element = '', $options = array(), $owner = ''){
 
@@ -371,6 +368,7 @@ class RMTemplate
         $id = TextCleaner::getInstance()->sweetstring($file);
 
         if( $file == 'jquery.min.js' && $element == 'rmcommon' && !$cuSettings->jquery)
+
             return;
 
         // Check if file is a full URL
@@ -382,12 +380,12 @@ class RMTemplate
         if( $element == '' )
             $remote_script = 1;
 
-        if( $remote_script > 0 ){
+        if ($remote_script > 0) {
 
             $id = TextCleaner::getInstance()->sweetstring(preg_replace("/.*\/(.*)$/", "$1", $file));
             $script_url = $file;
 
-        } else{
+        } else {
 
             $id = TextCleaner::getInstance()->sweetstring($element.$file);
             $script_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-js' : 'js', $directory, $version);
@@ -395,6 +393,7 @@ class RMTemplate
         }
 
         if( $script_url == '' )
+
             return;
 
         // Add the new script to array (replacing old if exists)
@@ -417,26 +416,26 @@ class RMTemplate
     /**
      * Create the URL for scripts or styles according to given parameters.
      *
-     * @param string $file File to locate
-     * @param string $element Module or plugin
-     * @param string $type Can be 'js' or 'css', 'theme-js' or 'theme-css'
-     * @param string $directory Subdirectory where the script|style will be searched
-     * @param string $version The version that will be added to script|style URL
+     * @param  string $file      File to locate
+     * @param  string $element   Module or plugin
+     * @param  string $type      Can be 'js' or 'css', 'theme-js' or 'theme-css'
+     * @param  string $directory Subdirectory where the script|style will be searched
+     * @param  string $version   The version that will be added to script|style URL
      * @return string
      */
     public function generate_url($file, $element, $type = 'js', $directory = '', $version = ''){
         global $xoopsConfig, $rmEvents, $cuSettings;
 
         if($file=='')
-            return '';
 
+            return '';
 
         $version = $version=='' ? str_replace(" ", "-", RMCVERSION) : $version;
 
-        if( $type == 'js' || $type == 'css' ){
+        if ($type == 'js' || $type == 'css') {
             // Possibles paths in order of importance
             // 1. Theme
-            if ( defined( 'XOOPS_CPFUNC_LOADED' ) ){
+            if ( defined( 'XOOPS_CPFUNC_LOADED' ) ) {
                 $paths['theme'] = RMCPATH . '/themes/' . $cuSettings->theme . "/$type/" . $element;
                 $paths['theme'] .= $directory != '' ? '/' . $directory : '';
             } else {
@@ -446,7 +445,6 @@ class RMTemplate
 
             $paths['theme'] .= '/' . $file;
 
-
             // 2. Module
             $paths['module'] = XOOPS_ROOT_PATH . '/modules/' . $element;
             $paths['module'] .=  $directory != '' ? '/' . $directory : '';
@@ -455,7 +453,7 @@ class RMTemplate
             $type = $type == 'theme-css' ? 'css' : 'js';
 
             // Add path for theme script|style
-            if(defined('XOOPS_CPFUNC_LOADED')){
+            if (defined('XOOPS_CPFUNC_LOADED')) {
                 $paths['theme'] = RMCPATH . '/themes/' . $cuSettings->theme;
             } else {
                 $paths['theme'] = XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'];
@@ -468,7 +466,7 @@ class RMTemplate
         // Allow other components to add new paths where scripts can be searched
         $paths = RMEvents::get()->run_event('rmcommon.scripts.paths', $paths, $file, $element, $directory, $version);
 
-        foreach($paths as $path){
+        foreach ($paths as $path) {
 
             if(!file_exists(preg_replace("/(.*)(\?.*)$/", '$1', $path)))
                 continue;
@@ -476,9 +474,11 @@ class RMTemplate
             $url = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path);
             // Check if parameter 'version' exists in url
             if( !preg_match( "/.*(\?.*)$/", $url ) )
+
                 return $url . '?version=' . $version;
 
             if( !preg_match( "/.*(version=).*$/", $url ))
+
                 return $url . '&version=' . $version;
 
             return $url;
@@ -515,7 +515,7 @@ class RMTemplate
     public function head_scripts(){
         $ret = '<script type="text/javascript">'."\n";
 
-        foreach($this->tpl_hscripts as $script){
+        foreach ($this->tpl_hscripts as $script) {
 
             $ret .= $script."\n";
             $ret .= "//".str_repeat("-",20)."\n";
@@ -550,6 +550,7 @@ class RMTemplate
     public function get_scripts(){
         $ev = RMEvents::get();
         $this->tpl_scripts = $ev->run_event('rmcommon.get.scripts',$this->tpl_scripts);
+
         return $this->tpl_scripts;
     }
 
@@ -564,10 +565,10 @@ class RMTemplate
      * Add stylesheets to the HTML code according to given parameters.
      * This function allows to add styles from modules and themes, in a similar way to add_script() method.
      *
-     * @param string $file File to add. Can be a file name that exists locally, or a well formed URL.
+     * @param string $file    File to add. Can be a file name that exists locally, or a well formed URL.
      * @param string $element Name of the owner element. Can be the name of a module or a theme.
-     * @param array $options Additional parameters to add to style code.
-     * @param string $owner Type of owner element. Possible values can be 'theme' or empty;
+     * @param array  $options Additional parameters to add to style code.
+     * @param string $owner   Type of owner element. Possible values can be 'theme' or empty;
      */
     public function add_style($file, $element = '', $options = array(), $owner = ''){
 
@@ -584,7 +585,7 @@ class RMTemplate
         else
             $element = $element == '' ? ($xoopsModule ? $xoopsModule->getVar('dirname') : '') : $element;
 
-        if( $remote_script > 0 ){
+        if ($remote_script > 0) {
 
             $id = TextCleaner::getInstance()->sweetstring(preg_replace("/.*\/(.*)$/", "$1", $file));
             $style_url = $file;
@@ -596,12 +597,13 @@ class RMTemplate
 
         }
 
-        if ( isset($options['id']) && $options['id'] != '' ){
+        if ( isset($options['id']) && $options['id'] != '' ) {
             $id = $options['id'];
             unset($options['id']);
         }
 
         if( $style_url == '' )
+
             return;
 
         // Add the new script to array (replacing old if exists)
@@ -634,12 +636,13 @@ class RMTemplate
 
     }
 
-	/**
+    /**
    	* Get all styles stored in class
    	*/
     public function get_styles(){
         $ev = RMEvents::get();
         $this->tpl_styles = $ev->run_event('rmcommon.get.styles',$this->tpl_styles);
+
         return $this->tpl_styles;
     }
 
@@ -665,7 +668,7 @@ class RMTemplate
     * @param mixed Var valu
     */
     public function append($varname, $value){
-		$this->tpl_vars[$varname][] = $value;
+        $this->tpl_vars[$varname][] = $value;
     }
 
     /**
@@ -681,10 +684,11 @@ class RMTemplate
     * @return any
     */
     public function get_var($varname){
-		if (isset($this->tpl_vars[$varname])){
-			return $this->tpl_vars[$varname];
-		}
-		return false;
+        if (isset($this->tpl_vars[$varname])) {
+            return $this->tpl_vars[$varname];
+        }
+
+        return false;
     }
 
     /**
@@ -708,16 +712,16 @@ class RMTemplate
     }
 
     public function add_separator(){
-		$this->tpl_menus = array('type'=>'separator');
+        $this->tpl_menus = array('type'=>'separator');
     }
     /**
     * Get all menu options
     */
     public function menu_options(){
 
-    	$this->tpl_menus = RMEvents::get()->run_event('rmcommon.menus_options',$this->tpl_menus, $this);
+        $this->tpl_menus = RMEvents::get()->run_event('rmcommon.menus_options',$this->tpl_menus, $this);
 
-		return $this->tpl_menus;
+        return $this->tpl_menus;
     }
 
     /**
@@ -758,26 +762,26 @@ class RMTemplate
      *         )
      *     )
      * );</code>
-     * @param string|array $data <p>Could be a title that will be uses as caption for button or you can pass an array with all button properties</p>
-     * @param string $link <p>URL for link</p>
-     * @param string $icon <p>The icon could be a image URL relative to module path or a full URL.</p>
-     * @param string $location
-     * @param array $attributes <p>HTML attributes</p>
-     * @param array $options <p>Options to add to this tool</p>
+     * @param string|array $data       <p>Could be a title that will be uses as caption for button or you can pass an array with all button properties</p>
+     * @param string       $link       <p>URL for link</p>
+     * @param string       $icon       <p>The icon could be a image URL relative to module path or a full URL.</p>
+     * @param string       $location
+     * @param array        $attributes <p>HTML attributes</p>
+     * @param array        $options    <p>Options to add to this tool</p>
      */
     public function add_tool( $data, $link = '', $icon='', $location='', $attributes = array(), $options = array() ){
 
-        if ( is_array($data) ){
+        if ( is_array($data) ) {
 
             $this->toolbar[] = $data;
 
         } else {
 
             $this->toolbar[] = array(
-                'title'		 => $data,
-                'link'		 => $link,
-                'icon'		 => $icon,
-                'location'	 => $location,
+                'title'         => $data,
+                'link'         => $link,
+                'icon'         => $icon,
+                'location'     => $location,
                 'attributes' => $attributes,
                 'options'    => $options
             );
@@ -787,7 +791,7 @@ class RMTemplate
     }
 
     public function get_toolbar(){
-		return $this->toolbar;
+        return $this->toolbar;
     }
 
     /**
@@ -801,7 +805,6 @@ class RMTemplate
     public function get_metas(){
         return $this->metas;
     }
-
 
     /*
     DEPRECATED METHODS

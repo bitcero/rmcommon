@@ -15,13 +15,13 @@ $xoopsLogger->activated = false;
  */
 (function() {
     var DOM = tinymce.DOM;
-    
+
     tinymce.PluginManager.requireLangPack('exmsystem');
-    
+
     tinymce.create('tinymce.plugins.EXMSystem', {
-        
+
         <?php RMEvents::get()->run_event('rmcommon.tiny.plugin.controls'); ?>
-        
+
         init : function(ed, url){
             var t = this;
             var tbId1 = ed.getParam('exmsystem_adv_toolbar1','toolbar2');
@@ -29,10 +29,10 @@ $xoopsLogger->activated = false;
             var tbId3 = ed.getParam('exmsystem_adv_toolbar3','toolbar4');
             var moreHTML = '<img src="' + url + '/img/trans.gif" class="mceEXMmore mceItemNoResize" title="'+ed.getLang('exmsystem.exm_more_alt')+'" />';
             var nextpageHTML = '<img src="' + url + '/img/trans.gif" class="mceEXMnextpage mceItemNoResize" title="'+ed.getLang('exmsystem.exm_page_alt')+'" />';
-            
+
             /*if ( getUserSetting('hidetb', '0') == '1' )
                     ed.settings.exmsystem_adv_hidden = 0;*/
-            
+
             // Hides the specified toolbar and resizes the iframe
             ed.onPostRender.add(function() {
                 if ( ed.getParam('exmsystem_adv_hidden', 1) ) {
@@ -41,13 +41,13 @@ $xoopsLogger->activated = false;
                         DOM.hide(ed.controlManager.get(tbId2).id);
                     if(ed.controlManager.get(tbId3)!=undefined)
                         DOM.hide(ed.controlManager.get(tbId3).id);
-                    
+
                     t._resizeIframe(ed, tbId1, 28);
                     t._resizeIframe(ed, tbId2, 28);
                     t._resizeIframe(ed, tbId3, 28);
                 }
             });
-            
+
             // Register commands
             ed.addCommand('EXM_More', function() {
                 ed.execCommand('mceInsertContent', 0, moreHTML);
@@ -76,14 +76,14 @@ $xoopsLogger->activated = false;
                         DOM.hide(ed.controlManager.get(tbId2).id);
                     if(ed.controlManager.get(tbId3)!=undefined);
                         DOM.hide(ed.controlManager.get(tbId3).id);
-                    
+
                     t._resizeIframe(ed, tbId1, 28);
                     t._resizeIframe(ed, tbId2, 28);
                     t._resizeIframe(ed, tbId3, 28);
                     ed.settings.exmsystem_adv_hidden = 1;
                 }
             });
-            
+
             // EXM Icons plugin
             // Register commands
             ed.addCommand('mceExmIcons', function() {
@@ -96,7 +96,7 @@ $xoopsLogger->activated = false;
                     plugin_url : url
                 });
             });
-            
+
             // Register buttons
             ed.addButton('exm_more', {
                 title : 'exmsystem.exm_more_desc',
@@ -115,15 +115,15 @@ $xoopsLogger->activated = false;
                 image : url + '/img/toolbars.gif',
                 cmd : 'EXM_Adv'
             });
-            
+
             // Icons plugin
             // Register buttons
             ed.addButton('exm_icons', {
-                title : 'exmsystem.exm_icons_desc', 
-                cmd : 'mceExmIcons', 
+                title : 'exmsystem.exm_icons_desc',
+                cmd : 'mceExmIcons',
                 image : url+'/img/icon.png'
             });
-            
+
             // Add class "alignleft", "alignright" and "aligncenter" when selecting align for images.
             ed.addCommand('JustifyLeft', function() {
                 var n = ed.selection.getNode();
@@ -148,10 +148,10 @@ $xoopsLogger->activated = false;
                     ed.plugins.exmsystem.do_align(n, 'aligncenter');
                 else ed.editorCommands.mceJustify('JustifyCenter', 'center');
             });
-            
+
             // Add listeners to handle more break
             t._handleMoreBreak(ed, url);
-            
+
             <?php
                 // Incluimos los plugins y datos de otros módulos
                 // para crear botones y comandos en TinyMCE
@@ -159,10 +159,10 @@ $xoopsLogger->activated = false;
                 // funcional en el método init de tinymce
                 RMEvents::get()->run_event('rmcommon.tinymce.plugin.loading');
             ?>
-        
+
         },
-        
-    
+
+
         getInfo : function() {
             return {
                 longname : 'EXMSystem Plugin',
@@ -172,7 +172,7 @@ $xoopsLogger->activated = false;
                 version : '3.0'
             };
         },
-        
+
         // Internal functions
         do_align : function(n, a) {
             var P, DL, DIV, cls, c, ed = tinyMCE.activeEditor;
@@ -184,12 +184,12 @@ $xoopsLogger->activated = false;
             DL = ed.dom.getParent(n, 'dl');
             DIV = ed.dom.getParent(n, 'div');
 
-            if ( DL && DIV ) {
+            if (DL && DIV) {
                 cls = ed.dom.hasClass(DL, a) ? 'alignnone' : a;
                 DL.className = DL.className.replace(/align[^ '"]+\s?/g, '');
                 ed.dom.addClass(DL, cls);
                 c = (cls == 'aligncenter') ? ed.dom.addClass(DIV, 'mceIEcenter') : ed.dom.removeClass(DIV, 'mceIEcenter');
-            } else if ( P ) {
+            } else if (P) {
                 cls = ed.dom.hasClass(n, a) ? 'alignnone' : a;
                 n.className = n.className.replace(/align[^ '"]+\s?/g, '');
                 ed.dom.addClass(n, cls);
@@ -201,7 +201,7 @@ $xoopsLogger->activated = false;
 
             ed.execCommand('mceRepaint');
         },
-        
+
         // Resizes the iframe by a relative height value
         _resizeIframe : function(ed, tb_id, dy) {
             var ifr = ed.getContentAreaContainer().firstChild;
@@ -209,7 +209,7 @@ $xoopsLogger->activated = false;
             DOM.setStyle(ifr, 'height', ifr.clientHeight + dy); // Resize iframe
             ed.theme.deltaHeight += dy; // For resize cookie
         },
-        
+
         _handleMoreBreak : function(ed, url) {
             var moreHTML = '<img src="' + url + '/img/trans.gif" alt="$1" class="mceEXMmore mceItemNoResize" title="'+ed.getLang('exmsystem.exm_more_alt')+'" />';
             var nextpageHTML = '<img src="' + url + '/img/trans.gif" class="mceEXMnextpage mceItemNoResize" title="'+ed.getLang('exmsystem.exm_page_alt')+'" />';
@@ -261,15 +261,15 @@ $xoopsLogger->activated = false;
                 cm.setActive('exm_more', n.nodeName === 'IMG' && ed.dom.hasClass(n, 'mceEXMmore'));
             });
         }
-    
+
     });
-    
+
     <?php
         // Evento para registrar nuevas funciones en el plugin exmsystem
         RMEvents::get()->run_event('rmcommon.tinymce.plugin.functions','');
     ?>
-    
+
     // Register plugin
     tinymce.PluginManager.add('exmsystem', tinymce.plugins.EXMSystem);
-    
+
 })();

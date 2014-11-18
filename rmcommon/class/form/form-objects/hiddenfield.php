@@ -19,7 +19,7 @@ class ActiveHiddenField
         $class = '';
         $parameters = $this->parameters;
 
-        foreach ( $parameters as $attr => $value ){
+        foreach ($parameters as $attr => $value) {
             if ( 'class' == $attr )
                 $class .= $class != '' ? ' '.$value : $value;
             else
@@ -33,6 +33,5 @@ class ActiveHiddenField
         return $input;
 
     }
-
 
 }

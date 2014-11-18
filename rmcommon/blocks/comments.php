@@ -9,9 +9,9 @@
 // --------------------------------------------------------------
 
 function rmc_bkcomments_show($options){
-    
+
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    
+
     $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_comments")." ORDER BY id_com DESC";
     $limit = $options[0]>0 ? $options[0] : 10;
     $sql .= " LIMIT 0,$limit";
@@ -21,27 +21,27 @@ function rmc_bkcomments_show($options){
     $ucache = array();
     $ecache = array();
     $mods = array();
-        
-    while($row = $db->fetchArray($result)){
+
+    while ($row = $db->fetchArray($result)) {
         $com = new RMComment();
         $com->assignVars($row);
-        
-        if($options[3]){
+
+        if ($options[3]) {
             // Editor data
-            if(!isset($ecache[$com->getVar('user')])){
+            if (!isset($ecache[$com->getVar('user')])) {
                 $ecache[$com->getVar('user')] = new RMCommentUser($com->getVar('user'));
             }
-                
+
             $editor = $ecache[$com->getVar('user')];
-                
-            if($editor->getVar('xuid')>0){
-                
-                if(!isset($ucache[$editor->getVar('xuid')])){
+
+            if ($editor->getVar('xuid')>0) {
+
+                if (!isset($ucache[$editor->getVar('xuid')])) {
                     $ucache[$editor->getVar('xuid')] = new XoopsUser($editor->getVar('xuid'));
                 }
-                    
+
                 $user = $ucache[$editor->getVar('xuid')];
-                    
+
                 $poster = array(
                     'id' => $user->getVar('uid'),
                     'name'  => $user->getVar('uname'),
@@ -50,9 +50,9 @@ function rmc_bkcomments_show($options){
                     'avatar'=> $user->getVar('image')!='' && $user->getVar('image')!='blank.gif' ? XOOPS_UPLOAD_URL.'/'.$user->getVar('image') : RMCURL.'/images/avatar.gif',
                     'rank'  => $user->rank(),
                 );
-                
+
             } else {
-                    
+
                 $poster = array(
                     'id'    => 0,
                     'name'  => $editor->getVar('name'),
@@ -61,67 +61,67 @@ function rmc_bkcomments_show($options){
                     'avatar'=> RMCURL.'/images/avatar.gif',
                     'rank'  => ''
                 );
-                    
+
             }
         }
-        
+
         // Get item
         $cpath = XOOPS_ROOT_PATH.'/modules/'.$row['id_obj'].'/class/'.$row['id_obj'].'controller.php';
-        
-        if(is_file($cpath)){
-			if(!class_exists(ucfirst($row['id_obj']).'Controller'))
-				include_once $cpath;
-			
-			$class = ucfirst($row['id_obj']).'Controller';
-			$controller = new $class();
-			$item = $controller->get_item($row['params'], $com);
-			$item_url = $controller->get_item_url($row['params'], $com);
+
+        if (is_file($cpath)) {
+            if(!class_exists(ucfirst($row['id_obj']).'Controller'))
+                include_once $cpath;
+
+            $class = ucfirst($row['id_obj']).'Controller';
+            $controller = new $class();
+            $item = $controller->get_item($row['params'], $com);
+            $item_url = $controller->get_item_url($row['params'], $com);
         } else {
-			
-			$item = __('Unknow','rmcommon');
-			$item_url = '';
-			
+
+            $item = __('Unknow','rmcommon');
+            $item_url = '';
+
         }
-        
-        if(isset($mods[$row['id_obj']])){
+
+        if (isset($mods[$row['id_obj']])) {
             $mod = $mods[$row['id_obj']];
         } else {
             $m = RMModules::load_module($row['id_obj']);
             $mod = $m->getVar('name');
             $mods[$row['id_obj']] = $mod;
         }
-        
+
         $comments[] = array(
             'id'        => $row['id_com'],
             'text'      => TextCleaner::truncate(TextCleaner::getInstance()->clean_disabled_tags(TextCleaner::getInstance()->popuplinks(TextCleaner::getInstance()->nofollow($com->getVar('content')))), 50),
             'poster'    => isset($poster) ?  $poster : null,
             'posted'    => formatTimestamp($com->getVar('posted'), 'l'),
-            'item'		=> $item,
-			'item_url'  => $item_url,
-            'module'	=> $row['id_obj'],
-            'status'	=> $com->getVar('status'),
+            'item'        => $item,
+            'item_url'  => $item_url,
+            'module'    => $row['id_obj'],
+            'status'    => $com->getVar('status'),
             'module'    => $mod
         );
     }
-    
+
     $comments = RMEvents::get()->run_event('rmcommon.loading.block.comments', $comments);
     $block['comments'] = $comments;
     $block['show_module'] = $options[1];
     $block['show_name'] = $options[2];
     $block['show_user'] = $options[3];
     $block['show_date'] = $options[4];
-	
-	$num = $options[2] + $options[3] + $options[4];
-	$block['data_width'] = floor(100/$num);
-    
+
+    $num = $options[2] + $options[3] + $options[4];
+    $block['data_width'] = floor(100/$num);
+
     RMTemplate::get()->add_style('bk_comments.css', 'rmcommon');
-    
+
     return $block;
-    
+
 }
 
 function rmc_bkcomments_edit($options){
-    
+
     $form = '<div class="form-horizontal">';
 
     ob_start();
@@ -182,5 +182,5 @@ function rmc_bkcomments_edit($options){
     $form .= '</div>';
 
     return $form;
-    
+
 }

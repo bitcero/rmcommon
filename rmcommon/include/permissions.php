@@ -43,8 +43,6 @@ $rmcommon_permissions = array(
         'default' => 'deny'
     ),
 
-
-
 );
 
 return $rmcommon_permissions;

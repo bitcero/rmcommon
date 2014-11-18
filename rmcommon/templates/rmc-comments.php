@@ -86,8 +86,8 @@
         <td><span class="comment_date"><?php echo $com['posted']; ?></span>
         <?php echo $com['text']; ?>
         <span class="cu-item-options">
-        	<a href="comments.php?id=<?php echo $com['id']; ?>&amp;action=edit&amp;page=<?php echo $page; ?>&amp;filter=<?php echo $filter; ?>&amp;w=<?php echo $keyw; ?>"><?php _e('Edit','rmcommon'); ?></a> | 
-        	<a href="javascript:;" onclick="confirm_delete(<?php echo $com['id']; ?>);"><?php _e('Delete','rmcommon'); ?></a> | 
+        	<a href="comments.php?id=<?php echo $com['id']; ?>&amp;action=edit&amp;page=<?php echo $page; ?>&amp;filter=<?php echo $filter; ?>&amp;w=<?php echo $keyw; ?>"><?php _e('Edit','rmcommon'); ?></a> |
+        	<a href="javascript:;" onclick="confirm_delete(<?php echo $com['id']; ?>);"><?php _e('Delete','rmcommon'); ?></a> |
         	<?php if($com['status']=='approved'): ?>
         	<a href="javascript:;" onclick="approve_action(<?php echo $com['id']; ?>,'unapprove');"><?php _e('Unnaprove','rmcommon'); ?></a>
         	<?php else: ?>
@@ -99,21 +99,21 @@
         </span>
         </td>
         <td align="center">
-        	<?php 
-        		switch($com['status']){
-					case 'approved':
-						_e('Approved', 'rmcommon');
-						break;
-					case 'waiting':
-						_e('Unapproved','rmcommon');
-						break;
-					case 'spam':
-						echo "<span style='color: #F00;'>";
-						_e('SPAM', 'rmcommon');
-						echo "</span>";
-						break;
-        		}
-        	?>
+        	<?php
+                switch ($com['status']) {
+                    case 'approved':
+                        _e('Approved', 'rmcommon');
+                        break;
+                    case 'waiting':
+                        _e('Unapproved','rmcommon');
+                        break;
+                    case 'spam':
+                        echo "<span style='color: #F00;'>";
+                        _e('SPAM', 'rmcommon');
+                        echo "</span>";
+                        break;
+                }
+            ?>
         </td>
         <td align="center"><?php echo $com['module']; ?></td>
         <td align="center">

@@ -31,7 +31,7 @@ function show_groups_list(){
             LIMIT " . $navigation->start() . ", 20";
     $result = $xoopsDB->query( $sql );
     $groups = array();
-    while ( $row = $xoopsDB->fetchArray( $result ) ){
+    while ( $row = $xoopsDB->fetchArray( $result ) ) {
         $groups[] = (object) $row;
     }
 
@@ -62,7 +62,7 @@ function show_group_form(){
 
     $id = RMHttpRequest::get( 'id', 'integer', 0 );
 
-    if ( $id > 0 ){
+    if ($id > 0) {
 
         $group = new Rmcommon_Group( $id );
         if ( $group->isNew() )
@@ -79,7 +79,7 @@ function show_group_form(){
     $admin_rights = $group->load_permissions( 'module_admin' );
     $access_rights = $group->load_permissions( 'module_read' );
 
-    while ( $row = $xoopsDB->fetchArray( $result ) ){
+    while ( $row = $xoopsDB->fetchArray( $result ) ) {
 
         $modules[$row['mid']] = (object) $row;
         $modules[$row['mid']]->permissions = RMPrivileges::module_permissions( $row['dirname'] );
@@ -103,7 +103,6 @@ function show_group_form(){
     );
 
 }
-
 
 function save_group_data(){
 
@@ -137,7 +136,7 @@ function save_group_data(){
             1, 1
         );
 
-    if ( $id > 0 ){
+    if ($id > 0) {
         $group = new Rmcommon_Group( $id );
         if( $group->isNew() )
             $ajax->ajax_response(
@@ -201,7 +200,6 @@ function save_group_data(){
 
 }
 
-
 function delete_group_data() {
     global $xoopsSecurity, $xoopsDB;
 
@@ -262,7 +260,7 @@ function delete_group_data() {
     if( !$xoopsDB->queryF( $sql ) )
         $errors .= '<br>' . $xoopsDB->error();
 
-    if ( '' == $errors ){
+    if ('' == $errors) {
 
         showMessage( __('Selected groups has been deleted.', 'rmcommon' ), RMMSG_SUCCESS, 'fa fa-remove-circle' );
 
@@ -276,11 +274,10 @@ function delete_group_data() {
 
 }
 
-
 // get the action
 $action = RMHttpRequest::request( 'action', 'string', '' );
 
-switch ( $action ){
+switch ($action) {
 
     case 'new-group':
         show_group_form();

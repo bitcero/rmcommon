@@ -21,7 +21,7 @@ class ActiveRadio
         $checked = isset( $parameters['checked'] ) ? $parameters['checked'] : '';
         $attributes = '';
 
-        foreach ( $parameters as $attr => $value ){
+        foreach ($parameters as $attr => $value) {
             if ( 'class' == $attr || 'options' == $attr || 'checked' == $attr )
                 continue;
 
@@ -29,7 +29,7 @@ class ActiveRadio
         }
 
         $input = '';
-        foreach ( $options as $value => $option ){
+        foreach ($options as $value => $option) {
 
             $input .= '<label' . ( $class != '' ? ' class="' . $class .'"' : '') . '>';
             $input .= '<input type="radio" name="' . $this->name . '" id="' . $this->id . $value . '" value="' . $value .'"';

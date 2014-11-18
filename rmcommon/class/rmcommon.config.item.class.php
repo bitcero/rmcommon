@@ -14,7 +14,7 @@ class Rmcommon_Config_Item extends RMObject
     /**
      * Loads the specified item
      * @param string $name <p>Name of the configuration option</p>
-     * @param int $mod <p>Identifier of the module</p>
+     * @param int    $mod  <p>Identifier of the module</p>
      */
     public function __construct( $name = '', $mod = 0 ){
 
@@ -32,7 +32,7 @@ class Rmcommon_Config_Item extends RMObject
         if ($this->db->getRowsNum($result)<=0) return;
 
         $row = $this->db->fetchArray($result);
-        foreach ($row as $k => $v){
+        foreach ($row as $k => $v) {
             $this->setVar($k, $v);
         }
 
@@ -43,12 +43,12 @@ class Rmcommon_Config_Item extends RMObject
     /**
      * Set a config value
      *
-     * @param mixed $value Value
+     * @param mixed  $value      Value
      * @param string $type_Value type
      */
     function set_value( $value, $type )
     {
-        switch ( $type ) {
+        switch ($type) {
             case 'array':
                 if (!is_array($value)) {
                     $value = explode('|', trim($value));
@@ -77,6 +77,7 @@ class Rmcommon_Config_Item extends RMObject
 
         $sql = "DELETE FROM $this->_dbtable WHERE conf_id=" . $this->id();
         $this->db->queryF( $sql );
+
         return $this->deleteFromTable();
 
     }

@@ -9,18 +9,18 @@
 // --------------------------------------------------------------
 
 function rmc_available_mods(){
-	global $available_mods, $xoopsSecurity;
-	
-	$ret['title'] = __('Available Modules','rmcommon');
-	$ret['icon'] = RMCURL.'/images/modules.png';
-    
+    global $available_mods, $xoopsSecurity;
+
+    $ret['title'] = __('Available Modules','rmcommon');
+    $ret['icon'] = RMCURL.'/images/modules.png';
+
     $limit = 7;
     $tpages = ceil(count($available_mods)/$limit);
-    
+
     $nav = new RMPageNav(count($available_mods), $limit, 1, 3);
     $nav->target_url('#" onclick="load_page({PAGE_NUM});');
-	
-	ob_start();
+
+    ob_start();
     $i = 0;
 ?>
 	<div class="rmc_widget_content_reduced rmc_modules_widget">
@@ -168,10 +168,11 @@ function rmc_available_mods(){
         </div>
 	</div>
 <?php
-	$ret['content'] = ob_get_clean();
-	return $ret;
-	//print_r($available_mods);
-	
+    $ret['content'] = ob_get_clean();
+
+    return $ret;
+    //print_r($available_mods);
+
 }
 
 /**
@@ -179,15 +180,15 @@ function rmc_available_mods(){
 */
 function rmc_blocks_new(){
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    
+
     $blocks = RMBlocksFunctions::get_available_list($modules);
-    
+
     // Get intalled modules
     $result = $db->query("SELECT * FROM ".$db->prefix("modules")." WHERE isactive=1 ORDER BY `name`");
-    while($row = $db->fetchArray($result)){
+    while ($row = $db->fetchArray($result)) {
         $modules[] = array('dir'=>$row['dirname'], 'name'=>$row['name']);
     }
-    
+
     // Cargamos los grupos
     $sql = "SELECT groupid, name FROM " . $db->prefix("groups") . " ORDER BY name";
     $result = $db->query($sql);
@@ -195,12 +196,13 @@ function rmc_blocks_new(){
     while ($row = $db->fetchArray($result)) {
         $groups[] = array('id' => $row['groupid'], 'name' => $row['name']);
     }
-    
+
     $widget['title'] = 'Add Block';
     $widget['icon'] = '';
     ob_start();
     include RMTemplate::get()->get_template('widgets/rmc_aw_bknew.php');
     $widget['content'] = ob_get_clean();
+
     return $widget;
 }
 
@@ -209,15 +211,16 @@ function rmc_blocks_new(){
 */
 function rmc_blocks_addpos(){
     global $xoopsSecurity;
-    
+
     $widget['title'] = 'Add Position';
     $widget['icon'] = '';
-    
+
     $positions = RMBlocksFunctions::block_positions();
-    
+
     ob_start();
     include RMTemplate::get()->get_template('widgets/rmc_aw_posnew.php','module','rmcommon');
     $widget['content'] = ob_get_clean();
+
     return $widget;
-    
+
 }

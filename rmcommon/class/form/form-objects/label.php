@@ -28,7 +28,7 @@ class ActiveLabel
 
         $parameters = $this->parameters;
 
-        foreach ( $parameters as $attr => $value ){
+        foreach ($parameters as $attr => $value) {
             if ( 'class' == $attr )
                 $class .= $class != '' ? ' '.$value : $value;
             elseif ( 'caption' == $attr )
@@ -46,6 +46,5 @@ class ActiveLabel
         return $label;
 
     }
-
 
 }

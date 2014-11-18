@@ -4,21 +4,21 @@
 
 <div class="form_container">
 <?php
-	$elements = $form->elements();
+    $elements = $form->elements();
 
-	foreach ($elements as $data):
-		//print_r($data);
-		$field =& $data['field'];
-		
-		if ($data['class']=='RMFormHidden'):
-			echo $field->render();
-		elseif($data['class']=='RMFormSubTitle'):
+    foreach ($elements as $data):
+        //print_r($data);
+        $field =& $data['field'];
+
+        if ($data['class']=='RMFormHidden'):
+            echo $field->render();
+        elseif($data['class']=='RMFormSubTitle'):
 ?>
 <h3><?php echo $field->render(); ?></h3>
 <?php if($field->getDescription()!=''): ?><span class="help-block"><?php echo $field->getDescription(); ?></span><?php endif; ?>
 
 <?php
-		else:
+        else:
 ?>
 <div id="row_<?php echo $field->getName(); ?>" class="form-group">
 	<label class="col-md-2 control-label">
@@ -27,7 +27,7 @@
 	<div class="col-md-10">
 		<?php echo $field->render(); ?>
                 <?php
-                    switch(get_class($field)){
+                    switch (get_class($field)) {
                         case 'RMFormButtonGroup':
                         case 'RMFormButton':
                         case 'RMFormHidden':
@@ -41,8 +41,8 @@
     </div>
 </div>
 <?php
-		endif;
-	endforeach;
+        endif;
+    endforeach;
 ?>
 </div>
 </form>
