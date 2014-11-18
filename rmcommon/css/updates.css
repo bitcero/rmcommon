@@ -159,7 +159,7 @@ input.error{
     font-size: 12px!important;
 }
 #ftp-settings .help-block{
-    margin-bottom: 0px!important;
+    margin-bottom: 0!important;
 }
 #json-container{
     display: none;

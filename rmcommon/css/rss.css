@@ -1,7 +1,7 @@
 .feed_name{
 	background: url(../images/rss.png) left no-repeat;
 	padding: 2px 2px 2px 38px;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 .feed_url{
 	font-size: 0.8em;

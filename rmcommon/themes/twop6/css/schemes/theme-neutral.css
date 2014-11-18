@@ -238,7 +238,7 @@ a:hover{
 /* MODAL */
 .modal .modal-content,
 .cu-modal .cu-dialog-content,.modal-content{
-    border-radius: 0px;
+    border-radius: 0;
     background-color: #f2f2f2;
 }
 .modal .modal-header{
