@@ -73,7 +73,7 @@ class RMFormTheme extends RMFormElement
             // Read theme name
             $file = file_get_contents( XOOPS_ROOT_PATH.'/modules/rmcommon/themes/'.$dir.'/admin-gui.php' );
             preg_match("/Theme name:\s{0,}(.*)?\r/m", $file, $name );
-            $themes[$dir] = $name[1];
+            $themes[$dir] = isset( $name[1] ) ? $name[1] : __('Unknow', 'rmcommon');
 
         }
         unset( $name );

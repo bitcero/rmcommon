@@ -9,7 +9,7 @@
 // --------------------------------------------------------------
 
 if (!function_exists("__")){
-    function __($text, $d){
+    function __($text, $d = ''){
         return $text;
     }
 }
@@ -354,7 +354,7 @@ $modversion['config'][] = array(
 $modversion['config'][] = array(
     'name'          => 'transport',
     'title'         => __('Mailer method','rmcommon'),
-    'description'   => __('Common Utilities will use this method to send emails.'),
+    'description'   => __('Common Utilities will use this method to send emails.', 'rmcommon'),
     'formtype'      => 'select',
     'valuetype'     => 'text',
     'options'       => array(
