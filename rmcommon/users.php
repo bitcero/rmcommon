@@ -378,7 +378,7 @@ function save_data($edit = false){
     $user->setVar('uname', $uname);
     $user->setVar('display_name', $display_name);
     $user->setVar('email', $email);
-    if (!$edit) $user->assignVar('registered', time());
+    if (!$edit) $user->assignVar('user_regdate', time());
     if ($password!='') $user->assignVar('pass', md5($password));
     $user->setVar('level', 1);
     $user->setVar('timezone_offset', $timezone);

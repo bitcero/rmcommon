@@ -85,11 +85,14 @@ if ($action=='save'){
 	}
 
 	// Text
-	$text = rmc_server_var($_POST, 'comment_text', '');
+	$text = RMHttpRequest::post( 'comment_text', 'string', '' );
 	if (trim($text)==''){
 	    redirect_header($uri, 2, __('You must write a message!','rmcommon'));
 	    die();
 	}
+
+    $kses = new RMKses();
+    $text = $kses->filter( $text, 'reduced' );
 
 	RMEvents::get()->run_event('rmcommon.comment.postdata', $uri);
 

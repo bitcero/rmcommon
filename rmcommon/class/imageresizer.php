@@ -233,7 +233,7 @@ class RMImageResizer
     }
 
 
-    public function resize( $file, stdClass $params ){
+    static public function resize( $file, stdClass $params ){
 
         if ( empty( $file ) ) {
             trigger_error(__('Resize Image: You must provide a valid file for image.', 'rmcommon'), E_WARNING);
@@ -245,7 +245,7 @@ class RMImageResizer
          */
         $params->method = !isset( $params->method ) ? 'crop' : $params->method;
         /*
-         * Default directory target for resized images id "uploads/resizer"
+         * Default directory target for resize images is "uploads/resizer"
          */
         $params->target = !isset( $params->target ) ? 'resizer' : $params->target;
         /*

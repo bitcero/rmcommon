@@ -285,7 +285,7 @@ if (!$cuSettings){
 $rmEvents->run_event('rmcommon.base.loaded');
 $rmTpl->add_head_script('var xoUrl = "'.XOOPS_URL.'";');
 
-if($cuSettings->updates && $xoopsOption['pagetype']=='admin'){
+if($cuSettings->updates && isset( $xoopsOption['pagetype'] ) && $xoopsOption['pagetype']=='admin'){
 
     $interval = $cuSettings->updatesinterval <= 0 ? 7 : $cuSettings->updatesinterval;
     if(file_exists(XOOPS_CACHE_PATH.'/updates.chk'))
@@ -307,7 +307,7 @@ if($cuSettings->updates && $xoopsOption['pagetype']=='admin'){
 /**
  * Add ajax controller script
  */
-if ( defined("XOOPS_CPFUNC_LOADED") || $xoopsOption['pagetype'] == 'admin' ){
+if ( defined("XOOPS_CPFUNC_LOADED") || ( isset( $xoopsOption['pagetype'] ) && $xoopsOption['pagetype'] ) == 'admin' ){
     $rmTpl->add_script( 'cu-settings.php', 'rmcommon', array('footer' => 1) );
     $rmTpl->add_script( 'jquery.validate.min.js', 'rmcommon', array('footer' => 1) );
 }

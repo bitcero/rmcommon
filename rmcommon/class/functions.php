@@ -271,7 +271,8 @@ class RMFunctions
                 'poster'    => $poster,
                 'posted'    => sprintf(__('Posted on %s'), formatTimestamp($com->getVar('posted'), 'l')),
                 'ip'        => $com->getVar('ip'),
-                'edit'		=> $editlink
+                'edit'		=> $editlink,
+                'time'      => $com->getVar('posted')
             );
 
             unset($editor);
@@ -306,10 +307,10 @@ class RMFunctions
         $config = RMSettings::cu_settings();
 
         if ( !$config->enable_comments )
-			 return;
+			 return false;
 
         if ( !$xoopsUser && !$config->anonymous_comments )
-			return;
+			return false;
 
         if (!defined('COMMENTS_INCLUDED'))
 			define('COMMENTS_INCLUDED', 1);
@@ -600,6 +601,21 @@ class RMFunctions
             $status = 'active';
 
         return RMModules::get_modules_list( $status );
+
+    }
+
+    static public function error_404( $message, $module = '', $params = null ){
+
+        header("HTTP/1.0 404 " . __('Not Found', 'mywords') );
+        if (substr(php_sapi_name(), 0, 3) == 'cgi')
+            header("Status: 404 " . __('Not Found', 'mywords'), TRUE);
+        else
+            header($_SERVER['SERVER_PROTOCOL']." 404 " . __('Not Found', 'mywords'));
+
+        global $xoopsOption;
+        unset( $xoopsOption['template_main'] );
+        require RMCPATH . '/404.php';
+        exit();
 
     }
 

@@ -95,7 +95,7 @@ class RMTemplate
     */
     public function header(){
 
-        global $xoopsConfig, $xoopsOption;
+        global $xoopsConfig, $xoopsOption, $xoopsTpl;
 
         if ( defined('XOOPS_CPFUNC_LOADED' ) )
             xoops_cp_header(); //ob_start();
@@ -372,7 +372,7 @@ class RMTemplate
             return;
 
         // Check if file is a full URL
-        $remote_script = preg_match( "/^(\/\/)|(http:\/\/)|(https:\/\/)/", $file );
+        $remote_script = preg_match( "/^(\/\/)|(http:\/\/)|(https:\/\/)|(\/\/)/", $file );
 
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';
@@ -427,7 +427,6 @@ class RMTemplate
         global $xoopsConfig, $rmEvents, $cuSettings;
 
         if($file=='')
-
             return '';
 
         $version = $version=='' ? str_replace(" ", "-", RMCVERSION) : $version;
@@ -573,9 +572,8 @@ class RMTemplate
     public function add_style($file, $element = '', $options = array(), $owner = ''){
 
         global $xoopsModule, $cuSettings, $xoopsConfig;
-
         // Check if file is a full URL
-        $remote_script = preg_match( "/^(http:\/\/)|(https:\/\/)/", $file );
+        $remote_script = preg_match( "/^(http:\/\/)|(https:\/\/)|(\/\/)/", $file );
 
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';
@@ -603,7 +601,6 @@ class RMTemplate
         }
 
         if( $style_url == '' )
-
             return;
 
         // Add the new script to array (replacing old if exists)

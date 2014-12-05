@@ -61,7 +61,9 @@ class RmcommonRmcommonPreload
         if ( $dirname != 'rmcommon' )
             return $dirname;
 
-        $rules = '';
+        $base = parse_url(XOOPS_URL.'/');
+        $base = isset($base['path']) ? rtrim($base['path'], '/').'/' : '/';
+        $rules = "ErrorDocument 404 ".$base ."modules/rmcommon/404.php\n";
         foreach ( $save['modules_path'] as $mod => $path ){
 
             $path = ltrim( $path, "/" );
@@ -83,7 +85,7 @@ class RmcommonRmcommonPreload
 
         }
 
-        $rules .= "RewriteRule ^rss/?(.*)$ modules/rmcommon/rss.php?$1 [L]\n";
+        $rules .= "RewriteRule ^rss/?(.*)$ modules/rmcommon/rss.php$1 [L]\n";
 
         $ht = new RMHtaccess( 'rmcommon' );
         $htResult = $ht->write( $rules );

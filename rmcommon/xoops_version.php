@@ -505,3 +505,7 @@ if(in_array("rmcommon",$amod)){
     }
     
 }
+
+$modversion['subpages'] = array(
+    'error404'=> __('Error 404', 'rmcommon' )
+);
