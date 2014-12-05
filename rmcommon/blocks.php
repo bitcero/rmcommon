@@ -88,7 +88,7 @@ function show_rm_blocks()
     }
 
     // Cargamos las posiciones de bloques
-    $bpos = RMBlocksFunctions::block_positions( '' );
+    $bpos = RMBlocksFunctions::block_positions( 1 );
     $sql = createSQL();
     $result = $db->query($sql);
     $blocks = array();

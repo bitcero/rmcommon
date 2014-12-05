@@ -142,7 +142,7 @@ function configure_block(){
     if($block->isNew())
         response(__('Specified block does not exists!. Please try again', 'rmcommon'), array(), 1, 1);
 
-    $positions = RMBlocksFunctions::block_positions();
+    $positions = RMBlocksFunctions::block_positions( 1 );
     $form = new RMForm('','','');
     $canvas = new RMFormModules('', 'bk_mod', 1, 1, $block->sections(), 3, null, false, 1);
     $canvas->subpages( $block->subpages() );
