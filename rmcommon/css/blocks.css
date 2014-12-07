@@ -8,21 +8,9 @@
 .rmc-position-item{
     min-width: 300px;
     width: 19%;
-    border: 1px solid #2a2a2a;
-    border: 1px solid rgba(0,0,0,0.2);
-    display: inline-block;
-    vertical-align: text-top;
-    padding: 1px;
-    background: rgba(0,0,0,0.1);
-    margin: 0 5px 10px 0;
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.15);
 }
-.rmc-position-item h3{
-    margin: 0;
-    padding: 5px;
-    font-size: 1.1em;
-    /*background-color: rgba(0,85,128,0.05);*/
-}
+
 .rmc-position-item h3 > img{
     float: right;
     margin-top: 5px;
@@ -36,40 +24,49 @@
 .rmc-position-item ol li{
     border: 1px solid #ddd;
     margin: 0 0 6px 0;
-    background: #FFF;
 }
-.rmc-position-item ol li > .row-fluid > a{
+.rmc-position-item ol li > .row > a{
     display: inline-block;
     line-height: 30px;
     padding: 0 7px;
     border-left: 1px solid #ddd;
     box-shadow: inset 1px 1px 1px rgba(255,255,255,0.5);
 }
-.rmc-position-item ol li > .row-fluid > a:last-child{
+.rmc-position-item ol li > .row > a:last-child{
     border-radius: 0 0 0 2px;
 }
-.rmc-position-item ol li > .row-fluid > a:hover{
+.rmc-position-item ol li > .row > a:hover{
     background-color: rgba(255,255,255,0.5);
     text-decoration: none;
 }
-.rmc-position-item ol li > .item-controls{
-    border-bottom: 1px solid #ddd;
+.rmc-position-item ol li > .item-controls,
+.dd-dragel .item-controls{
     background: #ebebeb;
     color: #222;
+    margin-left: 0!important;
+    margin-right: 0!important;
 }
-.rmc-position-item ol li .dd-handle{
+.dd-dragel .item-controls,
+.dd-dragel li{
+    opacity: 0.8;
+    background: #FFF!important;
+}
+.rmc-position-item ol li .dd-handle,
+.dd-dragel .dd-handle{
     line-height: 30px;
     display: inline-block;
     padding: 0 5px;
-    width: 190px;
     text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
     font-size: 1.1em;
     cursor: move;
 }
-.rmc-position-item ol li > .block-data{
+.rmc-position-item ol li > .block-data,
+.dd-dragel .block-data{
     line-height: 18px;
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
     padding: 5px;
+    background: #fff;
+    margin-left: 0!important;
+    margin-right: 0!important;
 }
 .rmc-position-item ol li > .block-data > p{
     color: #666;
@@ -82,7 +79,7 @@
 /* NESTABLE */
 .dd-item,
 .dd-empty,
-.dd-placeholder { display: block; position: relative; margin: 0; padding: 0; min-height: 20px; font-size: 13px; line-height: 20px; }
+.dd-placeholder { display: block; position: relative; margin: 0; padding: 0; min-height: 20px; font-size: 13px; line-height: 20px; background: rgba(4, 164,204, 0.3); border: 1px dashed rgba(0,0,0,0.15);  }
 .dd-list { display: block; position: relative; margin: 0; padding: 0; list-style: none; }
 .dd-placeholder,
 .dd-empty {

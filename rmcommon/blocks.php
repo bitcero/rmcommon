@@ -88,7 +88,7 @@ function show_rm_blocks()
     }
 
     // Cargamos las posiciones de bloques
-    $bpos = RMBlocksFunctions::block_positions( 1 );
+    $bpos = RMBlocksFunctions::block_positions();
     $sql = createSQL();
     $result = $db->query($sql);
     $blocks = array();
@@ -99,7 +99,12 @@ function show_rm_blocks()
         $used_blocks[$row['canvas']][] = array(
             'id' => $row['bid'],
             'title' => $row['name'],
-            'module' => array('id' => $mod->mid(), 'dir' => $mod->dirname(), 'name' => $mod->name()),
+            'module' => array(
+                'id' => $mod->mid(),
+                'dir' => $mod->dirname(),
+                'name' => $mod->name(),
+                'icon' => RMModules::icon( $mod->dirname(), 16 )
+            ),
             'canvas' => isset($bpos[$row['canvas']]) ? $bpos[$row['canvas']] : array(),
             'weight' => $row['weight'],
             'visible'=>$row['visible'],
@@ -142,7 +147,7 @@ function show_rm_blocks()
     }
 
     RMTemplate::get()->add_script('jquery.checkboxes.js','rmcommon','include');
-    include RMCPATH . '/js/cu-js-language.php';
+    //include RMCPATH . '/js/cu-js-language.php';
 
     xoops_cp_header();
 

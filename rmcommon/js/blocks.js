@@ -98,7 +98,7 @@ var blocksAjax = {
                     });
 
                     if(data.error){
-                        blocksAjax.addMessage(data.message, 'alert-error');
+                        blocksAjax.addMessage(data.message, 'alert-danger');
                         blocksAjax.addToken(data.token);
                         return;
                     }
@@ -205,7 +205,7 @@ var blocksAjax = {
         }
 
         var html = '<li class="dd-item" data-id="'+block.id+'" id="block-'+block.id+'" data-position="'+block.position+'">';
-        html += '<div class="row-fluid item-controls">';
+        html += '<div class="row item-controls">';
         html += '<strong class="dd-handle">'+block.title+'</strong>';
         html += '<a href="#" class="pull-right text-error" data-block="'+block.id+'" data-action="delete" title="'+cuLanguage.deleteBlock+'"><i class="fa fa-minus-circle text-danger"></i></a>';
 
@@ -216,21 +216,22 @@ var blocksAjax = {
 
         html += '<a href="#" class="pull-right" data-block="'+block.id+'" data-action="settings" title="'+cuLanguage.blockSettings+'"><i class="fa fa-wrench"></i></a>';
         html += '</div>';
-        html += '<div class="row-fluid block-data">';
-        html += '<span class="text-info">'+block.module+'</span>';
-        html += '<p>'+block.description+'</p>';
-        html += '</div>';
         html += '</li>';
 
-        if($("#position-"+block.canvas.id_position).length<=0){
-            blocksAjax.addMessage(cuLanguage.errorNoPosition, 'alert-error');
-            return false;
-        }
+        if($("#position-"+block.canvas.id_position).length<=0)
+            block.canvas.id_position = blocksAjax.getFirstPosition().data('id');
 
         if($("#position-"+block.canvas.id_position+" ol.dd-list").length<=0)
             $("#position-"+block.canvas.id_position).append('<ol class="dd-list"></ol>');
 
         $("#position-"+block.canvas.id_position+" ol.dd-list").append(html);
+
+    },
+
+    getFirstPosition: function(){
+
+        var positions = $(".rmc-position-item");
+        return $(positions[0]);
 
     },
 
