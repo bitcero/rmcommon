@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Common Utilities\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-09 17:19-0600\n"
-"PO-Revision-Date: 2014-10-09 17:20-0600\n"
+"POT-Creation-Date: 2014-12-08 11:34-0600\n"
+"PO-Revision-Date: 2014-12-08 11:34-0600\n"
 "Last-Translator: Eduardo Cortés <me@eduardocortes.mx>\n"
 "Language-Team: Eduardo Cortés <yo@eduardocortes.mx>\n"
 "Language: en\n"
@@ -13,163 +13,163 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: Y:\\www\\xoops\\modules\\rmcommon\n"
 
 #: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:34
-#: Y:\www\xoops\modules\rmcommon/images.php:649
-#: Y:\www\xoops\modules\rmcommon/images.php:798
+#: Y:\www\xoops\modules\rmcommon/images.php:648
+#: Y:\www\xoops\modules\rmcommon/images.php:797
 msgid "Operation not allowed!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:49
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:136
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:48
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:134
 #: Y:\www\xoops\modules\rmcommon/ajax/users.php:20
 #: Y:\www\xoops\modules\rmcommon/ajax/users.php:40
 msgid "Sorry, you are not allowed to view this page"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:52
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:51
 msgid "The block specified seems to be invalid. Please try again."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:56
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:55
 msgid "The specified module does not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:74
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:73
 msgid "The specified block does not exists, please verify your selection."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:108
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:107
 msgid "Block could not be created. Please try again!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:125
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:123
 #, php-format
 msgid "Block \"%s\" was added successfully! Please configure it."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:141
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:139
 msgid "The block that you specified seems to be invalid. Please try again"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:145
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:143
 msgid "Specified block does not exists!. Please try again"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:165
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:163
 #, php-format
 msgid "Configuration form for block \"%s\" was loaded successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:179
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:225
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:177
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:222
+#: Y:\www\xoops\modules\rmcommon/settings.php:205
 #: Y:\www\xoops\modules\rmcommon/settings.php:208
-#: Y:\www\xoops\modules\rmcommon/settings.php:211
 msgid "Session token expired. Please try again."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:182
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:180
 msgid "You must provide a block ID!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:186
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:320
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:354
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:184
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:316
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:350
 msgid "Specified block does not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:205
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:203
 #, php-format
 msgid "Settings for the block \"%s\" could not be saved!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:214
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:212
 #, php-format
 msgid "Settings for block \"%s\" were saved successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:234
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:230
 msgid "Specified position is not valid!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:237
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:233
 msgid "You must fill name and tag input fields!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:241
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:237
 msgid "Specified blocks position does not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:249
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:245
 msgid "Already exists another blocks position with same name or tag!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:256
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:252
 #, php-format
 msgid "Position \"%s\" was saved successfylly!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:258
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:254
 #, php-format
 msgid "Position \"%s\" could not be saved!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:272
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:268
 msgid "Blocks order could not be saved!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:272
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:313
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:345
-#: Y:\www\xoops\modules\rmcommon/groups.php:213
-#: Y:\www\xoops\modules\rmcommon/plugins.php:520
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:268
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:309
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:341
+#: Y:\www\xoops\modules\rmcommon/groups.php:211
+#: Y:\www\xoops\modules\rmcommon/plugins.php:517
 msgid "Session token expired!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:275
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:271
 msgid "Position not specified!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:294
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:290
 #, php-format
 msgid "Blocks order for position \"%s\" saved successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:297
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:293
 #, php-format
 msgid "Blocks order for position \"%s\" could not be saved!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:313
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:309
 msgid "Block visibility could not be saved!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:316
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:312
 msgid "Block identifier not specified!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:325
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:321
 #, php-format
 msgid "The visibility of the block %s was changed successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:328
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:324
 #, php-format
 msgid "Visibility for block %s could not be changed!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:350
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:346
 msgid "No block has been specified!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:358
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:354
 #, php-format
 msgid "The block \"%s\" could not be deleted!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:364
+#: Y:\www\xoops\modules\rmcommon/ajax/blocks.php:360
 #, php-format
 msgid "The block \"%s\" was deleted successfully!"
 msgstr ""
@@ -193,70 +193,87 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:131
-#: Y:\www\xoops\modules\rmcommon/blocks.php:132
+#: Y:\www\xoops\modules\rmcommon/blocks.php:136
+#: Y:\www\xoops\modules\rmcommon/blocks.php:137
 msgid "Blocks Management"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:141
+#: Y:\www\xoops\modules\rmcommon/blocks.php:146
 msgid "Internal blocks manager is currenlty disabled!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:186
-#: Y:\www\xoops\modules\rmcommon/blocks.php:243
-#: Y:\www\xoops\modules\rmcommon/blocks.php:269
+#: Y:\www\xoops\modules\rmcommon/blocks.php:191
+#: Y:\www\xoops\modules\rmcommon/blocks.php:248
+#: Y:\www\xoops\modules\rmcommon/blocks.php:274
 #: Y:\www\xoops\modules\rmcommon/post-comment.php:28
 msgid "You are not allowed to do this action!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:194
+#: Y:\www\xoops\modules\rmcommon/blocks.php:199
 msgid "Please provide a name and tag for this new position!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:205
+#: Y:\www\xoops\modules\rmcommon/blocks.php:210
 msgid "You must specify a valid position ID!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:209
+#: Y:\www\xoops\modules\rmcommon/blocks.php:214
 msgid "Specified position does not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:227
+#: Y:\www\xoops\modules\rmcommon/blocks.php:232
 msgid "Already exists another position with same name or same tag!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:230
+#: Y:\www\xoops\modules\rmcommon/blocks.php:235
 #: Y:\www\xoops\modules\rmcommon/images.php:428
-#: Y:\www\xoops\modules\rmcommon/users.php:395
+#: Y:\www\xoops\modules\rmcommon/users.php:394
 msgid "Database updated successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:232
+#: Y:\www\xoops\modules\rmcommon/blocks.php:237
 msgid "Errors ocurred while trying to save data"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:250
+#: Y:\www\xoops\modules\rmcommon/blocks.php:255
 msgid "Select at least a block!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:258
-#: Y:\www\xoops\modules\rmcommon/blocks.php:291
+#: Y:\www\xoops\modules\rmcommon/blocks.php:263
+#: Y:\www\xoops\modules\rmcommon/blocks.php:296
 msgid "Database updated successfully"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:260
+#: Y:\www\xoops\modules\rmcommon/blocks.php:265
 msgid "Errors ocurred while trying to do this action"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:276
+#: Y:\www\xoops\modules\rmcommon/blocks.php:281
 msgid "You must select at least one position!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/blocks.php:289
+#: Y:\www\xoops\modules\rmcommon/blocks.php:294
 msgid "There was some errors:"
 msgstr ""
 
+#: Y:\www\xoops\modules\rmcommon/blocks.php:305
+msgid "Session token is not valid!"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/blocks.php:313
+msgid "No position id has been provided"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/blocks.php:322
+msgid "Database updated successully!"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/blocks.php:327
+msgid "Errors ocurrs while trying to update data:"
+msgstr ""
+
 #: Y:\www\xoops\modules\rmcommon/blocks/comments.php:81
+#: Y:\www\xoops\modules\rmcommon/class/fields/theme.class.php:76
 #: Y:\www\xoops\modules\rmcommon/comments.php:105
 #: Y:\www\xoops\modules\rmcommon/comments.php:230
 msgid "Unknow"
@@ -308,32 +325,32 @@ msgstr ""
 msgid "No owner has been specified!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:123
+#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:124
 #: Y:\www\xoops\modules\rmcommon/class/ar/db.class.php:60
 #, php-format
 msgid "Property \"%s.%s\" is not defined."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:143
-#: Y:\www\xoops\modules\rmcommon/class/helpers/properties.trait.php:37
+#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:144
+#: Y:\www\xoops\modules\rmcommon/class/helpers/properties.trait.php:38
 #, php-format
 msgid "Property \"%s.%s\" is read only."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:166
+#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:168
 msgid "You must provide an array with columns names and titles as values pair!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:346
+#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:348
 msgid "Invalid argument in RMActiveRecord::do_pairs. Array is required."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:351
+#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:353
 msgid ""
 "Invalid argument in RMActiveRecord::do_pairs. A key and value are required."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:608
+#: Y:\www\xoops\modules\rmcommon/class/ar/activerecord.php:610
 #, php-format
 msgid "The field \"%s\" could not be empty."
 msgstr ""
@@ -374,7 +391,7 @@ msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/class/fields/modules.class.php:127
 #: Y:\www\xoops\modules\rmcommon/include/right_widgets.php:14
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:76
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:80
 msgid "Available Modules"
 msgstr ""
 
@@ -438,7 +455,7 @@ msgstr ""
 msgid "All Files"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/form.class.php:451
+#: Y:\www\xoops\modules\rmcommon/class/form.class.php:452
 msgid "Fields marked with (*) are required."
 msgstr ""
 
@@ -470,7 +487,7 @@ msgstr ""
 #: Y:\www\xoops\modules\rmcommon/menu.php:36
 #: Y:\www\xoops\modules\rmcommon/menu.php:60
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-groups.php:12
-#: Y:\www\xoops\modules\rmcommon/users.php:427
+#: Y:\www\xoops\modules\rmcommon/users.php:426
 msgid "Users"
 msgstr ""
 
@@ -491,8 +508,8 @@ msgid "Groups"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/class/functions.php:80
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:281
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:165
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:283
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:101
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:89
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:34
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-images.php:43
@@ -506,9 +523,9 @@ msgid "Edit Group"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/class/functions.php:93
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:122
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:164
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:184
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:58
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:100
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:120
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:86
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:121
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:90
@@ -527,7 +544,7 @@ msgid "Delete Groups"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/class/functions.php:106
-#: Y:\www\xoops\modules\rmcommon/images.php:261
+#: Y:\www\xoops\modules\rmcommon/images.php:262
 #: Y:\www\xoops\modules\rmcommon/menu.php:80
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:1
 msgid "Categories"
@@ -539,7 +556,7 @@ msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/class/functions.php:110
 #: Y:\www\xoops\modules\rmcommon/class/functions.php:121
-#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:107
+#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:110
 #: Y:\www\xoops\modules\rmcommon/menu.php:75
 #: Y:\www\xoops\modules\rmcommon/menu.php:92
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:21
@@ -563,6 +580,7 @@ msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/class/functions.php:118
 #: Y:\www\xoops\modules\rmcommon/menu.php:29
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:11
 msgid "Blocks"
 msgstr ""
 
@@ -582,16 +600,16 @@ msgstr ""
 msgid "Updates"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:271
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:272
 #: Y:\www\xoops\modules\rmcommon/comments.php:114
 #, php-format
 msgid "Posted on %s"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:320
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:90
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:131
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:140
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:322
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:26
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:67
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:76
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-form-users.php:22
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-groups.php:10
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:17
@@ -608,58 +626,64 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:322
-#: Y:\www\xoops\modules\rmcommon/users.php:284
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:324
+#: Y:\www\xoops\modules\rmcommon/users.php:283
 msgid "Email address"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:324
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:326
 msgid "Web site"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:325
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:327
 msgid "Your comment"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:326
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:328
 msgid "Submit Comment"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:327
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:329
 msgid "Submit a comment"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:347
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:349
 msgid "Please specify your name"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:348
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:350
 msgid "Please specify a valid email"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:349
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:351
 msgid "Please write a message"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:350
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:352
 msgid "Please enter a valid URL"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:516
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:537
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:550
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:582
-#: Y:\www\xoops\modules\rmcommon/class/functions.php:593
-#: Y:\www\xoops\modules\rmcommon/class/template.php:816
-#: Y:\www\xoops\modules\rmcommon/class/template.php:836
-#: Y:\www\xoops\modules\rmcommon/class/template.php:856
-#: Y:\www\xoops\modules\rmcommon/class/template.php:876
-#: Y:\www\xoops\modules\rmcommon/class/template.php:897
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:518
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:539
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:552
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:584
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:595
+#: Y:\www\xoops\modules\rmcommon/class/template.php:817
+#: Y:\www\xoops\modules\rmcommon/class/template.php:837
+#: Y:\www\xoops\modules\rmcommon/class/template.php:857
+#: Y:\www\xoops\modules\rmcommon/class/template.php:877
+#: Y:\www\xoops\modules\rmcommon/class/template.php:898
 #: Y:\www\xoops\modules\rmcommon/class/utilities.php:208
 #: Y:\www\xoops\modules\rmcommon/class/utilities.php:223
 #: Y:\www\xoops\modules\rmcommon/class/utilities.php:240
 #, php-format
 msgid "Method %s is deprecated. Use %s::%s instead."
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:609
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:611
+#: Y:\www\xoops\modules\rmcommon/class/functions.php:613
+msgid "Not Found"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/class/helpers/format.class.php:220
@@ -718,62 +742,70 @@ msgid ""
 "security issues. Please consider to specify a type before to get URL params."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/privileges.class.php:170
-#: Y:\www\xoops\modules\rmcommon/class/helpers/privileges.class.php:177
+#: Y:\www\xoops\modules\rmcommon/class/helpers/privileges.class.php:171
+#: Y:\www\xoops\modules\rmcommon/class/helpers/privileges.class.php:178
 msgid "You don't have required rights to do this action!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:305
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:306
 msgid "No cache"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:306
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:307
 #, php-format
 msgid "%u seconds"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:307
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:308
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-block-form.php:52
 msgid "1 minute"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:308
 #: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:309
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:310
 #, php-format
 msgid "%u minutes"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:310
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:311
 msgid "One hour"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:311
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:312
 #, php-format
 msgid "%u hours"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:312
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:313
 msgid "One day"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:313
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:314
 #, php-format
 msgid "%u days"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:314
+#: Y:\www\xoops\modules\rmcommon/class/helpers/settings.class.php:315
 msgid "One week"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/htaccess.class.php:83
+#: Y:\www\xoops\modules\rmcommon/class/htaccess.class.php:84
 msgid "URL rewriting requires an Apache Server and mod_rewrite enabled!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/internalblock.php:345
+#: Y:\www\xoops\modules\rmcommon/class/imageresizer.php:239
+msgid "Resize Image: You must provide a valid file for image."
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/class/imageresizer.php:292
+msgid "Image format could not be accepted for resize"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/class/internalblock.php:346
 msgid "The configuration file for this block does not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/internalblock.php:352
+#: Y:\www\xoops\modules\rmcommon/class/internalblock.php:353
 msgid ""
 "There was a problem trying to show the configuration options for this block!"
 msgstr ""
@@ -793,97 +825,97 @@ msgstr ""
 msgid "This area requires user login!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/pagenav.php:133
+#: Y:\www\xoops\modules\rmcommon/class/pagenav.php:135
 #, php-format
 msgid ""
 "Showing results <strong>%u</strong> to <strong>%u</strong> from <strong>%u</"
 "strong>."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/template.php:228
+#: Y:\www\xoops\modules\rmcommon/class/template.php:224
 #: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:244
 msgid "Help"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:67
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:65
 msgid ""
 "You must provide a valid time and format value to use RMTimeFormatter::"
 "format() method"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:115
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:113
 msgid "Sunday"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:116
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:114
 msgid "Monday"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:117
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:115
 msgid "Tuesday"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:118
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:116
 msgid "Wednesday"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:119
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:117
 msgid "Thursday"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:120
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:118
 msgid "Friday"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:121
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:119
 msgid "Saturday"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:133
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:131
 msgid "January"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:134
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:132
 msgid "February"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:135
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:133
 msgid "March"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:136
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:134
 msgid "April"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:137
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:135
 msgid "May"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:138
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:136
 msgid "June"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:139
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:137
 msgid "July"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:140
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:138
 msgid "August"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:141
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:139
 msgid "September"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:142
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:140
 msgid "October"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:143
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:141
 msgid "November"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:144
+#: Y:\www\xoops\modules\rmcommon/class/timeformatter.php:142
 msgid "December"
 msgstr ""
 
@@ -911,7 +943,7 @@ msgid "Do you really want to delete this comment?"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:150
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:168
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:171
 msgid "Invalid operation"
 msgstr ""
 
@@ -949,24 +981,24 @@ msgstr ""
 #: Y:\www\xoops\modules\rmcommon/comments.php:269
 #: Y:\www\xoops\modules\rmcommon/comments.php:298
 #: Y:\www\xoops\modules\rmcommon/comments.php:300
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:207
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:210
 msgid "Edit Comment"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:270
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:208
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:211
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:60
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:70
 msgid "In reply to"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:271
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:209
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:212
 msgid "Posted date"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:272
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:210
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:213
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:59
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:69
 msgid "Module"
@@ -977,12 +1009,12 @@ msgid "IP"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:276
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:214
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:217
 msgid "Poster"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:279
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:219
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:222
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:58
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:68
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:18
@@ -994,33 +1026,33 @@ msgid "Status"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:280
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:220
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:223
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:45
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:105
 msgid "Approved"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:281
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:221
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:224
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:42
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:108
 msgid "Unapproved"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:284
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:225
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:228
 msgid "Content"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:291
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:228
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:231
 msgid "Update Comment"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:292
 #: Y:\www\xoops\modules\rmcommon/js/cu-js-language.php:43
-#: Y:\www\xoops\modules\rmcommon/plugins.php:478
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:229
+#: Y:\www\xoops\modules\rmcommon/plugins.php:475
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:232
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-block-form.php:131
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:176
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-editor-image.php:105
@@ -1031,8 +1063,8 @@ msgstr ""
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-updates.php:126
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-updates.php:155
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-users.php:129
-#: Y:\www\xoops\modules\rmcommon/users.php:312
-#: Y:\www\xoops\modules\rmcommon/users.php:439
+#: Y:\www\xoops\modules\rmcommon/users.php:311
+#: Y:\www\xoops\modules\rmcommon/users.php:438
 msgid "Cancel"
 msgstr ""
 
@@ -1041,58 +1073,58 @@ msgid "Comment ID not specified!"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:330
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:186
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:273
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:189
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:276
 msgid "Specified comment does not exist!"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:365
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:315
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:318
 msgid "Comment updated successfully!"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/comments.php:367
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:317
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:320
 msgid "Errros ocurrs while trying to update comment!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:79
+#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:81
 msgid "An error ocurred while trying to delete .htaccess rules!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:80
+#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:82
 msgid ""
 "Please delete lines starting with <code># begin rmcommon</code> and ending "
 "with <code># end rmcommon</code>"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:91
+#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:93
 msgid "An error ocurred while trying to write .htaccess file!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:92
+#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:94
 msgid "Please try to add manually next lines:"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:106
-#: Y:\www\xoops\modules\rmcommon/images.php:196
-#: Y:\www\xoops\modules\rmcommon/images.php:260
+#: Y:\www\xoops\modules\rmcommon/events/rmcommon.php:109
+#: Y:\www\xoops\modules\rmcommon/images.php:197
+#: Y:\www\xoops\modules\rmcommon/images.php:261
 #: Y:\www\xoops\modules\rmcommon/images.php:309
-#: Y:\www\xoops\modules\rmcommon/images.php:619
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:120
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:121
+#: Y:\www\xoops\modules\rmcommon/images.php:618
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:124
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:125
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-images.php:1
 msgid "Images Manager"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/groups.php:39
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:144
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:145
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:148
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:149
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-users.php:1
-#: Y:\www\xoops\modules\rmcommon/users.php:189
 #: Y:\www\xoops\modules\rmcommon/users.php:190
-#: Y:\www\xoops\modules\rmcommon/users.php:266
-#: Y:\www\xoops\modules\rmcommon/users.php:419
+#: Y:\www\xoops\modules\rmcommon/users.php:191
+#: Y:\www\xoops\modules\rmcommon/users.php:265
+#: Y:\www\xoops\modules\rmcommon/users.php:418
 msgid "Users Management"
 msgstr ""
 
@@ -1113,58 +1145,58 @@ msgstr ""
 msgid "Edit group \"%s\""
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:118
+#: Y:\www\xoops\modules\rmcommon/groups.php:117
 msgid "Session token expired"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:130
+#: Y:\www\xoops\modules\rmcommon/groups.php:129
 msgid "No name has been provided."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:136
+#: Y:\www\xoops\modules\rmcommon/groups.php:135
 msgid "Description has not been provided."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:144
+#: Y:\www\xoops\modules\rmcommon/groups.php:143
 msgid "Specified group does not exists. Please try again."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:158
+#: Y:\www\xoops\modules\rmcommon/groups.php:157
 msgid "Errors ocurred while trying to save group data."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:166
+#: Y:\www\xoops\modules\rmcommon/groups.php:165
 msgid "Administrative rights could not be saved."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:176
+#: Y:\www\xoops\modules\rmcommon/groups.php:175
 msgid "Access rights could not be saved."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:186
+#: Y:\www\xoops\modules\rmcommon/groups.php:185
 msgid "Specific permissions could not be saved."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:192
-#: Y:\www\xoops\modules\rmcommon/groups.php:196
+#: Y:\www\xoops\modules\rmcommon/groups.php:191
+#: Y:\www\xoops\modules\rmcommon/groups.php:195
 msgid "Data saved successfully."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:220
+#: Y:\www\xoops\modules\rmcommon/groups.php:218
 msgid "You must select at least one group. Please, try again."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:239
+#: Y:\www\xoops\modules\rmcommon/groups.php:237
 msgid ""
 "No valid groups has been selected. Note that system groups could not be "
 "deleted."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:267
+#: Y:\www\xoops\modules\rmcommon/groups.php:265
 msgid "Selected groups has been deleted."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/groups.php:273
+#: Y:\www\xoops\modules\rmcommon/groups.php:271
 msgid "Errors ocurred while trying to delete selected groups."
 msgstr ""
 
@@ -1202,13 +1234,13 @@ msgstr ""
 msgid "Uploaded successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:199
-#: Y:\www\xoops\modules\rmcommon/images.php:201
+#: Y:\www\xoops\modules\rmcommon/images.php:200
+#: Y:\www\xoops\modules\rmcommon/images.php:202
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-upload-images.php:2
 msgid "Upload Images"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:263
+#: Y:\www\xoops\modules\rmcommon/images.php:264
 msgid "Images Manager: Categories"
 msgstr ""
 
@@ -1303,66 +1335,66 @@ msgstr ""
 msgid "Invalid image ID"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:620
-#: Y:\www\xoops\modules\rmcommon/images.php:622
+#: Y:\www\xoops\modules\rmcommon/images.php:619
+#: Y:\www\xoops\modules\rmcommon/images.php:621
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-edit.php:2
 msgid "Edit Image"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:654
+#: Y:\www\xoops\modules\rmcommon/images.php:653
 msgid "Image ID not provided!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:659
+#: Y:\www\xoops\modules\rmcommon/images.php:658
 msgid "You must  provide a title for this image"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:665
-#: Y:\www\xoops\modules\rmcommon/images.php:756
+#: Y:\www\xoops\modules\rmcommon/images.php:664
+#: Y:\www\xoops\modules\rmcommon/images.php:755
 msgid "Image not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:671
+#: Y:\www\xoops\modules\rmcommon/images.php:670
 msgid "Category not exist!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:684
+#: Y:\www\xoops\modules\rmcommon/images.php:683
 msgid "the image could not be updated!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:690
+#: Y:\www\xoops\modules\rmcommon/images.php:689
 msgid "Image updated succesfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:732
+#: Y:\www\xoops\modules\rmcommon/images.php:731
 msgid "Image updated successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:746
+#: Y:\www\xoops\modules\rmcommon/images.php:745
 msgid "Please, speciy an image at least!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:782
+#: Y:\www\xoops\modules\rmcommon/images.php:781
 msgid "Errors ocurred during images deletion!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:784
+#: Y:\www\xoops\modules\rmcommon/images.php:783
 msgid "Images deleted successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:803
+#: Y:\www\xoops\modules\rmcommon/images.php:802
 msgid "Category ID not provided"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:809
+#: Y:\www\xoops\modules\rmcommon/images.php:808
 msgid "Category not found"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:842
+#: Y:\www\xoops\modules\rmcommon/images.php:841
 msgid "Category deleted successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/images.php:844
+#: Y:\www\xoops\modules\rmcommon/images.php:843
 msgid "Errors ocurred while deleting the category"
 msgstr ""
 
@@ -1394,7 +1426,7 @@ msgstr ""
 #: Y:\www\xoops\modules\rmcommon/include/right_widgets.php:157
 #: Y:\www\xoops\modules\rmcommon/modules.php:808
 #: Y:\www\xoops\modules\rmcommon/modules.php:927
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:86
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:90
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:118
 msgid "Install"
 msgstr ""
@@ -1472,7 +1504,7 @@ msgid "Close"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:119
-#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:215
+#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:213
 msgid "Sorry, unauthorized operation!"
 msgstr ""
 
@@ -1480,30 +1512,30 @@ msgstr ""
 msgid "You must select a category before"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:223
+#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:221
 msgid "No image specified"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:231
+#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:229
 msgid "Specified image does not exists"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:262
+#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:260
 msgid "Original"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:266
-#: Y:\www\xoops\modules\rmcommon/plugins.php:365
-#: Y:\www\xoops\modules\rmcommon/plugins.php:371
-#: Y:\www\xoops\modules\rmcommon/plugins.php:377
-#: Y:\www\xoops\modules\rmcommon/plugins.php:383
+#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:264
+#: Y:\www\xoops\modules\rmcommon/plugins.php:364
+#: Y:\www\xoops\modules\rmcommon/plugins.php:370
+#: Y:\www\xoops\modules\rmcommon/plugins.php:376
+#: Y:\www\xoops\modules\rmcommon/plugins.php:382
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-editor-image.php:81
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-list-editor.php:85
 #: Y:\www\xoops\modules\rmcommon/xoops_version.php:386
 msgid "None"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:267
+#: Y:\www\xoops\modules\rmcommon/include/tiny-images.php:265
 msgid "File URL"
 msgstr ""
 
@@ -1563,7 +1595,7 @@ msgid "Do you really want to delete this block?"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/js/cu-js-language.php:38
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:57
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:193
 msgid "Delete Block"
 msgstr ""
 
@@ -1576,7 +1608,7 @@ msgid "Show Block"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/js/cu-js-language.php:41
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:63
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:199
 msgid "Block Settings"
 msgstr ""
 
@@ -1587,12 +1619,10 @@ msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/js/cu-js-language.php:44
 #: Y:\www\xoops\modules\rmcommon/js/cu-js-language.php:45
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:7
 msgid "Show Positions"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/js/cu-js-language.php:46
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:7
 msgid "Show Blocks"
 msgstr ""
 
@@ -1930,17 +1960,17 @@ msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/plugins.php:77
 #: Y:\www\xoops\modules\rmcommon/plugins.php:79
-#: Y:\www\xoops\modules\rmcommon/plugins.php:487
+#: Y:\www\xoops\modules\rmcommon/plugins.php:484
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:1
 msgid "Plugins Manager"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/plugins.php:97
 #: Y:\www\xoops\modules\rmcommon/plugins.php:133
-#: Y:\www\xoops\modules\rmcommon/plugins.php:165
-#: Y:\www\xoops\modules\rmcommon/plugins.php:196
-#: Y:\www\xoops\modules\rmcommon/plugins.php:230
-#: Y:\www\xoops\modules\rmcommon/plugins.php:503
+#: Y:\www\xoops\modules\rmcommon/plugins.php:164
+#: Y:\www\xoops\modules\rmcommon/plugins.php:195
+#: Y:\www\xoops\modules\rmcommon/plugins.php:229
+#: Y:\www\xoops\modules\rmcommon/plugins.php:500
 msgid "You must specify a existing plugin"
 msgstr ""
 
@@ -1967,84 +1997,84 @@ msgid "Plugin installed succesfully!"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/plugins.php:140
-#: Y:\www\xoops\modules\rmcommon/plugins.php:172
-#: Y:\www\xoops\modules\rmcommon/plugins.php:203
-#: Y:\www\xoops\modules\rmcommon/plugins.php:237
-#: Y:\www\xoops\modules\rmcommon/plugins.php:510
+#: Y:\www\xoops\modules\rmcommon/plugins.php:171
+#: Y:\www\xoops\modules\rmcommon/plugins.php:202
+#: Y:\www\xoops\modules\rmcommon/plugins.php:236
+#: Y:\www\xoops\modules\rmcommon/plugins.php:507
 msgid "Specified plugin is not installed yet!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:146
+#: Y:\www\xoops\modules\rmcommon/plugins.php:145
 msgid "Plugin could not be uninstalled, please try again."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:151
+#: Y:\www\xoops\modules\rmcommon/plugins.php:150
 msgid ""
 "The plugin has been deleted from database, but erros ocurred on this process."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:157
+#: Y:\www\xoops\modules\rmcommon/plugins.php:156
 msgid "Plugin uninstalled succesfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:177
-#: Y:\www\xoops\modules\rmcommon/plugins.php:210
+#: Y:\www\xoops\modules\rmcommon/plugins.php:176
+#: Y:\www\xoops\modules\rmcommon/plugins.php:209
 msgid "Plugin could not be updated, please try again."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:182
-#: Y:\www\xoops\modules\rmcommon/plugins.php:215
+#: Y:\www\xoops\modules\rmcommon/plugins.php:181
+#: Y:\www\xoops\modules\rmcommon/plugins.php:214
 msgid "The database has been updated, but erros ocurred on this process."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:188
+#: Y:\www\xoops\modules\rmcommon/plugins.php:187
 msgid "Plugin updated succesfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:221
+#: Y:\www\xoops\modules\rmcommon/plugins.php:220
 msgid "Plugin status changed succesfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:242
-#: Y:\www\xoops\modules\rmcommon/plugins.php:515
+#: Y:\www\xoops\modules\rmcommon/plugins.php:241
+#: Y:\www\xoops\modules\rmcommon/plugins.php:512
 msgid "Specified plugin is not active!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:249
+#: Y:\www\xoops\modules\rmcommon/plugins.php:248
 #, php-format
 msgid "%s configuration"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:457
+#: Y:\www\xoops\modules\rmcommon/plugins.php:456
 #: Y:\www\xoops\modules\rmcommon/xoops_version.php:157
 msgid "Visual Editor"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:458
+#: Y:\www\xoops\modules\rmcommon/plugins.php:457
 msgid "EXMCode Editor"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:459
+#: Y:\www\xoops\modules\rmcommon/plugins.php:458
 #: Y:\www\xoops\modules\rmcommon/xoops_version.php:160
 msgid "Simple Editor"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:460
+#: Y:\www\xoops\modules\rmcommon/plugins.php:459
 #: Y:\www\xoops\modules\rmcommon/xoops_version.php:158
 msgid "HTML Editor"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:477
+#: Y:\www\xoops\modules\rmcommon/plugins.php:474
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-block-form.php:132
 msgid "Save Settings"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:488
-#: Y:\www\xoops\modules\rmcommon/plugins.php:490
+#: Y:\www\xoops\modules\rmcommon/plugins.php:485
+#: Y:\www\xoops\modules\rmcommon/plugins.php:487
 msgid "Configure Plugin "
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/plugins.php:545
+#: Y:\www\xoops\modules\rmcommon/plugins.php:542
 msgid "Settings updated!"
 msgstr ""
 
@@ -2076,44 +2106,44 @@ msgstr ""
 msgid "You must write a message!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:143
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:146
 msgid "Comment could not be posted!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:163
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:166
 msgid "Comment posted successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:174
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:193
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:257
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:262
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:177
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:196
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:260
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:265
 msgid "You are not allowed to edit this comment!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:180
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:267
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:183
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:270
 msgid "Please specify a comment"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:251
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:254
 msgid "Invalid Operation"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/post-comment.php:284
+#: Y:\www\xoops\modules\rmcommon/post-comment.php:287
 msgid "You must provide a text for comment!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/rss.php:18
+#: Y:\www\xoops\modules\rmcommon/rss.php:21
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-rss-center.php:1
 msgid "RSS Center"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/rss.php:38
+#: Y:\www\xoops\modules\rmcommon/rss.php:41
 msgid "Choose an option to see its feed"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/rss.php:43
+#: Y:\www\xoops\modules\rmcommon/rss.php:46
 msgid "This module does not support rss feeds"
 msgstr ""
 
@@ -2133,35 +2163,44 @@ msgstr ""
 msgid "This module can not be configured with Common Utilities"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/settings.php:107
-#: Y:\www\xoops\modules\rmcommon/settings.php:139
+#: Y:\www\xoops\modules\rmcommon/settings.php:105
+#: Y:\www\xoops\modules\rmcommon/settings.php:137
 msgid "Preferences"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/settings.php:157
+#: Y:\www\xoops\modules\rmcommon/settings.php:155
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:60
 msgid "Settings"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/settings.php:159
-#: Y:\www\xoops\modules\rmcommon/settings.php:175
+#: Y:\www\xoops\modules\rmcommon/settings.php:157
+#: Y:\www\xoops\modules\rmcommon/settings.php:172
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-settings-form.php:3
 #, php-format
 msgid "%s Settings"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/settings.php:203
+#: Y:\www\xoops\modules\rmcommon/settings.php:200
 msgid "A module has not been specified!"
 msgstr ""
 
+#: Y:\www\xoops\modules\rmcommon/settings.php:215
 #: Y:\www\xoops\modules\rmcommon/settings.php:218
-#: Y:\www\xoops\modules\rmcommon/settings.php:221
 msgid "The specified module does not exists."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/settings.php:329
-#: Y:\www\xoops\modules\rmcommon/settings.php:334
+#: Y:\www\xoops\modules\rmcommon/settings.php:325
+#: Y:\www\xoops\modules\rmcommon/settings.php:330
 msgid "Settings saved successfully!"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/404.php:1
+#: Y:\www\xoops\modules\rmcommon/xoops_version.php:510
+msgid "Error 404"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/404.php:2
+msgid "The document that you trying to reach could not be found in server"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/templates/ajax/rmc-updates-list.php:7
@@ -2252,7 +2291,7 @@ msgid "%s settings"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-block-form.php:4
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:205
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:206
 msgid "General Settings"
 msgstr ""
 
@@ -2317,8 +2356,6 @@ msgid "1 month"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-block-form.php:70
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:120
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:182
 msgid "Visible"
 msgstr ""
 
@@ -2358,63 +2395,58 @@ msgstr ""
 msgid "Blocks Administration"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:10
-msgid "Add New Block"
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:8
+msgid "Positions"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:32
-msgid "Messages Console"
-msgstr ""
-
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:50
-msgid "Drag and drop blocks here"
-msgstr ""
-
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:59
-msgid "Hide block"
-msgstr ""
-
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:61
-msgid "Show block"
-msgstr ""
-
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:92
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:28
 #: Y:\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:5
 msgid "Input a name to identify this position (<em>eg. Left blocks</em>)"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:96
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:32
 msgid "Tag Name"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:98
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:34
 #: Y:\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:8
 msgid ""
 "Specify a name for the smarty tag to use in templates (eg. left_blocks). "
 "This tag will be used as Smarty tag (eg. &lt;{$left_blocks}&gt)."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:101
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:37
 #: Y:\www\xoops\modules\rmcommon/templates/widgets/rmc_aw_posnew.php:9
 msgid "Add Position"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:105
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:41
 msgid "How to implement blocks"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:119
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:181
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:55
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:117
 msgid "Bulk actions..."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:121
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:183
-msgid "Hidden"
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:56
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:69
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:78
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:118
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:24
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:79
+msgid "Active"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:124
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:186
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:57
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:119
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:19
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:79
+msgid "Inactive"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:60
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:122
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:35
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-comments.php:135
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-images-categories.php:12
@@ -2424,8 +2456,8 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:130
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:139
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:66
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:75
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-form-users.php:20
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-groups.php:9
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-users.php:148
@@ -2435,27 +2467,45 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:132
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:141
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:68
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:77
 msgid "Smarty Tag"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:133
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:142
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:24
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:79
-msgid "Active"
-msgstr ""
-
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:151
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:87
 msgid "There are not positions created yet!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:194
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:142
+msgid "Add New Block"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:164
+msgid "Messages Console"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:183
+msgid "Drag and drop blocks here"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:189
+#, php-format
+msgid "Module: %s"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:195
+msgid "Hide block"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:197
+msgid "Show block"
+msgstr ""
+
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:229
 msgid "Loading"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:194
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-blocks.php:229
 msgid "Loading data..."
 msgstr ""
 
@@ -2469,11 +2519,6 @@ msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:16
 msgid "Category Status:"
-msgstr ""
-
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:19
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-plugins.php:79
-msgid "Inactive"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-categories-form.php:30
@@ -2656,45 +2701,45 @@ msgstr ""
 msgid "%s Updates Available!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:69
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:71
 #, php-format
 msgid "Please %s to view available updates."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:69
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:71
 msgid "click here"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:91
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:95
 msgid ""
 "If you wish to manage or install new modules please go to Modules Management."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:93
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:97
 msgid "Modules management"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:108
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:112
 msgid "System Tools"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:114
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:115
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:118
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:119
 msgid "Configure Common Utilities"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:126
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:127
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:130
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:131
 msgid "Comments Management"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:132
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:133
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:136
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:137
 msgid "Plugins Management"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:138
-#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:139
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:142
+#: Y:\www\xoops\modules\rmcommon/templates/rmc-dashboard.php:143
 msgid "XOOPS Modules"
 msgstr ""
 
@@ -3109,8 +3154,8 @@ msgstr ""
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-modules.php:26
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-modules.php:35
 #: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:58
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:131
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:371
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:132
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:373
 msgid "Options"
 msgstr ""
 
@@ -3243,8 +3288,8 @@ msgid "Configurable Items"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-updates.php:1
+#: Y:\www\xoops\modules\rmcommon/updates.php:53
 #: Y:\www\xoops\modules\rmcommon/updates.php:54
-#: Y:\www\xoops\modules\rmcommon/updates.php:55
 msgid "Available Updates"
 msgstr ""
 
@@ -3332,7 +3377,7 @@ msgstr ""
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-users.php:183
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-users.php:195
 #: Y:\www\xoops\modules\rmcommon/templates/rmc-users.php:257
-#: Y:\www\xoops\modules\rmcommon/users.php:276
+#: Y:\www\xoops\modules\rmcommon/users.php:275
 msgid "Username"
 msgstr ""
 
@@ -3512,31 +3557,31 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:206
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:207
 msgid "User Info Settings"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:207
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:208
 msgid "Meta Tags and Footer"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:208
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:209
 msgid "Word Censoring"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:209
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:210
 msgid "Search Options"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:210
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:211
 msgid "Email Setup"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:211
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:212
 msgid "Authentication Options"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:212
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/class/twop6functions.class.php:213
 msgid "System Module Settings"
 msgstr ""
 
@@ -3656,264 +3701,264 @@ msgstr ""
 msgid "Color Test"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:333
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:334
 #, php-format
-msgid "%s updates available"
+msgid "%s UPDATES"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:351
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:353
 msgid "Menu"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:416
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:418
 msgid "Toolbar"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:518
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:520
 #, php-format
 msgid "Powered by %s."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:519
+#: Y:\www\xoops\modules\rmcommon/themes/twop6/theme.php:521
 #, php-format
 msgid "Reloaded by %s."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:43
+#: Y:\www\xoops\modules\rmcommon/updates.php:42
 msgid "Item updated!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:45
+#: Y:\www\xoops\modules\rmcommon/updates.php:44
 msgid "Updates Help"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:92
-#: Y:\www\xoops\modules\rmcommon/updates.php:127
-#: Y:\www\xoops\modules\rmcommon/updates.php:356
+#: Y:\www\xoops\modules\rmcommon/updates.php:91
+#: Y:\www\xoops\modules\rmcommon/updates.php:125
+#: Y:\www\xoops\modules\rmcommon/updates.php:352
 msgid "Invalid parameters!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:140
-#: Y:\www\xoops\modules\rmcommon/updates.php:367
+#: Y:\www\xoops\modules\rmcommon/updates.php:138
+#: Y:\www\xoops\modules\rmcommon/updates.php:363
 msgid "Unable to download update file!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:146
+#: Y:\www\xoops\modules\rmcommon/updates.php:144
 msgid "ERROR: unable to open downloaded zip file!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:174
+#: Y:\www\xoops\modules\rmcommon/updates.php:172
 #, php-format
 msgid "Target path \"%s\" does not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:208
+#: Y:\www\xoops\modules\rmcommon/updates.php:205
 msgid "FTP configuration not specified!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:212
+#: Y:\www\xoops\modules\rmcommon/updates.php:209
 msgid "FTP configuration not valid!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:224
+#: Y:\www\xoops\modules\rmcommon/updates.php:221
 #, php-format
 msgid "Unable to connect FTP server %s"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:252
+#: Y:\www\xoops\modules\rmcommon/updates.php:249
 msgid "Executing files..."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:254
+#: Y:\www\xoops\modules\rmcommon/updates.php:251
 #, php-format
 msgid "%s has been updated"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:369
+#: Y:\www\xoops\modules\rmcommon/updates.php:365
 msgid "Downloaded!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/updates.php:384
-#: Y:\www\xoops\modules\rmcommon/updates.php:390
+#: Y:\www\xoops\modules\rmcommon/updates.php:379
+#: Y:\www\xoops\modules\rmcommon/updates.php:385
 msgid "File not found!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:173
+#: Y:\www\xoops\modules\rmcommon/users.php:174
 msgid "You have not selected any user!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:174
+#: Y:\www\xoops\modules\rmcommon/users.php:175
 msgid "Dou you really wish to delete selected users?"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:256
-#: Y:\www\xoops\modules\rmcommon/users.php:343
+#: Y:\www\xoops\modules\rmcommon/users.php:255
+#: Y:\www\xoops\modules\rmcommon/users.php:342
 msgid "The specified user is not valid!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:261
-#: Y:\www\xoops\modules\rmcommon/users.php:349
+#: Y:\www\xoops\modules\rmcommon/users.php:260
+#: Y:\www\xoops\modules\rmcommon/users.php:348
 msgid "The specified user does not exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:267
-#: Y:\www\xoops\modules\rmcommon/users.php:269
-#: Y:\www\xoops\modules\rmcommon/users.php:311
+#: Y:\www\xoops\modules\rmcommon/users.php:266
+#: Y:\www\xoops\modules\rmcommon/users.php:268
+#: Y:\www\xoops\modules\rmcommon/users.php:310
 msgid "Edit User"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:267
-#: Y:\www\xoops\modules\rmcommon/users.php:269
+#: Y:\www\xoops\modules\rmcommon/users.php:266
+#: Y:\www\xoops\modules\rmcommon/users.php:268
 msgid "Add User"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:273
+#: Y:\www\xoops\modules\rmcommon/users.php:272
 msgid "Editing User"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:277
+#: Y:\www\xoops\modules\rmcommon/users.php:276
 msgid "This field also will be the user login name."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:280
+#: Y:\www\xoops\modules\rmcommon/users.php:279
 msgid "Full name"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:281
+#: Y:\www\xoops\modules\rmcommon/users.php:280
 msgid "This field must contain firstname and lastname."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:287
+#: Y:\www\xoops\modules\rmcommon/users.php:286
 msgid "New password"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:288
+#: Y:\www\xoops\modules\rmcommon/users.php:287
 msgid ""
 "The password should be at least eight characters long. To make it stronger, "
 "use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:289
+#: Y:\www\xoops\modules\rmcommon/users.php:288
 msgid "Repeat Password"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:290
+#: Y:\www\xoops\modules\rmcommon/users.php:289
 msgid "Type password again."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:293
+#: Y:\www\xoops\modules\rmcommon/users.php:292
 msgid "URL (Blog or personal website)"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:296
+#: Y:\www\xoops\modules\rmcommon/users.php:295
 msgid "Time zone"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:299
+#: Y:\www\xoops\modules\rmcommon/users.php:298
 msgid "Assign to groups"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:337
+#: Y:\www\xoops\modules\rmcommon/users.php:336
 msgid "Sorry, you don't have permission to add users."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:358
+#: Y:\www\xoops\modules\rmcommon/users.php:357
 msgid "Please fill all required fields and try again!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:364
+#: Y:\www\xoops\modules\rmcommon/users.php:363
 msgid "Passwords doesn't match. Please chek them."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:374
+#: Y:\www\xoops\modules\rmcommon/users.php:373
 msgid "Another user with same username or email already exists!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:397
+#: Y:\www\xoops\modules\rmcommon/users.php:396
 msgid "The users could not be saved. Please try again!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:414
+#: Y:\www\xoops\modules\rmcommon/users.php:413
 msgid ""
 "You must select one user at least. Please click on \"Add Users\" and select "
 "as many users as you wish."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:420
-#: Y:\www\xoops\modules\rmcommon/users.php:438
+#: Y:\www\xoops\modules\rmcommon/users.php:419
+#: Y:\www\xoops\modules\rmcommon/users.php:437
 msgid "Send E-Mail"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:421
+#: Y:\www\xoops\modules\rmcommon/users.php:420
 msgid "Sending email to users"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:425
+#: Y:\www\xoops\modules\rmcommon/users.php:424
 msgid "Send Email to Users"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:428
+#: Y:\www\xoops\modules\rmcommon/users.php:427
 msgid ""
 "Please note that the maximun users number that you can select depends of the "
 "limit of emails that you can send accourding to your email server policies "
 "(or hosting account policies)."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:430
+#: Y:\www\xoops\modules\rmcommon/users.php:429
 msgid "Message subject"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:431
+#: Y:\www\xoops\modules\rmcommon/users.php:430
 msgid "Subject must be descriptive."
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:432
+#: Y:\www\xoops\modules\rmcommon/users.php:431
 msgid "Message type"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:433
+#: Y:\www\xoops\modules\rmcommon/users.php:432
 msgid "HTML"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:434
+#: Y:\www\xoops\modules\rmcommon/users.php:433
 msgid "Plain Text"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:435
+#: Y:\www\xoops\modules\rmcommon/users.php:434
 msgid "Message content"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:469
+#: Y:\www\xoops\modules\rmcommon/users.php:468
 msgid "There was errors while sending this emails"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:476
+#: Y:\www\xoops\modules\rmcommon/users.php:475
 msgid "Message sent successfully!"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:494
+#: Y:\www\xoops\modules\rmcommon/users.php:493
 msgid "No users has been selected"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:505
+#: Y:\www\xoops\modules\rmcommon/users.php:504
 msgid "Users "
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:507
+#: Y:\www\xoops\modules\rmcommon/users.php:506
 msgid "Users could not be "
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:534
+#: Y:\www\xoops\modules\rmcommon/users.php:533
 #, php-format
 msgid "Admin user cannot be deleted: %s"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:536
+#: Y:\www\xoops\modules\rmcommon/users.php:535
 #, php-format
 msgid "User cannot be deleted: %s"
 msgstr ""
 
-#: Y:\www\xoops\modules\rmcommon/users.php:546
+#: Y:\www\xoops\modules\rmcommon/users.php:545
 msgid "Users deleted successfully!"
 msgstr ""
 
@@ -3934,7 +3979,7 @@ msgid "LinkedIn"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/xoops_version.php:55
-msgid "GithHub"
+msgid "GitHub"
 msgstr ""
 
 #: Y:\www\xoops\modules\rmcommon/xoops_version.php:56
