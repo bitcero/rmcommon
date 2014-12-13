@@ -283,6 +283,7 @@ if (!$cuSettings){
 }
 
 $rmEvents->run_event('rmcommon.base.loaded');
+
 $rmTpl->add_head_script('var xoUrl = "'.XOOPS_URL.'";');
 
 if($cuSettings->updates && isset( $xoopsOption['pagetype'] ) && $xoopsOption['pagetype']=='admin'){

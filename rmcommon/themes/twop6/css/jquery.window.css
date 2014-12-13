@@ -1,5 +1,5 @@
 .window_panel {
-	position: fixed;
+	position: absolute;
 	left: 0;
 	top: 0;
 	margin: 0;
@@ -14,9 +14,7 @@
 	text-align: left;
 	vertical-align: top;
 	border: 1px solid #aaa;
-	border-radius: 4px;
 	overflow: hidden;
-	box-shadow: 0 0 10px #666;
 }
 
 .window_panel .window_header {
@@ -26,13 +24,12 @@
 	border-bottom: 1px solid #aaa;
 	overflow: hidden;
 	white-space: nowrap;
-	border-radius: 4px 4px 0 0;
 }
 
 .window_panel .window_header_normal {
 	/*background: url('../images/header_bg.gif') repeat-x;*/  /* change to use jquery-ui theme instead */
-	height: 20px;
-	line-height: 20px;
+	height: 36px;
+	line-height: 30px;
 	padding: 2px 5px;
 	text-align: left;
 	cursor: move;
@@ -49,7 +46,7 @@
 }
 
 .window_panel .window_header_minimize_vertical {
-	padding: 7px 0;
+	padding: 7px 0px;
 	line-height: 13px;
 	text-align: center;
 }
@@ -81,6 +78,7 @@
 	border-top: 1px solid #aaa;
 	overflow: hidden;
 	font-size: 12px;
+    display: none;
 }
 
 .window_panel .window_footer div {
@@ -92,7 +90,7 @@
 	height: 16px;
 	position: absolute;
 	left: 4px;
-	top: 4px;
+	top: 8px;
 }
 
 .window_panel .window_header .window_title_text {
@@ -119,7 +117,7 @@
 
 .window_panel .window_header .window_function_bar {
 	height: 23px;
-	width: 72px;
+	width: 44px!important;
 	position: absolute;
 	right: 0;
 	top: 2px;
@@ -129,7 +127,7 @@
 
 .window_panel .window_header .window_icon_button {
 	width: 16px;
-	height: 16px;
+	height: 30px;
 	z-index: 3200;
 	cursor: pointer;
 	float: right;

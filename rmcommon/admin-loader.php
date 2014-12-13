@@ -30,7 +30,7 @@ define('RMTHEMEPATH', RMCPATH.'/themes/'.$rmc_theme);
 define('RMTHEMEURL', RMCURL.'/themes/'.$rmc_theme);
 
 // Load theme events
-RMEvents::get()->load_extra_preloads(RMTHEMEPATH, ucfirst($rmc_theme).'Theme');
+//RMEvents::get()->load_extra_preloads(RMTHEMEPATH, ucfirst($rmc_theme).'Theme');
 
 header ("Expires: Mon, 26 Jul 1990 05:00:00 GMT");
 header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");

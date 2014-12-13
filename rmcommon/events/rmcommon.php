@@ -29,6 +29,10 @@ class RmcommonRmcommonPreload
 
 	}
 
+    public function eventRmcommonXoopsCommonStart(){
+
+    }
+
 	public function eventRmcommonXoopsCommonEnd(){
 		global $xoopsConfig;
 
@@ -39,6 +43,12 @@ class RmcommonRmcommonPreload
 		$p = parse_url($url);
 
         $config = RMSettings::cu_settings();
+
+        /**
+         * This event has added in order to add custom codes in a "semantic" way, but
+         * the codes can be added from any pertinent place
+         */
+        RMEvents::get()->run_event('rmcommon.load.codes');
 
 		if(substr($p['path'], -11)=='backend.php' && $config->rss_enable){
 			include_once RMCPATH.'/rss.php';

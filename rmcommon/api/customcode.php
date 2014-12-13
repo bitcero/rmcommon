@@ -1,6 +1,6 @@
 <?php
 /**
- * This code is a modified fragment toaken from Wordpress.
+ * This code is a modified fragment taken from Wordpress.
  * The idea is to provide the functionallity of shortcodes
  * directly on XOOPS using rmcommon
  */

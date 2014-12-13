@@ -233,12 +233,28 @@ class RMImageResizer
     }
 
 
-    static public function resize( $file, stdClass $params ){
+    /**
+     * Resize an image and returns an object with different values.
+     *
+     * Given parameters must be:
+     * <p><em>optional</em> <strong>target</strong>: Folder where resize image will be saved.</p>
+     * <p><em>optional</em> <strong>cache</strong>: Determines if an image is obtained from cache or if must be regenerated.</p>
+     * <p><em>optional</em> <strong>quality</strong>: Determines the quality of the resize image.</p>
+     * <p><strong>width</strong>: Width of the resize image</p>
+     * <p><strong>height</strong>: Height of the resize image</p>
+     * @param string $file URL to image
+     * @param array|object $params Parameters to use
+     * @return stdClass
+     */
+    static public function resize( $file, $params ){
 
         if ( empty( $file ) ) {
             trigger_error(__('Resize Image: You must provide a valid file for image.', 'rmcommon'), E_WARNING);
             return false;
         }
+
+        if ( is_array( $params ) )
+            $params = (object) $params;
 
         /*
          * Default method for resize images is "crop"
@@ -252,6 +268,7 @@ class RMImageResizer
          * Enable or disable cache verification
          */
         $params->cache = !isset( $params->cache ) ? true : $params->cache;
+        $params->quality = !isset( $params->quality ) ? 80 : $params->quality;
 
         $file = str_replace( XOOPS_URL, XOOPS_ROOT_PATH, $file);
 
@@ -336,9 +353,9 @@ class RMImageResizer
         if ( $image->type == 'gif' )
             imagegif( $target, $target_file );
         elseif ( $image->type == 'jpg' )
-            imagejpeg( $target, $target_file );
+            imagejpeg( $target, $target_file, $params->quality );
         elseif ( $image->type == 'png' )
-            imagepng( $target, $target_file );
+            imagepng( $target, $target_file, $params->quality );
 
         $image_resize = new stdClass();
         $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $cache_file );
