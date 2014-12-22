@@ -598,6 +598,13 @@ class TextCleaner
         $rmc_config = empty($params) ? RMSettings::cu_settings() : $params;
 
 		$original_text = $text;
+
+        // Custom Codes
+        global $rmCodes;
+
+        if(!defined('XOOPS_CPFUNC_LOADED') && !defined('NO_CUSTOM_CODES'))
+            $text = $rmCodes->doCode($text);
+
 		if ($rmc_config->dohtml != 1){
 			$text = $this->specialchars($text);
         }
@@ -620,12 +627,6 @@ class TextCleaner
 		$text = $this->make_clickable($text);
 		$text = $this->codeConv($text, $rmc_config->doxcode);	// Ryuji_edit(2003-11-18)
 		if($paragraph) $text = $this->double_br($text);
-
-        // Custom Codes
-        global $rmCodes;
-
-		if(!defined('XOOPS_CPFUNC_LOADED') && !defined('NO_CUSTOM_CODES'))
-            $text = $rmCodes->doCode($text);
 
 		// Before to send the formatted string we send it to interceptor methods
 		return RMEvents::get()->run_event('rmcommon.text.todisplay', $text, $original_text);

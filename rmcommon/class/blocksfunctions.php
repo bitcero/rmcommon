@@ -85,7 +85,7 @@ class RMBlocksFunctions
         $subpage = isset($xoopsOption['module_subpage']) ? $xoopsOption['module_subpage'] : '';
         $barray = array(); // Array of retrieved blocks
 
-        $barray = self::get_blocks($groups, $mid, $isStart, XOOPS_BLOCK_VISIBLE, '', 1, $subpage);
+        $barray = self::get_blocks($groups, $mid, $isStart, XOOPS_BLOCK_VISIBLE, '', 1, $subpage, array_keys( $sides ) );
 
         foreach($barray as $block){
 
@@ -99,12 +99,11 @@ class RMBlocksFunctions
         }
 
         unset($side,$sides,$content,$subpage,$barray,$groups,$startMod);
-
         return $blocks;
 
     }
 
-    public function get_blocks($groupid, $mid=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.wid', $isactive=1, $subpage=''){
+    public function get_blocks($groupid, $mid=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.wid', $isactive=1, $subpage='', $canvas = array()){
 
         $orderby = $orderby=='' ? 'b.weight,b.bid' : $orderby;
 
@@ -159,6 +158,10 @@ class RMBlocksFunctions
             }
             $sql .= $subpage!=''  ? " AND (m.page='$subpage' OR m.page='--')" : '';
             $sql .= ' AND b.bid IN ('.implode(',', $blockids).')';
+
+            if ( is_array( $canvas ) )
+                $sql .= ' AND canvas IN ('.implode(',', $canvas) .')';
+
             $sql .= ' ORDER BY '.$orderby;
             $result = $db->query($sql);
             while ( $myrow = $db->fetchArray($result) ) {

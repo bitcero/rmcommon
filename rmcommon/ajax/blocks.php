@@ -202,6 +202,8 @@ function save_block_config(){
     if(!$block->save())
         response(sprintf(__('Settings for the block "%s" could not be saved!','rmcommon'), $block->getVar('name')), array('error' => $block->errors()), 1, 1);
 
+    RMEvents::get()->run_event( 'rmcommon.block.saved', $block );
+
     $ret = array(
         'id'            => $block->id(),
         'canvas'        => $block->getVar('canvas'),

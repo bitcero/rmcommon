@@ -72,7 +72,7 @@ class RMUtilities
 	/**
 	 * Genera una cadena aleatoria en base a par?metros especificados
 	 */
-	public function randomString($size, $digit = true, $special = false, $upper = false, $alpha = true){
+	static public function randomString($size, $digit = true, $special = false, $upper = false, $alpha = true){
 		$aM = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		$am = "abcdefghijklmnopqrstuvwxyz";
 		$d = "0123456789";

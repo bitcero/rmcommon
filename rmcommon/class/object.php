@@ -325,6 +325,10 @@ class RMObject
     */
     function getVar($key, $format = 's')
     {
+
+        if ( !isset( $this->vars[$key] ) )
+            return null;
+
         $ret = $this->vars[$key]['value'];
 
         switch ($this->vars[$key]['data_type']) {

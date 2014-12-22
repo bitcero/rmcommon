@@ -256,9 +256,9 @@ class RMFunctions
 
             if ($xoopsUser && $xoopsUser->isAdmin()){
 				$editlink = RMCURL.'/comments.php?action=edit&amp;id='.$com->id().'&amp;ret='.urlencode(RMUris::current_url());
-            }elseif($rmc_config['allow_edit']){
+            }elseif($rmc_config->allow_edit){
 				$time_limit = time() - $com->getVar('posted');
-	            if($xoopsUser && $xoopsUser->getVar('uid')==$editor->getVar('xuid') && $time_limit<($rmc_config['edit_limit']*3600)){
+	            if($xoopsUser && $xoopsUser->getVar('uid')==$editor->getVar('xuid') && $time_limit<($rmc_config->edit_limit*3600)){
 					$editlink = RMCURL.'/post-comment.php?action=edit&amp;id='.$com->id().'&amp;ret='.urlencode(RMUris::current_url());
 	            } else {
 					$editlink = '';
