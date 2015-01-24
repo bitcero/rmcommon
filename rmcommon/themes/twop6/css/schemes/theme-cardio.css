@@ -374,3 +374,7 @@ hr{
 .support-me + .box-footer > a:hover{
     background-color: #5A6A62;
 }
+#xo-context-help .title{
+    background-color: #E94C6F;
+    color: #FFF;
+}

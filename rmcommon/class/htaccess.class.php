@@ -30,13 +30,6 @@ class RMHtaccess
         $this->module = $module;
         $this->file = XOOPS_ROOT_PATH.'/.htaccess';
 
-        if(strpos($_SERVER['SERVER_SOFTWARE'], 'Apache')!==FALSE){
-
-            if(!file_exists($this->file))
-                file_put_contents($this->file, '');
-
-        }
-
         $this->content = file_get_contents($this->file);
 
         $this->checkHealth();
@@ -71,7 +64,7 @@ class RMHtaccess
      */
     private function checkHealth(){
 
-        if(strpos($_SERVER['SERVER_SOFTWARE'], 'Apache')===FALSE)
+        if( strpos($_SERVER['SERVER_SOFTWARE'], 'Apache')===FALSE && strpos($_SERVER['SERVER_SOFTWARE'], 'LiteSpeed')===FALSE )
             $this->apache = false;
 
         if(function_exists('apache_get_modules')){

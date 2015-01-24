@@ -69,7 +69,7 @@ $(document).ready(function(){
 
     $("a.rm_help_button").click(function(){
 
-        $.window({
+        /*$.window({
             title: $(this).attr('title'),
             headerClass: "th bg_dark",
             url: $(this).attr('href'),
@@ -81,10 +81,39 @@ $(document).ready(function(){
             minimizable: false,
             y: 10,
             x: '60%'
-        });
+        });*/
+
+        $("#xo-context-help > .title").html('<span class="fa fa-question-circle"></span> ' + $(this).attr('title'));
+
+        if ( $("#xo-context-help > iframe").length > 0 )
+            $("#xo-context-help iframe").attr("src", $(this).attr('href') );
+        else
+            $("#xo-context-help").append('<iframe src="' + $(this).attr('href') + '"></iframe>');
+
+        $("#xo-context-help .help-switch").removeClass('fa-question-circle').addClass('fa-angle-double-right');
+
+        $("body").addClass('xo-help');
 
         return false;
 
+    });
+
+    $("#xo-context-help .help-switch").click( function(){
+
+        if ( $("body").hasClass('xo-help') ) {
+            $("body").removeClass('xo-help').addClass('xo-without-help');
+            $(this).removeClass('fa-angle-double-right').addClass('fa-question-circle');
+        } else {
+            $("body").removeClass('xo-without-help').addClass('xo-help');
+            $(this).removeClass('fa-question-circle').addClass('fa-angle-double-right');
+        }
+
+    });
+
+    $("#xo-context-help .help-close").click( function(){
+        $("body").removeClass('xo-help').removeClass('xo-without-help');
+        $("#xo-context-help iframe").remove();
+        $("#xo-context-help .title").html('');
     });
 
     $(".cu-breadcrumb-container > .breadcrumb-puller").click(function(){

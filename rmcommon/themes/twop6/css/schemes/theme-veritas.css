@@ -479,3 +479,7 @@ pre{
 .support-me + .box-footer > a:hover{
     background-color: #1352A2;
 }
+#xo-context-help .title{
+    background-color: #fb6964;
+    color: #FFF;
+}

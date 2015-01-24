@@ -2,10 +2,11 @@ span.cu-item-options{
 	display: block;
 	font-size: 0.9em;
 	padding: 4px 0;
-	visibility: hidden;
+	opacity: 0;
+    transition: opacity 200ms ease-in-out;
 }
 .table > tbody > tr > td:hover span.cu-item-options{
-	visibility: visible;
+	opacity: 1;
 }
 div.cu-bulk-actions{
 	padding: 8px 0;

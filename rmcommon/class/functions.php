@@ -232,7 +232,7 @@ class RMFunctions
 
                 $poster = array(
                     'id' => $user->getVar('uid'),
-                    'name'  => $user->getVar('uname'),
+                    'name'  => $user->getVar('name') != '' ? $user->getVar('name') : $user->getVar('uname'),
                     'email' => $user->getVar('email'),
                     'posts' => $user->getVar('posts'),
                     'avatar'=> XOOPS_UPLOAD_URL.'/'.$user->getVar('image'),

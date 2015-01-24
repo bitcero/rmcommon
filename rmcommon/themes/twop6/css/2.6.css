@@ -365,3 +365,83 @@ table th{
 .container {
     max-width: 98%;
 }
+
+/* Context Help */
+#two6-container{
+    transition: ease-in-out all 250ms;
+}
+#xo-context-help{
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    right: -300px;
+    bottom: 0;
+    background-color: #FFF;
+    width: 300px;
+    z-index: 1081;
+    transition: ease-in-out all 250ms;
+    box-shadow: -2px 0 2px rgba(0,0,0,0.1);
+}
+#xo-context-help .title{
+    padding: 5px 10px;
+    font-weight: bold;
+}
+#xo-context-help iframe{
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+#xo-context-help .help-switch,
+#xo-context-help .help-close{
+    background-color: #222222;
+    color: #FFF;
+    font-size: 20px;
+    line-height: 40px;
+    width: 40px;
+    position: absolute;
+    left: -40px;
+    top: 150px;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+}
+#xo-context-help .help-close{
+    background-color: #CF4944;
+    top: 191px;
+}
+
+body.xo-help #xo-context-help{
+    opacity: 1;
+    transform: translate(-300px, 0);
+}
+body.xo-help #xo-context-help .help-close,
+body.xo-help #xo-context-help .help-switch,
+body.xo-without-help #xo-context-help .help-close,
+body.xo-without-help #xo-context-help .help-switch{
+    display: block;
+}
+
+body.xo-without-help #xo-context-help{
+    opacity: 1;
+}
+
+/* MEDIA QUERIES */
+@media( min-width: 1200px ){
+    #xo-context-help{
+        width: 600px;
+        right: -600px;
+    }
+    body.xo-help #xo-context-help{
+        transform: translate(-600px, 0);
+    }
+}
+
+@media( min-width: 992px ) and ( max-width: 1199px ){
+    #xo-context-help{
+        width: 500px;
+        right: -500px;
+    }
+    body.xo-help #xo-context-help{
+        transform: translate(-500px, 0);
+    }
+}

@@ -129,7 +129,7 @@ class RMUtilities
 	 * @param string $path Ruta del directorio
 	 * @return bool
 	 */
-	function delete_directory($path){
+	static function delete_directory($path){
 		$path = str_replace('\\', '/', $path);
 		if (substr($path, 0, strlen($path) - 1)!='/'){
 			$path .= '/';
