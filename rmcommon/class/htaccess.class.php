@@ -87,7 +87,7 @@ class RMHtaccess
 
         if(strpos($this->content, $rb)===false){
             if(preg_match("/RewriteBase/", $this->content))
-                preg_replace("/RewriteBase\s{1,}(.*)\n",$rb, $this->content);
+                preg_replace("/RewriteBase\s{1,}(.*)\n/",$rb, $this->content);
             else
                 $this->content .= $rb."\n";
         }
