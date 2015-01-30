@@ -13,6 +13,7 @@ ul.dropdown_menu, ul.dropdown_menu li{
     border: 1px solid #999;
     -moz-box-shadow: #999 2px 2px 5px;
     overflow: auto;
+    z-index: 1052;
 }
 
 .dropdown_menu a:link, .dropdown_menu a:visited {

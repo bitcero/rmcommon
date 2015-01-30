@@ -23,6 +23,9 @@
  * </code>
  */
 
+if ( !defined('RMCLOCATION') )
+    define('RMLOCATION', '');
+
 ob_start();
 ?>
 

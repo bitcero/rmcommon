@@ -1,0 +1,43 @@
+/*
+FULL SCREEN EDITOR
+---------------------------------------------- */
+.ed-plugins{
+    .full-screen, .normal-screen{
+        float: right;
+    }
+}
+.ed-container.full-screen-edit{
+    z-index: 1050;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #FFFFFF;
+    .ed-plugins{
+        padding: 10px 15px;
+        background: #FFF;
+    }
+    .txtarea-container{
+        position: absolute;
+        top: 140px;
+        bottom: 20px;
+        left: 15%; right: 15%;
+    }
+    textarea{
+        border: 0;
+        color: #646464;
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        font-size: 1.4em;
+        padding: 15px;
+        &:focus{
+            outline: 0;
+            border: 0;
+        }
+    }
+    .ed-buttons{
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(0,0,0,0.1);
+        padding: 5px 15px;
+    }
+}

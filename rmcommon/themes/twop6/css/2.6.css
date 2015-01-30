@@ -75,7 +75,7 @@ body{
     top: -32px; left: 0; right: 0;
     height: 32px;
     padding: 0;
-    z-index: 1080;
+    z-index: 1032;
 }
 .cu-breadcrumb-container .breadcrumb-puller{
     display: inline-block;
@@ -404,6 +404,7 @@ table th{
     text-align: center;
     cursor: pointer;
     display: none;
+    border-radius: 3px 0 0 3px;
 }
 #xo-context-help .help-close{
     background-color: #CF4944;

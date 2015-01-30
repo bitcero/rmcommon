@@ -14,5 +14,8 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# Prepros files
+prepros.cfg
+
 # Windows shortcuts
 *.lnk

@@ -4,7 +4,7 @@
 * @author: Eduardo Cortés <i.bitcero@gmail.com>
 */
 div.ed-container{
-
+    transition: ease-in-out all 350ms;
 }
 div.ed-container div.quicktags{
 	background: #f9f9f9;
@@ -12,6 +12,7 @@ div.ed-container div.quicktags{
     border: 1px solid #CCC;
     border-bottom: 0;
     padding: 3px 3px 5px 3px;
+    transition: ease-in-out all 350ms;
 }
 div.ed-container div.quicktags button{
     background-color: #fff;
@@ -26,20 +27,22 @@ div.ed-container div.quicktags button:hover{
     border-color: rgba(0,0,0,0.25);
 }
 div.ed-container div.txtarea_container{
-
+    transition: ease-in-out all 350ms;
 }
 div.ed-container textarea{
-    font-family: Tahoma, Geneva, sans-serif;
-	font-size: 1.05em;
+	font-size: 1.4em;
 	color: #333;
 	padding: 3px;
 	border: 1px solid rgba(0,0,0,0.15);
 	background: #FFF;
 	border-radius: 0 0 2px 2px;
     width: 100%;
+    transition: ease-in-out all 350ms;
+    outline: 0;
 }
 .ed-plugins{
     padding: 4px 0;
+    transition: ease-in-out all 350ms;
 }
 .ed-plugins .plugin{
     display: inline-block;
@@ -54,4 +57,39 @@ div.ed-container textarea{
 .ed-plugins .plugin:hover{
     border-color: rgba(0,0,0,0.3);
     background: #FFF;
+}
+.ed-plugins .full-screen,
+.ed-plugins .normal-screen{
+    float: right;
+}
+.ed-container.full-screen-edit{
+    z-index: 1050;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #FFF;
+}
+.ed-container.full-screen-edit .ed-plugins{
+    padding: 10px 15px;
+}
+.ed-container.full-screen-edit .txtarea_container{
+    position: absolute;
+    top: 140px;
+    bottom: 20px;
+    left: 15%; right: 15%;
+}
+.ed-container.full-screen-edit .txtarea_container textarea{
+    border: 0;
+    color: #646464;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+.ed-container.full-screen-edit .txtarea_container textarea:focus{
+    outline: 0;
+}
+.ed-container.full-screen-edit .quicktags{
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 5px 15px;
 }

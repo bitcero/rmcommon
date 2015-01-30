@@ -34,6 +34,7 @@ div.ed-container div.ed_buttons span.buttons{
     display: block;
     float: left;
     font-size: 0.9em;
+    background: #FFF;
 }
 div.ed-container div.ed_buttons span.buttons:hover{
 	border: 1px solid rgba(0,0,0,0.3);
@@ -75,13 +76,13 @@ div.ed-container div.ed_buttons span.separator{
     clear: none;
 }
 div.ed-container textarea{
-    font-family: Georgia, times, serif;
-	font-size: 1.05em;
+	font-size: 1.15em;
 	color: #333;
-	padding: 3px;
+	padding: 6px;
 	border-radius: 0 0 2px 2px;
     background: #FFF;
     width: 100%;
+    outline: 0;
 }
 div.ed-container textarea:focus{
     border: 1px solid rgba(0,0,0,0.1);
@@ -213,4 +214,44 @@ div.ed-container div.pops input[type='button']{
     border:1px solid #000; 
     background:#000; top:0; left:0; opacity:0.8; -ms-filter:'alpha(opacity=80)'; filter:alpha(opacity=80);
     z-index: 1081;
+}
+
+.ed-plugins .full-screen,
+.ed-plugins .normal-screen{
+    float: right;
+}
+.ed-container.full-screen-edit{
+    z-index: 1050;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #FFFFFF;
+}
+.ed-container.full-screen-edit .ed-plugins{
+    padding: 10px 15px;
+    background: #FFF;
+}
+.ed-container.full-screen-edit .txtarea_container{
+    position: absolute;
+    top: 140px;
+    bottom: 20px;
+    left: 15%; right: 15%;
+}
+.ed-container.full-screen-edit textarea{
+    border: 0;
+    color: #646464;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    font-size: 1.4em;
+    padding: 15px;
+}
+.ed-container.full-screen-edit .txtarea_container textarea:focus{
+    outline: 0;
+    border: 0;
+}
+.ed-container.full-screen-edit div.ed_buttons{
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 5px 15px;
 }

@@ -139,6 +139,16 @@ edButtons.push(
     )
 );
 
+edButtons.push(
+    new edButton(
+        'ed_more',
+        '&lt;--More--&gt;',
+        '<!--more-->',
+        '',
+        -1
+    )
+);
+
 var extendedStart = edButtons.length;
 
 // below here are the extended buttons
@@ -454,6 +464,7 @@ function edToolbar(which) {
         document.write(
             '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
             + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');">Dict</button>'
+            //+ '<button type="button" id="ed_more_' + which + '" class="ed_button" onclick="edMore(\'' + which + '\');">More</button>'
             + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')"  style="visibility: hidden;">&raquo;</button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '">'
@@ -464,6 +475,7 @@ function edToolbar(which) {
         document.write(
             '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
             + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');">Dict</button>'
+            //+ '<button type="button" id="ed_more_' + which + '" class="ed_button" onclick="edMore(\'' + which + '\');">More</button>'
             + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')">&raquo;</button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '" style="display: none;">'

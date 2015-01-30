@@ -154,10 +154,11 @@ $modversion['config'][] = array(
     'valuetype'     => 'text',
     'default'       => 'tiny',
     'options'       => array(
-        __('Visual Editor','rmcommon')=>'tiny',
-        __('HTML Editor','rmcommon')=>'html',
-        __('XoopsCode Editor','rmcommon')=>'xoops',
-        __('Simple Editor','rmcommon')=>'simple'
+        __('Visual Editor','rmcommon') =>'tiny',
+        __('HTML Editor','rmcommon') => 'html',
+        __('XoopsCode Editor','rmcommon') => 'xoops',
+        __('Simple Editor','rmcommon') => 'simple',
+        __('Markdown Editor','rmcommon') => 'markdown'
     ),
     'category'      => 'general'
 );

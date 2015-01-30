@@ -1,0 +1,91 @@
+/*!
+Markdown editor for Common Utilities
+Using: CodeMirror
+Created by Eduardo Cortés <http://eduardocortes.mx>
+*/
+
+/* TOP PLUGINS
+-------------------------------------*/
+.ed-plugins{
+    padding: 4px 0;
+    .plugin{
+        display: inline-block;
+        padding: 5px 6px;
+        border: 1px solid rgba(0,0,0,0.15);
+        background-color: #f9f9f9;
+        font-size: 0.95em;
+        color: #646464;
+        &:hover{
+            background-color: #FFF;
+        }
+    }
+    a{
+        color: #646464;
+    }
+}
+
+/* EDITOR BUTTONS
+-------------------------------------*/
+.ed-buttons{
+    background: #f9f9f9;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 0;
+    .toolbar-1{
+        background: #f9f9f9;
+        overflow: hidden;
+        padding: 5px;
+        border-bottom: 0;
+    }
+    .button{
+        padding: 5px 8px;
+        color: #666;
+        border: 1px solid transparent;
+        margin: 0;
+        display: inline-block;
+        font-size: 14px;
+        background: transparent;
+        transition: ease-in-out all 100ms;
+        outline: 0;
+        &:hover{
+            border: 1px solid rgba(0,0,0,0.1);
+            background-color: #FFF;
+        }
+        span{
+            display: block;
+            min-height: 16px;
+            min-width: 12px;
+            overflow: hidden;
+            padding: 2px 0 0 0;
+            width: auto;
+        }
+    }
+}
+
+.ed-container{
+    .txtarea-container{
+        position: relative;
+        overflow: hidden;
+        min-height: 150px;
+        textarea{
+            border: 1px solid rgba(0,0,0,0.1);
+            width: 100%;
+            outline: 0;
+            padding: 10px;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+    }
+}
+
+@import 'codemirror.less';
+@import '../../full-screen.less';
+
+.ed-container.full-screen-edit{
+    .txtarea-container{
+        .CodeMirror{
+            border: 0;
+            font-size: 1.3em;
+        }
+    }
+}
+
