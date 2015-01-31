@@ -26,8 +26,21 @@
 
 class Editor_Markdown extends RMEditor
 {
+    /*
+     * Id for editor
+     */
     private $id = '';
+    /**
+     * @var array Default configuration options
+     * @link http://codemirror.net/doc/manual.html
+     */
     private $defaults = array();
+    /**
+     * @var array Plugins that will be loaded when editor render
+     */
+    private $enabled_plugins = array(
+        'link' => array()
+    );
 
     /**
      * Instantiate the class
@@ -62,6 +75,16 @@ class Editor_Markdown extends RMEditor
     }
 
     /**
+     * Set the plugins that will be loaded with editor
+     * @param array $plugins Plugins active
+     */
+    public function set_plugins( $plugins = array() ){
+
+        $this->enabled_plugins = $plugins;
+
+    }
+
+    /**
      * Set options for Codemirror
      * @param $name
      * @param $value
@@ -72,6 +95,10 @@ class Editor_Markdown extends RMEditor
 
     }
 
+    /**
+     * Make the JS code
+     * @return string
+     */
     public function render_js(){
 
         $options = '{';
@@ -84,13 +111,33 @@ class Editor_Markdown extends RMEditor
 
         $options .= '}';
 
-        $script = '<script>$(document).ready( function() { mdEditor.init("' . $this->id . '", ' . $options . '); } );</script>';
+        /*
+         * Create plugins
+         */
+        $plugins = '{';
+        foreach( $this->enabled_plugins as $id => $data ){
+
+            if ( is_array( $data ) && !empty( $data ) ){
+                $plugins .= '{' == $plugins ? '' : ',';
+                $plugins .= $id . ': {file: "' . $id . '.js", path: "' . $data['path'] . '"}';
+            } else {
+                $plugins .= '{' == $plugins ? '' : ',';
+                $plugins .= $id . ': {file: "plugin.js", path: "' . RMUris::relative_url(RMCURL . '/api/editors/markdown/plugins/' . $id) . '"}';
+            }
+
+        }
+        $plugins .= '}';
+
+        $script = '<script>$(document).ready( function() { mdEditor.init("' . $this->id . '", ' . $options . ','. $plugins .'); } );</script>';
 
         return $script;
 
     }
 
-
+    /**
+     * Render the editor
+     * @return string
+     */
     public function render(){
 
         RMTemplate::get()->add_script( 'codemirror.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown') );
@@ -112,7 +159,7 @@ class Editor_Markdown extends RMEditor
 		              <button type="button" class="plugin full-screen" accesskey="s" title="'. __('Toggle full screen [S]', 'rmcommon') . '"><span class="fa fa-arrows-alt"></span></button>
                    </div>';
         $rtn .= "  <div class='ed-buttons' id='".$this->id."-buttons-container'>";
-        $rtn .= "    <div class='toolbar-1'></div>";
+        $rtn .= '    <div class="toolbar-1"></div>';
         $rtn .= "  </div>";
         $rtn .= "  <div class=\"txtarea-container\"". $this->render_attributes() ."><textarea id='".$this->id."' name='".$this->id."'></textarea></div>";
         $rtn .= "</div>";
