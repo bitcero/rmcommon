@@ -119,7 +119,7 @@ function show_images(){
     RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('imgmgr.css','rmcommon');
     RMTemplate::get()->add_style('general.css','rmcommon');
-    RMTemplate::get()->add_script('include/js/jquery.checkboxes.js');
+    RMTemplate::get()->add_script('jquery.checkboxes.js', 'rmcommon');
     include RMTemplate::get()->get_template('rmc-images-images.php','module','rmcommon');
     xoops_cp_footer();
 
@@ -187,7 +187,7 @@ function images_form($edit = 0){
         RMTemplate::get()->add_head($uploader->render());
     }
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
-    RMTemplate::get()->add_script('include/js/images.js');
+    RMTemplate::get()->add_script('images.js', 'rmcommon');
 
     // Load Categories
     $categories = RMFunctions::load_images_categories("WHERE status='open' ORDER BY id_cat DESC");
@@ -255,7 +255,7 @@ function show_categories(){
 
     RMTemplate::get()->add_style('general.css','rmcommon');
     RMTemplate::get()->add_style('imgmgr.css','rmcommon');
-    RMTemplate::get()->add_script('include/js/jquery.checkboxes.js');
+    RMTemplate::get()->add_script('jquery.checkboxes.js', 'rmcommon');
     RMFunctions::create_toolbar();
 
     RMBreadCrumb::get()->add_crumb(__('Images Manager','rmcommon'), 'images.php');
@@ -317,7 +317,7 @@ function new_category($edit = 0){
     $fwrite = new RMFormGroups('','write',true,1, 3, isset($write) ? $write : array(XOOPS_GROUP_ADMIN));
     $fread = new RMFormGroups('','read',true,1, 3, isset($read) ? $read : array(0));
 
-    RMTemplate::get()->add_script('include/js/imgmanager.js');
+    RMTemplate::get()->add_script('imgmanager.js', 'rmcommon');
     include RMTemplate::get()->get_template('rmc-categories-form.php', 'module', 'rmcommon');
     RMTemplate::get()->add_style('imgmgr.css','rmcommon');
     xoops_cp_footer();
@@ -622,7 +622,7 @@ function edit_image(){
 
     xoops_cp_header();
 
-    RMTemplate::get()->add_script('include/js/images.js');
+    RMTemplate::get()->add_script('images.js', 'rmcommon');
     RMTemplate::get()->add_script('include/js/jquery.validate.min.js');
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     include RMTemplate::get()->get_template('rmc-images-edit.php','module','rmcommon');
@@ -856,7 +856,7 @@ function update_thumbnails(){
     $ids = implode(',', $imgs);
 
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
-    RMTemplate::get()->add_script('include/js/images.js');
+    RMTemplate::get()->add_script('images.js', 'rmcommon');
 
     xoops_cp_header();
     RMFunctions::create_toolbar();

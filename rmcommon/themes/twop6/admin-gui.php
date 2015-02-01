@@ -17,9 +17,6 @@ define('TWOP6_URL', RMCURL.'/themes/twop6');
 include_once TWOP6_PATH.'/class/twop6functions.class.php';
 $xoFunc = new Twop6Functions();
 
-// Cookies
-//RMTemplate::get()->add_local_script('jquery.ck.js', 'rmcommon','include');
-
 // Get current module menu
 if($xoopsModule->dirname()!='rmcommon' && $xoopsModule->dirname()!='system')
     $xoFunc->currentModuleMenu();
@@ -73,7 +70,7 @@ $this->add_style('font-awesome.min.css','rmcommon', array('footer' => 1));
 $this->add_style('icomoon.css','rmcommon', array('footer' => 1));
 $this->add_style('jquery.window.css','twop6', array('footer' => 1), 'theme');
 $this->add_script( 'bootstrap.min.js', 'rmcommon' );
-$this->add_script( 'jquery.ck.js', 'rmcommon', array('directory' => 'include') );
+$this->add_script( 'jquery.ck.js', 'rmcommon');
 $this->add_script('2.6.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('jquery.window.min.js', 'twop6', array('footer' => 1), 'theme');
 $this->add_script('updates.js', 'rmcommon', array('footer' => 1));

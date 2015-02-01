@@ -97,6 +97,17 @@
             <div class="form-group img-sizes">
 
             </div>
+            <?php if( $type == 'markdown' ): ?>
+            <div class="form-group" id="md-as">
+                <label><?php _e('Insert as:', 'rmcommon'); ?></label><br>
+                <label class="radio-inline">
+                    <input type="radio" name="insertas" value="md" checked> Markdown
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="insertas" value="html"> HTML
+                </label>
+            </div>
+            <?php endif; ?>
             <div class="form-group">
                 <input type="hidden" name="id" value="" class="img-id">
                 <input type="hidden" name="type" value="<?php echo $type!=''?$type:'tiny'; ?>" id="insert-type">

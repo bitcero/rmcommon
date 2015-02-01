@@ -36,7 +36,7 @@ class RMFormDate extends RMFormElement
         $this->time = $time;
 
         RMTemplate::get()->add_script('jquery-ui-timepicker-addon.js', 'rmcommon', array('directory' => 'include'));
-        RMTemplate::get()->add_Script('dates.js', 'rmcommon', array('directory' => 'include'));
+        RMTemplate::get()->add_script('dates.js', 'rmcommon');
 
     }
 
