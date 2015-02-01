@@ -247,7 +247,10 @@
                         <ul class="dropdown-menu">
                             <?php foreach($this->help() as $help): ?>
                                 <li>
-                                    <a href="<?php echo $help['link']; ?>" class="help_button rm_help_button" target="_blank" title="<?php echo $help['caption']; ?>"><span class="fa fa-question"></span> <?php echo $help['caption']; ?></a>
+                                    <a href="<?php echo $help['link']; ?>" class="help_button rm_help_button" target="_blank" title="<?php echo $help['caption']; ?>">
+                                        <span class="fa fa-question-circle"></span>
+                                        <?php echo $help['caption']; ?>
+                                    </a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -541,7 +544,6 @@
         <input type="hidden" name="cu_token" id="cu-token" value="<?php echo $xoopsSecurity->createToken(0, 'CUTOKEN'); ?>">
 
         <div id="xo-context-help">
-            <div class="title"></div>
             <span class="fa fa-question-circle help-switch"></span>
             <span class="fa fa-times help-close"></span>
         </div>

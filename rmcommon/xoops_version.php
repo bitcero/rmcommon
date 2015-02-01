@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>84,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>88,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['author'] = "BitC3R0";
 $modversion['authormail'] = "i.bitcero@gmail.com";
@@ -154,11 +154,22 @@ $modversion['config'][] = array(
     'valuetype'     => 'text',
     'default'       => 'tiny',
     'options'       => array(
-        __('Visual Editor','rmcommon')=>'tiny',
-        __('HTML Editor','rmcommon')=>'html',
-        __('XoopsCode Editor','rmcommon')=>'xoops',
-        __('Simple Editor','rmcommon')=>'simple'
+        __('Visual Editor','rmcommon') =>'tiny',
+        __('HTML Editor','rmcommon') => 'html',
+        __('XoopsCode Editor','rmcommon') => 'xoops',
+        __('Simple Editor','rmcommon') => 'simple',
+        __('Markdown Editor','rmcommon') => 'markdown'
     ),
+    'category'      => 'general'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'markdown',
+    'title'         => __('Parse markdown','rmcommon'),
+    'description'   => __('This option enables the parsing fo Markdown code for text. This optiosn must be enabled when "Markdown Editor" is selected.', 'rmcommon'),
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => 1,
     'category'      => 'general'
 );
 

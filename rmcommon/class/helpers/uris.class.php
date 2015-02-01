@@ -90,6 +90,30 @@ class RMUris
     }
 
     /**
+     * Gets a relative URL to file/folder
+     * @param string $path
+     * @return mixed|string
+     */
+    static function relative_url( $path = '' ){
+
+        $url = 'http';
+        if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {$url .= "s";}
+        $url .= "://";
+        $url .= $_SERVER["HTTP_HOST"];
+
+        if (  FALSE === strpos( $path, XOOPS_URL ) )
+            $path = XOOPS_URL . '/' . ltrim($path, "/");
+
+        $url = str_replace( $url, '', $path );
+
+        /*if ( '' != $path )
+            $url .= '/' . $path;*/
+
+        return $url;
+
+    }
+
+    /**
      * Redirect the browser to a new URL
      * @param string $message Message to show
      * @param string $url New URL

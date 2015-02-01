@@ -368,6 +368,8 @@ jQuery.fn.disable = function(){
 
 $(document).ready(function(){
 
+    var textarea_style = '';
+
     /**
      * Cargar diálogos de otros módulos
      */
@@ -551,6 +553,26 @@ $(document).ready(function(){
         }, 'json' );
 
     }
+
+    /**
+     * Editor full screen
+     */
+    $("body").on('click', ".ed-container .full-screen", function(){
+        $(this).parents(".ed-container").addClass('full-screen-edit');
+        $(this).removeClass('full-screen').addClass('normal-screen');
+        textarea_style = $(this).parents(".ed-container").find('.txtarea-container').attr("style");
+
+        $(this).parents(".ed-container").find('.txtarea-container').attr("style", '');
+        $("body").css("overflow", 'hidden');
+
+    });
+    $("body").on('click', ".ed-container .normal-screen", function(){
+        $(this).parents(".ed-container").removeClass('full-screen-edit');
+        $(this).addClass('full-screen').removeClass('normal-screen');
+        $(this).parents(".ed-container").find('.txtarea-container').attr("style", textarea_style);
+        textarea_style = '';
+        $("body").css("overflow", 'visible');
+    });
 
 });
 

@@ -37,13 +37,19 @@ class RMFormEditor extends RMFormElement
     */
     private $ex_plugins = 'dropdown,texts,fonts,email,link,xcode,xquote,rmimage,emotions,more,chars';
     private $ex_buttons = 'bold,italic,underline,strikeout,separator_t,left,center,right,separator_t,fontsize,font,fontcolor,separator_t,more,bottom,top,separator_b,link,email,xcode,xquote,separator_b,images,emotions,separator_b,chars,page';
+
+    /**
+     * Markdown editor options
+     */
+    private $md_options = array();
+
 	/**
 	 * @param string $caption Texto del campo
 	 * @param string $name Nombre de este campo
 	 * @param string $width Ancho del campo. Puede ser el valor en formato pixels (300px) o en porcentaje (100%)
 	 * @param string $height Alto de campo. El valor debe ser pasado en formato pixels (300px).
 	 * @param string $default Texto incial al cargar el campo. POr defecto se muestra vaco.
-	 * @param string $type Tipo de Editor. Posibles valores: FCKeditor, DHTML
+	 * @param string $type Tipo de Editor. Posibles valores: tiny, html, xoops, simple, markdown
 	 */
 	function __construct($caption, $name, $width='100%', $height='300px', $default='', $type='', $change=1, $ele=array('op')){
         
@@ -102,6 +108,9 @@ class RMFormEditor extends RMFormElement
 			case 'html':
 				$ret .= $this->renderHTML();
 				break;
+            case 'markdown':
+                $ret .= $this->renderMarkdown();
+                break;
             case 'tiny':
             default:
                 $ret .= $this->renderTiny();
@@ -112,17 +121,18 @@ class RMFormEditor extends RMFormElement
 	}
 	
 	public function renderTArea(){
-        RMTemplate::get()->add_style('editor-simple.css', 'rmcommon');
-		$rtn = "<div class=\"ed-container\" style=\"width: $this->_width\">";
+        RMTemplate::get()->add_style('simple-editor.min.css', 'rmcommon');
+		$rtn = "<div class=\"ed-container\">";
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'simple', $this->id());
         $plugins = RMEvents::get()->run_event('rmcommon.simple.editor.plugins', $plugins, $this->id());
         if (!empty($plugins)){
             $rtn .= '<div class="ed-plugins"><span class="plugin">';
             $rtn .= implode('</span><span class="plugin">', $plugins);
-            $rtn .= "</span></div>";
+            $rtn .= "</span>";
+            $rtn .= '<button type="button" class="plugin full-screen" accesskey="s" title="'. __('Toggle full screen [S]', 'rmcommon') . '"><span class="fa fa-arrows-alt"></span></button></div>';
         }
-        $rtn .= "<textarea class='xc-editor' id='".$this->getName()."' name='".$this->getName()."' style='height: ".$this->_height.";'>".$this->_default."</textarea>
+        $rtn .= "<div class=\"txtarea-container\" style='height: ".$this->_height.";'><textarea class='xc-editor' id='".$this->getName()."' name='".$this->getName()."'>".$this->_default."</textarea></div>
                  </div>";
         return $rtn;
 	}
@@ -142,7 +152,7 @@ class RMFormEditor extends RMFormElement
 		TinyEditor::getInstance()->add_config('elements',$this->id(), true);
 		RMTemplate::get()->add_style('editor-tiny.css','rmcommon');
 		RMTemplate::get()->add_script( 'editor.js','rmcommon', array('directory' => 'include') );
-		RMTemplate::get()->add_script( 'quicktags.js','rmcommon' );
+		RMTemplate::get()->add_script( 'quicktags.min.js','rmcommon' );
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce.js');
 		RMTemplate::get()->add_head_script(TinyEditor::getInstance()->get_js());
 
@@ -170,8 +180,8 @@ class RMFormEditor extends RMFormElement
 	* @since 1.5
 	*/
 	private function renderHTML(){
-		RMTemplate::get()->add_script("quicktags.js", 'rmcommon');
-		RMTemplate::get()->add_style('editor-html.css','rmcommon');
+		RMTemplate::get()->add_script("quicktags.min.js", 'rmcommon');
+		RMTemplate::get()->add_style('html-editor.min.css','rmcommon');
 		$rtn = "\n<div class='ed-container html_editor_container' style='width: $this->_width;' id='".$this->id()."-ed-container'>";
         $plugins = array();
 
@@ -179,15 +189,19 @@ class RMFormEditor extends RMFormElement
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'html', $this->id());
 
-        if ( !empty( $plugins ) )
-            $rtn .= '<div class="ed-plugins"><span class="plugin">'.implode('</span><span class="plugin">', $plugins).'</span></div>';
+        if ( !empty( $plugins ) ){
+            $rtn .= '<div class="ed-plugins">
+                        <span class="plugin">'.implode('</span><span class="plugin">', $plugins).'</span>
+                        <button type="button" class="plugin full-screen" accesskey="s" title="'. __('Toggle full screen [S]', 'rmcommon') . '"><span class="fa fa-arrows-alt"></span></button>
+                     </div>';
+        }
 
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.html.editor.plugins', $plugins, $this->id());
         
 		$rtn .= "<div class=\"quicktags\">
 		<script type=\"text/javascript\">edToolbar('".$this->id()."')</script>".(!empty($plugins) ? "<div class='ed-qt-plugins'><span class='plugin'>".implode('</span><span class="plugin">', $plugins)."</span></div>" : '')."</div>
-		<div class='txtarea_container'><textarea id='".$this->id()."' name='".$this->getName()."' style='height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea></div>
+		<div class='txtarea-container' style='height: ".$this->_height.";'><textarea id='".$this->id()."' name='".$this->getName()."' class='".$this->getClass()."'>".$this->_default."</textarea></div>
 		</div>";
 		return $rtn;
 	}
@@ -195,18 +209,21 @@ class RMFormEditor extends RMFormElement
 	private function renderExmCode(){
 		RMTemplate::get()->add_script(RMCURL."/api/editors/exmcode/editor-exmcode.php?id=".$this->id());
 		RMTemplate::get()->add_script(RMCURL."/include/js/colorpicker.js");
-		RMTemplate::get()->add_style('editor-exmcode.css','rmcommon');
+		RMTemplate::get()->add_style('exmcode-editor.min.css','rmcommon');
 		RMTemplate::get()->add_style('colorpicker.css','rmcommon');
 
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'exmcode', $this->id());
 
 		$rtn = 	"<div class='ed-container' id='".$this->id()."-ed-container' width='$this->_width'>";
-		$rtn .= "<div class='ed-plugins' id='".$this->id()."-ed-plugins'><span class='plugin'>".implode('</span> <span class="plugin">', $plugins).'</span></div>';
+		$rtn .= "<div class='ed-plugins' id='".$this->id()."-ed-plugins'>
+		            <span class='plugin'>".implode('</span> <span class="plugin">', $plugins).'</span>
+		            <button type="button" class="plugin full-screen" accesskey="s" title="'. __('Toggle full screen [S]', 'rmcommon') . '"><span class="fa fa-arrows-alt"></span></button>
+                 </div>';
 		$rtn .= "<div class='ed_buttons' id='".$this->id()."-ec-container'>";
         $rtn .= "<div class='row_top'></div><div class='row_bottom'></div>";
 		$rtn .= "</div>";
-		$rtn .= "<textarea id='".$this->id()."' name='".$this->getName()."' style='height: ".$this->_height.";' class='".$this->getClass()."'>".$this->_default."</textarea>";
+		$rtn .= "<div class=\"txtarea-container\" style='height: ".$this->_height.";'><textarea id='".$this->id()."' name='".$this->getName()."' class='".$this->getClass()."'>".$this->_default."</textarea></div>";
 		$rtn .= "</div>";
         // buttons
         $tplugins = RMEvents::get()->run_event('rmcommon.exmcode.plugins', $this->ex_plugins);
@@ -218,6 +235,26 @@ class RMFormEditor extends RMFormElement
         RMTemplate::get()->add_head("<script type=\"text/javascript\">\nvar ".$this->id()."_buttons = \"".RMEvents::get()->run_event('rmcommon.exmcode.buttons', $this->ex_buttons)."\";\nvar ".$this->id()."_plugins = {".$plugins."};\n</script>");
 		return $rtn;
 	}
+
+    /**
+     * MARKDOWN EDITOR
+     */
+    public function set_markdown_options( $options ){
+        $this->md_options = $options;
+    }
+
+    public function get_markdown_options(){
+        return $this->md_options;
+    }
+
+    public function renderMarkdown(){
+
+        $editor = new Editor_Markdown( $this->id(), $this->md_options );
+        $editor->attr( 'style', 'height: ' . $this->_height );
+        $editor->content = $this->_default;
+        return $editor->render();
+
+    }
     
     /**
     * Establece los botones a mostrar en el editor

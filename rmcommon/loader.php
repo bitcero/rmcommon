@@ -57,9 +57,18 @@ function rmc_autoloader($class){
      * Common Utilities will search for "PATH/module/module.classname.class.php" file
      */
     $data = explode("_", strtolower($class));
+    
     if(count($data) >= 2){
 
-        if ( is_dir( XOOPS_ROOT_PATH . '/modules/' . $data[0] ) ){
+        if ( 'editor' == $data[0]){
+
+            $file = RMCPATH . '/api/editors/' . $data[1] . '/' . strtolower( $data[1] ) . '.php';
+            if ( file_exists( $file )) {
+                require $file;
+                return null;
+            }
+
+        } elseif ( is_dir( XOOPS_ROOT_PATH . '/modules/' . $data[0] ) ){
             // Existe el módulo
             $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace("_", ".", $class) ) . '.class.php';
             if( is_file($file) ){
