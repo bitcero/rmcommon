@@ -1,0 +1,98 @@
+.ed-plugins{
+    padding: 6px 6px;
+    background: #F9F9F9;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 0;
+    margin: 0;
+    overflow: hidden;
+
+    .plugin{
+        display: inline-block;
+        padding: 3px 6px;
+        margin: 0 2px;
+        background: #FFFFFF;
+        border: 1px solid rgba(0,0,0,0.15);
+
+        *{
+            color: #797979;
+        }
+
+        &:hover{
+            border-color: rgba(0,0,0,0.3);
+
+            *{
+                color: #333;
+            }
+
+        }
+
+    }
+
+    .full-screen, .normal-screen{
+        float: right;
+    }
+
+}
+
+.xc-editor{
+    margin: 0;
+    border-color: rgba(0,0,0,0.15);
+    padding: 4px;
+    width: 100%;
+    outline: 0;
+}
+
+.ed-container{
+
+    .txtarea-container{
+        position: relative;
+
+        textarea{
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+
+    }
+
+    &.full-screen-edit{
+        z-index: 1050;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #FFF;
+
+        .ed-plugins{
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .txtarea-container{
+            position: absolute;
+            top: 80px;
+            bottom: 20px;
+            left: 15%; right: 15%;
+
+            textarea{
+                border: 0;
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                font-size: 1.2em;
+
+                &:focus{
+                    outline: 0;
+                }
+
+            }
+
+        }
+
+        .ed_buttons{
+            border-left: 0;
+            border-right: 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding: 5px 15px;
+        }
+
+    }
+
+}

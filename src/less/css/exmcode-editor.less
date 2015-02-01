@@ -1,0 +1,321 @@
+/**
+* $Id: editor-exmcode.css 886 2011-12-28 22:12:33Z i.bitcero $
+* ExmCode Editor
+* $Author: i.bitcero $
+* $Rev: 886 $
+*/
+
+.ed-container{
+
+    .ed_buttons{
+        background: #f9f9f9;
+        overflow: hidden;
+        margin-bottom: -2px;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 0;
+    }
+
+    .txtarea-container{
+
+        position: relative;
+
+        textarea{
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+            font-family: monospace;
+            color: #333;
+            padding: 6px;
+            border-radius: 0 0 2px 2px;
+            background: #FFF;
+            width: 100%;
+            outline: 0;
+        }
+
+    }
+
+    .ed_buttons{
+
+        .row_top{
+            background: #f9f9f9;
+            overflow: hidden;
+            padding: 3px;
+            border-bottom: 0;
+        }
+
+        .row_bottom{
+            overflow: hidden;
+            display: none;
+            padding: 3px;
+        }
+
+        .buttons{
+            padding: 3px;
+            color: #333;
+            border: 1px solid rgba(0,0,0,0.1);
+            margin: 0 2px;
+            display: block;
+            float: left;
+            font-size: 0.9em;
+            background: #FFF;
+
+            span{
+                display: block;
+                min-height: 16px;
+                min-width: 12px;
+                overflow: hidden;
+                padding: 2px 0 0 0;
+                width: auto;
+
+                .dropdown{
+                    float: right;
+                    margin-left: 5px;
+                    border-left: 1px solid #fff;
+                    padding: 0;
+
+                    img{
+                        padding: 0 5px 0 6px;
+                        border-left: 1px solid #ccc;
+                    }
+
+
+                }
+
+                img{
+                    float: left;
+                    margin-top: -1px;
+                }
+
+            }
+
+            &:hover{
+                border: 1px solid rgba(0,0,0,0.3);
+                background-position: left bottom;
+            }
+
+            .separator{
+                display: block;
+                float: left;
+                background: url(../images/separator.gif) no-repeat center;
+                width: 6px;
+                height: 30px;
+                margin-left: 2px;
+                clear: none;
+            }
+
+        }
+
+    }
+
+    .pops{
+        position: absolute;
+        display: none;
+        background: #FFF;
+        border: 1px solid #CCC;
+        padding: 3px;
+        max-height: 300px;
+        overflow: auto;
+
+        ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li{
+                list-style: none;
+                padding: 2px;
+                cursor: pointer;
+                border: 1px solid #fff;
+
+                &:hover{
+                    background: #ebebeb;
+                    border: 1px solid #CCC;
+                }
+
+            }
+
+        }
+
+        label{
+            display: block;
+        }
+
+        input[type='text']{
+            margin: 2px 0 6px 0;
+        }
+
+    }
+
+    .bottom{
+        line-height: 150%;
+        background: #f2f2f2;
+    }
+
+    input[type='button']{
+        margin: 2px 2px 3px 0;
+    }
+
+    &.full-screen-edit{
+        z-index: 1050;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #FFFFFF;
+
+        .ed-plugins{
+            padding: 10px 15px;
+            background: #FFF;
+        }
+
+        .txtarea-container{
+            position: absolute;
+            top: 140px;
+            bottom: 20px;
+            left: 15%; right: 15%;
+
+            textarea{
+                border: 0;
+                color: #646464;
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                font-size: 1.2em;
+                padding: 15px;
+
+                &:focus{
+                    outline: 0;
+                    border: 0;
+                }
+
+            }
+
+        }
+
+        .ed_buttons{
+            border-left: 0;
+            border-right: 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding: 5px 15px;
+        }
+
+    }
+
+}
+
+/** TOP PLUGINS */
+.ed-plugins{
+    padding: 3px 0;
+
+    .plugin{
+        display: inline-block;
+        padding: 5px 8px;
+        border: 1px solid rgba(0,0,0,0.15);
+        background-color: #f9f9f9;
+        font-size: 0.95em;
+
+        *{
+            color: #646464;
+        }
+
+        &:hover{
+            background-color: #FFF;
+            border-color: rgba(0,0,0,0.3);
+        }
+
+    }
+
+    .full-screen, .normal-screen{
+        float: right;
+    }
+
+}
+
+/* POPUPS */
+.popup{
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 1px;
+    background: #FFF;
+    z-index: 1082;
+
+    .titlebar{
+        padding: 10px;
+        text-shadow: none;
+
+        .buttons{
+            display: block;
+            float: right;
+            overflow: hidden;
+
+            span{
+                background: url(../images/popbuts.png) no-repeat;
+                width: 17px;
+                height: 16px;
+                display: block;
+                cursor: pointer;
+                float: right;
+            }
+
+            .close{
+                background-position: -34px top;
+
+                &:hover{
+                    background-position: -34px bottom;
+                }
+
+            }
+
+            .maximize{
+                background-position: left top;
+                display: none;
+
+                :hover{
+                    background-position: left bottom;
+                }
+
+            }
+
+            .restore{
+                background-position: -17px top;
+                display: none;
+
+                &:hover{
+                    background-position: -17px bottom;
+                }
+
+            }
+
+            span span{
+                display: none;
+            }
+
+        }
+
+    }
+
+    .content{
+        padding: 3px;
+        position: inline;
+    }
+
+    iframe{
+        border: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+.maximized{
+    box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+.popblocker{
+    position:fixed; 
+    left:0; 
+    top:0; 
+    width:100%; 
+    height:100%;
+    border:1px solid #000; 
+    background:#000; top:0; left:0; opacity:0.8; -ms-filter:'alpha(opacity=80)'; filter:alpha(opacity=80);
+    z-index: 1081;
+}

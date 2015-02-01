@@ -86,6 +86,10 @@ This component is part of Common Utilities
 
         },
 
+        save: function( id ){
+            this.editors[id].save();
+        },
+
         add_callback: function( id, callback ){
 
             this.callbacks[id] = callback;

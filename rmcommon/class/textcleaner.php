@@ -595,7 +595,7 @@ class TextCleaner
 	 **/
 	function to_display($text, $dbr = true, $clean_tags = true, $paragraph = true){
 
-        $rmc_config = empty($params) ? RMSettings::cu_settings() : $params;
+        $rmc_config = RMSettings::cu_settings();
 
 		$original_text = $text;
 
@@ -622,6 +622,12 @@ class TextCleaner
 		// Replace breaklines
 		if ($rmc_config->dobr)
 			$text = $this->nl2Br($text);
+
+        // Markdown
+        if ( $rmc_config->markdown ){
+            $md = new RMParsedown();
+            $text = $md->text( $text );
+        }
 
         if($clean_tags) $text = $this->clean_disabled_tags($text);
 		$text = $this->make_clickable($text);

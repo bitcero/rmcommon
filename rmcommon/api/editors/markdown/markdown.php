@@ -42,6 +42,8 @@ class Editor_Markdown extends RMEditor
         'link' => array()
     );
 
+    public $content = '';
+
     /**
      * Instantiate the class
      * @param string $id Editor identifier (must be unique)
@@ -161,7 +163,7 @@ class Editor_Markdown extends RMEditor
         $rtn .= "  <div class='ed-buttons' id='".$this->id."-buttons-container'>";
         $rtn .= '    <div class="toolbar-1"></div>';
         $rtn .= "  </div>";
-        $rtn .= "  <div class=\"txtarea-container\"". $this->render_attributes() ."><textarea id='".$this->id."' name='".$this->id."'></textarea></div>";
+        $rtn .= "  <div class=\"txtarea-container\"". $this->render_attributes() ."><textarea id='".$this->id."' name='".$this->id."'>".$this->content."</textarea></div>";
         $rtn .= "</div>";
 
         return $rtn;

@@ -51,7 +51,7 @@ function edButton(id, display, tagStart, tagEnd, access, open) {
 edButtons.push(
     new edButton(
         'ed_bold'
-        ,'B'
+        ,'<span class="fa fa-bold"></span>'
         ,'<strong>'
         ,'</strong>'
         ,'b'
@@ -61,7 +61,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_italic'
-        ,'I'
+        ,'<span class="fa fa-italic"></span>'
         ,'<em>'
         ,'</em>'
         ,'i'
@@ -71,7 +71,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_link'
-        ,'Link'
+        ,'<span class="fa fa-link"></span>'
         ,''
         ,'</a>'
         ,'a'
@@ -81,7 +81,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_ext_link'
-        ,'Ext. Link'
+        ,'<span class="fa fa-external-link"></span>'
         ,''
         ,'</a>'
         ,'e'
@@ -91,7 +91,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_img'
-        ,'IMG'
+        ,'<span class="fa fa-picture-o"></span>'
         ,''
         ,''
         ,'m'
@@ -102,7 +102,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_ul'
-        ,'UL'
+        ,'<span class="fa fa-list-ul"></span>'
         ,'<ul>\n'
         ,'</ul>\n\n'
         ,'u'
@@ -112,7 +112,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_ol'
-        ,'OL'
+        ,'<span class="fa fa-list-ol"></span>'
         ,'<ol>\n'
         ,'</ol>\n\n'
         ,'o'
@@ -122,7 +122,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_li'
-        ,'LI'
+        ,'<span class="fa fa-check"></span>'
         ,'\t<li>'
         ,'</li>\n'
         ,'l'
@@ -132,7 +132,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_block'
-        ,'B-QUOTE'
+        ,'<span class="fa fa-quote-left"></span>'
         ,'<blockquote>'
         ,'</blockquote>'
         ,'q'
@@ -141,11 +141,11 @@ edButtons.push(
 
 edButtons.push(
     new edButton(
-        'ed_more',
-        '&lt;--More--&gt;',
-        '<!--more-->',
-        '',
-        -1
+        'ed_more'
+        ,'<span class="fa fa-ellipsis-h"></span>'
+        ,'<!--more-->'
+        ,''
+        ,'r'
     )
 );
 
@@ -196,7 +196,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_p'
-        ,'P'
+        ,'<span class="fa fa-paragraph" title="<p>"></span>'
         ,'<p>'
         ,'</p>\n\n'
         ,'p'
@@ -206,7 +206,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_code'
-        ,'CODE'
+        ,'<span class="fa fa-code"></span>'
         ,'<code>'
         ,'</code>'
         ,'c'
@@ -252,7 +252,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_table'
-        ,'TABLE'
+        ,'<span class="fa fa-table"></span>'
         ,'<table>\n<tbody>'
         ,'</tbody>\n</table>\n'
     )
@@ -261,7 +261,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_tr'
-        ,'TR'
+        ,'<span class="fa fa-minus" title="<tr>"></span>'
         ,'\t<tr>\n'
         ,'\n\t</tr>\n'
     )
@@ -270,7 +270,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_td'
-        ,'TD'
+        ,'<span class="fa fa-square-o" title="<td>"></span>'
         ,'\t\t<td>'
         ,'</td>\n'
     )
@@ -279,7 +279,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_ins'
-        ,'INS'
+        ,'<span class="fa fa-terminal" title="<ins>"></span>'
         ,'<ins>'
         ,'</ins>'
     )
@@ -288,25 +288,17 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_del'
-        ,'DEL'
+        ,'<span class="fa fa-strikethrough" title="<del>"></span>'
         ,'<del>'
         ,'</del>'
     )
 );
 
-edButtons.push(
-    new edButton(
-        'ed_nobr'
-        ,'NOBR'
-        ,'<nobr>'
-        ,'</nobr>'
-    )
-);
 
 edButtons.push(
     new edButton(
         'ed_footnote'
-        ,'Footnote'
+        ,'<span class="fa fa-info-circle" title="Footnote"></span>'
         ,''
         ,''
         ,'f'
@@ -316,7 +308,7 @@ edButtons.push(
 edButtons.push(
     new edButton(
         'ed_via'
-        ,'Via'
+        ,'<span class="fa fa-external-link-square" title="Via"></span>'
         ,''
         ,''
         ,'v'
@@ -463,23 +455,23 @@ function edToolbar(which) {
     if (edShowExtraCookie()) {
         document.write(
             '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
-            + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');">Dict</button>'
+            + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');" title="Dictionary"><span class="fa fa-book"></span></button>'
             //+ '<button type="button" id="ed_more_' + which + '" class="ed_button" onclick="edMore(\'' + which + '\');">More</button>'
-            + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')"  style="visibility: hidden;">&raquo;</button>'
+            + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')"  style="visibility: hidden;"><span class="fa fa-angle-double-right"></span></button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '">'
-            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');">&laquo;</button>'
+            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');"><span class="fa fa-angle-double-left"></span></button>'
         );
     }
     else {
         document.write(
             '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
-            + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');">Dict</button>'
+            + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');" title="Dictionary"><span class="fa fa-book"></span></button>'
             //+ '<button type="button" id="ed_more_' + which + '" class="ed_button" onclick="edMore(\'' + which + '\');">More</button>'
-            + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')">&raquo;</button>'
+            + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')"><span class="fa fa-angle-double-right"></span></button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '" style="display: none;">'
-            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');">&laquo;</button>'
+            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');"><span class="fa fa-angle-double-left"></span></button>'
         );
     }
     for (i = extendedStart; i < edButtons.length; i++) {

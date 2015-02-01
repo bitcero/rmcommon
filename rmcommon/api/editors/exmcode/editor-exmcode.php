@@ -8,7 +8,6 @@
     require '../../../../../mainfile.php';
     XoopsLogger::getInstance()->activated = false;
     XoopsLogger::getInstance()->renderingEnabled = false;
-    $lang = is_file(ABSPATH.'/api/editors/exmcode/language/'.EXMLANG.'.js') ? EXMLANG : 'en_US';
     $id = rmc_server_var($_GET, 'id', '');
 ?>
 
