@@ -88,6 +88,89 @@ $modversion['categories'] = array(
     'appearance' => __('Appearance', 'rmcommon'),
     'comments' => __('Comentarios', 'rmcommon'),
     'email' => __('Email', 'rmcommon'),
+    'components' => __('Components', 'rmcommon')
+);
+
+// Jquery cdn
+$modversion['config'][] = array(
+    'name'          => 'cdn_jquery',
+    'title'         => __( 'Use CDN for jQuery', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => '0',
+    'category'      => 'components'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'cdn_jquery_url',
+    'title'         => __( 'jQuery CDN URI', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'textbox',
+    'valuetype'     => 'text',
+    'default'       => 'https://code.jquery.com/jquery-2.1.3.min.js',
+    'category'      => 'components'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'cdn_bootstrap',
+    'title'         => __( 'Use CDN for Bootstrap', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => '0',
+    'category'      => 'components'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'cdn_bootstrap_url',
+    'title'         => __( 'Bootstrap CDN URI', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'textbox',
+    'valuetype'     => 'text',
+    'default'       => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+    'category'      => 'components'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'cdn_jsbootstrap_url',
+    'title'         => __( 'Bootstrap Javascript CDN URI', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'textbox',
+    'valuetype'     => 'text',
+    'default'       => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js',
+    'category'      => 'components'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'cdn_fa',
+    'title'         => __( 'Use CDN for FontAwesome', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => '0',
+    'category'      => 'components'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'cdn_fa_url',
+    'title'         => __( 'FontAwesome CDN URI', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'textbox',
+    'valuetype'     => 'text',
+    'default'       => '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+    'category'      => 'components'
+);
+
+// URL Rewriting
+$modversion['config'][] = array(
+    'name'          => 'permalinks',
+    'title'         => __( 'Enable URL rewriting', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => '0',
+    'category'      => 'general'
 );
 
 // URL Rewriting

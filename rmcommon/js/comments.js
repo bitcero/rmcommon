@@ -1,0 +1,1 @@
+function confirm_delete(e){var c=confirm(delmes);return c?($("#com-"+e).attr("checked","checked"),$("#action-select").val("delete"),void $("#list-comments").submit()):!1}function approve_action(e,c){("approve"==c||"unapprove"==c||"spam"==c)&&($("#com-"+e).attr("checked","checked"),$("#action-select").val(c),$("#list-comments").submit())}var delmes="";

@@ -138,7 +138,7 @@ function show_rm_blocks()
 
     RMTemplate::get()->add_style('blocks.css', 'rmcommon');
     RMTemplate::get()->add_script('blocks.js', 'rmcommon');
-    RMTemplate::get()->add_script('jkmenu.js', 'rmcommon', array('directory' => 'include'));
+    RMTemplate::get()->add_script('jkmenu.js', 'rmcommon');
     RMTemplate::get()->add_style('forms.css', 'rmcommon');
     RMTemplate::get()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
 
@@ -146,7 +146,7 @@ function show_rm_blocks()
         showMessage(__('Internal blocks manager is currenlty disabled!','rmcommon'), RMMSG_WARN);
     }
 
-    RMTemplate::get()->add_script('jquery.checkboxes.js','rmcommon','include');
+    RMTemplate::get()->add_script('jquery.checkboxes.js','rmcommon');
     //include RMCPATH . '/js/cu-js-language.php';
 
     xoops_cp_header();

@@ -1,5 +1,4 @@
 <?php
-
 $tpl = RMTemplate::get();
 
 $scripts = '';
@@ -23,7 +22,7 @@ foreach ($temp as $id => $script) {
         $extra .= ' ' . $name . '="' . $value . '"';
     }
 
-    if ( strpos($script['url'], 'jquery-latest.js')!==FALSE || strpos($script['url'], 'jquery.min.js')!==FALSE )
+    if ( strpos($script['url'], 'jquery.min.js')!==FALSE || $script['url'] == $cuSettings->cdn_jquery_url )
 
         $jquery_and_bootstrap[0] = sprintf( $script_tpl, $id, $type, $url, $extra ) . $tscript;
 

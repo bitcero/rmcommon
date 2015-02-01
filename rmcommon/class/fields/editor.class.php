@@ -151,7 +151,7 @@ class RMFormEditor extends RMFormElement
 		global $rmc_config, $xoopsUser;
 		TinyEditor::getInstance()->add_config('elements',$this->id(), true);
 		RMTemplate::get()->add_style('editor-tiny.css','rmcommon');
-		RMTemplate::get()->add_script( 'editor.js','rmcommon', array('directory' => 'include') );
+		RMTemplate::get()->add_script( 'editor.js','rmcommon');
 		RMTemplate::get()->add_script( 'quicktags.min.js','rmcommon' );
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce.js');
 		RMTemplate::get()->add_head_script(TinyEditor::getInstance()->get_js());
@@ -208,7 +208,7 @@ class RMFormEditor extends RMFormElement
 	
 	private function renderExmCode(){
 		RMTemplate::get()->add_script(RMCURL."/api/editors/exmcode/editor-exmcode.php?id=".$this->id());
-		RMTemplate::get()->add_script(RMCURL."/include/js/colorpicker.js");
+		RMTemplate::get()->add_script("colorpicker.js");
 		RMTemplate::get()->add_style('exmcode-editor.min.css','rmcommon');
 		RMTemplate::get()->add_style('colorpicker.css','rmcommon');
 

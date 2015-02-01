@@ -130,8 +130,8 @@ function show_comments(){
     //RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('comms-admin.css', 'rmcommon');
     RMTemplate::get()->add_style('general.css', 'rmcommon');
-    RMTemplate::get()->add_script('include/js/jquery.checkboxes.js');
-    RMTemplate::get()->add_script('include/js/comments.js');
+    RMTemplate::get()->add_script('jquery.checkboxes.js', 'rmcommon');
+    RMTemplate::get()->add_script('comments.js', 'rmcommon');
     $script = '<script type="text/javascript">delmes = "'.__('Do you really want to delete this comment?','rmcommon').'";</script>';
     RMTemplate::get()->add_head($script);
     include RMTemplate::get()->get_template('rmc-comments.php','module','rmcommon');

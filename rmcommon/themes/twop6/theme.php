@@ -19,7 +19,15 @@
         }
 
         $jquery_and_bootstrap = array();
+
         $scripts_all = '';
+        if ( isset( $this->tpl_scripts['jquery'] ) )
+            $scripts_all .= '<script id="jquery" type="'.$this->tpl_scripts['jquery']['type'].'" src="'.$this->tpl_scripts['jquery']['url'].'"></script>'."\n";
+
+        if ( isset( $this->tpl_scripts['jsbootstrap'] ) )
+            $scripts_all .= '<script id="jsbootstrap" type="'.$this->tpl_scripts['jsbootstrap']['type'].'" src="'.$this->tpl_scripts['jsbootstrap']['url'].'"></script>'."\n";
+
+        unset($this->tpl_scripts['jquery'],$this->tpl_scripts['jsbootstrap']);
 
         foreach ($this->tpl_scripts as $id => $script) {
             $type = $script['type'];

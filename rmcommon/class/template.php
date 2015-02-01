@@ -367,9 +367,11 @@ class RMTemplate
 
         $id = TextCleaner::getInstance()->sweetstring($file);
 
-        if( $file == 'jquery.min.js' && $element == 'rmcommon' && !$cuSettings->jquery)
+        if( $file == 'jquery.min.js' || $cuSettings->cdn_jquery_url == $file )
+            return $this->add_jquery();
 
-            return;
+        if ( FALSE !== strpos( $file, 'bootstrap.js' ) || FALSE !== strpos( $file, 'bootstrap.min.js') )
+            return $this->add_bootstrap('js');
 
         // Check if file is a full URL
         $remote_script = preg_match( "/^(\/\/)|(http:\/\/)|(https:\/\/)|(\/\/)/", $file );
@@ -393,8 +395,7 @@ class RMTemplate
         }
 
         if( $script_url == '' )
-
-            return;
+            return false;
 
         // Add the new script to array (replacing old if exists)
         $this->tpl_scripts[$id] = array(
@@ -410,6 +411,8 @@ class RMTemplate
         unset($options['type']);
 
         $this->tpl_scripts[$id] = array_merge($this->tpl_scripts[$id], $options);
+
+        return true;
 
     }
 
@@ -530,19 +533,112 @@ class RMTemplate
     /**
     * Add jQuery script to site header
     */
-    public function add_jquery($ui=true, $local=true){
+    public function add_jquery($ui=false, $local=true){
         global $cuSettings;
 
-        if(!$cuSettings->jquery) return;
+        if(!$cuSettings->jquery) return true;
 
-        if($local)
-            $this->add_script( 'jquery.min.js', 'rmcommon', array( 'directory' => 'include' ) );
-        else
-            $this->add_script( "http://code.jquery.com/jquery-latest.js" );
+        if ( isset( $this->tpl_scripts['jquery'] ) )
+            return true;
 
+        if ( $cuSettings->cdn_jquery ){
+
+            $this->tpl_scripts['jquery'] = array(
+                'url'       => $cuSettings->cdn_jquery_url,
+                'type'      => 'text/javascript',
+                'footer'    => 0,
+            );
+            return true;
+
+        }
+
+        $this->tpl_scripts['jquery'] = array(
+            'url'       => RMUris::relative_url( RMCURL . '/include/js/jquery.min.js' ),
+            'type'      => 'text/javascript',
+            'footer'    => 0,
+        );
         if ($ui)
             $this->add_script( 'jquery-ui.min.js', 'rmcommon', array( 'directory' => 'include' ) );
+
+        return true;
+
     }
+
+    /**
+     * Add jQuery script to site header
+     */
+    public function add_bootstrap( $type = 'css' ){
+        global $cuSettings;
+
+        if ( $type == 'css' && isset( $this->tpl_styles['bootstrap'] ) )
+            return true;
+
+        if ( $type == 'js' && isset( $this->tpl_scripts['bootstrap'] ) )
+            return true;
+
+        if ( $cuSettings->cdn_bootstrap ){
+
+            if ( 'js' == $type )
+                $this->tpl_scripts['jsbootstrap'] = array(
+                    'url'       => $cuSettings->cdn_jsbootstrap_url,
+                    'type'      => 'text/javascript',
+                    'footer'    => 1,
+                );
+            else
+                $this->tpl_styles['bootstrap'] = array(
+                    'url'       => $cuSettings->cdn_bootstrap_url,
+                    'type'      => 'text/css',
+                    'footer'    => 0,
+                );
+
+            return true;
+
+        }
+
+        if ( 'js' == $type )
+            $this->tpl_scripts['jsbootstrap'] = array(
+                'url'       => RMUris::relative_url( RMCURL . '/js/bootstrap.min.js' ),
+                'type'      => 'text/javascript',
+                'footer'    => 1,
+            );
+        else
+            $this->tpl_styles['bootstrap'] = array(
+                'url'       => RMUris::relative_url( RMCURL . '/js/bootstrap.min.css' ),
+                'type'      => 'text/css',
+                'footer'    => 0,
+            );
+
+        return true;
+
+    }
+
+    public function add_fontawesome(){
+        global $cuSettings;
+
+        if ( isset( $this->tpl_styles['fontawesome'] ) )
+            return true;
+
+        if ( $cuSettings->cdn_fa ){
+
+            $this->tpl_styles['fontawesome'] = array(
+                'url'       => $cuSettings->cdn_fa_url,
+                'type'      => 'text/css',
+                'footer'    => 0,
+            );
+            return true;
+
+        }
+
+        $this->tpl_styles['fontawesome'] = array(
+            'url'       => RMUris::relative_url( RMCURL . '/css/font-awesome.min.css' ),
+            'type'      => 'text/css',
+            'footer'    => 0,
+        );
+
+        return true;
+
+    }
+
     /**
    	* Get all scripts stored in class
    	*/
@@ -574,6 +670,12 @@ class RMTemplate
         global $xoopsModule, $cuSettings, $xoopsConfig;
         // Check if file is a full URL
         $remote_script = preg_match( "/^(http:\/\/)|(https:\/\/)|(\/\/)/", $file );
+
+        if ( FALSE !== strpos( $file, 'bootstrap.css' ) || FALSE !== strpos( $file, 'bootstrap.min.css') )
+            return $this->add_bootstrap( 'css' );
+
+        if ( FALSE !== strpos( $file, 'font-awesome.css' ) || FALSE !== strpos( $file, 'font-awesome.min.css') )
+            return $this->add_fontawesome();
 
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';

@@ -56,7 +56,8 @@ class Editor_Markdown extends RMEditor
         $this->defaults = array(
             'value'             => '',
             'mode'              => 'gfm',
-            'theme'             => 'default'
+            'theme'             => 'default',
+            'lineWrapping'      => 'true'
         );
 
         if ( !empty( $options ) ) {
