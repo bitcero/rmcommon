@@ -61,6 +61,12 @@ class RMTemplate
     * Version to add as parameter to scripts and styles
     */
     private $version = '';
+
+    /**
+     * Body classes
+     */
+    private $body_classes = array();
+
     /**
      * At this moment this method do nothing
      * Maybe later i will add some functionality... i must to think ;)
@@ -370,7 +376,7 @@ class RMTemplate
         if( $file == 'jquery.min.js' || $cuSettings->cdn_jquery_url == $file )
             return $this->add_jquery();
 
-        if ( FALSE !== strpos( $file, 'bootstrap.js' ) || FALSE !== strpos( $file, 'bootstrap.min.js') )
+        if ( FALSE !== strpos( $file, 'bootstrap.js' ) || FALSE !== strpos( $file, 'bootstrap.min.js') && 'theme' != $owner )
             return $this->add_bootstrap('js');
 
         // Check if file is a full URL
@@ -473,7 +479,7 @@ class RMTemplate
             if(!file_exists(preg_replace("/(.*)(\?.*)$/", '$1', $path)))
                 continue;
 
-            $url = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path);
+            $url = RMUris::relative_url( str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path) );
             // Check if parameter 'version' exists in url
             if( !preg_match( "/.*(\?.*)$/", $url ) )
 
@@ -533,7 +539,7 @@ class RMTemplate
     /**
     * Add jQuery script to site header
     */
-    public function add_jquery($ui=false, $local=true){
+    public function add_jquery($ui=true, $local=true){
         global $cuSettings;
 
         if(!$cuSettings->jquery) return true;
@@ -548,6 +554,14 @@ class RMTemplate
                 'type'      => 'text/javascript',
                 'footer'    => 0,
             );
+
+            if ( $ui )
+                $this->tpl_scripts['jqueryui'] = array(
+                    'url'       => $cuSettings->cdn_jqueryui_url,
+                    'type'      => 'text/javascript',
+                    'footer'    => 0,
+                );
+
             return true;
 
         }
@@ -557,8 +571,13 @@ class RMTemplate
             'type'      => 'text/javascript',
             'footer'    => 0,
         );
+
         if ($ui)
-            $this->add_script( 'jquery-ui.min.js', 'rmcommon', array( 'directory' => 'include' ) );
+            $this->tpl_scripts['jqueryui'] = array(
+                'url'       => RMUris::relative_url( RMCURL . '/include/js/jquery-ui.min.js' ),
+                'type'      => 'text/javascript',
+                'footer'    => 0,
+            );
 
         return true;
 
@@ -603,7 +622,7 @@ class RMTemplate
             );
         else
             $this->tpl_styles['bootstrap'] = array(
-                'url'       => RMUris::relative_url( RMCURL . '/js/bootstrap.min.css' ),
+                'url'       => RMUris::relative_url( RMCURL . '/css/bootstrap.min.css' ),
                 'type'      => 'text/css',
                 'footer'    => 0,
             );
@@ -671,10 +690,10 @@ class RMTemplate
         // Check if file is a full URL
         $remote_script = preg_match( "/^(http:\/\/)|(https:\/\/)|(\/\/)/", $file );
 
-        if ( FALSE !== strpos( $file, 'bootstrap.css' ) || FALSE !== strpos( $file, 'bootstrap.min.css') )
+        if ( 'theme' != $owner && ( FALSE !== strpos( $file, 'bootstrap.css' ) || FALSE !== strpos( $file, 'bootstrap.min.css') ) )
             return $this->add_bootstrap( 'css' );
 
-        if ( FALSE !== strpos( $file, 'font-awesome.css' ) || FALSE !== strpos( $file, 'font-awesome.min.css') )
+        if ( $cuSettings->cdn_fa && ( FALSE !== strpos( $file, 'font-awesome.css' ) || FALSE !== strpos( $file, 'font-awesome.min.css') ) )
             return $this->add_fontawesome();
 
         $version = isset($options['version']) ? $options['version'] : '';
@@ -1000,6 +1019,19 @@ class RMTemplate
         trigger_error( sprintf( __('Method %s is deprecated. Use %s::%s instead.', 'rmcommon' ), __METHOD__, 'RMTemplate', 'generate_url()' ), E_USER_DEPRECATED );
 
         return $this->generate_url($sheet, $element, 'css');
+    }
+
+    public function add_body_class( $class ){
+
+        if ( '' == $class )
+            return null;
+
+        $this->body_classes[] = $class;
+
+    }
+
+    public function body_classes(){
+        return implode(" ", $this->body_classes);
     }
 
 }

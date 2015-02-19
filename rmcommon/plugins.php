@@ -328,8 +328,8 @@ function configure_rm_plugin(){
                 $ele = new RMFormSelect($option['caption'], 'conf_' . $config);
                 if ($option['desc']!='') $ele->setDescription($option['desc']);
 
-                foreach ($option['options'] as $op => $opvalue) {
-                    $ele->addOption($opvalue, $op, $opvalue==$option['value'] ? 1 : 0);
+                foreach ($option['options'] as $value => $caption) {
+                    $ele->addOption($value, $caption, $value==$option['value'] ? 1 : 0);
                 }
                 $form->addElement($ele);
                 break;

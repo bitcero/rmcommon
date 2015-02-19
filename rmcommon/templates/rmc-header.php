@@ -3,11 +3,21 @@ $tpl = RMTemplate::get();
 
 $scripts = '';
 $tscript = '';
-$jquery_and_bootstrap = array();
 $fscripts = '';
 $temp = $tpl->get_scripts();
 
 $script_tpl = '<script id="%s" type="%s" src="%s"%s></script>' . "\n";
+
+if ( isset( $temp['jquery'] ) )
+    $tscript .= '<script id="jquery" type="'.$temp['jquery']['type'].'" src="'.$temp['jquery']['url'].'"></script>'."\n";
+
+if ( isset( $temp['jqueryui'] ) )
+    $tscript .= '<script id="jqueryui" type="'.$temp['jqueryui']['type'].'" src="'.$temp['jqueryui']['url'].'"></script>'."\n";
+
+if ( isset( $temp['jsbootstrap'] ) )
+    $fscripts .= '<script id="jsbootstrap" type="'.$temp['jsbootstrap']['type'].'" src="'.$temp['jsbootstrap']['url'].'"></script>'."\n";
+
+unset( $temp['jquery'],$temp['jqueryui'], $temp['jsbootstrap'] );
 
 foreach ($temp as $id => $script) {
 
@@ -22,15 +32,7 @@ foreach ($temp as $id => $script) {
         $extra .= ' ' . $name . '="' . $value . '"';
     }
 
-    if ( strpos($script['url'], 'jquery.min.js')!==FALSE || $script['url'] == $cuSettings->cdn_jquery_url )
-
-        $jquery_and_bootstrap[0] = sprintf( $script_tpl, $id, $type, $url, $extra ) . $tscript;
-
-    elseif ( preg_match( "/bootstrap(\.min)?\.js/i", $script['url'] ) )
-
-        $jquery_and_bootstrap[1] = sprintf( $script_tpl, $id, $type, $url, $extra ) . $tscript;
-
-    elseif ( $footer )
+    if ( $footer )
 
         $fscripts .= sprintf( $script_tpl, $id, $type, $url, $extra );
 
