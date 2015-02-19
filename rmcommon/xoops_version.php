@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>88,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>90,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['author'] = "BitC3R0";
 $modversion['authormail'] = "i.bitcero@gmail.com";
@@ -109,6 +109,16 @@ $modversion['config'][] = array(
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
     'default'       => 'https://code.jquery.com/jquery-2.1.3.min.js',
+    'category'      => 'components'
+);
+
+$modversion['config'][] = array(
+    'name'          => 'cdn_jqueryui_url',
+    'title'         => __( 'jQuery UI CDN URI', 'rmcommon' ),
+    'description'   => '',
+    'formtype'      => 'textbox',
+    'valuetype'     => 'text',
+    'default'       => 'https://code.jquery.com/ui/1.11.2/jquery-ui.min.js',
     'category'      => 'components'
 );
 

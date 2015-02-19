@@ -8,6 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
+define('RMC_POPUP_IMAGES', 1);
 include '../../../mainfile.php';
 XoopsLogger::getInstance()->activated = false;
 XoopsLogger::getInstance()->renderingEnabled = false;
