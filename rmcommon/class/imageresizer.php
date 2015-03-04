@@ -289,7 +289,7 @@ class RMImageResizer
         $image->type = $formats[ $data[2] - 1 ];
         $image->mime = $data['mime'];
 
-        $ratio = $image->width / $image->height;
+        $ratio = $image->width < $image->height ? $image->width / $image->height : $image->height / $image->width;
 
         if ( !$params->width )
             $params->width = intval( $params->height * $ratio );
@@ -355,7 +355,7 @@ class RMImageResizer
         elseif ( $image->type == 'jpg' )
             imagejpeg( $target, $target_file, $params->quality );
         elseif ( $image->type == 'png' )
-            imagepng( $target, $target_file, $params->quality );
+            imagepng( $target, $target_file, ceil( $params->quality / 10) );
 
         $image_resize = new stdClass();
         $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $cache_file );

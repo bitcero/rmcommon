@@ -146,5 +146,46 @@ class RMTimeFormatter
 
     }
 
+    public function ago( $time = 0 ){
+
+        if ( $time <= 0 )
+            return __('Some time ago', 'rmcommon');
+
+        // Comentario enviado hace menos de un minuto
+        if ( $time > time() - 60 )
+            return __('A moment ago', 'rmcommon');
+
+        // Comentario enviado hace menos de una hora
+        if ( $time > time() - 3600 ){
+            $minutes = ceil((time() - $time) / 60);
+            return sprintf( __('%u minutes ago', 'rmcommon'), $minutes );
+        }
+
+        /**
+         * El comentario fue enviado hace menos de 24 horas
+         */
+        if ( $time > time() - (24 * 3600) ){
+
+            $d1 = date('d', $time);
+            $d2 = date('d', time());
+            if ( $d2 != $d1 )
+                return __('Yesterday', 'rmcommon');
+
+            $hours = ceil((time() - $time) / 3600 );
+            return sprintf( __('%u hours ago', 'rmcommon'), $hours );
+        }
+
+        // El comentario fue enviado hace menos de 10 días
+        if ( $time > time() - (10 * 86400)){
+
+            $days = ceil( time() - $time) / 86400;
+            return sprintf( __('%u days ago', 'rmcommon'), $days );
+
+        }
+
+        return $this->format();
+
+    }
+
 
 }

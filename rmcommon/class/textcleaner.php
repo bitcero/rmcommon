@@ -631,7 +631,7 @@ class TextCleaner
 
         if($clean_tags) $text = $this->clean_disabled_tags($text);
 		$text = $this->make_clickable($text);
-		$text = $this->codeConv($text, $rmc_config->doxcode);	// Ryuji_edit(2003-11-18)
+		//$text = $this->codeConv($text, $rmc_config->doxcode);	// Ryuji_edit(2003-11-18)
 		if($paragraph) $text = $this->double_br($text);
 
 		// Before to send the formatted string we send it to interceptor methods
