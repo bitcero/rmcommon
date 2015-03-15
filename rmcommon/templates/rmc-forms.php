@@ -21,10 +21,10 @@
         else:
 ?>
 <div id="row_<?php echo $field->getName(); ?>" class="form-group">
-	<label class="col-md-2 control-label">
+	<label class="col-md-2 col-md-offset-1 control-label">
 		<?php if($field->getCaption()!=''): ?><label for="<?php echo $field->getName(); ?>"><?php echo $field->getCaption(); ?></label><?php else: ?>&nbsp;<?php endif; ?>
 	</label>
-	<div class="col-md-10">
+	<div class="col-md-8">
 		<?php echo $field->render(); ?>
                 <?php
                     switch (get_class($field)) {

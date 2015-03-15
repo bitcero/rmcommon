@@ -113,13 +113,13 @@ body{
 .thumbnail-item > .thumbnail-cover{
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0);
     transition: ease all 250ms;
 }
 .thumbnail-item:hover > .thumbnail-cover,
 .thumbnail-hover > .thumbnail-cover,
 .thumbnail-item.thumb-selected > .thumbnail-cover{
-    background: rgba(0,0,0,0);
+    background: rgba(255,255,255,0.4);
 }
 .thumbnail-item > .add,
 .thumbnail-item > .insert{
