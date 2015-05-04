@@ -127,9 +127,10 @@ class RMUtilities
 	/**
 	 * Elimina directorios y todos los archivos contenidos
 	 * @param string $path Ruta del directorio
+     * @param bool $root Specify if the folder root must be deleted too
 	 * @return bool
 	 */
-	static function delete_directory($path){
+	static function delete_directory( $path, $root = true ){
 		$path = str_replace('\\', '/', $path);
 		if (substr($path, 0, strlen($path) - 1)!='/'){
 			$path .= '/';
@@ -144,7 +145,8 @@ class RMUtilities
 			}
 		}
 		closedir($dir);
-		@rmdir($path);
+        if ( $root )
+		    @rmdir($path);
 	}
 
     /**

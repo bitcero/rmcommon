@@ -924,6 +924,42 @@ class RMTemplate
         return $this->metas;
     }
 
+    /**
+     * Gets an instance of XoopsTpl if exists, or create a new one if not.
+     * @return XoopsTpl
+     */
+    public function xo_tpl(){
+        global $xoopsTpl, $xoopsConfig;
+
+        if ( is_a( $xoopsTpl, 'XoopsTpl' ) )
+            return $xoopsTpl;
+
+        // include Smarty template engine and initialize it
+        require_once $GLOBALS['xoops']->path('class/template.php');
+        require_once $GLOBALS['xoops']->path('class/theme.php');
+        require_once $GLOBALS['xoops']->path('class/theme_blocks.php');
+
+        $xoopsThemeFactory = null;
+        $xoopsThemeFactory = new xos_opal_ThemeFactory();
+        $xoopsThemeFactory->allowedThemes = $xoopsConfig['theme_set_allowed'];
+        $xoopsThemeFactory->defaultTheme = $xoopsConfig['theme_set'];
+
+        $xoTheme  =& $xoopsThemeFactory->createInstance(array('contentTemplate' => @$xoopsOption['template_main']));
+        $xoopsTpl =& $xoTheme->template;
+
+        return $xoopsTpl;
+
+    }
+
+    public function fetch_smarty( $tpl_file, $element, $type='module', $plugin = '' ){
+
+        $file = $this->get_template( $tpl_file, $type, $element, $plugin );
+
+        $tpl = $this->xo_tpl();
+        return $tpl->fetch( $file );
+
+    }
+
     /*
     DEPRECATED METHODS
     =======================================

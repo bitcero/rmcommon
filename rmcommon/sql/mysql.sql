@@ -112,3 +112,18 @@ CREATE TABLE `mod_rmcommon_settings` (
   PRIMARY KEY (`conf_id`),
   KEY `element` (`element`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `mod_rmcommon_notifications` (
+  `id_notification` int(11) NOT NULL AUTO_INCREMENT,
+  `event` varchar(50) NOT NULL,
+  `element` varchar(50) NOT NULL,
+  `params` varchar(50) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'module',
+  `date` datetime NOT NULL,
+  PRIMARY KEY `id_notification`,
+  KEY `event` (`event`),
+  KEY `element` (`element`),
+  KEY `uid` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

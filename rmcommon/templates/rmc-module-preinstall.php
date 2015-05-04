@@ -16,7 +16,15 @@
                     <tr class="even">
                         <td rowspan="2" class="head"><img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $module->getInfo('dirname'); ?>/<?php echo $module->getInfo('image'); ?>" alt="<?php echo $module->getInfo('name'); ?>" /></td>
                         <td><strong><?php _e('Name:','rmcommon'); ?></strong></td>
-                        <td><?php echo $module->getInfo('name'); ?></td>
+                        <td>
+                            <?php if( $module->getInfo('url') ): ?>
+                                <a href="<?php echo $module->getInfo('url'); ?>" target="_blank">
+                                    <?php echo $module->getInfo('name'); ?>
+                                </a>
+                            <?php else: ?>
+                                <?php echo $module->getInfo('name'); ?>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                     <tr class="odd">
                         <td><strong><?php _e('Version:','rmcommon'); ?></strong>
@@ -25,8 +33,8 @@
                     <tr class="even">
                         <td><strong><?php _e('Author:','rmcommon'); ?></strong></td>
                         <td colspan="2">
-                            <?php if($module->getInfo('rmnative')): ?>
-                                <a href="mailto:<?php echo $module->getInfo('authormail'); ?>"><?php echo $module->getInfo('author'); ?></a>
+                            <?php if($module->getInfo('authorurl')): ?>
+                                <a href="<?php echo $module->getInfo('authorurl'); ?>"><?php echo $module->getInfo('author'); ?></a>
                             <?php else: ?>
                                 <?php echo $module->getInfo('author'); ?>
                             <?php endif; ?>

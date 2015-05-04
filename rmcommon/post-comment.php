@@ -39,7 +39,7 @@ if ($action=='save'){
 	    
 	} else {
 	    
-	    $name = $xoopsUser->getVar('uname');
+	    $name = $xoopsUser->getVar('name') != '' ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname');
 	    $email = $xoopsUser->getVar('email');
 	    $url = $xoopsUser->getVar('url');
 	    $xuid = $xoopsUser->uid();
@@ -163,7 +163,49 @@ if ($action=='save'){
 	    
 	}
 
-	redirect_header($uri.'#comment-'.$comment->id(), 1, __('Comment posted successfully!','rmcommon'));
+    // Send notification
+    if ( $cuSettings->comments_notify ){
+
+        $config_handler =& xoops_gethandler('config');
+        $mailConfig = $config_handler->getConfigsByCat(XOOPS_CONF_MAILER);
+
+        $xoopsMailer =& xoops_getMailer();
+        $xoopsMailer->useMail();
+        $xoopsMailer->setHTML( true );
+
+        $ghandler = xoops_gethandler( 'group' );
+        $group = $ghandler->get(XOOPS_GROUP_ADMIN);
+        $xoopsMailer->setToGroups( $group );
+        $xoopsMailer->setFromEmail($mailConfig['from']);
+        $xoopsMailer->setFromName( $mailConfig['fromname'] );
+        $xoopsMailer->setSubject( sprintf(__('New comment sent in %s', 'rmcommon'), $xoopsConfig['sitename']) );
+
+        if ( isset( $controller ) ){
+            $item = array(
+                'name'  => $controller->get_item( $params, $comment ),
+                'url'   => $uri
+            );
+        } else {
+            $item = array(
+                'name' => $xoopsConfig['sitename'],
+                'url'  => $uri
+            );
+        }
+
+        ob_start();
+        include RMTemplate::get()->get_template('mail/rmc-comment-notify.php');
+        $body = ob_get_clean();
+
+        $xoopsMailer->setBody( $body );
+        $xoopsMailer->send();
+
+    }
+
+    RMUris::redirect_with_message(
+        __('Comment posted successfully!','rmcommon'),
+        $uri.'#comment-'.$comment->id(),
+        RMMSG_SUCCESS
+    );
 	
 } elseif ($action=='edit') {
 	

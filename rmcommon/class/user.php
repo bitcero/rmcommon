@@ -12,12 +12,28 @@ class RMUser extends RMObject
 {
     private $groups = array();
 
-    public function __construct($id=''){
+    public function __construct($id='', $use_email = false, $pass = '' ){
 
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("users");
         $this->setNew();
         $this->initVarsFromTable();
+
+        /**
+         * Find user using the email
+         */
+        if ( $use_email ){
+
+            if ( '' == $id )
+                return null;
+
+            $this->primary = 'email';
+            if($this->loadValues($id))
+                $this->unsetNew ();
+            $this->primary = 'uid';
+            return true;
+
+        }
 
         if ($id != '' && $this->loadValues($id))
             $this->unsetNew();

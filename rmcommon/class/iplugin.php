@@ -16,12 +16,13 @@ abstract class RMIPlugin
 {
     protected $info = array();
     protected $settings = array();
+    protected $errors = array();
 
-    abstract public function on_install();
-    abstract public function on_uninstall();
-    abstract public function on_update();
-    abstract public function on_activate($q);
-    abstract public function options();
+    public function on_install(){return true;}
+    public function on_uninstall(){return true;}
+    public function on_update(){return true;}
+    public function on_activate($q){return true;}
+    public function options(){return array();}
 
     function get_info($name){
 
@@ -43,6 +44,21 @@ abstract class RMIPlugin
             return $settings[$name];
 
         return $settings;
+
+    }
+
+    public function addError( $error_string ){
+
+        $this->errors[] = $error_string;
+
+    }
+
+    public function errors( $lines = true ){
+
+        if ( $lines )
+            return implode( "<br>", $this->errors );
+        else
+            return $this->errors;
 
     }
 

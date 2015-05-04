@@ -217,12 +217,12 @@ function show_users(){
     $result = $db->query($sql);
 
     $users = array();
-    $user = new XoopsUser();
     $t = array(); // Temporary
     while ($row=$db->fetchArray($result)) {
+        $user = new RMUser();
         $user->assignVars($row);
         $t = $user->getValues();
-        $t['groups'] = $user->groups();
+        $t['groups'] = $user->getGroups();
         $t = RMEvents::get()->run_event('rmcommon.loading.users.list', $t);
         $users[] = $t;
         $t = array();

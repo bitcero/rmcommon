@@ -50,16 +50,21 @@
                     <?php endif; ?>
                     </span>
                     <a href="#" class="rename text-info"><span class="fa fa-edit"></span> <?php _e('Edit','rmcommon'); ?></a>
-                    <span class="descriptions"><?php echo $mod['description']; ?></span>
+                    <?php if( $mod['help'] != '' ): ?>
+                    <a href="<?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?>" class="help cu-help-button text-success" title="<?php echo sprintf(__('%s Help', 'rmcommon'), $mod['name']); ?>"><span class="fa fa-question-circle"></span> <?php _e('Help','rmcommon'); ?></a>
+                    <?php endif; ?>
+                    <span class="help-block"><?php echo $mod['description']; ?></span>
                 </td>
                 <td align="center">
                     <?php echo $mod['version']; ?>
                 </td>
                 <td class="author">
-                    <?php if($mod['author_mail']!=''): ?>
-                        <a href="mailto:<?php echo $mod['author_mail']; ?>"><?php echo $mod['author']; ?></a>
+                    <?php if( '' != $mod['author_url'] ): ?>
+                        <a href="<?php echo $mod['author_url']; ?>" target="_blank" title="<?php echo $mod['author']; ?>">
+                            <img src="<?php echo $mod['avatar']; ?>" alt="<?php echo $mod['author']; ?>">
+                        </a>
                     <?php else: ?>
-                        <?php echo $mod['author']; ?>
+                        <img src="<?php echo $mod['avatar']; ?>" title="<?php echo $mod['author']; ?>" alt="<?php echo $mod['author']; ?>">
                     <?php endif; ?>
                     <span class="hidden_data">
                         <span class="adminlink"><?php echo $mod['admin_link']; ?></span>
@@ -74,7 +79,8 @@
                         <span class="author"><?php echo $mod['author']; ?></span>
                         <span class="mail"><?php echo $mod['author_mail']; ?></span>
                         <span class="web"><?php echo $mod['author_web']; ?></span>
-                        <span class="url"><?php echo $mod['author_url']; ?></span>
+                        <span class="author-url"><?php echo $mod['author_url']; ?></span>
+                        <span class="url"><?php echo $mod['url']; ?></span>
                         <span class="license"><?php echo $mod['license']; ?></span>
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
                         <span class="active"><?php echo $mod['active']; ?></span>
@@ -89,37 +95,46 @@
                         </span>
                     </span>
                 </td>
-                <td class="actions">
+                <td class="actions" nowrap>
                     <div class="btn-group">
-                        <a href="#" class="btn btn-default data_button" title="<?php _e('Show Information','twop6'); ?>">
-                            <span class="fa fa-info-circle"></span>
+                        <?php if( '' != $mod['url'] ): ?>
+                        <a href="<?php echo $mod['url']; ?>" target="_blank" class="btn btn-default" title="<?php _e('Visit module website','rmcommon'); ?>">
+                            <span class="fa fa-globe"></span>
+                        </a>
+                        <?php else: ?>
+                            <a href="#" class="btn btn-default" onclick="return false;">
+                                <span class="fa fa-globe text-muted"></span>
+                            </a>
+                        <?php endif; ?>
+                        <a href="#" class="btn btn-default data_button" title="<?php _e('Show information','rmcommon'); ?>">
+                            <span class="fa fa-info-circle text-info"></span>
                         </a>
                         <a href="#" class="btn btn-default update_button" title="<?php _e('Update','rmcommon'); ?>">
-                            <span class="fa fa-refresh"></span>
+                            <span class="fa fa-refresh text-success"></span>
                         </a>
                         <?php if($mod['active']): ?>
                                 <?php if($mod['dirname']!='system'): ?>
                                     <a href="#" class="btn btn-default disable_button" title="<?php _e('Disable','rmcommon'); ?>">
-                                        <span class="fa fa-lock"></span>
+                                        <span class="fa fa-lock text-warning"></span>
                                     </a>
                                 <?php else: ?>
-                                    <a href="#" class="btn btn-default">
-                                        <span class="fa fa-lock"></span>
+                                    <a href="#" class="btn btn-default" aria-disabled="true" disabled>
+                                        <span class="fa fa-lock text-muted"></span>
                                     </a>
                                 <?php endif; ?>
                         <?php endif; ?>
                         <?php if(!$mod['active']): ?>
                                 <a href="#" class="btn btn-default enable_button" title="<?php _e('Enable','rmcommon'); ?>">
-                                    <span class="fa fa-unlock"></span>
+                                    <span class="fa fa-unlock text-info"></span>
                                 </a>
                         <?php endif; ?>
                         <?php if($mod['dirname']!='system'): ?>
-                            <a href="#" class="btn btn-danger uninstall_button" title="<?php _e('Uninstall','rmcommon'); ?>" data-dir="<?php echo $mod['dirname']; ?>">
-                                <span class="fa fa-minus-circle"></span>
+                            <a href="#" class="btn btn-default uninstall_button" title="<?php _e('Uninstall','rmcommon'); ?>" data-dir="<?php echo $mod['dirname']; ?>">
+                                <span class="fa fa-minus-circle text-danger"></span>
                             </a>
                         <?php else: ?>
-                            <a href="#" class="btn btn-danger">
-                                <span class="fa fa-minus-circle"></span>
+                            <a href="#" class="btn btn-default" aria-disabled="true" disabled>
+                                <span class="fa fa-minus-circle text-muted"></span>
                             </a>
                         <?php endif; ?>
                     </div>
@@ -165,7 +180,7 @@
                         <span class="form-control author"><?php _e('Not provided','twop6'); ?></span>
                     </div>
                     <div class="col-sm-6">
-                        <label><?php _e('Web site:','twop6'); ?></label>
+                        <label><?php _e('Module web site:','twop6'); ?></label>
                         <span class="form-control web"><?php _e('Not provided','twop6'); ?></span>
                     </div>
                 </div>

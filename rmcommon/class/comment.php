@@ -43,7 +43,7 @@ class RMComment extends RMObject
 
         $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_comments_assignations")." WHERE id_user=".$this->getVar('user');
         $result = $db->query($sql);
-        if ($db->getRowsNum($resul)<=0) return;
+        if ($db->getRowsNum($result)<=0) return;
 
         $row = $db->fetchArray($result);
         $this->user = $row;

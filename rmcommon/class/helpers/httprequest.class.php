@@ -205,4 +205,63 @@ class RMHttpRequest
         return $collected;
 
     }
+
+    /**
+     * Get content from URL
+     * @param        string $url
+     * @param string string|array $query
+     * @param bool   bool $post
+     *
+     * @return bool|mixed|string
+     */
+    static public function load_url( $url, $query = '', $post = false ){
+
+        // Form the query
+        if ( is_array( $query ) )
+            $query = http_build_query( $query );
+
+        if ( $post ){
+
+            if ( !function_exists( "curl_init" ) ){
+
+                if ( $query == '' ){
+                    $query = explode("?", $url);
+                    $url = $query[0];
+                    $query = $query[1];
+                }
+
+                $options = array(
+                    'http' => array(
+                        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                        'method'  => 'POST',
+                        'content' => $query,
+                    )
+                );
+                $context  = stream_context_create($options);
+                $result = file_get_contents($url, false, $context);
+                return $result;
+
+            }
+
+            // With cURL
+            $ch = curl_init( $url );
+            curl_setopt( $ch, CURLOPT_URL, $url );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+            curl_setopt( $ch, CURLOPT_POST, 1 );
+            curl_setopt( $ch, CURLOPT_POSTFIELDS, $query );
+            curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+            curl_setopt( $ch, CURLOPT_HEADER, 0 );
+            $result = curl_exec( $ch );
+            curl_close( $ch );
+            return $result;
+
+        }
+
+        if ( $query != '' )
+            $url .= '?' . $query;
+
+        return file_get_contents( $url );
+
+    }
+
 }

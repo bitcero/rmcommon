@@ -103,19 +103,39 @@ class RMPlugin extends RMObject
 	}
 
     public function on_install(){
-        return $this->plugin->on_install();
+        if ( !$this->plugin->on_install() ) {
+            $this->addError($this->plugin->errors());
+            return false;
+        }
+
+        return true;
     }
 
     public function on_update(){
-        return $this->plugin->on_update();
+        if ( !$this->plugin->on_update() ) {
+            $this->addError($this->plugin->errors());
+            return false;
+        }
+
+        return true;
     }
 
     public function on_uninstall(){
-        return $this->plugin->on_uninstall();
+        if ( !$this->plugin->on_uninstall() ) {
+            $this->addError($this->plugin->errors());
+            return false;
+        }
+
+        return true;
     }
 
     public function on_activate($q){
-        return $this->plugin->on_activate($q);
+        if ( !$this->plugin->on_activate() ) {
+            $this->addError($this->plugin->errors());
+            return false;
+        }
+
+        return true;
     }
 
     public function options(){

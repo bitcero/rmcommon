@@ -70,7 +70,7 @@ $(document).ready(function(){
 
         var author = '';
         if($(sdata+" .mail").html()!=''){
-            author = '<a href="mailto:'+$(sdata+" .mail").html()+'">'+$(sdata+" .author").html()+'</a>';
+            author = '<a href="'+$(sdata+" .author-url").html()+'">'+$(sdata+" .author").html()+'</a>';
         } else {
             author = $(sdata+" .author").html()
         }
@@ -80,14 +80,14 @@ $(document).ready(function(){
 
         var web = '';
         if($(sdata+" .url").html()!=''){
-            web = '<a href="'+$(sdata+" .url").html()+'" target="_blank">'+$(sdata+" .web").html()+'</a>';
+            web = '<a href="'+$(sdata+" .url").html()+'" target="_blank">'+cuLanguage.visitWeb+'</a>';
             $("#info-module .web").html(web);
         }
 
         $("#info-module .license").html($(sdata+" .license").html());
 
         if($(sdata+" .help").html()!='')
-            $("#info-module .help").html('<a href="'+$(sdata+" .help").html()+'" target="_blank">'+$(sdata+" .oname").html()+'</a>');
+            $("#info-module .help").html('<a href="'+$(sdata+" .help").html()+'" target="_blank" class="cu-help-button">'+$(sdata+" .oname").html()+'</a>');
 
         $("#info-module .social").html($(sdata+" .social").html());
 

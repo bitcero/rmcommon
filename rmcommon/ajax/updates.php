@@ -1,12 +1,35 @@
 <?php
-// $Id: blocks.php 1037 2012-09-07 21:19:12Z i.bitcero $
-// --------------------------------------------------------------
-// Red México Common Utilities
-// A framework for Red México Modules
-// Author: Eduardo Cortés <i.bitcero@gmail.com>
-// Email: i.bitcero@gmail.com
-// License: GPL 2.0
-// --------------------------------------------------------------
+/**
+ * Common Utilities
+ * A framework for new XOOPS modules
+ * 
+ * Copyright © 2015 Eduardo Cortés
+ * -----------------------------------------------------------------
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * -----------------------------------------------------------------
+ * @package      rmcommon
+ * @author       Eduardo Cortés
+ * @copyright    Eduardo Cortés
+ * @license      GPL 2 (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @link         http://eduardocortes.mx
+ * @link         http://rmcommon.com
+ */
+
+/**
+ * This file allows to load updates information from the remote server
+ */
 
 include dirname(dirname(dirname(dirname(__FILE__)))).'/mainfile.php';
 $xoopsLogger->activated = false;
@@ -20,6 +43,9 @@ $result = $xoopsDB->query($sql);
 $urls = array();
 $modNames = array();
 
+/**
+ * Load existing modules and fetch data to request remote server information
+ */
 while($row = $xoopsDB->fetchArray($result)){
     $mod = new XoopsModule();
     $mod->assignVars($row);
@@ -41,10 +67,14 @@ while($row = $xoopsDB->fetchArray($result)){
     
 }
 
+/**
+ * Load remote information and fetch it
+ * for each module
+ */
 $total = 0;
 $upds = array();
 foreach($urls as $dir => $url){
-    $ret = file_get_contents($url);
+    $ret = file_get_contents($url . '&xv=' . urlencode(XOOPS_VERSION));
     $ret = json_decode($ret, true);
     if($ret['message']==0) continue;
     if($ret['error']==1) continue;
@@ -57,6 +87,10 @@ foreach($urls as $dir => $url){
     $total++;
 }
 
+
+/**
+ * Now load all installed plugins to search for updates
+ */
 $rmFunc = RMFunctions::get();
 $urls = array();
 $plugNames = array();
@@ -84,6 +118,10 @@ while($row = $xoopsDB->fetchArray($result)){
     
 }
 
+/**
+ * Load information from remote server
+ * and fetch it for ach plugin
+ */
 foreach($urls as $dir => $url){
     $ret = file_get_contents($url);
     $ret = json_decode($ret, true);
@@ -98,6 +136,11 @@ foreach($urls as $dir => $url){
     $total++;
 }
 
+/**
+ * TODO: Create support for themes updates
+ */
+
+// Write file with updates information
 file_put_contents(XOOPS_CACHE_PATH.'/updates.chk', base64_encode(serialize(array('date'=>time(),'total'=>$total,'updates'=>$upds))));
 
 header('Cache-Control: no-cache, must-revalidate');

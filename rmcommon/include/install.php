@@ -54,25 +54,59 @@ function xoops_module_update_rmcommon($mod, $prev){
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_bkmod").'` TO  `'.$db->prefix("mod_rmcommon_blocks_assignations").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_blocks").'` TO  `'.$db->prefix("mod_rmcommon_blocks").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_blocks_positions").'` TO  `'.$db->prefix("mod_rmcommon_blocks_positions").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_comments").'` TO  `'.$db->prefix("mod_rmcommon_comments").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_comusers").'` TO  `'.$db->prefix("mod_rmcommon_comments_assignations").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_images").'` TO  `'.$db->prefix("mod_rmcommon_images").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_img_cats").'` TO  `'.$db->prefix("mod_rmcommon_images_categories").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_plugins").'` TO  `'.$db->prefix("mod_rmcommon_plugins").'` ;');
-    $db->queryF('RENAME TABLE `'.$db->prefix("rmc_settings").'` TO  `'.$db->prefix("mod_rmcommon_settings").'` ;');
+    $result = $db->query("SHOW TABLES LIKE '" . $db->prefix("rmc_bkmod") . "'");
 
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks_assignations").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks_positions").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_comments").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_comments_assignations").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_images").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_images_categories").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_plugins").'` ENGINE = INNODB');
-    $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_settings").'` ENGINE = INNODB');
+    if ( $db->getRowsNum($result) > 0 ) {
+        /**
+         * Update old tables
+         */
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_bkmod").'` TO  `'.$db->prefix("mod_rmcommon_blocks_assignations").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_blocks").'` TO  `'.$db->prefix("mod_rmcommon_blocks").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_blocks_positions").'` TO  `'.$db->prefix("mod_rmcommon_blocks_positions").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_comments").'` TO  `'.$db->prefix("mod_rmcommon_comments").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_comusers").'` TO  `'.$db->prefix("mod_rmcommon_comments_assignations").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_images").'` TO  `'.$db->prefix("mod_rmcommon_images").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_img_cats").'` TO  `'.$db->prefix("mod_rmcommon_images_categories").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_plugins").'` TO  `'.$db->prefix("mod_rmcommon_plugins").'` ;');
+        $db->queryF('RENAME TABLE `'.$db->prefix("rmc_settings").'` TO  `'.$db->prefix("mod_rmcommon_settings").'` ;');
+
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks_assignations").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_blocks_positions").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_comments").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_comments_assignations").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_images").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_images_categories").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_plugins").'` ENGINE = INNODB');
+        $db->queryF('ALTER TABLE  `'.$db->prefix("mod_rmcommon_settings").'` ENGINE = INNODB');
+
+    }
+
+    $result = $db->query("SHOW TABLES LIKE '" . $db->prefix("mod_rmcommon_notifications") . "'");
+    if ( $db->getRowsNum($result) > 0 ) {
+        /**
+         * Create notifications table if not exists
+         */
+        $sql = 'CREATE TABLE `' . $db->prefix("mod_rmcommon_notifications") . '` (
+                `id_notification` int(11) NOT NULL,
+                  `event` varchar(50) NOT NULL,
+                  `element` varchar(50) NOT NULL,
+                  `params` varchar(50) NOT NULL,
+                  `uid` int(11) NOT NULL,
+                  `type` varchar(10) NOT NULL DEFAULT \'module\',
+                  `date` datetime NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+        $db->queryF( $sql );
+
+        $sql = 'ALTER TABLE `' . $db->prefix("mod_rmcommon_notifications") . '`
+                ADD PRIMARY KEY (`id_notification`), ADD KEY `event` (`event`), ADD KEY `element` (`element`), ADD KEY `uid` (`uid`);';
+        $db->queryF( $sql );
+
+        $sql = 'ALTER TABLE `' . $db->prefix("mod_rmcommon_notifications") . '`
+                MODIFY `id_notification` int(11) NOT NULL AUTO_INCREMENT;COMMIT;';
+        $db->queryF( $sql );
+
+    }
 
     // Prepare welcome screen
     $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);

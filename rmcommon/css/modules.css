@@ -7,13 +7,76 @@
 }
 
 /** Modules Widget **/
-.rmc_modules_widget ul{
+.rmc-modules-widget #mods-widget-container > ul{
     position: relative;
 }
-.rmc_modules_widget ul > li{
+.rmc-modules-widget #mods-widget-container > ul > li{
 	overflow: hidden;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+    position: relative;
+    min-height: 72px;
+}
+.rmc-modules-widget ul > li > .the-logo{
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    width: 112px;
+    min-height: 72px;
+    padding: 10px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.05);
+}
+.rmc-modules-widget ul > li > .the-info{
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 112px;
+    padding: 0;
+}
+.rmc-modules-widget ul > li > .the-info > ul{
+    list-style: none;
+    padding: 0; margin: 0;
+}
+.rmc-modules-widget ul > li > .the-info > ul .name{
+    padding: 5px 10px;
+    line-height: 1;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 25px;
+}
+.rmc-modules-widget ul > li > .the-info > ul .name > strong{
+    display: block;
+}
+.rmc-modules-widget ul > li > .the-info > ul .name > small {
+    color: #999;
+}
+.rmc-modules-widget ul > li > .the-info > ul .install{
+    position: absolute;
+    left: 0; bottom: 0;
+    text-align: center;
+    width: 50%;
+    line-height: 25px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+.rmc-modules-widget ul > li > .the-info > ul .info{
+    position: absolute;
+    right: 0; bottom: 0;
+    text-align: center;
+    width: 50%;
+    line-height: 25px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+.rmc-modules-widget ul > li > .the-info > ul .install a,
+.rmc-modules-widget ul > li > .the-info > ul .info a{
+    color: #999;
+}
+.rmc-modules-widget ul > li > .the-info > ul .install:hover,
+.rmc-modules-widget ul > li > .the-info > ul .info:hover{
+    background-color: #dedede;
+    border-color: transparent;
+}
+.rmc-modules-widget ul > li > .the-info > ul .install:hover a,
+.rmc-modules-widget ul > li > .the-info > ul .info:hover a{
+    color: #666;
 }
 .rmc_mod_info{display: none;}
 #mod-info-blocker{
@@ -109,7 +172,8 @@
     font-weight: bold;
     font-size: 1.1em;
 }
-#des-mods-container .name a.rename{
+#des-mods-container .name a.rename,
+#des-mods-container .name a.help{
     font-size: 0.7em;
     font-weight: normal;
     text-transform: uppercase;
@@ -153,16 +217,11 @@
     border-radius: 0;
 }
 
-#des-mods-container .descriptions{
-	line-height: 120%;
-	display: block;
-    font-size: 0.9em;
-    margin: 0;
-    padding: 2px 0;
-}
-#des-mods-container .author{
-    font-size: 0.9em;
-    color: #666;
+
+#des-mods-container .author img{
+    max-width: 40px;
+    padding: 1px;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 .inactive td{
     border-bottom:1px dashed #ccc;
@@ -178,7 +237,7 @@
 .actions
 {
     text-align: center;
-    min-width: 180px;
+    min-width: 250px;
 }
 .tablesorter tbody tr:last-child td{
     border-bottom: 0;

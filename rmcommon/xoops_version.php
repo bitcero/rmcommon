@@ -20,7 +20,7 @@ $modversion['releasedate'] = "";
 $modversion['status'] = "Beta";
 $modversion['description'] = 'Contains a lot of classes and functions used by Red México Modules';
 $modversion['credits'] = "Red México, BitC3R0";
-$modversion['help'] = "docs/readme.html";
+$modversion['help'] = "http://www.xoopsmexico.net/docs/common-utilities/introduccion/";//"docs/readme.html";
 $modversion['license'] = "GPL 2";
 $modversion['official'] = 0;
 $modversion['image'] = "images/logo.png";
@@ -33,12 +33,13 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>91,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>93,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
-$modversion['author'] = "BitC3R0";
+$modversion['url'] = "http://rmcommon.com";
+$modversion['author'] = "Eduardo Cortés";
 $modversion['authormail'] = "i.bitcero@gmail.com";
-$modversion['authorweb'] = "Red México";
-$modversion['authorurl'] = "http://redmexico.com.mx";
+$modversion['authorweb'] = "Eduardo Cortés";
+$modversion['authorurl'] = "http://eduardocortes.mx";
 $modversion['updateurl'] = "http://www.xoopsmexico.net/modules/vcontrol/";
 $modversion['icon16'] = "images/icon16.png";
 $modversion['icon24'] = 'images/icon24.png';
@@ -372,6 +373,27 @@ $modversion['config'][] = array(
     'category'      => 'appearance'
 );
 
+$modversion['config'][] = array(
+    'name'          => 'mods_number',
+    'title'         => __('Modules number on dashboard','rmcommon'),
+    'description'   => '',
+    'formtype'      => 'textbox',
+    'valuetype'     => 'int',
+    'default'       => 6,
+    'category'      => 'appearance'
+);
+
+
+$modversion['config'][] = array(
+    'name'          => 'rssimage',
+    'title'         => __('Image for RSS feeds','rmcommon'),
+    'description'   => '',
+    'formtype'      => 'textbox',
+    'valuetype'     => 'text',
+    'default'       => XOOPS_URL.'/modules/rmcommon/images/rssimage.png',
+    'category'      => 'appearance'
+);
+
 // Comments
 $modversion['config'][] = array(
     'name'          => 'enable_comments',
@@ -434,24 +456,13 @@ $modversion['config'][] = array(
 );
 
 $modversion['config'][] = array(
-    'name'          => 'mods_number',
-    'title'         => __('Modules number on dashboard','rmcommon'),
-    'description'   => '',
-    'formtype'      => 'textbox',
+    'name'          => 'comments_notify',
+    'title'         => __('Notify administrators about new comments','rmcommon'),
+    'description'   => __('By enabling this option, Common Utilities will send a notification to webmasters every time that a new comment is posted.', 'rmcommon'),
+    'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => 6,
-    'category'      => 'appearance'
-);
-
-
-$modversion['config'][] = array(
-    'name'          => 'rssimage',
-    'title'         => __('Image for RSS feeds','rmcommon'),
-    'description'   => '',
-    'formtype'      => 'textbox',
-    'valuetype'     => 'text',
-    'default'       => XOOPS_URL.'/modules/rmcommon/images/rssimage.png',
-    'category'      => 'appearance'
+    'default'       => 1,
+    'category'      => 'comments'
 );
 
 /** Mailer Configurations **/
