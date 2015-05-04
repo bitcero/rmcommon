@@ -148,7 +148,7 @@ function download_file(){
 
     // Request access
     $query = explode( "?", $url );
-    $query[1] = ($query[1] != '' ? $query[1] . '&' : '') . 'action=login'.($cred!='' ? '&l='.$cred : '');
+    $query[1] = ($query[1] != '' ? $query[1] . '&' : '') . 'action=identity'.($cred!='' ? '&l='.$cred : '');
 
     $response = json_decode( RMHttpRequest::load_url( $query[0], $query[1], true ), true );
 
@@ -169,7 +169,7 @@ function download_file(){
     if($details['error']==1)
         jsonReturn($details['message']);
 
-    $hash = $details['data']['files'];
+    $hash = $details['data']['hash'];
     $file_hash = md5_file( XOOPS_CACHE_PATH.'/updates/'.$type.'-'.$dir.'.zip' );
 
     if ( $hash != $file_hash ){
@@ -222,31 +222,6 @@ function download_file(){
         closedir($odir);
 
         RMUtilities::delete_directory( $source );
-
-        /*foreach ($files as $item) {
-
-            $fpath = $source . $item['path'] . ($item['path']!='/' ? '/' : '') . $item['name'];
-
-            if ($item['type']=='directory') {
-
-                if($item['action']=='delete')
-                    is_dir($target.$item['path'].'/'.$item['name']) ? $rmUtil->delete_directory(str_replace($source, $target, $fpath)) : null;
-                else
-                    !is_dir($target.$item['path'].'/'.$item['name']) ? mkdir(str_replace($source, $target, $fpath)) : null;
-
-            } else {
-
-                if($item['action']=='delete')
-                    is_file($target.$item['path'].'/'.$item['name']) ? unlink(str_replace($source, $target, $fpath)) : null;
-                else
-                    copy($fpath, str_replace($source, $target, $fpath));
-
-                if($item['action']=='run')
-                    $runFiles[] = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, str_replace($source, $target, $fpath));
-
-            }
-
-        }*/
 
     } else {
 
@@ -402,7 +377,7 @@ function download_for_later(){
         jsonReturn(__('Invalid parameters!','rmcommon'));
 
     // Request access
-    $response = json_decode(file_get_contents($url.'&action=login'.($cred!='' ? '&l='.$cred : '')), true);
+    $response = json_decode(file_get_contents($url.'&action=identity'.($cred!='' ? '&l='.$cred : '')), true);
     if($response['error']==1)
         jsonReturn($response['message']);
 

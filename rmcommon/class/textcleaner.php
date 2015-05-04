@@ -602,6 +602,12 @@ class TextCleaner
         // Custom Codes
         global $rmCodes;
 
+        // Markdown
+        if ( $rmc_config->markdown ){
+            $md = new RMParsedown();
+            $text = $md->text( $text );
+        }
+
         if(!defined('XOOPS_CPFUNC_LOADED') && !defined('NO_CUSTOM_CODES'))
             $text = $rmCodes->doCode($text);
 
@@ -622,12 +628,6 @@ class TextCleaner
 		// Replace breaklines
 		if ($rmc_config->dobr)
 			$text = $this->nl2Br($text);
-
-        // Markdown
-        if ( $rmc_config->markdown ){
-            $md = new RMParsedown();
-            $text = $md->text( $text );
-        }
 
         if($clean_tags) $text = $this->clean_disabled_tags($text);
 		$text = $this->make_clickable($text);
