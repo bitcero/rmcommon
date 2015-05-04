@@ -122,11 +122,19 @@ class RMUris
      */
     static function redirect_with_message($message, $url, $level = RMMSG_WARN, $icon = ''){
 
+
         $i = isset($_SESSION['cu_redirect_messages']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
         $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
         $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
         $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
-        header('location: '.preg_replace("/[&]amp;/i", '&', $url));
+
+        if ( !headers_sent() ) {
+            header('location: ' . preg_replace("/[&]amp;/i", '&', $url));
+            die();
+        }
+
+        $ret = '<script>window.location.href = "' . $url . '";</script><noscript><meta http-equiv="refresh" content="0;url='.$url.'"></noscript>';
+        echo $ret;
         die();
 
     }

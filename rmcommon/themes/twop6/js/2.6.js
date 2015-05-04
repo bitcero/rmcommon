@@ -67,7 +67,7 @@ $(document).ready(function(){
 
     });
 
-    $("a.rm_help_button").click(function(){
+    $("body").on('click', ".rm_help_button, .cu-help-button", function(){
 
         /*$.window({
             title: $(this).attr('title'),

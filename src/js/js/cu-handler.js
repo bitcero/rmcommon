@@ -572,5 +572,68 @@ $(document).ready(function(){
         $("body").css("overflow", 'visible');
     });
 
+    /**
+     * Set user notifications
+     */
+    $(".cu-notifications form .notification-item").change( function(){
+
+        var event = $(this).data('event');
+        var status = $(this).is(":checked") ? 1 : 0;
+        var item = $(this);
+
+        var params = {
+            event: event,
+            status: status,
+            page: 'cu-notification-subscribe'
+        };
+
+        $.post( xoUrl + '/notifications.php', params, function( response ){
+
+            if ( 'error' == response.type ){
+                alert(response.message);
+                return;
+            }
+
+            $(item).parent().parent()
+                .animate({
+                    backgroundColor: '#ffff99'
+                },500,'linear', function(){
+                    $(this).animate({
+                        backgroundColor: 'transparent'
+                    }, 500, 'linear');
+                });
+
+        }, 'json' );
+
+    } );
+
+    $(" #cu-notifications .cancel-subscription").click( function() {
+
+        var event = $(this).data('info');
+        var status = 0;
+        var item = $(this);
+
+        var params = {
+            event: event,
+            status: status,
+            page: 'cu-notification-subscribe'
+        };
+
+        $.post( xoUrl + '/notifications.php', params, function( response ){
+
+            if ( 'error' == response.type ){
+                alert(response.message);
+                return;
+            }
+
+            $(item).parent().parent()
+                .slideUp(250, function(){
+                    $(this).remove();
+                });
+
+        }, 'json' );
+
+    } );
+
 });
 

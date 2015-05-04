@@ -75,6 +75,14 @@ function rmc_autoloader($class){
                 require $file;
                 return;
             }
+
+            if ( 'rmcommon' == $data[0] ){
+                $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/helpers/' . strtolower(str_replace("_", ".", $class) ) . '.class.php';
+                if( is_file($file) ){
+                    require $file;
+                    return;
+                }
+            }
         }
 
     }
@@ -317,7 +325,7 @@ if($cuSettings->updates && isset( $xoopsOption['pagetype'] ) && $xoopsOption['pa
 /**
  * Add ajax controller script
  */
-if ( defined("XOOPS_CPFUNC_LOADED") || ( isset( $xoopsOption['pagetype'] ) && $xoopsOption['pagetype'] ) == 'admin' ){
+if ( defined("XOOPS_CPFUNC_LOADED") || ( isset($xoopsOption) && array_key_exists( 'pagetype', $xoopsOption ) && $xoopsOption['pagetype'] == 'admin' ) ){
     $rmTpl->add_script( 'cu-settings.php', 'rmcommon', array('footer' => 1) );
     $rmTpl->add_script( 'jquery.validate.min.js', 'rmcommon', array('footer' => 1) );
 }

@@ -23,21 +23,41 @@ function rmc_available_mods(){
     ob_start();
     $i = 0;
 ?>
-	<div class="rmc_widget_content_reduced rmc_modules_widget">
+	<div class="rmc_widget_content_reduced rmc-modules-widget">
         <img id="img-load" src="images/loading.gif" style="display: none; margin: 15px auto;" />
         <div id="mods-widget-container">
             <ul class="list-unstyled">
                 <?php foreach($available_mods as $mod): ?>
                 <?php if($i==$limit) break; ?>
                     <li>
-                        <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="rmc_mod_img">
-                            <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
-                        </a>
-                        <strong><a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php echo $mod->getInfo('name'); ?></a></strong>
-                        <span class="rmc_available_options">
-                            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="text-warning"><?php _e('Install','rmcommon'); ?></a> |
-                            <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');" class="text-warning"><?php _e('More info','rmcommon'); ?></a>
-                        </span>
+                        <div class="the-logo">
+                            <?php if( $mod->getInfo('url')!=''): ?>
+                            <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>">
+                                <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
+                            </a>
+                            <?php else: ?>
+                                <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
+                            <?php endif; ?>
+                        </div>
+                        <div class="the-info">
+                            <ul>
+                                <li class="name">
+                                    <strong><a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php echo $mod->getInfo('name'); ?></a></strong>
+                                    <small><?php echo $mod->getInfo('rmversion') ? RMFormat::version( $mod->getInfo('rmversion') ) : $mod->getInfo('version'); ?></small>
+                                </li>
+                                <li class="install">
+                                    <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>">
+                                        <span class="fa fa-cog"></span> <span class="hidden-md"><?php _e('Install','rmcommon'); ?></span>
+                                    </a>
+                                </li>
+                                <li class="info">
+                                    <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');">
+                                        <span class="fa fa-info-circle"></span>
+                                        <span class="hidden-md"><?php _e('Info','rmcommon'); ?></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="rmc_mod_info" id="mod-<?php echo $mod->getInfo('dirname'); ?>">
                             <div class="header">
                                 <div class="logo">
@@ -160,8 +180,8 @@ function rmc_available_mods(){
                                 </tr>
                             </table>
                         </div>
-                    <?php $i++; endforeach; ?>
                     </li>
+                    <?php $i++; endforeach; ?>
             </ul>
         <?php $nav->display(false); ?>
             <input type="hidden" id="token" value="<?php echo $xoopsSecurity->createToken(); ?>" />

@@ -9,7 +9,7 @@ var warns = new Array();
 var credentials = new Array();
 
 $(document).ready(function(){
-    
+
     if($("#details").length>0 && $("#files").length>0)
         loadUpdates();
     
@@ -31,7 +31,7 @@ $(document).ready(function(){
                 $(this).remove();
             });
         });
-        $.get(xoUrl+'/modules/rmcommon/ajax/updates.php', {XOOPS_TOKEN_REQUEST: xoToken}, function(data){
+        $.get(xoUrl+'/modules/rmcommon/ajax/updates.php', {XOOPS_TOKEN_REQUEST: $("#cu-token").val()}, function(data){
 
             loadUpdates();
             $("#refresh-updates > span").removeClass('fa-spin');
@@ -99,7 +99,10 @@ $(document).ready(function(){
 function loadUpdates(){
     
     $.get('updates.php', {action: 'ajax-updates'}, function(data){
-        
+
+        if ( undefined != data.token )
+            $("#cu-token").val( data.token );
+
         $("#rmc-updates").append(data);
         $(".rm-loading").fadeOut('fast');
         $("#rmc-updates > .upd-item").each(function(){
@@ -111,7 +114,10 @@ function loadUpdates(){
 
 function rmCheckUpdates(){
     
-    $.get(xoUrl+'/modules/rmcommon/ajax/updates.php', {XOOPS_TOKEN_REQUEST: xoToken}, function(data){
+    $.get(xoUrl+'/modules/rmcommon/ajax/updates.php', {XOOPS_TOKEN_REQUEST: $("#cu-token").val()}, function(data){
+
+        if ( '' != data.token )
+            $("#cu-token").val( data.token );
         
         if(data.total<=0) return false;
         
@@ -156,8 +162,13 @@ function loadUpdateDetails(id){
         
         if(data.error==1){
             alert(data.message);
+            if ( '' != data.token )
+                $("#cu-token").val( data.token );
             $("#upd-info-blocker").click();
         }
+
+        if ( '' != data.token )
+            $("#cu-token").val( data.token );
         
         $("#details").html(data.data.details);
         $("#files").html(data.data.files);
@@ -236,8 +247,13 @@ function downloadUpdate(id){
 
         if(data.error==1){
             alert(data.message);
+            if ( '' != data.token )
+                $("#cu-token").val( data.token );
             return;
         }
+
+        if ( '' != data.token )
+            $("#cu-token").val( data.token );
 
         $("#upd-"+id+" .button-later > i").removeClass("icon-spinner icon-spin").addClass("icon-time");
 
@@ -293,40 +309,97 @@ function showLogin(update){
 }
 
 function updateStepOne(update, id){
-    
+
     var url = update.url.replace(/\&amp;/,'&');
-    
+
     var params = {
         action: 'first-step',
         url: url,
         credentials: credentials[id]==undefined ? '' : credentials[id],
         type: update.type,
         dir: update.dir,
-        ftp: $("#ftp-form").serialize()
+        ftp: $("#ftp-form").serialize(),
+        'XOOPS_TOKEN_REQUEST': $("#cu-token").val()
     };
-    
+
     incrementProgress('50%', id);
 
     $.post("updates.php", params, function(data){
 
         if(data.error==1){
             $("#upd-"+id+" .upd-progress .status").html(data.message);
+            if( '' != data.token )
+                $("#cu-token").val( data.token );
             return false;
         }
+
+        if ( '' != data.token )
+            $("#cu-token").val( data.token );
         
         $("#upd-"+id+" .upd-progress .status").html(data.message);
+
+        if ( update.type == 'module' || update.type == 'plugin' ) {
+            incrementProgress('80%', id);
+            local_update( id );
+        } else {
+
+            incrementProgress('100%', id);
+            $("#upd-"+id+" .progress-bar").addClass('progress-bar-success').removeClass("active");;
+            $("#upd-"+id+" h4").addClass('update-done');
+
+        }
         
-        if(data.data.run!=undefined){
+        /*if(data.data.run!=undefined){
             incrementProgress('80%', id);
             runFiles(id, data.data.run);
         } else {  
             incrementProgress('100%', id);
             $("#upd-"+id+" .progress-bar").addClass('progress-bar-success').removeClass("active");;
             $("#upd-"+id+" h4").addClass('update-done');
-        }
+        }*/
         
     },'json');
     
+}
+
+function local_update( id ){
+
+    var updates = eval($("#json-container").html());
+    var update = updates[id].data;
+
+    var params = {
+        action: 'local-update',
+        type: update.type,
+        module: update.dir,
+        XOOPS_TOKEN_REQUEST: $("#cu-token").val()
+    };
+
+    $.post( 'updates.php', params, function( response ){
+
+        if ( 1 == response.error ){
+            $("#upd-"+id+" .upd-progress .status").html(response.message);
+            if( '' != response.token )
+                $("#cu-token").val( response.token );
+            return false;
+        }
+
+        if ( '' != response.token )
+            $("#cu-token").val( response.token );
+
+        cuDialog.dialog({
+            message: response.data.log,
+            title: 'Module update log',
+            width: 'large'
+        });
+
+        $("#upd-"+id+" .upd-progress .status").html(response.message);
+        incrementProgress( '100%', id );
+        $("#upd-"+id+" .progress-bar").addClass('progress-bar-success').removeClass("active");;
+        $("#upd-"+id+" h4").addClass('update-done');
+
+
+    }, 'json' );
+
 }
 
 function runFiles(id, run){

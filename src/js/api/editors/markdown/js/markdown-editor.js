@@ -381,7 +381,7 @@ This component is part of Common Utilities
         id: 'list',
         caption: 'Unorderd list',
         icon: 'fa fa-list-ul',
-        key: 'l',
+        key: 'u',
         callback: 'list',
         content: ''
     });

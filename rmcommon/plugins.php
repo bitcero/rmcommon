@@ -210,7 +210,7 @@ function activate_rm_plugin($q){
         die();
     }
 
-    if (!$plugin->on_activate()) {
+    if (!$plugin->on_activate($q)) {
         redirectMsg('plugins.php', __('The database has been updated, but erros ocurred on this process.', 'rmcommon').'<br />'.$plugin->errors(), 1);
         die();
     }
@@ -263,23 +263,23 @@ function configure_rm_plugin(){
         switch ($option['fieldtype']) {
             case 'checkbox_groups':
             case 'group_multi':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 1, 3, $option['value']);
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 1, 3, array($option['value']));
                 if ($option['desc']!='') $ele->setDescription($option['desc']);
                 $form->addElement($ele);
                 break;
             case 'radio_groups':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 1, 3, $option['value']);
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 1, 3, array($option['value']));
                 if ($option['desc']!='') $ele->setDescription($option['desc']);
                 $form->addElement($ele);
                 break;
             case 'group':
             case 'select_groups':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 0, 3, $option['value']);
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 0, 3, array($option['value']));
                 if ($option['desc']!='') $ele->setDescription($option['desc']);
                 $form->addElement($ele);
                 break;
             case 'select_groups_multi':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 0, 3, $option['value']);
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 0, 3, array($option['value']));
                 if ($option['desc']!='') $ele->setDescription($option['desc']);
                 $form->addElement($ele);
                 break;

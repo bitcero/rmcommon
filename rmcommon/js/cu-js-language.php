@@ -53,6 +53,10 @@ var cuLanguage = {
     confirmPositionDeletion: "<?php _e('Do you really want to delete selected positions?','rmcommon'); ?>",
     selectBefore: "<?php _e('You must select at least one position before you can do this action!','rmcommon'); ?>",
 
+<?php elseif ( RMCLOCATION == 'modules' ): ?>
+
+    visitWeb: "<?php _e('Visit web site', 'rmcommon'); ?>",
+
 <?php endif; ?>
 
     downloadNews: "<?php _e('Downloading News...', 'rmcommon' ); ?>",

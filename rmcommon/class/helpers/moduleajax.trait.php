@@ -44,7 +44,7 @@ trait RMModuleAjax
      * $this->ajax_response('Message to sent', 0, 1, $ajax_data);
      * </pre>
      * @param string $message <p>Text message to senf to client.</p>
-     * @param int $level <p>Indicate it the response sent is an error result (1) or a successfull result (0).</p>
+     * @param int $level <p>Indicate it the response sent is an error result (1) or a successful result (0).</p>
      * @param int $token <p>If this parameter is set to 1, then a security token will be sent to client.</p>
      * @param array $data <p>Array with data to send. Each array index must correspond to a parameter to send to client.</p>
      */

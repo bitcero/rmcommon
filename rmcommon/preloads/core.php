@@ -141,6 +141,22 @@ class RmcommonCorePreload extends XoopsPreloadItem
             global $xoopsSecurity, $rmTpl;
             $rmTpl->add_head_script('var xoToken = "'.$xoopsSecurity->createToken().'";');
         }
+
+        // Process notifications
+        $current = explode( "?", RMUris::relative_url( RMUris::current_url() ) );
+        if ( $current[0] == '/notifications.php' ){
+            $page = RMHttpRequest::post( 'page', 'string', '' );
+            if ( 'cu-notification-subscribe' == $page ){
+                include RMCPATH . '/include/notifications.php';
+            }
+
+            $page = RMHttpRequest::get( 'page', 'string', '' );
+            if ( 'cu-notification-list' == $page ){
+                include RMCPATH . '/include/notifications.php';
+            }
+
+        }
+
 		RMEvents::get()->run_event('rmcommon.xoops.common.end');
 		
 	}
