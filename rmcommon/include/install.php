@@ -83,7 +83,7 @@ function xoops_module_update_rmcommon($mod, $prev){
     }
 
     $result = $db->query("SHOW TABLES LIKE '" . $db->prefix("mod_rmcommon_notifications") . "'");
-    if ( $db->getRowsNum($result) > 0 ) {
+    if ( $db->getRowsNum($result) <= 0 ) {
         /**
          * Create notifications table if not exists
          */
