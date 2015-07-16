@@ -106,17 +106,17 @@
                         </div>
 
                         <div class="btn-group" data-toggle="buttons">
-                                <label>
-                                    <input type="radio" name="sizes[<?php echo $scounter; ?>][type]" value="scale"<?php echo $size['type']=='scale' ? ' checked="checked"' : ''; ?> /> <?php _e('Scale','rmcommon'); ?>
+                                <label class="btn btn-success<?php echo $size['type']=='scale' || $size['type'] == '' ? ' active' : ''; ?>">
+                                    <input type="radio" name="sizes[<?php echo $scounter; ?>][type]" value="scale"<?php echo $size['type']=='scale' || $size['type'] == '' ? ' checked="checked"' : ''; ?> /> <?php _e('Scale','rmcommon'); ?>
                                 </label>
-                                <label>
+                                <label class="btn btn-success<?php echo $size['type']=='crop' ? ' active' : ''; ?>">
                                     <input type="radio" name="sizes[<?php echo $scounter; ?>][type]" value="crop"<?php echo $size['type']=='crop' ? ' checked="checked"' : ''; ?> /> <?php _e('Crop','rmcommon'); ?>
                                 </label>
-                                <label>
+                                <label class="btn btn-success<?php echo $size['type']=='none' ? ' active' : ''; ?>">
                                     <input type="radio" name="sizes[<?php echo $scounter; ?>][type]" value="none"<?php echo $size['type']=='none' ? ' checked="checked"' : ''; ?> /> <?php _e('No Resize','rmcommon'); ?>
                                 </label>
                         </div>
-                        <br>
+                        <hr>
                         <div class="form-group">
                             <a href="#" class="btn btn-danger" id="delete-0" onclick="return delete_size(this);"><i class="fa fa-minus-circle"></i> <?php _e('Delete','rmcommon'); ?></a>
                         </div>
@@ -150,13 +150,13 @@
                     </div>
 
                     <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default active">
+                            <label class="btn btn-success active">
                                 <input type="radio" name="sizes[0][type]" value="scale" checked="checked" /> <?php _e('Scale','rmcommon'); ?>
                             </label>
-                            <label class="btn btn-default">
+                            <label class="btn btn-success">
                                 <input type="radio" name="sizes[0][type]" value="crop" /> <?php _e('Crop','rmcommon'); ?>
                             </label>
-                            <label class="btn btn-default">
+                            <label class="btn btn-success">
                                 <input type="radio" name="sizes[0][type]" value="none" /> <?php _e('No Resize','rmcommon'); ?>
                             </label>
                     </div>

@@ -358,8 +358,8 @@ class RMImageResizer
             imagepng( $target, $target_file, ceil( $params->quality / 10) );
 
         $image_resize = new stdClass();
-        $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $cache_file );
-        $image_resize->path      = $cache_file;
+        $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $target_file );
+        $image_resize->path      = $target_file;
         $image_resize->width     = $params->width;
         $image_resize->height    = $params->height;
 

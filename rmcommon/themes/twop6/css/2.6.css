@@ -66,8 +66,9 @@ body{
 #xo-toolbar .fa,
 #xo-toolbar .glyphicon{
     font-size: 16px;
-    display: inline-block;
-    vertical-align: text-bottom;
+    vertical-align: top;
+    /*display: inline-block;
+    vertical-align: text-bottom;*/
 }
 
 .cu-breadcrumb-container{
@@ -131,7 +132,6 @@ body{
 	margin: 0;
 }
 #xo-contents h1.cu-section-title > span{
-    vertical-align: text-bottom;
     display: inline-block;
     float: none;
 }
@@ -224,7 +224,7 @@ table th{
     cursor: pointer;
     position: absolute;
     top: 0; bottom: 0; right: 0;
-    line-height: 24px;
+    line-height: 1;
     padding: 10px;
 }
 .cu-box .box-content{

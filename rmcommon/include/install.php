@@ -88,7 +88,7 @@ function xoops_module_update_rmcommon($mod, $prev){
          * Create notifications table if not exists
          */
         $sql = 'CREATE TABLE `' . $db->prefix("mod_rmcommon_notifications") . '` (
-                `id_notification` int(11) NOT NULL,
+                `id_notification` int(11) NOT NULL AUTO_INCREMENT,
                   `event` varchar(50) NOT NULL,
                   `element` varchar(50) NOT NULL,
                   `params` varchar(50) NOT NULL,

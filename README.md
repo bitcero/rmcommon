@@ -32,7 +32,7 @@ Prior to install **Common Utilities**, an installation of XOOPS must exists.
 Follow next steps in order to get Common Utilities installed in XOOPS:
 
 1. Extract compressed file on your hard disk.
-2. Upload folder `rmcommon/system` to directory `modules` of your XOOPS installation.
+2. Upload folder `modules` to your XOOPS installation.
 
    This folder contains the system theme called **redmexico**, and this theme make possible all integration
 between rmcommon and XOOPS.

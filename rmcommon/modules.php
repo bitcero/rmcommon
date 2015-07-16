@@ -11,6 +11,84 @@
 define('RMCLOCATION','modules');
 include_once '../../include/cp_header.php';
 
+/**
+ * Parse module authors
+ *
+ * @param $mod
+ *
+ * @return array
+ */
+function get_authors( $mod ){
+
+    if ( is_array($mod->getInfo('author')) ){
+        return $mod->getInfo('author');
+    } else {
+
+        if( $mod->getInfo('rmnative') ){
+            $author = array(array(
+                'name'  => $mod->getInfo('author'),
+                'email' => $mod->getInfo('authormail'),
+                'web'   => $mod->getInfo('authorweb'),
+                'url'   => $mod->getInfo('url'),
+                'aka'   => $mod->getInfo('aka')
+            ));
+            return $author;
+        } else {
+
+            if ( '' != $mod->getInfo('author') ){
+                $persons = explode(",", $mod->getInfo('author'));
+            } else {
+                $persons = explode(",", $mod->getInfo('credits'));
+            }
+
+            $authors = array();
+            foreach( $persons as $person ){
+                $authors[] = array(
+                    'name'  => $person,
+                    'email' => '',
+                    'web'   => 'XOOPS',
+                    'url'   => 'http://xoops.org',
+                    'aka'   => $person
+                );
+            }
+
+            return $authors;
+        }
+
+    }
+
+}
+
+/**
+ * Parse social icons
+ */
+function parse_social_icons( $type ){
+
+    $icons = array(
+        'twitter'   => 'fa fa-twitter-square',
+        'facebook'  => 'fa fa-facebook-square',
+        'linkedin'  => 'fa fa-linkedin-square',
+        'instagram' => 'fa fa-instagram',
+        'google'    => 'fa fa-google-plus-square',
+        'flickr'    => 'fa fa-flickr',
+        'pinterest' => 'fa fa-pinterest-square',
+        'blog'      => 'fa fa-wordpress',
+        'youtube'   => 'fa fa-youtube-square',
+        'github'    => 'fa fa-github',
+        'medium'    => 'fa fa-medium',
+        'slideshare'=> 'fa fa-slideshare',
+        'tumblr'    => 'fa fa-tumblr-square',
+        'vimeo'     => 'fa fa-vimeo-square',
+        'default'   => 'fa fa-external-link-square'
+    );
+
+    if ( array_key_exists($type, $icons) )
+        return $icons[$type];
+    else
+        return $icons['default'];
+
+}
+
 function show_modules_list(){
 	global $xoopsSecurity;
     
@@ -71,11 +149,8 @@ function show_modules_list(){
             'admin_link'    => $admin_link,
             'updated'        => formatTimestamp($mod->getVar('last_update'), 's'),
             'url'        => $mod->getInfo('url'),
-            'author'        => $mod->getInfo('author'),
-            'author_mail'    => $mod->getInfo('authormail'),
-            'author_web'    => $mod->getInfo('authorweb'),
-            'author_url'    => $mod->getInfo('authorurl'),
-            'avatar'        => RMEvents::get()->run_event('rmcommon.get.avatar', $mod->getInfo('authormail'), 80),
+            'authors'        => get_authors( $mod ),
+            //'avatar'        => RMEvents::get()->run_event('rmcommon.get.avatar', $mod->getInfo('authormail'), 80),
             'license'        => $mod->getInfo('license'),
             'dirname'        => $mod->getInfo('dirname'),
             'active'        => $mod->getVar('isactive'),
@@ -185,7 +260,16 @@ function module_install_now(){
 	}
 
     xoops_loadLanguage( 'admin', 'system' );
-	
+
+    // Include system language file
+    $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin.php';
+    if (file_exists($file)){
+        include_once $file;
+    } else {
+        include_once str_replace($xoopsConfig['language'], 'english', $file);
+    }
+
+    // Include system language file
 	$file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/modulesadmin.php';
 	if (file_exists($file)){
 		include_once $file;

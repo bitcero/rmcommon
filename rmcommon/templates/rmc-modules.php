@@ -58,14 +58,16 @@
                 <td align="center">
                     <?php echo $mod['version']; ?>
                 </td>
-                <td class="author">
-                    <?php if( '' != $mod['author_url'] ): ?>
-                        <a href="<?php echo $mod['author_url']; ?>" target="_blank" title="<?php echo $mod['author']; ?>">
-                            <img src="<?php echo $mod['avatar']; ?>" alt="<?php echo $mod['author']; ?>">
-                        </a>
-                    <?php else: ?>
-                        <img src="<?php echo $mod['avatar']; ?>" title="<?php echo $mod['author']; ?>" alt="<?php echo $mod['author']; ?>">
-                    <?php endif; ?>
+                <td class="author" nowrap>
+                    <?php foreach( $mod['authors'] as $author ): ?>
+                        <?php if( '' != $author['url'] ): ?>
+                            <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
+                                <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=40" alt="<?php echo $author['aka']; ?>">
+                            </a>
+                        <?php else: ?>
+                            <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=40" title="<?php echo $author['name']; ?>" alt="<?php echo $author['aka']; ?>">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                     <span class="hidden_data">
                         <span class="adminlink"><?php echo $mod['admin_link']; ?></span>
                         <span class="link"><?php echo $mod['link']; ?></span>
