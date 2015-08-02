@@ -129,7 +129,7 @@ function show_comments(){
     xoops_cp_header();
     //RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('comms-admin.css', 'rmcommon');
-    RMTemplate::get()->add_style('general.css', 'rmcommon');
+    RMTemplate::get()->add_style('general.min.css', 'rmcommon');
     RMTemplate::get()->add_script('jquery.checkboxes.js', 'rmcommon');
     RMTemplate::get()->add_script('comments.js', 'rmcommon');
     $script = '<script type="text/javascript">delmes = "'.__('Do you really want to delete this comment?','rmcommon').'";</script>';

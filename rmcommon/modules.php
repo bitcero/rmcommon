@@ -188,8 +188,8 @@ function show_modules_list(){
 	
 	////RMFunctions::create_toolbar();
 	RMTemplate::get()->assign('xoops_pagetitle', __('Modules Management','rmcommon'));
-	RMTemplate::get()->add_style('modules.css', 'rmcommon');
-	RMTemplate::get()->add_script('modules.js', 'rmcommon');
+	RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
+	RMTemplate::get()->add_script('modules.min.js', 'rmcommon');
         RMTemplate::get()->set_help('http://www.redmexico.com.mx/docs/common-utilities/uso-de-common-utilities/standalone/1/#administrador-de-modulos');
 	xoops_cp_header();
 	include RMTemplate::get()->get_template('rmc-modules.php', 'module', 'rmcommon');
@@ -773,7 +773,16 @@ function module_update_now(){
         redirectMsg('modules.php', sprintf(__('Module %s is not installed yet!', 'rmcommon'), $mod), 1);
         die();
     }
-    
+
+    // Include system language file
+    $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin.php';
+    if (file_exists($file)){
+        include_once $file;
+    } else {
+        include_once str_replace($xoopsConfig['language'], 'english', $file);
+    }
+
+    // Include system language file
     $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/modulesadmin.php';
     if (file_exists($file)){
         include_once $file;

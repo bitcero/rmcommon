@@ -73,6 +73,7 @@ $modversion['tables'] = array(
     'mod_rmcommon_permissions',
     'mod_rmcommon_settings',
     'mod_rmcommon_blocks',
+    'mod_rmcommon_notifications',
     'mod_rmcommon_blocks_positions',
     'mod_rmcommon_blocks_assignations'
 );

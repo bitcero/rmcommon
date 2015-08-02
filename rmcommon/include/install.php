@@ -20,6 +20,13 @@ function xoops_module_pre_uninstall_rmcommon($mod){
 }
 
 function xoops_module_uninstall_rmcommon($mod){
+
+    $contents = file_get_contents(XOOPS_VAR_PATH.'/configs/xoopsconfig.php');
+    $write = "if(file_exists(XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php')) include_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';";
+    if(strpos($contents,$write)!==FALSE)
+        $contents = str_replace($write, '', $contents);
+
+    file_put_contents(XOOPS_VAR_PATH.'/configs/xoopsconfig.php', $contents);
     
     xoops_setActiveModules();
     return true;

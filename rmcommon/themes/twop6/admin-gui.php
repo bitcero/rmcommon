@@ -58,7 +58,7 @@ foreach ( $files as $scheme ){
 unset($content_color, $info_color);
 
 $this->add_style('bootstrap.min.css','rmcommon');
-$this->add_style('general.css','rmcommon', array());
+$this->add_style('general.min.css','rmcommon', array());
 $this->add_style('2.6.css','twop6', array(), 'theme');
 
 $color_scheme = isset($_COOKIE['color_scheme']) ? $_COOKIE['color_scheme'] : 'theme-default.css';

@@ -257,7 +257,7 @@ a:hover{
 /* FORMS */
 .form-control{
     border-radius: 0;
-    padding: 3px;
+    /*padding: 3px;*/
 }
 .input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle) {
     border-radius: 0;

@@ -78,10 +78,13 @@
                         <span class="oname"><?php echo $mod['realname']; ?></span>
                         <span class="version"><?php echo $mod['version']; ?></span>
                         <span class="dirname"><?php echo $mod['dirname']; ?></span>
-                        <span class="author"><?php echo $mod['author']; ?></span>
-                        <span class="mail"><?php echo $mod['author_mail']; ?></span>
-                        <span class="web"><?php echo $mod['author_web']; ?></span>
-                        <span class="author-url"><?php echo $mod['author_url']; ?></span>
+                        <span class="author">
+                            <?php foreach($mod['authors'] as $author): ?>
+                                <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
+                                    <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=60" alt="<?php echo $author['aka']; ?>">
+                                </a>
+                            <?php endforeach; ?>
+                        </span>
                         <span class="url"><?php echo $mod['url']; ?></span>
                         <span class="license"><?php echo $mod['license']; ?></span>
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
@@ -179,7 +182,7 @@
                 <div class="row form-group">
                     <div class="col-sm-6">
                         <label><?php _e('Author(s):','twop6'); ?></label>
-                        <span class="form-control author"><?php _e('Not provided','twop6'); ?></span>
+                        <span class="author"><?php _e('Not provided','twop6'); ?></span>
                     </div>
                     <div class="col-sm-6">
                         <label><?php _e('Module web site:','twop6'); ?></label>

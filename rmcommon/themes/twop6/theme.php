@@ -64,7 +64,7 @@
         ?>
         <title><?php if($this->get_var('xoops_pagetitle')!=''): ?><?php echo $this->get_var('xoops_pagetitle'); ?> - <?php endif; ?><?php echo isset($xoopsModule) ? $xoopsModule->getInfo('name').' - ' : ''; ?><?php echo $xoopsConfig['sitename']; ?></title>
     </head>
-    <body class="<?php if($this->get_toolbar()): ?>xo-body-toolbar<?php endif; ?>">
+    <body class="<?php echo RMTemplate::get()->body_classes(); ?><?php if($this->get_toolbar()): ?> xo-body-toolbar<?php endif; ?>">
 
         <div class="cu-breadcrumb-container hidden-xs">
             <?php echo RMBreadCrumb::get()->render(); ?>

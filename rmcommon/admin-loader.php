@@ -24,7 +24,7 @@ if (!file_exists(RMCPATH.'/themes/'.$rmc_theme.'/admin-gui.php')){
 	$rmc_theme = 'twop6';
 }
 
-RMTemplate::get()->add_style('general.css','rmcommon');
+RMTemplate::get()->add_style('general.min.css','rmcommon');
 
 define('RMTHEMEPATH', RMCPATH.'/themes/'.$rmc_theme);
 define('RMTHEMEURL', RMCURL.'/themes/'.$rmc_theme);

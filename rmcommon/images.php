@@ -118,7 +118,7 @@ function show_images(){
     xoops_cp_header();
     RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('imgmgr.css','rmcommon');
-    RMTemplate::get()->add_style('general.css','rmcommon');
+    RMTemplate::get()->add_style('general.min.css','rmcommon');
     RMTemplate::get()->add_script('jquery.checkboxes.js', 'rmcommon');
     include RMTemplate::get()->get_template('rmc-images-images.php','module','rmcommon');
     xoops_cp_footer();
@@ -253,7 +253,7 @@ function show_categories(){
         );
     }
 
-    RMTemplate::get()->add_style('general.css','rmcommon');
+    RMTemplate::get()->add_style('general.min.css','rmcommon');
     RMTemplate::get()->add_style('imgmgr.css','rmcommon');
     RMTemplate::get()->add_script('jquery.checkboxes.js', 'rmcommon');
     RMFunctions::create_toolbar();
