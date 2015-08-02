@@ -705,7 +705,7 @@ function module_install_now(){
     $module_log = RMEvents::get()->run_event('rmcommon.module.installed', $module_log, $mod);
 	
 	//RMFunctions::create_toolbar();
-    RMTemplate::get()->add_style('modules.css', 'rmcommon');
+    RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
 	xoops_cp_header();
 	
     $module = $module_handler->getByDirname($mod);
@@ -767,7 +767,7 @@ function module_uninstall_now(){
     $module_log = RMEvents::get()->run_event('rmcommon.module.uninstalled', $module_log, $mod);
     
     //RMFunctions::create_toolbar();
-    RMTemplate::get()->add_style('modules.css', 'rmcommon');
+    RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
 
 	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'), 'modules.php');
 	RMBreadCrumb::get()->add_crumb(sprintf(__('%s install log','rmcommon'), $mod->getVar('name')));
@@ -1218,7 +1218,7 @@ function module_update_now(){
     $module_log = RMEvents::get()->run_event('rmcommon.module.updated', $module_log, $module_log);
     
     //RMFunctions::create_toolbar();
-    RMTemplate::get()->add_style('modules.css', 'rmcommon');
+    RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
     xoops_cp_header();
     
     $log_title = sprintf(__('Update log for %s', 'rmcommon'), $module ? $module->getInfo('name') : $mod);
