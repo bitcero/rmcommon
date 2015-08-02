@@ -61,6 +61,27 @@ class RmcommonCorePreload extends XoopsPreloadItem
             $db->queryF("UPDATE ".$db->prefix("config")." SET conf_value='redmexico' WHERE conf_modid=0 AND conf_catid=1 AND conf_name='cpanel'");
         }
 
+        /**
+         * Check before to a rmcommon native module be installed
+         */
+        $fct = RMHttpRequest::get('fct', 'string', '');
+        $op = RMHttpRequest::get('op', 'string', '');
+        if ('modulesadmin' == $fct && 'install' == $op){
+            $dirname = RMHttpRequest::get('module', 'string', '');
+
+            if ('' != $dirname){
+                $module = new XoopsModule();
+                $module->loadInfoAsVar($dirname);
+                if($module->getInfo('rmnative')){
+                    RMUris::redirect_with_message(
+                        __('Please install %s using the modules manager from Common Utilities to prevent errors during install.', 'rmcommon'),
+                        RMCURL . '/modules.php?action=install&amp;dir=' . $dirname, RMMSG_WARN
+                    );
+                }
+            }
+
+        }
+
         if (RMUris::current_url()==RMCURL.'/include/upload.php' && $xoopsConfig['closesite']){
             $security = rmc_server_var($_POST, 'rmsecurity', 0);
             $data = TextCleaner::getInstance()->decrypt($security, true);
