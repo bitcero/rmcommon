@@ -203,7 +203,7 @@ function images_form($edit = 0){
     }
 
     xoops_cp_header();
-
+    $isupdate = false;
     include RMTemplate::get()->get_template('rmc-images-upload-images.php','module','rmcommon');
 
     xoops_cp_footer();
@@ -278,6 +278,9 @@ function new_category($edit = 0){
     global $rmTpl;
 
     define('RMCSUBLOCATION','newcategory');
+
+    $active = 'open';
+    $name = '';
 
     extract($_GET);
 

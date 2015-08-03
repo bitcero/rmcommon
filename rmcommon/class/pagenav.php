@@ -109,7 +109,7 @@ class RMPageNav
     * @param bool INdicates if this method must show the navbar or only render it
     * @return string|echo
     */
-    public function render($caption, $showing=0){
+    public function render($caption = false, $showing=0){
 
 		// If we have the content of render then return it
 		if ($this->displayed){
