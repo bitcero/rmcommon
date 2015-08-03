@@ -17,7 +17,7 @@ if ( !defined( 'RMCURL' ) )
     define("RMCURL",XOOPS_URL.'/modules/rmcommon');
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
-define('RMCVERSION','2.2.8.8');
+define('RMCVERSION','2.2.9.6');
 
 /**
  * Welcome Screen
