@@ -118,8 +118,8 @@ class RmcommonCorePreload extends XoopsPreloadItem
         global $xoopsModule;
         global $cuSettings;
 
-        if ( $xoopsModule &&  !$xoopsModule->getInfo('rmnative') && $cuSettings->gui_disable )
-            return;
+        //if ( $xoopsModule &&  !$xoopsModule->getInfo('rmnative') && $cuSettings->gui_disable )
+        //    return;
 
         // 0 = URL
 	    // 1 = Time

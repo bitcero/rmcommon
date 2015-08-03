@@ -35,7 +35,7 @@ class RMUser extends RMObject
 
         }
 
-        if ($id != '' && $this->loadValues($id))
+        if ($id != '' && is_numeric($id) && $this->loadValues(intval($id)))
             $this->unsetNew();
         elseif ($id!='') {
             $this->primary = 'uname';
