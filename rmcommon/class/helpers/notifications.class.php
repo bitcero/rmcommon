@@ -97,6 +97,8 @@ class RMNotifications
             $id = hash('crc32', $item->event . ':' . $item->element . ':' . $item->type . ':' . $item->params);
             if ( array_key_exists( $id, $subscriptions ) )
                 $item->subscribed = true;
+            else
+                $item->subscribed = false;
 
             if ( !is_array( $item->permissions ) || count( $item->permissions ) <= 0 ){
                 $items[] = $item->data();

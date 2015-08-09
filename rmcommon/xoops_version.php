@@ -185,17 +185,6 @@ $modversion['config'][] = array(
     'category'      => 'general'
 );
 
-// URL Rewriting
-$modversion['config'][] = array(
-    'name'          => 'permalinks',
-    'title'         => __( 'Enable URL rewriting', 'rmcommon' ),
-    'description'   => '',
-    'formtype'      => 'yesno',
-    'valuetype'     => 'int',
-    'default'       => '0',
-    'category'      => 'general'
-);
-
 // Modules path rewriting
 $modversion['config'][] = array(
     'name'          => 'modules_path',

@@ -602,6 +602,32 @@ function edInsertContent(which, myValue) {
     }
 }
 
+function edGetSelection(which){
+    myField = document.getElementById(which);
+
+    var selection = '';
+
+    if ('selectionStart' in myField) {
+        // check whether some text is selected in the textarea
+        if (myField.selectionStart != myField.selectionEnd) {
+            selection = myField.value.substring  (myField.selectionStart, myField.selectionEnd);
+        }
+    }
+    else {  // Internet Explorer before version 9
+        // create a range from the current selection
+        var textRange = document.selection.createRange ();
+        // check whether the selection is within the textarea
+        var rangeParent = textRange.parentElement ();
+        if (rangeParent === myField) {
+            selection = textRange.text;
+
+        }
+    }
+
+    return selection;
+
+}
+
 function edInsertLink(which, i, defaultValue) {
     myField = document.getElementById(which);
     if (!defaultValue) {
