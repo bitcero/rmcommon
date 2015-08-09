@@ -128,6 +128,9 @@ class RMUris
         $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
         $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
 
+        // legacy
+        $_SESSION['redirect_message'] = $message;
+
         if ( !headers_sent() ) {
             header('location: ' . preg_replace("/[&]amp;/i", '&', $url));
             die();

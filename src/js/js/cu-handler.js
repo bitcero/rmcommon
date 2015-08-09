@@ -377,7 +377,7 @@ $(document).ready(function(){
 
     });
 
-    $("body").on('submit', '.ajax-form', function(){
+    $("body").on('submit', 'data-type["ajax"]', function(){
         cuHandler.submitAjaxForm( $(this) );
         return false;
     });

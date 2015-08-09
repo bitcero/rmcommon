@@ -117,7 +117,9 @@ class RmcommonRmcommonPreload
                         onclick="launch_image_manager($(this));"
                         data-id="'.$id.'" data-multiple="yes"
                         data-title="'.__('Images Manager','rmcommon').'"
-                        data-type="'.$type.'"><span class="fa fa-image"></span> ' . __('Images', 'rmcommon') . '</a>';
+                        data-type="'.$type.'"
+                        title="' . __('Images', 'rmcommon') . '"
+                        ><span class="fa fa-image"></span><span class="caption">' . __('Images', 'rmcommon') . '</span></a>';
 
         return $plugins;
 

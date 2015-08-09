@@ -27,9 +27,11 @@ abstract class RMController
 
     protected $model;
 
+    protected $tpl;
+
     protected function __construct(){
 
-
+        $this->tpl = RMTemplate::get();
 
     }
 

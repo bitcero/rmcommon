@@ -205,16 +205,16 @@ class RMFormYesNo extends RMFormElement
 	 * @return string
 	 */
 	public function render(){
-		$rtn = "<input name='".$this->getName()."' id='".$this->getName()."' type='radio' value='1' ";
+		$rtn = "<input name='".$this->getName()."' id='".$this->getName()."-1' type='radio' value='1' ";
 		if ($this->_value==1){
-			$rtn .= "checked='checked' ";
+			$rtn .= "checked";
 		}
-		$rtn .= "/> ".__('Yes','rmcommon')."&nbsp;&nbsp;";
-		$rtn .= "<input name='".$this->getName()."' id='".$this->getName()."' type='radio' value='0' ";
+		$rtn .= "> ".__('Yes','rmcommon')."&nbsp;&nbsp;";
+		$rtn .= "<input name='".$this->getName()."' id='".$this->getName()."-2' type='radio' value='0' ";
 		if ($this->_value==0){
-			$rtn .= "checked='checked' ";
+			$rtn .= "checked";
 		}
-		$rtn .= "/> ".__('No','rmcommon');
+		$rtn .= "> ".__('No','rmcommon');
 		return $rtn;
 	}
 }

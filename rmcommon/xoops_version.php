@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>93,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>96,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -73,6 +73,7 @@ $modversion['tables'] = array(
     'mod_rmcommon_permissions',
     'mod_rmcommon_settings',
     'mod_rmcommon_blocks',
+    'mod_rmcommon_notifications',
     'mod_rmcommon_blocks_positions',
     'mod_rmcommon_blocks_assignations'
 );
@@ -171,17 +172,6 @@ $modversion['config'][] = array(
     'valuetype'     => 'text',
     'default'       => '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
     'category'      => 'components'
-);
-
-// URL Rewriting
-$modversion['config'][] = array(
-    'name'          => 'permalinks',
-    'title'         => __( 'Enable URL rewriting', 'rmcommon' ),
-    'description'   => '',
-    'formtype'      => 'yesno',
-    'valuetype'     => 'int',
-    'default'       => '0',
-    'category'      => 'general'
 );
 
 // URL Rewriting

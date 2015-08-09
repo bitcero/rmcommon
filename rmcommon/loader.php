@@ -17,7 +17,7 @@ if ( !defined( 'RMCURL' ) )
     define("RMCURL",XOOPS_URL.'/modules/rmcommon');
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
-define('RMCVERSION','2.2.8.8');
+define('RMCVERSION','2.2.9.6');
 
 /**
  * Welcome Screen
@@ -54,7 +54,7 @@ function rmc_autoloader($class){
      * $class = new Module_ClassName();
      * The class name must contain the module directory name separated with a "_"
      * from the file name.
-     * Common Utilities will search for "PATH/module/module.classname.class.php" file
+     * Common Utilities will search for "PATH/module/classname.class.php" file
      */
     $data = explode("_", strtolower($class));
     
@@ -69,20 +69,24 @@ function rmc_autoloader($class){
             }
 
         } elseif ( is_dir( XOOPS_ROOT_PATH . '/modules/' . $data[0] ) ){
-            // Existe el módulo
-            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace("_", ".", $class) ) . '.class.php';
+
+            // Module exists! Then will search for /{dir}/{class}.class.php
+            $name = substr(strtolower($class), strlen($data[0]) + 1);
+            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower( str_replace( '_', '-', $name) ) . '.class.php';
             if( is_file($file) ){
                 require $file;
                 return;
             }
 
+            // Helpers from rmcommon have a different name structure
             if ( 'rmcommon' == $data[0] ){
-                $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/helpers/' . strtolower(str_replace("_", ".", $class) ) . '.class.php';
+                $file = XOOPS_ROOT_PATH . '/modules/rmcommon/class/helpers/' . strtolower(str_replace("_", ".", $class) ) . '.class.php';
                 if( is_file($file) ){
                     require $file;
                     return;
                 }
             }
+
         }
 
     }

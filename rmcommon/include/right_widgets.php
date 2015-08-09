@@ -167,7 +167,7 @@ function rmc_available_mods(){
                                         <?php endif; ?>
                                         <?php if ( $mod->getInfo('social') ): ?>
                                         <?php foreach( $mod->getInfo('social') as $social ): ?>
-                                            <a target="_blank" href="<?php echo $social['url']; ?>"><span class="fa fa-<?php echo $social['type']; ?>-square"></span></a>
+                                            <a target="_blank" href="<?php echo $social['url']; ?>"><span class="<?php echo parse_social_icons($social['type']); ?>"></span></a>
                                         <?php endforeach; ?>
                                         <?php endif; ?>
                                     </td>

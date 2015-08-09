@@ -58,14 +58,16 @@
                 <td align="center">
                     <?php echo $mod['version']; ?>
                 </td>
-                <td class="author">
-                    <?php if( '' != $mod['author_url'] ): ?>
-                        <a href="<?php echo $mod['author_url']; ?>" target="_blank" title="<?php echo $mod['author']; ?>">
-                            <img src="<?php echo $mod['avatar']; ?>" alt="<?php echo $mod['author']; ?>">
-                        </a>
-                    <?php else: ?>
-                        <img src="<?php echo $mod['avatar']; ?>" title="<?php echo $mod['author']; ?>" alt="<?php echo $mod['author']; ?>">
-                    <?php endif; ?>
+                <td class="author" nowrap>
+                    <?php foreach( $mod['authors'] as $author ): ?>
+                        <?php if( '' != $author['url'] ): ?>
+                            <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
+                                <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=40" alt="<?php echo $author['aka']; ?>">
+                            </a>
+                        <?php else: ?>
+                            <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=40" title="<?php echo $author['name']; ?>" alt="<?php echo $author['aka']; ?>">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                     <span class="hidden_data">
                         <span class="adminlink"><?php echo $mod['admin_link']; ?></span>
                         <span class="link"><?php echo $mod['link']; ?></span>
@@ -76,10 +78,13 @@
                         <span class="oname"><?php echo $mod['realname']; ?></span>
                         <span class="version"><?php echo $mod['version']; ?></span>
                         <span class="dirname"><?php echo $mod['dirname']; ?></span>
-                        <span class="author"><?php echo $mod['author']; ?></span>
-                        <span class="mail"><?php echo $mod['author_mail']; ?></span>
-                        <span class="web"><?php echo $mod['author_web']; ?></span>
-                        <span class="author-url"><?php echo $mod['author_url']; ?></span>
+                        <span class="author">
+                            <?php foreach($mod['authors'] as $author): ?>
+                                <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
+                                    <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=60" alt="<?php echo $author['aka']; ?>">
+                                </a>
+                            <?php endforeach; ?>
+                        </span>
                         <span class="url"><?php echo $mod['url']; ?></span>
                         <span class="license"><?php echo $mod['license']; ?></span>
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
@@ -177,7 +182,7 @@
                 <div class="row form-group">
                     <div class="col-sm-6">
                         <label><?php _e('Author(s):','twop6'); ?></label>
-                        <span class="form-control author"><?php _e('Not provided','twop6'); ?></span>
+                        <span class="author"><?php _e('Not provided','twop6'); ?></span>
                     </div>
                     <div class="col-sm-6">
                         <label><?php _e('Module web site:','twop6'); ?></label>

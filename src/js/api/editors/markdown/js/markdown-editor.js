@@ -215,6 +215,15 @@ This component is part of Common Utilities
 
         },
 
+        selection: function( id ){
+            var editor = this.editors[id];
+            var selection = {
+                cursor: editor.getCursor(),
+                text:   editor.getSelection()
+            };
+            return selection;
+        },
+
         popup_form: function( id, content ){
 
             $("#" + id + "-ed-container .txtarea-container").append('<div id=')

@@ -45,7 +45,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
             header('location: '.XOOPS_URL.'/modules/rmcommon/');
             die();
         }
-        
+
 	    require_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';
 		
 	}
@@ -59,6 +59,27 @@ class RmcommonCorePreload extends XoopsPreloadItem
         if($xoopsConfig['cpanel']!='redmexico'){
             $db = XoopsDatabaseFactory::getDatabaseConnection();
             $db->queryF("UPDATE ".$db->prefix("config")." SET conf_value='redmexico' WHERE conf_modid=0 AND conf_catid=1 AND conf_name='cpanel'");
+        }
+
+        /**
+         * Check before to a rmcommon native module be installed
+         */
+        $fct = RMHttpRequest::get('fct', 'string', '');
+        $op = RMHttpRequest::get('op', 'string', '');
+        if ('modulesadmin' == $fct && 'install' == $op){
+            $dirname = RMHttpRequest::get('module', 'string', '');
+
+            if ('' != $dirname){
+                $module = new XoopsModule();
+                $module->loadInfoAsVar($dirname);
+                if($module->getInfo('rmnative')){
+                    RMUris::redirect_with_message(
+                        __('Please install %s using the modules manager from Common Utilities to prevent errors during install.', 'rmcommon'),
+                        RMCURL . '/modules.php?action=install&amp;dir=' . $dirname, RMMSG_WARN
+                    );
+                }
+            }
+
         }
 
         if (RMUris::current_url()==RMCURL.'/include/upload.php' && $xoopsConfig['closesite']){
@@ -97,8 +118,8 @@ class RmcommonCorePreload extends XoopsPreloadItem
         global $xoopsModule;
         global $cuSettings;
 
-        if ( $xoopsModule &&  !$xoopsModule->getInfo('rmnative') && $cuSettings->gui_disable )
-            return;
+        //if ( $xoopsModule &&  !$xoopsModule->getInfo('rmnative') && $cuSettings->gui_disable )
+        //    return;
 
         // 0 = URL
 	    // 1 = Time
