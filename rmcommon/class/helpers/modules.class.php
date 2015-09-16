@@ -188,4 +188,26 @@ class RMModules
 
     }
 
+    /**
+     * Get the permalink for a specific module.@deprecatedThis method is useful when the
+     * module supports rmcommon rewrite feature.
+     *
+     * @param string $directory
+     * @param bool $admin
+     * @return string
+     */
+    static function permalink( $directory, $admin = false ){
+
+        global $cuSettings;
+
+        $paths = $cuSettings->modules_path;
+
+        if(isset($paths[$directory])){
+            return XOOPS_URL . ($admin ? '/admin/' : '') . trim($paths[$directory], '/');
+        } else {
+            return XOOPS_URL . '/modules/' . $directory;
+        }
+
+    }
+
 }

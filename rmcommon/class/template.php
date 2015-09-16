@@ -25,6 +25,7 @@ class RMTemplate
     */
     public $tpl_scripts = array();
     public $tpl_hscripts = array();
+    public $tpl_fscripts = array();
     /**
     * Stores all styles for HEAD section
     */
@@ -83,9 +84,9 @@ class RMTemplate
     /**
      * Use this method to instantiate EXMTemplate
      * @staticvar <type> $instance
-     * @return object EXMTemplate
+     * @return RMTemplate
      */
-    static function get(){
+    static function getInstance(){
         static $instance;
 
         if (!isset($instance)) {
@@ -94,6 +95,13 @@ class RMTemplate
 
         return $instance;
 
+    }
+
+    /**
+     * @return RMTemplate
+     */
+    static function get(){
+        return self::getInstance();
     }
 
     /**
@@ -169,10 +177,16 @@ class RMTemplate
     * @param string Plugin name, only when type = plugin
     * @return string Template path
     */
-    public static function get_template($file, $type='module',$module='rmcommon',$plugin=''){
-        global $cuSettings, $xoopsConfig;
+    public static function get_template($file, $type='module',$module='',$plugin=''){
+        global $cuSettings, $xoopsConfig, $xoopsModule;
 
         $type = $type=='' ? 'module' : $type;
+
+        if ('' == $module && !$xoopsModule){
+            $module = 'rmcommon';
+        } elseif ('' == $module && $xoopsModule) {
+            $module = $xoopsModule->getVar('dirname');
+        }
 
         if (!function_exists("xoops_cp_header")) {
 
@@ -374,7 +388,7 @@ class RMTemplate
         $id = TextCleaner::getInstance()->sweetstring($file);
 
         if( $file == 'jquery.min.js' || $cuSettings->cdn_jquery_url == $file )
-            return $this->add_jquery();
+            return $this->add_jquery(false);
 
         if ( FALSE !== strpos( $file, 'bootstrap.js' ) || FALSE !== strpos( $file, 'bootstrap.min.js') && 'theme' != $owner )
             return $this->add_bootstrap('js');
@@ -451,12 +465,12 @@ class RMTemplate
                 $paths['theme'] .= $directory != '' ? '/' . $directory : '';
             }
 
-            $paths['theme'] .= '/' . $file;
+            $paths['theme'] .= '/' . ltrim($file,'/');
 
             // 2. Module
             $paths['module'] = XOOPS_ROOT_PATH . '/modules/' . $element;
             $paths['module'] .=  $directory != '' ? '/' . $directory : '';
-            $paths['module'] .= "/$type/" . $file;
+            $paths['module'] .= "/$type/" . ltrim($file,'/');
         } else {
             $type = $type == 'theme-css' ? 'css' : 'js';
 
@@ -467,7 +481,7 @@ class RMTemplate
                 $paths['theme'] = XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'];
             }
             $paths['theme'] .= $directory != '' ? '/' . $directory : '';
-            $paths['theme'] .= "/$type/" . $file;
+            $paths['theme'] .= "/$type/" . ltrim($file,'/');
 
         }
 
@@ -512,18 +526,34 @@ class RMTemplate
      *
      * @param $script
      * @param int $footer
+     * @return bool
      */
-    public function add_head_script($script, $footer = 0){
-        $this->tpl_hscripts[] = $script;
+    public function add_inline_script($script, $footer = 0){
+        if($script == ''){
+            return false;
+        }
+
+        if($footer){
+            $this->tpl_fscripts[] = $script;
+        } else {
+            $this->tpl_hscripts[] = $script;
+        }
+        return true;
     }
 
     /**
-     * Get all head scripts
+     * Get inline scripts
+     *
+     * @param int $footer
+     *
+     * @return string
      */
-    public function head_scripts(){
+    public function inline_scripts( $footer = 0 ){
         $ret = '<script type="text/javascript">'."\n";
 
-        foreach ($this->tpl_hscripts as $script) {
+        $scripts = $footer ? $this->tpl_fscripts : $this->tpl_hscripts;
+
+        foreach ($scripts as $script) {
 
             $ret .= $script."\n";
             $ret .= "//".str_repeat("-",20)."\n";
@@ -533,7 +563,6 @@ class RMTemplate
         $ret .= '</script>';
 
         return $ret;
-
     }
 
     /**
@@ -960,6 +989,19 @@ class RMTemplate
 
     }
 
+    public function add_body_class( $class ){
+
+        if ( '' == $class )
+            return null;
+
+        $this->body_classes[] = $class;
+
+    }
+
+    public function body_classes(){
+        return implode(" ", $this->body_classes);
+    }
+
     /*
     DEPRECATED METHODS
     =======================================
@@ -1057,17 +1099,22 @@ class RMTemplate
         return $this->generate_url($sheet, $element, 'css');
     }
 
-    public function add_body_class( $class ){
-
-        if ( '' == $class )
-            return null;
-
-        $this->body_classes[] = $class;
-
+    /**
+     * @deprecated Use add_inline_script() instead.
+     * @param     $script
+     * @param int $footer
+     */
+    public function add_head_script($script, $footer = 0){
+        $this->add_inline_script($script, 0);
     }
 
-    public function body_classes(){
-        return implode(" ", $this->body_classes);
+    /**
+     * @deprecated Use inline_scripts() instead.
+     * Get all head scripts
+     */
+    public function head_scripts(){
+        return $this->inline_scripts(0);
+
     }
 
 }

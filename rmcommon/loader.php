@@ -37,6 +37,7 @@ define('RMMSG_WARN', 1);
 define('RMMSG_SUCCESS', 2);
 define('RMMSG_SAVED', 3);
 define('RMMSG_ERROR', 4);
+define('RMMSG_DANGER', 4);
 define('RMMSG_OTHER', 5);
 
 ob_start('cu_render_output');
@@ -156,10 +157,10 @@ spl_autoload_register('rmc_autoloader');
 */
 function cu_render_output($output){
 	global $xoTheme, $xoopsTpl;
-    
+
     $rmEvents = RMEvents::get();
     
-    if (function_exists('xoops_cp_header')) return $output;    
+    if (function_exists('xoops_cp_header')) return $output;
     
     $page = $output;
     if($xoopsTpl){
@@ -315,13 +316,13 @@ if($cuSettings->updates && isset( $xoopsOption['pagetype'] ) && $xoopsOption['pa
     else
         $updates = array('date'=>0,'total'=>0,'updates'=>array());
 
-    $rmTpl->add_script('updates.js','rmcommon', array('directory' => 'include', 'footer' => 1));
+    $rmTpl->add_script('updates.js','rmcommon', array('footer' => 1));
     
     if( $updates['date'] < ( time()-( $cuSettings->updatesinterval * 86400 ) ) ){
-        $rmTpl->add_head_script('(function(){rmCheckUpdates();})();');
+        $rmTpl->add_inline_script('(function(){rmCheckUpdates();})();', 1);
         define('RMC_CHECK_UPDATES', 1);
     }else{
-        $rmTpl->add_head_script('$(document).ready(function(){rmCallNotifier('.$updates['total'].');});');
+        $rmTpl->add_inline_script('$(document).ready(function(){rmCallNotifier('.$updates['total'].');});', 1);
     }
     
 }

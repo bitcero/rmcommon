@@ -32,7 +32,7 @@ body{
 #xo-toolbar{
 	top: 50px;
 	z-index: 1025;
-    min-height: 32px;
+    min-height: 40px;
 }
 #xo-toolbar .navbar-collapse{
 
@@ -46,13 +46,24 @@ body{
     padding: 10px 8px;
 }
 #xo-toolbar .navbar-collapse .nav > li{
-
+    border-right: 1px solid rgba(0,0,0,0.1);
 }
 #xo-toolbar .navbar-collapse .nav > li > a{
-    padding: 8px 8px;
+    padding: 0 12px;
+    line-height: 40px;
+    height: 40px;
 	color: rgba(255,255,255,0.9);
 	text-shadow: none;
+    font-size: 0.9em;
+    border-right: 1px solid rgba(255,255,255,0.1);
 
+}
+#xo-toolbar .navbar-collapse .nav > li > a > .icon,
+#xo-toolbar .navbar-collapse .nav > li > a > .fa,
+#xo-toolbar .navbar-collapse .nav > li > a > .glyphicon{
+    line-height: 40px;
+    font-size: 14px;
+    margin-right: 5px;
 }
 #xo-toolbar .navbar-collapse .nav > li > a > .caret{
 	border-bottom-color: #FFF7F2;
@@ -230,6 +241,12 @@ table th{
 .cu-box .box-content{
     padding: 10px;
     color: #4e4e4e;
+}
+.cu-box > .box-content > table,
+.cu-box > .box-content > .table-responsive,
+.cu-box > .box-content > .table-responsive > table{
+    margin: 0!important;
+    box-shadow: none!important;
 }
 .cu-box .box-footer{
     padding: 4px 15px;

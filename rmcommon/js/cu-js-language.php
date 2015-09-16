@@ -67,4 +67,4 @@ var cuLanguage = {
 <?php
 
 $script = ob_get_clean();
-RMTemplate::get()->add_head_script( $script );
+RMTemplate::get()->add_inline_script( $script );

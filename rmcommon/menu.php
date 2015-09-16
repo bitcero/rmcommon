@@ -14,67 +14,42 @@ if (!function_exists('__'))
 $adminmenu[] = array(
     'title' => __('Dashboard','rmcommon'),
     'link' => "index.php",
-    'icon' => "images/dashboard.png",
+    'icon' => "icon icon-meter2",
     'location' => "dashboard"
 );
 
 $adminmenu[] = array(
     'title' => __('Modules','rmcommon'),
     'link' => "modules.php",
-    'icon' => "images/modules.png",
+    'icon' => "glyphicon glyphicon-th-large",
     'location' => "modules"
 );
 
 $adminmenu[] = array(
     'title' => __('Blocks','rmcommon'),
     'link' => "blocks.php",
-    'icon' => "images/blocks.png",
+    'icon' => "fa fa-cubes",
     'location' => "blocks"
 );
 
 $adminmenu[] = array(
     'title' => __('Users','rmcommon'),
     'link' => 'users.php',
-    'icon' => 'images/users.png',
-    'location' => 'users',
-    'options' => array(
-        array(
-            'title'     => __('Groups','rmcommon'),
-            'link'      => 'groups.php',
-            'selected'  => 'allgroups',
-            'icon'      => 'images/group.png',
-        ),
-        array(
-            'title'     => __('Add Group','rmcommon'),
-            'link'      => 'groups.php?action=new-group',
-            'selected'  => 'addgroup',
-            'icon'      => 'images/group_add.png',
-            'attributes' => array(
-                'data-action' => 'load-remote-dialog'
-            )
-        ),
-        array(
-            'divider'   => 1,
-        ),
-        array(
-            'title'     => __('Users','rmcommon'),
-            'link'      => 'users.php',
-            'selected'  => 'allusers',
-            'icon'      => 'images/users.png',
-        ),
-        array(
-            'title'     => __('New user','rmcommon'),
-            'link'      => 'users.php?action=new',
-            'selected'  => 'newuser',
-            'icon'      => 'images/user_add.png',
-        ),
-    )
+    'icon' => 'icon icon-user',
+    'location' => 'users'
+);
+
+$adminmenu[] = array(
+    'title' => __('Groups','rmcommon'),
+    'link' => 'groups.php',
+    'icon' => 'icon icon-users',
+    'location' => 'groups'
 );
 
 $adminmenu[] = array(
     'title' => __('Images','rmcommon'),
     'link' => "images.php",
-    'icon' => "images/images.png",
+    'icon' => "icon icon-images",
     'location' => "imgmanager",
     'options' => array(0 => array(
                     'title'		=>	__('Categories','rmcommon'),
@@ -105,20 +80,27 @@ $adminmenu[] = array(
 $adminmenu[] = array(
     'title' => __('Comments','rmcommon'),
     'link' => "comments.php",
-    'icon' => "images/comments.png",
+    'icon' => "icon icon-bubbles4",
     'location' => "comments"
 );
 
 $adminmenu[] = array(
     'title' => __('Plugins','rmcommon'),
     'link' => "plugins.php",
-    'icon' => "images/plugin.png",
+    'icon' => "icon icon-power-cord",
     'location' => "plugins"
 );
 
 $adminmenu[] = array(
     'title' => __('Updates','rmcommon'),
     'link' => "updates.php",
-    'icon' => "images/updates.png",
+    'icon' => "icon icon-loop2",
     'location' => "updates"
+);
+
+$adminmenu[] = array(
+    'title' => __('About','rmcommon'),
+    'link' => "about.php",
+    'icon' => "icon icon-info",
+    'location' => "about"
 );

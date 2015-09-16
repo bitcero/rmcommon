@@ -13,7 +13,7 @@
         for($i=$start;$i<=$end;$i++):
             if ($i==$current_page):
                 ?>
-                <li class="disabled"><span><?php echo $i; ?></span></li>
+                <li class="active"><span><?php echo $i; ?></span></li>
             <?php else: ?>
                 <li><a href="<?php echo str_replace('{PAGE_NUM}', $i, $url); ?>" title="<?php echo sprintf(__('Page %u','rmcommon'), $i); ?>"><?php echo $i; ?></a></li>
             <?php

@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>96,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>97,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -85,7 +85,8 @@ $modversion['templates'][2]['file'] = 'rmc-comments-form.html';
 $modversion['templates'][2]['description'] = 'Shows the comments form';
 
 // Settings categories
-$modversion['categories'] = array(
+$cu_settings = array();
+$cu_settings['categories'] = array(
     'general' => __('General', 'rmcommon'),
     'appearance' => __('Appearance', 'rmcommon'),
     'comments' => __('Comentarios', 'rmcommon'),
@@ -94,7 +95,7 @@ $modversion['categories'] = array(
 );
 
 // Jquery cdn
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_jquery',
     'title'         => __( 'Use CDN for jQuery', 'rmcommon' ),
     'description'   => '',
@@ -104,7 +105,7 @@ $modversion['config'][] = array(
     'category'      => 'components'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_jquery_url',
     'title'         => __( 'jQuery CDN URI', 'rmcommon' ),
     'description'   => '',
@@ -114,7 +115,7 @@ $modversion['config'][] = array(
     'category'      => 'components'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_jqueryui_url',
     'title'         => __( 'jQuery UI CDN URI', 'rmcommon' ),
     'description'   => '',
@@ -124,7 +125,7 @@ $modversion['config'][] = array(
     'category'      => 'components'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_bootstrap',
     'title'         => __( 'Use CDN for Bootstrap', 'rmcommon' ),
     'description'   => '',
@@ -134,7 +135,7 @@ $modversion['config'][] = array(
     'category'      => 'components'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_bootstrap_url',
     'title'         => __( 'Bootstrap CDN URI', 'rmcommon' ),
     'description'   => '',
@@ -144,7 +145,7 @@ $modversion['config'][] = array(
     'category'      => 'components'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_jsbootstrap_url',
     'title'         => __( 'Bootstrap Javascript CDN URI', 'rmcommon' ),
     'description'   => '',
@@ -154,7 +155,7 @@ $modversion['config'][] = array(
     'category'      => 'components'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_fa',
     'title'         => __( 'Use CDN for FontAwesome', 'rmcommon' ),
     'description'   => '',
@@ -164,7 +165,7 @@ $modversion['config'][] = array(
     'category'      => 'components'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'cdn_fa_url',
     'title'         => __( 'FontAwesome CDN URI', 'rmcommon' ),
     'description'   => '',
@@ -175,7 +176,7 @@ $modversion['config'][] = array(
 );
 
 // URL Rewriting
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'permalinks',
     'title'         => __( 'Enable URL rewriting', 'rmcommon' ),
     'description'   => '',
@@ -186,7 +187,7 @@ $modversion['config'][] = array(
 );
 
 // Modules path rewriting
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'modules_path',
     'title'         => __( 'New rewrite paths for supported modules', 'rmcommon' ),
     'description'   => __( 'Indicate the new paths for supported modules. This path must be used to form new rewrited URLs for modules.', 'rmcommon' ),
@@ -199,7 +200,7 @@ $modversion['config'][] = array(
 /**
 * Language
 */
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'lang',
     'title'         => __('Language to use','rmcommon'),
     'description'   => '',
@@ -209,7 +210,7 @@ $modversion['config'][] = array(
     'category'      => 'general'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'theme',
     'title'         => __('Admin theme','rmcommon'),
     'description'   => '',
@@ -219,7 +220,7 @@ $modversion['config'][] = array(
     'category'      => 'appearance'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'gui_disable',
     'title'         => __('Disable new GUI when working on non native modules?','rmcommon'),
     'description'   => '',
@@ -230,7 +231,7 @@ $modversion['config'][] = array(
 );
 
 // Editor
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'editor_type',
     'title'         => __('Select the default editor','rmcommon'),
     'description'   => '',
@@ -247,7 +248,7 @@ $modversion['config'][] = array(
     'category'      => 'general'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'markdown',
     'title'         => __('Parse markdown','rmcommon'),
     'description'   => __('This option enables the parsing fo Markdown code for text. This optiosn must be enabled when "Markdown Editor" is selected.', 'rmcommon'),
@@ -258,7 +259,7 @@ $modversion['config'][] = array(
 );
 
 // JQuery inclusion
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'jquery',
     'title'         => __('Enable JQuery for front end','rmcommon'),
     'description'   => __('When this option is enabled, Common Utilities will include JQuery automatically. Please, disable this option only when your theme include jquery by default.','rmcommon'),
@@ -269,7 +270,7 @@ $modversion['config'][] = array(
 );
 
 // Images store type
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'imagestore',
     'title'         => __('Arrange images by date','rmcommon'),
     'description'   => '',
@@ -280,7 +281,7 @@ $modversion['config'][] = array(
 );
 
 // Images Categories list limit number
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'catsnumber',
     'title'         => __('Limit for image categories list.','rmcommon'),
     'description'   => '',
@@ -290,7 +291,7 @@ $modversion['config'][] = array(
     'category'      => 'general'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'imgsnumber',
     'title'         => __('Image manager: number of images per page','rmcommon'),
     'description'   => '',
@@ -302,7 +303,7 @@ $modversion['config'][] = array(
 
 // Secure Key
 if (!isset($xoopsSecurity)) $xoopsSecurity = new XoopsSecurity();
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'secretkey',
     'title'         => __('Secret Key','rmcommon'),
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
@@ -313,7 +314,7 @@ $modversion['config'][] = array(
 );
 
 // Formato HTML5
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'dohtml',
     'title'         => __('Allow HTMl in text','rmcommon'),
     'description'   => '',
@@ -323,7 +324,7 @@ $modversion['config'][] = array(
     'category'      => 'appearance'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'dosmileys',
     'title'         => __('Allow smilies in text','rmcommon'),
     'description'   => '',
@@ -333,7 +334,7 @@ $modversion['config'][] = array(
     'category'      => 'appearance'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'doxcode',
     'title'         => __('Allow XoopsCode','rmcommon'),
     'description'   => '',
@@ -343,7 +344,7 @@ $modversion['config'][] = array(
     'category'      => 'appearance'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'doimage',
     'title'         => __('Allow images in text','rmcommon'),
     'description'   => '',
@@ -353,7 +354,7 @@ $modversion['config'][] = array(
     'category'      => 'appearance'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'dobr',
     'title'         => __('Auto add line breaks in text','rmcommon'),
     'description'   => '',
@@ -363,7 +364,7 @@ $modversion['config'][] = array(
     'category'      => 'appearance'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'mods_number',
     'title'         => __('Modules number on dashboard','rmcommon'),
     'description'   => '',
@@ -374,7 +375,7 @@ $modversion['config'][] = array(
 );
 
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'rssimage',
     'title'         => __('Image for RSS feeds','rmcommon'),
     'description'   => '',
@@ -385,7 +386,7 @@ $modversion['config'][] = array(
 );
 
 // Comments
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'enable_comments',
     'title'         => __('Enable comments','rmcommon'),
     'description'   => '',
@@ -395,7 +396,7 @@ $modversion['config'][] = array(
     'category'      => 'comments'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'anonymous_comments',
     'title'         => __('Allow anonymous users to post comments','rmcommon'),
     'description'   => '',
@@ -405,7 +406,7 @@ $modversion['config'][] = array(
     'category'      => 'comments'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'approve_reg_coms',
     'title'         => __('Automatically approve comments by registered users','rmcommon'),
     'description'   => '',
@@ -415,7 +416,7 @@ $modversion['config'][] = array(
     'category'      => 'comments'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'approve_anon_coms',
     'title'         => __('Automatically approve comments by anonymous users','rmcommon'),
     'description'   => '',
@@ -425,7 +426,7 @@ $modversion['config'][] = array(
     'category'      => 'comments'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'allow_edit',
     'title'         => __('Allow users to edit their comments','rmcommon'),
     'description'   => '',
@@ -435,7 +436,7 @@ $modversion['config'][] = array(
     'category'      => 'comments'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'edit_limit',
     'title'         => __('Time limit to edit a comment (in hours).','rmcommon'),
     'description'   => '',
@@ -445,7 +446,7 @@ $modversion['config'][] = array(
     'category'      => 'comments'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'comments_notify',
     'title'         => __('Notify administrators about new comments','rmcommon'),
     'description'   => __('By enabling this option, Common Utilities will send a notification to webmasters every time that a new comment is posted.', 'rmcommon'),
@@ -456,7 +457,7 @@ $modversion['config'][] = array(
 );
 
 /** Mailer Configurations **/
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'transport',
     'title'         => __('Mailer method','rmcommon'),
     'description'   => __('Common Utilities will use this method to send emails.', 'rmcommon'),
@@ -471,7 +472,7 @@ $modversion['config'][] = array(
     'category'      => 'email'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'smtp_server',
     'title'         => __('SMTP server to use','rmcommon'),
     'description'   => __('Specify the server through with the emails will be sent.','rmcommon'),
@@ -481,7 +482,7 @@ $modversion['config'][] = array(
     'category'      => 'email'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'smtp_crypt',
     'title'         => __('SMTP encryption','rmcommon'),
     'description'   => __('For SSL or TLS encryption to work, your PHP installation must have appropriate OpenSSL transports wrappers.','rmcommon'),
@@ -496,7 +497,7 @@ $modversion['config'][] = array(
     'category'      => 'email'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'smtp_port',
     'title'         => __('SMTP server port','rmcommon'),
     'description'   => __('Note that you must to write the appropriate port based on your encryption type selection.','rmcommon'),
@@ -506,7 +507,7 @@ $modversion['config'][] = array(
     'category'      => 'email'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'smtp_user',
     'title'         => __('SMTP username','rmcommon'),
     'description'   => '',
@@ -516,7 +517,7 @@ $modversion['config'][] = array(
     'category'      => 'email'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'smtp_pass',
     'title'         => __('SMTP password','rmcommon'),
     'description'   => '',
@@ -526,7 +527,7 @@ $modversion['config'][] = array(
     'category'      => 'email'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'sendmail_path',
     'title'         => __('Sendmail path','rmcommon'),
     'description'   => __('Input the command for sendmail, including the correct command line flags. The default to use is "/usr/sbin/sendmail -bs" if this is not specified.','rmcommon'),
@@ -536,7 +537,7 @@ $modversion['config'][] = array(
     'category'      => 'email'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'rss_enable',
     'title'         => __('Enable RSS Center','rmcommon'),
     'description'   => '',
@@ -546,7 +547,7 @@ $modversion['config'][] = array(
     'category'      => 'general'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'blocks_enable',
     'title'         => __('Enable internal blocks manager','rmcommon'),
     'description'   => '',
@@ -556,7 +557,7 @@ $modversion['config'][] = array(
     'category'      => 'general'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'updates',
     'title'         => __('Activate updates','rmcommon'),
     'description'   => __('When this option is enabled, Common Utilities will search automatically updates for modules and other components.','rmcommon'),
@@ -566,7 +567,7 @@ $modversion['config'][] = array(
     'category'      => 'general'
 );
 
-$modversion['config'][] = array(
+$cu_settings['config'][] = array(
     'name'          => 'updatesinterval',
     'title'         => __('Days between updates search','rmcommon'),
     'description'   => '',
@@ -575,6 +576,15 @@ $modversion['config'][] = array(
     'default'       => 1,
     'category'      => 'general'
 );
+
+// Additional configurations
+if( class_exists('RMEvents') ){
+    $cu_settings = RMEvents::get()->run_event('rmcommon.addtional.options', $cu_settings);
+}
+
+$modversion['categories']   = $cu_settings['categories'];
+$modversion['config']       = $cu_settings['config'];
+unset($cu_settings);
 
 // BLOCKS
 

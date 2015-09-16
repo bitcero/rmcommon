@@ -1,6 +1,6 @@
 <h1 class="cu-section-title"><?php _e('Plugins Manager','rmcommon'); ?></h1>
 
-<ul class="nav nav-tabs plugins-nav">
+<ul class="nav nav-tabs plugins-nav cu-top-tabs">
 	<li class="active"><a href="#plugins-installed" data-toggle="tab"><?php _e('Installed Plugins','rmcommon'); ?></a></li>
 	<li><a href="#plugins-noinstalled" data-toggle="tab"><?php _e('Available Plugins','rmcommon'); ?></a></li>
 </ul>

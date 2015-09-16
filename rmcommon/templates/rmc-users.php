@@ -175,78 +175,85 @@
 </div>
 <!-- Navigation Options -->
 
-<table class="outer" cellspacing="0" width="100%">
-    <thead>
-    <tr>
-        <th width="20" class="text-center"><input type="checkbox" class="checkall" id="checkall-top" onclick="$('#form-users').toggleCheckboxes(':not(#checkall-top)');" /></th>
-        <th class="text-center"><?php _e('ID','rmcommon'); ?></th>
-        <th><?php _e('Username','rmcommon'); ?></th>
-        <th><?php _e('Name','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Email','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Registered','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Groups','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Status','rmcommon'); ?></th>
-    </tr>
-    </thead>
-    <tfoot>
-    <tr>
-        <th width="20" class="text-center"><input type="checkbox" id="checkall-bottom" name="checkall" onclick="$('#form-users').toggleCheckboxes(':not(#checkall-bottom)');" /></th>
-        <th class="text-center"><?php _e('ID','rmcommon'); ?></th>
-        <th><?php _e('Username','rmcommon'); ?></th>
-        <th><?php _e('Name','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Email','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Registered','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Groups','rmcommon'); ?></th>
-        <th class="text-center"><?php _e('Status','rmcommon'); ?></th>
-    </tr>
-    </tfoot>
-    <tbody>
-    <?php if(count($users)<=0): ?>
-    <tr class="even">
-    	<td colspan="8" class="text-center">
-    		<span class="label label-important"><?php _e('There are not any user registered with for this filter.','rmcommon'); ?></span>
-    	</td>
-    </tr>
-    <?php endif; ?>
-    <?php
-    $class = 'odd';
+    <div class="cu-box">
+        <div class="box-content">
+            <div class="table-responsive">
+                <table class="table table-striped" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="20" class="text-center"><input type="checkbox" class="checkall" id="checkall-top" onclick="$('#form-users').toggleCheckboxes(':not(#checkall-top)');" /></th>
+                        <th class="text-center"><?php _e('ID','rmcommon'); ?></th>
+                        <th><?php _e('Username','rmcommon'); ?></th>
+                        <th><?php _e('Name','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Email','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Registered','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Groups','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Status','rmcommon'); ?></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th width="20" class="text-center"><input type="checkbox" id="checkall-bottom" name="checkall" onclick="$('#form-users').toggleCheckboxes(':not(#checkall-bottom)');" /></th>
+                        <th class="text-center"><?php _e('ID','rmcommon'); ?></th>
+                        <th><?php _e('Username','rmcommon'); ?></th>
+                        <th><?php _e('Name','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Email','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Registered','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Groups','rmcommon'); ?></th>
+                        <th class="text-center"><?php _e('Status','rmcommon'); ?></th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <?php if(count($users)<=0): ?>
+                        <tr class="even">
+                            <td colspan="8" class="text-center">
+                                <span class="label label-important"><?php _e('There are not any user registered with for this filter.','rmcommon'); ?></span>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                    <?php
+                    $class = 'odd';
 
-    $qstring = '';
-    foreach (RMTemplate::get()->get_vars() as $var => $value) {
-        $qstring .= $qstring=='' ? $var.'='.$value : '&amp;'.$var.'='.$value;
-    }
+                    $qstring = '';
+                    foreach (RMTemplate::get()->get_vars() as $var => $value) {
+                        $qstring .= $qstring=='' ? $var.'='.$value : '&amp;'.$var.'='.$value;
+                    }
 
-    foreach($users as $user):
-    ?>
-    <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $user['level']<=0 ? ' user_inactive' : '' ?>" valign="top">
-        <td class="text-center"><input type="checkbox" name="ids[]" id="item-<?php echo $user['uid']; ?>" value="<?php echo $user['uid']; ?>" /></td>
-        <td class="text-center"><?php echo $user['uid']; ?></td>
-        <td>
-            <strong><?php echo $user['uname']; ?></strong>
-            <span class="cu-item-options">
-                <a href="users.php?action=edit&amp;uid=<?php echo $user['uid']; ?>&amp;query=<?php echo base64_encode($qstring); ?>"><?php _e('Edit','rmcommon'); ?></a> |
-                <a href="users.php?action=mailer&amp;uid=<?php echo $user['uid']; ?>&amp;query=<?php echo base64_encode($qstring); ?>"><?php _e('Send Email','rmcommon'); ?></a> |
-                <a href="#" onclick="select_option(<?php echo $user['uid']; ?>,'delete','form-users');"><?php _e('Delete','rmcommon'); ?></a>
-            </span>
-        </td>
-        <td><?php echo $user['name']; ?></td>
-        <td class="text-center"><a href="javascript:;" title="<?php echo sprintf(__('Send email to %s','rmcommon'), $user['uname']); ?>"><?php echo $user['email']; ?></a></td>
-	    <td class="text-center"><?php echo formatTimestamp($user['user_regdate'], 'c'); ?></td>
-        <td class="text-center" class="users_cell_groups">
-        	<?php
-                $str = '';
-                foreach ($user['groups'] as $group):
-                    $str = $str=='' ? $xgh->get($group)->name() : ', '.$xgh->get($group)->name();
-                    echo $str;
-                endforeach; ?>
-        </td>
-        <td class="text-center">
-            <img src="images/<?php echo $user['level']<=0 ? 'error.png' : 'done.png'; ?>" alt="" />
-        </td>
-    </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+                    foreach($users as $user):
+                        ?>
+                        <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $user['level']<=0 ? ' user_inactive' : '' ?>" valign="top">
+                            <td class="text-center"><input type="checkbox" name="ids[]" id="item-<?php echo $user['uid']; ?>" value="<?php echo $user['uid']; ?>" /></td>
+                            <td class="text-center"><?php echo $user['uid']; ?></td>
+                            <td nowrap="nowrap">
+                                <strong><?php echo $user['uname']; ?></strong>
+                                <span class="cu-item-options">
+                                    <a href="users.php?action=edit&amp;uid=<?php echo $user['uid']; ?>&amp;query=<?php echo base64_encode($qstring); ?>"><?php _e('Edit','rmcommon'); ?></a>
+                                    <a href="users.php?action=mailer&amp;uid=<?php echo $user['uid']; ?>&amp;query=<?php echo base64_encode($qstring); ?>"><?php _e('Email','rmcommon'); ?></a>
+                                    <a href="#" onclick="select_option(<?php echo $user['uid']; ?>,'delete','form-users');"><?php _e('Delete','rmcommon'); ?></a>
+                                </span>
+                            </td>
+                            <td><?php echo $user['name']; ?></td>
+                            <td class="text-center"><a href="javascript:;" title="<?php echo sprintf(__('Send email to %s','rmcommon'), $user['uname']); ?>"><?php echo $user['email']; ?></a></td>
+                            <td class="text-center"><?php echo formatTimestamp($user['user_regdate'], 'c'); ?></td>
+                            <td class="text-center" class="users_cell_groups">
+                                <?php
+                                $str = '';
+                                foreach ($user['groups'] as $group):
+                                    $str = $str=='' ? $xgh->get($group)->name() : ', '.$xgh->get($group)->name();
+                                    echo $str;
+                                endforeach; ?>
+                            </td>
+                            <td class="text-center">
+                                <img src="images/<?php echo $user['level']<=0 ? 'error.png' : 'done.png'; ?>" alt="" />
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 <!-- Navigation Options -->
     <div class="row users_navigation cu-bulk-actions">
 

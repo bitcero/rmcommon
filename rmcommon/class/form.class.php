@@ -131,8 +131,8 @@ class RMForm
     	RMTemplate::get()->add_style('forms.css', 'rmcommon');
     	RMTemplate::get()->add_style('js-widgets.css','rmcommon');
         RMTemplate::get()->add_jquery(true);
-    	RMTemplate::get()->add_script( 'jquery.validate.min.js', 'rmcommon' );
-    	RMTemplate::get()->add_script( 'forms.js','rmcommon' );
+    	RMTemplate::get()->add_script( 'jquery.validate.min.js', 'rmcommon', array('footer' => 1) );
+    	RMTemplate::get()->add_script( 'forms.js','rmcommon', array('footer' => 1) );
 
     	if ($addtoken) $this->addElement(new RMFormHidden('XOOPS_TOKEN_REQUEST', $xoopsSecurity->createToken()));
 

@@ -120,7 +120,12 @@ class Twop6Functions
             $return_menu[] = array(
                 'title' => $menu['title'],
                 'link' => preg_match("/^(http:\/\/|https:\/\/|ftp:\/\/|mailto:)/i", $menu['link']) ? $menu['link'] : XOOPS_URL.'/modules/'.$mod->getVar('dirname','n').'/'.$menu['link'],
-                'icon' => isset($menu['icon']) ? (preg_match("/^(http:\/\/|https:\/\/)/i", $menu['icon']) ? $menu['icon'] : XOOPS_URL.'/modules/'.$mod->dirname().'/'.$menu['icon']) : '',
+                'icon' => isset($menu['icon']) ? (preg_match("/^(http:\/\/|https:\/\/)/i", $menu['icon']) ?
+                    $menu['icon'] : ( self::is_font_icon($menu['icon']) ? $menu['icon'] : XOOPS_URL.'/modules/'
+                    .$mod->dirname()
+                    .'/'
+                    .$menu['icon'])) :
+            '',
                 'location' => isset($menu['location']) ? $menu['location'] : '',
                 'options' => isset($menu['options']) ? self::moduleSubmenu($menu['options'], $mod) : ($m=='system' && $menu['title']==_AM_SYSTEM_PREF ? self::systemPreferences() : null)
             );
@@ -396,7 +401,7 @@ class Twop6Functions
             $lg -= 3;
         }
 
-        return "col-md-$md col-lg-$lg";
+        return "col-sm-$md col-lg-$lg";
 
     }
 

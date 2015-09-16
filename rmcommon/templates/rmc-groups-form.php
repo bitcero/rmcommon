@@ -22,7 +22,9 @@ $form = new RMActiveForm(array(
                 <textarea type="text" name="description" id="group-description" class="form-control required" rows="4"><?php echo $group->getVar('description', 'e'); ?></textarea>
             </div>
 
-            <p class="help-block"><?php _e("Add <strong>admin rights</strong> and <strong>access rights</strong> to new group. Remember that specific permissions allows to control with more detail the operations that users can do according to the groups that they belongs.",'rmcommon'); ?></p>
+            <small class="help-block"><?php _e("Select <strong>admin rights</strong> and <strong>access rights</strong> to
+            new group. Remember that specific permissions allows to control with more detail the operations that
+            users can do according to the groups that they belongs.",'rmcommon'); ?></small>
 
         </div>
         <div class="col-lg-8">

@@ -10,7 +10,7 @@
 
 include_once '../../include/cp_header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
-define('RMCLOCATION','settings');
+define('RMCLOCATION','cu-settings');
 
 class AjaxResponse{
     use RMModuleAjax;

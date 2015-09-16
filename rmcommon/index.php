@@ -95,7 +95,7 @@ function show_dashboard(){
     xoops_cp_header();
 
     RMTemplate::get()->add_style('dashboard.css', 'rmcommon');
-    RMTemplate::get()->add_script('dashboard.js', 'rmcommon');
+    RMTemplate::get()->add_script('dashboard.js', 'rmcommon', array('footer' => 1));
     RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
     RMTemplate::get()->add_help(__('Dashboard Help','rmcommon'),'http://www.xoopsmexico.net/docs/common-utilities/uso-de-common-utilities/standalone/1/#dashboard');
     include RMTemplate::get()->get_template('rmc-dashboard.php', 'module', 'rmcommon');

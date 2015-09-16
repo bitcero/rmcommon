@@ -506,7 +506,7 @@
                 </div>
 
                 <?php if($right_widgets): ?>
-                    <aside class="col-md-3">
+                    <aside class="col-sm-3">
                         <?php foreach($right_widgets as $widget): ?>
                             <?php if(!isset($widget['title']) && !isset($widget['content'])) continue; ?>
                             <div class="cu-box">
