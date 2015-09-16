@@ -21,7 +21,7 @@
     <?php
     $form = new RMForm('','','');
     ?>
-<form name="formSettings" id="form-settings" method="post" action="<?php echo RMCURL; ?>/settings.php"<?php echo $is_popup ? ' class="ajax-form"' : ''; ?>>
+<form name="formSettings" id="form-settings" method="post" action="<?php echo RMCURL; ?>/settings.php"<?php echo $is_popup ? ' data-type="ajax"' : ''; ?>>
     <div class="tab-content">
 
         <?php

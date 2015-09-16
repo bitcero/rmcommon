@@ -64,21 +64,38 @@ class RMFunctions
 
         } elseif( RMCLOCATION == 'groups' ){
 
-            RMTemplate::get()->add_tool(__('Groups','rmcommon'), 'groups.php', '', 'allgroups', array('class' => 'cu-tool tool-groups'));
             RMTemplate::get()->add_tool(
-                __('Add','rmcommon'), '#', '', 'newgroup', array(
-                'class' => 'cu-tool tool-group-add',
-                'data-action' => 'load-remote-dialog',
-                'data-url' => 'groups.php?action=new-group',
-                'data-parameters' => '{action: \'new-group\'}'
-            ));
+                __('Groups','rmcommon'),
+                'groups.php',
+                'icon icon-users',
+                'allgroups',
+                array(
+                    'class' => 'cu-tool tool-groups'
+                )
+            );
+
+            RMTemplate::get()->add_tool(
+                __('Add','rmcommon'),
+                '#',
+                'icon icon-plus',
+                'newgroup',
+                array(
+                    'class' => 'cu-tool tool-group-add',
+                    'data-action' => 'load-remote-dialog',
+                    'data-url' => 'groups.php?action=new-group',
+                    'data-parameters' => '{action: \'new-group\'}'
+                )
+            );
 
             /*
              * Next buttons are available only when groups list is shown
              */
             RMTemplate::get()->add_tool(
                 __('Edit', 'rmcommon'),
-                    '#', '', 'editgroup', array(
+                '#',
+                'icon icon-pencil',
+                'editgroup',
+                array(
                         'class' => 'cu-tool tool-group-edit',
                         'data-activator' => 'groups-list',
                         'data-oncount' => '== 1',
@@ -89,9 +106,13 @@ class RMFunctions
                         'title' => __('Edit Group','rmcommon')
                 )
             );
+
             RMTemplate::get()->add_tool(
                 __('Delete', 'rmcommon'),
-                '#', '', 'deletegroup', array(
+                '#',
+                'icon icon-bin',
+                'deletegroup',
+                array(
                     'class' => 'cu-tool tool-group-delete',
                     'data-activator' => 'groups-list',
                     'data-oncount' => '> 0',

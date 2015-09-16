@@ -372,7 +372,7 @@ $(document).ready(function(){
      * Cargar diálogos de otros módulos
      */
     $('body').on('click', '*[data-action]', function(){
-        cuHandler.runAction( $(this) )
+        cuHandler.runAction( $(this) );
         return false;
 
     });
@@ -397,9 +397,15 @@ $(document).ready(function(){
      */
     $("body").on('change', '.activator-container :checkbox[data-switch], .activator-container :radio[data-switch]', function(){
 
+        event.stopPropagation();
+
         var id_container = $(this).parents(".activator-container").attr("id");
 
         cuHandler.enableCommands( id_container, $(this).attr("type") );
+
+        if($(this).attr("type") == 'radio'){
+            $(this).parents(".activator-container").find(".tr-checked").removeClass('tr-checked');
+        }
 
         if ( $(this).is(":checked") )
             $(this).parents("tr").addClass( 'tr-checked' );
@@ -411,18 +417,30 @@ $(document).ready(function(){
     /**
      * Select rows
      */
-    $("body").on('click', '.activator-container > tbody > tr > td', function(){
+    /*$("body").on('click', '.activator-container > tbody > tr > td', function(){
 
-        var input = $(this).parent().find("input[data-switch]");
+        var parent = $(this).parents("tr");
+        var input = $(parent).find("input[data-switch]");
+
+        if($(input).attr("type") == 'radio'){
+            $(parent).parents(".activator-container").find(".tr-checked").removeClass('tr-checked');
+        }
 
         if ( input.is(":checked") )
             input.removeAttr( "checked" );
         else
             input.prop( "checked", 'checked' );
 
-        input.change();
+        cuHandler.enableCommands($(this).parents(".activator-container").attr("id"), input.attr("type"));
 
-    });
+        if ( $(input).is(":checked") )
+            $(parent).addClass( 'tr-checked' );
+        else
+            $(parent).removeClass( 'tr-checked' );
+
+        event.stopPropagation();
+
+    });*/
 
     /**
      * Select all checkbox

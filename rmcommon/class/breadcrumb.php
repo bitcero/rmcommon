@@ -15,7 +15,6 @@
 
 class RMBreadCrumb
 {
-    use RMSingleton;
 
     private $crumbs = array();
 
@@ -98,6 +97,22 @@ class RMBreadCrumb
 
         $ret = ob_get_clean();
         return $ret;
+
+    }
+
+    /**
+     * Use this method to instantiate EXMTemplate
+     * @staticvar <type> $instance
+     * @return RMBreadCrumb
+     */
+    static function get(){
+        static $instance;
+
+        if (!isset($instance)) {
+            $instance = new RMBreadCrumb();
+        }
+
+        return $instance;
 
     }
 

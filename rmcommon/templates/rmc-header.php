@@ -8,6 +8,8 @@ $temp = $tpl->get_scripts();
 
 $script_tpl = '<script id="%s" type="%s" src="%s"%s></script>' . "\n";
 
+$jquery_and_bootstrap = array();
+
 if ( isset( $temp['jquery'] ) )
     $tscript .= '<script id="jquery" type="'.$temp['jquery']['type'].'" src="'.$temp['jquery']['url'].'"></script>'."\n";
 
@@ -18,6 +20,7 @@ if ( isset( $temp['jsbootstrap'] ) )
     $fscripts .= '<script id="jsbootstrap" type="'.$temp['jsbootstrap']['type'].'" src="'.$temp['jsbootstrap']['url'].'"></script>'."\n";
 
 unset( $temp['jquery'],$temp['jqueryui'], $temp['jsbootstrap'] );
+
 
 foreach ($temp as $id => $script) {
 
