@@ -119,10 +119,11 @@ a:hover{
 #rmc-toolbar{
     position: fixed;
     top: 87px; left: 0; right: 0;
-    background: #f1f1f1;
+    background-color: #F7F7F7;
+    background-color: rgba(255,255,255,0.4);
     z-index: 1000;
     border-radius: 0;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 #rmc-toolbar > .navbar-collapse{
     border-top: 0;
@@ -132,12 +133,18 @@ a:hover{
     padding: 0;
     min-height: 30px;
 }
+#rmc-toolbar .nav > li{
+    border-right: 1px solid rgba(0,0,0,0.06);
+}
 #rmc-toolbar .nav > li button{
-    padding: 5px 10px;
+    padding: 10px 15px;
     text-align: center;
     border: 0;
     color: #4b4b4b;
     background: transparent;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
 }
 #rmc-toolbar .nav > li button > i{
     display: block;
@@ -146,14 +153,18 @@ a:hover{
 }
 #rmc-toolbar .nav > li button > span.tool-icon{
     display: block;
-    width: 32px; height: 32px;
-    background-size: 32px 32px;
-    font-size: 32px;
+    height: 32px;
+    background-size: 24px 24px;
+    font-size: 24px;
     margin: 0 auto 3px auto;
+    line-height: 30px;
 }
 #rmc-toolbar .nav > li button > span > img{
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
+}
+#rmc-toolbar .nav > li button:hover{
+    color: #CF4944;
 }
 #rmc-toolbar .btn-group.open .dropdown-toggle{
     box-shadow: none;
