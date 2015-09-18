@@ -474,7 +474,7 @@ $(document).ready(function(){
 
         if ( checked.length <= 0 )
             $(activator).removeAttr( 'checked' );
-        else if ( checked.length > 0 && !$(activator).is(":checked") )
+        else if ( checked.length == existing.length )
             $(activator).prop( 'checked', 'checked' );
 
     });

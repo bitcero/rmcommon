@@ -59,8 +59,22 @@ class RMFunctions
 
         if(RMCLOCATION=='users'){
 
-            RMTemplate::get()->add_tool(__('Users','rmcommon'), 'users.php', '', 'allusers', array('class' => 'cu-tool tool-users-list'));
-            RMTemplate::get()->add_tool(__('Add','rmcommon'), 'users.php?action=new', '', 'newuser', array('class' => 'cu-tool tool-user-add'));
+            RMTemplate::get()->add_tool(
+                __('Users','rmcommon'),
+                'users.php',
+                'icon icon-users',
+                'allusers',
+                array('class' => 'cu-tool tool-users-list')
+            );
+
+            RMTemplate::get()->add_tool(
+                __('Add','rmcommon'),
+                'users.php?action=new',
+                'icon icon-plus',
+                'newuser',
+                array('class' => 'cu-tool tool-user-add')
+            );
+
 
         } elseif( RMCLOCATION == 'groups' ){
 

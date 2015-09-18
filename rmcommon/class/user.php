@@ -48,8 +48,8 @@ class RMUser extends RMObject
 
     function setGroups($groupsArr){
         $this->groups = array();
-    if (is_array($groupsArr))
-            $this->groups =& $groupsArr;
+        if (is_array($groupsArr))
+                $this->groups =& $groupsArr;
     }
 
     public function &getGroups(){
