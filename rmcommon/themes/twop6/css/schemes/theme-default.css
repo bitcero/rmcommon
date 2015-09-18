@@ -376,3 +376,10 @@ pre{border-radius: 0;}
     background-color: #04A4CC;
     color: #FFF;
 }
+
+/*Item options*/
+.cu-item-options > a:hover{
+    text-decoration: none;
+    color: #FFF;
+    background: #04A4CC;
+}

@@ -401,6 +401,9 @@ table > tbody > tr:nth-child(odd) > td,
 .table-hover > tbody > tr:hover > th {
     background-color: rgba(0,0,0,0.4);
 }
+.table-striped>tbody>tr:nth-of-type(odd){
+    background-color: rgba(255,255,255,0.05)!important;
+}
 
 /* TABS */
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
@@ -514,5 +517,16 @@ pre{
 }
 #xo-context-help .title{
     background-color: #c23519;
+    color: #FFF;
+}
+
+
+/*Item options*/
+.cu-item-options > a{
+    background: transparent;
+}
+.cu-item-options > a:hover{
+    text-decoration: none;
+    background: #C23519;
     color: #FFF;
 }

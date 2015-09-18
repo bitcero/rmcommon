@@ -390,7 +390,9 @@ table > tbody > tr:nth-child(odd) > td,
 .table-hover > tbody > tr:hover > th {
     background-color: rgba(0,0,0,0.4);
 }
-
+.table-striped>tbody>tr:nth-of-type(odd){
+    background-color: rgba(255,255,255,0.01)!important;
+}
 /* TABS */
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
     background-color: #262625;
@@ -502,4 +504,14 @@ pre{
 #xo-context-help .title{
     background-color: #83bf17;
     color: #FFF;
+}
+
+/*Item options*/
+.cu-item-options > a{
+    background: #83bf17;
+    color: #FFF;
+}
+.cu-item-options > a:hover{
+    text-decoration: none;
+    background: #F15D58;
 }
