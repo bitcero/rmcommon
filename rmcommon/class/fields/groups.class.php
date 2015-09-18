@@ -154,7 +154,7 @@ class RMFormGroups extends RMFormElement
 					$rtn .= " checked='checked'";
 				}
 			}
-			$rtn .= "> ".__('All','rmcommon')."</label></li>";
+			$rtn .= " data-checkbox=\"$name-chks\"> ".__('All','rmcommon')."</label></li>";
 			while ($row = $db->fetchArray($result)){
 				
 				$rtn .= "<li><label><input type='$typeinput' name='$name' id='".$this->id()."' value='$row[groupid]'";
@@ -163,7 +163,7 @@ class RMFormGroups extends RMFormElement
 						$rtn .= " checked='checked'";
 					}
 				}
-				$rtn .= "> $row[name]</label>";
+				$rtn .= " data-oncheck=\"$name-chks\"> $row[name]</label>";
 				
 				if ($this->_showdesc){
 					$rtn .= "<br /><small style='font-size: 10px;' class='description'>$row[description]</small>";

@@ -383,6 +383,28 @@ function save_data($edit = false){
     $user->setVar('level', 1);
     $user->setVar('timezone_offset', $timezone);
     $user->setVar('url', $url);
+
+    /**
+     * If "All" has been selected then we need to get all
+     * groups ID's
+     */
+    if( in_array( 0, $groups )){
+        $groups = array();
+        $result = $xoopsDB->query("SELECT groupid FROm " . $xoopsDB->prefix("groups"));
+        while($row = $xoopsDB->fetchArray($result)){
+            $groups[] = $row['groupid'];
+        }
+        unset($result);
+    }
+
+    /**
+     * If no group has been selected, then we add user to
+     * Anonymous group
+     */
+    if(empty($groups)){
+        $groups = array(XOOPS_GROUP_ANONYMOUS);
+    }
+
     $user->setGroups($groups);
 
     // Plugins and modules can save metadata.
