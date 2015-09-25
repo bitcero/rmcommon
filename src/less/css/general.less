@@ -209,6 +209,15 @@ CU Top Tabs
 .cu-ajax-news > li{
     margin-bottom: 10px;
     border-bottom: 1px solid #DDD;
+
+    &:nth-child(n+3){
+        > p{
+            display: none;
+        }
+        > h5{
+            font-weight: normal;
+        }
+    }
 }
 .cu-ajax-news small{
     font-size: 0.8em;
