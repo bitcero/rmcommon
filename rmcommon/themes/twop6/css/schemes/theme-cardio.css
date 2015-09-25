@@ -388,3 +388,17 @@ hr{
     background-color: #E94C6F;
     color: #FFF;
 }
+
+
+/*Item options*/
+.cu-item-options > a{
+    display: inline-block;
+    padding: 2px 6px;
+    background: #E94C6F;
+    color: #FFF;
+    border-radius: 3px;
+}
+.cu-item-options > a:hover{
+    text-decoration: none;
+    background: #5A6A62;
+}

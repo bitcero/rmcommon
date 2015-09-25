@@ -481,3 +481,10 @@ pre{
     background-color: #BABABA;
     color: #5d5d5d;
 }
+
+/*Item options*/
+.cu-item-options > a:hover{
+    text-decoration: none;
+    background: #5D5D5D;
+    color: #FFF;
+}

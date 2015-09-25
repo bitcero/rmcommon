@@ -490,3 +490,16 @@ pre{
     background-color: #fb6964;
     color: #FFF;
 }
+
+/*Item options*/
+.cu-item-options > a{
+    background: #FFD464;
+    color: #000;
+    font-size: 0.85em;
+    text-transform: uppercase;
+}
+.cu-item-options > a:hover{
+    text-decoration: none;
+    background: #1352A2;
+    color: #FFF;
+}
