@@ -160,7 +160,7 @@ class RMFormat
                     $rtn .= ' RC';
                     break;
                 default:
-                    $rtn .= ' production';
+                    $rtn .= ' Production';
                     break;
             }
             return $rtn;

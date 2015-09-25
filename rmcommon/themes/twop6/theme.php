@@ -533,7 +533,8 @@
             <footer class="row">
                 <div class="col-md-6 col-lg-6">
                     <?php echo sprintf(__('Powered by %s.','rmcommon'), '<a href="http://www.xoops.org">'.XOOPS_VERSION.'</a>'); ?>
-                    <?php echo sprintf(__('Reloaded by %s.','rmcommon'), '<a href="http://www.xoopsmexico.net">Common Utilities '.RMCVERSION.'</a>'); ?>
+                    <?php echo sprintf(__('Reloaded by %s.','rmcommon'), '<a href="http://www.xoopsmexico.net">'.RMModules::get_module_version('rmcommon',
+                            true) .'</a>'); ?>
                 </div>
                 <div class="col-md-6 col-lg-6 xo-foot-links">
                     <ul>

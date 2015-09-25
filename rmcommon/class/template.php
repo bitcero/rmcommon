@@ -455,10 +455,10 @@ class RMTemplate
      * @param string $element Owner element name
      * @param array $options Array with options to be added to script
      * @param string $owner Owner type for the script|style. Can be 'theme' or empty
+     * @return bool
      */
     public function add_script($file, $element = '', $options = array(), $owner = '')
     {
-
         global $xoopsModule, $cuSettings, $xoopsConfig;
 
         $idProvided = false;
@@ -505,7 +505,7 @@ class RMTemplate
         if ($script_url == '')
             return false;
 
-        if(array_key_exists($id, $this->tpl_scripts)){
+        if(array_key_exists($id, $this->tpl_scripts) && $this->tpl_scripts[$id]['url'] != $script_url){
             $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
             trigger_error(sprintf(__('Script %s will be replaced for new value in file %s on line %s', 'classifieds'), '<strong>' . $id . '</strong>',
                 '<strong>' . $trace[0]['file'] . '</strong>', '<strong>' . $trace[0]['line'] . '</strong>'));
