@@ -12,7 +12,7 @@ var groupsController = {
      */
     retrieveSingle: function( ele ){
 
-        var eles = $("#groups-list :checkbox[data-switch]:checked");
+        var eles = $("#groups-list :radio[data-switch]:checked");
         if ( eles.length <= 0 || eles.length > 1 )
             return false;
 
@@ -30,7 +30,7 @@ var groupsController = {
         if ( !confirm( cuLanguage.confirmDelete ) )
             return false;
 
-        var eles = $("#groups-list :checkbox[data-switch]:checked");
+        var eles = $("#groups-list :radio[data-switch]:checked");
         var ids = '';
         $(eles).each( function( index ){
             ids += ids==''?$(this).val():','+$(this).val();

@@ -12,6 +12,8 @@ var cuHandler = {
      */
     ismobile: /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()),
 
+    currentResponse: false,
+
     /**
      * Send a request to a remote URL and present the response in a window
      * Launcher can have several useful data attributes:
@@ -106,6 +108,8 @@ var cuHandler = {
 
     // Retrieve information for AJAX-FORMS
     retrieveAjax: function(response){
+
+        this.currentResponse = response;
 
         if (response.type=='error'){
 
@@ -352,15 +356,15 @@ Number.prototype.formatMoney = function(c, d, t){
  */
 jQuery.fn.enable = function(){
     this.each(function(){
-        jQuery(this).attr("disabled", false);
-        jQuery(this).removeClass("disable");
+        jQuery(this).removeAttr("disabled");
+        jQuery(this).removeClass("disabled");
     });
 }
 
 jQuery.fn.disable = function(){
     this.each(function(){
         jQuery(this).attr("disabled", true);
-        jQuery(this).addClass("disable");
+        jQuery(this).addClass("disabled");
     });
 }
 
@@ -372,12 +376,15 @@ $(document).ready(function(){
      * Cargar diálogos de otros módulos
      */
     $('body').on('click', '*[data-action]', function(){
+        if($(this).is(":disabled") || $(this).attr("disabled")){
+            return false;
+        }
         cuHandler.runAction( $(this) );
         return false;
 
     });
 
-    $("body").on('submit', 'data-type["ajax"]', function(){
+    $("body").on('submit', 'form[data-type="ajax"]', function(){
         cuHandler.submitAjaxForm( $(this) );
         return false;
     });
@@ -452,7 +459,12 @@ $(document).ready(function(){
         if ( checkbox_class == undefined )
             return;
 
-        $(":checkbox[data-oncheck='"+checkbox_class+"']").prop('checked', $(this).prop('checked'));
+        $(":checkbox[data-oncheck='"+checkbox_class+"']").prop('checked', $(this).prop('checked')).change();
+
+        var $activator = $(this).parents('.activator-container');
+        if($activator.length>0){
+            cuHandler.enableCommands($activator.attr("id"), 'checkbox');
+        }
 
     });
 
@@ -469,10 +481,9 @@ $(document).ready(function(){
         var checked = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']:checked");
 
         var activator = $(":checkbox[data-checkbox='" + $(this).data('oncheck') + "']");
-        if ( activator.length <= 0 )
-            return;
 
-        if ( checked.length <= 0 )
+
+        if ( checked.length < existing.length )
             $(activator).removeAttr( 'checked' );
         else if ( checked.length == existing.length )
             $(activator).prop( 'checked', 'checked' );

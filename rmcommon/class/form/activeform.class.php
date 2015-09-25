@@ -137,7 +137,7 @@ class RMActiveForm
 
             switch ( $attr ){
                 case 'submit-via':
-                    $class .= $value == 'ajax' ? ' ajax-form' : '';
+                    $form .= $value == 'ajax' ? ' data-type="ajax"' : '';
                     break;
                 case 'validation':
                     $class .= $value == 'local' ? ' validate-form' : '';

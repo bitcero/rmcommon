@@ -245,6 +245,13 @@ global $cuSettings;
 $GLOBALS['rmc_config'] = (array) $cuSettings;
 global $rmc_config;
 
+// PSR4
+require 'class/Psr4ClassLoader.php';
+$psr4Loader = new \Common\Core\Psr4ClassLoader();
+$psr4Loader->register();
+$psr4Loader->addNamespace('Common\Helpers', RMCPATH . '/class/helpers');
+$psr4Loader->addNamespace('Common\Builders', RMCPATH . '/builders');
+$psr4Loader->addNamespace('Common\Core', RMCPATH . '/class');
 
 // Base classes
 $GLOBALS['rmEvents'] = RMEvents::get();

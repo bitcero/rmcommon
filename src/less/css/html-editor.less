@@ -9,20 +9,33 @@
     .quicktags{
         background: #f9f9f9;
         margin-bottom: -2px;
-        border: 1px solid #CCC;
+        border: 1px solid rgba(0,0,0,0.12);
         border-bottom: 0;
         padding: 3px 3px 5px 3px;
         transition: ease-in-out all 350ms;
         button{
-            background-color: transparent;
-            padding: 3px 6px;
-            font-size: 0.9em;
-            font-weight: bold;
-            color: #505050;
-            border: 1px solid transparent;
-            margin: 2px 0 2px 2px;
-            font-family: Tahoma, Arial, Helvetica, sans-serif;
-            transition: ease-in-out all 200ms;
+            border-radius: 2px;
+              padding: 0 6px;
+              font-size: 14px;
+              font-weight: normal;
+              color: #666;
+              border: 0;
+              margin: 1px;
+              text-shadow: none;
+              background: transparent;
+              box-shadow: none;
+              line-height: 32px;
+              height: 32px;
+              text-align: center;
+              min-width: 32px;
+              outline: 0;
+              vertical-align: text-bottom;
+
+              &[id^='ed_close_']{
+                  font-size: 10px;
+                  text-transform: uppercase;
+                  font-weight: bold;
+              }
             &:hover{
                 border-color: rgba(0,0,0,0.25);
                 background-color: #fff;
@@ -43,13 +56,14 @@
     .txtarea-container{
         transition: ease-in-out all 350ms;
         position: relative;
-        textarea{
+        > textarea{
             padding: 10px;
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             font-family: monospace;
             color: #333;
             border: 1px solid rgba(0,0,0,0.15);
+            border-top: 0;
             background: #FFF;
             border-radius: 0 0 2px 2px;
             width: 100%;

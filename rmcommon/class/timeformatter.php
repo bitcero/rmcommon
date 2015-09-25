@@ -25,13 +25,15 @@ class RMTimeFormatter
     }
 
     /**
-    * Singleton Method
-    */
-    public static function get(){
+     * Singleton method
+     * @param string $format
+     * @return RMTimeFormatter
+     */
+    public static function get($format = ''){
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new RMTimeFormatter();
+            $instance = new RMTimeFormatter(0, $format);
         }
 
         return $instance;

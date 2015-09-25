@@ -131,7 +131,8 @@ class Editor_Markdown extends RMEditor
         }
         $plugins .= '}';
 
-        $script = '<script>$(document).ready( function() { mdEditor.init("' . $this->id . '", ' . $options . ','. $plugins .'); } );</script>';
+        $script = '<script>function initMD(id){$(document).ready( function() {
+mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'");</script>';
 
         return $script;
 
