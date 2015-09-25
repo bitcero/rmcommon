@@ -102,9 +102,9 @@ class RMFormEditor extends RMFormElement
 			case 'simple':
 				$ret .= $this->renderTArea();
 				break;
-			case 'xoops':
+			/*case 'xoops':
 				$ret .= $this->renderExmCode();
-				break;
+				break;*/
 			case 'html':
 				$ret .= $this->renderHTML();
 				break;
@@ -155,6 +155,7 @@ class RMFormEditor extends RMFormElement
 		RMTemplate::get()->add_script( 'quicktags.min.js','rmcommon' );
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce.js');
 		RMTemplate::get()->add_head_script(TinyEditor::getInstance()->get_js());
+		RMTemplate::get()->add_inline_script('edToolbar("' . $this->id() . '");', 1);
 
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'tiny', $this->id());
@@ -169,7 +170,7 @@ class RMFormEditor extends RMFormElement
         <a class="edButtonPreview'.(isset($_COOKIE['editor']) && $_COOKIE['editor'] == 'tinymce' ? ' active' : '').'" onclick="switchEditors.go(\''.$this->id().'\', \'tinymce\'); return false;"><span class="fa fa-eye"></span> Visual</a>
         </div>
         <div'.(isset($_COOKIE['editor']) && $_COOKIE['editor'] == 'html' ? ' class="showing"' : '').'>
-        <div class="quicktags"><script type="text/javascript">edToolbar(\''.$this->id().'\')</script></div>
+        <div class="quicktags"><div id="ed_toolbar_' . $this->id() . '"></div></div>
         <textarea onchange="tinyMCE.activeEditor.save();" id="'.$this->id().'" name="'.$this->getName().'" style="width: 100%; height: '.$this->_height.';" class="'.$this->getClass().'">'.$this->_default.'</textarea></div>
         </div>';
 		return $rtn;
@@ -180,8 +181,9 @@ class RMFormEditor extends RMFormElement
 	* @since 1.5
 	*/
 	private function renderHTML(){
-		RMTemplate::get()->add_script("quicktags.min.js", 'rmcommon');
+		RMTemplate::get()->add_script("quicktags.min.js", 'rmcommon', array('footer' => 1));
 		RMTemplate::get()->add_style('html-editor.min.css','rmcommon');
+		RMTemplate::get()->add_inline_script('edToolbar("' . $this->id() . '");', 1);
 		$rtn = "\n<div class='ed-container html_editor_container' style='width: $this->_width;' id='".$this->id()."-ed-container'>";
         $plugins = array();
 
@@ -199,8 +201,8 @@ class RMFormEditor extends RMFormElement
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.html.editor.plugins', $plugins, $this->id());
         
-		$rtn .= "<div class=\"quicktags\">
-		<script type=\"text/javascript\">edToolbar('".$this->id()."')</script>".(!empty($plugins) ? "<div class='ed-qt-plugins'><span class='plugin'>".implode('</span><span class="plugin">', $plugins)."</span></div>" : '')."</div>
+		$rtn .= "<div class=\"quicktags\"><div id=\"ed_toolbar_" . $this->id() . "\"></div></div>".(!empty
+		($plugins) ? "<div class='ed-qt-plugins'><span class='plugin'>".implode('</span><span class="plugin">', $plugins)."</span></div>" : '')."
 		<div class='txtarea-container' style='height: ".$this->_height.";'><textarea id='".$this->id()."' name='".$this->getName()."' class='".$this->getClass()."'>".$this->_default."</textarea></div>
 		</div>";
 		return $rtn;

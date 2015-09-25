@@ -54,22 +54,33 @@ class TinyEditor
 
     public function get_js(){
 
-        $rtn = 'tinyMCE.init({';
-                    $configs = ''; $i = 0;
-                    foreach ($this->configuration as $name => $value){
-                        $i++;
-                        $configs .= $name.' : "'.$value.'"'.($i>count($this->configuration) ? '' : ',')."\n";
-                    }
-                    $rtn .= $configs . '
-					setup: function(ed){
-						ed.onKeyUp.add(function(ed, e){
-							if (tinyMCE.activeEditor.isDirty())
-								ed.save();
-						});
-					},
-					oninit: function(ed){
-				        switchEditors.go("'.$this->configuration['elements'].'", "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
-					}});
+        $rtn = 'function initMCE(elements){
+
+                    tinyMCE.init({';
+                        $configs = ''; $i = 0;
+                        foreach ($this->configuration as $name => $value){
+                            $i++;
+                            if( $name == 'elements' ){
+                                $configs .= $name . ': elements,' . "\n";
+                            } else {
+                                $configs .= $name.' : "'.$value.'"'.($i>count($this->configuration) ? '' : ',')."\n";
+                            }
+                        }
+                        $rtn .= $configs . '
+                        setup: function(ed){
+                            ed.onKeyUp.add(function(ed, e){
+                                if (tinyMCE.activeEditor.isDirty())
+                                    ed.save();
+                            });
+                        },
+
+                        oninit: function(ed){
+                            switchEditors.go(elements, "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
+                        }
+                    });
+                };
+
+					initMCE("'.$this->configuration['elements'].'");
 				';
 
         return $rtn;

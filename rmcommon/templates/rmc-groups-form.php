@@ -1,7 +1,7 @@
 <?php
 $form = new RMActiveForm(array(
     'id'            => 'form-add-group',
-    'submit-via'    => 'ajax',
+    'data-type'     => 'ajax',
     'validation'    => 'local',
     'action'        => RMCURL.'/groups.php'
 ));

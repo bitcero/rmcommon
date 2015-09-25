@@ -241,7 +241,6 @@ $cu_settings['config'][] = array(
     'options'       => array(
         __('Visual Editor','rmcommon') =>'tiny',
         __('HTML Editor','rmcommon') => 'html',
-        __('XoopsCode Editor','rmcommon') => 'xoops',
         __('Simple Editor','rmcommon') => 'simple',
         __('Markdown Editor','rmcommon') => 'markdown'
     ),

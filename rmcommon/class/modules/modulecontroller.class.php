@@ -169,7 +169,7 @@ abstract class RMModuleController {
     }
 
     /**
-     * Include the appropiate template/view to use with current action
+     * Return the appropiate template/view path to use with current action
      * The view is related to controller and action names.
      *
      * e.g. <code>Controller::action()</code> will return in <code>templates/<strong>controller</strong>/action.php</code> file.
@@ -196,6 +196,31 @@ abstract class RMModuleController {
 
         return $file;
 
+    }
+
+    /**
+     * Build the view/template
+     * @param string $view
+     * @return string
+     */
+    public function renderView( $view = '' ){
+
+        if ( $view == '' )
+            $name = ( str_replace( 'controller', '', $this->controller ) ) . '/' . str_replace("_", "-", $this->action) . '.php';
+        else
+            $name = str_replace( 'controller', '', $this->controller ) . '/' . $view . '.php';
+
+        if ( defined( 'XOOPS_CPFUNC_LOADED' ) )
+            $file = 'backend/' . $name;
+        else
+            $file = 'frontend/' . $name;
+
+        return RMTemplate::get()->render($file, 'module', $this->directory);
+
+    }
+
+    public function display($view = ''){
+        echo $this->renderView($view);
     }
 
     /**

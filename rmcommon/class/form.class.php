@@ -239,6 +239,7 @@ class RMForm
      * @param RMFormElement $element
      * @param bool $required true = Elemento requerido
      * @param string $css_type Content Type: email,url, etc.
+     * @return object
      */
     public function addElement(&$element, $required=false, $css_type=''){
         $element->setForm($this->_name);
@@ -396,7 +397,7 @@ class RMForm
          */
         $form =& $this;
         ob_start();
-        include RMTemplate::get_template('rmc-forms.php','module','rmcommon');
+        include RMTemplate::get()->path('rmc-forms.php','module','rmcommon');
         return ob_get_clean();
 
     }
@@ -406,6 +407,7 @@ class RMForm
     * @param string Nombre de la variable smarty
     * @param string Plantilla que se utilizará
     * @param bool Incluir javascript
+     * @return string
     */
     public function renderForTemplate(){
 
@@ -461,6 +463,7 @@ class RMForm
      * Email, Num, Range y Select.
      * Un rango debe proporcionarse con el formato RangeX,Y
      * @param string $type
+     * @return string
      */
     private function getType($type){
         if ($type=='Email'){
@@ -480,7 +483,7 @@ class RMForm
      */
     public function display($js=true){
     	$form =& $this;
-	    include RMTemplate::get_template('rmc-forms.php','rmcommon');
+	    include RMTemplate::get()->path('rmc-forms.php','module', 'rmcommon');
         //echo $this->render($js);
     }
     /**

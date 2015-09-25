@@ -338,22 +338,22 @@ function edShowButton(which, button, i) {
     }
     switch (button.id) {
         case 'ed_img':
-            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertImage(\'' + which + '\');">' + button.display + '</button>');
+            return '<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertImage(\'' + which + '\');">' + button.display + '</button>';
             break;
         case 'ed_link':
-            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertLink(\'' + which + '\', ' + i + ');">' + button.display + '</button>');
+            return '<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertLink(\'' + which + '\', ' + i + ');">' + button.display + '</button>';
             break;
         case 'ed_ext_link':
-            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertExtLink(\'' + which + '\', ' + i + ');">' + button.display + '</button>');
+            return '<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertExtLink(\'' + which + '\', ' + i + ');">' + button.display + '</button>';
             break;
         case 'ed_footnote':
-            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertFootnote(\'' + which + '\');">' + button.display + '</button>');
+            return '<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertFootnote(\'' + which + '\');">' + button.display + '</button>';
             break;
         case 'ed_via':
-            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertVia(\'' + which + '\');">' + button.display + '</button>');
+            return '<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertVia(\'' + which + '\');">' + button.display + '</button>';
             break;
         default:
-            document.write('<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertTag(\'' + which + '\', ' + i + ');">' + button.display + '</button>');
+            return '<button type="button" id="' + button.id + '_' + which + '" ' + accesskey + ' class="ed_button" onclick="edInsertTag(\'' + which + '\', ' + i + ');">' + button.display + '</button>';
             break;
     }
 }
@@ -364,7 +364,7 @@ function edShowLinks() {
         tempStr += '<option value="' + i + '">' + edLinks[i].display + '</option>';
     }
     tempStr += '</select>';
-    document.write(tempStr);
+    return tempStr;
 }
 
 function edAddTag(which, button) {
@@ -448,38 +448,41 @@ function edSpell(which) {
 }
 
 function edToolbar(which) {
-    document.write('<div id="ed_toolbar_' + which + '"><span>');
+    var toolbar = '';
+    toolbar += '<span>';
     for (i = 0; i < extendedStart; i++) {
-        edShowButton(which, edButtons[i], i);
+        toolbar += edShowButton(which, edButtons[i], i);
     }
     if (edShowExtraCookie()) {
-        document.write(
+        toolbar +=
             '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
             + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');" title="Dictionary"><span class="fa fa-book"></span></button>'
             //+ '<button type="button" id="ed_more_' + which + '" class="ed_button" onclick="edMore(\'' + which + '\');">More</button>'
             + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')"  style="visibility: hidden;"><span class="fa fa-angle-double-right"></span></button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '">'
-            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');"><span class="fa fa-angle-double-left"></span></button>'
-        );
+            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');"><span class="fa fa-angle-double-left"></span></button>';
     }
     else {
-        document.write(
+        toolbar +=
             '<button type="button" id="ed_close_' + which + '" class="ed_button" onclick="edCloseAllTags(\'' + which + '\');">Close Tags</button>'
             + '<button type="button" id="ed_spell_' + which + '" class="ed_button" onclick="edSpell(\'' + which + '\');" title="Dictionary"><span class="fa fa-book"></span></button>'
             //+ '<button type="button" id="ed_more_' + which + '" class="ed_button" onclick="edMore(\'' + which + '\');">More</button>'
             + '<button type="button" id="ed_extra_show_' + which + '" class="ed_button" onclick="edShowExtra(\'' + which + '\')"><span class="fa fa-angle-double-right"></span></button>'
             + '</span><br />'
             + '<span id="ed_extra_buttons_' + which + '" style="display: none;">'
-            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');"><span class="fa fa-angle-double-left"></span></button>'
-        );
+            + '<button type="button" id="ed_extra_hide_' + which + '" class="ed_button" onclick="edHideExtra(\'' + which + '\');"><span class="fa fa-angle-double-left"></span></button>';
     }
     for (i = extendedStart; i < edButtons.length; i++) {
-        edShowButton(which, edButtons[i], i);
+        toolbar += edShowButton(which, edButtons[i], i);
     }
-    document.write('</span>');
-//    edShowLinks();
-    document.write('</div>');
+    toolbar += '</span>';
+
+    if(undefined != which && '' != which){
+        document.getElementById('ed_toolbar_' + which).innerHTML = toolbar;
+    }
+
+    //    edShowLinks();
     edOpenTags[which] = new Array();
 }
 
