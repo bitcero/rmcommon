@@ -5,7 +5,7 @@
 <div class="cu-box">
     <div class="box-header">
         <h5 class="box-title">
-            <?php _e('Elementos Configurables', 'rmcommon'); ?>
+            <?php _e('Configurable Elements', 'rmcommon'); ?>
         </h5>
     </div>
     <div class="box-content">

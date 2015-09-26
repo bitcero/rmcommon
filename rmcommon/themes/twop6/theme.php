@@ -21,18 +21,19 @@
         $jquery_and_bootstrap = array();
 
         $scripts_all = '';
-        if ( isset( $this->tpl_scripts['jquery'] ) )
-            $scripts_all .= '<script id="jquery" type="'.$this->tpl_scripts['jquery']['type'].'" src="'.$this->tpl_scripts['jquery']['url'].'"></script>'."\n";
+        $tpl_scripts = $this->get_scripts();
+        if ( isset( $tpl_scripts['jquery'] ) )
+            $scripts_all .= '<script id="jquery" type="'.$tpl_scripts['jquery']['type'].'" src="'.$tpl_scripts['jquery']['url'].'"></script>'."\n";
 
-        if ( isset( $this->tpl_scripts['jqueryui'] ) )
-            $scripts_all .= '<script id="jqueryui" type="'.$this->tpl_scripts['jqueryui']['type'].'" src="'.$this->tpl_scripts['jqueryui']['url'].'"></script>'."\n";
+        if ( isset( $tpl_scripts['jqueryui'] ) )
+            $scripts_all .= '<script id="jqueryui" type="'.$tpl_scripts['jqueryui']['type'].'" src="'.$tpl_scripts['jqueryui']['url'].'"></script>'."\n";
 
-        if ( isset( $this->tpl_scripts['jsbootstrap'] ) )
-            $scripts_all .= '<script id="jsbootstrap" type="'.$this->tpl_scripts['jsbootstrap']['type'].'" src="'.$this->tpl_scripts['jsbootstrap']['url'].'"></script>'."\n";
+        if ( isset( $tpl_scripts['jsbootstrap'] ) )
+            $scripts_all .= '<script id="jsbootstrap" type="'.$tpl_scripts['jsbootstrap']['type'].'" src="'.$tpl_scripts['jsbootstrap']['url'].'"></script>'."\n";
 
-        unset($this->tpl_scripts['jquery'],$this->tpl_scripts['jqueryui'],$this->tpl_scripts['jsbootstrap']);
+        unset($tpl_scripts['jquery'],$tpl_scripts['jqueryui'],$tpl_scripts['jsbootstrap']);
 
-        foreach ($this->tpl_scripts as $id => $script) {
+        foreach ($tpl_scripts as $id => $script) {
             $type = $script['type'];
             $url = $script['url'];
 
@@ -48,6 +49,9 @@
 
             $extra = '';
             foreach ($script as $name => $value) {
+                if($name == 'required'){
+                    continue;
+                }
                 $extra .= ' ' . $name . '="' . $value . '"';
             }
             $scripts_all .= '<script id="'.$id.'" type="'.$type.'" src="'.$url.'"'.$extra.'></script>'."\n";
