@@ -204,12 +204,21 @@ function download_file(){
     if(!is_dir($target))
         jsonReturn(sprintf(__('Target path "%s" does not exists!','rmcommon'), $target));
 
+    /**
+     * When rmcommon is the module to be updated then we need
+     * to make a backup before to delete files
+     */
+    $excluded = array();
+    if($dir == 'rmcommon'){
+        $excluded = array($target . '/plugins');
+    }
+
     if (is_writable($target) && !empty( $target ) ) {
 
         $target = str_replace( '\\', '/', $target );
 
         // Deletes dir content to replace with new files
-        RMUtilities::delete_directory( $target, false );
+        RMUtilities::delete_directory( $target, false, $excluded );
 
         // Copy new files
         $source = rtrim( str_replace('\\', '/', $source), '/' );

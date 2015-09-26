@@ -128,9 +128,10 @@ class RMUtilities
 	 * Elimina directorios y todos los archivos contenidos
 	 * @param string $path Ruta del directorio
      * @param bool $root Specify if the folder root must be deleted too
+	 * @param array Path of excluded files or folders
 	 * @return bool
 	 */
-	static function delete_directory( $path, $root = true ){
+	static function delete_directory( $path, $root = true, $exclude = array() ){
 		$path = str_replace('\\', '/', $path);
 		if (substr($path, 0, strlen($path) - 1)!='/'){
 			$path .= '/';
@@ -138,6 +139,11 @@ class RMUtilities
 		$dir = opendir($path);
 		while (($file = readdir($dir)) !== false){
 			if ($file == '.' || $file=='..') continue;
+
+			if(in_array( $path . $file, $exclude )){
+				continue;
+			}
+
 			if (is_dir($path . $file)){
 				self::delete_directory($path . $file);
 			} else {
@@ -147,6 +153,35 @@ class RMUtilities
 		closedir($dir);
         if ( $root )
 		    @rmdir($path);
+	}
+
+	static function copy_directory( $source, $target ){
+
+		$source = str_replace('\\', '/', $source);
+		$target = str_replace('\\', '/', $target);
+
+		$source = rtrim($source, '/');
+		$target = rtrim($target, '/');
+
+		if(!is_dir($source) || !is_dir($target)){
+			return false;
+		}
+
+		$dir = opendir($source);
+
+		while (($file = readdir($dir)) !== false){
+			if ($file == '.' || $file=='..'){
+				continue;
+			}
+
+			if (is_dir($source . '/' . $file)){
+				self::copy_directory($source . '/' . $file, $target . '/' . $file);
+			} else {
+				copy($source . '/' . $file, $target . '/' . $file);
+			}
+		}
+		closedir($dir);
+		return true;
 	}
 
     /**
