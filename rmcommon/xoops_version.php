@@ -249,8 +249,8 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'markdown',
-    'title'         => __('Parse markdown','rmcommon'),
-    'description'   => __('This option enables the parsing fo Markdown code for text. This optiosn must be enabled when "Markdown Editor" is selected.', 'rmcommon'),
+    'title'         => __('Parse MarkDown','rmcommon'),
+    'description'   => __('This option enables the parsing for Markdown code for text. Must be enabled when "Markdown Editor" is selected.', 'rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
     'default'       => 1,
