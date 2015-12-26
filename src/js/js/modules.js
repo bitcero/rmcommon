@@ -59,7 +59,7 @@ $(document).ready(function(){
 
     $("a.data_button").click(function(){
 
-        var id = $(this).parent().parent().parent().attr("id");
+        var id = $(this).parents('tr').attr("id");
         var sdata = "#"+id+" .hidden_data";
 
         $("#info-module .header img").attr("src", $(sdata+" .image").html());
@@ -91,7 +91,11 @@ $(document).ready(function(){
 
         $("#info-module .social").html($(sdata+" .social").html());
 
-        $("#info-module").modal();
+        var $ele = $("#info-module");
+        $ele.detach();
+
+        $("body").append($ele);
+        $ele.modal();
 
         return false;
 

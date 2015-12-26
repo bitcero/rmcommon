@@ -1,0 +1,129 @@
+.system-tools > .nav-pills > li > a{
+  display: block;
+  padding: 6px 10px;
+}
+.th{
+  padding-top: 7px!important;
+  padding-bottom: 7px!important;
+}
+
+#mods-list{
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 320px;
+}
+#mods-list > .row{
+  margin-right: -5px;
+  margin-left: -5px;
+}
+.installed-item{
+  padding: 5px 0;
+  position: relative;
+  min-height: 58px;
+  border-radius: 2px;
+  line-height: 1.5em;
+  margin: 0 -10px 5px -10px;
+  text-align: center;
+}
+.installed-item:hover{
+  background: rgba(255,255,255,0.05);
+}
+.installed-item > a{
+  text-decoration: none;
+}
+.installed-item > .icon{
+  display: block;
+  padding: 5px;
+  text-align: center;
+}
+.installed-item > .name{
+  font-style: italic;
+}
+.installed-item > .name > a{
+  font-weight: bold;
+  font-style: normal;
+}
+.installed-item > .version{
+  display: block;
+  font-size: 0.9em;
+}
+.installed-item > .options{
+  display: block;
+  font-size: 1.1em;
+}
+.installed-item > .options > a{
+  display: inline-block;
+  padding: 0 4px;
+  width: 24px;
+  line-height: 18px;
+  border-radius: 2px;
+  text-decoration: none;
+}
+.modimg{
+  width: 42px;
+  display: block;
+  height: 42px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  float: left;
+  margin: 0 5px 3px 0;
+}
+
+.news_item{
+  padding: 0 0 8px 0;
+  margin-bottom: 5px;
+  border-bottom: 1px dotted #CCC;
+  overflow: hidden;
+}
+#rmc-recent-news .news_item:last-child{
+  border-bottom: none;
+}
+.news_item h3{
+  margin: 0 0 10px 0;
+  font-size: 15px;
+}
+.news_item a.thumb{
+  display: none;
+}
+.news_item .news_content{
+  line-height: 150%;
+  color: #666;
+  font-size: 12px;
+}
+.news_item:nth-child(1) .link:before,
+.news_item:nth-child(2) .link:before{
+  content: '';
+  display: block;
+}
+.news_item:nth-child(n+3) .news_content{
+  display: none;
+}
+.news_item:nth-child(n+3) h3{
+  margin: 0;
+  display: inline-block;
+}
+.news_item:nth-child(n+3) .link{
+  display: inline-block;
+}
+
+.available-list li{
+  position: relative;
+  padding: 10px 5px 10px 58px;
+  min-height: 58px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.available-list li:first-child{
+  padding-top: 0;
+}
+.available-list li > .module-icon{
+  position: absolute;
+  left: 0; top: 5px;
+  width: 48px;
+}
+.available-list li > .module-description{
+  font-size: 0.9em;
+  color: #575757;
+  display: block;
+  margin-bottom: 5px;
+}

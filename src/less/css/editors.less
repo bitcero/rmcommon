@@ -1,0 +1,252 @@
+/*
+This file contains styles for editors fields.
+The editors can have similar elements like
+dropdowns, buttons, plugins, etc. This file
+allows them to unify those styles in order
+to maintain a coherent appearance
+*/
+.ed-container{
+
+  transition: ease-in-out all 350ms;
+
+  .ed-buttons, .quicktags{
+    background: #f9f9f9;
+    margin-bottom: -2px;
+    border: 1px solid #E6E6E6;
+    border-bottom: 0;
+    padding: 4px 6px 6px;
+    transition: ease-in-out all 350ms;
+
+    .command, .button-dropdown{
+      border-radius: 2px;
+      padding: 0 6px;
+      font-size: 14px;
+      font-weight: normal;
+      color: #666;
+      border: 1px solid transparent;
+      margin: 1px;
+      text-shadow: none;
+      background: transparent;
+      box-shadow: none;
+      line-height: 36px;
+      height: 36px;
+      text-align: center;
+      min-width: 36px;
+      outline: 0;
+      vertical-align: middle;
+      display: inline-block;
+
+      &:hover{
+        border-color: rgba(0,0,0,0.08);
+        background-color: #fff;
+        color: #333;
+      }
+      .fa{
+        font-size: 14px;
+      }
+    }
+
+  }
+
+  .ed-plugins{
+    padding: 4px 0;
+
+    .plugin{
+      display: inline-block;
+      border: 1px solid rgba(0,0,0,0);
+      background-color: transparent;
+      color: #666;
+      outline: 0;
+      line-height: 1;
+      vertical-align: text-bottom;
+
+      > a, > .button{
+        background: transparent;
+        line-height: 32px;
+        border: 0;
+        padding: 0 8px;
+        box-shadow: none;
+        display: block;
+        color: #666;
+        font-size: .8em;
+
+        > .caption{
+          margin-left: 3px;
+          display: none;
+          text-transform: uppercase;
+        }
+
+      }
+
+      .fa, .icon, .glyphicon{
+        font-size: 18px;
+        line-height: 1;
+        vertical-align: middle;
+      }
+
+      .cu-icon{
+        fill: currentColor;
+        display: inline-block;
+        line-height: 1;
+        vertical-align: text-top;
+        vertical-align: middle;
+        height: 18px;
+
+        svg{
+          height: 18px;
+          min-width: 18px;
+        }
+      }
+
+      &:hover{
+        background-color: #fff;
+        border-color: rgba(0,0,0,0.15);
+      }
+    }
+
+    .full-screen, .normal-screen{
+      float: right;
+      line-height: 32px !important;
+      border: 0;
+      padding: 0 8px;
+      box-shadow: none;
+      display: block;
+      color: #666;
+      cursor: pointer;
+
+      .cu-icon{
+        display: none;
+      }
+    }
+
+    .full-screen > .cu-icon:first-child{
+      display: inline-block;
+    }
+    .normal-screen > .cu-icon:last-child{
+      display: inline-block;
+    }
+  }
+
+  textarea{
+    box-sizing: border-box;
+  }
+
+}
+
+.button-dropdown {
+  position: relative;
+  padding: 0!important;
+
+  > button.command {
+    position: relative;
+    marign: 0;
+    display: block;
+    border: 0!important;
+
+    // Bring the "active" button to the front
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      border: 0;
+      background-color: transparent!important;
+      box-shadow: none!important;
+      z-index: 2;
+    }
+  }
+}
+
+.button-dropdown > .command + .dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.button-group.open .dropdown-toggle {
+  box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+
+// The dropdown menu (ul)
+.editor-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none; // none by default, but block on "open" of the menu
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0; // override default ul
+  list-style: none;
+  font-size: inherit;
+  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+  background-color: #FFF;
+  border: 1px solid #CCC; // IE8 fallback
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 0;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+
+  // Aligns the dropdown menu to right
+  //
+  // Deprecated as of 3.1.0 in favor of `.editor-menu-[dir]`
+  &.pull-right {
+    right: 0;
+    left: auto;
+  }
+
+  // Dividers (basically an hr) within the dropdown
+  .divider {
+    height: 1px;
+    margin: 5px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+  }
+
+  // Links within the dropdown menu
+  > li {
+
+    > a {
+      display: block;
+      padding: 3px 20px;
+      clear: both;
+      font-weight: normal;
+      line-height: 1.4;
+      color: inherit;
+      white-space: nowrap; // prevent links from randomly breaking onto new lines
+    }
+
+    &:hover{
+      background-color: rgba(0,0,0,0.05);
+    }
+
+  }
+
+  button{
+    background: transparent;
+    border: 0;
+    width: 100%;
+    text-align: left;
+    padding: 4px 10px;
+    line-height: 20px;
+  }
+}
+
+.open {
+  // Show the menu
+  > .editor-menu {
+    display: block;
+  }
+
+  // Remove the outline when :focus is triggered
+  > a {
+    outline: 0;
+  }
+}
+
+.window-title{
+  background: rga(0,0,0,0.8);
+  color: #FFF;
+
+  .close{
+    float: right;
+  }
+}

@@ -34,6 +34,8 @@ if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
 	    public function header(){
 		    global $xoopsConfig, $xoopsUser, $xoopsModule, $xoTheme, $xoopsTpl;
 		    parent::header();
+
+            RMTemplate::getInstance()->add_jquery(false, true);
 		    
 		    if ($xoopsModule && !$xoopsModule->getInfo('rmnative'))
 			    RMTemplate::get()->add_script(XOOPS_URL.'/include/xoops.js');
