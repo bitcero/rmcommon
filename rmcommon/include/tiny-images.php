@@ -102,9 +102,10 @@ if ($action=='') {
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
     RMTemplate::get()->add_style('popup-images-manager.css', 'rmcommon');
+
     if ($type=='tiny' && $target!='container') {
         RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce_popup.js');
-    } elseif ($target!='container'&&$type!='external') {
+    } elseif ($target!='container'&&$type!='external'&&$type!='markdown') {
         RMTemplate::get()->add_head_script('var exmPopup = window.parent.exmCode'.ucfirst($container).';');
     }
 

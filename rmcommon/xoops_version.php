@@ -15,7 +15,7 @@ if (!function_exists("__")){
 }
 
 $modversion['name'] = 'Common Utilities';
-$modversion['version'] = 2.2;
+$modversion['version'] = 2.3;
 $modversion['releasedate'] = "";
 $modversion['status'] = "Beta";
 $modversion['description'] = 'Contains a lot of classes and functions used by Red México Modules';
@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>2,'revision'=>99,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>0,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -216,7 +216,7 @@ $cu_settings['config'][] = array(
     'description'   => '',
     'formtype'      => 'cu-theme',
     'valuetype'     => 'text',
-    'default'       => 'twop6',
+    'default'       => 'helium',
     'category'      => 'appearance'
 );
 
@@ -264,7 +264,7 @@ $cu_settings['config'][] = array(
     'description'   => __('When this option is enabled, Common Utilities will include JQuery automatically. Please, disable this option only when your theme include jquery by default.','rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
-    'default'       => '1',
+    'default'       => '0',
     'category'      => 'general'
 );
 
@@ -308,7 +308,7 @@ $cu_settings['config'][] = array(
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => $xoopsSecurity->createToken(),
+    'default'       => defined('RMCPATH') ? '' : $xoopsSecurity->createToken(),
     'category'      => 'general'
 );
 
@@ -578,7 +578,7 @@ $cu_settings['config'][] = array(
 
 // Additional configurations
 if( class_exists('RMEvents') ){
-    $cu_settings = RMEvents::get()->run_event('rmcommon.addtional.options', $cu_settings);
+    $cu_settings = RMEvents::get()->run_event('rmcommon.additional.options', $cu_settings);
 }
 
 $modversion['categories']   = $cu_settings['categories'];

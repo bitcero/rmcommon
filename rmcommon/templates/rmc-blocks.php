@@ -175,7 +175,7 @@
                         <div id="position-<?php echo $pos['id']; ?>" class="cu-box rmc-position-item" data-id="<?php echo $pos['id']; ?>">
                             <div class="box-header">
                                 <span class="fa fa-caret-up box-handler"></span>
-                                <h3><?php echo $pos['name']; ?><img src="images/ok.png"></h3>
+                                <h3 class="box-title"><?php echo $pos['name']; ?><img src="images/ok.png"></h3>
                             </div>
                             <div class="dd box-content collapsable" data-pos="<?php echo $pos['id']; ?>">
 

@@ -53,7 +53,7 @@ function rmc_server_var($from, $key, $default=''){
 }
 
 function showMessage($message, $level=0, $icon = ''){
-    $i = isset($_SESSION['cu_redirect_message']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
+    $i = isset($_SESSION['cu_redirect_messages']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
     $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
     $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
     $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;

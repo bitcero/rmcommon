@@ -26,6 +26,12 @@ class RMTemplate
     public $tpl_scripts = array();
     public $tpl_hscripts = array();
     public $tpl_fscripts = array();
+
+    /**
+     *
+     */
+    private $attributes = [];
+
     /**
      * Stores all styles for HEAD section
      */
@@ -68,16 +74,19 @@ class RMTemplate
      */
     private $body_classes = array();
 
-    /**
-     * At this moment this method do nothing
-     * Maybe later i will add some functionality... i must to think ;)
-     */
     function __construct()
     {
         global $cuSettings;
 
-        if (!function_exists("xoops_cp_header") && !$cuSettings->jquery) return;
         $this->version = str_replace(" ", '-', RMCVERSION);
+
+        if(defined('XOOPS_CPFUNC_LOADED')){
+            $this->add_jquery(true);
+            return true;
+        }
+
+        if ($cuSettings->jquery) return true;
+
         $this->add_jquery(true);
 
     }
@@ -228,14 +237,14 @@ class RMTemplate
             $where .= $type == 'plugin' ? '/plugins/' . $element : '';
             $lpath = RMCPATH . '/themes/' . $theme . '/' . $where . '/' . $file;
         } else {
-            $where = 'modules/'. $module . '/builders/' . $module;
+            $where = 'modules/' . $module . '/builders/' . $module;
             $lpath = RMCPATH . '/themes/' . $theme . '/builders/' . $file;
         }
 
         if (file_exists($lpath))
             return $lpath;
 
-        if( 'builder' == $type ){
+        if ('builder' == $type) {
             return XOOPS_ROOT_PATH . '/modules/' . $module . '/templates/builders/' . $file;
         } else {
             return XOOPS_ROOT_PATH . '/' . $where . '/templates/' . $file;
@@ -271,10 +280,20 @@ class RMTemplate
      * @param string $element
      * @return string
      */
-    public function render($file, $type = 'module', $module = '', $element = '')
+    public function render($file, $type = '', $module = '', $element = '')
     {
-        global $cuSettings, $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
-        $template = $this->path($file, $type, $module, $element);
+        global $cuSettings,
+               $xoopsConfig,
+               $xoopsModule,
+               $xoopsModuleConfig,
+               $cuIcons,
+               $cuServices;
+
+        if('' == $type && is_file($file)){
+            $template = $file;
+        } else {
+            $template = $this->path($file, $type, $module, $element);
+        }
 
         /**
          * We extract all assigned variables
@@ -287,7 +306,8 @@ class RMTemplate
 
     }
 
-    public function display($file, $type = 'module', $module = '', $element = ''){
+    public function display($file, $type = 'module', $module = '', $element = '')
+    {
         echo $this->render($file, $type, $module, $element);
     }
 
@@ -463,7 +483,7 @@ class RMTemplate
 
         $idProvided = false;
 
-        if(array_key_exists('id', $options) && '' != $options['id']){
+        if (array_key_exists('id', $options) && '' != $options['id']) {
             $id = $options['id'];
             $idProvided = true;
 
@@ -471,8 +491,9 @@ class RMTemplate
             $id = TextCleaner::getInstance()->sweetstring($file);
         }
 
-        if ($file == 'jquery.min.js' || $cuSettings->cdn_jquery_url == $file)
+        if ($file == 'jquery.min.js' || $cuSettings->cdn_jquery_url == $file) {
             return $this->add_jquery(false);
+        }
 
         if (FALSE !== strpos($file, 'bootstrap.js') || FALSE !== strpos($file, 'bootstrap.min.js') && 'theme' != $owner)
             return $this->add_bootstrap('js');
@@ -488,14 +509,14 @@ class RMTemplate
 
         if ($remote_script > 0) {
 
-            if (!$idProvided){
+            if (!$idProvided) {
                 $id = TextCleaner::getInstance()->sweetstring(preg_replace("/.*\/(.*)$/", "$1", $file));
             }
             $script_url = $file;
 
         } else {
 
-            if(!$idProvided){
+            if (!$idProvided) {
                 $id = TextCleaner::getInstance()->sweetstring($element . $file);
             }
             $script_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-js' : 'js', $directory, $version);
@@ -505,7 +526,7 @@ class RMTemplate
         if ($script_url == '')
             return false;
 
-        if(array_key_exists($id, $this->tpl_scripts) && $this->tpl_scripts[$id]['url'] != $script_url){
+        if (array_key_exists($id, $this->tpl_scripts) && $this->tpl_scripts[$id]['url'] != $script_url) {
             $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
             trigger_error(sprintf(__('Script %s will be replaced for new value in file %s on line %s', 'classifieds'), '<strong>' . $id . '</strong>',
                 '<strong>' . $trace[0]['file'] . '</strong>', '<strong>' . $trace[0]['line'] . '</strong>'));
@@ -665,11 +686,11 @@ class RMTemplate
     /**
      * Add jQuery script to site header
      */
-    public function add_jquery($ui = true, $local = true)
+    public function add_jquery($ui = true, $force = false)
     {
         global $cuSettings;
 
-        if (!$cuSettings->jquery) return true;
+        if (!$cuSettings->jquery && !$force) return true;
 
         if (isset($this->tpl_scripts['jquery']))
             return true;
@@ -790,22 +811,36 @@ class RMTemplate
     /**
      * Get all scripts stored in class
      */
-    public function get_scripts( $make = false )
+    public function get_scripts($make = false)
     {
         $ev = RMEvents::get();
         $this->tpl_scripts = $ev->run_event('rmcommon.get.scripts', $this->tpl_scripts);
 
         $this->process_scripts();
 
-        if(!$make){
+        if (!$make) {
             return $this->tpl_scripts;
         }
 
-        $rtn = '';
-        foreach($this->tpl_scripts as $id => $script){
-            $rtn .= "\n" . '<script type="' . $script['type'] . '" id="' . $id . '" src="' . $script['url'] .
-                '"></script>';
+        $rtn = array('footer' => '', 'header' => '');
+        foreach ($this->tpl_scripts as $id => $script) {
+            if ($script['footer']) {
+                $rtn['footer'] .= "\n" . '<script type="' . $script['type'] . '" id="' . $id . '" src="' . $script['url'] .
+                    '"></script>';
+            } else {
+                $rtn['header'] .= "\n" . '<script type="' . $script['type'] . '" id="' . $id . '" src="' . $script['url'] .
+                    '"></script>';
+            }
         }
+
+        if (!empty($this->tpl_head)) {
+            foreach ($this->tpl_head as $script) {
+                $rtn['heads'] = $script . "\n";
+            }
+        } else {
+            $rtn['heads'] = '';
+        }
+
         return $rtn;
 
     }
@@ -814,17 +849,23 @@ class RMTemplate
      * This function recreates the scripts array in order to
      * verify accomplish of dependencies
      */
-    private function process_scripts(){
+    private function process_scripts()
+    {
 
         $scripts = [];
         $missing = [];
 
-        foreach($this->tpl_scripts as $id => $item){
-            if(!array_key_exists('required', $item)){
+        if(array_key_exists('jquery', $this->tpl_scripts)){
+            $scripts['jquery'] = $this->tpl_scripts['jquery'];
+            unset($this->tpl_scripts['jquery']);
+        }
+
+        foreach ($this->tpl_scripts as $id => $item) {
+            if (!array_key_exists('required', $item)) {
                 $scripts[$id] = $item;
             }
 
-            if(array_key_exists('required', $item) && array_key_exists($item['required'], $scripts)){
+            if (array_key_exists('required', $item) && array_key_exists($item['required'], $scripts)) {
                 $scripts = $this->insert_script_after($scripts, $item['required'], $id, $item);
             } else {
                 $missing[$id] = $item;
@@ -833,16 +874,16 @@ class RMTemplate
         }
 
         // Now read $missing array
-        foreach( $missing as $id => $script){
+        foreach ($missing as $id => $script) {
 
             // Check if script has been added
-            if(array_key_exists('required', $script) && array_key_exists($script['required'], $scripts)){
+            if (array_key_exists('required', $script) && array_key_exists($script['required'], $scripts)) {
                 $scripts = $this->insert_script_after($scripts, $script['required'], $id, $script);
                 continue;
             }
 
             // Check is required script exists in missing array
-            if(array_key_exists('required', $script) && array_key_exists($script['required'], $missing)){
+            if (array_key_exists('required', $script) && array_key_exists($script['required'], $missing)) {
                 $scripts[$script['required']] = $missing[$script['required']];
                 $scripts = $this->insert_script_after($scripts, $script['required'], $id, $script);
                 continue;
@@ -857,15 +898,16 @@ class RMTemplate
 
     }
 
-    private function insert_script_after($scripts, $required, $id, $data){
+    private function insert_script_after($scripts, $required, $id, $data)
+    {
 
         $total = count($scripts);
         $return = array();
 
-        foreach($scripts as $ids => $script){
+        foreach ($scripts as $ids => $script) {
             $return[$ids] = $script;
 
-            if($ids == $required && !array_key_exists($id, $scripts)){
+            if ($ids == $required && !array_key_exists($id, $scripts)) {
                 $return[$id] = $data;
             }
         }
@@ -966,17 +1008,17 @@ class RMTemplate
     /**
      * Get all styles stored in class
      */
-    public function get_styles( $make = false )
+    public function get_styles($make = false)
     {
         $ev = RMEvents::get();
         $this->tpl_styles = $ev->run_event('rmcommon.get.styles', $this->tpl_styles);
 
-        if( !$make ) {
+        if (!$make) {
             return $this->tpl_styles;
         }
 
         $rtn = '';
-        foreach($this->tpl_styles as $id => $style){
+        foreach ($this->tpl_styles as $id => $style) {
             $rtn .= "\n" . '<link rel="stylesheet" type="' . $style['type'] . '" id="' . $id . '" href="' .
                 $style['url'] . '">';
         }
@@ -1217,6 +1259,62 @@ class RMTemplate
     public function body_classes()
     {
         return implode(" ", $this->body_classes);
+    }
+
+    /**
+     * Assign attributes to an element
+     * Currently, valid elements only are html and body
+     * @param $element
+     * @param array $attributes
+     * @return mixed
+     */
+    public function add_attribute($element, $attributes){
+
+        if(!in_array($element, ['html', 'body'])){
+            return false;
+        }
+
+        foreach($attributes as $id => $value){
+            $this->attributes[$element][$id] = $value;
+        }
+
+        return true;
+
+    }
+
+    public function clear_attributes($element){
+        if(!in_array($element, ['html', 'body'])){
+            return false;
+        }
+
+        $attributes = [];
+
+        foreach( $this->attributes as $id => $attrs){
+            if($id == $element){
+                continue;
+            }
+
+            $attributes[$id] = $attrs;
+        }
+
+        return true;
+    }
+
+    public function render_attributes($element){
+        if(!in_array($element, ['html', 'body'])){
+            return false;
+        }
+
+        if(!array_key_exists($element, $this->attributes)){
+            return null;
+        }
+
+        $return = '';
+        foreach($this->attributes[$element] as $id => $value){
+            $return .= $id . '="' . $value . '" ';
+        }
+
+        return trim($return);
     }
 
     /*

@@ -1,0 +1,103 @@
+/*
+ TABS IN PANELS
+*/
+.panel{
+
+  > .nav-tabs{
+    padding: 15px 15px 0;
+
+    > li{
+
+      > a{
+        &:hover{
+          background-color: rgba(255,255,255,0.5);
+          //border-color: transparent;
+        }
+      }
+
+      &.active{
+        > a{
+          color: @text-color;
+
+          &:hover{
+            color: @text-color;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  > .panel-heading + .nav-tabs{
+    padding-top: 0;
+  }
+
+}
+
+.panel-default{
+  > .panel-heading + .nav-tabs{
+    padding-top: 15px;
+  }
+}
+
+.panel-red {
+  .panel-variant(@color-red; @color-text-red; @color-red; @color-red);
+}
+.panel-pink {
+  .panel-variant(@color-pink; @color-text-pink; @color-pink; @color-pink);
+}
+.panel-purple {
+  .panel-variant(@color-purple; @color-text-purple; @color-purple; @color-purple);
+}
+.panel-deep-purple {
+  .panel-variant(@color-deep-purple; @color-text-deep-purple; @color-deep-purple; @color-deep-purple);
+}
+.panel-indigo {
+  .panel-variant(@color-indigo; @color-text-indigo; @color-indigo; @color-indigo);
+}
+.panel-blue {
+  .panel-variant(@color-blue; @color-text-blue; @color-blue; @color-blue);
+}
+.panel-light-blue {
+  .panel-variant(@color-light-blue; @color-text-light-blue; @color-light-blue; @color-light-blue);
+}
+.panel-cyan {
+  .panel-variant(@color-cyan; @color-text-cyan; @color-cyan; @color-cyan);
+}
+.panel-teal {
+  .panel-variant(@color-teal; @color-text-teal; @color-teal; @color-teal);
+}
+.panel-green {
+  .panel-variant(@color-green; @color-text-green; @color-green; @color-green);
+}
+.panel-light-green {
+  .panel-variant(@color-light-green; @color-text-light-green; @color-light-green; @color-light-green);
+}
+.panel-lime {
+  .panel-variant(@color-lime; @color-text-lime; @color-lime; @color-lime);
+}
+.panel-yellow {
+  .panel-variant(@color-yellow; @color-text-yellow; @color-yellow; @color-yellow);
+}
+.panel-amber {
+  .panel-variant(@color-amber; @color-text-amber; @color-amber; @color-amber);
+}
+.panel-orange {
+  .panel-variant(@color-orange; @color-text-orange; @color-orange; @color-orange);
+}
+.panel-deep-orange {
+  .panel-variant(@color-deep-orange; @color-text-deep-orange; @color-deep-orange; @color-deep-orange);
+}
+.panel-brown {
+  .panel-variant(@color-brown; @color-text-brown; @color-brown; @color-brown);
+}
+.panel-grey {
+  .panel-variant(@color-grey; @color-text-grey; @color-grey; @color-grey);
+}
+.panel-blue-grey {
+  .panel-variant(@color-blue-grey; @color-text-blue-grey; @color-blue-grey; @color-blue-grey);
+}
+.panel-midnight {
+  .panel-variant(@color-midnight; @color-text-midnight; @color-midnight; @color-midnight);
+}

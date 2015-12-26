@@ -21,101 +21,68 @@ class RMFormText extends RMFormElement
 	
 	/**
 	 * Constructor de la clase
-	 * @param sring $caption Texto de la etiqueta
+	 * @param string|array $caption Texto de la etiqueta
 	 * @param string $name Nombre del campo
 	 * @param int $size Longitud del campo
 	 * @param int $max Longitud m?xima de car?cteres del campo
 	 * @param string $value Valor por defecto
 	 * @param bol $password True muestra un campo password
 	 */
-	function __construct($caption, $name, $size=50, $max=255, $value='',$password=false, $enabled=true){
-		$this->setName($name);
-		$this->setCaption($caption);
-		$this->_size = $size;
-		$this->_max = $max;
-		$this->_value = $value;
-		$this->_password = $password;
-		$this->_enabled = $enabled;
+	function __construct($caption, $name = null, $size=10, $maxlength=64, $value='',$password=false, $enabled=true){
+
+        if(is_array($caption)){
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('size', $size, 10);
+            $this->setWithDefaults('maxlength', $maxlength, 64);
+            $this->set('value', $value);
+        }
+
+        $this->setIfNotSet('type', 'text');
+        $this->setIfNotSet('value', '');
 	}
-	/**
-	 * Establece el tam?o del campo.
-	 * @param int $size Longitud del campo
-	 */
-	public function setSize($size){
-		$this->_size = $size;
-	}
+
 	/**
 	 * Recupera la longitud del campo
 	 * @return int
 	 */
 	public function getSize(){
-		return $this->_size;
+        return (int) $this->get('size');
 	}
-	/**
-	 * Establece el n?mero m?ximo de car?cteres en el campo
-	 * @param int $max N?mero de car?cteres
-	 */
-	public function setMax($max){
-		$this->_max = $max;
-	}
+
 	/**
 	 * Recupera el n?mero de car?cteres
 	 * @return int
 	 */
 	public function getMax(){
-		return $this->_max;
+        return (int) $this->get('maxlength');
 	}
-	/**
-	 * Establece el texto inicial del campo
-	 * @param string $value Texto
-	 */
-	public function setValue($value){
-		$this->_value = $value;
-	}
-	/**
-	 * Recupera el texto incial del campo
-	 * @return string
-	 */
-	public function getValue(){
-		return $this->_value;
-	}
-	/**
-	 * Establece si el campo se muestra como un campo password
-	 * @param bol $value true o false (Por defecto False)
-	 */
-	public function setPassword($value=false){
-		$this->_password = $value;
-	}
-	/**
-	 * Devuelve si el campo se muestra como password
-	 * @return bol
-	 */
-	public function getPassword(){
-		return $this->_password;
-	}
+
+    public function getValue($encoded = false){
+        if($encoded){
+            $value = htmlspecialchars($this->get('value', ''), ENT_QUOTES);
+        } else{
+            $value = $this->get('value', '');
+        }
+        return $value;
+    }
+
 	/**
 	 * Devuelve el c?digo HTML para mostrar el campo.
 	 * @return string
 	 */
 	public function render(){
-        if(!is_numeric($this->_size))
-            $this->_size = 50;
-            
-		$ret = '<input type="'.($this->_password ? 'password' :'text').'" size="'.$this->_size.'" name="'.$this->getName().'" id="'.$this->id().'"'.($this->getMax()>0 ? ' maxlength="'.$this->getMax().'"' : '').' value="'.(isset($_REQUEST[$this->getName()]) ? $_REQUEST[$this->getName()] : $this->getValue()).'" ';
-        $ret .= 'class="form-control ';
-		if ($this->getClass() != '')
-			$ret .= $this->getClass();
 
-        $ret .= '" '.$this->getExtra();
-
-        foreach( $this->attrs as $name => $value ){
-
-            $ret .= $name . '="' . $value . '" ';
-
+        if($this->has('datalist')){
+            $this->add('list', 'list_' . $this->getName());
         }
-		
-		$ret .= ($this->_enabled ? '' : ' disabled="disabled"').'>';
-		return $ret;
+
+        $attributes = $this->renderAttributeString();
+
+		return '<input ' . $attributes . ' ' . $this->getExtra() . '>';
 	}
 }
 

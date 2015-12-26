@@ -1,10 +1,10 @@
 <?php
+
 /**
  * This code is a modified fragment taken from Wordpress.
  * The idea is to provide the functionallity of shortcodes
  * directly on XOOPS using rmcommon
  */
-
 class RMCustomCode
 {
     /**
@@ -12,7 +12,11 @@ class RMCustomCode
      */
     private $custom_codes = array();
 
-    static function get(){
+    /**
+     * @return RMCustomCode
+     */
+    static function get()
+    {
         static $instance;
 
         if (isset($instance))
@@ -34,7 +38,7 @@ class RMCustomCode
      * <code>
      * // [footag foo="bar"]
      * function footag_func($atts) {
-     * 	return "foo = {$atts[foo]}";
+     *    return "foo = {$atts[foo]}";
      * }
      * add_customcode('footag', 'footag_func');
      * </code>
@@ -44,12 +48,12 @@ class RMCustomCode
      * <code>
      * // [bartag foo="bar"]
      * function bartag_func($atts) {
-     * 	extract(customcode_atts(array(
-     * 		'foo' => 'no foo',
-     * 		'baz' => 'default baz',
-     * 	), $atts));
+     *    extract(customcode_atts(array(
+     *        'foo' => 'no foo',
+     *        'baz' => 'default baz',
+     *    ), $atts));
      *
-     * 	return "foo = {$foo}";
+     *    return "foo = {$foo}";
      * }
      * add_customcode('bartag', 'bartag_func');
      * </code>
@@ -59,7 +63,7 @@ class RMCustomCode
      * <code>
      * // [baztag]content[/baztag]
      * function baztag_func($atts, $content='') {
-     * 	return "content = $content";
+     *    return "content = $content";
      * }
      * add_customcode('baztag', 'baztag_func');
      * </code>
@@ -70,10 +74,12 @@ class RMCustomCode
      * @param string $tag customcode tag to be searched in post content.
      * @param callable $func Hook to run when customcode is found.
      */
-    function add($tag, $func) {
+    function add($tag, $func)
+    {
 
-        if ( is_callable($func) )
+        if (is_callable($func)) {
             $this->custom_codes[$tag] = $func;
+        }
 
     }
 
@@ -85,7 +91,8 @@ class RMCustomCode
      *
      * @param string $tag customcode tag to remove hook for.
      */
-    function remove($tag) {
+    function remove($tag)
+    {
 
         unset($this->custom_codes[$tag]);
     }
@@ -100,7 +107,8 @@ class RMCustomCode
      * @since 2.5
      * @uses $customcode_tags
      */
-    function removeAll() {
+    function removeAll()
+    {
 
         $this->custom_codes = array();
 
@@ -120,13 +128,14 @@ class RMCustomCode
      * @param string $content Content to search for customcodes
      * @return string Content with customcodes filtered out.
      */
-    function doCode($content) {
+    function doCode($content)
+    {
 
-        if (empty($this->custom_codes) || !is_array($this->custom_codes))
+        if (empty($this->custom_codes) || !is_array($this->custom_codes)) {
             return $content;
-
+        }
         $pattern = $this->getRegex();
-        return preg_replace_callback( "/$pattern/s", array($this, 'doTag'), $content );
+        return preg_replace_callback("/$pattern/s", array($this, 'doTag'), $content);
     }
 
     /**
@@ -149,10 +158,11 @@ class RMCustomCode
      *
      * @return string The customcode search regular expression
      */
-    function getRegex() {
+    function getRegex()
+    {
 
         $tagnames = array_keys($this->custom_codes);
-        $tagregexp = join( '|', array_map('preg_quote', $tagnames) );
+        $tagregexp = join('|', array_map('preg_quote', $tagnames));
 
         // WARNING! Do not change this regex without changing do_customcode_tag() and strip_customcode_tag()
         // Also, see customcode_unautop() and customcode.js.
@@ -162,34 +172,34 @@ class RMCustomCode
             . "($tagregexp)"                     // 2: customcode name
             . '(?![\\w-])'                       // Not followed by word character or hyphen
             . '('                                // 3: Unroll the loop: Inside the opening customcode tag
-            .     '[^\\]\\/]*'                   // Not a closing bracket or forward slash
-            .     '(?:'
-            .         '\\/(?!\\])'               // A forward slash not followed by a closing bracket
-            .         '[^\\]\\/]*'               // Not a closing bracket or forward slash
-            .     ')*?'
+            . '[^\\]\\/]*'                   // Not a closing bracket or forward slash
+            . '(?:'
+            . '\\/(?!\\])'               // A forward slash not followed by a closing bracket
+            . '[^\\]\\/]*'               // Not a closing bracket or forward slash
+            . ')*?'
             . ')'
             . '(?:'
-            .     '(\\/)'                        // 4: Self closing tag ...
-            .     '\\]'                          // ... and closing bracket
+            . '(\\/)'                        // 4: Self closing tag ...
+            . '\\]'                          // ... and closing bracket
             . '|'
-            .     '\\]'                          // Closing bracket
-            .     '(?:'
-            .         '('                        // 5: Unroll the loop: Optionally, anything between the opening and closing customcode tags
-            .             '[^\\[]*+'             // Not an opening bracket
-            .             '(?:'
-            .                 '\\[(?!\\/\\2\\])' // An opening bracket not followed by the closing customcode tag
-            .                 '[^\\[]*+'         // Not an opening bracket
-            .             ')*+'
-            .         ')'
-            .         '\\[\\/\\2\\]'             // Closing customcode tag
-            .     ')?'
+            . '\\]'                          // Closing bracket
+            . '(?:'
+            . '('                        // 5: Unroll the loop: Optionally, anything between the opening and closing customcode tags
+            . '[^\\[]*+'             // Not an opening bracket
+            . '(?:'
+            . '\\[(?!\\/\\2\\])' // An opening bracket not followed by the closing customcode tag
+            . '[^\\[]*+'         // Not an opening bracket
+            . ')*+'
+            . ')'
+            . '\\[\\/\\2\\]'             // Closing customcode tag
+            . ')?'
             . ')'
             . '(\\]?)';                          // 6: Optional second closing brocket for escaping customcodes: [[tag]]
     }
 
     /**
      * Regular Expression callable for do_customcode() for calling customcode hook.
-     * @see get_customcode_regex for details of the match array contents.
+     * @see  get_customcode_regex for details of the match array contents.
      *
      * @since 2.5
      * @access private
@@ -198,22 +208,23 @@ class RMCustomCode
      * @param array $m Regular expression match array
      * @return mixed False on failure.
      */
-    function doTag( $m ) {
+    function doTag($m)
+    {
 
         // allow [[foo]] syntax for escaping a tag
-        if ( $m[1] == '[' && $m[6] == ']' ) {
+        if ($m[1] == '[' && $m[6] == ']') {
             return substr($m[0], 1, -1);
         }
 
         $tag = $m[2];
-        $attr = $this->parseAtts( $m[3] );
+        $attr = $this->parseAtts($m[3]);
 
-        if ( isset( $m[5] ) ) {
+        if (isset($m[5])) {
             // enclosing tag - extra parameter
-            return $m[1] . call_user_func( $this->custom_codes[$tag], $attr, $m[5], $tag ) . $m[6];
+            return $m[1] . call_user_func($this->custom_codes[$tag], $attr, $m[5], $tag) . $m[6];
         } else {
             // self-closing tag
-            return $m[1] . call_user_func( $this->custom_codes[$tag], $attr, null,  $tag ) . $m[6];
+            return $m[1] . call_user_func($this->custom_codes[$tag], $attr, null, $tag) . $m[6];
         }
     }
 
@@ -229,11 +240,12 @@ class RMCustomCode
      * @param string $text
      * @return array List of attributes and their value.
      */
-    function parseAtts($text) {
+    function parseAtts($text)
+    {
         $atts = array();
         $pattern = '/(\w+)\s*=\s*"([^"]*)"(?:\s|$)|(\w+)\s*=\s*\'([^\']*)\'(?:\s|$)|(\w+)\s*=\s*([^\s\'"]+)(?:\s|$)|"([^"]*)"(?:\s|$)|(\S+)(?:\s|$)/';
         $text = preg_replace("/[\x{00a0}\x{200b}]+/u", " ", $text);
-        if ( preg_match_all($pattern, $text, $match, PREG_SET_ORDER) ) {
+        if (preg_match_all($pattern, $text, $match, PREG_SET_ORDER)) {
             foreach ($match as $m) {
                 if (!empty($m[1]))
                     $atts[strtolower($m[1])] = stripcslashes($m[2]);
@@ -268,11 +280,12 @@ class RMCustomCode
      * @param array $atts User defined attributes in customcode tag.
      * @return array Combined and filtered attribute list.
      */
-    function atts($pairs, $atts) {
+    function atts($pairs, $atts)
+    {
         $atts = (array)$atts;
         $out = array();
-        foreach($pairs as $name => $default) {
-            if ( array_key_exists($name, $atts) )
+        foreach ($pairs as $name => $default) {
+            if (array_key_exists($name, $atts))
                 $out[$name] = $atts[$name];
             else
                 $out[$name] = $default;
@@ -289,19 +302,21 @@ class RMCustomCode
      * @param string $content Content to remove customcode tags.
      * @return string Content without customcode tags.
      */
-    function strip( $content ) {
+    function strip($content)
+    {
 
         if (empty($this->custom_codes) || !is_array($this->custom_codes))
             return $content;
 
         $pattern = $this->getRegex();
 
-        return preg_replace_callback( "/$pattern/s", array($this, 'strip'), $content );
+        return preg_replace_callback("/$pattern/s", array($this, 'strip'), $content);
     }
 
-    function stripTag( $m ) {
+    function stripTag($m)
+    {
         // allow [[foo]] syntax for escaping a tag
-        if ( $m[1] == '[' && $m[6] == ']' ) {
+        if ($m[1] == '[' && $m[6] == ']') {
             return substr($m[0], 1, -1);
         }
 

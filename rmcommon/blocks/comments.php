@@ -9,6 +9,7 @@
 // --------------------------------------------------------------
 
 function rmc_bkcomments_show($options){
+    global $cuServices;
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
@@ -47,7 +48,7 @@ function rmc_bkcomments_show($options){
                     'name'  => $user->getVar('uname'),
                     'email' => $user->getVar('email'),
                     'posts' => $user->getVar('posts'),
-                    'avatar'=> $user->getVar('image')!='' && $user->getVar('image')!='blank.gif' ? XOOPS_UPLOAD_URL.'/'.$user->getVar('image') : RMCURL.'/images/avatar.gif',
+                    'avatar'=> $cuServices->avatar->getAvatarSrc($user->getVar('email'), 100),
                     'rank'  => $user->rank(),
                 );
 

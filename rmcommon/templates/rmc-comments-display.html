@@ -1,6 +1,6 @@
 <section class="comments-container">
     <{foreach item=comment from=$comments}>
-    <div class="comment-item panel panel-default"><a name="comment-<{$comment.id}>"></a>
+    <div class="comment-item panel panel-default" id="comment-<{$comment.id}>">
         <div class="panel-body">
             <div class="head">
                 <{if $comment.poster.avatar=="$xoops_url/uploads/blank.gif" || $comment.poster.avatar==''}>

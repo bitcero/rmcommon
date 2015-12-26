@@ -8,36 +8,27 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-define('RMCLOCATION','blocks');
+define('RMCLOCATION','about');
 include '../../include/cp_header.php';
 
 RMTemplate::get()->header(); ?>
 
-<style type="text/css">
-    .thumbnail{
-        width: 100%;
-        height: 100px;
-        border-radius: 0;
-        background-size: 95%;
-        background-repeat: no-repeat;
-        background-position: 50% -5%;
-        margin: 10px 0;
-    }
-    .thumbnail span{display: none;}
-    .clearfix hr{
-        margin: 10px 0;
-    }
-    .page-header{border: 0;}
-</style>
-
-<div class="row">
-    <div class="col-xs-12">
-        <h1 class="page-header">
-            <img src="<?php echo RMCURL; ?>/images/cu-gear.png" class="pull-left" style="width: 80px; margin-right: 10px;">
-            Welcome to Common Utilities<br>
-            <small>Thanks for using Common Utilities <?php echo RMCVERSION; ?>. This version has a lot of improvements for you.</small>
-        </h1>
-        <hr>
+<div class="cu-box box-solid box-red">
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-left">
+                <img src="<?php echo RMCURL; ?>/images/cu-gear.png" class="media-object" style="width: 80px;">
+            </div>
+            <div class="media-body">
+                <h1 class="media-heading">
+                    Welcome to Common Utilities
+                </h1>
+                <p class="lead">
+                    Thanks for using <strong><?php echo RMModules::get_module_version('rmcommon'); ?></strong>.
+                    This version has a lot of improvements and new features to make your work more productive and pleasing.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -208,6 +199,12 @@ RMTemplate::get()->header(); ?>
     </div>
 
 </div>
+
+<style>
+    body{
+        background: #F0F1F4;
+    }
+</style>
 
 <?php
 RMTemplate::get()->footer();

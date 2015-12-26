@@ -63,7 +63,7 @@ function show_module_preferences(){
         $ajax->prepare_ajax_response();
         if ( !$xoopsSecurity->validateToken(false, true, 'CUTOKEN') )
             $ajax->ajax_response(
-                __('Unauthorized action', 'rmcommon'), 1, 0
+                __('Unauthorized action', 'rmcommon'), 1, 0, array('reload' => true)
             );
     }
 
@@ -116,11 +116,11 @@ function show_module_preferences(){
     $fields = array(); // Container for all fields and values
     foreach ($configs as $option) {
 
-        $id = ucfirst($module->getVar('dirname')).'['.$option['name'].']';
-        $name = $option['name'];
+        $name = ucfirst($module->getVar('dirname')).'['.$option['name'].']';
 
         $field = new stdClass();
-        $field->id = $id;
+        $field->name = $name;
+        $field->id = $option['name'];
         $field->value = isset( $values->$option['name'] ) ? $values->$option['name'] : $option['default'];
         $field->caption = defined($option['title']) ? constant( $option['title'] ) : $option['title'];
         $field->description = defined($option['description']) ? constant( $option['description'] ) : $option['description'];
@@ -131,12 +131,12 @@ function show_module_preferences(){
         $category = isset($option['category']) ? $option['category'] : 'all';
 
         if ( isset( $categories[$category] ) )
-            $categories[$category]['fields'][$name] = $field;
+            $categories[$category]['fields'][$field->id] = $field;
         else{
             if ( !isset( $categories['all'] ) )
                 $categories['all'] = array('caption' => __('Preferences', 'rmcommon'));
 
-            $categories['all']['fields'][$name] = $field;
+            $categories['all']['fields'][$field->id] = $field;
         }
 
     }
@@ -172,9 +172,9 @@ function show_module_preferences(){
             sprintf( __('%s Settings', 'rmcommon'), $module->getVar('name') ),
             0, 1, array(
                 'content' => $response,
-                'width' => 'xxlarge',
+                'width' => 'xlarge',
                 'closeButton' => 1,
-                'windowId' => 'cu-settings-form'
+                'id' => 'cu-settings-form'
             )
         );
 
@@ -199,7 +199,9 @@ function save_module_settings(){
     if ( $mod == '' )
         RMUris::redirect_with_message( __('A module has not been specified!', 'rmcommon' ), 'settings.php', RMMSG_ERROR );
 
-    if ( !$xoopsSecurity->check() ) {
+    //echo RMHttpRequest::request('CUTOKEN_REQUEST', 'string', '') . ' ' . print_r($_SESSION['CUTOKEN_SESSION'], true); die();
+
+    if ( !$xoopsSecurity->check(true, false, $via_ajax ? 'CUTOKEN' : 'XOOPS_TOKEN') ) {
         if ($via_ajax)
             $ajax->ajax_response(
                 __('Session token expired. Please try again.', 'rmcommon'), 1, 0
@@ -313,7 +315,7 @@ function save_module_settings(){
     /**
      * Notify to system events
      */
-    RMEvents::get()->run_event( 'rmcommon.saved.settings', $module->dirname(), $to_save, $to_add, $to_delete );
+    RMEvents::get()->trigger( 'rmcommon.saved.settings', $module->dirname(), $to_save, $to_add, $to_delete );
 
     if ( $module->getInfo( 'hasAdmin' ) )
         $goto = XOOPS_URL . '/modules/' . $module->getVar('dirname') . '/' . $module->getInfo('adminindex');
@@ -323,7 +325,11 @@ function save_module_settings(){
     if ( $via_ajax )
         $ajax->ajax_response(
             __('Settings saved successfully!', 'rmcommon'), 0, 1, array(
-                'closeWindow' => '#cu-settings-form'
+                'closeWindow' => '#cu-settings-form',
+                'notify' => array(
+                    'icon' => 'svg-rmcommon-ok-circle',
+                    'type' => 'alert-success'
+                )
             )
         );
     else

@@ -1,7 +1,6 @@
 <h1 class="cu-section-title"><?php _e('Existing Groups', 'rmcommon'); ?></h1>
 
-<div class="cu-box">
-    <div class="box-content">
+<div class="panel">
         <div class="table-responsive">
 
             <table class="table table-hover table-striped activator-container" id="groups-list">
@@ -50,14 +49,15 @@
             </table>
 
         </div>
-    </div>
-</div>
 
-<div class="row cu-bulk-actions">
-    <div class="col-md-5 col-lg-5">
-        <?php echo $navigation->display( false ); ?>
-    </div>
-    <div class="col-md-7 col-lg-7 text-right">
-        <?php echo $navigation->get_showing(); ?>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-5 col-lg-5">
+                <?php echo $navigation->display( false ); ?>
+            </div>
+            <div class="col-md-7 col-lg-7 text-right">
+                <?php echo $navigation->get_showing(); ?>
+            </div>
+        </div>
     </div>
 </div>

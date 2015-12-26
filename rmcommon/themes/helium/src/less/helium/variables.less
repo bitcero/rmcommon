@@ -1,0 +1,134 @@
+/**
+This file containes the variables used in Helium Theme.
+If you need to make some change in colors or basic styles, you can copy
+this file with a new name and make all required changes. After
+that, recompile file with a new theme name
+*/
+
+/*
+1. MIXINS
+------------------------------
+*/
+@import 'mixins/svg-icons';
+@import 'mixins/boxes';
+@import 'mixins/utilities';
+@import 'mixins/options';
+@import '../bootstrap/mixins/panels';
+@import '../bootstrap/mixins/buttons';
+@import '../bootstrap/mixins/alerts';
+
+//== Breakpoints for columns
+//
+//##
+
+// Screen width xtra large
+@screen-xl:     1700px;
+@screen-xl-min: @screen-xl;
+@screen-lg-max: @screen-xl - 1;
+
+/*
+2. THEME COLORS
+------------------------------
+We have stablished a basic set
+of names for HELIUM and all
+subsequents themes.
+*/
+@import "colors";
+
+@theme-main-color: #259dab;
+@theme-main-color-text: #FFF;
+@theme-secondary-color: #2574ab;
+@theme-secondary-color-text: #FFF;
+
+/*
+3. Theme Header
+------------------------------
+*/
+@he-header-bg-color:              #262B36;
+@he-header-logo-bg:               #1E222B;
+@he-header-svg-logo-color:        #259DAB;
+@he-header-toggle-color:          #778395;
+@he-header-toggle-hover:          #9fa8bc;
+@he-header-dropdown-border:       1px solid rgba(38, 43, 54, 0.1);
+@he-header-menu-color:            #505b72;
+@he-header-menu-hover-bg:         @he-header-bg-color;
+@he-header-menu-hover:            @he-header-toggle-hover;
+@he-header-rmc-color:             @he-header-svg-logo-color;
+@he-header-rmc-hover:             #74DE02;
+
+/*
+4. Sidebar
+------------------------------
+*/
+@he-sidebar-bg:                   #FFFFFF;
+@he-sidebar-user-bg:              @he-header-bg-color;
+@he-sidebar-user-border:          #657390;
+@he-sidebar-user-name:            rgba(255,255,255,0.8);//@gray-lighter;
+@he-sidebar-user-charge:          @he-header-svg-logo-color;
+@he-sidebar-search-bg:            darken(#FFF, 5%);//@color-blue-grey;
+@he-sidebar-search-input:         darken(@he-sidebar-search-bg, 5%);
+@he-sidebar-search-color:         darken(@he-sidebar-search-bg, 35%);
+@he-sidebar-search-pholder:       darken(@he-sidebar-search-bg, 30%);//lighten(@he-sidebar-search-bg, 10%);
+@he-sidebar-search-focus-bg:      #FFF; //@he-sidebar-user-bg;
+@he-sidebar-search-focus-color:   darken(@he-sidebar-search-bg, 50%); //@he-sidebar-search-bg;
+@he-sidebar-heading-color:        @he-header-toggle-hover;
+@he-sidebar-menu-border:          1px solid #EAECF0;
+@he-sidebar-menu-color:           #505b72;
+@he-sidebar-menu-hover:           darken(@he-sidebar-menu-color, 15%);
+@he-sidebar-menu-hover-bg:        rgba(0,0,0,0.03);
+@he-sidebar-icon-color:           @he-header-svg-logo-color;
+@he-sidebar-submenu-bg:           #F6F7F8;
+@he-sidebar-submenu-color:        @he-sidebar-user-border;
+@he-sidebar-submenu-icon-color:   @he-header-toggle-hover;
+@he-sidebar-active-color:         #FFF;
+
+/*
+5. Breadcrumb
+------------------------------
+*/
+@he-breadcrumb-links:             @text-color;
+@he-breadcrumb-links-hover:       @brand-primary;
+
+/*
+6. CU Boxes
+------------------------------
+*/
+@cu-box-bg:                       #FFF;
+
+/*
+7. Toolbar
+------------------------------
+*/
+@he-toolbar-bg:                   transparent;
+@he-toolbar-item-bg:              #FFF;
+@he-toolbar-color:                @text-color;
+@he-toolbar-hover-bg:             @theme-main-color;
+@he-toolbar-hover-color:          #FFF;
+@he-toolbar-disabled-bg:          transparent;
+@he-toolbar-disabled-color:       rgba(0,0,0,0.2);
+
+/*
+8. BULK ACTIONS
+------------------------------
+*/
+@he-bulk-bg:                      @he-header-bg-color;
+@he-bulk-default-btn-bg:          @color-teal;
+@he-bulk-default-btn-color:       @color-text-teal;
+@he-bulk-link-color:              @color-cyan;
+@he-bulk-link-color-hover:        @color-amber;
+
+/*
+9. CONTEXTUAL ITEM OPTIONS
+------------------------------
+*/
+@he-item-option-bg:               @color-blue-grey;
+@he-item-option-bg-hover:         @color-teal;
+@he-item-option-color:            @color-text-midnight;
+@he-item-option-color-hover:      #FFF;
+
+/*
+10. TABS
+------------------------------
+*/
+@he-tab-active-bg:                #FFF;
+@he-tab-content-bg:               #FFF;
