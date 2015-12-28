@@ -80,6 +80,8 @@ function updatesNotifier(count){
                 }, 300);
             }
 
+            return false;
+
         });
 
         /**
@@ -223,6 +225,7 @@ function updatesNotifier(count){
 
             $("#he-logger-output .close-logger").click(function(){
                 $("html").toggleClass('logger');
+                return false;
             });
 
         }

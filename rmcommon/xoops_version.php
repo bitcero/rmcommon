@@ -41,10 +41,6 @@ $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
 $modversion['updateurl'] = "http://www.xoopsmexico.net/modules/vcontrol/";
-$modversion['icon16'] = "images/icon16.png";
-$modversion['icon24'] = 'images/icon24.png';
-$modversion['icon32'] = 'images/icon32.png';
-$modversion['icon48'] = 'images/icon48.png';
 
 // PERMISSIONS
 $modversion['permissions'] = 'include/permissions.php';
@@ -467,7 +463,7 @@ $cu_settings['config'][] = array(
         __('SMTP','rmcommon') => 'smtp',
         __('Sendmail','rmcommon') => 'sendmail'
     ),
-    'default'       => XOOPS_URL.'/modules/rmcommon/images/rssimage.png',
+    'default'       => 'mail',
     'category'      => 'email'
 );
 

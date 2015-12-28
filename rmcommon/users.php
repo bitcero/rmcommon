@@ -161,7 +161,7 @@ function formatSQL(){
 * Shows all registered users in a list with filter and manage options
 */
 function show_users(){
-    global $xoopsSecurity, $rmTpl;
+    global $xoopsSecurity, $rmTpl, $cuIcons;
 
     define('RMCSUBLOCATION','allusers');
     RMTemplate::get()->add_style('users.css','rmcommon');
@@ -223,16 +223,16 @@ function show_users(){
         $user->assignVars($row);
         $t = $user->getValues();
         $t['groups'] = $user->getGroups();
-        $t = RMEvents::get()->run_event('rmcommon.loading.users.list', $t);
+        $t = RMEvents::get()->trigger('rmcommon.loading.users.list', $t);
         $users[] = $t;
         $t = array();
     }
 
     $xgh = new XoopsGroupHandler($db);
-    $users = RMEvents::get()->run_event('rmcommon.users.list.loaded', $users);
+    $users = RMEvents::get()->trigger('rmcommon.users.list.loaded', $users);
 
     // Users template
-    include RMTemplate::get()->get_template('rmc-users.php','module','rmcommon');
+    include RMTemplate::get()->path('rmc-users.php','module','rmcommon');
 
     xoops_cp_footer();
 }

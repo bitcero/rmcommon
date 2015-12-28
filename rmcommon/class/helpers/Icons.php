@@ -29,14 +29,13 @@
 
 namespace Common\Core\Helpers;
 
-class Icons
+class Icons extends Attributes
 {
     private $iconsProviders = array();
     private $noIcon = '';
 
     public function __construct()
     {
-
         $this->iconsProviders['rmcommon'] = RMCPATH . '/icons';
         $this->noIcon = '<span class="cu-icon">' . file_get_contents(RMCPATH . '/icons/noicon.svg') . '</span>';
         $this->loadProviders();
@@ -47,7 +46,6 @@ class Icons
             $jsProviders[$provider] = \RMUris::relative_url(str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path));
         }
         \RMTemplate::get()->add_inline_script('var iconsProviders = ' . json_encode($jsProviders) . ';', 1);
-
     }
 
     /**
@@ -183,8 +181,12 @@ class Icons
      * @param string $icon
      * @return string
      */
-    public function getIcon($icon)
+    public function getIcon($icon, $attributes = [])
     {
+
+        parent::__construct($attributes);
+        $this->add('class', 'cu-icon');
+
         /**
          * Check if this is a SVG icon
          */
@@ -197,11 +199,16 @@ class Icons
              */
             $iconExploded = explode(" ", trim($icon));
 
+            $this->add('class', str_replace($iconExploded[0], ' ', $icon));
+            $renderedAttrs = $this->renderAttributeString();
+
             // Index 0 has the SVG icon
             $iconSVG = $this->providerIcon($iconExploded[0]);
-            return '<span class="cu-icon' . str_replace($iconExploded[0], ' ', $icon) . '">' . $iconSVG . '</span>';
+            return '<span ' . $renderedAttrs . '>' . $iconSVG . '</span>';
 
         }
+
+        $renderedAttrs = $this->renderAttributeString();
 
         // Relative or absolute url?
         $matches = array();
@@ -211,20 +218,20 @@ class Icons
         // Icon with absolute path
         if ($absolute) {
             if ($is_svg) {
-                return '<span class="cu-icon">' . file_get_contents($icon) . '</span>'; //returns SVG code
+                return '<span '.$renderedAttrs.'>' . file_get_contents($icon) . '</span>'; //returns SVG code
             } else {
-                return '<span class="cu-icon"><img src="' . $icon . '"></span>'; // returns image URL
+                return '<span '.$renderedAttrs.'><img src="' . $icon . '"></span>'; // returns image URL
             }
         }
 
         // Relative image url?
         $imageFormats = array('.jpg', '.gif', '.png', 'jpeg');
         if (in_array(substr($icon, -4), $imageFormats)) {
-            return '<span class="cu-icon"><img src="' . $icon . '"></span>';
+            return '<span '.$renderedAttrs.'><img src="' . $icon . '"></span>';
         }
 
         // Last option: icon font
-        return '<span class="cu-icon"><span class="' . $icon . '"></span></span>';
+        return '<span '.$renderedAttrs.'><span class="' . $icon . '"></span></span>';
 
     }
 

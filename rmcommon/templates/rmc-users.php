@@ -232,8 +232,8 @@
                                 echo $str;
                             endforeach; ?>
                         </td>
-                        <td class="text-center">
-                            <img src="images/<?php echo $user['level']<=0 ? 'error.png' : 'done.png'; ?>" alt="" />
+                        <td class="text-center <?php echo $user['level']<=0 ? ' text-danger' : ' text-success'; ?>">
+                            <?php echo $user['level']<=0 ? $cuIcons->getIcon('svg-rmcommon-close') : $cuIcons->getIcon('svg-rmcommon-ok-circle'); ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

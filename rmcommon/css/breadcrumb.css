@@ -28,7 +28,6 @@
 .rm-breadcrumb-container ul li:first-child a{
     width: 16px;
     height: 16px;
-    background: url(../images/homebc.png) no-repeat center
 }
 .rm-breadcrumb-container ul li:first-child a span,
 .rm-breadcrumb-container ul li:nth-child(2) span{

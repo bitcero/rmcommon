@@ -115,6 +115,12 @@ function xoops_module_update_rmcommon($mod, $prev){
 
     }
 
+    // Change theme from TwoP6 to Helium
+    $sql = "UPDATE " . $db->prefix("config") . " SET conf_value='helium' WHERE conf_modid=" . $mod->getVar('mid')
+           . " AND conf_name='theme'";
+
+    $db->queryF($sql);
+
     // Prepare welcome screen
     $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);
     setcookie( "rmcwelcome", 1, time() + (365 * 86400), '/', $domain );
