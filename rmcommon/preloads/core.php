@@ -213,7 +213,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
         if (!$xoopsTpl) return;
 
-        $xoopsTpl->plugins_dir[] = RMCPATH . '/include';
+        $xoopsTpl->plugins_dir[] = RMCPATH . '/include/smarty';
 
     }
 

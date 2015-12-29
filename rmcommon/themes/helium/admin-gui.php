@@ -167,5 +167,17 @@ if (RMBreadCrumb::get()->count() > 0) {
     RMTemplate::getInstance()->add_body_class('with-breadcrumb');
 }
 
+// The logo
+$logoHelium = trim($cuSettings->helium_logo);
+if ('' == $logoHelium){
+    $logoHelium = HELIUM_URL . '/images/logo-he.svg';
+}
+
+if(substr($logoHelium, -4) == '.svg'){
+    $logoHelium = file_get_contents($logoHelium);
+} else {
+    $logoHelium = '<img src="' . $logoHelium . '">';
+}
+
 // Display theme
 include_once HELIUM_PATH . '/theme.php';

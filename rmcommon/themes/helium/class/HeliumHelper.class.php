@@ -29,60 +29,6 @@
 
 class HeliumHelper
 {
-    /**
-     * Get the menu for the current module
-     */
-    public function currentModuleMenu($m=''){
-
-        global $xoopsModule, $xoopsUser, $rmTpl;
-
-        if(!is_a($xoopsModule, 'XoopsModule')){
-            return false;
-        } else {
-            $mod = $xoopsModule;
-        }
-        // Check user
-        if(!is_a($xoopsUser, 'XoopsUser')) return false;
-
-        if(!$xoopsUser->isAdmin($mod->mid())) return false;
-
-        $amenu = $mod->getAdminMenu();
-        $amenu = RMEvents::get()->run_event('rmcommon.current.module.menu', $amenu);
-        $currentMenu = array();
-
-        if ($amenu){
-            foreach ($amenu as $menu){
-                if(isset($menu['icon']) && $menu['icon']!=''){
-                    if(self::is_absolute_url( $menu['icon']) || self::is_font_icon( $menu['icon'] ) )
-                        $icon = $menu['icon'];
-                    else{
-                        $m = array();
-
-                        $icon = XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/'.(preg_match("/^(\.\.\/){2,}/", $menu['icon']) ? $menu['icon'] : preg_replace("/^\.\.\/{1}/",'', $menu['icon']));
-                    }
-                } else {
-                    $icon = '';
-                }
-
-                $currentMenu[] = array(
-                    $menu['title'],
-                    strpos($menu['link'], 'http://')!==FALSE && strpos($menu['link'], 'ftp://')!==FALSE ? $menu['link'] : XOOPS_URL.'/modules/'.$mod->getVar('dirname','n').'/'.$menu['link'],
-                    $icon,
-                    !empty($menu['class']) ? $menu['class'] : '',
-                    isset($menu['location']) ? $menu['location'] : '',
-                    isset($menu['options']) ? $menu['options'] : array()
-                );
-                //$rmTpl->add_tool($menu['title'], $menu['link'], isset($menu['icon']) ? $menu['icon'] : '');
-            }
-        }
-
-        if($mod->hasconfig()){
-            $rmTpl->add_menu(__('Options','rmcommon'), $mod->getInfo('rmnative') ? RMCURL .'/settings.php?mod='.$mod->mid().'&amp;action=configure&amp;popup=1' : XOOPS_URL.'/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod='.$mod->mid(), 'option','');
-        }
-
-        return null;
-    }
-
     public function menuLink(\stdClass $menu, $module)
     {
         global $cuSettings;
@@ -151,24 +97,6 @@ class HeliumHelper
     static function is_absolute_url( $url ){
 
         return preg_match( "/^(http:\/\/|https:\/\/|ftp:\/\/)/m", $url );
-
-    }
-
-    static function is_font_icon( $icon ){
-
-        $pos = strpos( $icon, 'fa fa-' );
-        if (false !== $pos)
-            return true;
-
-        $pos = strpos( $icon, 'icon icon-' );
-        if (false !== $pos)
-            return true;
-
-        $pos = strpos( $icon, 'glyphicon glyphicon-' );
-        if (false !== $pos)
-            return true;
-
-        return false;
 
     }
 
@@ -323,61 +251,6 @@ class HeliumHelper
         }
 
         return null;
-    }
-
-    /**
-     * Get the module icon
-     */
-    public function moduleIcon($module, $size = '16'){
-
-        global $xoopsModule;
-
-        $available = array(
-            'mylinks'           => 'fa fa-link',
-            'news'              => 'xicon-consulting',
-            //'contact'           => 'xicon-email',
-            'extgallery'        => 'xicon-picture',
-            'date'              => 'xicon-date',
-            'fmcontent'         => 'xicon-library',
-            'marquee'           => 'xicon-advertising',
-            'mastop_go2'        => 'xicon-cloud',
-            'moduleinstaller'   => 'xicon-download',
-            'pm'                => 'xicon-comment',
-            'profile'           => 'xicon-profile',
-            'protector'         => 'xicon-shield',
-            'tag'               => 'xicon-tag',
-            'xforms'            => 'xicon-form',
-            'xlanguage'         => 'xicon-comment',
-            'xoopsfaq'          => 'xicon-faq',
-            'xoopspartners'     => 'xicon-me',
-            'system'            => 'xicon-gear'
-        );
-
-        if(!is_a($xoopsModule, 'XoopsModule')) return false;
-
-        if($xoopsModule->dirname()!=$module){
-            $mod = RMModules::load_module($module);
-        } else {
-            $mod = $xoopsModule;
-        }
-
-        if(isset($available[$mod->dirname()]))
-            return '<i class="xo-icon '.$available[$mod->dirname()].'"></i> ';
-
-        $icon = $mod->getInfo('icon'.$size);
-        $path = XOOPS_ROOT_PATH.'/modules/'.$mod->dirname().'/'.$icon;
-        if(!is_file($path)){
-            $path = TWOP6_PATH.'/images/modules/'.$mod->dirname().'-'.$size.'.png';
-
-            if(!is_file($path))
-                $path = TWOP6_PATH.'/images/module.png';
-
-        }
-
-        $icon = str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path);
-
-        return '<i class="xo-icon" style="background-image: url('.$icon.');"></i> ';
-
     }
 
     /**

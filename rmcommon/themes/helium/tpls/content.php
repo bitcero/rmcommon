@@ -30,7 +30,7 @@
         <?php endif; ?>
 
         <div id="he-footer">
-            <?php echo sprintf(__('Powered by %s and %s', 'helium'),
+            <?php echo sprintf(__('Powered by %s and %s', 'rmcommon'),
                 '<strong><a href="http://rmcommon.com" target="_blank">' . RMModules::get_module_version('rmcommon') . '</a></strong>',
                 '<a href="http://xoops.org" target="_blank">' . XOOPS_VERSION . '</a>'); ?>.
         </div>

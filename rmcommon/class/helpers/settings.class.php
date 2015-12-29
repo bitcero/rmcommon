@@ -347,7 +347,7 @@ class RMSettings
          * Allow to plugins and other modules create new form
          * elements types in settings form
          */
-        $ele = RMEvents::get()->run_event( 'rmcommon.load.form.field', $ele, $field );
+        $ele = RMEvents::get()->trigger( 'rmcommon.load.form.field', $ele, $field );
         $ele->set('id', $field->id);
         $ele->add('class', 'form-control');
 

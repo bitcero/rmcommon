@@ -17,7 +17,7 @@
     </div>
 
     <div class="module-search">
-        <input type="text" value="" class="form-control" id="filter-module" placeholder="<?php _e('Search modules...', 'helium'); ?>">
+        <input type="text" value="" class="form-control" id="filter-module" placeholder="<?php _e('Search modules...', 'rmcommon'); ?>">
     </div>
 
     <div class="menu-wrapper">

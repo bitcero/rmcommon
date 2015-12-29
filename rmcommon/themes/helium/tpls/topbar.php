@@ -2,7 +2,7 @@
 <nav role="navigation" id="he-topbar">
 
     <a class="navbar-brand he-logo" href="<?php echo RMCURL; ?>">
-        <?php include HELIUM_PATH . '/images/logo-he.svg'; ?>
+        <?php echo $logoHelium; ?>
     </a>
 
     <div class="he-topbar-collapse">
