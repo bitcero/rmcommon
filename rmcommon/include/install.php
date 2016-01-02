@@ -9,14 +9,14 @@
 // --------------------------------------------------------------
 
 function xoops_module_pre_uninstall_rmcommon($mod){
-    
+
     // Restore previous configurations
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    
+
     $db->queryF("UPDATE ".$db->prefix("config")." SET conf_value='default' WHERE conf_name='cpanel'");
-    
+
     return true;
-    
+
 }
 
 function xoops_module_uninstall_rmcommon($mod){
@@ -27,10 +27,10 @@ function xoops_module_uninstall_rmcommon($mod){
         $contents = str_replace($write, '', $contents);
 
     file_put_contents(XOOPS_VAR_PATH.'/configs/xoopsconfig.php', $contents);
-    
+
     xoops_setActiveModules();
     return true;
-    
+
 }
 
 function xoops_module_install_rmcommon($mod){
@@ -41,19 +41,19 @@ function xoops_module_install_rmcommon($mod){
 
     // Restore previous configurations
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    
+
     $db->queryF("UPDATE ".$db->prefix("config")." SET conf_value='redmexico' WHERE conf_name='cpanel'");
-    
+
     // Temporary solution
     $contents = file_get_contents(XOOPS_VAR_PATH.'/configs/xoopsconfig.php');
     $write = "if(file_exists(XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php')) include_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';";
     if(strpos($contents,$write)!==FALSE) return true;
-    
+
     $pos = strpos($contents, '<?php');
-    
+
     file_put_contents(XOOPS_VAR_PATH.'/configs/xoopsconfig.php', substr($contents, $pos, 5)."\n".$write."\n".substr($contents, $pos+5));
     xoops_setActiveModules();
-    
+
     return true;
 }
 
@@ -124,6 +124,33 @@ function xoops_module_update_rmcommon($mod, $prev){
     // Prepare welcome screen
     $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);
     setcookie( "rmcwelcome", 1, time() + (365 * 86400), '/', $domain );
+
+    // Move system theme to right dir
+    $target = XOOPS_ROOT_PATH . '/modules/system/themes/redmexico';
+    $source = XOOPS_ROOT_PATH . '/modules/rmcommon/redmexico';
+
+    if(!is_dir($source)){
+      return true;
+    }
+
+    global $msgs;
+
+    if(!is_writable($target)){
+        $msgs[] = '<span class="text-danger">' . __('System theme "redmexico" could not move to destination directory (modules/system/themes). Please do it manually in order to get Common Utilities working correctly.', 'rmcommon') . '</span>';
+        return true;
+    }
+
+    // Deletes dir content to replace with new files
+    RMUtilities::delete_directory( $target, false );
+
+    $odir = opendir($source);
+    while (($file = readdir($odir)) !== false){
+        if ($file == '.' || $file=='..') continue;
+        @rename( $source . '/' . $file, $target . '/' . $file );
+    }
+    closedir($odir);
+
+    RMUtilities::delete_directory( $source );
 
     return true;
 

@@ -328,6 +328,8 @@ function updateStepOne(update, id){
 
         if(data.error==1){
             $("#upd-"+id+" .upd-progress .status").html(data.message);
+            $("#upd-"+id+" .progress-bar").addClass('progress-bar-danger');
+            $("#upd-"+id+" .progress").removeClass("active");
             if( '' != data.token )
                 $("#cu-token").val( data.token );
             return false;
@@ -344,11 +346,12 @@ function updateStepOne(update, id){
         } else {
 
             incrementProgress('100%', id);
-            $("#upd-"+id+" .progress-bar").addClass('progress-bar-success').removeClass("active");;
+            $("#upd-"+id+" .progress-bar").addClass('progress-bar-success');
+            $("#upd-"+id+" .progress").removeClass("active");
             $("#upd-"+id+" h4").addClass('update-done');
 
         }
-        
+
         /*if(data.data.run!=undefined){
             incrementProgress('80%', id);
             runFiles(id, data.data.run);
@@ -378,6 +381,8 @@ function local_update( id ){
 
         if ( 1 == response.error ){
             $("#upd-"+id+" .upd-progress .status").html(response.message);
+            $("#upd-"+id+" .progress-bar").addClass('progress-bar-danger');
+            $("#upd-"+id+" .progress").removeClass("active");
             if( '' != response.token )
                 $("#cu-token").val( response.token );
             return false;
@@ -386,7 +391,7 @@ function local_update( id ){
         if ( '' != response.token )
             $("#cu-token").val( response.token );
 
-        cuDialog.dialog({
+        cuHandler.modal.dialog({
             message: response.data.log,
             title: 'Module update log',
             width: 'large'
@@ -394,7 +399,8 @@ function local_update( id ){
 
         $("#upd-"+id+" .upd-progress .status").html(response.message);
         incrementProgress( '100%', id );
-        $("#upd-"+id+" .progress-bar").addClass('progress-bar-success').removeClass("active");;
+        $("#upd-"+id+" .progress-bar").addClass('progress-bar-success');
+        $("#upd-"+id+" .progress").removeClass("active");
         $("#upd-"+id+" h4").addClass('update-done');
 
 
@@ -437,9 +443,7 @@ function runFiles(id, run){
 
 function incrementProgress(p, id){
 
-    $("#upd-"+id+" .progress > .progress-bar").animate({
-        width: p
-    });
+    $("#upd-"+id+" .progress > .progress-bar").width(p);
     
 }
 

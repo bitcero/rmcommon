@@ -102,6 +102,13 @@
                 </a>
             </li-->
 
+            <li id="updater-info-top">
+                <a href="<?php echo RMUris::relative_url(RMCURL . '/updates.php'); ?>">
+                    <?php echo $cuIcons->getIcon('svg-rmcommon-update'); ?>
+                    <em>%s</em>
+                </a>
+            </li>
+
             <li class="dropdown<?php if($xoopsModule->dirname()=='system'): ?> active<?php endif; ?> system-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                     <?php echo $cuIcons->getIcon('svg-rmcommon-gear'); ?>

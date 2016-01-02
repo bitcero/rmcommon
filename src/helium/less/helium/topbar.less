@@ -486,3 +486,29 @@
     }
   }
 }
+
+#updater-info-top{
+  display: none;
+
+  > a{
+    position: relative;
+    .cu-icon{
+      .cu-icon-color(@color-green);
+    }
+
+    em{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      border-radius: 14px;
+      background-color: @color-deep-orange;
+      color: @color-text-deep-orange;
+      font-size: 10px;
+      display: block;
+      padding: 0 5px;
+      height: 16px;
+      line-height: 14px;
+      font-style: normal;
+    }
+  }
+}

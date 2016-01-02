@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>0,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>10,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -611,9 +611,9 @@ if(in_array("rmcommon",$amod)){
             $block['type'] = 'plugin';
             $modversion['blocks'][] = $block;
         }
-        
+
     }
-    
+
 }
 
 $modversion['subpages'] = array(

@@ -48,7 +48,7 @@
     </div>
 
     <div class="size-1" data-dashboard="item" style="display: none;" id="updater-info">
-        <div class="cu-box">
+        <div class="cu-box box-warning">
             <div class="box-header">
                 <h3 class="box-title"><?php echo sprintf(__('%s Updates Available!','rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></h3>
             </div>

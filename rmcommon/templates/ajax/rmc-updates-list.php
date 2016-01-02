@@ -6,9 +6,9 @@
                 <div class="rmc-upd-info">
                     <?php echo sprintf(__('Type: %s','rmcommon'), '<span class="label label-info">'.$upd['data']['type'].'</span>'); ?> |
                     <?php echo sprintf(__('Version: %s','rmcommon'), '<strong>'.$upd['data']['version'].'</strong>'); ?> |
-                    <?php echo sprintf(__('Released on: %s','rmcommon'), '<strong>'.$upd['data']['released'].'</strong>'); ?>
+                    <?php echo sprintf(__('Released on: %s','rmcommon'), '<span class="label label-green">'.$upd['data']['released'].'</span>'); ?>
                     <?php if($upd['data']['login']): ?>
-                    | <i class="fa fa-lock"></i> <?php _e('Login required','rmcommon'); ?>
+                    | <?php echo $cuIcons->getIcon('svg-rmcommon-lock', ['class' => 'text-warning']); ?> <?php _e('Login required','rmcommon'); ?>
                     <?php endif; ?>
                 </div>
                 <div class="upd-progress">

@@ -778,7 +778,9 @@ $(document).ready(function(){
 
                 }
                 target.html('').append(news);
-                news.fadeIn('fast');
+                news.fadeIn('fast', function(){
+                    $('html.dashboard [data-container="dashboard"]').trigger('containerUpdated');
+                });
 
             }
 
@@ -810,9 +812,9 @@ $(document).ready(function(){
                                     $(this).prepend(newbox);
                                 else
                                     $(this).append(newbox);
-                                newbox.fadeIn('fast');
-
-                                $(this).trigger('containerUpdated');
+                                newbox.fadeIn('fast', function(){
+                                    $('html.dashboard [data-container="dashboard"]').trigger('containerUpdated');
+                                });
 
                             });
                         }

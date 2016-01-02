@@ -11,8 +11,17 @@ Author URI: http://www.bitcero.info
 
 function updatesNotifier(count){
     if(count<=0) return;
-    $("#xo-menubar .xo-upd-notifier").html($("#xo-menubar .xo-upd-notifier").html().replace("%s", count));
-    $("#xo-menubar .xo-upd-notifier").fadeIn('fast');
+
+    $("#updater-info-top").html($("#updater-info-top").html().replace("%s", count));
+    $("#updater-info-top").fadeIn('fast');
+
+    if($("#updater-info").length > 0){
+        $("#updater-info").html($("#updater-info").html().replace("%s", count));
+        $("#updater-info").fadeIn('fast', function(){
+            $('html.dashboard [data-container="dashboard"]').trigger('containerUpdated');
+        });
+    }
+
 }
 
 (function($, lang) {

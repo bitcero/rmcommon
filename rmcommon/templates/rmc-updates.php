@@ -10,70 +10,72 @@
     </div>
 </div>
 <br>
-<div id="ftp-settings">
+<div id="ftp-settings" class="panel panel-default">
 
-    <div class="row">
+    <div class="panel-body">
+        <div class="row">
 
-        <form id="ftp-form">
+            <form id="ftp-form">
 
-            <div class="col-md-2 col-lg-2">
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" title="<?php _e('Server:','rmcommon'); ?>"><i class="fa fa-desktop"></i></span>
-                        <input type="text" class="form-control" name="ftp_server" id="ftp-server" value="<?php echo $ftpserver; ?>" />
+                <div class="col-md-2 col-lg-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="<?php _e('Server:','rmcommon'); ?>"><i class="fa fa-desktop"></i></span>
+                            <input type="text" class="form-control" name="ftp_server" id="ftp-server" value="<?php echo $ftpserver; ?>" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-2 col-lg-2">
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><?php _e('Port:','rmcommon'); ?></span>
-                        <input type="text" class="form-control" name="ftp_port" id="ftp-port" value="21" />
+                <div class="col-md-2 col-lg-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><?php _e('Port:','rmcommon'); ?></span>
+                            <input type="text" class="form-control" name="ftp_port" id="ftp-port" value="21" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-2 col-lg-2">
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" title="<?php _e('User:','rmcommon'); ?>"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" name="ftp_user" id="ftp-user" value="" />
+                <div class="col-md-2 col-lg-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="<?php _e('User:','rmcommon'); ?>"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" name="ftp_user" id="ftp-user" value="" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-2 col-lg-2">
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" title="<?php _e('Password:','rmcommon'); ?>"><i class="fa fa-keyboard-o"></i></span>
-                        <input type="password" class="form-control" name="ftp_pass" id="ftp-pass" value="" />
+                <div class="col-md-2 col-lg-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="<?php _e('Password:','rmcommon'); ?>"><i class="fa fa-keyboard-o"></i></span>
+                            <input type="password" class="form-control" name="ftp_pass" id="ftp-pass" value="" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-2 col-lg-2">
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" title="<?php _e('XOOPS Directory:','rmcommon'); ?>"><i class="fa fa-folder-open"></i></span>
-                        <input type="text" class="form-control" name="ftp_dir" id="ftp-dir" value="<?php echo $ftpdir; ?>" />
+                <div class="col-md-2 col-lg-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="<?php _e('XOOPS Directory:','rmcommon'); ?>"><i class="fa fa-folder-open"></i></span>
+                            <input type="text" class="form-control" name="ftp_dir" id="ftp-dir" value="<?php echo $ftpdir; ?>" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-2 col-lg-2">
-                <button type="button" class="btn btn-warning btn-block"><i class="fa fa-check"></i> <?php _e('Save','rmcommon'); ?></button>
-            </div>
+                <div class="col-md-2 col-lg-2">
+                    <button type="button" class="btn btn-warning btn-block"><i class="fa fa-check"></i> <?php _e('Save','rmcommon'); ?></button>
+                </div>
 
-        </form>
+            </form>
 
-    </div>
+        </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <span class="help-block">
+        <div class="row">
+            <div class="col-lg-12">
+            <small class="help-block">
                 <?php _e('XOOPS directory must match with this XOOPS installation, but only the relative patch to server root.','rmcommon'); ?>
-            </span>
+            </small>
+            </div>
         </div>
     </div>
 
@@ -94,7 +96,7 @@
 </div>
 
 <div id="upd-info" class="modal fade">
-    <div class="modal-dialog xlarge">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header cu-titlebar">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
