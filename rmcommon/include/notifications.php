@@ -122,7 +122,7 @@ if ( 'cu-notification-subscribe' == $page ){
 
     }
 
-    RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', array('footer' => 1));
+    RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', array('footer' => 1, 'id' => 'cuhandler'));
 
     RMTemplate::get()->header();
 

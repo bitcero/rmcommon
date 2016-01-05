@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Common Utilities\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-28 21:22-0600\n"
-"PO-Revision-Date: 2015-12-28 21:22-0600\n"
+"POT-Creation-Date: 2016-01-03 13:35-0600\n"
+"PO-Revision-Date: 2016-01-03 13:35-0600\n"
 "Last-Translator: Eduardo Cortés <me@eduardocortes.mx>\n"
-"Language-Team: Eduardo Cortés <yo@eduardocortes.mx>\n"
+"Language-Team: Red México <i.bitcero@gmail.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -807,7 +807,7 @@ msgid ""
 msgstr ""
 
 #: class/template.php:331 templates/rmc-modules.php:80
-#: templates/rmc-modules.php:212 themes/helium/tpls/topbar.php:207
+#: templates/rmc-modules.php:212 themes/helium/tpls/topbar.php:214
 msgid "Help"
 msgstr ""
 
@@ -1034,7 +1034,7 @@ msgstr ""
 #: templates/rmc-categories-form.php:190 templates/rmc-editor-image.php:105
 #: templates/rmc-images-edit.php:52 templates/rmc-images-upload-images.php:13
 #: templates/rmc-module-preinstall.php:69 templates/rmc-settings-form.php:66
-#: templates/rmc-updates.php:126 templates/rmc-updates.php:155
+#: templates/rmc-updates.php:128 templates/rmc-updates.php:157
 #: templates/rmc-users.php:132 users.php:311 users.php:460
 msgid "Cancel"
 msgstr ""
@@ -1338,6 +1338,13 @@ msgstr ""
 msgid "Errors ocurred while deleting the category"
 msgstr ""
 
+#: include/install.php:139
+msgid ""
+"System theme \"redmexico\" could not move to destination directory (modules/"
+"system/themes). Please do it manually in order to get Common Utilities "
+"working correctly."
+msgstr ""
+
 #: include/notifications.php:45
 msgid "Sorry, your request could not be processed."
 msgstr ""
@@ -1580,7 +1587,7 @@ msgstr ""
 msgid "Block Settings"
 msgstr ""
 
-#: js/cu-js-language.php:45 templates/rmc-updates.php:65
+#: js/cu-js-language.php:45 templates/rmc-updates.php:66
 msgid "Save"
 msgstr ""
 
@@ -2125,7 +2132,7 @@ msgstr ""
 msgid "The specified module does not exists."
 msgstr ""
 
-#: settings.php:327 settings.php:336
+#: settings.php:328 settings.php:337
 msgid "Settings saved successfully!"
 msgstr ""
 
@@ -2166,7 +2173,7 @@ msgid "Downloading %s"
 msgstr ""
 
 #: templates/ajax/rmc-updates-list.php:24 templates/rmc-images-images.php:38
-#: templates/rmc-updates.php:105
+#: templates/rmc-updates.php:107
 msgid "Details"
 msgstr ""
 
@@ -3223,85 +3230,85 @@ msgstr ""
 msgid "Last comprobation: %s"
 msgstr ""
 
-#: templates/rmc-updates.php:22
+#: templates/rmc-updates.php:23
 msgid "Server:"
 msgstr ""
 
-#: templates/rmc-updates.php:31
+#: templates/rmc-updates.php:32
 msgid "Port:"
 msgstr ""
 
-#: templates/rmc-updates.php:40
+#: templates/rmc-updates.php:41
 msgid "User:"
 msgstr ""
 
-#: templates/rmc-updates.php:49 templates/rmc-updates.php:148
+#: templates/rmc-updates.php:50 templates/rmc-updates.php:150
 msgid "Password:"
 msgstr ""
 
-#: templates/rmc-updates.php:58
+#: templates/rmc-updates.php:59
 msgid "XOOPS Directory:"
 msgstr ""
 
-#: templates/rmc-updates.php:75
+#: templates/rmc-updates.php:76
 msgid ""
 "XOOPS directory must match with this XOOPS installation, but only the "
 "relative patch to server root."
 msgstr ""
 
-#: templates/rmc-updates.php:84
+#: templates/rmc-updates.php:86
 msgid "Important:"
 msgstr ""
 
-#: templates/rmc-updates.php:84
+#: templates/rmc-updates.php:86
 msgid ""
 "Before to install updates be sure that target folders have writting "
 "permissions for web server. If you wish, you can configure the internal FTP "
 "Client in order to update without assign writting permissions."
 msgstr ""
 
-#: templates/rmc-updates.php:89
+#: templates/rmc-updates.php:91
 msgid "Searching for updates..."
 msgstr ""
 
-#: templates/rmc-updates.php:101
+#: templates/rmc-updates.php:103
 msgid "Update Details"
 msgstr ""
 
-#: templates/rmc-updates.php:106
+#: templates/rmc-updates.php:108
 msgid "Files"
 msgstr ""
 
-#: templates/rmc-updates.php:127
+#: templates/rmc-updates.php:129
 msgid "Continue &raquo;"
 msgstr ""
 
-#: templates/rmc-updates.php:135
+#: templates/rmc-updates.php:137
 msgid "User Credentials"
 msgstr ""
 
-#: templates/rmc-updates.php:138
+#: templates/rmc-updates.php:140
 msgid "Please provide your login credentials for site %site%."
 msgstr ""
 
-#: templates/rmc-updates.php:142
+#: templates/rmc-updates.php:144
 msgid "Username:"
 msgstr ""
 
-#: templates/rmc-updates.php:143 templates/rmc-users.php:157
+#: templates/rmc-updates.php:145 templates/rmc-users.php:157
 #: templates/rmc-users.php:187 templates/rmc-users.php:263 users.php:275
 msgid "Username"
 msgstr ""
 
-#: templates/rmc-updates.php:149
+#: templates/rmc-updates.php:151
 msgid "Password"
 msgstr ""
 
-#: templates/rmc-updates.php:154
+#: templates/rmc-updates.php:156
 msgid "Login"
 msgstr ""
 
-#: templates/rmc-updates.php:164
+#: templates/rmc-updates.php:166
 msgid "Executing Files..."
 msgstr ""
 
@@ -3482,6 +3489,20 @@ msgstr ""
 msgid "System Module Settings"
 msgstr ""
 
+#: themes/helium/events/rmcommon.php:67 themes/helium/tpls/topbar.php:173
+msgid "Control Panel"
+msgstr ""
+
+#: themes/helium/events/rmcommon.php:73
+msgid "Logo to use"
+msgstr ""
+
+#: themes/helium/events/rmcommon.php:74
+msgid ""
+"You can specify a logo as bitmap but SVG is recommended. The logo will be "
+"resize to 29 pixels of height."
+msgstr ""
+
 #: themes/helium/include/test-color.php:1
 msgid "Color Test for Two&bull;P6"
 msgstr ""
@@ -3572,19 +3593,15 @@ msgstr ""
 msgid "%s UPDATES"
 msgstr ""
 
-#: themes/helium/tpls/topbar.php:147
+#: themes/helium/tpls/topbar.php:154
 msgid "Social Links"
 msgstr ""
 
-#: themes/helium/tpls/topbar.php:166
-msgid "Control Panel"
-msgstr ""
-
-#: themes/helium/tpls/topbar.php:172
+#: themes/helium/tpls/topbar.php:179
 msgid "View Home Page"
 msgstr ""
 
-#: themes/helium/tpls/topbar.php:192
+#: themes/helium/tpls/topbar.php:199
 msgid "Close Session"
 msgstr ""
 
@@ -3851,7 +3868,7 @@ msgstr ""
 
 #: widgets/Counter.php:119
 msgid ""
-"You must provide the caption and value when add a new row to Counter Widget"
+"You must provide the caption and value when add a new cell to Counter Widget"
 msgstr ""
 
 #: widgets/Counter.php:124

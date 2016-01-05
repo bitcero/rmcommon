@@ -139,7 +139,7 @@ class RMNotifications
         if ( empty( $items ) )
             return null;
 
-        RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', array('footer' => 1));
+        RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', array('footer' => 1, 'id' => 'cuhandler'));
 
         ob_start();
         include RMTemplate::get()->get_template('rmc-notifications-options.php', 'module', 'rmcommon');

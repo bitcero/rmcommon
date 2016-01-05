@@ -71,7 +71,7 @@ class HeliumRmcommonPreload
         $settings['config'][] = array(
             'name'          => 'helium_logo',
             'title'         => __( 'Logo to use', 'rmcommon' ),
-            'description'   => __('You can specify a logo as bitmap but SVG is reommended. The logo will be resized to 29 pixels of height.', 'helium'),
+            'description'   => __('You can specify a logo as bitmap but SVG is recommended. The logo will be resize to 29 pixels of height.', 'helium'),
             'formtype'      => $af_available ? 'image-url' : 'textbox',
             'valuetype'     => 'text',
             'default'       => RMCURL . '/themes/helium/images/logo-he.svg',

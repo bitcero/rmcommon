@@ -109,7 +109,7 @@ class RMFormEditor extends RMFormElement
 
         if('tiny' != $this->get('type')){
             RMTemplate::getInstance()->add_style('editors.min.css', 'rmcommon', ['id' => 'editors-css']);
-            RMTemplate::getInstance()->add_script('cu-handler.js', 'rmcommon', ['id' => 'cuhandler']);
+            RMTemplate::getInstance()->add_script('cu-handler.js', 'rmcommon', ['id' => 'cuhandler', 'footer' => 1]);
         }
         
 		switch ($this->get('type')){

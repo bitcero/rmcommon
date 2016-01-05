@@ -350,7 +350,7 @@ if ($cuSettings->updates && isset($xoopsOption['pagetype']) && $xoopsOption['pag
  * Add ajax controller script
  */
 if (defined("XOOPS_CPFUNC_LOADED") || (isset($xoopsOption) && array_key_exists('pagetype', $xoopsOption) && $xoopsOption['pagetype'] == 'admin')) {
-    $rmTpl->add_script('cu-handler.js', 'rmcommon', array('footer' => 1));
+    $rmTpl->add_script('cu-handler.js', 'rmcommon', array('footer' => 1, 'id' => 'cuhandler'));
     $rmTpl->add_script('jquery.validate.min.js', 'rmcommon', array('footer' => 1));
 }
 

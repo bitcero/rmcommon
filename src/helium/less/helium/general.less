@@ -106,11 +106,15 @@
     vertical-align: middle;
   }
 
+  .input-group .form-control {
+    max-width: none;
+  }
+
   .btn{
     transition: ease all 250ms;
     text-transform: uppercase;
-    font-size: 0.9em;
-    line-height: ceil(14px * 1.4);
+    font-size: floor(@font-size-base * 0.9);
+    line-height: ceil(@font-size-base * 1.4);
   }
 
   .btn-default{
@@ -188,6 +192,35 @@
 
     &:hover{
       color: @he-bulk-link-color-hover;
+    }
+  }
+
+  // Dropdowns
+  .dropdown-menu{
+    background-color: @he-header-bg-color;
+
+    a:not(.button){
+      color: @he-bulk-dropdown-link;
+      font-size: floor(@font-size-base * 0.9);
+      text-transform: uppercase;
+      padding: 6px 15px 6px 10px;
+
+      .cu-icon{
+        .cu-icon-size(12px);
+        margin-right: 6px;
+        vertical-align: inherit;
+      }
+
+      &:hover{
+        background-color: rgba(255,255,255,0.05);
+        color: @he-bulk-dropdown-link-hover;
+      }
+    }
+
+    .active{
+      > a{
+        color: @he-bulk-dropdown-link-active;
+      }
     }
   }
 
