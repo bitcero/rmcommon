@@ -5,10 +5,10 @@
 <div class="row mod_preinstall_container">
 
     <div class="col-sm-6 col-md-5 col-lg-5">
-        <div class="cu-box">
+        <div class="cu-box box-primary">
 
             <div class="box-header">
-                <h3><?php echo sprintf(__('%s Details','rmcommon'), $module->getInfo('name')); ?></h3>
+                <h3 class="box-title"><?php echo sprintf(__('%s Details','rmcommon'), $module->getInfo('name')); ?></h3>
             </div>
 
             <div class="box-content">
@@ -84,7 +84,7 @@
 
             <div class="box-header">
                 <span class="fa fa-caret-down box-handler"></span>
-                <h3><?php _e('Module Templates','rmcommon'); ?> (<?php echo count($module->getInfo('templates')); ?>)</h3>
+                <h3 class="box-title"><?php _e('Module Templates','rmcommon'); ?> (<?php echo count($module->getInfo('templates')); ?>)</h3>
             </div>
 
             <div class="box-content" style="display: none;">
@@ -106,7 +106,7 @@
 
             <div class="box-header">
                 <span class="fa fa-caret-down box-handler"></span>
-                <h3><?php _e('Database Tables','rmcommon'); ?> (<?php echo count($module->getInfo('tables')); ?>)</h3>
+                <h3 class="box-title"><?php _e('Database Tables','rmcommon'); ?> (<?php echo count($module->getInfo('tables')); ?>)</h3>
             </div>
 
             <div class="box-content" style="display: none;">
@@ -127,7 +127,7 @@
 
             <div class="box-header">
                 <span class="fa fa-caret-down box-handler"></span>
-                <h3><?php _e('Option settings to insert','rmcommon'); ?> (<?php echo count($module->getInfo('config')); ?>)</h3>
+                <h3 class="box-title"><?php _e('Option settings to insert','rmcommon'); ?> (<?php echo count($module->getInfo('config')); ?>)</h3>
             </div>
 
             <div class="box-content" style="display: none;">
@@ -149,7 +149,7 @@
 
             <div class="box-header">
                 <span class="fa fa-caret-down box-handler"></span>
-                <h3><?php _e('Bloks to insert','rmcommon'); ?> (<?php echo count($module->getInfo('blocks')); ?>)</h3>
+                <h3 class="box-title"><?php _e('Bloks to insert','rmcommon'); ?> (<?php echo count($module->getInfo('blocks')); ?>)</h3>
             </div>
 
             <div class="box-content" style="display: none;">

@@ -509,7 +509,7 @@ function parse_social_icons( $type ){
 }
 
 function show_modules_list(){
-	global $xoopsSecurity;
+	global $xoopsSecurity, $cuIcons;
     
     $installed_modules = array();
     
@@ -555,6 +555,7 @@ function show_modules_list(){
         
         // Admin section
         $admin_link = $mod->getVar('hasadmin') ? XOOPS_URL.'/modules/'.$mod->dirname().'/'.$mod->getInfo('adminindex') : '';
+        $icon = $mod->getInfo('icon') != '' ? $cuIcons->getIcon($mod->getInfo('icon')) : (XOOPS_URL.'/modules/'.$mod->getVar('dirname').'/'.($mod->getInfo('icon48') ? $mod->getInfo('icon48') : $mod->getInfo('image')));
         
         $modules[] = array(
             'id'            => $mod->getVar('mid'),
@@ -562,7 +563,7 @@ function show_modules_list(){
             'realname'        => $mod->getInfo('name'),
             'version'        => $mod->getInfo('rmnative') ? RMModules::format_module_version($mod->getInfo('rmversion')) : $mod->getInfo('version'),
             'description'    => $mod->getInfo('description'),
-            'icon'            => XOOPS_URL.'/modules/'.$mod->getVar('dirname').'/'.($mod->getInfo('icon48') ? $mod->getInfo('icon48') : $mod->getInfo('image')),
+            'icon'            => $icon,
             'image'         => XOOPS_URL.'/modules/'.$mod->getVar('dirname').'/'.$mod->getInfo('image'),
             'link'            => $main_link,
             'admin_link'    => $admin_link,
@@ -593,15 +594,24 @@ function show_modules_list(){
             if (!$module->loadInfo($file, false)) {
                 continue;
             }
-            $available_mods[] = $module;
+
+            $available_mods[] = array(
+                'name'            => $module->getInfo('name'),
+                'version'        => $module->getInfo('rmnative') ? RMModules::format_module_version($module->getInfo('rmversion')) : $module->getInfo('version'),
+                'description'    => $module->getInfo('description'),
+                'image'         => XOOPS_URL.'/modules/'.$module->getInfo('dirname').'/'.$module->getInfo('image'),
+                'authors'        => get_authors( $module ),
+                'license'        => $module->getInfo('license'),
+                'dirname'        => $module->getInfo('dirname'),
+                'help'        => $module->getInfo('help'),
+                'social'        => $module->getInfo('social')
+            );
             unset($module);
         }
     }
     
     // Event for available modules
-    $available_mods = RMEvents::get()->run_event('rmcommon.available.modules', $available_mods);
-    
-    $GLOBALS['available_mods'] = $available_mods;
+    $available_mods = RMEvents::get()->trigger('rmcommon.available.modules', $available_mods);
 
 	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'));
 	
@@ -611,7 +621,7 @@ function show_modules_list(){
 	RMTemplate::get()->add_script('modules.min.js', 'rmcommon');
         RMTemplate::get()->set_help('http://www.redmexico.com.mx/docs/common-utilities/uso-de-common-utilities/standalone/1/#administrador-de-modulos');
 	xoops_cp_header();
-	include RMTemplate::get()->get_template('rmc-modules.php', 'module', 'rmcommon');
+	include RMTemplate::get()->path('rmc-modules.php', 'module', 'rmcommon');
 	xoops_cp_footer();
 	
 }

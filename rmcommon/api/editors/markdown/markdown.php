@@ -131,8 +131,8 @@ class Editor_Markdown extends RMEditor
         }
         $plugins .= '}';
 
-        $script = '<script>function initMD(id){$(document).ready( function() {
-mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'");</script>';
+        $script = 'function initMD(id){$(document).ready( function() {
+mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'");';
 
         return $script;
 
@@ -143,6 +143,7 @@ mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'"
      * @return string
      */
     public function render(){
+        global $cuIcons;
 
         RMTemplate::get()->add_script( 'codemirror.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown') );
         RMTemplate::get()->add_script( 'mode/overlay.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown') );
@@ -152,7 +153,8 @@ mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'"
         RMTemplate::get()->add_script( 'mode/meta.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown') );
         RMTemplate::get()->add_script( 'markdown-editor.min.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown') );
         RMTemplate::get()->add_style( 'markdown-editor.min.css', 'rmcommon', array('directory' => 'api/editors/markdown') );
-        RMTemplate::get()->add_head( $this->render_js() );
+        RMTemplate::getInstance()->add_fontawesome();
+        RMTemplate::get()->add_inline_script( $this->render_js(), 1 );
 
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'markdown', $this->id );
@@ -160,7 +162,9 @@ mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'"
         $rtn = 	"<div class='ed-container' id='".$this->id."-ed-container'>";
         $rtn .= "  <div class='ed-plugins' id='".$this->id."-ed-plugins'>
 		              <span class='plugin'>".implode('</span> <span class="plugin">', $plugins).'</span>
-		              <button type="button" class="plugin full-screen" accesskey="s" title="'. __('Toggle full screen [S]', 'rmcommon') . '"><span class="fa fa-arrows-alt"></span></button>
+		              <button type="button" class="plugin full-screen" accesskey="s" title="'. __('Toggle full screen [S]', 'rmcommon') . '">
+		              '.$cuIcons->getIcon('svg-rmcommon-fullscreen').$cuIcons->getIcon('svg-rmcommon-exit-fullscreen').'
+		              </button>
                    </div>';
         $rtn .= "  <div class='ed-buttons' id='".$this->id."-buttons-container'>";
         $rtn .= '    <div class="toolbar-1"></div>';

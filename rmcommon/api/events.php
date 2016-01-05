@@ -107,7 +107,7 @@ class RMEvents
     /**
 	* @desc Almacena toda la información de la API
 	*/
-    public function run_event($event_name, $value=null)
+    public function trigger($event_name, $value=null)
     {
         $pre = $event_name;
         $event_name = strtolower(str_replace('.', '', $event_name));
@@ -118,11 +118,24 @@ class RMEvents
 
         foreach ($this->_events[$event_name] as $event) {
             $args[1] =& $value;
-            $xoopsLogger->addExtra($pre, $event['class_name'].'::'.$event['method']);
+            //$xoopsLogger->addExtra($pre, $event['class_name'].'::'.$event['method']);
             $value = call_user_func_array(array($event['class_name'], $event['method']), array_slice($args, 1));
         }
 
         return $value;
+    }
+
+    /**
+     * @param $event_name
+     * @param null $value
+     * @return mixed
+     *
+     * @deprecated Use trigger instead
+     */
+    public function run_event($event_name, $value = null){
+
+        return call_user_func_array(array($this, 'trigger'), func_get_args());
+
     }
 
 }

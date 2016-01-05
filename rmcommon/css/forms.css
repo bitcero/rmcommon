@@ -9,10 +9,9 @@
 * you can specify a new styles for forms based on your designs
 */
 div.form_container{
-	margin: 20px auto;
+	margin: 0 auto;
 }
 table.table_form{
-	width: 85%;
 	margin: 0 auto;
 }
 .cell_fields{

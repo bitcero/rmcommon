@@ -17,6 +17,8 @@
 class RMActiveForm
 {
     use RMProperties;
+
+    private $model;
     /**
      * Class constructor for the &lt;form&gt; tag. This method accept a list of attributes and parameters that
      * could be inserted in form.
@@ -77,6 +79,11 @@ class RMActiveForm
         // Default validation is in local client
         if ( !isset( $attributes['validation'] ) )
             $attributes['validation'] = 'local';
+
+        if (array_key_exists('model', $attributes) && is_a($attributes['model'], 'RMActiveRecord')){
+            $this->model = $attributes['model'];
+            unset($attributes['model']);
+        }
 
         $this->attributes = $attributes;
 
@@ -165,4 +172,5 @@ class RMActiveForm
     public function close(){
         echo "</form>";
     }
+
 }

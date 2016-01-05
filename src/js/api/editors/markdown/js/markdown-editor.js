@@ -15,10 +15,10 @@ This component is part of Common Utilities
         callbacks: {},
         plugins: {},
 
-        btn_tpl: '<button type="button" class="button" data-id="%id" data-editor="%e" accesskey="%k" title="%t">%c</button>',
+        btn_tpl: '<button type="button" class="command" data-id="%id" data-editor="%e" accesskey="%k" title="%t">%c</button>',
         menu_item_tpl: '<button type="button" class="" data-id="%id" data-owner="%ow" data-editor="%e" accesskey="%k">%i %c</button>',
-        btn_menu_tpl: '<div class="btn-group"><button type="button" class="button dropdown-toggle" data-toggle="dropdown" data-id="%id" data-editor="%e" accesskey="%k" title="%t">%c</button>%m</div>',
-        menu_tpl: '<ul class="dropdown-menu" role="menu">%li</ul>',
+        btn_menu_tpl: '<div class="button-dropdown" onclick="if(!$.fn.dropdown){$(this).toggleClass(\'open\');}"><button type="button" class="command dropdown-toggle" data-toggle="dropdown" data-id="%id" data-editor="%e" accesskey="%k" title="%t">%c</button>%m</div>',
+        menu_tpl: '<ul class="editor-menu" role="menu">%li</ul>',
 
         init: function( id, options ){
 
@@ -253,7 +253,7 @@ This component is part of Common Utilities
     mdEditor.add_button({
         id: 'h1',
         owner: 'head',
-        caption: '<h1>Heading 1</h1>',
+        caption: '<strong>&lt;H1&gt;</strong> Heading 1',
         icon: '',
         key: '1',
         callback: '',
@@ -264,7 +264,7 @@ This component is part of Common Utilities
     mdEditor.add_button({
         id: 'h2',
         owner: 'head',
-        caption: '<h2>Heading 2</h2>',
+        caption: '<strong>&lt;H2&gt;</strong> Heading 2',
         icon: '',
         key: '2',
         callback: '',
@@ -275,7 +275,7 @@ This component is part of Common Utilities
     mdEditor.add_button({
         id: 'h3',
         owner: 'head',
-        caption: '<h3>Heading 3</h3>',
+        caption: '<strong>&lt;H3&gt;</strong> Heading 3',
         icon: '',
         key: '3',
         callback: '',
@@ -286,7 +286,7 @@ This component is part of Common Utilities
     mdEditor.add_button({
         id: 'h4',
         owner: 'head',
-        caption: '<h4>Heading 4</h4>',
+        caption: '<strong>&lt;H4&gt;</strong> Heading 4',
         icon: '',
         key: '4',
         callback: '',
@@ -297,7 +297,7 @@ This component is part of Common Utilities
     mdEditor.add_button({
         id: 'h5',
         owner: 'head',
-        caption: '<h5>Heading 5</h5>',
+        caption: '<strong>&lt;H5&gt;</strong> Heading 5',
         icon: '',
         key: '5',
         callback: '',
@@ -308,7 +308,7 @@ This component is part of Common Utilities
     mdEditor.add_button({
         id: 'h6',
         owner: 'head',
-        caption: '<h6>Heading 6</h6>',
+        caption: '<strong>&lt;H6&gt;</strong> Heading 6',
         icon: '',
         key: '6',
         callback: '',

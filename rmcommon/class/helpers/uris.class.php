@@ -57,23 +57,25 @@ class RMUris
 
         if ( defined( 'XOOPS_CPFUNC_LOADED' ) ){
 
-            if ( $cuSettings->permalinks && isset( $paths[$module] ) )
+            if ( $cuSettings->permalinks && isset( $paths[$module] ) ) {
                 $url .= '/admin' . $path;
-            else
-                $url .= '/modules/' . $module .'/admin';
-
+            } else {
+                $objModule = XoopsModule::getByDirName($module);
+                $url .= '/modules/' . $module . '/' . $objModule->getInfo('adminindex');
+            }
 
         }else
             $url .= $cuSettings->permalinks ? $path : '/modules/' . $module;
 
         if($controller == '')
-            return $url . '/';
+            return $url;
 
-        $url .=  $cuSettings->permalinks ? '/' . $controller . '/' : '/index.php/' . $controller . '/';
+        $url .=  $cuSettings->permalinks ? '/' . $controller . '/' : '/' . $controller . '/';
         $url .= $action != '' ? $action . '/' : '';
         $query = '';
+
         foreach( $parameters as $name => $value ){
-            $query .= ($query=='' ? '?' : '&') . $name . '=' . urlencode($value);
+            $query .= $name . '/' . urlencode($value) . '/';
         }
 
         return $url . $query;

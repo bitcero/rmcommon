@@ -17,13 +17,13 @@ class RmcommonRmcommonPreload
 		include_once RMCPATH.'/include/right_widgets.php';
 
 		global $xoopsModule;
-		if (RMCLOCATION=='modules' && $xoopsModule->dirname()=='rmcommon' && rmc_server_var($_REQUEST, 'action', '')=='')
+		/*if (RMCLOCATION=='modules' && $xoopsModule->dirname()=='rmcommon' && rmc_server_var($_REQUEST, 'action', '')=='')
 			$widgets[] = rmc_available_mods();
 
         if (RMCLOCATION=='blocks' && $xoopsModule->dirname()=='rmcommon'){
             //$widgets[] = rmc_blocks_new();
             //$widgets[] = rmc_blocks_addpos();
-        }
+        }*/
 
 		return $widgets;
 
@@ -104,12 +104,13 @@ class RmcommonRmcommonPreload
                     __('Please try to add manually next lines:', 'rmcommon') . '<br><code>' . nl2br($rules) . '</code>', RMMSG_ERROR);
         }
 
-        RMSettings::write_rewrite_js( $save['modules_path'] );
+        //RMSettings::write_rewrite_js( $save['modules_path'] );
 
         return null;
     }
 
     public function eventRmcommonEditorTopPlugins( $plugins, $type, $id ){
+        global $cuIcons;
 
         RMTemplate::get()->add_script( 'cu-image-mgr.js', 'rmcommon' );
 
@@ -119,7 +120,7 @@ class RmcommonRmcommonPreload
                         data-title="'.__('Images Manager','rmcommon').'"
                         data-type="'.$type.'"
                         title="' . __('Images', 'rmcommon') . '"
-                        ><span class="fa fa-image"></span><span class="caption">' . __('Images', 'rmcommon') . '</span></a>';
+                        >'. $cuIcons->getIcon('svg-rmcommon-images').'<span class="caption">' . __('Images', 'rmcommon') . '</span></a>';
 
         return $plugins;
 

@@ -68,11 +68,12 @@
             </div>
         </div>
     </div>
-    <?php echo $xoopsSecurity->getTokenHTML(); ?>
     <input type="hidden" name="action" value="save-settings">
     <input type="hidden" name="mod" value="<?php echo $module->mid(); ?>">
     <?php if ( $is_popup ): ?>
     <input type="hidden" name="via_ajax" value="1">
+    <?php else: ?>
+        <?php echo $xoopsSecurity->getTokenHTML(); ?>
     <?php endif; ?>
 </form>
 </div>

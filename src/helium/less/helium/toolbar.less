@@ -1,0 +1,100 @@
+#he-toolbar{
+
+  background-color: @he-toolbar-bg;
+  margin-bottom: @grid-gutter-width;
+
+  .he-toolbar-icons{
+    padding: 0;
+
+    a{
+      text-align: center;
+      color: @theme-main-color;//@he-toolbar-color;
+      margin-right: 1px;
+      transition: ease all 250ms;
+      border-radius: @border-radius-base;
+      background-color: @he-toolbar-item-bg;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 0.8em;
+      transition: ease all 250ms;
+      display: block;
+      padding: @grid-gutter-width;
+
+      > .cu-icon{
+        font-size: 24px;
+        display: block;
+        margin: 0 auto 5px;
+        text-align: center;
+
+        .cu-icon-color(@theme-main-color);
+        .cu-icon-size(24px);
+
+      }
+
+      &:hover{
+        background-color: @he-toolbar-hover-bg;
+        color: @he-toolbar-hover-color!important;
+        .vertical-gradient(@theme-main-color, @theme-secondary-color);
+
+        > .cu-icon{
+          .cu-icon-color(@he-toolbar-hover-color)!important;
+          > svg{
+            fill: @he-toolbar-hover-color!important;
+          }
+
+          > *{
+            color: @he-toolbar-hover-color!important;
+          }
+        }
+      }
+
+      &[disabled]{
+        background-color: @he-toolbar-disabled-bg;
+        color: @he-toolbar-disabled-color;
+        cursor: default;
+        text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+
+        > .cu-icon{
+          .cu-icon-color(@he-toolbar-disabled-color)!important;
+          svg{
+            fill: @he-toolbar-disabled-color!important;
+          }
+          > span{
+            color: @he-toolbar-disabled-color!important;
+          }
+        }
+
+        &:hover{
+          background: transparent!important;
+        }
+
+      }
+
+    }
+
+    .tools{
+      list-style: none;
+      padding: 0; margin: 0;
+      position: relative;
+      height: 74px;
+      white-space: nowrap;
+
+      > li{
+        display: inline-block;
+
+        &:last-child a{
+          margin-right: 0;
+        }
+
+      }
+
+    }
+  }
+
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+}

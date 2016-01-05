@@ -5,6 +5,10 @@
  * @link   http://rmcommon.com
  */
 
+//@prepros-prepend 'bootbox.js';
+//@prepros-prepend 'cu-spinner.js';
+//@prepros-prepend 'pnotify.custom.js';
+
 var cuHandler = {
 
     /**
@@ -26,18 +30,8 @@ var cuHandler = {
         var url = $(launcher).attr("href") != undefined && $(launcher).attr("href") != '#' ? $(launcher).attr("href") : $(launcher).data('url');
         var handler = $(launcher).data("handler");
         var window_id = $(launcher).data("window-id");
-        var params_retriever = $(launcher).data('retriever');
-        var params_setter = $(launcher).data('parameters');
 
-        if ( params_retriever != undefined )
-            var params = eval(params_retriever+'(launcher)');
-        else if ( params_setter != undefined ){
-
-            eval("var params = " + params_setter);
-
-        }
-        else
-            var params = {CUTOKEN_REQUEST: $("#cu-token").val()};
+        var params = {CUTOKEN_REQUEST: $("#cu-token").val()};
 
         if (params==false)
             return false;
@@ -53,13 +47,14 @@ var cuHandler = {
 
                 cuHandler.closeLoader();
 
-                cuDialog.dialog({
+                bootbox.dialog({
                     message: response.content,
                     title: response.message,
                     icon: response.icon != undefined ? response.icon : '',
                     width: response.width != undefined ? response.width : '',
-                    id: response.windowId != undefined ? response.windowId : window_id,
+                    id: response.id != undefined ? response.id : window_id,
                     animate: false,
+                    color: response.color != undefined ? response.color : '',
                     closeButton: response.closeButton != undefined ? response.closeButton : true
                 });
 
@@ -106,6 +101,44 @@ var cuHandler = {
 
     },
 
+    /**
+     * Send an AJAX request
+     * @param e DOM element
+     * @param data
+     */
+    requestAjax: function(e, data){
+
+        $(e).cuSpinner({icon: 'svg-rmcommon-spinner-14'});
+
+        if(data == undefined){
+            return false;
+        }
+
+        if(data.url == undefined){
+            return false;
+        }
+
+        if(data.parameters == undefined){
+            data.parameters = {};
+        }
+
+        data.parameters.CUTOKEN_REQUEST = $("#cu-token").val();
+
+        if(data.method == undefined || data.method == 'post'){
+            $.post(data.url, data.parameters, cuHandler.retrieveAjax, 'json');
+        } else {
+            $.get(data.url, data.parameters, cuHandler.retrieveAjax, 'json');
+        }
+
+    },
+
+    isDisabled: function(e){
+        if($(e).hasClass('disabled') || $(e).attr('disabled') != undefined){
+            return true;
+        }
+        return false;
+    },
+
     // Retrieve information for AJAX-FORMS
     retrieveAjax: function(response){
 
@@ -113,16 +146,25 @@ var cuHandler = {
 
         if (response.type=='error'){
 
-            if (response.modal_message!=undefined)
-                cuDialog.alert({
+            if (response.modal_message!=undefined) {
+                bootbox.alert({
                     message: response.message
                 });
-            else
+            } else if(response.notify != undefined && response.message != undefined){
+                cuHandler.notify({
+                    title: response.notify.title == undefined ? '' : response.notify.title,
+                    type: response.notify.type == undefined ? 'alert-info' : response.notify.type,
+                    icon: response.notify.icon == undefined ? 'svg-rmcommon-info-solid' : response.notify.icon,
+                    text: response.message
+                });
+                response.notify = undefined;
+            } else {
                 alert(response.message);
+            }
 
         }
 
-        if( response.token!='' )
+        if( response.token!=undefined && response.token!='' )
             $("#cu-token").val(response.token);
 
         cuHandler.closeLoader();
@@ -136,6 +178,10 @@ var cuHandler = {
 
     },
 
+    /**
+     * Check AJAX action reponsed.
+     * @param data
+     */
     checkAjaxAction: function( data ){
 
         /**
@@ -143,6 +189,15 @@ var cuHandler = {
          */
         if ( data.showMessage != undefined )
             alert( data.message );
+
+        if(data.notify != undefined && data.message != undefined){
+            this.notify({
+                title: data.notify.title == undefined ? null : data.notify.title,
+                type: data.notify.type == undefined ? 'alert-info' : data.notify.type,
+                icon: data.notify.icon == undefined ? 'svg-rmcommon-info-solid' : data.notify.icon,
+                text: data.message
+            })
+        }
 
         // closeWindow: "#window-id"
         if(data.closeWindow != undefined)
@@ -159,7 +214,7 @@ var cuHandler = {
 
         if(data.openDialog != undefined){
 
-            cuDialog.dialog({
+            bootbox.dialog({
                 message: data.content,
                 title: data.message,
                 icon: data.icon != undefined ? data.icon : '',
@@ -174,7 +229,7 @@ var cuHandler = {
 
         // Reload
         if ( data.reload != undefined ){
-            window.location.reload();
+            window.location.reload(true);
             return;
         }
 
@@ -189,7 +244,10 @@ var cuHandler = {
         html += '<div class="cu-window-loader">' +
             '<div class="loader-container text-center">' +
             '<button class="close" type="button">&times;</button>' +
-            '<span>Operación en progreso...</span>' +
+            '<span>' +
+            '<span class="cu-icon cu-spinner" style="animation: cu-spin 1s infinite steps(10)">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path d="M5.233 2.056C5.23 1.063 6.033.253 7.027.25c.994-.003 1.803.8 1.806 1.794.004.994-.8 1.802-1.794 1.806-1 .003-1.81-.8-1.81-1.794zm3.824 1.568c-.003-.993.8-1.802 1.792-1.806.99-.003 1.8.8 1.8 1.793 0 1-.8 1.81-1.8 1.81-1 .01-1.8-.8-1.81-1.79zm2.495 3.81c-.002-.497.398-.9.896-.903.497 0 .902.4.904.9 0 .5-.402.9-.897.91-.498.01-.902-.39-.903-.89zm-1.57 3.824c-.003-.496.4-.9.895-.903.498 0 .903.4.904.897.01.498-.4.9-.89.904-.49.002-.9-.4-.9-.898zM6.17 12.853c-.002-.496.4-.9.897-.902.497 0 .9.4.903.9.002.5-.4.9-.897.91-.498.01-.902-.4-.903-.89zm-3.824-1.57c-.002-.495.4-.9.897-.902.496 0 .9.4.902.9.002.5-.4.9-.896.91-.5 0-.91-.4-.91-.9zM1.87 3.65c-.003-.746.6-1.352 1.345-1.354.746-.002 1.352.6 1.354 1.345 0 .75-.6 1.36-1.35 1.36-.75.01-1.35-.6-1.36-1.34zM.637 7.472c-.002-.56.45-1.014 1.01-1.016.56-.002 1.013.45 1.015 1.01 0 .56-.45 1.014-1.008 1.016S.64 8.03.638 7.472z"/></svg>' +
+            '</span>' + ' ' + cuLanguage.inProgress + '</span>' +
             '</div></div>';
 
         $('body').append(html);
@@ -212,6 +270,10 @@ var cuHandler = {
     },
 
     getURI: function( module, controller, action, zone, params ){
+        return this.getControllerURI(module, controller, action, zone, params);
+    },
+
+    getControllerURI: function( module, controller, action, zone, params ){
 
         var url = xoUrl;
 
@@ -242,6 +304,34 @@ var cuHandler = {
 
         return url + query;
 
+    },
+
+    /**
+     * Get the absolute or relative URL according to a given path
+     * @param url
+     * @param relative
+     * @returns {string}
+     */
+    url: function (url, relative) {
+
+        // Get the hostname
+        var host = window.location.protocol + '//' + window.location.host;
+
+        if (window.location.port != '') {
+            host += ':' + window.location.port;
+        }
+
+        var baseUrl = xoUrl.replace(host, '');
+
+        if (undefined == url) {
+            return xoUrl;
+        }
+
+        if (arguments.length == 1 || true != relative) {
+            return xoUrl + url;
+        }
+
+        return baseUrl + url;
     },
 
     /**
@@ -308,9 +398,12 @@ var cuHandler = {
                 if(url!=undefined && url!='')
                     window.location.href = url;
                 break;
-            default:
+            case 'ajax':
+                var url = $(e).attr('href') != '' ? $(e).attr('href') : $(e).data('url');
+                cuHandler.requestAjax(e, {url:url});
+            /*default:
                 eval( action + "(e)" );
-                break;
+                break;*/
         }
 
     },
@@ -333,7 +426,139 @@ var cuHandler = {
 
         });
 
-    }
+    },
+
+    /*------------------------------------------------
+     1.7 GET SVG ICON
+     ------------------------------------------------*/
+    getIcon: function (icon) {
+
+        // Get an SVG icon from providers
+
+        var isSVG = 'svg-' == icon.slice(0,4);
+        var isAbsolute = false;
+        var isUrl = false;
+        if(!isSVG){
+            isSVG = '.svg' == icon.slice(-4);
+
+            if(isSVG){
+                isUrl = true;
+            }
+        }
+
+        isAbsolute = null != icon.match(/^(http:\/\/|ftp:\/\/|https:\/\/\|\/\/)/i);
+
+        if (isSVG && !isUrl) {
+            var parts = icon.split("-");
+
+            if(parts.length < 3){
+                return this.url("modules/rmcommon/icons/noicon.svg");
+            }
+
+            var fileName = icon.slice(5 + parts[1].length);
+
+            var defaultFile = this.url("modules/rmcommon/icons/" + fileName + '.svg');
+
+            if (undefined == iconsProviders){
+                return defaultFile;
+            }
+
+            if(iconsProviders.hasOwnProperty(parts[1])){
+                var file = iconsProviders[parts[1]] + '/' + fileName + '.svg';
+                return file;
+            }
+
+            return defaultFile;
+        }
+
+        // SVG from URL
+        if(isUrl && !isAbsolute){
+            return this.url(icon);
+        }
+
+        // Get an image
+        var images = ['.jpg', '.gif', '.png', 'jpeg'];
+        var ext = icon.slice(-4);
+
+        if(images.indexOf(ext) || isAbsolute){
+            return icon;
+        }
+
+        // Get a icon from font
+        return '<span class="' + icon + '"></span>';
+
+    },
+
+    /*------------------------------------------------
+     1.8 LOAD ICON INSIDE CONTAINER
+     ------------------------------------------------*/
+    /**
+     * Load an icon inside a container.
+     * @param icon Icon path or name to use
+     * @param container Container DOM element
+     * @param replace Indicate if replace current xo-icon-svg or use existent
+     * @returns {boolean}
+     */
+    loadIcon: function (icon, container, replace) {
+
+        // We need two arguments
+        if (arguments.length < 1) {
+            return false;
+        }
+
+        replace = arguments.length == 2 ? true : (arguments.length ==1 ? false : replace);
+
+        var file = this.getIcon(icon);
+
+        var is_svg = file.slice(-4) == '.svg';
+        var is_font = file.slice(0, 5) == '<span';
+
+        if (replace) {
+            var iconLoaded = container.find('.cu-icon');
+        } else {
+            var iconLoaded = $("<span />", {"class": 'cu-icon'});
+        }
+
+        if(undefined == iconLoaded || iconLoaded.length <= 0){
+            replace = false;
+            iconLoaded = $("<span />", {"class": 'cu-icon'});
+        }
+
+
+        // Load a SVG icon
+        if (is_svg) {
+            iconLoaded.html('').load(file);
+        } else if (is_font){
+            iconLoaded.html('').append(file);
+        } else {
+            /* If it is not a SVG icon then it's an image (?) */
+            var img = $("<img>").attr("src", file);
+            iconLoaded.html('').append(img);
+        }
+
+        if(!replace && arguments.length > 1){
+            $(container).append(iconLoaded);
+        }
+
+        return iconLoaded;
+
+    },
+
+    modal: bootbox,
+
+    /**
+     * This is a wrapper for PNotify plugin
+     * See http://sciactive.com/pnotify/ for docs
+     * @param options To be passed to PNotify plugin
+     */
+    notify: function (options) {
+
+        //PNotify.prototype.options.styling = 'bootstrap3';
+        return new PNotify(options);
+
+    },
+
+
 
 };
 
@@ -375,8 +600,9 @@ $(document).ready(function(){
     /**
      * Cargar diálogos de otros módulos
      */
-    $('body').on('click', '*[data-action]', function(){
-        if($(this).is(":disabled") || $(this).attr("disabled")){
+    $('body').on('click', '*[data-action]', function(e){
+        if($(this).is(":disabled") || $(this).attr("disabled") || $(this).hasClass('disabled')){
+            $(e).stopPropagation();
             return false;
         }
         cuHandler.runAction( $(this) );
@@ -386,6 +612,11 @@ $(document).ready(function(){
 
     $("body").on('submit', 'form[data-type="ajax"]', function(){
         cuHandler.submitAjaxForm( $(this) );
+        return false;
+    });
+
+    // Prevent submission of forms no-submit
+    $("body").on('submit', 'form[data-type="no-submit"]', function(){
         return false;
     });
 
@@ -424,13 +655,17 @@ $(document).ready(function(){
     /**
      * Select rows
      */
-    /*$("body").on('click', '.activator-container > tbody > tr > td', function(){
+    $("body").on('click', '.activator-container > tbody > tr', function(e){
 
-        var parent = $(this).parents("tr");
-        var input = $(parent).find("input[data-switch]");
+        if(e.target.tagName != 'DIV' && e.target.tagName != 'TD'){
+            return;
+        }
+
+        //var parent = $(this).parents("tr");
+        var input = $(this).find("input[data-switch]");
 
         if($(input).attr("type") == 'radio'){
-            $(parent).parents(".activator-container").find(".tr-checked").removeClass('tr-checked');
+            $(this).parents(".activator-container").find(".tr-checked").removeClass('tr-checked');
         }
 
         if ( input.is(":checked") )
@@ -441,13 +676,13 @@ $(document).ready(function(){
         cuHandler.enableCommands($(this).parents(".activator-container").attr("id"), input.attr("type"));
 
         if ( $(input).is(":checked") )
-            $(parent).addClass( 'tr-checked' );
+            $(this).addClass( 'tr-checked' );
         else
-            $(parent).removeClass( 'tr-checked' );
+            $(this).removeClass( 'tr-checked' );
 
         event.stopPropagation();
 
-    });*/
+    });
 
     /**
      * Select all checkbox
@@ -507,7 +742,7 @@ $(document).ready(function(){
         var target = $(container.data('target'));
 
         if ( target != undefined )
-            target.html( '<div class="text-success"><span class="fa fa-spinner fa-spin"></span> ' + cuLanguage.downloadNews + '</div>' );
+            target.html( '<div class="text-success"><span class="fa fa-spinner fa-pulse"></span> ' + cuLanguage.downloadNews + '</div>' );
 
         var bcontainer = $("*[data-boxes='load']");
 
@@ -543,7 +778,9 @@ $(document).ready(function(){
 
                 }
                 target.html('').append(news);
-                news.fadeIn('fast');
+                news.fadeIn('fast', function(){
+                    $('html.dashboard [data-container="dashboard"]').trigger('containerUpdated');
+                });
 
             }
 
@@ -554,9 +791,17 @@ $(document).ready(function(){
 
                 for ( i=0; i < response.boxes.length; i++ ){
 
-                    var box = $("<div>").addClass('cu-box').css("display", 'none');
-                    box.append('<div class="box-header"><span class="fa fa-caret-up box-handler"></span><h3>'+ response.boxes[i].title +'</h3></div>');
-                    box.append('<div class="box-content">'+response.boxes[i].content+'</div>');
+                    if (response.boxes[i].size == undefined || response.boxes[i].size <= 0){
+                        var size = 1;
+                    } else {
+                        size = response.boxes[i].size;
+                    }
+
+                    var box = $("<div data-dashboard=\"item\">").addClass('size-' + size).css("display", 'none');
+                    box.append('<div class="cu-box"><div class="box-header">' +
+                        '<span class="fa fa-caret-up box-handler"></span>' +
+                        '<h3 class="box-title">'+ response.boxes[i].title +'</h3></div>' +
+                        '<div class="box-content">'+response.boxes[i].content+'</div></div>');
                     // Get the box position
                     if (response.boxes[i].container != undefined){
                         var box_container = $(response.boxes[i].container);
@@ -567,7 +812,10 @@ $(document).ready(function(){
                                     $(this).prepend(newbox);
                                 else
                                     $(this).append(newbox);
-                                newbox.fadeIn('fast');
+                                newbox.fadeIn('fast', function(){
+                                    $('html.dashboard [data-container="dashboard"]').trigger('containerUpdated');
+                                });
+
                             });
                         }
                     }

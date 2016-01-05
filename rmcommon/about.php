@@ -8,206 +8,202 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-define('RMCLOCATION','blocks');
+define('RMCLOCATION','about');
 include '../../include/cp_header.php';
+
+RMTemplate::getInstance()->add_style('about.min.css', 'rmcommon', ['id'=>'about-css']);
 
 RMTemplate::get()->header(); ?>
 
-<style type="text/css">
-    .thumbnail{
-        width: 100%;
-        height: 100px;
-        border-radius: 0;
-        background-size: 95%;
-        background-repeat: no-repeat;
-        background-position: 50% -5%;
-        margin: 10px 0;
-    }
-    .thumbnail span{display: none;}
-    .clearfix hr{
-        margin: 10px 0;
-    }
-    .page-header{border: 0;}
-</style>
-
-<div class="row">
-    <div class="col-xs-12">
-        <h1 class="page-header">
-            <img src="<?php echo RMCURL; ?>/images/cu-gear.png" class="pull-left" style="width: 80px; margin-right: 10px;">
-            Welcome to Common Utilities<br>
-            <small>Thanks for using Common Utilities <?php echo RMCVERSION; ?>. This version has a lot of improvements for you.</small>
-        </h1>
-        <hr>
+<div class="cu-box welcome-box">
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-left">
+                <?php echo $cuIcons->getIcon('svg-rmcommon-rmcommon', ['class' => 'media-object rmcommon-logo']); ?>
+            </div>
+            <div class="media-body">
+                <h1 class="media-heading">
+                    Welcome to Common Utilities
+                </h1>
+                <p class="lead">
+                    Thanks for using <strong><?php echo RMModules::get_module_version('rmcommon'); ?></strong>.
+                    This version has a lot of improvements and new features to make your work more productive and pleasing.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-sm-4">
-        <div class="cu-box">
-            <div class="box-content">
-                <h2>Improved GUI</h2>
-                <img src="//www.xoopsmexico.net/about/rmcommon/schemes/all.jpg" class="img-responsive" style="margin-bottom: 10px;" alt="Improved GUI">
-                <p>The default theme of Common Utilities (Two·P6) has been improved and we have gived to it a better, modern and clean
-                    appearance.</p>
-                <hr>
-                <h3 class="text-info">Choose a Color Scheme</h3>
-                <p class="help-block">Six new color schemes has been included in this version of Two·Six, and you can
-                    <a href="./?twop6=about">create your own schemes</a>.</p>
-                <div class="row">
-                    <div class="col-xs-4  col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" data-file="theme-default.css" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/default.png');" title="Default Color Sheme" data-rel="tooltip">
-                            <span>Default</span>
-                        </a>
-                        <strong>Default</strong>
-                    </div>
-                    <div class="clearfix visible-sm"></div>
-                    <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/cardio.png');" data-file="theme-cardio.css">
-                            <span>Cardio</span>
-                        </a>
-                        <strong>Cardio</strong>
-                    </div>
-                    <div class="clearfix visible-sm visible-md visible-lg"></div>
-                    <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/neutral.png');" data-file="theme-neutral.css">
-                            <span>Neutral Flavor</span>
-                        </a>
-                        <strong>Neutral Flavor</strong>
-                    </div>
-                    <div class="clearfix visible-xs visible-sm"></div>
-                    <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/veritas.png');" data-file="theme-veritas.css">
-                            <span>Veritas</span>
-                        </a>
-                        <strong>Veritas</strong>
-                    </div>
-                    <div class="clearfix visible-sm visible-md visible-lg"></div>
-                    <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/voyboy.png');" data-file="theme-voyboy.css">
-                            <span>Voy-Boy</span>
-                        </a>
-                        <strong>Voy-Boy</strong>
-                    </div>
-                    <div class="clearfix visible-sm visible-md visible-sm"></div>
-                    <div class="col-xs-4 col-sm-12 col-md-6 text-center">
-                        <a href="#" class="twop6-scheme thumbnail" style="background-image: url('//www.xoopsmexico.net/about/rmcommon/schemes/thewinner.png');" data-file="theme-winner.css">
-                            <span>Voy-Boy</span>
-                        </a>
-                        <strong>Voy-Boy</strong>
-                    </div>
-                </div>
+<div class="color-bar">
+    <ul>
+        <li class="bg-red"></li>
+        <li class="bg-pink"></li>
+        <li class="bg-purple"></li>
+        <li class="bg-deep-purple"></li>
+        <li class="bg-indigo"></li>
+        <li class="bg-blue"></li>
+        <li class="bg-light-blue"></li>
+        <li class="bg-cyan"></li>
+        <li class="bg-teal"></li>
+        <li class="bg-green"></li>
+        <li class="bg-light-green"></li>
+        <li class="bg-lime"></li>
+        <li class="bg-yellow"></li>
+        <li class="bg-amber"></li>
+        <li class="bg-orange"></li>
+        <li class="bg-deep-orange"></li>
+        <li class="bg-brown"></li>
+        <li class="bg-grey"></li>
+        <li class="bg-blue-grey"></li>
+        <li class="bg-midnight"></li>
+        <li class="bg-primary"></li>
+        <li class="bg-success"></li>
+        <li class="bg-info"></li>
+        <li class="bg-warning"></li>
+        <li class="bg-danger"></li>
+    </ul>
+</div>
 
-                <hr>
+<div class="page-header text-center">
+    <h2>Introducing Helium: the new GUI for Common Utilities</h2>
+    <p>More friendly, more impressive and colorful</p>
+</div>
 
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-sm-8">
-
-        <h2 class="text-success text-center">Better and modern modules</h2>
-        <p class="lead text-center">
-            Common Utilities provide the neccessary tools to make better modules with modern features.
-            As if this were not enough, it's integrated MVC support allows you to create modules faster and easily as ever.
+<div id="introduce-helium">
+    <div class="info">
+        <h3>A fully new design with great improvements and additions.</h3>
+        <p>
+            Never was so easy to use and take advantage of <a href="http://www.xoops.org" target="_blank">XOOPS</a> and
+            <a href="http://www.rmcommon.com" target="_blank">Common Utilities.</a> All the power, modularity and features of both are available for you with
+            the best appearance ever.
         </p>
-        <hr>
+        <p>
+            Doesn't mind if you are a programmer,a developer or a final user; Helium will provide you the best user experience and a bunch of cohesive graphical
+            elements to use in your modules: <em>fully responsivity</em>, <em>easy to use widgets and GUI elements</em> and <em>a well designed environment</em>.
+        </p>
+    </div>
+    <div class="screenshot">
+        &nbsp;
+    </div>
+</div>
+<div id="helium-features" class="row">
+    <div class="col-sm-6 col-md-3">
+        <?php echo $cuIcons->getIcon('svg-rmcommon-responsive', ['class' => 'text-amber']); ?>
+        <h4 class="text-amber">Fully Responsive</h4>
+        <p>
+            Helium offers a fully responsive environment, easey to integrate with your modules.
+        </p>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <?php echo $cuIcons->getIcon('svg-rmcommon-blocks', ['class' => 'text-light-green']); ?>
+        <h4 class="text-light-green">Admin Widgets</h4>
+        <p>
+            Provide more information with a good looking widgets resuable in all your modules.
+        </p>
+    </div>
+    <div class="clearfix visible-sm"></div>
+    <div class="col-sm-6 col-md-3">
+        <?php echo $cuIcons->getIcon('svg-rmcommon-heart', ['class' => 'text-pink']); ?>
+        <h4 class="text-pink">More Friendly</h4>
+        <p>
+            Find the right element in Helium is easier than ever: try the new sidebar and the quick modules search.
+        </p>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <?php echo $cuIcons->getIcon('svg-rmcommon-vector', ['class' => 'text-light-blue']); ?>
+        <h4 class="text-light-blue">SVG Icons</h4>
+        <p>
+            Helium integrate the use of SVG as icons: infinite resizing without loss in quality.
+        </p>
+    </div>
+</div>
 
-        <h3>New Components</h3>
-        <div class="row">
+<div class="panel">
+    <div class="panel-body">
 
-            <div class="col-sm-4">
-                <h4 class="text-info">Modules Manager</h4>
-                <p class="help-block">
-                    The new <strong>Modules Manager</strong> of Common Utilities allows a more effective control of
-                    modules.
-                </p>
-            </div>
-            <div class="col-sm-4">
-                <h4 class="text-info">Blocks Manager</h4>
-                <p class="help-block">
-                    The Common Utilities block manager provide you a full freedom to manage your blocks: create new
-                    blocks positions, add blocks and a super comfortable interface.
-                </p>
-            </div>
-            <div class="col-sm-4">
-                <h4 class="text-info">Images Manager</h4>
-                <p class="help-block">
-                    Upload and manage images never has been more easy.
-                    Organize them by categories and assign different sizes for each one. Common Utilities make the hard work
-                    for you.
-                </p>
-            </div>
-
-        </div>
-        <hr>
-
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h3 class="text-center" style="margin-bottom: 20px;">Markdown editor and full screen edition</h3>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <a href="settings.php"><img src="//www.xoopsmexico.net/about/rmcommon/md.png" alt="Nuevo editor Markdown" class="img-responsive img-thumbnail"></a>
-                    </div>
-                    <div class="col-sm-7">
-                        <p>Common Utilities now includes a <strong>Markdown editor</strong> (Github Flavored), with highlight syntax,
-                            available to use in any module or component.</p>
-                        <hr>
-                        <p>
-                            Additionally, all editors (Visual, HTMl, Simple, XoopsCode and Markdown) now includes a great feature:
-                            <strong>Full screen edition</strong>. Work without distractions and be more productive.
-                        </p>
-                    </div>
+        <div class="row feature-info">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe width="420" height="315" src="https://www.youtube.com/embed/BvRQqXJs7Zk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen class="embed-responsive-item"></iframe>
                 </div>
             </div>
         </div>
 
-        <hr>
-
-        <h2 class="text-primary text-center">More Powerful Configuration</h2><br>
-        <div class="row">
-            <div class="col-sm-6">
-                <p>El nuevo sistema de confgiuración de Common Utilities (<em>tambien disponible para módulos nativos de XOOPS</em>), permite
-                    una configuración mas poderosa de los módulos al proporcionar nuevos tipos de campos y la modificación de los
-                    valores en línea.</p>
+        <div class="row feature-info">
+            <div class="screenshot">
+                <img src="http://rmcommon.com/images/md-editor.png" alt="Markdown Editor">
+            </div>
+            <div class="info">
+                <h3>
+                    Multiple editors available
+                    <small>including the new <strong>Markdown Editor</strong></small>
+                </h3>
                 <p>
-                    Con el soporte para categorías de opciones de configuración y un diseño mucho mas limpio, ajustar el comportamiento
-                    de los módulos para adaptarlos a tus necesidades es mucho mas fácil.
+                    Common Utilities includes awesome text editors that will fit your needs and preferences. You can choose between visual, markdown, HTML or plain
+                    text editors.
                 </p>
-            </div>
-            <div class="col-sm-6">
-                <a href="settings.php"><img src="//www.xoopsmexico.net/about/rmcommon/settings.png" alt="Nuevo sistema de confgiuración" class="img-responsive img-thumbnail"></a>
             </div>
         </div>
 
-        <hr>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3>1-Click Updates</h3>
-                        <img src="//www.xoopsmexico.net/about/rmcommon/updates.png" alt="Actualizaciones automáticas" class="img-responsive img-thumbnail">
-                        <p class="help-block">
-                            ¡Se acabaron los sufrimientos para mantener actualizado el sistema! Con el sistema de actualizaciones de
-                            Common Utilities, las actualizaciones están <strong class="text-success">a un solo click de distancia</strong>.
-                        </p>
-                    </div>
-                </div>
+        <div class="row feature-info">
+            <div class="screenshot">
+                <img src="http://rmcommon.com/images/inline-help.png" alt="Inline Help">
             </div>
-            <div class="col-md-6">
-                <h3>Improved Permissions</h3>
-                <img src="//www.xoopsmexico.net/about/rmcommon/security.png" alt="Seguridad mejorada" class="img-responsive img-thumbnail">
-                <p class="help-block">
-                    Módulos con un mejor control sobre cada una de sus características mediante el nuevo sistema de seguridad
-                    mejorado. Ahora es posible asignar <strong class="text-warning">permisos individuales a cada acción</strong>.
+            <div class="info">
+                <h3>
+                    Inline Help
+                    <small>Contextual help easy to be included</small>
+                </h3>
+                <p>
+                    Common Utilities offers an inline help system that can be easily integrated with any component. You only need to provide a valid URL (local or remote)
+                    and the help will be available.
+                </p>
+            </div>
+        </div>
+
+        <div class="row feature-info">
+            <div class="screenshot">
+                <img src="http://rmcommon.com/images/updates.png" alt="Automatic Updates">
+            </div>
+            <div class="info">
+                <h3>
+                    Automatic Updates
+                    <small>Maintain your system updated with a single click</small>
+                </h3>
+                <p>
+                    Common Utilities and their modules can be updated easily and with a single click. Updates are automatic and delivered directly on the dashboard.
                 </p>
             </div>
         </div>
 
     </div>
-
 </div>
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="media bug-report">
+            <div class="media-left">
+                <?php echo $cuIcons->getIcon('svg-rmcommon-bug', ['class' => 'media-object text-danger']); ?>
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">
+                    Do you found a bug?
+                </h3>
+                <p>
+                    Report any bug directly on the <a href="https://github.com/bitcero/rmcommon/">Common Utilities project page</a>. Remember to include all details about the bug, including system details and
+                    versions of PHP, MySQL, etc.
+                </p>
+                <a href="https://github.com/bitcero/rmcommon/issues" target="_blank" class="btn btn-danger">Report Now!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body{
+        background: #F0F1F4;
+    }
+</style>
 
 <?php
 RMTemplate::get()->footer();

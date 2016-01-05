@@ -61,6 +61,9 @@ var cuLanguage = {
 
     downloadNews: "<?php _e('Downloading News...', 'rmcommon' ); ?>",
     downloadNewsError: "<?php _e('Error ocurred while trying to load news.', 'rmcommon' ); ?>",
+    inProgress: "<?php _e('Operation in progress...', 'rmcommon' ); ?>",
+    searchResults: "<?php _e('Search Results (%u)', 'rmcommon'); ?>",
+    modules: "<?php _e('Modules', 'rmcommon'); ?>",
 
 };
 

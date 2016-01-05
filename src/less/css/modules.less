@@ -6,78 +6,6 @@
     border-bottom: 1px solid #CCC;
 }
 
-/** Modules Widget **/
-.rmc-modules-widget #mods-widget-container > ul{
-    position: relative;
-}
-.rmc-modules-widget #mods-widget-container > ul > li{
-	overflow: hidden;
-    padding: 10px;
-    border: 1px solid rgba(0,0,0,0.1);
-    margin-bottom: 5px;
-    position: relative;
-    min-height: 72px;
-}
-.rmc-modules-widget ul > li > .the-logo{
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    width: 112px;
-    min-height: 72px;
-    padding: 10px;
-    border-right: 1px solid rgba(0,0,0,0.1);
-    background: rgba(0,0,0,0.05);
-}
-.rmc-modules-widget ul > li > .the-info{
-    position: absolute;
-    top: 0; bottom: 0; right: 0; left: 112px;
-    padding: 0;
-}
-.rmc-modules-widget ul > li > .the-info > ul{
-    list-style: none;
-    padding: 0; margin: 0;
-}
-.rmc-modules-widget ul > li > .the-info > ul .name{
-    padding: 5px 10px;
-    line-height: 1;
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 25px;
-}
-.rmc-modules-widget ul > li > .the-info > ul .name > strong{
-    display: block;
-}
-.rmc-modules-widget ul > li > .the-info > ul .name > small {
-    color: #999;
-}
-.rmc-modules-widget ul > li > .the-info > ul .install{
-    position: absolute;
-    left: 0; bottom: 0;
-    text-align: center;
-    width: 50%;
-    line-height: 25px;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    border-right: 1px solid rgba(0,0,0,0.1);
-}
-.rmc-modules-widget ul > li > .the-info > ul .info{
-    position: absolute;
-    right: 0; bottom: 0;
-    text-align: center;
-    width: 50%;
-    line-height: 25px;
-    border-top: 1px solid rgba(0,0,0,0.1);
-}
-.rmc-modules-widget ul > li > .the-info > ul .install a,
-.rmc-modules-widget ul > li > .the-info > ul .info a{
-    color: #999;
-}
-.rmc-modules-widget ul > li > .the-info > ul .install:hover,
-.rmc-modules-widget ul > li > .the-info > ul .info:hover{
-    background-color: #dedede;
-    border-color: transparent;
-}
-.rmc-modules-widget ul > li > .the-info > ul .install:hover a,
-.rmc-modules-widget ul > li > .the-info > ul .info:hover a{
-    color: #666;
-}
 .rmc_mod_info{display: none;}
 #mod-info-blocker{
     background: #FFF;
@@ -162,47 +90,57 @@
 /** Modules Content **/
 #des-mods-container{
 
-}
-#des-mods-container .logo img{
-
+  .logo img{
     width: 48px;
     display: block;
-}
-#des-mods-container .name a{
-    font-weight: bold;
-    font-size: 1.1em;
-}
-#des-mods-container .name a.rename,
-#des-mods-container .name a.help{
-    font-size: 0.7em;
-    font-weight: normal;
-    text-transform: uppercase;
-    display: inline-block;
-    padding: 3px;
-    line-height: 100%;
-    margin-left: 5px;
-}
-#des-mods-container .renamer{
+  }
+
+  .name{
+    a{
+      font-weight: bold;
+      font-size: 1.1em;
+
+      &.rename,
+      &.help{
+        font-size: 0.7em;
+        font-weight: normal;
+        text-transform: uppercase;
+        display: inline-block;
+        padding: 3px;
+        line-height: 100%;
+        margin-left: 5px;
+      }
+
+      &.savenewname,
+      &.cancelnewname{
+        background: #F5F5F5 url("../images/save.png") no-repeat center;
+        padding: 4px;
+        width: 22px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        border-left: 1px solid rgba(0,0,0,0.1);
+      }
+
+      &.savenewname{
+        top: 0; right: 0; bottom: 0;
+      }
+
+    }
+  }
+
+  .renamer{
     display: block;
     position: relative;
     width: 250px;
     border: 0;
     overflow: hidden;
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
+  }
+
 }
-#des-mods-container .name a.savenewname,
-#des-mods-container .name a.cancelnewname{
-    background: #F5F5F5 url("../images/save.png") no-repeat center;
-    padding: 4px;
-    width: 22px;
-    text-align: center;
-    display: block;
-    position: absolute;
-    border-left: 1px solid rgba(0,0,0,0.1);
-}
-#des-mods-container .name a.savenewname{
-    top: 0; right: 0; bottom: 0;
-}
+
+
 #des-mods-container .name a.cancelnewname{
     background: #F5F5F5 url("../images/cancels.png") no-repeat center;
     top: 0; right: 22px; bottom: 0;
@@ -266,6 +204,14 @@
     background: #f4f4f4;
     border: 1px solid #CCC;
     padding: 10px;
+
+  .noininstall{
+    display: none;
+
+    & + br + center{
+      display: none;
+    }
+  }
 }
 .mod_log strong{
     color: #BB5E00;
@@ -323,4 +269,9 @@
     #mod-info-data{
         left: 30%; right: 30%;
     }
+}
+
+#available .logo img{
+  width: 92px!important;
+  height: 52px!important;
 }

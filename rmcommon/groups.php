@@ -54,7 +54,7 @@ function show_groups_list(){
 }
 
 function show_group_form(){
-    global $xoopsDB;
+    global $xoopsDB, $xoopsSecurity;
 
     $ajax = new Rmcommon_Ajax();
 
@@ -98,6 +98,7 @@ function show_group_form(){
         0, 1, array(
             'content' => $content,
             'width' => 'xlarge',
+            'color' => 'green',
             'windowId' => 'window-form-groups'
         )
     );
@@ -264,7 +265,7 @@ function delete_group_data() {
 
         showMessage( __('Selected groups has been deleted.', 'rmcommon' ), RMMSG_SUCCESS, 'fa fa-remove-circle' );
 
-        $ajax->ajax_response( '', 0, 1, array( 'action' => 'reload' ) );
+        $ajax->ajax_response( '', 0, 1, array( 'reload' => true ) );
 
     } else {
 

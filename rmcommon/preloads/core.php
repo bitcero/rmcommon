@@ -104,7 +104,19 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     public function eventCoreFooterStart()
     {
-        RMEvents::get()->run_event('rmcommon.footer.start');
+        global $xoopsTpl;
+
+        // Assign scripts and styles
+        /*$tpl = RMTemplate::getInstance();
+        $htmlScripts = $tpl->get_scripts(true);
+        $htmlScripts['inlineHeader'] = $tpl->inline_scripts();
+        $htmlScripts['inlineFooter'] = $tpl->inline_scripts(1);
+        $htmlStyles = $tpl->get_styles(true);
+
+        $xoopsTpl->assign('themeScripts', $htmlScripts);
+        $xoopsTpl->assign('themeStyles', $htmlStyles);*/
+
+        RMEvents::get()->trigger('rmcommon.footer.start');
     }
 
     public function eventCoreFooterEnd()
@@ -201,7 +213,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
         if (!$xoopsTpl) return;
 
-        $xoopsTpl->plugins_dir[] = RMCPATH . '/include';
+        $xoopsTpl->plugins_dir[] = RMCPATH . '/include/smarty';
 
     }
 

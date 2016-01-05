@@ -60,17 +60,17 @@ class RMMailer
 
 		// Instantiate the Swit Transport according to our preferences
 		// We can change this preferences later
-		switch($config['transport']){
+		switch($config->transport){
 			case 'mail':
 				$this->swTransport = Swift_MailTransport::newInstance();
 				break;
 			case 'smtp':
-				$this->swTransport = Swift_SmtpTransport::newInstance($config['smtp_server'], $config['smtp_port'], $config['smtp_crypt']!='none' ? $config['smtp_crypt'] : '');
-				$this->swTransport->setUsername($config['smtp_user']);
-				$this->swTransport->setPassword($config['smtp_pass']);
+				$this->swTransport = Swift_SmtpTransport::newInstance($config->smtp_server, $config->smtp_port, $config->smtp_crypt!='none' ? $config->smtp_crypt : '');
+				$this->swTransport->setUsername($config->smtp_user);
+				$this->swTransport->setPassword($config->smtp_pass);
 				break;
 			case 'sendmail':
-				$this->swTransport = Swift_SendmailTransport::newInstance($config['sendmail_path']);
+				$this->swTransport = Swift_SendmailTransport::newInstance($config->sendmail_path);
 				break;
 		}
 
@@ -453,7 +453,7 @@ class RMMailer
 	function batchSend(){
         $this->create_body();
 		$this->swMailer = Swift_Mailer::newInstance($this->swTransport);
-		return $this->swMailer->batchSend($this->swMessage, $this->errors);
+		return $this->swMailer->send($this->swMessage, $this->errors);
 	}
 
 	function send(){

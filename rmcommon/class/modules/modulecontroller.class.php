@@ -156,7 +156,7 @@ abstract class RMModuleController {
         $controller->settings = $this->settings;
         $controller->tpl = $GLOBALS['rmTpl'];
         $controller->module = $this->module;
-        $this->parameters = $parameters;
+        $controller->parameters = $this->parseParameters($parameters);
 
         if( !method_exists( $controller, $action ) )
             return $this->send_status( 404, $controller_name, $action );
@@ -271,6 +271,28 @@ abstract class RMModuleController {
             RMMSG_INFO
         );
         return null;
+    }
+
+    private function parseParameters( $pArray ){
+
+        $parameters = [];
+
+        $i = 0;
+        $prev = '';
+
+        foreach($pArray as $value){
+            if($i % 2 == 0){
+                $parameters[$value] = null;
+                $prev = $value;
+            } else {
+                $parameters[$prev] = $value;
+            }
+
+            $i++;
+        }
+
+        return $parameters;
+
     }
 
     abstract public function get_url();

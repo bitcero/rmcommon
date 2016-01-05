@@ -1,0 +1,14 @@
+// Contextual backgrounds
+
+.bg-variant(@color, @text: '') {
+  background-color: @color;
+
+  a&:hover,
+  a&:focus {
+    background-color: darken(@color, 10%);
+  }
+
+  & when not(@text = ''){
+    color: @text;
+  }
+}

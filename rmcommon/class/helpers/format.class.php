@@ -23,7 +23,8 @@ class RMFormat
      * @param $phone <p>Número teléfonico a formatear
      * @return string
      */
-    static function phone( $phone ){
+    static function phone($phone)
+    {
 
         $matches = array();
         $found = false;
@@ -44,7 +45,7 @@ class RMFormat
             '+$1 ($2) $3&middot;$4',
         );
 
-        $formatted = preg_replace( $patterns, $replaces, $phone );
+        $formatted = preg_replace($patterns, $replaces, $phone);
         /*foreach ( $patterns as $search ){
 
             if( preg_match( $search, $phone, $matches ) ){
@@ -72,23 +73,24 @@ class RMFormat
      * @param bool $local Utilizar formato de localización
      * @return string
      */
-    static function date( $date, $format = '', $local = false ){
+    static function date($date, $format = '', $local = false)
+    {
 
-        if($date=='') return null;
+        if ($date == '') return null;
 
         $time = strtotime($date);
 
-        if ($time<=0)
+        if ($time <= 0)
             return '<code>?</code>';
 
-        if ($local){
+        if ($local) {
 
             $tf = new RMTimeFormatter($time, $format);
             return $tf->format();
 
         }
 
-        return date($format!='' ? $format : 'd/m/Y H:i:s', $time);
+        return date($format != '' ? $format : 'd/m/Y H:i:s', $time);
 
     }
 
@@ -99,7 +101,8 @@ class RMFormat
      * @param string $type <p>Identifier type of social network</p>
      * @return string
      */
-    public static function social_icon( $type ){
+    public static function social_icon($type)
+    {
 
         $networks = array(
 
@@ -123,7 +126,7 @@ class RMFormat
 
         );
 
-        if ( isset( $networks[$type] ) )
+        if (isset($networks[$type]))
             return $networks[$type];
         else
             return 'fa-chain';
@@ -137,19 +140,20 @@ class RMFormat
      * @param bool $name Include module name in return string
      * @return string
      */
-    public static function version( $version, $name = false ){
+    public static function version($version, $name = false)
+    {
 
         $rtn = '';
 
-        if ( $name )
-            $rtn .= ( defined( $version['name'] ) ? constant( $version['name'] ) : $version['name'] ) . ' ';
+        if ($name)
+            $rtn .= (defined($version['name']) ? constant($version['name']) : $version['name']) . ' ';
 
         // New versioning
-        if ( isset( $version['major'] ) ){
+        if (isset($version['major'])) {
             $rtn .= $version['major'];
-            $rtn .= '.'.$version['minor'];
-            $rtn .= '.'.($version['revision']/10);
-            switch( $version['stage'] ){
+            $rtn .= '.' . $version['minor'];
+            $rtn .= '.' . ($version['revision'] / 10);
+            switch ($version['stage']) {
                 case -3:
                     $rtn .= ' alfa';
                     break;
@@ -160,7 +164,7 @@ class RMFormat
                     $rtn .= ' RC';
                     break;
                 default:
-                    $rtn .= ' Production';
+                    $rtn .= '';
                     break;
             }
             return $rtn;
@@ -169,12 +173,12 @@ class RMFormat
         // Format version of a module with previous versioning system
         $rtn .= $version['number'];
 
-        if ( $version['revision'] > 0 )
-            $rtn .= '.' . ( $version['revision'] / 100 );
+        if ($version['revision'] > 0)
+            $rtn .= '.' . ($version['revision'] / 100);
         else
             $rtn .= '.0';
 
-        switch( $version['status'] ){
+        switch ($version['status']) {
             case '-3':
                 $rtn .= ' alfa';
                 break;
@@ -200,7 +204,8 @@ class RMFormat
      * @param bool $abr True enable abbreviations (e.g. kb, mb, gb, etc)
      * @return string
      */
-    public static function bytes_format($size, $origin = '', $target = '', $abr = true){
+    public static function bytes_format($size, $origin = '', $target = '', $abr = true)
+    {
 
         $kb = 1024;
         $mb = $kb * 1024;
@@ -217,28 +222,28 @@ class RMFormat
 
         $string = array(
 
-            'b' => $abr ? __('%s b','rmcommon') : __('%s Bytes','rmcommon'),
-            'kb' => $abr ? __('%s Kb','rmcommon') : __('%s Kilobytes','rmcommon'),
-            'mb' => $abr ? __('%s Mb','rmcommon') : __('%s Megabytes','rmcommon'),
-            'gb' => $abr ? __('%s Gb','rmcommon') : __('%s Gigabytes','rmcommon'),
-            'tb' => $abr ? __('%s Tb','rmcommon') : __('%s Terabytes','rmcommon'),
+            'b' => $abr ? __('%s b', 'rmcommon') : __('%s Bytes', 'rmcommon'),
+            'kb' => $abr ? __('%s Kb', 'rmcommon') : __('%s Kilobytes', 'rmcommon'),
+            'mb' => $abr ? __('%s Mb', 'rmcommon') : __('%s Megabytes', 'rmcommon'),
+            'gb' => $abr ? __('%s Gb', 'rmcommon') : __('%s Gigabytes', 'rmcommon'),
+            'tb' => $abr ? __('%s Tb', 'rmcommon') : __('%s Terabytes', 'rmcommon'),
 
         );
 
-        $origin = $origin == '' || !isset( $units[ $origin ] ) ? 'b' : $origin;
-        $target = !isset( $units[ $target ] ) ? '' : $target;
+        $origin = $origin == '' || !isset($units[$origin]) ? 'b' : $origin;
+        $target = !isset($units[$target]) ? '' : $target;
 
-        if ( $target != '' && $units[$target] == $units[$origin] )
-            return sprintf( $string[ $origin ], $size );
+        if ($target != '' && $units[$target] == $units[$origin])
+            return sprintf($string[$origin], $size);
 
         // Convert size to bytes
-        $bytes = $size * $units[ $origin ];
+        $bytes = $size * $units[$origin];
         // Get bytes in target format only if $target has been provided
-        if ( $target != '' )
-            $result = number_format($bytes / $units[ $target ], 2);
+        if ($target != '')
+            $result = number_format($bytes / $units[$target], 2);
         else {
 
-            switch( $size ){
+            switch ($size) {
 
                 case $size < $kb:
                     $result = $bytes;
@@ -265,7 +270,7 @@ class RMFormat
 
         }
 
-        return sprintf( $string[ $target ], $result );
+        return sprintf($string[$target], $result);
 
     }
 

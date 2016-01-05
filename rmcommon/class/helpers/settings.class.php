@@ -201,21 +201,21 @@ class RMSettings
             case 'textarea':
                 if ($field->type == 'array') {
                     // this is exceptional.. only when value type is arrayneed a smarter way for this
-                    $ele = ($field->value != '') ? new RMFormTextArea($field->caption, $field->id, 4, 45, $tc->specialchars(implode('|', $field->value))) : new RMFormTextArea($field->title, $field->id, 4, 45);
+                    $ele = ($field->value != '') ? new RMFormTextArea($field->caption, $field->name, 4, 45, $tc->specialchars(implode('|', $field->value))) : new RMFormTextArea($field->title, $field->name, 4, 45);
                 } else {
-                    $ele = new RMFormTextArea($field->caption, $field->id, 4, 50, $tc->specialchars($field->value) );
+                    $ele = new RMFormTextArea($field->caption, $field->name, 4, 50, $tc->specialchars($field->value) );
                 }
                 break;
 
             case 'select':
-                $ele = new RMFormSelect($field->caption, $field->id, 0, array($field->value));
+                $ele = new RMFormSelect($field->caption, $field->name, 0, array($field->value));
                 foreach( $field->options as $caption => $value ){
                     $ele->addOption( $value, defined( $caption ) ? constant( $caption ) : $caption );
                 }
                 break;
 
             case 'select_multi':
-                $ele = new RMFormSelect($field->caption, $field->id, 1, array($field->value));
+                $ele = new RMFormSelect($field->caption, $field->name, 1, array($field->value));
                 $options = $field->options;
                 foreach ( $options as $value => $caption ) {
                     $value = defined( $value ) ? constant( $value ) : $value;
@@ -225,22 +225,23 @@ class RMSettings
                 break;
 
             case 'yesno':
-                $ele = new RMFormYesNo( $field->caption, $field->id, $field->value );
+                $ele = new RMFormYesNo( $field->caption, $field->name, $field->value );
                 break;
 
             case 'theme':
             case 'theme_multi':
 
-                $ele = new RMFormTheme( $field->caption, $field->id, $field->field == 'theme_multi' ? 1 : 0, 0, $field->value );
+                $ele = new RMFormTheme( $field->caption, $field->name, $field->field == 'theme_multi' ? 1 : 0, 0, $field->value );
                 break;
 
             case 'cu-theme':
             case 'cu-theme-multi':
-                $ele = new RMFormTheme( $field->caption, $field->id, $field->field == 'cu-theme-multi' ? 1 : 0, 0, $field->value, 1, 'GUI' );
+                $ele = new RMFormTheme( $field->caption, $field->name, $field->field == 'cu-theme-multi' ? 1 : 0, 0, $field->value, 1, 'GUI' );
                 break;
 
             case 'tplset':
-                $ele = new RMFormSelect( $field->caption, $field->id, 0, array( $field->value ) );
+                $ele = new RMFormSelect( $field->caption, $field->name, 0, array( $field->value ) );
+                
                 $tplset_handler =& xoops_gethandler('tplset');
                 $tplsetlist = $tplset_handler->getList();
                 asort($tplsetlist);
@@ -250,58 +251,63 @@ class RMSettings
                 break;
 
             case 'cpanel':
-                $ele = new RMFormSelect( $field->caption, $field->id, 0, array($field->value) );
+                $ele = new RMFormSelect( $field->caption, $field->name, 0, array($field->value) );
                 xoops_load("cpanel", "system");
                 $list = XoopsSystemCpanel::getGuis();
                 $ele->addOptionArray( $list );
+                
                 break;
 
             case 'timezone':
-                $ele = new RMFormTimeZoneField( $field->caption, $field->id, $field->value );
+                $ele = new RMFormTimeZoneField( $field->caption, $field->name, 0, 0, $field->value );
+                
                 break;
 
             case 'language':
             case 'language_multi':
                 $langs = XoopsLists::getLangList();
-                $ele = new RMFormSelect( $field->caption, $field->id, $field->field == 'language_multi' ? 1 : 0, $field->value );
+                $ele = new RMFormSelect( $field->caption, $field->name, $field->field == 'language_multi' ? 1 : 0, $field->value );
                 foreach ( $langs as $caption => $value ){
                     $ele->addOption( $value, $caption );
                 }
+                
                 break;
 
             case 'cu-language':
             case 'cu-language-multi':
 
-                $ele = new RMFormLanguageField( $field->caption, $field->id, $field->field == 'cu-language-multi' ? 1 : 0, 0, $field->value );
+                $ele = new RMFormLanguageField( $field->caption, $field->name, $field->field == 'cu-language-multi' ? 1 : 0, 0, $field->value );
                 break;
 
             case 'startpage':
-                $ele = new RMFormSelect( $field->caption, $field->id, 0, array($field->value) );
+                $ele = new RMFormSelect( $field->caption, $field->name, 0, array($field->value) );
                 $module_handler =& xoops_gethandler('module');
                 $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
                 $criteria->add(new Criteria('isactive', 1));
                 $moduleslist = $module_handler->getList($criteria, true);
                 $moduleslist['--'] = _MD_AM_NONE;
                 $ele->addOptionsArray($moduleslist);
+                
                 break;
 
             case 'group':
             case 'group_multi':
-                $ele = new RMFormGroups( $field->caption, $field->id, $field->field == 'group_multi' ? 1 : 0, 0, 1, $field->value );
+                $ele = new RMFormGroups( $field->caption, $field->name, $field->field == 'group_multi' ? 1 : 0, 0, 1, $field->value );
                 break;
 
             case 'user':
             case 'user_multi':
-                $ele = new RMFormUser( $field->caption, $field->id, $field->field == 'user_multi' ? 1 : 0, $field->value );
+                $ele = new RMFormUser( $field->caption, $field->name, $field->field == 'user_multi' ? 1 : 0, $field->value );
                 break;
 
             case 'module_cache':
 
-                $ele = new RMFormCacheModuleField( $field->caption, $field->id, $field->value );
+                $ele = new RMFormCacheModuleField( $field->caption, $field->name, $field->value );
                 break;
 
             case 'site_cache':
-                $ele = new RMFormSelect( $field->caption, $field->id, 0, $field->value );
+                $ele = new RMFormSelect( $field->caption, $field->name, 0, $field->value );
+                
                 $ele->addOptionArray(array(
                     '0' => __('No cache', 'rmcommon'),
                     '30' => sprintf( __('%u seconds', 'rmcommon'), 30),
@@ -317,20 +323,22 @@ class RMSettings
                 break;
 
             case 'password':
-                $ele = new RMFormText( $field->caption, $field->id, 50, 255, $field->value, true );
+                $ele = new RMFormText( $field->caption, $field->name, 50, 255, $field->value, true );
+                
                 break;
 
             case 'hidden':
-                $ele = new RMFormHidden( $field->id, $field->value );
+                $ele = new RMFormHidden( $field->name, $field->value );
+                
                 break;
 
             case 'modules-rewrite':
-                $ele = new RMFormRewrite( $field->caption, $field->id, $field->value );
+                $ele = new RMFormRewrite( $field->caption, $field->name, $field->value );
                 break;
 
             case 'textbox':
             default:
-                $ele = new RMFormText($field->caption, $field->id, 50, 255, $tc->specialchars($field->value));
+                $ele = new RMFormText($field->caption, $field->name, 50, 255, $tc->specialchars($field->value));
                 break;
 
         }
@@ -339,22 +347,19 @@ class RMSettings
          * Allow to plugins and other modules create new form
          * elements types in settings form
          */
-        $ele = RMEvents::get()->run_event( 'rmcommon.load.form.field', $ele, $field );
+        $ele = RMEvents::get()->trigger( 'rmcommon.load.form.field', $ele, $field );
+        $ele->set('id', $field->id);
+        $ele->add('class', 'form-control');
 
         return $ele->render();
 
     }
 
-    public static function write_rewrite_js( $paths ){
+    public static function write_rewrite_js(){
 
-        if (empty($paths))
-            $paths = array();
+        $paths = self::cu_settings('modules_path');
 
-        $settings = RMSettings::cu_settings();
-
-        $file = XOOPS_CACHE_PATH . '/cu-rewrite.js';
-
-        $content = "/**\nRewrite configuration for installed modules\n**/\nvar cu_modules = {\n";
+        $content = "var cu_modules = {\n";
 
         foreach( $paths as $module => $path ){
             $content .= "$module: '" . rtrim($path, '/') . "',\n";
@@ -362,7 +367,7 @@ class RMSettings
 
         $content .= "};\n";
 
-        file_put_contents( $file, $content );
+        RMTemplate::getInstance()->add_inline_script($content, 1);
 
     }
 

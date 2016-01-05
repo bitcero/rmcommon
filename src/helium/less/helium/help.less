@@ -1,0 +1,63 @@
+/* Context Help */
+#he-context-help{
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  transform: translateX(350px);
+  bottom: 0;
+  background-color: #FFF;
+  width: 350px;
+  z-index: 1081;
+  transition: ease-in-out all 250ms;
+  box-shadow: -2px 0 2px rgba(0,0,0,0.1);
+
+  .title{
+    padding: 5px 10px;
+    font-weight: bold;
+  }
+
+  iframe{
+    border: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .help-switch, .help-close{
+    background-color: #222222;
+    color: #FFF;
+    font-size: 20px;
+    line-height: 40px;
+    width: 40px;
+    position: absolute;
+    left: -40px;
+    top: 150px;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .help-close{
+    background-color: #CF4944;
+    top: 191px;
+  }
+
+  body.xo-help &{
+    opacity: 1;
+    transform: translateX(0);
+
+    .help-close, .help-switch, .help-close, .help-switch{
+      display: block;
+    }
+
+  }
+
+  body.xo-without-help &{
+    opacity: 1;
+    .help-close, .help-switch, .help-close, .help-switch{
+      display: block;
+    }
+  }
+
+}

@@ -1,0 +1,69 @@
+.widget-counter{
+  padding: 15px;
+  border-radius: @border-radius-large;
+
+  .cu-icon{
+    .cu-icon-size(32px);
+
+    @media(min-width: @screen-md-min){
+      .cu-icon-size(48px);
+    }
+  }
+
+  .first-cell{
+    > small{
+      text-transform: uppercase;
+      display: block;
+      line-height: 1;
+      font-size: 0.9em;
+      font-family: 'Open Sans Condensed', sans-serif;
+    }
+    > em{
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    @media(min-width: @screen-md-min){
+      > small{
+        font-size: 1em;
+      }
+      > em{
+        font-size: 35px;
+      }
+    }
+  }
+
+  .other-cells{
+    margin-top: 10px;
+
+    small{
+      font-size: 0.8em;
+      text-transform: uppercase;
+      display: block;
+      line-height: 1;
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-weight: 300;
+    }
+
+    em{
+      font-size: 18px;
+      line-height: 1;
+      display: block;
+      font-weight: 700;
+      font-style: normal;
+      font-family: 'Open Sans Condensed', sans-serif;
+    }
+
+    @media(min-width: @screen-md-min){
+      small{
+        font-size: 0.85em;
+      }
+      em{
+        font-size: 22px;
+      }
+    }
+  }
+
+}

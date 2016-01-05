@@ -1,0 +1,38 @@
+.cu-spinner{
+
+  &.spin{
+    animation: xo-spin 1.5s infinite linear;
+  }
+
+  &.pulse{
+    animation: xo-spin 1s infinite steps(12);
+  }
+
+  .cu-spinner-01{
+    circle,path{
+      stroke: currentColor;
+    }
+  }
+
+}
+
+@-webkit-keyframes cu-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes cu-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}

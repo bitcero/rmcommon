@@ -11,27 +11,16 @@
 
 global $xoopsModule, $xoopsConfig, $rmEvents;
 
-include_once RMCPATH.'/class/fields/formelement.class.php';
-include_once RMCPATH.'/class/fields/text.class.php';
-include_once RMCPATH.'/class/fields/select.class.php';
-include_once RMCPATH.'/class/fields/file.class.php';
-include_once RMCPATH.'/class/fields/hidden.class.php';
-include_once RMCPATH.'/class/fields/button.class.php';
-include_once RMCPATH.'/class/fields/editor.class.php';
-include_once RMCPATH.'/class/fields/groups.class.php';
-include_once RMCPATH.'/class/fields/checks.class.php';
-include_once RMCPATH.'/class/fields/formuser.class.php';
-include_once RMCPATH.'/class/fields/theme.class.php';
-include_once RMCPATH.'/class/fields/language.class.php';
-include_once RMCPATH.'/class/fields/modules.class.php';
-include_once RMCPATH.'/class/fields/timezone.class.php';
-include_once RMCPATH.'/class/fields/cachemod.class.php';
-include_once RMCPATH.'/class/fields/avatar.class.php';
-include_once RMCPATH.'/class/fields/textoptions.class.php';
-include_once RMCPATH.'/class/fields/formuser.class.php';
-include_once RMCPATH.'/class/fields/date.class.php';
-include_once RMCPATH.'/class/fields/formimage.class.php';
-include_once RMCPATH.'/class/fields/rewrite.class.php';
+if($dir = opendir(RMCPATH . '/class/fields')){
+    while(false !== ($file = readdir($dir))){
+        if($file == '.' || $file == '..' || substr($file, -4) != '.php'){
+            continue;
+        }
+
+        include_once RMCPATH . '/class/fields/' . $file;
+    }
+}
+
 include_once RMCPATH.'/api/editors/tinymce/tinyeditor.php';
 
 $rmEvents->run_event("rmcommon.form.loader");
@@ -78,26 +67,18 @@ $tiny->configuration = array('mode'=>'exact',
  */
 class RMForm
 {
+    /**
+     * Sets the default class for new fields
+     * @var string
+     */
+    public $fieldClass = 'form-control';
+
     private $_fields = array();
     protected $_name = '';
     protected $_action = '';
     protected $_extra = '';
     protected $_method = '';
     protected $_title = '';
-
-    private $_tableClass = 'outer';
-    private $_thClass = '';
-    private $_headClass = 'head';
-    private $_evenClass = 'even';
-    private $_oddClass = 'odd';
-    private $_footClass = 'foot';
-    private $_addtoken = true;
-    private $_oddStyle='';
-    private $_oddSpanStyle;
-    private $_evenStyle='';
-    private $_headStyle='';
-    private $_thStyle='';
-    private $_footStyle='';
 
     private $_othervalidates = '';
     private $_alertColor = '#FF0000';
@@ -261,6 +242,10 @@ class RMForm
             $this->_fields[] = $ret;
         }
 
+        if ('' != $this->fieldClass){
+            $element->add('class', $this->fieldClass);
+        }
+
         return $element;
 
     }
@@ -275,82 +260,6 @@ class RMForm
 		}
         return null;
     }
-    /**
-     * Las siguientes funciones dan formato a la tabla
-     * creada por esta clase
-     */
-    /**
-     * Establece la clase CSS de ta tabla
-     * @param string $value
-     */
-    public function tableClass($value){
-        if ($value!='') $this->_tableClass = $value;
-    }
-    /**
-     * Establece la clase 'CSS' de las celdas de encabezado
-     * @param $string $value Nombre de la clase
-     */
-    public function thClass($value){
-        if ($value!='') $this->_thClass = $value;
-    }
-    /**
-     * Establece la clase 'CSS' para usar para las celdas marcadas como 'pseudo-encabezados'
-     * @param string $value Nombre de la clase
-     */
-    public function headClass($value){
-        if ($value!='') $this->_headClass = $value;
-    }
-    /**
-     * Extablece la clase 'CSS' para celdas impares
-     * @param string $value
-     */
-    public function evenClass($value){
-        if ($value!='') $this->_evenClass = $value;
-    }
-    /**
-     * Extablece la clase 'CSS' para celdas pares
-     * @param string $value
-     */
-    public function oddClass($value){
-        if ($value!='') $this->_oddClass = $value;
-    }
-    /**
-     * Estilo 'CSS' para el pie del formulario
-     * @param string $value
-     */
-    public function footClass($value){
-        if (trim($value)!='') $this->_footClass = $value;
-    }
-
-    /**
-    * Establece los estilos de los diferentes elementos de la tabla
-    * @param string Estilo CSS del elemento
-    * @param string Id del elemento (odd, even, head, th, foot, oddspan)
-    **/
-    public function styles($style,$id){
-        switch ($id){
-            case 'odd':
-                $this->_oddStyle=$style;
-                break;
-            case 'even':
-                $this->_evenStyle=$style;
-                break;
-            case 'head':
-                $this->_headStyle=$style;
-                break;
-            case 'th':
-                $this->_thStyle=$style;
-                break;
-            case 'foot':
-                $this->_footStyle=$style;
-                break;
-            case 'oddspan':
-                $this->_oddSpanStyle = $style;
-                break;
-        }
-
-    }
-
 
     /**
      * Agrega una cadena para comprobar un campo

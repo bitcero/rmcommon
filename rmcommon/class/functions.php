@@ -138,13 +138,37 @@ class RMFunctions
 
         } elseif(RMCLOCATION=='imgmanager'){
 
-            RMTemplate::get()->add_tool(__('Categories','rmcommon'), 'images.php?action=showcats', '', 'showcategories', array('class' => 'cu-tool tool-categories-images'));
-            RMTemplate::get()->add_tool(__('New','rmcommon'), 'images.php?action=newcat', '', 'newcategory', array('class' => 'cu-tool tool-category-add'));
+            RMTemplate::get()->add_tool(
+                __('Categories','rmcommon'),
+                'images.php?action=showcats',
+                'svg-rmcommon-folder text-orange',
+                'showcategories',
+                array('class' => 'cu-tool tool-categories-images')
+            );
+            RMTemplate::get()->add_tool(
+                __('New','rmcommon'),
+                'images.php?action=newcat',
+                'svg-rmcommon-folder-plus text-orange',
+                'newcategory',
+                array('class' => 'cu-tool tool-category-add')
+            );
             $cat = rmc_server_var($_REQUEST,'category',0);
             if($cat>0){
-                RMTemplate::get()->add_tool(__('Images','rmcommon'), 'images.php?category='.$cat, '', 'showimages', array('class' => 'cu-tool tool-images'));
+                RMTemplate::get()->add_tool(
+                    __('Images','rmcommon'),
+                    'images.php?category='.$cat,
+                    'svg-rmcommon-camera',
+                    'showimages',
+                    array('class' => 'cu-tool tool-images')
+                );
             }
-            RMTemplate::get()->add_tool(__('Add','rmcommon'), 'images.php?action=new'.($cat>0?"&amp;category=$cat":''), '', 'addimages', array('class' => 'cu-tool tool-images-add'));
+            RMTemplate::get()->add_tool(
+                __('Add','rmcommon'),
+                'images.php?action=new'.($cat>0?"&amp;category=$cat":''),
+                'svg-rmcommon-camera-plus text-info',
+                'addimages',
+                array('class' => 'cu-tool tool-images-add')
+            );
 
         } else {
 
