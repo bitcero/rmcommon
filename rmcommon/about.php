@@ -147,6 +147,21 @@ RMTemplate::get()->header(); ?>
 
         <div class="row feature-info">
             <div class="screenshot">
+                <img src="http://rmcommon.com/images/svg-icons.svg" alt="SVG icons">
+            </div>
+            <div class="info">
+                <h3>
+                    SVG Icons
+                    <small>icons that not loose resolution</small>
+                </h3>
+                <p>
+                    Now, with svg icons support, you can resize and use the icons in any desired size without worry about reolution. Vectorial icons can be scaled without limits.
+                </p>
+            </div>
+        </div>
+
+        <div class="row feature-info">
+            <div class="screenshot">
                 <img src="http://rmcommon.com/images/inline-help.png" alt="Inline Help">
             </div>
             <div class="info">
