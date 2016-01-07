@@ -157,7 +157,7 @@ abstract class RMFormElement extends Attributes
     public function id()
     {
 
-        $this->get('id', '');
+        return $this->get('id', '');
     }
 
     /**

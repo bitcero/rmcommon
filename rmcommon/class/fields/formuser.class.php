@@ -13,14 +13,6 @@
 */
 class RMFormUser extends RMFormElement
 {
-	private $selected = array();
-	private $limit = 100;
-	private $multi = false;
-	private $width = 600;
-	private $height = 500;
-	private $showall = 0;
-	private $can_change = true; // Show search users button?
-	
 	// Eventos
 	private $_onchange = '';
 	
@@ -34,16 +26,32 @@ class RMFormUser extends RMFormElement
 	* @param int Alto de la ventana
 	*/
 	public function __construct($caption, $name, $multi = false, $select=array(), $limit=20, $width=600,$height=300, $showall = 0, $enable=true){
-		$this->selected = is_array($select) ? $select : array($select);
-		$this->limit = $limit;
-		$this->multi = $multi;
-		$this->setCaption($caption);
-		$this->setName($name);
-		$this->width = $width<=0 ? 600 : $width;
-		$this->height = $height<=0 ? 500 : $height;
-		$this->showall = $showall;
-        $this->can_change = $enable;
-		
+
+        if(is_array($caption)){
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('limit', $limit, 20);
+            $this->setWithDefaults('multi', $multi, false);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('showall', $showall, 0);
+            $this->setWithDefaults('can_change', $enable, true);
+            $this->setWithDefaults('selected', $select, array());
+        }
+
+        $this->add('class', 'form_users_container');
+        if ($this->get('multi')){
+            $this->add('class', 'checkbox');
+        } else {
+            $this->add('class', 'radio');
+        }
+
+        $this->setIfNotSet('selected', array());
+        $this->setIfNotSet('id', $this->get('name'));
+
+        $this->suppressList = array_merge($this->suppressList, ['limit', 'multi', 'showall', 'can_change', 'selected']);
+
         !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
 	}
 	
@@ -73,37 +81,41 @@ class RMFormUser extends RMFormElement
 		} else {
 			RMTemplate::get()->add_style('jquery.css','rmcommon');
 		}
+
+        $attributes = $this->renderAttributeString();
 		
-		$rtn = "<div id='".$this->id()."-users-container'".($this->getExtra()!='' ? " ".$this->getExtra() : '')." class='form_users_container ".($this->multi ? 'checkbox' : 'radio')."'>
-				<ul id='".$this->id()."-users-list'>";
+		$rtn = '<div id="'.$this->id().'-users-container" ' . $attributes . '>
+				<ul id="'.$this->id().'-users-list">';
 		$db = XoopsDatabaseFactory::getDatabaseConnection();
 		
-		if ($this->showall && in_array(0, $this->selected)){
+		if ($this->get('showall') && in_array(0, $this->get('selected'))){
 			$rtn .= "<li id='".$this->id()."-exmuser-0'>\n
                         <label>
                         <a href='javascript:;' onclick=\"users_field_name='".$this->id()."'; usersField.remove(0);\"><span>delete</span></a>
-                        <input type='".($this->multi ? 'checkbox' : 'radio')."' name='".($this->multi ? $this->getName().'[]' : $this->getName())."' id='".$this->id()."-0'
+                        <input type='".($this->get('multi') ? 'checkbox' : 'radio')."' name='".($this->get('multi') ? $this->get('name').'[]' : $this->get('name'))."' id='".$this->id()."-0'
 				 		value='0' checked='checked' /> ".__('All Users','rmcommon')."
                         </label></li>";
 		}
+        
+        $selected = $this->get('selected');
 		
-		if (is_array($this->selected) && !empty($this->selected) && !(count($this->selected)==1 && $this->selected[0]==0)){
+		if (is_array($selected) && !empty($selected) && !(count($selected)==1 && $selected[0]==0)){
 			$sql = "SELECT uid,uname FROM ".$db->prefix("users")." WHERE ";
 			$sql1 = '';
 			if ($this->multi){
-				foreach ($this->selected as $id){
+				foreach ($selected as $id){
 					if ($id!=0) $sql1 .= $sql1 == '' ? "uid='$id'" : " OR uid='$id'";
 				}
 			} else {
-				if ($this->selected[0]!=0) $sql1 = "uid='".$this->selected[0]."'";
+				if ($selected[0]!=0) $sql1 = "uid='".$selected[0]."'";
 			}
 			$result = $db->query($sql.$sql1);
 			$selected = '';
 			while ($row = $db->fetchArray($result)){
 				$rtn .= "<li id='".$this->id()."-exmuser-$row[uid]'>\n
 						<label>";
-                $rtn .= $this->can_change ? " <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]);\"><span>delete</span></a>" : '';
-                $rtn .= "<input type='".($this->multi ? 'checkbox' : 'radio')."' name='".($this->multi ? $this->getName().'[]' : $this->getName())."' id='".$this->id()."-".$row['uid']."'
+                $rtn .= $this->get('can_change') ? " <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]);\"><span>delete</span></a>" : '';
+                $rtn .= "<input type='".($this->get('multi') ? 'checkbox' : 'radio')."' name='".($this->get('multi') ? $this->get('name').'[]' : $this->get('name'))."' id='".$this->id()."-".$row['uid']."'
 				 		value='$row[uid]' checked='checked' /> 
                         $row[uname] ";
                 $rtn .= "</label></li>";
@@ -111,8 +123,8 @@ class RMFormUser extends RMFormElement
 		}
 		
 		$rtn .= "</ul><br />";
-		if ($this->can_change){
-			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->width.",".$this->height.",".$this->limit.",".intval($this->multi).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
+		if ($this->get('can_change')){
+			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit').",".intval($this->get('multi')).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
 		    $rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
 					    <div class="modal-dialog">
 					        <div class="modal-content">

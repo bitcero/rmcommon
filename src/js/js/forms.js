@@ -17,7 +17,7 @@ var absurl = '';
 var users_field_name = '';
 var usersField = jQuery.extend({
 	
-	form_search_users: 	function(id, width, height, limit, multisel, baseurl){
+	form_search_users: 	function(id, limit, multisel, baseurl){
 
 		users_field_name = id;
 		absurl = baseurl;
