@@ -29,6 +29,51 @@ Format for SVG icons
   vertical-align: text-top;
   vertical-align: middle;
 }
+.cu-icon.icon2x {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+.cu-icon.icon2x > * {
+  width: 32px;
+  height: 32px;
+}
+.cu-icon.icon3x {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}
+.cu-icon.icon3x > * {
+  width: 48px;
+  height: 48px;
+}
+.cu-icon.icon4x {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+}
+.cu-icon.icon4x > * {
+  width: 64px;
+  height: 64px;
+}
+.cu-icon.icon5x {
+  font-size: 96px;
+  width: 96px;
+  height: 96px;
+}
+.cu-icon.icon5x > * {
+  width: 96px;
+  height: 96px;
+}
+.cu-icon.icon6x {
+  font-size: 128px;
+  width: 128px;
+  height: 128px;
+}
+.cu-icon.icon6x > * {
+  width: 128px;
+  height: 128px;
+}
 /*
 2. THEME COLORS
 ------------------------------
@@ -5117,6 +5162,25 @@ IMAGE MANAGER
   height: 40px;
 }
 #des-mods-container .logo .cu-icon > * {
+  width: 40px;
+  height: 40px;
+}
+/*
+ ALERT WITH ICON
+*/
+.alert-icon {
+  padding-left: 70px;
+  position: relative;
+}
+.alert-icon > .cu-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.alert-icon > .cu-icon > * {
   width: 40px;
   height: 40px;
 }

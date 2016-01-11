@@ -64,7 +64,7 @@ class HeliumRmcommonPreload
 
     public function eventRmcommonAdditionalOptions( $settings ){
 
-        $settings['categories']['helium'] = __('Control Panel', 'helium');
+        $settings['categories']['helium'] = __('Helium', 'helium');
 
         $af_available = RMFunctions::plugin_installed('advform');
 
@@ -75,6 +75,16 @@ class HeliumRmcommonPreload
             'formtype'      => $af_available ? 'image-url' : 'textbox',
             'valuetype'     => 'text',
             'default'       => RMCURL . '/themes/helium/images/logo-he.svg',
+            'category'      => 'helium'
+        );
+
+        $settings['config'][] = array(
+            'name'          => 'helium_xoops_metas',
+            'title'         => __( 'Render XOOPS metas?', 'rmcommon' ),
+            'description'   => __('By enabling this option Helium will render inside &gt;head&lt; tag the XOOPS scripts, styles and metas.', 'helium'),
+            'formtype'      => 'yesno',
+            'valuetype'     => 'int',
+            'default'       => 0,
             'category'      => 'helium'
         );
 

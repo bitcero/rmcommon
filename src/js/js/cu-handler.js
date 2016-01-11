@@ -798,7 +798,7 @@ $(document).ready(function(){
                     }
 
                     var box = $("<div data-dashboard=\"item\">").addClass('size-' + size).css("display", 'none');
-                    box.append('<div class="cu-box"><div class="box-header">' +
+                    box.append('<div class="cu-box '+response.boxes[i].class+'"><div class="box-header">' +
                         '<span class="fa fa-caret-up box-handler"></span>' +
                         '<h3 class="box-title">'+ response.boxes[i].title +'</h3></div>' +
                         '<div class="box-content">'+response.boxes[i].content+'</div></div>');
