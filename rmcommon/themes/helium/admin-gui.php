@@ -179,5 +179,8 @@ if(substr($logoHelium, -4) == '.svg'){
     $logoHelium = '<img src="' . $logoHelium . '">';
 }
 
+// Xoops Metas
+$showXoopsMetas = $cuSettings->helium_xoops_metas;
+
 // Display theme
 include_once HELIUM_PATH . '/theme.php';

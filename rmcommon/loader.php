@@ -40,195 +40,21 @@ define('RMMSG_ERROR', 4);
 define('RMMSG_DANGER', 4);
 define('RMMSG_OTHER', 5);
 
+// Render output
+require RMCPATH . '/include/render-output.php';
+
 ob_start('cu_render_output');
 
-/**
- * This file contains the autoloader function files from RMCommon Utilities
- */
-function rmc_autoloader($class)
-{
-    global $xoopsModule;
+// Legacy Autoloader
+require RMCPATH . '/include/legacy-autoloader.php';
 
-    if (class_exists($class)) return;
-
-    /**
-     * New autoloader method
-     * $class = new Module_ClassName();
-     * The class name must contain the module directory name separated with a "_"
-     * from the file name.
-     * Common Utilities will search for "PATH/module/classname.class.php" file
-     */
-    $data = explode("_", strtolower($class));
-
-    if (count($data) >= 2) {
-
-        if ('editor' == $data[0]) {
-
-            $file = RMCPATH . '/api/editors/' . $data[1] . '/' . strtolower($data[1]) . '.php';
-            if (file_exists($file)) {
-                require $file;
-                return null;
-            }
-
-        } elseif (is_dir(XOOPS_ROOT_PATH . '/modules/' . $data[0])) {
-
-            // Module exists! Then will search for /{dir}/{class}.class.php
-            $name = substr(strtolower($class), strlen($data[0]) + 1);
-            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace('_', '-', $name)) . '.class.php';
-            if (is_file($file)) {
-                require $file;
-                return;
-            }
-
-            // Helpers from rmcommon have a different name structure
-            if ('rmcommon' == $data[0]) {
-                $file = XOOPS_ROOT_PATH . '/modules/rmcommon/class/helpers/' . strtolower(str_replace("_", ".", $class)) . '.class.php';
-                if (is_file($file)) {
-                    require $file;
-                    return;
-                }
-            }
-
-        }
-
-    }
-
-    /**
-     * Old method maintained for backward compatibility
-     */
-    $class = str_replace("\\", "/", $class);
-
-    $class = strtolower($class);
-
-    if ($class == 'xoopskernel') return;
-
-    if (substr($class, 0, 2) == 'rm') $class = substr($class, 2);
-
-    if (substr($class, strlen($class) - strlen('handler')) == 'handler') {
-        $class = substr($class, 0, strlen($class) - 7);
-    }
-
-    $class = str_replace("_", "-", $class);
-
-    $paths = array(
-        '/api',
-        '/class',
-        '/class/ar',
-        '/class/helpers',
-        '/class/modules',
-        '/class/fields',
-        '/class/form',
-        '/kernel',
-    );
-
-    if (is_a($xoopsModule, 'XoopsModule') && $xoopsModule->dirname() != 'system') {
-        $paths[] = '/modules/' . $xoopsModule->dirname() . '/class';
-    }
-
-    foreach ($paths as $path) {
-
-        if (file_exists(RMCPATH . $path . '/' . $class . '.class.php')) {
-            include_once RMCPATH . $path . '/' . $class . '.class.php';
-            break;
-        } elseif (file_exists(RMCPATH . $path . '/' . $class . '.php')) {
-            include_once RMCPATH . $path . '/' . $class . '.php';
-            break;
-        } elseif (file_exists(RMCPATH . $path . '/' . $class . '.trait.php')) {
-            include_once RMCPATH . $path . '/' . $class . '.trait.php';
-            break;
-        } elseif (file_exists(XOOPS_ROOT_PATH . $path . '/' . $class . '.php')) {
-            include_once XOOPS_ROOT_PATH . $path . '/' . $class . '.php';
-            break;
-        } elseif (file_exists(XOOPS_ROOT_PATH . $path . '/' . $class . '.class.php')) {
-            include_once XOOPS_ROOT_PATH . $path . '/' . $class . '.class.php';
-            break;
-        }
-
-    }
-
-}
-
-spl_autoload_register('rmc_autoloader');
-
-/**
- * Modify the page output to include some new features
- *
- * @param mixed $output
- * @return string
- */
-function cu_render_output($output)
-{
-    global $xoTheme, $xoopsTpl;
-
-    $rmEvents = RMEvents::get();
-
-    if (function_exists('xoops_cp_header')) return $output;
-
-    $page = $output;
-    if ($xoopsTpl) {
-        if (defined('COMMENTS_INCLUDED') && COMMENTS_INCLUDED) {
-            RMTemplate::get()->add_style('comments.css', 'rmcommon');
-        }
-    }
-
-    include_once RMTemplate::get()->path('rmc-header.php', 'module', 'rmcommon');
-    $rtn = $htmlStyles;
-    $rtn .= $htmlScripts['header'];
-    $rtn .= $htmlScripts['inlineHeader'];
-
-    $find = [];
-    $repl = [];
-    foreach ($metas as $name => $content) {
-
-        $str = "<meta\s+name=['\"]??" . $name . "['\"]??\s+content=['\"]??(.+)['\"]??\s*\/?>";
-        if (preg_match($str, $page)) {
-            $find[] = $str;
-            $str = "meta name=\"$name\" content=\"$content\" />\n";
-            $repl[] = $str;
-        } else {
-
-            $rtn .= "\n<meta name=\"$name\" content=\"$content\" />";
-
-        }
-
-    }
-
-    if (!empty($find))
-        $page = preg_replace($find, $repl, $page);
-
-    $pos = strpos($page, "</body>");
-    if ($pos === FALSE) return $output;
-
-    $ret = substr($page, 0, $pos) . "\n";
-    $ret .= $htmlScripts['footer'] . "\n" . $htmlScripts['inlineFooter'] . "\n" . $htmlScripts['heads'] . "\n";
-    $ret .= substr($page, $pos);
-
-    $page = $ret;
-
-    $pos = strpos($page, "<!-- RMTemplateHeader -->");
-    if ($pos !== FALSE) {
-        $page = str_replace('<!-- RMTemplateHeader -->', $rtn, $page);
-        $page = $rmEvents->trigger('rmcommon.end.flush', $page);
-        return $page;
-    }
-
-    $pos = strpos($page, "</head>");
-    if ($pos === FALSE) return $output;
-
-    $ret = substr($page, 0, $pos) . "\n";
-    $ret .= $rtn;
-    $ret .= substr($page, $pos);
-
-    $ret = $rmEvents->trigger('rmcommon.end.flush', $ret);
-
-    return $ret;
-}
-
+// Logger and Database
 include_once XOOPS_ROOT_PATH . '/class/logger/xoopslogger.php';
 include_once XOOPS_ROOT_PATH . '/class/database/databasefactory.php';
 
 $dbF = new XoopsDatabaseFactory();
 $db =& $dbF->getDatabaseConnection();
+
 
 $GLOBALS['rmFunctions'] = new RMFunctions();
 global $rmFunctions;
@@ -271,6 +97,9 @@ $GLOBALS['rmTpl'] = RMTemplate::get();
 $GLOBALS['rmCodes'] = RMCustomCode::get();
 
 global $rmEvents, $rmTpl, $rmCodes;
+
+// Custom Codes
+require RMCPATH . '/include/custom-codes.php';
 
 define('RMCLANG', $rmEvents->run_event('rmcommon.set.language', $cuSettings->lang));
 

@@ -16,7 +16,7 @@
         <?php echo $heliumScripts['header']; ?>
         <?php echo RMTemplate::get()->inline_scripts(); ?>
 
-        <?php include_once 'include/xoops_metas.php';  ?>
+        <?php if($showXoopsMetas){ include_once 'include/xoops_metas.php'; } ?>
     </head>
     <body>
 
