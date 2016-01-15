@@ -171,7 +171,7 @@ class RMFormEditor extends RMFormElement
 		global $rmc_config, $xoopsUser;
 
         $this->renderAttributeString();
-        
+
 		TinyEditor::getInstance()->add_config('elements',$this->get('id'), true);
 		RMTemplate::get()->add_style('editor-tiny.min.css','rmcommon');
 		RMTemplate::get()->add_script( 'editor.js','rmcommon');

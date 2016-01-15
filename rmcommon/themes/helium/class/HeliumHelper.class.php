@@ -157,7 +157,7 @@ class HeliumHelper
                 'icon' => 'svg-rmcommon-wrench',
                 'type' => 1,
                 'location' => 'cu-settings',
-                'attr' => array(
+                'attributes' => array(
                     'data-action' => 'load-remote-dialog'
                 )
             );
@@ -176,6 +176,11 @@ class HeliumHelper
 
         foreach($submenu as $i => $menu){
             if(isset($menu['divider']) || $menu == 'divider' ) continue;
+
+            if(array_key_exists('rewrite', $menu)){
+                return $submenu;
+            }
+
             $submenu[$i]['link'] = preg_match("/^(http:\/\/|https:\/\/|ftp:\/\/|mailto:)/i", $menu['link']) ? $menu['link'] : XOOPS_URL.'/modules/'.$mod->getVar('dirname','n').'/'.$menu['link'];
         }
 

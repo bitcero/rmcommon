@@ -196,6 +196,8 @@ class RMSettings
 
         $tc = TextCleaner::getInstance();
 
+        $field->caption = $tc->clean_disabled_tags($field->caption);
+
         switch ( $field->field ) {
 
             case 'textarea':
@@ -226,6 +228,33 @@ class RMSettings
 
             case 'yesno':
                 $ele = new RMFormYesNo( $field->caption, $field->name, $field->value );
+                break;
+
+            case 'radio':
+                $ele = new RMFormRadio( [
+                    'caption' => $field->caption,
+                    'display' => 'list',
+                    'name' => $field->name
+                ]);
+                $options = $field->options;
+                foreach ( $options as $value => $caption ) {
+                    $value = defined( $value ) ? constant( $value ) : $value;
+                    $caption = defined( $caption ) ? constant( $caption ) : $caption;
+                    $ele->addOption( $caption, $value, $value == $field->value ? 'selected' : '' );
+                }
+                break;
+
+            case 'checkbox':
+                $ele = new RMFormCheck( [
+                    'caption' => $field->caption,
+                    'display' => 'inline'
+                ]);
+                $options = $field->options;
+                foreach ( $options as $value => $caption ) {
+                    $value = defined( $value ) ? constant( $value ) : $value;
+                    $caption = defined( $caption ) ? constant( $caption ) : $caption;
+                    $ele->addOption( $caption, $caption['name'], $value, $value == $field->value ? 'selected' : '' );
+                }
                 break;
 
             case 'theme':
@@ -349,7 +378,12 @@ class RMSettings
          */
         $ele = RMEvents::get()->trigger( 'rmcommon.load.form.field', $ele, $field );
         $ele->set('id', $field->id);
-        $ele->add('class', 'form-control');
+
+        $skipControls = ['radio','checkbox'];
+
+        if(!in_array($field->field, $skipControls)){
+            $ele->add('class', 'form-control');
+        }
 
         return $ele->render();
 

@@ -126,4 +126,9 @@ class RmcommonRmcommonPreload
 
     }
 
+    public function eventRmcommonSmartyPlugins($plugins){
+        $plugins[] = RMCPATH . '/include/smarty';
+        return $plugins;
+    }
+
 }

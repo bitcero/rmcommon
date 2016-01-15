@@ -35,9 +35,9 @@ abstract class RMModuleController {
             'data'                  => (object) $moduleObject->getInfo(),
             'directory'             => $module,
             'controller'            => '',
-            'action'                => '',
             'default_controller'    => '',
             'default_action'        => '',
+            'action'                => '',
             'parameters'            => array(),
 
         );
@@ -153,6 +153,7 @@ abstract class RMModuleController {
         $controller = new $class();
 
         $controller->parent = $this;
+        $controller->action = strtolower( $action );
         $controller->settings = $this->settings;
         $controller->tpl = $GLOBALS['rmTpl'];
         $controller->module = $this->module;

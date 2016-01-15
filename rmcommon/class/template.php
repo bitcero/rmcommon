@@ -80,7 +80,7 @@ class RMTemplate
 
         $this->version = str_replace(" ", '-', RMCVERSION);
 
-        if(defined('XOOPS_CPFUNC_LOADED')){
+        if (defined('XOOPS_CPFUNC_LOADED')) {
             $this->add_jquery(true);
             return true;
         }
@@ -110,6 +110,7 @@ class RMTemplate
 
     /**
      * @return RMTemplate
+     * @deprecated
      */
     static function get()
     {
@@ -289,7 +290,7 @@ class RMTemplate
                $cuIcons,
                $cuServices;
 
-        if('' == $type && is_file($file)){
+        if ('' == $type && is_file($file)) {
             $template = $file;
         } else {
             $template = $this->path($file, $type, $module, $element);
@@ -855,7 +856,7 @@ class RMTemplate
         $scripts = [];
         $missing = [];
 
-        if(array_key_exists('jquery', $this->tpl_scripts)){
+        if (array_key_exists('jquery', $this->tpl_scripts)) {
             $scripts['jquery'] = $this->tpl_scripts['jquery'];
             unset($this->tpl_scripts['jquery']);
         }
@@ -1013,6 +1014,8 @@ class RMTemplate
         $ev = RMEvents::get();
         $this->tpl_styles = $ev->run_event('rmcommon.get.styles', $this->tpl_styles);
 
+        $this->process_styles();
+
         if (!$make) {
             return $this->tpl_styles;
         }
@@ -1023,6 +1026,54 @@ class RMTemplate
                 $style['url'] . '">';
         }
         return $rtn;
+    }
+
+    /**
+     * This function recreates the styles array in order to
+     * verify accomplish of dependencies
+     */
+    private function process_styles()
+    {
+
+        $styles = [];
+        $missing = [];
+
+        foreach ($this->tpl_styles as $id => $item) {
+            if (!array_key_exists('required', $item)) {
+                $styles[$id] = $item;
+            }
+
+            if (array_key_exists('required', $item) && array_key_exists($item['required'], $styles)) {
+                $styles = $this->insert_script_after($styles, $item['required'], $id, $item);
+            } else {
+                $missing[$id] = $item;
+            }
+
+        }
+
+        // Now read $missing array
+        foreach ($missing as $id => $style) {
+
+            // Check if script has been added
+            if (array_key_exists('required', $style) && array_key_exists($style['required'], $styles)) {
+                $styles = $this->insert_script_after($styles, $style['required'], $id, $style);
+                continue;
+            }
+
+            // Check is required script exists in missing array
+            if (array_key_exists('required', $style) && array_key_exists($style['required'], $missing)) {
+                $styles[$style['required']] = $missing[$style['required']];
+                $styles = $this->insert_script_after($styles, $style['required'], $id, $style);
+                continue;
+            }
+
+            $styles[$id] = $style;
+
+        }
+
+        $this->tpl_styles = $styles;
+        return true;
+
     }
 
     /**
@@ -1268,13 +1319,14 @@ class RMTemplate
      * @param array $attributes
      * @return mixed
      */
-    public function add_attribute($element, $attributes){
+    public function add_attribute($element, $attributes)
+    {
 
-        if(!in_array($element, ['html', 'body'])){
+        if (!in_array($element, ['html', 'body'])) {
             return false;
         }
 
-        foreach($attributes as $id => $value){
+        foreach ($attributes as $id => $value) {
             $this->attributes[$element][$id] = $value;
         }
 
@@ -1282,15 +1334,16 @@ class RMTemplate
 
     }
 
-    public function clear_attributes($element){
-        if(!in_array($element, ['html', 'body'])){
+    public function clear_attributes($element)
+    {
+        if (!in_array($element, ['html', 'body'])) {
             return false;
         }
 
         $attributes = [];
 
-        foreach( $this->attributes as $id => $attrs){
-            if($id == $element){
+        foreach ($this->attributes as $id => $attrs) {
+            if ($id == $element) {
                 continue;
             }
 
@@ -1300,18 +1353,23 @@ class RMTemplate
         return true;
     }
 
-    public function render_attributes($element){
-        if(!in_array($element, ['html', 'body'])){
+    public function render_attributes($element)
+    {
+        if (!in_array($element, ['html', 'body'])) {
             return false;
         }
 
-        if(!array_key_exists($element, $this->attributes)){
+        if (!array_key_exists($element, $this->attributes)) {
             return null;
         }
 
         $return = '';
-        foreach($this->attributes[$element] as $id => $value){
-            $return .= $id . '="' . $value . '" ';
+        foreach ($this->attributes[$element] as $id => $value) {
+            if (null == $value) {
+                $return .= $id . ' ';
+            } else {
+                $return .= $id . '="' . $value . '" ';
+            }
         }
 
         return trim($return);

@@ -86,6 +86,25 @@
           margin-right: 0;
         }
 
+        &.active{
+          > a{
+            background-color: @he-toolbar-hover-bg;
+            color: @he-toolbar-hover-color!important;
+            .vertical-gradient(@theme-main-color, @theme-secondary-color);
+
+            > .cu-icon{
+              .cu-icon-color(@he-toolbar-hover-color)!important;
+              > svg{
+                fill: @he-toolbar-hover-color!important;
+              }
+
+              > *{
+                color: @he-toolbar-hover-color!important;
+              }
+            }
+          }
+        }
+
       }
 
     }

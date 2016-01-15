@@ -12,7 +12,16 @@
         <?php
         $i = 0;
         foreach( $categories as $id => $category): ?>
-            <li<?php echo $i==0 ? ' class="active"' : ''; ?>><a href="#category-<?php echo $id; ?>-<?php echo $sufix; ?>" data-toggle="tab"><?php echo $category['caption']; ?></a></li>
+            <li<?php echo $i==0 ? ' class="active"' : ''; ?>>
+                <a href="#category-<?php echo $id; ?>-<?php echo $sufix; ?>" data-toggle="tab" title="<?php echo $category['caption']; ?>">
+                    <?php if(array_key_exists('icon', $category)): ?>
+                        <?php echo $cuIcons->getIcon($category['icon']); ?>
+                        <span class="caption"><?php echo $category['caption']; ?></span>
+                    <?php else: ?>
+                        <?php echo $category['caption']; ?>
+                    <?php endif; ?>
+                </a>
+            </li>
             <?php
             $i++;
         endforeach; ?>

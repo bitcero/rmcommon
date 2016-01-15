@@ -13,7 +13,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     public function eventCoreHeaderStart()
     {
-        RMEvents::get()->run_event('rmcommon.core.header.start');
+        RMEvents::get()->trigger('rmcommon.core.header.start');
     }
 
     public function eventCoreHeaderEnd()
@@ -25,7 +25,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
         if ($config->blocks_enable) {
             global $xoopsTpl;
             $bks = RMBlocksFunctions::construct_blocks();
-            $bks = RMEvents::get()->run_event('rmcommon.retrieve.xoops.blocks', $bks);
+            $bks = RMEvents::get()->trigger('rmcommon.retrieve.xoops.blocks', $bks);
             $b =& $xoopsTpl->get_template_vars('xoBlocks');
             if (is_array($bks)) {
                 $blocks = array_merge($b, $bks);
@@ -36,7 +36,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
             unset($b, $bks);
         }
 
-        RMEvents::get()->run_event('rmcommon.core.header.end');
+        RMEvents::get()->trigger('rmcommon.core.header.end');
 
     }
 
@@ -98,7 +98,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
             if ($xoopsUser->isAdmin()) $xoopsConfig['closesite'] = 0;
         }
 
-        RMEvents::get()->run_event('rmcommon.include.common.language');
+        RMEvents::get()->trigger('rmcommon.include.common.language');
 
     }
 
@@ -133,7 +133,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
         // Blocks
         $blocks =& $params[2];
 
-        $blocks = RMEvents::get()->run_event('rmcommon.retrieve.xoops.blocks', $blocks, $xpb, $tpl);
+        $blocks = RMEvents::get()->trigger('rmcommon.retrieve.xoops.blocks', $blocks, $xpb, $tpl);
 
     }
 
@@ -150,7 +150,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
         // 2 = Message
         // 3 = Add redirect
         // 4 = Allow external link
-        RMEvents::get()->run_event('rmcommon.redirect.header', $params[0], $params[1], $params[2], $params[3], $params[4]);
+        RMEvents::get()->trigger('rmcommon.redirect.header', $params[0], $params[1], $params[2], $params[3], $params[4]);
         //if(!defined('XOOPS_CPFUNC_LOADED')) return;
 
         RMUris::redirect_with_message($params[2], $params[0], RMMSG_INFO);
@@ -203,7 +203,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
         }
 
-        RMEvents::get()->run_event('rmcommon.xoops.common.end');
+        RMEvents::get()->trigger('rmcommon.xoops.common.end');
 
     }
 
@@ -213,7 +213,8 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
         if (!$xoopsTpl) return;
 
-        $xoopsTpl->plugins_dir[] = RMCPATH . '/include/smarty';
+        $xoopsTpl->plugins_dir = RMEvents::get()->trigger('rmcommon.smarty.plugins', $xoopsTpl->plugins_dir);
+        RMEvents::get()->trigger('rmcommon.xoops.header.add.meta');
 
     }
 
@@ -224,49 +225,49 @@ class RmcommonCorePreload extends XoopsPreloadItem
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'home-page';
-        RMEvents::get()->run_event('rmcommon.index.start');
+        RMEvents::get()->trigger('rmcommon.index.start');
     }
 
     public function eventCoreEdituserStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'edit-user';
-        RMEvents::get()->run_event('rmcommon.edituser.start');
+        RMEvents::get()->trigger('rmcommon.edituser.start');
     }
 
     public function eventCoreReadpmsgStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'readpm';
-        RMEvents::get()->run_event('rmcommon.readpm.start');
+        RMEvents::get()->trigger('rmcommon.readpm.start');
     }
 
     public function eventCoreRegisterStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'register';
-        RMEvents::get()->run_event('rmcommon.register.start');
+        RMEvents::get()->trigger('rmcommon.register.start');
     }
 
     public function eventCoreUserStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'user';
-        RMEvents::get()->run_event('rmcommon.user.start');
+        RMEvents::get()->trigger('rmcommon.user.start');
     }
 
     public function eventCoreUserinfoStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'profile';
-        RMEvents::get()->run_event('rmcommon.userinfo.start');
+        RMEvents::get()->trigger('rmcommon.userinfo.start');
     }
 
     public function eventCoreViewpmsgStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'pm';
-        RMEvents::get()->run_event('rmcommon.viewpm.start');
+        RMEvents::get()->trigger('rmcommon.viewpm.start');
     }
 
 }

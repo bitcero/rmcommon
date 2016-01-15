@@ -45,10 +45,16 @@ function updatesNotifier(count){
 
             $("#he-context-help > .title").html('<span class="fa fa-question-circle"></span> ' + $(this).attr('title'));
 
+            if(undefined != $(this).data('help')){
+                var src = cuHandler.url('/modules/rmcommon/help.php?doc=' + $(this).data('help'));
+            } else {
+                var src = $(this).attr('href');
+            }
+
             if ( $("#he-context-help > iframe").length > 0 )
-                $("#he-context-help iframe").attr("src", $(this).attr('href') );
+                $("#he-context-help iframe").attr("src", src );
             else
-                $("#he-context-help").append('<iframe src="' + $(this).attr('href') + '"></iframe>');
+                $("#he-context-help").append('<iframe src="' + src + '"></iframe>');
 
             $("#he-context-help .help-switch").removeClass('fa-question-circle').addClass('fa-angle-double-right');
 
