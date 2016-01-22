@@ -103,7 +103,7 @@ class RMPlugin extends RMObject
 	}
 
     public function on_install(){
-        if ( !$this->plugin->on_install() ) {
+        if ( false == $this->plugin->on_install() ) {
             $this->addError($this->plugin->errors());
             return false;
         }

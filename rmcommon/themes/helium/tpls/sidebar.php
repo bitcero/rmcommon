@@ -31,7 +31,7 @@
                 <ul id="menu-<?php echo $currentModule->directory; ?>" class="current-module-menu">
                     <?php foreach ($currentModule->menu as $menu): ?>
                         <li<?php echo $menu['location'] == RMCLOCATION ? ' class="active"' : ''; ?>>
-                            <a <?php echo isset($menu['attr']) ? $xoFunc->render_attributes($menu['attr']) : ''; ?> href="<?php echo $xoFunc->menuLink((object) $menu, $currentModule); ?>"<?php echo $menu['location'] == RMCLOCATION ? ' class="open"' : ''; ?> <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?> data-submenu="yes"<?php endif; ?>>
+                            <a <?php echo isset($menu['attributes']) ? $xoFunc->render_attributes($menu['attributes']) : ''; ?> href="<?php echo $xoFunc->menuLink((object) $menu, $currentModule); ?>"<?php echo $menu['location'] == RMCLOCATION ? ' class="open"' : ''; ?> <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?> data-submenu="yes"<?php endif; ?>>
                                 <?php echo $xoFunc->menuIcon($menu['icon'], $currentModule->directory); ?>
                                 <?php echo $menu['title']; ?>
                                 <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?>
@@ -43,7 +43,9 @@
                                     <?php foreach($menu['options'] as $submenu): ?>
                                         <?php if(array_key_exists('divider', $submenu)) continue; ?>
                                         <li>
-                                            <a href="<?php echo $xoFunc->menuLink((object) $submenu, $currentModule); ?>">
+                                            <a
+                                                href="<?php echo $xoFunc->menuLink((object) $submenu, $currentModule); ?>"
+                                                <?php echo isset($submenu['attributes']) ? $xoFunc->render_attributes($submenu['attributes']) : ''; ?>>
                                                 <?php echo isset($submenu['icon']) ? $xoFunc->menuIcon($submenu['icon'], $currentModule->directory) : ''; ?>
                                                 <?php echo $submenu['title']; ?>
                                             </a>

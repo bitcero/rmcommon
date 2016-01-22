@@ -29,7 +29,7 @@
                             <li<?php if(isset($menu['options'])): ?> class="dropdown-submenu"<?php endif; ?>>
                                 <a
                                     href="<?php echo $xoFunc->menuLink( (object) $menu, (object) $rmcommon_menu); ?>"<?php if(isset($menu['options'])): ?> tabindex="-1"<?php endif; ?>
-                                    <?php if(array_key_exists('attr', $menu)): ?><?php echo $xoFunc->render_attributes($menu['attr']); ?><?php endif; ?>
+                                    <?php if(array_key_exists('attributes', $menu)): ?><?php echo $xoFunc->render_attributes($menu['attributes']); ?><?php endif; ?>
                                     >
                                     <?php echo $cuIcons->getIcon($menu['icon']); ?>
                                     <?php echo $menu['title']; ?>

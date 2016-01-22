@@ -25,6 +25,11 @@ abstract class RMController
      */
     public $parent;
 
+    /**
+     * @var Name of the current action
+     */
+    public $action;
+
     public $parameters;
 
     protected $model;
@@ -34,7 +39,8 @@ abstract class RMController
     protected function __construct()
     {
 
-        $this->tpl = RMTemplate::get();
+        $this->tpl = RMTemplate::getInstance();
+        $this->tpl->assign('controller', $this);
 
     }
 

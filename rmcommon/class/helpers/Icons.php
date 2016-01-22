@@ -111,7 +111,7 @@ class Icons extends Attributes
 
             $dir = opendir($this->iconsProviders[$id]);
             while (false !== ($file = readdir($dir))) {
-                if ($file == '.' || $file == '..' || substr($file, -4) != '.svg') {
+                if ($file == '.' || $file == '..' || substr($file, -4) != '.svg' || substr($file, 0, 1) == '.') {
                     continue;
                 }
 

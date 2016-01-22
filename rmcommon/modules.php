@@ -11,6 +11,31 @@
 define('RMCLOCATION','modules');
 include_once '../../include/cp_header.php';
 
+/**
+ * function to update compiled template file in templates_c folder
+ *
+ * @param string $tpl_id
+ * @param boolean $clear_old
+ * @return boolean
+ */
+function modules_template_touch($tpl_id, $clear_old = true)
+{
+
+    $tplfile_handler = &xoops_gethandler('tplfile');
+    $tplfile =& $tplfile_handler->get($tpl_id);
+
+    if (is_object($tplfile)) {
+        $file = $tplfile->getVar('tpl_file', 'n');
+        $tpl = new XoopsTpl();
+
+        $tpl->plugins_dir = RMEvents::get()->trigger('rmcommon.smarty.plugins', $tpl->plugins_dir);
+
+        return $tpl->touch('db:' . $file);
+    }
+
+    return false;
+}
+
 function modules_install_function($dirname)
 {
     global $xoopsUser, $xoopsConfig;
@@ -160,7 +185,7 @@ function modules_install_function($dirname)
                             $msgs[] = "&nbsp;&nbsp;" . sprintf(_AM_SYSTEM_MODULES_TEMPLATE_ADD_DATA, "<strong>" . $tpl['file'] . "</strong>") . "(ID: <strong>" . $newtplid . "</strong>)";
                             // generate compiled file
                             include_once XOOPS_ROOT_PATH . '/class/template.php';
-                            if (!xoops_template_touch($newtplid)) {
+                            if (!modules_template_touch($newtplid)) {
                                 $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(_AM_SYSTEM_MODULES_TEMPLATE_COMPILED_FAILED, "<strong>" . $tpl['file'] . "</strong>") . "</span>";
                             } else {
                                 $msgs[] = "&nbsp;&nbsp;" . sprintf(_AM_SYSTEM_MODULES_TEMPLATE_COMPILED, "<strong>" . $tpl['file'] . "</strong>");
@@ -799,7 +824,7 @@ function module_uninstall_now(){
 
 function xoops_module_update($dirname){
     global $xoopsConfig, $xoopsDB;
-    
+
     $dirname = trim($dirname);
     $module_handler =& xoops_gethandler('module');
     $module =& $module_handler->getByDirname($dirname);
@@ -860,7 +885,7 @@ function xoops_module_update($dirname){
                         $newid = $tplfile->getVar('tpl_id');
                         $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s inserted to the database.','rmcommon'), "<strong>".$tpl['file']."</strong>");
                         if ($xoopsConfig['template_set'] == 'default') {
-                            if (!xoops_template_touch($newid)) {
+                            if (!modules_template_touch($newid)) {
                                 $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not recompile template %s','rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
                             } else {
                                 $msgs[] = '&nbsp;&nbsp;<span>'.sprintf(__('Template %s recompiled','rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
@@ -929,7 +954,7 @@ function xoops_module_update($dirname){
                                 } else {
                                     $msgs[] = "&nbsp;&nbsp;".sprintf(__('Template %s updated.','rmcommon'), "<strong>".$block['template']."</strong>");
                                     if ($xoopsConfig['template_set'] == 'default') {
-                                        if (!xoops_template_touch($tplfile_new->getVar('tpl_id'))) {
+                                        if (!modules_template_touch($tplfile_new->getVar('tpl_id'))) {
                                             $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not recompile template %s','rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
                                         } else {
                                             $msgs[] = "&nbsp;&nbsp;".sprintf(__('Template %s recompiled','rmcommon'), "<strong>".$block['template']."</strong>");
@@ -988,7 +1013,7 @@ function xoops_module_update($dirname){
                                     $newid = $tplfile->getVar('tpl_id');
                                     $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s added to the database','rmcommon'), "<strong>".$block['template']."</strong>");
                                     if ($xoopsConfig['template_set'] == 'default') {
-                                        if (!xoops_template_touch($newid)) {
+                                        if (!modules_template_touch($newid)) {
                                             $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Template %s recompile failed','rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
                                         } else {
                                             $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s recompiled','rmcommon'), "<strong>".$block['template']."</strong>");

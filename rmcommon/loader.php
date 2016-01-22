@@ -93,7 +93,7 @@ $loader = RMEvents::get()->trigger('rmcommon.psr4loader', $loader);
 
 // Base classes
 $GLOBALS['rmEvents'] = RMEvents::get();
-$GLOBALS['rmTpl'] = RMTemplate::get();
+$GLOBALS['rmTpl'] = RMTemplate::getInstance();
 $GLOBALS['rmCodes'] = RMCustomCode::get();
 
 global $rmEvents, $rmTpl, $rmCodes;

@@ -51,7 +51,7 @@ function show_configurable_items(){
  * Show the preferences for a specific module
  */
 function show_module_preferences(){
-    global $rmTpl, $xoopsSecurity;
+    global $rmTpl, $xoopsSecurity, $cuIcons;
 
     $quick = RMHttpRequest::get( 'popup', 'integer', 0 );
     $token = RMHttpRequest::get( 'CUTOKEN_REQUEST', 'string', '' );
@@ -107,7 +107,12 @@ function show_module_preferences(){
         );
     else{
         foreach ($settings_categories as $category => $caption) {
-            $categories[$category] = array('caption' => $caption);
+            // Verify if category has been provided in array format
+            if(is_array($caption) && array_key_exists('caption', $caption)){
+                $categories[$category] = $caption;
+            } else {
+                $categories[$category] = array('caption' => $caption);
+            }
         }
     }
 

@@ -13,79 +13,99 @@
  */
 class RMFormCheck extends RMFormElement
 {
-	private $asTable = false;
-	private $tableCols = 3;
-	private $_options = array();
-	/**
-	 * @param string $caption Texto de la etiqueta
-	 */
-	function __construct($caption){
-		$this->setCaption($caption);
-	}
-	/**
-	 * Agrega una nueva casilla (checkbox) al elemento.
-	 * @param string $caption Texto de la casilla
-	 * @param string $name Nombre de la casilla
-	 * @param mixed $value Valor de la casilla
-	 * @param int $state Activada, descativada (1, 0)
-	 */
-	public function addOption($caption, $name, $value, $state=0){
-		$rtn = array();
-		$rtn['caption'] = $caption;
-		$rtn['value'] = $value;
-		$rtn['state'] = $state;
-		$rtn['name'] = $name;
-		$this->_options[] = $rtn;
-	}
-	/** 
-	 * Devuelve un array con las casilla del elemento.
-	 * @return array
-	 */
-	public function getOptions(){
-		return $this->_options;
-	}
-	/**
-	 * Genera el cdigo HTML necesario para mostrar el campo.
-	 * @return string
-	 */
-	function render(){
-		$rtn = '';
-		if ($this->asTable){
-			$rtn .= "<table width='100%' cellspacing='1' cellpadding='2' border='0'><tr>";
-			$cols = 1;
-			foreach ($this->_options as $k => $v){
-				if ($cols>$this->tableCols){
-					$rtn .= '</tr><tr>';
-					$cols = 1;
-				}
-				$rtn .= "<td><label><input type='checkbox' name='$v[name]' id='".$this->id()."' value='$v[value]' ";
-				//if ($v['state']==1){
-				$rtn .= isset($_REQUEST[$v['name']]) && $_REQUEST[$v['name']]==$v['value'] ? "checked='checked' " : ($v['state']==1 ? "checked='checked' " : '');
-				//}
-				$rtn .= "/> $v[caption]</label></td>";
-				$cols++;
-			}
-			$rtn .= "</tr></table>";
-		} else {
-			foreach ($this->_options as $k => $v){
-				$rtn .= "<input type='checkbox' name='$v[name]' id='".$this->id()."' value='$v[value]' ";
-				//if ($v['state']==1){
-				//	$rtn .= "checked='checked' ";
-				//}
-				$rtn .= isset($_REQUEST[$v['name']]) && $_REQUEST[$v['name']]==$v['value'] ? "checked='checked' " : ($v['state']==1 ? "checked='checked' " : '');
-				$rtn .= "/> $v[caption]<br />";
-			}
-		}
-		return $rtn;
-	}
-	/**
-	 * Formatea la lista de checkboxes mediante una table
-	 */
-	function asTable($cols=3){
-		$this->asTable = true;
-		if ($cols<=0) $cols = 3;
-		$this->tableCols = $cols;
-	}
+    private $_options = array();
+
+    /**
+     * @param string $caption Texto de la etiqueta
+     */
+    function __construct($caption)
+    {
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->set('display', 'list');
+        }
+
+        $this->set('type', 'checkbox');
+
+        $this->suppressList[] = 'display';
+        $this->suppressList[] = 'options';
+
+        // User can provide options in constructor
+        if (array_key_exists('options', $caption)) {
+            foreach ($caption['options'] as $value => $option) {
+                $this->_options[] = [
+                    'caption' => TextCleaner::getInstance()->clean_disabled_tags($option['caption']),
+                    'value' => TextCleaner::getInstance()->clean_disabled_tags($value),
+                    'selected' => $caption['selected'],
+                    'extra' => $caption['extra'],
+                    'name' => $caption['name']
+                ];
+            }
+        }
+    }
+
+    /**
+     * Agrega una nueva casilla (checkbox) al elemento.
+     * @param string $caption Texto de la casilla
+     * @param string $name Nombre de la casilla
+     * @param mixed $value Valor de la casilla
+     * @param int $state Activada, descativada (1, 0)
+     */
+    public function addOption($caption, $name, $value, $state = 0)
+    {
+        $rtn = array();
+        $rtn['caption'] = TextCleaner::getInstance()->clean_disabled_tags($caption);
+        $rtn['value'] = TextCleaner::getInstance()->clean_disabled_tags($value);
+        $rtn['selected'] = $state == 1 ? 'selected' : '';
+        $rtn['name'] = $name;
+        $this->_options[] = $rtn;
+    }
+
+    /**
+     * Devuelve un array con las casilla del elemento.
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+    /**
+     * Genera el cdigo HTML necesario para mostrar el campo.
+     * @return string
+     */
+    function render()
+    {
+        $attributes = $this->renderAttributeString();
+
+        $rtn = '';
+        if ($this->get('display') == 'inline') {
+            $rtn .= "";
+            $cols = 1;
+            foreach ($this->_options as $k => $v) {
+                $rtn .= "<label class='checkbox-inline'><input $attributes value='$v[value]' ";
+                //if ($v['state']==1){
+                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked " : '');
+                //}
+                $rtn .= "> $v[caption]</label>";
+                $cols++;
+            }
+            $rtn .= "";
+        } else {
+            foreach ($this->_options as $k => $v) {
+                $rtn .= "<div class='checkbox'><label><input $attributes value='$v[value]' ";
+                //if ($v['state']==1){
+                //	$rtn .= "checked='checked' ";
+                //}
+                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked " : '');
+                $rtn .= "> $v[caption]</label></div>";
+            }
+        }
+        return $rtn;
+    }
 }
 
 /**
@@ -94,80 +114,110 @@ class RMFormCheck extends RMFormElement
 class RMFormRadio extends RMFormElement
 {
 
-	private $_options = array();
-	private $_break;
-    private $_type = 0;
-    private $_cols = 3;
-    
-	/**
-	 * @param string $caption Texto de la etiqueta.
-	 * @param string $name Nombre del campo.
-	 * @param string $salto Separador de elementos (&nbsp;, <br />, u otro caracter HTML)
+    private $_options = array();
+
+    /**
+     * @param string $caption Texto de la etiqueta.
+     * @param string $name Nombre del campo.
+     * @param integer $inline Show inline controls or as list
      * @param int $type 1 = Tabla, 0 = Lista
      * @param int $cols Numero de columnas de la tabla
-	 */
-	public function __construct($caption, $name, $salto=0, $type = 0, $cols = 3){
-		$this->setCaption($caption);
-		$this->setName($name);
-        $this->_type = $type;
-        $this->_cols = $cols;
-		if ($salto==0){ $this->_break = '<br />'; } else { $this->_break = '&nbsp;&nbsp;'; }
-	}
-	/**
-	 * Agrega una nueva opcion (radio) al elemento
-	 * @param string $caption Texto de la etiqueta
-	 * @param mixed $value valor del elemento
-	 * @param int $state 0 Desactivado, 1 Activado
-	 */
-	public function addOption($caption, $value, $state = 0, $extra = ''){
-		$rtn = array();
-		$rtn['caption'] = $caption;
-		$rtn['value'] = $value;
-		$rtn['state'] = $state;
-        $rtn['extra'] = $extra;
-		$this->_options[] = $rtn;
-	}
-	/**
-	 * Devuelve el array con las opciones (radios) del elemento.
-	 * @return array
-	 */
-	public function getOptions(){
-		return $this->_options;
-	}
-	/**
-	 * Genera el cdigo HTML para mostrar el elemento
-	 * @return string
-	 */
-	public function render(){
-		$rtn = '';
-        
-        if ($this->_type){
-            
-            $rtn .= "<table cellspacing='1' cellpadding='2' border='0'><tr>";
-            $i = 1;
-            foreach ($this->_options as $k => $v){
-                if ($i>$this->_cols){
-                    $i = 1;
-                    $rtn .= "</tr><tr>";
-                }
-                $rtn .= "<td><label><input name='".$this->getName()."' id='".$this->id()."' type='radio' value='$v[value]' ";
-                $rtn .= isset($_REQUEST[$this->getName()]) && $_REQUEST[$this->getName()]==$v['value'] ? "checked='checked' " : ($v['state']==1 ? "checked='checked' " : '');
-                $rtn .= ($v['extra']!='' ? "$v[extra] " : '')."/> $v[caption]</label></td>";
-                $i++;
-            }
-            $rtn .= "</tr></table>";
-            
+     */
+    public function __construct($caption, $name, $inline = 0)
+    {
+
+        if (is_array($caption)) {
+            parent::__construct($caption);
         } else {
-        
-		    foreach ($this->_options as $k => $v){
-			    $rtn .= "<label><input name='".$this->getName()."' id='".$this->id()."' type='radio' value='$v[value]' ";
-			    $rtn .= isset($_REQUEST[$this->getName()]) && $_REQUEST[$this->getName()]==$v['value'] ? "checked='checked' " : ($v['state']==1 ? "checked='checked' " : '');
-			    $rtn .= ($v['extra']!='' ? "$v[extra] " : '')."/> $v[caption]</label>".$this->_break;
-		    }
-        
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('display', $inline ? 'inline' : 'list', 'list');
         }
-		return $rtn;
-	}
+
+        $this->set('type', 'radio');
+
+        $this->suppressList[] = 'display';
+        $this->suppressList[] = 'options';
+
+        // User can provide options in constructor
+        if (array_key_exists('options', $caption)) {
+            foreach ($caption['options'] as $value => $option) {
+                if (is_array($option)) {
+                    $this->_options[] = [
+                        'caption' => TextCleaner::getInstance()->clean_disabled_tags($option['caption']),
+                        'value' => TextCleaner::getInstance()->clean_disabled_tags($value),
+                        'selected' => $caption['selected'],
+                        'extra' => $caption['extra']
+                    ];
+                } else {
+                    $this->_options[] = [
+                        'caption' => TextCleaner::getInstance()->clean_disabled_tags($option),
+                        'value' => TextCleaner::getInstance()->clean_disabled_tags($value),
+                        'selected' => '',
+                        'extra' => ''
+                    ];
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Agrega una nueva opcion (radio) al elemento
+     * @param string $caption Texto de la etiqueta
+     * @param mixed $value valor del elemento
+     * @param int $state 0 Desactivado, 1 Activado
+     */
+    public function addOption($caption, $value, $state = 0, $extra = '')
+    {
+        $rtn = array();
+        $rtn['caption'] = TextCleaner::getInstance()->clean_disabled_tags($caption);
+        $rtn['value'] = TextCleaner::getInstance()->clean_disabled_tags($value);
+        $rtn['selected'] = $state;
+        $rtn['extra'] = $extra;
+        $this->_options[] = $rtn;
+    }
+
+    /**
+     * Devuelve el array con las opciones (radios) del elemento.
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+    /**
+     * Genera el cdigo HTML para mostrar el elemento
+     * @return string
+     */
+    public function render()
+    {
+        $rtn = '';
+
+        $attributes = $this->renderAttributeString();
+
+        if ('inline' == $this->get('display')) {
+
+            foreach ($this->_options as $k => $v) {
+                $rtn .= '<label class="radio-inline">';
+                $rtn .= "<input $attributes value='$v[value]' ";
+                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked='checked' " : '');
+                $rtn .= ($v['extra'] != '' ? "$v[extra] " : '') . "> $v[caption]</label>";
+            }
+
+        } else {
+
+            foreach ($this->_options as $k => $v) {
+                $rtn .= "<div class=\"radio\"><label><input $attributes value='$v[value]' ";
+                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked='checked' " : '');
+                $rtn .= ($v['extra'] != '' ? "$v[extra] " : '') . "> $v[caption]</label></div>";
+            }
+
+        }
+        return $rtn;
+    }
 }
 
 /**
@@ -175,46 +225,62 @@ class RMFormRadio extends RMFormElement
  */
 class RMFormYesNo extends RMFormElement
 {
-	var $_value = '';
-	/**
-	 * @param string $caption Texto de la etiqueta
-	 * @param string $name Nombre dle campo
-	 * @param int $inicial Valor inicial (0 = No, 1 = S)
-	 */
-	public function __construct($caption, $name, $inicial=0){
-		$this->setCaption($caption);
-		$this->setName($name);
-		$this->_value = isset($_REQUEST[$this->getName()]) ? $_REQUEST[$this->getName()] : $inicial;
-	}
-	/**
-	 * Establece el valor incial del elemento
-	 * @param int $value 0 = no, 1 = S
-	 */
-	public function setValue($value){
-		$this->_value = $value;
-	}
-	/**
-	 * Devuelve el valor inicial del elemento
-	 * @return int
-	 */
-	public function getValue(){
-		return $this->_value;
-	}
-	/**
-	 * Genera el cdigo HTML para mostrar el campo
-	 * @return string
-	 */
-	public function render(){
-		$rtn = "<input name='".$this->getName()."' id='".$this->getName()."-1' type='radio' value='1' ";
-		if ($this->_value==1){
-			$rtn .= "checked";
-		}
-		$rtn .= "> ".__('Yes','rmcommon')."&nbsp;&nbsp;";
-		$rtn .= "<input name='".$this->getName()."' id='".$this->getName()."-2' type='radio' value='0' ";
-		if ($this->_value==0){
-			$rtn .= "checked";
-		}
-		$rtn .= "> ".__('No','rmcommon');
-		return $rtn;
-	}
+    /**
+     * @param string $caption
+     * @param string $name
+     * @param int $value Initial value (0 = No, 1 = S)
+     */
+    public function __construct($caption, $name, $value = 0)
+    {
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('value', $value == 1 ? 'yes' : 'no', 'yes');
+        }
+
+        $this->suppressList[] = 'value';
+        $this->suppressList[] = 'type';
+    }
+
+    /**
+     * Establece el valor incial del elemento
+     * @param int $value 0 = no, 1 = S
+     */
+    public function setValue($value)
+    {
+        $this->set('value', $value);
+    }
+
+    /**
+     * Devuelve el valor inicial del elemento
+     * @return int
+     */
+    public function getValue()
+    {
+        return $this->get('value');
+    }
+
+    /**
+     * Genera el cdigo HTML para mostrar el campo
+     * @return string
+     */
+    public function render()
+    {
+        $attributes = $this->renderAttributeString();
+
+        $rtn = "<label class=\"radio-inline\"><input type='radio' $attributes value='1' ";
+        if ($this->get('value') == 'yes') {
+            $rtn .= "checked";
+        }
+        $rtn .= "> " . __('Yes', 'rmcommon') . "</label>";
+        $rtn .= "<label class=\"radio-inline\"><input type='radio' $attributes value='0' ";
+        if ($this->get('value') == 'no') {
+            $rtn .= "checked";
+        }
+        $rtn .= "> " . __('No', 'rmcommon') . '</label>';
+        return $rtn;
+    }
 }
