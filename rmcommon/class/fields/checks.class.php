@@ -242,6 +242,7 @@ class RMFormYesNo extends RMFormElement
         }
 
         $this->suppressList[] = 'value';
+        $this->suppressList[] = 'type';
     }
 
     /**
@@ -270,12 +271,12 @@ class RMFormYesNo extends RMFormElement
     {
         $attributes = $this->renderAttributeString();
 
-        $rtn = "<label class=\"inline-radio\"><input $attributes value='1' ";
+        $rtn = "<label class=\"radio-inline\"><input type='radio' $attributes value='1' ";
         if ($this->get('value') == 'yes') {
             $rtn .= "checked";
         }
         $rtn .= "> " . __('Yes', 'rmcommon') . "</label>";
-        $rtn .= "<label class=\"inline-radio\"><input $attributes value='0' ";
+        $rtn .= "<label class=\"radio-inline\"><input type='radio' $attributes value='0' ";
         if ($this->get('value') == 'no') {
             $rtn .= "checked";
         }

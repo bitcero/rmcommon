@@ -242,6 +242,8 @@ class RMForm
             $this->_fields[] = $ret;
         }
 
+        //$formControls = ['RMFormText', 'RMFormSelect', 'RMTextArea', 'RMFormFile'];
+
         if ('' != $this->fieldClass){
             $element->add('class', $this->fieldClass);
         }

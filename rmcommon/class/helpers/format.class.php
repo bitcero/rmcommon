@@ -255,15 +255,15 @@ class RMFormat
                     break;
                 case $size < $gb:
                     $result = number_format($size / $mb, 2);
-                    $target = 'mb';
+                    $target = 'MB';
                     break;
                 case $size < $tb:
                     $result = number_format($size / $gb, 2);
-                    $target = 'gb';
+                    $target = 'GB';
                     break;
                 default:
                     $result = number_format($size / $tb, 2);
-                    $target = 'tb';
+                    $target = 'TB';
                     break;
 
             }

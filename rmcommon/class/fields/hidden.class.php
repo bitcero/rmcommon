@@ -13,37 +13,54 @@
  */
 class RMFormHidden extends RMFormElement
 {
-	var $_value;
-	/**
-	 * Constructor de la clase
-	 * @param string $name Nombre del campo
-	 * @param string $value Valor del elemento
-	 */
-	public function __construct($name, $value){
-		$this->setName($name);
-		$this->_value = $value;
-	}
-	/**
-	 * Establece el valor del elemento.
-	 * @param string $value Valor del elemento
-	 */
-	function setValue($value){
-		$this->_value = $value;
-	}
-	/**
-	 * Devuelve el valor del elemento
-	 * @return string
-	 */
-	function getValue(){
-		return $this->_value;
-	}
-	/**
-	 * Genera el c?digo HTML para mostrar el elemento
-	 * @return string
-	 */
-	function render(){
-		$ret = '<input type="hidden" name="'.$this->getName().'" id="'.$this->id().'" value="'.$this->getValue().'" />';
-		return $ret;
-	}
+    /**
+     * Constructor de la clase
+     * @param string $name Nombre del campo
+     * @param string $value Valor del elemento
+     */
+    public function __construct($name, $value)
+    {
+
+        if (is_array($name)) {
+            parent::__construct($name);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('value', $value, '');
+        }
+
+        $this->setIfNotSet('id', $name);
+
+    }
+
+    /**
+     * Establece el valor del elemento.
+     * @param string $value Valor del elemento
+     */
+    function setValue($value)
+    {
+        $this->set('value', $value);
+    }
+
+    /**
+     * Devuelve el valor del elemento
+     * @return string
+     */
+    function getValue()
+    {
+        return $this->get('value');
+    }
+
+    /**
+     * Genera el c?digo HTML para mostrar el elemento
+     * @return string
+     */
+    function render()
+    {
+        $attributes = $this->renderAttributeString();
+
+        $ret = '<input type="hidden" ' . $attributes . '>';
+        return $ret;
+    }
 }
 
