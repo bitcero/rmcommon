@@ -1078,10 +1078,22 @@ class RMTemplate
 
     /**
      * Clear all styles stored previously.
+     * @param string Style ID
+     * @return bool
      */
-    public function clear_styles()
+    public function clear_styles( $id = null )
     {
-        $this->tpl_styles = array();
+        if(null == $id ){
+            $this->tpl_styles = array();
+            return true;
+        }
+
+        if(array_key_exists($id, $this->tpl_styles)){
+            unset($this->tpl_styles[$id]);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

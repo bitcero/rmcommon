@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>16,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>17,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -41,6 +41,7 @@ $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
 $modversion['updateurl'] = "http://www.xoopsmexico.net/modules/vcontrol/";
+$modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
 // PERMISSIONS
 $modversion['permissions'] = 'include/permissions.php';

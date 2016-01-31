@@ -190,7 +190,7 @@ class RMModules
         return false;
     }
 
-    static function icon( $dirname, $size ){
+    static function icon( $dirname ){
 
         global $xoopsModule;
 
@@ -199,8 +199,8 @@ class RMModules
         else
             $mod = self::load_module( $dirname );
 
-        $icon = XOOPS_URL . '/modules/' . $dirname . '/';
-        $icon .= $mod->getInfo( 'icon' . $size );
+        $icon = $mod->getInfo( 'icon' . $size );
+        $icon = '' != $icon ? $icon : XOOPS_URL . '/modules/' . $dirname . '/' . $mod->getInfo('image');
 
         return $icon;
 
