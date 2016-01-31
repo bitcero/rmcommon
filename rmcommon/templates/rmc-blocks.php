@@ -187,7 +187,7 @@
                                             <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-action="<?php echo $block['visible'] ? 'hide-block' : ' show-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
                                                 <div class="row item-controls">
                                                     <strong class="dd-handle" title="<?php echo sprintf( __('Module: %s', 'rmcommon'), $block['module']['name'] ); ?>">
-                                                        <img src="<?php echo $block['module']['icon']; ?>">
+                                                        <?php echo $cuIcons->getIcon($block['module']['icon']); ?>
                                                         <?php echo $block['title']; ?>
                                                     </strong>
                                                     <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'delete', <?php echo $block['id']; ?> );" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="fa fa-minus-circle text-danger"></i></a>

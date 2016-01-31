@@ -67,7 +67,7 @@ function createSQL()
 
 function show_rm_blocks()
 {
-    global $xoopsModule, $xoopsConfig, $wid_globals, $xoopsSecurity, $rmc_config, $rmTpl;
+    global $xoopsModule, $xoopsConfig, $wid_globals, $xoopsSecurity, $rmc_config, $rmTpl, $cuIcons;
     define('RMCSUBLOCATION','blocks');
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
@@ -103,7 +103,7 @@ function show_rm_blocks()
                 'id' => $mod->mid(),
                 'dir' => $mod->dirname(),
                 'name' => $mod->name(),
-                'icon' => RMModules::icon( $mod->dirname(), 16 )
+                'icon' => RMModules::icon( $mod->dirname() )
             ),
             'canvas' => isset($bpos[$row['canvas']]) ? $bpos[$row['canvas']] : array(),
             'weight' => $row['weight'],
@@ -136,7 +136,7 @@ function show_rm_blocks()
     RMBreadCrumb::get()->add_crumb(__('Blocks Management','rmcommon'));
     $rmTpl->assign('xoops_pagetitle', __('Blocks Management','rmcommon'));
 
-    RMTemplate::get()->add_style('blocks.css', 'rmcommon');
+    RMTemplate::get()->add_style('blocks.min.css', 'rmcommon', ['id' => 'cu-blocks-css']);
     RMTemplate::get()->add_script('blocks.js', 'rmcommon');
     RMTemplate::get()->add_script('jkmenu.js', 'rmcommon');
     RMTemplate::get()->add_style('forms.css', 'rmcommon');

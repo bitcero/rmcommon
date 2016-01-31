@@ -109,14 +109,10 @@ $this->add_script('updates.js', 'rmcommon', array('footer' => 1));
 $content = preg_replace("/<script.*" . str_replace("/", '\/', XOOPS_URL) . "\/js\/.*/", '', $content);
 $content = preg_replace("/<link.*" . str_replace("/", '\/', XOOPS_URL) . "\/css\/.*\/>/", '', $content);
 
-// Uset certain scripts
-if (array_key_exists('rmcommongeneralmincss', \RMTemplate::get()->tpl_styles)) {
-    unset(\RMTemplate::get()->tpl_styles['rmcommongeneralmincss']);
-}
-
-if (array_key_exists('rmcommonpagenavcss', \RMTemplate::get()->tpl_styles)) {
-    unset(\RMTemplate::get()->tpl_styles['rmcommonpagenavcss']);
-}
+// Unset certain scripts
+RMTemplate::getInstance()->clear_styles('rmcommongeneralmincss');
+RMTemplate::getInstance()->clear_styles('rmcommonpagenavcss');
+RMTemplate::getInstance()->clear_styles('cu-blocks-css');
 
 $tp6Alerts = array(
     RMMSG_ERROR => 'alert-danger',
