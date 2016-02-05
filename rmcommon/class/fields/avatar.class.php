@@ -139,12 +139,12 @@ class RMFormAvatarField extends RMFormElement
 	 * @return string
 	 */
 	public function render(){
-		$db = EXMDatabase::get();
+		$db = XoopsDatabaseFactory::getDatabaseConnection();
         $sql = "SELECT * FROM ".$db->prefix("avatar");
         if ($this->_onlyuser){
-            global $exmUser;
-            if ($exmUser){
-                $useravatar = $exmUser->getVar('user_avatar');
+            global $xoopsUser;
+            if ($xoopsUser){
+                $useravatar = $xoopsUser->getVar('user_avatar');
                 $sql .= " WHERE avatar_display='1' AND (avatar_type='0' OR (avatar_type='1' AND avatar_file='$useravatar'))";
                 unset($useravatar);
             }

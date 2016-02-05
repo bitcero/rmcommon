@@ -138,26 +138,6 @@
                     <div class="row blocks-nav">
                         <div class="col-xs-12">
                             <ul class="nav nav-pills">
-                                <li class="active">
-                                    <a href="#" id="newban"><?php _e('Add New Block','rmcommon'); ?></a>
-                                    <div id="megamenu1" class="megamenu">
-                                        <div class="menucont">
-                                            <?php $i = 0; ?>
-                                            <?php foreach($blocks as $dir => $block): ?>
-                                                <?php if(empty($block['blocks'])) continue; ?>
-                                                <?php $i++; ?>
-                                                <div class="column">
-                                                    <h3><?php echo $block['name']; ?></h3>
-                                                    <ul class="nav nav-pills">
-                                                        <?php foreach($block['blocks'] as $id => $bk): ?>
-                                                            <li><a href="#" id="block-<?php echo $dir; ?>-<?php echo $bk['id']; ?>"><?php echo $bk['name']; ?></a></li>
-                                                        <?php endforeach; ?>
-                                                    </ul>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                                </li>
                                 <li>
                                     <a href="#" id="blocks-console-control">
                                         <span class="fa fa-bell"></span>
@@ -171,42 +151,81 @@
                         </div>
                     </div>
 
-                    <?php foreach($positions as $pos): if ( $pos['active'] <= 0 ) continue; ?>
-                        <div id="position-<?php echo $pos['id']; ?>" class="cu-box rmc-position-item" data-id="<?php echo $pos['id']; ?>">
-                            <div class="box-header">
-                                <span class="fa fa-caret-up box-handler"></span>
-                                <h3 class="box-title"><?php echo $pos['name']; ?><img src="images/ok.png"></h3>
-                            </div>
-                            <div class="dd box-content collapsable" data-pos="<?php echo $pos['id']; ?>">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 available-list">
 
-                                <?php if(!isset($used_blocks[$pos['id']])): ?>
-                                    <div class="dd-empty"><?php _e('Drag and drop blocks here','rmcommon'); ?></div>
-                                <?php else: ?>
-                                    <ol class="dd-list">
-                                        <?php foreach($used_blocks[$pos['id']] as $block): ?>
-                                            <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-action="<?php echo $block['visible'] ? 'hide-block' : ' show-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
-                                                <div class="row item-controls">
-                                                    <strong class="dd-handle" title="<?php echo sprintf( __('Module: %s', 'rmcommon'), $block['module']['name'] ); ?>">
-                                                        <?php echo $cuIcons->getIcon($block['module']['icon']); ?>
-                                                        <?php echo $block['title']; ?>
-                                                    </strong>
-                                                    <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'delete', <?php echo $block['id']; ?> );" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="fa fa-minus-circle text-danger"></i></a>
-                                                    <?php if($block['visible']): ?>
-                                                        <a href="#" class="pull-right text-warning control-visible" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'hide', <?php echo $block['id']; ?> );" title="<?php _e('Hide block','rmcommon'); ?>"><i class="fa fa-eye-slash"></i></a>
-                                                    <?php else: ?>
-                                                        <a href="#" class="pull-right text-success control-visible" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'show', <?php echo $block['id']; ?> );" title="<?php _e('Show block','rmcommon'); ?>"><i class="fa fa-eye"></i></a>
-                                                    <?php endif; ?>
-                                                    <a href="#" class="pull-right control-settings" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'settings', <?php echo $block['id']; ?> );" title="<?php _e('Block Settings','rmcommon'); ?>"><i class="fa fa-wrench"></i></a>
-                                                </div>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ol>
-                                <?php endif; ?>
+                            <h4><?php _e('Available Blocks','rmcommon'); ?></h4>
 
+                            <div id="blocks-available">
+                                <?php $i = 0; ?>
+                                <?php foreach($blocks as $dir => $block): ?>
+                                    <?php if(empty($block['blocks'])) continue; ?>
+                                    <?php $i++; ?>
+                                    <div class="new-module">
+                                        <h5>
+                                            <?php if('' != $block['icon']){echo $cuIcons->getIcon($block['icon']);} ?>
+                                            <?php echo $block['name']; ?>
+                                        </h5>
+                                        <ul>
+                                            <?php foreach($block['blocks'] as $id => $bk): ?>
+                                                <li>
+                                                    <a href="#" id="block-<?php echo $dir; ?>-<?php echo $bk['id']; ?>">
+                                                        <?php echo $bk['name']; ?>
+                                                        <?php if(array_key_exists('description', $bk) && '' != $bk['description']): ?>
+                                                        <small><?php echo $bk['description']; ?></small>
+                                                        <?php endif; ?>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
 
                         </div>
-                    <?php endforeach; ?>
+                        <div class="col-sm-6 col-md-6 available-positions">
+
+                            <h4><?php _e('Active Blocks','rmcommon'); ?></h4>
+
+                            <?php foreach($positions as $pos): if ( $pos['active'] <= 0 ) continue; ?>
+                                <div id="position-<?php echo $pos['id']; ?>" class="cu-box rmc-position-item" data-id="<?php echo $pos['id']; ?>">
+                                    <div class="box-header">
+                                        <span class="fa fa-caret-up box-handler"></span>
+                                        <h3 class="box-title"><?php echo $pos['name']; ?><?php echo $cuIcons->getIcon('svg-rmcommon-ok-circle text-success'); ?></h3>
+                                    </div>
+                                    <div class="dd box-content collapsable" data-pos="<?php echo $pos['id']; ?>">
+
+                                        <?php if(!isset($used_blocks[$pos['id']])): ?>
+                                            <div class="dd-empty"><?php _e('Drag and drop blocks here','rmcommon'); ?></div>
+                                        <?php else: ?>
+                                            <ol class="dd-list">
+                                                <?php foreach($used_blocks[$pos['id']] as $block): ?>
+                                                    <li class="dd-item<?php echo $block['visible'] ? '' : ' invisible-block'; ?>" data-action="<?php echo $block['visible'] ? 'hide-block' : ' show-block'; ?>" data-position="<?php echo $pos['id']; ?>" data-id="<?php echo $block['id']; ?>" id="block-<?php echo $block['id']; ?>">
+                                                        <div class="row item-controls">
+                                                            <strong class="dd-handle" title="<?php echo sprintf( __('Module: %s', 'rmcommon'), $block['module']['name'] ); ?>">
+                                                                <?php echo $cuIcons->getIcon($block['module']['icon']); ?>
+                                                                <?php echo $block['title']; ?>
+                                                            </strong>
+                                                            <a href="#" class="pull-right text-error control-delete" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'delete', <?php echo $block['id']; ?> );" title="<?php _e('Delete Block','rmcommon'); ?>"><i class="fa fa-minus-circle text-danger"></i></a>
+                                                            <?php if($block['visible']): ?>
+                                                                <a href="#" class="pull-right text-warning control-visible" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'hide', <?php echo $block['id']; ?> );" title="<?php _e('Hide block','rmcommon'); ?>"><i class="fa fa-eye-slash"></i></a>
+                                                            <?php else: ?>
+                                                                <a href="#" class="pull-right text-success control-visible" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'show', <?php echo $block['id']; ?> );" title="<?php _e('Show block','rmcommon'); ?>"><i class="fa fa-eye"></i></a>
+                                                            <?php endif; ?>
+                                                            <a href="#" class="pull-right control-settings" data-block="<?php echo $block['id']; ?>" onclick="control_action( 'settings', <?php echo $block['id']; ?> );" title="<?php _e('Block Settings','rmcommon'); ?>"><i class="fa fa-wrench"></i></a>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ol>
+                                        <?php endif; ?>
+
+                                    </div>
+
+                                </div>
+                            <?php endforeach; ?>
+
+                        </div>
+                    </div>
 
                 </div>
 

@@ -20,7 +20,7 @@ class RMFunctions
 
     public function __construct(){
 
-        $this->settings = new RMSettings;
+        $this->settings = new RMSettings();
         $this->modules = new RMModules;
         $this->uris = new RMUris;
 
@@ -439,49 +439,33 @@ class RMFunctions
 
 
     /**
-    * Check if a plugin is installed and active in Common Utilities
-    */
+     * Check if a plugin is installed and active in Common Utilities
+     * @param string $dir Plugin directory name
+     * @return bool|object
+     * @deprecated
+     */
     public static function plugin_installed($dir){
 
-		if (isset($GLOBALS['installed_plugins'][$dir]))
-			return true;
-		else
-			return false;
+		return Common\Core\Helpers\Plugins::isInstalled($dir);
 
     }
 
     /**
-    * Get a existing plugin
-    */
-    public static function load_plugin($name){
+     * Get a existing plugin
+     * @param string $dir Plugin directory name
+     * @return bool|object
+     * @deprecated
+     */
+    public static function load_plugin($dir){
 
-		$name = strtolower($name);
-		if (!file_exists(RMCPATH.'/plugins/'.$name.'/'.$name.'-plugin.php'))
-			return false;
-
-		include_once RMCPATH.'/plugins/'.$name.'/'.$name.'-plugin.php';
-		$class = ucfirst($name).'CUPlugin';
-
-		if (!class_exists($class))
-			return false;
-
-		$plugin = new $class();
-		return $plugin;
+		return Common\Core\Helpers\Plugins::getInstance()->load($dir);
 
     }
 
+
     public static function installed_plugins(){
 
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $result = $db->query("SELECT dir FROM ".$db->prefix("mod_rmcommon_plugins").' WHERE status=1');
-        $plugins = array();
-        while($row = $db->fetchArray($result)){
-            $plugins[] = $row['dir'];
-        }
-
-        $plugins = RMEvents::get()->run_event("rmcommon.installed.plugins", $plugins);
-
-        return $plugins;
+        return Common\Core\Helpers\Plugins::allInstalled();
 
     }
 

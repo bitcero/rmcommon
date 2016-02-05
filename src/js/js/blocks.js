@@ -305,10 +305,10 @@ var blocksAjax = {
         if(position==undefined || position=='')
             return false;
 
-        $(position+' '+" h3 > img").fadeIn('fast', function(){
+        $(position+' '+" h3 > .cu-icon").fadeIn('fast', function(){
 
             setTimeout(function(){
-                $(position+" h3 > img").fadeOut('fast');
+                $(position+" h3 > .cu-icon").fadeOut('fast');
             }, 1000);
 
         });
@@ -396,7 +396,7 @@ $(document).ready(function(){
         return false;
     });
     
-    $("#megamenu1 li a").click(function(){
+    $("#blocks-available li a").click(function(){
 
         var block = $(this).attr("id").replace("block-",'');
         

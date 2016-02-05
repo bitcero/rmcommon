@@ -58,18 +58,19 @@ class RMModules
      * <pre>
      * array
      *
-     * @param  string       $module Module directory to check
-     * @param  bool         $name   Return the name and version (true) or only version (false)
-     * @param  string       $type   Type of data to get: 'verbose' get a formatted string, 'raw' gets an array with values.
+     * @param  string $module Module directory to check
+     * @param  bool $name Return the name and version (true) or only version (false)
+     * @param  string $type Type of data to get: 'verbose' get a formatted string, 'raw' gets an array with values.
      * @return array|string
      */
-    static public function get_module_version( $module = '', $name = true, $type = 'verbose' ){
+    static public function get_module_version($module = '', $name = true, $type = 'verbose')
+    {
         global $xoopsModule;
 
         //global $version;
         if ($module != '') {
 
-            if ( $xoopsModule && $xoopsModule->dirname() == $module ) {
+            if ($xoopsModule && $xoopsModule->dirname() == $module) {
                 $mod = $xoopsModule;
             } else {
                 $mod = new XoopsModule();
@@ -79,11 +80,11 @@ class RMModules
             $mod = new XoopsModule();
         }
 
-        $mod->loadInfoAsVar( $module );
-        $version = $mod->getInfo( 'rmversion' );
-        $version = is_array( $version ) ? $version : array('major'=>$version, 'minor'=>0, 'revision'=>0, 'stage' => 0, 'name'=>$mod->getInfo('name'));
+        $mod->loadInfoAsVar($module);
+        $version = $mod->getInfo('rmversion');
+        $version = is_array($version) ? $version : array('major' => $version, 'minor' => 0, 'revision' => 0, 'stage' => 0, 'name' => $mod->getInfo('name'));
 
-        if ($type=='raw')
+        if ($type == 'raw')
             return $version;
 
         return self::format_module_version($version, $name);
@@ -93,12 +94,13 @@ class RMModules
     /**
      * Format a given array with version information for a module.
      *
-     * @param  array  $version Array with version values
-     * @param  bool   $name    Include module name in return string
+     * @param  array $version Array with version values
+     * @param  bool $name Include module name in return string
      * @return string
      */
-    static public function format_module_version($version, $name = false){
-        return RMFormat::version( $version, $name );
+    static public function format_module_version($version, $name = false)
+    {
+        return RMFormat::version($version, $name);
     }
 
     /**
@@ -106,17 +108,18 @@ class RMModules
      * @param  string|integer $id Indentifier of module. Could be dirname or numeric ID
      * @return XoopsModule
      */
-    static public function load_module( $id ){
+    static public function load_module($id)
+    {
 
         $module_handler = xoops_gethandler('module');
 
-        if ( is_numeric( $id ) )
-            $module = $module_handler->get( $id );
+        if (is_numeric($id))
+            $module = $module_handler->get($id);
         else
-            $module = $module_handler->getByDirname( $id );
+            $module = $module_handler->getByDirname($id);
 
-        if ( $module )
-            load_mod_locale( $module->getVar('dirname') );
+        if ($module)
+            load_mod_locale($module->getVar('dirname'));
 
         return $module;
     }
@@ -129,27 +132,28 @@ class RMModules
      * @param  string $status Type of modules to get
      * @return array
      */
-    static public function get_modules_list( $status = 'all' ){
+    static public function get_modules_list($status = 'all')
+    {
 
         $db = XoopsDatabaseFactory::getDatabaseConnection();
 
         $active = null;
 
-        if ( $status == 'inactive' )
+        if ($status == 'inactive')
             $active = 0;
-        elseif ( $status=='active' )
+        elseif ($status == 'active')
             $active = 1;
 
         $sql = "SELECT mid, name, dirname FROM " . $db->prefix("modules");
 
-        if( isset( $active ) )
+        if (isset($active))
             $sql .= " WHERE isactive=$active";
 
         $sql .= " ORDER BY name";
         $result = $db->query($sql);
         $modules = array();
 
-        while ( $row = $db->fetchArray( $result ) ) {
+        while ($row = $db->fetchArray($result)) {
             $modules[] = $row;
         }
 
@@ -159,7 +163,8 @@ class RMModules
     /**
      * Create the files to store the modules list
      */
-    static function build_modules_cache(){
+    static function build_modules_cache()
+    {
 
         $modules = XoopsLists::getModulesList();
 
@@ -169,18 +174,19 @@ class RMModules
 
     /**
      * Get the main menu for a module
-     * @param  string     $dirname Directory name of module
+     * @param  string $dirname Directory name of module
      * @return array|bool
      */
-    static function main_menu( $dirname ){
+    static function main_menu($dirname)
+    {
         global $xoopsModule;
 
-        if ( $xoopsModule && $xoopsModule->getVar('dirname') == $dirname )
+        if ($xoopsModule && $xoopsModule->getVar('dirname') == $dirname)
             $mod = $xoopsModule;
         else
-            $mod = self::load_module( $dirname );
+            $mod = self::load_module($dirname);
 
-        if ($mod->getInfo('main_menu') && $mod->getInfo('main_menu') != '' && file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu') )) {
+        if ($mod->getInfo('main_menu') && $mod->getInfo('main_menu') != '' && file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu'))) {
             $main_menu = array();
             include XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu');
 
@@ -190,16 +196,17 @@ class RMModules
         return false;
     }
 
-    static function icon( $dirname ){
+    static function icon($dirname)
+    {
 
         global $xoopsModule;
 
-        if ( $xoopsModule && $xoopsModule->getVar('dirname') == $dirname )
+        if ($xoopsModule && $xoopsModule->getVar('dirname') == $dirname)
             $mod = $xoopsModule;
         else
-            $mod = self::load_module( $dirname );
+            $mod = self::load_module($dirname);
 
-        $icon = $mod->getInfo( 'icon' . $size );
+        $icon = $mod->getInfo('icon');
         $icon = '' != $icon ? $icon : XOOPS_URL . '/modules/' . $dirname . '/' . $mod->getInfo('image');
 
         return $icon;
@@ -214,13 +221,14 @@ class RMModules
      * @param bool $admin
      * @return string
      */
-    static function permalink( $directory, $admin = false ){
+    static function permalink($directory, $admin = false)
+    {
 
         global $cuSettings;
 
         $paths = $cuSettings->modules_path;
 
-        if(isset($paths[$directory])){
+        if (isset($paths[$directory])) {
             return XOOPS_URL . ($admin ? '/admin/' : '') . trim($paths[$directory], '/');
         } else {
             return XOOPS_URL . '/modules/' . $directory;

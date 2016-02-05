@@ -33,9 +33,12 @@ class RMBlocksFunctions
             $module = new XoopsModule();
             $module->loadInfoAsVar($mod['dirname']);
 
+            $icon = $module->getInfo('icon');
+
             $list[$mod['dirname']] = array(
                 'name' => $mod['name'],
-                'blocks' => $module->getInfo('blocks')
+                'blocks' => $module->getInfo('blocks'),
+                'icon' => $icon
             );
 
         }

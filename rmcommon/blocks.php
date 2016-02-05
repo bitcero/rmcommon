@@ -131,22 +131,22 @@ function show_rm_blocks()
 
     $positions = RMEvents::get()->run_event('rmcommon.block.positions.list', $positions);
 
-    RMTemplate::get()->add_script('jquery.nestable.js', 'rmcommon', array('directory' => 'include'));
+    RMTemplate::getInstance()->add_script('jquery.nestable.js', 'rmcommon', array('directory' => 'include'));
 
     RMBreadCrumb::get()->add_crumb(__('Blocks Management','rmcommon'));
     $rmTpl->assign('xoops_pagetitle', __('Blocks Management','rmcommon'));
 
-    RMTemplate::get()->add_style('blocks.min.css', 'rmcommon', ['id' => 'cu-blocks-css']);
-    RMTemplate::get()->add_script('blocks.js', 'rmcommon');
-    RMTemplate::get()->add_script('jkmenu.js', 'rmcommon');
-    RMTemplate::get()->add_style('forms.css', 'rmcommon');
-    RMTemplate::get()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
+    RMTemplate::getInstance()->add_style('blocks.min.css', 'rmcommon', ['id' => 'cu-blocks-css']);
+    RMTemplate::getInstance()->add_script('blocks.min.js', 'rmcommon');
+    RMTemplate::getInstance()->add_script('jkmenu.js', 'rmcommon');
+    RMTemplate::getInstance()->add_style('forms.css', 'rmcommon');
+    RMTemplate::getInstance()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
 
     if (!$rmc_config['blocks_enable']) {
         showMessage(__('Internal blocks manager is currenlty disabled!','rmcommon'), RMMSG_WARN);
     }
 
-    RMTemplate::get()->add_script('jquery.checkboxes.js','rmcommon');
+    RMTemplate::getInstance()->add_script('jquery.checkboxes.js','rmcommon');
     //include RMCPATH . '/js/cu-js-language.php';
 
     xoops_cp_header();
@@ -176,7 +176,7 @@ function show_rm_blocks()
     $visible = rmc_server_var($_GET,'visible',-1);
     $pid = rmc_server_var($_GET,'pos',0);
 
-    include RMTemplate::get()->get_template("rmc-blocks.php", 'module', 'rmcommon');
+    include RMTemplate::getInstance()->path("rmc-blocks.php", 'module', 'rmcommon');
 
     xoops_cp_footer();
 }

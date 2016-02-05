@@ -64,7 +64,10 @@ class RMPlugin extends RMObject
         if (!is_file($path.'/'.strtolower($dir).'-plugin.php')) return false;
 
         include_once $path.'/'.strtolower($dir).'-plugin.php';
-        $class = ucfirst($dir).'CUPlugin';
+
+        $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
+
+        $class = ucfirst($cleanDir).'CUPlugin';
 
         if (!class_exists($class)) return false;
 
@@ -85,7 +88,10 @@ class RMPlugin extends RMObject
 	public function plugin($dir = ''){
 
 		$dir = $dir=='' ? $this->getVar('dir') : $dir;
-		$class = ucfirst($dir).'CUPlugin';
+
+        $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
+
+		$class = ucfirst($cleanDir).'CUPlugin';
 
 		if (is_a($this->plugin, $class))
 			return $this->plugin;

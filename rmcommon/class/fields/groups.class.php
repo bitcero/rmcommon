@@ -29,20 +29,30 @@ class RMFormGroups extends RMFormElement
 	 * @param string $caption Texto de la etiqueta
 	 * @param string $name Nombre del campo
 	 */
-	function __construct($caption, $name, $multi=0, $type=0, $cols=2, $select=array()){
-		$this->setCaption($caption);
-		$this->setName($multi ? str_replace('[]', '', $name).'[]' : $name);
-		if (isset($_REQUEST[$name])) $this->_select = $_REQUEST[$name];
-		$this->_multi = $multi;
-		$this->_showtype = $type;
-		$this->_cols = $cols;
-		
-		if (isset($_REQUEST[$this->getName()])){
-			$this->_select = $_REQUEST[$this->getName()];
-		} else {		
-			$this->_select = $select;
-		}
-		
+	function __construct($caption, $name, $multi=0, $type=0, $cols=2, $selected=array()){
+
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            if ($multi) {
+                $this->setWithDefaults('multiple', null, null);
+            }
+            $this->setWithDefaults('type', $type == 0 ? 'select' : 'radio', 'select');
+            $this->setWithDefaults('selected', $selected, []);
+        }
+
+        $this->setIfNotSet('type', 'select');
+        $this->setIfNotSet('selected', []);
+        $this->setIfNotSet('id', TextCleaner::getInstance()->sweetstring($this->get('name')));
+
+        //$this->suppressList[] = 'multiple';
+        $this->suppressList[] = 'selected';
+        $this->suppressList[] = 'value';
+        $this->suppressList[] = 'description';
+
 	}
 	/**
 	 * Establece el comportamiento de seleccion del campo groups.
@@ -143,21 +153,30 @@ class RMFormGroups extends RMFormElement
 		$rtn = '';
 		$col = 1;
 		
-		$typeinput = $this->_multi ? 'checkbox' : 'radio';
+		$typeinput = $this->get('type');
 		$name = $this->getName();
+        $selected = $this->get('selected');
 
-		if ($this->_showtype){
+		if ($typeinput == 'radio' || $typeinput == 'checkbox'){
+
+            $this->remove('id');
+            if($typeinput == 'checkbox'){
+                $this->set('name', $this->get('name') . '[]');
+            }
+
+            $attributes = $this->renderAttributeString();
+
 			$rtn = "<ul class='groups_field_list ".$this->id()."_groups'>";
-			$rtn .= "<li><label><input type='$typeinput' name='$name' id='".$this->id()."' value='0'";
-			if (is_array($this->_select)){
-				if (in_array(0, $this->_select)){
-					$rtn .= " checked='checked'";
+			$rtn .= "<li><label><input $attributes value='0'";
+			if (is_array($selected)){
+				if (in_array(0, $selected)){
+					$rtn .= " checked";
 				}
 			}
 			$rtn .= " data-checkbox=\"$name-chks\"> ".__('All','rmcommon')."</label></li>";
 			while ($row = $db->fetchArray($result)){
 				
-				$rtn .= "<li><label><input type='$typeinput' name='$name' id='".$this->id()."' value='$row[groupid]'";
+				$rtn .= "<li><label><input $attributes value='$row[groupid]'";
 				if (is_array($this->_select)){
 					if (in_array($row['groupid'], $this->_select)){
 						$rtn .= " checked='checked'";
@@ -176,16 +195,13 @@ class RMFormGroups extends RMFormElement
 			}
 			$rtn .= "</ul>";
 		} else {
-			
-			$rtn = "<select name='$name'";
-			$rtn .= $this->_multi ? " multiple='multiple' size='5'" : "";
-			$rtn .= " class=\"form-control ".$this->getClass()."\"><option value='0'";
-			if (is_array($this->_select)){
-				if (in_array(0, $this->_select)){
-					$rtn .= " selected='selected'";
+
+            $attributes = $this->renderAttributeString();
+			$rtn = "<select $attributes\"><option value='0'";
+			if (is_array($selected)){
+				if (in_array(0, $selected)){
+					$rtn .= " selected";
 				}
-			} else {
-				$rtn .= " selected='selected'";
 			}
 			
 			$rtn .= ">".__('All','rmcommon')."</option>";
@@ -194,7 +210,7 @@ class RMFormGroups extends RMFormElement
 				$rtn .= "<option value='$row[groupid]'";
 				if (is_array($this->_select)){
 					if (in_array($row['groupid'], $this->_select)){
-						$rtn .= " selected='selected'";
+						$rtn .= " selected";
 					}
 				}
 				$rtn .= ">".$row['name']."</option>";
