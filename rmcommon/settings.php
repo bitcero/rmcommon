@@ -146,7 +146,7 @@ function show_module_preferences(){
 
     }
 
-    $categories = RMEvents::get()->run_event( 'rmcommon.settings.fields', $categories, $module );
+    $categories = RMEvents::get()->trigger( 'rmcommon.settings.fields', $categories, $module );
 
     $rmTpl->add_style('settings.css', 'rmcommon', array('footer' => 1));
 

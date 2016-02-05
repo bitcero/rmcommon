@@ -5,15 +5,22 @@
 .blocks-nav .nav-pills{
     margin-bottom: 10px;
 }
+
+.available-positions{
+  @media(min-width: @screen-sm-min){
+    padding-left: 25px;
+  }
+}
+
 .rmc-position-item{
-    min-width: 300px;
-    width: 19%;
+    width: 100%;
     border: 1px solid rgba(0,0,0,0.15);
 }
 
-.rmc-position-item h3 > img{
+.rmc-position-item h3 > .cu-icon{
     float: right;
-    margin-top: 5px;
+    margin-top: 0px;
+  margin-right: 10px;
     display: none;
 }
 .rmc-position-item ol{
@@ -118,34 +125,100 @@
 .rmc_blocks_options{
     margin-bottom: 20px;
 }
-/** Menus **/
-.megamenu, #blocks-console{
+/** Console log **/
+#blocks-console{
     position: absolute;
     display: none;
     left: 0;
     top: 0;
     background: #fff;
-    border-top: 12px solid #ebebeb;
-    border-radius: 2px;
+    border-top: 12px solid @theme-main-color;
     z-index: 100;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 2px 3px rgba(0,0,0,0.4);
 }
 
-.megamenu .column{
-    overflow: hidden;
+/*
+AVAILABLE LIST
+--------------------*/
+.available-list, .available-positions{
+
+  > h4{
+    font-size: ceil(@font-size-base * 1.2);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
 }
 
-.megamenu .column ul li a{
-    border: 1px solid #CCC;
+.available-positions{
+  padding: 20px;
 }
 
-.megamenu .column h3{
-    margin: 0 0 5px 0;
-    border-bottom: 1px solid #ddd;
-    padding: 0 0 2px 0;
+.available-list{
+  //border-right: 1px solid rgba(0,0,0,0.1);
+  background-color: @body-bg;
+  border-radius: @border-radius-base;
+  padding: 20px;
 }
 
-.menucont, #bk-messages{
+#blocks-available{
+
+  .new-module{
+    position: relative;
+    margin-bottom: 15px;
+
+    > h5{
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0 0 10px 0;
+      padding: 5px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      color: #000;
+
+      .cu-icon{
+        .cu-icon-size(14px);
+        display: inline;
+      }
+    }
+
+    > ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+
+      li{
+        float: left;
+        margin: 2px;
+        width: 48%;
+
+        a{
+          display: block;
+          padding: @padding-base-vertical @padding-base-horizontal;
+          border: 1px solid @input-border;
+          color: @gray-base;
+          background-color: #FFF;
+          font-weight: 600;
+
+          > small{
+            display: block;
+            font-weight: 400;
+            color: @text-color;
+          }
+
+          @media(min-width: @screen-md-min){
+            font-size: 0.9em;
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+#bk-messages{
     max-height: 300px;
     padding: 10px;
     overflow: auto;

@@ -47,7 +47,7 @@ var cuHandler = {
 
                 cuHandler.closeLoader();
 
-                bootbox.dialog({
+                cuHandler.modal.dialog({
                     message: response.content,
                     title: response.message,
                     icon: response.icon != undefined ? response.icon : '',
@@ -140,7 +140,9 @@ var cuHandler = {
     },
 
     // Retrieve information for AJAX-FORMS
-    retrieveAjax: function(response){
+    retrieveAjax: function(response, showAlert){
+
+        showAlert = showAlert == undefined ? true : showAlert;
 
         this.currentResponse = response;
 
@@ -158,7 +160,7 @@ var cuHandler = {
                     text: response.message
                 });
                 response.notify = undefined;
-            } else {
+            } else if(showAlert) {
                 alert(response.message);
             }
 
@@ -214,7 +216,7 @@ var cuHandler = {
 
         if(data.openDialog != undefined){
 
-            bootbox.dialog({
+            cuHandler.modal.dialog({
                 message: data.content,
                 title: data.message,
                 icon: data.icon != undefined ? data.icon : '',
@@ -222,7 +224,8 @@ var cuHandler = {
                 owner: data.owner != undefined ? data.owner : '',
                 id: data.windowId!=undefined ? data.windowId : '',
                 animate: false,
-                closeButton: data.closeButton != undefined ? data.closeButton : true
+                closeButton: data.closeButton != undefined ? data.closeButton : true,
+                color: data.color != undefined ? data.color : ''
             });
 
         }

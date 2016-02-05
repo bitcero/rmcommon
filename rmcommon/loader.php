@@ -17,7 +17,7 @@ if (!defined('RMCURL'))
     define("RMCURL", XOOPS_URL . '/modules/rmcommon');
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
-define('RMCVERSION', '2.2.9.9');
+define('RMCVERSION', '2.3.1.8');
 
 /**
  * Welcome Screen
@@ -118,7 +118,7 @@ if (empty($plugins) || !is_array($plugins)) {
     while ($row = $db->fetchArray($result)) {
         $GLOBALS['installed_plugins'][$row['dir']] = true;
         $plugins[] = $row['dir'];
-        $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $row['dir'], ucfirst($row['dir']) . 'Plugin');
+        $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $row['dir'], preg_replace("/[^A-Za-z0-9]/", '', $row['dir']) . 'Plugin');
     }
     file_put_contents($file, json_encode($plugins));
 
@@ -126,13 +126,17 @@ if (empty($plugins) || !is_array($plugins)) {
 
     foreach ($plugins as $p) {
         $GLOBALS['installed_plugins'][$p] = true;
-        $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $p, ucfirst($p) . 'Plugin');
+        $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $p, ucfirst(preg_replace("/[^A-Za-z0-9]/", '', $p)) . 'Plugin');
     }
 
 }
 
 // Load GUI theme events
 $rmEvents->load_extra_preloads(RMCPATH . '/themes/' . $cuSettings->theme, ucfirst($cuSettings->theme));
+
+// Load theme Events
+list($theme) = $db->fetchRow($db->query("select conf_value from " . $db->prefix("config") . " where conf_name = 'theme_set' and conf_modid = 0;"));
+RMEvents::get()->load_extra_preloads(XOOPS_THEME_PATH . '/' . $theme, ucfirst($theme) . 'Theme');
 
 unset($plugins);
 unset($file);

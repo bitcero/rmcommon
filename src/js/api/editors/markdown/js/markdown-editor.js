@@ -87,6 +87,14 @@ This component is part of Common Utilities
         },
 
         save: function( id ){
+
+            if(arguments.length <= 0){
+                for(var key in this.editors){
+                    this.editors[key].save();
+                }
+                return;
+            }
+
             this.editors[id].save();
         },
 

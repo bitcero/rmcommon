@@ -17,19 +17,25 @@ class RMFormButton extends RMFormElement
 	private $_type = 'submit';
 	private $_value = '';
 	/**
-	 * @param string $name Nombre del elemento de formulario
+	 * @param string $caption Nombre del elemento de formulario
 	 * @param string $value Texto del Bot?n (Ej. Enviar, Cancelar)
 	 * @param string $type Tipo de bot?n (Ej. submit, button). Por defecto el valor es 'submit'
 	 */
-	function __construct($name, $value, $type = 'submit'){
-		$this->setName($name);
-		$this->_value = $value;
-		$this->_type = $type;
-		/**
-		 * Eliminamos la etiqueta para este campo de manera que
-		 * solo sean visibles los botones
-		 */
-		$this->setCaption('&nbsp;');
+	function __construct($caption, $value, $type = 'submit'){
+
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, 'Caption Error');
+            $this->setWithDefaults('type', $type, 'button');
+        }
+
+        $this->setIfNotSet('caption', 'Caption Error');
+        $this->setIfNotSet('class', 'btn');
+        $this->setIfNotSet('type', 'button');
+
+        $this->suppressList[] = 'caption';
 	}
 	/**
 	 * Establece o modifica el tipo del bot?n
@@ -64,13 +70,8 @@ class RMFormButton extends RMFormElement
 	 * @return string C?digo HTML del Bot?n
 	 */
 	public function render(){
-		$ret = "<button type='".$this->_type."' name='".$this->getName()."' id='".$this->id()."' class=\"btn";
-        if ($this->_type == 'submit')
-            $ret .= " btn-primary " . $this->getClass() . "\" ";
-        else
-            $ret .= " btn-default " . $this->getClass() . "\" ";
-		
-		$ret .= $this->getExtra().">" . $this->getValue() . '</button>';
+        $attributes = $this->renderAttributeString();
+		$ret = "<button $attributes>" . $this->get('caption') . '</button>';
 		return $ret;
 	}
 	
@@ -103,7 +104,7 @@ class RMFormButtonGroup extends RMFormElement
 	 */
 	public function addButton($name, $value, $type = 'button', $extra='', $ok=false){
 		$index = count($this->buttons);
-		$this->buttons[$index] = new RMFormButton($name,$value,$type);
+		$this->buttons[$index] = new RMFormButton($value,'', $type);
 		if (trim($extra)!='') $this->buttons[$index]->setExtra($extra);
 		/**
 		 * Si este boton se marca como "principal" ($ok=true)

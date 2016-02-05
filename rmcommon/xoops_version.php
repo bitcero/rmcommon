@@ -33,7 +33,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>17,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>19,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -604,9 +604,9 @@ $modversion['blocks'][] = array(
 
 $amod = xoops_getActiveModules();
 if(in_array("rmcommon",$amod)){
-    $plugins = RMFunctions::installed_plugins();
+    $plugins = Common\Core\Helpers\Plugins::allInstalled();
     foreach($plugins as $plugin){
-        $p = RMFunctions::load_plugin($plugin);
+        $p = Common\Core\Helpers\Plugins::getInstance()->load($plugin);
         if(!method_exists($p, 'blocks')) continue;
         foreach($p->blocks() as $block){
             $block['type'] = 'plugin';

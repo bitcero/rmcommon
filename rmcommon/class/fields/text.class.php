@@ -48,7 +48,7 @@ class RMFormText extends RMFormElement
      * @param string $value Valor por defecto
      * @param bol $password True muestra un campo password
      */
-    function __construct($caption, $name = null, $size = 10, $maxlength = 64, $value = '', $password = false, $enabled = true)
+    function __construct($caption, $name = null, $size = 10, $maxlength = 0, $value = '', $password = false, $enabled = true)
     {
 
         if (is_array($caption)) {
@@ -58,7 +58,9 @@ class RMFormText extends RMFormElement
             $this->setWithDefaults('caption', $caption, '');
             $this->setWithDefaults('name', $name, 'name_error');
             $this->setWithDefaults('size', $size, 10);
-            $this->setWithDefaults('maxlength', $maxlength, 64);
+            if($maxlength > 0){
+                $this->setWithDefaults('maxlength', $maxlength, 64);
+            }
             $this->set('value', $value);
             if ($password) {
                 $this->set('type', 'password');
@@ -210,16 +212,21 @@ class RMFormTextArea extends RMFormElement
      * @param string $width Ancho del campo formateado para estilo CSS
      * @param string $height Alto del campo formateado para estilo CSS
      */
-    public function __construct($caption, $name, $rows = 4, $cols = 45, $value = '', $width = '', $height = '')
+    public function __construct($caption, $name = '', $rows = 4, $cols = 45, $value = '', $width = '', $height = '')
     {
-        $this->_rows = $rows;
-        $this->_cols = $cols;
-        $this->_value = $value;
-        $this->setCaption($caption);
-        $this->setName($name);
-        $this->width = $width;
-        $this->height = $height;
-        $this->addClass('form-control');
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('rows', $rows, 4);
+            $this->setWithDefaults('cols', $cols, 45);
+            $this->set('value', $value);
+        }
+
+        $this->setIfNotSet('rows', 4);
+        $this->setIfNotSet('value', '');
     }
 
     /**
@@ -282,20 +289,9 @@ class RMFormTextArea extends RMFormElement
      */
     function render()
     {
-        $ret = "<textarea name='" . $this->getName() . "' id='" . $this->id() . "' cols='" . $this->_cols . "' rows='" . $this->_rows . "' ";
-        if ($this->getClass() != '') {
-            $ret .= "class='" . $this->getClass() . "' ";
-        }
-        if ($this->width != '' || $this->height != '') {
-            $ret .= "style='" . ($this->width != '' ? "width: $this->width; " : '') . ($this->height != '' ? "height: $this->height; " : '') . "'";
-        }
-        $ret .= $this->getExtra();
-        foreach ($this->attrs as $name => $value) {
+        $attributes = $this->renderAttributeString();
 
-            $ret .= $name . '="' . $value . '" ';
-
-        }
-        $ret .= ">" . (isset($_REQUEST[$this->getName()]) ? $_REQUEST[$this->getName()] : $this->_value) . "</textarea>";
+        $ret = "<textarea $attributes>" . (isset($_REQUEST[$this->get('name')]) ? $_REQUEST[$this->get('name')] : $this->get('value')) . "</textarea>";
         return $ret;
     }
 }
