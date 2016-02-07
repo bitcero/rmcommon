@@ -68,6 +68,7 @@ class RMFormModules extends RMFormElement
         $this->suppressList[] = 'insert';
         $this->suppressList[] = 'dirnames';
         $this->suppressList[] = 'subpages';
+        $this->suppressList[] = 'selectedSubs';
 
         !defined('RM_FRAME_APPS_CREATED') ? define('RM_FRAME_APPS_CREATED', 1) : '';
     }
@@ -152,7 +153,7 @@ class RMFormModules extends RMFormElement
      */
     public function subpages($subs)
     {
-        $this->selectedSubPages = $subs;
+        $this->set('selectedSubs', $subs);
     }
 
     function render()
@@ -182,7 +183,7 @@ class RMFormModules extends RMFormElement
                 $this->set('name', $this->get('name') . '[]');
             }
 
-            $rtn = '<div class="modules-field" id="modules-field-' . $this->getName() . '">
+            $rtn = '<div class="modules-field" id="modules-field-' . $this->get('id') . '">
 		            <div>
 		                <h4>' . __('Available Modules', 'rmcommon') . '</h4>
 		            <ul>';
@@ -195,7 +196,7 @@ class RMFormModules extends RMFormElement
                 $rtn .= "<input $attributes value='$k'" . ($k == 0 ? "
 			    data-checkbox='module-item'" : " data-oncheck='module-item'") . "
 			    id='" . $this->get('id') . "-$k'" . (is_array($selected) ? (in_array($k, $selected) ? " checked" : '') : '') . ($k != -1 ? " data-checkbox='module-item-" . $k . "'" : '') . "> ";
-                    if ($this->subpages)
+                    if ($this->has('subpages'))
                         $rtn .= '<a href="#">' . $v . '</a>';
                     else
                         $rtn .= $v;
@@ -203,7 +204,7 @@ class RMFormModules extends RMFormElement
                 /**
                  * Mostramos las subpáginas
                  */
-                if ($this->has('subpages') && $k > 0) {
+                if ($this->has('subpages') && $k != '') {
                     if ($app->dirname() == 'system') {
                         $subpages = array(
                             'home-page' => __('Home Page', 'rmcommon'),
@@ -218,7 +219,7 @@ class RMFormModules extends RMFormElement
                         $subpages = $app->getInfo('subpages');
                     }
                     if (!empty($subpages)) {
-                        $selected = $this->selectedSubPages;
+                        $selected = $this->has('selectedSubs') ? $this->get('selectedSubs') : [];
                         $cr = 0;
 
                         $rtns = "<ul class=\"subpages-container subpages-" . $k . "\" data-module=\"" . $k . "\">";
@@ -246,7 +247,7 @@ class RMFormModules extends RMFormElement
             $rtn .= "</ul>
 		            </div>";
 
-            if ($this->subpages) {
+            if ($this->has('subpages')) {
 
                 $rtn .= '<div><h4>' . __('Inner Pages', 'rmcommon') . '</h4>';
 

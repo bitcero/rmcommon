@@ -144,8 +144,17 @@ function configure_block(){
 
     $positions = RMBlocksFunctions::block_positions( 1 );
     $form = new RMForm('','','');
-    $canvas = new RMFormModules('', 'bk_mod', 1, 1, $block->sections(), 3, null, false, 1);
-    $canvas->subpages( $block->subpages() );
+    $canvas = new RMFormModules([
+        'caption' => '',
+        'name' => 'bk_mod',
+        'id' => 'bk_mod',
+        'type' => 'checkbox',
+        'multiple' => null,
+        'selected' => $block->sections(),
+        'subpages' => null,
+        'dirname' => false,
+        'selectedSubs' => $block->subpages()
+    ]);
 
     // Groups
     $groups = new RMFormGroups('', 'bk_groups', true, 1, 3, $block->readGroups());
