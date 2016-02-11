@@ -18,23 +18,6 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     public function eventCoreHeaderEnd()
     {
-        /**
-         * Use internal blocks manager if enabled
-         */
-        $config = RMSettings::cu_settings();
-        if ($config->blocks_enable) {
-            global $xoopsTpl;
-            $bks = RMBlocksFunctions::construct_blocks();
-            $bks = RMEvents::get()->trigger('rmcommon.retrieve.xoops.blocks', $bks);
-            $b =& $xoopsTpl->get_template_vars('xoBlocks');
-            if (is_array($bks)) {
-                $blocks = array_merge($b, $bks);
-            } else {
-                $blocks = $b;
-            }
-            $xoopsTpl->assign_by_ref('xoBlocks', $blocks);
-            unset($b, $bks);
-        }
 
         RMEvents::get()->trigger('rmcommon.core.header.end');
 
@@ -126,12 +109,37 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     public function eventCoreClassTheme_blocksRetrieveBlocks($params)
     {
+        global $xoopsTpl;
+
+        $xoopsTpl->plugins_dir = RMEvents::get()->trigger('rmcommon.smarty.plugins', $xoopsTpl->plugins_dir);
+
         // xos_logos_PageBuilder
         $xpb = $params[0];
         // Template
         $tpl = $params[1];
         // Blocks
-        $blocks =& $params[2];
+        //$blocks =& $params[2];
+
+        /**
+         * Use internal blocks manager if enabled
+         */
+        $config = RMSettings::cu_settings();
+        if ($config->blocks_enable) {
+            global $xoopsTpl;
+            $blocks = RMBlocksFunctions::construct_blocks();
+            $blocks = RMEvents::get()->trigger('rmcommon.retrieve.xoops.blocks', $blocks);
+            /*$b =& $xoopsTpl->get_template_vars('xoBlocks');
+            if (is_array($bks)) {
+                $blocks = array_merge($b, $bks);
+            } else {
+                $blocks = $b;
+            }*/
+            //$xoopsTpl->assign_by_ref('xoBlocks', $blocks);
+
+            $xpb->blocks = $blocks;
+
+            unset($b, $bks);
+        }
 
         $blocks = RMEvents::get()->trigger('rmcommon.retrieve.xoops.blocks', $blocks, $xpb, $tpl);
 

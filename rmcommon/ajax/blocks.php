@@ -153,9 +153,9 @@ function configure_block(){
         'selected' => $block->sections(),
         'subpages' => null,
         'dirname' => false,
-        'selectedSubs' => $block->subpages()
+        'selectedSubs' => $block->subpages(),
+        'dirnames' => false
     ]);
-
     // Groups
     $groups = new RMFormGroups('', 'bk_groups', true, 1, 3, $block->readGroups());
 

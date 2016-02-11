@@ -390,6 +390,7 @@ class RMInternalBlock extends RMObject
                 }
 
             }
+
             if (!$this->db->queryF($sql . $sql1)) $this->addError($this->db->error());
         }
         // Guardamos los permisos

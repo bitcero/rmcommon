@@ -34,7 +34,7 @@ $form = new RMActiveForm(array(
                 <li><a href="#read" data-toggle="tab"><?php _e('Specific Permissions','rmcommon'); ?></a></li>
             </ul>
 
-            <div class="tab-content">
+            <div class="tab-content with-border">
 
                 <div class="tab-pane active" id="admin">
 

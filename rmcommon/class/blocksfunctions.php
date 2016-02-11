@@ -151,14 +151,14 @@ class RMBlocksFunctions
             }
             $mid = intval($mid);
             if (!empty($mid)) {
-                $sql .= ' AND m.mid IN (0,' . $mid;
+                $sql .= ' AND m.mid IN (-1,' . $mid;
                 if ($toponlyblock) {
                     $sql .= ',1';
                 }
                 $sql .= ')';
             } else {
                 /*   if ($toponlyblock) {*/
-                $sql .= ' AND m.mid IN (0,1)';
+                $sql .= ' AND m.mid IN (-1,1)';
                 /*} else {
                     $sql .= ' AND m.app_id=0';
                 }*/
@@ -167,10 +167,11 @@ class RMBlocksFunctions
             $sql .= ' AND b.bid IN (' . implode(',', $blockids) . ')';
 
             if (is_array($canvas))
-                $sql .= ' AND canvas IN (' . implode(',', $canvas) . ')';
+                $sql .= ' AND b.canvas IN (' . implode(',', $canvas) . ')';
 
             $sql .= ' ORDER BY ' . $orderby;
             $result = $db->query($sql);
+            
             while ($myrow = $db->fetchArray($result)) {
                 $block = new RMInternalBlock();
                 $block->assignVars($myrow);

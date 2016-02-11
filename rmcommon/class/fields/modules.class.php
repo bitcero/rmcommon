@@ -22,6 +22,10 @@ class RMFormModules extends RMFormElement
 
     /**
      * Constructor
+     *
+     * If you wish to exclude system from modules list then you need to pass the
+     * parameter 'system' as null or false to avoid it.
+     *
      * @param string $caption
      * @param string $name Nombre del campo
      * @param int $multi Selecciona multiple activada o desactivada
@@ -33,7 +37,7 @@ class RMFormModules extends RMFormElement
      * @param bool $dirnames Devolver nombres de directorios (true) o ids (false)
      * @param int Mostrar Subpáginas
      */
-    function __construct($caption, $name, $multi = 0, $type = 0, $selected = null, $cols = 2, $insert = null, $dirnames = true, $subpages = 0)
+    function __construct($caption, $name = '', $multi = 0, $type = 0, $selected = null, $cols = 2, $insert = null, $dirnames = true, $subpages = 0)
     {
 
         if (is_array($caption)) {
@@ -56,7 +60,7 @@ class RMFormModules extends RMFormElement
 
             $this->setWithDefaults('dirnames', $dirnames, true);
 
-            if ($subpages){
+            if ($subpages) {
                 $this->set('subpages', null);
             }
         }
@@ -69,6 +73,9 @@ class RMFormModules extends RMFormElement
         $this->suppressList[] = 'dirnames';
         $this->suppressList[] = 'subpages';
         $this->suppressList[] = 'selectedSubs';
+        $this->suppressList[] = 'selected';
+        $this->suppressList[] = 'name';
+        $this->suppressList[] = 'system';
 
         !defined('RM_FRAME_APPS_CREATED') ? define('RM_FRAME_APPS_CREATED', 1) : '';
     }
@@ -161,11 +168,22 @@ class RMFormModules extends RMFormElement
         $module_handler =& xoops_gethandler('module');
         $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
         $criteria->add(new Criteria('isactive', 1));
-        if ($this->subpages) $criteria->add(new Criteria('dirname', 'system'), 'OR');
+        if ($this->get('subpages')) $criteria->add(new Criteria('dirname', 'system'), 'OR');
         $modules = array();
         $modules[-1] = __('All', 'rmcommon');
-        if (is_array($this->inserted)) $modules = $this->inserted;
-        foreach ($module_handler->getList($criteria, $this->dirnames) as $k => $v) {
+
+        if (is_array($this->get('insert'))) {
+            $modules = $this->get('insert');
+        }
+
+        $modulesList = $module_handler->getList($criteria, $this->get('dirnames'));
+
+        // Add system module if not excluded
+        if(!$this->has('system') || !$this->get('system') == false){
+            $modules[1] = __('System', 'rmcommon');
+        }
+
+        foreach ($modulesList as $k => $v) {
             $modules[$k] = $v;
         }
 
@@ -179,8 +197,8 @@ class RMFormModules extends RMFormElement
             $pagesOptions = array();
             $attributes = $this->renderAttributeString();
 
-            if($type == 'checkbox'){
-                $this->set('name', $this->get('name') . '[]');
+            if ($type == 'checkbox') {
+                $name = $this->get('name') . '[%s]';
             }
 
             $rtn = '<div class="modules-field" id="modules-field-' . $this->get('id') . '">
@@ -193,18 +211,18 @@ class RMFormModules extends RMFormElement
                 $app = RMModules::load_module($k);
 
                 $rtn .= "<li>";
-                $rtn .= "<input $attributes value='$k'" . ($k == 0 ? "
-			    data-checkbox='module-item'" : " data-oncheck='module-item'") . "
-			    id='" . $this->get('id') . "-$k'" . (is_array($selected) ? (in_array($k, $selected) ? " checked" : '') : '') . ($k != -1 ? " data-checkbox='module-item-" . $k . "'" : '') . "> ";
-                    if ($this->has('subpages'))
-                        $rtn .= '<a href="#">' . $v . '</a>';
-                    else
-                        $rtn .= $v;
+                $rtn .= "<input $attributes name=\"".sprintf($name, $k)."\" value='$k'" . ($k == 0 ? "
+			    data-checkbox='module-item-$k'" : " data-oncheck='module-item'") . "
+			    id='" . $this->get('id') . "-$k'" . (is_array($selected) && in_array($k, $selected) ? " checked" : '') . ($k != -1 ? " data-checkbox='module-item-" . $k . "'" : '') . "> ";
+                if ($this->has('subpages') && $k>-1)
+                    $rtn .= '<a href="#">' . $v . '</a>';
+                else
+                    $rtn .= $v;
 
                 /**
                  * Mostramos las subpáginas
                  */
-                if ($this->has('subpages') && $k != '') {
+                if ($this->has('subpages') && ($k != '' && $k != -1)) {
                     if ($app->dirname() == 'system') {
                         $subpages = array(
                             'home-page' => __('Home Page', 'rmcommon'),
@@ -219,7 +237,7 @@ class RMFormModules extends RMFormElement
                         $subpages = $app->getInfo('subpages');
                     }
                     if (!empty($subpages)) {
-                        $selected = $this->has('selectedSubs') ? $this->get('selectedSubs') : [];
+                        $selectedSubs = $this->has('selectedSubs') ? $this->get('selectedSubs') : [];
                         $cr = 0;
 
                         $rtns = "<ul class=\"subpages-container subpages-" . $k . "\" data-module=\"" . $k . "\">";
@@ -228,7 +246,7 @@ class RMFormModules extends RMFormElement
                         if (!is_array($subpages)) $subpages = array();
 
                         foreach ($subpages as $page => $caption) {
-                            $rtns .= "<li><input type='checkbox' data-oncheck='module-item-" . $k . "' name='" . $name . "[subpages][$page]' id='subpages[$k][$page]' value='$page'" . (is_array($subpages) && @in_array($page, $selected[$k]) ? " checked='checked'" : '') . " /> $caption</li>";
+                            $rtns .= "<li class='checkbox'><label><input type='checkbox' data-oncheck='module-item-" . $k . "' name='" . sprintf($name, $k) . "[subpages][$page]' id='subpages-$k-$page' value='$page'" . (is_array($subpages) && @in_array($page, $selectedSubs[$k]) ? " checked='checked'" : '') . " /> $caption</label></li>";
                             $j++;
                             $cr++;
                         }
@@ -261,7 +279,7 @@ class RMFormModules extends RMFormElement
 
             $rtn .= "</div>";
         } else {
-            if($this->has('multiple')) {
+            if ($this->has('multiple')) {
                 $this->set('name', $this->get('name') . '[' . $k . ']');
             }
             $attributes = $this->renderAttributeString();
