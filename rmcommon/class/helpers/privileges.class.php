@@ -13,7 +13,7 @@ Smart-B ERP
 
 class RMPrivileges
 {
-    use RMModuleAjax, RMSingleton;
+    use RMModuleAjax;
 
     /**
      * Loads all user permissions and stores in a stdClass
@@ -179,6 +179,16 @@ class RMPrivileges
 
         }
 
+    }
+    
+    public static function getInstance(){
+        static $instance;
+
+        if(!isset($instance)){
+            $instance = new RMPrivileges();
+        }
+
+        return $instance;
     }
 
 }

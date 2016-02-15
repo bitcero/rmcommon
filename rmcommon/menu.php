@@ -113,6 +113,13 @@ $adminmenu[] = array(
 );
 
 $adminmenu[] = array(
+    'title' => __('Servicios','rmcommon'),
+    'link' => "services.php",
+    'icon' => "svg-rmcommon-services text-deep-purple",
+    'location' => "services"
+);
+
+$adminmenu[] = array(
     'title' => __('Updates','rmcommon'),
     'link' => "updates.php",
     'icon' => "svg-rmcommon-update text-success",

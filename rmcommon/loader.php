@@ -195,6 +195,10 @@ $GLOBALS['cuServices'] = $cuServices;
 $cuIcons = Common\Core\Helpers\Icons::getInstance();
 $GLOBALS['cuIcons'] = $cuIcons;
 
+// Common handler
+global $common;
+$common = Common\Core\Helpers\Common::getInstance();
+
 // Rewrite for JS
 RMSettings::write_rewrite_js();
 

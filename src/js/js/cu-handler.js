@@ -624,7 +624,7 @@ jQuery.fn.enable = function () {
 
 jQuery.fn.disable = function () {
     this.each(function () {
-        jQuery(this).attr("disabled", true);
+        jQuery(this).prop("disabled", true);
         jQuery(this).addClass("disabled");
     });
 }
