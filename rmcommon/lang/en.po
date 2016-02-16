@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Common Utilities\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-03 13:35-0600\n"
-"PO-Revision-Date: 2016-01-03 13:35-0600\n"
+"POT-Creation-Date: 2016-02-15 22:00-0600\n"
+"PO-Revision-Date: 2016-02-15 22:01-0600\n"
 "Last-Translator: Eduardo Cortés <me@eduardocortes.mx>\n"
 "Language-Team: Red México <i.bitcero@gmail.com>\n"
 "Language: en\n"
@@ -13,13 +13,13 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: plugins\n"
 "X-Poedit-SearchPathExcluded-1: themes/hydrogen\n"
 "X-Poedit-SearchPathExcluded-2: themes/twop6\n"
 
-#: ajax/blocks.php:34 images.php:651 images.php:800
+#: ajax/blocks.php:34 images.php:653 images.php:802
 msgid "Operation not allowed!"
 msgstr ""
 
@@ -56,110 +56,110 @@ msgstr ""
 msgid "Specified block does not exists!. Please try again"
 msgstr ""
 
-#: ajax/blocks.php:163
+#: ajax/blocks.php:172
 #, php-format
 msgid "Configuration form for block \"%s\" was loaded successfully!"
 msgstr ""
 
-#: ajax/blocks.php:177 ajax/blocks.php:224 settings.php:207 settings.php:210
+#: ajax/blocks.php:186 ajax/blocks.php:233 settings.php:212 settings.php:215
 msgid "Session token expired. Please try again."
 msgstr ""
 
-#: ajax/blocks.php:180
+#: ajax/blocks.php:189
 msgid "You must provide a block ID!"
 msgstr ""
 
-#: ajax/blocks.php:184 ajax/blocks.php:318 ajax/blocks.php:352
+#: ajax/blocks.php:193 ajax/blocks.php:327 ajax/blocks.php:361
 msgid "Specified block does not exists!"
 msgstr ""
 
-#: ajax/blocks.php:203
+#: ajax/blocks.php:212
 #, php-format
 msgid "Settings for the block \"%s\" could not be saved!"
 msgstr ""
 
-#: ajax/blocks.php:214
+#: ajax/blocks.php:223
 #, php-format
 msgid "Settings for block \"%s\" were saved successfully!"
 msgstr ""
 
-#: ajax/blocks.php:232
+#: ajax/blocks.php:241
 msgid "Specified position is not valid!"
 msgstr ""
 
-#: ajax/blocks.php:235
+#: ajax/blocks.php:244
 msgid "You must fill name and tag input fields!"
 msgstr ""
 
-#: ajax/blocks.php:239
+#: ajax/blocks.php:248
 msgid "Specified blocks position does not exists!"
 msgstr ""
 
-#: ajax/blocks.php:247
+#: ajax/blocks.php:256
 msgid "Already exists another blocks position with same name or tag!"
 msgstr ""
 
-#: ajax/blocks.php:254
+#: ajax/blocks.php:263
 #, php-format
 msgid "Position \"%s\" was saved successfylly!"
 msgstr ""
 
-#: ajax/blocks.php:256
+#: ajax/blocks.php:265
 #, php-format
 msgid "Position \"%s\" could not be saved!"
 msgstr ""
 
-#: ajax/blocks.php:270
+#: ajax/blocks.php:279
 msgid "Blocks order could not be saved!"
 msgstr ""
 
-#: ajax/blocks.php:270 ajax/blocks.php:311 ajax/blocks.php:343 groups.php:212
-#: plugins.php:517
+#: ajax/blocks.php:279 ajax/blocks.php:320 ajax/blocks.php:352 groups.php:214
+#: plugins.php:589
 msgid "Session token expired!"
 msgstr ""
 
-#: ajax/blocks.php:273
+#: ajax/blocks.php:282
 msgid "Position not specified!"
 msgstr ""
 
-#: ajax/blocks.php:292
+#: ajax/blocks.php:301
 #, php-format
 msgid "Blocks order for position \"%s\" saved successfully!"
 msgstr ""
 
-#: ajax/blocks.php:295
+#: ajax/blocks.php:304
 #, php-format
 msgid "Blocks order for position \"%s\" could not be saved!"
 msgstr ""
 
-#: ajax/blocks.php:311
+#: ajax/blocks.php:320
 msgid "Block visibility could not be saved!"
 msgstr ""
 
-#: ajax/blocks.php:314
+#: ajax/blocks.php:323
 msgid "Block identifier not specified!"
 msgstr ""
 
-#: ajax/blocks.php:323
+#: ajax/blocks.php:332
 #, php-format
 msgid "The visibility of the block %s was changed successfully!"
 msgstr ""
 
-#: ajax/blocks.php:326
+#: ajax/blocks.php:335
 #, php-format
 msgid "Visibility for block %s could not be changed!"
 msgstr ""
 
-#: ajax/blocks.php:348
+#: ajax/blocks.php:357
 msgid "No block has been specified!"
 msgstr ""
 
-#: ajax/blocks.php:356
+#: ajax/blocks.php:365
 #, php-format
 msgid "The block \"%s\" could not be deleted!"
 msgstr ""
 
-#: ajax/blocks.php:362
+#: ajax/blocks.php:371
 #, php-format
 msgid "The block \"%s\" was deleted successfully!"
 msgstr ""
@@ -172,15 +172,15 @@ msgstr ""
 msgid "Specified module is not installed!"
 msgstr ""
 
-#: ajax/users.php:94 class/fields/groups.class.php:157
-#: class/fields/groups.class.php:191 class/fields/modules.class.php:113
-#: class/functions.php:201 class/functions.php:202 class/functions.php:205
+#: ajax/users.php:94 class/fields/groups.class.php:176
+#: class/fields/groups.class.php:207 class/fields/modules.class.php:173
+#: class/functions.php:199 class/functions.php:200 class/functions.php:203
 #: templates/rmc-groups-form.php:112
 msgid "All"
 msgstr ""
 
-#: api/editors/markdown/markdown.php:165 class/fields/editor.class.php:150
-#: class/fields/editor.class.php:225
+#: api/editors/markdown/markdown.php:165 class/fields/editor.class.php:160
+#: class/fields/editor.class.php:239
 msgid "Toggle full screen [S]"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgstr ""
 msgid "Already exists another position with same name or same tag!"
 msgstr ""
 
-#: blocks.php:235 images.php:431 users.php:416
+#: blocks.php:235 images.php:433 users.php:416
 msgid "Database updated successfully!"
 msgstr ""
 
@@ -256,8 +256,7 @@ msgstr ""
 msgid "Errors ocurrs while trying to update data:"
 msgstr ""
 
-#: blocks/comments.php:82 class/fields/theme.class.php:76 comments.php:105
-#: comments.php:230 index.php:282
+#: blocks/comments.php:82 comments.php:105 comments.php:230 index.php:282
 msgid "Unknow"
 msgstr ""
 
@@ -270,13 +269,13 @@ msgid "Show module name:"
 msgstr ""
 
 #: blocks/comments.php:140 blocks/comments.php:151 blocks/comments.php:162
-#: blocks/comments.php:173 class/fields/checks.class.php:212
+#: blocks/comments.php:173 class/fields/checks.class.php:279
 #: templates/rmc-block-form.php:72
 msgid "Yes"
 msgstr ""
 
 #: blocks/comments.php:143 blocks/comments.php:154 blocks/comments.php:165
-#: blocks/comments.php:176 class/fields/checks.class.php:217
+#: blocks/comments.php:176 class/fields/checks.class.php:284
 #: templates/rmc-block-form.php:75
 msgid "No"
 msgstr ""
@@ -351,51 +350,55 @@ msgstr ""
 msgid "Choose Time"
 msgstr ""
 
-#: class/fields/formuser.class.php:86
+#: class/fields/formuser.class.php:96
 msgid "All Users"
 msgstr ""
 
-#: class/fields/formuser.class.php:115
+#: class/fields/formuser.class.php:127
 msgid "Users..."
 msgstr ""
 
-#: class/fields/formuser.class.php:121
+#: class/fields/formuser.class.php:133
 msgid "Select users"
 msgstr ""
 
-#: class/fields/modules.class.php:127 include/right_widgets.php:14
+#: class/fields/modules.class.php:183
+msgid "System"
+msgstr ""
+
+#: class/fields/modules.class.php:206 include/right_widgets.php:14
 msgid "Available Modules"
 msgstr ""
 
-#: class/fields/modules.class.php:155
+#: class/fields/modules.class.php:228
 msgid "Home Page"
 msgstr ""
 
-#: class/fields/modules.class.php:156
+#: class/fields/modules.class.php:229
 msgid "User page"
 msgstr ""
 
-#: class/fields/modules.class.php:157
+#: class/fields/modules.class.php:230
 msgid "User profile page"
 msgstr ""
 
-#: class/fields/modules.class.php:158
+#: class/fields/modules.class.php:231
 msgid "Users registration"
 msgstr ""
 
-#: class/fields/modules.class.php:159
+#: class/fields/modules.class.php:232
 msgid "Edit user"
 msgstr ""
 
-#: class/fields/modules.class.php:160
+#: class/fields/modules.class.php:233
 msgid "Read PM"
 msgstr ""
 
-#: class/fields/modules.class.php:161
+#: class/fields/modules.class.php:234
 msgid "Private messages"
 msgstr ""
 
-#: class/fields/modules.class.php:197
+#: class/fields/modules.class.php:270
 msgid "Inner Pages"
 msgstr ""
 
@@ -427,7 +430,7 @@ msgstr ""
 msgid "All Files"
 msgstr ""
 
-#: class/form.class.php:363
+#: class/form.class.php:365
 msgid "Fields marked with (*) are required."
 msgstr ""
 
@@ -454,33 +457,33 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
-#: class/functions.php:63 class/functions.php:179 index.php:111 index.php:177
+#: class/functions.php:63 class/functions.php:177 index.php:111 index.php:177
 #: menu.php:57 templates/rmc-groups.php:13 users.php:448
 msgid "Users"
 msgstr ""
 
-#: class/functions.php:71 class/functions.php:92 class/functions.php:166
+#: class/functions.php:71 class/functions.php:92 class/functions.php:164
 msgid "Add"
 msgstr ""
 
-#: class/functions.php:82 class/functions.php:178 groups.php:40 index.php:183
+#: class/functions.php:82 class/functions.php:176 groups.php:40 index.php:183
 #: menu.php:64 templates/rmc-images-categories.php:24
 #: templates/rmc-users.php:191
 msgid "Groups"
 msgstr ""
 
-#: class/functions.php:108 class/functions.php:342 templates/rmc-blocks.php:101
+#: class/functions.php:108 class/functions.php:340 templates/rmc-blocks.php:101
 #: templates/rmc-comments.php:93 templates/rmc-images-categories.php:41
 #: templates/rmc-images-images.php:65 templates/rmc-modules.php:78
 #: templates/rmc-users.php:219
 msgid "Edit"
 msgstr ""
 
-#: class/functions.php:120
+#: class/functions.php:118
 msgid "Edit Group"
 msgstr ""
 
-#: class/functions.php:125 templates/rmc-blocks.php:58
+#: class/functions.php:123 templates/rmc-blocks.php:58
 #: templates/rmc-blocks.php:100 templates/rmc-blocks.php:120
 #: templates/rmc-categories-form.php:96 templates/rmc-categories-form.php:131
 #: templates/rmc-comments.php:94 templates/rmc-images-categories.php:8
@@ -490,59 +493,59 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: class/functions.php:134
+#: class/functions.php:132
 msgid "Delete Groups"
 msgstr ""
 
-#: class/functions.php:142 images.php:262 menu.php:76
+#: class/functions.php:140 images.php:264 menu.php:76
 #: templates/rmc-images-categories.php:1
 msgid "Categories"
 msgstr ""
 
-#: class/functions.php:149
+#: class/functions.php:147
 msgid "New"
 msgstr ""
 
-#: class/functions.php:158 class/functions.php:180 events/rmcommon.php:122
+#: class/functions.php:156 class/functions.php:178 events/rmcommon.php:122
 #: events/rmcommon.php:123 index.php:189 menu.php:71 menu.php:88
 #: templates/rmc-images-categories.php:44
 msgid "Images"
 msgstr ""
 
-#: class/functions.php:175 menu.php:36 templates/rmc-breadcrumb.php:6
+#: class/functions.php:173 menu.php:36 templates/rmc-breadcrumb.php:6
 #: templates/rmc-dashboard.php:1
 msgid "Dashboard"
 msgstr ""
 
-#: class/functions.php:176 index.php:91 index.php:165 js/cu-js-language.php:66
-#: menu.php:43 themes/helium/tpls/sidebar.php:61
+#: class/functions.php:174 index.php:91 index.php:165 js/cu-js-language.php:66
+#: menu.php:43 themes/helium/tpls/sidebar.php:63
 msgid "Modules"
 msgstr ""
 
-#: class/functions.php:177 index.php:171 menu.php:50
+#: class/functions.php:175 index.php:171 menu.php:50
 #: templates/rmc-blocks.php:11
 msgid "Blocks"
 msgstr ""
 
-#: class/functions.php:181 index.php:132 index.php:195 menu.php:102
-#: xoops_version.php:588
+#: class/functions.php:179 index.php:132 index.php:195 menu.php:102
+#: xoops_version.php:589
 msgid "Comments"
 msgstr ""
 
-#: class/functions.php:182 index.php:201 menu.php:109
+#: class/functions.php:180 index.php:201 menu.php:109
 msgid "Plugins"
 msgstr ""
 
-#: class/functions.php:183 index.php:207 menu.php:116
+#: class/functions.php:181 index.php:207 menu.php:123
 msgid "Updates"
 msgstr ""
 
-#: class/functions.php:331 comments.php:114
+#: class/functions.php:329 comments.php:114
 #, php-format
 msgid "Posted on %s"
 msgstr ""
 
-#: class/functions.php:381 templates/rmc-blocks.php:26
+#: class/functions.php:379 templates/rmc-blocks.php:26
 #: templates/rmc-blocks.php:67 templates/rmc-blocks.php:76
 #: templates/rmc-form-users.php:22 templates/rmc-groups.php:11
 #: templates/rmc-images-categories.php:21 templates/rmc-modules.php:43
@@ -554,52 +557,52 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: class/functions.php:383 users.php:283
+#: class/functions.php:381 users.php:283
 msgid "Email address"
 msgstr ""
 
-#: class/functions.php:385
+#: class/functions.php:383
 msgid "Web site"
 msgstr ""
 
-#: class/functions.php:386
+#: class/functions.php:384
 msgid "Your comment"
 msgstr ""
 
-#: class/functions.php:387
+#: class/functions.php:385
 msgid "Submit Comment"
 msgstr ""
 
-#: class/functions.php:388
+#: class/functions.php:386
 msgid "Submit a comment"
 msgstr ""
 
-#: class/functions.php:408
+#: class/functions.php:406
 msgid "Please specify your name"
 msgstr ""
 
-#: class/functions.php:409
+#: class/functions.php:407
 msgid "Please specify a valid email"
 msgstr ""
 
-#: class/functions.php:410
+#: class/functions.php:408
 msgid "Please write a message"
 msgstr ""
 
-#: class/functions.php:411
+#: class/functions.php:409
 msgid "Please enter a valid URL"
 msgstr ""
 
-#: class/functions.php:577 class/functions.php:598 class/functions.php:611
-#: class/functions.php:643 class/functions.php:654 class/template.php:1332
-#: class/template.php:1353 class/template.php:1374 class/template.php:1395
-#: class/template.php:1417 class/utilities.php:245 class/utilities.php:260
+#: class/functions.php:559 class/functions.php:580 class/functions.php:593
+#: class/functions.php:625 class/functions.php:636 class/template.php:1412
+#: class/template.php:1433 class/template.php:1454 class/template.php:1475
+#: class/template.php:1497 class/utilities.php:245 class/utilities.php:260
 #: class/utilities.php:277
 #, php-format
 msgid "Method %s is deprecated. Use %s::%s instead."
 msgstr ""
 
-#: class/functions.php:668 class/functions.php:670 class/functions.php:672
+#: class/functions.php:650 class/functions.php:652 class/functions.php:654
 msgid "Not Found"
 msgstr ""
 
@@ -607,26 +610,26 @@ msgstr ""
 msgid "Illegal attempt to replace \"Common Utilities\" icons provider!"
 msgstr ""
 
-#: class/helpers/Services.php:76 class/helpers/Services.php:105
+#: class/helpers/Services.php:109 class/helpers/Services.php:201
 msgid "Service name could not be empty!"
 msgstr ""
 
-#: class/helpers/Services.php:80
+#: class/helpers/Services.php:113
 #, php-format
 msgid "There are not any service installed for %s!"
 msgstr ""
 
-#: class/helpers/Services.php:85
+#: class/helpers/Services.php:118
 #, php-format
 msgid "File for service %s does not exists!"
 msgstr ""
 
-#: class/helpers/Services.php:91
+#: class/helpers/Services.php:124
 #, php-format
 msgid "The class %s for service %s does not exists!"
 msgstr ""
 
-#: class/helpers/Services.php:144 class/helpers/Services.php:149
+#: class/helpers/Services.php:241 class/helpers/Services.php:247
 #, php-format
 msgid "There are not service using %s method"
 msgstr ""
@@ -713,43 +716,43 @@ msgstr ""
 msgid "You don't have required rights to do this action!"
 msgstr ""
 
-#: class/helpers/settings.class.php:312
+#: class/helpers/settings.class.php:347
 msgid "No cache"
 msgstr ""
 
-#: class/helpers/settings.class.php:313
+#: class/helpers/settings.class.php:348
 #, php-format
 msgid "%u seconds"
 msgstr ""
 
-#: class/helpers/settings.class.php:314 templates/rmc-block-form.php:52
+#: class/helpers/settings.class.php:349 templates/rmc-block-form.php:52
 msgid "1 minute"
 msgstr ""
 
-#: class/helpers/settings.class.php:315 class/helpers/settings.class.php:316
+#: class/helpers/settings.class.php:350 class/helpers/settings.class.php:351
 #, php-format
 msgid "%u minutes"
 msgstr ""
 
-#: class/helpers/settings.class.php:317
+#: class/helpers/settings.class.php:352
 msgid "One hour"
 msgstr ""
 
-#: class/helpers/settings.class.php:318
+#: class/helpers/settings.class.php:353
 #, php-format
 msgid "%u hours"
 msgstr ""
 
-#: class/helpers/settings.class.php:319
+#: class/helpers/settings.class.php:354
 msgid "One day"
 msgstr ""
 
-#: class/helpers/settings.class.php:320
+#: class/helpers/settings.class.php:355
 #, php-format
 msgid "%u days"
 msgstr ""
 
-#: class/helpers/settings.class.php:321
+#: class/helpers/settings.class.php:356
 msgid "One week"
 msgstr ""
 
@@ -774,13 +777,13 @@ msgid ""
 "There was a problem trying to show the configuration options for this block!"
 msgstr ""
 
-#: class/modules/controller.class.php:101
-#: class/modules/controller.class.php:119
-#: class/modules/controller.class.php:123
+#: class/modules/controller.class.php:107
+#: class/modules/controller.class.php:125
+#: class/modules/controller.class.php:129
 msgid "You must provide a valid request method name to be accepted!"
 msgstr ""
 
-#: class/modules/controller.class.php:109
+#: class/modules/controller.class.php:115
 msgid "Provided request method is not acceptable!"
 msgstr ""
 
@@ -795,7 +798,7 @@ msgstr ""
 msgid "Property %s.%s does not exists."
 msgstr ""
 
-#: class/modules/modulecontroller.class.php:269
+#: class/modules/modulecontroller.class.php:270
 msgid "This area requires user login!"
 msgstr ""
 
@@ -806,12 +809,12 @@ msgid ""
 "strong>."
 msgstr ""
 
-#: class/template.php:331 templates/rmc-modules.php:80
+#: class/template.php:332 templates/rmc-modules.php:80
 #: templates/rmc-modules.php:212 themes/helium/tpls/topbar.php:214
 msgid "Help"
 msgstr ""
 
-#: class/template.php:531
+#: class/template.php:532
 #, php-format
 msgid "Script %s will be replaced for new value in file %s on line %s"
 msgstr ""
@@ -1029,11 +1032,11 @@ msgstr ""
 msgid "Update Comment"
 msgstr ""
 
-#: comments.php:292 js/cu-js-language.php:46 plugins.php:475
+#: comments.php:292 js/cu-js-language.php:46 plugins.php:542
 #: post-comment.php:274 templates/rmc-block-form.php:131
 #: templates/rmc-categories-form.php:190 templates/rmc-editor-image.php:105
 #: templates/rmc-images-edit.php:52 templates/rmc-images-upload-images.php:13
-#: templates/rmc-module-preinstall.php:69 templates/rmc-settings-form.php:66
+#: templates/rmc-module-preinstall.php:69 templates/rmc-settings-form.php:76
 #: templates/rmc-updates.php:128 templates/rmc-updates.php:157
 #: templates/rmc-users.php:132 users.php:311 users.php:460
 msgid "Cancel"
@@ -1073,9 +1076,13 @@ msgstr ""
 msgid "Please try to add manually next lines:"
 msgstr ""
 
-#: events/rmcommon.php:120 images.php:197 images.php:261 images.php:312
-#: images.php:621 templates/rmc-images-images.php:1
+#: events/rmcommon.php:120 images.php:199 images.php:263 images.php:314
+#: images.php:623 templates/rmc-images-images.php:1
 msgid "Images Manager"
+msgstr ""
+
+#: events/rmcommon.php:144
+msgid "Service provider to use avatars from XOOPS"
 msgstr ""
 
 #: groups.php:39 templates/rmc-users.php:1 users.php:190 users.php:191
@@ -1091,70 +1098,82 @@ msgstr ""
 msgid "The specified group does not exists!"
 msgstr ""
 
-#: groups.php:97
+#: groups.php:98
 msgid "Create new group"
 msgstr ""
 
-#: groups.php:97
+#: groups.php:98
 #, php-format
 msgid "Edit group \"%s\""
 msgstr ""
 
-#: groups.php:118
+#: groups.php:120
 msgid "Session token expired"
 msgstr ""
 
-#: groups.php:130
+#: groups.php:132
 msgid "No name has been provided."
 msgstr ""
 
-#: groups.php:136
+#: groups.php:138
 msgid "Description has not been provided."
 msgstr ""
 
-#: groups.php:144
+#: groups.php:146
 msgid "Specified group does not exists. Please try again."
 msgstr ""
 
-#: groups.php:158
+#: groups.php:160
 msgid "Errors ocurred while trying to save group data."
 msgstr ""
 
-#: groups.php:166
+#: groups.php:168
 msgid "Administrative rights could not be saved."
 msgstr ""
 
-#: groups.php:176
+#: groups.php:178
 msgid "Access rights could not be saved."
 msgstr ""
 
-#: groups.php:186
+#: groups.php:188
 msgid "Specific permissions could not be saved."
 msgstr ""
 
-#: groups.php:192 groups.php:196
+#: groups.php:194 groups.php:198
 msgid "Data saved successfully."
 msgstr ""
 
-#: groups.php:219
+#: groups.php:221
 msgid "You must select at least one group. Please, try again."
 msgstr ""
 
-#: groups.php:238
+#: groups.php:240
 msgid ""
 "No valid groups has been selected. Note that system groups could not be "
 "deleted."
 msgstr ""
 
-#: groups.php:266
+#: groups.php:268
 msgid "Selected groups has been deleted."
 msgstr ""
 
-#: groups.php:272
+#: groups.php:274
 msgid "Errors ocurred while trying to delete selected groups."
 msgstr ""
 
-#: images.php:33 include/tiny-images.php:129
+#: help.php:15
+msgid "No valid help data!"
+msgstr ""
+
+#: help.php:26
+msgid "Not valid help component type!"
+msgstr ""
+
+#: help.php:52
+msgid "Not valid help document!"
+msgstr ""
+
+#: images.php:33 include/tiny-images.php:128
 msgid "There are not categories yet! Please create one in order to add images."
 msgstr ""
 
@@ -1172,169 +1191,169 @@ msgstr ""
 msgid "Category %s is closed. Please, select another category."
 msgstr ""
 
-#: images.php:152 include/tiny-images.php:55
+#: images.php:152 include/tiny-images.php:54
 msgid "All Images (*.jpg, *.png, *.gif)"
 msgstr ""
 
-#: images.php:154 include/tiny-images.php:57
+#: images.php:154 include/tiny-images.php:56
 msgid "Browse Images..."
 msgstr ""
 
-#: images.php:163 include/tiny-images.php:73
+#: images.php:163 include/tiny-images.php:72
 msgid "Uploaded successfully!"
 msgstr ""
 
-#: images.php:200 images.php:202 templates/rmc-images-upload-images.php:2
+#: images.php:202 images.php:204 templates/rmc-images-upload-images.php:2
 msgid "Upload Images"
 msgstr ""
 
-#: images.php:264
+#: images.php:266
 msgid "Images Manager: Categories"
 msgstr ""
 
-#: images.php:290
+#: images.php:292
 msgid "You must specify a category id to edit!"
 msgstr ""
 
-#: images.php:297
+#: images.php:299
 msgid "The specified category does not exist!"
 msgstr ""
 
-#: images.php:313 images.php:315
+#: images.php:315 images.php:317
 msgid "Edit Category"
 msgstr ""
 
-#: images.php:313
+#: images.php:315
 msgid "Add Category"
 msgstr ""
 
-#: images.php:315
+#: images.php:317
 #, php-format
 msgid "Images Manager: %s"
 msgstr ""
 
-#: images.php:315
+#: images.php:317
 msgid "Add category"
 msgstr ""
 
-#: images.php:351
+#: images.php:353
 msgid "Specify a valid category id"
 msgstr ""
 
-#: images.php:357
+#: images.php:359
 msgid "Specified category does not exists!"
 msgstr ""
 
-#: images.php:366
+#: images.php:368
 msgid "Please specify a category name"
 msgstr ""
 
-#: images.php:382
+#: images.php:384
 msgid "You must create one size for this category at least!"
 msgstr ""
 
-#: images.php:389
+#: images.php:391
 msgid "There is already a category with the same name!"
 msgstr ""
 
-#: images.php:401
+#: images.php:403
 msgid "Category updated successfully!"
 msgstr ""
 
-#: images.php:403
+#: images.php:405
 msgid "There were some erros while trying to save this category."
 msgstr ""
 
-#: images.php:419
+#: images.php:421
 msgid "Specify one category at least to change status!"
 msgstr ""
 
-#: images.php:434
+#: images.php:436
 msgid "There were some erros while updating database:"
 msgstr ""
 
-#: images.php:459 images.php:470 images.php:474 images.php:478
+#: images.php:461 images.php:472 images.php:476 images.php:480
 msgid "Unauthorized!"
 msgstr ""
 
-#: images.php:463
+#: images.php:465
 msgid "Invalid image!"
 msgstr ""
 
-#: images.php:483 images.php:579
+#: images.php:485 images.php:581
 msgid "Image not found!"
 msgstr ""
 
-#: images.php:489
+#: images.php:491
 msgid "Unauthorized"
 msgstr ""
 
-#: images.php:555
+#: images.php:557
 #, php-format
 msgid "%s done!"
 msgstr ""
 
-#: images.php:573
+#: images.php:575
 msgid "Invalid image ID"
 msgstr ""
 
-#: images.php:622 images.php:624 templates/rmc-images-edit.php:2
+#: images.php:624 images.php:626 templates/rmc-images-edit.php:2
 msgid "Edit Image"
 msgstr ""
 
-#: images.php:656
+#: images.php:658
 msgid "Image ID not provided!"
 msgstr ""
 
-#: images.php:661
+#: images.php:663
 msgid "You must  provide a title for this image"
 msgstr ""
 
-#: images.php:667 images.php:758
+#: images.php:669 images.php:760
 msgid "Image not exists!"
 msgstr ""
 
-#: images.php:673
+#: images.php:675
 msgid "Category not exist!"
 msgstr ""
 
-#: images.php:686
+#: images.php:688
 msgid "the image could not be updated!"
 msgstr ""
 
-#: images.php:692
+#: images.php:694
 msgid "Image updated succesfully!"
 msgstr ""
 
-#: images.php:734
+#: images.php:736
 msgid "Image updated successfully!"
 msgstr ""
 
-#: images.php:748
+#: images.php:750
 msgid "Please, speciy an image at least!"
 msgstr ""
 
-#: images.php:784
+#: images.php:786
 msgid "Errors ocurred during images deletion!"
 msgstr ""
 
-#: images.php:786
+#: images.php:788
 msgid "Images deleted successfully!"
 msgstr ""
 
-#: images.php:805
+#: images.php:807
 msgid "Category ID not provided"
 msgstr ""
 
-#: images.php:811
+#: images.php:813
 msgid "Category not found"
 msgstr ""
 
-#: images.php:844
+#: images.php:846
 msgid "Category deleted successfully!"
 msgstr ""
 
-#: images.php:846
+#: images.php:848
 msgid "Errors ocurred while deleting the category"
 msgstr ""
 
@@ -1393,92 +1412,92 @@ msgstr ""
 msgid "Grant access to system and modules configuration."
 msgstr ""
 
-#: include/right_widgets.php:50 include/right_widgets.php:177 modules.php:1360
-#: modules.php:1487 templates/rmc-modules.php:262 templates/rmc-plugins.php:118
+#: include/right_widgets.php:50 include/right_widgets.php:177 modules.php:1385
+#: modules.php:1512 templates/rmc-modules.php:262 templates/rmc-plugins.php:118
 msgid "Install"
 msgstr ""
 
-#: include/right_widgets.php:56 modules.php:1366
+#: include/right_widgets.php:56 modules.php:1391
 msgid "Info"
 msgstr ""
 
-#: include/right_widgets.php:75 modules.php:1385
+#: include/right_widgets.php:75 modules.php:1410
 #: templates/rmc-module-preinstall.php:30
 msgid "Version:"
 msgstr ""
 
-#: include/right_widgets.php:86 modules.php:1396
+#: include/right_widgets.php:86 modules.php:1421
 #: templates/rmc-module-preinstall.php:34
 msgid "Author:"
 msgstr ""
 
-#: include/right_widgets.php:94 modules.php:1404 templates/rmc-users.php:39
+#: include/right_widgets.php:94 modules.php:1429 templates/rmc-users.php:39
 msgid "Web site:"
 msgstr ""
 
-#: include/right_widgets.php:101 modules.php:1411
+#: include/right_widgets.php:101 modules.php:1436
 msgid "Updatable:"
 msgstr ""
 
-#: include/right_widgets.php:111 modules.php:1421
+#: include/right_widgets.php:111 modules.php:1446
 #: templates/rmc-module-preinstall.php:58 templates/rmc-modules.php:321
 msgid "License:"
 msgstr ""
 
-#: include/right_widgets.php:117 modules.php:1427
+#: include/right_widgets.php:117 modules.php:1452
 msgid "XOOPS Official:"
 msgstr ""
 
-#: include/right_widgets.php:127 modules.php:1437
+#: include/right_widgets.php:127 modules.php:1462
 msgid "C.U. Native:"
 msgstr ""
 
-#: include/right_widgets.php:137 modules.php:1447 templates/rmc-modules.php:305
+#: include/right_widgets.php:137 modules.php:1472 templates/rmc-modules.php:305
 msgid "Directory:"
 msgstr ""
 
-#: include/right_widgets.php:143 modules.php:1453
+#: include/right_widgets.php:143 modules.php:1478
 msgid "Released:"
 msgstr ""
 
-#: include/right_widgets.php:157 modules.php:1467
+#: include/right_widgets.php:157 modules.php:1492
 msgid "Get Help"
 msgstr ""
 
-#: include/right_widgets.php:178 modules.php:1488
+#: include/right_widgets.php:178 modules.php:1513
 #: templates/rmc-groups-form.php:136 templates/rmc-images-list-editor.php:119
 #: templates/rmc-modules.php:336 themes/helium/include/test-color.php:78
 #: themes/helium/include/test-color.php:94
 msgid "Close"
 msgstr ""
 
-#: include/tiny-images.php:121 include/tiny-images.php:215
+#: include/tiny-images.php:120 include/tiny-images.php:214
 msgid "Sorry, unauthorized operation!"
 msgstr ""
 
-#: include/tiny-images.php:134
+#: include/tiny-images.php:133
 msgid "You must select a category before"
 msgstr ""
 
-#: include/tiny-images.php:223
+#: include/tiny-images.php:222
 msgid "No image specified"
 msgstr ""
 
-#: include/tiny-images.php:231
+#: include/tiny-images.php:230
 msgid "Specified image does not exists"
 msgstr ""
 
-#: include/tiny-images.php:262
+#: include/tiny-images.php:261
 msgid "Original"
 msgstr ""
 
-#: include/tiny-images.php:266 plugins.php:364 plugins.php:370 plugins.php:376
-#: plugins.php:382 templates/rmc-editor-image.php:81
-#: templates/rmc-images-list-editor.php:85 xoops_version.php:487
+#: include/tiny-images.php:265 plugins.php:391 plugins.php:397 plugins.php:403
+#: plugins.php:409 templates/rmc-editor-image.php:81
+#: templates/rmc-images-list-editor.php:85 xoops_version.php:488
 msgid "None"
 msgstr ""
 
-#: include/tiny-images.php:267
+#: include/tiny-images.php:266
 msgid "File URL"
 msgstr ""
 
@@ -1541,7 +1560,7 @@ msgstr ""
 msgid "Current Version"
 msgstr ""
 
-#: index.php:214 settings.php:105 settings.php:137
+#: index.php:214 settings.php:105 settings.php:142
 msgid "Preferences"
 msgstr ""
 
@@ -1571,7 +1590,7 @@ msgstr ""
 msgid "Do you really want to delete this block?"
 msgstr ""
 
-#: js/cu-js-language.php:41 templates/rmc-blocks.php:193
+#: js/cu-js-language.php:41 templates/rmc-blocks.php:209
 msgid "Delete Block"
 msgstr ""
 
@@ -1583,7 +1602,7 @@ msgstr ""
 msgid "Show Block"
 msgstr ""
 
-#: js/cu-js-language.php:44 templates/rmc-blocks.php:199
+#: js/cu-js-language.php:44 templates/rmc-blocks.php:215
 msgid "Block Settings"
 msgstr ""
 
@@ -1641,7 +1660,7 @@ msgstr ""
 msgid "Search Results (%u)"
 msgstr ""
 
-#: loader.php:322
+#: loader.php:155
 msgid "Sorry, Red Mexico Common Utilities has not been installed yet!"
 msgstr ""
 
@@ -1653,372 +1672,376 @@ msgstr ""
 msgid "Add images"
 msgstr ""
 
-#: menu.php:123
+#: menu.php:116
+msgid "Servicios"
+msgstr ""
+
+#: menu.php:130
 msgid "About"
 msgstr ""
 
-#: modules.php:616 modules.php:619 modules.php:661 modules.php:782
-#: modules.php:1236 templates/rmc-modules.php:1
+#: modules.php:641 modules.php:644 modules.php:686 modules.php:807
+#: modules.php:1261 templates/rmc-modules.php:1
 msgid "Modules Management"
 msgstr ""
 
-#: modules.php:638
+#: modules.php:663
 msgid "Specified module is not valid!"
 msgstr ""
 
-#: modules.php:645 modules.php:687
+#: modules.php:670 modules.php:712
 #, php-format
 msgid "%s is already installed!"
 msgstr ""
 
-#: modules.php:651
+#: modules.php:676
 msgid "Sepecified module is not a valid Xoops Module!"
 msgstr ""
 
-#: modules.php:662 modules.php:664 templates/rmc-module-preinstall.php:1
+#: modules.php:687 modules.php:689 templates/rmc-module-preinstall.php:1
 #, php-format
 msgid "Install %s"
 msgstr ""
 
-#: modules.php:680 modules.php:737 modules.php:1194 modules.php:1255
+#: modules.php:705 modules.php:762 modules.php:1219 modules.php:1280
 msgid "Sorry, this operation could not be completed!"
 msgstr ""
 
-#: modules.php:722
+#: modules.php:747
 #, php-format
 msgid "Installation log for %s"
 msgstr ""
 
-#: modules.php:744 modules.php:1202 modules.php:1262
+#: modules.php:769 modules.php:1227 modules.php:1287
 #, php-format
 msgid "Module %s is not installed yet!"
 msgstr ""
 
-#: modules.php:783 modules.php:785
+#: modules.php:808 modules.php:810
 #, php-format
 msgid "%s install log"
 msgstr ""
 
-#: modules.php:791
+#: modules.php:816
 #, php-format
 msgid "Uninstall log for %s"
 msgstr ""
 
-#: modules.php:819 updates.php:507
+#: modules.php:844 updates.php:507
 #, php-format
 msgid "Could not update %s"
 msgstr ""
 
-#: modules.php:823 updates.php:511
+#: modules.php:848 updates.php:511
 #, php-format
 msgid "Updating module %s"
 msgstr ""
 
-#: modules.php:838 updates.php:526
+#: modules.php:863 updates.php:526
 msgid "Updating templates..."
 msgstr ""
 
-#: modules.php:858 updates.php:546
+#: modules.php:883 updates.php:546
 #, php-format
 msgid "Template %s could not be inserted!"
 msgstr ""
 
-#: modules.php:861 updates.php:549
+#: modules.php:886 updates.php:549
 #, php-format
 msgid "Template %s inserted to the database."
 msgstr ""
 
-#: modules.php:864 modules.php:933 updates.php:552 updates.php:621
+#: modules.php:889 modules.php:958 updates.php:552 updates.php:621
 #, php-format
 msgid "ERROR: Could not recompile template %s"
 msgstr ""
 
-#: modules.php:866 modules.php:935 modules.php:994 updates.php:554
+#: modules.php:891 modules.php:960 modules.php:1019 updates.php:554
 #: updates.php:623 updates.php:682
 #, php-format
 msgid "Template %s recompiled"
 msgstr ""
 
-#: modules.php:872 updates.php:560
+#: modules.php:897 updates.php:560
 #, php-format
 msgid "ERROR: Could not delete old template %s. Aborting update of this file."
 msgstr ""
 
-#: modules.php:877 updates.php:565
+#: modules.php:902 updates.php:565
 msgid "Rebuilding blocks..."
 msgstr ""
 
-#: modules.php:908 updates.php:596
+#: modules.php:933 updates.php:596
 #, php-format
 msgid "ERROR: Could not update %s"
 msgstr ""
 
-#: modules.php:910 updates.php:598
+#: modules.php:935 updates.php:598
 #, php-format
 msgid "Block %s updated."
 msgstr ""
 
-#: modules.php:910 modules.php:968 modules.php:970 modules.php:999
-#: modules.php:1011 updates.php:598 updates.php:656 updates.php:658
+#: modules.php:935 modules.php:993 modules.php:995 modules.php:1024
+#: modules.php:1036 updates.php:598 updates.php:656 updates.php:658
 #: updates.php:687 updates.php:699
 #, php-format
 msgid "Block ID: %s"
 msgstr ""
 
-#: modules.php:928 updates.php:616
+#: modules.php:953 updates.php:616
 #, php-format
 msgid "ERROR: Could not update %s template."
 msgstr ""
 
-#: modules.php:930 updates.php:618
+#: modules.php:955 updates.php:618
 #, php-format
 msgid "Template %s updated."
 msgstr ""
 
-#: modules.php:950 updates.php:638
+#: modules.php:975 updates.php:638
 #, php-format
 msgid "ERROR: Could not create %s"
 msgstr ""
 
-#: modules.php:968 updates.php:656
+#: modules.php:993 updates.php:656
 msgid "ERROR: Could not add block access right"
 msgstr ""
 
-#: modules.php:968 modules.php:970 updates.php:656 updates.php:658
+#: modules.php:993 modules.php:995 updates.php:656 updates.php:658
 #, php-format
 msgid "Group ID: %s"
 msgstr ""
 
-#: modules.php:970 updates.php:658
+#: modules.php:995 updates.php:658
 msgid "Added block access right"
 msgstr ""
 
-#: modules.php:986 updates.php:674
+#: modules.php:1011 updates.php:674
 #, php-format
 msgid "ERROR: Could not insert template %s to the database."
 msgstr ""
 
-#: modules.php:989 updates.php:677
+#: modules.php:1014 updates.php:677
 #, php-format
 msgid "Template %s added to the database"
 msgstr ""
 
-#: modules.php:992 updates.php:680
+#: modules.php:1017 updates.php:680
 #, php-format
 msgid "ERROR: Template %s recompile failed"
 msgstr ""
 
-#: modules.php:999 updates.php:687
+#: modules.php:1024 updates.php:687
 #, php-format
 msgid "Block %s created"
 msgstr ""
 
-#: modules.php:1011 updates.php:699
+#: modules.php:1036 updates.php:699
 #, php-format
 msgid "ERROR: Could not delete block %s"
 msgstr ""
 
-#: modules.php:1020 updates.php:708
+#: modules.php:1045 updates.php:708
 msgid "ERROR: Could not remove deprecated block template."
 msgstr ""
 
-#: modules.php:1022 updates.php:710
+#: modules.php:1047 updates.php:710
 #, php-format
 msgid "Block template %s deprecated"
 msgstr ""
 
-#: modules.php:1041 updates.php:729
+#: modules.php:1066 updates.php:729
 msgid "Deleting module config options..."
 msgstr ""
 
-#: modules.php:1044 updates.php:732
+#: modules.php:1069 updates.php:732
 msgid "ERROR: Could not delete config data from the database"
 msgstr ""
 
-#: modules.php:1044 modules.php:1051 updates.php:732 updates.php:739
+#: modules.php:1069 modules.php:1076 updates.php:732 updates.php:739
 #, php-format
 msgid "Config ID: %s"
 msgstr ""
 
-#: modules.php:1051 updates.php:739
+#: modules.php:1076 updates.php:739
 msgid "Config data deleted from the database."
 msgstr ""
 
-#: modules.php:1141 updates.php:829
+#: modules.php:1166 updates.php:829
 msgid "Config option added"
 msgstr ""
 
-#: modules.php:1141 templates/rmc-module-preinstall.php:18 updates.php:829
+#: modules.php:1166 templates/rmc-module-preinstall.php:18 updates.php:829
 msgid "Name:"
 msgstr ""
 
-#: modules.php:1141 updates.php:829
+#: modules.php:1166 updates.php:829
 msgid "Value:"
 msgstr ""
 
-#: modules.php:1148 updates.php:836
+#: modules.php:1173 updates.php:836
 #, php-format
 msgid "Config %s added to the database"
 msgstr ""
 
-#: modules.php:1150 updates.php:838
+#: modules.php:1175 updates.php:838
 #, php-format
 msgid "ERROR: Could not insert config %s to the database."
 msgstr ""
 
-#: modules.php:1165 updates.php:853
+#: modules.php:1190 updates.php:853
 #, php-format
 msgid "Failed to execute %s"
 msgstr ""
 
-#: modules.php:1167 updates.php:855
+#: modules.php:1192 updates.php:855
 #, php-format
 msgid "%s executed successfully."
 msgstr ""
 
-#: modules.php:1175 updates.php:863
+#: modules.php:1200 updates.php:863
 #, php-format
 msgid "Module %s updated successfully!"
 msgstr ""
 
-#: modules.php:1234
+#: modules.php:1259
 #, php-format
 msgid "Update log for %s"
 msgstr ""
 
-#: modules.php:1271
+#: modules.php:1296
 #, php-format
 msgid "Module %s could not be disabled!"
 msgstr ""
 
-#: modules.php:1277
+#: modules.php:1302
 #, php-format
 msgid "Module %s successfully disabled!"
 msgstr ""
 
-#: modules.php:1288
+#: modules.php:1313
 msgid "Sorry, you don't have access to this page"
 msgstr ""
 
-#: modules.php:1289
+#: modules.php:1314
 msgid "Click here to refresh"
 msgstr ""
 
-#: modules.php:1514
+#: modules.php:1539
 msgid "You can not rename modules. Session token not valid!"
 msgstr ""
 
-#: modules.php:1528
+#: modules.php:1553
 msgid "Data provided is not valid"
 msgstr ""
 
-#: modules.php:1541
+#: modules.php:1566
 msgid "Module name could not be changed!"
 msgstr ""
 
-#: modules.php:1551
+#: modules.php:1576
 msgid "Module name changed successfully!"
 msgstr ""
 
-#: plugins.php:77 plugins.php:79 plugins.php:484 templates/rmc-plugins.php:1
+#: plugins.php:99 plugins.php:101 plugins.php:555 templates/rmc-plugins.php:1
 msgid "Plugins Manager"
 msgstr ""
 
-#: plugins.php:97 plugins.php:133 plugins.php:164 plugins.php:195
-#: plugins.php:229 plugins.php:500
+#: plugins.php:120 plugins.php:157 plugins.php:189 plugins.php:221
+#: plugins.php:256 plugins.php:572
 msgid "You must specify a existing plugin"
 msgstr ""
 
-#: plugins.php:104
+#: plugins.php:127
 msgid "Specified plugin is installed already!"
 msgstr ""
 
-#: plugins.php:109
+#: plugins.php:132
 #, php-format
 msgid "%s is not a valid plugin!"
 msgstr ""
 
-#: plugins.php:114
+#: plugins.php:137
 msgid "Plugin could not be installed, please try again."
 msgstr ""
 
-#: plugins.php:119
+#: plugins.php:142
 msgid ""
 "The plugin has been inserted on database, but erros ocurred on this process."
 msgstr ""
 
-#: plugins.php:125
+#: plugins.php:148
 msgid "Plugin installed succesfully!"
 msgstr ""
 
-#: plugins.php:140 plugins.php:171 plugins.php:202 plugins.php:236
-#: plugins.php:507
+#: plugins.php:164 plugins.php:196 plugins.php:228 plugins.php:263
+#: plugins.php:579
 msgid "Specified plugin is not installed yet!"
 msgstr ""
 
-#: plugins.php:145
+#: plugins.php:169
 msgid "Plugin could not be uninstalled, please try again."
 msgstr ""
 
-#: plugins.php:150
+#: plugins.php:174
 msgid ""
 "The plugin has been deleted from database, but erros ocurred on this process."
 msgstr ""
 
-#: plugins.php:156
+#: plugins.php:180
 msgid "Plugin uninstalled succesfully!"
 msgstr ""
 
-#: plugins.php:176 plugins.php:209
+#: plugins.php:201 plugins.php:235
 msgid "Plugin could not be updated, please try again."
 msgstr ""
 
-#: plugins.php:181 plugins.php:214
+#: plugins.php:206 plugins.php:240
 msgid "The database has been updated, but erros ocurred on this process."
 msgstr ""
 
-#: plugins.php:187
+#: plugins.php:212
 msgid "Plugin updated succesfully!"
 msgstr ""
 
-#: plugins.php:220
+#: plugins.php:246
 msgid "Plugin status changed succesfully!"
 msgstr ""
 
-#: plugins.php:241 plugins.php:512
+#: plugins.php:268 plugins.php:584
 msgid "Specified plugin is not active!"
 msgstr ""
 
-#: plugins.php:248
+#: plugins.php:275
 #, php-format
 msgid "%s configuration"
 msgstr ""
 
-#: plugins.php:456 xoops_version.php:238
+#: plugins.php:472 xoops_version.php:239
 msgid "Visual Editor"
 msgstr ""
 
-#: plugins.php:457
-msgid "EXMCode Editor"
+#: plugins.php:473 xoops_version.php:242
+msgid "Markdown Editor"
 msgstr ""
 
-#: plugins.php:458 xoops_version.php:240
+#: plugins.php:474 xoops_version.php:241
 msgid "Simple Editor"
 msgstr ""
 
-#: plugins.php:459 xoops_version.php:239
+#: plugins.php:475 xoops_version.php:240
 msgid "HTML Editor"
 msgstr ""
 
-#: plugins.php:474 templates/rmc-block-form.php:132
+#: plugins.php:537 templates/rmc-block-form.php:132
 msgid "Save Settings"
 msgstr ""
 
-#: plugins.php:485 plugins.php:487
+#: plugins.php:556 plugins.php:558
 msgid "Configure Plugin "
 msgstr ""
 
-#: plugins.php:542
+#: plugins.php:614
 msgid "Settings updated!"
 msgstr ""
 
@@ -2080,7 +2103,7 @@ msgstr ""
 msgid "You must provide a text for comment!"
 msgstr ""
 
-#: preloads/core.php:85
+#: preloads/core.php:68
 #, php-format
 msgid ""
 "Please install %s using the modules manager from Common Utilities to prevent "
@@ -2099,6 +2122,27 @@ msgstr ""
 msgid "This module does not support rss feeds"
 msgstr ""
 
+#: services.php:42
+msgid "Services Manager"
+msgstr ""
+
+#: services.php:69
+msgid "Not authorized!"
+msgstr ""
+
+#: services.php:79
+msgid "Service name or provider name are not valid!"
+msgstr ""
+
+#: services.php:81 services.php:94
+msgid "Services"
+msgstr ""
+
+#: services.php:92
+#, php-format
+msgid "Provider %s for service %s registered successfully"
+msgstr ""
+
 #: settings.php:66
 msgid "Unauthorized action"
 msgstr ""
@@ -2115,28 +2159,28 @@ msgstr ""
 msgid "This module can not be configured with Common Utilities"
 msgstr ""
 
-#: settings.php:155 templates/rmc-plugins.php:60
+#: settings.php:160 templates/rmc-plugins.php:60
 msgid "Settings"
 msgstr ""
 
-#: settings.php:157 settings.php:172 templates/rmc-settings-form.php:3
+#: settings.php:162 settings.php:177 templates/rmc-settings-form.php:3
 #, php-format
 msgid "%s Settings"
 msgstr ""
 
-#: settings.php:200
+#: settings.php:205
 msgid "A module has not been specified!"
 msgstr ""
 
-#: settings.php:217 settings.php:220
+#: settings.php:222 settings.php:225
 msgid "The specified module does not exists."
 msgstr ""
 
-#: settings.php:328 settings.php:337
+#: settings.php:333 settings.php:342
 msgid "Settings saved successfully!"
 msgstr ""
 
-#: templates/404.php:1 xoops_version.php:620
+#: templates/404.php:1 xoops_version.php:621
 msgid "Error 404"
 msgstr ""
 
@@ -2273,7 +2317,7 @@ msgid "%s settings"
 msgstr ""
 
 #: templates/rmc-block-form.php:4
-#: themes/helium/class/HeliumHelper.class.php:233
+#: themes/helium/class/HeliumHelper.class.php:238
 msgid "General Settings"
 msgstr ""
 
@@ -2429,36 +2473,40 @@ msgstr ""
 msgid "There are not positions created yet!"
 msgstr ""
 
-#: templates/rmc-blocks.php:142
-msgid "Add New Block"
-msgstr ""
-
-#: templates/rmc-blocks.php:164
+#: templates/rmc-blocks.php:144
 msgid "Messages Console"
 msgstr ""
 
-#: templates/rmc-blocks.php:183
+#: templates/rmc-blocks.php:157
+msgid "Available Blocks"
+msgstr ""
+
+#: templates/rmc-blocks.php:188
+msgid "Active Blocks"
+msgstr ""
+
+#: templates/rmc-blocks.php:199
 msgid "Drag and drop blocks here"
 msgstr ""
 
-#: templates/rmc-blocks.php:189
+#: templates/rmc-blocks.php:205
 #, php-format
 msgid "Module: %s"
 msgstr ""
 
-#: templates/rmc-blocks.php:195
+#: templates/rmc-blocks.php:211
 msgid "Hide block"
 msgstr ""
 
-#: templates/rmc-blocks.php:197
+#: templates/rmc-blocks.php:213
 msgid "Show block"
 msgstr ""
 
-#: templates/rmc-blocks.php:229
+#: templates/rmc-blocks.php:248
 msgid "Loading"
 msgstr ""
 
-#: templates/rmc-blocks.php:229
+#: templates/rmc-blocks.php:248
 msgid "Loading data..."
 msgstr ""
 
@@ -3193,11 +3241,16 @@ msgstr ""
 msgid "URL:"
 msgstr ""
 
-#: templates/rmc-settings-form.php:34
+#: templates/rmc-services.php:9
+#, php-format
+msgid "Service: %s"
+msgstr ""
+
+#: templates/rmc-settings-form.php:44
 msgid "There are not fields in this category."
 msgstr ""
 
-#: templates/rmc-settings-form.php:67
+#: templates/rmc-settings-form.php:77
 msgid "Save Changes"
 msgstr ""
 
@@ -3400,7 +3453,7 @@ msgid "Order by..."
 msgstr ""
 
 #: templates/rmc-users.php:159 templates/rmc-users.php:189
-#: templates/rmc-users.php:220 templates/rmc-users.php:265 xoops_version.php:89
+#: templates/rmc-users.php:220 templates/rmc-users.php:265 xoops_version.php:90
 msgid "Email"
 msgstr ""
 
@@ -3461,46 +3514,56 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: themes/helium/class/HeliumHelper.class.php:234
+#: themes/helium/class/HeliumHelper.class.php:239
 msgid "User Info Settings"
 msgstr ""
 
-#: themes/helium/class/HeliumHelper.class.php:235
+#: themes/helium/class/HeliumHelper.class.php:240
 msgid "Meta Tags and Footer"
 msgstr ""
 
-#: themes/helium/class/HeliumHelper.class.php:236
+#: themes/helium/class/HeliumHelper.class.php:241
 msgid "Word Censoring"
 msgstr ""
 
-#: themes/helium/class/HeliumHelper.class.php:237
+#: themes/helium/class/HeliumHelper.class.php:242
 msgid "Search Options"
 msgstr ""
 
-#: themes/helium/class/HeliumHelper.class.php:238
+#: themes/helium/class/HeliumHelper.class.php:243
 msgid "Email Setup"
 msgstr ""
 
-#: themes/helium/class/HeliumHelper.class.php:239
+#: themes/helium/class/HeliumHelper.class.php:244
 msgid "Authentication Options"
 msgstr ""
 
-#: themes/helium/class/HeliumHelper.class.php:240
+#: themes/helium/class/HeliumHelper.class.php:245
 msgid "System Module Settings"
 msgstr ""
 
-#: themes/helium/events/rmcommon.php:67 themes/helium/tpls/topbar.php:173
-msgid "Control Panel"
+#: themes/helium/events/rmcommon.php:34
+msgid "Helium"
 msgstr ""
 
-#: themes/helium/events/rmcommon.php:73
+#: themes/helium/events/rmcommon.php:40
 msgid "Logo to use"
 msgstr ""
 
-#: themes/helium/events/rmcommon.php:74
+#: themes/helium/events/rmcommon.php:41
 msgid ""
 "You can specify a logo as bitmap but SVG is recommended. The logo will be "
 "resize to 29 pixels of height."
+msgstr ""
+
+#: themes/helium/events/rmcommon.php:50
+msgid "Render XOOPS metas?"
+msgstr ""
+
+#: themes/helium/events/rmcommon.php:51
+msgid ""
+"By enabling this option Helium will render inside &gt;head&lt; tag the XOOPS "
+"scripts, styles and metas."
 msgstr ""
 
 #: themes/helium/include/test-color.php:1
@@ -3595,6 +3658,10 @@ msgstr ""
 
 #: themes/helium/tpls/topbar.php:154
 msgid "Social Links"
+msgstr ""
+
+#: themes/helium/tpls/topbar.php:173
+msgid "Control Panel"
 msgstr ""
 
 #: themes/helium/tpls/topbar.php:179
@@ -3875,319 +3942,315 @@ msgstr ""
 msgid "It is not possible to add more than 4 cells to this widget"
 msgstr ""
 
-#: xoops_version.php:48
+#: xoops_version.php:49
 msgid "Twitter"
 msgstr ""
 
-#: xoops_version.php:49
+#: xoops_version.php:50
 msgid "Facebook"
 msgstr ""
 
-#: xoops_version.php:50
+#: xoops_version.php:51
 msgid "Instagram"
 msgstr ""
 
-#: xoops_version.php:51
+#: xoops_version.php:52
 msgid "LinkedIn"
 msgstr ""
 
-#: xoops_version.php:52
+#: xoops_version.php:53
 msgid "GitHub"
 msgstr ""
 
-#: xoops_version.php:53
+#: xoops_version.php:54
 msgid "My Blog"
 msgstr ""
 
-#: xoops_version.php:86
+#: xoops_version.php:87
 msgid "General"
 msgstr ""
 
-#: xoops_version.php:87
+#: xoops_version.php:88
 msgid "Appearance"
 msgstr ""
 
-#: xoops_version.php:88
+#: xoops_version.php:89
 msgid "Comentarios"
 msgstr ""
 
-#: xoops_version.php:90
+#: xoops_version.php:91
 msgid "Components"
 msgstr ""
 
-#: xoops_version.php:96
+#: xoops_version.php:97
 msgid "Use CDN for jQuery"
 msgstr ""
 
-#: xoops_version.php:106
+#: xoops_version.php:107
 msgid "jQuery CDN URI"
 msgstr ""
 
-#: xoops_version.php:116
+#: xoops_version.php:117
 msgid "jQuery UI CDN URI"
 msgstr ""
 
-#: xoops_version.php:126
+#: xoops_version.php:127
 msgid "Use CDN for Bootstrap"
 msgstr ""
 
-#: xoops_version.php:136
+#: xoops_version.php:137
 msgid "Bootstrap CDN URI"
 msgstr ""
 
-#: xoops_version.php:146
+#: xoops_version.php:147
 msgid "Bootstrap Javascript CDN URI"
 msgstr ""
 
-#: xoops_version.php:156
+#: xoops_version.php:157
 msgid "Use CDN for FontAwesome"
 msgstr ""
 
-#: xoops_version.php:166
+#: xoops_version.php:167
 msgid "FontAwesome CDN URI"
 msgstr ""
 
-#: xoops_version.php:177
+#: xoops_version.php:178
 msgid "Enable URL rewriting"
 msgstr ""
 
-#: xoops_version.php:188
+#: xoops_version.php:189
 msgid "New rewrite paths for supported modules"
 msgstr ""
 
-#: xoops_version.php:189
+#: xoops_version.php:190
 msgid ""
 "Indicate the new paths for supported modules. This path must be used to form "
 "new rewrited URLs for modules."
 msgstr ""
 
-#: xoops_version.php:201
+#: xoops_version.php:202
 msgid "Language to use"
 msgstr ""
 
-#: xoops_version.php:211
+#: xoops_version.php:212
 msgid "Admin theme"
 msgstr ""
 
-#: xoops_version.php:221
+#: xoops_version.php:222
 msgid "Disable new GUI when working on non native modules?"
 msgstr ""
 
-#: xoops_version.php:232
+#: xoops_version.php:233
 msgid "Select the default editor"
 msgstr ""
 
-#: xoops_version.php:241
-msgid "Markdown Editor"
-msgstr ""
-
-#: xoops_version.php:248
+#: xoops_version.php:249
 msgid "Parse MarkDown"
 msgstr ""
 
-#: xoops_version.php:249
+#: xoops_version.php:250
 msgid ""
 "This option enables the parsing for Markdown code for text. Must be enabled "
 "when \"Markdown Editor\" is selected."
 msgstr ""
 
-#: xoops_version.php:259
+#: xoops_version.php:260
 msgid "Enable JQuery for front end"
 msgstr ""
 
-#: xoops_version.php:260
+#: xoops_version.php:261
 msgid ""
 "When this option is enabled, Common Utilities will include JQuery "
 "automatically. Please, disable this option only when your theme include "
 "jquery by default."
 msgstr ""
 
-#: xoops_version.php:270
+#: xoops_version.php:271
 msgid "Arrange images by date"
 msgstr ""
 
-#: xoops_version.php:281
+#: xoops_version.php:282
 msgid "Limit for image categories list."
 msgstr ""
 
-#: xoops_version.php:291
+#: xoops_version.php:292
 msgid "Image manager: number of images per page"
 msgstr ""
 
-#: xoops_version.php:303
+#: xoops_version.php:304
 msgid "Secret Key"
 msgstr ""
 
-#: xoops_version.php:304
+#: xoops_version.php:305
 msgid "Provide a secret key used to encrypt information."
 msgstr ""
 
-#: xoops_version.php:314
+#: xoops_version.php:315
 msgid "Allow HTMl in text"
 msgstr ""
 
-#: xoops_version.php:324
+#: xoops_version.php:325
 msgid "Allow smilies in text"
 msgstr ""
 
-#: xoops_version.php:334
+#: xoops_version.php:335
 msgid "Allow XoopsCode"
 msgstr ""
 
-#: xoops_version.php:344
+#: xoops_version.php:345
 msgid "Allow images in text"
 msgstr ""
 
-#: xoops_version.php:354
+#: xoops_version.php:355
 msgid "Auto add line breaks in text"
 msgstr ""
 
-#: xoops_version.php:364
+#: xoops_version.php:365
 msgid "Modules number on dashboard"
 msgstr ""
 
-#: xoops_version.php:375
+#: xoops_version.php:376
 msgid "Image for RSS feeds"
 msgstr ""
 
-#: xoops_version.php:386
+#: xoops_version.php:387
 msgid "Enable comments"
 msgstr ""
 
-#: xoops_version.php:396
+#: xoops_version.php:397
 msgid "Allow anonymous users to post comments"
 msgstr ""
 
-#: xoops_version.php:406
+#: xoops_version.php:407
 msgid "Automatically approve comments by registered users"
 msgstr ""
 
-#: xoops_version.php:416
+#: xoops_version.php:417
 msgid "Automatically approve comments by anonymous users"
 msgstr ""
 
-#: xoops_version.php:426
+#: xoops_version.php:427
 msgid "Allow users to edit their comments"
 msgstr ""
 
-#: xoops_version.php:436
+#: xoops_version.php:437
 msgid "Time limit to edit a comment (in hours)."
 msgstr ""
 
-#: xoops_version.php:446
+#: xoops_version.php:447
 msgid "Notify administrators about new comments"
 msgstr ""
 
-#: xoops_version.php:447
+#: xoops_version.php:448
 msgid ""
 "By enabling this option, Common Utilities will send a notification to "
 "webmasters every time that a new comment is posted."
 msgstr ""
 
-#: xoops_version.php:457
+#: xoops_version.php:458
 msgid "Mailer method"
 msgstr ""
 
-#: xoops_version.php:458
+#: xoops_version.php:459
 msgid "Common Utilities will use this method to send emails."
 msgstr ""
 
-#: xoops_version.php:462
+#: xoops_version.php:463
 msgid "PHP Mail()"
 msgstr ""
 
-#: xoops_version.php:463
+#: xoops_version.php:464
 msgid "SMTP"
 msgstr ""
 
-#: xoops_version.php:464
+#: xoops_version.php:465
 msgid "Sendmail"
 msgstr ""
 
-#: xoops_version.php:472
+#: xoops_version.php:473
 msgid "SMTP server to use"
 msgstr ""
 
-#: xoops_version.php:473
+#: xoops_version.php:474
 msgid "Specify the server through with the emails will be sent."
 msgstr ""
 
-#: xoops_version.php:482
+#: xoops_version.php:483
 msgid "SMTP encryption"
 msgstr ""
 
-#: xoops_version.php:483
+#: xoops_version.php:484
 msgid ""
 "For SSL or TLS encryption to work, your PHP installation must have "
 "appropriate OpenSSL transports wrappers."
 msgstr ""
 
-#: xoops_version.php:488
+#: xoops_version.php:489
 msgid "SSL"
 msgstr ""
 
-#: xoops_version.php:489
+#: xoops_version.php:490
 msgid "TLS"
 msgstr ""
 
-#: xoops_version.php:497
+#: xoops_version.php:498
 msgid "SMTP server port"
 msgstr ""
 
-#: xoops_version.php:498
+#: xoops_version.php:499
 msgid ""
 "Note that you must to write the appropriate port based on your encryption "
 "type selection."
 msgstr ""
 
-#: xoops_version.php:507
+#: xoops_version.php:508
 msgid "SMTP username"
 msgstr ""
 
-#: xoops_version.php:517
+#: xoops_version.php:518
 msgid "SMTP password"
 msgstr ""
 
-#: xoops_version.php:527
+#: xoops_version.php:528
 msgid "Sendmail path"
 msgstr ""
 
-#: xoops_version.php:528
+#: xoops_version.php:529
 msgid ""
 "Input the command for sendmail, including the correct command line flags. "
 "The default to use is \"/usr/sbin/sendmail -bs\" if this is not specified."
 msgstr ""
 
-#: xoops_version.php:537
+#: xoops_version.php:538
 msgid "Enable RSS Center"
 msgstr ""
 
-#: xoops_version.php:547
+#: xoops_version.php:548
 msgid "Enable internal blocks manager"
 msgstr ""
 
-#: xoops_version.php:557
+#: xoops_version.php:558
 msgid "Activate updates"
 msgstr ""
 
-#: xoops_version.php:558
+#: xoops_version.php:559
 msgid ""
 "When this option is enabled, Common Utilities will search automatically "
 "updates for modules and other components."
 msgstr ""
 
-#: xoops_version.php:567
+#: xoops_version.php:568
 msgid "Days between updates search"
 msgstr ""
 
-#: xoops_version.php:589
+#: xoops_version.php:590
 msgid "Show comments from internal comments system"
 msgstr ""
 
-#: xoops_version.php:598
+#: xoops_version.php:599
 msgid "Custom Block"
 msgstr ""
 
-#: xoops_version.php:599
+#: xoops_version.php:600
 msgid "Allows to create a block with custom content."
 msgstr ""

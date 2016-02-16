@@ -39,8 +39,7 @@ $container = RMHttpRequest::request( 'idcontainer', 'string', '' );
 
 if ($action=='') {
 
-    RMTemplate::get()->add_script('jquery.min.js', 'rmcommon', array('directory' => 'include'));
-    RMTemplate::get()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
+    RMTemplate::getInstance()->add_jquery(true, true);
     RMTemplate::get()->add_script('popup-images-manager.js', 'rmcommon' );
 
     if (!$cat->isNew()) {

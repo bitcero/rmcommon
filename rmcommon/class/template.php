@@ -81,7 +81,7 @@ class RMTemplate
         $this->version = str_replace(" ", '-', RMCVERSION);
 
         if (defined('XOOPS_CPFUNC_LOADED')) {
-            $this->add_jquery(true);
+            $this->add_jquery(true, true);
             return true;
         }
 
@@ -693,40 +693,50 @@ class RMTemplate
 
         if (!$cuSettings->jquery && !$force) return true;
 
-        if (isset($this->tpl_scripts['jquery']))
-            return true;
+        if (!isset($this->tpl_scripts['jquery'])){
 
-        if ($cuSettings->cdn_jquery) {
+            if ($cuSettings->cdn_jquery) {
 
-            $this->tpl_scripts['jquery'] = array(
-                'url' => $cuSettings->cdn_jquery_url,
-                'type' => 'text/javascript',
-                'footer' => 0,
-            );
+                $this->tpl_scripts['jquery'] = array(
+                    'url' => $cuSettings->cdn_jquery_url,
+                    'type' => 'text/javascript',
+                    'footer' => 0,
+                );
 
-            if ($ui)
+            } else {
+
+                $this->tpl_scripts['jquery'] = array(
+                    'url' => RMUris::relative_url(RMCURL . '/include/js/jquery.min.js'),
+                    'type' => 'text/javascript',
+                    'footer' => 0,
+                );
+
+            }
+
+        }
+
+        if($ui && !isset($this->tpl_scripts['jqueryui'])){
+
+            if ($cuSettings->cdn_jquery) {
+
                 $this->tpl_scripts['jqueryui'] = array(
                     'url' => $cuSettings->cdn_jqueryui_url,
                     'type' => 'text/javascript',
                     'footer' => 0,
                 );
 
-            return true;
+            } else {
+
+                $this->tpl_scripts['jqueryui'] = array(
+                    'url' => RMUris::relative_url(RMCURL . '/include/js/jquery-ui.min.js'),
+                    'type' => 'text/javascript',
+                    'footer' => 0,
+                );
+
+            }
 
         }
 
-        $this->tpl_scripts['jquery'] = array(
-            'url' => RMUris::relative_url(RMCURL . '/include/js/jquery.min.js'),
-            'type' => 'text/javascript',
-            'footer' => 0,
-        );
-
-        if ($ui)
-            $this->tpl_scripts['jqueryui'] = array(
-                'url' => RMUris::relative_url(RMCURL . '/include/js/jquery-ui.min.js'),
-                'type' => 'text/javascript',
-                'footer' => 0,
-            );
 
         return true;
 
