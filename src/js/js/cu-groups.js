@@ -10,16 +10,36 @@ var groupsController = {
     /**
      * Get a single selected group
      */
-    retrieveSingle: function( ele ){
+    edit: function( ele ){
 
         var eles = $("#groups-list :radio[data-switch]:checked");
+
         if ( eles.length <= 0 || eles.length > 1 )
             return false;
 
         var params = {
             CUTOKEN_REQUEST: $("#cu-token").val(),
-            id: $(eles[0]).val()
+            id: $(eles[0]).val(),
+            action: 'new-group'
         };
+
+        $.get('groups.php', params, function(response){
+
+            if(!cuHandler.retrieveAjax(response)){
+                return false;
+            }
+
+            cuHandler.modal.dialog({
+                message: response.content,
+                title: response.message,
+                icon: response.icon != undefined ? response.icon : '',
+                width: response.width != undefined ? response.width : '',
+                id: response.id,
+                animate: false,
+                color: response.color
+            });
+
+        }, 'json');
 
         return params;
 
@@ -53,3 +73,4 @@ var groupsController = {
     }
 
 };
+

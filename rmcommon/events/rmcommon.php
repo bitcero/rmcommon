@@ -131,4 +131,24 @@ class RmcommonRmcommonPreload
         return $plugins;
     }
 
+    /**
+     * For new RMCommon service component
+     * @param array $services All added services
+     * @return array
+     */
+    public function eventRmcommonGetServices( $services ){
+
+        $services[] = array(
+            'id'            => 'xoops-avatar', // provider id
+            'name'          => 'XOOPS Avatars', // Provider name
+            'description'   => __('Service provider to use avatars from XOOPS'),
+            'service'       => 'avatar', // Service to provide
+            'file'          => RMCPATH . '/class/AvatarService.php',
+            'class'         => 'XoopsAvatarService'
+        );
+
+        return $services;
+
+    }
+
 }

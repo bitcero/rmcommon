@@ -25,7 +25,7 @@ var cuHandler = {
      * @param launcher Element that will function as launcher
      * @returns {boolean}
      */
-    loadRemoteDialog: function( launcher ){
+    loadRemoteDialog: function (launcher) {
 
         var url = $(launcher).attr("href") != undefined && $(launcher).attr("href") != '#' ? $(launcher).attr("href") : $(launcher).data('url');
         var handler = $(launcher).data("handler");
@@ -33,17 +33,17 @@ var cuHandler = {
 
         var params = {CUTOKEN_REQUEST: $("#cu-token").val()};
 
-        if (params==false)
+        if (params == false)
             return false;
 
         cuHandler.showLoader();
 
-        $.get(url, params, function(response){
+        $.get(url, params, function (response) {
 
-            if(!cuHandler.retrieveAjax( response ) )
+            if (!cuHandler.retrieveAjax(response))
                 return false;
 
-            if (handler == undefined && handler != '' ){
+            if (handler == undefined && handler != '') {
 
                 cuHandler.closeLoader();
 
@@ -61,15 +61,15 @@ var cuHandler = {
             } else {
 
                 cuHandler.closeLoader();
-                eval(handler+"(response, launcher);");
+                eval(handler + "(response, launcher);");
 
             }
 
-            $(".cu-data-table").each( function(){
-                cuHandler.createDataTable( $(this) );
+            $(".cu-data-table").each(function () {
+                cuHandler.createDataTable($(this));
             });
 
-            cuHandler.checkAjaxAction( response );
+            cuHandler.checkAjaxAction(response);
 
             return false;
 
@@ -79,9 +79,9 @@ var cuHandler = {
 
     },
 
-    submitAjaxForm: function(form){
+    submitAjaxForm: function (form) {
 
-        if ( !$(form).valid() )
+        if (!$(form).valid())
             return false;
 
         cuHandler.showLoader();
@@ -92,10 +92,10 @@ var cuHandler = {
         var action = form.attr("action");
         var method = form.attr("method");
 
-        if ( method == 'post' )
-            $.post( action, params, cuHandler.retrieveAjax, 'json');
+        if (method == 'post')
+            $.post(action, params, cuHandler.retrieveAjax, 'json');
         else
-            $.get( action, params, cuHandler.retrieveAjax, 'json');
+            $.get(action, params, cuHandler.retrieveAjax, 'json');
 
         return false;
 
@@ -106,25 +106,25 @@ var cuHandler = {
      * @param e DOM element
      * @param data
      */
-    requestAjax: function(e, data){
+    requestAjax: function (e, data) {
 
         $(e).cuSpinner({icon: 'svg-rmcommon-spinner-14'});
 
-        if(data == undefined){
+        if (data == undefined) {
             return false;
         }
 
-        if(data.url == undefined){
+        if (data.url == undefined) {
             return false;
         }
 
-        if(data.parameters == undefined){
+        if (data.parameters == undefined) {
             data.parameters = {};
         }
 
         data.parameters.CUTOKEN_REQUEST = $("#cu-token").val();
 
-        if(data.method == undefined || data.method == 'post'){
+        if (data.method == undefined || data.method == 'post') {
             $.post(data.url, data.parameters, cuHandler.retrieveAjax, 'json');
         } else {
             $.get(data.url, data.parameters, cuHandler.retrieveAjax, 'json');
@@ -132,27 +132,27 @@ var cuHandler = {
 
     },
 
-    isDisabled: function(e){
-        if($(e).hasClass('disabled') || $(e).attr('disabled') != undefined){
+    isDisabled: function (e) {
+        if ($(e).hasClass('disabled') || $(e).attr('disabled') != undefined) {
             return true;
         }
         return false;
     },
 
     // Retrieve information for AJAX-FORMS
-    retrieveAjax: function(response, showAlert){
+    retrieveAjax: function (response, showAlert) {
 
         showAlert = showAlert == undefined ? true : showAlert;
 
         this.currentResponse = response;
 
-        if (response.type=='error'){
+        if (response.type == 'error') {
 
-            if (response.modal_message!=undefined) {
+            if (response.modal_message != undefined) {
                 bootbox.alert({
                     message: response.message
                 });
-            } else if(response.notify != undefined && response.message != undefined){
+            } else if (response.notify != undefined && response.message != undefined) {
                 cuHandler.notify({
                     title: response.notify.title == undefined ? '' : response.notify.title,
                     type: response.notify.type == undefined ? 'alert-info' : response.notify.type,
@@ -160,20 +160,20 @@ var cuHandler = {
                     text: response.message
                 });
                 response.notify = undefined;
-            } else if(showAlert) {
+            } else if (showAlert) {
                 alert(response.message);
             }
 
         }
 
-        if( response.token!=undefined && response.token!='' )
+        if (response.token != undefined && response.token != '')
             $("#cu-token").val(response.token);
 
         cuHandler.closeLoader();
 
-        cuHandler.checkAjaxAction( response );
+        cuHandler.checkAjaxAction(response);
 
-        if (response.type=='error')
+        if (response.type == 'error')
             return false;
 
         return true;
@@ -184,15 +184,15 @@ var cuHandler = {
      * Check AJAX action reponsed.
      * @param data
      */
-    checkAjaxAction: function( data ){
+    checkAjaxAction: function (data) {
 
         /**
          * Ejecución de otras acciones
          */
-        if ( data.showMessage != undefined )
-            alert( data.message );
+        if (data.showMessage != undefined)
+            alert(data.message);
 
-        if(data.notify != undefined && data.message != undefined){
+        if (data.notify != undefined && data.message != undefined) {
             this.notify({
                 title: data.notify.title == undefined ? null : data.notify.title,
                 type: data.notify.type == undefined ? 'alert-info' : data.notify.type,
@@ -202,19 +202,19 @@ var cuHandler = {
         }
 
         // closeWindow: "#window-id"
-        if(data.closeWindow != undefined)
+        if (data.closeWindow != undefined)
             $(data.closeWindow).modal('hide');
 
-        if(data.runHandler != undefined)
+        if (data.runHandler != undefined)
             eval(data.runHandler + "(data)");
 
         if (data.goto != undefined)
             window.location.href = data.goto;
 
-        if(data.function != undefined)
+        if (data.function != undefined)
             eval(data.function);
 
-        if(data.openDialog != undefined){
+        if (data.openDialog != undefined) {
 
             cuHandler.modal.dialog({
                 message: data.content,
@@ -222,7 +222,7 @@ var cuHandler = {
                 icon: data.icon != undefined ? data.icon : '',
                 width: data.width != undefined ? data.width : '',
                 owner: data.owner != undefined ? data.owner : '',
-                id: data.windowId!=undefined ? data.windowId : '',
+                id: data.windowId != undefined ? data.windowId : '',
                 animate: false,
                 closeButton: data.closeButton != undefined ? data.closeButton : true,
                 color: data.color != undefined ? data.color : ''
@@ -231,14 +231,14 @@ var cuHandler = {
         }
 
         // Reload
-        if ( data.reload != undefined ){
+        if (data.reload != undefined) {
             window.location.reload(true);
             return;
         }
 
     },
 
-    showLoader: function(){
+    showLoader: function () {
 
         $(".cu-window-loader").hide();
         $(".cu-window-blocker").hide();
@@ -255,15 +255,15 @@ var cuHandler = {
 
         $('body').append(html);
 
-        $(".cu-window-blocker").fadeIn(0, function(){
+        $(".cu-window-blocker").fadeIn(0, function () {
             $(".cu-window-loader").fadeIn(1);
         });
 
     },
 
-    closeLoader: function( handler ){
-        $(".cu-window-loader").fadeOut(1, function(){
-            $(".cu-window-blocker").fadeOut(0, function(){
+    closeLoader: function (handler) {
+        $(".cu-window-loader").fadeOut(1, function () {
+            $(".cu-window-blocker").fadeOut(0, function () {
                 $(".cu-window-loader").remove();
                 $(".cu-window-blocker").remove();
                 if (handler != 'undefined')
@@ -272,25 +272,25 @@ var cuHandler = {
         });
     },
 
-    getURI: function( module, controller, action, zone, params ){
+    getURI: function (module, controller, action, zone, params) {
         return this.getControllerURI(module, controller, action, zone, params);
     },
 
-    getControllerURI: function( module, controller, action, zone, params ){
+    getControllerURI: function (module, controller, action, zone, params) {
 
         var url = xoUrl;
 
-        if( cu_modules[module] != undefined && controller != undefined && controller != '' ){
+        if (cu_modules[module] != undefined && controller != undefined && controller != '') {
 
-            url += zone=='backend'?'/admin':'';
+            url += zone == 'backend' ? '/admin' : '';
             url += cu_modules[module] + '/' + controller + '/' + action + '/';
 
         } else {
 
             url += '/modules/' + module;
 
-            url += zone=='backend'?'/admin':'';
-            if ( controller == '' || controller == undefined )
+            url += zone == 'backend' ? '/admin' : '';
+            if (controller == '' || controller == undefined)
                 return url;
 
             url += '/index.php/' + controller + '/' + action + '/';
@@ -301,8 +301,8 @@ var cuHandler = {
             return url;
 
         var query = '';
-        for(key in params){
-            query += (query=='' ? '?' : '&') + key + '=' + eval('params.' + key);
+        for (key in params) {
+            query += (query == '' ? '?' : '&') + key + '=' + eval('params.' + key);
         }
 
         return url + query;
@@ -341,28 +341,28 @@ var cuHandler = {
      * Crea una tabla de datos
      * @param ele
      */
-    createDataTable: function( ele ){
+    createDataTable: function (ele) {
 
-        if ( ele.hasClass("dataTable") )
+        if (ele.hasClass("dataTable"))
             return;
 
         var exclude = $(ele).data("exclude");
         var cols = exclude != undefined ? exclude.toString().split(",") : '';
 
-        $(ele).dataTable( {
+        $(ele).dataTable({
             "bProcessing": true,
             "bServerSide": true,
             "sAjaxSource": $(ele).data('source'),
             "bPaginate": true,
             //"aoColumnDefs": [exclude != undefined ? {"bSortable": false, "aTargets": cols} : '']
-        } );
+        });
 
     },
 
     /**
      * Controlar la barra de estado
      *
-    showInPanel: function( panel, message, process ){
+     showInPanel: function( panel, message, process ){
 
         process = process == undefined ? false : process;
         var loader = '';
@@ -373,55 +373,89 @@ var cuHandler = {
 
     },
 
-    getPanel: function(panel){
+     getPanel: function(panel){
         return $("#status-" + panel).html();
     },*/
 
     /**
      * Ejecuta una acción asociada a un elemento específico
      */
-    runAction: function( e ) {
+    runAction: function (e) {
 
         var action = $(e).data("action");
 
-        switch(action){
+        switch (action) {
             case 'load-remote-dialog':
             case 'load-module-dialog':
-                cuHandler.loadRemoteDialog( e );
+                cuHandler.loadRemoteDialog(e);
                 break;
             case 'goto':
                 var url = $(e).data("url");
-                if ( url == undefined )
+                if (url == undefined)
                     url = $(e).attr("href");
                 var retriever = $(e).data("retriever");
 
                 if (retriever != undefined)
-                    url = url + eval(retriever+'(e)');
+                    url = url + eval(retriever + '(e)');
 
-                if(url!=undefined && url!='')
+                if (url != undefined && url != '')
                     window.location.href = url;
                 break;
             case 'ajax':
                 var url = $(e).attr('href') != '' ? $(e).attr('href') : $(e).data('url');
-                cuHandler.requestAjax(e, {url:url});
-            /*default:
-                eval( action + "(e)" );
-                break;*/
+                cuHandler.requestAjax(e, {url: url});
+            default:
+
+                if ('' == action) {
+                    return;
+                }
+
+                var parts = action.split('.');
+
+                if (parts.length < 1) {
+                    return;
+                }
+
+                if (parts.length == 1) {
+                    if (undefined == window[parts[0]]) {
+                        return;
+                    }
+
+                    window[parts[0]]();
+                    return;
+                }
+
+                if (parts.length == 2) {
+                    if (undefined == window[parts[0]][parts[1]]) {
+                        return;
+                    }
+
+                    window[parts[0]][parts[1]]();
+                }
+
+                if (parts.length == 3) {
+                    if (undefined == window[parts[0]][parts[1]][parts[2]]) {
+                        return;
+                    }
+
+                    window[parts[0]][parts[1]][parts[2]]();
+                }
+                break;
         }
 
     },
 
-    enableCommands: function( id_activator, type ){
+    enableCommands: function (id_activator, type) {
 
-        var commands = $("*[data-activator='"+id_activator+"']");
+        var commands = $("*[data-activator='" + id_activator + "']");
 
-        var total = $("#" + id_activator + " :"+type+"[data-switch]:checked").length;
+        var total = $("#" + id_activator + " :" + type + "[data-switch]:checked").length;
 
-        $(commands).each(function(index){
+        $(commands).each(function (index) {
 
-            var required = $(this).data("oncount")!=undefined ? $(this).data("oncount") : ' >= 1';
+            var required = $(this).data("oncount") != undefined ? $(this).data("oncount") : ' >= 1';
 
-            if ( eval('total ' + required))
+            if (eval('total ' + required))
                 $(this).enable();
             else
                 $(this).disable();
@@ -438,13 +472,13 @@ var cuHandler = {
 
         // Get an SVG icon from providers
 
-        var isSVG = 'svg-' == icon.slice(0,4);
+        var isSVG = 'svg-' == icon.slice(0, 4);
         var isAbsolute = false;
         var isUrl = false;
-        if(!isSVG){
+        if (!isSVG) {
             isSVG = '.svg' == icon.slice(-4);
 
-            if(isSVG){
+            if (isSVG) {
                 isUrl = true;
             }
         }
@@ -454,7 +488,7 @@ var cuHandler = {
         if (isSVG && !isUrl) {
             var parts = icon.split("-");
 
-            if(parts.length < 3){
+            if (parts.length < 3) {
                 return this.url("modules/rmcommon/icons/noicon.svg");
             }
 
@@ -462,11 +496,11 @@ var cuHandler = {
 
             var defaultFile = this.url("modules/rmcommon/icons/" + fileName + '.svg');
 
-            if (undefined == iconsProviders){
+            if (undefined == iconsProviders) {
                 return defaultFile;
             }
 
-            if(iconsProviders.hasOwnProperty(parts[1])){
+            if (iconsProviders.hasOwnProperty(parts[1])) {
                 var file = iconsProviders[parts[1]] + '/' + fileName + '.svg';
                 return file;
             }
@@ -475,7 +509,7 @@ var cuHandler = {
         }
 
         // SVG from URL
-        if(isUrl && !isAbsolute){
+        if (isUrl && !isAbsolute) {
             return this.url(icon);
         }
 
@@ -483,7 +517,7 @@ var cuHandler = {
         var images = ['.jpg', '.gif', '.png', 'jpeg'];
         var ext = icon.slice(-4);
 
-        if(images.indexOf(ext) || isAbsolute){
+        if (images.indexOf(ext) || isAbsolute) {
             return icon;
         }
 
@@ -509,7 +543,7 @@ var cuHandler = {
             return false;
         }
 
-        replace = arguments.length == 2 ? true : (arguments.length ==1 ? false : replace);
+        replace = arguments.length == 2 ? true : (arguments.length == 1 ? false : replace);
 
         var file = this.getIcon(icon);
 
@@ -522,7 +556,7 @@ var cuHandler = {
             var iconLoaded = $("<span />", {"class": 'cu-icon'});
         }
 
-        if(undefined == iconLoaded || iconLoaded.length <= 0){
+        if (undefined == iconLoaded || iconLoaded.length <= 0) {
             replace = false;
             iconLoaded = $("<span />", {"class": 'cu-icon'});
         }
@@ -531,7 +565,7 @@ var cuHandler = {
         // Load a SVG icon
         if (is_svg) {
             iconLoaded.html('').load(file);
-        } else if (is_font){
+        } else if (is_font) {
             iconLoaded.html('').append(file);
         } else {
             /* If it is not a SVG icon then it's an image (?) */
@@ -539,7 +573,7 @@ var cuHandler = {
             iconLoaded.html('').append(img);
         }
 
-        if(!replace && arguments.length > 1){
+        if (!replace && arguments.length > 1) {
             $(container).append(iconLoaded);
         }
 
@@ -562,13 +596,12 @@ var cuHandler = {
     },
 
 
-
 };
 
 /**
  * Currenty format
  */
-Number.prototype.formatMoney = function(c, d, t){
+Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
         c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
@@ -582,53 +615,53 @@ Number.prototype.formatMoney = function(c, d, t){
 /**
  * jQuery plugin to enable or disable an element
  */
-jQuery.fn.enable = function(){
-    this.each(function(){
+jQuery.fn.enable = function () {
+    this.each(function () {
         jQuery(this).removeAttr("disabled");
         jQuery(this).removeClass("disabled");
     });
 }
 
-jQuery.fn.disable = function(){
-    this.each(function(){
-        jQuery(this).attr("disabled", true);
+jQuery.fn.disable = function () {
+    this.each(function () {
+        jQuery(this).prop("disabled", true);
         jQuery(this).addClass("disabled");
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     var textarea_style = '';
 
     /**
      * Cargar diálogos de otros módulos
      */
-    $('body').on('click', '*[data-action]', function(e){
-        if($(this).is(":disabled") || $(this).attr("disabled") || $(this).hasClass('disabled')){
+    $('body').on('click', '*[data-action]', function (e) {
+        if ($(this).is(":disabled") || $(this).attr("disabled") || $(this).hasClass('disabled')) {
             $(e).stopPropagation();
             return false;
         }
-        cuHandler.runAction( $(this) );
+        cuHandler.runAction($(this));
         return false;
 
     });
 
-    $("body").on('submit', 'form[data-type="ajax"]', function(){
-        cuHandler.submitAjaxForm( $(this) );
+    $("body").on('submit', 'form[data-type="ajax"]', function () {
+        cuHandler.submitAjaxForm($(this));
         return false;
     });
 
     // Prevent submission of forms no-submit
-    $("body").on('submit', 'form[data-type="no-submit"]', function(){
+    $("body").on('submit', 'form[data-type="no-submit"]', function () {
         return false;
     });
 
-    $('body').on("click", ".cu-window-loader .close", function(){
+    $('body').on("click", ".cu-window-loader .close", function () {
         cuHandler.closeLoader();
     });
 
-    $(".cu-data-table").each( function(){
-        cuHandler.createDataTable( $(this) );
+    $(".cu-data-table").each(function () {
+        cuHandler.createDataTable($(this));
     });
 
     $("*[data-rel='tooltip']").tooltip();
@@ -636,52 +669,52 @@ $(document).ready(function(){
     /**
      * Activar comandos
      */
-    $("body").on('change', '.activator-container :checkbox[data-switch], .activator-container :radio[data-switch]', function(){
+    $("body").on('change', '.activator-container :checkbox[data-switch], .activator-container :radio[data-switch]', function () {
 
         event.stopPropagation();
 
         var id_container = $(this).parents(".activator-container").attr("id");
 
-        cuHandler.enableCommands( id_container, $(this).attr("type") );
+        cuHandler.enableCommands(id_container, $(this).attr("type"));
 
-        if($(this).attr("type") == 'radio'){
+        if ($(this).attr("type") == 'radio') {
             $(this).parents(".activator-container").find(".tr-checked").removeClass('tr-checked');
         }
 
-        if ( $(this).is(":checked") )
-            $(this).parents("tr").addClass( 'tr-checked' );
+        if ($(this).is(":checked"))
+            $(this).parents("tr").addClass('tr-checked');
         else
-            $(this).parents("tr").removeClass( 'tr-checked' );
+            $(this).parents("tr").removeClass('tr-checked');
 
     });
 
     /**
      * Select rows
      */
-    $("body").on('click', '.activator-container > tbody > tr', function(e){
+    $("body").on('click', '.activator-container > tbody > tr', function (e) {
 
-        if(e.target.tagName != 'DIV' && e.target.tagName != 'TD'){
+        if (e.target.tagName != 'DIV' && e.target.tagName != 'TD') {
             return;
         }
 
         //var parent = $(this).parents("tr");
         var input = $(this).find("input[data-switch]");
 
-        if($(input).attr("type") == 'radio'){
+        if ($(input).attr("type") == 'radio') {
             $(this).parents(".activator-container").find(".tr-checked").removeClass('tr-checked');
         }
 
-        if ( input.is(":checked") )
-            input.removeAttr( "checked" );
+        if (input.is(":checked"))
+            input.removeAttr("checked");
         else
-            input.prop( "checked", 'checked' );
+            input.prop("checked", 'checked');
 
         cuHandler.enableCommands($(this).parents(".activator-container").attr("id"), input.attr("type"));
 
-        if ( $(input).is(":checked") )
-            $(this).addClass( 'tr-checked' );
+        if ($(input).is(":checked"))
+            $(this).addClass('tr-checked');
         else
-            $(this).removeClass( 'tr-checked' );
+            $(this).removeClass('tr-checked');
 
         event.stopPropagation();
 
@@ -690,29 +723,29 @@ $(document).ready(function(){
     /**
      * Select all checkbox
      */
-    $("body").on("change", ":checkbox[data-checkbox]", function(){
+    $("body").on("change", ":checkbox[data-checkbox]", function () {
 
         var checkbox_class = $(this).data("checkbox");
 
-        if ( checkbox_class == undefined )
+        if (checkbox_class == undefined)
             return;
 
-        $(":checkbox[data-oncheck='"+checkbox_class+"']").prop('checked', $(this).prop('checked')).change();
+        $(":checkbox[data-oncheck='" + checkbox_class + "']").prop('checked', $(this).prop('checked')).change();
 
         var $activator = $(this).parents('.activator-container');
-        if($activator.length>0){
+        if ($activator.length > 0) {
             cuHandler.enableCommands($activator.attr("id"), 'checkbox');
         }
 
     });
 
 
-    $("body").on("change", ':checkbox', function(){
+    $("body").on("change", ':checkbox', function () {
 
-        if( this.hasAttribute('data-checkbox') )
+        if (this.hasAttribute('data-checkbox'))
             return;
 
-        if( !this.hasAttribute('data-oncheck') )
+        if (!this.hasAttribute('data-oncheck'))
             return;
 
         var existing = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']");
@@ -721,10 +754,14 @@ $(document).ready(function(){
         var activator = $(":checkbox[data-checkbox='" + $(this).data('oncheck') + "']");
 
 
-        if ( checked.length < existing.length )
-            $(activator).removeAttr( 'checked' );
-        else if ( checked.length == existing.length )
-            $(activator).prop( 'checked', 'checked' );
+        //if ( checked.length < existing.length )
+        if (checked.length <= 0) {
+            $(activator).removeAttr('checked');
+        }
+        //else if ( checked.length == existing.length )
+        else if (checked.length > 0) {
+            $(activator).prop('checked', 'checked');
+        }
 
     });
 
@@ -732,20 +769,20 @@ $(document).ready(function(){
      * Check if there are a "News" box in current page
      * and then, load the news for this module
      */
-    if ( $("*[data-news='load']").length == 1 || $("*[data-boxes='load']").length > 0 ){
+    if ($("*[data-news='load']").length == 1 || $("*[data-boxes='load']").length > 0) {
 
         var container = $("*[data-news='load']");
         if (container.length <= 0)
             container = $("*[data-boxes='load']");
 
-        if ( container.length <= 0 )
+        if (container.length <= 0)
             return false;
 
         var module = container.data('module');
         var target = $(container.data('target'));
 
-        if ( target != undefined )
-            target.html( '<div class="text-success"><span class="fa fa-spinner fa-pulse"></span> ' + cuLanguage.downloadNews + '</div>' );
+        if (target != undefined)
+            target.html('<div class="text-success"><span class="fa fa-spinner fa-pulse"></span> ' + cuLanguage.downloadNews + '</div>');
 
         var bcontainer = $("*[data-boxes='load']");
 
@@ -754,34 +791,34 @@ $(document).ready(function(){
             CU_TOKEN: $("#cu-token").val()
         };
 
-        $.get( xoUrl + '/modules/rmcommon/ajax/module-info.php', params, function( response ){
+        $.get(xoUrl + '/modules/rmcommon/ajax/module-info.php', params, function (response) {
 
-            if ( response.type == 'error' ){
-                target.html( '<div class="text-danger"><span class="fa fa-exclamation-triangle"></span> '+cuLanguage.downloadNewsError+'</div>')
+            if (response.type == 'error') {
+                target.html('<div class="text-danger"><span class="fa fa-exclamation-triangle"></span> ' + cuLanguage.downloadNewsError + '</div>')
                 return;
             }
 
             /**
              * Get News
              */
-            if ( response.news != undefined && target != undefined ){
+            if (response.news != undefined && target != undefined) {
 
                 news = $("<ul>").addClass("cu-ajax-news list-unstyled");
-                for( i=0; i < response.news.length; i++ ){
+                for (i = 0; i < response.news.length; i++) {
 
                     var html = '<li>' +
-                        '<small>'+response.news[i].date+'</small>' +
-                        '<h5><a href="'+response.news[i].link+'" target="_blank">'+response.news[i].title+'</a></h5>';
+                        '<small>' + response.news[i].date + '</small>' +
+                        '<h5><a href="' + response.news[i].link + '" target="_blank">' + response.news[i].title + '</a></h5>';
                     /*if ( response.news[i].image )
-                        html += '<img src="'+response.news[i].image+'" class="img-responsive">';*/
+                     html += '<img src="'+response.news[i].image+'" class="img-responsive">';*/
 
-                    html += '<p class="help-block">'+response.news[i].content+'</p>' +
+                    html += '<p class="help-block">' + response.news[i].content + '</p>' +
                         '</li>';
-                    news.append( html );
+                    news.append(html);
 
                 }
                 target.html('').append(news);
-                news.fadeIn('fast', function(){
+                news.fadeIn('fast', function () {
                     $('html.dashboard [data-container="dashboard"]').trigger('containerUpdated');
                 });
 
@@ -790,32 +827,32 @@ $(document).ready(function(){
             /**
              * Get boxes
              */
-            if ( response.boxes != undefined && bcontainer != undefined ){
+            if (response.boxes != undefined && bcontainer != undefined) {
 
-                for ( i=0; i < response.boxes.length; i++ ){
+                for (i = 0; i < response.boxes.length; i++) {
 
-                    if (response.boxes[i].size == undefined || response.boxes[i].size <= 0){
+                    if (response.boxes[i].size == undefined || response.boxes[i].size <= 0) {
                         var size = 1;
                     } else {
                         size = response.boxes[i].size;
                     }
 
                     var box = $("<div data-dashboard=\"item\">").addClass('size-' + size).css("display", 'none');
-                    box.append('<div class="cu-box '+response.boxes[i].class+'"><div class="box-header">' +
+                    box.append('<div class="cu-box ' + response.boxes[i].class + '"><div class="box-header">' +
                         '<span class="fa fa-caret-up box-handler"></span>' +
-                        '<h3 class="box-title">'+ response.boxes[i].title +'</h3></div>' +
-                        '<div class="box-content">'+response.boxes[i].content+'</div></div>');
+                        '<h3 class="box-title">' + response.boxes[i].title + '</h3></div>' +
+                        '<div class="box-content">' + response.boxes[i].content + '</div></div>');
                     // Get the box position
-                    if (response.boxes[i].container != undefined){
+                    if (response.boxes[i].container != undefined) {
                         var box_container = $(response.boxes[i].container);
-                        if (box_container.length > 0){
-                            $(box_container).each(function(){
+                        if (box_container.length > 0) {
+                            $(box_container).each(function () {
                                 var newbox = box.clone();
-                                if ( response.boxes[i].position == 'top' )
+                                if (response.boxes[i].position == 'top')
                                     $(this).prepend(newbox);
                                 else
                                     $(this).append(newbox);
-                                newbox.fadeIn('fast', function(){
+                                newbox.fadeIn('fast', function () {
                                     $('html.dashboard [data-container="dashboard"]').trigger('containerUpdated');
                                 });
 
@@ -828,14 +865,14 @@ $(document).ready(function(){
             }
 
 
-        }, 'json' );
+        }, 'json');
 
     }
 
     /**
      * Editor full screen
      */
-    $("body").on('click', ".ed-container .full-screen", function(){
+    $("body").on('click', ".ed-container .full-screen", function () {
         $(this).parents(".ed-container").addClass('full-screen-edit');
         $(this).removeClass('full-screen').addClass('normal-screen');
         textarea_style = $(this).parents(".ed-container").find('.txtarea-container').attr("style");
@@ -844,7 +881,7 @@ $(document).ready(function(){
         $("body").css("overflow", 'hidden');
 
     });
-    $("body").on('click', ".ed-container .normal-screen", function(){
+    $("body").on('click', ".ed-container .normal-screen", function () {
         $(this).parents(".ed-container").removeClass('full-screen-edit');
         $(this).addClass('full-screen').removeClass('normal-screen');
         $(this).parents(".ed-container").find('.txtarea-container').attr("style", textarea_style);
@@ -855,7 +892,7 @@ $(document).ready(function(){
     /**
      * Set user notifications
      */
-    $(".cu-notifications form .notification-item").change( function(){
+    $(".cu-notifications form .notification-item").change(function () {
 
         var event = $(this).data('event');
         var status = $(this).is(":checked") ? 1 : 0;
@@ -867,9 +904,9 @@ $(document).ready(function(){
             page: 'cu-notification-subscribe'
         };
 
-        $.post( xoUrl + '/notifications.php', params, function( response ){
+        $.post(xoUrl + '/notifications.php', params, function (response) {
 
-            if ( 'error' == response.type ){
+            if ('error' == response.type) {
                 alert(response.message);
                 return;
             }
@@ -877,17 +914,17 @@ $(document).ready(function(){
             $(item).parent().parent()
                 .animate({
                     backgroundColor: '#ffff99'
-                },500,'linear', function(){
+                }, 500, 'linear', function () {
                     $(this).animate({
                         backgroundColor: 'transparent'
                     }, 500, 'linear');
                 });
 
-        }, 'json' );
+        }, 'json');
 
-    } );
+    });
 
-    $(" #cu-notifications .cancel-subscription").click( function() {
+    $(" #cu-notifications .cancel-subscription").click(function () {
 
         var event = $(this).data('info');
         var status = 0;
@@ -899,21 +936,21 @@ $(document).ready(function(){
             page: 'cu-notification-subscribe'
         };
 
-        $.post( xoUrl + '/notifications.php', params, function( response ){
+        $.post(xoUrl + '/notifications.php', params, function (response) {
 
-            if ( 'error' == response.type ){
+            if ('error' == response.type) {
                 alert(response.message);
                 return;
             }
 
             $(item).parent().parent()
-                .slideUp(250, function(){
+                .slideUp(250, function () {
                     $(this).remove();
                 });
 
-        }, 'json' );
+        }, 'json');
 
-    } );
+    });
 
 });
 

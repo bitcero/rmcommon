@@ -310,7 +310,7 @@ CU BOXES
   overflow: auto;
   max-height: 85vh;
 
-  .nav-tabs{
+  .nav-tabs.nav-tabs-color{
     font-size: 0.8em;
     font-weight: 600;
     text-transform: uppercase;
@@ -352,6 +352,10 @@ CU BOXES
       }
     }
 
+    & + .tab-content{
+
+    }
+
     @media(max-width: @screen-sm-min){
       li > a{
         > .caption{
@@ -364,16 +368,35 @@ CU BOXES
     }
   }
 
+  .nav-tabs:not(.nav-tabs-color){
+
+    li > a{
+      text-transform: uppercase;
+      font-size: 0.80em;
+      border: 0;
+      border-radius: @border-radius-base @border-radius-base 0 0;
+    }
+
+  }
+
   .tab-content{
     background-color: #FFF;
-    margin: 0 -@modal-inner-padding 0 -@modal-inner-padding;;
     padding: @panel-body-padding;
-    border: 0;
-    border-top: 0;
     font-size: 0.9em;
     max-height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
+    margin: 0 -@modal-inner-padding 0 -@modal-inner-padding;
+    border: 0;
+    border-top: 0;
+
+    &.with-border{
+      border: 1px solid @nav-tabs-border-color;
+      border-top: 0;
+      margin: 0;
+      max-height: none;
+      border-radius: 0 0 @border-radius-base @border-radius-base;
+    }
   }
 
 }

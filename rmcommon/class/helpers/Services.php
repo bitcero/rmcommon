@@ -31,18 +31,39 @@ namespace Common\Core\Helpers;
 
 class Services
 {
+    /**
+     * All service providers existing on system
+     * @var array
+     */
+    private $allServices = array();
+
+    /**
+     * Services with assigned provider
+     * @var array
+     */
     private $services = array();
+
+    private $servicesFile = '';
 
     public function __construct()
     {
+        /**
+         * File where enabled providers will be stored
+         */
+        $this->servicesFile = XOOPS_CACHE_PATH . '/providers.json';
 
         /**
          * Load all services provided for modules, plugins and themes.
-         * The component must return a service identificator and the
+         * The component must return a service identifier and the
          * class name to run this service.
          */
         $services = array();
-        $services = \RMEvents::get()->run_event('rmcommon.get.services', $services);
+        $services = \RMEvents::get()->trigger('rmcommon.get.services', $services);
+
+        /**
+         * Get services with their assigned providers
+         */
+        $enabled = $this->enabledProviders();
 
         /**
          * Due to nature of services, the last added service will have
@@ -54,11 +75,23 @@ class Services
                 continue;
             }
 
-            $this->services[$service['service']] = array(
-                'id' => $service['id'],
-                'file' => $service['file'],
-                'class' => $service['class']
-            );
+            $this->allServices[$service['service']][$service['id']] = $service;
+
+            // Assign current enabled service
+
+            if (array_key_exists($service['service'], $enabled)) {
+
+                if ($enabled[$service['service']] == $service['id']) {
+                    $this->services[$service['service']] = $this->allServices[$service['service']][$service['id']];
+                }
+
+            } else {
+
+                $this->services[$service['service']] = $this->allServices[$service['service']][$service['id']];
+
+                $this->registerProvider($service['service'], $service['id']);
+
+            }
         }
 
     }
@@ -98,6 +131,69 @@ class Services
 
     }
 
+    /**
+     * Returns an array with all registered services
+     * @return array
+     */
+    public function registeredServices()
+    {
+        return $this->allServices;
+    }
+
+    /**
+     * Get the list with services and their providers
+     * @return array|mixed
+     */
+    public function enabledProviders()
+    {
+        if (is_file($this->servicesFile)) {
+            $enabledProviders = json_decode(file_get_contents($this->servicesFile), true);
+        } else {
+            $enabledProviders = [];
+        }
+
+        return $enabledProviders;
+    }
+
+    /**
+     * Register a new provider for a specific service
+     * @param $service
+     * @param $provider
+     * @return bool
+     */
+    public function registerProvider($service, $provider)
+    {
+
+        // Check that service and provider are correct
+        if ('' == trim($provider) || '' == trim($service)) {
+            return false;
+        }
+
+        $enabledProviders = $this->enabledProviders();
+
+        $enabledProviders[$service] = $provider;
+
+        // Save file
+        $this->saveProviders($enabledProviders);
+        return true;
+
+    }
+
+    /**
+     * Save file for services providers
+     * @param $providers
+     */
+    public function saveProviders($providers)
+    {
+        file_put_contents($this->servicesFile, json_encode($providers));
+    }
+
+    /**
+     * Returns a service provider
+     * @param $name
+     * @return ServiceFallback|mixed
+     * @throws \Exception
+     */
     public function __get($name)
     {
 
@@ -105,7 +201,7 @@ class Services
             throw new \Exception(__('Service name could not be empty!', 'rmcommon'));
         }
 
-        if(false !== $service =  $this->service($name)){
+        if (false !== $service = $this->service($name)) {
             return $service;
         }
 
@@ -114,7 +210,7 @@ class Services
 
     }
 
-    public function getInstance()
+    static public function getInstance()
     {
         static $instance;
 
@@ -140,12 +236,14 @@ Interface ServiceInterface
 
 abstract class ServiceAbstract
 {
-    public function __call($name, $arguments){
+    public function __call($name, $arguments)
+    {
         trigger_error(sprintf(__('There are not service using %s method'), $name));
         return null;
     }
 
-    public static function __callStatic($name, $arguments){
+    public static function __callStatic($name, $arguments)
+    {
         trigger_error(sprintf(__('There are not service using %s method'), $name));
         return null;
     }

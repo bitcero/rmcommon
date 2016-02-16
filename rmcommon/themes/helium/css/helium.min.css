@@ -8685,7 +8685,7 @@ CU BOXES
   overflow: auto;
   max-height: 85vh;
 }
-.modal-body .nav-tabs {
+.modal-body .nav-tabs.nav-tabs-color {
   font-size: 0.8em;
   font-weight: 600;
   text-transform: uppercase;
@@ -8694,14 +8694,14 @@ CU BOXES
   background-color: #259dab;
   border-bottom: 0;
 }
-.modal-body .nav-tabs li > a {
+.modal-body .nav-tabs.nav-tabs-color li > a {
   border: 0;
   background-color: transparent;
   color: rgba(255, 255, 255, 0.5);
   -webkit-transition: ease color 250ms;
           transition: ease color 250ms;
 }
-.modal-body .nav-tabs li > a > .cu-icon {
+.modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   display: block;
   text-align: center;
   margin: 0 auto 5px auto;
@@ -8713,51 +8713,64 @@ CU BOXES
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-body .nav-tabs li > a > .cu-icon > * {
+.modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon > * {
   width: 28px;
   height: 28px;
 }
-.modal-body .nav-tabs li > a:hover {
+.modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-body .nav-tabs li > a:hover > .cu-icon {
+.modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-body .nav-tabs li.active > a {
+.modal-body .nav-tabs.nav-tabs-color li.active > a {
   background-color: transparent;
   border: 0;
   border-bottom: 4px solid #FFF;
   color: #ffffff;
 }
-.modal-body .nav-tabs li.active > a > .cu-icon {
+.modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
 @media (max-width: 768px) {
-  .modal-body .nav-tabs li > a > .caption {
+  .modal-body .nav-tabs.nav-tabs-color li > a > .caption {
     display: none;
   }
-  .modal-body .nav-tabs li > a > .cu-icon {
+  .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
     font-size: 24px;
     width: 24px;
     height: 24px;
   }
-  .modal-body .nav-tabs li > a > .cu-icon > * {
+  .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon > * {
     width: 24px;
     height: 24px;
   }
 }
+.modal-body .nav-tabs:not(.nav-tabs-color) li > a {
+  text-transform: uppercase;
+  font-size: 0.80em;
+  border: 0;
+  border-radius: 2px 2px 0 0;
+}
 .modal-body .tab-content {
   background-color: #FFF;
-  margin: 0 -15px 0 -15px;
   padding: 15px;
-  border: 0;
-  border-top: 0;
   font-size: 0.9em;
   max-height: 70vh;
   overflow-y: auto;
   overflow-x: hidden;
+  margin: 0 -15px 0 -15px;
+  border: 0;
+  border-top: 0;
+}
+.modal-body .tab-content.with-border {
+  border: 1px solid #dddddd;
+  border-top: 0;
+  margin: 0;
+  max-height: none;
+  border-radius: 0 0 2px 2px;
 }
 .modal-header {
   min-height: 16.428571429px;
@@ -8803,28 +8816,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-red .modal-body .nav-tabs:first-child {
+.modal-red .modal-body .nav-tabs.nav-tabs-color {
   background-color: #f44336;
 }
-.modal-red .modal-body .nav-tabs:first-child li > a {
+.modal-red .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-red .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-red .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-red .modal-body .nav-tabs:first-child li > a:hover {
+.modal-red .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-red .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-red .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-red .modal-body .nav-tabs:first-child li.active > a {
+.modal-red .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-red .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-red .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-red .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #f44336;
   color: #ffffff;
 }
 .modal-success .modal-header {
@@ -8832,28 +8849,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-success .modal-body .nav-tabs:first-child {
+.modal-success .modal-body .nav-tabs.nav-tabs-color {
   background-color: #5cb85c;
 }
-.modal-success .modal-body .nav-tabs:first-child li > a {
+.modal-success .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-success .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-success .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-success .modal-body .nav-tabs:first-child li > a:hover {
+.modal-success .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-success .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-success .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-success .modal-body .nav-tabs:first-child li.active > a {
+.modal-success .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-success .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-success .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-success .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #5cb85c;
   color: #ffffff;
 }
 .modal-info .modal-header {
@@ -8861,28 +8882,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-info .modal-body .nav-tabs:first-child {
+.modal-info .modal-body .nav-tabs.nav-tabs-color {
   background-color: #5bc0de;
 }
-.modal-info .modal-body .nav-tabs:first-child li > a {
+.modal-info .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-info .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-info .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-info .modal-body .nav-tabs:first-child li > a:hover {
+.modal-info .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-info .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-info .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-info .modal-body .nav-tabs:first-child li.active > a {
+.modal-info .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-info .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-info .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-info .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #5bc0de;
   color: #ffffff;
 }
 .modal-warning .modal-header {
@@ -8890,28 +8915,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-warning .modal-body .nav-tabs:first-child {
+.modal-warning .modal-body .nav-tabs.nav-tabs-color {
   background-color: #e6ad5c;
 }
-.modal-warning .modal-body .nav-tabs:first-child li > a {
+.modal-warning .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-warning .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-warning .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-warning .modal-body .nav-tabs:first-child li > a:hover {
+.modal-warning .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-warning .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-warning .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-warning .modal-body .nav-tabs:first-child li.active > a {
+.modal-warning .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-warning .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-warning .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-warning .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #e6ad5c;
   color: #ffffff;
 }
 .modal-danger .modal-header {
@@ -8919,28 +8948,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-danger .modal-body .nav-tabs:first-child {
+.modal-danger .modal-body .nav-tabs.nav-tabs-color {
   background-color: #d9534f;
 }
-.modal-danger .modal-body .nav-tabs:first-child li > a {
+.modal-danger .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-danger .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-danger .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-danger .modal-body .nav-tabs:first-child li > a:hover {
+.modal-danger .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-danger .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-danger .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-danger .modal-body .nav-tabs:first-child li.active > a {
+.modal-danger .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-danger .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-danger .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-danger .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #d9534f;
   color: #ffffff;
 }
 .modal-pink .modal-header {
@@ -8948,28 +8981,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-pink .modal-body .nav-tabs:first-child {
+.modal-pink .modal-body .nav-tabs.nav-tabs-color {
   background-color: #e91e63;
 }
-.modal-pink .modal-body .nav-tabs:first-child li > a {
+.modal-pink .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-pink .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-pink .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-pink .modal-body .nav-tabs:first-child li > a:hover {
+.modal-pink .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-pink .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-pink .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-pink .modal-body .nav-tabs:first-child li.active > a {
+.modal-pink .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-pink .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-pink .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-pink .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #e91e63;
   color: #ffffff;
 }
 .modal-purple .modal-header {
@@ -8977,28 +9014,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-purple .modal-body .nav-tabs:first-child {
+.modal-purple .modal-body .nav-tabs.nav-tabs-color {
   background-color: #9c27b0;
 }
-.modal-purple .modal-body .nav-tabs:first-child li > a {
+.modal-purple .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-purple .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-purple .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-purple .modal-body .nav-tabs:first-child li > a:hover {
+.modal-purple .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-purple .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-purple .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-purple .modal-body .nav-tabs:first-child li.active > a {
+.modal-purple .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-purple .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-purple .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-purple .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #9c27b0;
   color: #ffffff;
 }
 .modal-deep-purple .modal-header {
@@ -9006,28 +9047,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-deep-purple .modal-body .nav-tabs:first-child {
+.modal-deep-purple .modal-body .nav-tabs.nav-tabs-color {
   background-color: #673ab7;
 }
-.modal-deep-purple .modal-body .nav-tabs:first-child li > a {
+.modal-deep-purple .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-deep-purple .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-deep-purple .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-deep-purple .modal-body .nav-tabs:first-child li > a:hover {
+.modal-deep-purple .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-deep-purple .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-deep-purple .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-deep-purple .modal-body .nav-tabs:first-child li.active > a {
+.modal-deep-purple .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-deep-purple .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-deep-purple .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-deep-purple .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #673ab7;
   color: #ffffff;
 }
 .modal-indigo .modal-header {
@@ -9035,28 +9080,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-indigo .modal-body .nav-tabs:first-child {
+.modal-indigo .modal-body .nav-tabs.nav-tabs-color {
   background-color: #3f51b5;
 }
-.modal-indigo .modal-body .nav-tabs:first-child li > a {
+.modal-indigo .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-indigo .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-indigo .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-indigo .modal-body .nav-tabs:first-child li > a:hover {
+.modal-indigo .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-indigo .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-indigo .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-indigo .modal-body .nav-tabs:first-child li.active > a {
+.modal-indigo .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-indigo .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-indigo .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-indigo .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #3f51b5;
   color: #ffffff;
 }
 .modal-blue .modal-header {
@@ -9064,28 +9113,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-blue .modal-body .nav-tabs:first-child {
+.modal-blue .modal-body .nav-tabs.nav-tabs-color {
   background-color: #2196f3;
 }
-.modal-blue .modal-body .nav-tabs:first-child li > a {
+.modal-blue .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-blue .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-blue .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-blue .modal-body .nav-tabs:first-child li > a:hover {
+.modal-blue .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-blue .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-blue .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-blue .modal-body .nav-tabs:first-child li.active > a {
+.modal-blue .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-blue .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-blue .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-blue .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #2196f3;
   color: #ffffff;
 }
 .modal-light-blue .modal-header {
@@ -9093,28 +9146,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-light-blue .modal-body .nav-tabs:first-child {
+.modal-light-blue .modal-body .nav-tabs.nav-tabs-color {
   background-color: #03a9f4;
 }
-.modal-light-blue .modal-body .nav-tabs:first-child li > a {
+.modal-light-blue .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-light-blue .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-light-blue .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-light-blue .modal-body .nav-tabs:first-child li > a:hover {
+.modal-light-blue .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-light-blue .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-light-blue .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-light-blue .modal-body .nav-tabs:first-child li.active > a {
+.modal-light-blue .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-light-blue .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-light-blue .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-light-blue .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #03a9f4;
   color: #ffffff;
 }
 .modal-cyan .modal-header {
@@ -9122,28 +9179,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-cyan .modal-body .nav-tabs:first-child {
+.modal-cyan .modal-body .nav-tabs.nav-tabs-color {
   background-color: #00bcd4;
 }
-.modal-cyan .modal-body .nav-tabs:first-child li > a {
+.modal-cyan .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-cyan .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-cyan .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-cyan .modal-body .nav-tabs:first-child li > a:hover {
+.modal-cyan .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-cyan .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-cyan .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-cyan .modal-body .nav-tabs:first-child li.active > a {
+.modal-cyan .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-cyan .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-cyan .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-cyan .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #00bcd4;
   color: #ffffff;
 }
 .modal-teal .modal-header {
@@ -9151,28 +9212,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-teal .modal-body .nav-tabs:first-child {
+.modal-teal .modal-body .nav-tabs.nav-tabs-color {
   background-color: #009688;
 }
-.modal-teal .modal-body .nav-tabs:first-child li > a {
+.modal-teal .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-teal .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-teal .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-teal .modal-body .nav-tabs:first-child li > a:hover {
+.modal-teal .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-teal .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-teal .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-teal .modal-body .nav-tabs:first-child li.active > a {
+.modal-teal .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-teal .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-teal .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-teal .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #009688;
   color: #ffffff;
 }
 .modal-green .modal-header {
@@ -9180,28 +9245,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-green .modal-body .nav-tabs:first-child {
+.modal-green .modal-body .nav-tabs.nav-tabs-color {
   background-color: #4caf50;
 }
-.modal-green .modal-body .nav-tabs:first-child li > a {
+.modal-green .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-green .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-green .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-green .modal-body .nav-tabs:first-child li > a:hover {
+.modal-green .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-green .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-green .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-green .modal-body .nav-tabs:first-child li.active > a {
+.modal-green .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-green .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-green .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-green .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #4caf50;
   color: #ffffff;
 }
 .modal-light-green .modal-header {
@@ -9209,28 +9278,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-light-green .modal-body .nav-tabs:first-child {
+.modal-light-green .modal-body .nav-tabs.nav-tabs-color {
   background-color: #8bc34a;
 }
-.modal-light-green .modal-body .nav-tabs:first-child li > a {
+.modal-light-green .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-light-green .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-light-green .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-light-green .modal-body .nav-tabs:first-child li > a:hover {
+.modal-light-green .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-light-green .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-light-green .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-light-green .modal-body .nav-tabs:first-child li.active > a {
+.modal-light-green .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-light-green .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-light-green .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-light-green .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #8bc34a;
   color: #ffffff;
 }
 .modal-lime .modal-header {
@@ -9238,28 +9311,32 @@ CU BOXES
   color: #393e0b;
   border-bottom: 0!important;
 }
-.modal-lime .modal-body .nav-tabs:first-child {
+.modal-lime .modal-body .nav-tabs.nav-tabs-color {
   background-color: #cddc39;
 }
-.modal-lime .modal-body .nav-tabs:first-child li > a {
+.modal-lime .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(57, 62, 11, 0.5);
 }
-.modal-lime .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-lime .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(57, 62, 11, 0.5);
   color: rgba(57, 62, 11, 0.5);
 }
-.modal-lime .modal-body .nav-tabs:first-child li > a:hover {
+.modal-lime .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #393e0b;
 }
-.modal-lime .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-lime .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #393e0b;
   color: #393e0b;
 }
-.modal-lime .modal-body .nav-tabs:first-child li.active > a {
+.modal-lime .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #393e0b;
 }
-.modal-lime .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-lime .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #393e0b;
+  color: #393e0b;
+}
+.modal-lime .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #cddc39;
   color: #393e0b;
 }
 .modal-yellow .modal-header {
@@ -9267,28 +9344,32 @@ CU BOXES
   color: #6e6300;
   border-bottom: 0!important;
 }
-.modal-yellow .modal-body .nav-tabs:first-child {
+.modal-yellow .modal-body .nav-tabs.nav-tabs-color {
   background-color: #ffeb3b;
 }
-.modal-yellow .modal-body .nav-tabs:first-child li > a {
+.modal-yellow .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(110, 99, 0, 0.5);
 }
-.modal-yellow .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-yellow .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(110, 99, 0, 0.5);
   color: rgba(110, 99, 0, 0.5);
 }
-.modal-yellow .modal-body .nav-tabs:first-child li > a:hover {
+.modal-yellow .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #6e6300;
 }
-.modal-yellow .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-yellow .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #6e6300;
   color: #6e6300;
 }
-.modal-yellow .modal-body .nav-tabs:first-child li.active > a {
+.modal-yellow .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #6e6300;
 }
-.modal-yellow .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-yellow .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #6e6300;
+  color: #6e6300;
+}
+.modal-yellow .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #ffeb3b;
   color: #6e6300;
 }
 .modal-amber .modal-header {
@@ -9296,28 +9377,32 @@ CU BOXES
   color: #533f00;
   border-bottom: 0!important;
 }
-.modal-amber .modal-body .nav-tabs:first-child {
+.modal-amber .modal-body .nav-tabs.nav-tabs-color {
   background-color: #ffc107;
 }
-.modal-amber .modal-body .nav-tabs:first-child li > a {
+.modal-amber .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(83, 63, 0, 0.5);
 }
-.modal-amber .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-amber .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(83, 63, 0, 0.5);
   color: rgba(83, 63, 0, 0.5);
 }
-.modal-amber .modal-body .nav-tabs:first-child li > a:hover {
+.modal-amber .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #533f00;
 }
-.modal-amber .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-amber .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #533f00;
   color: #533f00;
 }
-.modal-amber .modal-body .nav-tabs:first-child li.active > a {
+.modal-amber .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #533f00;
 }
-.modal-amber .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-amber .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #533f00;
+  color: #533f00;
+}
+.modal-amber .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #ffc107;
   color: #533f00;
 }
 .modal-orange .modal-header {
@@ -9325,28 +9410,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-orange .modal-body .nav-tabs:first-child {
+.modal-orange .modal-body .nav-tabs.nav-tabs-color {
   background-color: #ff9800;
 }
-.modal-orange .modal-body .nav-tabs:first-child li > a {
+.modal-orange .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-orange .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-orange .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-orange .modal-body .nav-tabs:first-child li > a:hover {
+.modal-orange .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-orange .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-orange .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-orange .modal-body .nav-tabs:first-child li.active > a {
+.modal-orange .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-orange .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-orange .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-orange .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #ff9800;
   color: #ffffff;
 }
 .modal-deep-orange .modal-header {
@@ -9354,28 +9443,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-deep-orange .modal-body .nav-tabs:first-child {
+.modal-deep-orange .modal-body .nav-tabs.nav-tabs-color {
   background-color: #ff5722;
 }
-.modal-deep-orange .modal-body .nav-tabs:first-child li > a {
+.modal-deep-orange .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-deep-orange .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-deep-orange .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-deep-orange .modal-body .nav-tabs:first-child li > a:hover {
+.modal-deep-orange .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-deep-orange .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-deep-orange .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-deep-orange .modal-body .nav-tabs:first-child li.active > a {
+.modal-deep-orange .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-deep-orange .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-deep-orange .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-deep-orange .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #ff5722;
   color: #ffffff;
 }
 .modal-brown .modal-header {
@@ -9383,28 +9476,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-brown .modal-body .nav-tabs:first-child {
+.modal-brown .modal-body .nav-tabs.nav-tabs-color {
   background-color: #795548;
 }
-.modal-brown .modal-body .nav-tabs:first-child li > a {
+.modal-brown .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-brown .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-brown .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-brown .modal-body .nav-tabs:first-child li > a:hover {
+.modal-brown .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-brown .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-brown .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-brown .modal-body .nav-tabs:first-child li.active > a {
+.modal-brown .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-brown .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-brown .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-brown .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #795548;
   color: #ffffff;
 }
 .modal-grey .modal-header {
@@ -9412,28 +9509,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-grey .modal-body .nav-tabs:first-child {
+.modal-grey .modal-body .nav-tabs.nav-tabs-color {
   background-color: #9e9e9e;
 }
-.modal-grey .modal-body .nav-tabs:first-child li > a {
+.modal-grey .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-grey .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-grey .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-grey .modal-body .nav-tabs:first-child li > a:hover {
+.modal-grey .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-grey .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-grey .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-grey .modal-body .nav-tabs:first-child li.active > a {
+.modal-grey .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-grey .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-grey .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-grey .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #9e9e9e;
   color: #ffffff;
 }
 .modal-blue-grey .modal-header {
@@ -9441,28 +9542,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-blue-grey .modal-body .nav-tabs:first-child {
+.modal-blue-grey .modal-body .nav-tabs.nav-tabs-color {
   background-color: #607d8b;
 }
-.modal-blue-grey .modal-body .nav-tabs:first-child li > a {
+.modal-blue-grey .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-blue-grey .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-blue-grey .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-blue-grey .modal-body .nav-tabs:first-child li > a:hover {
+.modal-blue-grey .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-blue-grey .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-blue-grey .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-blue-grey .modal-body .nav-tabs:first-child li.active > a {
+.modal-blue-grey .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-blue-grey .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-blue-grey .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-blue-grey .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #607d8b;
   color: #ffffff;
 }
 .modal-midnight .modal-header {
@@ -9470,28 +9575,32 @@ CU BOXES
   color: #ffffff;
   border-bottom: 0!important;
 }
-.modal-midnight .modal-body .nav-tabs:first-child {
+.modal-midnight .modal-body .nav-tabs.nav-tabs-color {
   background-color: #262b36;
 }
-.modal-midnight .modal-body .nav-tabs:first-child li > a {
+.modal-midnight .modal-body .nav-tabs.nav-tabs-color li > a {
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-midnight .modal-body .nav-tabs:first-child li > a > .cu-icon {
+.modal-midnight .modal-body .nav-tabs.nav-tabs-color li > a > .cu-icon {
   fill: rgba(255, 255, 255, 0.5);
   color: rgba(255, 255, 255, 0.5);
 }
-.modal-midnight .modal-body .nav-tabs:first-child li > a:hover {
+.modal-midnight .modal-body .nav-tabs.nav-tabs-color li > a:hover {
   color: #ffffff;
 }
-.modal-midnight .modal-body .nav-tabs:first-child li > a:hover > .cu-icon {
+.modal-midnight .modal-body .nav-tabs.nav-tabs-color li > a:hover > .cu-icon {
   fill: #ffffff;
   color: #ffffff;
 }
-.modal-midnight .modal-body .nav-tabs:first-child li.active > a {
+.modal-midnight .modal-body .nav-tabs.nav-tabs-color li.active > a {
   color: #ffffff;
 }
-.modal-midnight .modal-body .nav-tabs:first-child li.active > a > .cu-icon {
+.modal-midnight .modal-body .nav-tabs.nav-tabs-color li.active > a > .cu-icon {
   fill: #ffffff;
+  color: #ffffff;
+}
+.modal-midnight .modal-body .nav-tabs:not(.nav-tabs-color) li.active > a {
+  background: #262b36;
   color: #ffffff;
 }
 /*

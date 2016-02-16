@@ -120,7 +120,7 @@ class Rmcommon_Group extends RMObject
             if ( !empty($this->specific_perms) )
                 return $this->specific_perms;
 
-            $sql = "SELECT * FROM " . $this->db->prefix("mod_users_permissions") . " WHERE `group` = " . $this->id();
+            $sql = "SELECT * FROM " . $this->db->prefix("mod_rmcommon_permissions") . " WHERE `group` = " . $this->id();
             $return = array();
             $result = $this->db->query($sql);
             while( $row = $this->db->fetchArray( $result ) ){

@@ -186,6 +186,8 @@ function images_form($edit = 0){
         }");
         RMTemplate::get()->add_head($uploader->render());
     }
+
+    RMTemplate::getInstance()->add_jquery(true, true);
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     RMTemplate::get()->add_script('images.js', 'rmcommon');
 
@@ -858,6 +860,7 @@ function update_thumbnails(){
 
     $ids = implode(',', $imgs);
 
+    RMTemplate::getInstance()->add_jquery(true, true);
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     RMTemplate::get()->add_script('images.js', 'rmcommon');
 

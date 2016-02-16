@@ -70,8 +70,9 @@ function show_group_form(){
                 __('The specified group does not exists!', 'rmcommon'), 1, 1
             );
 
-    } else
+    } else{
         $group = new Rmcommon_Group();
+    }
 
     $result = $xoopsDB->query( "SELECT * FROM " . $xoopsDB->prefix("modules") . " ORDER BY name ASC" );
     $modules = array();
@@ -99,7 +100,8 @@ function show_group_form(){
             'content' => $content,
             'width' => 'xlarge',
             'color' => 'green',
-            'windowId' => 'window-form-groups'
+            'windowId' => 'window-form-groups',
+            'id' => 'groups-dialog'
         )
     );
 

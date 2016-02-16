@@ -59,7 +59,7 @@ class RMFunctions
 
         if(RMCLOCATION=='users'){
 
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Users','rmcommon'),
                 'users.php',
                 'icon icon-users',
@@ -67,7 +67,7 @@ class RMFunctions
                 array('class' => 'cu-tool tool-users-list')
             );
 
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Add','rmcommon'),
                 'users.php?action=new',
                 'icon icon-plus',
@@ -78,7 +78,7 @@ class RMFunctions
 
         } elseif( RMCLOCATION == 'groups' ){
 
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Groups','rmcommon'),
                 'groups.php',
                 'icon icon-users',
@@ -88,7 +88,7 @@ class RMFunctions
                 )
             );
 
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Add','rmcommon'),
                 '#',
                 'icon icon-plus',
@@ -104,7 +104,7 @@ class RMFunctions
             /*
              * Next buttons are available only when groups list is shown
              */
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Edit', 'rmcommon'),
                 '#',
                 'icon icon-pencil',
@@ -113,15 +113,13 @@ class RMFunctions
                         'class' => 'cu-tool tool-group-edit',
                         'data-activator' => 'groups-list',
                         'data-oncount' => '== 1',
-                        'data-action' => 'load-remote-dialog',
-                        'data-retriever' => 'groupsController.retrieveSingle',
-                        'data-url' => 'groups.php?action=new-group',
+                        'data-action' => 'groupsController.edit',
                         'disabled' => 'disabled',
                         'title' => __('Edit Group','rmcommon')
                 )
             );
 
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Delete', 'rmcommon'),
                 '#',
                 'icon icon-bin',
@@ -138,14 +136,14 @@ class RMFunctions
 
         } elseif(RMCLOCATION=='imgmanager'){
 
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Categories','rmcommon'),
                 'images.php?action=showcats',
                 'svg-rmcommon-folder text-orange',
                 'showcategories',
                 array('class' => 'cu-tool tool-categories-images')
             );
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('New','rmcommon'),
                 'images.php?action=newcat',
                 'svg-rmcommon-folder-plus text-orange',
@@ -154,7 +152,7 @@ class RMFunctions
             );
             $cat = rmc_server_var($_REQUEST,'category',0);
             if($cat>0){
-                RMTemplate::get()->add_tool(
+                RMTemplate::getInstance()->add_tool(
                     __('Images','rmcommon'),
                     'images.php?category='.$cat,
                     'svg-rmcommon-camera',
@@ -162,7 +160,7 @@ class RMFunctions
                     array('class' => 'cu-tool tool-images')
                 );
             }
-            RMTemplate::get()->add_tool(
+            RMTemplate::getInstance()->add_tool(
                 __('Add','rmcommon'),
                 'images.php?action=new'.($cat>0?"&amp;category=$cat":''),
                 'svg-rmcommon-camera-plus text-info',
@@ -172,15 +170,15 @@ class RMFunctions
 
         } else {
 
-            RMTemplate::get()->add_tool(__('Dashboard','rmcommon'), 'index.php', '', 'dashboard', array('class' => 'cu-tool tool-dashboard'));
-            RMTemplate::get()->add_tool(__('Modules','rmcommon'), 'modules.php', '', 'modules', array('class' => 'cu-tool tool-modules'));
-            RMTemplate::get()->add_tool(__('Blocks','rmcommon'), 'blocks.php', '', 'blocks', array('class' => 'cu-tool tool-blocks'));
-            RMTemplate::get()->add_tool(__('Groups','rmcommon'), 'groups.php', '', 'groups', array('class' => 'cu-tool tool-groups'));
-            RMTemplate::get()->add_tool(__('Users','rmcommon'), 'users.php', '', 'users', array('class' => 'cu-tool tool-users'));
-            RMTemplate::get()->add_tool(__('Images','rmcommon'), 'images.php', '', 'imgmanager', array('class' => 'cu-tool tool-images'));
-            RMTemplate::get()->add_tool(__('Comments','rmcommon'), 'comments.php', '', 'comments', array('class' => 'cu-tool tool-comments'));
-            RMTemplate::get()->add_tool(__('Plugins','rmcommon'), 'plugins.php', '', 'plugins', array('class' => 'cu-tool tool-plugins'));
-	        RMTemplate::get()->add_tool(__('Updates','rmcommon'), 'updates.php', '', 'updates', array('class' => 'cu-tool tool-updates'));
+            RMTemplate::getInstance()->add_tool(__('Dashboard','rmcommon'), 'index.php', '', 'dashboard', array('class' => 'cu-tool tool-dashboard'));
+            RMTemplate::getInstance()->add_tool(__('Modules','rmcommon'), 'modules.php', '', 'modules', array('class' => 'cu-tool tool-modules'));
+            RMTemplate::getInstance()->add_tool(__('Blocks','rmcommon'), 'blocks.php', '', 'blocks', array('class' => 'cu-tool tool-blocks'));
+            RMTemplate::getInstance()->add_tool(__('Groups','rmcommon'), 'groups.php', '', 'groups', array('class' => 'cu-tool tool-groups'));
+            RMTemplate::getInstance()->add_tool(__('Users','rmcommon'), 'users.php', '', 'users', array('class' => 'cu-tool tool-users'));
+            RMTemplate::getInstance()->add_tool(__('Images','rmcommon'), 'images.php', '', 'imgmanager', array('class' => 'cu-tool tool-images'));
+            RMTemplate::getInstance()->add_tool(__('Comments','rmcommon'), 'comments.php', '', 'comments', array('class' => 'cu-tool tool-comments'));
+            RMTemplate::getInstance()->add_tool(__('Plugins','rmcommon'), 'plugins.php', '', 'plugins', array('class' => 'cu-tool tool-plugins'));
+	        RMTemplate::getInstance()->add_tool(__('Updates','rmcommon'), 'updates.php', '', 'updates', array('class' => 'cu-tool tool-updates'));
 
         }
 
@@ -399,9 +397,9 @@ class RMFunctions
         // eg. Captcha checker, etc
 
         $form = RMEvents::get()->run_event('rmcommon.comments.form', $form, $obj, $params, $type);
-        RMTemplate::get()->add_jquery();
-        RMTemplate::get()->add_script( 'jquery.validate.min.js', 'rmcommon' );
-        RMTemplate::get()->add_head('<script type="text/javascript">
+        RMTemplate::getInstance()->add_jquery();
+        RMTemplate::getInstance()->add_script( 'jquery.validate.min.js', 'rmcommon' );
+        RMTemplate::getInstance()->add_head('<script type="text/javascript">
         $(document).ready(function(){
         	$("#rmc-comment-form").validate({
         		messages: {
@@ -517,7 +515,7 @@ class RMFunctions
 
         if($description=='') return;
 
-        $tpl = RMTemplate::get();
+        $tpl = RMTemplate::getInstance();
         $tc = TextCleaner::getInstance();
         $description = strip_tags($description);
         $tpl->add_meta('description', $tc->truncate($description, 255));

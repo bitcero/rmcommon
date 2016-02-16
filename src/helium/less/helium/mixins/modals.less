@@ -4,7 +4,7 @@
     color: @text;
     border-bottom: 0!important;
   }
-  .modal-body .nav-tabs:first-child{
+  .modal-body .nav-tabs.nav-tabs-color{
     background-color: @color;
 
     li > a{
@@ -31,4 +31,12 @@
     }
 
   }
+
+  .modal-body .nav-tabs:not(.nav-tabs-color){
+    li.active > a{
+      background: @color;
+      color: @text;
+    }
+  }
+
 }
