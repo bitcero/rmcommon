@@ -829,7 +829,7 @@ class RMObject
 		if (get_magic_quotes_gpc())
         	$id = stripslashes($id);
 
-		$id = mysql_real_escape_string($id);
+		$id = $this->escape($id);
 
 		$sql = "SELECT * FROM $this->_dbtable WHERE `$this->primary`='$id'";
 		$result = $this->db->query($sql);
@@ -877,7 +877,7 @@ class RMObject
 		foreach ($values as $k => $v){
 			if (get_magic_quotes_gpc())
         		$v = stripslashes($v);
-			$values[$k] = mysql_real_escape_string($v);
+			$values[$k] = $this->escape($v);
 			$query .= $query=='' ? "`$k`='$v'" : " AND `$k`='$v'";
 		}
 
@@ -964,4 +964,16 @@ class RMObject
 		}
 
 	}
+
+    /**
+     * Escape a string for secure use
+     * @param string String to escape
+     * @return string Escaped string
+     */
+    protected function escape($string){
+        if(method_exists($this->db, 'escape')) {
+            return $this->db->escape($string);
+        }
+        return mysql_real_escape_string($string);
+    }
 }
