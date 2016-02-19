@@ -275,9 +275,10 @@ class RMDb
      * @return string Escaped string
      */
     public function escape($string){
-
+        if(method_exists($this->database, 'escape')) {
+            return $this->database->escape($string);
+        }
         return mysql_real_escape_string($string);
-
     }
 
     /**
