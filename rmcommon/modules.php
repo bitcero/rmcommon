@@ -822,7 +822,7 @@ function module_uninstall_now(){
 }
 
 
-function xoops_module_update($dirname){
+function module_update($dirname){
     global $xoopsConfig, $xoopsDB;
 
     $dirname = trim($dirname);
@@ -1247,9 +1247,9 @@ function module_update_now(){
     include_once XOOPS_ROOT_PATH.'/modules/system/admin/modulesadmin/modulesadmin.php';
     
     RMEvents::get()->run_event('rmcommon.updating.module', $module);
-    
-    $module_log = xoops_module_update($mod);
-    
+
+    $module_log = module_update($mod);
+
     $module_log = RMEvents::get()->run_event('rmcommon.module.updated', $module_log, $module_log);
     
     //RMFunctions::create_toolbar();

@@ -25,7 +25,7 @@ class Rmcommon_Config_Item extends RMObject
 
         if ($name == '' || $mod <= 0 ) return;
 
-        $name = mysql_real_escape_string($name);
+        $name = $this->escape($name);
 
         $sql = "SELECT * FROM $this->_dbtable WHERE `conf_name`='$name' AND `conf_modid`=$mod";
         $result = $this->db->query($sql);

@@ -462,7 +462,7 @@ function update_locally(){
         }
 
         include_once XOOPS_ROOT_PATH.'/modules/system/admin/modulesadmin/modulesadmin.php';
-        $log = xoops_module_update( $dir );
+        $log = module_update( $dir );
 
         jsonReturn( __('Module updated locally', 'rmcommon'), 0, array('log' => $log) );
 
@@ -485,7 +485,7 @@ function update_locally(){
 
 }
 
-function xoops_module_update($dirname){
+function module_update($dirname){
     global $xoopsConfig, $xoopsDB;
 
     $dirname = trim($dirname);
