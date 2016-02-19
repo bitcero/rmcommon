@@ -88,6 +88,12 @@ class RMObject
         return $this->getVar($this->primary);
     }
 
+    /**
+     * Magic method to assign values to vars
+     * @param $name
+     * @param $value
+     * @return null|void
+     */
     public function __set( $name, $value ){
 
         // Verificamos columnas
@@ -97,6 +103,11 @@ class RMObject
         return null;
     }
 
+    /**
+     * Magic method to get vars
+     * @param $name
+     * @return mixed|null
+     */
     public function __get( $name ){
         // Verificamos columnas
         if ( isset( $this->_tblcolumns[$name] ) )

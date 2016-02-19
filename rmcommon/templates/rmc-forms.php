@@ -1,10 +1,10 @@
-<form class="form-horizontal" name="<?php echo $form->getName() ?>" id="<?php echo $form->getName(); ?>" method="<?php echo $form->method(); ?>" action="<?php echo $form->getAction(); ?>"<?php if($form->getExtra()!=''): echo " ".$form->getExtra(); endif;?>>
+<form <?php echo $attributes; ?>>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <?php if ($form->getTitle()!=''): ?>
+            <?php if ($form->has('title')): ?>
             <hi class="panel-title">
-                <?php echo $form->getTitle(); ?>
+                <?php echo $form->get('title'); ?>
             </hi>
             <?php endif; ?>
         </div>

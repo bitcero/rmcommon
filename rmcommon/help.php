@@ -2,6 +2,8 @@
 
 require '../../mainfile.php';
 
+$common->ajax()->prepare();
+
 $doc = RMHttpRequest::get('doc', 'string', '');
 
 if('' == trim($doc)){

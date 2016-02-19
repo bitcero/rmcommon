@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="<?php echo $cuSettings->lang; ?>" class="<?php echo RMTemplate::get()->body_classes(); ?>" <?php echo RMTemplate::getInstance()->render_attributes('html'); ?>>
+<html lang="<?php echo $cuSettings->lang; ?>" <?php echo RMTemplate::getInstance()->render_attributes('html'); ?>>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

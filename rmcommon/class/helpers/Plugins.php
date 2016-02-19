@@ -64,7 +64,7 @@ class Plugins
         if (false !== ($this->loadedPlugins[$dir] = $this->loadNew($dir))) {
             return $this->loadedPlugins[$dir];
         } else {
-            false;
+            return false;
         }
 
     }
@@ -83,13 +83,17 @@ class Plugins
         // dirnames must be in lowercase format
         $dir = strtolower($dir);
 
-        // Check if dir exists
-        if (!file_exists(RMCPATH . '/plugins/' . $dir . '/' . $dir . '-plugin.php')) {
+        $oldFile = RMCPATH . '/plugins/' . $dir . '/' . $dir . '-plugin.php';
+        $newFile = RMCPATH . '/plugins/' . $dir . '/' . $dir . '.php';
+
+        // Load plugin controller
+        if (file_exists($oldFile)) {
+            include_once $oldFile;
+        } elseif(file_exists($newFile)){
+            include_once $newFile;
+        } else {
             return false;
         }
-
-        // Load plugin controller class
-        include_once RMCPATH . '/plugins/' . $dir . '/' . $dir . '-plugin.php';
 
         $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
 

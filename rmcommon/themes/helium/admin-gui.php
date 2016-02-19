@@ -157,11 +157,15 @@ $helpLinks = RMTemplate::getInstance()->help();
 
 // Body classess
 if ( !array_key_exists('sidebar', $_COOKIE) || $_COOKIE['sidebar'] == 'visible' ){
-    RMTemplate::getInstance()->add_body_class('sidebar');
+    RMTemplate::getInstance()->add_attribute('html', ['class' => 'sidebar']);
 }
 if (RMBreadCrumb::get()->count() > 0) {
-    RMTemplate::getInstance()->add_body_class('with-breadcrumb');
+    RMTemplate::getInstance()->add_attribute('html', ['class' => 'with-breadcrumb']);
 }
+
+RMTemplate::getInstance()->add_attribute('html', [
+    'class' => RMTemplate::getInstance()->body_classes()
+]);
 
 // The logo
 $logoHelium = trim($cuSettings->helium_logo);

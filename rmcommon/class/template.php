@@ -693,7 +693,7 @@ class RMTemplate
 
         if (!$cuSettings->jquery && !$force) return true;
 
-        if (!isset($this->tpl_scripts['jquery'])){
+        if (!isset($this->tpl_scripts['jquery'])) {
 
             if ($cuSettings->cdn_jquery) {
 
@@ -715,7 +715,7 @@ class RMTemplate
 
         }
 
-        if($ui && !isset($this->tpl_scripts['jqueryui'])){
+        if ($ui && !isset($this->tpl_scripts['jqueryui'])) {
 
             if ($cuSettings->cdn_jquery) {
 
@@ -1091,14 +1091,14 @@ class RMTemplate
      * @param string Style ID
      * @return bool
      */
-    public function clear_styles( $id = null )
+    public function clear_styles($id = null)
     {
-        if(null == $id ){
+        if (null == $id) {
             $this->tpl_styles = array();
             return true;
         }
 
-        if(array_key_exists($id, $this->tpl_styles)){
+        if (array_key_exists($id, $this->tpl_styles)) {
             unset($this->tpl_styles[$id]);
             return true;
         } else {
@@ -1349,7 +1349,18 @@ class RMTemplate
         }
 
         foreach ($attributes as $id => $value) {
-            $this->attributes[$element][$id] = $value;
+
+            if(!array_key_exists($element, $this->attributes)){
+                $this->attributes[$element][$id] = $value;
+                continue;
+            }
+
+            if(array_key_exists($id, $this->attributes[$element])){
+                $this->attributes[$element][$id] = $this->attributes[$element][$id] . ' ' . $value;
+            } else {
+                $this->attributes[$element][$id] = $value;
+            }
+
         }
 
         return true;
