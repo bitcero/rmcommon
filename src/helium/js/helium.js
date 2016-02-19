@@ -47,6 +47,11 @@ function updatesNotifier(count){
 
             if(undefined != $(this).data('help')){
                 var src = cuHandler.url('/modules/rmcommon/help.php?doc=' + $(this).data('help'));
+
+                if($(this).attr('href') != '#'){
+                    src += $(this).attr('href');
+                }
+
             } else {
                 var src = $(this).attr('href');
             }
