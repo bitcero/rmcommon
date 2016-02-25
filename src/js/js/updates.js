@@ -143,7 +143,7 @@ function rmCallNotifier(total){
 function loadUpdateDetails(id){
     
     if(id==null || id==undefined) return false;
-    
+
     var updates = eval($("#json-container").html());
     var update = updates[id].data;
     
