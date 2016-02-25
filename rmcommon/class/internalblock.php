@@ -37,12 +37,20 @@ class RMInternalBlock extends RMObject
     {
 	    global $xoopsConfig;
 
+        // Prevent to be translated
+        $this->noTranslate = [
+            'element', 'element_type', 'description', 'type', 'content_type', 'dirname', 'file', 'show_func', 'edit_func', 'template'
+        ];
+
 	    $this->db =& XoopsDatabaseFactory::getDatabaseConnection();
 	    $this->_dbtable = $this->db->prefix("mod_rmcommon_blocks");
 	    $this->setNew();
 	    $this->initVarsFromTable();
 	    $this->setVarType('options', XOBJ_DTYPE_ARRAY);
 	    $this->setVarType('content', XOBJ_DTYPE_OTHER);
+
+        $this->ownerType = 'module';
+        $this->ownerName = 'rmcommon';
 
 	    if ($id==null) return;
 

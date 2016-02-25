@@ -31,6 +31,8 @@
 $p = isset($_REQUEST['p']) ? $_REQUEST['p'] : '';
 if ($p == '') {
     define('RMCLOCATION', 'plugins');
+} else {
+    define('RMCLOCATION', $p . '-main');
 }
 include_once '../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';

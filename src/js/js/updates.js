@@ -180,12 +180,12 @@ function loadUpdateDetails(id){
 }
 
 function installUpdate(id){
-    
+
     if(id==null || id==undefined) return false;
     
     var updates = eval($("#json-container").html());
     var update = updates[id].data;
-    if(update.url.match(/^http:\/\//)==null) return false;
+    if(update.url.match(/^http:\/\/|https:\/\//)==null) return false;
     
     var url = update.url.replace(/\&amp;/,'&');
     

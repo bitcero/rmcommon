@@ -45,6 +45,8 @@ class Services
 
     private $servicesFile = '';
 
+    private $enabledProviders = [];
+
     public function __construct()
     {
         /**
@@ -63,7 +65,12 @@ class Services
         /**
          * Get services with their assigned providers
          */
-        $enabled = $this->enabledProviders();
+        $this->enabledProviders = $this->enabledProviders();
+
+        /**
+         * Temporary providers to check if all registered providers are present
+         */
+        $tempProviders = [];
 
         /**
          * Due to nature of services, the last added service will have
@@ -79,9 +86,9 @@ class Services
 
             // Assign current enabled service
 
-            if (array_key_exists($service['service'], $enabled)) {
+            if (array_key_exists($service['service'], $this->enabledProviders)) {
 
-                if ($enabled[$service['service']] == $service['id']) {
+                if ($this->enabledProviders[$service['service']] == $service['id']) {
                     $this->services[$service['service']] = $this->allServices[$service['service']][$service['id']];
                 }
 
@@ -92,6 +99,13 @@ class Services
                 $this->registerProvider($service['service'], $service['id']);
 
             }
+
+            $tempProviders[$service['service']] = $service['id'];
+
+        }
+
+        if(!empty(array_diff($this->enabledProviders, $tempProviders))){
+            $this->saveProviders(array_intersect($this->enabledProviders, $tempProviders));
         }
 
     }
@@ -129,6 +143,19 @@ class Services
 
         return $service;
 
+    }
+
+    /**
+     * Checks if there are a registered provider for specific service
+     * @param $service Service name
+     * @return bool
+     */
+    public function isThereProvider($service){
+        if(array_key_exists($service, $this->enabledProviders)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -210,6 +237,10 @@ class Services
 
     }
 
+    /**
+     * Singleton
+     * @return Services
+     */
     static public function getInstance()
     {
         static $instance;

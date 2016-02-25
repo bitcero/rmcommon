@@ -88,7 +88,7 @@ class RMEvents
 
         foreach ($extra as $preload) {
             include_once $dir . '/events/' . $preload. '.php';
-            $class_name = ucfirst($name) . ucfirst($preload) . 'Preload' ;
+            $class_name = ucfirst($name) . ucfirst($preload) . 'Preload';
             if (!class_exists($class_name)) {
                 continue;
             }

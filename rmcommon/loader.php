@@ -55,15 +55,14 @@ include_once XOOPS_ROOT_PATH . '/class/database/databasefactory.php';
 $dbF = new XoopsDatabaseFactory();
 $db =& $dbF->getDatabaseConnection();
 
-
 $GLOBALS['rmFunctions'] = new RMFunctions();
 global $rmFunctions;
 
 /**
  * New object to manage Common Utilities configurations
  */
-$GLOBALS['cuSettings'] = (object)$rmFunctions->settings->cu_settings();
 global $cuSettings;
+$GLOBALS['cuSettings'] = (object)$rmFunctions->settings->cu_settings();
 
 /**
  * Do not use $rmc_config, use $cuSettings instead
@@ -85,12 +84,6 @@ $loader->addNamespace("Common\\Admin\\Theme\\" . ucfirst($cuSettings->theme), RM
 //$loader->addNamespace('Common\Plugin', XOOPS_ROOT_PATH . '/modules/rmcommon/plugins');
 $loader->addNamespace('Common\Widgets', XOOPS_ROOT_PATH . '/modules/rmcommon/widgets');
 
-/**
- * Modules and other elements can use this event to add their own namespaces
- * The module most retorn the $loader object again to prevent errors
- */
-$loader = RMEvents::get()->trigger('rmcommon.psr4loader', $loader);
-
 // Base classes
 $GLOBALS['rmEvents'] = RMEvents::get();
 $GLOBALS['rmTpl'] = RMTemplate::getInstance();
@@ -101,7 +94,7 @@ global $rmEvents, $rmTpl, $rmCodes;
 // Custom Codes
 require RMCPATH . '/include/custom-codes.php';
 
-define('RMCLANG', $rmEvents->run_event('rmcommon.set.language', $cuSettings->lang));
+$cuSettings->lang = $rmEvents->run_event('rmcommon.set.language', $cuSettings->lang);
 
 // Load plugins
 $file = XOOPS_CACHE_PATH . '/plgs.cnf';
@@ -137,6 +130,12 @@ $rmEvents->load_extra_preloads(RMCPATH . '/themes/' . $cuSettings->theme, ucfirs
 // Load theme Events
 list($theme) = $db->fetchRow($db->query("select conf_value from " . $db->prefix("config") . " where conf_name = 'theme_set' and conf_modid = 0;"));
 RMEvents::get()->load_extra_preloads(XOOPS_THEME_PATH . '/' . $theme, ucfirst($theme) . 'Theme');
+
+/**
+ * Modules and other elements can use this event to add their own namespaces
+ * The module most retorn the $loader object again to prevent errors
+ */
+$loader = RMEvents::get()->trigger('rmcommon.psr4loader', $loader);
 
 unset($plugins);
 unset($file);

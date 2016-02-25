@@ -14,22 +14,15 @@ require RMCPATH.'/class/gettext/streams.php';
 * If does not exists a locale then returns en_US
 */
 function get_locale(){
-    global $exm_locale;
+    static $exm_locale;
+    global $cuSettings;
 
-    if (isset($exm_locale) && $exm_locale!='')
-        return RMEvents::get()->run_event('rmcommon.get_locale', $exm_locale);
-
-    // Search for a defined constant
-
-    if (defined('RMCLANG'))
-        $exm_locale = RMCLANG;
+    if(!isset($exm_locale) || $exm_locale == ''){
+        $exm_locale = RMEvents::get()->trigger('rmcommon.get.locale', $cuSettings->lang);
+    }
 
     if ($exm_locale=='')
-        $exm_locale = 'en_US';
-
-    // Get default locale
-    if ( class_exists( 'RMEvents' ) )
-        $exm_locale = RMEvents::get()->run_event('rmcommon.get_locale', $exm_locale);
+        $exm_locale = 'en';
 
     return $exm_locale;
 }

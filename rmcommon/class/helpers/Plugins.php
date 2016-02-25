@@ -61,7 +61,9 @@ class Plugins
             return $this->loadedPlugins[$dir];
         }
 
-        if (false !== ($this->loadedPlugins[$dir] = $this->loadNew($dir))) {
+        $this->loadedPlugins[$dir] = $this->loadNew($dir);
+
+        if (false !== $this->loadedPlugins[$dir]) {
             return $this->loadedPlugins[$dir];
         } else {
             return false;
@@ -102,7 +104,7 @@ class Plugins
         if (!class_exists($class))
             return false;
 
-        $plugin = new $class();
+        $plugin = $class::getInstance();
         return $plugin;
     }
 

@@ -68,7 +68,7 @@ if(!empty($heliumMessages)){
 
         }
 
-        $template = sprintf($template, '', $msg['text'], $type, $icon);
+        $template = sprintf($template, '', html_entity_decode($msg['text']), $type, $icon);
 
         RMTemplate::get()->add_inline_script($template, 1);
 

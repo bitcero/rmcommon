@@ -43,7 +43,7 @@ class RMTemplate
     /**
      * Template Vars
      */
-    private $tpl_vars = array();
+    private $tpl_vars = ['charset' => 'UTF-8'];
     /**
      * Messages for template
      */
@@ -288,7 +288,8 @@ class RMTemplate
                $xoopsModule,
                $xoopsModuleConfig,
                $cuIcons,
-               $cuServices;
+               $cuServices,
+               $xoopsSecurity;
 
         if ('' == $type && is_file($file)) {
             $template = $file;

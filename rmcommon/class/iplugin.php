@@ -70,4 +70,6 @@ abstract class RMIPlugin
         return RMCURL . '/plugins/' . $this->get_info('dir');
     }
 
+    abstract static function getInstance();
+
 }

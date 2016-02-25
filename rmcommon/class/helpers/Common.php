@@ -47,6 +47,18 @@ use Common\Core\Helpers\Services;
 class Common
 {
     /**
+     * Common Utilities settings
+     * @var
+     */
+    public $settings;
+
+    public function __construct()
+    {
+        global $cuSettings;
+        $this->settings = $cuSettings;
+    }
+
+    /**
      * @return RMBreadCrumb
      */
     public function breadcrumb()
@@ -236,6 +248,15 @@ class Common
         }
 
         return $instance;
+    }
+
+    /**
+     * @return Xoops
+     */
+    public function db(){
+        global $xoopsDB;
+
+        return $xoopsDB;
     }
 
 }
