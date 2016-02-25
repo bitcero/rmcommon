@@ -173,16 +173,16 @@ class RMFormGroups extends RMFormElement
 					$rtn .= " checked";
 				}
 			}
-			$rtn .= " data-checkbox=\"$name-chks\"> ".__('All','rmcommon')."</label></li>";
+			$rtn .= ">".__('All','rmcommon')."</label></li>";
 			while ($row = $db->fetchArray($result)){
 				
 				$rtn .= "<li><label><input $attributes value='$row[groupid]'";
 				if (is_array($this->_select)){
-					if (in_array($row['groupid'], $this->_select)){
-						$rtn .= " checked='checked'";
+					if (in_array($row['groupid'], $selected)){
+						$rtn .= " checked";
 					}
 				}
-				$rtn .= " data-oncheck=\"$name-chks\"> $row[name]</label>";
+				$rtn .= "> $row[name]</label>";
 				
 				if ($this->_showdesc){
 					$rtn .= "<br /><small style='font-size: 10px;' class='description'>$row[description]</small>";
@@ -209,7 +209,7 @@ class RMFormGroups extends RMFormElement
 			while ($row = $db->fetchArray($result)){
 				$rtn .= "<option value='$row[groupid]'";
 				if (is_array($this->_select)){
-					if (in_array($row['groupid'], $this->_select)){
+					if (in_array($row['groupid'], $selected)){
 						$rtn .= " selected";
 					}
 				}

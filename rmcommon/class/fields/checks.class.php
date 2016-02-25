@@ -86,7 +86,7 @@ class RMFormCheck extends RMFormElement
             $rtn .= "";
             $cols = 1;
             foreach ($this->_options as $k => $v) {
-                $rtn .= "<label class='checkbox-inline'><input $attributes value='$v[value]' ";
+                $rtn .= "<label class='checkbox-inline'><input $attributes name='".$v['name']."[]' value='$v[value]' ";
                 //if ($v['state']==1){
                 $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked " : '');
                 //}
@@ -96,7 +96,7 @@ class RMFormCheck extends RMFormElement
             $rtn .= "";
         } else {
             foreach ($this->_options as $k => $v) {
-                $rtn .= "<div class='checkbox'><label><input $attributes value='$v[value]' ";
+                $rtn .= "<div class='checkbox'><label><input $attributes name='$v[name]' value='$v[value]' ";
                 //if ($v['state']==1){
                 //	$rtn .= "checked='checked' ";
                 //}
