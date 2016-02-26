@@ -785,10 +785,13 @@ $(document).ready(function () {
             target.html('<div class="text-success"><span class="fa fa-spinner fa-pulse"></span> ' + cuLanguage.downloadNews + '</div>');
 
         var bcontainer = $("*[data-boxes='load']");
+        var lang = $("html").attr('lang');
+        lang = undefined == lang ? 'en' : lang;
 
         var params = {
             module: module,
-            CU_TOKEN: $("#cu-token").val()
+            CU_TOKEN: $("#cu-token").val(),
+            lang: lang
         };
 
         $.get(xoUrl + '/modules/rmcommon/ajax/module-info.php', params, function (response) {

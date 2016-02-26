@@ -249,12 +249,14 @@ class RMImageResizer
     static public function resize( $file, $params ){
 
         if ( empty( $file ) ) {
-            trigger_error(__('Resize Image: You must provide a valid file for image.', 'rmcommon'), E_WARNING);
+            trigger_error(__('Resize Image: You must provide a valid file for image.', 'rmcommon'), E_USER_WARNING);
             return false;
         }
 
         if ( is_array( $params ) )
             $params = (object) $params;
+
+
 
         /*
          * Default method for resize images is "crop"
@@ -271,6 +273,10 @@ class RMImageResizer
         $params->quality = !isset( $params->quality ) ? 80 : $params->quality;
 
         $file = str_replace( XOOPS_URL, XOOPS_ROOT_PATH, $file);
+
+        if(!file_exists($file)){
+            return false;
+        }
 
         try{
             $data = getimagesize( $file );
