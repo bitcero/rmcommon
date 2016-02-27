@@ -37,7 +37,6 @@ class RmcommonCorePreload extends XoopsPreloadItem
         }
 
         require_once XOOPS_ROOT_PATH . '/modules/rmcommon/loader.php';
-
     }
 
     /**

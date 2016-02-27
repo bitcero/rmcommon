@@ -18,6 +18,18 @@ class Rmcommon_Config_Item extends RMObject
      */
     public function __construct( $name = '', $mod = 0 ){
 
+        // Prevent to be translated
+        $this->noTranslate = [
+            'conf_name',
+            'conf_title',
+            'conf_desc',
+            'conf_formtype',
+            'conf_valuetype'
+        ];
+
+        $this->ownerName = 'rmcommon';
+        $this->ownerType = 'module';
+
         $this->db =& XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("config");
         $this->setNew();

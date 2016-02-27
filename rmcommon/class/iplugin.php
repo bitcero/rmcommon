@@ -62,4 +62,14 @@ abstract class RMIPlugin
 
     }
 
+    public function path(){
+        return RMCPATH . '/plugins/' . $this->get_info('dir');
+    }
+
+    public function url(){
+        return RMCURL . '/plugins/' . $this->get_info('dir');
+    }
+
+    abstract static function getInstance();
+
 }

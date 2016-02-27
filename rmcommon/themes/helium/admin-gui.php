@@ -7,6 +7,8 @@ Author: Eduardo Cortés
 Author URI: http://www.eduardocortes.mx
 */
 
+global $common;
+
 load_theme_locale('helium', '', true);
 
 global $xoopsUser, $xoopsSecurity, $cuIcons, $cuServices;
@@ -77,15 +79,16 @@ foreach ($modulesList as $item) {
 }
 
 // Other Menus
-$other_menu = RMEvents::get()->run_event('helium.other.menu');
+$other_menu = [];
+$other_menu = $common->events()->trigger('helium.other.menu', $other_menu);
 
 // Left Widgets
 $left_widgets = array();
-$left_widgets = RMEvents::get()->run_event('rmcommon.load.left.widgets', $left_widgets);
+$left_widgets = $common->events()->trigger('rmcommon.load.left.widgets', $left_widgets);
 
 // Right widgets
 $right_widgets = array();
-$right_widgets = RMEvents::get()->run_event('rmcommon.load.right.widgets', $right_widgets);
+$right_widgets = $common->events()->trigger('rmcommon.load.right.widgets', $right_widgets);
 
 $this->add_style('bootstrap.min.css', 'helium', array('id' => 'bootstrap-css'), 'theme');
 $this->add_style('rmcommon.min.css', 'helium', array(), 'theme');
@@ -157,11 +160,15 @@ $helpLinks = RMTemplate::getInstance()->help();
 
 // Body classess
 if ( !array_key_exists('sidebar', $_COOKIE) || $_COOKIE['sidebar'] == 'visible' ){
-    RMTemplate::getInstance()->add_body_class('sidebar');
+    RMTemplate::getInstance()->add_attribute('html', ['class' => 'sidebar']);
 }
 if (RMBreadCrumb::get()->count() > 0) {
-    RMTemplate::getInstance()->add_body_class('with-breadcrumb');
+    RMTemplate::getInstance()->add_attribute('html', ['class' => 'with-breadcrumb']);
 }
+
+RMTemplate::getInstance()->add_attribute('html', [
+    'class' => RMTemplate::getInstance()->body_classes()
+]);
 
 // The logo
 $logoHelium = trim($cuSettings->helium_logo);

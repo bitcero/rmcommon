@@ -9,40 +9,42 @@
 // --------------------------------------------------------------
 
 /**
-* Class to manage plugins objects
-*/
-
+ * Class to manage plugins objects
+ */
 class RMPlugin extends RMObject
 {
     private $dir = '';
     private $settings = array();
+
+    // The file used for plugin
+    private $file = '';
     /**
-    * The plugin object
-    */
+     * The plugin object
+     */
     private $plugin;
 
-	public function __construct($id=null){
-
-		$this->db = XoopsDatabaseFactory::getDatabaseConnection();
+    public function __construct($id = null)
+    {
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("mod_rmcommon_plugins");
         $this->setNew();
         $this->initVarsFromTable();
 
-        if ($id==null){
+        if ($id == null) {
             return null;
         }
 
         // If provided id is numeric
-        if (is_numeric($id) && $this->loadValues($id)){
-			$this->unsetNew();
+        if (is_numeric($id) && $this->loadValues($id)) {
+            $this->unsetNew();
             $this->load_from_dir($this->getVar('dir'));
-			return true;
+            return true;
         }
 
         // If id is a directory name
         $this->primary = 'dir';
-        if ($this->loadValues($id)){
-			$this->unsetNew();
+        if ($this->loadValues($id)) {
+            $this->unsetNew();
             $this->load_from_dir($this->getVar('dir'));
         }
 
@@ -52,64 +54,94 @@ class RMPlugin extends RMObject
     }
 
     /**
-    * This method must be called before to access the plugin methods
-    * @param string Directory name
-    */
-    public function load_from_dir($dir){
-
+     * This method must be called before to access the plugin methods
+     * @param string Directory name
+     * @return bool
+     */
+    public function load_from_dir($dir)
+    {
         if ($dir == '') return false;
 
-        $path = RMCPATH.'/plugins/'.$dir;
+        $path = RMCPATH . '/plugins/' . $dir;
 
-        if (!is_file($path.'/'.strtolower($dir).'-plugin.php')) return false;
+        // backward compatibility
+        $oldFile = $path . '/' . strtolower($dir) . '-plugin.php';
+        $newFile = $path . '/' . strtolower($dir) . '.php';
 
-        include_once $path.'/'.strtolower($dir).'-plugin.php';
+        if (is_file($oldFile)) {
+            $this->file = $oldFile;
+            include_once $oldFile;
+        } elseif (is_file($newFile)) {
+            $this->file = $newFile;
+            include_once $newFile;
+        } else {
+            return false;
+        }
 
         $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
 
-        $class = ucfirst($cleanDir).'CUPlugin';
+        $class = ucfirst($cleanDir) . 'CUPlugin';
 
         if (!class_exists($class)) return false;
 
         $this->plugin = new $class();
         $this->setVar('dir', $dir);
 
-        foreach ($this->plugin->info() as $k => $v){
-			$this->setVar($k, $v);
+        foreach ($this->plugin->info() as $k => $v) {
+            $this->setVar($k, $v);
         }
 
         return true;
     }
 
-	public function id(){
-		return $this->getVar('id_plugin');
-	}
+    public function id()
+    {
+        return $this->getVar('id_plugin');
+    }
 
-	public function plugin($dir = ''){
+    public function plugin($dir = '')
+    {
 
-		$dir = $dir=='' ? $this->getVar('dir') : $dir;
+        $dir = $dir == '' ? $this->getVar('dir') : $dir;
 
         $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
 
-		$class = ucfirst($cleanDir).'CUPlugin';
+        $class = ucfirst($cleanDir) . 'CUPlugin';
 
-		if (is_a($this->plugin, $class))
-			return $this->plugin;
+        if (is_a($this->plugin, $class))
+            return $this->plugin;
 
-		if (!class_exists($class))
-			include_once RMCPATH.'/plugins/'.$dir.'/'.strtolower($dir).'-plugin.php';
+        if (!class_exists($class)) {
 
-		$plugin = new $class();
-		return $plugin;
+            if ($this->file == '') {
+                $oldFile = RMCPATH . '/plugins/' . $dir . '/' . strtolower($dir) . '-plugin.php';
+                $newFile = RMCPATH . '/plugins/' . $dir . '/' . strtolower($dir) . '.php';
 
-	}
+                if (file_exists($oldFile)) {
+                    $this->file = $oldFile;
+                    include_once $oldFile;
+                } elseif (file_exists($newFile)) {
+                    $this->file = $newFile;
+                    include_once $newFile;
+                } else {
+                    return false;
+                }
+            }
+        }
 
-	public function get_info($name){
-		return $this->plugin()->get_info($name);
-	}
+        $plugin = new $class();
+        return $plugin;
 
-    public function on_install(){
-        if ( false == $this->plugin->on_install() ) {
+    }
+
+    public function get_info($name)
+    {
+        return $this->plugin()->get_info($name);
+    }
+
+    public function on_install()
+    {
+        if (false == $this->plugin->on_install()) {
             $this->addError($this->plugin->errors());
             return false;
         }
@@ -117,8 +149,9 @@ class RMPlugin extends RMObject
         return true;
     }
 
-    public function on_update(){
-        if ( !$this->plugin->on_update() ) {
+    public function on_update()
+    {
+        if (!$this->plugin->on_update()) {
             $this->addError($this->plugin->errors());
             return false;
         }
@@ -126,8 +159,9 @@ class RMPlugin extends RMObject
         return true;
     }
 
-    public function on_uninstall(){
-        if ( !$this->plugin->on_uninstall() ) {
+    public function on_uninstall()
+    {
+        if (!$this->plugin->on_uninstall()) {
             $this->addError($this->plugin->errors());
             return false;
         }
@@ -135,8 +169,9 @@ class RMPlugin extends RMObject
         return true;
     }
 
-    public function on_activate($q){
-        if ( !$this->plugin->on_activate() ) {
+    public function on_activate($q)
+    {
+        if (!$this->plugin->on_activate()) {
             $this->addError($this->plugin->errors());
             return false;
         }
@@ -144,11 +179,13 @@ class RMPlugin extends RMObject
         return true;
     }
 
-    public function options(){
+    public function options()
+    {
         return $this->plugin->options();
     }
 
-    private function insert_configs(){
+    private function insert_configs()
+    {
 
         $dir = $this->plugin()->get_info('dir');
         $pre_options = $this->plugin->options();
@@ -158,17 +195,17 @@ class RMPlugin extends RMObject
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $c_options = RMFunctions::plugin_settings($dir);
 
-        if (empty($c_options)){
+        if (empty($c_options)) {
 
             $sql = '';
-            foreach ($pre_options as $name => $option){
-                $sql .= $sql==''?'':',';
+            foreach ($pre_options as $name => $option) {
+                $sql .= $sql == '' ? '' : ',';
                 $sql .= "('$dir','$name','plugin','$option[value]','$option[valuetype]')";
             }
 
-            $sql = "INSERT INTO ".$db->prefix("mod_rmcommon_settings")." (`element`,`name`,`type`,`value`,`valuetype`) VALUES ".$sql;
+            $sql = "INSERT INTO " . $db->prefix("mod_rmcommon_settings") . " (`element`,`name`,`type`,`value`,`valuetype`) VALUES " . $sql;
 
-            if(!$db->queryF($sql)){
+            if (!$db->queryF($sql)) {
                 $this->addError($this->db->error());
                 return false;
             } else {
@@ -178,14 +215,14 @@ class RMPlugin extends RMObject
         } else {
 
             $sql = '';
-            foreach ($pre_options as $name => $option){
+            foreach ($pre_options as $name => $option) {
 
-                if (isset($c_options[$name])){
+                if (isset($c_options[$name])) {
                     $option['value'] = $c_options[$name]['value'];
-                    $sql = "UPDATE ".$db->prefix("mod_rmcommon_settings")." SET value='$option[value]' WHERE element='$dir' AND type='plugin' AND name='$name'";
+                    $sql = "UPDATE " . $db->prefix("mod_rmcommon_settings") . " SET value='$option[value]' WHERE element='$dir' AND type='plugin' AND name='$name'";
                     $db->queryF($sql);
                 } else {
-                    $sql = "INSERT INTO ".$db->prefix("mod_rmcommon_settings")." (`element`,`name`,`type`,`value`,`valuetype`) VALUES
+                    $sql = "INSERT INTO " . $db->prefix("mod_rmcommon_settings") . " (`element`,`name`,`type`,`value`,`valuetype`) VALUES
                             ('$dir','$name','plugin','$option[value]','$option[valuetype]')";
                     $db->queryF($sql);
                 }
@@ -196,23 +233,25 @@ class RMPlugin extends RMObject
         return true;
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->insert_configs();
 
-        if ($this->isNew()){
+        if ($this->isNew()) {
             return $this->saveToTable();
         } else {
             return $this->updateTable();
         }
     }
 
-    public function delete(){
+    public function delete()
+    {
 
         $dir = $this->plugin()->get_info('dir');
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $sql = "DELETE FROM ".$db->prefix("mod_rmcommon_settings")." WHERE element='$dir' AND type='plugin'";
-        if(!$db->queryF($sql)){
+        $sql = "DELETE FROM " . $db->prefix("mod_rmcommon_settings") . " WHERE element='$dir' AND type='plugin'";
+        if (!$db->queryF($sql)) {
             $this->addError($db->error());
             return false;
         }

@@ -31,6 +31,8 @@
 $p = isset($_REQUEST['p']) ? $_REQUEST['p'] : '';
 if ($p == '') {
     define('RMCLOCATION', 'plugins');
+} else {
+    define('RMCLOCATION', $p . '-main');
 }
 include_once '../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
@@ -45,7 +47,10 @@ function rm_reload_plugins()
 
     foreach ($dir_list as $dir) {
 
-        if (!file_exists($path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php')) continue;
+        $oldFile = $path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php';
+        $newFile = $path . '/' . $dir . '/' . strtolower($dir) . '.php';
+
+        if (!file_exists($oldFile) && !file_exists($newFile)) continue;
 
         $phand = new RMPlugin($dir); // PLugin handler
 
@@ -77,7 +82,10 @@ function show_rm_plugins()
 
     foreach ($dir_list as $dir) {
 
-        if (!file_exists($path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php')) continue;
+        $oldFile = $path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php';
+        $newFile = $path . '/' . $dir . '/' . strtolower($dir) . '.php';
+
+        if (!file_exists($oldFile) && !file_exists($newFile)) continue;
 
         $phand = new RMPlugin($dir); // PLugin handler
 
@@ -103,7 +111,7 @@ function show_rm_plugins()
     //RMFunctions::create_toolbar();
     xoops_cp_header();
 
-    include RMTemplate::get()->get_template('rmc-plugins.php', 'module', 'rmcommon');
+    include RMTemplate::getInstance()->path('rmc-plugins.php', 'module', 'rmcommon');
 
     xoops_cp_footer();
 
@@ -623,7 +631,10 @@ function main_rm_plugin($dir)
 
     $path = RMCPATH . '/plugins';
 
-    if (!file_exists($path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php')) {
+    $oldFile = $path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php';
+    $newFile = $path . '/' . $dir . '/' . strtolower($dir) . '.php';
+
+    if (!file_exists($oldFile) && !file_exists($newFile)) {
         header("location: plugins.php");
         die();
     }
@@ -640,6 +651,7 @@ function main_rm_plugin($dir)
     }
 
     $plugin = Common\Core\Helpers\Plugins::getInstance()->load($dir);
+
     if (!method_exists($plugin, 'main')) {
         header("location: plugins.php");
         die();
@@ -654,13 +666,21 @@ function main_rm_plugin($dir)
 // Allow to plugins to take control over this section and show their own options
 RMEvents::get()->run_event('rmcommon.plugins.check.actions');
 
-$dir = rmc_server_var($_REQUEST, 'p', '');
+/**
+ * If plugin have a control panel then we need to detect when user is
+ * requesting this.
+ */
+$dir = $common->httpRequest()->request('p', 'string', '');
+
 if ($dir != '') {
     main_rm_plugin($dir);
     die();
 }
 
-$action = rmc_server_var($_REQUEST, 'action', '');
+/**
+ * Trigger action
+ */
+$action = $common->httpRequest()->request('action', 'string', '');
 
 switch ($action) {
     case 'install':

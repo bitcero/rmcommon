@@ -106,7 +106,7 @@ class HeliumHelper
      */
     public function moduleMenu($m){
 
-        global $xoopsModule, $xoopsUser;
+        global $xoopsModule, $xoopsUser, $common;
 
         if(!is_a($xoopsModule, 'XoopsModule')){
             $mod = RMModules::load_module($m);
@@ -162,6 +162,9 @@ class HeliumHelper
                 )
             );
         }
+
+        // Integration with other components
+        $return_menu = $common->events()->trigger('rmcommon.module.menu', $return_menu, $m);
 
         return $return_menu;
 

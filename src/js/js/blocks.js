@@ -439,6 +439,8 @@ $(document).ready(function(){
             return false;
             
         }, 'json');
+
+        return false;
         
     });
     

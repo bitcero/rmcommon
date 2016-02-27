@@ -56,34 +56,48 @@
             </li>
 
             <?php if($other_menu): ?>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                        <i class="xo-icon xicon-gear"></i>
-                        <?php _e('Theme','rmcommon'); ?>
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <?php foreach($other_menu as $menu): ?>
-                            <?php if(isset($menu['divider'])): ?>
-                                <li class="divider"></li>
-                            <?php else: ?>
-                                <li<?php if(isset($menu['options'])): ?> class="dropdown-submenu"<?php endif; ?>>
-                                    <a href="<?php echo $menu['link']; ?>"<?php if(isset($menu['options'])): ?> tabindex="-1"<?php endif; ?>>
-                                        <?php echo $xoFunc->getIcon($menu); ?>
-                                        <?php echo $menu['title']; ?>
-                                    </a>
-                                    <?php if(isset($menu['options'])): ?>
-                                        <ul class="dropdown-menu">
-                                            <?php foreach($menu['options'] as $sub): ?>
-                                                <li><a href="<?php echo $sub['link']; ?>"><?php echo $sub['title']; ?></a></li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                </li>
+                <?php foreach($other_menu as $item): ?>
+                    <li class="dropdown <?php echo $item['class']; ?>">
+                        <a href="<?php echo $item['link']; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"<?php echo array_key_exists('title', $item) ? ' title="' . $item['title'] . '"' : ''; ?>>
+                            <?php echo array_key_exists('icon', $item) ? $cuIcons->getIcon($item['icon']) : ''; ?>
+                            <?php if(array_key_exists('caption', $item)): ?>
+                            <span class="caption"><?php echo $item['caption']; ?></span>
                             <?php endif; ?>
-                        <?php endforeach; ?>
-                    </ul>
-                </li>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <?php foreach($item['menu'] as $menu): ?>
+                                <?php if(isset($menu['divider'])): ?>
+                                    <li class="divider"></li>
+                                <?php else: ?>
+                                    <li<?php if(isset($menu['options'])): ?> class="dropdown-submenu"<?php endif; ?>>
+                                        <a
+                                            href="<?php echo $menu['link']; ?>"<?php if(isset($menu['options'])): ?> tabindex="-1"<?php endif; ?>
+                                            <?php if(array_key_exists('attributes', $menu)): ?><?php echo $xoFunc->render_attributes($menu['attributes']); ?><?php endif; ?>
+                                        >
+                                            <?php echo $cuIcons->getIcon($menu['icon']); ?>
+                                            <?php echo $menu['title']; ?>
+                                        </a>
+                                        <?php if(isset($menu['options'])): ?>
+                                            <ul class="dropdown-menu">
+                                                <?php foreach($menu['options'] as $sub): ?>
+                                                    <?php if( isset( $sub['divider'] ) ): ?>
+                                                        <li class="divider"></li>
+                                                        <?php continue; endif; ?>
+                                                    <li>
+                                                        <a href="<?php echo $menu['link']; ?>">
+                                                            <?php echo $cuIcons->getIcon($sub['icon']); ?>
+                                                            <?php echo $sub['title']; ?>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </li>
+                <?php endforeach; ?>
             <?php endif; ?>
 
             <li class="xo-upd-notifier" style="display: none;">
