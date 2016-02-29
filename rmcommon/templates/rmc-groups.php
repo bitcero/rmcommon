@@ -1,12 +1,17 @@
 <h1 class="cu-section-title"><?php _e('Existing Groups', 'rmcommon'); ?></h1>
 
-<div class="panel">
+<div class="panel panel-blue-grey">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <?php _e('Existing Groups', 'rmcommon'); ?>
+        </h3>
+    </div>
         <div class="table-responsive">
 
             <table class="table table-hover table-striped activator-container" id="groups-list">
                 <thead>
                 <tr>
-                    <th class="text-center">&nbsp;</th>
+                    <th class="text-center" style="width: 40px;">&nbsp;</th>
                     <th class="text-center"><?php _e('ID', 'rmcommon'); ?></th>
                     <th><?php _e('Name', 'rmcommon'); ?></th>
                     <th><?php _e('Description', 'rmcommon'); ?></th>
