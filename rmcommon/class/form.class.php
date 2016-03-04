@@ -72,7 +72,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
      * Sets the default class for new fields
      * @var string
      */
-    public $fieldClass = 'form-control';
+    public $fieldClass = '';
 
     private $_fields = array();
     protected $_name = '';

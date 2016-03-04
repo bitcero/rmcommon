@@ -95,14 +95,24 @@ class RMFormButtonGroup extends RMFormElement
 		$this->setCaption($caption);
 		$this->sep = $separator;	
 	}
-	
-	/**
-	 * Agrega botones al grupo basandose en {@link EXMButton}
-	 * @param string $name Nombre del Bot?n
-	 * @param string $value Texto del bot?n
-	 * @param string $type Tipo de bot?n. Ve?se {@link EXMButton}
-	 */
+
+    /**
+     * Adds a new button to group
+     *
+     * @param string|object $name
+     * @param $value
+     * @param string $type
+     * @param string $extra
+     * @param bool $ok
+     * @return bool
+     */
 	public function addButton($name, $value, $type = 'button', $extra='', $ok=false){
+
+        if(is_a($name, 'RMFormButton')){
+            $this->buttons[] = $name;
+            return true;
+        }
+
 		$index = count($this->buttons);
 		$this->buttons[$index] = new RMFormButton($value,'', $type);
 		if (trim($extra)!='') $this->buttons[$index]->setExtra($extra);

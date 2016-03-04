@@ -19,6 +19,26 @@ class RmcommonCorePreload extends XoopsPreloadItem
     public function eventCoreHeaderEnd()
     {
 
+        /**
+         * Use internal blocks manager if enabled
+         */
+        $config = RMSettings::cu_settings();
+        if ($config->blocks_enable) {
+            global $xoopsTpl;
+            $bks = RMBlocksFunctions::construct_blocks();
+            $bks = RMEvents::get()->trigger('rmcommon.retrieve.xoops.blocks', $bks);
+            $b =& $xoopsTpl->get_template_vars('xoBlocks');
+            if (is_array($bks)) {
+                $blocks = array_merge($b, $bks);
+            } else {
+                $blocks = $b;
+            }
+
+            $xoopsTpl->assign_by_ref('xoBlocks', $blocks);
+            unset($b, $bks);
+        }
+
+
         RMEvents::get()->trigger('rmcommon.core.header.end');
 
     }
@@ -117,11 +137,11 @@ class RmcommonCorePreload extends XoopsPreloadItem
         // Template
         $tpl = $params[1];
         // Blocks
-        //$blocks =& $params[2];
+        $blocks =& $params[2];
 
         /**
          * Use internal blocks manager if enabled
-         */
+         *
         $config = RMSettings::cu_settings();
         if ($config->blocks_enable) {
             global $xoopsTpl;
@@ -132,13 +152,13 @@ class RmcommonCorePreload extends XoopsPreloadItem
                 $blocks = array_merge($b, $bks);
             } else {
                 $blocks = $b;
-            }*/
+            }*
             //$xoopsTpl->assign_by_ref('xoBlocks', $blocks);
 
             $xpb->blocks = $blocks;
 
             unset($b, $bks);
-        }
+        }*/
 
         $blocks = RMEvents::get()->trigger('rmcommon.retrieve.xoops.blocks', $blocks, $xpb, $tpl);
 

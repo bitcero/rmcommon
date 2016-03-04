@@ -283,9 +283,10 @@ abstract class RMActiveRecord
     /**
      * Retrieves all results from a database query and assign all data to a stdClass object.
      * @param database results $results
+     * @param bool $object If true, returns an object, false returns an array
      * @return array
      */
-    public function walk_results( $results = null ){
+    public function walk_results( $results = null, $object = true ){
 
         if ( $results == null )
             $results = $this->results;
@@ -294,7 +295,11 @@ abstract class RMActiveRecord
 
         while( $row = $this->db->database->fetchArray( $results ) ){
 
-            $data[] = (object) $row;
+            if($object){
+                $data[] = (object) $row;
+            } else {
+                $data[] = $row;
+            }
 
         }
 

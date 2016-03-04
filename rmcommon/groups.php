@@ -22,7 +22,7 @@ function show_groups_list(){
 
     define('RMCSUBLOCATION', 'allgroups');
 
-    list($total) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT COUNT(*) FROM " . $xoopsDB->prefix("groups_users_link") ) );
+    list($total) = $xoopsDB->fetchRow( $xoopsDB->query( "SELECT COUNT(*) FROM " . $xoopsDB->prefix("groups")));
     $navigation = new RMPageNav( $total, 20, RMHttpRequest::get( 'page', 'integer', 1 ) );
     $navigation->target_url( RMCURL . '/users.php?action=groups&amp;page={PAGE_NUM}' );
 

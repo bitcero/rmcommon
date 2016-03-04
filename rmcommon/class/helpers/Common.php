@@ -237,6 +237,13 @@ class Common
         return \Rmcommon_Ajax::getInstance();
     }
 
+    public function security(){
+        global $xoopsSecurity;
+
+        return $xoopsSecurity;
+
+    }
+
     /**
      * @return Common
      */

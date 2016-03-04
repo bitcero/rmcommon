@@ -33,7 +33,7 @@ var cuLanguage = {
 
 <?php if ( RMCLOCATION == 'groups' ): ?>
 
-    confirmDelete: '<?php _e('Do you really want to delete selected groups?\n\nPlease note that this action can not be undo.', 'rmcommon' ); ?>',
+    confirmDelete: '<?php _e('Do you really want to delete selected groups? Please note that this action can not be undo.', 'rmcommon' ); ?>',
 
 <?php elseif ( RMCLOCATION == 'blocks' ): ?>
 
