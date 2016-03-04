@@ -30,10 +30,10 @@ trait RMModels
             return false;
 
         $path = XOOPS_ROOT_PATH . '/modules/' . $module . ( $cp ? '/admin' : '' ) . '/models';
-        $class = ucfirst( $module ) . '_' . ucfirst( $model ) . '_Model' .  ( $cp ? '_Admin' : '' );
+        $class = ucfirst( $module ) . '_' . ucfirst( $model ) .  ( $cp ? '_Admin_Model' : '_Model' );
 
-        if ( is_file( $path .'/' . strtolower( $model ) . '-model.php' ) ) {
-            include_once  $path .'/' . strtolower( $model ) . '-model.php';
+        if ( is_file( $path .'/' . strtolower( $model ) . '.php' ) ) {
+            include_once  $path .'/' . strtolower( $model ) . '.php';
             $model = new $class();
         } else
 
