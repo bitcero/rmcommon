@@ -129,22 +129,7 @@ class RMFormButtonGroup extends RMFormElement
 	public function getButtons(){
 		return $this->buttons;
 	}
-	/**
-	 * Establece el contenido extra para un determinado bot?n.
-	 * El par?metro pasado a esta funci?n puede contener c?digo JavaScript o
-	 * cualquier otro dato que se desee pasar a la etiqueta <input .. />
-	 * @param string $name Identificado del bot?n
-	 * @param string $extra  Contenido a insertar
-	 */
-	public function setExtra($name, $extra){
-		//if (!isset($this->buttons[$name])) return;
-		foreach ($this->buttons as $index => $button){
-			if ($button->getName()==$name){
-				$this->buttons[$index]->setExtra($extra);
-				break;
-			}
-		}
-	}
+
 	/**
 	 * Genera el c?digo HTML para el grupo de botones.
 	 * Lo que esta funci?n hace es llamar al m?todo render() de cada

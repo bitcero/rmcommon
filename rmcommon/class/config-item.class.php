@@ -30,7 +30,7 @@ class Rmcommon_Config_Item extends RMObject
         $this->ownerName = 'rmcommon';
         $this->ownerType = 'module';
 
-        $this->db =& XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("config");
         $this->setNew();
         $this->initVarsFromTable();

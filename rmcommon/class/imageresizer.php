@@ -372,4 +372,14 @@ class RMImageResizer
         return $image_resize;
 
     }
+
+    static function getInstance(){
+        static $instance;
+
+        if(!isset($instance)){
+            $instance = new RMImageResizer();
+        }
+
+        return $instance;
+    }
 }

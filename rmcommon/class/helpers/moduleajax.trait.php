@@ -27,15 +27,6 @@ trait RMModuleAjax
     }
 
     /**
-     * Alias for prepare()
-     * @deprecated
-     */
-    public function prepare_ajax_response()
-    {
-        $this->prepare();
-    }
-
-    /**
      * Sends an AJAX response to client.
      * Each parameter correspond to a specifi data to be sent via AJAX.
      * <h3>$data parameter</h3>
@@ -70,6 +61,29 @@ trait RMModuleAjax
         echo json_encode($data);
         die();
 
+    }
+
+    public function responseRaw($data){
+        echo json_encode($data);
+        die();
+    }
+
+    public function notifyError($message, $token = 1){
+        $this->response($message, 1, $token == 1 ? 1 : 0, [
+            'notify' => [
+                'type' => 'alert-danger',
+                'icon' => 'svg-rmcommon-error'
+            ]
+        ]);
+    }
+
+    /**
+     * Alias for prepare()
+     * @deprecated
+     */
+    public function prepare_ajax_response()
+    {
+        $this->prepare();
     }
 
     /**

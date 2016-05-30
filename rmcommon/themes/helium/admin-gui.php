@@ -91,8 +91,8 @@ $right_widgets = array();
 $right_widgets = $common->events()->trigger('rmcommon.load.right.widgets', $right_widgets);
 
 $this->add_style('bootstrap.min.css', 'helium', array('id' => 'bootstrap-css'), 'theme');
-$this->add_style('rmcommon.min.css', 'helium', array(), 'theme');
-$this->add_style('helium.min.css', 'helium', array(), 'theme');
+$this->add_style('rmcommon.min.css', 'helium', array('id' => 'rmcommon-css'), 'theme');
+$this->add_style('helium.min.css', 'helium', array('id' => 'helium-css'), 'theme');
 
 /*
 $color_scheme = isset($_COOKIE['color_scheme']) ? $_COOKIE['color_scheme'] : 'theme-default.css';

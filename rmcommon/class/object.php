@@ -455,7 +455,7 @@ class RMObject
                 break;
             case XOBJ_DTYPE_ARRAY:
                 if (!is_array($ret) && trim($ret) != '') {
-                    $ret =& unserialize($ret);
+                    $ret = unserialize($ret);
                 } else {
                     $ret = $ret;
                 }
@@ -524,7 +524,7 @@ class RMObject
      */
     public function cleanVars()
     {
-        $ts =& TextCleaner::getInstance();
+        $ts = TextCleaner::getInstance();
         $existing_errors = $this->getErrors();
         $this->_errors = array();
         foreach ($this->vars as $k => $v) {
@@ -1055,13 +1055,13 @@ class RMObject
         foreach ($this->_tblcolumns as $k) {
             if ($k['Extra'] == 'auto_increment') continue;
             $fields .= ($fields == '') ? "`$k[Field]`" : ", `$k[Field]`";
-            $values .= ($values == '') ? "'" . addslashes($this->cleanVars[$k['Field']]) . "'" : ", '" . addslashes($this->cleanVars[$k['Field']]) . "'";
+            $values .= ($values == '') ? "'" . $this->escape($this->cleanVars[$k['Field']]) . "'" : ", '" . $this->escape($this->cleanVars[$k['Field']]) . "'";
         }
 
         $sql .= $fields . ") VALUES (" . $values . ")";
 
         if (!$this->db->queryF($sql)) {
-            $this->addError($this->db->error());
+            $this->addError($this->db->error() . $sql);
             return false;
         } else {
             $this->setVar($this->primary, $this->db->getInsertId());
@@ -1078,7 +1078,7 @@ class RMObject
     {
         if (empty($this->_tblcolumns)) $this->getColumns();
 
-        $myts =& TextCleaner::getInstance();
+        $myts = TextCleaner::getInstance();
         $this->cleanVars();
 
         // Added for translation support
@@ -1157,6 +1157,18 @@ class RMObject
         if (method_exists($this->db, 'escape')) {
             return $this->db->escape($string);
         }
-        return mysql_real_escape_string($string);
+        return mysqli_real_escape_string($this->db->conn, $string);
+    }
+
+    public function save(){
+        if($this->isNew()){
+            return $this->saveToTable();
+        } else {
+            return $this->updateTable();
+        }
+    }
+
+    public function delete(){
+        return $this->deleteFromTable();
     }
 }

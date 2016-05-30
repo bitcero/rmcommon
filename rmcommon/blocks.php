@@ -139,7 +139,7 @@ function show_rm_blocks()
     RMTemplate::getInstance()->add_style('blocks.min.css', 'rmcommon', ['id' => 'cu-blocks-css']);
     RMTemplate::getInstance()->add_script('blocks.min.js', 'rmcommon');
     RMTemplate::getInstance()->add_script('jkmenu.js', 'rmcommon');
-    RMTemplate::getInstance()->add_style('forms.css', 'rmcommon');
+    RMTemplate::getInstance()->add_style('forms.min.css', 'rmcommon', ['id' => 'forms-css']);
     RMTemplate::getInstance()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
 
     if (!$rmc_config['blocks_enable']) {
@@ -151,7 +151,7 @@ function show_rm_blocks()
 
     xoops_cp_header();
 
-    // Available Widgets
+    // Available blocks
 
     $blocks = RMBlocksFunctions::get_available_list($modules);
 

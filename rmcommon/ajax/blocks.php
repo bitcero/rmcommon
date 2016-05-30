@@ -101,6 +101,7 @@ function insert_block(){
     $block->setVar('widget', $id);
     $block->setVar('options', is_array($bk['options']) ? serialize($bk['options']) : serialize(explode("|", $bk['options'])));
     $block->setVar('template', $bk['template']);
+    $block->setVar('bcachetime', 0);
     $block->sections(array(0));
 
     if(!$block->save())

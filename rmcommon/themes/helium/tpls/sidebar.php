@@ -28,6 +28,7 @@
                 <h4 class="menu-heading current-module-head">
                     <a href="#menu-<?php echo $currentModule->directory; ?>"><?php echo $currentModule->name; ?></a>
                 </h4>
+                <?php if(!empty($currentModule->menu)): ?>
                 <ul id="menu-<?php echo $currentModule->directory; ?>" class="current-module-menu">
                     <?php foreach ($currentModule->menu as $menu): ?>
                         <li<?php echo $menu['location'] == RMCLOCATION ? ' class="active"' : ''; ?>>
@@ -56,6 +57,7 @@
                         </li>
                     <?php endforeach; ?>
                 </ul>
+                <?php endif; ?>
             <?php endif; ?>
 
             <!-- INSTALLED MODULES MENU -->

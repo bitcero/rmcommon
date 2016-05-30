@@ -35,6 +35,8 @@ function show_groups_list(){
         $groups[] = (object) $row;
     }
 
+    $form = new RMForm('');
+
     $bc = RMBreadCrumb::get();
     $bc->add_crumb( __('Users Management', 'rmcommon'), RMCURL . '/users.php' );
     $bc->add_crumb( __('Groups', 'rmcommon') );
@@ -73,6 +75,8 @@ function show_group_form(){
     } else{
         $group = new Rmcommon_Group();
     }
+
+    $form = new RMForm('');
 
     $result = $xoopsDB->query( "SELECT * FROM " . $xoopsDB->prefix("modules") . " ORDER BY name ASC" );
     $modules = array();
@@ -125,6 +129,7 @@ function save_group_data(){
 
     $name = RMHttpRequest::post( 'name', 'string', '' );
     $description = RMHttpRequest::post( 'description', 'string', '' );
+    $icon = RMHttpRequest::post( 'icon', 'string', '' );
     $id = RMHttpRequest::post( 'id', 'integer', 0 );
 
     if( $name == '' )
@@ -154,6 +159,7 @@ function save_group_data(){
 
     $group->setVar('name', $name);
     $group->setVar('description', $description);
+    $group->setVar('icon', $icon);
 
     if ( !$group->save() )
         $ajax->ajax_response(

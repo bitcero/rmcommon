@@ -28,7 +28,7 @@ $rmEvents->run_event("rmcommon.form.loader");
 /**
  * @desc Controlador del editor TinyMCE
  */
-$tiny =& TinyEditor::getInstance();
+$tiny = TinyEditor::getInstance();
 $tiny->configuration = array('mode' => 'exact',
     'theme' => 'advanced',
     'skin' => "exm_theme",
@@ -100,7 +100,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
      */
     function __construct($title, $name = '', $action = '', $method = 'post', $addtoken = true)
     {
-        global $xoopsSecurity;
+        global $xoopsSecurity, $xoops;
 
         if (is_array($title)) {
 
@@ -126,8 +126,8 @@ class RMForm extends \Common\Core\Helpers\Attributes
             $this->set('class', 'form-horizontal');
         }
 
-        RMTemplate::getInstance()->add_style('forms.css', 'rmcommon');
-        RMTemplate::getInstance()->add_style('js-widgets.css', 'rmcommon');
+        RMTemplate::getInstance()->add_style('forms.min.css', 'rmcommon', ['id' => 'forms-css']);
+        //RMTemplate::getInstance()->add_style('js-widgets.css', 'rmcommon');
         RMTemplate::getInstance()->add_jquery(true);
         RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', array('footer' => 1));
         RMTemplate::getInstance()->add_script('forms.js', 'rmcommon', array('footer' => 1));
@@ -251,7 +251,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
      */
     public function cssfile()
     {
-        return 'forms.css';
+        return 'forms.min.css';
     }
 
     /**

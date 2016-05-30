@@ -16,11 +16,23 @@ class RMFormTimeZoneField extends RMFormElement
 	private $size = 5;
 
 	public function __construct($caption, $name, $type = 0, $multi = 0, $selected = null, $size=5){
-		$this->setName($name);
-		$this->setCaption($caption);
-		$this->multi = $multi;
-		$this->type = $type;
-		$this->selected = $selected;
+
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('type', $type == 0 ? 'select' : ($multi == 0 ? 'radio' : 'checkbox'), 'select');
+            if($multi == 1){
+                $this->setWithDefaults('multiple', null);
+            }
+            $this->setWithDefaults('selected', $selected, []);
+        }
+
+        $this->setIfNotSet('class', 'form-control');
+
+        $this->suppressRender(['caption','name','multiple','selected']);
 	}
 	public function multi(){
 		return $this->multi;
@@ -50,36 +62,34 @@ class RMFormTimeZoneField extends RMFormElement
 	public function render(){
 		include_once XOOPS_ROOT_PATH."/class/xoopslists.php";
 		$zonas = XoopsLists::getTimeZoneList();
+        $selected = $this->get('selected');
 
-		if ($this->type){
-			$rtn = "<table cellpadding='2' cellspacing='1' border='0'>";
+		if ($this->get('type') == 'readio' || $this->get('type') == 'checkbox'){
+
+            $this->suppressRender('class');
+            $attributes = $this->renderAttributeString();
+
+			$rtn = "<div class='checkbox'>";
 			foreach ($zonas as $k => $v){
-				$rtn .= "<tr><td>";
-				if ($this->multi){
-					if (!is_array($this->selected)) $this->selected=array($this->selected);
-					$rtn .= "<label><input type='checkbox' value='$k' name='".$this->getName()."[]' id='".$this->id()."[]'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " checked='checked'" : '') : '')." /> $v</label>";
+				if ($this->has('multiple')){
+					if (!is_array($selected)) $selected=array($selected);
+					$rtn .= "<label><input $attributes value='$k' ".(is_array($selected) ? (in_array($k, $selected) ? " checked='checked'" : '') : '')."> $v</label>";
 				} else {
-					$rtn .= "<label><input type='radio' value='$k' name='".$this->getName()."' id='".$this->id()."'".($k == $this->selected ? " checked='checked'" : '')." /> $v</label>";
+					$rtn .= "<label><input $attributes value='$k' ".($k == $selected ? " checked='checked'" : '')."> $v</label>";
 				}
-				$rtn .= "</td></tr>";
 				$i++;
 			}
-			$rtn .= "</table>";
+			$rtn .= "</div>";
 		} else {
-			if ($this->multi){
-				if (!is_array($this->selected)) $this->selected=array($this->selected);
-				$rtn = "<select name='".$this->getName()."[]' id='".$this->id()."[]' size='$this->size' multiple='multiple' class=\"form-control ". $this->getClass() . "\">";
-				foreach ($zonas as $k => $v){
-					$rtn .= "<option value='$k'".(is_array($this->selected) ? (in_array($k, $this->selected) ? " selected='selected'" : '') : '').">$v</option>";
-				}
-				$rtn .= "</select>";
-			} else {
-				$rtn = "<select name='".$this->getName()."' id='".$this->id()."' class=\"form-control ". $this->getClass() . "\">";
-				foreach ($zonas as $k => $v){
-					$rtn .= "<option value='$k'".($k==$this->selected ? " selected='selected'" : '').">$v</option>";
-				}
-				$rtn .= "</select>";
-			}
+
+            $attributes = $this->renderAttributeString();
+
+            if (!is_array($selected)) $selected=array($selected);
+            $rtn = "<select $attributes>";
+            foreach ($zonas as $k => $v){
+                $rtn .= "<option value='$k'".(is_array($selected) ? (in_array($k, $selected) ? " selected='selected'" : '') : '').">$v</option>";
+            }
+            $rtn .= "</select>";
 		}
 
 		return $rtn;

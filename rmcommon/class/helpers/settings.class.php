@@ -166,9 +166,9 @@ class RMSettings
                 return (object)$xoopsModuleConfig;
 
         } else {
-            $module_handler =& xoops_gethandler('module');
+            $module_handler = xoops_gethandler('module');
             $module = $module_handler->getByDirname($directory);
-            $config_handler =& xoops_gethandler('config');
+            $config_handler = xoops_gethandler('config');
             if ($module) {
 
                 $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
@@ -253,13 +253,21 @@ class RMSettings
             case 'checkbox':
                 $ele = new RMFormCheck([
                     'caption' => $field->caption,
-                    'display' => 'inline'
+                    'display' => 'inline',
+                    'name' => $field->name . ($field->type == 'array' ? '[]' : '')
                 ]);
                 $options = $field->options;
                 foreach ($options as $value => $caption) {
                     $value = defined($value) ? constant($value) : $value;
                     $caption = defined($caption) ? constant($caption) : $caption;
-                    $ele->addOption($caption, $caption['name'], $value, $value == $field->value ? 'selected' : '');
+
+                    if($field->type == 'array'){
+                        $checked = in_array($value, $field->value);
+                    } else {
+                        $checked = $value == $field->value;
+                    }
+
+                    $ele->addOption($caption, $caption['name'], $value, $checked ? 'selected' : '');
                 }
                 break;
 

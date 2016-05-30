@@ -13,6 +13,7 @@ if (!function_exists("__")){
         return $text;
     }
 }
+global $xoopsUser, $common;
 
 $modversion['name'] = 'Common Utilities';
 $modversion['version'] = 2.3;
@@ -33,7 +34,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>25,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>27,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -305,7 +306,7 @@ $cu_settings['config'][] = array(
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => defined('RMCPATH') ? '' : $xoopsSecurity->createToken(),
+    'default'       => $common->settings->secretkey != '' ? '' : password_hash( XOOPS_URL . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['GATEWAY_INTERFACE'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_ADMIN'] . $_SERVER['SERVER_SIGNATURE'] . $xoopsUser->uname(), PASSWORD_DEFAULT),
     'category'      => 'general'
 );
 

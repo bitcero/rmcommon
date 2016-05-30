@@ -139,7 +139,7 @@ class RMFormSelect extends RMFormElement
      */
     function render()
     {
-
+        $this->setIfNotSet('class', 'form-control');
         $attributes = $this->renderAttributeString();
         $selected = $this->get('value');
 

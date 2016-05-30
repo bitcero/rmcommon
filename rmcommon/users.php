@@ -295,7 +295,13 @@ function user_form($edit = false){
     $form->addElement(new RMFormTimeZoneField(__('Time zone','rmcommon'), 'timezone', 0, 0, $edit ? $user->getVar('timezone_offset') : ''));
 
     // Groups
-    $form->addElement(new RMFormGroups(__('Assign to groups','rmcommon'), 'groups', 1, 1, 3, $edit ? $user->groups() : ''));
+    $form->addElement(new RMFormGroups([
+        'caption' => __('Assign to groups','rmcommon'),
+        'name' => 'groups',
+        'multiple' => null,
+        'type' => 'checkbox',
+        'selected' => $user->groups()
+    ]));
 
     // Other options by API
     $form = RMEvents::get()->run_event('rmcommon.user.form', $form, $edit, isset($user) ? $user : null);
@@ -307,8 +313,17 @@ function user_form($edit = false){
 
     // Submit and cancel buttons
     $ele = new RMFormButtonGroup('');
-    $ele->addButton('sbt', __($edit ? 'Edit User' : 'Add user','rmcommon'), 'submit');
-    $ele->addButton('cancel', __('Cancel','global'), 'button', 'onclick="history.go(-1);"');
+    $ele->addButton(new RMFormButton([
+        'caption' => $edit ? __('Save Changes', 'rmcommon') : __('Save User', 'rmcommon'),
+        'type' => 'submit',
+        'class' => 'btn btn-primary btn-lg'
+    ]));
+    $ele->addButton(new RMFormButton([
+        'caption' => __('Cancel', 'rmcommon'),
+        'type' => 'button',
+        'class' => 'btn btn-default btn-lg',
+        'onclick' => 'history.go(-1);'
+    ]));
 
     $form->addElement($ele);
 

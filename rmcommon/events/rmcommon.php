@@ -10,7 +10,7 @@
 
 class RmcommonRmcommonPreload
 {
-	public function eventRmcommonLoadRightWidgets($widgets){
+	static function eventRmcommonLoadRightWidgets($widgets){
 
 		if(!defined('RMCLOCATION')) return null;
 
@@ -29,11 +29,11 @@ class RmcommonRmcommonPreload
 
 	}
 
-    public function eventRmcommonXoopsCommonStart(){
+    static function eventRmcommonXoopsCommonStart(){
 
     }
 
-	public function eventRmcommonXoopsCommonEnd(){
+	static function eventRmcommonXoopsCommonEnd(){
 		global $xoopsConfig;
 
         // Get preloaders from current theme
@@ -66,7 +66,7 @@ class RmcommonRmcommonPreload
      * @param array $delete <p>Settings options deleted from database table</p>
      * @return string
      */
-    public function eventRmcommonSavedSettings( $dirname, $save, $add, $delete ){
+    static function eventRmcommonSavedSettings( $dirname, $save, $add, $delete ){
 
         if ( $dirname != 'rmcommon' )
             return $dirname;
@@ -109,7 +109,7 @@ class RmcommonRmcommonPreload
         return null;
     }
 
-    public function eventRmcommonEditorTopPlugins( $plugins, $type, $id ){
+    static function eventRmcommonEditorTopPlugins( $plugins, $type, $id ){
         global $cuIcons;
 
         RMTemplate::get()->add_script( 'cu-image-mgr.js', 'rmcommon' );
@@ -126,7 +126,7 @@ class RmcommonRmcommonPreload
 
     }
 
-    public function eventRmcommonSmartyPlugins($plugins){
+    static function eventRmcommonSmartyPlugins($plugins){
         $plugins[] = RMCPATH . '/include/smarty';
         return $plugins;
     }
@@ -136,7 +136,7 @@ class RmcommonRmcommonPreload
      * @param array $services All added services
      * @return array
      */
-    public function eventRmcommonGetServices( $services ){
+    static function eventRmcommonGetServices( $services ){
 
         $services[] = array(
             'id'            => 'xoops-avatar', // provider id
