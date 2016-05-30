@@ -29,7 +29,7 @@ if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
 		    
 	    }
 	    
-	    public function validate(){ return true; }
+	    static function validate(){ return true; }
 	    
 	    public function header(){
 		    global $xoopsConfig, $xoopsUser, $xoopsModule, $xoTheme, $xoopsTpl;
@@ -45,7 +45,7 @@ if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
 	    public function footer(){
 		    global $xoopsConfig, $xoopsOption, $xoopsTpl, $xoTheme, $rmc_config, $xoopsModule;
             
-            $xoopsLogger =& XoopsLogger::getInstance();
+            $xoopsLogger = XoopsLogger::getInstance();
             $xoopsLogger->stopTime('Module display');
 
             if (!headers_sent()) {

@@ -634,6 +634,10 @@
             body.before(templates.header);
         }
 
+        if (options.solid) {
+            dialog.addClass('modal-solid');
+        }
+
         if (options.closeButton) {
             var closeButton = $(templates.closeButton);
 

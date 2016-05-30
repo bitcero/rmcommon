@@ -218,14 +218,13 @@
 
             <?php if(!empty($helpLinks)): ?>
                 <li class="help-menu<?php if(count($helpLinks) == 1): ?> dropdown<?php endif; ?>">
-                    <?php if(count($helpLinks)): ?>
+                    <?php if(count($helpLinks) == 1): ?>
                         <a href="<?php echo $helpLinks[0]['link']; ?>" data-action="help">
                             <?php echo $cuIcons->getIcon('svg-rmcommon-question'); ?>
                         </a>
                     <?php else: ?>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="fa fa-question-circle"></span>
-                            <?php _e('Help','rmcommon'); ?>
+                            <?php echo $cuIcons->getIcon('svg-rmcommon-question'); ?>
                         </a>
                         <ul class="dropdown-menu">
                             <?php foreach($helpLinks as $help): ?>

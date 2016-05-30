@@ -8,6 +8,7 @@
 //@prepros-prepend 'bootbox.js';
 //@prepros-prepend 'cu-spinner.js';
 //@prepros-prepend 'pnotify.custom.js';
+//@prepros-append 'rmtable.js';
 
 var cuHandler = {
 
@@ -55,7 +56,8 @@ var cuHandler = {
                     id: response.id != undefined ? response.id : window_id,
                     animate: false,
                     color: response.color != undefined ? response.color : '',
-                    closeButton: response.closeButton != undefined ? response.closeButton : true
+                    closeButton: response.closeButton != undefined ? response.closeButton : true,
+                    solid: response.solid != undefined ? true: false
                 });
 
             } else {
@@ -225,9 +227,14 @@ var cuHandler = {
                 id: data.windowId != undefined ? data.windowId : '',
                 animate: false,
                 closeButton: data.closeButton != undefined ? data.closeButton : true,
-                color: data.color != undefined ? data.color : ''
+                color: data.color != undefined ? data.color : '',
+                solid: data.solid != undefined ? true : false,
             });
 
+        }
+
+        if(data.dynamicTable != undefined){
+            $(data.dynamicTable.table).dynamicTable(data.dynamicTable.action,{});
         }
 
         // Reload

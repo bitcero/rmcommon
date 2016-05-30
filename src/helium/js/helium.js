@@ -97,6 +97,7 @@ function updatesNotifier(count){
             if($("html").hasClass('dashboard')){
                 setTimeout(function(){
                     $("[data-box]").trigger('containerUpdated');
+                    $("[data-container='dashboard']").trigger('containerUpdated');
                 }, 300);
             }
 
@@ -159,11 +160,11 @@ function updatesNotifier(count){
          * Modal animations
          */
         $("body").on('show.bs.modal', '.modal', function(){
-            $(this).removeClass('slideOutDown').addClass('animated slideInDown');
+            $(this).removeClass('slideOutDown').addClass('animated zoomIn');
         });
 
         $("body").on('hide.bs.modal', '.modal', function(){
-            $(this).removeClass('slideInDown').addClass('slideOutDown');
+            $(this).removeClass('slideInDown').addClass('zoomOut');
         });
 
         /**
