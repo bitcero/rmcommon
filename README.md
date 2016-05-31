@@ -16,8 +16,8 @@ More security, more stability and the last features with every module.
 ---
 
 ### Requirements
-* PHP >= 5.3
-* XOOPS >= 2.5 installed and running
+* PHP >= 5.6+
+* XOOPS >= 2.5.8 installed and running
  
 ---
 
@@ -43,6 +43,17 @@ between rmcommon and XOOPS.
    All initial configuration will be done automatically during installation process. After that, you can customize the configuration if you wish.
 
 5. Done! Common Utilities is installed.
+
+---
+
+### Update
+
+Common Utilities includes its own integrated updates system. You can update the module directly from _Updates Manager_, however, if you are upgrading from a XOOPS version prior to **2.5.8** then follow next instructions in order to prevent any issue.
+
+1. Upgrade XOOPS version to 2.5.8 by following the instructions. If you experience any problem you can follow next steps:
+    1. If you have installed protector: open file xoops_lib/modules/protector/include/precheck.inc.php and change line #6 from `require __DIR__ . '/postcheck.inc.php';` to `require_once __DIR__ . '/postcheck.inc.php';`
+    2. Save file and continue the upgarde process.
+2. Go to modules management and update Common Utilities.
 
 ---
 
