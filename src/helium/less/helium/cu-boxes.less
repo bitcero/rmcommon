@@ -263,29 +263,39 @@ CU BOXES
 
 .bootbox {
 
-  @media(min-width: @screen-md-min){
+  @media(min-width: @screen-sm-min){
+    .xlarge, .large, .medium{
+      width: 95%;
+    }
 
+    .small, .xsmall{
+      width: 75%;
+    }
+
+  }
+
+  @media(min-width: @screen-md-min){
     .xlarge{
       width: 95%;
     }
 
     .large{
-      width: 75%;
+      width: 85%;
     }
 
     .medium{
-      width: 55%;
+      width: 70%;
     }
 
     .small{
-      width: 40%;
+      width: 55%;
     }
 
     .xsmall{
-      width: 30%;
+      width: 45%;
     }
-
   }
+
 }
 
 .cu-dialog-content {
@@ -305,12 +315,15 @@ CU BOXES
   font-weight: 600;
 }
 
+.modal-content{
+  background-color: #FFF; //@body-bg;
+}
+
 .modal-body {
   //position: relative;
   padding: @panel-body-padding;
   color: @text-color;
   overflow: auto;
-  max-height: 85vh;
 
   .nav-tabs.nav-tabs-color{
     font-size: 0.8em;
@@ -385,7 +398,7 @@ CU BOXES
     background-color: #FFF;
     padding: @panel-body-padding;
     font-size: 0.9em;
-    max-height: 70vh;
+    //max-height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
     margin: 0 -@modal-inner-padding 0 -@modal-inner-padding;

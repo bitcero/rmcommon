@@ -52,9 +52,9 @@ class RMPrivileges
      * @param bool $redirect
      * @return mixed
      */
-    static public function verify($module, $action, $method = '', $redirect = true){
+    static public function verify($module, $action, $method = 'ajax', $redirect = true){
 
-        global $xoopsUser, $xoopsDB;
+        global $xoopsUser;
 
         if (!$xoopsUser){
 
@@ -164,10 +164,11 @@ class RMPrivileges
     }
 
     private function response( $method ){
+        global $common;
 
         if ( $method == 'ajax' ){
-            self::prepare_ajax_response();
-            self::ajax_response(
+            $common->ajax()->prepare();
+            $common->ajax()->response(
                 __('You don\'t have required rights to do this action!', 'rmcommon'),
                 1, 0, array(
                     'goto' => XOOPS_URL

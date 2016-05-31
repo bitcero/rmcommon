@@ -110,6 +110,7 @@ class RMFormLanguageField extends RMFormElement
 
             $rtn .= "</ul></div>";
         } else {
+            $this->setIfNotSet('class', 'form-control');
             $attributes = $this->renderAttributeString();
             $rtn = "<select $attributes>";
             foreach ($langs as $k) {

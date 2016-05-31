@@ -69,7 +69,7 @@ class Common
     /**
      * @return RMSettings
      */
-    public function moduleSettings()
+    public function settings()
     {
         static $settingsInstance;
 
@@ -233,11 +233,13 @@ class Common
     /**
      * AJAX Helper
      */
-    public function ajax(){
+    public function ajax()
+    {
         return \Rmcommon_Ajax::getInstance();
     }
 
-    public function security(){
+    public function security()
+    {
         global $xoopsSecurity;
 
         return $xoopsSecurity;
@@ -245,9 +247,66 @@ class Common
     }
 
     /**
+     * @return Xoops
+     */
+    public function db()
+    {
+        global $xoopsDB;
+
+        return $xoopsDB;
+    }
+
+    /**
+     * @return App
+     */
+    public function app()
+    {
+        $app = App::getInstance();
+        return $app;
+    }
+
+    /**
+     * Check the session token sent via HTTP and redirect if not valid
+     * @param bool $ajax
+     * @return bool
+     */
+    public function checkToken($ajax = true)
+    {
+
+        if ($this->security()->check(true, false, 'CUTOKEN')) {
+            return true;
+        }
+
+        if ($ajax) {
+
+            $this->ajax()->response(
+                __('Session token expired!', 'rmcommon'), 1, 0, ['reload' => true]
+            );
+
+        } else {
+
+            $this->uris()->redirect_with_message(
+                __('Session token expired!', 'rmcommon'),
+                XOOPS_URL, RMMSG_ERROR
+            );
+
+        }
+
+    }
+
+    /**
+     * @return \RMImageResizer
+     */
+    public function resize(){
+        $resizer = \RMImageResizer::getInstance();
+        return $resizer;
+    }
+
+    /**
      * @return Common
      */
-    public static function getInstance(){
+    public static function getInstance()
+    {
         static $instance;
 
         if (!isset($instance)) {
@@ -255,15 +314,6 @@ class Common
         }
 
         return $instance;
-    }
-
-    /**
-     * @return Xoops
-     */
-    public function db(){
-        global $xoopsDB;
-
-        return $xoopsDB;
     }
 
 }

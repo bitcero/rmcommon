@@ -53,7 +53,7 @@ include_once XOOPS_ROOT_PATH . '/class/logger/xoopslogger.php';
 include_once XOOPS_ROOT_PATH . '/class/database/databasefactory.php';
 
 $dbF = new XoopsDatabaseFactory();
-$db =& $dbF->getDatabaseConnection();
+$db = $dbF->getDatabaseConnection();
 
 $GLOBALS['rmFunctions'] = new RMFunctions();
 global $rmFunctions;
@@ -133,7 +133,7 @@ RMEvents::get()->load_extra_preloads(XOOPS_THEME_PATH . '/' . $theme, ucfirst($t
 
 /**
  * Modules and other elements can use this event to add their own namespaces
- * The module most retorn the $loader object again to prevent errors
+ * The module most return the $loader object again to prevent errors
  */
 $loader = RMEvents::get()->trigger('rmcommon.psr4loader', $loader);
 
@@ -167,7 +167,7 @@ if ($cuSettings->updates && isset($xoopsOption['pagetype']) && $xoopsOption['pag
     else
         $updates = array('date' => 0, 'total' => 0, 'updates' => array());
 
-    $rmTpl->add_script('updates.js', 'rmcommon', array('footer' => 1));
+    RMTemplate::getInstance()->add_script('updates.js', 'rmcommon', array('footer' => 1));
 
     if ($updates['date'] < (time() - ($cuSettings->updatesinterval * 86400))) {
         $rmTpl->add_inline_script('(function(){rmCheckUpdates();})();', 1);

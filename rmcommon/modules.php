@@ -605,7 +605,7 @@ function show_modules_list(){
     }
     
     // Event for installed modules
-    $modules = RMEvents::get()->run_event('rmcommon.installed.modules', $modules, $installed_dirs);
+    $modules = RMEvents::get()->trigger('rmcommon.installed.modules', $modules, $installed_dirs);
     
     require_once XOOPS_ROOT_PATH . "/class/xoopslists.php";
     $dirlist = XoopsLists::getModulesList();
@@ -615,7 +615,7 @@ function show_modules_list(){
         clearstatcache();
         $file = trim($file);
         if (!in_array($file, $installed_dirs)) {
-            $module =& $module_handler->create();
+            $module = $module_handler->create();
             if (!$module->loadInfo($file, false)) {
                 continue;
             }

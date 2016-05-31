@@ -122,8 +122,7 @@ class RMTemplate
      */
     public function header()
     {
-
-        global $xoopsConfig, $xoopsOption, $xoopsTpl;
+        global $xoopsModule, $xoopsConfig, $xoopsOption, $xoopsTpl;
 
         if (defined('XOOPS_CPFUNC_LOADED'))
             xoops_cp_header(); //ob_start();
@@ -289,7 +288,8 @@ class RMTemplate
                $xoopsModuleConfig,
                $cuIcons,
                $cuServices,
-               $xoopsSecurity;
+               $xoopsSecurity,
+               $common;
 
         if ('' == $type && is_file($file)) {
             $template = $file;

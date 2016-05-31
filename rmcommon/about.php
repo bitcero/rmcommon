@@ -26,7 +26,8 @@ RMTemplate::get()->header(); ?>
                     Welcome to Common Utilities
                 </h1>
                 <p class="lead">
-                    Thanks for using <strong><?php echo RMModules::get_module_version('rmcommon'); ?></strong>.
+                    Thanks for using <strong><?php echo RMModules::get_module_version('rmcommon'); ?></strong> for
+                    <a href="http://xoops.org/modules/news/article.php?storyid=6762" target="_blank">XOOPS 2.5.8</a>.
                     This version has a lot of improvements and new features to make your work more productive and pleasing.
                 </p>
             </div>

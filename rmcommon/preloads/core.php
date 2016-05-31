@@ -11,12 +11,12 @@
 class RmcommonCorePreload extends XoopsPreloadItem
 {
 
-    public function eventCoreHeaderStart()
+    static function eventCoreHeaderStart()
     {
         RMEvents::get()->trigger('rmcommon.core.header.start');
     }
 
-    public function eventCoreHeaderEnd()
+    static function eventCoreHeaderEnd()
     {
 
         /**
@@ -62,7 +62,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
     /**
      * To prevent errors when upload images with closed site
      */
-    public function eventCoreIncludeCommonLanguage()
+    static function eventCoreIncludeCommonLanguage()
     {
         global $xoopsConfig;
 
@@ -104,7 +104,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     }
 
-    public function eventCoreFooterStart()
+    static function eventCoreFooterStart()
     {
         global $xoopsTpl;
 
@@ -121,12 +121,12 @@ class RmcommonCorePreload extends XoopsPreloadItem
         RMEvents::get()->trigger('rmcommon.footer.start');
     }
 
-    public function eventCoreFooterEnd()
+    static function eventCoreFooterEnd()
     {
         ob_end_flush();
     }
 
-    public function eventCoreClassTheme_blocksRetrieveBlocks($params)
+    static function eventCoreClassTheme_blocksRetrieveBlocks($params)
     {
         global $xoopsTpl;
 
@@ -164,7 +164,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     }
 
-    public function eventCoreIncludeFunctionsRedirectheaderStart($params)
+    static function eventCoreIncludeFunctionsRedirectheaderStart($params)
     {
         global $xoopsModule;
         global $cuSettings;
@@ -205,7 +205,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
     /**
      * RSS Management
      */
-    public function eventCoreIncludeCommonEnd()
+    static function eventCoreIncludeCommonEnd()
     {
         global $xoopsOption;
 
@@ -234,7 +234,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     }
 
-    public function eventCoreHeaderAddmeta()
+    static function eventCoreHeaderAddmeta()
     {
         global $xoopsTpl, $xoopsConfig, $xoTheme, $rmc_config;
 
@@ -248,49 +248,49 @@ class RmcommonCorePreload extends XoopsPreloadItem
     /**
      * Next methods will add subpage to xoopsOption
      */
-    public function eventCoreIndexStart()
+    static function eventCoreIndexStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'home-page';
         RMEvents::get()->trigger('rmcommon.index.start');
     }
 
-    public function eventCoreEdituserStart()
+    static function eventCoreEdituserStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'edit-user';
         RMEvents::get()->trigger('rmcommon.edituser.start');
     }
 
-    public function eventCoreReadpmsgStart()
+    static function eventCoreReadpmsgStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'readpm';
         RMEvents::get()->trigger('rmcommon.readpm.start');
     }
 
-    public function eventCoreRegisterStart()
+    static function eventCoreRegisterStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'register';
         RMEvents::get()->trigger('rmcommon.register.start');
     }
 
-    public function eventCoreUserStart()
+    static function eventCoreUserStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'user';
         RMEvents::get()->trigger('rmcommon.user.start');
     }
 
-    public function eventCoreUserinfoStart()
+    static function eventCoreUserinfoStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'profile';
         RMEvents::get()->trigger('rmcommon.userinfo.start');
     }
 
-    public function eventCoreViewpmsgStart()
+    static function eventCoreViewpmsgStart()
     {
         global $xoopsOption;
         $xoopsOption['module_subpage'] = 'pm';

@@ -245,7 +245,7 @@ class RMFormEditor extends RMFormElement
 
         $rtn .= "<div class=\"quicktags\"><div id=\"ed_toolbar_" . $this->get('id') . "\"></div></div>" . (!empty
             ($plugins) ? "<div class='ed-qt-plugins'><span class='plugin'>" . implode('</span><span class="plugin">', $plugins) . "</span></div>" : '') . "
-		<div class='txtarea-container' style='height: " . $this->get('height') . ";'><textarea id='" . $this->get('id') . "' name='" . $this->get('name') . "' class='" . $this->get('class') . "'>" . $this->get('default') . "</textarea></div>
+		<div class='txtarea-container' style='height: " . $this->get('height') . ";'><textarea id='" . $this->get('id') . "' name='" . $this->get('name') . "' class='" . $this->get('class') . "'>" . $this->get('value') . "</textarea></div>
 		</div>";
         return $rtn;
     }

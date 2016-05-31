@@ -106,8 +106,8 @@
     <!--// End recent news -->
 
     <!-- Third part panels -->
-    <?php foreach($dashboardPanels as $panel): ?>
+    <?php if($dashboardPanels): foreach($dashboardPanels as $panel): ?>
         <?php echo $panel; ?>
-    <?php endforeach; ?>
+    <?php endforeach; endif; ?>
 
 </div>

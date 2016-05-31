@@ -59,7 +59,7 @@ class RMFormCheck extends RMFormElement
         $rtn = array();
         $rtn['caption'] = TextCleaner::getInstance()->clean_disabled_tags($caption);
         $rtn['value'] = TextCleaner::getInstance()->clean_disabled_tags($value);
-        $rtn['selected'] = $state == 1 ? 'selected' : '';
+        $rtn['selected'] = $state ? 'selected' : '';
         $rtn['name'] = $name;
         $this->_options[] = $rtn;
     }

@@ -243,7 +243,7 @@
                                 </a>
                             <?php endforeach; ?>
                         </span>
-                        <span class="url"><?php echo $mod['url']; ?></span>
+                        <span class="url"><?php echo isset($mod['url']) ? $mod['url'] : ''; ?></span>
                         <span class="license"><?php echo $mod['license']; ?></span>
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
                         <span class="active"></span>

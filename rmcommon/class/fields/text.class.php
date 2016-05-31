@@ -71,6 +71,7 @@ class RMFormText extends RMFormElement
 
         $this->setIfNotSet('type', 'text');
         $this->setIfNotSet('value', '');
+        $this->setIfNotSet('class', 'form-control');
     }
 
     /**

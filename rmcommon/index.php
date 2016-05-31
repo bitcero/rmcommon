@@ -53,7 +53,7 @@ function show_dashboard(){
     global $xoopsModule, $cuSettings, $cuIcons;
     
     //RMFunctions::create_toolbar();
-    
+
     $db = XoopsDatabaseFactory::getDatabaseConnection();
     $sql = 'SELECT * FROM ' . $db->prefix('modules');
     $result = $db->query($sql);
@@ -65,13 +65,13 @@ function show_dashboard(){
     require_once XOOPS_ROOT_PATH . "/class/xoopslists.php";
     $dirlist = XoopsLists::getModulesList();
     $available_mods = array();
-    $module_handler =& xoops_gethandler('module');
+    $module_handler = xoops_gethandler('module');
 
     foreach ($dirlist as $file) {
         clearstatcache();
         $file = trim($file);
         if (!in_array($file, $installed_mods)) {
-            $module =& $module_handler->create();
+            $module = $module_handler->create();
             if (!$module->loadInfo($file, false)) {
                 continue;
             }
@@ -133,7 +133,7 @@ function show_dashboard(){
     $counterComments->addCell(__('Approved', 'rmcommon'), $approved);
     $counterComments->addCell(__('Waiting', 'rmcommon'), $waiting);
 
-    $ratio = $approved / ($approved + $waiting);
+    @$ratio = $approved / ($approved + $waiting);
     if($ratio < 1){
         $ratio = number_format($ratio, 2);
     }
@@ -314,8 +314,8 @@ function show_dashboard(){
     xoops_cp_header();
 
     //RMTemplate::get()->add_style('dashboard.min.css', 'rmcommon');
-    RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
-    RMTemplate::get()->add_help(__('Dashboard Help','rmcommon'),'http://www.xoopsmexico.net/docs/common-utilities/uso-de-common-utilities/standalone/1/#dashboard');
+    RMTemplate::getInstance()->add_style('pagenav.css', 'rmcommon');
+    RMTemplate::getInstance()->add_help(__('Dashboard Help','rmcommon'),'http://www.xoopsmexico.net/docs/common-utilities/uso-de-common-utilities/standalone/1/#dashboard');
     include RMTemplate::get()->path('rmc-dashboard.php', 'module', 'rmcommon');
 
     xoops_cp_footer();

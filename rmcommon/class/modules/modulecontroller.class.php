@@ -132,7 +132,14 @@ abstract class RMModuleController {
 
         }
 
-        $action = str_replace("-", "_", $action);
+        $newAction = explode("-", $action);
+        if(count($newAction > 1)){
+            $action = $newAction[0];
+            unset($newAction[0]);
+            foreach($newAction as $part){
+                $action .= ucfirst($part);
+            }
+        }
 
         $class = ucfirst( $this->directory ) . '_' . ucfirst( $controller_name ) . '_' . ( defined('XOOPS_CPFUNC_LOADED') ? 'Admin_' : '' ) . 'Controller';
         $file = $this->path . '/' . ( defined('XOOPS_CPFUNC_LOADED') ? 'admin/controllers' : 'controllers' ) . '/' . strtolower( $controller_name ) . '.php';
@@ -216,7 +223,7 @@ abstract class RMModuleController {
         else
             $file = 'frontend/' . $name;
 
-        return RMTemplate::get()->render($file, 'module', $this->directory);
+        return RMTemplate::getInstance()->render($file, 'module', $this->directory);
 
     }
 

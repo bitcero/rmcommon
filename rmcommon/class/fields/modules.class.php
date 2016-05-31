@@ -170,7 +170,10 @@ class RMFormModules extends RMFormElement
         $criteria->add(new Criteria('isactive', 1));
         if ($this->get('subpages')) $criteria->add(new Criteria('dirname', 'system'), 'OR');
         $modules = array();
-        $modules[-1] = __('All', 'rmcommon');
+
+        if($this->get('type') != 'radio'){
+            $modules[-1] = __('All', 'rmcommon');
+        }
 
         if (is_array($this->get('insert'))) {
             $modules = $this->get('insert');
@@ -211,9 +214,13 @@ class RMFormModules extends RMFormElement
                 $app = RMModules::load_module($k);
 
                 $rtn .= "<li>";
-                $rtn .= "<input $attributes name=\"".sprintf($name, $k)."\" value='$k'" . ($k == 0 ? "
-			    data-checkbox='module-item-$k'" : " data-oncheck='module-item'") . "
-			    id='" . $this->get('id') . "-$k'" . (is_array($selected) && in_array($k, $selected) ? " checked" : '') . ($k != -1 ? " data-checkbox='module-item-" . $k . "'" : '') . "> ";
+                $rtn .= "<input $attributes name=\"".sprintf($name, $k)."\"
+                        value='$k'" .
+                        ($k == -1 ? "data-checkbox='" . $this->get('id') . "-module-item'" : " data-oncheck='" . $this->get('id') . "-module-item'") . "
+			            id='" . $this->get('id') . "-$k'" .
+                            (is_array($selected) && in_array($k, $selected) ? " checked" : '') .
+                            ($this->has('subpages') ? " data-checkbox='" . $this->get('id') . "-module-item-$k'" : '') . "> ";
+
                 if ($this->has('subpages') && $k>-1)
                     $rtn .= '<a href="#">' . $v . '</a>';
                 else
@@ -246,7 +253,9 @@ class RMFormModules extends RMFormElement
                         if (!is_array($subpages)) $subpages = array();
 
                         foreach ($subpages as $page => $caption) {
-                            $rtns .= "<li class='checkbox'><label><input type='checkbox' data-oncheck='module-item-" . $k . "' name='" . sprintf($name, $k) . "[subpages][$page]' id='subpages-$k-$page' value='$page'" . (is_array($subpages) && @in_array($page, $selectedSubs[$k]) ? " checked='checked'" : '') . " /> $caption</label></li>";
+                            $rtns .= "<li class='checkbox'>
+                                        <label>
+                                            <input type='checkbox' data-oncheck='".$this->get('id')."-module-item-" . $k . "' name='" . sprintf($name, $k) . "[subpages][$page]' id='subpages-$k-$page' value='$page'" . (is_array($subpages) && @in_array($page, $selectedSubs[$k]) ? " checked='checked'" : '') . " /> $caption</label></li>";
                             $j++;
                             $cr++;
                         }
@@ -282,6 +291,7 @@ class RMFormModules extends RMFormElement
             if ($this->has('multiple')) {
                 $this->set('name', $this->get('name') . '[' . $k . ']');
             }
+            $this->setIfNotSet('class', 'form-control');
             $attributes = $this->renderAttributeString();
 
             $rtn = "<select $attributes>";

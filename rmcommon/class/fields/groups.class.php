@@ -41,7 +41,7 @@ class RMFormGroups extends RMFormElement
                 $this->setWithDefaults('multiple', null, null);
             }
             $this->setWithDefaults('type', $type == 0 ? 'select' : 'radio', 'select');
-            $this->setWithDefaults('selected', $selected, []);
+            $this->setWithDefaults('value', $selected, []);
         }
 
         $this->setIfNotSet('type', 'select');
@@ -155,7 +155,8 @@ class RMFormGroups extends RMFormElement
 		
 		$typeinput = $this->get('type');
 		$name = $this->getName();
-        $selected = $this->get('selected');
+        $selected = $this->get('value');
+        $selected = is_array($selected) ? $selected : array($selected);
 
 		if ($typeinput == 'radio' || $typeinput == 'checkbox'){
 
@@ -167,13 +168,17 @@ class RMFormGroups extends RMFormElement
             $attributes = $this->renderAttributeString();
 
 			$rtn = "<ul class='groups_field_list ".$this->id()."_groups'>";
-			$rtn .= "<li><label><input $attributes value='0'";
-			if (is_array($selected)){
-				if (in_array(0, $selected)){
-					$rtn .= " checked";
-				}
-			}
-			$rtn .= ">".__('All','rmcommon')."</label></li>";
+
+            if($typeinput == 'checkbox'){
+                $rtn .= "<li><label><input $attributes value='0'";
+                if (is_array($selected)){
+                    if (in_array(0, $selected)){
+                        $rtn .= " checked";
+                    }
+                }
+                $rtn .= ">".__('All','rmcommon')."</label></li>";
+            }
+
 			while ($row = $db->fetchArray($result)){
 				
 				$rtn .= "<li><label><input $attributes value='$row[groupid]'";
@@ -196,6 +201,7 @@ class RMFormGroups extends RMFormElement
 			$rtn .= "</ul>";
 		} else {
 
+            $this->setIfNotSet('class', 'form-control');
             $attributes = $this->renderAttributeString();
 			$rtn = "<select $attributes\"><option value='0'";
 			if (is_array($selected)){
@@ -204,14 +210,12 @@ class RMFormGroups extends RMFormElement
 				}
 			}
 			
-			$rtn .= ">".__('All','rmcommon')."</option>";
+			$rtn .= ">".__('Select...','rmcommon')."</option>";
 			
 			while ($row = $db->fetchArray($result)){
 				$rtn .= "<option value='$row[groupid]'";
-				if (is_array($this->_select)){
-					if (in_array($row['groupid'], $selected)){
+				if (in_array($row['groupid'], $selected)){
 						$rtn .= " selected";
-					}
 				}
 				$rtn .= ">".$row['name']."</option>";
 			}

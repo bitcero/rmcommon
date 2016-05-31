@@ -60,9 +60,9 @@ function show_module_preferences(){
     $is_popup = $quick == 1 && $token != '';
 
     if ($is_popup) {
-        $ajax->prepare_ajax_response();
+        $ajax->prepare();
         if ( !$xoopsSecurity->validateToken(false, true, 'CUTOKEN') )
-            $ajax->ajax_response(
+            $ajax->response(
                 __('Unauthorized action', 'rmcommon'), 1, 0, array('reload' => true)
             );
     }
@@ -126,7 +126,7 @@ function show_module_preferences(){
         $field = new stdClass();
         $field->name = $name;
         $field->id = $option['name'];
-        $field->value = isset( $values->$option['name'] ) ? $values->$option['name'] : $option['default'];
+        $field->value = isset( $values->{$option['name']} ) ? $values->{$option['name']} : $option['default'];
         $field->caption = defined($option['title']) ? constant( $option['title'] ) : $option['title'];
         $field->description = defined($option['description']) ? constant( $option['description'] ) : $option['description'];
         $field->field = $option['formtype'];
@@ -177,9 +177,11 @@ function show_module_preferences(){
             sprintf( __('%s Settings', 'rmcommon'), $module->getVar('name') ),
             0, 1, array(
                 'content' => $response,
-                'width' => 'xlarge',
+                'width' => 'large',
                 'closeButton' => 1,
-                'id' => 'cu-settings-form'
+                'id' => 'cu-settings-form',
+                'color' => 'primary',
+                'solid' => true
             )
         );
 
@@ -191,14 +193,14 @@ function show_module_preferences(){
  * Save module settings
  */
 function save_module_settings(){
-    global $xoopsSecurity, $xoopsDB;
+    global $xoopsSecurity, $xoopsDB, $common;
 
     $mod = RMHttpRequest::post( 'mod', 'string', '' );
     $via_ajax = RMHttpRequest::post( 'via_ajax', 'integer', 0 );
 
     if ($via_ajax) {
         $ajax = new AjaxResponse();
-        $ajax->prepare_ajax_response();
+        $common->ajax()->prepare();
     }
 
     if ( $mod == '' )
