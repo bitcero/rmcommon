@@ -1033,6 +1033,9 @@ class RMTemplate
 
         $rtn = '';
         foreach ($this->tpl_styles as $id => $style) {
+
+            $style['type'] = !isset($style['type']) || $style['type'] == '' ? 'text/css' : $style['type'];
+
             $rtn .= "\n" . '<link rel="stylesheet" type="' . $style['type'] . '" id="' . $id . '" href="' .
                 $style['url'] . '">';
         }
