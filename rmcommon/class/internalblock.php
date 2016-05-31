@@ -42,7 +42,7 @@ class RMInternalBlock extends RMObject
             'element', 'element_type', 'description', 'type', 'content_type', 'dirname', 'file', 'show_func', 'edit_func', 'template'
         ];
 
-	    $this->db =& XoopsDatabaseFactory::getDatabaseConnection();
+	    $this->db = XoopsDatabaseFactory::getDatabaseConnection();
 	    $this->_dbtable = $this->db->prefix("mod_rmcommon_blocks");
 	    $this->setNew();
 	    $this->initVarsFromTable();

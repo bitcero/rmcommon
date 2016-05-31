@@ -109,13 +109,13 @@ class RMBlocksFunctions
 
     }
 
-    public function get_blocks($groupid, $mid = 0, $toponlyblock = false, $visible = null, $orderby = 'b.weight,b.wid', $isactive = 1, $subpage = '', $canvas = array())
+    static function get_blocks($groupid, $mid = 0, $toponlyblock = false, $visible = null, $orderby = 'b.weight,b.wid', $isactive = 1, $subpage = '', $canvas = array())
     {
 
         $orderby = $orderby == '' ? 'b.weight,b.bid' : $orderby;
 
         // Get authorized blocks
-        $db =& XoopsDatabaseFactory::getDatabaseConnection();
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
         $ret = array();
         $sql = "SELECT DISTINCT
                     gperm_itemid
@@ -185,7 +185,7 @@ class RMBlocksFunctions
 
     }
 
-    function buildBlock($bobj)
+    static function buildBlock($bobj)
     {
 
         global $xoopsTpl, $xoTheme;
@@ -220,7 +220,7 @@ class RMBlocksFunctions
          * , $bobj->getVar( 'show_func', 'n' )
          */
 
-        $xoopsLogger =& XoopsLogger::getInstance();
+        $xoopsLogger = XoopsLogger::getInstance();
         if (!$bcachetime || !$template->is_cached($tplName, $cacheid)) {
             $xoopsLogger->addBlock($bobj->getVar('name'));
             if ($bresult = $bobj->buildBlock()) {
