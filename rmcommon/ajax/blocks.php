@@ -158,7 +158,13 @@ function configure_block(){
         'dirnames' => false
     ]);
     // Groups
-    $groups = new RMFormGroups('', 'bk_groups', true, 1, 3, $block->readGroups());
+    $groups = new RMFormGroups([
+        'caption' => '',
+        'name' => 'bk_groups',
+        'multiple' => null,
+        'type' => 'checkbox',
+        'value' => $block->readGroups()
+    ]);
 
     $block_options = $block->getOptions();
 

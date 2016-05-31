@@ -315,7 +315,7 @@ function show_dashboard(){
 
     //RMTemplate::get()->add_style('dashboard.min.css', 'rmcommon');
     RMTemplate::getInstance()->add_style('pagenav.css', 'rmcommon');
-    RMTemplate::getInstance()->add_help(__('Dashboard Help','rmcommon'),'http://www.xoopsmexico.net/docs/common-utilities/uso-de-common-utilities/standalone/1/#dashboard');
+    RMTemplate::getInstance()->add_help(__('Dashboard Help','rmcommon'),'https://www.xoopsmexico.net/docs/bitcero/common-utilities/introduccion/');
     include RMTemplate::get()->path('rmc-dashboard.php', 'module', 'rmcommon');
 
     xoops_cp_footer();

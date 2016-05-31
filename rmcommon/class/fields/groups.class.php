@@ -40,7 +40,7 @@ class RMFormGroups extends RMFormElement
             if ($multi) {
                 $this->setWithDefaults('multiple', null, null);
             }
-            $this->setWithDefaults('type', $type == 0 ? 'select' : 'radio', 'select');
+            $this->setWithDefaults('type', $type == 0 ? 'select' : ($multi == 1 ? 'checkbox' : 'radio'), 'select');
             $this->setWithDefaults('value', $selected, []);
         }
 
