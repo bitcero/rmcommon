@@ -1,0 +1,422 @@
+@import '../../helium/less/helium/variables';
+@import '../../helium/less/bootstrap/variables';
+
+//* DropZone uploader *//
+#files-container{
+  margin: 20px;
+
+  > #images-uploader{
+    background-color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    padding: 40px;
+    border-radius: @border-radius-base;
+    border: 1px dashed rgba(0,0,0,0.2);
+
+    .dz-default.dz-message{
+      font-size: ceil(@font-size-base * 2.5);
+      color: @gray-light;
+      font-weight: 100;
+      text-align: center;
+    }
+
+    &.dz-started .dz-message{
+      display: none;
+    }
+
+    .dz-preview{
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      margin: 10px;
+      min-height: 100px;
+
+      .dz-image{
+        border-radius: @border-radius-large;
+        overflow: hidden;
+        width: 120px;
+        height: 120px;
+        position: relative;
+        display: block;
+        z-index: 10;
+
+        > img{
+          transition: ease all 250ms;
+        }
+      }
+
+      .dz-details{
+        z-index: 20;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0; right: 0;
+        opacity: 0;
+        font-size: floor(@font-size-base * 0.9);
+        min-width: 100%;
+        max-width: 100%;
+        padding: 2em 1em;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.9);
+        line-height: 150%;
+        transition: ease opacity 250ms;
+        background-color: rgba(0,0,0,0.4);
+
+        > .dz-size{
+          background-color: @theme-main-color;
+          margin-bottom: 10px;
+          color: @theme-main-color-text;
+          padding: 2px 0;
+        }
+
+        > .dz-filename{
+          padding: 2px;
+          font-size: 0.9em;
+          background-color: @theme-main-color-text;
+          color: @theme-main-color;
+        }
+      }
+
+      .dz-progress{
+        opacity: 1;
+        z-index: 1000;
+        pointer-events: none;
+        position: absolute;
+        height: 16px;
+        left: 50%;
+        top: 50%;
+        margin-top: -8px;
+        width: 80px;
+        margin-left: -40px;
+        background: rgba(255, 255, 255, 0.9);
+        -webkit-transform: scale(1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      &.dz-processing .dz-progress{
+        opacity: 1;
+        -webkit-transition: all 0.2s linear;
+        -moz-transition: all 0.2s linear;
+        -ms-transition: all 0.2s linear;
+        -o-transition: all 0.2s linear;
+        transition: all 0.2s linear;
+      }
+
+      &.dz-complete .dz-progress{
+        opacity: 0;
+        -webkit-transition: opacity 0.4s ease-in;
+        -moz-transition: opacity 0.4s ease-in;
+        -ms-transition: opacity 0.4s ease-in;
+        -o-transition: opacity 0.4s ease-in;
+        transition: opacity 0.4s ease-in;
+      }
+
+      .dz-success-mark, .dz-error-mark{
+        pointer-events: none;
+        opacity: 0;
+        z-index: 500;
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        margin-left: -27px;
+        margin-top: -27px;
+
+        > svg{
+          display: block;
+          width: 54px;
+          height: 54px;
+        }
+      }
+
+      &.dz-success .dz-success-mark{
+        -webkit-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+        -moz-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+        -ms-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+        -o-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+        animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+
+      .dz-error-message{
+        pointer-events: none;
+        z-index: 1000;
+        position: absolute;
+        display: block;
+        display: none;
+        opacity: 0;
+        -webkit-transition: opacity 0.3s ease;
+        -moz-transition: opacity 0.3s ease;
+        -ms-transition: opacity 0.3s ease;
+        -o-transition: opacity 0.3s ease;
+        transition: opacity 0.3s ease;
+        border-radius: 8px;
+        font-size: 13px;
+        top: 130px;
+        left: -10px;
+        width: 140px;
+        background: #be2626;
+        background: linear-gradient(to bottom, #be2626, #a92222);
+        padding: 0.5em 1.2em;
+        color: white;
+      }
+
+      &.dz-error{
+        .dz-error-mark{
+          opacity: 1;
+          -webkit-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+          -moz-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+          -ms-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+          -o-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+          animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .dz-error-message{
+          display: block;
+        }
+
+        &:hover{
+          .dz-error-message{
+            opacity: 1;
+            pointer-events: auto;
+          }
+        }
+      }
+
+      &:hover{
+        .dz-details{
+          opacity: 1;
+        }
+
+        .dz-image > img{
+          transform: scale(1.5);
+        }
+      }
+
+    }
+
+  }
+
+}
+
+#uploading-messages{
+  margin: 20px;
+  padding: @padding-base-horizontal;
+  background-color: #FFF;
+  border-radius: @border-radius-large;
+  display: none;
+
+  > h4{
+    margin-bottom: 15px;
+    color: @gray-light;
+  }
+
+  >ul{
+    list-style: none;
+    padding: 0 20px;
+
+    > li{
+      padding: 5px 0 5px 24px;
+      border-bottom: 1px solid @gray-lighter;
+      overflow: hidden;
+      position: relative;
+
+      > svg{
+        width: 14px;
+        height: 14px;
+        float: left;
+        position: absolute;
+        left: 0; top: 7px;
+      }
+
+      &.error{
+        color: @brand-danger;
+
+        > svg{
+          fill: @brand-danger;
+        }
+
+      }
+
+      &.success{
+        color: @brand-success;
+
+        > svg{
+          fill: @brand-success;
+        }
+      }
+    }
+  }
+
+}
+
+#images-resizing{
+  display: none;
+  margin: 20px;
+  padding: @padding-base-horizontal;
+  border-radius: @border-radius-large;
+  border: 1px dashed @brand-info;
+  background-color: #FFF;
+}
+
+.select-image-category{
+  background: #FFF;
+  padding: 15px;
+  border-radius: @border-radius-large;
+  margin: 20px;
+
+  [data-action="upload-more"]{
+    display: none;
+  }
+}
+
+.single-size{
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	display: inline-block;
+	width: 250px;
+	padding: 15px;
+	margin: 0 5px 5px 0;
+	color: #333;
+    background-color: #f7f7f7;
+    position: relative;
+}
+.single-size .close{
+    font-size: 12px;
+    position: absolute;
+    top: 5px; right: 5px;
+    background: #FFF;
+    padding: 2px 4px;
+    display: block;
+    border-radius: 100%;
+}
+.single-size .close:hover{
+    opacity: 1;
+    text-shadow: none;
+}
+.form-container .form-actions{
+	padding: 10px!important;
+	margin: 15px -15px -15px -15px;
+	border-radius: 0 0 3px 3px;
+}
+.form-container .new-container{
+	margin: 15px 0;
+}
+.form-container input[name*="[name]"]{
+	font-weight: bold;
+	text-decoration: underline;
+}
+.form-container .cat-buttons{
+	padding: 15px 0 0 0;
+	border-top: 1px solid #eee;
+	margin-top: 20px;
+}
+#filesize, #sizeunit{
+    width: 48%;
+    display: inline-block;
+}
+
+a.delsize{
+	float: right;
+	font-weight: normal;
+	background: url(../images/delete.png) no-repeat left;
+	padding: 3px 3px 3px 19px;
+}
+td#sizes-container-all{
+	overflow: hidden;
+}
+td#sizes-container-all table.outer{
+	width: 435px;
+	float: left;
+}
+td#sizes-container-all table{
+	margin: 5px;
+}
+td#sizes-container-all div.new_container{
+	clear: both;
+	margin-top: 10px;
+	text-align: center;
+}
+td.sizes_data{
+	font-size: 0.9em;
+	color: #666;
+}
+td.sizes_data em{
+	font-style: normal;
+}
+
+/** IMAGES **/
+div.select_image_cat{
+	border-bottom: 1px dotted #ddd;
+	margin: 0 0 20px 0;
+	font-weight: bold;
+	margin-bottom: 10px;
+    padding: 5px 0;
+}
+.select_image_cat .form-control{
+    max-width: 200px;
+}
+#upload-errors{
+	padding: 10px;
+	margin: 10px 0;
+	float: right;
+	width: 300px;
+}
+#upload-errors span.failed{
+	background: url(../images/error.png) no-repeat left;
+	padding: 5px 0 5px 19px;
+	color: #f00;
+	margin: 2px 0;
+	display: block;
+}
+#upload-errors span.done{
+	background: url(../images/done.png) no-repeat left;
+	padding: 5px 0 5px 19px;
+	margin: 2px 0;
+	display: block;
+}
+#resizer-bar{
+	text-align: center;
+	font-size: 0.9em;
+	color: #666;
+	display: none;
+}
+#resizer-bar span.message{
+	display: block;
+	float: left;
+	color: #008000;
+}
+#resizer-bar span.message span{
+	color: #F00;
+}
+div.donebutton{
+	display: none;
+	margin: 10px 0;
+}
+div#gen-thumbnails img{
+	width: 90px;
+	height: 70px;
+	margin: 4px;
+	padding: 1px;
+	border: 1px solid #666;
+}
+.even .description, .odd .description{
+	font-size: 0.9em;
+	display: block;
+	padding: 2px 0;
+	font-style: italic;
+	color: #666;
+}
+.rmc_pages_navigation_container{
+	float: right;
+}
+#image-loader{
+	display: none;
+	position: absolute;
+	padding: 10px;
+	background: #fff;
+	top: 50%;
+	left: 50%;
+	-moz-box-shadow: 0 0 20px #000;
+	-webkit-box-shadow: 0 0 20px #000;
+	box-shadow: 0 0 20px #000;
+}

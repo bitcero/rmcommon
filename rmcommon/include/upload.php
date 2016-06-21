@@ -9,8 +9,9 @@
 // --------------------------------------------------------------
 
 include '../../../mainfile.php';
-XoopsLogger::getInstance()->activated = false;
-XoopsLogger::getInstance()->renderingEnabled = false;
+
+/*XoopsLogger::getInstance()->activated = false;
+XoopsLogger::getInstance()->renderingEnabled = false;*/
 
 function error($message){
     $data['error'] = 1;
@@ -19,40 +20,41 @@ function error($message){
     die();
 }
 
+$common->ajax()->prepare();
+
+if(!$common->security()->check(false, false, 'CUTOKEN')){
+    $common->ajax()->notifyError(
+        __('Session token invalid!', 'rmcommon'), 0
+    );
+}
+
 /**
 * Handle uploaded image files only.
 */
-$security = TextCleaner::getInstance()->decrypt(rmc_server_var($_POST, 'rmsecurity', 0), true);
-$category = rmc_server_var($_POST, 'category', 0);
+$category = $common->httpRequest()->post('category', 'integer', 0);
 
-$data = $security; //base64_decode($security);
-$data = explode("|", $data); // [0] = referer, [1] = session_id(), [2] = user, [3] = token
-
-$xoopsUser = new XoopsUser($data[0]);
-
-if (!isset($data[1]) || strpos($data[1], RMCURL)===FALSE) {
-    error(__('You are not allowed to do this action','rmcommon'));
-}
-
+// Check user
 if (!$xoopsUser) {
-    error(__('You are not allowed to do this action','rmcommon'));
+    $common->ajax()->notifyError(__('You are not allowed to do this action','rmcommon'));
 }
 
+// Check if category was specified
 if ($category<=0) {
-    error(__('Sorry, category has not been specified!','rmcommon'));
+    $common->ajax()->notifyError(__('Sorry, category has not been specified!','rmcommon'));
 }
 
 $cat = new RMImageCategory($category);
 if ($cat->isNew()) {
-    error(__('Sorry, the specified category has not been found!','rmcommon'));
+    $common->ajax()->notifyError(__('Sorry, the specified category could not been found!','rmcommon'));
 }
 
 if ($cat->getVar('status')!='open') {
-    error(__('Sorry, the specified category is closed!','rmcommon'));
+    $common->ajax()->notifyError(__('Sorry, the specified category is closed!','rmcommon'));
 }
 
+// Check permissions to upload
 if (!$cat->user_allowed_toupload($xoopsUser)) {
-    error(__('Sorry, you can not upload images!','rmcommon'));
+    $common->ajax()->notifyError(__('Sorry, you can not upload images!','rmcommon'));
 }
 
 // Cargamos la imágen
@@ -77,12 +79,12 @@ include RMCPATH.'/class/uploader.php';
 $uploader = new RMFileUploader($updir, $cat->max_file_size(), array('gif', 'jpg', 'jpeg', 'png'));
 
 $err = array();
-if (!$uploader->fetchMedia('Filedata')) {
-    error($uploader->getErrors());
+if (!$uploader->fetchMedia('file')) {
+    $common->ajax()->notifyError($uploader->getErrors());
 }
 
 if (!$uploader->upload()) {
-    error($uploader->getErrors());
+    $common->ajax()->notifyError($uploader->getErrors());
 }
 
 // Insertamos el archivo en la base de datos
@@ -95,11 +97,13 @@ $image->setVar('uid', $xoopsUser->uid());
 
 if (!$image->save()) {
     unlink($uploader->savedDestination);
-    error(__('File could not be inserted to database!','rmcommon'));
+    $common->ajax()->notifyError(__('File could not be inserted to database!','rmcommon'));
 }
 
-$ret['message'] = '1';
-$ret['id'] = $image->id();
-echo json_encode($ret);
+$common->ajax()->response(
+    sprintf(__('File <strong>%s</strong> has been uploaded successfully', 'rmcommon'), $uploader->savedFileName), 0, 1, [
+        'id' => $image->id()
+    ]
+);
 
 die();

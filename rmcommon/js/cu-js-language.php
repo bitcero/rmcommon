@@ -64,7 +64,10 @@ var cuLanguage = {
     inProgress: "<?php _e('Operation in progress...', 'rmcommon' ); ?>",
     searchResults: "<?php _e('Search Results (%u)', 'rmcommon'); ?>",
     modules: "<?php _e('Modules', 'rmcommon'); ?>",
+    resizingLegend: "<?php _e('Resizing %1 from %2', 'rmcommon'); ?>",
 
+    <?php /* DROPZONE messages */?>
+    dzDefault: "<?php _e('Drop files here to upload', 'rmcommon'); ?>",
 };
 
 <?php

@@ -37,8 +37,8 @@
                             <input type="text" name="filesize" id="filesize" size="5" value="<?php echo $edit ? $cat->getVar('filesize') : '50'; ?>" class="form-control" />
                             <select name="sizeunit" class="form-control" id="sizeunit">
                                 <option value="1"<?php echo $edit && $cat->getVar('sizeunit')=='1' ? ' selected="selected"' : ''; ?>><?php _e('Bytes','rmcommon'); ?></option>
-                                <option value="1024"<?php echo $edit && $cat->getVar('sizeunit')=='1024' ? ' selected="selected"' : (!$edit ? 'selected="selected"' : ''); ?>><?php _e('Kilobytes','rmcommon'); ?></option>
-                                <option value="1048576"<?php echo $edit && $cat->getVar('sizeunit')=='1048576' ? ' selected="selected"' : ''; ?>><?php _e('Megabytes','rmcommon'); ?></option>
+                                <option value="1000"<?php echo $edit && $cat->getVar('sizeunit')=='1024' ? ' selected="selected"' : (!$edit ? 'selected="selected"' : ''); ?>><?php _e('Kilobytes','rmcommon'); ?></option>
+                                <option value="1000000"<?php echo $edit && $cat->getVar('sizeunit')=='1048576' ? ' selected="selected"' : ''; ?>><?php _e('Megabytes','rmcommon'); ?></option>
                             </select>
                         </div>
                     </div>
