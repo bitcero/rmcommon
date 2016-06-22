@@ -32,6 +32,15 @@ body{
     display: none;
   }
 
+  &.dz-drag-hover{
+    transition: ease all 250ms;
+    background-color: rgba(red(@theme-main-color), green(@theme-main-color), blue(@theme-main-color), 0.3);
+
+    .dz-message{
+      color: @theme-main-color-text;
+    }
+  }
+
   .dz-preview{
     position: relative;
     display: inline-block;
