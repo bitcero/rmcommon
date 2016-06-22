@@ -141,68 +141,17 @@ function images_form($edit = 0){
     /*$upload = new RMFlashUploader('images', 'images.php');*/
     if (!$cat->isNew()) {
 
-        $uploader = new Common\Core\Helpers\Uploader('images-uploader', [
-            'url' => RMCURL . '/include/upload.php',
-            'acceptedFiles' => '.png, .jpg, .gif, .jpeg',
-            'maxFileSize' => ($cat->getVar('filesize') * $cat->getVar('sizeunit')) / 1000000,
-            'parallelUploads' => 1,
-            'autoProcessQueue' => true,
-            'dictDefaultMessage' => 'cuLanguage.dzDefault'
-        ]);
-
+        $uploader = new Common\Core\Helpers\Uploader('images-uploader');
         $uploader->includeDropzone();
+
         $script = "(function(){cuImagesManager.init('" . RMCURL . "/include/upload.php', " . (($cat->getVar('filesize') * $cat->getVar('sizeunit')) / 1000000) . ");}());";
         $common->template()->add_inline_script($script, true);
 
-        /*$uploader = new RMFlashUploader('files-container', RMCURL.'/include/upload.php');
-        $uploader->add_setting('formData', array(
-            'action'=>'upload',
-            'category'=>$cat->id(),
-            // Need better code
-            'rmsecurity'=>TextCleaner::getInstance()->encrypt($xoopsUser->uid().'|'.RMCURL.'/images.php'.'|'.$xoopsSecurity->createToken(), true))
-        );
-        $uploader->add_setting('multi', true);
-        $uploader->add_setting('fileExt', '*.jpg;*.png;*.gif');
-        $uploader->add_setting('fileDesc', __('All Images (*.jpg, *.png, *.gif)','rmcommon'));
-        $uploader->add_setting('sizeLimit', $cat->getVar('filesize') * $cat->getVar('sizeunit'));
-        $uploader->add_setting('buttonText', __('Browse Images...','rmcommon'));
-        $uploader->add_setting('queueSizeLimit', 100);
-        $uploader->add_setting('onUploadSuccess',"function(file, resp, data){
-            eval('ret = '+resp);
-            if (ret.error) {
-                \$('#upload-errors').append('<span class=\"failed\"><strong>'+file.name+'</strong>: '+ret.message+'</span>');
-            } else {
-                total++;
-                ids[total-1] = ret.id;
-                \$('#upload-errors').append('<span class=\"done\"><strong>'+file.name+'</strong>: ".__('Uploaded successfully!','rmcommon')."</span>');
-            }
-
-            return true;
-        }");
-        $uploader->add_setting('onQueueComplete', "function(event, data){
-
-        	if(total<=0) return;
-
-            \$('.select_image_cat').hide('slow');
-            \$('#upload-errors').hide('slow');
-            \$('#upload-errors').html('');
-            \$('#upload-controls').hide('slow');
-            \$('#resizer-bar').show('slow');
-            \$('#resizer-bar').effect('highlight',{},1000);
-            \$('#gen-thumbnails').show();
-
-            var increments = 1/total*100;
-            url = '".RMCURL."/images.php';
-
-            params = '".TextCleaner::getInstance()->encrypt($xoopsUser->uid().'|'.RMCURL.'/images.php'.'|'.$xoopsSecurity->createToken(), true)."';
-            resize_image(params);
-
-        }");
-        RMTemplate::get()->add_head($uploader->render());*/
     }
 
     $common->template()->add_jquery(true, true);
     $common->template()->add_style('imgmgr.min.css', 'rmcommon');
+    $common->template()->add_script('images-manager.min.js', 'rmcommon');
     $common->template()->add_script('images.min.js', 'rmcommon');
 
     // Load Categories
