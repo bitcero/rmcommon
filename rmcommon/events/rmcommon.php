@@ -138,14 +138,23 @@ class RmcommonRmcommonPreload
      */
     static function eventRmcommonGetServices( $services ){
 
-        $services[] = array(
+        $services[] = [
             'id'            => 'xoops-avatar', // provider id
             'name'          => 'XOOPS Avatars', // Provider name
-            'description'   => __('Service provider to use avatars from XOOPS'),
+            'description'   => __('Service provider to use avatars from XOOPS', 'rmcommon'),
             'service'       => 'avatar', // Service to provide
             'file'          => RMCPATH . '/class/AvatarService.php',
             'class'         => 'XoopsAvatarService'
-        );
+        ];
+
+        $services[] = [
+            'id'            => 'cu-comments', // provider id
+            'name'          => 'Comentarios', // Provider name
+            'description'   => __('Comentarios de Common Utilities para XOOPS', 'rmcommon'),
+            'service'       => 'comments', // Service to provide
+            'file'          => RMCPATH . '/class/CommentsService.php',
+            'class'         => 'CUCommentsService'
+        ];
 
         return $services;
 

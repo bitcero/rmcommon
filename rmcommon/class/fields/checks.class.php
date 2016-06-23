@@ -212,7 +212,7 @@ class RMFormRadio extends RMFormElement
 
             foreach ($this->_options as $k => $v) {
                 $rtn .= "<div class=\"radio\"><label><input $attributes value='$v[value]' ";
-                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['value'] == $this->get('value') ? "checked='checked' " : '');
+                $rtn .= RMHttpRequest::request($this->get('name'), 'mixed') == $v['value'] ? "checked " : ($v['value'] == $this->get('value') ? "checked='checked' " : '');
                 $rtn .= ($v['extra'] != '' ? "$v[extra] " : '') . "> $v[caption]</label></div>";
             }
 
@@ -231,7 +231,7 @@ class RMFormYesNo extends RMFormElement
      * @param string $name
      * @param int $value Initial value (0 = No, 1 = S)
      */
-    public function __construct($caption, $name, $value = 0)
+    public function __construct($caption, $name = '', $value = 0)
     {
         if (is_array($caption)) {
             parent::__construct($caption);
@@ -273,14 +273,39 @@ class RMFormYesNo extends RMFormElement
         $attributes = $this->renderAttributeString();
 
         $rtn = "<label class=\"radio-inline\"><input type='radio' $attributes value='1' ";
-        if ($this->get('value') == 1 || $this->get('value') == 'yes') {
-            $rtn .= "checked";
+
+        if(is_string($this->get('value'))){
+
+            if ($this->get('value') == 'yes') {
+                $rtn .= "checked";
+            }
+
+        } else {
+
+            if ($this->get('value') == 1) {
+                $rtn .= "checked";
+            }
+
         }
+
+
         $rtn .= "> " . __('Yes', 'rmcommon') . "</label>";
         $rtn .= "<label class=\"radio-inline\"><input type='radio' $attributes value='0' ";
-        if ($this->get('value') == 0 || $this->get('value') == 'no') {
-            $rtn .= "checked";
+
+        if(is_string($this->get('value'))){
+
+            if ($this->get('value') == 'no') {
+                $rtn .= "checked";
+            }
+
+        } else {
+
+            if ($this->get('value') == 0) {
+                $rtn .= "checked";
+            }
+
         }
+
         $rtn .= "> " . __('No', 'rmcommon') . '</label>';
         return $rtn;
     }
