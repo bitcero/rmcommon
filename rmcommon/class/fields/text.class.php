@@ -306,11 +306,17 @@ class RMFormLabel extends RMFormElement
      * @param string $caption Texto de la etiqueta
      * @param string $cell Contenido de la celda
      */
-    public function __construct($caption, $cell, $id = '')
+    public function __construct($caption, $cell = '', $id = '')
     {
-        $this->setCaption($caption);
-        $this->setExtra($cell);
-        $this->setName($id);
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('content', $cell, '');
+        }
+
+        $this->suppressList[] = 'content';
     }
 
     /**
@@ -319,6 +325,6 @@ class RMFormLabel extends RMFormElement
      */
     function render()
     {
-        return $this->getExtra();
+        return $this->get('content');
     }
 }

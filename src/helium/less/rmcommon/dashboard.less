@@ -195,7 +195,8 @@ html.dashboard{
 
   }
 
-  @media(min-width: @screen-lg-min){
+  @media(min-width: @screen-md-min){
+
     .size-1{
       width: 33.33333333%
     }
@@ -205,19 +206,39 @@ html.dashboard{
     .size-3, .size-4{
       width: 100%;
     }
-  }
 
-  @media(min-width: @screen-xl-min){
-    .size-1{
+    .size-md-1{
       width: 25%;
     }
-    .size-2{
+
+    .size-md-2{
       width: 50%;
     }
-    .size-3{
+
+    .size-md-3{
       width: 75%;
     }
-    .size-4{
+
+    .size-md-4{
+      width: 100%;
+    }
+
+  }
+
+  @media(min-width: @screen-lg-min){
+    .size-lg-1{
+      width: 25%;
+    }
+
+    .size-lg-2{
+      width: 50%;
+    }
+
+    .size-lg-3{
+      width: 75%;
+    }
+
+    .size-lg-4{
       width: 100%;
     }
   }

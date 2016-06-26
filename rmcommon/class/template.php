@@ -726,6 +726,12 @@ class RMTemplate
                     'footer' => 0,
                 );
 
+                $this->tpl_styles['jqueryui-css'] = [
+                    'url' => 'https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css',
+                    'type' => 'text/css',
+                    'footer' => 0
+                ];
+
             } else {
 
                 $this->tpl_scripts['jqueryui'] = array(
@@ -733,6 +739,12 @@ class RMTemplate
                     'type' => 'text/javascript',
                     'footer' => 0,
                 );
+
+                $this->tpl_styles['jqueryui-css'] = [
+                    'url' => RMUris::relative_url(RMCURL . '/css/jquery.css'),
+                    'type' => 'text/css',
+                    'footer' => 0
+                ];
 
             }
 

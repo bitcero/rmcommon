@@ -1,17 +1,15 @@
-.vertical-gradient (@startColor: #eee, @endColor: white) {
-  background-color: @startColor;
-  background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
-  background: -webkit-linear-gradient(top, @startColor, @endColor);
-  background: -moz-linear-gradient(top, @startColor, @endColor);
-  background: -ms-linear-gradient(top, @startColor, @endColor);
-  background: -o-linear-gradient(top, @startColor, @endColor);
+.vertical-gradient (@startcolor: #eee, @endcolor: white) {
+  background: @startcolor;
+  background: ~"-moz-linear-gradient(top, @{startcolor} 0%, @{endcolor} 100%)";
+  background: ~"-webkit-linear-gradient(top, @{startcolor} 0%, @{endcolor} 100%)";
+  background: ~"linear-gradient(to bottom, @{startcolor} 0%, @{endcolor} 100%)";
+  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@{startcolor}', endColorstr='@{endcolor}',GradientType=0 )";
 }
 
-.horizontal-gradient (@startColor: #eee, @endColor: white) {
-  background-color: @startColor;
-  background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
-  background-image: -webkit-linear-gradient(left, @startColor, @endColor);
-  background-image: -moz-linear-gradient(left, @startColor, @endColor);
-  background-image: -ms-linear-gradient(left, @startColor, @endColor);
-  background-image: -o-linear-gradient(left, @startColor, @endColor);
+.horizontal-gradient (@startcolor: #eee, @endcolor: white) {
+  background: ~"@{startcolor}";
+  background: ~"-moz-linear-gradient(left,  @{startcolor} 0%, @{endcolor} 100%)";
+  background: ~"-webkit-linear-gradient(left,  @{startcolor} 0%,@{endcolor} 100%)";
+  background: ~"linear-gradient(to right,  @{startcolor} 0%,@{endcolor} 100%)";
+  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@{startcolor}', endColorstr='@{endcolor}',GradientType=1 )";
 }
