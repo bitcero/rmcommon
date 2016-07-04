@@ -86,7 +86,7 @@ class RMFunctions
                 __('Groups', 'rmcommon'),
                 'groups.php',
                 'icon icon-users',
-                'allgroups',
+                '',
                 array(
                     'class' => 'cu-tool tool-groups'
                 )
