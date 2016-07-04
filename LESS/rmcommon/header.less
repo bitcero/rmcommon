@@ -1,0 +1,141 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster+Two:700);
+
+#rm-hero-header{
+  background: url(../images/blurred-bg.jpg) no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  .home-nav{
+    padding: 10px 0;
+
+    a{
+      color: #FFF;
+      padding: 8px 20px;
+      transition: ease all 250ms;
+      border-radius: @border-radius-base;
+    }
+
+    .icon-bar{
+      background-color: #FFF;
+    }
+
+    .nav>li>a:hover, .nav>li>a:focus{
+      background-color: rgba(0,0,0,0.3);
+    }
+
+    .navbar-collapse{
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    @media(min-width: @screen-sm){
+      .navbar-header{
+        display: none;
+      }
+      .navbar-collapse{
+        background-color: transparent;
+      }
+    }
+
+  }
+
+  .big-screen{
+    padding: 50px 0;
+    text-align: center;
+
+    .screenshot{
+      width: 100%;
+      max-width: 800px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .logo{
+      max-width: 250px;
+      display: block;
+      margin: 0 auto 50px auto;
+    }
+
+    h1{
+      font-family: 'Lobster Two', cursive;
+      //text-transform: uppercase;
+      font-weight: 700;
+      color: #FFF;
+      text-shadow: 0 0 5px rgba(0,0,0,0.2);
+      margin: 0 0 10px;
+    }
+
+    .intro{
+      color: rgba(255,255,255,0.7);
+      font-size: 16px;
+      font-weight: 300;
+      text-shadow: 0 0 2px rgba(0,0,0,0.2);
+
+      p{
+        margin: 0;
+      }
+    }
+
+    .buttons{
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      .btn{
+        border: 0;
+        transition: ease all 300ms;
+        margin-bottom: 10px;
+      }
+
+      .btn-default{
+        background-color: rgba(255,255,255,0.3);
+
+        &:hover{
+          background-color: rgba(255,255,255,0.6);
+        }
+      }
+
+      .btn-primary{
+        background-color: rgba(red(#252b36), green(#252b36), blue(#252b36), 0.7);
+        margin-right: 3px;
+
+        &:hover{
+          background-color: #252b36;
+        }
+      }
+    }
+
+    .read-docs{
+      margin: 20px 0;
+    }
+
+    @media(min-width: @screen-sm){
+      padding-bottom: 0;
+    }
+
+    @media(min-width: @screen-md){
+      text-align: left;
+
+      h1{
+        font-size: 50px;
+        margin-top: 50px;
+
+        >em{
+          font-style: normal;
+        }
+      }
+
+      .intro{
+        font-size: 20px;
+
+      }
+
+      .buttons{
+        margin-bottom: 0;
+
+        > .btn{
+          margin-bottom: 0;
+        }
+
+      }
+    }
+  }
+}

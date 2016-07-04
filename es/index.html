@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="es-MX">
+    <!--
+    Author:     Eduardo Cortés (http://eduardcortes.mx)
+    URL:        https://www.redmexico.com.mx
+    Copyright:  2016. Eduardo COrtés y Red México
+    License:    http://creativecommons.org/licenses/by-nc-sa/4.0/
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Common Utilities, un módulo XOOPS para crear mejores módulos XOOPS. Transforma XOOPS por dentro y por fuera.">
@@ -9,11 +15,9 @@
     <title>Common Utilities - XOOPS con esteroides</title>
     <link rel="icon" type="image/png" href="../favicon.ico" type="image/x-icon">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/material.min.css" rel="stylesheet">
-    <link href="../css/ripples.min.css" rel="stylesheet">
     <link href="../css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link href="../css/cu.css" rel="stylesheet">
+    <link href="../css/cusite.min.css" rel="stylesheet">
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -27,62 +31,74 @@
 </head>
 <body>
 
-<nav class="navbar home-nav" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cu-top-navbar">
-                <span class="sr-only">Navegación</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><strong>Common Utilities</strong></a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="cu-top-navbar">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="getting-started/">Empezando</a>
-                </li>
-                <li>
-                    <a href="modules">Módulos</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="../en"><span class="fa fa-language"></span> English</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid big-screen">
-
-    <div class="container">
-
-        <div class="row " id="big-screen">
-            <div class="col-md-4">
-                <h1>Common <span>Utilities</span></h1>
-                <p>Te presentamos un módulo que inyecta potencia y poder directamente al corazón
-                de <strong>XOOPS</strong>. </p>
-                <p>Un módulo que permite crear nuevos módulos, modernos y más funcionales.</p>
-                <a href="https://github.com/bitcero/rmcommon/archive/master.zip" class="btn btn-material-lightyellow btn-lg">
-                    <span class="fa fa-download"></span> Descargalo Ahora
-                </a><br>
-                <small><a href="https://github.com/bitcero/rmcommon/">
-                    <span class="fa fa-github-alt"></span> Fork en GitHub</a></small>
+<header id="rm-hero-header">
+    <nav class="navbar home-nav" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cu-top-navbar">
+                    <span class="sr-only">Navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><strong>Common Utilities</strong></a>
             </div>
-            <div class="col-md-8 macbook">
-                <img src="../images/lap-cu.png" alt="Common Utilities" class="img-responsive">
+
+            <div class="collapse navbar-collapse" id="cu-top-navbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="https://github.com/bitcero/rmcommon/"><span class="fa fa-play"></span> &nbsp; Empezando</a>
+                    </li>
+                    <li>
+                        <a href="#section-modules" class="scroll"><span class="fa fa-hdd-o"></span> &nbsp; Módulos</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://docs.redmexico.com.mx"><span class="fa fa-book"></span> &nbsp; Docs</a>
+                    </li>
+                    <li>
+                        <a href="../en"><span class="fa fa-language"></span> &nbsp; English</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+
+    <div class="big-screen">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-5 col-lg-4">
+                    <img src="../images/rmcommon.png" alt="Common Utilities" class="img-responsive logo hidden-sm hidden-md hidden-lg">
+                    <h1>Common <em>Utilities</em></h1>
+                    <div class="intro">
+                        <p>Te presentamos un módulo que inyecta potencia y poder directamente al corazón
+                            de <strong>XOOPS</strong>. </p>
+                    </div>
+                    <div class="buttons">
+                        <a href="https://github.com/bitcero/rmcommon/archive/master.zip" class="btn btn-primary btn-lg">
+                            <span class="fa fa-download"></span>
+                            Descargar
+                        </a>
+                        <a href="https://github.com/bitcero/rmcommon/" class="btn btn-default btn-lg">
+                            <span class="fa fa-github-alt"></span>
+                            Ver en GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    <img src="../images/ss-rmcommon.png" alt="Common Utilities" class="img-responsive screenshot hidden-xs">
+                </div>
+            </div>
+
+        </div>
 
     </div>
+</header>
 
-</div>
-
-<div class="container-fluid" id="cu-dark-band">
+<div class="cu-sh-band">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
@@ -92,11 +108,11 @@
     </div>
 </div>
 
-<div class="container" id="cu-container">
+<div class="container" id="what-is">
     <div class="row">
 
         <div class="col-sm-4 text-center">
-            <span class="btn btn-theme-color btn-fab fa fa-gear"></span>
+            <span class="fa fa-gear"></span>
             <h3>Un framework</h3>
             <p>
                 Todas las herramientas para crear nuevos módulos: más modernos, más funcionales y mejor integrados.
@@ -104,7 +120,7 @@
         </div>
 
         <div class="col-sm-4 text-center">
-            <span class="btn btn-theme-color btn-fab fa fa-eye"></span>
+            <span class="fa fa-eye"></span>
             <h3>Nueva apariencia</h3>
             <p>
                 No solo inyecta potencia a XOOPS, también embellece la apariencia general del panel de control.
@@ -112,7 +128,7 @@
         </div>
 
         <div class="col-sm-4 text-center">
-            <span class="btn btn-theme-color btn-fab fa fa-repeat"></span>
+            <span class="fa fa-repeat"></span>
             <h3>Compatibilidad</h3>
             <p>
                 Aprovecha las ventajas que ofrecen los nuevos módulos, sin sacrificar compatibilidad con los anteriores.
@@ -121,14 +137,20 @@
 
     </div>
 </div>
-<hr>
+
+<div class="helium-gui">
+    <div class="container text-center">
+        <img src="../images/helium-gui.png" alt="Nueva Interfaz Helium" class="img-responsive">
+    </div>
+</div>
+
 <div class="container">
-    <div class="row feature">
+    <div class="row modules-base">
         <div class="col-md-7">
             <img src="../images/modules-ipad.png" class="img-responsive" alt="Una increíble base para módulos">
         </div>
         <div class="col-md-5">
-            <h2 class="cu-ftitle">La mejor base para módulos XOOPS nuevos</h2>
+            <h2>La mejor base para módulos XOOPS nuevos</h2>
             <p>Common Utilities ofrece una excelente base para la creación de nuevos módulos, gracias a sus componentes
                 mejorados. Crea módulos que se integran totalmente entre ellos y con el sistema con una curva de
                 aprendizaje muy ligera.</p>
@@ -136,47 +158,48 @@
         </div>
     </div>
 </div>
-<hr>
-<div class="container-fluid bg-lightblue">
+
+<div class="container modules-base">
+    <div class="row feature">
+        <div class="col-md-6 text-right">
+            <h2 class="cu-ftitle">Módulos más útiles y con mejor apariencia</h2>
+            <p>Common Utilities no genera incompatibilidades con módulos existentes de XOOPS, por lo que puedes
+                seguir utilizándolos sin problemas, pero si deseas mejorar tu sitio web, cuenta con excelentes
+                módulos 100% nativos que te permitirán crear blogs, páginas, portafolios, temas, etc..</p><br>
+            <a href="modules/" class="btn btn-lg btn-success">
+                <span class="fa fa-cloud-download"></span>
+                Módulos Disponibles</a>
+        </div>
+        <div class="col-md-6">
+            <img src="../images/module-bag.png" alt="Módulos cool" class="img-responsive bag">
+        </div>
+    </div>
+</div>
+
+
+<div class="cu-download-bar">
     <div class="container">
-        <div class="row feature">
-            <div class="col-md-6 col-md-offset-1 text-center">
-                <h2 class="cu-ftitle">Módulos más útiles y con mejor apariencia</h2>
-                <p>Common Utilities no genera incompatibilidades con módulos existentes de XOOPS, por lo que puedes
-                    seguir utilizándolos sin problemas, pero si deseas mejorar tu sitio web, cuenta con excelentes
-                    módulos 100% nativos que te permitirán crear blogs, páginas, portafolios, temas, etc..</p>
-                <a href="modules/" class="btn btn-lg btn-material-pink"><span class="fa fa-cloud-download"></span> Módulos Disponibles</a>
-            </div>
-            <div class="col-md-4">
-                <img src="../images/module-bag.png" alt="Módulos cool" class="img-responsive">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <a href="https://github.com/bitcero/rmcommon/archive/master.zip" class="btn btn-lg btn-primary">
+                    <span class="fa fa-download"></span> &nbsp; Descargar Ahora
+                </a>
+                <a href="https://github.com/bitcero/rmcommon" class="btn btn-lg btn-default"><span class="fa fa-github-alt"></span> &nbsp; Proyecto en GitHub</a>
             </div>
         </div>
     </div>
 </div>
 
-<hr>
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            <a href="https://github.com/bitcero/rmcommon/archive/v2.2.75.zip" class="btn btn-lg btn-big-download"><span class="fa fa-download"></span> &nbsp; Descargar Ahora</a>
-            <a href="https://github.com/bitcero/rmcommon" class="btn btn-lg btn-big-download"><span class="fa fa-github-alt"></span> &nbsp; Proyecto en GitHub</a>
-        </div>
-    </div>
-</div>
-
-<hr>
-
-<div class="container-fluid bg-danger">
+<div class="cu-updates">
     <div class="container">
         <div class="row feature">
             <div class="col-md-5">
                 <img src="../images/upd-brow.png" alt="Actualizaciones 1-CLICK" class="img-responsive">
             </div>
-            <div class="col-md-6 text-center">
+            <div class="col-md-6 text-left">
                 <h2 class="cu-ftitle">Actualizaciones <strong>1-Click</strong></h2>
                 <p>
-                    Mantén actualizados tus módulos fácilmente. Olvidate de buscar actualizaciones manualmente y todo
+                    Mantén actualizados tus módulos fácilmente. Olvídate de buscar actualizaciones manualmente y todo
                     el proceso que eso conlleva; deja que <strong>Common Utilities</strong> haga todo el trabajo por tí mediante su
                     sistema de actualizaciones <strong>1-Click</strong>*.
                 </p>
@@ -192,313 +215,310 @@
     </div>
 </div>
 
-<hr>
+<div class="" id="cu-features">
 
-<div class="container features-container" id="cu-features">
+    <div class="container">
+                <h2>Características
+                    <br><small>Common Utilities ofrece características que permiten una mejor experiencia para los usuarios
+                        finales y <strong>mejores herramientas</strong> para desarrolladores.</small></h2>
 
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            <h1 class="cu-ftitle">Características
-            <br><small>Common Utilities ofrece características que permiten una mejor experiencia para los usuarios
-                finales y <strong>mejores herramientas</strong> para desarrolladores.</small></h1>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
+        <div class="row">
 
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-gear cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Administrador de Módulos</h4>
-                    <p>Un nuevo administrador de módulos; más facil de usar y entender.</p>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-gear"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Administrador de Módulos</h4>
+                        <p>Un nuevo administrador de módulos; más facil de usar y entender.</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-th-large cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Bloques Mejorados</h4>
-                    <p>Common Utilities ofrece su propio sistema de bloques que permiten crear tantas posiciones
-                    como sean necesarias y un manejo mucho mas intuitivo y funcional de los bloques.</p>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-th-large cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Bloques Mejorados</h4>
+                        <p>Common Utilities ofrece su propio sistema de bloques que permiten crear tantas posiciones
+                            como sean necesarias y un manejo mucho mas intuitivo y funcional de los bloques.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
+        <div class="row">
 
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-shield cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Seguridad Mejorada</h4>
-                    <p>
-                        Una nueva capa de seguridad que permite establecer permisos por grupos y acciones específicas
-                        que además pueden integrarse fácilmente en otros módulos.
-                    </p>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-shield cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Seguridad Mejorada</h4>
+                        <p>
+                            Una nueva capa de seguridad que permite establecer permisos por grupos y acciones específicas
+                            que además pueden integrarse fácilmente en otros módulos.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="clearfix visible-xs-block"></div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-users cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Manejo de Usuarios y Grupos</h4>
-                    <p>Un administrador de usuarios y grupos que permite aprovechar las nuevas características
-                        de seguridad de Common Utilities.</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-image cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Administrador de Imágenes</h4>
-                    <p>
-                        Un administrador de imágenes muy versátil que permite un manejo más intuitivo de las imágenes
-                        y que puede ser integrado en cualquier módulo.
-                    </p>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-users cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Manejo de Usuarios y Grupos</h4>
+                        <p>Un administrador de usuarios y grupos que permite aprovechar las nuevas características
+                            de seguridad de Common Utilities.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="clearfix visible-xs-block"></div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-plug cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Soporte para Plugins</h4>
-                    <p>Es posible agregar mayor funcionalida o extender las características existentes
-                        a través de plugins.</p>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-image cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Administrador de Imágenes</h4>
+                        <p>
+                            Un administrador de imágenes muy versátil que permite un manejo más intuitivo de las imágenes
+                            y que puede ser integrado en cualquier módulo.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-comments cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Sistema de Comentarios</h4>
-                    <p>
-                        Un nuevo sistema de comentarios, más fácil de integrar y de usar con cualquier módulo.
-                    </p>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-plug cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Soporte para Plugins</h4>
+                        <p>Es posible agregar mayor funcionalida o extender las características existentes
+                            a través de plugins.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="clearfix visible-xs-block"></div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-hand-o-up cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Actualizaciones 1-Click</h4>
-                    <p>Mantén tu sistema al día y recibe las actualizaciones directamente con Common Utilities con
-                        un solo click.</p>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-comments cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Sistema de Comentarios</h4>
+                        <p>
+                            Un nuevo sistema de comentarios, más fácil de integrar y de usar con cualquier módulo.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-sliders cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Sistema de Configuración</h4>
-                    <p>
-                        Con el sistema de configuración integrado es posible establecer las opciones para los módulos
-                        sin abandonar lo que estas haciendo. Un nuevo método en línea permite configurar módulos
-                        vía AJAX.
-                    </p>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-hand-o-up cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Actualizaciones 1-Click</h4>
+                        <p>Mantén tu sistema al día y recibe las actualizaciones directamente con Common Utilities con
+                            un solo click.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="clearfix visible-xs-block"></div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-life-ring cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Documentación en Línea</h4>
-                    <p>Un método de documentación que permite a los módulos, plugins y temas proporcionar documentación
-                        alojada en Internet fácilmente.</p>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-sliders cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Sistema de Configuración</h4>
+                        <p>
+                            Con el sistema de configuración integrado es posible establecer las opciones para los módulos
+                            sin abandonar lo que estas haciendo. Un nuevo método en línea permite configurar módulos
+                            vía AJAX.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-file-text cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Nuevo Control de Plantillas</h4>
-                    <p>
-                        Añade una nueva clase para plantillas que permite un manejo mas efectivo y sencillo de hojas
-                        de estilo, scripts y otros elementos.
-                    </p>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-life-ring cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Documentación en Línea</h4>
+                        <p>Un método de documentación que permite a los módulos, plugins y temas proporcionar documentación
+                            alojada en Internet fácilmente.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="clearfix visible-xs-block"></div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-edit cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Nuevos Editores de Texto</h4>
-                    <p>Elige entre los distintos editores que ofrece Common Utilities de acuerdo a tus gustos de
-                        edición: Visual, HTML, XoopsCode o Simple.</p>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-file-text cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Nuevo Control de Plantillas</h4>
+                        <p>
+                            Añade una nueva clase para plantillas que permite un manejo mas efectivo y sencillo de hojas
+                            de estilo, scripts y otros elementos.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-language cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Soporte Multiidioma</h4>
-                    <p>
-                        Un sistema de localización totalmente independiente de XOOPS, basado en GetText y con archivos
-                        fácilmente editables con <a href="http://poedit.net" target="_blank">PoEdit</a>. y disponible
-                        para todos los módulos, incluso módulos antiguos.
-                    </p>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-edit cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Nuevos Editores de Texto</h4>
+                        <p>Elige entre los distintos editores que ofrece Common Utilities de acuerdo a tus gustos de
+                            edición: Visual, HTML, XoopsCode o Simple.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="clearfix visible-xs-block"></div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-code cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Códigos Personalizados</h4>
-                    <p>Soporte para código personalizados que pueden ser utilizados en módulos, plugins o temas y que
-                        pueden extender la funcionalidad por defecto del sistema.</p>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-language cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Soporte Multiidioma</h4>
+                        <p>
+                            Un sistema de localización totalmente independiente de XOOPS, basado en GetText y con archivos
+                            fácilmente editables con <a href="http://poedit.net" target="_blank">PoEdit</a>. y disponible
+                            para todos los módulos, incluso módulos antiguos.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-reorder cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Implementación MVC</h4>
-                    <p>
-                        Implementación básica del patrón MVC aplicado a módulos XOOPS que permite un desarrollo
-                        organizado, estructurado y en tiempo récord.
-                    </p>
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-code cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Códigos Personalizados</h4>
+                        <p>Soporte para código personalizados que pueden ser utilizados en módulos, plugins o temas y que
+                            pueden extender la funcionalidad por defecto del sistema.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
 
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-check-square cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Campos de Formulario</h4>
-                    <p>Campos de formulario adicionales a los existentes en XOOPS, mejor integrados y mucho más sencillos
-                        de usar.</p>
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-reorder cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Implementación MVC</h4>
+                        <p>
+                            Implementación básica del patrón MVC aplicado a módulos XOOPS que permite un desarrollo
+                            organizado, estructurado y en tiempo récord.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-link cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Reescritura de URLs</h4>
-                    <p>
-                        Permite un fácil control de reescritura de las URLs por parte de los módulos, y para los módulos
-                        que implementan MVC la reescritura ya está integrada.
-                    </p>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-check-square cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Campos de Formulario</h4>
+                        <p>Campos de formulario adicionales a los existentes en XOOPS, mejor integrados y mucho más sencillos
+                            de usar.</p>
+                    </div>
                 </div>
             </div>
+
         </div>
 
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-2 text-center">
-                    <span class="fa fa-paint-brush cu-ficon"></span>
-                </div>
-                <div class="col-xs-8 col-sm-9 col-md-10">
-                    <h4>Soporte de temas</h4>
-                    <p>La apariencia general puede ser modificada mediante temas para el panel de control.</p>
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-link cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Reescritura de URLs</h4>
+                        <p>
+                            Permite un fácil control de reescritura de las URLs por parte de los módulos, y para los módulos
+                            que implementan MVC la reescritura ya está integrada.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+                        <span class="fa fa-paint-brush cu-ficon"></span>
+                    </div>
+                    <div class="col-xs-8 col-sm-9 col-md-10">
+                        <h4>Soporte de temas</h4>
+                        <p>La apariencia general puede ser modificada mediante temas para el panel de control.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </div>
-<hr>
-<div class="container-fluid bg-salmon cu-transform">
+
+<!-- Before and after -->
+<div class="cu-transform">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 col-sm-offset-2">
-                <img src="../images/xoops-brow.png" alt="XOOPS sin Common Utilities" class="img-responsive">
-            </div>
-            <div class="col-sm-4">
-                <img src="../images/cu-brow.png" alt="XOOPS con Common Utilities" class="img-responsive">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div id="before-after" class="twentytwenty-container">
+                    <img src="../images/xoops-before.png" alt="XOOPS without Common Utilities">
+                    <img src="../images/rmc-after.png" alt="XOOPS with Common Utilities">
+                </div>
             </div>
         </div>
         <div class="row">
@@ -509,12 +529,146 @@
         </div>
     </div>
 </div>
+<!-- End before and after -->
 
-<hr>
+<!-- Available Modules -->
+<section id="section-modules">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="cu-title">Módulos Disponibles</h2>
+            <p class="lead">
+                Esta es una lista de los módulos disponibles para <strong>Common Utilities</strong>, pero recuerda que siempre puedes utilizar
+                los módulos convencionales de XOOPS sin problemas de compatibilidad.
+            </p>
+        </div>
+        <ul>
+            <li class="item">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="http://www.rmcommon.com">
+                            <img src="https://raw.githubusercontent.com/bitcero/mywords/master/mywords/images/logo.png" alt="Logo MyWords" class="media-object">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="http://mywords.rmcommon.com">MyWords</a>
+                        </h4>
+                        <p>Un módulo para publicar artículos o noticias con todas las herramientas para crear una sección de blog.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="http://github.com/bitcero/qpages/">
+                            <img src="https://raw.githubusercontent.com/bitcero/qpages/master/qpages/images/logo.png" alt="Logo QuickPages" class="media-object">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="http://github.com/bitcero/qpages/">QuickPages</a>
+                        </h4>
+                        <p>Módulo para la publicación de páginas semi-estáticas con avanzadas características para el uso de plantillas.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="clearfix visible-sm visible-md visible-lg"></li>
+            <li class="item">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="http://github.com/bitcero/xthemes/">
+                            <img src="https://raw.githubusercontent.com/bitcero/xthemes/master/xthemes/images/logo.png" alt="Logo xThemes" class="media-object">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="http://github.com/bitcero/xthemes/">xThemes</a>
+                        </h4>
+                        <p>Framework para la creación de temas avanzados para XOOPS. Proporciona nuevas posibilidades para crear temas profesionales.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="http://github.com/bitcero/works/">
+                            <img src="https://raw.githubusercontent.com/bitcero/works/master/works/images/logo.png" alt="Logo Professional Works" class="media-object">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="http://github.com/bitcero/works/">Professional Works</a>
+                        </h4>
+                        <p>Módulo para crear una sección de portafolio profesional. Ideal para creativos, agencias publicitarias, freelancers, etc.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="clearfix visible-sm visible-md visible-lg"></li>
+            <li class="item">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="http://github.com/bitcero/bxpress/">
+                            <img src="https://raw.githubusercontent.com/bitcero/bxpress/master/bxpress/images/logo.png" alt="Logo bXpress" class="media-object">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="http://github.com/bitcero/nxpress/">bXPress</a>
+                        </h4>
+                        <p>Módulo ligero para la creación de foros en XOOPS. Caracteristicas novedosas frente a otras opciones.</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- End available modules -->
+
+<!-- Read the docs -->
+<section id="section-docs">
+    <div class="container">
+        <div class="text-center">
+            <a href="https://github.com/bitcero/rmcommon/archive/master.zip" class="btn btn-lg btn-primary">
+                <span class="fa fa-download"></span> &nbsp; Descargar Ahora
+            </a>
+            <a href="https://docs.redmexico.com.mx" class="btn btn-lg btn-default"><span class="fa fa-book"></span> &nbsp; Documentación</a>
+        </div>
+    </div>
+</section>
+<!-- End read the docs -->
 
 <footer class="cu-footer" role="contentinfo">
 
     <div class="container">
+
+        <div class="row credits">
+            <div class="col-md-6">
+                Diseñado con <span class="fa fa-heart"></span> por <a href="http://www.eduardocortes.mx">Eduardo Cortés</a>. Visita <a href="https://redmexico.com.mx">Red México</a>.
+            </div>
+            <div class="col-md-6 social-buttons">
+                <a href="https://twitter.com/bitcero/">
+                    <span class="fa fa-twitter">
+                        <span class="sr-only">Sígueme en Twitter</span>
+                    </span>
+                </a>
+                <a href="https://github.com/bitcero/">
+                    <span class="fa fa-github-alt">
+                        <span class="sr-only">Mi cuenta en GitHub</span>
+                    </span>
+                </a>
+                <a href="https://plus.google.com/100655708852776329288">
+                    <span class="fa fa-google-plus">
+                        <span class="sr-only">Estoy en Google+</span>
+                    </span>
+                </a>
+                <a href="https://linkedin.com/in/ecorteshervis/">
+                    <span class="fa fa-linkedin">
+                        <span class="sr-only">Mi perfil en LinkedIn</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+
         <div class="cu-social text-center">
             <ul class="list-inline">
                 <li>
@@ -533,20 +687,14 @@
         </div>
     </div>
 
-    <hr>
-
 </footer>
 
-<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/cu.js"></script>
-<script type="text/javascript" src="../js/ripples.min.js"></script>
-<script type="text/javascript" src="../js/material.min.js"></script>
+<script type="text/javascript" src="../js/jquery.event.move.js"></script>
+<script type="text/javascript" src="../js/jquery.twentytwenty.js"></script>
+<script type="text/javascript" src="../js/cu.min.js"></script>
 <script type="text/javascript">
-    $(document).ready( function(){
-        $.material.init();
-    });
-
     window.twttr = (function (d,s,id) {
         var t, js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;

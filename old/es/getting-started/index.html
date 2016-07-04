@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head lang="es-MX">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Common Utilities, un módulo XOOPS para crear mejores módulos XOOPS. Transforma XOOPS por dentro y por fuera.">
+    <meta name="keywords" content="xoops, rmcommon, framework, php, modulos, frontend, backend, red mexico, rmcommon">
+    <meta name="author" content="Eduardo Cortes">
+    <title>Empezando con Common Utilities</title>
+    <link rel="icon" type="image/png" href="../favicon.ico" type="image/x-icon">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/material.min.css" rel="stylesheet">
+    <link href="../../css/ripples.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="../../css/cu.css" rel="stylesheet">
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-56636491-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body data-spy="scroll" data-target=".sidebar-nav">
+
+<nav class="navbar navbar-material-cyan" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cu-top-navbar">
+                <span class="sr-only">Navegación</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../"><strong>Common Utilities</strong></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="cu-top-navbar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="./">Empezando</a>
+                </li>
+                <li>
+                    <a href="../modules">Módulos</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="../../en"><span class="fa fa-language"></span> English</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid bg-dark pages-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Empezando</h1>
+                <p class="text-cyan">Primero pasos con Common Utilities: descarga, instalación y puesta en marcha.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-9 main-content" role="main">
+            <!-- Download -->
+            <h1 id="download">Descarga</h1>
+            <p class="lead">Existen dos formas muy simples de obtener Common Utilities para instalaciones nuevas, y es
+            así para facilitarte las cosas.</p>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3><strong>Sitio de Common Utilities</strong></h3>
+                    <p>Desde este sitio obtendrás siempre la versión estable mas reciente del módulo, que ha sido probada
+                    y verificada antes de su liberación.</p>
+                    <a href="https://github.com/bitcero/rmcommon/archive/v2.2.75.zip" class="btn btn-lg btn-material-red">Descargalo Ahora </a>
+                </div>
+                <div class="col-sm-6">
+                    <h3><strong>Desde GitHub</strong></h3>
+                    <p>Puedes descargar Common Utilities directamente desde la página del proyecto en GitHub,
+                    donde también están disponibles otras versiones y el código del módulo.</p>
+                    <a href="http://github.com/bitcero/rmcommon/releases" class="btn btn-lg btn-material-red">Ver Proyecto</a>
+                </div>
+            </div>
+
+            <hr>
+            <!-- Requisitos -->
+            <h1 id="requirements">Requisitos previos</h1>
+            <p class="lead">Antes de instalar Common Utilities, es necesario contar con algunos sencillos requisitos
+                para que todo funciones correctamente.</p>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3><strong>PHP 5.4</strong></h3>
+                    <p>El módulo ha sido desarrollado utilizando PHP 5.4 y constantemente se integran las nuevas
+                        características del lenguaje.</p>
+
+                </div>
+                <div class="col-sm-6">
+                    <h3><strong>XOOPS 2.5</strong></h3>
+                    <p>Common Utilities es un módulo XOOPS, por lo tanto es necesario tener instalado y configurado
+                        XOOPS antes de la instalación.</p>
+                    <a href="https://xoops.org" class="btn btn-lg btn-material-lightblue">Sitio Oficial</a>
+                </div>
+            </div>
+
+            <!-- INstalación -->
+            <hr>
+            <h1 id="install">Instalación</h1>
+            <p class="lead">Instalar Common Utilities es muy sencillo. Estas son las instrucciones.</p>
+            <p>
+                La instalación de Common Utilities es similar a la de cualqueir otro módulo en XOOPS, sin embargo
+                es necesario poner especial atención a ciertos detalles para asegurarnos que todo marche
+                correctamente.
+            </p>
+            <h2 id="uncompress">1. Descomprimir archivo</h2>
+            <p>
+                Una vez descargado el archivo que contiene los archivos el módulo, es necesario extraer el
+                contenido al disco duro local. Una vez extraídos, podrás observar los siguientes archivos:
+            </p>
+
+            <ul class="tree-view">
+                <li><span class="fa fa-folder"></span> <strong>rmcommon*</strong></li>
+                <li><span class="fa fa-file-o"></span> .gitattributes</li>
+                <li><span class="fa fa-file-o"></span> .README.md</li>
+            </ul>
+
+            <p>Dentro del directorio <code>rmcommon</code> se encuentran todos los archivos del módulo:</p>
+
+            <ul class="tree-view">
+                <ul class="tree-view">
+                    <li>
+                        <span class="fa fa-folder-open"></span> <strong>rmcommon</strong>
+                        <ul>
+                            <li><span class="fa fa-folder"></span> ajax</li>
+                            <li><span class="fa fa-folder"></span> api</li>
+                            <li><span class="fa fa-folder"></span> blocks</li>
+                            <li><span class="fa fa-folder"></span> class</li>
+                            <li><span class="fa fa-folder"></span> css</li>
+                            <li><span class="fa fa-folder"></span> docs</li>
+                            <li><span class="fa fa-folder"></span> events</li>
+                            <li><span class="fa fa-folder"></span> fonts</li>
+                            <li><span class="fa fa-folder"></span> images</li>
+                            <li><span class="fa fa-folder"></span> include</li>
+                            <li><span class="fa fa-folder"></span> js</li>
+                            <li><span class="fa fa-folder"></span> lang</li>
+                            <li><span class="fa fa-folder"></span> language</li>
+                            <li><span class="fa fa-folder"></span> plugins</li>
+                            <li><span class="fa fa-folder"></span> preloads</li>
+                            <li><span class="fa fa-folder"></span> sql</li>
+                            <li><span class="fa fa-folder"></span> <strong>system*</strong></li>
+                            <li><span class="fa fa-folder"></span> templates</li>
+                            <li><span class="fa fa-folder"></span> themes</li>
+                            <li><span class="fa fa-file-o"></span> about.php</li>
+                            <li><span class="fa fa-file-o"></span> admin-loader.php</li>
+                            <li><span class="fa fa-file-o"></span> blocks.php</li>
+                            <li><span class="fa fa-file-o"></span> comments.php</li>
+                            <li><span class="fa fa-file-o"></span> groups.php</li>
+                            <li><span class="fa fa-file-o"></span> images.php</li>
+                            <li><span class="fa fa-file-o"></span> index.php</li>
+                            <li><span class="fa fa-file-o"></span> loader.php</li>
+                            <li><span class="fa fa-file-o"></span> menu.php</li>
+                            <li><span class="fa fa-file-o"></span> modules.php</li>
+                            <li><span class="fa fa-file-o"></span> plugins.php</li>
+                            <li><span class="fa fa-file-o"></span> post-comment.php</li>
+                            <li><span class="fa fa-file-o"></span> rss.php</li>
+                            <li><span class="fa fa-file-o"></span> settings.php</li>
+                            <li><span class="fa fa-file-o"></span> updates.php</li>
+                            <li><span class="fa fa-file-o"></span> users.php</li>
+                            <li><span class="fa fa-file-o"></span> xoops_version.php</li>
+                        </ul>
+                    </li>
+                    <li><span class="fa fa-file-o"></span> .gitattributes</li>
+                    <li><span class="fa fa-file-o"></span> .README.md</li>
+                </ul>
+            </ul>
+
+            <p>
+                El subdirectorio <code>system</code> contiene el tema para el módulo sistema que activa la interfaz
+                gráfica de Common Utilities.
+            </p>
+
+            <h2 id="upload">2. Subir archivos</h2>
+            <p>
+                La carga de archivos al servidor donde se encuentra instalado <a href="http://xoops.org" target="_blank">XOOPS</a>
+                se realiza en dos partes:
+            </p>
+
+            <h4 class="text-red">1. Carga del tema para el módulo System</h4>
+            <p><strong>Common Utilities</strong> proporciona un tema para ser integrado en el módulo de sistema. Este tema
+            proporciona los medios para poder modificar la interfaz gráfica y utilizar los componentes visuales nuevos.</p>
+
+            <h4 class="text-red">2. Carga del módulo</h4>
+            <p>Por supuesto es necesario cargar los archivo propios de Common Utilities, que se integrarán
+            con XOOPS y ofrecerán nuevas capacidades y elementos listos para ser usados.</p>
+
+            <div class="alert alert-material-lightblue text-center text-white">
+                Common Utilities no modifica ningún archivo de XOOPS, siguiente la filosofía <strong>0% hacks ➙ 100% funcionalidad</strong>.
+            </div>
+
+            <div class="alert alert-warning text-white">
+                <strong>Importante:</strong> para la carga de archivos a un servidor remoto, es probable que necesites
+                utilizar algún cliente FTP cómo <a href="http://filezilla-project.org" target="_blank">FileZilla</a> o algún programa similar.
+            </div>
+
+            <p>Para subir los archivos a tu sitio XOOPS, sigue el procedimiento a continuación:</p>
+            <ol>
+                <li>Sube la carpeta <code>system</code> ubicada dentro de la carpeta <code>rmcommon</code> al directorio
+                    <code>/modules/system/themes</code> de tu instalación XOOPS.</li>
+                <li>Sube el directorio <code>rmcommon</code> al directorio <code>/modules</code>de tu instalación
+                XOOPS.</li>
+            </ol>
+
+            <p>
+                Una vez los archivos se encuentren alojados en el servidor, procederemos a instalar Common Utilities, para
+                lo cuál seguiremos el procedimiento básico de instalación de módulos en XOOPS.
+            </p>
+
+            <h2 id="installnow">3. Instalar el Módulo</h2>
+
+            <ol>
+                <li>Ingresa al panel de control de XOOPS, posteriormente ve al administrador de módulos de XOOPS.</li>
+                <li>Haz click en el botón <em>Instalar módulos</em> (<em>Install module</em>). Podrás ver el icono
+                de Common Utilities en la lista de módulos disponibles para instalación.</li>
+                <li>Haz click en el icono <em>Instalar</em> (representado por una flecha), Nuevamente en el botón
+                    <em>Instalar</em>.</li>
+                <li>Si todo ha resultado correctamente, Common Utilities está instalado y listo para ser utilizado.</li>
+            </ol>
+
+            <p>
+                Probablemente te preguntes acerca de la instalación del tema del módulo System y otros ajustes; no te
+                preocupes, <strong>Common Utilities ha preparado todo el sistema para funcionar adecuadamente</strong>.
+            </p>
+
+            <hr>
+
+            <h1 id="getting-help">Obtener Ayuda</h1>
+
+            <p class="lead">
+                La mejor forma de obtener ayuda y solucionar problemas con Common Utilities, es a través de GitHub,
+                utilizando la <a href="http://github.com/bitcero/rmcommon/issues">herramienta para tal fin</a>. Para
+                cualquier otro medio no garantizo respuestas o resultados.
+            </p>
+
+            <a href="http://github.com/bitcero/rmcommon/issues" class="btn btn-material-red">
+                <span class="fa fa-exclamation-circle"></span> Reportar un Error</a>
+
+            <br>
+
+            <h1 id="request-features">Sugerir Características</h1>
+
+            <p class="lead">
+                También puedes solicitar o sugerir nuevas características para ser añadidas a Common Utilities. Para hacerlo,
+                utiliza el <a href="http://github.com/bitcero/rmcommon/issues">sistema de GitHub</a>.
+            </p>
+
+            <a href="http://github.com/bitcero/rmcommon/issues" class="btn btn-material-deeporange">
+                <span class="fa fa-exclamation-circle"></span> Solicitar o Sugerir Características</a>
+
+        </div>
+
+        <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="sidebar-nav affix-top">
+                <ul class="nav sidenav">
+                    <li><a href="#download">Descarga</a></li>
+                    <li><a href="#requirements">Requerimientos</a></li>
+                    <li>
+                        <a href="#install">Instalación</a>
+                        <ul class="nav">
+                            <li><a href="#uncompress">Descomprimir</a></li>
+                            <li><a href="#upload">Subir archivos</a></li>
+                            <li><a href="#installnow">Instalar el módulo</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#getting-help">Obtener ayuda</a></li>
+                    <li><a href="#request-features">Sugerir Características</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<hr>
+
+<footer class="cu-footer" role="contentinfo">
+
+    <div class="container">
+        <div class="cu-social text-center">
+            <ul class="list-inline">
+                <li>
+                    <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=bitcero&amp;repo=rmcommon&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
+                </li>
+                <li>
+                    <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=bitcero&amp;repo=rmcommon&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
+                </li>
+                <li class="follow-btn">
+                    <a href="https://twitter.com/bitcero" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @bitcero</a>
+                </li>
+                <li class="tweet-btn">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://rmcommon.com/" data-count="horizontal" data-via="bitcero" data-related="mdo:Creator of Common Utilities">Tweet</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</footer>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/cu.js"></script>
+<script type="text/javascript" src="../../js/ripples.min.js"></script>
+<script type="text/javascript" src="../../js/material.min.js"></script>
+<script type="text/javascript">
+    $(document).ready( function(){
+        $.material.init();
+
+        $(".sidebar-nav").affix({
+            offset: {
+                top: function () {
+                    return (this.bottom = $('.pages-header').outerHeight(true) + 50)
+                },
+                bottom: 100
+            }
+        });
+    });
+
+    window.twttr = (function (d,s,id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;
+        js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+    }(document, "script", "twitter-wjs"));
+</script>
+</body>
+</html>

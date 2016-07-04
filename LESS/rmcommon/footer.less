@@ -1,0 +1,53 @@
+.cu-footer{
+  background-color: #252B36;
+  padding: 50px;
+
+  iframe{
+    border: 0;
+  }
+
+  .credits{
+    margin: 0 0 40px;
+    color: rgba(255,255,255,0.5);
+
+    a{
+      color: #46AEBC;
+      transition: ease color 300ms;
+
+      &:hover{
+        text-decoration: none;
+        color: #FFF;
+      }
+    }
+
+    .social-buttons{
+      text-align: center;
+      margin-top: 20px;
+
+      > a{
+        display: inline-block;
+        line-height: 32px;
+        height: 32px;
+        width: 32px;
+        text-align: center;
+        font-size: 18px;
+        background-color: #46AEBC;
+        color: #FFF;
+        border-radius: 5px;
+        transition: ease all 250ms;
+
+        &:hover{
+          background-color: @brand-danger;
+        }
+      }
+    }
+
+    @media(min-width: @screen-md){
+
+      .social-buttons{
+        text-align: right;
+        margin-top: 0;
+      }
+    }
+  }
+}

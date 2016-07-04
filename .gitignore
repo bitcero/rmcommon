@@ -1,3 +1,5 @@
 Thumbs.db
 src/prepros.cfg
 src/
+*.DS_Store
+*.cfg

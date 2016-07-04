@@ -6,8 +6,12 @@ $(document).ready( function(){
         var anchor  = $link.attr('href');
         $('html, body').stop().animate({
             scrollTop: $(anchor).offset().top
-        }, 1000);
+        }, 1500, 'swing');
+
+        return false;
 
     });
+
+    $("#before-after").twentytwenty();
 
 });
