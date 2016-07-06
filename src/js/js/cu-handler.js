@@ -8,6 +8,7 @@
 //@prepros-prepend 'bootbox.js';
 //@prepros-prepend 'cu-spinner.js';
 //@prepros-prepend 'pnotify.custom.js';
+//@prepros-prepend 'jsrender.min.js';
 //@prepros-append 'rmtable.js';
 
 var cuHandler = {
