@@ -297,6 +297,11 @@ class RMTemplate
             $template = $this->path($file, $type, $module, $element);
         }
 
+        if(!file_exists($template)){
+            throw new RMException(__("Template $template does not exists!", 'rmcommon'));
+            return false;
+        }
+
         /**
          * We extract all assigned variables
          */
