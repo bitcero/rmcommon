@@ -45,7 +45,7 @@ switch($action){
 
     case 'load-icons':
 
-        //$common->ajax()->prepare();
+        $common->ajax()->prepare();
         $common->checkToken(true);
         $provider = $common->httpRequest()->get('provider', 'string', '');
         $size = $common->httpRequest()->get('size', 'integer', 32);
