@@ -84,7 +84,7 @@
 
     });
 
-    $(".icons-grid a").click(function(){
+    $("body").on('click', '.icons-grid a', function(){
 
         icons.showData($(this));
         return false;
