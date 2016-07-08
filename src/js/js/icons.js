@@ -55,7 +55,8 @@
         var params = {
             icon: '<span class="icon-load"></span>',
             iconCode: $(ele).data('icon'),
-            provider: $(ele).parents('.icons-grid').data('provider')
+            provider: $(ele).parents('.icons-grid').data('provider'),
+            file: $(ele).attr("title")
         };
 
         var template = $.templates('#details-tpl');
@@ -68,6 +69,29 @@
 
         $('body').append(container);
 
+    };
+    
+    CUIcons.prototype.filter = function(ele){
+
+        var filter = $(ele).val().trim(), count = 0;
+
+        if(filter.length < 1){
+            $(".icons-grid > li").fadeIn();
+            return null;
+        }
+
+        $(".icons-grid > li").each(function(){
+            // If the list item does not contain the text phrase fade it out
+            if ($(this).data('icon').search(new RegExp(filter, "i")) < 0) {
+                $(this).fadeOut();
+
+                // Show the list item if the phrase matches and increase the count by 1
+            } else {
+                $(this).fadeIn();
+                count++;
+            }
+        });
+        
     };
 
     var icons = new CUIcons();
@@ -95,6 +119,12 @@
         $("#icon-details").fadeOut(500, function(){
             $(this).remove();
         });
+    });
+
+    $("#icons-search").keyup(function(){
+
+        icons.filter($(this));
+
     });
 
 }(jQuery));

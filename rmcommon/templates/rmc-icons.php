@@ -1,5 +1,5 @@
 <div class="row" id="icons-options">
-    <div class="col-sm-6">
+    <div class="col-md-4">
         <div class="input-group">
             <span class="input-group-addon">
                 <?php _e('Proveedor:', 'rmcommon'); ?>
@@ -11,7 +11,15 @@
             </select>
         </div>
     </div>
-    <div class="col-sm-6 text-right">
+    <div class="col-sm-6 col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <?php _e('Search:', 'rmcommon'); ?>
+            </span>
+            <input type="text" class="form-control" id="icons-search">
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4 text-right">
         <div class="btn-group" data-toggle="buttons" id="icons-sizes">
             <label class="btn btn-pink active">
                 <input type="radio" name="sizes" autocomplete="off" value="32" checked> Small
@@ -33,7 +41,7 @@
     <div class="panel-body">
         <ul class="icons-grid" data-size="32" data-provider="<?php echo $selectedProvider['name']; ?>">
             <?php foreach($icons as $icon): ?>
-                <li>
+                <li data-icon="<?php echo str_replace($providerPrefix, '', $icon); ?>">
                     <a href="#" title="<?php echo str_replace($providerPrefix, '', $icon); ?>" data-icon="<?php echo $icon; ?>"><?php echo $cuIcons->getIcon($icon); ?></a>
                 </li>
             <?php endforeach; ?>
@@ -53,24 +61,28 @@
                 <table>
                     <tbody>
                     <tr>
-                        <td>Provider:</td>
+                        <td><?php _e('Provider:', 'rmcommon'); ?></td>
                         <td>{{:provider}}</td>
                     </tr>
                     <tr>
-                        <td>Code:</td>
+                        <td><?php _e('Code:', 'rmcommon'); ?></td>
                         <td><code>{{:iconCode}}</code></td>
                     </tr>
                     <tr>
-                        <td>PHP Use:</td>
+                        <td><?php _e('PHP Usage:', 'rmcommon'); ?></td>
                         <td>
                             <code>$cuIcons->getIcon('{{:iconCode}}');</code>
                         </td>
                     </tr>
                     <tr>
-                        <td>Smarty Use:</td>
+                        <td><?php _e('Smarty Usage:', 'rmcommon'); ?></td>
                         <td>
                             <code>&lt;{cuIcon icon={{:iconCode}}}&gt;</code>
                         </td>
+                    </tr>
+                    <tr>
+                        <td><?php _e('File name:', 'rmcommon'); ?></td>
+                        <td>{{:file}}.svg</td>
                     </tr>
                     </tbody>
                 </table>

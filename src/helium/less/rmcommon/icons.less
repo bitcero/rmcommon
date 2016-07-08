@@ -2,6 +2,31 @@
 
   #icons-options{
     margin-bottom: 30px;
+
+    [class*='col-']{
+      margin-bottom: 10px;
+    }
+
+    @media(min-width: @screen-sm){
+
+      [class*='col-']:first-child{
+        margin-bottom: 10px;
+      }
+
+    }
+
+    @media(min-width: @screen-md){
+      [class*='col-']:first-child{
+        margin-bottom: 0;
+      }
+    }
+
+    #icons-search{
+      background: @input-bg url(../../../icons/search.svg) no-repeat;
+      background-position: right 9px bottom 9px;
+      padding-right: 32px;
+    }
+
   }
 
   .icons-grid{
@@ -110,7 +135,7 @@
       }
 
       @media(min-width: @screen-sm){
-        width: 550px;
+        width: 600px;
         box-shadow: 0 3px 20px rgba(0,0,0,0.4);
         background-color: #FFF;
         color: @text-color;
