@@ -133,7 +133,7 @@ class RMObject
     {
 
         // Verificamos columnas
-        if (isset($this->_tblcolumns[$name]))
+        if (isset($this->vars[$name]))
             return $this->setVar($name, $value);
 
         return null;
@@ -147,7 +147,7 @@ class RMObject
     public function __get($name)
     {
         // Verificamos columnas
-        if (isset($this->_tblcolumns[$name]))
+        if (isset($this->vars[$name]))
             return $this->getVar($name);
         return null;
     }
@@ -816,6 +816,7 @@ class RMObject
                 while ($row = $this->db->fetchArray($result)) {
                     if ($row['Extra'] == 'auto_increment') {
                         $this->primary = $row['Field'];
+                        $this->_uniquefield = $row['Field']; // To prevent issues
                         $primaryCols[get_class($this)] = $row['Field'];
                     }
                     $this->_tblcolumns[$row['Field']] = $row;
@@ -947,7 +948,7 @@ class RMObject
                 'vars' => $this->vars,
                 'element' => $this->ownerName,
                 'type' => $this->ownerType,
-                'id' => $this->vars[$this->primary]['value'],
+                'id' => $this->vars[$this->_uniquefield]['value'],
                 'object' => strtolower(get_class($this))
             ]);
         }

@@ -100,33 +100,32 @@ if ($action=='') {
 
         }");
 
-        RMTemplate::get()->add_head($uploader->render());*/
+        RMTemplate::getInstance()->add_head($uploader->render());*/
     }
 
     $categories = RMFunctions::load_images_categories("WHERE status='open' ORDER BY id_cat DESC", true);
 
-    RMTemplate::get()->add_style('bootstrap.min.css', 'rmcommon');
-    RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
-    RMTemplate::get()->add_style('pagenav.css', 'rmcommon');
-    RMTemplate::get()->add_style('popup-images.min.css', 'rmcommon');
+    RMTemplate::getInstance()->add_style('bootstrap.min.css', 'rmcommon');
+    RMTemplate::getInstance()->add_style('imgmgr.css', 'rmcommon');
+    RMTemplate::getInstance()->add_style('pagenav.css', 'rmcommon');
+    RMTemplate::getInstance()->add_style('popup-images.min.css', 'rmcommon');
 
     if ($type=='tiny' && $target!='container') {
-        RMTemplate::get()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce_popup.js');
+        RMTemplate::getInstance()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce_popup.js');
     } elseif ($target!='container'&&$type!='external'&&$type!='markdown') {
-        RMTemplate::get()->add_head_script('var exmPopup = window.parent.exmCode'.ucfirst($container).';');
+        RMTemplate::getInstance()->add_inline_script('var exmPopup = window.parent.exmCode'.ucfirst($container).';');
     }
 
-    RMEvents::get()->run_event('rmcommon.loading.editorimages', '');
+    RMEvents::get()->trigger('rmcommon.loading.editorimages', '');
 
-    include RMTemplate::get()->get_template('rmc-editor-image.php', 'module', 'rmcommon');
+    include RMTemplate::getInstance()->path('rmc-editor-image.php', 'module', 'rmcommon');
 
 } elseif ($action=='load-images') {
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
     if (!$xoopsSecurity->check()) {
-        _e('Sorry, unauthorized operation!','rmcommon');
-        echo '<script type="text/javascript">window.location.href="tiny-images.php";</script>';
+        send_error(__('Sorry, unauthorized operation!','rmcommon'));
         die();
     }
 
@@ -203,7 +202,7 @@ if ($action=='') {
 
     }
 
-    include RMTemplate::get()->get_template('rmc-images-list-editor.php','module','rmcommon');
+    include RMTemplate::getInstance()->get_template('rmc-images-list-editor.php','module','rmcommon');
 
 } elseif ($action == 'image-details') {
 
@@ -217,12 +216,13 @@ if ($action=='') {
 
     }
 
-    if (!$xoopsSecurity->check()) {
+    // @todo: Make this
+    /*if (!$xoopsSecurity->check()) {
         images_send_json(array(
-            'message'   => _e('Sorry, unauthorized operation!','rmcommon'),
+            'message'   => __('Sorry, unauthorized operation!','rmcommon'),
             'error'     => 1
         ));
-    }
+    }*/
 
     $id = RMHttpRequest::post( 'id', 'integer', 0 );
     if ( $id <= 0 )

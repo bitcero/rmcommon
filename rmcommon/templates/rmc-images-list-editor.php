@@ -137,4 +137,4 @@
 
 <input type="hidden" name="token" id="ret-token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
 <?php echo $nav->display( false ); ?>
-<input type="hidden" id="filesurl" value="<?php echo $filesurl; ?>" />
+<input type="hidden" id="filesurl" value="<?php echo $filesurl; ?>">
