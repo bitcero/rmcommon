@@ -808,6 +808,7 @@ class RMObject
         static $primaryCols;
         if (!empty($objectColumns[get_class($this)])) {
             $this->primary = $primaryCols[get_class($this)];
+            $this->_uniquefield = $primaryCols[get_class($this)];
             $this->_tblcolumns = $objectColumns[get_class($this)];
             return $objectColumns[get_class($this)];
         } else {

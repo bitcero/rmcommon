@@ -125,7 +125,7 @@ if ($action=='') {
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
     if (!$xoopsSecurity->check()) {
-        send_error(__('Sorry, unauthorized operation!','rmcommon'));
+        send_message(__('Sorry, unauthorized operation!','rmcommon'));
         die();
     }
 
