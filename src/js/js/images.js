@@ -1,77 +1,47 @@
-var total = 0;
-var ids = new Array();
-var url = '';
-var current = 0;
+/*!
+ * More info at [www.rmcommon.com](http://www.rmcommon.com)
+ *
+ * Author:  Eduardo Cortés
+ * URI:     http://eduardocortes.mx
+ * Parte del proyecto "Common Utilities"
+ *
+ * Copyright (c) 2016, Eduardo Cortés Hervis
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 
-function send_resize(id,params){
+var cuImagesManager;
 
-    $.get(url, {data: params, img: id, action: 'resize'}, function(data){
-        if (data['error']){
-            $("#resizer-bar span.message").html('<span>'+data['message']+'</span>');
-            resize_image(params);
-            return;
-        }
-        
-        var img = '<img src="'+data['file']+'" alt="" title="'+data['title']+'" />';
-        $("#gen-thumbnails").append(img);
-        $("#resizer-bar span.message").html(data['message']+' - '+(current)+' of '+total);
-        resize_image(params);
-        
-    }, "json");
-    
-}
+(function($){
 
-function resize_image(params){
-    
-    if (ids.length<=0) return;    
-    
-    if(ids[current]==undefined){
-        $("#bar-indicator").html('100%');
-        $("#bar-indicator").animate({
-	        width: '100%'
-	    }, 200)
-            .removeClass('progress-bar-info')
-            .removeClass('active')
-            .addClass('progress-bar-success');
-        current = 0;
-        total = 0;
-        ids = new Array();
-        $("div.donebutton").fadeIn('fast');
-        return;
-    }
-    
-    percent = 1/total*100;
-    
-    send_resize(ids[current], params);
-    $("#bar-indicator").animate({
-        width: percent*(current)+'%'
-    }, 200);
+    cuImagesManager = new CUImagesManager("form#images-uploader");
 
-    //$("#bar-indicator").css('width', percent*(current+1)+'%');
-    $("#bar-indicator").html(Math.round(percent*current+1)+'%');
+    $(document).ready(function(){
 
-    if (percent * current > 25)
-        $("#bar-indicator").removeClass('progress-bar-danger').addClass('progress-bar-warning');
+        $("button[data-action='upload-more']").click(function(){
+            cuImagesManager.uploadMore();
+        });
 
-    if ( percent * current > 65 )
-        $("#bar-indicator").removeClass('progress-bar-warning').addClass('progress-bar-info');
-
-    current++;
-    
-}
-
-function imgcontinue(){
-    $("#resizer-bar").hide('slow');
-    $('.select_image_cat').fadeIn('fast');
-    $('#upload-errors').fadeIn('fast');
-    $('#upload-controls').fadeIn('fast');
-    $("#bar-indicator").html(0);
-    $("#bar-indicator").css('width','0px');
-    $("#gen-thumbnails").fadeOut('fast', function(){
-        $("#gen-thumbnails").html('');
     });
-    
-}
+
+}(jQuery));
+
 
 function show_image_pop(url){
     

@@ -100,3 +100,6 @@ function cu_render_output($output)
 
     return $ret;
 }
+
+// Start
+ob_start('cu_render_output');

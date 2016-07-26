@@ -52,6 +52,17 @@ if ($action=='save'){
 	    header('loaction: '.XOOPS_URL);
 	    die();
 	}
+
+    // Check captcha
+    if($common->services()->service('captcha')){
+
+        if(!$common->services()->captcha->verify()){
+            $common->uris()->redirect_with_message(
+                __('CAPTCHA challenge failed! Please try again', 'rmcommon'), $uri, RMMSG_DANGER
+            );
+        }
+
+    }
 	
 	if ($name=='' || $email==''){
 		redirect_header($uri, 2, __('You must provide your name and email in order to can post comments','rmcommon'));

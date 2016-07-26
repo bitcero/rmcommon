@@ -303,6 +303,19 @@ class Common
     }
 
     /**
+     * Comments handler
+     * @return Comments
+     */
+    public function comments(){
+        $comments = Comments::getInstance();
+        return $comments;
+    }
+
+    public function plugins(){
+        return Plugins::getInstance();
+    }
+
+    /**
      * @return Common
      */
     public static function getInstance()

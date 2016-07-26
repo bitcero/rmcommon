@@ -126,7 +126,7 @@ function show_images(){
 }
 
 function images_form($edit = 0){
-    global $xoopsModule, $xoopsModuleConfig, $xoopsSecurity, $xoopsUser, $rmc_config;
+    global $xoopsModule, $xoopsModuleConfig, $xoopsSecurity, $xoopsUser, $rmc_config, $common;
 
     define('RMCSUBLOCATION','addimages');
 
@@ -140,56 +140,19 @@ function images_form($edit = 0){
 
     /*$upload = new RMFlashUploader('images', 'images.php');*/
     if (!$cat->isNew()) {
-        $uploader = new RMFlashUploader('files-container', RMCURL.'/include/upload.php');
-        $uploader->add_setting('formData', array(
-            'action'=>'upload',
-            'category'=>$cat->id(),
-            // Need better code
-            'rmsecurity'=>TextCleaner::getInstance()->encrypt($xoopsUser->uid().'|'.RMCURL.'/images.php'.'|'.$xoopsSecurity->createToken(), true))
-        );
-        $uploader->add_setting('multi', true);
-        $uploader->add_setting('fileExt', '*.jpg;*.png;*.gif');
-        $uploader->add_setting('fileDesc', __('All Images (*.jpg, *.png, *.gif)','rmcommon'));
-        $uploader->add_setting('sizeLimit', $cat->getVar('filesize') * $cat->getVar('sizeunit'));
-        $uploader->add_setting('buttonText', __('Browse Images...','rmcommon'));
-        $uploader->add_setting('queueSizeLimit', 100);
-        $uploader->add_setting('onUploadSuccess',"function(file, resp, data){
-            eval('ret = '+resp);
-            if (ret.error) {
-                \$('#upload-errors').append('<span class=\"failed\"><strong>'+file.name+'</strong>: '+ret.message+'</span>');
-            } else {
-                total++;
-                ids[total-1] = ret.id;
-                \$('#upload-errors').append('<span class=\"done\"><strong>'+file.name+'</strong>: ".__('Uploaded successfully!','rmcommon')."</span>');
-            }
 
-            return true;
-        }");
-        $uploader->add_setting('onQueueComplete', "function(event, data){
+        $uploader = new Common\Core\Helpers\Uploader('images-uploader');
+        $uploader->includeDropzone();
 
-        	if(total<=0) return;
+        $script = "(function(){cuImagesManager.init('" . RMCURL . "/include/upload.php', " . (($cat->getVar('filesize') * $cat->getVar('sizeunit')) / 1000000) . ");}());";
+        $common->template()->add_inline_script($script, true);
 
-            \$('.select_image_cat').hide('slow');
-            \$('#upload-errors').hide('slow');
-            \$('#upload-errors').html('');
-            \$('#upload-controls').hide('slow');
-            \$('#resizer-bar').show('slow');
-            \$('#resizer-bar').effect('highlight',{},1000);
-            \$('#gen-thumbnails').show();
-
-            var increments = 1/total*100;
-            url = '".RMCURL."/images.php';
-
-            params = '".TextCleaner::getInstance()->encrypt($xoopsUser->uid().'|'.RMCURL.'/images.php'.'|'.$xoopsSecurity->createToken(), true)."';
-            resize_image(params);
-
-        }");
-        RMTemplate::get()->add_head($uploader->render());
     }
 
-    RMTemplate::getInstance()->add_jquery(true, true);
-    RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
-    RMTemplate::get()->add_script('images.js', 'rmcommon');
+    $common->template()->add_jquery(true, true);
+    $common->template()->add_style('imgmgr.min.css', 'rmcommon');
+    $common->template()->add_script('images-manager.min.js', 'rmcommon');
+    $common->template()->add_script('images.min.js', 'rmcommon');
 
     // Load Categories
     $categories = RMFunctions::load_images_categories("WHERE status='open' ORDER BY id_cat DESC");
@@ -447,48 +410,29 @@ function send_error($message){
 }
 
 function resize_images(){
-    global $xoopsUser, $xoopsLogger, $xoopsSecurity;
+    global $xoopsUser, $xoopsLogger, $common;
 
-    set_time_limit(0);
+    $common->ajax()->prepare();
 
-    error_reporting(0);
-    $xoopsLogger->activated = false;
-
-    $params = rmc_server_var($_GET, 'data','');
-    $id = rmc_server_var($_GET, 'img', 0);
-
-    if ($params=='') {
-        send_error(__('Unauthorized!','rmcommon'));
+    if(!$common->security()->check(false, false, 'CUTOKEN')){
+        $common->ajax()->notifyError(__('Session token invalid!', 'rmcommon'), 0);
     }
+
+    $id = $common->httpRequest()->get('img', 'integer', 0);
 
     if ($id<=0) {
-        send_error(__('Invalid image!','rmcommon'));
-    }
-
-    $params = TextCleaner::decrypt($params);
-    $data = explode('|', $params);
-
-    if ($data[0]!=$xoopsUser->uid()) {
-        send_error(__('Unauthorized!','rmcommon'));
-    }
-
-    if ($data[1]!=RMCURL.'/images.php') {
-        send_error(__('Unauthorized!','rmcommon'));
-    }
-
-    if (!$xoopsSecurity->check(false, $data[2])) {
-        send_error(__('Unauthorized!','rmcommon'));
+        $common->ajax()->notifyError(__('Image not valid!','rmcommon'), 0);
     }
 
     $image = new RMImage($id);
     if ($image->isNew()) {
-        send_error(__('Image not found!','rmcommon'));
+        $common->ajax()->notifyError(__('Image not found!','rmcommon'), 0);
     }
 
     // Resize image
     $cat = new RMImageCategory($image->getVar('cat'));
     if (!$cat->user_allowed_toupload($xoopsUser)) {
-        send_error(__('Unauthorized','rmcommon'));
+        $common->ajax()->notifyError(__('You have not authorization to resize images!','rmcommon'), 0);
     }
 
     $sizes = $cat->getVar('sizes');
@@ -554,13 +498,13 @@ function resize_images(){
 
     }
 
-    $ret['message'] = sprintf(__('%s done!', 'rmcommon'), $image->getVar('file'));
-    $ret['done'] = 1;
-    $ret['file'] = $tfile;
-    $ret['title'] = $image->getVar('title');
-    echo json_encode($ret);
+    $common->ajax()->response(
+        sprintf(__('%s done!', 'rmcommon'), $image->getVar('file')), 0, 1, [
+            'file' => $tfile,
+            'title' => $image->title,
+        ]
+    );
 
-    die();
 }
 
 /**
@@ -627,7 +571,7 @@ function edit_image(){
 
     xoops_cp_header();
 
-    RMTemplate::get()->add_script('images.js', 'rmcommon');
+    RMTemplate::get()->add_script('images.min.js', 'rmcommon');
     RMTemplate::get()->add_script('include/js/jquery.validate.min.js');
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
     include RMTemplate::get()->get_template('rmc-images-edit.php','module','rmcommon');
@@ -862,7 +806,7 @@ function update_thumbnails(){
 
     RMTemplate::getInstance()->add_jquery(true, true);
     RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
-    RMTemplate::get()->add_script('images.js', 'rmcommon');
+    RMTemplate::get()->add_script('images.min.js', 'rmcommon');
 
     xoops_cp_header();
     RMFunctions::create_toolbar();

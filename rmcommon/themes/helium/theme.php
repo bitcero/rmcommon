@@ -18,7 +18,7 @@
 
         <?php if($showXoopsMetas){ include_once 'include/xoops_metas.php'; } ?>
     </head>
-    <body>
+    <body <?php echo RMTemplate::getInstance()->render_attributes('body'); ?>>
 
         <!-- Top bar -->
         <?php require 'tpls/topbar.php'; ?>

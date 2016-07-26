@@ -166,6 +166,10 @@ if (RMBreadCrumb::get()->count() > 0) {
     RMTemplate::getInstance()->add_attribute('html', ['class' => 'with-breadcrumb']);
 }
 
+if(count(RMTemplate::getInstance()->get_toolbar()) > 0){
+    RMTemplate::getInstance()->add_body_class('with-toolbar');
+}
+
 RMTemplate::getInstance()->add_attribute('html', [
     'class' => RMTemplate::getInstance()->body_classes()
 ]);

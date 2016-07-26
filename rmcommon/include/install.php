@@ -54,6 +54,33 @@ function xoops_module_install_rmcommon($mod){
     file_put_contents(XOOPS_VAR_PATH.'/configs/xoopsconfig.php', substr($contents, $pos, 5)."\n".$write."\n".substr($contents, $pos+5));
     xoops_setActiveModules();
 
+    /**
+     * Move "redmexico" system theme to its destination directory
+     * XOOPS_ROOT_PATH/modules/system/themes
+     */
+    $target = XOOPS_ROOT_PATH . '/modules/system/themes/redmexico';
+    $source = XOOPS_ROOT_PATH . '/modules/rmcommon/redmexico';
+
+    if(!is_dir($source)){
+        return true;
+    }
+
+    global $msgs;
+
+    if(!is_writable(dirname($target))){
+        $msgs[] = '<span class="text-danger">' . __('System theme "redmexico" could not move to destination directory (modules/system/themes). Please do it manually in order to get Common Utilities working correctly.', 'rmcommon') . '</span>';
+        return true;
+    }
+
+    // Deletes dir content to replace with new files
+    include_once XOOPS_ROOT_PATH . '/modules/rmcommon/class/utilities.php';
+    if(is_dir($target)){
+        RMUtilities::delete_directory( $target, false );
+    }
+    @rename( $source, $target );
+
+    //RMUtilities::delete_directory( $source );
+
     return true;
 }
 

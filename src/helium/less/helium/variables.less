@@ -99,13 +99,15 @@ subsequents themes.
 7. Toolbar
 ------------------------------
 */
-@he-toolbar-bg:                   transparent;
-@he-toolbar-item-bg:              #FFF;
-@he-toolbar-color:                @text-color;
-@he-toolbar-hover-bg:             @theme-main-color;
-@he-toolbar-hover-color:          #FFF;
+@he-toolbar-bg:                   lighten(@body-bg, 5%); //transparent;
+@he-toolbar-item-bg:              transparent; //#FFF;
+@he-toolbar-color:                darken(@body-bg, 30%);//@text-color;
+@he-toolbar-hover-bg:             rgba(255,255,255,0.1);//@theme-main-color;
+@he-toolbar-hover-color:          rgba(0,0,0,0.6);
+@he-toolbar-active-bg:            transparent;
+@he-toolbar-active-color:         @theme-main-color;
 @he-toolbar-disabled-bg:          transparent;
-@he-toolbar-disabled-color:       rgba(0,0,0,0.2);
+@he-toolbar-disabled-color:       rgba(0,0,0,0.15);
 
 /*
 8. BULK ACTIONS

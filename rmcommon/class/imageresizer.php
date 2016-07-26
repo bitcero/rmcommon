@@ -256,8 +256,6 @@ class RMImageResizer
         if ( is_array( $params ) )
             $params = (object) $params;
 
-
-
         /*
          * Default method for resize images is "crop"
          */
@@ -274,7 +272,7 @@ class RMImageResizer
 
         $file = str_replace( XOOPS_URL, XOOPS_ROOT_PATH, $file);
 
-        if(!file_exists($file)){
+        if(!file_exists($file) && 0 != strpos($file, 'http')){
             return false;
         }
 

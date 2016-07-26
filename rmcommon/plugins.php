@@ -27,7 +27,6 @@
  * @url          http://www.eduardocortes.mx
  */
 
-
 $p = isset($_REQUEST['p']) ? $_REQUEST['p'] : '';
 if ($p == '') {
     define('RMCLOCATION', 'plugins');
@@ -257,7 +256,7 @@ function activate_rm_plugin($q)
 
 function configure_rm_plugin()
 {
-    global $rmTpl;
+    global $rmTpl, $common;
 
     $name = rmc_server_var($_GET, 'plugin', '');
     if ($name == '') {
@@ -278,7 +277,7 @@ function configure_rm_plugin()
     }
 
     $cuSettings = RMSettings::cu_settings();
-    $settings = RMFunctions::plugin_settings($name, true);
+    $settings = $common->settings()->plugin_settings($name, true);
 
     $form = new RMForm(sprintf(__('%s configuration', 'rmcommon'), $plugin->getVar('name')), 'frmconfig', 'plugins.php');
     $form->fieldClass = '';
@@ -291,8 +290,8 @@ function configure_rm_plugin()
             $option['field'] = $option['fieldtype'];
         }
 
-        if (isset($settings[$config])) {
-            $option['value'] = $settings[$config];
+        if (isset($settings->{$config})) {
+            $option['value'] = $settings->{$config};
         }
 
         if (isset($option['separator']) && !empty($option['separator'])) {
@@ -355,8 +354,12 @@ function configure_rm_plugin()
 
                 break;
             case 'yesno':
-                $ele = new RMFormYesNo($option['caption'], 'conf_' . $config, $option['value']);
-                if ($option['desc'] != '') $ele->setDescription($option['desc']);
+                $ele = new RMFormYesNo([
+                    'caption' => $option['caption'],
+                    'name' => 'conf_' . $config,
+                    'value' => $option['value'],
+                    'description' => $option['desc']
+                ]);
 
                 break;
             case 'select':
@@ -466,8 +469,14 @@ function configure_rm_plugin()
 
                 break;
             case 'radio':
-                $ele = new RMFormRadio($option['caption'], 'conf_' . $config, 1);
-                if ($option['desc'] != '') $ele->setDescription($option['desc']);
+                $ele = new RMFormRadio([
+                    'caption' => $option['caption'],
+                    'name' => 'conf_' . $config,
+                    'value' => $option['value'],
+                    'description' => $option['desc']
+                ]);
+                //$ele = new RMFormRadio($option['caption'], 'conf_' . $config, 1);
+                //if ($option['desc'] != '') $ele->setDescription($option['desc']);
 
                 foreach ($option['options'] as $op => $opvalue) {
                     $ele->addOption($op, $opvalue, $opvalue == $option['value'] ? 1 : 0);

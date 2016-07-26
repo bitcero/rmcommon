@@ -11,10 +11,10 @@
     <div id="thumbnail-<?php echo $image['id']; ?>" data-id="<?php echo $image['id']; ?>" class="thumbnail-item" style="background-image: url('<?php echo $image['thumb']; ?>');" alt="<?php echo $image['title']; ?>">
         <span class="thumbnail-cover"></span>
         <?php if( $multi ): ?>
-        <a href="#" class="add"><span class="glyphicon glyphicon-th"></span></a>
-        <span class="check"><span class="glyphicon glyphicon-ok"></span></span>
+        <a href="#" class="add"><?php echo $cuIcons->getIcon('svg-rmcommon-squares'); ?></a>
+        <span class="check"><?php echo $cuIcons->getIcon('svg-rmcommon-ok'); ?></span>
         <?php endif; ?>
-        <a href="#" class="insert"><span class="glyphicon glyphicon-plus"></span></a>
+        <a href="#" class="insert"><?php echo $cuIcons->getIcon('svg-rmcommon-plus'); ?></a>
     </div>
 
 <?php endforeach; ?>
@@ -137,4 +137,4 @@
 
 <input type="hidden" name="token" id="ret-token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
 <?php echo $nav->display( false ); ?>
-<input type="hidden" id="filesurl" value="<?php echo $filesurl; ?>" />
+<input type="hidden" id="filesurl" value="<?php echo $filesurl; ?>">

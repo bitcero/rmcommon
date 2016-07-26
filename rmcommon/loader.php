@@ -43,8 +43,6 @@ define('RMMSG_OTHER', 5);
 // Render output
 require RMCPATH . '/include/render-output.php';
 
-ob_start('cu_render_output');
-
 // Legacy Autoloader
 require RMCPATH . '/include/legacy-autoloader.php';
 

@@ -19,3 +19,4 @@ prepros.cfg
 
 # Windows shortcuts
 *.lnk
+*.DS_Store

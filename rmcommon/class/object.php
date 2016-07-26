@@ -133,7 +133,7 @@ class RMObject
     {
 
         // Verificamos columnas
-        if (isset($this->_tblcolumns[$name]))
+        if (isset($this->vars[$name]))
             return $this->setVar($name, $value);
 
         return null;
@@ -147,7 +147,7 @@ class RMObject
     public function __get($name)
     {
         // Verificamos columnas
-        if (isset($this->_tblcolumns[$name]))
+        if (isset($this->vars[$name]))
             return $this->getVar($name);
         return null;
     }
@@ -411,7 +411,7 @@ class RMObject
                     case 'preview':
                     case 'f':
                     case 'formpreview':
-                        $ts =& TextCleaner::getInstance();
+                        $ts = TextCleaner::getInstance();
                         return $ts->specialchars($ts->stripSlashesGPC($ret));
                         break 1;
                     case 'n':
@@ -433,7 +433,7 @@ class RMObject
                         break;
                     case 'p':
                     case 'preview':
-                        $ts =& TextCleaner::getInstance();
+                        $ts = TextCleaner::getInstance();
                         $html = !empty($this->vars['dohtml']['value']) ? 1 : 0;
                         $xcode = (!isset($this->vars['doxcode']['value']) || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
                         $smiley = (!isset($this->vars['dosmiley']['value']) || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
@@ -443,7 +443,7 @@ class RMObject
                         break 1;
                     case 'f':
                     case 'formpreview':
-                        $ts =& TextCleaner::getInstance();
+                        $ts = TextCleaner::getInstance();
                         return htmlspecialchars($ts->stripSlashesGPC($ret), ENT_QUOTES);
                         break 1;
                     case 'n':
@@ -471,12 +471,12 @@ class RMObject
                         break 1;
                     case 'p':
                     case 'preview':
-                        $ts =& TextCleaner::getInstance();
+                        $ts = TextCleaner::getInstance();
                         return $ts->stripSlashesGPC($ret);
                         break 1;
                     case 'f':
                     case 'formpreview':
-                        $ts =& TextCleaner::getInstance();
+                        $ts = TextCleaner::getInstance();
                         return htmlspecialchars($ts->stripSlashesGPC($ret), ENT_QUOTES);
                         break 1;
                     case 'n':
@@ -808,6 +808,7 @@ class RMObject
         static $primaryCols;
         if (!empty($objectColumns[get_class($this)])) {
             $this->primary = $primaryCols[get_class($this)];
+            $this->_uniquefield = $primaryCols[get_class($this)];
             $this->_tblcolumns = $objectColumns[get_class($this)];
             return $objectColumns[get_class($this)];
         } else {
@@ -816,6 +817,7 @@ class RMObject
                 while ($row = $this->db->fetchArray($result)) {
                     if ($row['Extra'] == 'auto_increment') {
                         $this->primary = $row['Field'];
+                        $this->_uniquefield = $row['Field']; // To prevent issues
                         $primaryCols[get_class($this)] = $row['Field'];
                     }
                     $this->_tblcolumns[$row['Field']] = $row;
@@ -947,7 +949,7 @@ class RMObject
                 'vars' => $this->vars,
                 'element' => $this->ownerName,
                 'type' => $this->ownerType,
-                'id' => $this->vars[$this->primary]['value'],
+                'id' => $this->vars[$this->_uniquefield]['value'],
                 'object' => strtolower(get_class($this))
             ]);
         }
@@ -998,7 +1000,7 @@ class RMObject
         if ($this->db->getRowsNum($result) <= 0) return false;
 
         $row = $this->db->fetchArray($result);
-        $myts =& TextCleaner::getInstance();
+        $myts = TextCleaner::getInstance();
         foreach ($row as $k => $v) {
             $this->setVar($k, $myts->stripslashes($v));
         }
@@ -1037,7 +1039,7 @@ class RMObject
     {
         global $common;
 
-        $myts =& TextCleaner::getInstance();
+        $myts = TextCleaner::getInstance();
         $this->cleanVars();
 
         // Added for translation support
