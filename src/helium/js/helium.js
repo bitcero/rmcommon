@@ -160,11 +160,11 @@ function updatesNotifier(count){
          * Modal animations
          */
         $("body").on('show.bs.modal', '.modal', function(){
-            $(this).removeClass('slideOutDown').addClass('animated zoomIn');
+            $(this).removeClass('slideOutDown zoomOut').addClass('animated zoomIn');
         });
 
         $("body").on('hide.bs.modal', '.modal', function(){
-            $(this).removeClass('slideInDown').addClass('zoomOut');
+            $(this).removeClass('slideInDown zoomIn').addClass('zoomOut');
         });
 
         /**
