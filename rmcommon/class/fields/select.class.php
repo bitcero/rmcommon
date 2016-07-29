@@ -89,13 +89,7 @@ class RMFormSelect extends RMFormElement
     public function addOptionsArray($options)
     {
         foreach ($options as $k => $v) {
-            $rtn = array();
-            $rtn['value'] = is_array($v) && isset($v['value']) ? $v['value'] : $k;
-            $rtn['text'] = is_array($v) && isset($v['text']) ? $v['text'] : $v;
-            $rtn['select'] = isset($_REQUEST[$this->getName()]) && $_REQUEST[$this->getName()] == $rtn['value'] ? 1 : (is_array($v) && isset($v['select']) ? 1 : (is_array($this->_selected) && in_array($rtn['value'], $this->_selected) ? 1 : 0));
-            $rtn['disabled'] = is_array($v) && isset($v['disabled']) ? $v['disabled'] : 0;
-            $rtn['style'] = is_array($v) && isset($v['style']) ? trim($v['style']) : '';
-            $this->_options[] = $rtn;
+            $this->addOption($v, $k);
         }
     }
 
