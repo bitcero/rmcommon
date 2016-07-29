@@ -182,7 +182,7 @@
             <table class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th width="20" class="text-center"><input type="checkbox" class="checkall" id="checkall-top" onclick="$('#form-users').toggleCheckboxes(':not(#checkall-top)');" /></th>
+                    <th width="20" class="text-center"><input type="checkbox" class="checkall" id="checkall-top" data-checkbox="users" /></th>
                     <th class="text-center"><?php _e('ID','rmcommon'); ?></th>
                     <th><?php _e('Username','rmcommon'); ?></th>
                     <th><?php _e('Name','rmcommon'); ?></th>
@@ -211,7 +211,7 @@
                 foreach($users as $user):
                     ?>
                     <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $user['level']<=0 ? ' user_inactive' : '' ?>" valign="top">
-                        <td class="text-center"><input type="checkbox" name="ids[]" id="item-<?php echo $user['uid']; ?>" value="<?php echo $user['uid']; ?>" /></td>
+                        <td class="text-center"><input type="checkbox" name="ids[]" id="item-<?php echo $user['uid']; ?>" value="<?php echo $user['uid']; ?>" data-oncheck="users"></td>
                         <td class="text-center"><?php echo $user['uid']; ?></td>
                         <td nowrap="nowrap">
                             <strong><?php echo $user['uname']; ?></strong>
