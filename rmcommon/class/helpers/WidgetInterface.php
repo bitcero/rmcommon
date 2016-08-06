@@ -46,6 +46,12 @@ interface WidgetInterface
     public function id();
 
     /**
+     * Initialize the widget
+     * @param mixed $parameters
+     */
+    public function setup($parameters);
+
+    /**
      * Returns the template used for this widget
      * @return mixed
      */

@@ -280,7 +280,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
      * @param string $css_type Content Type: email,url, etc.
      * @return object
      */
-    public function addElement(&$element, $required = false, $css_type = '')
+    public function addElement($element, $required = false, $css_type = '')
     {
         $element->setForm($this->_name);
         $ret['field'] = $element;

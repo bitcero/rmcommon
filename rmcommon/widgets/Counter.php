@@ -30,22 +30,36 @@
 namespace Common\Widgets;
 
 use Common\Core\Helpers\Widget;
+use Common\Core\Helpers\WidgetAbstract;
 use Common\Core\Helpers\WidgetInterface;
 
 /**
  * This file contains a widget useful to show a counter with small information
  * and styled in different colors
  */
-class Counter extends Widget implements WidgetInterface
+class Counter extends WidgetAbstract implements WidgetInterface
 {
     private $tplPath = '';
     private $cells = [];
 
-    public function __construct(array $data)
+    public function __construct($data = [])
     {
 
         $this->suppressList = ['color', 'icon', 'format'];
 
+        if(false === empty($data)){
+
+            parent::__construct($data);
+
+            if(!$this->has('format')){
+                $this->set('format', 'y');
+            }
+
+        }
+    }
+
+    public function setup($data = [])
+    {
         parent::__construct($data);
 
         if(!$this->has('format')){
@@ -100,7 +114,7 @@ class Counter extends Widget implements WidgetInterface
     public function template()
     {
         if('' == $this->tplPath){
-            $this->tplPath = \RMTemplate::get()->path('widgets/widget-counter.php', 'module', 'rmcommon');
+            $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-counter.php', 'module', 'rmcommon');
         }
         return $this->tplPath;
     }

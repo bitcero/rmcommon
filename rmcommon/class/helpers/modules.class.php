@@ -108,7 +108,7 @@ class RMModules
      * @param  string|integer $id Indentifier of module. Could be dirname or numeric ID
      * @return XoopsModule
      */
-    static public function load_module($id)
+    static public function load($id)
     {
 
         $module_handler = xoops_gethandler('module');
@@ -122,6 +122,15 @@ class RMModules
             load_mod_locale($module->getVar('dirname'));
 
         return $module;
+    }
+
+    /**
+     * @param $id
+     * @return XoopsModule
+     * @deprecated
+     */
+    static function load_module($id){
+        return self::load($id);
     }
 
     /**

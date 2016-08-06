@@ -78,10 +78,11 @@ class TinyEditor
                             switchEditors.go(elements, "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
                         }
                     });
-                };
+                };';
 
-					initMCE("'.$this->configuration['elements'].'");
-				';
+        if('' != $this->configuration['elements']){
+            $rtn .= 'initMCE("'.$this->configuration['elements'].'");';
+        }
 
         return $rtn;
     }

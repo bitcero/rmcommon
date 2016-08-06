@@ -91,10 +91,10 @@ class RMBreadCrumb
     public function render(){
         global $cuIcons;
 
-        RMTemplate::get()->add_style('breadcrumb.css', 'rmcommon');
+        RMTemplate::getInstance()->add_style('breadcrumb.css', 'rmcommon');
         ob_start();
 
-        include RMTemplate::get()->path('rmc-breadcrumb.php', 'module', 'rmcommon');
+        include RMTemplate::getInstance()->path('rmc-breadcrumb.php', 'module', 'rmcommon');
 
         $ret = ob_get_clean();
         return $ret;

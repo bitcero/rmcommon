@@ -315,6 +315,12 @@ class Common
         return Plugins::getInstance();
     }
 
+    // Widgets handler
+    public function widgets(){
+        $widgets = Widgets::getInstance();
+        return $widgets;
+    }
+
     /**
      * @return Common
      */
