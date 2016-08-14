@@ -32,7 +32,7 @@ class RMFormTimeZoneField extends RMFormElement
 
         $this->setIfNotSet('class', 'form-control');
 
-        $this->suppressRender(['caption','name','multiple','selected']);
+        $this->suppressRender(['caption','multiple','selected']);
 	}
 	public function multi(){
 		return $this->multi;

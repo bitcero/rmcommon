@@ -68,8 +68,8 @@
                     });
 
                     this.on('queuecomplete', function(){
-                        $("#files-container").slideUp(300);
-                        $("#images-resizing").slideDown(300, function(){
+                        $("#files-container").slideUp();
+                        $("#images-resizing").slideDown(function(){
                             $this.resizeImages($this);
                         });
                     });
@@ -108,12 +108,20 @@
             var total = $this.uploadedIds.length;
             var percent = 1/total*100;
 
-            $("#bar-indicator").animate({
+            /*$("#bar-indicator").animate({
                 width: percent*($this.currentResizing)+'%'
-            }, 200);
+            }, 50);*/
+
+            if(percent > 0 && $this.currentResizing == 0){
+                $("#bar-indicator").css('width', '100%');
+                $("#bar-indicator").html('100%');
+            } else {
+                $("#bar-indicator").css('width', percent*($this.currentResizing)+'%');
+                $("#bar-indicator").html(Math.round(percent*$this.currentResizing+1)+'%');
+            }
 
             //$("#bar-indicator").css('width', percent*(current+1)+'%');
-            $("#bar-indicator").html(Math.round(percent*$this.currentResizing+1)+'%');
+
 
             if (percent * $this.currentResizing > 25)
                 $("#bar-indicator").removeClass('progress-bar-danger').addClass('progress-bar-warning');
@@ -161,6 +169,12 @@
 
             if (ids.length<=0) return;
 
+            if(true !== $("#images-resizing").is(":visible")){
+                $("#images-resizing").slideDown(function(){
+                    $this.resizeImages($this);
+                });
+            }
+
             if(ids[$this.currentResizing]==undefined){
                 $("#bar-indicator").html('100%');
                 $("#bar-indicator").animate({
@@ -173,9 +187,13 @@
                 $this.uploadedIds = [];
                 $("button[data-action='upload-more']").fadeIn(300);
                 $($this).trigger('resizeFinished');
+
+                if($("#back-images").length > 0){
+                    $("#back-images").slideDown();
+                }
+
                 return;
             }
-
             $this.sendResizeCommand(ids[$this.currentResizing], $this);
 
         }

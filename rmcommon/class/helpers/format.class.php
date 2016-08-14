@@ -207,10 +207,10 @@ class RMFormat
     public static function bytes_format($size, $origin = '', $target = '', $abr = true)
     {
 
-        $kb = 1024;
-        $mb = $kb * 1024;
-        $gb = $mb * 1024;
-        $tb = $gb * 1024;
+        $kb = 1000;
+        $mb = $kb * 1000;
+        $gb = $mb * 1000;
+        $tb = $gb * 1000;
 
         $units = array(
             'b' => 1,
@@ -223,10 +223,10 @@ class RMFormat
         $string = array(
 
             'b' => $abr ? __('%s b', 'rmcommon') : __('%s Bytes', 'rmcommon'),
-            'kb' => $abr ? __('%s Kb', 'rmcommon') : __('%s Kilobytes', 'rmcommon'),
-            'mb' => $abr ? __('%s Mb', 'rmcommon') : __('%s Megabytes', 'rmcommon'),
-            'gb' => $abr ? __('%s Gb', 'rmcommon') : __('%s Gigabytes', 'rmcommon'),
-            'tb' => $abr ? __('%s Tb', 'rmcommon') : __('%s Terabytes', 'rmcommon'),
+            'kb' => $abr ? __('%s KB', 'rmcommon') : __('%s Kilobytes', 'rmcommon'),
+            'mb' => $abr ? __('%s MB', 'rmcommon') : __('%s Megabytes', 'rmcommon'),
+            'gb' => $abr ? __('%s GB', 'rmcommon') : __('%s Gigabytes', 'rmcommon'),
+            'tb' => $abr ? __('%s TB', 'rmcommon') : __('%s Terabytes', 'rmcommon'),
 
         );
 
@@ -237,7 +237,7 @@ class RMFormat
             return sprintf($string[$origin], $size);
 
         // Convert size to bytes
-        $bytes = $size * $units[$origin];
+        $size = $size * $units[$origin];
         // Get bytes in target format only if $target has been provided
         if ($target != '')
             $result = number_format($bytes / $units[$target], 2);
@@ -246,7 +246,7 @@ class RMFormat
             switch ($size) {
 
                 case $size < $kb:
-                    $result = $bytes;
+                    $result = $size;
                     $target = 'b';
                     break;
                 case $size < $mb:
@@ -255,15 +255,15 @@ class RMFormat
                     break;
                 case $size < $gb:
                     $result = number_format($size / $mb, 2);
-                    $target = 'MB';
+                    $target = 'mb';
                     break;
                 case $size < $tb:
                     $result = number_format($size / $gb, 2);
-                    $target = 'GB';
+                    $target = 'gb';
                     break;
                 default:
                     $result = number_format($size / $tb, 2);
-                    $target = 'TB';
+                    $target = 'tb';
                     break;
 
             }

@@ -191,7 +191,9 @@ class RMFormEditor extends RMFormElement
         RMTemplate::get()->add_script('quicktags.min.js', 'rmcommon');
         RMTemplate::get()->add_script(RMCURL . '/api/editors/tinymce/tiny_mce.js');
         RMTemplate::get()->add_inline_script(TinyEditor::getInstance()->get_js());
-        RMTemplate::get()->add_inline_script('edToolbar("' . $this->get('id') . '");', 1);
+        if('' != $this->get('id')){
+            RMTemplate::get()->add_inline_script('edToolbar("' . $this->get('id') . '");', 1);
+        }
 
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'tiny', $this->get('id'));

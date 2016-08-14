@@ -169,7 +169,7 @@ function images_form($edit = 0){
 
     xoops_cp_header();
     $isupdate = false;
-    include RMTemplate::get()->get_template('rmc-images-upload-images.php','module','rmcommon');
+    include RMTemplate::getInstance()->path('rmc-images-upload-images.php','module','rmcommon');
 
     xoops_cp_footer();
 
@@ -436,8 +436,8 @@ function resize_images(){
     }
 
     $sizes = $cat->getVar('sizes');
-    $updir = XOOPS_UPLOAD_PATH.'/'.date('Y', $image->getVar('date')).'/'.date('m',time());
-    $upurl = XOOPS_UPLOAD_URL.'/'.date('Y', $image->getVar('date')).'/'.date('m',time());;
+    $updir = XOOPS_UPLOAD_PATH.'/'.date('Y', $image->getVar('date')).'/'.date('m',$image->getVar('date'));
+    $upurl = XOOPS_UPLOAD_URL.'/'.date('Y', $image->getVar('date')).'/'.date('m',$image->getVar('date'));;
     $width = 0;
     $tfile = '';
 
@@ -798,23 +798,38 @@ function delete_category(){
 * Update image thumbnails
 */
 function update_thumbnails(){
-    global $xoopsUser, $xoopsSecurity;
-    $cat = new RMImageCategory(rmc_server_var($_POST, 'category', 0));
-    $imgs = rmc_server_var($_POST, 'imgs', array());
+    global $xoopsUser, $xoopsSecurity, $common;
+
+    $catId = $common->httpRequest()->post('category', 'integer', 0);
+    $imgs = $common->httpRequest()->post('imgs', 'array', []);
+    $page = $common->httpRequest()->post('page', 'integer', 1);
+
+    if($catId <= 0){
+        $common->uris()->redirect_with_message(
+            __('No category ID has been provided!', 'rmcommon'), 'images.php?page=' . $page, RMMSG_WARN
+        );
+    }
+
+    $cat = new RMImageCategory($catId);
+
+    if($cat->isNew()){
+        $common->uris()->redirect_with_message(
+            __('Specified category does not exists!', 'rmcommon'), 'images.php?page=' . $page, RMMSG_WARN
+        );
+    }
 
     $ids = implode(',', $imgs);
 
     RMTemplate::getInstance()->add_jquery(true, true);
-    RMTemplate::get()->add_style('imgmgr.css', 'rmcommon');
-    RMTemplate::get()->add_script('images.min.js', 'rmcommon');
+    $common->template()->add_style('imgmgr.min.css', 'rmcommon');
+    RMTemplate::getInstance()->add_script('images-manager.min.js', 'rmcommon', ['id' => 'images-manager-js', 'footer' => 1]);
+    RMTemplate::getInstance()->add_script('images.min.js', 'rmcommon', ['id' => 'images-js', 'footer' => 1]);
 
     xoops_cp_header();
     RMFunctions::create_toolbar();
 
     $isupdate = true;
-    RMTemplate::get()->add_head("<script type='text/javascript'>
-    \$(document).ready(function(){
-        ids = [$ids];
+    RMTemplate::getInstance()->add_inline_script("\$(document).ready(function(){
         total = ".count($imgs).";
         \$('#resizer-bar').show('slow');
         \$('#resizer-bar').effect('highlight',{},1000);
@@ -824,10 +839,17 @@ function update_thumbnails(){
         url = '".RMCURL."/images.php';
 
         params = '".TextCleaner::getInstance()->encrypt($xoopsUser->uid().'|'.RMCURL.'/images.php'.'|'.$xoopsSecurity->createToken(), true)."';
-        resize_image(params);
-    });</script>");
+        cuImagesManager.uploadedIds = [$ids];
+        cuImagesManager.resizeImages(cuImagesManager);
+    });", 1);
 
-    include RMTemplate::get()->get_template('rmc-images-upload-images.php','module','rmcommon');
+    // Messages title
+    $messagesTitle = __('Resizing results', 'rmcommon');
+
+    // Disable upload controls
+    $showControls = false;
+
+    include RMTemplate::getInstance()->path('rmc-images-upload-images.php','module','rmcommon');
 
     xoops_cp_footer();
 

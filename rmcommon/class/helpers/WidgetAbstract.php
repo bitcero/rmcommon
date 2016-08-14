@@ -29,7 +29,7 @@
 
 namespace Common\Core\Helpers;
 
-abstract class Widget extends Attributes
+abstract class WidgetAbstract extends Attributes
 {
     /**
      * Attributes to be ignored
@@ -43,7 +43,7 @@ abstract class Widget extends Attributes
     {
         parent::__construct($data);
 
-        $this->tpl = \RMTemplate::get();
+        $this->tpl = \RMTemplate::getInstance();
 
     }
 

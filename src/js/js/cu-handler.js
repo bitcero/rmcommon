@@ -603,6 +603,56 @@ var cuHandler = {
 
     },
 
+    /**
+     * Images manager launcher
+     * <pre>
+     * cuHandler.imagesManager({
+     *     type: 'tiny|html|markdown|simple|external',
+     *     target: 'container|function name',
+     *     idContainer: 'container id',
+     *     multiple: 'yes|no',
+     *     title: 'title for modal'
+     * }
+     * </pre>
+     */
+    imagesManager: function(options){
+
+        var html = '<div id="blocker-'+options.idContainer+'" class="mgr_blocker"></div><div id="window-'+options.idContainer+'" class="imgmgr_container">';
+
+        html += '<div class="window-title cu-titlebar"><button type="button" class="close">&times;</button>'+options.title+'</div>';
+        html += '<iframe src="'+xoUrl+'/modules/rmcommon/include/tiny-images.php?type='+options.type+'&amp;idcontainer='+options.idContainer+'&amp;editor='+options.idContainer+'&amp;target='+options.target+'&amp;&amp;multi='+options.multiple+'" name="image"></iframe>'
+        html += '</div>';
+
+        $("body").append(html);
+
+        // window height
+
+
+        $("#blocker-"+options.idContainer).fadeIn('fast', function(){
+            $("body").css('overflow','hidden');
+            $("#window-"+options.idContainer).fadeIn('fast', function(){
+
+            });
+
+        });
+
+        $("#blocker-"+options.idContainer+", #window-"+options.idContainer+" .window-title .close").click(function(){
+
+            $("#window-"+options.idContainer).fadeOut('fast', function(){
+
+                $("#blocker-"+options.idContainer).fadeOut('fast', function(){
+                    $("body").css('overflow','auto');
+                    $("#window-"+options.idContainer).remove();
+                    $("#blocker-"+options.idContainer).remove();
+
+                });
+
+            })
+
+        });
+
+    }
+
 
 };
 
