@@ -103,7 +103,7 @@
                 <h4 class="modal-title"><?php _e('Update Details','rmcommon'); ?></h4>
             </div>
             <div class="modal-body">
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs nav-tabs-color">
                     <li class="active"><a href="#details" data-toggle="tab"><?php _e('Details','rmcommon'); ?></a></li>
                     <li><a href="#files" data-toggle="tab"><?php _e('Files','rmcommon'); ?></a></li>
                 </ul>
