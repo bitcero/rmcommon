@@ -258,6 +258,8 @@ function user_form($edit = false){
         $user = $uh->get($uid);
         if ($user->isNew())
             redirectMsg('users.php?'.$query, __('The specified user does not exists!','rmcommon'), 1);
+    } else {
+        $user = new XoopsUser();
     }
 
     RMFunctions::create_toolbar();

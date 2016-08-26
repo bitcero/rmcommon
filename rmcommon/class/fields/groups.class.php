@@ -29,7 +29,7 @@ class RMFormGroups extends RMFormElement
 	 * @param string $caption Texto de la etiqueta
 	 * @param string $name Nombre del campo
 	 */
-	function __construct($caption, $name, $multi=0, $type=0, $cols=2, $selected=array()){
+	function __construct($caption, $name='', $multi=0, $type=0, $cols=2, $selected=array()){
 
         if (is_array($caption)) {
             parent::__construct($caption);

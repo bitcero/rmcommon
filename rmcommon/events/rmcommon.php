@@ -48,7 +48,7 @@ class RmcommonRmcommonPreload
          * This event has added in order to add custom codes in a "semantic" way, but
          * the codes can be added from any pertinent place
          */
-        RMEvents::get()->run_event('rmcommon.load.codes');
+        RMEvents::get()->trigger('rmcommon.load.codes');
 
 		if(substr($p['path'], -11)=='backend.php' && $config->rss_enable){
 			include_once RMCPATH.'/rss.php';

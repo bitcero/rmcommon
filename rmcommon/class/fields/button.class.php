@@ -21,7 +21,7 @@ class RMFormButton extends RMFormElement
 	 * @param string $value Texto del Bot?n (Ej. Enviar, Cancelar)
 	 * @param string $type Tipo de bot?n (Ej. submit, button). Por defecto el valor es 'submit'
 	 */
-	function __construct($caption, $value, $type = 'submit'){
+	function __construct($caption, $value='', $type = 'submit'){
 
         if (is_array($caption)) {
             parent::__construct($caption);
@@ -106,7 +106,7 @@ class RMFormButtonGroup extends RMFormElement
      * @param bool $ok
      * @return bool
      */
-	public function addButton($name, $value, $type = 'button', $extra='', $ok=false){
+	public function addButton($name, $value = '', $type = 'button', $extra='', $ok=false){
 
         if(is_a($name, 'RMFormButton')){
             $this->buttons[] = $name;
