@@ -204,13 +204,14 @@ class RMInternalBlock extends RMObject
     */
     public function getContent($format = 'S')
     {
+        global $common;
 
         $c_type = $this->getVar('content_type');
 
         switch ( $format ) {
             case 'S':
                 if ( $c_type == 'HTML' ) {
-                    return str_replace('{X_SITEURL}', XOOPS_URL.'/', $this->getVar('content', 'N'));
+                    return str_replace('{X_SITEURL}', XOOPS_URL.'/', $common->customCode()->doCode($this->getVar('content', 'N')));
                 } elseif ( $c_type == 'PHP' ) {
                     ob_start();
                     echo eval($this->getVar('content', 'N'));

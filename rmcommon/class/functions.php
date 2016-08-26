@@ -557,7 +557,7 @@ class RMFunctions
 
         global $xoopsOption;
         unset($xoopsOption['template_main']);
-        require RMCPATH . '/404.php';
+        require RMCPATH . '/templates/404.php';
         exit();
 
     }

@@ -130,7 +130,7 @@ $adminmenu[] = array(
     'title' => __('Icons','rmcommon'),
     'link' => "icons.php",
     'icon' => "svg-rmcommon-vector text-blue",
-    'location' => "updates"
+    'location' => "icons"
 );
 
 $adminmenu[] = array(
