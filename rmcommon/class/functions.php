@@ -548,7 +548,7 @@ class RMFunctions
 
     static public function error_404($message, $module = '', $params = null)
     {
-
+        global $common;
         header("HTTP/1.0 404 " . __('Not Found', 'mywords'));
         if (substr(php_sapi_name(), 0, 3) == 'cgi')
             header("Status: 404 " . __('Not Found', 'mywords'), TRUE);
@@ -557,8 +557,41 @@ class RMFunctions
 
         global $xoopsOption;
         unset($xoopsOption['template_main']);
-        require RMCPATH . '/templates/404.php';
+
+        $common->template()->header();
+
+        require $common->template()->path('404.php', 'module', 'rmcommon');
+
+        $common->template()->footer();
         exit();
+
+    }
+
+
+    static function loadModuleController($dirname){
+        if('' == $dirname){
+            return false;
+        }
+
+        $class = ucfirst($dirname) . 'Controller';
+
+        if(class_exists($class)){
+            return $class::getInstance();
+        }
+
+        $dirname = strtolower($dirname);
+
+        $file = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/class/' . $dirname.'controller.php';
+
+        if(false == file_exists($file) || false == is_file($file)){
+            return false;
+        }
+
+        include $file;
+        $class = ucfirst($dirname) . 'Controller';
+        $controller = $class::getInstance();
+
+        return $controller;
 
     }
 

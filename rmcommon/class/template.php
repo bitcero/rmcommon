@@ -289,7 +289,9 @@ class RMTemplate
                $cuIcons,
                $cuServices,
                $xoopsSecurity,
-               $common;
+               $common,
+               $xoopsTpl,
+               $xoopsUser;
 
         if ('' == $type && is_file($file)) {
             $template = $file;

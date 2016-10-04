@@ -40,4 +40,10 @@ interface iCommentsController
      * @return string
      */
     public function get_main_link();
+
+    /**
+     * Loads an existing instance of the controller
+     * @return object
+     */
+    static function getInstance();
 }

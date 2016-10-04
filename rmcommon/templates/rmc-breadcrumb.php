@@ -3,13 +3,24 @@
 <?php if ( $total_crumbs > 0 ): ?>
 <!-- Breadcrumb -->
     <ul class="breadcrumb rmc-breadcrumb">
-        <li><a href="<?php echo RMCURL; ?>" title="<?php _e('Dashboard','rmcommon'); ?>"><span class="glyphicon glyphicon-home"></span></a></li>
-        <?php if($xoopsModule->dirname()!='rmcommon'): ?>
-            <li>
-                <a href="<?php echo $xoopsModule->hasadmin() ? XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/'.$xoopsModule->getInfo('adminindex') : ''; ?>">
-                    <strong><?php echo $xoopsModule->name(); ?></strong>
-                </a>
-            </li>
+        <?php if(defined('XOOPS_CPFUNC_LOADED')): ?>
+            <li><a href="<?php echo RMCURL; ?>" title="<?php _e('Dashboard','rmcommon'); ?>"><span class="glyphicon glyphicon-home"></span></a></li>
+            <?php if($xoopsModule->dirname()!='rmcommon'): ?>
+                <li>
+                    <a href="<?php echo $xoopsModule->hasadmin() ? XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/'.$xoopsModule->getInfo('adminindex') : ''; ?>">
+                        <strong><?php echo $xoopsModule->name(); ?></strong>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php else: ?>
+            <li><a href="<?php echo XOOPS_URL; ?>" title="<?php _e('Home','rmcommon'); ?>"><span class="glyphicon glyphicon-home"></span></a></li>
+            <?php if($xoopsModule && $xoopsModule->getInfo('hasMain')): ?>
+                <li>
+                    <a href="<?php echo $controller == false ? XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname') . '/' : $controller->get_main_link(); ?>">
+                        <strong><?php echo $xoopsModule->name(); ?></strong>
+                    </a>
+                </li>
+            <?php endif; ?>
         <?php endif; ?>
         <?php foreach($this->crumbs as $i => $item): ?>
             <?php if($item['link']!=''): ?>
