@@ -377,7 +377,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
         /**
          * Generamos el cdigo JavaScript para comprobación del formulario
          */
-        $form =& $this;
+        $form = $this;
         ob_start();
         include RMTemplate::getInstance()->path('rmc-forms.php', 'module', 'rmcommon');
         return ob_get_clean();
@@ -469,7 +469,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
     public function display($js = true)
     {
         $attributes = $this->renderAttributeString();
-        $form =& $this;
+        $form = $this;
         include RMTemplate::getInstance()->path('rmc-forms.php', 'module', 'rmcommon');
         //echo $this->render($js);
     }

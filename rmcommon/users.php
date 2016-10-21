@@ -561,11 +561,11 @@ function delete_users(){
     }
 
     $uid = rmc_server_var($_POST, 'ids', array());
-    $member_handler =& xoops_gethandler('member', 'system');
+    $member_handler = xoops_gethandler('member', 'system');
 
     foreach ($uid as $id) {
 
-        $user =& $member_handler->getUser($id);
+        $user = $member_handler->getUser($id);
         $groups = $user->getGroups();
 
         if (in_array(XOOPS_GROUP_ADMIN, $groups)) {
@@ -573,7 +573,7 @@ function delete_users(){
         } elseif (!$member_handler->deleteUser($user)) {
             xoops_error( sprintf( __('User cannot be deleted: %s','rmcommon'), $user->getVar("uname").'<br />') );
         } else {
-            $online_handler =& xoops_gethandler('online');
+            $online_handler = xoops_gethandler('online');
             $online_handler->destroy($uid);
             // RMV-NOTIFY
             xoops_notification_deletebyuser($uid);

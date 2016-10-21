@@ -1323,7 +1323,7 @@ class RMTemplate
         $xoopsThemeFactory->allowedThemes = $xoopsConfig['theme_set_allowed'];
         $xoopsThemeFactory->defaultTheme = $xoopsConfig['theme_set'];
 
-        $xoTheme =& $xoopsThemeFactory->createInstance(array('contentTemplate' => @$xoopsOption['template_main']));
+        $xoTheme = $xoopsThemeFactory->createInstance(array('contentTemplate' => @$xoopsOption['template_main']));
         $xoopsTpl =& $xoTheme->template;
 
         return $xoopsTpl;

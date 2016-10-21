@@ -177,7 +177,7 @@ if ($action=='save'){
     // Send notification
     if ( $cuSettings->comments_notify ){
 
-        $config_handler =& xoops_gethandler('config');
+        $config_handler = xoops_gethandler('config');
         $mailConfig = $config_handler->getConfigsByCat(XOOPS_CONF_MAILER);
 
         $xoopsMailer =& xoops_getMailer();

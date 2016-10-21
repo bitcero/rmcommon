@@ -171,7 +171,7 @@ class RMSettings
             $config_handler = xoops_gethandler('config');
             if ($module) {
 
-                $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
+                $moduleConfig = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
                 self::$modules_settings[$directory] = $moduleConfig;
 
                 if ($option != '' && isset($moduleConfig[$option]))
@@ -285,7 +285,7 @@ class RMSettings
             case 'tplset':
                 $ele = new RMFormSelect($field->caption, $field->name, 0, array($field->value));
 
-                $tplset_handler =& xoops_gethandler('tplset');
+                $tplset_handler = xoops_gethandler('tplset');
                 $tplsetlist = $tplset_handler->getList();
                 asort($tplsetlist);
                 foreach ($tplsetlist as $key => $name) {
@@ -324,7 +324,7 @@ class RMSettings
 
             case 'startpage':
                 $ele = new RMFormSelect($field->caption, $field->name, 0, array($field->value));
-                $module_handler =& xoops_gethandler('module');
+                $module_handler = xoops_gethandler('module');
                 $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
                 $criteria->add(new Criteria('isactive', 1));
                 $moduleslist = $module_handler->getList($criteria, true);

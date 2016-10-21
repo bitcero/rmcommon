@@ -92,7 +92,7 @@ class RMUser extends RMObject
         } elseif (intval($module_id) < 1) {
             $module_id = 0;
         }
-        $moduleperm_handler =& xoops_gethandler('groupperm');
+        $moduleperm_handler = xoops_gethandler('groupperm');
 
         return $moduleperm_handler->checkRight('module_admin', $module_id, $this->getGroups());
     }

@@ -191,7 +191,7 @@ class RMInternalBlock extends RMObject
 
         if ($gid<=0 && empty($xoopsUser)) $gid = XOOPS_GROUP_ANONYMOUS;
 
-        $pHand =& xoops_gethandler('groupperm');
+        $pHand = xoops_gethandler('groupperm');
         return $pHand->checkRight($level ? 'block_admin' : 'rmblock_read', $this->id(), $gid>0 ? $gid : $xoopsUser->getGroups());
     }
 
@@ -445,7 +445,7 @@ class RMInternalBlockHandler
 
         $orderby = $orderby=='' ? 'b.weight,b.bid' : $orderby;
 
-        $db =& XoopsDatabaseFactory::getDatabaseConnection();
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
         $ret = array();
         $sql = "SELECT DISTINCT gperm_itemid FROM ".$db->prefix('group_permission')." WHERE gperm_name = 'rmblock_read' AND gperm_modid = 1";
         if ( is_array($groupid) ) {
@@ -499,7 +499,7 @@ class RMInternalBlockHandler
 
     function getByModule($moduleid, $asobject=true)
     {
-        $db =& XoopsDatabaseFactory::getDatabaseConnection();
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
 
         if (!is_numeric($moduleid)){
             $col = 'dirname';

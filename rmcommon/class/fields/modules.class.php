@@ -165,7 +165,7 @@ class RMFormModules extends RMFormElement
 
     function render()
     {
-        $module_handler =& xoops_gethandler('module');
+        $module_handler = xoops_gethandler('module');
         $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
         $criteria->add(new Criteria('isactive', 1));
         if ($this->get('subpages')) $criteria->add(new Criteria('dirname', 'system'), 'OR');
