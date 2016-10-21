@@ -294,7 +294,7 @@ class RMTemplate
         if ('' == $type && is_file($file)) {
             $template = $file;
         } else {
-            $template = $this->path($file, $type, $module, $element);
+            $template = static::path($file, $type, $module, $element);
         }
 
         if(!file_exists($template)){
@@ -1561,7 +1561,7 @@ class RMTemplate
      */
     public function get_template($file, $type = 'module', $module = '', $element = '')
     {
-        return $this->path($file, $type, $module, $element);
+        return static::path($file, $type, $module, $element);
     }
 
 }

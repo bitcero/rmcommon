@@ -7,7 +7,7 @@ Author: bitcero
 Author URI: http://www.bitcero.info
 */
 
-require dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/mainfile.php';
+require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/mainfile.php';
 
 $xoopsLogger->renderingEnabled = false;
 $xoopsLogger->activated = false;

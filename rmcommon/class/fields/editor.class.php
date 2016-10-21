@@ -170,7 +170,7 @@ class RMFormEditor extends RMFormElement
      * @param string $url
      * @param RMForm $form
      */
-    public function tinyCSS($url, RMForm &$form)
+    public function tinyCSS($url, RMForm $form)
     {
         $form->tinyCSS($url);
     }

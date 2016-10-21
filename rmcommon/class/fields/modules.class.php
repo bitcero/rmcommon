@@ -241,7 +241,7 @@ class RMFormModules extends RMFormElement
                             'pm' => __('Private messages', 'rmcomon')
                         );
                     } else {
-                        $subpages = $app->getInfo('subpages');
+                        $subpages =& $app->getInfo('subpages');
                     }
                     if (!empty($subpages)) {
                         $selectedSubs = $this->has('selectedSubs') ? $this->get('selectedSubs') : [];

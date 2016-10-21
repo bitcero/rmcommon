@@ -191,7 +191,7 @@ class RMInternalBlock extends RMObject
 
         if ($gid<=0 && empty($xoopsUser)) $gid = XOOPS_GROUP_ANONYMOUS;
 
-        $pHand = xoops_gethandler('groupperm');
+        $pHand = xoops_getHandler('groupperm');
         return $pHand->checkRight($level ? 'block_admin' : 'rmblock_read', $this->id(), $gid>0 ? $gid : $xoopsUser->getGroups());
     }
 
@@ -451,7 +451,7 @@ class RMInternalBlockHandler
         if ( is_array($groupid) ) {
             $sql .= ' AND gperm_groupid IN ('.implode(',', $groupid).',0)';
         } else {
-            if (intval($groupid) > 0) {
+            if ((int)$groupid > 0) {
                 $sql .= ' AND gperm_groupid IN (0,'.$groupid.')';
             }
         }
@@ -465,9 +465,9 @@ class RMInternalBlockHandler
             $sql = 'SELECT b.* FROM '.$db->prefix('mod_rmcommon_blocks').' b, '.$db->prefix('mod_rmcommon_blocks_assignations').' m WHERE m.bid=b.bid';
             $sql .= ' AND b.isactive='.$isactive;
             if (isset($visible)) {
-                $sql .= ' AND b.visible='.intval($visible);
+                $sql .= ' AND b.visible=' . (int)$visible;
             }
-            $app_id = intval($app_id);
+            $app_id = (int)$app_id;
             if (!empty($app_id)) {
                 $sql .= ' AND m.app_id IN (0,'.$app_id;
                 if ($toponlyblock) {

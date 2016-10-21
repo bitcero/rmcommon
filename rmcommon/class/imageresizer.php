@@ -296,10 +296,10 @@ class RMImageResizer
         $ratio = $image->width < $image->height ? $image->width / $image->height : $image->height / $image->width;
 
         if ( !$params->width )
-            $params->width = intval( $params->height * $ratio );
+            $params->width = (int)($params->height * $ratio);
 
         if ( !$params->height )
-            $params->height = intval( $params->width * $ratio );
+            $params->height = (int)($params->width * $ratio);
 
         $size_ratio = max( $params->width / $image->width, $params->height / $image->height );
 

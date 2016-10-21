@@ -56,7 +56,7 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
             $string = $this->_canonicalize($string);
         }
 
-        return $this->_safeWordWrap($string, $maxLineLength, "\r\n");
+        return $this->_safeWordwrap($string, $maxLineLength, "\r\n");
     }
 
     /**
@@ -75,7 +75,7 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
             if ($this->_canonical) {
                 $toencode = $this->_canonicalize($toencode);
             }
-            $wrapped = $this->_safeWordWrap($toencode, $maxLineLength, "\r\n");
+            $wrapped = $this->_safeWordwrap($toencode, $maxLineLength, "\r\n");
             $lastLinePos = strrpos($wrapped, "\r\n");
             $leftOver = substr($wrapped, $lastLinePos);
             $wrapped = substr($wrapped, 0, $lastLinePos);

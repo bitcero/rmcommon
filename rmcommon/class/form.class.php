@@ -460,7 +460,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
             return "difto" . str_replace("Select", "", $type);
         } else {
             return $type;
-        };
+        }
     }
 
     /**

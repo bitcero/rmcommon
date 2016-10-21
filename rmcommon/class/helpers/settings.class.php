@@ -114,16 +114,16 @@ class RMSettings
 
             switch ($data['valuetype']) {
                 case 'int':
-                    $settings[$name]['value'] = intval($data['value']);
+                    $settings[$name]['value'] = (int)$data['value'];
                     break;
                 case 'array':
                     $settings[$name]['value'] = unserialize($data['value']);
                     break;
                 case 'float':
-                    $settings[$name]['value'] = floatval($data['value']);
+                    $settings[$name]['value'] = (float)$data['value'];
                     break;
                 case 'textarea':
-                    $settings[$name]['value'] = stripSlashes($data['value']);
+                    $settings[$name]['value'] = stripslashes($data['value']);
                     break;
             }
         }
@@ -166,9 +166,9 @@ class RMSettings
                 return (object)$xoopsModuleConfig;
 
         } else {
-            $module_handler = xoops_gethandler('module');
+            $module_handler = xoops_getHandler('module');
             $module = $module_handler->getByDirname($directory);
-            $config_handler = xoops_gethandler('config');
+            $config_handler = xoops_getHandler('config');
             if ($module) {
 
                 $moduleConfig = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
@@ -285,7 +285,7 @@ class RMSettings
             case 'tplset':
                 $ele = new RMFormSelect($field->caption, $field->name, 0, array($field->value));
 
-                $tplset_handler = xoops_gethandler('tplset');
+                $tplset_handler = xoops_getHandler('tplset');
                 $tplsetlist = $tplset_handler->getList();
                 asort($tplsetlist);
                 foreach ($tplsetlist as $key => $name) {
@@ -324,7 +324,7 @@ class RMSettings
 
             case 'startpage':
                 $ele = new RMFormSelect($field->caption, $field->name, 0, array($field->value));
-                $module_handler = xoops_gethandler('module');
+                $module_handler = xoops_getHandler('module');
                 $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
                 $criteria->add(new Criteria('isactive', 1));
                 $moduleslist = $module_handler->getList($criteria, true);

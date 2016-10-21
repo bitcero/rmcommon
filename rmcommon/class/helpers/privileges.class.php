@@ -129,7 +129,7 @@ class RMPrivileges
         if ( !is_file( $file ) )
             return false;
 
-        $permissions = include( $file );
+        $permissions = include $file;
 
         return $permissions;
 
