@@ -59,7 +59,7 @@ foreach ($modulesList as $item) {
         continue;
     }
 
-    if (false == ($module = \XoopsModule::getByDirName($item))) {
+    if (false == ($module = \XoopsModule::getByDirname($item))) {
         continue;
     }
 

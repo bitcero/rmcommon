@@ -124,7 +124,8 @@ class RMFormUser extends RMFormElement
 		
 		$rtn .= "</ul><br />";
 		if ($this->get('can_change')){
-			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit').",".intval($this->get('multi')).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
+			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit')."," . (int)$this->get('multi')
+                    . ",'" . XOOPS_URL . "');\">" . __('Users...', 'rmcommon') . "</button>";
 		    $rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
 					    <div class="modal-dialog">
 					        <div class="modal-content">

@@ -96,7 +96,7 @@ if ($action=='') {
     /**
      * Paginacion de Resultados
      */
-    $page = intval(rmc_server_var($_REQUEST, 'page', 1));
+    $page = (int)rmc_server_var($_REQUEST, 'page', 1);
     $page = $page<=0 ? $page = 1 : $page;
     $limit = 35;
     list($num) = $db->fetchRow($db->query($sql));
@@ -193,7 +193,7 @@ if ($action=='') {
     $author = new RMUser( $image->uid );
     $original = pathinfo( $image->get_files_path() . '/' . $image->file );
     $dimensions = getimagesize( $image->get_files_path() . '/' . $image->file );
-    $mimes = include(XOOPS_ROOT_PATH.'/include/mimetypes.inc.php');
+    $mimes = include XOOPS_ROOT_PATH . '/include/mimetypes.inc.php';
 
     $category_sizes = $cat->getVar('sizes');
     $sizes = array();

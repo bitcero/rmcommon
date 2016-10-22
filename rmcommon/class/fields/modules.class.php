@@ -165,7 +165,7 @@ class RMFormModules extends RMFormElement
 
     function render()
     {
-        $module_handler =& xoops_gethandler('module');
+        $module_handler = xoops_gethandler('module');
         $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
         $criteria->add(new Criteria('isactive', 1));
         if ($this->get('subpages')) $criteria->add(new Criteria('dirname', 'system'), 'OR');
@@ -241,7 +241,7 @@ class RMFormModules extends RMFormElement
                             'pm' => __('Private messages', 'rmcomon')
                         );
                     } else {
-                        $subpages = $app->getInfo('subpages');
+                        $subpages =& $app->getInfo('subpages');
                     }
                     if (!empty($subpages)) {
                         $selectedSubs = $this->has('selectedSubs') ? $this->get('selectedSubs') : [];

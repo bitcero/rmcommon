@@ -28,7 +28,7 @@
  */
 
 define('RMCLOCATION', 'icons');
-require dirname(dirname(dirname(__FILE__))) . '/include/cp_header.php';
+require dirname(dirname(__DIR__)) . '/include/cp_header.php';
 
 // Add scripts
 $common->template()->add_script('icons.min.js', 'rmcommon', ['footer' => 1, 'id' => 'icons-js']);

@@ -437,7 +437,7 @@ function resize_images(){
 
     $sizes = $cat->getVar('sizes');
     $updir = XOOPS_UPLOAD_PATH.'/'.date('Y', $image->getVar('date')).'/'.date('m',$image->getVar('date'));
-    $upurl = XOOPS_UPLOAD_URL.'/'.date('Y', $image->getVar('date')).'/'.date('m',$image->getVar('date'));;
+    $upurl = XOOPS_UPLOAD_URL.'/'.date('Y', $image->getVar('date')).'/'.date('m',$image->getVar('date'));
     $width = 0;
     $tfile = '';
 
@@ -450,7 +450,7 @@ function resize_images(){
 
         $name = $updir.'/sizes/'.$fd['filename'].'-'.$size['name'].'.'.$fd['extension'];
 
-        $ret['sizes'][$size['name']] = str_replace(XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $name);;
+        $ret['sizes'][$size['name']] = str_replace(XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $name);
 
         list($currentWidth, $currentHeight) = getimagesize($updir.'/'.$image->getVar('file'));
 
@@ -553,7 +553,7 @@ function edit_image(){
     }
 
     $image_data['thumbnail'] = XOOPS_UPLOAD_URL.$updir.'/sizes/'.$fd['filename'].'-'.$current_size['name'].'.'.$fd['extension'];
-    $mimes = include(XOOPS_ROOT_PATH.'/include/mimetypes.inc.php');
+    $mimes = include XOOPS_ROOT_PATH . '/include/mimetypes.inc.php';
     $image_data['mime'] = isset($mimes[$fd['extension']]) ? $mimes[$fd['extension']] : 'application/octet-stream';
     $image_data['file'] = $image->getVar('file');
     $image_data['date'] = $image->getVar('date');

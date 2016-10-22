@@ -65,7 +65,7 @@ function show_dashboard(){
     require_once XOOPS_ROOT_PATH . "/class/xoopslists.php";
     $dirlist = XoopsLists::getModulesList();
     $available_mods = array();
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
 
     foreach ($dirlist as $file) {
         clearstatcache();

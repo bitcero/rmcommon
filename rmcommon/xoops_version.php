@@ -299,6 +299,7 @@ $cu_settings['config'][] = array(
 );
 
 // Secure Key
+global $common;
 if (!isset($xoopsSecurity)) $xoopsSecurity = new XoopsSecurity();
 $cu_settings['config'][] = array(
     'name'          => 'secretkey',
@@ -306,7 +307,7 @@ $cu_settings['config'][] = array(
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => $common->settings->secretkey != '' ? '' : password_hash( XOOPS_URL . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['GATEWAY_INTERFACE'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_ADMIN'] . $_SERVER['SERVER_SIGNATURE'] . $xoopsUser->uname(), PASSWORD_DEFAULT),
+    'default'       => $common->settings->secretkey != '' ? '' : password_hash( XOOPS_URL . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['GATEWAY_INTERFACE'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_ADMIN'] . $_SERVER['SERVER_SIGNATURE'] . $GLOBALS['xoopsUser']->uname(), PASSWORD_DEFAULT),
     'category'      => 'general'
 );
 

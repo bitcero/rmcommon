@@ -13,11 +13,11 @@ include '../../include/cp_header.php';
 
 function createSQL()
 {
-    $mid = isset($_GET['mid']) ? intval($_GET['mid']) : 0;
+    $mid = isset($_GET['mid']) ? (int)$_GET['mid'] : 0;
     $subpage = isset($_GET['subpage']) ? $_GET['subpage'] : '';
-    $group = isset($_GET['group']) ? intval($_GET['group']) : 0;
-    $visible = isset($_GET['visible']) ? intval($_GET['visible']) : -1;
-    $pos = isset($_GET['pos']) ? intval($_GET['pos']) : -1;
+    $group = isset($_GET['group']) ? (int)$_GET['group'] : 0;
+    $visible = isset($_GET['visible']) ? (int)$_GET['visible'] : -1;
+    $pos = isset($_GET['pos']) ? (int)$_GET['pos'] : -1;
 
     $wid_globals = array(
         'mid'=>$mid,
@@ -167,12 +167,12 @@ function show_rm_blocks()
     }
 
     // Position
-    $the_position = isset($_GET['pos']) ? intval($_GET['pos']) : '';
+    $the_position = isset($_GET['pos']) ? (int)$_GET['pos'] : '';
 
     // Parameters
     $mid = rmc_server_var($_GET,'mid',0);
     $subpage = isset($_GET['subpage']) ? $_GET['subpage'] : '';
-    $group = isset($_GET['group']) ? intval($_GET['group']) : 0;
+    $group = isset($_GET['group']) ? (int)$_GET['group'] : 0;
     $visible = rmc_server_var($_GET,'visible',-1);
     $pid = rmc_server_var($_GET,'pos',0);
 

@@ -13,7 +13,7 @@ class RMBlockPosition extends RMObject
     
     public function __construct($id=''){
         
-        $this->db =& XoopsDatabaseFactory::getDatabaseConnection();
+        $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("mod_rmcommon_blocks_positions");
         $this->setNew();
         $this->initVarsFromTable();

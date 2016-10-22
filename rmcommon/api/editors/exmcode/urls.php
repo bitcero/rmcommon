@@ -2,7 +2,7 @@
 //error_reporting(0);
 $xoopsOption["nocommon"] = 1;
 
-include_once('../../../../../mainfile.php');
+include_once '../../../../../mainfile.php';
 
 foreach ($_GET as $k => $v) {
     $$k = $v;
