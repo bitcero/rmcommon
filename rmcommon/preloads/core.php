@@ -67,6 +67,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
         global $xoopsConfig;
 
         if ($xoopsConfig['cpanel'] != 'redmexico') {
+            file_put_contents(XOOPS_CACHE_PATH . '/rmgui.rmc', $xoopsConfig['cpanel']);
             $db = XoopsDatabaseFactory::getDatabaseConnection();
             $db->queryF("UPDATE " . $db->prefix("config") . " SET conf_value='redmexico' WHERE conf_modid=0 AND conf_catid=1 AND conf_name='cpanel'");
         }

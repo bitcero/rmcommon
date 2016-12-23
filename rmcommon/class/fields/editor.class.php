@@ -181,7 +181,9 @@ class RMFormEditor extends RMFormElement
      */
     private function renderTiny()
     {
-        global $rmc_config, $xoopsUser;
+        global $rmc_config, $xoopsUser, $common;
+
+        $common->template()->add_fontawesome();
 
         $this->renderAttributeString();
 
