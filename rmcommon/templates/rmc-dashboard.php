@@ -93,8 +93,8 @@
 
             </div>
             <div class="box-footer">
-                <a href="http://www.xoopsmexico.net" target="_blank" class="btn btn-link">
-                    <?php echo $cuIcons->getIcon('svg-rmcommon-xoopsmexico'); ?> XoopsMexico.net
+                <a href="http://www.eduardocortes.mx" target="_blank" class="btn btn-link">
+                    <?php _e('Author\'s Website', 'rmcommon'); ?>
                 </a>
                 <a href="http://xoops.org" target="_blank" class="btn btn-link pull-right">
                     <?php echo $cuIcons->getIcon('svg-rmcommon-xoops'); ?>

@@ -24,7 +24,6 @@
  * @copyright    2009 - 2014 Eduardo Cortés
  * @license      GPL v2
  * @link         http://eduardocortes.mx
- * @link         http://xoopsmexico.net
  */
 
 /**

@@ -21,7 +21,7 @@ $modversion['releasedate'] = "";
 $modversion['status'] = "Beta";
 $modversion['description'] = 'Contains a lot of classes and functions used by Red México Modules';
 $modversion['credits'] = "Red México, BitC3R0";
-$modversion['help'] = "https://www.xoopsmexico.net/docs/common-utilities/introduccion/";//"docs/readme.html";
+$modversion['help'] = "docs/readme.html";
 $modversion['license'] = "GPL 2";
 $modversion['official'] = 0;
 $modversion['image'] = "images/logo.png";
@@ -41,7 +41,7 @@ $modversion['author'] = "Eduardo Cortés";
 $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
-$modversion['updateurl'] = "https://www.xoopsmexico.net/modules/vcontrol/";
+//$modversion['updateurl'] = "https://www.xoopsmexico.net/modules/vcontrol/";
 $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
 // PERMISSIONS

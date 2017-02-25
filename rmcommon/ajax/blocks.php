@@ -85,6 +85,14 @@ function insert_block(){
             $canvas = '';
     }
 
+    if('' == $canvas){
+        response(
+            __('There are not blocks positions enabled! You must add or enable at least one position before to add new blocks.', 'rmcommon'),
+            array('error' => __('There are not blocks positions enabled! You must add or enable at least one position before to add new blocks.', 'rmcommon')), 
+            1, 1
+        );
+    }
+
     $block->setReadGroups(array(0));
     $block->setVar('name', $bk['name']);
     $block->setVar('element', $mod);
