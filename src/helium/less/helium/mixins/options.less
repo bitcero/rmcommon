@@ -1,0 +1,11 @@
+.options-variation(@color, @text){
+  background-color: @color;
+  color: @text;
+
+  &:hover{
+    background-color: darken(@color, 10%);
+    color: @text;
+    transform: scale(1.1,1.1);
+  }
+
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="../../editor-popups.js"></script>
+<script type="text/javascript" src="<?php echo RMCURL; ?>/include/js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo RMCURL; ?>/css/bootstrap.min.css" />
+<style type="text/css">
+    .container{width: 100%;}
+</style>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#title").val(exmPopup.selection().text);
+        
+        $("#insert").click(function(){
+            var title = $("#title").val();
+            title = title==''?'%replace%':title;
+            exmPopup.insertText('[url='+$("#url").val()+']'+title+'[/url]');
+            exmPopup.closePopup();
+        });
+        $("#cancel").click(function(){
+            exmPopup.closePopup();
+        })
+        
+    });
+</script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="title"><?php echo TITLE; ?></label>
+                <input type="text" id="title" size="50" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="url"><?php echo URL; ?></label>
+                <input type="text" id="url" size="50" value="http://" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-insert" id="insert"><?php echo INSERT; ?></button>
+                <button type="button" class="btn btn-default" id="cancel"><?php echo CANCEL; ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table width="100%" cellpadding="3" cellspacing="0">
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

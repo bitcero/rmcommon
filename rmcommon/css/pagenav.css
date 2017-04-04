@@ -1,0 +1,51 @@
+div.rmc_pages_navigation_container{
+    padding: 3px 0;
+    overflow: hidden;
+}
+div.rmc_pages_navigation_container span.pages_caption{
+    display: block;
+    float: left;
+    padding: 2px 4px;
+}
+div.rmc_pages_navigation_container span.showing{
+	display: block;
+	float: left;
+	padding: 3px 10px 3px 0;
+	margin-right: 10px;
+	border-right: 1px dotted #CCC;
+}
+div.rmc_pages_navigation_container a{
+    display: block;
+    padding: 1px 6px;
+    background: #ebebeb;
+    float: left;
+    font-size: 1.2em;
+    color: #666;
+    margin: 0 1px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+div.rmc_pages_navigation_container a:hover{
+    background-color: #CCC;
+    color: #000;
+    text-decoration: none;
+}
+div.rmc_pages_navigation_container span.page_separators{
+    display: block;
+    float: left;
+}
+div.rmc_pages_navigation_container span.current_page{
+    display: block;
+    float: left;
+    font-size: 1.2em;
+    padding: 1px 6px;
+    background: #999;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin: 0 1px;
+    color: #FFF;
+}

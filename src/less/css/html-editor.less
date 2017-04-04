@@ -1,0 +1,124 @@
+/**
+* HTML Editor for Common Utilities and XOOPS
+* @author: Eduardo Cortés <i.bitcero@gmail.com>
+* @link: http://eduardocortes.mx
+* @link: http://rmcommon.com
+*/
+.ed-container{
+    transition: ease-in-out all 350ms;
+    .quicktags{
+        background: #f9f9f9;
+        margin-bottom: -2px;
+        border: 1px solid rgba(0,0,0,0.12);
+        border-bottom: 0;
+        padding: 3px 3px 5px 3px;
+        transition: ease-in-out all 350ms;
+        button{
+            border-radius: 2px;
+              padding: 0 6px;
+              font-size: 14px;
+              font-weight: normal;
+              color: #666;
+              border: 0;
+              margin: 1px;
+              text-shadow: none;
+              background: transparent;
+              box-shadow: none;
+              line-height: 32px;
+              height: 32px;
+              text-align: center;
+              min-width: 32px;
+              outline: 0;
+              vertical-align: text-bottom;
+
+              &[id^='ed_close_']{
+                  font-size: 10px;
+                  text-transform: uppercase;
+                  font-weight: bold;
+              }
+            &:hover{
+                border-color: rgba(0,0,0,0.25);
+                background-color: #fff;
+                color: #333;
+                box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            }
+            .fa{
+                font-size: 14px;
+            }
+        }
+        button[value="/"]{
+            background-color: rgba(0,0,0,0.05);
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+    }
+
+    .txtarea-container{
+        transition: ease-in-out all 350ms;
+        position: relative;
+        > textarea{
+            padding: 10px;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            font-family: monospace;
+            color: #333;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-top: 0;
+            background: #FFF;
+            border-radius: 0 0 2px 2px;
+            width: 100%;
+            transition: ease-in-out all 350ms;
+            outline: 0;
+        }
+    }
+
+    .ed-plugins{
+
+        .full-screen, .normal-screen{
+            float: right;
+        }
+
+    }
+
+    &.full-screen-edit{
+        z-index: 1050;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #FFF;
+        .ed-plugins{
+            padding: 10px 15px;
+        }
+
+        .txtarea-container{
+            position: absolute;
+            top: 140px;
+            bottom: 20px;
+            left: 15%; right: 15%;
+
+            textarea{
+                border: 0;
+                color: #646464;
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                padding: 0;
+                font-size: 1.2em;
+
+                &:focus{
+                    outline: 0;
+                }
+
+            }
+
+        }
+
+        .quicktags{
+            border-left: 0;
+            border-right: 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding: 5px 15px;
+        }
+
+    }
+
+}

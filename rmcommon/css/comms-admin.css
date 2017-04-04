@@ -1,0 +1,29 @@
+/** Poster data **/
+.poster_data{
+    display: block;
+    font-size: 0.9em;
+}
+.poster_avatar{
+    max-width: 40px;
+    max-height: 40px;
+    float: left;
+    margin: 0 3px 2px 0;
+}
+.poster_cell{
+    overflow: hidden;
+    min-width: 200px;
+}
+.comment_date{
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+}
+.comm-pagination{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+}
+.comm-search-control{
+    width: 250px;
+}
+

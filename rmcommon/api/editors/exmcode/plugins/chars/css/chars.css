@@ -1,0 +1,55 @@
+body, html{
+    height: 100%;
+}
+.container{
+    width: 100%;
+}
+#preview{
+	font-size: 60px;
+	border: 1px solid #CCC;
+	text-align: center;
+	height: 120px;
+	line-height: 120px;
+}
+#description{
+	display: block;
+	text-align: center;
+	padding: 2px 0;
+	font-size: 0.8em;
+	height: 30px;
+}
+#charmap{
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 0;
+}
+#charmap a{
+	display: inline-block;
+	color: #000;
+	margin: 1px;
+	text-decoration: none;
+	border: 1px solid #CCC;
+	text-align: center;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+}
+.preview{
+	text-align: center;
+	padding: 2px;
+}
+.preview span{
+	font-size: 0.8em;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: 5px;
+}
+#html,#numeric{
+	text-transform: none;
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 3px 0;
+	display: block;
+	border: 1px solid #CCC;
+}

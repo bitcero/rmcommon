@@ -1,0 +1,246 @@
+/*
+This file contains the styles to allow modules to create their
+own dashboards using the same look and feel that in rmcommon.
+*/
+
+// ------------#
+// TOP WIDGETS
+// ------------#
+.top-widgets{
+  list-style: none;
+  margin: 0 -5px 10px;
+  padding: 0;
+
+  > li{
+    margin: 0 0 5px 0;
+
+    @media(min-width: 401px){
+      float: left;
+      width: 50%;
+      padding: 5px;
+    }
+
+    @media(min-width: @screen-sm-min){
+      width: 25%;
+    }
+
+  }
+
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+    height: 1px;
+  }
+}
+
+/*
+  MANAGEMENT TOOLS
+--------------------------- */
+#management-box{
+
+  > .box-content{
+    max-height: 350px;
+    overflow-y: auto;
+  }
+  .management-tools{
+    list-style: none;
+    padding: 0;
+    margin: -5px;
+    overflow: hidden;
+
+    > li{
+      float: left;
+      width: 50%;
+      padding: 5px;
+
+      > a{
+        text-align: center;
+        display: block;
+        padding: 10px;
+        border-radius: @border-radius-large;
+        transition: ease all 250ms;
+        background: @color-grey-100;
+
+        > .cu-icon{
+          .cu-icon-size(30px);
+          transition: ease all 250ms;
+        }
+
+        > .title{
+          display: block;
+          font-weight: 400;
+          margin-top: 6px;
+          text-transform: uppercase;
+          font-size: 0.8em;
+          font-weight: 600;
+          color: @text-color;
+        }
+
+        &:hover{
+          background-color: @color-midnight;
+          color: @color-text-midnight;
+          > .title{
+            color: @color-text-midnight;
+          }
+        }
+
+        @media(min-width: @screen-md-min){
+          text-align: left;
+          > .cu-icon{
+            .cu-icon-size(24px);
+            margin-right: 5px;
+          }
+
+          > .title{
+            display: inline;
+            margin-top: 0;
+          }
+        }
+
+      }
+    }
+
+  }
+
+}
+
+/*
+  RECENT COMMENTS
+--------------------------- */
+#recent-comments{
+
+  > .box-content{
+    overflow-y: auto;
+    max-height: 450px;
+  }
+
+  .comments{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > li{
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+
+      &:first-child{
+        padding-top: 0;
+      }
+
+      &:last-child{
+        padding-bottom: 0;
+      }
+
+      > p{
+        font-size: 0.95em;
+      }
+
+      > cite{
+        font-size: 0.9em;
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+      > time{
+        font-size: 0.9em;
+        color: @gray-light;
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+      > span{
+        font-size: 0.9em;
+      }
+    }
+  }
+
+}
+
+#rmc-recent-news{
+  max-height: 400px;
+  overflow-y: auto;
+
+  & + .box-footer{
+    > .btn{
+      color: @text-color;
+
+      &:hover{
+        color: @link-hover-color;
+      }
+    }
+  }
+}
+
+/*
+Dashboard panels
+*/
+html.dashboard{
+
+  .size-1, .size-2, .size-3, .size-4{
+    padding-left:  (@grid-gutter-width / 2);
+    padding-right: (@grid-gutter-width / 2);
+    width: 100%;
+  }
+
+  @media(min-width: 600px){
+
+    .size-1{
+      width: 50%;
+    }
+
+    .size-2, .size-3, .size-4{
+      width: 100%;
+    }
+
+  }
+
+  @media(min-width: @screen-md-min){
+
+    .size-1{
+      width: 33.33333333%
+    }
+    .size-2{
+      width: 66.66666666%;
+    }
+    .size-3, .size-4{
+      width: 100%;
+    }
+
+    .size-md-1{
+      width: 25%;
+    }
+
+    .size-md-2{
+      width: 50%;
+    }
+
+    .size-md-3{
+      width: 75%;
+    }
+
+    .size-md-4{
+      width: 100%;
+    }
+
+  }
+
+  @media(min-width: @screen-lg-min){
+    .size-lg-1{
+      width: 25%;
+    }
+
+    .size-lg-2{
+      width: 50%;
+    }
+
+    .size-lg-3{
+      width: 75%;
+    }
+
+    .size-lg-4{
+      width: 100%;
+    }
+  }
+
+}

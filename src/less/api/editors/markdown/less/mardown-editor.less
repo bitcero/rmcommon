@@ -1,0 +1,83 @@
+/*!
+Markdown editor for Common Utilities
+Using: CodeMirror
+Created by Eduardo Cortés <http://eduardocortes.mx>
+*/
+
+
+
+/* EDITOR BUTTONS
+-------------------------------------*/
+.ed-buttons{
+
+    /*.toolbar-1{
+        padding: 5px;
+        border-bottom: 0;
+        .dropdown-menu{
+            > li > button{
+                border: 0;
+                width: 100%;
+                display: block;
+                background-color: transparent;
+                padding: 5px 12px;
+                text-align: left;
+                &:hover{
+                    background-color: #f5f5f5;
+                }
+                h1,h2,h3,h4,h5,h6{
+                    margin: 0;
+                    line-height: 1;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }*/
+    /*.button{
+        padding: 5px 8px;
+        color: #666;
+        border: 1px solid transparent;
+        margin: 0;
+        display: inline-block;
+        font-size: 14px;
+        background: transparent;
+        transition: ease-in-out all 100ms;
+        outline: 0;
+        &:hover{
+            border: 1px solid rgba(0,0,0,0.1);
+            background-color: #FFF;
+        }
+        > span{
+            padding: 2px 0 0 0;
+        }
+    }*/
+}
+
+.ed-container{
+    .txtarea-container{
+        position: relative;
+        overflow: hidden;
+        min-height: 150px;
+        textarea{
+            border: 1px solid rgba(0,0,0,0.1);
+            border-top: 0;
+            width: 100%;
+            outline: 0;
+            padding: 10px;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+    }
+}
+
+@import 'codemirror.less';
+@import '../../full-screen.less';
+
+.ed-container.full-screen-edit{
+    .txtarea-container{
+        .CodeMirror{
+            border: 0;
+            font-size: 1.3em;
+        }
+    }
+}
+

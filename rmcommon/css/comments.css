@@ -1,0 +1,24 @@
+/** Item **/
+.comment-item .head{
+    background: #FFF;
+    margin-bottom: 6px;
+}
+.comment-item .head > img{
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 2px;
+    margin: 0 10px 0 0;
+}
+.comment-item .head > .data{
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-left: 50px;
+}
+.comment-item .head > .data > small{
+    margin: 0;
+}
+
+.comment-item .text{
+    padding-left: 50px;
+}

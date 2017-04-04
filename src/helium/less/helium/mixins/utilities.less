@@ -1,0 +1,15 @@
+.vertical-gradient (@startcolor: #eee, @endcolor: white) {
+  background: @startcolor;
+  background: ~"-moz-linear-gradient(top, @{startcolor} 0%, @{endcolor} 100%)";
+  background: ~"-webkit-linear-gradient(top, @{startcolor} 0%, @{endcolor} 100%)";
+  background: ~"linear-gradient(to bottom, @{startcolor} 0%, @{endcolor} 100%)";
+  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@{startcolor}', endColorstr='@{endcolor}',GradientType=0 )";
+}
+
+.horizontal-gradient (@startcolor: #eee, @endcolor: white) {
+  background: ~"@{startcolor}";
+  background: ~"-moz-linear-gradient(left,  @{startcolor} 0%, @{endcolor} 100%)";
+  background: ~"-webkit-linear-gradient(left,  @{startcolor} 0%,@{endcolor} 100%)";
+  background: ~"linear-gradient(to right,  @{startcolor} 0%,@{endcolor} 100%)";
+  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='@{startcolor}', endColorstr='@{endcolor}',GradientType=1 )";
+}
