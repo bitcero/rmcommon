@@ -32,7 +32,7 @@ abstract class RMController
 
     public $parameters;
 
-    protected $model;
+    protected $model = [];
 
     protected $tpl;
 
@@ -75,11 +75,11 @@ abstract class RMController
 
         include_once $file;
 
-        $this->model = new $class();
-        $this->model->controller = $this;
-        $this->model->module = $this->module;
+        $this->model[$model] = new $class();
+        $this->model[$model]->controller = $this;
+        $this->model[$model]->module = $this->module;
 
-        return $this->model;
+        return $this->model[$model];
 
     }
 
