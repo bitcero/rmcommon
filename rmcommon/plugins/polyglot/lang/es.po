@@ -1,0 +1,291 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2016-02-25 15:32-0600\n"
+"PO-Revision-Date: 2016-02-25 15:34-0600\n"
+"Last-Translator: \n"
+"Language-Team: Red México\n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: class/PolyglotService.php:197
+msgid "Element could not be registered:"
+msgstr "No se pudo registrar el elemento:"
+
+#: class/PolyglotService.php:237 class/PolyglotService.php:246
+msgid "Translation strings could not be save!"
+msgstr "¡Las cadenas de traducción no pudieron guardarse!"
+
+#: cp/adjust.php:85 cp/dashboard.php:364
+msgid "Plugins Manager"
+msgstr "Administración de Plugins"
+
+#: cp/adjust.php:86 cp/dashboard.php:365 polyglot.php:55
+msgid "Polyglot"
+msgstr "Polyglot"
+
+#: cp/adjust.php:87 templates/polyglot-tabs.php:11
+msgid "Adjustments"
+msgstr "Ajustes"
+
+#: cp/dashboard.php:37 cp/dashboard.php:161 cp/dashboard.php:207
+msgid "You have not authorization for this action!"
+msgstr "¡No tienes autorización para llevar a cabo esta acción!"
+
+#: cp/dashboard.php:43
+msgid "Specified language is not valid!"
+msgstr "¡El idioma especificado no es válido!"
+
+#: cp/dashboard.php:56 cp/dashboard.php:178
+msgid "Specified language does not exists in Polyglot!"
+msgstr "¡El idioma especificado no existe en Polyglot!"
+
+#: cp/dashboard.php:74
+msgid "You have not authorization to add languages!"
+msgstr "¡No tienes autorización para añadir idiomas!"
+
+#: cp/dashboard.php:87
+msgid "Please fill all fields in order to add a new language!"
+msgstr "¡Por favor completa todos los campos para poder agregar un idioma!"
+
+#: cp/dashboard.php:105
+#, php-format
+msgid "The language \"%s\" already exists!"
+msgstr "Ya existe el idioma \"%s\""
+
+#: cp/dashboard.php:127
+#, php-format
+msgid "The language \"%s\" could not be added: %s"
+msgstr "No puso agregarse el idioma \"%s\": %s"
+
+#: cp/dashboard.php:140
+#, php-format
+msgid "The language \"%s\" was added successfully!"
+msgstr "¡El idioma \"%s\" se agregó correctamente!"
+
+#: cp/dashboard.php:172
+msgid "There are not languages registered in Polyglot!"
+msgstr "¡Todavía no hay idiomas registrados en Polyglot!"
+
+#: cp/dashboard.php:187
+#, php-format
+msgid "Language \"%s\" was set as base language"
+msgstr "El idioma \"%s\" fue establecido como idioma base"
+
+#: cp/dashboard.php:221
+msgid "You must provide all fields to modify this language. Please try again."
+msgstr ""
+"Para modificar este idioma debes llenar todos los campos. Por favor "
+"inténtalo de nuevo."
+
+#: cp/dashboard.php:235
+msgid "Another language with same code already exists!"
+msgstr "¡Ya existe otro idioma con el mismo código!"
+
+#: cp/dashboard.php:258 cp/dashboard.php:261
+msgid "Language updated successfully!"
+msgstr "¡Idioma actualizado correctamente!"
+
+#: cp/dashboard.php:283 cp/dashboard.php:294
+msgid "Language table could not be deleted:"
+msgstr "La tabla del idioma no pudo ser eliminada:"
+
+#: cp/dashboard.php:309 cp/dashboard.php:312
+#, php-format
+msgid "Language %s deleted successfully!"
+msgstr "¡El idioma %s se eliminó correctamente!"
+
+#: cp/dashboard.php:336
+#, php-format
+msgid "Status for language %s was changed to %s"
+msgstr "¡El estado para el idioma %s se cambió a %s"
+
+#: events/helium.php:62
+msgid "Base"
+msgstr "Base"
+
+#: events/helium.php:72
+msgid "Select Language"
+msgstr "Seleccionar Idioma"
+
+#: events/rmcommon.php:106 events/rmcommon.php:175
+#: templates/polyglot-tabs.php:5
+msgid "Languages"
+msgstr "Idiomas"
+
+#: events/rmcommon.php:198
+msgid ""
+"Service provider to add multilingual support to Common Utilities and modules"
+msgstr ""
+"Proveedor de servicio para agregar soporte multi-idioma a Common Utilities y "
+"sus módulos"
+
+#: help/help-header.php:6
+msgid "Polyglot Help"
+msgstr "Ayuda de Polyglot"
+
+#: js/polyglot-lang.php:47
+#, php-format
+msgid "You must complete the field %s before to continue!"
+msgstr "¡Debes llenar el campo %s antes de continuar!"
+
+#: js/polyglot-lang.php:48
+#, php-format
+msgid "Language %s already exists!"
+msgstr "¡Ya existe el idioma %s!"
+
+#: js/polyglot-lang.php:49
+msgid "No language data detected!"
+msgstr "¡No se detectaron datos de idioma!"
+
+#: js/polyglot-lang.php:50
+msgid "Edition Language:"
+msgstr "Idioma de Edición:"
+
+#: js/polyglot-lang.php:51
+#, php-format
+msgid ""
+"You are editing in a differnet language. Changes will be saved using the "
+"current one (%s), but if you need to edit in base language please click on "
+"the right button before to make any change."
+msgstr ""
+"Estás editando el contenido en un idioma diferente a tu idioma base. Los "
+"cambios serán guardados únicamente en el idioma actual (%s), pero si lo que "
+"necesitas es editar en el idioma original por favor selecciona el idioma "
+"correcto como idioma de edición."
+
+#: js/polyglot-lang.php:52
+msgid ""
+"Do you really want to set this language as \"Base Language\"? Note that this "
+"action can not be undone after."
+msgstr ""
+"¿Realmente deseas establecer este idioma como \"Idioma Base\"? Toma en "
+"cuenta que esto no se puede cambiar posteriormente."
+
+#: js/polyglot-lang.php:53
+msgid "Save Changes"
+msgstr "Guardar Cambios"
+
+#: js/polyglot-lang.php:54
+msgid ""
+"Do you really wish to delete this language? \\n\\nNote that this action can "
+"not be undone and all translated strings from this language will be deleted "
+"too."
+msgstr ""
+"¿Realmente deseas eliminar este idioma?\\n\\nToma en cuenta que esta acción "
+"no puede deshacerse y que todas las cadenas traducidas, de este idioma, "
+"también serán eliminadas."
+
+#: js/polyglot-lang.php:55
+msgid "Do you really wish to change the status for this language?"
+msgstr "¿Realmente deseas cambiar el estado de este idioma?"
+
+#: polyglot.php:56
+msgid "Multilingual plugin for Common Utilities and XOOPS."
+msgstr "Plugin para soporte multi-idioma en Common Utilities y XOOPS."
+
+#: polyglot.php:99
+msgid "Common Utilities version must be at least 2.3"
+msgstr "La versión de Commón Utilities debe ser al menos la 2.3"
+
+#: polyglot.php:167
+msgid "Default language"
+msgstr "Idioma por defecto"
+
+#: polyglot.php:168
+msgid ""
+"Select the language that will be used when users browser language does not "
+"match with any language registered in Polyglot."
+msgstr ""
+"Selecciona el idioma que será usado cuando el idioma del navegador del "
+"usuario no coincida con ningún idioma registrado en Polyglot."
+
+#: templates/polyglot-adjusts.php:10 templates/polyglot-languages.php:42
+msgid "Language"
+msgstr "Idioma"
+
+#: templates/polyglot-adjusts.php:11 templates/polyglot-languages.php:11
+#: templates/polyglot-languages.php:53
+msgid "Code"
+msgstr "Código"
+
+#: templates/polyglot-adjusts.php:12
+msgid "charset"
+msgstr "charset"
+
+#: templates/polyglot-adjusts.php:13
+msgid "Direction"
+msgstr "Dirección"
+
+#: templates/polyglot-adjusts.php:21
+msgid "There are not languages registered yet!"
+msgstr "¡Todavía no hay idiomas registrados!"
+
+#: templates/polyglot-adjusts.php:47
+msgid "Right to left"
+msgstr "Derecha a izquierda"
+
+#: templates/polyglot-adjusts.php:59
+msgid "Save Adjustments"
+msgstr "Guardar Ajustes"
+
+#: templates/polyglot-dashboard.php:3
+msgid "Polyglot Configuration"
+msgstr "Configuración de Polyglot"
+
+#: templates/polyglot-dashboard.php:13
+msgid ""
+"Specify the base language for this site and it can not (and must not) be "
+"changed."
+msgstr "Especifica el idioma base para este sitio y no puede ser cambiado."
+
+#: templates/polyglot-languages.php:4 templates/polyglot-languages.php:52
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/polyglot-languages.php:18
+msgid "Country"
+msgstr "País"
+
+#: templates/polyglot-languages.php:25 templates/polyglot-languages.php:55
+msgid "File"
+msgstr "Archivo"
+
+#: templates/polyglot-languages.php:32 templates/polyglot-languages.php:56
+msgid "Directory"
+msgstr "Directorio"
+
+#: templates/polyglot-languages.php:54
+msgid "Country (flag)"
+msgstr "País (bandera)"
+
+#: templates/polyglot-languages.php:65
+msgid "Althought there are no languages to handle in Polyglot."
+msgstr "Todavía no hay idiomas para administrar con Polyglot."
+
+#: templates/polyglot-languages.php:101
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/polyglot-languages.php:103
+msgid "Enable"
+msgstr "Habilitar"
+
+#: templates/polyglot-languages.php:105
+msgid "Disable"
+msgstr "Deshabilitar"
+
+#: templates/polyglot-languages.php:107
+msgid "Delete"
+msgstr "Eliminar"
+
+#~ msgid "Multilanguage plugin for Common Utilities and XOOPS."
+#~ msgstr "Plugin multi-idioma para Common Utilities y XOOPS"

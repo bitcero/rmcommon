@@ -1,0 +1,95 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lightbox for Common Utilities\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-09 22:49-0600\n"
+"PO-Revision-Date: 2011-08-09 22:58-0600\n"
+"Last-Translator: Eduardo Cortés <i.bitcero@gmail.com>\n"
+"Language-Team: Red México <i.bitcero@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: MEXICO\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: E:\\webserver\\htdocs\\x25\\modules\\rmcommon\\plugins\\lightbox\n"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/lightbox-plugin.php:19
+msgid "LighBox Plugin"
+msgstr "Lightbox"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/lightbox-plugin.php:20
+msgid "This plugin allows to use jQuery LightBox in modules and other elements."
+msgstr "Este plugin permite utilizar jQuery Lightbox en los módulos y otros elementos."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:12
+msgid "Lightbox theme"
+msgstr "Tema Lightbox"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:13
+msgid "Select the appearance taht you wish for Lightbox plugin"
+msgstr "Selecciona la apariencia que deseas para el plugin"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:30
+msgid "Lightbox transition type"
+msgstr "Tipo de transición"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:36
+msgid "Elastic"
+msgstr "Elástica"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:37
+msgid "Fade"
+msgstr "Aparecer"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:38
+msgid "None"
+msgstr "Ninguna"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:44
+msgid "Transition speed"
+msgstr "Velocidad de la transición"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:45
+msgid "Sets the speed of the fade and elastic transitions, in milliseconds."
+msgstr "Establece la velocidad de la transición del plugin. Este valor se especifica en milisegundos."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:53
+msgid "Max width"
+msgstr "Ancho máximo"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:54
+msgid "Set a maximum width for loaded content. Example: \"100%\", 500, \"500px\". Leave 0 for no limit."
+msgstr "Establece un ancho máximo para el contenido que se carga. Ejemplo \"100%\", 500, \"500px\". Cero significa sin límite."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:62
+msgid "Max height"
+msgstr "Altura máxima."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:63
+msgid "Set a maximum height for loaded content. Example: \"100%\", 500, \"500px\". Leave 0 for no limit."
+msgstr "Establece un alto  máximo para el contenido que se carga. Ejemplo \"100%\", 500, \"500px\". Cero significa sin límite."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:71
+msgid "Scale images"
+msgstr "Redimensionar imágenes"
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:72
+msgid "If \"yes\" and if Max width or Max height have been defined, ColorBox will scale photos to fit within the those values."
+msgstr "Si se ha definido un ancho o alto máximo y esta opción se establece en \"Sí\", ColorBox redimensionará las imágenes para encajar en esos tamaños."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:80
+msgid "Addtitional settings"
+msgstr "Configuraciones adicionales."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:81
+#, php-format
+msgid "Use this field to add extra configurations to lightbox. You can view all available options %s."
+msgstr "Usa este campo para agregar configuraciones extras a colorbox. Puedes ver todas las opciones disponibles en %s."
+
+#: E:\webserver\htdocs\x25\modules\rmcommon\plugins\lightbox/include/options.php:81
+msgid "here"
+msgstr ""
+
