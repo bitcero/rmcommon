@@ -49,6 +49,12 @@ class Common
     public $isAjax = false;
 
     /**
+     * Determines if current theme is a native theme (xThemes)
+     * or a standard xoops theme
+     * @var bool
+     */
+    public $nativeTheme = false;
+    /**
      * Common Utilities settings
      * @var
      */

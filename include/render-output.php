@@ -88,7 +88,25 @@ function cu_render_output($output)
 
     }
 
-    unset($rtn, $ssContent);
+    // Inject code if this is a standard theme
+    // Natives themes must to include appropiate code
+    $pos = strpos($page, "</head>");
+    if ($pos !== FALSE){
+        $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
+        $ret = substr($page, 0, $pos) . "\n";
+        $ret .= $ssContent;
+        $page = $ret . substr($page, $pos);
+    }
+
+    $pos = strpos($page, "</body>");
+    if ($pos !== FALSE){
+        $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
+        $ret = substr($page, 0, $pos) . "\n";
+        $ret .= $ssContent;
+        $page = $ret . substr($page, $pos);
+    }
+
+    unset($rtn, $ssContent, $ret);
 
     $ret = $rmEvents->trigger('rmcommon.end.flush', $page);
 
