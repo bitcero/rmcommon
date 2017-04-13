@@ -35,7 +35,7 @@
  */
 function cu_render_output($output)
 {
-    global $xoTheme, $xoopsTpl;
+    global $xoTheme, $xoopsTpl, $common;
 
     $rmEvents = RMEvents::get();
 
@@ -74,36 +74,41 @@ function cu_render_output($output)
     if (!empty($find))
         $page = preg_replace($find, $repl, $page);
 
+    $headerRendered = false;
+    $footerRendered = false;
+
     if(FALSE !== $pos = strpos($page, '<!-- RMTemplateHeader -->')){
         // Replace RMTemplateHeader with scripts and styles
         $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
         $page = str_replace('<!-- RMTemplateHeader -->', $ssContent, $page);
-
+        $headerRendered = true;
     }
 
     if(FALSE !== $pos = strpos($page, '<!-- RMTemplateFooter -->')){
         // Replace RMTemplateHeader with scripts and styles
         $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
         $page = str_replace('<!-- RMTemplateFooter -->', $ssContent, $page);
-
+        $footerRendered = true;
     }
 
     // Inject code if this is a standard theme
     // Natives themes must to include appropiate code
-    $pos = strpos($page, "</head>");
-    if ($pos !== FALSE){
-        $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
-        $ret = substr($page, 0, $pos) . "\n";
-        $ret .= $ssContent;
-        $page = $ret . substr($page, $pos);
-    }
+    if(false == $common->nativeTheme){
+        $pos = strpos($page, "</head>");
+        if ($pos !== FALSE && false == $headerRendered){
+            $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
+            $ret = substr($page, 0, $pos) . "\n";
+            $ret .= $ssContent;
+            $page = $ret . substr($page, $pos);
+        }
 
-    $pos = strpos($page, "</body>");
-    if ($pos !== FALSE){
-        $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
-        $ret = substr($page, 0, $pos) . "\n";
-        $ret .= $ssContent;
-        $page = $ret . substr($page, $pos);
+        $pos = strpos($page, "</body>");
+        if ($pos !== FALSE && false == $footerRendered){
+            $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
+            $ret = substr($page, 0, $pos) . "\n";
+            $ret .= $ssContent;
+            $page = $ret . substr($page, $pos);
+        }
     }
 
     unset($rtn, $ssContent, $ret);
