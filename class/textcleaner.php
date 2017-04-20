@@ -264,9 +264,9 @@ class TextCleaner
             $string = $matches;
         }
 
-        $string2 = TextCleaner::decode_entities($string);
+        $string2 = TextCleaner::getInstance()->decode_entities($string);
         $string2 = preg_replace('/\s/', '', $string2);
-        $string2 = TextCleaner::no_null($string2);
+        $string2 = TextCleaner::getInstance()->no_null($string2);
         $string2 = strtolower($string2);
 
         $allowed = false;

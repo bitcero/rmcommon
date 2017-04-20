@@ -112,6 +112,10 @@ class RMForm extends \Common\Core\Helpers\Attributes
 
         }
 
+        if(false == $this->has('method')){
+            $this->set('method', 'post');
+        }
+
         if (!$this->has('action')) {
             $this->set('method', 'post');
         }

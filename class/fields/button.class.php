@@ -114,7 +114,11 @@ class RMFormButtonGroup extends RMFormElement
         }
 
 		$index = count($this->buttons);
-		$this->buttons[$index] = new RMFormButton($value,'', $type);
+		$this->buttons[$index] = new RMFormButton([
+		    'id' => $name,
+            'caption' => $value,
+            'type' => $type
+        ]);
 		if (trim($extra)!='') $this->buttons[$index]->setExtra($extra);
 		/**
 		 * Si este boton se marca como "principal" ($ok=true)
