@@ -47,6 +47,7 @@ use Common\Core\Helpers\Services;
 class Common
 {
     public $isAjax = false;
+    private $helps = [];
 
     /**
      * Determines if current theme is a native theme (xThemes)
@@ -309,7 +310,8 @@ class Common
     /**
      * @return \RMImageResizer
      */
-    public function resize(){
+    public function resize()
+    {
         $resizer = \RMImageResizer::getInstance();
         return $resizer;
     }
@@ -318,17 +320,20 @@ class Common
      * Comments handler
      * @return Comments
      */
-    public function comments(){
+    public function comments()
+    {
         $comments = Comments::getInstance();
         return $comments;
     }
 
-    public function plugins(){
+    public function plugins()
+    {
         return Plugins::getInstance();
     }
 
     // Widgets handler
-    public function widgets(){
+    public function widgets()
+    {
         $widgets = Widgets::getInstance();
         return $widgets;
     }
@@ -347,10 +352,22 @@ class Common
         return $instance;
     }
 
-    public function xoopsTpl(){
+    public function xoopsTpl()
+    {
         global $xoopsTpl;
 
         return $xoopsTpl;
+    }
+
+    public function help($directory)
+    {
+
+        if(false == array_key_exists($directory, $this->helps)){
+            $this->helps[$directory] = new Help($directory);
+        }
+
+        return $this->helps[$directory];
+
     }
 
 }

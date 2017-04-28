@@ -58,6 +58,8 @@ var cuHandler = {
                     animate: false,
                     color: response.color != undefined ? response.color : '',
                     closeButton: response.closeButton != undefined ? response.closeButton : true,
+                    helpButton: response.helpButton != undefined ? response.helpButton : false,
+                    helpUrl: response.helpUrl != undefined ? response.helpUrl: '#',
                     solid: response.solid != undefined ? true: false
                 });
 
@@ -228,6 +230,8 @@ var cuHandler = {
                 id: data.windowId != undefined ? data.windowId : '',
                 animate: false,
                 closeButton: data.closeButton != undefined ? data.closeButton : true,
+                helpButton: data.helpButton != undefined ? data.helpButton : false,
+                helpUrl: data.helpUrl != undefined ? data.helpUrl: '#',
                 color: data.color != undefined ? data.color : '',
                 solid: data.solid != undefined ? true : false,
             });

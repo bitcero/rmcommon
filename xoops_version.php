@@ -173,6 +173,16 @@ $cu_settings['config'][] = array(
     'category'      => 'components'
 );
 
+$cu_settings['config'][] = array(
+    'name'          => 'development',
+    'title'         => __( 'Enable development stage', 'rmcommon' ),
+    'description'   => __('Enable features for development stage, such as disable CSS and JS files caching and more.', 'rmcommon'),
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => 0,
+    'category'      => 'components'
+);
+
 // URL Rewriting
 $cu_settings['config'][] = array(
     'name'          => 'permalinks',

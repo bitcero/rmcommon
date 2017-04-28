@@ -595,7 +595,11 @@ class RMTemplate
         if ($file == '')
             return '';
 
-        $version = $version == '' ? str_replace(" ", "-", RMCVERSION) : $version;
+        if($cuSettings->development){
+            $version = date('dmyhis', time());
+        } else {
+            $version = $version == '' ? str_replace(" ", "-", RMCVERSION) : $version;
+        }
 
         if ($type == 'js' || $type == 'css') {
             // Possibles paths in order of importance
