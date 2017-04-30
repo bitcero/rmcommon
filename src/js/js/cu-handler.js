@@ -573,7 +573,6 @@ var cuHandler = {
             iconLoaded = $("<span />", {"class": 'cu-icon'});
         }
 
-
         // Load a SVG icon
         if (is_svg) {
             iconLoaded.html('').load(file);
