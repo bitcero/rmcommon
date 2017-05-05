@@ -141,6 +141,7 @@ function images_form($edit = 0){
     /*$upload = new RMFlashUploader('images', 'images.php');*/
     if (!$cat->isNew()) {
 
+        $showControls = true;
         $uploader = new Common\Core\Helpers\Uploader('images-uploader');
         $uploader->includeDropzone();
 

@@ -1458,26 +1458,38 @@ class RMTemplate
         return true;
     }
 
-    public function render_attributes($element)
+    public function render_attributes($element = '')
     {
-        if (!in_array($element, ['html', 'body'])) {
+        /*if (!in_array($element, ['html', 'body'])) {
             return false;
-        }
+        }*/
 
-        if (!array_key_exists($element, $this->attributes)) {
+        if ('' != $element && false == array_key_exists($element, $this->attributes)) {
             return null;
         }
 
-        $return = '';
-        foreach ($this->attributes[$element] as $id => $value) {
-            if (null == $value) {
-                $return .= $id . ' ';
-            } else {
-                $return .= $id . '="' . $value . '" ';
-            }
-        }
+        if('' == $element){
 
-        return trim($return);
+            $ret = [];
+
+            foreach ($this->attributes as $element => $values){
+                $ret[$element] = $this->render_attributes($element);
+            }
+
+            return $ret;
+
+        } else {
+            $return = '';
+            foreach ($this->attributes[$element] as $id => $value) {
+                if (null == $value) {
+                    $return .= $id . ' ';
+                } else {
+                    $return .= $id . '="' . $value . '" ';
+                }
+            }
+
+            return trim($return);
+        }
     }
 
     /*

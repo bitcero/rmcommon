@@ -118,6 +118,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
         $xoopsTpl->assign('themeScripts', $htmlScripts);
         $xoopsTpl->assign('themeStyles', $htmlStyles);
+        $xoopsTpl->assign('htmlAttributes', $tpl->render_attributes());
 
         RMEvents::get()->trigger('rmcommon.footer.start');
     }
