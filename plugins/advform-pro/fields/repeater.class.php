@@ -95,7 +95,7 @@ class AdvancedRepeaterField extends RMFormElement
             // Change name
             $field->set('name', 'x-repeat[repeat-num][' . $data->name . ']');
             // Change id
-            $field->set('id', 'x-repeat-' . $data->id . '-repeat-num');
+            $field->set('id', 'x-repeat-' . (isset($data->id) ? $data->id : $data->name) . '-repeat-num');
 
             // Countries
             if ($data->field == 'countries') {
@@ -141,7 +141,7 @@ class AdvancedRepeaterField extends RMFormElement
 
                 $field = $plugin->renderField($data);
                 $field->set('name', $this->get('name') . '[' . $id . '][' . $data->name . ']');
-                $field->set('id', $this->get('name') . '-' . $data->id . '-' . $id);
+                $field->set('id', $this->get('name') . '-' . (isset($data->id) ? $data->id : $data->name) . '-' . $id);
                 $repeat .= '<div data-repeater="field" class="repeater-field"' . ($this->get('layout') == 'horizontal' ? ' style="width:' . $data->fieldsize . '%"' : '') . '>' .
                     '<label>' . $field->get('caption') . '</label>' .
                     $field->render();
