@@ -162,7 +162,7 @@ var cuHandler = {
                     title: response.notify.title == undefined ? '' : response.notify.title,
                     type: response.notify.type == undefined ? 'alert-info' : response.notify.type,
                     icon: response.notify.icon == undefined ? 'svg-rmcommon-info-solid' : response.notify.icon,
-                    text: response.message
+                    text: undefined == response.notify.text ? response.message : response.notify.text
                 });
                 response.notify = undefined;
             } else if (showAlert) {
@@ -202,7 +202,7 @@ var cuHandler = {
                 title: data.notify.title == undefined ? null : data.notify.title,
                 type: data.notify.type == undefined ? 'alert-info' : data.notify.type,
                 icon: data.notify.icon == undefined ? 'svg-rmcommon-info-solid' : data.notify.icon,
-                text: data.message
+                text: undefined == data.notify.text ? data.message : data.notify.text
             })
         }
 

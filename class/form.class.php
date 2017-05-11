@@ -92,7 +92,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
      * @param string $action Post o Get (Default post)
      * @param bool $addtoken Crea el cdigo de seguridad de la sesin con el formulario (default true)
      */
-    function __construct($title, $name = '', $action = '', $method = 'post', $addtoken = true)
+    function __construct($title = '', $name = '', $action = '', $method = 'post', $addtoken = true)
     {
         global $xoopsSecurity, $xoops;
 
