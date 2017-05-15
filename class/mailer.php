@@ -411,7 +411,6 @@ class RMMailer
 
             $this->set_body($ret);
             return;
-
         }
 
         extract($this->vars);
