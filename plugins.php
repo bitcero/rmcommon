@@ -38,7 +38,6 @@ require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
 
 function rm_reload_plugins()
 {
-
     $path = RMCPATH . '/plugins';
     $dir_list = XoopsLists::getDirListAsArray($path);
 
