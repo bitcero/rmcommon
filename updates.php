@@ -27,7 +27,7 @@
  * @link         http://rmcommon.com
  */
 
-define('RMCLOCATION','updates');
+$common->location = 'updates';
 include_once '../../include/cp_header.php';
 
 $updfile = XOOPS_CACHE_PATH.'/updates.chk';

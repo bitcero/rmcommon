@@ -41,21 +41,18 @@
  * stringIdentifier: 'Language String';
  * </code>
  */
-
-if ( !defined('RMCLOCATION') ){
-    define('RMLOCATION', '');
-}
+global $common;
 
 ob_start();
 ?>
 
 var cuLanguage = {
 
-<?php if ( RMCLOCATION == 'groups' ): ?>
+<?php if ( $common->location == 'groups' ): ?>
 
     confirmDelete: '<?php _e('Do you really want to delete selected groups? Please note that this action can not be undo.', 'rmcommon' ); ?>',
 
-<?php elseif ( RMCLOCATION == 'blocks' ): ?>
+<?php elseif ( $common->location == 'blocks' ): ?>
 
     deleteBlockMessage: "<?php _e('Do you really want to delete this block?','rmcommon'); ?>",
     deleteBlock: "<?php _e('Delete Block','rmcommon'); ?>",
@@ -73,7 +70,7 @@ var cuLanguage = {
     confirmPositionDeletion: "<?php _e('Do you really want to delete selected positions?','rmcommon'); ?>",
     selectBefore: "<?php _e('You must select at least one position before you can do this action!','rmcommon'); ?>",
 
-<?php elseif ( RMCLOCATION == 'modules' ): ?>
+<?php elseif ( $common->location == 'modules' ): ?>
 
     visitWeb: "<?php _e('Visit web site', 'rmcommon'); ?>",
 

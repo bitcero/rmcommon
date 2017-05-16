@@ -8,7 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-define('RMCLOCATION','modules');
+$common->location = 'modules';
 include_once '../../include/cp_header.php';
 
 /**

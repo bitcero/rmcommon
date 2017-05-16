@@ -10,9 +10,9 @@
 
 // Constant to specify the internal location
 // Could be useful for themes, plugins and modules
-define('RMCLOCATION', 'groups');
 
 include '../../include/cp_header.php';
+$common->location = 'groups';
 
 /**
  * Shows existing groups

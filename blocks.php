@@ -8,7 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-define('RMCLOCATION','blocks');
+$common->location = 'blocks';
 include '../../include/cp_header.php';
 
 function createSQL()

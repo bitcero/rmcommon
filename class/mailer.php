@@ -55,7 +55,7 @@ class RMMailer
 	public function __construct($content_type = 'text/plain'){
 
         $config = RMSettings::cu_settings();
-        $config_handler =& xoops_gethandler('config');
+        $config_handler = xoops_gethandler('config');
         $xconfig = $config_handler->getConfigsByCat(XOOPS_CONF_MAILER);
 
 		// Instantiate the Swit Transport according to our preferences
@@ -348,11 +348,14 @@ class RMMailer
             }
 
         } else {
+
             $user = new RMUser($users);
 
             if (strtolower(get_class($users))=='xoopsuser'){
                 $this->xusers[] = $user;
                 $this->add_user($users->getVar('email'), $users->getVar('name')!='' ? $users->getVar('name') : $users->getVar('uname'), $field);
+            } else {
+                $this->add_user($user->email, $user->name !='' ? $user->name : $user->uname, $field);
             }
 
         }

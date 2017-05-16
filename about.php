@@ -8,7 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-define('RMCLOCATION','about');
+$common->location = 'about';
 include '../../include/cp_header.php';
 
 RMTemplate::getInstance()->add_style('about.min.css', 'rmcommon', ['id'=>'about-css']);

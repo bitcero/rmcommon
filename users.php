@@ -15,7 +15,7 @@
 
 // Constant to specify the internal location
 // Could be useful for themes, plugins and modules
-define('RMCLOCATION', 'users');
+$common->location = 'users';
 
 include '../../include/cp_header.php';
 

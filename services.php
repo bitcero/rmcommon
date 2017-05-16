@@ -27,7 +27,7 @@
  * @url          http://www.eduardocortes.mx
  */
 
-define('RMCLOCATION', 'services');
+$common->location = 'services';
 
 include_once '../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';

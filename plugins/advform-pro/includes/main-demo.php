@@ -27,7 +27,7 @@
  * @url          http://www.eduardocortes.mx
  */
 
-define('RMCLOCATION', 'advform-demo');
+$common->location = 'advform-demo';
 
 RMTemplate::get()->header();
 

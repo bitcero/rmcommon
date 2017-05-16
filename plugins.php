@@ -29,7 +29,7 @@
 
 $p = isset($_REQUEST['p']) ? $_REQUEST['p'] : '';
 if ($p == '') {
-    define('RMCLOCATION', 'plugins');
+    $common->location = 'plugins';
 } else {
     define('RMCLOCATION', $p . '-main');
 }

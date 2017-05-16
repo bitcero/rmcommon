@@ -8,7 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-define('RMCLOCATION','dashboard');
+$common->location = 'dashboard';
 include_once '../../include/cp_header.php';
 
 function get_modules_list(){

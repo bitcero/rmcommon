@@ -27,7 +27,7 @@
  * @url          http://www.eduardocortes.mx
  */
 
-define('RMCLOCATION', 'icons');
+$common->location = 'icons';
 require dirname(dirname(dirname(__FILE__))) . '/include/cp_header.php';
 
 // Add scripts
