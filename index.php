@@ -8,8 +8,8 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-$common->location = 'dashboard';
 include_once '../../include/cp_header.php';
+$common->location = 'dashboard';
 
 function get_modules_list(){
     

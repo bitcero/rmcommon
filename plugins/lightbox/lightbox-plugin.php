@@ -18,7 +18,7 @@ class LightBoxCUPlugin extends RMIPlugin
         $this->info = array(
             'name'          => __('Lightbox Plugin', 'lightbox'),
             'description'   => __('This plugin allows to use jQuery Colorbox in modules and other elements.','lightbox'),
-            'version'       => array('major' => 1, 'minor' => 12, 'stage' => 0, 'name' => 'Lightbox Plugin'),
+            'version'       => array('major' => 1, 'minor' => 12, 'revision' => 20, 'stage' => 0, 'name' => 'Lightbox Plugin'),
             'author'        => 'Eduardo Cortés',
             'email'         => 'i.bitcero@gmail.com',
             'web'           => 'http://eduardocortes.mx',

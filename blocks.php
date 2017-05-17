@@ -8,8 +8,8 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-$common->location = 'blocks';
 include '../../include/cp_header.php';
+$common->location = 'blocks';
 
 function createSQL()
 {

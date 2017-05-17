@@ -54,7 +54,7 @@ class PolyglotCUPlugin extends \RMIPlugin
         $this->info = array(
             'name' => __('Polyglot', 'lightbox'),
             'description' => __('Multilingual plugin for Common Utilities and XOOPS.', 'lightbox'),
-            'version' => array('major' => 0, 'minor' => 53, 'stage' => -3, 'name' => 'Polyglot'),
+            'version' => array('major' => 0, 'minor' => 53, 'revision' => 38, 'stage' => -3, 'name' => 'Polyglot'),
             'author' => 'Eduardo Cortés',
             'email' => 'i.bitcero@gmail.com',
             'web' => 'http://eduardocortes.mx',
@@ -66,7 +66,9 @@ class PolyglotCUPlugin extends \RMIPlugin
         $this->file = XOOPS_CACHE_PATH . '/polyglot-langs.json';
 
         // Load languages
-        $this->getLanguages();
+        if($this->isActive()){
+            $this->getLanguages();
+        }
 
         /**
          * Set relations between XOOPS languages and CU languages

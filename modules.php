@@ -8,8 +8,8 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-$common->location = 'modules';
 include_once '../../include/cp_header.php';
+$common->location = 'modules';
 
 /**
  * function to update compiled template file in templates_c folder

@@ -13,11 +13,8 @@
 * plugins can extend this file functionallity
 */
 
-// Constant to specify the internal location
-// Could be useful for themes, plugins and modules
-$common->location = 'users';
-
 include '../../include/cp_header.php';
+$common->location = 'users';
 
 /**
  * Get the formated SQL to query the database

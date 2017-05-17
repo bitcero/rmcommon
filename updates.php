@@ -27,8 +27,8 @@
  * @link         http://rmcommon.com
  */
 
-$common->location = 'updates';
 include_once '../../include/cp_header.php';
+$common->location = 'updates';
 
 $updfile = XOOPS_CACHE_PATH.'/updates.chk';
 $ftpConfig = new stdClass();
