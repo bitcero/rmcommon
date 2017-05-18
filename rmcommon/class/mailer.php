@@ -348,11 +348,14 @@ class RMMailer
             }
 
         } else {
+
             $user = new RMUser($users);
 
             if (strtolower(get_class($users))=='xoopsuser'){
                 $this->xusers[] = $user;
                 $this->add_user($users->getVar('email'), $users->getVar('name')!='' ? $users->getVar('name') : $users->getVar('uname'), $field);
+            } else {
+                $this->add_user($user->email, $user->name !='' ? $user->name : $user->uname, $field);
             }
 
         }
@@ -411,7 +414,6 @@ class RMMailer
 
             $this->set_body($ret);
             return;
-
         }
 
         extract($this->vars);

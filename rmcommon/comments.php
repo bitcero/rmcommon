@@ -9,7 +9,7 @@
 // --------------------------------------------------------------
 
 include_once '../../include/cp_header.php';
-define('RMCLOCATION','comments');
+$common->location = 'comments';
 
 function show_comments(){
     global $xoopsSecurity, $rmTpl;

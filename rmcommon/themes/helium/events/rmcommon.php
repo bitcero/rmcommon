@@ -68,5 +68,6 @@ class HeliumRmcommonPreload
     static function eventRmcommonPsr4loader($loader)
     {
         $loader->addNamespace('Helium', XOOPS_ROOT_PATH . '/modules/rmcommon/themes/helium/class');
+        return $loader;
     }
 }

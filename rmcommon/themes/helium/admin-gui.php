@@ -40,14 +40,16 @@ $system_menu = array(
 );
 
 // Current Module Menu
-$currentModule = array(
-    'name' => $xoopsModule->getVar('name'),
-    'directory' => $xoopsModule->getVar('dirname'),
-    'menu' => $xoFunc->moduleMenu($xoopsModule->getVar('dirname')),
-    'native' => $xoopsModule->getInfo('rmnative'),
-    'rewrite' => $xoopsModule->getInfo('rewrite')
-);
-$currentModule = (object)$currentModule;
+if($xoopsModule->getVar('dirname') != 'rmcommon'){
+    $currentModule = array(
+        'name' => $xoopsModule->getVar('name'),
+        'directory' => $xoopsModule->getVar('dirname'),
+        'menu' => $xoFunc->moduleMenu($xoopsModule->getVar('dirname')),
+        'native' => $xoopsModule->getInfo('rmnative'),
+        'rewrite' => $xoopsModule->getInfo('rewrite')
+    );
+    $currentModule = (object)$currentModule;
+}
 
 /**
  * Load modules and their menus

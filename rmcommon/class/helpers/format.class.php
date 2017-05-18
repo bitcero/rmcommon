@@ -274,4 +274,38 @@ class RMFormat
 
     }
 
+    /**
+     * Formats a given quantity to short it:
+     * Example:
+     * 1000 => 1K
+     * 150000 => 150K
+     * @param $number
+     * @return string
+     */
+    static function quantity($number){
+
+        $value = 0;
+        $suffix = '';
+
+        if($number < 1000){
+            $value = $number;
+            $suffix = '';
+        } elseif($number >= 1000 && $number < 1000000){
+            $value = number_format($number / 1000, 1);
+            $suffix = 'K';
+        } elseif( $number >= 1000000){
+            $value = number_format($number / 1000000, 1);
+            $suffix = 'M';
+        }
+
+        if($value > intval($value)){
+            $formatted = $value . $suffix;
+        } else {
+            $formatted = intval($value) . $suffix;
+        }
+
+        return $formatted;
+
+    }
+
 }

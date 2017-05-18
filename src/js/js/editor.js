@@ -15,13 +15,13 @@ var switchEditors = {
         try {
             this.I("quicktags").style.display = "none";
         } catch(e){};
-        tinyMCE.execCommand("mceAddControl", false, "content");
+        tinymce.execCommand("mceAddControl", false, "content");
         
 	},
 
 	saveCallback : function(el, content, body) {
 
-		if ( tinyMCE.activeEditor.isHidden() )
+		if ( tinymce.activeEditor.isHidden() )
 			content = this.I(el).value;
 		else
 			content = this.pre_esautop(content);
@@ -88,8 +88,9 @@ var switchEditors = {
 
 	go : function(id, mode) {
 		id = id || 'content';
+		id = id.replace('#', '');
 		mode = mode || this.mode || 'tinymce';
-		var ed = tinyMCE.get(id) || false;
+		var ed = tinymce.get(id) || false;
 		var qt = $('#ed-cont-'+id+' .quicktags');
 		var H = $('#ed-cont-'+id+' .edButtonHTML');
 		var P = $('#ed-cont-'+id+' .edButtonPreview');
@@ -112,9 +113,9 @@ var switchEditors = {
 			ta.val(this.esautop(ta.val()));
 
 			if ( ed ) ed.show();
-			else tinyMCE.execCommand("mceAddControl", false, id);
+			else tinymce.execCommand("mceAddControl", false, id);
 
-            tinyMCE.util.Cookie.set('editor', 'tinymce');
+            $.cookie('editor', 'tinymce');
 
 		} else {
 			if ( ! ed || ed.isHidden() )
@@ -131,7 +132,7 @@ var switchEditors = {
             //qt.css('width', ta.css('width'));
 
 			ta.css('color','');
-            tinyMCE.util.Cookie.set('editor', 'html');
+            $.cookie('editor', 'html');
 
 		}
 		return false;

@@ -89,9 +89,17 @@ class RMBreadCrumb
     * @return string
     */
     public function render(){
-        global $cuIcons;
+        global $cuIcons, $xoopsModule;
 
         RMTemplate::getInstance()->add_style('breadcrumb.css', 'rmcommon');
+
+        // Include module controller if exists
+        if($xoopsModule){
+            $controller = RMFunctions::loadModuleController($xoopsModule->getVar('dirname'));
+        } else {
+            $controller = false;
+        }
+
         ob_start();
 
         include RMTemplate::getInstance()->path('rmc-breadcrumb.php', 'module', 'rmcommon');

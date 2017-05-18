@@ -154,7 +154,7 @@ class RMPrivileges
 
         while ( $row = $xoopsDB->fetchArray( $result ) ){
 
-            $permissions->$row['key'] = 1;
+            $permissions->{$row['key']} = 1;
 
         }
 

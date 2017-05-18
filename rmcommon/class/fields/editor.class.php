@@ -30,6 +30,7 @@ class RMFormEditor extends RMFormElement
     private $_eles = array();
     /**
      * Variables utilizadas con el editor tiny
+     * Variables utilizadas con el editor tiny
      */
     private $_tinycss = '';
     /**
@@ -49,11 +50,11 @@ class RMFormEditor extends RMFormElement
      * @param string $width Ancho del campo. Puede ser el valor en formato pixels (300px) o en porcentaje (100%)
      * @param string $height Alto de campo. El valor debe ser pasado en formato pixels (300px).
      * @param string $default Texto incial al cargar el campo. POr defecto se muestra vaco.
-     * @param string $type Tipo de Editor. Posibles valores: tiny, html, xoops, simple, markdown
+     * @param string $type Tipo de Editor. Posibles valores: tiny, html, xoops, simple, markdown, quill
+     * @update Added quill editor as default option
      */
     function __construct($caption, $name = null, $width = '100%', $height = '300px', $default = '', $type = '', $change = 1, $ele = array('op'))
     {
-
         $rmc_config = RMSettings::cu_settings();
 
         $tcleaner = TextCleaner::getInstance();
@@ -135,12 +136,22 @@ class RMFormEditor extends RMFormElement
                 $ret .= $this->renderMarkdown();
                 break;
             case 'tiny':
-            default:
                 $ret .= $this->renderTiny();
+                break;
+            case 'quill':
+            default:
+                $ret .= $this->renderQuill();
+                echo $ret;
                 break;
         }
 
         return $ret;
+    }
+
+    public function renderQuill()
+    {
+        $quill = new \Common\API\Editors\Quill\Quill($this->get('id'));
+        return $quill->render();
     }
 
     public function renderTArea()
@@ -181,22 +192,28 @@ class RMFormEditor extends RMFormElement
      */
     private function renderTiny()
     {
-        global $rmc_config, $xoopsUser;
+        global $rmc_config, $xoopsUser, $common;
+
+        $common->template()->add_fontawesome();
 
         $this->renderAttributeString();
 
-        TinyEditor::getInstance()->add_config('elements', $this->get('id'), true);
-        RMTemplate::get()->add_style('editor-tiny.min.css', 'rmcommon');
-        RMTemplate::get()->add_script('editor.js', 'rmcommon');
-        RMTemplate::get()->add_script('quicktags.min.js', 'rmcommon');
-        RMTemplate::get()->add_script(RMCURL . '/api/editors/tinymce/tiny_mce.js');
-        RMTemplate::get()->add_inline_script(TinyEditor::getInstance()->get_js());
-        if('' != $this->get('id')){
+        if ('' != $this->get('id')){
+            TinyEditor::getInstance()->add_config('elements', '#' . $this->get('id'), true);
+        }
+        RMTemplate::getInstance()->add_style('editor-tiny.min.css', 'rmcommon');
+        RMTemplate::getInstance()->add_script('jquery.ck.js', 'rmcommon', ['footer' => 1, 'id' => 'cookie-js']);
+        RMTemplate::getInstance()->add_script('editor.js', 'rmcommon', ['footer' => 1]);
+        RMTemplate::getInstance()->add_script('quicktags.min.js', 'rmcommon');
+        RMTemplate::getInstance()->add_script(RMCURL . '/api/editors/tinymce/tinymce.min.js', '', ['footer' => 1, 'id' => 'tinymce-js']);
+        RMTemplate::getInstance()->add_script(RMCURL . '/api/editors/tinymce/jquery.tinymce.min.js', '', ['footer' => 1, 'id' => 'tinymce-jquery-js']);
+        RMTemplate::getInstance()->add_inline_script(TinyEditor::getInstance()->get_js(), 1);
+        if ('' != $this->get('id')) {
             RMTemplate::get()->add_inline_script('edToolbar("' . $this->get('id') . '");', 1);
         }
 
         $plugins = array();
-        $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'tiny', $this->get('id'));
+        $plugins = RMEvents::get()->trigger('rmcommon.editor.top.plugins', $plugins, 'tiny', $this->get('id'));
 
         $rtn = '
 		<div class="ed-container" id="ed-cont-' . $this->get('id') . '" style="width: 100%;">

@@ -31,8 +31,8 @@
                 <?php if(!empty($currentModule->menu)): ?>
                 <ul id="menu-<?php echo $currentModule->directory; ?>" class="current-module-menu">
                     <?php foreach ($currentModule->menu as $menu): ?>
-                        <li<?php echo $menu['location'] == RMCLOCATION ? ' class="active"' : ''; ?>>
-                            <a <?php echo isset($menu['attributes']) ? $xoFunc->render_attributes($menu['attributes']) : ''; ?> href="<?php echo $xoFunc->menuLink((object) $menu, $currentModule); ?>"<?php echo $menu['location'] == RMCLOCATION ? ' class="open"' : ''; ?> <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?> data-submenu="yes"<?php endif; ?>>
+                        <li<?php echo $menu['location'] == $common->location ? ' class="active"' : ''; ?>>
+                            <a <?php echo isset($menu['attributes']) ? $xoFunc->render_attributes($menu['attributes']) : ''; ?> href="<?php echo $xoFunc->menuLink((object) $menu, $currentModule); ?>"<?php echo $menu['location'] == $common->location ? ' class="open"' : ''; ?> <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?> data-submenu="yes"<?php endif; ?>>
                                 <?php echo $xoFunc->menuIcon($menu['icon'], $currentModule->directory); ?>
                                 <?php echo $menu['title']; ?>
                                 <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?>
@@ -40,7 +40,7 @@
                                 <?php endif; ?>
                             </a>
                             <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?>
-                                <ul class="submenu"<?php echo $menu['location'] == RMCLOCATION ? ' style="display: block;"' : ''; ?>>
+                                <ul class="submenu"<?php echo $menu['location'] == $common->location ? ' style="display: block;"' : ''; ?>>
                                     <?php foreach($menu['options'] as $submenu): ?>
                                         <?php if(array_key_exists('divider', $submenu)) continue; ?>
                                         <li>

@@ -32,8 +32,8 @@ license GPL/LGPL/MPL
         dir1: "down",
         dir2: "left",
         push: "bottom",
-        spacing1: 25,
-        spacing2: 25,
+        spacing1: 5,
+        spacing2: 5,
         context: $("body")
     };
     var posTimer, // Position all timer.
@@ -735,14 +735,15 @@ license GPL/LGPL/MPL
                 switch (s.dir1) {
                     case "down":
                     case "up":
-                        s.nextpos1 += e.height() + (typeof s.spacing1 === "undefined" ? 25 : s.spacing1);
+                        s.nextpos1 += e.height() + (typeof s.spacing1 === "undefined" ? 5 : s.spacing1);
                         break;
                     case "left":
                     case "right":
-                        s.nextpos1 += e.width() + (typeof s.spacing1 === "undefined" ? 25 : s.spacing1);
+                        s.nextpos1 += e.width() + (typeof s.spacing1 === "undefined" ? 5 : s.spacing1);
                         break;
                 }
             }
+
             return this;
         },
         // Queue the position all function so it doesn't run repeatedly and

@@ -8,8 +8,8 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-define('RMCLOCATION','dashboard');
 include_once '../../include/cp_header.php';
+$common->location = 'dashboard';
 
 function get_modules_list(){
     
@@ -315,7 +315,7 @@ function show_dashboard(){
 
     //RMTemplate::get()->add_style('dashboard.min.css', 'rmcommon');
     RMTemplate::getInstance()->add_style('pagenav.css', 'rmcommon');
-    RMTemplate::getInstance()->add_help(__('Dashboard Help','rmcommon'),'https://www.xoopsmexico.net/docs/bitcero/common-utilities/introduccion/');
+    //RMTemplate::getInstance()->add_help(__('Dashboard Help','rmcommon'),'https://www.xoopsmexico.net/docs/bitcero/common-utilities/introduccion/');
     include RMTemplate::get()->path('rmc-dashboard.php', 'module', 'rmcommon');
 
     xoops_cp_footer();

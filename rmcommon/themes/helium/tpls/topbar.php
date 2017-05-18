@@ -201,9 +201,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://www.xoopsmexico.net" target="_blank">
-                            <?php echo $cuIcons->getIcon('svg-rmcommon-xoopsmexico'); ?>
-                            XOOPSMexico.net
+                        <a href="http://www.eduardocortes.mx" target="_blank">
+                            <?php echo $cuIcons->getIcon('svg-rmcommon-bitcero'); ?>
+                            <?php _e('Author Website', 'rmcommon'); ?>
                         </a>
                     </li>
                     <li class="divider"></li>

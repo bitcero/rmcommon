@@ -620,14 +620,7 @@ function send_to_element( data ){
 
     } else {
 
-        if ( tinyMCEPopup.editor != null ){
-            ed = tinyMCEPopup.editor;
-            ed.execCommand("mceInsertContent", true, data);
-            tinyMCEPopup.close();
-        } else {
-            ed = tinyMCE.get( $("#idcontainer").val() );
-        }
-
+        window.parent.tinymce.activeEditor.selection.setContent(data);
 
     }
 

@@ -27,8 +27,8 @@
  * @link         http://rmcommon.com
  */
 
-define('RMCLOCATION','updates');
 include_once '../../include/cp_header.php';
+$common->location = 'updates';
 
 $updfile = XOOPS_CACHE_PATH.'/updates.chk';
 $ftpConfig = new stdClass();
@@ -63,7 +63,7 @@ function show_available_updates(){
     $rmTpl->add_head_script('var xoToken = "'.$xoopsSecurity->createToken().'";');
     $rmTpl->add_head_script('var langUpdated = "'.__('Item updated!','rmcommon').'";');
 
-    $rmTpl->add_help(__('Updates Help','rmcommon'), 'http://www.xoopsmexico.net/docs/common-utilities/actualizaciones-automaticas/standalone/1/');
+    //$rmTpl->add_help(__('Updates Help','rmcommon'), 'http://www.xoopsmexico.net/docs/common-utilities/actualizaciones-automaticas/standalone/1/');
 
     $ftpserver = parse_url(XOOPS_URL);
     $ftpserver = $ftpserver['host'];

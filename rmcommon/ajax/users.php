@@ -11,17 +11,9 @@
 include '../../../mainfile.php';
 //include_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';
 
-// Deactivate the logger
-error_reporting(0);
-$xoopsLogger->activated = false;
+$common->ajax()->prepare();
 
-// Check Security settings
-if (!$xoopsSecurity->check()){
-	_e('Sorry, you are not allowed to view this page','rmcommon');
-	die();
-}
-
-$token = $xoopsSecurity->createToken();
+$common->checkToken();
 
 $tpl = new RMTemplate();
 $db = XoopsDatabaseFactory::getDatabaseConnection();
@@ -112,4 +104,13 @@ $field_type = $type ? 'checkbox' : 'radio';
 
 $nav->render(false);
 
+ob_start();
 include RMTemplate::get()->get_template("rmc-form-users.php", 'module','rmcommon');
+$content = ob_get_clean();
+
+$common->ajax()->response(
+    __('Seleccionar usuario', 'sessions'), 0, 1, [
+        'content' => $content
+    ]
+);
+

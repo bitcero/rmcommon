@@ -14,7 +14,7 @@ xoops_load('gui', 'system');
 global $xoopsConfig, $rmc_config;
 //include_once XOOPS_ROOT_PATH.'/modules/rmcommon/admin_loader.php';
 
-if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
+if($xoopsModule && ($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable'])){
     /**
     * XOOPS CPanel "redmexico" GUI class
     * 

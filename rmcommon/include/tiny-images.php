@@ -61,7 +61,7 @@ if ($action=='') {
     RMTemplate::getInstance()->add_style('popup-images.min.css', 'rmcommon');
 
     if ($type=='tiny' && $target!='container') {
-        RMTemplate::getInstance()->add_script(RMCURL.'/api/editors/tinymce/tiny_mce_popup.js');
+
     } elseif ($target!='container'&&$type!='external'&&$type!='markdown') {
         RMTemplate::getInstance()->add_inline_script('var exmPopup = window.parent.exmCode'.ucfirst($container).';');
     }

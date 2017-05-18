@@ -103,7 +103,6 @@
         },
 
         render: function(params){
-
             params.CUTOKEN_REQUEST = $("#cu-token").val();
             cuHandler.showLoader();
 

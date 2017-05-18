@@ -19,19 +19,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * -------------------------------------------------------------
- * @copyright    Eduardo Cortés (http://www.redmexico.com.mx)
+ * @copyright    Eduardo Cortés (http://www.eduardocortes.mx)
  * @license      GNU GPL 2
  * @package      rmcommon
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
- * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
 
-define('RMCLOCATION', 'services');
-
 include_once '../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
-
+$common->location = 'services';
 
 /**
  * Show all registered services

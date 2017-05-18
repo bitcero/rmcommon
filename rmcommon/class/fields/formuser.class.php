@@ -25,7 +25,7 @@ class RMFormUser extends RMFormElement
 	* @param int Ancho de la ventana
 	* @param int Alto de la ventana
 	*/
-	public function __construct($caption, $name, $multi = false, $select=array(), $limit=20, $width=600,$height=300, $showall = 0, $enable=true){
+	public function __construct($caption = '', $name = '', $multi = false, $select=array(), $limit=20, $width=600,$height=300, $showall = 0, $enable=true){
 
         if(is_array($caption)){
             parent::__construct($caption);
@@ -124,9 +124,8 @@ class RMFormUser extends RMFormElement
 		
 		$rtn .= "</ul><br />";
 		if ($this->get('can_change')){
-			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit')."," . (int)$this->get('multi')
-                    . ",'" . XOOPS_URL . "');\">" . __('Users...', 'rmcommon') . "</button>";
-		    $rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
+			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit').",".intval($this->get('multi')).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
+		    /*$rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
 					    <div class="modal-dialog">
 					        <div class="modal-content">
 					            <div class="modal-header">
@@ -138,7 +137,7 @@ class RMFormUser extends RMFormElement
 					            </div>
 					        </div>
 					    </div>
-					</div>';
+					</div>';*/
 		}
 		$rtn .= '</div>';
 		return $rtn;

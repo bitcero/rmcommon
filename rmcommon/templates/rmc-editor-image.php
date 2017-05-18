@@ -157,6 +157,6 @@ $ev->run_event('rmcommon.imgwin.parameter');
 
 <!-- Options from other elements -->
 <?php RMEvents::get()->run_event('rmcommon.imgmgr.editor.containers', ''); ?>
-
+<!-- RMTemplateFooter -->
 </body>
 </html>

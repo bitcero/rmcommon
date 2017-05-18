@@ -21,7 +21,7 @@ $modversion['releasedate'] = "";
 $modversion['status'] = "Beta";
 $modversion['description'] = 'Contains a lot of classes and functions used by Red México Modules';
 $modversion['credits'] = "Red México, BitC3R0";
-$modversion['help'] = "https://www.xoopsmexico.net/docs/common-utilities/introduccion/";//"docs/readme.html";
+$modversion['help'] = "docs/readme.html";
 $modversion['license'] = "GPL 2";
 $modversion['official'] = 0;
 $modversion['image'] = "images/logo.png";
@@ -34,14 +34,14 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>41,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>62,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
 $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
-$modversion['updateurl'] = "https://www.xoopsmexico.net/modules/vcontrol/";
+//$modversion['updateurl'] = "https://www.xoopsmexico.net/modules/vcontrol/";
 $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
 // PERMISSIONS
@@ -173,6 +173,16 @@ $cu_settings['config'][] = array(
     'category'      => 'components'
 );
 
+$cu_settings['config'][] = array(
+    'name'          => 'development',
+    'title'         => __( 'Enable development stage', 'rmcommon' ),
+    'description'   => __('Enable features for development stage, such as disable CSS and JS files caching and more.', 'rmcommon'),
+    'formtype'      => 'yesno',
+    'valuetype'     => 'int',
+    'default'       => 0,
+    'category'      => 'components'
+);
+
 // URL Rewriting
 $cu_settings['config'][] = array(
     'name'          => 'permalinks',
@@ -235,9 +245,10 @@ $cu_settings['config'][] = array(
     'description'   => '',
     'formtype'      => 'select',
     'valuetype'     => 'text',
-    'default'       => 'tiny',
+    'default'       => 'quill',
     'options'       => array(
-        __('Visual Editor','rmcommon') =>'tiny',
+        __('Visual Editor Quill','rmcommon') =>'quill',
+        __('Visual Editor TinyMCE','rmcommon') =>'tiny',
         __('HTML Editor','rmcommon') => 'html',
         __('Simple Editor','rmcommon') => 'simple',
         __('Markdown Editor','rmcommon') => 'markdown'
