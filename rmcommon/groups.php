@@ -10,9 +10,9 @@
 
 // Constant to specify the internal location
 // Could be useful for themes, plugins and modules
-define('RMCLOCATION', 'groups');
 
 include '../../include/cp_header.php';
+$common->location = 'groups';
 
 /**
  * Shows existing groups
@@ -56,11 +56,9 @@ function show_groups_list(){
 }
 
 function show_group_form(){
-    global $xoopsDB, $xoopsSecurity;
+    global $xoopsDB, $common;
 
-    $ajax = new Rmcommon_Ajax();
-
-    $ajax->prepare_ajax_response();
+    $common->ajax()->prepare();
 
     $id = RMHttpRequest::get( 'id', 'integer', 0 );
 
@@ -68,9 +66,7 @@ function show_group_form(){
 
         $group = new Rmcommon_Group( $id );
         if ( $group->isNew() )
-            $ajax->ajax_response(
-                __('The specified group does not exists!', 'rmcommon'), 1, 1
-            );
+            $common->ajax()->notifyError(__('The specified group does not exists!', 'rmcommon'));
 
     } else{
         $group = new Rmcommon_Group();
@@ -95,10 +91,10 @@ function show_group_form(){
     }
 
     ob_start();
-    include RMTemplate::get()->get_template( 'rmc-groups-form.php', 'module', 'rmcommon' );
+    include RMTemplate::getInstance()::path( 'rmc-groups-form.php', 'module', 'rmcommon' );
     $content = ob_get_clean();
 
-    $ajax->ajax_response(
+    $common->ajax()->response(
         $group->isNew() ? __('Create new group', 'rmcommon') : sprintf(__('Edit group "%s"', 'rmcommon'), $group->getVar('name')),
         0, 1, array(
             'content' => $content,

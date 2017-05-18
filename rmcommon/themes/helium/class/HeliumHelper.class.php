@@ -46,7 +46,7 @@ class HeliumHelper
         }
 
         /**
-         * If links could be "rewrited" for rmcommon then we need to detect the
+         * If links could be "rewrited" by rmcommon then we need to detect the
          * module URL and form the right link.
          */
 

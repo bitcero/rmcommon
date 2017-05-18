@@ -148,7 +148,7 @@ class RMActiveForm
                     break;
                 case 'validation':
                     $class .= $value == 'local' ? ' validate-form' : '';
-                    RMTemplate::get()->add_script('jquery.validate.min.js', 'rmcommon', array('directory' => 'include', 'location' => 'footer'));
+                    RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', array('directory' => 'include', 'location' => 'footer', 'id' => 'validate-js'));
                     break;
                 case 'class':
                     $class .= ' ' . $value;

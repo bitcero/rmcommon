@@ -60,8 +60,9 @@ class RMFunctions
      */
     public static function create_toolbar()
     {
+        global $common;
 
-        if (RMCLOCATION == 'users') {
+        if ($common->location == 'users') {
 
             RMTemplate::getInstance()->add_tool(
                 __('Users', 'rmcommon'),
@@ -80,7 +81,7 @@ class RMFunctions
             );
 
 
-        } elseif (RMCLOCATION == 'groups') {
+        } elseif ($common->location == 'groups') {
 
             RMTemplate::getInstance()->add_tool(
                 __('Groups', 'rmcommon'),
@@ -138,7 +139,7 @@ class RMFunctions
                 )
             );
 
-        } elseif (RMCLOCATION == 'imgmanager') {
+        } elseif ($common->location == 'imgmanager') {
 
             RMTemplate::getInstance()->add_tool(
                 __('Categories', 'rmcommon'),

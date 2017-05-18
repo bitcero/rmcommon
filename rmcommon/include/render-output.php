@@ -35,7 +35,7 @@
  */
 function cu_render_output($output)
 {
-    global $xoTheme, $xoopsTpl;
+    global $xoTheme, $xoopsTpl, $common;
 
     $rmEvents = RMEvents::get();
 
@@ -49,9 +49,10 @@ function cu_render_output($output)
     }
 
     include_once RMTemplate::get()->path('rmc-header.php', 'module', 'rmcommon');
-    $rtn = $htmlStyles;
+    /*$rtn = $htmlStyles;
     $rtn .= $htmlScripts['header'];
-    $rtn .= $htmlScripts['inlineHeader'];
+    $rtn .= $htmlScripts['inlineHeader'];*/
+    $rtn = '';
 
     $find = [];
     $repl = [];
@@ -73,30 +74,46 @@ function cu_render_output($output)
     if (!empty($find))
         $page = preg_replace($find, $repl, $page);
 
-    $pos = strpos($page, "</body>");
-    if ($pos === FALSE) return $output;
+    $headerRendered = false;
+    $footerRendered = false;
 
-    $ret = substr($page, 0, $pos) . "\n";
-    $ret .= $htmlScripts['footer'] . "\n" . $htmlScripts['inlineFooter'] . "\n" . $htmlScripts['heads'] . "\n";
-    $ret .= substr($page, $pos);
-
-    $page = $ret;
-
-    $pos = strpos($page, "<!-- RMTemplateHeader -->");
-    if ($pos !== FALSE) {
-        $page = str_replace('<!-- RMTemplateHeader -->', $rtn, $page);
-        $page = $rmEvents->trigger('rmcommon.end.flush', $page);
-        return $page;
+    if(FALSE !== $pos = strpos($page, '<!-- RMTemplateHeader -->')){
+        // Replace RMTemplateHeader with scripts and styles
+        $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
+        $page = str_replace('<!-- RMTemplateHeader -->', $ssContent, $page);
+        $headerRendered = true;
     }
 
-    $pos = strpos($page, "</head>");
-    if ($pos === FALSE) return $output;
+    if(FALSE !== $pos = strpos($page, '<!-- RMTemplateFooter -->')){
+        // Replace RMTemplateHeader with scripts and styles
+        $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
+        $page = str_replace('<!-- RMTemplateFooter -->', $ssContent, $page);
+        $footerRendered = true;
+    }
 
-    $ret = substr($page, 0, $pos) . "\n";
-    $ret .= $rtn;
-    $ret .= substr($page, $pos);
+    // Inject code if this is a standard theme
+    // Natives themes must to include appropiate code
+    if(false == $common->nativeTheme){
+        $pos = strpos($page, "</head>");
+        if ($pos !== FALSE && false == $headerRendered){
+            $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
+            $ret = substr($page, 0, $pos) . "\n";
+            $ret .= $ssContent;
+            $page = $ret . substr($page, $pos);
+        }
 
-    $ret = $rmEvents->trigger('rmcommon.end.flush', $ret);
+        $pos = strpos($page, "</body>");
+        if ($pos !== FALSE && false == $footerRendered){
+            $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
+            $ret = substr($page, 0, $pos) . "\n";
+            $ret .= $ssContent;
+            $page = $ret . substr($page, $pos);
+        }
+    }
+
+    unset($rtn, $ssContent, $ret);
+
+    $ret = $rmEvents->trigger('rmcommon.end.flush', $page);
 
     return $ret;
 }

@@ -9,7 +9,7 @@
 //@prepros-prepend 'cu-spinner.js';
 //@prepros-prepend 'pnotify.custom.js';
 //@prepros-prepend 'jsrender.min.js';
-//@prepros-append 'rmtable.js';
+//prepros-append 'rmtable.js';
 
 var cuHandler = {
 
@@ -58,6 +58,8 @@ var cuHandler = {
                     animate: false,
                     color: response.color != undefined ? response.color : '',
                     closeButton: response.closeButton != undefined ? response.closeButton : true,
+                    helpButton: response.helpButton != undefined ? response.helpButton : false,
+                    helpUrl: response.helpUrl != undefined ? response.helpUrl: '#',
                     solid: response.solid != undefined ? true: false
                 });
 
@@ -160,7 +162,7 @@ var cuHandler = {
                     title: response.notify.title == undefined ? '' : response.notify.title,
                     type: response.notify.type == undefined ? 'alert-info' : response.notify.type,
                     icon: response.notify.icon == undefined ? 'svg-rmcommon-info-solid' : response.notify.icon,
-                    text: response.message
+                    text: undefined == response.notify.text ? response.message : response.notify.text
                 });
                 response.notify = undefined;
             } else if (showAlert) {
@@ -200,7 +202,7 @@ var cuHandler = {
                 title: data.notify.title == undefined ? null : data.notify.title,
                 type: data.notify.type == undefined ? 'alert-info' : data.notify.type,
                 icon: data.notify.icon == undefined ? 'svg-rmcommon-info-solid' : data.notify.icon,
-                text: data.message
+                text: undefined == data.notify.text ? data.message : data.notify.text
             })
         }
 
@@ -228,6 +230,8 @@ var cuHandler = {
                 id: data.windowId != undefined ? data.windowId : '',
                 animate: false,
                 closeButton: data.closeButton != undefined ? data.closeButton : true,
+                helpButton: data.helpButton != undefined ? data.helpButton : false,
+                helpUrl: data.helpUrl != undefined ? data.helpUrl: '#',
                 color: data.color != undefined ? data.color : '',
                 solid: data.solid != undefined ? true : false,
             });
@@ -457,7 +461,7 @@ var cuHandler = {
 
         var commands = $("*[data-activator='" + id_activator + "']");
 
-        var total = $("#" + id_activator + " :" + type + "[data-switch]:checked").length;
+        var total = $("#" + id_activator + " :" + type + ":checked").length;
 
         $(commands).each(function (index) {
 
@@ -569,7 +573,6 @@ var cuHandler = {
             iconLoaded = $("<span />", {"class": 'cu-icon'});
         }
 
-
         // Load a SVG icon
         if (is_svg) {
             iconLoaded.html('').load(file);
@@ -651,8 +654,14 @@ var cuHandler = {
 
         });
 
-    }
+    },
 
+    template: function(template, data){
+
+        var tpl = $.templates(template);
+        return tpl.render(data);
+
+    }
 
 };
 
@@ -749,7 +758,7 @@ $(document).ready(function () {
     /**
      * Select rows
      */
-    $("body").on('click', '.activator-container > tbody > tr', function (e) {
+    /*$("body").on('click', '.activator-container > tbody > tr', function (e) {
 
         if (e.target.tagName != 'DIV' && e.target.tagName != 'TD') {
             return;
@@ -776,7 +785,7 @@ $(document).ready(function () {
 
         event.stopPropagation();
 
-    });
+    });*/
 
     /**
      * Select all checkbox

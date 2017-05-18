@@ -54,35 +54,46 @@ class TinyEditor
 
     public function get_js(){
 
-        $rtn = 'function initMCE(elements){
+        ob_start(); ?>
 
-                    tinyMCE.init({';
-                        $configs = ''; $i = 0;
-                        foreach ($this->configuration as $name => $value){
-                            $i++;
-                            if( $name == 'elements' ){
-                                $configs .= $name . ': elements,' . "\n";
-                            } else {
-                                $configs .= $name.' : "'.$value.'"'.($i>count($this->configuration) ? '' : ',')."\n";
-                            }
-                        }
-                        $rtn .= $configs . '
-                        setup: function(ed){
-                            ed.onKeyUp.add(function(ed, e){
-                                if (tinyMCE.activeEditor.isDirty())
-                                    ed.save();
-                            });
-                        },
+        (function($){
+            this.initMCE = function(elements){
 
-                        oninit: function(ed){
-                            switchEditors.go(elements, "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
-                        }
+                var editor;
+
+                editor = $(elements).tinymce({
+                    <?php
+
+                    $elements = $this->configuration['elements'];
+                    unset($this->configuration['elements']);
+
+                    echo substr(json_encode($this->configuration), 1, -1) . ',';
+                    ?>
+                    setup: function(ed){
+                        ed.on('keyup', function(e){
+                            if ($(editor).isDirty())
+                                this.save();
+                        });
+                    },
+
+                    oninit: function(ed){
+                        switchEditors.go(elements, "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
+                    }
+                });
+
+                return editor;
+
+            };
+
+            <?php
+                if('' != $elements){ ?>
+                    $(document).ready(function(){
+                        initMCE("<?php echo $elements; ?>");
                     });
-                };';
+            <?php } ?>
+        })(jQuery);
 
-        if('' != $this->configuration['elements']){
-            $rtn .= 'initMCE("'.$this->configuration['elements'].'");';
-        }
+        <?php $rtn = ob_get_clean();
 
         return $rtn;
     }

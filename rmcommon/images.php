@@ -15,7 +15,7 @@
 
 include_once '../../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
-define('RMCLOCATION','imgmanager');
+$common->location = 'imgmanager';
 
 /**
 * Show all images existing in database
@@ -141,6 +141,7 @@ function images_form($edit = 0){
     /*$upload = new RMFlashUploader('images', 'images.php');*/
     if (!$cat->isNew()) {
 
+        $showControls = true;
         $uploader = new Common\Core\Helpers\Uploader('images-uploader');
         $uploader->includeDropzone();
 

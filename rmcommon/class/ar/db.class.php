@@ -94,7 +94,7 @@ class RMDb
      */
     public function getTableName(){
 
-        return str_replace( $this->database->prefix(), '', $this->table );
+        return str_replace( $this->database->prefix() . '_', '', $this->table );
 
     }
 
@@ -107,6 +107,8 @@ class RMDb
 
         if( $name == '' )
             throw new RMException( __('Table name could not be empty.','rmcommon' ) );
+
+        $name = str_replace($this->database->prefix() . '_', '', $name);
 
         $this->table = $this->database->prefix( $name );
         $this->_properties['from'][] = '`' . $this->table . '`';

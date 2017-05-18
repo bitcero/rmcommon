@@ -32,7 +32,7 @@ abstract class RMController
 
     public $parameters;
 
-    protected $model;
+    protected $model = [];
 
     protected $tpl;
 
@@ -44,26 +44,42 @@ abstract class RMController
 
     }
 
-    protected function model()
+    /**
+     * Loads a model defined by $model parameter.
+     * If $model is empty then model with current controler name will be loaded.
+     * If $model has been provided, then this model will be loaded, but this model
+     * will be searched inside "model" folder belonged to current module.
+     *
+     * If you with to load a third module model then use method load_model():
+     * @param string $model
+     * @return bool
+     */
+    protected function model($model = '')
     {
 
-        $class = ucfirst($this->parent->directory) . '_' . ucfirst($this->parent->controller) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
+        if('' == $model){
+            $model = $this->parent->controller;
+            $class = ucfirst($this->parent->directory) . '_' . ucfirst($this->parent->controller) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
+        } else {
+            $class = ucfirst($this->parent->directory) . '_' . ucfirst($model) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
+        }
 
-        if (is_a($this->model, $class))
-            return $this->model;
+        if (is_a($this->model[$model], $class))
+            return $this->model[$model];
 
-        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . (defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '') . '/models/' . strtolower($this->parent->controller) . '.php';
+        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . (defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '') . '/models/' . strtolower($model) . '.php';
 
-        if (!file_exists($file))
-            return false;
+        if (!file_exists($file)){
+            throw new RMException(sprintf(__('The model "%s" does not exists!', 'rmcommon'), $model));
+        }
 
         include_once $file;
 
-        $this->model = new $class();
-        $this->model->controller = $this;
-        $this->model->module = $this->module;
+        $this->model[$model] = new $class();
+        $this->model[$model]->controller = $this;
+        $this->model[$model]->module = $this->module;
 
-        return $this->model;
+        return $this->model[$model];
 
     }
 

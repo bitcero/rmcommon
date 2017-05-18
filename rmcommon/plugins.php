@@ -27,18 +27,19 @@
  * @url          http://www.eduardocortes.mx
  */
 
+include_once '../../include/cp_header.php';
+
 $p = isset($_REQUEST['p']) ? $_REQUEST['p'] : '';
 if ($p == '') {
-    define('RMCLOCATION', 'plugins');
+    $common->location = 'plugins';
 } else {
-    define('RMCLOCATION', $p . '-main');
+    $common->location = $p . '-main';
 }
-include_once '../../include/cp_header.php';
+
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
 
 function rm_reload_plugins()
 {
-
     $path = RMCPATH . '/plugins';
     $dir_list = XoopsLists::getDirListAsArray($path);
 

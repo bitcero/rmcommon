@@ -1,12 +1,30 @@
 <?php
-// $Id: template.php 1041 2012-09-09 06:23:26Z i.bitcero $
-// --------------------------------------------------------------
-// Red México Common Utilities
-// A framework for Red México Modules
-// Author: Eduardo Cortés <i.bitcero@gmail.com>
-// Email: i.bitcero@gmail.com
-// License: GPL 2.0
-// --------------------------------------------------------------
+/**
+ * Common Utilities Framework for XOOPS
+ *
+ * Copyright © 2015 Eduardo Cortés http://www.eduardocortes.mx
+ * -------------------------------------------------------------
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * -------------------------------------------------------------
+ * @copyright    Eduardo Cortés (http://www.redmexico.com.mx)
+ * @license      GNU GPL 2
+ * @package      rmcommon
+ * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
+ * @url          http://www.eduardocortes.mx
+ */
 
 include_once RMCPATH . '/include/tpl_functions.php';
 
@@ -577,7 +595,11 @@ class RMTemplate
         if ($file == '')
             return '';
 
-        $version = $version == '' ? str_replace(" ", "-", RMCVERSION) : $version;
+        if($cuSettings->development){
+            $version = date('dmyhis', time());
+        } else {
+            $version = $version == '' ? str_replace(" ", "-", RMCVERSION) : $version;
+        }
 
         if ($type == 'js' || $type == 'css') {
             // Possibles paths in order of importance
@@ -690,6 +712,17 @@ class RMTemplate
         $ret .= '</script>';
 
         return $ret;
+    }
+
+    /**
+     * Add rmcommon JS handler
+     */
+    public function addCuHandler(){
+        $this->tpl_scripts['rmcommon-js'] = [
+            'url' => RMUris::relative_url(RMCURL . '/js/cu-handler.js'),
+            'type' => 'text/javascript',
+            'footer' => 1
+        ];
     }
 
     /**
@@ -889,6 +922,11 @@ class RMTemplate
         if (array_key_exists('jquery', $this->tpl_scripts)) {
             $scripts['jquery'] = $this->tpl_scripts['jquery'];
             unset($this->tpl_scripts['jquery']);
+        }
+
+        if (array_key_exists('rmcommon-js', $this->tpl_scripts)) {
+            $scripts['rmcommon-js'] = $this->tpl_scripts['rmcommon-js'];
+            unset($this->tpl_scripts['rmcommon-js']);
         }
 
         foreach ($this->tpl_scripts as $id => $item) {
@@ -1286,6 +1324,17 @@ class RMTemplate
 
     public function get_toolbar()
     {
+        global $common, $xoopsModule;
+
+        /*
+         * Call preloaders in order to include new toolbar buttons
+         * Parameters:
+         *     Current toolbar controls
+         *     Current XOOPS module (verify if variable is defined
+         *     Is admin side or not
+         */
+        $this->toolbar = $common->events()->trigger('rmcommon.render.toolbar', $this->toolbar, $xoopsModule, XOOPS_CPFUNC_LOADED );
+
         return $this->toolbar;
     }
 
@@ -1409,26 +1458,38 @@ class RMTemplate
         return true;
     }
 
-    public function render_attributes($element)
+    public function render_attributes($element = '')
     {
-        if (!in_array($element, ['html', 'body'])) {
+        /*if (!in_array($element, ['html', 'body'])) {
             return false;
-        }
+        }*/
 
-        if (!array_key_exists($element, $this->attributes)) {
+        if ('' != $element && false == array_key_exists($element, $this->attributes)) {
             return null;
         }
 
-        $return = '';
-        foreach ($this->attributes[$element] as $id => $value) {
-            if (null == $value) {
-                $return .= $id . ' ';
-            } else {
-                $return .= $id . '="' . $value . '" ';
-            }
-        }
+        if('' == $element){
 
-        return trim($return);
+            $ret = [];
+
+            foreach ($this->attributes as $element => $values){
+                $ret[$element] = $this->render_attributes($element);
+            }
+
+            return $ret;
+
+        } else {
+            $return = '';
+            foreach ($this->attributes[$element] as $id => $value) {
+                if (null == $value) {
+                    $return .= $id . ' ';
+                } else {
+                    $return .= $id . '="' . $value . '" ';
+                }
+            }
+
+            return trim($return);
+        }
     }
 
     /*

@@ -416,7 +416,7 @@ class RMSettings
 
         $content .= "};\n";
 
-        RMTemplate::getInstance()->add_inline_script($content, 1);
+        RMTemplate::getInstance()->add_inline_script($content, 0);
 
     }
 

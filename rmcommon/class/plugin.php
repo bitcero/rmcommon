@@ -171,7 +171,7 @@ class RMPlugin extends RMObject
 
     public function on_activate($q)
     {
-        if (!$this->plugin->on_activate()) {
+        if (!$this->plugin->on_activate($q)) {
             $this->addError($this->plugin->errors());
             return false;
         }

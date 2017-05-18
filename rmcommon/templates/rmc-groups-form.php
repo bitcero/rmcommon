@@ -10,7 +10,7 @@ $form = new RMActiveForm(array(
     <?php $form->open(); ?>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-md-4">
 
             <div class="form-group">
                 <label for="group-name"><?php _e('Group Name','rmcommon') ; ?></label>
@@ -27,7 +27,7 @@ $form = new RMActiveForm(array(
             users can do according to the groups that they belongs.",'rmcommon'); ?></small>
 
         </div>
-        <div class="col-lg-8">
+        <div class="col-md-8">
 
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#admin" data-toggle="tab"><?php _e('Basic Permissions','rmcommon'); ?></a></li>
@@ -40,7 +40,7 @@ $form = new RMActiveForm(array(
 
                     <div class="row">
 
-                        <div class="col-lg-6">
+                        <div class="col-sm-6">
 
                             <h5><?php _e('Admin Rights','rmcommon'); ?></h5>
 
@@ -68,7 +68,7 @@ $form = new RMActiveForm(array(
 
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-sm-6">
 
                             <h5><?php _e('Access Rights','rmcommon'); ?></h5>
 

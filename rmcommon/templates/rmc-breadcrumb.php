@@ -13,11 +13,11 @@
                 </li>
             <?php endif; ?>
         <?php else: ?>
-            <li><a href="<?php echo XOOPS_URL; ?>" title="<?php _e('Home','rmcommon'); ?>"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a href="<?php echo XOOPS_URL; ?>" title="<?php _e('Home','rmcommon'); ?>"><span class="fa fa-home"></span></a></li>
             <?php if($xoopsModule && $xoopsModule->getInfo('hasMain')): ?>
                 <li>
                     <a href="<?php echo $controller == false ? XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname') . '/' : $controller->get_main_link(); ?>">
-                        <strong><?php echo $xoopsModule->name(); ?></strong>
+                        <?php echo $xoopsModule->name(); ?>
                     </a>
                 </li>
             <?php endif; ?>

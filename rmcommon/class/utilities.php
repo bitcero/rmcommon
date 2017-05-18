@@ -284,4 +284,18 @@ class RMUtilities
 
     }
 
+    /**
+     * Creates a new system message that will be shown on next page load
+     * @param $message
+     * @param int $level
+     * @param string $icon
+     */
+    public function showMessage($message, $level=0, $icon = '')
+    {
+        $i = isset($_SESSION['cu_redirect_messages']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
+        $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
+        $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
+        $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
+    }
+
 }

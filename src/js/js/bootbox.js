@@ -44,6 +44,8 @@
             "<div class='modal-footer'></div>",
         closeButton:
             "<button type='button' class='bootbox-close-button close' data-dismiss='modal' aria-hidden='true'>&times;</button>",
+        helpButton:
+            "<a href='%s' class='help-button' target='_blank'>?</a>",
         form:
             "<form class='bootbox-form'></form>",
         inputs: {
@@ -84,7 +86,10 @@
         // dialog container
         container: "body",
         // modal ID
-        id: ''
+        id: '',
+        // Help button
+        helpButton: false,
+        helpUrl: '#'
     };
 
     // our public object; augmented after our private API
@@ -636,6 +641,16 @@
 
         if (options.solid) {
             dialog.addClass('modal-solid');
+        }
+
+        if (options.helpButton) {
+            var helpButton = $(templates.helpButton.replace('%s', options.helpUrl));
+
+            if (options.title) {
+                dialog.find(".modal-header").prepend(helpButton);
+            } else {
+                helpButton.css("margin-top", "-10px").prependTo(body);
+            }
         }
 
         if (options.closeButton) {

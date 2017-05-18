@@ -2,7 +2,7 @@
 /**
  * Common Utilities Framework for Xoops
  *
- * Copyright © 2015 Eduardo Cortés http://www.redmexico.com.mx
+ * Copyright © 2015 Eduardo Cortés http://www.eduardocortes.mx
  * -------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,12 +23,11 @@
  * @license      GNU GPL 2
  * @package      rmcommon
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
- * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
 
-define('RMCLOCATION', 'icons');
 require dirname(dirname(dirname(__FILE__))) . '/include/cp_header.php';
+$common->location = 'icons';
 
 // Add scripts
 $common->template()->add_script('icons.min.js', 'rmcommon', ['footer' => 1, 'id' => 'icons-js']);

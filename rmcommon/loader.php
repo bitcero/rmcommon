@@ -77,6 +77,8 @@ $loader->register();
 
 // Basic namespaces from Common Utilities
 $loader->addNamespace('Common\Core', RMCPATH . '/class');
+$loader->addNamespace('Common\API', RMCPATH . '/api');
+$loader->addNamespace('Common\API\Editors', RMCPATH . '/api/editors');
 $loader->addNamespace('Common\Core\Helpers', RMCPATH . '/class/helpers');
 $loader->addNamespace("Common\\Admin\\Theme\\" . ucfirst($cuSettings->theme), RMCPATH . '/themes/' . $cuSettings->theme . '/class');
 //$loader->addNamespace('Common\Plugin', XOOPS_ROOT_PATH . '/modules/rmcommon/plugins');

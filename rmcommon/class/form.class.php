@@ -30,21 +30,15 @@ $rmEvents->run_event("rmcommon.form.loader");
  */
 $tiny = TinyEditor::getInstance();
 $tiny->configuration = array('mode' => 'exact',
-    'theme' => 'advanced',
-    'skin' => "exm_theme",
-    'inlinepopups_skin' => 'exm',
+    //'skin' => "exm_theme",
     //'plugins'=>"inlinepopups,spellchecker,media,fullscreen,exmsystem",
-    'plugins' => $rmEvents->run_event('rmcommon.tiny.plugins.editor', "exmsystem,autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template"),
-    'theme_advanced_buttons1' => RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar1', "bold,italic,strikethrough,|,bullist,numlist,blockquote,|,justifyleft,justifycenter,justifyright,|,link,unlink,|,image,fullscreen,|,exm_more,exm_adv"),
-    'theme_advanced_buttons2' => RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar2', "underline,justifyfull,forecolor,|,removeformat,|,media,charmap,|,outdent,indent,|,undo,redo,|,exm_page,exm_img,exm_icons"),
-    'theme_advanced_buttons3' => RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar3', "styleselect,formatselect,insertimage,|,tablecontrols"),
-    'theme_advanced_buttons4' => RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar4', ""),
-    'spellchecker_languages' => "+English=en,Danish=da,Dutch=nl,Finnish=fi,French=fr,German=de,Italian=it,Polish=pl,Portuguese=pt,Spanish=es,Swedish=sv",
-    'theme_advanced_toolbar_location' => "top",
-    'theme_advanced_toolbar_align' => "left",
-    'theme_advanced_statusbar_location' => "bottom",
-    'theme_advanced_resizing' => "1",
-    'theme_advanced_resize_horizontal' => "",
+    'menubar' => false,
+    'plugins' => [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'media table contextmenu paste code'
+    ],
+    'toolbar' => RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar1', "undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"),
     'dialog_type' => "modal",
     'relative_urls' => "",
     'remove_script_host' => "",
@@ -98,7 +92,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
      * @param string $action Post o Get (Default post)
      * @param bool $addtoken Crea el cdigo de seguridad de la sesin con el formulario (default true)
      */
-    function __construct($title, $name = '', $action = '', $method = 'post', $addtoken = true)
+    function __construct($title = '', $name = '', $action = '', $method = 'post', $addtoken = true)
     {
         global $xoopsSecurity, $xoops;
 
@@ -116,6 +110,10 @@ class RMForm extends \Common\Core\Helpers\Attributes
             $this->set('addtoken', $addtoken);
             $this->set('class', 'form-horizontal');
 
+        }
+
+        if(false == $this->has('method')){
+            $this->set('method', 'post');
         }
 
         if (!$this->has('action')) {
