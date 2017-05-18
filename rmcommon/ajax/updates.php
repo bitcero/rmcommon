@@ -31,7 +31,7 @@
  * This file allows to load updates information from the remote server
  */
 
-include dirname(dirname(dirname(dirname(__FILE__)))).'/mainfile.php';
+include dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 $xoopsLogger->activated = false;
 
 set_time_limit(0);
@@ -50,7 +50,7 @@ while($row = $xoopsDB->fetchArray($result)){
     $mod = new XoopsModule();
     $mod->assignVars($row);
     
-    $info = $mod->getInfo();
+    $info =& $mod->getInfo();
     
     if(!isset($info['rmversion'])) continue;
     if(!isset($info['updateurl'])) continue;

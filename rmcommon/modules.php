@@ -21,8 +21,8 @@ $common->location = 'modules';
 function modules_template_touch($tpl_id, $clear_old = true)
 {
 
-    $tplfile_handler = &xoops_gethandler('tplfile');
-    $tplfile =& $tplfile_handler->get($tpl_id);
+    $tplfile_handler = &xoops_getHandler('tplfile');
+    $tplfile = $tplfile_handler->get($tpl_id);
 
     if (is_object($tplfile)) {
         $file = $tplfile->getVar('tpl_file', 'n');
@@ -40,11 +40,11 @@ function modules_install_function($dirname)
 {
     global $xoopsUser, $xoopsConfig;
     $dirname = trim($dirname);
-    $db =& $GLOBALS["xoopsDB"];
+    $db = $GLOBALS["xoopsDB"];
     $reservedTables = array('avatar', 'avatar_users_link', 'block_module_link', 'xoopscomments', 'config', 'configcategory', 'configoption', 'image', 'imagebody', 'imagecategory', 'imgset', 'imgset_tplset_link', 'imgsetimg', 'groups','groups_users_link','group_permission', 'online', 'bannerclient', 'banner', 'bannerfinish', 'priv_msgs', 'ranks', 'session', 'smiles', 'users', 'newblocks', 'modules', 'tplfile', 'tplset', 'tplsource', 'xoopsnotifications', 'banner', 'bannerclient', 'bannerfinish');
-    $module_handler =& xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
     if ($module_handler->getCount(new Criteria('dirname', $dirname)) == 0) {
-        $module =& $module_handler->create();
+        $module = $module_handler->create();
         $module->loadInfoAsVar($dirname);
         $module->setVar('weight', 1);
         $module->setVar('isactive', 1);
@@ -160,12 +160,12 @@ function modules_install_function($dirname)
                 $newmid = $module->getVar('mid');
                 unset($created_tables);
                 $msgs[] = "<p>" . _AM_SYSTEM_MODULES_INSERT_DATA_DONE .  sprintf(_AM_SYSTEM_MODULES_MODULEID, "<strong>" . $newmid . "</strong>");
-                $tplfile_handler =& xoops_gethandler('tplfile');
+                $tplfile_handler = xoops_getHandler('tplfile');
                 $templates = $module->getInfo('templates');
                 if ($templates != false) {
                     $msgs[] = _AM_SYSTEM_MODULES_TEMPLATES_ADD;
                     foreach ($templates as $tpl) {
-                        $tplfile =& $tplfile_handler->create();
+                        $tplfile = $tplfile_handler->create();
                         $type = (isset($tpl['type']) ? $tpl['type'] : 'module');
                         $tpldata =& xoops_module_gettemplate($dirname, $tpl['file'], $type);
                         $tplfile->setVar('tpl_source', $tpldata, true);
@@ -211,7 +211,7 @@ function modules_install_function($dirname)
                         $newbid = $db->genId($db->prefix('newblocks') . '_bid_seq');
                         $edit_func = isset($block['edit_func']) ? trim($block['edit_func']) : '';
                         $template = '';
-                        if ((isset($block['template']) && trim($block['template']) != '')) {
+                        if (isset($block['template']) && trim($block['template']) != '') {
                             $content =& xoops_module_gettemplate($dirname, $block['template'], 'blocks');
                         }
                         if (empty($content)) {
@@ -220,7 +220,8 @@ function modules_install_function($dirname)
                             $template = trim($block['template']);
                         }
                         $block_name = addslashes(trim($block['name']));
-                        $sql = "INSERT INTO " . $db->prefix("newblocks") . " (bid, mid, func_num, options, name, title, content, side, weight, visible, block_type, c_type, isactive, dirname, func_file, show_func, edit_func, template, bcachetime, last_modified) VALUES ($newbid, $newmid, " . intval($blockkey) . ", '$options', '" . $block_name . "','" . $block_name . "', '', 0, 0, 0, 'M', 'H', 1, '" . addslashes($dirname) . "', '" . addslashes(trim($block['file'])) . "', '" . addslashes(trim($block['show_func'])) . "', '" . addslashes($edit_func) . "', '" . $template . "', 0, " . time() . ")";
+                        $sql = "INSERT INTO " . $db->prefix("newblocks") . " (bid, mid, func_num, options, name, title, content, side, weight, visible, block_type, c_type, isactive, dirname, func_file, show_func, edit_func, template, bcachetime, last_modified) VALUES ($newbid, $newmid, " . (int)$blockkey
+                               . ", '$options', '" . $block_name . "','" . $block_name . "', '', 0, 0, 0, 'M', 'H', 1, '" . addslashes($dirname) . "', '" . addslashes(trim($block['file'])) . "', '" . addslashes(trim($block['show_func'])) . "', '" . addslashes($edit_func) . "', '" . $template . "', 0, " . time() . ")";
                         if (!$db->query($sql)) {
                             $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(_AM_SYSTEM_MODULES_BLOCK_ADD_ERROR, "<strong>" . $block['name'] . "</strong>") . sprintf(_AM_SYSTEM_MODULES_BLOCK_ADD_ERROR_DATABASE, "<strong>" . $db->error() . "</strong>") . "</span>";
                         } else {
@@ -231,7 +232,7 @@ function modules_install_function($dirname)
                             $sql = 'INSERT INTO ' . $db->prefix('block_module_link') . ' (block_id, module_id) VALUES (' . $newbid . ', -1)';
                             $db->query($sql);
                             if ($template != '') {
-                                $tplfile =& $tplfile_handler->create();
+                                $tplfile = $tplfile_handler->create();
                                 $tplfile->setVar('tpl_refid', $newbid);
                                 $tplfile->setVar('tpl_source', $content, true);
                                 $tplfile->setVar('tpl_tplset', 'default');
@@ -314,10 +315,10 @@ function modules_install_function($dirname)
 
                 if ($configs != false) {
                     $msgs[] = _AM_SYSTEM_MODULES_MODULE_DATA_ADD;
-                    $config_handler =& xoops_gethandler('config');
+                    $config_handler = xoops_getHandler('config');
                     $order = 0;
                     foreach ($configs as $config) {
-                        $confobj =& $config_handler->createConfig();
+                        $confobj = $config_handler->createConfig();
                         $confobj->setVar('conf_modid', $newmid);
                         $confobj->setVar('conf_catid', 0);
                         $confobj->setVar('conf_name', $config['name']);
@@ -330,7 +331,7 @@ function modules_install_function($dirname)
                         $confop_msgs = '';
                         if (isset($config['options']) && is_array($config['options'])) {
                             foreach ($config['options'] as $key => $value) {
-                                $confop =& $config_handler->createConfigOption();
+                                $confop = $config_handler->createConfigOption();
                                 $confop->setVar('confop_name', $key, true);
                                 $confop->setVar('confop_value', $value, true);
                                 $confobj->setConfOptions($confop);
@@ -358,10 +359,10 @@ function modules_install_function($dirname)
             // retrieve all block ids for this module
             $blocks = XoopsBlock::getByModule($newmid, false);
             $msgs[] = _AM_SYSTEM_MODULES_GROUP_SETTINGS_ADD;
-            $gperm_handler =& xoops_gethandler('groupperm');
+            $gperm_handler = xoops_getHandler('groupperm');
             foreach ($groups as $mygroup) {
                 if ($gperm_handler->checkRight('module_admin', 0, $mygroup)) {
-                    $mperm =& $gperm_handler->create();
+                    $mperm = $gperm_handler->create();
                     $mperm->setVar('gperm_groupid', $mygroup);
                     $mperm->setVar('gperm_itemid', $newmid);
                     $mperm->setVar('gperm_name', 'module_admin');
@@ -373,7 +374,7 @@ function modules_install_function($dirname)
                     }
                     unset($mperm);
                 }
-                $mperm =& $gperm_handler->create();
+                $mperm = $gperm_handler->create();
                 $mperm->setVar('gperm_groupid', $mygroup);
                 $mperm->setVar('gperm_itemid', $newmid);
                 $mperm->setVar('gperm_name', 'module_read');
@@ -385,7 +386,7 @@ function modules_install_function($dirname)
                 }
                 unset($mperm);
                 foreach ($blocks as $blc) {
-                    $bperm =& $gperm_handler->create();
+                    $bperm = $gperm_handler->create();
                     $bperm->setVar('gperm_groupid', $mygroup);
                     $bperm->setVar('gperm_itemid', $blc);
                     $bperm->setVar('gperm_name', 'block_read');
@@ -424,7 +425,6 @@ function modules_install_function($dirname)
             if ($blocks != false) {
                 $msgs[] = '<div class="center"><a href="admin.php?fct=blocksadmin&op=list&filter=1&selgen=' . $newmid . '&selmod=-2&selgrp=-1&selvis=-1&filsave=1">' . _AM_SYSTEM_BLOCKS . '</a></div>';
             }
-            ;
             $msgs[] = '<div class="noininstall center"><a href="admin.php?fct=preferences&op=showmod&mod=' . $newmid . '">' . _AM_SYSTEM_PREF . '</a>';
             $msgs[] = '<a href="' . XOOPS_URL . '/modules/' . $module->getInfo('dirname', 'e') . '/' . $module->getInfo('adminindex') . '">' . _AM_SYSTEM_MODULES_ADMIN . '</a>';
 
@@ -610,7 +610,7 @@ function show_modules_list(){
     require_once XOOPS_ROOT_PATH . "/class/xoopslists.php";
     $dirlist = XoopsLists::getModulesList();
     $available_mods = array();
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
     foreach ($dirlist as $file) {
         clearstatcache();
         $file = trim($file);
@@ -664,14 +664,14 @@ function module_install(){
         die();
     }
     
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
 	
 	if ($module = $module_handler->getByDirname($dir)){
 		redirectMsg('modules.php', sprintf(__('%s is already installed!', 'rmcommon'), $module->name()), 1);
 		die();
 	}
     
-    $module =& $module_handler->create();
+    $module = $module_handler->create();
     if (!$module->loadInfo($dir, false)) {
         redirectMsg('modules.php',__('Sepecified module is not a valid Xoops Module!','rmcommon'), 1);
         die();
@@ -706,7 +706,7 @@ function module_install_now(){
 		die();
 	}
 	
-	$module_handler = xoops_gethandler('module');
+	$module_handler = xoops_getHandler('module');
 	
 	if ($module = $module_handler->getByDirname($mod)){
 		redirectMsg('modules.php', sprintf(__('%s is already installed!', 'rmcommon'), $module->name()), 1);
@@ -763,7 +763,7 @@ function module_uninstall_now(){
         die();
     }
     
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
     
     if (!$mod = $module_handler->getByDirname($dir)){
         redirectMsg('modules.php', sprintf(__('Module %s is not installed yet!', 'rmcommon'), $mod), 1);
@@ -826,8 +826,8 @@ function module_update($dirname){
     global $xoopsConfig, $xoopsDB;
 
     $dirname = trim($dirname);
-    $module_handler =& xoops_gethandler('module');
-    $module =& $module_handler->getByDirname($dirname);
+    $module_handler = xoops_getHandler('module');
+    $module = $module_handler->getByDirname($dirname);
     // Save current version for use in the update function
     $prev_version = $module->getVar('version');
     include_once XOOPS_ROOT_PATH.'/class/template.php';
@@ -846,7 +846,7 @@ function module_update($dirname){
         $newmid = $module->getVar('mid');
         $msgs = array();
         $msgs[] = sprintf(__('Updating module %s','rmcommon'), $module->getVar('name'));
-        $tplfile_handler =& xoops_gethandler('tplfile');
+        $tplfile_handler = xoops_getHandler('tplfile');
         $deltpl = $tplfile_handler->find('default', 'module', $module->getVar('mid'));
         $delng = array();
         if (is_array($deltpl)) {
@@ -865,7 +865,7 @@ function module_update($dirname){
                 $tpl['file'] = trim($tpl['file']);
                 if (!in_array($tpl['file'], $delng)) {
                     $tpldata =& xoops_module_gettemplate($dirname, $tpl['file']);
-                    $tplfile =& $tplfile_handler->create();
+                    $tplfile = $tplfile_handler->create();
                     $tplfile->setVar('tpl_refid', $newmid);
                     $tplfile->setVar('tpl_lastimported', 0);
                     $tplfile->setVar('tpl_lastmodified', time());
@@ -909,8 +909,8 @@ function module_update($dirname){
                     $showfuncs[] = $block['show_func'];
                     $funcfiles[] = $block['file'];
                     $template = '';
-                    if ((isset($block['template']) && trim($block['template']) != '')) {
-                        $content = xoops_module_gettemplate($dirname, $block['template'], 'blocks');
+                    if (isset($block['template']) && trim($block['template']) != '') {
+                        $content =& xoops_module_gettemplate($dirname, $block['template'], 'blocks');
                     }
 
                     if (!$content) {
@@ -936,7 +936,7 @@ function module_update($dirname){
                             if ($template != '') {
                                 $tplfile = $tplfile_handler->find('default', 'block', $fblock['bid']);
                                 if (count($tplfile) == 0) {
-                                    $tplfile_new =& $tplfile_handler->create();
+                                    $tplfile_new = $tplfile_handler->create();
                                     $tplfile_new->setVar('tpl_module', $dirname);
                                     $tplfile_new->setVar('tpl_refid', $fblock['bid']);
                                     $tplfile_new->setVar('tpl_tplset', 'default');
@@ -982,9 +982,9 @@ function module_update($dirname){
                             } else {
                                 $groups = array(XOOPS_GROUP_ADMIN);
                             }
-                            $gperm_handler =& xoops_gethandler('groupperm');
+                            $gperm_handler = xoops_getHandler('groupperm');
                             foreach ($groups as $mygroup) {
-                                $bperm =& $gperm_handler->create();
+                                $bperm = $gperm_handler->create();
                                 $bperm->setVar('gperm_groupid', $mygroup);
                                 $bperm->setVar('gperm_itemid', $newbid);
                                 $bperm->setVar('gperm_name', 'block_read');
@@ -997,7 +997,7 @@ function module_update($dirname){
                             }
 
                             if ($template != '') {
-                                $tplfile =& $tplfile_handler->create();
+                                $tplfile = $tplfile_handler->create();
                                 $tplfile->setVar('tpl_module', $dirname);
                                 $tplfile->setVar('tpl_refid', $newbid);
                                 $tplfile->setVar('tpl_source', $content, true);
@@ -1058,7 +1058,7 @@ function module_update($dirname){
         $xoopsTpl->setCompileId();
 
         // first delete all config entries
-        $config_handler =& xoops_gethandler('config');
+        $config_handler = xoops_getHandler('config');
         $configs = $config_handler->getConfigs(new Criteria('conf_modid', $module->getVar('mid')));
         $confcount = count($configs);
         $config_delng = array();
@@ -1083,14 +1083,14 @@ function module_update($dirname){
         // Include 
         if ($configs != false) {
             if ($module->getVar('hascomments') != 0) {
-                include_once(XOOPS_ROOT_PATH.'/include/comment_constants.php');
+                include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
                 array_push($configs, array('name' => 'com_rule', 'title' => '_CM_COMRULES', 'description' => '', 'formtype' => 'select', 'valuetype' => 'int', 'default' => 1, 'options' => array('_CM_COMNOCOM' => XOOPS_COMMENT_APPROVENONE, '_CM_COMAPPROVEALL' => XOOPS_COMMENT_APPROVEALL, '_CM_COMAPPROVEUSER' => XOOPS_COMMENT_APPROVEUSER, '_CM_COMAPPROVEADMIN' => XOOPS_COMMENT_APPROVEADMIN)));
                 array_push($configs, array('name' => 'com_anonpost', 'title' => '_CM_COMANONPOST', 'description' => '', 'formtype' => 'yesno', 'valuetype' => 'int', 'default' => 0));
             }
         } else {
             if ($module->getVar('hascomments') != 0) {
                 $configs = array();
-                include_once(XOOPS_ROOT_PATH.'/include/comment_constants.php');
+                include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
                 $configs[] = array('name' => 'com_rule', 'title' => '_CM_COMRULES', 'description' => '', 'formtype' => 'select', 'valuetype' => 'int', 'default' => 1, 'options' => array('_CM_COMNOCOM' => XOOPS_COMMENT_APPROVENONE, '_CM_COMAPPROVEALL' => XOOPS_COMMENT_APPROVEALL, '_CM_COMAPPROVEUSER' => XOOPS_COMMENT_APPROVEUSER, '_CM_COMAPPROVEADMIN' => XOOPS_COMMENT_APPROVEADMIN));
                 $configs[] = array('name' => 'com_anonpost', 'title' => '_CM_COMANONPOST', 'description' => '', 'formtype' => 'yesno', 'valuetype' => 'int', 'default' => 0);
             }
@@ -1133,12 +1133,12 @@ function module_update($dirname){
 
         if ($configs != false) {
             $msgs[] = 'Adding module config data...';
-            $config_handler =& xoops_gethandler('config');
+            $config_handler = xoops_getHandler('config');
             $order = 0;
             foreach ($configs as $config) {
                 // only insert ones that have been deleted previously with success
                 if (!in_array($config['name'], $config_delng)) {
-                    $confobj =& $config_handler->createConfig();
+                    $confobj = $config_handler->createConfig();
                     $confobj->setVar('conf_modid', $newmid);
                     $confobj->setVar('conf_catid', 0);
                     $confobj->setVar('conf_name', $config['name']);
@@ -1159,7 +1159,7 @@ function module_update($dirname){
                     $confop_msgs = '';
                     if (isset($config['options']) && is_array($config['options'])) {
                         foreach ($config['options'] as $key => $value) {
-                            $confop =& $config_handler->createConfigOption();
+                            $confop = $config_handler->createConfigOption();
                             $confop->setVar('confop_name', $key, true);
                             $confop->setVar('confop_value', $value, true);
                             $confobj->setConfOptions($confop);
@@ -1220,7 +1220,7 @@ function module_update_now(){
         die();
     }
     
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
     $module = $module_handler->getByDirname($mod);
     
     if (!$module){
@@ -1281,7 +1281,7 @@ function module_disable_now($enable=0){
         die();
     }
     
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
     
     if (!$module = $module_handler->getByDirname($mod)){
         redirectMsg('modules.php', sprintf(__('Module %s is not installed yet!', 'rmcommon'), $mod), 1);
@@ -1327,12 +1327,12 @@ function load_modules_page(){
     require_once XOOPS_ROOT_PATH . "/class/xoopslists.php";
     $dirlist = XoopsLists::getModulesList();
     $available_mods = array();
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
     foreach ($dirlist as $file) {
         clearstatcache();
         $file = trim($file);
         if (!in_array($file, $installed_dirs)) {
-            $module =& $module_handler->create();
+            $module = $module_handler->create();
             if (!$module->loadInfo($file, false)) {
                 continue;
             }

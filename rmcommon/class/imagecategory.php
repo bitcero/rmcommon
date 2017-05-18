@@ -54,7 +54,7 @@ class RMImageCategory extends RMObject
     */
     public function user_allowed_toupload(XoopsUser $user){
     	
-        $groups = $user->getGroups();
+        $groups =& $user->getGroups();
         $allowed = $this->getVar('groups');
         
         foreach ($groups as $id){

@@ -19,7 +19,7 @@ class RMFormCacheModuleField extends RMFormElement
 	}
 	
 	public function render(){
-		$module_handler =& xoops_gethandler('application');
+		$module_handler = xoops_getHandler('application');
 		$modules =& $module_handler->getObjects(new Criteria('hasmain', 1), true);
 		$options = array('0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK);
 		

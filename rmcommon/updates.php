@@ -276,7 +276,7 @@ function download_file(){
 
     }
 
-    file_put_contents(XOOPS_CACHE_PATH.'/updates.chk', base64_encode(serialize(array('date'=>$updates['date'],'total'=>intval($updates['total'])-1,'updates'=>$new))));
+    file_put_contents(XOOPS_CACHE_PATH.'/updates.chk', base64_encode(serialize(array('date' =>$updates['date'], 'total' => (int)$updates['total'] - 1, 'updates' =>$new))));
 
     if(!empty($runFiles))
         jsonReturn(__('Executing files...','rmcommon'), 0, array('run'=>json_encode($runFiles)));
@@ -489,8 +489,8 @@ function module_update($dirname){
     global $xoopsConfig, $xoopsDB;
 
     $dirname = trim($dirname);
-    $module_handler =& xoops_gethandler('module');
-    $module =& $module_handler->getByDirname($dirname);
+    $module_handler = xoops_getHandler('module');
+    $module = $module_handler->getByDirname($dirname);
     // Save current version for use in the update function
     $prev_version = $module->getVar('version');
     include_once XOOPS_ROOT_PATH.'/class/template.php';
@@ -509,7 +509,7 @@ function module_update($dirname){
         $newmid = $module->getVar('mid');
         $msgs = array();
         $msgs[] = sprintf(__('Updating module %s','rmcommon'), $module->getVar('name'));
-        $tplfile_handler =& xoops_gethandler('tplfile');
+        $tplfile_handler = xoops_getHandler('tplfile');
         $deltpl = $tplfile_handler->find('default', 'module', $module->getVar('mid'));
         $delng = array();
         if (is_array($deltpl)) {
@@ -528,7 +528,7 @@ function module_update($dirname){
                 $tpl['file'] = trim($tpl['file']);
                 if (!in_array($tpl['file'], $delng)) {
                     $tpldata =& xoops_module_gettemplate($dirname, $tpl['file']);
-                    $tplfile =& $tplfile_handler->create();
+                    $tplfile = $tplfile_handler->create();
                     $tplfile->setVar('tpl_refid', $newmid);
                     $tplfile->setVar('tpl_lastimported', 0);
                     $tplfile->setVar('tpl_lastmodified', time());
@@ -572,8 +572,8 @@ function module_update($dirname){
                     $showfuncs[] = $block['show_func'];
                     $funcfiles[] = $block['file'];
                     $template = '';
-                    if ((isset($block['template']) && trim($block['template']) != '')) {
-                        $content = xoops_module_gettemplate($dirname, $block['template'], 'blocks');
+                    if (isset($block['template']) && trim($block['template']) != '') {
+                        $content =& xoops_module_gettemplate($dirname, $block['template'], 'blocks');
                     }
 
                     if (!$content) {
@@ -599,7 +599,7 @@ function module_update($dirname){
                             if ($template != '') {
                                 $tplfile = $tplfile_handler->find('default', 'block', $fblock['bid']);
                                 if (count($tplfile) == 0) {
-                                    $tplfile_new =& $tplfile_handler->create();
+                                    $tplfile_new = $tplfile_handler->create();
                                     $tplfile_new->setVar('tpl_module', $dirname);
                                     $tplfile_new->setVar('tpl_refid', $fblock['bid']);
                                     $tplfile_new->setVar('tpl_tplset', 'default');
@@ -645,9 +645,9 @@ function module_update($dirname){
                             } else {
                                 $groups = array(XOOPS_GROUP_ADMIN);
                             }
-                            $gperm_handler =& xoops_gethandler('groupperm');
+                            $gperm_handler = xoops_getHandler('groupperm');
                             foreach ($groups as $mygroup) {
-                                $bperm =& $gperm_handler->create();
+                                $bperm = $gperm_handler->create();
                                 $bperm->setVar('gperm_groupid', $mygroup);
                                 $bperm->setVar('gperm_itemid', $newbid);
                                 $bperm->setVar('gperm_name', 'block_read');
@@ -660,7 +660,7 @@ function module_update($dirname){
                             }
 
                             if ($template != '') {
-                                $tplfile =& $tplfile_handler->create();
+                                $tplfile = $tplfile_handler->create();
                                 $tplfile->setVar('tpl_module', $dirname);
                                 $tplfile->setVar('tpl_refid', $newbid);
                                 $tplfile->setVar('tpl_source', $content, true);
@@ -721,7 +721,7 @@ function module_update($dirname){
         $xoopsTpl->setCompileId();
 
         // first delete all config entries
-        $config_handler =& xoops_gethandler('config');
+        $config_handler = xoops_getHandler('config');
         $configs = $config_handler->getConfigs(new Criteria('conf_modid', $module->getVar('mid')));
         $confcount = count($configs);
         $config_delng = array();
@@ -746,14 +746,14 @@ function module_update($dirname){
         // Include
         if ($configs != false) {
             if ($module->getVar('hascomments') != 0) {
-                include_once(XOOPS_ROOT_PATH.'/include/comment_constants.php');
+                include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
                 array_push($configs, array('name' => 'com_rule', 'title' => '_CM_COMRULES', 'description' => '', 'formtype' => 'select', 'valuetype' => 'int', 'default' => 1, 'options' => array('_CM_COMNOCOM' => XOOPS_COMMENT_APPROVENONE, '_CM_COMAPPROVEALL' => XOOPS_COMMENT_APPROVEALL, '_CM_COMAPPROVEUSER' => XOOPS_COMMENT_APPROVEUSER, '_CM_COMAPPROVEADMIN' => XOOPS_COMMENT_APPROVEADMIN)));
                 array_push($configs, array('name' => 'com_anonpost', 'title' => '_CM_COMANONPOST', 'description' => '', 'formtype' => 'yesno', 'valuetype' => 'int', 'default' => 0));
             }
         } else {
             if ($module->getVar('hascomments') != 0) {
                 $configs = array();
-                include_once(XOOPS_ROOT_PATH.'/include/comment_constants.php');
+                include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
                 $configs[] = array('name' => 'com_rule', 'title' => '_CM_COMRULES', 'description' => '', 'formtype' => 'select', 'valuetype' => 'int', 'default' => 1, 'options' => array('_CM_COMNOCOM' => XOOPS_COMMENT_APPROVENONE, '_CM_COMAPPROVEALL' => XOOPS_COMMENT_APPROVEALL, '_CM_COMAPPROVEUSER' => XOOPS_COMMENT_APPROVEUSER, '_CM_COMAPPROVEADMIN' => XOOPS_COMMENT_APPROVEADMIN));
                 $configs[] = array('name' => 'com_anonpost', 'title' => '_CM_COMANONPOST', 'description' => '', 'formtype' => 'yesno', 'valuetype' => 'int', 'default' => 0);
             }
@@ -796,12 +796,12 @@ function module_update($dirname){
 
         if ($configs != false) {
             $msgs[] = 'Adding module config data...';
-            $config_handler =& xoops_gethandler('config');
+            $config_handler = xoops_getHandler('config');
             $order = 0;
             foreach ($configs as $config) {
                 // only insert ones that have been deleted previously with success
                 if (!in_array($config['name'], $config_delng)) {
-                    $confobj =& $config_handler->createConfig();
+                    $confobj = $config_handler->createConfig();
                     $confobj->setVar('conf_modid', $newmid);
                     $confobj->setVar('conf_catid', 0);
                     $confobj->setVar('conf_name', $config['name']);
@@ -822,7 +822,7 @@ function module_update($dirname){
                     $confop_msgs = '';
                     if (isset($config['options']) && is_array($config['options'])) {
                         foreach ($config['options'] as $key => $value) {
-                            $confop =& $config_handler->createConfigOption();
+                            $confop = $config_handler->createConfigOption();
                             $confop->setVar('confop_name', $key, true);
                             $confop->setVar('confop_value', $value, true);
                             $confobj->setConfOptions($confop);

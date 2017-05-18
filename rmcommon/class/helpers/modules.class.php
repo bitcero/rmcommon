@@ -81,7 +81,7 @@ class RMModules
         }
 
         $mod->loadInfoAsVar($module);
-        $version = $mod->getInfo('rmversion');
+        $version =& $mod->getInfo('rmversion');
         $version = is_array($version) ? $version : array('major' => $version, 'minor' => 0, 'revision' => 0, 'stage' => 0, 'name' => $mod->getInfo('name'));
 
         if ($type == 'raw')
@@ -215,7 +215,7 @@ class RMModules
         else
             $mod = self::load_module($dirname);
 
-        $icon = $mod->getInfo('icon');
+        $icon =& $mod->getInfo('icon');
         $icon = '' != $icon ? $icon : XOOPS_URL . '/modules/' . $dirname . '/' . $mod->getInfo('image');
 
         return $icon;

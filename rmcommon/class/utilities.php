@@ -41,7 +41,7 @@ class RMUtilities
 	 * @return bool
 	 */
 	public function get_count($table, $cond=''){
-		$db =& EXMDatabase::get();
+		$db = EXMDatabase::get();
 		$sql = "SELECT COUNT(*) FROM $table";
 		if ($cond!='') $sql .= " WHERE $cond";
 		list($num) = $db->fetchRow($db->query($sql));

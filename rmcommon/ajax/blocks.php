@@ -55,7 +55,7 @@ function insert_block(){
         response(__('The specified module does not exists!','rmcommon'), array(), 1, 0);
 
     $module->loadInfoAsVar($mod);
-    $blocks = $module->getInfo('blocks');
+    $blocks =& $module->getInfo('blocks');
     $ms = $module->name().'<br />';
     $found = false;
     foreach ($blocks as $bk) {

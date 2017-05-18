@@ -33,7 +33,7 @@ class RMBlocksFunctions
             $module = new XoopsModule();
             $module->loadInfoAsVar($mod['dirname']);
 
-            $icon = $module->getInfo('icon');
+            $icon =& $module->getInfo('icon');
 
             $list[$mod['dirname']] = array(
                 'name' => $mod['name'],
@@ -129,7 +129,7 @@ class RMBlocksFunctions
         if (is_array($groupid)) {
             $sql .= ' AND gperm_groupid IN (' . implode(',', $groupid) . ',0)';
         } else {
-            if (intval($groupid) > 0) {
+            if ((int)$groupid > 0) {
                 $sql .= ' AND gperm_groupid IN (0,' . $groupid . ')';
             }
         }
@@ -147,9 +147,9 @@ class RMBlocksFunctions
             $sql = 'SELECT b.* FROM ' . $db->prefix('mod_rmcommon_blocks') . ' b, ' . $db->prefix('mod_rmcommon_blocks_assignations') . ' m WHERE m.bid=b.bid';
             $sql .= ' AND b.isactive=' . $isactive;
             if (isset($visible)) {
-                $sql .= ' AND b.visible=' . intval($visible);
+                $sql .= ' AND b.visible=' . (int)$visible;
             }
-            $mid = intval($mid);
+            $mid = (int)$mid;
             if (!empty($mid)) {
                 $sql .= ' AND m.mid IN (-1,' . $mid;
                 if ($toponlyblock) {
@@ -200,7 +200,7 @@ class RMBlocksFunctions
             'type' => $bobj->getVar('element_type')
         );
 
-        $bcachetime = intval($bobj->getVar('bcachetime'));
+        $bcachetime = (int)$bobj->getVar('bcachetime');
         if (empty($bcachetime)) {
             $template->caching = 0;
         } else {

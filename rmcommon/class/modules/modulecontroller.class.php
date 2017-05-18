@@ -44,7 +44,7 @@ abstract class RMModuleController {
         $this->module = $moduleObject;
 
         if ( defined( 'XOOPS_CPFUNC_LOADED') )
-            $this->module_data['menu'] = $moduleObject->getAdminMenu();
+            $this->module_data['menu'] =& $moduleObject->getAdminMenu();
 
         $this->module_data['url'] = $this->url;
 

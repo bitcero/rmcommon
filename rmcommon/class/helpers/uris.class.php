@@ -81,7 +81,7 @@ class RMUris
             if ($cuSettings->permalinks && isset($paths[$module])) {
                 $url .= '/admin' . $path;
             } else {
-                $objModule = XoopsModule::getByDirName($module);
+                $objModule = XoopsModule::getByDirname($module);
                 $url .= '/modules/' . $module . '/' . $objModule->getInfo('adminindex');
             }
 

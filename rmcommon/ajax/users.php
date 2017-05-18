@@ -34,7 +34,7 @@ if (!isset($field) || $field==''){
 }
 
 $field = addslashes($field);
-$kw = addSlashes($kw);
+$kw = addslashes($kw);
 
 if (is_string($s) && $s!=''){
 	$selected = explode(',',$s);
