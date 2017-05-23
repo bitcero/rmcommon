@@ -259,6 +259,14 @@ $form->addElement(new RMFormButton([
 
 $path = RMCPATH . '/plugins/advform-pro/includes/';
 
+$users = new \Common\Plugins\AdvForm\AdvancedUsers([
+    'name' => 'users',
+    'id' => 'adv-users',
+    'multi' => true,
+    'selected' => [1]
+]);
+$form->addElement($users);
+
 $form->display();
 
 RMTemplate::get()->footer();
