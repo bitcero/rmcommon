@@ -1,11 +1,7 @@
 (function($){
 
-    var _self;
-
-    this.UsersField = function()
+    $.fn.usersField = function(options)
     {
-        _self = this;
-
 
     }
 
