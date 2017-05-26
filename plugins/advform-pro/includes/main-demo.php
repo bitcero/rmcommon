@@ -262,8 +262,9 @@ $path = RMCPATH . '/plugins/advform-pro/includes/';
 $users = new \Common\Plugins\AdvForm\AdvancedUsers([
     'name' => 'users',
     'id' => 'adv-users',
-    'multi' => true,
-    'selected' => [1]
+    'selected' => [1],
+    'caption' => __('Users select', 'advform-pro'),
+    'placeholder' => __('Select users...', 'advform-pro')
 ]);
 $form->addElement($users);
 

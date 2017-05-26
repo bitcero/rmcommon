@@ -70,7 +70,7 @@ class AdvancedStatesField extends RMFormElement
 
         // Add script
         RMTemplate::getInstance()->add_script('chosen.min.js', 'rmcommon', [
-            'id' => 'adv-select-js',
+            'id' => 'chosen-js',
             'directory' => 'plugins/advform-pro',
             'footer' => 1
         ]);

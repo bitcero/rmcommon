@@ -1,3 +1,3 @@
 <select <?php echo $attributes; ?>>
-    <option value="">Hola</option>
+    <option></option>
 </select>

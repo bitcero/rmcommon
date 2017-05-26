@@ -40,7 +40,7 @@ class AdvancedUsers extends \RMFormElement
      * $users = new Common\Plugin\AdvForm\AdvancedUsers([
      *     'name' => 'Name of element',
      *     'id' => 'Id of element',
-     *     'multi' => bool,
+     *     'multiple' => null,
      *     'key' => 'Name of column fields that will be returned,
      *     'select' => array with values that will be selected
      * ]);
@@ -49,13 +49,18 @@ class AdvancedUsers extends \RMFormElement
      */
     public function __construct($options)
     {
+        if(array_key_exists('key', $options)){
+            $options['data-key'] = $options['key'];
+            unset($options['key']);
+        }
+
         parent::__construct($options);
 
         $this->setIfNotSet('name', 'name_error');
         $this->setIfNotSet('id', \TextCleaner::sweetstring($this->get('name')));
-        $this->setIfNotSet('multi', false);
-        $this->setIfNotSet('key', 'uid');
+        $this->setIfNotSet('data-key', 'uid');
         $this->setIfNotSet('class', 'form-control');
+        $this->set('data-advf-field', 'users-field');
 
         $this->suppressList = ['key', 'multi', 'selected', 'form'];
     }
@@ -68,18 +73,23 @@ class AdvancedUsers extends \RMFormElement
         $attributes = $this->renderAttributeString();
 
         // Add script
-        $common->template()->add_script('chosen.min.js', 'rmcommon', [
-            'id' => 'adv-select-js',
+        /*$common->template()->add_script('jquery.debounce.min.js', 'rmcommon', [
+            'id' => 'debounce-js',
+            'footer' => 1
+        ]);*/
+
+        /*$common->template()->add_script('chosen.min.js', 'rmcommon', [
+            'id' => 'chosen-js',
+            'directory' => 'plugins/advform-pro',
+            'footer' => 1,
+            'required' => 'chosen-js'
+        ]);*/
+
+        $common->template()->add_script('advanced-fields.min.js', 'rmcommon', [
+            'id' => 'advform-js',
             'directory' => 'plugins/advform-pro',
             'footer' => 1
         ]);
-
-        $common->template()->add_script('chosen.min.js', 'rmcommon', [
-            'id' => 'adv-select-js',
-            'directory' => 'plugins/advform-pro',
-            'footer' => 1
-        ]);
-
 
         $common->template()->assign('attributes', $attributes);
         $common->template()->assign('selected', $selected);

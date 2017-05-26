@@ -9,6 +9,7 @@
 // @prepros-append 'fields/icons-selector.js'
 // @prepros-append 'fields/repeater-field.js'
 // @prepros-append 'fields/countries-field.js'
+// @prepros-append 'fields/select2.js'
 // @prepros-append 'fields/users-field.js'
 
 var total = rmwebfonts.items!=undefined ? rmwebfonts.items.length : 0;
