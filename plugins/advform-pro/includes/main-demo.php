@@ -2,7 +2,7 @@
 /**
  * Advanced Form Fields for Common Utilities
  *
- * Copyright © 2015 Eduardo Cortés http://www.redmexico.com.mx
+ * Copyright © 2015 Eduardo Cortés http://www.eduardocortes.mx
  * -------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
  * MA 02110-1301, USA.
  * -------------------------------------------------------------
- * @copyright    Eduardo Cortés (http://www.redmexico.com.mx)
+ * @copyright    Eduardo Cortés
  * @license      GNU GPL 2
- * @package      
+ * @package      advform
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
- * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
 
@@ -265,6 +264,16 @@ $users = new \Common\Plugins\AdvForm\AdvancedUsers([
     'selected' => [1],
     'caption' => __('Users select', 'advform-pro'),
     'placeholder' => __('Select users...', 'advform-pro')
+]);
+$form->addElement($users);
+
+$users = new \Common\Plugins\AdvForm\AdvancedUsers([
+    'name' => 'usersMulti',
+    'id' => 'adv-users-multi',
+    'selected' => [1],
+    'caption' => __('Users multi select', 'advform-pro'),
+    'placeholder' => __('Select users...', 'advform-pro'),
+    'multiple' => null
 ]);
 $form->addElement($users);
 

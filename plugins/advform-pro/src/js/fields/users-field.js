@@ -1,3 +1,32 @@
+/*!
+ * AdvForm Pro for Common Utilities
+ *
+ * Copyright © 2015 - 2017 Eduardo Cortés http://www.eduardocortes.mx
+ * -------------------------------------------------------------
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * -------------------------------------------------------------
+ * @copyright    Eduardo Cortés (http://www.eduardocortes.mx)
+ * @license      GNU GPL 2
+ * @package      advform
+ * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
+ * @url          http://www.eduardocortes.mx
+ */
+
+var usersField;
+
 (function($){
 
     this.UsersField = function(){
@@ -18,7 +47,7 @@
 
             markup = markup.replace('%avatar', data.avatar)
                 .replace('%uname', name)
-                .replace('%uid', advFormLang.uid.replace('%uid', data.uid))
+                .replace('%uid', advFormLang.uid.replace('%uid', data.id))
                 .replace('%email', advFormLang.email.replace('%email', data.email));
 
             return markup;
@@ -26,14 +55,14 @@
         };
 
         this.formatSelection = function(data){
-            return data.uname || data.text;
+            return data.text;
         };
 
     };
 
-    $(document).ready(function(){
+    this.UsersField.prototype.init = function(id){
+
         var props = {};
-        var usersField = new UsersField();
 
         props.ajax = {
             url: xoUrl + '/modules/rmcommon/plugins/advform-pro/includes/users.php',
@@ -59,11 +88,13 @@
 
         };
 
-        props.templateResult = usersField.formatData;
+        props.templateResult = this.formatData;
         props.escapeMarkup = function(markup){return markup;};
-        props.templateSelection = usersField.formatSelection;
+        props.templateSelection = this.formatSelection;
 
-        $("select[data-advf-field='users-field']").each(function(){
+        id = undefined == id ? "select[data-advf-field='users-field']" : id;
+
+        $(id).each(function(){
 
             var placeholder = $(this).attr('placeholder');
 
@@ -75,6 +106,10 @@
             $(this).select2(props);
 
         });
-    });
+
+    };
+
+    usersField = new UsersField();
+    usersField.init();
 
 })(jQuery);

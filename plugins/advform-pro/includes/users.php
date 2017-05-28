@@ -48,9 +48,10 @@ $users = [];
 
 while($row = $xoopsDB->fetchArray($result)){
     $users[] = [
-        'uid' => $row['uid'],
+        'id' => $row['uid'],
         'uname' => $row['uname'],
         'name' => $row['name'],
+        'text' => '' != $row['name'] ? $row['name'] . ' (' . $row['uname'] . ')' : $row['uname'],
         'email' => $row['email'],
         'avatar' => $common->services()->service('avatar')->getAvatarSrc($row['email'], 80)
     ];

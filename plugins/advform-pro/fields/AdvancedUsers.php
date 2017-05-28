@@ -62,7 +62,7 @@ class AdvancedUsers extends \RMFormElement
         $this->setIfNotSet('class', 'form-control');
         $this->set('data-advf-field', 'users-field');
 
-        $this->suppressList = ['key', 'multi', 'selected', 'form'];
+        $this->suppressList = ['key', 'multi', 'selected', 'form', 'caption'];
     }
 
     public function render()
@@ -71,19 +71,6 @@ class AdvancedUsers extends \RMFormElement
 
         $selected = $this->get('selected');
         $attributes = $this->renderAttributeString();
-
-        // Add script
-        /*$common->template()->add_script('jquery.debounce.min.js', 'rmcommon', [
-            'id' => 'debounce-js',
-            'footer' => 1
-        ]);*/
-
-        /*$common->template()->add_script('chosen.min.js', 'rmcommon', [
-            'id' => 'chosen-js',
-            'directory' => 'plugins/advform-pro',
-            'footer' => 1,
-            'required' => 'chosen-js'
-        ]);*/
 
         $common->template()->add_script('advanced-fields.min.js', 'rmcommon', [
             'id' => 'advform-js',
