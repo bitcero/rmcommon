@@ -30,23 +30,25 @@ namespace Common\Plugins\AdvForm;
 
 class AdvancedUploader extends \RMFormElement
 {
+    private $parameters = [];
+
     public function __construct($options)
     {
-
-        if(array_key_exists('url', $options)){
-            $options['data-url'] = $options['url'];
-        }
-
-        if(array_key_exists('files', $options)){
-            $options['data-files'] = $options['files'];
+        if ( false == array_key_exists('parameters', $options) ){
+            throw new \RMException(__('You must provide JavaScript parameters for uploader field', 'advform-pro'));
         }
 
         parent::__construct($options);
 
+        $this->parameters = $options['parameters'];
+        if(false == array_key_exists('dictDefaultMessage')){
+            $this->parameters['dictDefaultMessage'] = __('Drop files here to upload', 'adform-pro');
+        }
+
         $this->setIfNotSet('id', $this->get('name') . '-uploader');
         $this->set('data-advf-field', 'uploader');
 
-        $this->suppressList = ['caption'];
+        $this->suppressList = ['caption', 'params'];
     }
 
     public function render()
@@ -57,7 +59,16 @@ class AdvancedUploader extends \RMFormElement
 
         $attributes = $this->renderAttributeString();
 
-        $html = '<div '. $attributes .'><form class="dropzone"></form></div>';
+        // Render javascript initializer
+        $common->template()->assign('parameters', $this->parameters);
+        $common->template()->assign('id', $this->get('id'));
+        $common->template()->assign('name', $this->get('name'));
+        $common->template()->assign('attributes', $attributes);
+
+        $html = $common->template()->render('uploader-html.php', 'plugin', 'rmcommon','advform-pro');
+        $script = $common->template()->render('uploader.php', 'plugin', 'rmcommon','advform-pro');
+        $common->template()->add_inline_script($script, 1);
+
         return $html;
     }
 }

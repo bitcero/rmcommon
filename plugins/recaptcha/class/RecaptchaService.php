@@ -45,7 +45,7 @@ class RecaptchaService extends \Common\Core\Helpers\ServiceAbstract implements \
 
         $common->template()->add_inline_script("var reCounter = 1;\nvar reParams = {siteKey: '" . $this->settings->siteKey . "',theme:'" . $this->settings->theme . "',type:'" . $this->settings->type . "',size:'" . $this->settings->size . "'};");
 
-        if ('' == $this->settings->siteKey && $xoopsUser->isAdmin()) {
+        if ('' == $this->settings->siteKey && $xoopsUser && $xoopsUser->isAdmin()) {
             showMessage(__('reCaptcha site key has not been specified in reCaptcha plugin. Please correct this.', 'recaptcha'), RMMSG_WARN);
         }
 

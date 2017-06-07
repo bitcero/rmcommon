@@ -30,7 +30,7 @@ if ($action=='save'){
 	}
 
 	// Check if user is a Registered User
-	if(!$xoopsUser){
+	if(!$xoopsUser || false == is_a($xoopsUser, 'XoopsUser')){
 	    
 	    $name = rmc_server_var($_POST, 'comment_name', '');
 	    $email = rmc_server_var($_POST, 'comment_email', '');
@@ -148,7 +148,7 @@ if ($action=='save'){
 		$comment->setVar('status', 'approved');
 	} elseif(!$xoopsUser && $rmc_config->approve_anon_coms){
 		$comment->setVar('status', 'approved');
-	} elseif($xoopsUser && $xoopsUser->isAdmin()){
+	} elseif(is_a($xoopsUser, 'XoopsUser') && $xoopsUser->isAdmin()){
 		$comment->setVar('status', 'approved');
 	}
 
