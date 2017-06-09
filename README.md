@@ -1,6 +1,8 @@
 ![alt Common Utilities Logo](https://raw.githubusercontent.com/bitcero/rmcommon/master/rmcommon/images/logo.png) Common Utilities
 ========
 
+![alt Common Utilities](http://rmcommon.com/images/ss-rmcommon.png)
+
 **Common Utilities** is a framework oriented to develop advanced XOOPS modules by providing useful objects and new methods for developers.
 Development work turns more easy while Common Utilities provide new capabilities to create a new kind of components for XOOPS.
 
