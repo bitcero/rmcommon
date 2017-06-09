@@ -35,7 +35,7 @@ class RMUser extends RMObject
 
         }
 
-        if ($id != '' && is_numeric($id) && $this->loadValues(intval($id)))
+        if ($id != '' && is_numeric($id) && $this->loadValues((int)$id))
             $this->unsetNew();
         elseif ($id!='') {
             $this->primary = 'uname';
@@ -56,7 +56,7 @@ class RMUser extends RMObject
 
         if (!empty($this->groups)) return $this->groups;
 
-        $sql = 'SELECT groupid FROM '.$this->db->prefix('groups_users_link').' WHERE uid='.intval($this->getVar('uid'));
+        $sql = 'SELECT groupid FROM '.$this->db->prefix('groups_users_link').' WHERE uid=' . (int)$this->getVar('uid');
         $result = $this->db->query($sql);
 
         if (!$result) {
@@ -89,10 +89,10 @@ class RMUser extends RMObject
     {
         if (is_null($module_id)) {
             $module_id = isset($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('mid', 'n') : 1;
-        } elseif (intval($module_id) < 1) {
+        } elseif ((int)$module_id < 1) {
             $module_id = 0;
         }
-        $moduleperm_handler =& xoops_gethandler('groupperm');
+        $moduleperm_handler = xoops_getHandler('groupperm');
 
         return $moduleperm_handler->checkRight('module_admin', $module_id, $this->getGroups());
     }

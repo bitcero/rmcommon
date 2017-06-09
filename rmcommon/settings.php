@@ -27,7 +27,7 @@ function show_configurable_items(){
     $sql = "SELECT mid FROM " . $db->prefix("modules") . " WHERE dirname='system' OR hasconfig=1 ORDER BY name ASC";
     $result = $db->query( $sql );
 
-    $mh = xoops_gethandler( 'module' );
+    $mh = xoops_getHandler('module' );
     $modules = array();
 
     while ( $row = $db->fetchArray( $result ) ) {
@@ -73,7 +73,7 @@ function show_module_preferences(){
             __('You have not specified a module!', 'rmcommon'), 'settings.php', RMMSG_WARN
         );
 
-    $mh = xoops_gethandler( 'module' );
+    $mh = xoops_getHandler('module' );
     $module = $mh->get( $mod );
 
     if ( $module->isNew() )
@@ -230,7 +230,7 @@ function save_module_settings(){
     $current_settings = (array) RMSettings::module_settings( $module->getVar('dirname') );
     $new_settings = RMHttpRequest::post( ucfirst( $module->getVar('dirname') ), 'array', array() );
 
-    $configs = $module->getInfo( 'config' );
+    $configs =& $module->getInfo( 'config' );
     $fields = array(); // Container for all fields and values
     foreach ($configs as $option) {
 

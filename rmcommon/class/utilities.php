@@ -10,31 +10,42 @@
 
 class RMUtilities
 {
-    /**
-     * Obtiene una ?nica instancia de esta clase
-     */
-    static function get()
-    {
-        static $instance;
-        if (!isset($instance)) {
-            $instance = new RMUtilities();
-        }
-        return $instance;
-    }
+	/**
+	 * Obtiene una ?nica instancia de esta clase
+	 */
+	static function get(){
+		static $instance;
+		if (!isset($instance)) {
+			$instance = new RMUtilities();
+		}
+		return $instance;
+	}
 
-    /**
-     * Elimina un archivo existente del servidor
-     * @param string $filepath Ruta completa al archivo
-     * @return bool
-     */
-    public function delete_file($filepath)
-    {
-        if ($filepath == '') return false;
+	/**
+	 * Elimina un archivo existente del servidor
+	 * @param string $filepath Ruta completa al archivo
+	 * @return bool
+	 */
+	public function delete_file($filepath){
+		if ($filepath == '') return false;
 
-        if (!file_exists($filepath)) return true;
+		if (!file_exists($filepath)) return true;
 
-        return unlink($filepath);
+		return unlink($filepath);
 
+	}
+	/**
+	 * Comprueba si existe un elemento en una tabla expec?fica
+	 * @param string $table Nombre de la tabla
+	 * @param string $cond Condici?n de b?squeda
+	 * @return bool
+	 */
+	public function get_count($table, $cond=''){
+		$db = EXMDatabase::get();
+		$sql = "SELECT COUNT(*) FROM $table";
+		if ($cond!='') $sql .= " WHERE $cond";
+		list($num) = $db->fetchRow($db->query($sql));
+		return $num;
     }
 
     /**

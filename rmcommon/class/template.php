@@ -314,7 +314,7 @@ class RMTemplate
         if ('' == $type && is_file($file)) {
             $template = $file;
         } else {
-            $template = $this->path($file, $type, $module, $element);
+            $template = static::path($file, $type, $module, $element);
         }
 
         if(!file_exists($template)){
@@ -1381,7 +1381,7 @@ class RMTemplate
         $xoopsThemeFactory->allowedThemes = $xoopsConfig['theme_set_allowed'];
         $xoopsThemeFactory->defaultTheme = $xoopsConfig['theme_set'];
 
-        $xoTheme =& $xoopsThemeFactory->createInstance(array('contentTemplate' => @$xoopsOption['template_main']));
+        $xoTheme = $xoopsThemeFactory->createInstance(array('contentTemplate' => @$xoopsOption['template_main']));
         $xoopsTpl =& $xoTheme->template;
 
         return $xoopsTpl;
@@ -1631,7 +1631,7 @@ class RMTemplate
      */
     public function get_template($file, $type = 'module', $module = '', $element = '')
     {
-        return $this->path($file, $type, $module, $element);
+        return static::path($file, $type, $module, $element);
     }
 
 }

@@ -31,7 +31,7 @@ class RMFormRewrite extends RMFormElement
         /**
          * Load all modules that supports rewrite feature
          */
-        $module_handler = xoops_gethandler('module');
+        $module_handler = xoops_getHandler('module');
         $objects = $module_handler->getObjects();
         $modules = array();
 

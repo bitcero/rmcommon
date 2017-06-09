@@ -54,10 +54,10 @@ class RMImage extends RMObject
         if($params=='') return false;
         $p = explode(":", $params);
 
-        if(intval($p[0])<=0) return false;
+        if((int)$p[0] <= 0) return false;
 
-        if($this->loadValues(intval($p[0]))) $this->unsetNew();
-        $this->selected_size = intval($p[1]);
+        if($this->loadValues((int)$p[0])) $this->unsetNew();
+        $this->selected_size = (int)$p[1];
         
         $p[2] = $p[2]!='' ? urldecode($p[2]) : '';
         $p[3] = $p[3]!='' ? urldecode($p[3]) : '';

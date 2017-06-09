@@ -90,7 +90,7 @@ class phMagick_resize{
     function onTheFly(phmagick $p,$imageUrl, $width, $height, $exactDimentions = false, $webPath = '', $physicalPath=''){
         //convert web path to physical
         $basePath = str_replace($webPath,$physicalPath, dirname($imageUrl) );
-        $sourceFile = $basePath .'/'. basename($imageUrl); ;
+        $sourceFile = $basePath .'/'. basename($imageUrl);
 
         //naming the new thumbnail
         $thumbnailFile = $basePath . '/'.$width . '_' . $height . '_' . basename($imageUrl) ;

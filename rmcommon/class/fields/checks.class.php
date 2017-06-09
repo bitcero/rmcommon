@@ -274,7 +274,7 @@ class RMFormYesNo extends RMFormElement
 
         $rtn = "<label class=\"radio-inline\"><input type='radio' $attributes value='1' ";
 
-        if($this->get('value') == 'yes' || intval($this->get('value')) == 1){
+        if($this->get('value') == 'yes' || (int)$this->get('value') == 1){
 
             $rtn .= "checked";
 
@@ -284,7 +284,7 @@ class RMFormYesNo extends RMFormElement
         $rtn .= "> " . __('Yes', 'rmcommon') . "</label>";
         $rtn .= "<label class=\"radio-inline\"><input type='radio' $attributes value='0' ";
 
-        if($this->get('value') == 'no' || intval($this->get('value')) == 0){
+        if($this->get('value') == 'no' || (int)$this->get('value') == 0){
 
             $rtn .= "checked";
 
