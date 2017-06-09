@@ -77,7 +77,8 @@ class TinyEditor
                     },
 
                     oninit: function(ed){
-                        switchEditors.go(elements, "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
+                        switchEditors.edInit();
+                        switchEditors.go(elements, "<?php echo isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce'; ?>");
                     }
                 });
 

@@ -7,7 +7,8 @@ var switchEditors = {
 	},
 
 	edInit : function() {
-		var h = tinymce.util.Cookie.getHash("TinyMCE_content_size"),
+		//var h = tinymce.util.Cookie.getHash("TinyMCE_content_size"),
+		var h = $.cookie("editor"),
             H = this.I('edButtonHTML'),
             P = this.I('edButtonPreview');
 
@@ -16,6 +17,7 @@ var switchEditors = {
             this.I("quicktags").style.display = "none";
         } catch(e){};
         tinymce.execCommand("mceAddControl", false, "content");
+
         
 	},
 
