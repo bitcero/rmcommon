@@ -89,8 +89,9 @@ var switchEditors = {
 	},
 
 	go : function(id, mode) {
-		id = id || 'content';
+        id = id || 'content';
 		id = id.replace('#', '');
+
 		mode = mode || this.mode || 'tinymce';
 		var ed = tinymce.get(id) || false;
 		var qt = $('#ed-cont-'+id+' .quicktags');
@@ -112,7 +113,7 @@ var switchEditors = {
 
 			qt.hide().parent().removeClass("showing");
 
-			ta.val(this.esautop(ta.val()));
+			//$(ta).val(this.esautop($(ta).val()));
 
 			if ( ed ) ed.show();
 			else tinymce.execCommand("mceAddControl", false, id);
@@ -128,6 +129,7 @@ var switchEditors = {
 			P.removeClass('active');
 
 			ta.css('height', ed.getContentAreaContainer().offsetHeight + 6 + 'px');
+			$(ta).removeAttr('aria-hidden');
 
 			ed.hide();
 			qt.css('display','block').parent().addClass("showing");
@@ -141,6 +143,7 @@ var switchEditors = {
 	},
 
 	esautop : function(pee) {
+
 		var blocklist = 'table|thead|tfoot|caption|colgroup|tbody|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|select|form|blockquote|address|math|p|h[1-6]';
 
 		pee = pee + "\n\n";

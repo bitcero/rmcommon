@@ -226,7 +226,7 @@ class RMFormEditor extends RMFormElement
         </div>
         <div' . (isset($_COOKIE['editor']) && $_COOKIE['editor'] == 'html' ? ' class="showing"' : '') . '>
         <div class="quicktags"><div id="ed_toolbar_' . $this->get('id') . '"></div></div>
-        <textarea onchange="tinyMCE.activeEditor.save();" id="' . $this->get('id') . '" name="' . $this->get('name') . '" style="width: 100%; height: ' . $this->get('height') . ';" class="' . $this->getClass() . '">' . $this->get('value') . '</textarea></div>
+        <textarea id="' . $this->get('id') . '" name="' . $this->get('name') . '" style="width: 100%; height: ' . $this->get('height') . ';" class="' . $this->getClass() . '">' . $this->get('value') . '</textarea></div>
         </div>';
         return $rtn;
     }
