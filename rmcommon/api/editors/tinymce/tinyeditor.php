@@ -77,7 +77,17 @@ class TinyEditor
                     },
 
                     oninit: function(ed){
-                        switchEditors.go(elements, "'.(isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce').'");
+                        switchEditors.edInit();
+                        switchEditors.go(elements, "<?php echo isset($_COOKIE['editor']) ? $_COOKIE['editor'] : 'tinymce'; ?>");
+                    },
+
+                    init_instance_callback: function(editor) {
+
+                        if(undefined == switchEditors){return false;};
+
+                        editor.on('BeforeSetContent', function(e) {
+                            e.content = switchEditors.esautop(e.content);
+                        });
                     }
                 });
 

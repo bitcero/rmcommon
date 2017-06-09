@@ -70,10 +70,12 @@ td h2.form_subtitle{
 }
 .form-users-options{
     background: #f2f2f2;
-    margin: -15px -5px 15px -5px;
-    padding: 10px 0 0 0;
+    margin-bottom: 15px;
+    padding: 10px;
     font-size: 0.9em;
-    border-bottom: 1px solid #ddd;
+    //border-bottom: 1px solid #ddd;
+    position: absolute;
+  top: 0; left: 0; right: 0;
 }
 .form-users-options .form-group{
     margin-bottom: 5px;
@@ -122,6 +124,17 @@ img.form_user_waiting_img{
 	margin-top: -8px;
 	margin-left: -8px;
 }
+
+.form-users-fields{
+
+  margin-top: 80px;
+
+  ul > li{
+    display: inline-block;
+    padding: 8px 15px;
+  }
+}
+
 div.form_users_container{
 	overflow: hidden;
 }
@@ -280,6 +293,13 @@ div.form_container label.hidden{
     padding: 10px;
     font-weight: normal;
     font-size: 1.2em;
+
+  &.cu-titlebar{
+    background-color: @theme-main-color;
+    color: @theme-main-color-text;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
 }
 .imgmgr_container .window-title span{
     display: block;

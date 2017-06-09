@@ -36,14 +36,14 @@ $tiny->configuration = array('mode' => 'exact',
     'plugins' => [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        'media table contextmenu paste code'
+        'media table paste code'
     ],
     'toolbar' => RMEvents::get()->run_event('rmcommon.tinybuttons.toolbar1', "undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"),
     'dialog_type' => "modal",
     'relative_urls' => "",
     'remove_script_host' => "",
     'convert_urls' => "",
-    'apply_source_formatting' => "",
+    'apply_source_formatting' => "false",
     'remove_linebreaks' => "1",
     'paste_convert_middot_lists' => "1",
     'paste_remove_spans' => "1",

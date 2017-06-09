@@ -27,6 +27,8 @@ var usersField = jQuery.extend({
 			sel += sel=='' ? $(checks[i]).val() : ','+$(checks[i]).val();
 		}
 
+		var title = $("#" + id + "-users-container button").data('title');
+
 		// Add modal
         if($("#"+id+"-dialog-search .modal-body").length <= 0){
 		    $("body").append('<div class="modal fade smartb-form-dialog users-form-selector" id="'+id+'-dialog-search">' +
@@ -34,7 +36,7 @@ var usersField = jQuery.extend({
             '<div class="modal-content">' +
             '<div class="modal-header">' +
             '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-            '<h4 class="modal-title">%title</h4></div>' +
+            '<h4 class="modal-title">'+title+'</h4></div>' +
             '<div class="modal-body"></div></div></div></div>')
         }
 

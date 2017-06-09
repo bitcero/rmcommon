@@ -551,17 +551,18 @@ function configure_rm_plugin()
     }
 
     $ele = new RMFormButtonGroup();
-    $ele->addButton('send', [
+    $ele->addButton(new RMFormButton([
         'caption' => __('Save Settings', 'rmcommon'),
         'type' => 'submit',
-        'class' => 'btn btn-primary btn-lg'
-    ]);
-    $ele->addButton('cancel', [
+        'class' => 'btn btn-primary btn-lg',
+        'name' => 'send'
+    ]));
+    $ele->addButton(new RMFormButton([
         'caption' => __('Cancel', 'rmcommon'),
         'type' => 'button',
         'onclick' => "history.go(-1);",
         'class' => 'btn btn-default btn-lg'
-    ]);
+    ]));
 
     $form->addElement($ele);
 
