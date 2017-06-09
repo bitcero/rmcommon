@@ -513,9 +513,7 @@ class RMTemplate
         if (array_key_exists('id', $options) && '' != $options['id']) {
             $id = $options['id'];
             $idProvided = true;
-
-        } else {
-            $id = TextCleaner::getInstance()->sweetstring($file);
+            unset($options['id']);
         }
 
         if ($file == 'jquery.min.js' || $cuSettings->cdn_jquery_url == $file) {
@@ -534,18 +532,19 @@ class RMTemplate
         if ($element == '')
             $remote_script = 1;
 
+        if (false == $idProvided) {
+            $parts = pathinfo($file);
+            $id = str_replace('.min', '', $parts['filename']);
+            $id = strtolower($element) . '-' . TextCleaner::getInstance()->sweetstring($id) . '-js';
+            unset($parts);
+        }
+
         if ($remote_script > 0) {
 
-            if (!$idProvided) {
-                $id = TextCleaner::getInstance()->sweetstring(preg_replace("/.*\/(.*)$/", "$1", $file));
-            }
             $script_url = $file;
 
         } else {
 
-            if (!$idProvided) {
-                $id = TextCleaner::getInstance()->sweetstring($element . $file);
-            }
             $script_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-js' : 'js', $directory, $version);
 
         }
@@ -1023,21 +1022,29 @@ class RMTemplate
         else
             $element = $element == '' ? ($xoopsModule ? $xoopsModule->getVar('dirname') : '') : $element;
 
+        if (isset($options['id']) && $options['id'] != '') {
+            $id = $options['id'];
+            unset($options['id']);
+            $providedId = true;
+        } else {
+            $providedId = false;
+        }
+
+        if(false == $providedId){
+            $parts = pathinfo($file);
+            $id = str_replace('.min', '', $parts['filename']);
+            $id = strtolower($element) . '-' . TextCleaner::getInstance()->sweetstring($id) . '-css';
+            unset($parts);
+        }
+
         if ($remote_script > 0) {
 
-            $id = TextCleaner::getInstance()->sweetstring(preg_replace("/.*\/(.*)$/", "$1", $file));
             $style_url = $file;
 
         } else {
 
-            $id = TextCleaner::getInstance()->sweetstring($element . $file);
             $style_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-css' : 'css', $directory, $version);
 
-        }
-
-        if (isset($options['id']) && $options['id'] != '') {
-            $id = $options['id'];
-            unset($options['id']);
         }
 
         if ($style_url == '')

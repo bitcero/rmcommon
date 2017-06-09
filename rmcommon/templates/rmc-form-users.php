@@ -1,5 +1,5 @@
 <form name="<?php echo $field; ?>_users_form">
-    <div class="row form-users-options">
+    <div class="form-users-options">
         <div class="col-lg-4 form-group">
             <label for="<?php echo $field ?>-kw"><?php _e('Search user:', 'rmcommon'); ?></label>
             <input type="text" class="form-control" id="<?php echo $field ?>-kw" placeholder="<?php _e('Search user', 'rmcommon'); ?>" value="<?php echo $kw; ?>" />
@@ -42,7 +42,7 @@
 
         <div class="<?php echo $field_type=='checkbox' ? 'col-lg-7' : 'col-lg-12'; ?>">
 
-            <div class="row form-users-fields">
+            <div class="form-users-fields">
 
                 <div class="col-lg-12">
                     <ul class="list-unstyled">

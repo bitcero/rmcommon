@@ -45,17 +45,25 @@
                 <?php else: ?>
                     <?php foreach($category['fields'] as $id => $field): ?>
 
-                        <div class="row form-group">
-                            <div class="col-md-4 col-lg-4">
-                                <label for="<?php echo $id; ?>"><?php echo $field->caption; ?></label>
-                                <?php if( $field->description != '' ): ?>
-                                    <span class="help-block"><?php echo $field->description; ?></span>
-                                <?php endif; ?>
+                        <?php if('hidden' == $field->field): ?>
+
+                            <?php echo RMSettings::render_field( $field ); ?>
+
+                        <?php else: ?>
+
+                            <div class="row form-group">
+                                <div class="col-md-4 col-lg-4">
+                                    <label for="<?php echo $id; ?>"><?php echo $field->caption; ?></label>
+                                    <?php if( $field->description != '' ): ?>
+                                        <span class="help-block"><?php echo $field->description; ?></span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-md-8 col-lg-8">
+                                    <?php echo RMSettings::render_field( $field ); ?>
+                                </div>
                             </div>
-                            <div class="col-md-8 col-lg-8">
-                                <?php echo RMSettings::render_field( $field ); ?>
-                            </div>
-                        </div>
+
+                        <?php endif; ?>
 
                     <?php endforeach; ?>
                 <?php endif; ?>

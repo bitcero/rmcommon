@@ -38,6 +38,7 @@ class RMFormUser extends RMFormElement
             $this->setWithDefaults('showall', $showall, 0);
             $this->setWithDefaults('can_change', $enable, true);
             $this->setWithDefaults('selected', $select, array());
+            $this->setWithDefaults('title', $multi ? __('Select users', 'rmcommon') : __('Select user', 'rmcommon'), array());
         }
 
         $this->add('class', 'form_users_container');
@@ -48,9 +49,10 @@ class RMFormUser extends RMFormElement
         }
 
         $this->setIfNotSet('selected', array());
+        $this->setIfNotSet('title', $multi ? __('Select users', 'rmcommon') : __('Select user', 'rmcommon'), array());
         $this->setIfNotSet('id', $this->get('name'));
 
-        $this->suppressList = array_merge($this->suppressList, ['limit', 'multi', 'showall', 'can_change', 'selected']);
+        $this->suppressList = array_merge($this->suppressList, ['limit', 'multi', 'showall', 'can_change', 'selected','title']);
 
         !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
 	}
@@ -102,7 +104,7 @@ class RMFormUser extends RMFormElement
 		if (is_array($selected) && !empty($selected) && !(count($selected)==1 && $selected[0]==0)){
 			$sql = "SELECT uid,uname FROM ".$db->prefix("users")." WHERE ";
 			$sql1 = '';
-			if ($this->multi){
+			if ($this->get('multi')){
 				foreach ($selected as $id){
 					if ($id!=0) $sql1 .= $sql1 == '' ? "uid='$id'" : " OR uid='$id'";
 				}
@@ -124,7 +126,7 @@ class RMFormUser extends RMFormElement
 		
 		$rtn .= "</ul><br />";
 		if ($this->get('can_change')){
-			$rtn .= "<button type='button' class='btn btn-info btn-sm' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit').",".intval($this->get('multi')).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
+			$rtn .= "<button type='button' class='btn btn-info btn-sm' data-title='".$this->get('title')."' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit').",".intval($this->get('multi')).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
 		    /*$rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
 					    <div class="modal-dialog">
 					        <div class="modal-content">

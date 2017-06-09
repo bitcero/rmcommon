@@ -399,7 +399,13 @@ function edCheckOpenTags(which, button) {
 }    
 
 function edCloseAllTags(which) {
+
+    if(undefined == edOpenTags[which]){
+        return;
+    }
+
     var count = edOpenTags[which].length;
+
     for (o = 0; o < count; o++) {
         edInsertTag(which, edOpenTags[which][edOpenTags[which].length - 1]);
     }
