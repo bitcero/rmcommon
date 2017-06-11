@@ -209,7 +209,7 @@ var usersField = jQuery.extend({
 
 				li = "<li id='"+users_field_name+"-exmuser-"+id+"'>";
 				li += "<label>";
-                li += "<a href='javascript:;' onclick='usersField.remove("+id+");'><span>remove</span></a>";
+                li += "<a href='#' onclick='usersField.remove("+id+");'>&times;</a>";
                 li += "<input type='"+input+"' value='"+id+"' name='"+name+"' id='"+users_field_name+"-"+id+"' checked='checked' />";
 				li += " "+$("#user-"+users_field_name+"-caption-"+id).text()+"</label></li>";
 				$("#"+users_field_name+"-users-list").append(li);
@@ -223,7 +223,7 @@ var usersField = jQuery.extend({
 			if ($(ele).length>0){
 				li = "<li id='"+users_field_name+"-exmuser-"+uid+"'>";
 				li += "<label>";
-                li += "<a href='javascript:;' onclick='usersField.remove("+uid+");'><span>remove</span></a>";
+                li += "<a href='javascript:;' onclick='usersField.remove("+uid+");'>&times;</a>";
                 li += "<input type='"+input+"' value='"+uid+"' name='"+name+"' id='"+users_field_name+"-"+uid+"' checked='checked' />";
 				li += " "+$("#"+users_field_name+"-username-"+uid).text()+"</label></li>";
 				$("#"+users_field_name+"-users-list").append(li);
@@ -237,7 +237,7 @@ var usersField = jQuery.extend({
 
 	remove: function(id){
 		$("#"+users_field_name+"-exmuser-"+id).remove();
-
+        return false;
 	}
 
 });

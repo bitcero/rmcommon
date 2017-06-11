@@ -623,7 +623,7 @@
         }
 
         if(options.width){
-            options.size = options.width;
+            options.size = options.width == 'small' ? 'bsmall' : options.width;
         }
 
         if (options.size) {
