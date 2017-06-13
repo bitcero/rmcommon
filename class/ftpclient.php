@@ -87,7 +87,7 @@ class RMFtpClient
     * @return bool o octal
     */
     public function chmod($mode, $ruta){
-        return ftp_chmod($this->connection, intval($mode), $ruta);
+        return ftp_chmod($this->connection, (int)$mode, $ruta);
     }
     
     /**

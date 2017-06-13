@@ -1,12 +1,30 @@
 <?php
-// $Id: xoops_version.php 1056 2012-09-12 15:43:20Z i.bitcero $
-// --------------------------------------------------------------
-// Red México Common Utilities
-// A framework for Red México Modules
-// Author: Eduardo Cortés <i.bitcero@gmail.com>
-// Email: i.bitcero@gmail.com
-// License: GPL 2.0
-// --------------------------------------------------------------
+/**
+ * Common Utilities Framework for XOOPS
+ *
+ * Copyright © 2017 Eduardo Cortés http://www.eduardocortes.mx
+ * -------------------------------------------------------------
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * -------------------------------------------------------------
+ * @copyright    Eduardo Cortés (http://www.eduardocortes.mx)
+ * @license      GNU GPL 2
+ * @package      rmcommon
+ * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
+ * @url          http://www.eduardocortes.mx
+ */
 
 if (!function_exists("__")){
     function __($text, $d = ''){
@@ -34,7 +52,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>65,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>66,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -310,6 +328,7 @@ $cu_settings['config'][] = array(
 );
 
 // Secure Key
+global $common;
 if (!isset($xoopsSecurity)) $xoopsSecurity = new XoopsSecurity();
 $cu_settings['config'][] = array(
     'name'          => 'secretkey',
@@ -317,7 +336,7 @@ $cu_settings['config'][] = array(
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => $common->settings->secretkey != '' ? '' : password_hash( XOOPS_URL . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['GATEWAY_INTERFACE'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_ADMIN'] . $_SERVER['SERVER_SIGNATURE'] . $xoopsUser->uname(), PASSWORD_DEFAULT),
+    'default'       => $common->settings->secretkey != '' ? '' : password_hash( XOOPS_URL . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['GATEWAY_INTERFACE'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_ADMIN'] . $_SERVER['SERVER_SIGNATURE'] . $GLOBALS['xoopsUser']->uname(), PASSWORD_DEFAULT),
     'category'      => 'general'
 );
 

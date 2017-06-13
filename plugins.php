@@ -445,7 +445,7 @@ function configure_rm_plugin()
                 break;
             case 'tplset':
                 $ele = new RMFormSelect($option['caption'], 'conf_' . $config);
-                $tplset_handler =& exm_gethandler('tplset');
+                $tplset_handler = exm_gethandler('tplset');
                 $tplsetlist =& $tplset_handler->getList();
                 asort($tplsetlist);
                 foreach ($tplsetlist as $key => $name) {

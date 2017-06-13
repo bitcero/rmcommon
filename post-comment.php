@@ -177,7 +177,7 @@ if ($action=='save'){
     // Send notification
     if ( $cuSettings->comments_notify ){
 
-        $config_handler =& xoops_gethandler('config');
+        $config_handler = xoops_getHandler('config');
         $mailConfig = $config_handler->getConfigsByCat(XOOPS_CONF_MAILER);
 
         $xoopsMailer =& xoops_getMailer();
@@ -271,7 +271,7 @@ if ($action=='save'){
         $form->addElement($ele);
     }
     
-    if($xoopsUser->isAdmin($comment->getVAr('id_obj'))){
+    if($xoopsUser->isAdmin($comment->getVar('id_obj'))){
         $ele = new RMFormRadio(__('Status','rmcommon'), 'status', 1, 0, 2);
         $ele->addOption(__('Approved', 'rmcommon'), 'approved', $comment->getVar('status')=='approved'?1:0);
         $ele->addOption(__('Unapproved', 'rmcommon'), 'waiting', $comment->getVar('status')=='waiting'?1:0);

@@ -9,7 +9,7 @@
  * URI: http://www.redmexico.com.mx
  */
 
-require  dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/include/cp_header.php';
+require dirname( dirname( dirname(__DIR__) ) ) . '/include/cp_header.php';
 
 $ajax = new Rmcommon_Ajax();
 $ajax->prepare_ajax_response();
@@ -26,7 +26,7 @@ if ( !$module )
         __('Specified module is not installed!', 'rmcommon'), 1, 0
     );
 
-$url = $module->getInfo('updateurl');
+$url =& $module->getInfo('updateurl');
 $url .= false === strpos( $url, '?' ) ? '?' : '&';
 $url .= 'action=data&id=' . $module->dirname();
 

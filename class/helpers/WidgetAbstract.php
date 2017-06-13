@@ -58,4 +58,9 @@ abstract class WidgetAbstract extends Attributes
         // generate id from name if not already set
         return parent::renderAttributeString();
     }
+
+    public function display()
+    {
+        echo $this->getHTML();
+    }
 }

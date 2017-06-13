@@ -135,13 +135,13 @@ class RMHttpRequest
                 $return = (int) $value;
                 break;
             case 'float':
-                $return = floatval($value);
+                $return = (float)$value;
                 break;
             case 'number':
-                $return = is_float($value) ? floatval($value) : intval($value);
+                $return = is_float($value) ? (float)$value : (int)$value;
                 break;
             case 'string':
-                $return = trim(strval($value));
+                $return = trim((string)$value);
                 break;
             case 'array':
                 $return = is_array($value) ? $value : (array) $value;

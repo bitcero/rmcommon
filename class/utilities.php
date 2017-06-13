@@ -11,7 +11,7 @@
 class RMUtilities
 {
     /**
-     * Obtiene una ?nica instancia de esta clase
+     * Gets a singleton
      */
     static function get()
     {
@@ -23,7 +23,7 @@ class RMUtilities
     }
 
     /**
-     * Elimina un archivo existente del servidor
+     * Deletes an existing file
      * @param string $filepath Ruta completa al archivo
      * @return bool
      */

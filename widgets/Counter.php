@@ -104,7 +104,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
         // Calculate cells
 
 
-        return \RMTemplate::get()->render($this->template());
+        return \RMTemplate::getInstance()->render($this->template());
     }
 
     /**
@@ -170,8 +170,8 @@ class Counter extends WidgetAbstract implements WidgetInterface
         } elseif(is_numeric($value)) {
 
             $value = number_format($value, 2);
-            if(intval($value) == $value){
-                $value = intval($value);
+            if((int)$value == $value){
+                $value = (int)$value;
             }
 
         }

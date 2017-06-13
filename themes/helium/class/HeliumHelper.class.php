@@ -124,7 +124,7 @@ class HeliumHelper
 
         if(!$xoopsUser->isAdmin($mod->mid())) return false;
 
-        $amenu = $mod->getAdminMenu();
+        $amenu =& $mod->getAdminMenu();
 
         $amenu = RMEvents::get()->run_event($mod->dirname().'.module.menu', $amenu);
         if(empty($amenu)) return false;
@@ -198,7 +198,7 @@ class HeliumHelper
     public function systemPreferences(){
 
         include_once XOOPS_ROOT_PATH.'/modules/system/include/functions.php';
-        $confcat_handler = xoops_gethandler('configcategory');
+        $confcat_handler = xoops_getHandler('configcategory');
         $confcats = $confcat_handler->getObjects();
         $image = system_adminVersion('preferences', 'configcat');
 
@@ -250,7 +250,8 @@ class HeliumHelper
 
         switch($data){
             case 'icon':
-                $icon = isset($replacements_icons[$id]) ? $replacements_icons[$id] : '';;
+                $icon = isset($replacements_icons[$id]) ? $replacements_icons[$id] : '';
+
                 return $icon;
 
             case 'title':

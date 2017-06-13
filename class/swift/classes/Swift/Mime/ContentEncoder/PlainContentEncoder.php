@@ -56,7 +56,7 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
             $string = $this->_canonicalize($string);
         }
 
-        return $this->_safeWordWrap($string, $maxLineLength, "\r\n");
+        return $this->_safeWordwrap($string, $maxLineLength, "\r\n");
     }
 
     /**

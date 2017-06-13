@@ -73,7 +73,8 @@ class TileBox extends WidgetAbstract implements WidgetInterface
             'color' => '',
             'caption' => '',
             'solid' => false,
-            'footer' => ''
+            'footer' => '',
+            'link' => ''
         ];
 
         $data = array_merge($defaults, $data);
@@ -84,7 +85,7 @@ class TileBox extends WidgetAbstract implements WidgetInterface
         if($data['type'] == 'user'){
             $this->add('class', 'user');
 
-            if(!is_a($data['user'], 'XoopsUser') && intval($data['user']) <= 0){
+            if(!is_a($data['user'], 'XoopsUser') && (int)$data['user'] <= 0){
                 return false;
             }
 
