@@ -73,7 +73,8 @@ class TileBox extends WidgetAbstract implements WidgetInterface
             'color' => '',
             'caption' => '',
             'solid' => false,
-            'footer' => ''
+            'footer' => '',
+            'link' => ''
         ];
 
         $data = array_merge($defaults, $data);

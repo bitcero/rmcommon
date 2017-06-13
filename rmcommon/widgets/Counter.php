@@ -104,7 +104,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
         // Calculate cells
 
 
-        return \RMTemplate::get()->render($this->template());
+        return \RMTemplate::getInstance()->render($this->template());
     }
 
     /**
