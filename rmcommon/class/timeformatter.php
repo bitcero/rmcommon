@@ -150,6 +150,10 @@ class RMTimeFormatter
 
     public function ago( $time = 0 ){
 
+        if(is_string($time)){
+            $time = strtotime($time);
+        }
+
         if ( $time <= 0 )
             return __('Some time ago', 'rmcommon');
 

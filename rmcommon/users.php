@@ -1,12 +1,30 @@
 <?php
-// $Id: rss.php 825 2011-12-09 00:06:11Z i.bitcero $
-// --------------------------------------------------------------
-// Red México Common Utilities
-// A framework for Red México Modules
-// Author: Eduardo Cortés <i.bitcero@gmail.com>
-// Email: i.bitcero@gmail.com
-// License: GPL 2.0
-// --------------------------------------------------------------
+/**
+ * Common Utilities Framework for XOOPS
+ *
+ * Copyright © 2017 Eduardo Cortés http://www.eduardocortes.mx
+ * -------------------------------------------------------------
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * -------------------------------------------------------------
+ * @copyright    Eduardo Cortés (http://www.eduardocortes.mx)
+ * @license      GNU GPL 2
+ * @package      rmcommon
+ * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
+ * @url          http://www.eduardocortes.mx
+ */
 
 /**
 * This file allow to manage users registered.
@@ -467,7 +485,7 @@ function show_mailer(){
     $form->addElement(new RMFormRadio(__('Message type','rmcommon'), 'type', ' ', 1, 2));
     $form->element('type')->addOption(__('HTML','global'), 'html', 1, $rmc_config['editor_type']=='tiny' ? 'onclick="switchEditors.go(\'message\', \'tinymce\');"' : '');
     $form->element('type')->addOption(__('Plain Text','global'), 'text', 0, $rmc_config['editor_type']=='tiny' ? 'onclick="switchEditors.go(\'message\', \'html\');"': '');
-    $form->addElement(new RMFormEditor(__('Message content','rmcommon'), 'message', '99%', '300px', ''), true);
+    $form->addElement(new RMFormEditor(__('Message content','rmcommon'), 'message', '', '300px', ''), true);
 
     $ele = new RMFormButtonGroup();
     $ele->addButton('sbt', __('Send E-Mail','rmcommon'), 'submit');

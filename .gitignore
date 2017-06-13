@@ -23,3 +23,5 @@ prepros.cfg
 
 # PHPStorm projects
 .idea/
+
+*/prepros-9.config

@@ -106,7 +106,7 @@ class RMActiveForm
         $class = 'Active' . ucfirst( $object );
 
         if ( !class_exists( $class ) )
-            include_once $file;
+            include_once( $file );
 
         if ( !class_exists( $class ) )
             throw new RMException( sprintf( __( 'The form element "%s" is not valid.', 'rmcommon' ), $object ) );

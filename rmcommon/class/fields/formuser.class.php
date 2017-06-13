@@ -93,7 +93,7 @@ class RMFormUser extends RMFormElement
 		if ($this->get('showall') && in_array(0, $this->get('selected'))){
 			$rtn .= "<li id='".$this->id()."-exmuser-0'>\n
                         <label>
-                        <a href='javascript:;' onclick=\"users_field_name='".$this->id()."'; usersField.remove(0);\"><span>delete</span></a>
+                        <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove(0); return false;\">&times;</a>
                         <input type='".($this->get('multi') ? 'checkbox' : 'radio')."' name='".($this->get('multi') ? $this->get('name').'[]' : $this->get('name'))."' id='".$this->id()."-0'
 				 		value='0' checked='checked' /> ".__('All Users','rmcommon')."
                         </label></li>";
@@ -116,7 +116,7 @@ class RMFormUser extends RMFormElement
 			while ($row = $db->fetchArray($result)){
 				$rtn .= "<li id='".$this->id()."-exmuser-$row[uid]'>\n
 						<label>";
-                $rtn .= $this->get('can_change') ? " <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]);\"><span>delete</span></a>" : '';
+                $rtn .= $this->get('can_change') ? " <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]); return false;\">&times;</a>" : '';
                 $rtn .= "<input type='".($this->get('multi') ? 'checkbox' : 'radio')."' name='".($this->get('multi') ? $this->get('name').'[]' : $this->get('name'))."' id='".$this->id()."-".$row['uid']."'
 				 		value='$row[uid]' checked='checked' /> 
                         $row[uname] ";
