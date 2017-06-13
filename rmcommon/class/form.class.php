@@ -284,7 +284,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
         $ret['field'] = $element;
         $ret['class'] = get_class($element);
         if (get_class($element) == 'RMFormEditor') {
-            if ($element->getType() == 'tiny') $this->editores[] = $element->getName();
+            if ($element->getType() == 'tiny') $this->editores .= ','.$element->getName();
         }
 
         if ($required)

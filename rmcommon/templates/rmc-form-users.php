@@ -24,19 +24,21 @@
 
     <div class="row">
         <?php if ($field_type=='checkbox'): ?>
-            <div class="col-lg-5 form-users-selected-list">
-                <div id="<?php echo $field; ?>-selected-title" class="form_users_selected_title">
-                    <?php _e('Selected:','rmcommon'); ?> (<strong><span><?php echo count($selected); ?></span></strong>)
+            <div class="col-lg-5">
+                <div class="form-users-selected-list">
+                    <div id="<?php echo $field; ?>-selected-title" class="form_users_selected_title">
+                        <?php _e('Selected:','rmcommon'); ?> (<strong><span><?php echo count($selected); ?></span></strong>)
+                    </div>
+                    <ul id="<?php echo $field; ?>-selected-list">
+                        <?php foreach($selecteds as $sel): ?>
+                            <li class="user_<?php echo $sel['id'] ?>">
+                                <label><input type="checkbox" name="s[]" value="<?php echo $sel['id']; ?>" checked="checked" onchange="usersField.remove_from_list(<?php echo $sel['id']; ?>);" />
+                                    <span id="user-<?php echo $field; ?>-caption-<?php echo $sel['id']; ?>"><?php echo $sel['name']; ?></span>
+                                </label></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div align="center"><button type="button" class="btn btn-default" onclick="usersField.insert_users(<?php echo $type; ?>);"><?php echo _e('Insert Users','rmcommon'); ?></button></div>
                 </div>
-                <ul id="<?php echo $field; ?>-selected-list">
-                    <?php foreach($selecteds as $sel): ?>
-                        <li class="user_<?php echo $sel['id'] ?>">
-                            <label><input type="checkbox" name="s[]" value="<?php echo $sel['id']; ?>" checked="checked" onchange="usersField.remove_from_list(<?php echo $sel['id']; ?>);" />
-                                <span id="user-<?php echo $field; ?>-caption-<?php echo $sel['id']; ?>"><?php echo $sel['name']; ?></span>
-                            </label></li>
-                    <?php endforeach; ?>
-                </ul>
-                <div align="center"><button type="button" class="btn btn-default" onclick="usersField.insert_users(<?php echo $type; ?>);"><?php echo _e('Insert Users','rmcommon'); ?></button></div>
             </div>
         <?php endif; ?>
 

@@ -184,7 +184,7 @@ if ($action=='save'){
         $xoopsMailer->useMail();
         $xoopsMailer->setHTML( true );
 
-        $ghandler = xoops_getHandler('group' );
+        $ghandler = xoops_gethandler( 'group' );
         $group = $ghandler->get(XOOPS_GROUP_ADMIN);
         $xoopsMailer->setToGroups( $group );
         $xoopsMailer->setFromEmail($mailConfig['from']);
