@@ -1,0 +1,1 @@
+(function($){$("#<?php echo $fieldID; ?>").periodpicker({<?php foreach($parameters as $key => $value): ?><?php echo $key; ?>: <?php echo is_string($value) ? '"' . $value . '"' : var_export($value, true); ?>,<?php endforeach; ?>});})(jQuery);
