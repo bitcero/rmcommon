@@ -45,7 +45,7 @@ class RMFormEditor extends RMFormElement
     private $md_options = array();
 
     /**
-     * @param string $caption Texto del campo
+     * @param mixed $caption Texto del campo
      * @param string $name Nombre de este campo
      * @param string $width Ancho del campo. Puede ser el valor en formato pixels (300px) o en porcentaje (100%)
      * @param string $height Alto de campo. El valor debe ser pasado en formato pixels (300px).
@@ -209,7 +209,8 @@ class RMFormEditor extends RMFormElement
         RMTemplate::getInstance()->add_script(RMCURL . '/api/editors/tinymce/jquery.tinymce.min.js', '', ['footer' => 1, 'id' => 'tinymce-jquery-js']);
         RMTemplate::getInstance()->add_inline_script(TinyEditor::getInstance()->get_js(), 1);
         if ('' != $this->get('id')) {
-            RMTemplate::get()->add_inline_script('edToolbar("' . $this->get('id') . '");', 1);
+            //RMTemplate::get()->add_inline_script('edToolbar("' . $this->get('id') . '");', 1);
+            RMTemplate::getInstance()->add_inline_script('$(document).ready(function(){initMCE("#' . $this->get('id') . '"); edToolbar("' . $this->get('id') . '");});', 1);
         }
 
         $plugins = array();

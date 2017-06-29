@@ -184,6 +184,35 @@ class RMSettings
         return null;
     }
 
+    public function setValue($directory, $option, $value)
+    {
+        global $xoopsModule, $xoopsDB;
+
+        if('' == $directory || '' == $option){
+            return false;
+        }
+
+        if($xoopsModule && $xoopsModule->getVar('dirname') == $directory){
+            $mod = $xoopsModule;
+        } else {
+            $module_handler = xoops_getHandler('module');
+            $mod = $module_handler->getByDirname($directory);
+        }
+
+        $item = new Rmcommon_Config_Item($option, $mod->getVar('mid'));
+        if($item->isNew()){
+            return false;
+        }
+
+        $item->set_value($value);
+
+        if($item->save()){
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Prepares the form field that will be shown on settings form
      * and returns the HTML code.

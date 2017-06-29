@@ -77,12 +77,6 @@ class RMFormUser extends RMFormElement
 		RMTemplate::getInstance()->add_script('forms.js', 'rmcommon', array('footer' => 1));
 		RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon',  array('directory' => 'include', 'footer' => 1));
 		RMTemplate::getInstance()->add_style('forms.min.css','rmcommon', ['id' => 'forms-css']);
-        
-		if (function_exists("xoops_cp_header")){
-        	RMTemplate::get()->add_style('jquery.css','rmcommon');
-		} else {
-			RMTemplate::get()->add_style('jquery.css','rmcommon');
-		}
 
         $attributes = $this->renderAttributeString();
 		

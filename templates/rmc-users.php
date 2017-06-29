@@ -4,7 +4,7 @@
     <div class="basic_options">
 	<span class="sections">
 		<label for="search-key"><?php _e('Search:','rmcommon'); ?></label>
-		<input class="form-control" type="text" name="keyw" id="search-key" size="15" value="<?php echo rmc_server_var($_REQUEST, 'keyword', ''); ?>" />
+		<input class="form-control" type="text" name="keyw" id="search-key" size="15" value="<?php echo $srhkeyw; ?>" />
 	</span>
 	<span class="sections">
 		<label for="users-number"><?php _e('Show:','rmcommon'); ?></label>
@@ -29,7 +29,7 @@
 
                             <div class="form-group">
                                 <label for="user-email"><?php _e('Email:','rmcommon'); ?></label>
-                                <input type="text" class="form-control" name="email" id="user-email" value="<?php echo RMTemplate::get()->get_var('srhemail'); ?>" size="20">
+                                <input type="text" class="form-control" name="email" id="user-email" value="<?php echo $srhemail; ?>" size="20">
                             </div>
 
                         </div>
@@ -37,14 +37,14 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="user-url"><?php _e('Web site:','rmcommon'); ?></label>
-                                <input type="text" class="form-control" name="url" id="user-url" size="20" value="">
+                                <input type="text" class="form-control" name="url" id="user-url" size="20" value="<?php echo $srhurl; ?>">
                             </div>
                         </div>
 
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="user-from"><?php _e('Country/Location:','rmcommon'); ?></label>
-                                <input type="text" class="form-control" name="from" id="user-from" size="20" value="">
+                                <input type="text" class="form-control" name="from" id="user-from" size="20" value="<?php echo $srhfrom; ?>">
                             </div>
                         </div>
 
@@ -69,9 +69,9 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="<?php _e('Posts between:','rmcommon'); ?>"><?php _e('Posts between:','rmcommon'); ?></label><br>
-                                <input type="text" class="form-control inline" name="posts1" id="users-posts1" value="0" size="5" />
+                                <input type="text" class="form-control inline" name="posts1" id="users-posts1" value="<?php echo (int) $srhposts1; ?>" size="5" />
                                 <?php _e('and','rmcommon'); ?>
-                                <input type="text" class="form-control inline" name="posts2" id="users-posts2" value="" size="5" />
+                                <input type="text" class="form-control inline" name="posts2" id="users-posts2" value="<?php echo (int) $srhposts2 > 0 ? (int) $posts2 : ''; ?>" size="5" />
                             </div>
                         </div>
 
@@ -83,9 +83,9 @@
                             <div class="form-group">
                                 <label for="users-mailok"><?php _e('Mail:','rmcommon'); ?></label>
                                 <select name="mailok" id="users-mailok" class="form-control">
-                                    <option value="-1"><?php _e('All users','rmcommon'); ?></option>
-                                    <option value="1"><?php _e('Users that accept mail','rmcommon'); ?></option>
-                                    <option value="0"><?php _e('Users that do\'nt accept mail','rmcommon'); ?></option>
+                                    <option value="-1"<?php echo -1 == $srhmailok || '' == $srhmailok ? ' selected' : ''; ?>><?php _e('All users','rmcommon'); ?></option>
+                                    <option value="1"<?php echo 1 == $srhmailok ? ' selected' : ''; ?>><?php _e('Users that accept mail','rmcommon'); ?></option>
+                                    <option value="0"<?php echo is_numeric($srhmailok) && 0 == $srhmailok ? ' selected' : ''; ?>><?php _e('Users that do\'nt accept mail','rmcommon'); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -94,9 +94,9 @@
                             <div class="form-group">
                                 <label for="users-actives"><?php _e('Status:','rmcommon'); ?></label>
                                 <select name="actives" id="users-actives" class="form-control">
-                                    <option value="-1"><?php _e('All users','rmcommon'); ?></option>
-                                    <option value="1"><?php _e('Active users','rmcommon'); ?></option>
-                                    <option value="0"><?php _e('Inactive users','rmcommon'); ?></option>
+                                    <option value="all"<?php echo 'all' == $srhactives || '' == $srhactives ? ' selected' : ''; ?>><?php _e('All users','rmcommon'); ?></option>
+                                    <option value="active"<?php echo 'active' == $srhactives ? ' selected' : ''; ?>><?php _e('Active users','rmcommon'); ?></option>
+                                    <option value="inactive"<?php echo 'inactive' == $srhactives ? ' selected' : ''; ?>><?php _e('Inactive users','rmcommon'); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -105,10 +105,10 @@
                             <div class="form-group">
                                 <label><?php _e('Search method:','rmcommon'); ?></label><br>
                                 <div class="radio-inline">
-                                    <label><input name="srhmethod" value="OR"  checked="checked" type="radio" />Coincident</label>
+                                    <label><input name="srhmethod" value="OR" type="radio"<?php echo 'OR' == $srhmethod ? ' checked' : ''; ?>>Coincident</label>
                                 </div>
                                 <div class="radio-inline">
-                                    <label><input name="srhmethod" value="AND" type="radio" />Exact</label>
+                                    <label><input name="srhmethod" value="AND" type="radio"<?php echo 'AND' == $srhmethod ? ' checked' : ''; ?>>Exact</label>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                 <?php if(count($users)<=0): ?>
                     <tr class="even">
                         <td colspan="8" class="text-center">
-                            <span class="label label-important"><?php _e('There are not any user registered with for this filter.','rmcommon'); ?></span>
+                            <span class="text-danger"><?php _e('There are not any user registered.','rmcommon'); ?></span>
                         </td>
                     </tr>
                 <?php endif; ?>
@@ -281,5 +281,6 @@
 
     </div>
 <?php echo $xoopsSecurity->getTokenHTML(); ?>
+    <input type="hidden" name="query" value="<?php echo urlencode($query); ?>">
 <!-- Navigation Options -->
 </form>

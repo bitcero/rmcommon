@@ -780,7 +780,7 @@ class RMTemplate
                 );
 
                 $this->tpl_styles['jqueryui-css'] = [
-                    'url' => RMUris::relative_url(RMCURL . '/css/jquery.css'),
+                    'url' => RMUris::relative_url(RMCURL . '/css/js-widgets.css'),
                     'type' => 'text/css',
                     'footer' => 0
                 ];
