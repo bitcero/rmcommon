@@ -34,7 +34,7 @@ class RMFormCheck extends RMFormElement
         $this->suppressList[] = 'options';
 
         // User can provide options in constructor
-        if (array_key_exists('options', $caption)) {
+        if ($this->has('options' )) {
             foreach ($caption['options'] as $value => $option) {
                 $this->_options[] = [
                     'caption' => TextCleaner::getInstance()->clean_disabled_tags($option['caption']),
@@ -100,7 +100,7 @@ class RMFormCheck extends RMFormElement
                 //if ($v['state']==1){
                 //	$rtn .= "checked='checked' ";
                 //}
-                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked " : '');
+                $rtn .= RMHttpRequest::request($this->get('name'), 'string') == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked " : '');
                 $rtn .= "> $v[caption]</label></div>";
             }
         }
@@ -212,7 +212,7 @@ class RMFormRadio extends RMFormElement
 
             foreach ($this->_options as $k => $v) {
                 $rtn .= "<div class=\"radio\"><label><input $attributes value='$v[value]' ";
-                $rtn .= RMHttpRequest::request($this->get('name', 'string', ''), 'mixed') == $v['value'] ? "checked " : ($v['value'] == $this->get('value') ? "checked='checked' " : '');
+                $rtn .= RMHttpRequest::request($this->get('name', 'string', ''), 'mixed') == $v['value'] ? "checked " : ($v['value'] == $this->get('value') ? " checked " : '');
                 $rtn .= ($v['extra'] != '' ? "$v[extra] " : '') . "> $v[caption]</label></div>";
             }
 

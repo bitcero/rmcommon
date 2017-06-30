@@ -59,7 +59,7 @@ $modversion['author'] = "Eduardo Cortés";
 $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
-//$modversion['updateurl'] = "https://www.xoopsmexico.net/modules/vcontrol/";
+//$modversion['updateurl'] = "https://env.eduardocortes.mx/platform/";
 $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
 // PERMISSIONS
@@ -334,7 +334,7 @@ $cu_settings['config'][] = array(
     'name'          => 'secretkey',
     'title'         => __('Secret Key','rmcommon'),
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
-    'formtype'      => 'textbox',
+    'formtype'      => 'hidden',
     'valuetype'     => 'text',
     'default'       => $common->settings->secretkey != '' ? '' : password_hash( XOOPS_URL . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['GATEWAY_INTERFACE'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_ADMIN'] . $_SERVER['SERVER_SIGNATURE'] . $GLOBALS['xoopsUser']->uname(), PASSWORD_DEFAULT),
     'category'      => 'general'
