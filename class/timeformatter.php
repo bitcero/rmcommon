@@ -112,13 +112,13 @@ class RMTimeFormatter
         if($time<=0) return null;
 
         $days = array(
-            __('Sunday','rmcommon'),
-            __('Monday','rmcommon'),
-            __('Tuesday','rmcommon'),
-            __('Wednesday','rmcommon'),
-            __('Thursday','rmcommon'),
-            __('Friday','rmcommon'),
-            __('Saturday','rmcommon')
+            __('sunday','rmcommon'),
+            __('monday','rmcommon'),
+            __('tuesday','rmcommon'),
+            __('wednesday','rmcommon'),
+            __('thursday','rmcommon'),
+            __('friday','rmcommon'),
+            __('saturday','rmcommon')
         );
 
         return $days[date("w", $time)];
@@ -130,18 +130,18 @@ class RMTimeFormatter
         if($time<=0) return null;
 
         $months = array(
-            __('January', 'rmcommon'),
-            __('February', 'rmcommon'),
-            __('March', 'rmcommon'),
-            __('April', 'rmcommon'),
-            __('May', 'rmcommon'),
-            __('June', 'rmcommon'),
-            __('July', 'rmcommon'),
-            __('August', 'rmcommon'),
-            __('September', 'rmcommon'),
-            __('October', 'rmcommon'),
-            __('November', 'rmcommon'),
-            __('December', 'rmcommon'),
+            __('january', 'rmcommon'),
+            __('february', 'rmcommon'),
+            __('march', 'rmcommon'),
+            __('april', 'rmcommon'),
+            __('may', 'rmcommon'),
+            __('june', 'rmcommon'),
+            __('july', 'rmcommon'),
+            __('august', 'rmcommon'),
+            __('september', 'rmcommon'),
+            __('october', 'rmcommon'),
+            __('november', 'rmcommon'),
+            __('december', 'rmcommon'),
         );
 
         return $months[date('n', $time)-1];
