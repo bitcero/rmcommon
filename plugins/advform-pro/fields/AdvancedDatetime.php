@@ -41,13 +41,6 @@ class AdvancedDatetime extends \RMFormElement
             throw new \RMException(__('You must provide JavaScript parameters for datetime field', 'advform-pro'));
         }
 
-        if(array_key_exists('norange', $options['parameters'])){
-            $this->range = false;
-        } else {
-            $this->range = true;
-            $options['parameters']['end'] = '#' . $this->get('id') . '-end';
-        }
-
         if(array_key_exists('timepicker', $options['parameters'])){
             $this->time = true;
         }
@@ -62,11 +55,21 @@ class AdvancedDatetime extends \RMFormElement
 
         parent::__construct($options);
 
+        if(array_key_exists('norange', $options['parameters'])){
+            $this->range = false;
+        } else {
+            $this->range = true;
+            $this->set('parameters', array_merge($this->get('parameters'), ['end' => '#' . $this->get('id') . '-end']));
+        }
+
+        if(false == array_key_exists('buttonClassSuffix', $options['parameters'])){
+            $this->set('parameters', array_merge($this->get('parameters'), ['buttonClassSuffix' => 'btn btn-default']));
+        }
+
         if(false == $this->has('name')){
             throw new \RMException(__('You must provide a name for AdvancedDatetime field', 'advform-rpo'));
         }
 
-        //$this->setIfNotSet('class', 'form-control');
         $this->set('data-advf-field', 'uploader');
 
         $this->suppressList = ['caption', 'params'];
