@@ -1,11 +1,11 @@
 <?php foreach($updates['updates'] as $i => $upd): ?>
-    <div class="upd-item <?php echo $upd['data']['type']; ?>" id="upd-<?php echo $i; ?>">
+    <div class="upd-item <?php echo $upd['data']['type']; ?><?php echo $upd['data']['api'] ? ' apikey' : ''; ?>" id="upd-<?php echo $i; ?>">
         <span class="type"><?php echo $upd['data']['type'] == 'module' ? __('Module', 'rmcommon') : ($upd['data']['type'] == 'plugin' ? __('Plugin', 'rmcommon') : __('Theme', 'rmcommon')); ?></span>
         <div class="row">
             <div class="col-md-7">
                 <h5><?php echo $upd['data']['title']; ?></h5>
                 <div class="rmc-upd-info">
-                    <?php echo sprintf(__('Type: %s','rmcommon'), '<span class="label-type">'.$upd['data']['type'].'</span>'); ?> |
+                    <?php echo sprintf(__('Type: %s','rmcommon'), '<span class="label-type">'.('module' == $upd['data']['type'] ? __('Module', 'rmcommon') : ('plugin' == $upd['data']['type'] ? __('Plugin', 'rmcommon') : __('Theme', 'rmcommon'))).'</span>'); ?> |
                     <?php echo sprintf(__('Version: %s','rmcommon'), '<strong>'.$upd['data']['version'].'</strong>'); ?> |
                     <?php echo sprintf(__('Released on: %s','rmcommon'), '<strong>' . $upd['data']['released'] . '</strong>'); ?>
                     <?php if($upd['data']['api']): ?>

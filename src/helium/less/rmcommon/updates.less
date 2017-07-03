@@ -2,8 +2,7 @@
   > .upd-item{
 
     border-bottom: 1px solid rgba(0,0,0,0.2);
-    padding: 30px 20px;
-    //margin-bottom: 15px;
+    padding: 35px 20px 25px;
     position: relative;
 
     .type{
@@ -32,7 +31,6 @@
     }
 
     > div{
-      background-color: #FFF;
       //border-radius: @border-radius-base;
 
       &:after{
@@ -61,6 +59,10 @@
       }
     }
 
+    &.apikey{
+      background-color: fade(#fad42e, 10%);
+    }
+
   }
 
   .rmc-upd-info{
@@ -73,6 +75,15 @@
   .modal-dialog{
 
     width: 96%;
+
+    .modal-body{
+      padding: 0;
+    }
+
+    .cu-content-footer{
+      margin: 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
 
     @media(min-width: @screen-sm){
       width: 80%;
@@ -167,10 +178,23 @@
   height: 200px;
   background-repeat: no-repeat;
   background-size: cover;
-  margin: -@panel-body-padding -@panel-body-padding @panel-body-padding -@panel-body-padding;
+  margin: 0;
 }
 
 #details{
+
+  overflow: hidden;
+  margin: 0;
+
+  .details{
+    padding: 20px;
+  }
+
+  .details-data{
+    background-color: rgba(0,0,0,0.05);
+    padding: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
 
   img{
     max-width: 100%;
@@ -189,6 +213,29 @@
         margin-top: 10px;
       }
     }
+  }
+
+  @media(min-width: @screen-sm){
+
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+
+    .details{
+      width: 65%;
+      padding: 20px;
+      display: table-cell;
+    }
+
+    .details-data{
+      display: table-cell;
+      width: 35%;
+      background-color: rgba(0,0,0,0.05);
+      padding: 20px;
+      border-left: 1px solid rgba(0,0,0,0.1);
+      border-top: 0;
+    }
+
   }
 
 }
