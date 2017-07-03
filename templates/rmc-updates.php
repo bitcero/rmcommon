@@ -86,37 +86,21 @@
     <p><strong><?php _e('Important:','rmcommon'); ?></strong> <?php _e('Before to install updates be sure that target folders have writting permissions for web server. If you wish, you can configure the internal FTP Client in order to update without assign writting permissions.','rmcommon'); ?></p>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <span class="rm-loading text-primary"><span class="fa fa-refresh fa-spin"></span> <?php _e('Searching for updates...','rmcommon'); ?></span>
-        <div id="rmc-updates">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><?php _e('Available updates', 'rmcommon'); ?></h4>
+    </div>
+    <div class="rm-loading text-primary"><span class="fa fa-refresh fa-spin"></span> <?php _e('Searching for updates...','rmcommon'); ?></div>
+    <div id="rmc-updates">
 
-        </div>
+    </div>
+    <div class="panel-body">
+
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-12">
 
-<div id="upd-info" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header cu-titlebar">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><?php _e('Update Details','rmcommon'); ?></h4>
-            </div>
-            <div class="modal-body">
-                <ul class="nav nav-tabs nav-tabs-color">
-                    <li class="active"><a href="#details" data-toggle="tab"><?php _e('Details','rmcommon'); ?></a></li>
-                    <li><a href="#files" data-toggle="tab"><?php _e('Files','rmcommon'); ?></a></li>
-                </ul>
-                <div class="tab-content tab-container">
-                    <div class="tab-item tab-pane fade active in" id="details">
-
-                    </div>
-                    <div class="tab-item tab-pane fade" id="files">
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

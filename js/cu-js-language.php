@@ -74,6 +74,14 @@ var cuLanguage = {
 
     visitWeb: "<?php _e('Visit web site', 'rmcommon'); ?>",
 
+<?php elseif ( $common->location == 'updates' ): ?>
+
+    version: '<?php _e('Version:', 'rmcommon'); ?>',
+    author: '<?php _e('Author:', 'rmcommon'); ?>',
+    published: '<?php _e('Published:', 'rmcommon'); ?>',
+    requirements: '<?php _e('Requirements:', 'rmcommon'); ?>',
+    xoops: '<?php _e('XOOPS version:', 'rmcommon'); ?>',
+
 <?php endif; ?>
 
     downloadNews: "<?php _e('Downloading News...', 'rmcommon' ); ?>",

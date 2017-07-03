@@ -49,7 +49,7 @@ function jsonReturn($message, $error=1, $data=array(), $token = 1){
 }
 
 function show_available_updates(){
-    global $rmTpl, $rmEvents, $updfile, $xoopsSecurity;
+    global $rmTpl, $rmEvents, $updfile, $xoopsSecurity, $common;
 
     $rmFunc = RMFunctions::get();
     $rmUtil = RMUtilities::get();
@@ -85,7 +85,7 @@ function show_available_updates(){
 * Load available updates via AJAX
 */
 function ajax_load_updates(){
-    global $rmTpl, $xoopsLogger, $updfile, $cuIcons;
+    global $rmTpl, $xoopsLogger, $updfile, $cuIcons, $common;
 
     $rmUtil = RMUtilities::get();
 
@@ -103,7 +103,7 @@ function ajax_load_updates(){
 * Load update details
 */
 function ajax_update_details(){
-    global $xoopsLogger, $rmTpl;
+    global $xoopsLogger, $rmTpl, $common;
 
     $xoopsLogger->activated = false;
 
@@ -113,21 +113,18 @@ function ajax_update_details(){
         jsonReturn(__('Invalid parameters!','rmcommon'));
 
     $data = json_decode(file_get_contents($url.'&action=update-details'), true);
+//print_R($data); die();
+    if($data['type']=='error')
+        $common->ajax()->notifyError($data['message']);
 
-    if($data['error']==1)
-        jsonReturn($data['message']);
+    /**
+     * Todo: Delete next file
+     * include $rmTpl->get_template('ajax/rmc_files_list.php','module','rmcommon');
+     */
 
-    $rmUtil = RMUtilities::get();
-    $files = unserialize(base64_decode($data['data']['files']));
-    ob_start();
-    include $rmTpl->get_template('ajax/rmc_files_list.php','module','rmcommon');
+    echo json_encode($data);
 
-    $ret = array(
-        'details' => $data['data']['details'],
-        'files' => ob_get_clean()
-    );
-
-    jsonReturn(0,0,$ret);
+    //jsonReturn(0,0,$ret);
 
     die();
 }

@@ -10,8 +10,7 @@ var credentials = new Array();
 
 $(document).ready(function(){
 
-    if($("#details").length>0 && $("#files").length>0)
-        loadUpdates();
+    loadUpdates();
     
     $("#upds-ftp, #ftp-settings .btn-primary").click(function(){
 
@@ -93,11 +92,21 @@ $(document).ready(function(){
         }
         
     });
+
+    $("body").on('click', '.button-details', function(){
+
+        var id = $(this).data('id');
+
+        $(this).cuSpinner({icon: 'svg-rmcommon-spinner-03'});
+
+        loadUpdateDetails(id, $(this));
+
+    });
     
 });
 
 function loadUpdates(){
-    
+
     $.get('updates.php', {action: 'ajax-updates'}, function(data){
 
         if ( undefined != data.token )
@@ -140,7 +149,7 @@ function rmCallNotifier(total){
     
 }
 
-function loadUpdateDetails(id){
+function loadUpdateDetails(id, $element){
     
     if(id==null || id==undefined) return false;
 
@@ -149,31 +158,16 @@ function loadUpdateDetails(id){
     
     if(update.url=='') return false;
     if(update.url.match(/^http:\/\/|^https:\/\//)==null) return false;
-    
+
     var url = update.url.replace(/\&amp;/,'&');
-    
-    $("#details").html('');
-    $("#files").html('');
-    $("#upd-info .tab-container").addClass('loading');
-    
-    $("#upd-info").modal();
 
     $.get('updates.php', {action: 'update-details', url: url}, function(data){
-        
-        if(data.error==1){
-            alert(data.message);
-            if ( '' != data.token )
-                $("#cu-token").val( data.token );
-            $("#upd-info-blocker").click();
-        }
 
-        if ( '' != data.token )
-            $("#cu-token").val( data.token );
-        
-        $("#details").html(data.data.details);
-        $("#files").html(data.data.files);
-        
-        $("#upd-info .tab-container").removeClass('loading');
+        $($element).cuSpinner();
+
+        if(false == cuHandler.retrieveAjax(data)){
+            return false;
+        }
                 
     }, 'json');
     

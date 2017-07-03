@@ -59,7 +59,7 @@ $modversion['author'] = "Eduardo Cortés";
 $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
-//$modversion['updateurl'] = "https://env.eduardocortes.mx/platform/";
+$modversion['updateurl'] = "http://bitdesk/xoops/modules/vcontrol/";
 $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
 // PERMISSIONS

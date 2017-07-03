@@ -148,9 +148,9 @@ class RMTimeFormatter
 
     }
 
-    public function ago( $time = 0 ){
+    public function ago( $time ){
 
-        if(is_string($time)){
+        if(false == is_numeric($time)){
             $time = strtotime($time);
         }
 
