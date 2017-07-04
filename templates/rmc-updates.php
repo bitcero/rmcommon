@@ -107,10 +107,10 @@
 <div id="upd-warning">
     <h4></h4>
     <p></p>
-    <hr>
-    <div class="pull-right">
-    <button type="button" class="btn cancel-warning"><?php _e('Cancel','rmcommon'); ?></button>
-    <button type="button" class="btn btn-primary continue-update"><?php _e('Continue &raquo;','rmcommon'); ?></button>
+
+    <div class="controls">
+    <button type="button" class="btn btn-default cancel-warning"><?php _e('Cancel','rmcommon'); ?></button>
+    <button type="button" class="btn btn-warning continue-update"><?php _e('Continue &raquo;','rmcommon'); ?></button>
     </div>
 </div>
 
@@ -136,7 +136,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group buttons">
             <button type="button" class="btn btn-primary ok-login"><?php _e('Login','rmcommon'); ?></button> &nbsp;
             <button type="button" class="btn btn-default cancel-login"><?php _e('Cancel','rmcommon'); ?></button>
         </div>

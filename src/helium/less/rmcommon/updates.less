@@ -107,10 +107,10 @@
 .upd-item{
   display: none;
   padding: 0 15px;
+  transition: ease all 250ms;
 }
-.upd-item-process > div{
-  background: #FFF!important;
-  border: 1px dashed #d4d4d4!important;
+.upd-item-process{
+  background-color: @color-green-50!important;
 }
 
 #login-blocker, #files-blocker{
@@ -247,23 +247,32 @@
   margin-left: -250px;
   width: 500px;
   z-index: 1051;
-  background: #FCF8E3;
-  color: #A17942;
+  background: #FFF;
+  color: darken(@brand-warning, 25%);
   padding: 15px;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-  -o-border-radius: 4px;
-  border: 1px solid #E0D4BE;
-  box-shadow: 0 0 0 3px #FFF;
+  -o-border-radius: @border-radius-large;
+  border: 1px solid rgba(0,0,0,0.4);
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
 
   h4{
-    margin-top: 0;
+    font-size: @font-size-base * 1.1;
+    color: @text-color;
+    margin: -15px -15px 15px -15px;
+    background-color: @brand-warning;
+    color: @btn-warning-color;
+    padding: 10px;
+    border-radius: @border-radius-large @border-radius-large 0 0;
   }
 
-  hr{
-    border-top: 1px solid #E0D4BE;
-    border-bottom: 1px solid #FDFBF0;
+  .controls{
+    margin: 15px -15px -15px -15px;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    text-align: right;
   }
 
 }
@@ -291,10 +300,9 @@
 
 #upd-login{
   position: fixed;
-  top: 20%;
-  left: 50%;
-  margin-left: -200px;
-  width: 400px;
+  top: 10%;
+  left: 5%;
+  right: 5%;
   box-shadow: 0 0 10px #000;
   -moz-box-shadow: 0 0 10px #000;
   -webkit-box-shadow: 0 0 10px #000;
@@ -305,15 +313,34 @@
   .title{
     padding: 10px;
     font-weight: bold;
+    background-color: @theme-main-color;
 
     > h4{
       margin: 0;
+      color: @theme-secondary-color-text;
+      font-size: @font-size-base;
+      text-transform: uppercase;
     }
 
   }
 
   .controls{
-    padding: 10px;
+    padding: 15px;
+
+    .form-group.buttons{
+      margin: 15px -15px -15px -15px;
+      padding: 10px 15px;
+      text-align: right;
+      background-color: rgba(0,0,0,0.05);
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+  }
+
+  @media(min-width: 600px){
+    top: 20%;
+    left: 50%;
+    margin-left: -200px;
+    width: 400px;
   }
 
 }
