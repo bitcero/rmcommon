@@ -86,7 +86,7 @@
     <p><strong><?php _e('Important:','rmcommon'); ?></strong> <?php _e('Before to install updates be sure that target folders have writting permissions for web server. If you wish, you can configure the internal FTP Client in order to update without assign writting permissions.','rmcommon'); ?></p>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-purple">
     <div class="panel-heading">
         <h4 class="panel-title"><?php _e('Available updates', 'rmcommon'); ?></h4>
     </div>
