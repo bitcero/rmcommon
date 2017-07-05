@@ -91,11 +91,11 @@
         <h4 class="panel-title"><?php _e('Available updates', 'rmcommon'); ?></h4>
     </div>
     <div class="rm-loading text-primary"><span class="fa fa-refresh fa-spin"></span> <?php _e('Searching for updates...','rmcommon'); ?></div>
-    <div id="rmc-updates">
 
-    </div>
     <div class="panel-body">
+        <div id="rmc-updates">
 
+        </div>
     </div>
 </div>
 <div class="row">
@@ -106,8 +106,10 @@
 
 <div id="upd-warning">
     <h4></h4>
-    <p></p>
-
+    <div class="content">
+        <?php echo $common->icons()->getIcon('svg-rmcommon-warning text-warning'); ?>
+        <p></p>
+    </div>
     <div class="controls">
     <button type="button" class="btn btn-default cancel-warning"><?php _e('Cancel','rmcommon'); ?></button>
     <button type="button" class="btn btn-warning continue-update"><?php _e('Continue &raquo;','rmcommon'); ?></button>

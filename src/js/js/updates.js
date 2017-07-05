@@ -54,6 +54,85 @@ var credentials = new Array();
                 _self.hideWarning();
             });
 
+            /**
+             * Refresh updates list
+             */
+            $("#refresh-updates").click(function () {
+                $(this).children("span").addClass('fa-spin');
+                $(".rm-loading").fadeIn('fast');
+                $("#rmc-updates > div").each(function () {
+                    $(this).fadeOut('fast', function () {
+                        $(this).remove();
+                    });
+                });
+                $.get(xoUrl + '/modules/rmcommon/ajax/updates.php', {XOOPS_TOKEN_REQUEST: $("#cu-token").val()}, function (data) {
+
+                    _self.loadUpdates();
+                    $("#refresh-updates > span").removeClass('fa-spin');
+
+                }, 'json');
+            });
+
+            /**
+             * Cancel update on warning
+             */
+            $("#upd-login .cancel-login, #upd-login .close").click(function () {
+
+                $("#upd-login").fadeOut('fast', function () {
+                    $("#login-blocker").fadeOut('fast');
+                    $("#upd-login input").val('');
+                });
+
+            });
+
+            /**
+             * Install update
+             */
+            $("body").on('click', ".btn-install", function(){
+                _self.installUpdate($(this).data('id'));
+            });
+
+            /**
+             * Update details
+             */
+            $("body").on('click', '.button-details', function () {
+
+                var id = $(this).data('id');
+
+                $(this).cuSpinner({icon: 'svg-rmcommon-spinner-03'});
+
+                _self.loadUpdateDetals(id, $(this));
+
+            });
+
+            /**
+             * Continue update on warning
+             */
+            $("#upd-warning .continue-update").click(function () {
+
+                $("#upd-warning .cancel-warning").click();
+
+                var id = $(this).attr("data-id");
+                if (id == undefined || id < 0) return;
+                warns[id] = 1;
+                _self.installUpdate(id);
+
+            });
+
+        };
+
+        this.updateStatus = function(message, color, inactive){
+
+            $("#upd-" + id + " .upd-progress .status").html(message);
+
+            if(undefined != color){
+                $("#upd-" + id + " .progress-bar").addClass('progress-bar-' + color);
+            }
+
+            if(undefined != inactive && inactive == true){
+                $("#upd-" + id + " .progress").removeClass("active");
+            }
+
         };
 
         this.hideWarning = function(){
@@ -62,7 +141,7 @@ var credentials = new Array();
                 $("#upd-info-blocker").fadeOut('fast');
             });
 
-        }
+        };
 
         /**
          * Shows the FTP settings panel
@@ -95,9 +174,116 @@ var credentials = new Array();
 
         };
 
+        this.loadUpdateDetals = function (id, $element) {
+
+            if (id == null || id == undefined) return false;
+
+            var updates = JSON.parse($("#json-container").html());
+            var update = updates[id].data;
+
+            if (update.url == '') return false;
+            if (update.url.match(/^http:\/\/|^https:\/\//) == null) return false;
+
+            var url = update.url.replace(/\&amp;/, '&');
+
+            $.get('updates.php', {action: 'update-details', url: url}, function (data) {
+
+                $($element).cuSpinner();
+
+                if (false == cuHandler.retrieveAjax(data)) {
+                    return false;
+                }
+
+            }, 'json');
+
+        }
+
         /**
          * Starts the update process
          */
+        this.installUpdate = function (id) {
+
+            if (undefined == id || id <= 0) return false;
+
+            // Parse JSON data
+            var updates = JSON.parse($("#json-container").html());
+
+            // Get specified update information
+            var update = updates[id].data;
+
+            // CHeck that update url for transactions is correct
+            if (update.url.match(/^http:\/\/|https:\/\//) == null) return false;
+
+            var url = update.url.replace(/\&amp;/, '&');
+
+            // Check if we need to show a warning
+            if (update.warning != '' && warns[id] == undefined) {
+                $("#upd-warning .continue-update").attr("data-id", id);
+                showWarning(update);
+                return;
+            }
+
+            $("#upd-" + id + " .col-lg-4").hide();
+            $("#upd-" + id + " .col-lg-8").removeClass('col-lg-8').addClass('col-lg-12');
+
+            $("#upd-" + id).addClass('upd-item-process');
+
+            $("#upd-" + id + " .upd-progress").slideDown('fast');
+
+            _self.queryToServer(update, {remote: 'getfile'});
+
+        };
+
+        /**
+         * Sends a request to updates server
+         * @param object update
+         * @param object params
+         */
+        this.queryToServer = function (update, params){
+
+            params.url = update.url;
+            params.action = 'process';
+
+            $.post('updates.php', params, function(response){
+
+                if(false == cuHandler.retrieveAjax(response)){
+                    return false;
+                }
+
+                switch(response.response){
+                    // Requires login
+                    case 'login':
+                        _self.showLogin(update);
+                        break;
+                }
+
+            }, 'json');
+
+        };
+
+        /**
+         * =======================
+         * RESPONSE ACTIONS
+         * =======================
+         * Next methods will manage responde from updates server
+         */
+
+        /**
+         * Shows login window for user
+         * @param update
+         */
+        _self.showLogin = function(update){
+            $("#login-blocker").fadeIn('fast', function () {
+
+                var a = document.createElement('a');
+                a.href = update.url;
+                $("#upd-login").fadeIn('fast', function () {
+                    $("#uname").focus();
+                });
+                $("#upd-login p").html($("#upd-login p").html().replace("%site%", '<a href="http://' + a.hostname + '" target="_blank">' + a.hostname + '</a>'));
+
+            });
+        };
 
     };
 
@@ -110,25 +296,7 @@ $(document).ready(function () {
     updates = new UpdatesController();
     updates.init();
 
-    $("#upd-warning .continue-update").click(function () {
 
-        $("#upd-warning .cancel-warning").click();
-
-        var id = $(this).attr("data-id");
-        if (id == undefined || id < 0) return;
-        warns[id] = 1;
-        installUpdate(id);
-
-    });
-
-    $("#upd-login .cancel-login, #upd-login .close").click(function () {
-
-        $("#upd-login").fadeOut('fast', function () {
-            $("#login-blocker").fadeOut('fast');
-            $("#upd-login input").val('');
-        });
-
-    });
 
     $("#upd-login .ok-login").click(function () {
 
@@ -159,15 +327,7 @@ $(document).ready(function () {
 
     });
 
-    $("body").on('click', '.button-details', function () {
 
-        var id = $(this).data('id');
-
-        $(this).cuSpinner({icon: 'svg-rmcommon-spinner-03'});
-
-        loadUpdateDetails(id, $(this));
-
-    });
 
 });
 
@@ -200,62 +360,9 @@ function rmCallNotifier(total) {
 
 }
 
-function loadUpdateDetails(id, $element) {
 
-    if (id == null || id == undefined) return false;
 
-    var updates = eval($("#json-container").html());
-    var update = updates[id].data;
 
-    if (update.url == '') return false;
-    if (update.url.match(/^http:\/\/|^https:\/\//) == null) return false;
-
-    var url = update.url.replace(/\&amp;/, '&');
-
-    $.get('updates.php', {action: 'update-details', url: url}, function (data) {
-
-        $($element).cuSpinner();
-
-        if (false == cuHandler.retrieveAjax(data)) {
-            return false;
-        }
-
-    }, 'json');
-
-}
-
-function installUpdate(id) {
-
-    if (id == null || id == undefined) return false;
-    var updates = eval($("#json-container").html());
-    var update = updates[id].data;
-    if (update.url.match(/^http:\/\/|https:\/\//) == null) return false;
-
-    var url = update.url.replace(/\&amp;/, '&');
-
-    $("#upd-warning .continue-update").attr("data-id", id);
-
-    if (update.warning != '' && warns[id] == undefined) {
-        showWarning(update);
-        return;
-    }
-
-    if (update.login == 1 && credentials[id] == undefined) {
-        $("#upd-login .ok-login").attr("data-id", id);
-        showLogin(update);
-        return;
-    }
-
-    $("#upd-" + id + " .col-lg-4").hide();
-    $("#upd-" + id + " .col-lg-8").removeClass('col-lg-8').addClass('col-lg-12');
-
-    $("#upd-" + id).addClass('upd-item-process');
-
-    $("#upd-" + id + " .upd-progress").slideDown('fast');
-
-    updateStepOne(update, id);
-
-}
 
 /**
  * This function allows to download update package in order to install manually

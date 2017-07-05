@@ -1,3 +1,6 @@
+<div id="json-container">
+    <?php echo json_encode($updates['updates']); ?>
+</div>
 <?php foreach($updates['updates'] as $i => $upd): ?>
     <div class="upd-item <?php echo $upd['data']['type']; ?><?php echo $upd['data']['api'] ? ' apikey' : ''; ?>" id="upd-<?php echo $i; ?>">
         <span class="type"><?php echo $upd['data']['type'] == 'module' ? __('Module', 'rmcommon') : ($upd['data']['type'] == 'plugin' ? __('Plugin', 'rmcommon') : __('Theme', 'rmcommon')); ?></span>
@@ -26,7 +29,7 @@
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-info button-details" data-id="<?php echo $i; ?>">
                         <?php echo $common->icons()->getIcon('fa fa-info-circle'); ?> <?php _e('Details','rmcommon'); ?></button>
-                    <button type="button" class="btn btn-warning" onclick="installUpdate(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-arrow-circle-down"></i> <?php _e('Update now!','rmcommon'); ?></button>
+                    <button type="button" class="btn btn-warning btn-install" data-id="<?php echo $i; ?>"><i class="fa fa-arrow-circle-down"></i> <?php _e('Update now!','rmcommon'); ?></button>
                     <button type="button" class="btn btn-default" onclick="installLater(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-clock-o"></i> <?php _e('Later','rmcommon'); ?></button>
                 </div>
             </div>
@@ -34,6 +37,3 @@
     </div>
     <?php endforeach; ?>
 
-<div id="json-container">
-    <?php echo json_encode($updates['updates']); ?>
-</div>

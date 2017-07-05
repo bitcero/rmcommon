@@ -1,9 +1,14 @@
 #rmc-updates{
   > .upd-item{
 
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-    padding: 35px 20px 25px;
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 30px 20px 25px;
     position: relative;
+    margin-bottom: 15px;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
 
     .type{
       position: absolute;
@@ -267,12 +272,27 @@
     border-radius: @border-radius-large @border-radius-large 0 0;
   }
 
+  .content{
+    overflow: hidden;
+
+    .cu-icon{
+      .cu-icon-size(48px);
+      float: left;
+    }
+
+    p{
+      margin-left: 68px;
+    }
+
+  }
+
   .controls{
     margin: 15px -15px -15px -15px;
     padding: 15px;
     background-color: rgba(0,0,0,0.05);
     border-top: 1px solid rgba(0,0,0,0.1);
     text-align: right;
+    clear: both;
   }
 
 }
