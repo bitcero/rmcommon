@@ -163,7 +163,35 @@ class UpdateManager
     {
         global $common;
 
+        $common->ajax()->prepare();
 
+        // URL is mandatory
+        $url = $common->httpRequest()::post('url', 'string', '');
+        // "remote" param is mandatory
+        $action = $common->httpRequest()::post('remote', 'string', '');
+        // Query can contain a received server data
+        $params = $common->httpRequest()::post('params', 'string', '');
+
+        if('' == $url){
+            $common->ajax()->notifyError(__('Provided update URL is not valid!', 'rmcommon'));
+        }
+
+        if('' == $url){
+            $common->ajax()->notifyError(__('No action to process!', 'rmcommon'));
+        }
+
+        $query = explode("?", $url);
+        $query[1] = ($query[1] != '' ? $query[1] . '&' : '') . 'action=' . $action;
+
+        if('' != $params){
+            $query[1] .= "&params=" . urlencode($params);
+        }
+
+        $response = json_decode($common->httpRequest()::load_url($query[0], $query[1], true), true);
+
+        $common->ajax()->response(
+            __('Response from server', 'rmcommon'), 0, 1, $response
+        );
     }
 }
 

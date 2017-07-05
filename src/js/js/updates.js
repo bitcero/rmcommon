@@ -244,6 +244,8 @@ var credentials = new Array();
             params.url = update.url;
             params.action = 'process';
 
+            alert(update.url);
+
             $.post('updates.php', params, function(response){
 
                 if(false == cuHandler.retrieveAjax(response)){
