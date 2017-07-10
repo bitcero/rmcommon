@@ -167,31 +167,71 @@ class UpdateManager
 
         // URL is mandatory
         $url = $common->httpRequest()::post('url', 'string', '');
+        $url = str_replace('&amp;', '&', $url);
         // "remote" param is mandatory
         $action = $common->httpRequest()::post('remote', 'string', '');
         // Query can contain a received server data
-        $params = $common->httpRequest()::post('params', 'string', '');
+        $api = $common->httpRequest()::post('api', 'integer', 0);
+        $serial = $common->httpRequest()::post('serial', 'integer', 0);
+        // Data for login
+        $credentials = $common->httpRequest()::post('credentials', 'string', '');
 
         if('' == $url){
             $common->ajax()->notifyError(__('Provided update URL is not valid!', 'rmcommon'));
         }
 
-        if('' == $url){
+        if('' == $action){
             $common->ajax()->notifyError(__('No action to process!', 'rmcommon'));
         }
 
         $query = explode("?", $url);
         $query[1] = ($query[1] != '' ? $query[1] . '&' : '') . 'action=' . $action;
 
-        if('' != $params){
-            $query[1] .= "&params=" . urlencode($params);
+        if('' != $credentials){
+            $query[1] .= '&credentials=' . urlencode($credentials);
         }
+
+        /*
+         * Sends API information
+         */
+        if($api){
+            $controller = RMFunctions::loadModuleController('dtransport');
+            if(false == $controller){
+                $common->ajax()->notifyError(
+                    __('Module is not compatible with this update process', 'rmcommon'), 1, 1
+                );
+            }
+
+            $data = $controller->licenseData();
+            $query[1] .= '&data=' . urlencode($data);
+        }
+
+        $siteID = urlencode(md5(crypt(XOOPS_LICENSE_KEY . XOOPS_URL, $common->settings->secretkey)));
+        $query[1] .= '&site=' . $siteID;
 
         $response = json_decode($common->httpRequest()::load_url($query[0], $query[1], true), true);
 
-        $common->ajax()->response(
-            __('Response from server', 'rmcommon'), 0, 1, $response
-        );
+        $type = 0;
+        $message = __('Response from server', 'rmcommon');
+
+        if('error' == $response['type']){
+            $type = 1;
+            $message = $response['message'];
+
+            $common->ajax()->response(
+                $message, $type, 1, $response
+            );
+        }
+
+        if(false == isset($response['code']) || '' == $response['code']){
+            $common->ajax()->notifyError(__('Unexpected response from updates server. Please try again later.', 'rmcommon'));
+        }
+
+        $code = $response['code'];
+        $dir = $response['dir'];
+        $type = $response['itemtype'];
+        dt_download_file($url, $code, $siteID, $dir, $type);
+
     }
 }
 
@@ -210,41 +250,31 @@ function jsonReturn($message, $error = 1, $data = array(), $token = 1)
 
 }
 
-function download_file()
+function dt_download_file($url, $code, $siteID, $dir, $type)
 {
-    global $xoopsLogger, $rmTpl, $runFiles, $xoopsSecurity;
+    global $common;
 
-    $xoopsLogger->activated = false;
-
-    $url = RMHttpRequest::post('url', 'string', '');
-    $cred = RMHttpRequest::post('credentials', 'string', '');
-    $type = RMHttpRequest::post('type', 'string', '');
-    $dir = RMHttpRequest::post('dir', 'string', '');
-    $ftpdata = RMHttpRequest::post('ftp', 'string', '');
-
-    if ($url == '')
-        jsonReturn(__('Invalid parameters!', 'rmcommon'));
-
-    // Request access
-    $query = explode("?", $url);
-    $query[1] = ($query[1] != '' ? $query[1] . '&' : '') . 'action=identity' . ($cred != '' ? '&l=' . $cred : '');
-
-    $response = json_decode(RMHttpRequest::load_url($query[0], $query[1], true), true);
-
-    //$response = json_decode(file_get_contents($url.'&), true);
-    if ($response['error'] == 1)
-        jsonReturn($response['message']);
+    if('' == $url || '' == $code || '' == $siteID || '' == $dir || '' == $type){
+        $common->ajax()->notifyError(__('Unexpected response from updates server. Please try again later.', 'rmcommon'));
+    }
 
     //jsonReturn($response['data']['url']);
 
     if (!is_dir(XOOPS_CACHE_PATH . '/updates/'))
         mkdir(XOOPS_CACHE_PATH . '/updates/', 511);
 
-    if (!file_put_contents(XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir . '.zip', file_get_contents($response['data']['url'])))
-        jsonReturn(__('Unable to download update file!', 'rmcommon'));
+    $pos = strpos($url, '?');
+    $url .= false === $pos ? '?' : '&';
+    $url .= 'action=getpackage&code=' . urlencode($code) . '&site=' . $siteID;
+
+    $file = XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir . '.zip';
+
+    if (false === file_put_contents($file, file_get_contents($url))){
+        $common->ajax()->notifyError(__('Unable to download update file!', 'rmcommon'));
+    }
 
     // Get files list
-    $details = json_decode(RMHttpRequest::load_url($url . '&action=update-details', '', true), true);
+    /*$details = json_decode(RMHttpRequest::load_url($url . '&action=update-details', '', true), true);
     if ($details['error'] == 1)
         jsonReturn($details['message']);
 
@@ -254,18 +284,19 @@ function download_file()
     if ($hash != $file_hash) {
         @unlink(XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir . '.zip');
         jsonReturn(__('The package file could be corrupted. Aborting!', 'rmcommon'));
-    }
+    }*/
 
     // Extract files
     $zip = new ZipArchive();
-    $res = $zip->open(XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir . '.zip');
-    if ($res !== TRUE)
-        jsonReturn(__('ERROR: unable to open downloaded zip file!', 'rmcommon'));
+    $res = $zip->open($file);
+    if ($res !== TRUE){
+        $common->ajax()->notifyError(__('Response from sever: ' . file_get_contents($file), 'rmcommon'));
+    }
 
-    $rmUtil = RMUtilities::get();
     $source = XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir;
-    if (is_dir($source))
-        $rmUtil->delete_directory($source);
+    if (is_dir($source)){
+        $common->utilities()::delete_directory($source);
+    }
 
     $zip->extractTo($source);
     $zip->close();
@@ -280,8 +311,9 @@ function download_file()
     else
         $target .= $dir;
 
-    if (!is_dir($target))
-        jsonReturn(sprintf(__('Target path "%s" does not exists!', 'rmcommon'), $target));
+    if (!is_dir($target)){
+        $common->ajax()->notifyError(sprintf(__('Target path "%s" does not exists!', 'rmcommon'), $target));
+    }
 
     /**
      * When rmcommon is the module to be updated then we need
@@ -313,12 +345,15 @@ function download_file()
 
     } else {
 
-        if ($ftpdata == '')
-            jsonReturn(__('FTP configuration not specified!', 'rmcommon'));
+        $ftpdata = base64_decode($common->httpRequest()::post('ftp', 'string', ''));
+        if ($ftpdata == ''){
+            $common->ajax()->notifyError(__('FTP configuration has not been specified and directory %s could not be written', 'rmcommon'));
+        }
 
         parse_str($ftpdata);
-        if ($ftp_server == '' || $ftp_user == '' || $ftp_pass == '')
-            jsonReturn(__('FTP configuration not valid!', 'rmcommon'));
+        if ($ftp_server == '' || $ftp_user == '' || $ftp_pass == ''){
+            $common->ajax()->notifyError(__('FTP configuration not valid!', 'rmcommon'));
+        }
 
         $target = str_replace('\\', '/', $target);
 
@@ -331,8 +366,9 @@ function download_file()
 
         $ftp = new RMFtpClient($ftp_server, $ftp_port > 0 ? $ftp_port : 21, $ftp_user, $ftp_pass);
 
-        if (!$ftp->connect())
-            jsonReturn(sprintf(__('Unable to connect FTP server %s', 'rmcommon'), '<strong>' . $ftp_server . '</strong>'));
+        if (!$ftp->connect()){
+            $common->ajax()->notifyError(sprintf(__('Unable to connect FTP server %s', 'rmcommon'), '<strong>' . $ftp_server . '</strong>'));
+        }
 
         $ftpConfig->base = $ftpConfig->dir . '/modules/' . ($type == 'plugin' ? 'rmcommon/plugins/' : '') . $dir;
         $ftpConfig->source = $source;
@@ -341,7 +377,7 @@ function download_file()
         // Clean current element directory
         deleteFTPDir($ftpConfig->base, $ftp, false);
 
-        // Copy new files
+        // Todo: Copy new files
 
     }
 
@@ -357,10 +393,14 @@ function download_file()
 
     file_put_contents(XOOPS_CACHE_PATH . '/updates.chk', base64_encode(serialize(array('date' => $updates['date'], 'total' => (int)$updates['total'] - 1, 'updates' => $new))));
 
-    if (!empty($runFiles))
-        jsonReturn(__('Executing files...', 'rmcommon'), 0, array('run' => json_encode($runFiles)));
-    else
-        jsonReturn(sprintf(__('%s has been updated', 'rmcommon'), '<strong>' . $dir . '</strong>'), 0);
+    $common->ajax()->response(
+        sprintf(__('%s has been updated', 'rmcommon'), '<strong>' . $dir . '</strong>'), 0, 1, [
+            'notify' => [
+                'icon' => 'svg-rmcommon-ok',
+                'type' => 'alert-success'
+            ],
+            'response' => 'installed'
+    ]);
 
 }
 

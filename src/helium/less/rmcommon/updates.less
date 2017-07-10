@@ -12,8 +12,8 @@
 
     .type{
       position: absolute;
-      top: 0;
-      left: 0;
+      top: -1px;
+      left: -1px;
       display: block;
       padding: 4px 6px;
       font-size: 0.7em;
@@ -65,7 +65,16 @@
     }
 
     &.apikey{
-      background-color: fade(#fad42e, 10%);
+      background-color: fade(@color-purple, 10%);
+      border-color: @color-purple;
+    }
+
+    .update-buttons{
+      text-align: center;
+
+      @media(min-width: @screen-sm){
+        text-align: right;
+      }
     }
 
   }

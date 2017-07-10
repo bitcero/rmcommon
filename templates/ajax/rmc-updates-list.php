@@ -2,7 +2,7 @@
     <?php echo json_encode($updates['updates']); ?>
 </div>
 <?php foreach($updates['updates'] as $i => $upd): ?>
-    <div class="upd-item <?php echo $upd['data']['type']; ?><?php echo $upd['data']['api'] ? ' apikey' : ''; ?>" id="upd-<?php echo $i; ?>">
+    <div class="upd-item <?php echo $upd['data']['type']; ?><?php echo $upd['data']['api'] ? ' apikey' : ''; ?>" id="upd-<?php echo $i; ?>" data-dir="<?php echo $upd['data']['dir']; ?>">
         <span class="type"><?php echo $upd['data']['type'] == 'module' ? __('Module', 'rmcommon') : ($upd['data']['type'] == 'plugin' ? __('Plugin', 'rmcommon') : __('Theme', 'rmcommon')); ?></span>
         <div class="row">
             <div class="col-md-7">
@@ -17,22 +17,22 @@
                         | <?php echo $cuIcons->getIcon('svg-rmcommon-lock', ['class' => 'text-warning']); ?> <?php _e('Login required','rmcommon'); ?>
                     <?php endif; ?>
                 </div>
-                <div class="upd-progress">
-                    <label><?php _e('Installing update...','rmcommon'); ?></label>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar"></div>
-                    </div>
-                    <span class="text-info status"><?php echo sprintf(__('Downloading %s','rmcommon'), $rmUtil->formatBytesSize($upd['data']['size'])); ?></span>
+            </div>
+            <div class="col-md-5 update-buttons">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default button-details" data-id="<?php echo $i; ?>">
+                        <?php echo $common->icons()->getIcon('fa fa-info-circle text-info'); ?> <?php _e('Details','rmcommon'); ?></button>
+                    <button type="button" class="btn btn-default btn-install" data-id="<?php echo $i; ?>"><?php echo $common->icons()->getIcon('fa fa-arrow-circle-down', ['class' => 'text-warning']); ?> <?php _e('Update now!','rmcommon'); ?></button>
+                    <button type="button" class="btn btn-default btn-later" data-id="<?php echo $i; ?>" onclick="installLater(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-clock-o"></i> <?php _e('Later','rmcommon'); ?></button>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-info button-details" data-id="<?php echo $i; ?>">
-                        <?php echo $common->icons()->getIcon('fa fa-info-circle'); ?> <?php _e('Details','rmcommon'); ?></button>
-                    <button type="button" class="btn btn-warning btn-install" data-id="<?php echo $i; ?>"><i class="fa fa-arrow-circle-down"></i> <?php _e('Update now!','rmcommon'); ?></button>
-                    <button type="button" class="btn btn-default" onclick="installLater(<?php echo $i; ?>);" data-id="<?php echo $i; ?>"><i class="fa fa-clock-o"></i> <?php _e('Later','rmcommon'); ?></button>
-                </div>
+        </div>
+        <div class="upd-progress">
+            <label><?php _e('Installing update...','rmcommon'); ?></label>
+            <div class="progress progress-striped active">
+                <div class="progress-bar"></div>
             </div>
+            <span class="text-info status"><?php echo sprintf(__('Downloading %s','rmcommon'), $rmUtil->formatBytesSize($upd['data']['size'])); ?></span>
         </div>
     </div>
     <?php endforeach; ?>

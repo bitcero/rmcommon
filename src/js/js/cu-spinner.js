@@ -17,6 +17,7 @@
             icon: 'svg-rmcommon-spinner-06',
             type: 'spin',
             hide: 'cu-icon',
+            class: '',
             steps: 12, // Only useful when type equal to 'pulse'
             speed: 3    // 1 to 5 - only valid when type equal to spin
         }, options);
@@ -52,7 +53,7 @@
             /**
              * Add the spinner
              */
-            var spinner = $("<span />", {class: 'cu-icon cu-spinner'});
+            var spinner = $("<span />", {class: 'cu-icon cu-spinner' + (settings.class != '' ? ' ' + settings.class : '')});
             spinner.load(theIcon, function () {
                 // Hide the required class
                 var toHide = $(el).find('.' + settings.hide);

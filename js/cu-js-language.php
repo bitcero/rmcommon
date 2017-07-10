@@ -81,6 +81,11 @@ var cuLanguage = {
     published: '<?php _e('Published:', 'rmcommon'); ?>',
     requirements: '<?php _e('Requirements:', 'rmcommon'); ?>',
     xoops: '<?php _e('XOOPS version:', 'rmcommon'); ?>',
+    loginRequired: '<?php _e('Login required', 'rmcommon'); ?>',
+    loginVerify: '<?php _e('Verifying credentials...', 'rmcommon'); ?>',
+    requestFile: '<?php _e('Requesting update package...', 'rmcommon'); ?>',
+    waitingResponse: '<?php _e('Waiting server response...', 'rmcommon'); ?>',
+    installed: '<?php _e('Update installed successfully!', 'rmcommon'); ?>',
 
 <?php endif; ?>
 

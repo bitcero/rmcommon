@@ -157,18 +157,22 @@ class RMTemplate
                $xoopsConfigMetaFooter,
                $xoopsOption,
                $xoopsUser,
+               $common,
                $xoopsTpl;
 
         if (defined('XOOPS_CPFUNC_LOADED')) {
 
             $content = ob_get_clean();
+
+            $content = $common->events()->trigger('rmcommon.raw.content', $content);
+
             ob_start();
 
             $cuSettings = RMSettings::cu_settings();
             $theme = isset($cuSettings->theme) ? $cuSettings->theme : 'default';
 
             if (!file_exists(RMCPATH . '/themes/' . $theme . '/admin-gui.php')) {
-                $theme = 'twop6';
+                $theme = 'helium';
             }
 
             $rm_theme_url = RMCURL . '/themes/' . $theme;
@@ -185,9 +189,11 @@ class RMTemplate
             include_once RMCPATH . '/themes/' . $theme . '/admin-gui.php';
             $output = ob_get_clean();
 
-            $output = RMEvents::get()->run_event('rmcommon.admin.output', $output);
+            $output = RMEvents::get()->trigger('rmcommon.admin.output', $output);
 
             echo $output;
+
+            RMEvents::get()->trigger('rmcommon.footer.admin.end', $output);
 
         } else {
 

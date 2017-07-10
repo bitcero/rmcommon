@@ -127,14 +127,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label><?php _e('Username:','rmcommon'); ?></label>
-                    <input type="text" name="uname" id="uname" value="" class="form-control" placeholder="<?php _e('Username','rmcommon'); ?>" />
+                    <label><?php _e('Email:','rmcommon'); ?></label>
+                    <input type="text" name="email" id="uname" value="" class="form-control" placeholder="<?php _e('Username','rmcommon'); ?>" required>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label><?php _e('Password:', 'rmcommon'); ?></label>
-                    <input type="password" name="uname" id="upass" class="form-control" placeholder="<?php _e('Password','rmcommon'); ?>" />
+                    <input type="password" name="uname" id="upass" class="form-control" placeholder="<?php _e('Password','rmcommon'); ?>" required>
                 </div>
             </div>
         </div>

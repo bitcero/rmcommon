@@ -348,7 +348,7 @@ class RMSettings
             case 'cu-language':
             case 'cu-language-multi':
 
-                $ele = new RMFormLanguageField($field->caption, $field->name, $field->field == 'cu-language-multi' ? 1 : 0, 0, $field->value);
+                $ele = new RMFormLanguageField($field->caption, $field->name, $field->field == 'cu-language-multi' ? 1 : 0, 0, [$field->value]);
                 break;
 
             case 'startpage':

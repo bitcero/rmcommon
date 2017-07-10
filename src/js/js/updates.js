@@ -34,6 +34,8 @@ var credentials = new Array();
 
         var _self = this;
 
+        this.progress = [];
+
         this.init = function () {
 
             this.loadUpdates();
@@ -51,7 +53,7 @@ var credentials = new Array();
              * Cancel update on warning window
              */
             $("#upd-warning .cancel-warning").click(function () {
-                _self.hideWarning();
+                _self.hideWarning($(this).data('id'));
             });
 
             /**
@@ -78,10 +80,12 @@ var credentials = new Array();
              */
             $("#upd-login .cancel-login, #upd-login .close").click(function () {
 
-                $("#upd-login").fadeOut('fast', function () {
-                    $("#login-blocker").fadeOut('fast');
-                    $("#upd-login input").val('');
-                });
+                var id = $("#upd-login .cancel-login").data('id');
+
+                $(".btn-install[data-id='"+ id +"']").cuSpinner();
+                _self.hideProgress(id);
+
+                _self.hideLogin(id);
 
             });
 
@@ -89,7 +93,7 @@ var credentials = new Array();
              * Install update
              */
             $("body").on('click', ".btn-install", function(){
-                _self.installUpdate($(this).data('id'));
+                _self.installUpdate($(this).data('id'), true);
             });
 
             /**
@@ -101,7 +105,7 @@ var credentials = new Array();
 
                 $(this).cuSpinner({icon: 'svg-rmcommon-spinner-03'});
 
-                _self.loadUpdateDetals(id, $(this));
+                _self.loadUpdateDetails(id, $(this));
 
             });
 
@@ -119,23 +123,35 @@ var credentials = new Array();
 
             });
 
+            /**
+             * Sends login data
+             */
+            $("#upd-login .ok-login").click(function () {
+                _self.sendLogin();
+            });
+
         };
 
-        this.updateStatus = function(message, color, inactive){
+        this.updateStatus = function(id, message, color, inactive){
 
             $("#upd-" + id + " .upd-progress .status").html(message);
 
             if(undefined != color){
                 $("#upd-" + id + " .progress-bar").addClass('progress-bar-' + color);
+                $("#upd-" + id + " > .upd-progress > .status").attr('class', '')
+                    .addClass('status text-' + color);
             }
 
             if(undefined != inactive && inactive == true){
-                $("#upd-" + id + " .progress").removeClass("active");
+                $("#upd-" + id + " .progress .progress-bar").removeClass("active");
+                $("#upd-" + id + " > .upd-progress > .progress").removeClass("active");
             }
 
         };
 
-        this.hideWarning = function(){
+        this.hideWarning = function(id){
+
+            $(".btn-install[data-id='"+id+"']").cuSpinner();
 
             $("#upd-warning").fadeOut('fast', function () {
                 $("#upd-info-blocker").fadeOut('fast');
@@ -174,12 +190,13 @@ var credentials = new Array();
 
         };
 
-        this.loadUpdateDetals = function (id, $element) {
+        this.loadUpdateDetails = function (id, $element) {
 
             if (id == null || id == undefined) return false;
 
             var updates = JSON.parse($("#json-container").html());
             var update = updates[id].data;
+            update.id = id;
 
             if (update.url == '') return false;
             if (update.url.match(/^http:\/\/|^https:\/\//) == null) return false;
@@ -201,36 +218,48 @@ var credentials = new Array();
         /**
          * Starts the update process
          */
-        this.installUpdate = function (id) {
+        this.installUpdate = function (id, redo) {
 
-            if (undefined == id || id <= 0) return false;
+            if (undefined == id) return false;
 
             // Parse JSON data
             var updates = JSON.parse($("#json-container").html());
 
             // Get specified update information
             var update = updates[id].data;
+            update.id = id;
 
             // CHeck that update url for transactions is correct
             if (update.url.match(/^http:\/\/|https:\/\//) == null) return false;
+
+            $(".btn-install[data-id='"+id+"']").cuSpinner({icon: 'svg-rmcommon-spinner-02', class: 'text-warning'});
 
             var url = update.url.replace(/\&amp;/, '&');
 
             // Check if we need to show a warning
             if (update.warning != '' && warns[id] == undefined) {
                 $("#upd-warning .continue-update").attr("data-id", id);
+                $("#upd-warning .cancel-warning").attr("data-id", id);
                 showWarning(update);
                 return;
             }
 
-            $("#upd-" + id + " .col-lg-4").hide();
-            $("#upd-" + id + " .col-lg-8").removeClass('col-lg-8').addClass('col-lg-12');
+            _self.showProgress(id, redo);
 
-            $("#upd-" + id).addClass('upd-item-process');
+            if(undefined != update.login && update.login > 0 && undefined == credentials[update.id]){
+                _self.showLogin(update);
+                return;
+            }
 
-            $("#upd-" + id + " .upd-progress").slideDown('fast');
+            _self.updateStatus(id, cuLanguage.waitingResponse);
 
-            _self.queryToServer(update, {remote: 'getfile'});
+            _self.queryToServer(update, {
+                remote: 'getfile',
+                api: update.api,
+                credentials: credentials[id],
+                serial: update.serial,
+                ftp: btoa($("#ftp-form").serialize())
+            });
 
         };
 
@@ -244,23 +273,148 @@ var credentials = new Array();
             params.url = update.url;
             params.action = 'process';
 
-            alert(update.url);
-
             $.post('updates.php', params, function(response){
 
                 if(false == cuHandler.retrieveAjax(response)){
+                    _self.progressBarError(update.id);
+                    _self.updateStatus(update.id, response.message, 'danger', true);
+                    //alert($("#upd-" + update.id + " .btn-install").html());
+                    //$("#upd-" + update.id + " .btn-install").cuSpinner();
+                    credentials[update.id] = undefined;
+                    clearTimeout(_self.progress[update.id]);
                     return false;
                 }
 
                 switch(response.response){
                     // Requires login
+                    case 'installed':
+                        credentials[update.id] = undefined;
+                        $(".btn-install[data-id='"+update.id+"']").cuSpinner()
+                            .fadeOut('fast');
+                        $(".btn-later[data-id='"+update.id+"']")
+                            .fadeOut('fast');
+                        _self.updateStatus(update.id, cuLanguage.installed, 'green', true);
+                        _self.updateProgressBar(update.id, 100);
+                        break;
                     case 'login':
                         _self.showLogin(update);
+                        break;
+                    case 'api':
+                        //_self.sendApi(update);
                         break;
                 }
 
             }, 'json');
 
+        };
+
+        this.showProgress = function(id, redo){
+
+            $("#upd-" + id + " > .upd-progress .progress-bar").removeClass('progress-bar-danger')
+                .addClass('active');
+            $("#upd-" + id + " > .upd-progress .status").attr('class', '')
+                .addClass('text-info status');
+
+            if(undefined != redo){
+                $("#upd-" + id + " > .upd-progress .progress-bar").css('width', '0px');
+            }
+
+            $("#upd-" + id).addClass('upd-item-process');
+            $("#upd-" + id + " .upd-progress").slideDown('fast');
+            _self.updateProgressBar(id);
+        };
+
+        this.hideProgress = function(id){
+            $("#upd-" + id).removeClass('upd-item-process');
+            $("#upd-" + id + " .upd-progress").slideUp('fast');
+            clearTimeout(_self.progress[id]);
+        };
+
+        this.updateProgressBar = function(id, percent){
+
+            var current = $("#upd-" + id + " > .upd-progress > .progress > .progress-bar").width() / $("#upd-" + id + " .upd-progress .progress").width();
+            var steps = 0.01;
+
+            if($("#upd-" + id + " > .upd-progress > .progress > .progress-bar").hasClass('progress-bar-danger')){
+                return;
+            }
+
+            if(undefined != percent){
+                $("#upd-" + id + " .upd-progress .progress-bar").css('width', percent + '%');
+                $("#upd-" + id + " .upd-progress .progress-bar").addClass('probress-bar-success');
+                return;
+            }
+
+            if(current >= 1){
+                return;
+            }
+
+            if(current + steps > 1){
+                width = 100;
+            } else {
+                width = (current + steps) * 100;
+            }
+
+            $("#upd-" + id + " .upd-progress .progress-bar").css('width', width + '%');
+            _self.progress[id] = setTimeout(function(){
+                _self.updateProgressBar(id);
+            }, 1000);
+
+        };
+
+        this.progressBarError = function(id){
+
+            clearTimeout(_self.progress[id]);
+
+            var progress = $("#upd-" + id + " > .upd-progress > .progress");
+            $(progress).removeClass('active')
+                .find('> .progress-bar').addClass('progress-bar-danger');
+
+        };
+
+        this.sendLogin = function(){
+            if ($("#uname").val() == '') {
+                $("#uname").addClass("error").focus();
+                return;
+            }
+
+            if ($("#upass").val() == '') {
+                $("#upass").addClass("error").focus();
+                return;
+            }
+
+            var id = $("#upd-login .ok-login").data("id");
+
+            _self.updateStatus(id, cuLanguage.loginVerify);
+            setTimeout(function(){
+                _self.updateProgressBar(id);
+            }, 1000);
+
+            _self.hideLogin(id);
+            if (id == undefined || id < 0) return;
+
+            // Parse JSON data
+            var updates = JSON.parse($("#json-container").html());
+
+            // Get specified update information
+            var update = updates[id].data;
+            update.id = id;
+            credentials[id] = btoa($("#uname").val() + ':' + $("#upass").val());
+
+            $("#uname").val('');
+            $("#upass").val('');
+
+            _self.updateStatus(id, cuLanguage.requestFile);
+
+            _self.installUpdate(id);
+
+        };
+
+        _self.hideLogin = function(id){
+            $("#upd-login").fadeOut('fast', function () {
+                $("#login-blocker").fadeOut('fast');
+                $("#upd-login input").val('');
+            });
         };
 
         /**
@@ -274,7 +428,14 @@ var credentials = new Array();
          * Shows login window for user
          * @param update
          */
-        _self.showLogin = function(update){
+        this.showLogin = function(update){
+
+            clearTimeout(_self.progress[update.id]);
+            _self.updateStatus(update.id, cuLanguage.loginRequired);
+
+            $("#upd-login .ok-login").data("id", update.id);
+            $("#upd-login .cancel-login").data("id", update.id);
+
             $("#login-blocker").fadeIn('fast', function () {
 
                 var a = document.createElement('a');
@@ -287,6 +448,15 @@ var credentials = new Array();
             });
         };
 
+        /**
+         * Sends the registered API to remote server, or
+         * shows the api field to send to remote server
+         * @param update
+         */
+        this.sendApi = function(update){
+
+        };
+
     };
 
 })(jQuery);
@@ -297,39 +467,6 @@ $(document).ready(function () {
 
     updates = new UpdatesController();
     updates.init();
-
-
-
-    $("#upd-login .ok-login").click(function () {
-
-        if ($("#uname").val() == '') {
-            $("#uname").addClass("error").focus();
-            return;
-        }
-
-        if ($("#upass").val() == '') {
-            $("#upass").addClass("error").focus();
-            return;
-        }
-
-        $("#upd-login .cancel-login").click();
-        var id = $(this).attr("data-id");
-        if (id == undefined || id < 0) return;
-        credentials[id] = $("#uname").val() + ':' + $("#upass").val();
-
-        if ($("#upd-login").data('next') == 'download') {
-
-            downloadUpdate(id);
-
-        } else {
-
-            installUpdate(id);
-
-        }
-
-    });
-
-
 
 });
 
@@ -443,23 +580,6 @@ function showWarning(update) {
     $("#upd-warning h4").html(update.title);
     $("#upd-warning p").html(update.warning);
     $("#upd-warning").fadeIn('fast');
-
-}
-
-function showLogin(update) {
-
-    $("#login-blocker").fadeIn('fast', function () {
-        var updates = eval($("#json-container").html());
-        var id = $("#upd-login .ok-login").data("id");
-        var update = updates[id].data;
-        var a = document.createElement('a');
-        a.href = update.url;
-        $("#upd-login").fadeIn('fast', function () {
-            $("#uname").focus();
-        });
-        $("#upd-login p").html($("#upd-login p").html().replace("%site%", '<a href="http://' + a.hostname + '" target="_blank">' + a.hostname + '</a>'));
-
-    });
 
 }
 
