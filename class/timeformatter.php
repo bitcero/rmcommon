@@ -53,13 +53,15 @@ class RMTimeFormatter
      * @param string $format <p>This value is optional. Represents the format for the returned value.</p>
      * @return mixed
      */
-    public function format($time=0, $format=''){
+    public function format($time=0, $format='', $offset = true){
 		global $xoopsConfig;
 
         if ( $time <= 0 || strpos( $time, "-" ) !== false )
             $time = strtotime( $time );
 
-        $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
+        if($offset){
+            $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
+        }
 
         $format = $format=='' ? $this->format : $format;
 
@@ -94,7 +96,7 @@ class RMTimeFormatter
             date('s', $time)
         );
 
-
+        //return date('i', $time);
 
         return str_replace($find, $replace, $format);
 
