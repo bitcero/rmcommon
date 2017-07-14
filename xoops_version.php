@@ -52,14 +52,14 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>67,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>69,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
 $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
-$modversion['updateurl'] = "http://bitdesk/xoops/modules/vcontrol/";
+$modversion['updateurl'] = "https://sys.eduardocortes.mx/updates/";
 $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
 // PERMISSIONS
