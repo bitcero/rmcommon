@@ -330,13 +330,18 @@ $cu_settings['config'][] = array(
 // Secure Key
 global $common;
 if (!isset($xoopsSecurity)) $xoopsSecurity = new XoopsSecurity();
+
+if(null == $common){
+    require_once 'class/utilities.php';
+}
+
 $cu_settings['config'][] = array(
     'name'          => 'secretkey',
     'title'         => __('Secret Key','rmcommon'),
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => $common->settings->secretkey != '' ? '' : $common->utilities()::randomString(60),
+    'default'       => RMUtilities::randomString(60),
     'category'      => 'general'
 );
 

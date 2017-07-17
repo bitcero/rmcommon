@@ -55,7 +55,7 @@ class RMUser extends RMObject
                 $this->groups =& $groupsArr;
     }
 
-    public function &getGroups(){
+    public function getGroups(){
 
         if (!empty($this->groups)) return $this->groups;
 

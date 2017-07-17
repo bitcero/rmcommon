@@ -593,8 +593,17 @@ function delete_users(){
     $query = $common->httpRequest()->post('query', 'string', '');
     $query = urldecode($query);
 
-    $uid = rmc_server_var($_POST, 'ids', array());
+    $uid = $common->httpRequest()::post('ids', 'array', array());
+
+    if(empty($uid)){
+        $common->uris()::redirect_with_message(
+            __('Select at leas one user to delete','rmcommon'),
+            "users.php?".$query, RMMSG_INFO
+        );
+    }
+
     $member_handler = xoops_getHandler('member', 'system');
+    $errors = '';
 
     foreach ($uid as $id) {
 
@@ -602,9 +611,9 @@ function delete_users(){
         $groups = $user->getGroups();
 
         if (in_array(XOOPS_GROUP_ADMIN, $groups)) {
-            xoops_error( sprintf( __('Admin user cannot be deleted: %s','rmcommon'), $user->getVar("uname").'<br />') );
+            $errors .= sprintf( __('Admin user cannot be deleted: %s','rmcommon'), $user->getVar("uname")) .'<br />';
         } elseif (!$member_handler->deleteUser($user)) {
-            xoops_error( sprintf( __('User cannot be deleted: %s','rmcommon'), $user->getVar("uname").'<br />') );
+            $errors .= sprintf( __('User cannot be deleted: %s','rmcommon'), $user->getVar("uname")) .'<br />';
         } else {
             $online_handler = xoops_getHandler('online');
             $online_handler->destroy($uid);
@@ -614,9 +623,16 @@ function delete_users(){
 
     }
 
+    if('' == $errors){
+        $common->uris()::redirect_with_message(
+            __('Users deleted successfully!','rmcommon'),
+            "users.php?".$query, RMMSG_SUCCESS
+        );
+    }
+
     $common->uris()::redirect_with_message(
-        __('Users deleted successfully!','rmcommon'),
-        "users.php?".$query, RMMSG_SUCCESS
+        __('There was errors while trying to delete users:','rmcommon') . '<br>' . $errors,
+        "users.php?".$query, RMMSG_WARN
     );
 
 }
