@@ -12,7 +12,7 @@ class RMUser extends RMObject
 {
     private $groups = array();
 
-    public function __construct($id='', $use_email = false, $pass = '' ){
+    public function __construct($id='', $use_email = false, $pass = null ){
 
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("users");
@@ -28,22 +28,25 @@ class RMUser extends RMObject
                 return null;
 
             $this->primary = 'email';
-            if($this->loadValues($id))
-                $this->unsetNew ();
+            $loaded = $this->loadValues($id);
             $this->primary = 'uid';
-            return true;
 
-        }
-
-        if ($id != '' && is_numeric($id) && $this->loadValues((int)$id))
-            $this->unsetNew();
-        elseif ($id!='') {
+        } elseif($id != '' && is_numeric($id)){
+            $loaded = $this->loadValues((int)$id);
+        } elseif('' != $id) {
             $this->primary = 'uname';
-            if($this->loadValues($id))
-                $this->unsetNew ();
+            $loaded = $this->loadValues($id);
             $this->primary = 'uid';
         }
 
+        if($loaded && null == $pass){
+            $this->unsetNew();
+            return;
+        }
+
+        if(password_verify($pass, $this->pass)){
+            $this->unsetNew();
+        }
     }
 
     function setGroups($groupsArr){
@@ -52,7 +55,7 @@ class RMUser extends RMObject
                 $this->groups =& $groupsArr;
     }
 
-    public function &getGroups(){
+    public function getGroups(){
 
         if (!empty($this->groups)) return $this->groups;
 
@@ -72,7 +75,7 @@ class RMUser extends RMObject
     function groups($data=false, $fields='groupid'){
         $groups =& $this->getGroups();
 
-        if (!$data || $fields=='') return $groups;
+        if (false == $data || $fields=='') return $groups;
 
         // Gets all groups based in their id
         $sql = "SELECT ".($fields!='' ? "$fields" : '')." FROM ".$this->db->prefix("groups")." WHERE groupid IN(".implode(',',$groups).")";

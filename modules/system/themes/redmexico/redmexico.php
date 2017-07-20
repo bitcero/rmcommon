@@ -14,7 +14,7 @@ xoops_load('gui', 'system');
 global $xoopsConfig, $rmc_config;
 //include_once XOOPS_ROOT_PATH.'/modules/rmcommon/admin_loader.php';
 
-if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
+if($xoopsModule && ($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable'])){
 
     /**
      * XOOPS 2.5.8 changes the definition of XoopsSystemGui::validate() to static, as it is used in
@@ -65,7 +65,7 @@ if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
 	    public function footer(){
 		    global $xoopsConfig, $xoopsOption, $xoopsTpl, $xoTheme, $rmc_config, $xoopsModule;
             
-            $xoopsLogger =& XoopsLogger::getInstance();
+            $xoopsLogger = XoopsLogger::getInstance();
             $xoopsLogger->stopTime('Module display');
 
             if (!headers_sent()) {
@@ -79,7 +79,7 @@ if($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable']){
             //@internal: using global $xoTheme dereferences the variable in old versions, this does not
             //if (!isset($xoTheme)) $xoTheme =& $GLOBALS['xoTheme'];
             
-            if (!isset($xoTheme)) $xoTheme =& $GLOBALS['xoTheme'];
+            if (!isset($xoTheme)) $xoTheme = $GLOBALS['xoTheme'];
 
             if (isset($xoopsOption['template_main']) && $xoopsOption['template_main'] != $xoTheme->contentTemplate) {
                 trigger_error("xoopsOption[template_main] should be defined before call xoops_cp_header function", E_USER_WARNING);

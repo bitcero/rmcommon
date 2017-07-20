@@ -48,13 +48,13 @@ function select_option(id,action,form){
 		$("#bulk-top").val('edit');
 		$("#bulk-bottom").val('edit');
 		$("#"+form+" input[type=checkbox]").removeAttr("checked");
-		$("#item-"+id).attr("checked","checked");
+		$("#item-"+id).attr("checked", true);
 		$("#"+form).submit();
 	}else if(action=='delete'){
 		$("#bulk-top").val('delete');
 		$("#bulk-bottom").val('delete');
-		$("#"+form+" input[type=checkbox]").removeAttr("checked");
-		$("#item-"+id).attr("checked","checked");
+		$("#"+form+" input:checkbox").prop("checked", false);
+		$("#item-"+id).prop("checked", true);
 		if (confirm(rmcu_message))
 			$("#"+form).submit();
 	}

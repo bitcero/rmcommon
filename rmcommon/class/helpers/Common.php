@@ -370,4 +370,10 @@ class Common
 
     }
 
+    public function crypt($method = null, $key = null)
+    {
+        $crypt = new \Crypt($method, $key);
+        return $crypt;
+    }
+
 }

@@ -77,34 +77,72 @@ class RMUtilities
     }
 
     /**
-     * Genera una cadena aleatoria en base a par?metros especificados
+     * Generates a random string with a given length. Note that, by default, this
+     * method could generate strings that can cause conflicts with HTML. In order to
+     * prevent these issues, and if you need to show the result in a form field
+     * or directly in the page, then you can use special chars to show correctly.
+     *
+     * @param $options_or_size
+     * @param bool $useDigits
+     * @param bool $useSpecial
+     * @param bool $useUpper
+     * @param bool $useAlpha
+     * @return string
      */
-    static public function randomString($size, $digit = true, $special = false, $upper = false, $alpha = true)
+    static public function randomString($options_or_size, $useDigits = true, $useSpecial = true, $onlyUpper = false, $useAlpha = true)
     {
-        $aM = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $am = "abcdefghijklmnopqrstuvwxyz";
-        $d = "0123456789";
-        $s = "?@#\$%&()=???!.:,;-_+*[]{}";
+        $upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+        $digits = "0123456789";
+        $specialChars = "?@#\$%&()=/\\~!.:,;-_+*[]{}";
+        
+        if(is_array($options_or_size)){
+            
+            if(array_key_exists('upperLetters', $options_or_size)){
+                $upperLetters = $options_or_size['upperLetters'];
+            }
+
+            if(array_key_exists('lowerLetters', $options_or_size)){
+                $lowerLetters = $options_or_size['lowerLetters'];
+            }
+
+            if(array_key_exists('digits', $options_or_size)){
+                $digits = $options_or_size['digits'];
+            }
+
+            if(array_key_exists('specialChars', $options_or_size)){
+                $specialChars = $options_or_size['specialChars'];
+            }
+            
+            $size = array_key_exists('size', $options_or_size) ? $options_or_size['size'] : 40;
+            $useDigits = array_key_exists('digit', $options_or_size) ? $options_or_size['digit'] : true;
+            $useSpecial = array_key_exists('special', $options_or_size) ? $options_or_size['special'] : true;
+            $useAlpha = array_key_exists('alpha', $options_or_size) ? $options_or_size['alpha'] : true;
+            $onlyUpper = array_key_exists('upper', $options_or_size) ? $options_or_size['upper'] : false;
+            
+        } else {
+            $size = (int) $options_or_size;
+        }
 
         $que = array();
-        if ($alpha) $que[] = 'alpha';
-        if ($digit) $que[] = 'digit';
-        if ($special) $que[] = 'special';
+        if ($useAlpha) $que[] = 'alpha';
+        if ($useDigits) $que[] = 'digit';
+        if ($useSpecial) $que[] = 'special';
 
         $rtn = '';
 
         for ($i = 1; $i <= $size; $i++) {
-            $op = $que[rand(0, count($que) - 1)];
+            $op = $que[random_int(0, count($que) - 1)];
             switch ($op) {
                 case 'alpha':
-                    $what = $upper ? $aM : (rand(0, 1) == 0 ? $aM : $am);
-                    $rtn .= substr($what, rand(0, strlen($what) - 1), 1);
+                    $what = $onlyUpper ? $upperLetters : (random_int(0, 1) == 0 ? $upperLetters : $lowerLetters);
+                    $rtn .= substr($what, random_int(0, strlen($what) - 1), 1);
                     break;
                 case 'digit':
-                    $rtn .= substr($d, rand(0, strlen($d) - 1), 1);
+                    $rtn .= substr($digits, random_int(0, strlen($digits) - 1), 1);
                     break;
                 case 'special':
-                    $rtn .= substr($s, rand(0, strlen($s) - 1), 1);
+                    $rtn .= substr($specialChars, random_int(0, strlen($specialChars) - 1), 1);
                     break;
             }
         }

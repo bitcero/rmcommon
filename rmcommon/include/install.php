@@ -13,7 +13,7 @@ function xoops_module_pre_uninstall_rmcommon($mod){
     // Restore previous configurations
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
-    $db->queryF("UPDATE ".$db->prefix("config")." SET conf_value='default' WHERE conf_name='cpanel'");
+    $db->queryF("UPDATE ".$db->prefix("config")." SET conf_value='transition' WHERE conf_name='cpanel'");
 
     return true;
 

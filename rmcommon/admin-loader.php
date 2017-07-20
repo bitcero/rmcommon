@@ -18,10 +18,10 @@
 $tpl = RMTemplate::get();
 
 $rmc_config = RMSettings::cu_settings();
-$rmc_theme = isset($rmc_config->theme) ? $rmc_config->theme : 'twop6';
+$rmc_theme = isset($rmc_config->theme) ? $rmc_config->theme : 'helium';
 
 if (!file_exists(RMCPATH.'/themes/'.$rmc_theme.'/admin-gui.php')){
-	$rmc_theme = 'twop6';
+	$rmc_theme = 'helium';
 }
 
 RMTemplate::get()->add_style('general.min.css','rmcommon');

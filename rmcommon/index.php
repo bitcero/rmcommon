@@ -50,7 +50,7 @@ function get_modules_list(){
 }
 
 function show_dashboard(){
-    global $xoopsModule, $cuSettings, $cuIcons;
+    global $xoopsModule, $cuSettings, $cuIcons, $common;
     
     //RMFunctions::create_toolbar();
 
@@ -147,7 +147,7 @@ function show_dashboard(){
         'class' => 'animated bounceIn'
     ]);
     $counterSystem->addCell(__('Current Version', 'rmcommon'), RMModules::get_module_version('rmcommon', false));
-    $counterSystem->addCell('XOOPS', str_replace('XOOPS ', '', XOOPS_VERSION));
+    $counterSystem->addCell('XOOPS', substr(str_replace('XOOPS ', '', XOOPS_VERSION), 0 ,5));
     $version = explode('-', phpversion());
     $counterSystem->addCell('PHP', $version[0]);
     unset($version);
@@ -311,14 +311,14 @@ function show_dashboard(){
 
     RMTemplate::getInstance()->add_body_class('dashboard');
 
-    xoops_cp_header();
+    $common->template()->header();
 
     //RMTemplate::get()->add_style('dashboard.min.css', 'rmcommon');
     RMTemplate::getInstance()->add_style('pagenav.css', 'rmcommon');
     //RMTemplate::getInstance()->add_help(__('Dashboard Help','rmcommon'),'https://www.xoopsmexico.net/docs/bitcero/common-utilities/introduccion/');
-    include RMTemplate::get()->path('rmc-dashboard.php', 'module', 'rmcommon');
+    include RMTemplate::getInstance()->path('rmc-dashboard.php', 'module', 'rmcommon');
 
-    xoops_cp_footer();
+    $common->template()->footer();
 }
 
 

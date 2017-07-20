@@ -53,13 +53,15 @@ class RMTimeFormatter
      * @param string $format <p>This value is optional. Represents the format for the returned value.</p>
      * @return mixed
      */
-    public function format($time=0, $format=''){
+    public function format($time=0, $format='', $offset = true){
 		global $xoopsConfig;
 
         if ( $time <= 0 || strpos( $time, "-" ) !== false )
             $time = strtotime( $time );
 
-        $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
+        if($offset){
+            $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
+        }
 
         $format = $format=='' ? $this->format : $format;
 
@@ -94,7 +96,7 @@ class RMTimeFormatter
             date('s', $time)
         );
 
-
+        //return date('i', $time);
 
         return str_replace($find, $replace, $format);
 
@@ -112,13 +114,13 @@ class RMTimeFormatter
         if($time<=0) return null;
 
         $days = array(
-            __('Sunday','rmcommon'),
-            __('Monday','rmcommon'),
-            __('Tuesday','rmcommon'),
-            __('Wednesday','rmcommon'),
-            __('Thursday','rmcommon'),
-            __('Friday','rmcommon'),
-            __('Saturday','rmcommon')
+            __('sunday','rmcommon'),
+            __('monday','rmcommon'),
+            __('tuesday','rmcommon'),
+            __('wednesday','rmcommon'),
+            __('thursday','rmcommon'),
+            __('friday','rmcommon'),
+            __('saturday','rmcommon')
         );
 
         return $days[date("w", $time)];
@@ -130,27 +132,27 @@ class RMTimeFormatter
         if($time<=0) return null;
 
         $months = array(
-            __('January', 'rmcommon'),
-            __('February', 'rmcommon'),
-            __('March', 'rmcommon'),
-            __('April', 'rmcommon'),
-            __('May', 'rmcommon'),
-            __('June', 'rmcommon'),
-            __('July', 'rmcommon'),
-            __('August', 'rmcommon'),
-            __('September', 'rmcommon'),
-            __('October', 'rmcommon'),
-            __('November', 'rmcommon'),
-            __('December', 'rmcommon'),
+            __('january', 'rmcommon'),
+            __('february', 'rmcommon'),
+            __('march', 'rmcommon'),
+            __('april', 'rmcommon'),
+            __('may', 'rmcommon'),
+            __('june', 'rmcommon'),
+            __('july', 'rmcommon'),
+            __('august', 'rmcommon'),
+            __('september', 'rmcommon'),
+            __('october', 'rmcommon'),
+            __('november', 'rmcommon'),
+            __('december', 'rmcommon'),
         );
 
         return $months[date('n', $time)-1];
 
     }
 
-    public function ago( $time = 0 ){
+    public function ago( $time ){
 
-        if(is_string($time)){
+        if(false == is_numeric($time)){
             $time = strtotime($time);
         }
 
