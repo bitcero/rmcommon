@@ -58,8 +58,11 @@ class Rmcommon_Config_Item extends RMObject
      * @param mixed  $value      Value
      * @param string $type_Value type
      */
-    function set_value( $value, $type )
+    function set_value( $value, $type = '' )
     {
+
+        $type = '' == $type ? $this->conf_valuetype : $type;
+
         switch ($type) {
             case 'array':
                 if (!is_array($value)) {

@@ -42,7 +42,7 @@ class HeliumRmcommonPreload
             'description' => __('You can specify a logo as bitmap but SVG is recommended. The logo will be resize to 29 pixels of height.', 'helium'),
             'formtype' => $af_available ? 'image-url' : 'textbox',
             'valuetype' => 'text',
-            'default' => RMCURL . '/themes/helium/images/logo-he.svg',
+            'default' => RMCPATH . '/themes/helium/images/logo-he.svg',
             'category' => 'helium'
         );
 

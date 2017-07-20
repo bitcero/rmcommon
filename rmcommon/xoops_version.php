@@ -52,14 +52,14 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>67,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>69,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
 $modversion['authormail'] = "i.bitcero@gmail.com";
 $modversion['authorweb'] = "Eduardo Cortés";
 $modversion['authorurl'] = "http://eduardocortes.mx";
-//$modversion['updateurl'] = "https://www.xoopsmexico.net/modules/vcontrol/";
+$modversion['updateurl'] = "https://sys.eduardocortes.mx/updates/";
 $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
 // PERMISSIONS
@@ -330,13 +330,18 @@ $cu_settings['config'][] = array(
 // Secure Key
 global $common;
 if (!isset($xoopsSecurity)) $xoopsSecurity = new XoopsSecurity();
+
+if(null == $common){
+    require_once 'class/utilities.php';
+}
+
 $cu_settings['config'][] = array(
     'name'          => 'secretkey',
     'title'         => __('Secret Key','rmcommon'),
     'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
-    'default'       => $common->settings->secretkey != '' ? '' : password_hash( XOOPS_URL . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['GATEWAY_INTERFACE'] . $_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_ADMIN'] . $_SERVER['SERVER_SIGNATURE'] . $GLOBALS['xoopsUser']->uname(), PASSWORD_DEFAULT),
+    'default'       => RMUtilities::randomString(60),
     'category'      => 'general'
 );
 

@@ -145,7 +145,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
          */
         $format = $this->has('format') && $this->get('format') == 'y';
 
-        if(is_integer($value) || is_float($value) && $format){
+        if(is_numeric($value) && $format){
 
             // Format for numbers
             if($value >= 1000000){

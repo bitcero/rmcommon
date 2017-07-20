@@ -67,6 +67,7 @@ while($row = $xoopsDB->fetchArray($result)){
     
 }
 
+
 /**
  * Load remote information and fetch it
  * for each module

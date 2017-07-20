@@ -151,7 +151,7 @@ class RMUris
     {
         global $common;
 
-        if($common->nativeTheme){
+        if($common->nativeTheme || defined('XOOPS_CPFUNC_LOADED')){
             $i = isset($_SESSION['cu_redirect_messages']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
             $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
             $_SESSION['cu_redirect_messages'][$i]['level'] = $level;

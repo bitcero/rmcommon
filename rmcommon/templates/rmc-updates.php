@@ -86,47 +86,33 @@
     <p><strong><?php _e('Important:','rmcommon'); ?></strong> <?php _e('Before to install updates be sure that target folders have writting permissions for web server. If you wish, you can configure the internal FTP Client in order to update without assign writting permissions.','rmcommon'); ?></p>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <span class="rm-loading text-primary"><span class="fa fa-refresh fa-spin"></span> <?php _e('Searching for updates...','rmcommon'); ?></span>
+<div class="panel panel-purple">
+    <div class="panel-heading">
+        <h4 class="panel-title"><?php _e('Available updates', 'rmcommon'); ?></h4>
+    </div>
+    <div class="rm-loading text-primary"><span class="fa fa-refresh fa-spin"></span> <?php _e('Searching for updates...','rmcommon'); ?></div>
+
+    <div class="panel-body">
         <div id="rmc-updates">
 
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-12">
 
-<div id="upd-info" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header cu-titlebar">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><?php _e('Update Details','rmcommon'); ?></h4>
-            </div>
-            <div class="modal-body">
-                <ul class="nav nav-tabs nav-tabs-color">
-                    <li class="active"><a href="#details" data-toggle="tab"><?php _e('Details','rmcommon'); ?></a></li>
-                    <li><a href="#files" data-toggle="tab"><?php _e('Files','rmcommon'); ?></a></li>
-                </ul>
-                <div class="tab-content tab-container">
-                    <div class="tab-item tab-pane fade active in" id="details">
-
-                    </div>
-                    <div class="tab-item tab-pane fade" id="files">
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
 <div id="upd-warning">
     <h4></h4>
-    <p></p>
-    <hr>
-    <div class="pull-right">
-    <button type="button" class="btn cancel-warning"><?php _e('Cancel','rmcommon'); ?></button>
-    <button type="button" class="btn btn-primary continue-update"><?php _e('Continue &raquo;','rmcommon'); ?></button>
+    <div class="content">
+        <?php echo $common->icons()->getIcon('svg-rmcommon-warning text-warning'); ?>
+        <p></p>
+    </div>
+    <div class="controls">
+    <button type="button" class="btn btn-default cancel-warning"><?php _e('Cancel','rmcommon'); ?></button>
+    <button type="button" class="btn btn-warning continue-update"><?php _e('Continue &raquo;','rmcommon'); ?></button>
     </div>
 </div>
 
@@ -141,18 +127,18 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label><?php _e('Username:','rmcommon'); ?></label>
-                    <input type="text" name="uname" id="uname" value="" class="form-control" placeholder="<?php _e('Username','rmcommon'); ?>" />
+                    <label><?php _e('Email:','rmcommon'); ?></label>
+                    <input type="text" name="email" id="uname" value="" class="form-control" placeholder="<?php _e('Username','rmcommon'); ?>" required>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label><?php _e('Password:', 'rmcommon'); ?></label>
-                    <input type="password" name="uname" id="upass" class="form-control" placeholder="<?php _e('Password','rmcommon'); ?>" />
+                    <input type="password" name="uname" id="upass" class="form-control" placeholder="<?php _e('Password','rmcommon'); ?>" required>
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group buttons">
             <button type="button" class="btn btn-primary ok-login"><?php _e('Login','rmcommon'); ?></button> &nbsp;
             <button type="button" class="btn btn-default cancel-login"><?php _e('Cancel','rmcommon'); ?></button>
         </div>

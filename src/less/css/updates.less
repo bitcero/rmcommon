@@ -1,0 +1,183 @@
+#rmc-updates > div > div{
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    padding: 15px 0;
+}
+#rmc-updates > div > div:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+#rmc-updates h4{
+    margin: 0;
+    font-weight: bold;
+}
+#rmc-updates .rmc-upd-info{
+    font-size: 12px;
+}
+.rm-comprobation-legend{
+    font-size: 12px;
+}
+.rm-loading{
+    display: none;
+}
+.upd-item{display: none; padding: 0 15px;}
+.upd-item-process > div{
+    background: #FFF!important;
+    border: 1px dashed #d4d4d4!important;
+}
+
+#login-blocker, #files-blocker{
+    position: fixed;
+    top: 0; left:0; right: 0; bottom: 0;
+    background: #000;
+    display: none;
+    z-index: 1050;
+    opacity: 0.8;
+        -moz-opacity: 0.8;
+        -webkit-opacity: 0.8;
+        -o-opacity: 0.8;
+}
+#files{
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+#update-image{
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#upd-run{
+    position: fixed;
+    top: 25%; left: 15%; right: 15%; bottom: 25%;
+    background: #f2f2f2;
+    display: none;
+    z-index: 1051;
+    border-radius: 2px;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        -o-border-radius: 2px;
+    box-shadow: 0 0 15px #000;
+        -moz-box-shadow: 0 0 15px #000;
+        -webkit-box-shadow: 0 0 15px #000;
+        -o-box-shadow: 0 0 15px #666;
+}
+#upd-run > .title{
+    padding: 5px;
+    color: #FFF;
+    text-shadow: 0 0 3px #000;
+    border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 4px 4px 0 0;
+        -o-border-radius: 4px 4px 0 0;
+    font-size: 16px;
+    border-bottom: 1px solid #FFF;
+}
+
+#upd-info .loading{
+    background: #FFF url("../images/wait.gif") no-repeat center;
+}
+#upd-info .path{
+    display: block;
+    font-size: 12px;
+    color: #666!important;
+}
+#details img{
+    max-width: 100%;
+}
+#upd-warning{
+    position: fixed;
+    display: none;
+    top: 20%; left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    z-index: 1051;
+    background: #FCF8E3;
+    color: #A17942;
+    padding: 15px;
+    border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -o-border-radius: 4px;
+    border: 1px solid #E0D4BE;
+    box-shadow: 0 0 0 3px #FFF;
+}
+#upd-warning h4{
+    margin-top: 0;
+}
+#upd-warning hr{
+    border-top: 1px solid #E0D4BE;
+    border-bottom: 1px solid #FDFBF0;
+}
+.upd-progress{
+    display: none;
+    margin-top: 10px;
+}
+.upd-progress label{
+    font-size: 12px;
+    color: #666;
+}
+.upd-progress .progress{
+    margin-bottom: 5px!important;
+}
+.upd-progress .status{
+    font-size: 12px;
+    font-style: italic;
+}
+#upd-login{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-left: -200px;
+    width: 400px;
+    box-shadow: 0 0 10px #000;
+        -moz-box-shadow: 0 0 10px #000;
+        -webkit-box-shadow: 0 0 10px #000;
+        -o-box-shadow: 0 0 10px #000;
+    display: none;
+    z-index: 1052;
+}
+#upd-login .title{
+    padding: 10px;
+    font-weight: bold;
+}
+#upd-login .title > h4{
+    margin: 0;
+}
+#upd-login .controls{
+    padding: 10px;
+}
+input.error{
+    border-color: #B94A48!important;
+}
+
+#ftp-settings{
+    margin: 10px 0!important;
+    display: none;
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    font-size: 12px!important;
+}
+#ftp-settings .help-block{
+    margin-bottom: 0!important;
+}
+#json-container{
+    display: none;
+}
+h4.update-done{
+    padding-left: 22px!important;
+    background: url("../images/done.png") no-repeat left!important;
+}
+#upd-run{
+    top: 25%; left: 30%; right: 30%; bottom: 25%;
+}
+#upd-run iframe{
+    width: 100%;
+    height: 100%;
+    border: 0;
+}

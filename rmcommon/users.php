@@ -45,11 +45,11 @@ function formatSQL(){
     $url = '';
     $srhmethod = '';
     $from = '';
-    $login1 = ''; $login2 = ''; $register1 = ''; $register2 = '';
-    $posts1 = ''; $posts2 = ''; $mailok = -1; $actives = -1;
+    $login1 = ''; $login2 = ''; $registered1 = ''; $registered2 = '';
+    $posts1 = ''; $posts2 = ''; $mailok = -1; $actives = 'all';
     $show = '';
 
-    $tpl = RMTemplate::get();
+    $tpl = RMTemplate::getInstance();
     $sql = '';
     $tcleaner = TextCleaner::getInstance();
 
@@ -60,8 +60,12 @@ function formatSQL(){
     $tpl->assign('srhkeyw', $keyw);
     $tpl->assign('srhemail', $email);
     $tpl->assign('srhurl', $url);
-    $tpl->assign('srhsrhmethod', $srhmethod);
+    $tpl->assign('srhmethod', $srhmethod);
     $tpl->assign('srhfrom', $from);
+    $tpl->assign('srhposts1', $posts1);
+    $tpl->assign('srhposts2', $posts2);
+    $tpl->assign('srhmailok', $mailok);
+    $tpl->assign('srhactives', $actives);
 
     if ($show=='inactives') {
         $sql = "level<=0 AND ";
@@ -70,7 +74,7 @@ function formatSQL(){
     }
 
     if ($keyw == '' && $email == '' && $url == '' && $from == ''
-        && $login1 == '' && $login2 == '' && $register1 == '' && $register2 == '' && $posts1 == ''
+        && $login1 == '' && $login2 == '' && $registered1 == '' && $registered2 == '' && $posts1 == ''
         && $posts2 == '' && $mailok == -1 && $actives == -1) {
 
         if ($show=='inactives') {
@@ -156,8 +160,8 @@ function formatSQL(){
         $or = true;
     }
 
-    if ($actives>-1) {
-        $sql .= ($or ? " $ao " : '')."level".($actives>0 ? ">'0'" : "<='0'");
+    if ($actives != 'all') {
+        $sql .= ($or ? " $ao " : '')."level".($actives == 'active' ? " > 0"  : " <= 0 ");
         $or = true;
     }
 
@@ -176,7 +180,7 @@ function formatSQL(){
 * Shows all registered users in a list with filter and manage options
 */
 function show_users(){
-    global $xoopsSecurity, $rmTpl, $cuIcons;
+    global $xoopsSecurity, $rmTpl, $cuIcons, $common;
 
     define('RMCSUBLOCATION','allusers');
     RMTemplate::get()->add_style('users.css','rmcommon');
@@ -191,15 +195,15 @@ function show_users(){
 
     $form = new RMForm('', '', '');
     // Date Field
-    $login1 = new RMFormDate('','login1', '');
+    $login1 = new RMFormDate('','login1', $common->httpRequest()->request('login1', 'string', ''));
     $login1->addClass('form-control');
-    $login2 = new RMFormDate('','login2', '') ;
+    $login2 = new RMFormDate('','login2', $common->httpRequest()->request('login2', 'string', '')) ;
     $login2->addClass('form-control');
 
     // Registered Field
-    $register1 = new RMFormDate('','registered1', '');
+    $register1 = new RMFormDate('','registered1', $common->httpRequest()->request('registered1', 'string', ''));
     $register1->addClass('form-control');
-    $register2 = new RMFormDate('','registered2', '');
+    $register2 = new RMFormDate('','registered2', $common->httpRequest()->request('registered2', 'string', ''));
     $register2->addClass('form-control');
 
     RMBreadCrumb::get()->add_crumb(__('Users Management','rmcommon'));
@@ -224,9 +228,6 @@ function show_users(){
 
     $start = $num<=0 ? 0 : ($page - 1) * $limit;
 
-    $nav = new RMPageNav($num, $limit, $page, 5);
-    $nav->target_url('users.php?limit='.$limit.'&order='.$order.'&pag={PAGE_NUM}');
-
     $sql = str_replace("COUNT(*)",'*', $sql);
     $sql .= "ORDER BY $order LIMIT $start, $limit";
     $result = $db->query($sql);
@@ -242,6 +243,20 @@ function show_users(){
         $users[] = $t;
         $t = array();
     }
+
+    extract(RMTemplate::getInstance()->get_vars());
+    $query = '';
+    $params = [];
+
+    foreach ($_REQUEST as $k => $v) {
+        if('pag' == $k){
+            continue;
+        }
+        $query .= '' == $query ? $k . '=' . urlencode($v) : '&amp;' . $k . '=' . urlencode($v);
+    }
+
+    $nav = new RMPageNav($num, $limit, $page, 5);
+    $nav->target_url('users.php?pag={PAGE_NUM}&amp;' . $query);
 
     $xgh = new XoopsGroupHandler($db);
     $users = RMEvents::get()->trigger('rmcommon.users.list.loaded', $users);
@@ -563,7 +578,7 @@ function activate_users($activate){
 }
 
 function delete_users(){
-    global $xoopsSecurity;
+    global $xoopsSecurity, $common;
 
     if (!$xoopsSecurity->check()) {
         redirectMsg("users.php", implode('<br />', $GLOBALS['xoopsSecurity']->getErrors()), 1);
@@ -575,8 +590,20 @@ function delete_users(){
         $q .= $q=='' ? "$k=".urlencode($v) : "&$k=".urlencode($v);
     }
 
-    $uid = rmc_server_var($_POST, 'ids', array());
+    $query = $common->httpRequest()->post('query', 'string', '');
+    $query = urldecode($query);
+
+    $uid = $common->httpRequest()::post('ids', 'array', array());
+
+    if(empty($uid)){
+        $common->uris()::redirect_with_message(
+            __('Select at leas one user to delete','rmcommon'),
+            "users.php?".$query, RMMSG_INFO
+        );
+    }
+
     $member_handler = xoops_getHandler('member', 'system');
+    $errors = '';
 
     foreach ($uid as $id) {
 
@@ -584,9 +611,9 @@ function delete_users(){
         $groups = $user->getGroups();
 
         if (in_array(XOOPS_GROUP_ADMIN, $groups)) {
-            xoops_error( sprintf( __('Admin user cannot be deleted: %s','rmcommon'), $user->getVar("uname").'<br />') );
+            $errors .= sprintf( __('Admin user cannot be deleted: %s','rmcommon'), $user->getVar("uname")) .'<br />';
         } elseif (!$member_handler->deleteUser($user)) {
-            xoops_error( sprintf( __('User cannot be deleted: %s','rmcommon'), $user->getVar("uname").'<br />') );
+            $errors .= sprintf( __('User cannot be deleted: %s','rmcommon'), $user->getVar("uname")) .'<br />';
         } else {
             $online_handler = xoops_getHandler('online');
             $online_handler->destroy($uid);
@@ -596,7 +623,17 @@ function delete_users(){
 
     }
 
-    redirectMsg("users.php?".$q,__('Users deleted successfully!','rmcommon'),0);
+    if('' == $errors){
+        $common->uris()::redirect_with_message(
+            __('Users deleted successfully!','rmcommon'),
+            "users.php?".$query, RMMSG_SUCCESS
+        );
+    }
+
+    $common->uris()::redirect_with_message(
+        __('There was errors while trying to delete users:','rmcommon') . '<br>' . $errors,
+        "users.php?".$query, RMMSG_WARN
+    );
 
 }
 

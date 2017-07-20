@@ -54,6 +54,12 @@ class TinyEditor
 
     public function get_js(){
 
+        if(defined('TINY_JS_INCLUDED')){
+            return null;
+        }
+
+        define('TINY_JS_INCLUDED', 1);
+
         ob_start(); ?>
 
         (function($){
@@ -95,12 +101,6 @@ class TinyEditor
 
             };
 
-            <?php
-                if('' != $elements){ ?>
-                    $(document).ready(function(){
-                        initMCE("<?php echo $elements; ?>");
-                    });
-            <?php } ?>
         })(jQuery);
 
         <?php $rtn = ob_get_clean();

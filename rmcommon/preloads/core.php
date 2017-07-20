@@ -125,6 +125,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     static function eventCoreFooterEnd()
     {
+        RMEvents::get()->trigger('rmcommon.footer.end');
         ob_end_flush();
     }
 
