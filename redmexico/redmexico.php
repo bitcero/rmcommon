@@ -15,6 +15,26 @@ global $xoopsConfig, $rmc_config;
 //include_once XOOPS_ROOT_PATH.'/modules/rmcommon/admin_loader.php';
 
 if($xoopsModule && ($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disable'])){
+
+    /**
+     * XOOPS 2.5.8 changes the definition of XoopsSystemGui::validate() to static, as it is used in
+     * call_user_func(). While that fixes warnings, changing the declaration breaks backward compatibility
+     * and creates errors. This shim declares the method appropriate to the definition in XoopsSystemGui.
+     * 2.5.8 works without warnings, and 2.5.7 and earlier work without error.
+     */
+    $reflectionGui = new ReflectionClass('XoopsSystemGui');
+    if ($reflectionGui->getMethod('validate')->isStatic()) {
+        class XoopsGuiRedmexicoShim extends XoopsSystemGui
+        {
+            public static function validate() { return true; }
+        }
+    } else {
+        class XoopsGuiRedmexicoShim extends XoopsSystemGui
+        {
+            public function validate() { return true; }
+        }
+    }
+
     /**
     * XOOPS CPanel "redmexico" GUI class
     * 
@@ -23,7 +43,7 @@ if($xoopsModule && ($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disab
     * @author      BitC3R0       <i.bitcero@gmail.com>
     * @version     1.0
     */
-    class XoopsGuiRedmexico extends  XoopsSystemGui
+    class XoopsGuiRedmexico extends  XoopsGuiRedmexicoShim
     {
 	    function __construct(){
 		    

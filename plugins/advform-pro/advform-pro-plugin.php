@@ -43,7 +43,7 @@ class AdvformproCUPlugin extends RMIPlugin
             'email' => 'i.bitcero@gmail.com',
             'web' => 'http://www.redmexico.com.mx',
             'dir' => 'advform-pro',
-            //'updateurl' => 'http://www.xoopsmexico.net/modules/vcontrol/',
+            'updateurl' => 'https://sys.eduardocortes.mx/updates/',
             'hasmain' => true
         );
 
