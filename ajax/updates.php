@@ -78,7 +78,7 @@ foreach($urls as $dir => $url){
     $ret = file_get_contents($url . '&xv=' . urlencode(XOOPS_VERSION));
     $ret = json_decode($ret, true);
     if($ret['message']==0) continue;
-    if($ret['error']==1) continue;
+    if($ret['type']=='error') continue;
     
     $ret['data']['type'] = 'module';
     $ret['data']['dir'] = $dir;
@@ -127,7 +127,7 @@ foreach($urls as $dir => $url){
     $ret = file_get_contents($url);
     $ret = json_decode($ret, true);
     if($ret['message']==0) continue;
-    if($ret['error']==1) continue;
+    if($ret['type']=='error') continue;
     
     $ret['data']['type'] = 'plugin';
     $ret['data']['dir'] = $dir;

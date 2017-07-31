@@ -223,6 +223,16 @@ $cu_settings['config'][] = array(
     'category'      => 'general'
 );
 
+$cu_settings['config'][] = array(
+    'name'          => 'siteId',
+    'title'         => '',
+    'description'   => '',
+    'formtype'      => 'hidden',
+    'valuetype'     => 'text',
+    'default'       => '',
+    'category'      => 'general'
+);
+
 /**
 * Language
 */
