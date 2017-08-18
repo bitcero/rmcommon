@@ -34,7 +34,7 @@ class RMFormColorSelector extends RMFormElement
         $initial = $this->get('value');
         
         if($this->get('hash') && $initial!=''){
-            if(!preg_match("/^#[a-f0-9]{1,}$/is", $initial) && $initial != 'transparent')
+            if(!preg_match("/^#[a-f0-9]{1,}$/is", $initial) && $initial != 'transparent' && 'rgb' != substr($initial, 0, 3))
                 $this->set('value', '#'.$initial);
             else
                 $this->set('value', $initial);

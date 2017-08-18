@@ -260,7 +260,7 @@ class Common
     }
 
     /**
-     * @return Xoops
+     * @return \XoopsMySQLDatabase
      */
     public function db()
     {
@@ -281,9 +281,10 @@ class Common
     /**
      * Check the session token sent via HTTP and redirect if not valid
      * @param bool $ajax
+     * @param string $url Used only when $ajax is false
      * @return bool
      */
-    public function checkToken($ajax = true)
+    public function checkToken($ajax = true, $url = '')
     {
 
         if ($this->security()->check(true, false, 'CUTOKEN')) {
@@ -300,7 +301,7 @@ class Common
 
             $this->uris()->redirect_with_message(
                 __('Session token expired!', 'rmcommon'),
-                XOOPS_URL, RMMSG_ERROR
+                $url == '' ? XOOPS_URL : $url, RMMSG_ERROR
             );
 
         }

@@ -67,7 +67,6 @@ while($row = $xoopsDB->fetchArray($result)){
     
 }
 
-
 /**
  * Load remote information and fetch it
  * for each module
@@ -138,11 +137,28 @@ foreach($urls as $dir => $url){
 }
 
 /**
- * TODO: Create support for themes updates
+ * Check themes updates
+ * Event must return an array with 'dir' => 'url' values
  */
+$urls = $common->events()->trigger('rmcommon.check.updates.themes', []);
+foreach($urls as $dir => $data){
+    $ret = file_get_contents($data['url']);
+    $ret = json_decode($ret, true);
+    if($ret['message']==0) continue;
+    if($ret['type']=='error') continue;
+
+    $ret['data']['type'] = 'theme';
+    $ret['data']['dir'] = $dir;
+    $ret['data']['name'] = $data['name'];
+    $upds[] = $ret;
+
+    $total++;
+}
 
 // Write file with updates information
 file_put_contents(XOOPS_CACHE_PATH.'/updates.chk', base64_encode(serialize(array('date'=>time(),'total'=>$total,'updates'=>$upds))));
+
+\Common\Core\Helpers\Licensing::getInstance()->checkRemote();
 
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

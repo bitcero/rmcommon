@@ -39,12 +39,12 @@ class RMFormImageSelect extends RMFormElement
             parent::__construct([]);
             $this->setWithDefaults('caption', $caption, '');
             $this->setWithDefaults('name', $name, 'name_error');
-            $this->setWithDefaults('default', $initial, '');
+            $this->setWithDefaults('value', $initial, '');
             $this->setWithDefaults('width', $width, 50);
             $this->setWithDefaults('height', $height, 50);
         }
 
-        $this->setIfNotSet('default', $initial);
+        $this->setIfNotSet('value', $initial);
         $this->setIfNotSet('width', 50);
         $this->setIfNotSet('height', 50);
         $this->setIfNotSet('images', []);
@@ -91,7 +91,7 @@ class RMFormImageSelect extends RMFormElement
             if ( !in_array( $data[0], $this->accepted ) )
                 continue;
 
-            $ret .= '<label style="width: '.$this->get('width').'px; height: '.$this->get('height').'px;"><input type="radio" name="'.$this->get('name').'" value="'.$v.'"'.($v==$this->get('default') ? ' checked="checked"' : '').'>';
+            $ret .= '<label style="width: '.$this->get('width').'px; height: '.$this->get('height').'px;"><input type="radio" name="'.$this->get('name').'" value="'.$v.'"'.($v==$this->get('value') ? ' checked="checked"' : '').'>';
             $ret .= '<span style="background-image: url('.$url.')" title="'.$v.'"></span></label>';
         }
 

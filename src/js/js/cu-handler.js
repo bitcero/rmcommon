@@ -20,6 +20,11 @@ var cuHandler = {
 
     currentResponse: false,
 
+    checkEmail: function (email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    },
+
     /**
      * Send a request to a remote URL and present the response in a window
      * Launcher can have several useful data attributes:
@@ -59,8 +64,8 @@ var cuHandler = {
                     color: response.color != undefined ? response.color : '',
                     closeButton: response.closeButton != undefined ? response.closeButton : true,
                     helpButton: response.helpButton != undefined ? response.helpButton : false,
-                    helpUrl: response.helpUrl != undefined ? response.helpUrl: '#',
-                    solid: response.solid != undefined ? true: false
+                    helpUrl: response.helpUrl != undefined ? response.helpUrl : '#',
+                    solid: response.solid != undefined ? true : false
                 });
 
             } else {
@@ -231,15 +236,15 @@ var cuHandler = {
                 animate: false,
                 closeButton: data.closeButton != undefined ? data.closeButton : true,
                 helpButton: data.helpButton != undefined ? data.helpButton : false,
-                helpUrl: data.helpUrl != undefined ? data.helpUrl: '#',
+                helpUrl: data.helpUrl != undefined ? data.helpUrl : '#',
                 color: data.color != undefined ? data.color : '',
                 solid: data.solid != undefined ? true : false,
             });
 
         }
 
-        if(data.dynamicTable != undefined){
-            $(data.dynamicTable.table).dynamicTable(data.dynamicTable.action,{});
+        if (data.dynamicTable != undefined) {
+            $(data.dynamicTable.table).dynamicTable(data.dynamicTable.action, {});
         }
 
         // Reload
@@ -372,24 +377,6 @@ var cuHandler = {
     },
 
     /**
-     * Controlar la barra de estado
-     *
-     showInPanel: function( panel, message, process ){
-
-        process = process == undefined ? false : process;
-        var loader = '';
-        if (process)
-            loader = '<img src="' + xoUrl + '/themes/smarterp/images/loader.gif">';
-
-        $("#status-" + panel).html(loader + ' &nbsp; ' +message);
-
-    },
-
-     getPanel: function(panel){
-        return $("#status-" + panel).html();
-    },*/
-
-    /**
      * Ejecuta una acción asociada a un elemento específico
      */
     runAction: function (e) {
@@ -416,6 +403,12 @@ var cuHandler = {
             case 'ajax':
                 var url = $(e).attr('href') != '' ? $(e).attr('href') : $(e).data('url');
                 cuHandler.requestAjax(e, {url: url});
+            case 'register':
+                this.registerForm({
+                    item: $(e).data('item'),
+                    type: $(e).data('type')
+                });
+                break;
             default:
 
                 if ('' == action) {
@@ -475,6 +468,198 @@ var cuHandler = {
 
         });
 
+    },
+
+    registerForm: function (params) {
+
+        if (undefined == params) {
+            this.notify({
+                type: 'alert-danger',
+                icon: 'svg-rmcommon-error',
+                text: cuLanguage.dataInvalid
+            });
+            return false;
+        }
+
+        if (undefined == params.item) {
+            this.notify({
+                type: 'alert-danger',
+                icon: 'svg-rmcommon-error',
+                text: cuLanguage.noItemRegister
+            });
+            return false;
+        }
+
+        if (undefined == params.type) {
+            this.notify({
+                type: 'alert-danger',
+                icon: 'svg-rmcommon-error',
+                text: cuLanguage.noTypeRegister
+            });
+            return false;
+        }
+
+        var params = {
+            CUTOKEN_REQUEST: $("#cu-token").val(),
+            action: 'form',
+            dir: params.item,
+            type: params.type
+        };
+
+        $.post(xoUrl + '/modules/rmcommon/ajax/register.php', params, function (response) {
+
+            if (false == cuHandler.retrieveAjax(response)) {
+                return false;
+            }
+
+            if (undefined == response.form) {
+                return false;
+            }
+
+            $("body")
+                .addClass('registering')
+                .append(response.form);
+
+            $("#rmc-register-overlay").fadeIn(300, function () {
+                $("#rmc-register-form").fadeIn(250);
+            });
+
+        }, 'json');
+
+    },
+
+    sendRegistration: function () {
+        var $form = $("#rmc-register-form");
+        var email = $form.find("#register-email").val();
+        var api = $form.find("#register-api").val();
+        var key = $form.find("#register-key").val();
+        var type = $form.find("#register-type").val();
+        var item = $form.find("#register-item").val();
+        var error = false;
+
+        if (undefined == email || '' == email || false == this.checkEmail(email)) {
+            $form.find("#register-email").parent().addClass('error');
+            error = true;
+        }
+        if (undefined == api || '' == api) {
+            $form.find("#register-api").parent().addClass('error');
+            error = true;
+        }
+        if (undefined == key || '' == key) {
+            $form.find("#register-key").parent().addClass('error');
+            error = true;
+        }
+
+        if (error) {
+            cuHandler.notify({
+                text: cuLanguage.thereAreErrors,
+                icon: 'svg-rmcommon-error',
+                type: 'alert-danger'
+            });
+            return;
+        }
+
+        var params = {
+            CUTOKEN_REQUEST: $("#cu-token").val(),
+            action: 'register',
+            api: api,
+            email: email,
+            key: key,
+            dir: item,
+            type: type
+        };
+
+        $.post(xoUrl + '/modules/rmcommon/ajax/register.php', params, function (response) {
+
+            if (false == cuHandler.retrieveAjax(response)) {
+                if (undefined != response.code && response.code == 'reactivate') {
+                    cuHandler.showReactivation(response);
+                }
+                return false;
+            }
+
+            $("#rmc-register-form .form-group").fadeOut(250, function () {
+                $(this).remove();
+            });
+
+            setTimeout(function () {
+                $("#rmc-register-form").append(response.activation);
+            }, 300);
+
+        }, 'json');
+
+    },
+
+    showReactivation: function (response) {
+
+        $("#rmc-register-form").fadeOut(250, function () {
+            $(this).remove();
+        });
+
+        if(undefined == response.form || '' == response.form){
+            cuHandler.notify({
+                'text': cuLanguage.invalidResponse,
+                'type': 'alert-warning',
+                'icon': 'svg-rmcommon-alert'
+            });
+            return false;
+        }
+
+        $("body").append(response.form);
+        $("#rmc-reactivate-form").fadeIn(300);
+
+    },
+
+    sendReactivation: function(){
+        var $form = $("#rmc-reactivate-form");
+        var email = $form.find("#reactivate-email").val();
+        var api = $form.find("#reactivate-api").val();
+        var key = $form.find("#reactivate-key").val();
+        var type = $form.find("#reactivate-type").val();
+        var item = $form.find("#reactivate-item").val();
+        var license = $form.find("#reactivate-license").val();
+        var error = false;
+
+        if (undefined == key || '' == key) {
+            $form.find("#reactivate-key").parent().addClass('error');
+            error = true;
+        }
+
+        if (error) {
+            cuHandler.notify({
+                text: cuLanguage.thereAreErrors,
+                icon: 'svg-rmcommon-error',
+                type: 'alert-danger'
+            });
+            return;
+        }
+
+        var params = {
+            CUTOKEN_REQUEST: $("#cu-token").val(),
+            action: 'reactivate',
+            api: api,
+            email: email,
+            key: key,
+            license: license,
+            dir: item,
+            type: type
+        };
+
+        $.post(xoUrl + '/modules/rmcommon/ajax/register.php', params, function (response) {
+
+            if (false == cuHandler.retrieveAjax(response)) {
+                return false;
+            }
+
+            $("#rmc-reactivate-form .form-group, #rmc-reactivate-form .help-block").fadeOut(250, function () {
+                $(this).remove();
+            });
+
+            setTimeout(function () {
+                $("#rmc-reactivate-form").append(response.activation);
+            }, 300);
+
+        }, 'json');
     },
 
     /*------------------------------------------------
@@ -618,12 +803,12 @@ var cuHandler = {
      * }
      * </pre>
      */
-    imagesManager: function(options){
+    imagesManager: function (options) {
 
-        var html = '<div id="blocker-'+options.idContainer+'" class="mgr_blocker"></div><div id="window-'+options.idContainer+'" class="imgmgr_container">';
+        var html = '<div id="blocker-' + options.idContainer + '" class="mgr_blocker"></div><div id="window-' + options.idContainer + '" class="imgmgr_container">';
 
-        html += '<div class="window-title cu-titlebar"><button type="button" class="close">&times;</button>'+options.title+'</div>';
-        html += '<iframe src="'+xoUrl+'/modules/rmcommon/include/tiny-images.php?type='+options.type+'&amp;idcontainer='+options.idContainer+'&amp;editor='+options.idContainer+'&amp;target='+options.target+'&amp;&amp;multi='+options.multiple+'" name="image"></iframe>'
+        html += '<div class="window-title cu-titlebar"><button type="button" class="close">&times;</button>' + options.title + '</div>';
+        html += '<iframe src="' + xoUrl + '/modules/rmcommon/include/tiny-images.php?type=' + options.type + '&amp;idcontainer=' + options.idContainer + '&amp;editor=' + options.idContainer + '&amp;target=' + options.target + '&amp;&amp;multi=' + options.multiple + '" name="image"></iframe>'
         html += '</div>';
 
         $("body").append(html);
@@ -631,22 +816,22 @@ var cuHandler = {
         // window height
 
 
-        $("#blocker-"+options.idContainer).fadeIn('fast', function(){
-            $("body").css('overflow','hidden');
-            $("#window-"+options.idContainer).fadeIn('fast', function(){
+        $("#blocker-" + options.idContainer).fadeIn('fast', function () {
+            $("body").css('overflow', 'hidden');
+            $("#window-" + options.idContainer).fadeIn('fast', function () {
 
             });
 
         });
 
-        $("#blocker-"+options.idContainer+", #window-"+options.idContainer+" .window-title .close").click(function(){
+        $("#blocker-" + options.idContainer + ", #window-" + options.idContainer + " .window-title .close").click(function () {
 
-            $("#window-"+options.idContainer).fadeOut('fast', function(){
+            $("#window-" + options.idContainer).fadeOut('fast', function () {
 
-                $("#blocker-"+options.idContainer).fadeOut('fast', function(){
-                    $("body").css('overflow','auto');
-                    $("#window-"+options.idContainer).remove();
-                    $("#blocker-"+options.idContainer).remove();
+                $("#blocker-" + options.idContainer).fadeOut('fast', function () {
+                    $("body").css('overflow', 'auto');
+                    $("#window-" + options.idContainer).remove();
+                    $("#blocker-" + options.idContainer).remove();
 
                 });
 
@@ -656,7 +841,7 @@ var cuHandler = {
 
     },
 
-    template: function(template, data){
+    template: function (template, data) {
 
         var tpl = $.templates(template);
         return tpl.render(data);
@@ -699,6 +884,38 @@ jQuery.fn.disable = function () {
 $(document).ready(function () {
 
     var textarea_style = '';
+
+    $("body").on('click', "#rmc-register-form > .close, #rmc-reactivate-form > .close", function () {
+        $("#rmc-register-form, #rmc-reactivate-form").fadeOut(250, function () {
+            $("#rmc-register-overlay").fadeOut(300, function () {
+                $("#rmc-register-form, #rmc-reactivate-form").remove();
+                $("#rmc-register-overlay").remove();
+            });
+        });
+    });
+
+    $("body").on('click', "#rmc-register-form button.btn", function () {
+        cuHandler.sendRegistration();
+    });
+
+    $("body").on('click', "#rmc-reactivate-form button.btn", function () {
+        cuHandler.sendReactivation();
+    });
+
+    $("body").on('keyup', "#rmc-register-form .form-group.error .form-control", function (e) {
+        if (e.which != 13) {
+            if ($(this).attr('name') == 'email') {
+                if (cuHandler.checkEmail($(this).val())) {
+                    $(this).parent().removeClass('error');
+                }
+                return;
+            }
+            if ('' != $(this).val()) {
+                $(this).parent().removeClass('error');
+                return;
+            }
+        }
+    });
 
     /**
      * Cargar diálogos de otros módulos
@@ -756,38 +973,6 @@ $(document).ready(function () {
     });
 
     /**
-     * Select rows
-     */
-    /*$("body").on('click', '.activator-container > tbody > tr', function (e) {
-
-        if (e.target.tagName != 'DIV' && e.target.tagName != 'TD') {
-            return;
-        }
-
-        //var parent = $(this).parents("tr");
-        var input = $(this).find("input[data-switch]");
-
-        if ($(input).attr("type") == 'radio') {
-            $(this).parents(".activator-container").find(".tr-checked").removeClass('tr-checked');
-        }
-
-        if (input.is(":checked"))
-            input.removeAttr("checked");
-        else
-            input.prop("checked", 'checked');
-
-        cuHandler.enableCommands($(this).parents(".activator-container").attr("id"), input.attr("type"));
-
-        if ($(input).is(":checked"))
-            $(this).addClass('tr-checked');
-        else
-            $(this).removeClass('tr-checked');
-
-        event.stopPropagation();
-
-    });*/
-
-    /**
      * Select all checkbox
      */
     $("body").on("change", ":checkbox[data-checkbox]", function () {
@@ -831,6 +1016,7 @@ $(document).ready(function () {
         }
 
     });
+
 
     /**
      * Check if there are a "News" box in current page
