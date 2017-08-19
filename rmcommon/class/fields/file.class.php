@@ -23,11 +23,19 @@ class RMFormFile extends RMFormElement
 	 * @param int $size Longitud del campo (Por defecto 30)
      * @param int Limite en bytes para el tamaño del archivo
 	 */
-	public function __construct($caption, $name, $size=30, $limit=0){
-		$this->_size = $size;
-		$this->setCaption($caption);
-		$this->setName($name);
-		$this->_limit = $limit;
+	public function __construct($caption, $name = '', $size=30, $limit=0){
+
+        if (is_array($caption)) {
+            parent::__construct($caption);
+        } else {
+            parent::__construct([]);
+            $this->setWithDefaults('caption', $caption, '');
+            $this->setWithDefaults('name', $name, 'name_error');
+            $this->setWithDefaults('size', $size, 10);
+        }
+
+        $this->set('type', 'file');
+
 	}
 	/**
 	 * Modifica la longitud del campo
@@ -48,15 +56,10 @@ class RMFormFile extends RMFormElement
 	 * @return string
 	 */
 	public function render(){
-		$ret = '<input type="file" name="'.$this->getName().'" id="'.$this->id().'" size="'.$this->_size.'" class="form-control ';
-		if ($this->getClass()!='')
-			$ret .= $this->getClass();
 
-		$ret .= '" ' . $this->getExtra().">";
-		if ($this->_limit>0){
-			$ret .= '<input type="hidden" name="MAX_FILE_SIZE" value="'.$this->_limit.'" />';
-		}
-		return $ret;
+        $attributes = $this->renderAttributeString();
+
+        return '<input ' . $attributes . '>';
 	}
 }
 

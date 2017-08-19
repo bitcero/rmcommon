@@ -48,9 +48,9 @@ if($xoopsModule && ($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disab
 	    function __construct(){
 		    
 	    }
-	    
-	    static function validate(){ return true; }
-	    
+
+	    //public static function validate(){ return true; }
+
 	    public function header(){
 		    global $xoopsConfig, $xoopsUser, $xoopsModule, $xoTheme, $xoopsTpl;
 		    parent::header();

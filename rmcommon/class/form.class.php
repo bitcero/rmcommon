@@ -108,7 +108,6 @@ class RMForm extends \Common\Core\Helpers\Attributes
             $this->set('action', $action);
             $this->set('method', $method);
             $this->set('addtoken', $addtoken);
-            $this->set('class', 'form-horizontal');
 
         }
 

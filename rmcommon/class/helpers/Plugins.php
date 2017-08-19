@@ -52,7 +52,7 @@ class Plugins
     /**
      * Loads an installed plugin directly from file
      * @param $dir Plugin directory name
-     * @return bool|object
+     * @return bool|\RMPlugin
      */
     public function load($dir)
     {

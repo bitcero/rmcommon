@@ -52,7 +52,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>69,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>70,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -219,6 +219,16 @@ $cu_settings['config'][] = array(
     'description'   => __( 'Indicate the new paths for supported modules. This path must be used to form new rewrited URLs for modules.', 'rmcommon' ),
     'formtype'      => 'modules-rewrite',
     'valuetype'    => 'array',
+    'default'       => '',
+    'category'      => 'general'
+);
+
+$cu_settings['config'][] = array(
+    'name'          => 'siteId',
+    'title'         => '',
+    'description'   => '',
+    'formtype'      => 'hidden',
+    'valuetype'     => 'text',
     'default'       => '',
     'category'      => 'general'
 );

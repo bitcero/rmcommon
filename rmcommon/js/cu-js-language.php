@@ -95,6 +95,11 @@ var cuLanguage = {
     searchResults: "<?php _e('Search Results (%u)', 'rmcommon'); ?>",
     modules: "<?php _e('Modules', 'rmcommon'); ?>",
     resizingLegend: "<?php _e('Resizing %1 from %2', 'rmcommon'); ?>",
+    noItemRegister: "<?php _e('Provided item is not valid', 'rmcommon'); ?>",
+    noTypeRegister: "<?php _e('Unrecognized item type', 'rmcommon'); ?>",
+    dataInvalid: "<?php _e('Provided data is not valid!', 'rmcommon'); ?>",
+    thereAreErrors: "<?php _e('Errors were found! Please check fields in red.', 'rmcommon'); ?>",
+    invalidResponse: "<?php _e('Invalid response from server', 'rmcommon'); ?>",
 
     <?php /* DROPZONE messages */?>
     dzDefault: "<?php _e('Drop files here to upload', 'rmcommon'); ?>",

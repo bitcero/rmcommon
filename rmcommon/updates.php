@@ -140,7 +140,7 @@ class UpdateManager
         if ($url == '')
             jsonReturn(__('Invalid parameters!', 'rmcommon'));
 
-        $data = json_decode(file_get_contents($url . '&action=update-details'), true);
+        $data = json_decode(file_get_contents(str_replace('&amp;', '&', $url) . '&action=update-details'), true);
 
         if ($data['type'] == 'error')
             $common->ajax()->notifyError($data['message']);
@@ -290,7 +290,7 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
     $zip = new ZipArchive();
     $res = $zip->open($file);
     if ($res !== TRUE){
-        $common->ajax()->notifyError(__('Response from sever: ' . file_get_contents($file), 'rmcommon'));
+        $common->ajax()->notifyError(__('Package file is not valid!', 'rmcommon'));
     }
 
     $source = XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir;
@@ -306,10 +306,17 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
     // Prepare to copy files
 
     $target = XOOPS_ROOT_PATH . '/modules/';
-    if ($type == 'plugin')
+    if ($type == 'plugin'){
         $target .= 'rmcommon/plugins/' . $dir;
-    else
+    }
+
+    if($type == 'theme'){
+        $target = XOOPS_THEME_PATH . '/' . $dir;
+    }
+
+    if('module' == $type){
         $target .= $dir;
+    }
 
     if (!is_dir($target)){
         $common->ajax()->notifyError(sprintf(__('Target path "%s" does not exists!', 'rmcommon'), $target));
