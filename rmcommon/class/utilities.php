@@ -38,21 +38,6 @@ class RMUtilities
     }
 
     /**
-     * Comprueba si existe un elemento en una tabla expec?fica
-     * @param string $table Nombre de la tabla
-     * @param string $cond Condici?n de b?squeda
-     * @return bool
-     */
-    public function get_count($table, $cond = '')
-    {
-        $db =& EXMDatabase::get();
-        $sql = "SELECT COUNT(*) FROM $table";
-        if ($cond != '') $sql .= " WHERE $cond";
-        list($num) = $db->fetchRow($db->query($sql));
-        return $num;
-    }
-
-    /**
      * Determina el color rgb a partir de una cadena HEX
      */
     private function hexToRGB($color)
