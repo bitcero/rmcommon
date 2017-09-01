@@ -48,9 +48,9 @@ if($xoopsModule && ($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disab
 	    function __construct(){
 		    
 	    }
-
-	    //public static function validate(){ return true; }
-
+	    
+	    static function validate(){ return true; }
+	    
 	    public function header(){
 		    global $xoopsConfig, $xoopsUser, $xoopsModule, $xoTheme, $xoopsTpl;
 		    parent::header();
@@ -79,7 +79,7 @@ if($xoopsModule && ($xoopsModule->getInfo('rmnative') || !$rmc_config['gui_disab
             //@internal: using global $xoTheme dereferences the variable in old versions, this does not
             //if (!isset($xoTheme)) $xoTheme =& $GLOBALS['xoTheme'];
             
-            if (!isset($xoTheme)) $xoTheme = $GLOBALS['xoTheme'];
+            if (!isset($xoTheme)) $xoTheme =& $GLOBALS['xoTheme'];
 
             if (isset($xoopsOption['template_main']) && $xoopsOption['template_main'] != $xoTheme->contentTemplate) {
                 trigger_error("xoopsOption[template_main] should be defined before call xoops_cp_header function", E_USER_WARNING);

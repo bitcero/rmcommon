@@ -259,7 +259,7 @@ function show_library(pag){
     if($("#category-field option").length==2){
 		$("#category-field option").removeAttr("selected");
 		var opt = $("#category-field option");
-		$(opt[1]).attr("selected", 'selected');
+		$(opt[1]).prop("selected", true);
     }
 
     var params = {

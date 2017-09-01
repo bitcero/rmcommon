@@ -140,9 +140,7 @@
          * @returns {boolean}
          */
         this.serverResponse = function(file, response, $this){
-
-            response = JSON.parse(response);
-
+            //response = JSON.parse(response);
 
             if(undefined != response.token && '' != response.token){
                 $("#cu-token").val(response.token);

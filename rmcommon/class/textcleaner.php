@@ -755,7 +755,7 @@ class TextCleaner
     {
 
         $rmc_config = RMSettings::cu_settings();
-        $crypt = new Crypt(Crypt::MODE_HEX, $rmc_config->secretkey);
+        $crypt = new Crypt();
         $string = $crypt->encrypt($string);
         //if ($encode64) $string = base64_encode($string);
         return $string;
@@ -773,7 +773,7 @@ class TextCleaner
 
         $rmc_config = RMSettings::cu_settings();
 
-        $crypt = new Crypt(Crypt::MODE_HEX, $rmc_config->secretkey);
+        $crypt = new Crypt();
         $string = $crypt->decrypt($string);
 
         return $string;
