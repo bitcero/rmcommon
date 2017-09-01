@@ -152,7 +152,7 @@ if ($action=='') {
 
     }
 
-    include RMTemplate::getInstance()->get_template('rmc-images-list-editor.php','module','rmcommon');
+    include RMTemplate::getInstance()->path('rmc-images-list-editor.php','module','rmcommon');
 
 } elseif ($action == 'image-details') {
 
