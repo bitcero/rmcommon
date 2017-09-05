@@ -158,7 +158,11 @@ class Common
      */
     public function timeFormat($format = '')
     {
-        return RMTimeFormatter::get($format);
+        $formater = RMTimeFormatter::get($format);
+        if('' != $format){
+            $formater->format = $format;
+        }
+        return $formater;
     }
 
     /**

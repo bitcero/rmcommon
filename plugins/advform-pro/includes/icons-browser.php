@@ -28,12 +28,12 @@
  */
 
 require dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/mainfile.php';
+global $common;
 
-$ajax = new Rmcommon_Ajax();
-$ajax->prepare_ajax_response();
+$common->ajax()->prepare();
 
 if(!$xoopsSecurity->check(true, false, 'CUTOKEN')){
-    $ajax->ajax_response(
+    $common->ajax()->response(
         __('Session token expired!', 'advform-pro'), 1, 0
     );
 }
@@ -49,7 +49,7 @@ RMTemplate::getInstance()->assign('moonIcons', $icomoon);
 // Parent
 $parent = RMHttpRequest::get('parent', 'string', '');
 if(''==trim($parent)){
-    $ajax->ajax_response(
+    $common->ajax()->response(
         __('Provided data is not valid: parent field is missing!', 'advform-pro'), 1, 1
     );
 }
@@ -59,7 +59,7 @@ RMTemplate::getInstance()->assign('selectedIcon', RMHttpRequest::get('icon', 'st
 
 $content = RMTemplate::getInstance()->render('icons-browser.php', 'plugin', 'rmcommon', 'advform-pro');
 
-$ajax->ajax_response(
+$common->ajax()->response(
     __('Browse Icons', 'advform-pro'), 0, 1, [
         'openDialog' => 1,
         'content' => $content,

@@ -11,7 +11,7 @@
 class RMTimeFormatter
 {
     private $time = 0;
-    private $format = '';
+    public $format = '';
 
     /**
     * Initialize this class
@@ -65,7 +65,7 @@ class RMTimeFormatter
 
         $format = $format=='' ? $this->format : $format;
 
-        if ($format=='' || $time<0){
+        if ($format=='' || $time<0){echo $format;
             trigger_error(__('You must provide a valid time and format value to use RMTimeFormatter::format() method','rmcommon'));
             return null;
         }
@@ -191,7 +191,7 @@ class RMTimeFormatter
 
         }
 
-        return $this->format();
+        return $this->format($time);
 
     }
 
