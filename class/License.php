@@ -31,7 +31,7 @@ namespace Common\Core;
 
 class License extends \RMObject
 {
-    public function __construct($id = null)
+    public function __construct($id = null, $type = '')
     {
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("mod_rmcommon_licensing");
@@ -41,11 +41,13 @@ class License extends \RMObject
             return;
         }
 
+        $filters = null;
         if(is_string($id)){
             $this->primary = 'identifier';
+            $filters = ['type' => $type];
         }
 
-        if ($this->loadValues($id)){
+        if ($this->loadValues($id, $filters)){
             $this->unsetNew();
         }
 

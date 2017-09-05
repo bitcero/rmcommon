@@ -915,14 +915,32 @@ class RMObject
      * Cargaa los valores de un objeto desde la base de datos
      * en base a su clave primaria
      * @param mixed $id Valor a buscar en la clave primaria
+     * @param array $filters Additional filters for searches
      * @return bool
      */
-    protected function loadValues($id)
+    protected function loadValues($id, $filters = null)
     {
 
         $id = $this->escape($id);
 
         $sql = "SELECT * FROM $this->_dbtable WHERE `$this->primary`='$id'";
+
+        /**
+         * Added on Sep-05-2017
+         */
+        if(null != $filters && is_array($filters) && false == empty($filters)){
+            foreach($filters as $column => $value){
+                $column = $this->escape($column);
+                $value = $this->escape($value);
+
+                if('' == $column){
+                    continue;
+                }
+
+                $sql .= " AND `$column`=" . (is_numeric($value) ? $value : "'$value'");
+            }
+        }
+
         $result = $this->db->query($sql);
         if ($this->db->getRowsNum($result) <= 0) return false;
 
