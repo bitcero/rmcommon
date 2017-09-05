@@ -200,6 +200,7 @@ class UpdateManager
             parse_str($query[1], $vars);
             $license = new \Common\Core\License(md5($vars['type'].'-'.$vars['id']));
             $data = $license->data;
+
             if($license->isNew() && $vars['type'] == 'module'){
                 $controller = RMFunctions::loadModuleController($vars['id']);
                 if(false == $controller){
