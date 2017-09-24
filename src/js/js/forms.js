@@ -1,11 +1,9 @@
-// $Id: forms.js 934 2012-02-17 16:35:33Z i.bitcero $
-// --------------------------------------------------------------
-// EXM System
-// Content Management System
-// Author: BitC3R0 <bitc3r0@gmail.com>
-// Email: bitc3r0@gmail.com
-// License: GPL 2.0
-// --------------------------------------------------------------
+/**!
+ * JavaScript script to manage form fields
+ * Author: Eduardo Cortés
+ * Author URI: https://www.eduardocortes.mx
+ * License: GPL v2
+ */
 
 /**
 * This file contains all javascript method to manage forms and form fields
@@ -244,4 +242,88 @@ var usersField = jQuery.extend({
 
 $(document).ready(function(){
     $("form").validate();
+
+    /**
+     * Modules field control
+     */
+    $("body").on('change', ".modules-field :checkbox", function(){
+        var $field = $(this).parents(".modules-field"); // Main container
+
+        var parent = $(this).data('parent'); // Undefined if it is not a subpage
+        var module = $(this).data('module'); // Undefined if it is not a module or a check all option
+        var all = $(this).data('all'); // Undefined if it is a module or a subpage
+
+        /**
+         * This is a subpage, then we need to verify if all subpages
+         * has been checked or not
+         */
+        if(undefined != parent){
+            var checked = $($field).find("[data-parent='" + parent + "']:checked").length;
+
+            if(checked > 0){
+                $($field).find("[data-module='" + parent + "']").prop('checked', true);
+            } else {
+                $($field).find("[data-module='" + parent + "']").prop('checked', false);
+            }
+
+            /**
+             * Verify if all subpages has been checked.
+             * If not, "check all" option must not be checked
+             */
+            var totalPages = $($field).find("[data-parent]:checkbox").length;
+            var checkPages = $($field).find("[data-parent]:checked").length;
+            if(checkPages < totalPages){
+                $($field).find("[data-all]").prop('checked', false);
+            } else {
+                $($field).find("[data-all]").prop('checked', true);
+            }
+
+            return;
+        }
+
+        /**
+         * This is a module checkbox, then we need to check or uncheck
+         * all its subpages
+         */
+        if(undefined != module){
+            // Switch all subpages
+            $($field).find("[data-parent='" + module + "']").prop('checked', $(this).prop('checked'));
+
+            // Switch check all option
+            var total = $($field).find("[data-module]:checkbox").length;
+            var checked = $($field).find("[data-module]:checked").length;
+
+            if(checked < total){
+                $($field).find("[data-all]").prop('checked', false);
+            } else {
+
+                /**
+                 * Verify if all subpages has been checked.
+                 * If not, "check all" option must not be checked
+                 */
+                var totalPages = $($field).find("[data-parent]:checkbox").length;
+                var checkPages = $($field).find("[data-parent]:checked").length;
+                if(checkPages < totalPages){
+                    $($field).find("[data-all]").prop('checked', false);
+                } else {
+                    $($field).find("[data-all]").prop('checked', true);
+                }
+
+            }
+
+            return;
+        }
+
+        /**
+         * It is "check all" option
+         */
+        if(undefined != all){
+            $($field).find("[data-module]:checkbox").prop('checked', $(this).prop('checked'));
+            $($field).find("[data-parent]:checkbox").prop('checked', $(this).prop('checked'));
+        }
+
+        return;
+
+    });
+
 });

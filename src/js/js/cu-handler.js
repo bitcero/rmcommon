@@ -846,7 +846,7 @@ var cuHandler = {
         var tpl = $.templates(template);
         return tpl.render(data);
 
-    }
+    },
 
 };
 
@@ -991,28 +991,26 @@ $(document).ready(function () {
 
     });
 
+    $("body").on("change", ':checkbox[data-oncheck]', function () {
 
-    $("body").on("change", ':checkbox', function () {
+        /*if (this.hasAttribute('data-checkbox'))
+            return;*/
 
-        if (this.hasAttribute('data-checkbox'))
-            return;
+        /*if (!this.hasAttribute('data-oncheck'))
+            return;*/
 
-        if (!this.hasAttribute('data-oncheck'))
-            return;
+        var total = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']").length;
 
-        var existing = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']");
+        //var existing = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']");
         var checked = $(":checkbox[data-oncheck='" + $(this).data('oncheck') + "']:checked");
 
         var activator = $(":checkbox[data-checkbox='" + $(this).data('oncheck') + "']");
 
-
         //if ( checked.length < existing.length )
-        if (checked.length <= 0) {
-            $(activator).removeAttr('checked');
-        }
-        //else if ( checked.length == existing.length )
-        else if (checked.length > 0) {
-            $(activator).prop('checked', 'checked');
+        if (checked.length < total && undefined == $(activator).attr('data-oncheck')) {
+            $(activator).prop('checked', false);
+        }  else if (checked.length >= total) {
+            $(activator).prop('checked', true);
         }
 
     });

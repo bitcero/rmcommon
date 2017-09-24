@@ -150,7 +150,7 @@ class RMTimeFormatter
 
     }
 
-    public function ago( $time ){
+    public function ago( $time, $format = '%m%-%d%-%Y% %h%:%i%:%s%' ){
 
         if(false == is_numeric($time)){
             $time = strtotime($time);
@@ -191,7 +191,7 @@ class RMTimeFormatter
 
         }
 
-        return $this->format($time);
+        return $this->format($time, $format);
 
     }
 

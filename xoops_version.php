@@ -649,7 +649,7 @@ $modversion['blocks'][] = array(
 );
 
 $amod = xoops_getActiveModules();
-if(in_array("rmcommon",$amod)){
+if(in_array("rmcommon",$amod) && class_exists("Common\Core\Helpers\Plugins")){
     $plugins = Common\Core\Helpers\Plugins::allInstalled();
     foreach($plugins as $plugin){
         $p = Common\Core\Helpers\Plugins::getInstance()->load($plugin);

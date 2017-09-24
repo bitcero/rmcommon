@@ -89,6 +89,7 @@ class AdvancedRepeaterField extends RMFormElement
         $repeat .= '<div class="hidden-fields" data-repeater="repeater">';
 
         $fields = $this->fields;
+
         foreach ($fields as $data) {
             $data = (object)$data;
             $field = $plugin->renderField($data);
@@ -124,6 +125,7 @@ class AdvancedRepeaterField extends RMFormElement
             }
 
             $repeat .= '</div>';
+
         }
 
         $repeat .= '</div>';
@@ -132,13 +134,12 @@ class AdvancedRepeaterField extends RMFormElement
         $repeat .= '<div class="repeater-fields" data-repeater="container">';
 
         $values = $this->get('value');
+
         foreach ($values as $id => $value) {
             $repeat .= '<div data-repeater="row" class="repeater-row collapsed" data-id="' . $id . '">';
             foreach ($fields as $data) {
                 $data = (object)$data;
-
                 $data->value = isset($value[$data->name]) ? $value[$data->name] : '';
-
                 $field = $plugin->renderField($data);
                 $field->set('name', $this->get('name') . '[' . $id . '][' . $data->name . ']');
                 $field->set('id', $this->get('name') . '-' . (isset($data->id) ? $data->id : $data->name) . '-' . $id);
