@@ -236,7 +236,7 @@ class RMFormModules extends RMFormElement
 			            " id='" . $this->get('id') . "-$k'" .
                             (is_array($selected) && in_array($k, $selected) ? " checked" : '') . "> ";
 
-                if (false == empty($subpages) && $this->has('subpages') && $k >- 1)
+                if (1 == $k || (false == empty($subpages) && $this->has('subpages') && $k > -1))
                     $rtn .= '<a href="#">' . $v . '</a>';
                 else
                     $rtn .= $v;

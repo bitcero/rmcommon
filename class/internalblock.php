@@ -382,7 +382,7 @@ class RMInternalBlock extends RMObject
 
         // Guardamos las secciones
         if (count($this->sections)>0){
-            
+
             if (!$this->isNew()){
                 $this->db->queryF("DELETE FROM ".$this->db->prefix("mod_rmcommon_blocks_assignations")." WHERE bid='".$this->id()."'");
             }
