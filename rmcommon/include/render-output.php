@@ -35,9 +35,29 @@
  */
 function cu_render_output($output)
 {
-    global $xoTheme, $xoopsTpl, $common;
+    global $xoTheme, $xoopsTpl, $common, $xoopsModule;
 
     $rmEvents = RMEvents::get();
+
+    /**
+     * Temporal solution to ModuleAdmin __constructor method
+     * @todo Delete
+     */
+    if(false == $common->isAjax) {
+        $pos = strpos($output, '<!DOCTYPE');
+        if($pos > 0){
+            $toMove = substr($output, 0, $pos);
+            $output = substr($output, $pos);
+
+            if(!$xoopsModule || !$xoopsModule->getInfo('rmnative')){
+                $pos = strpos($output, '</head>', 0);
+                $output = substr($output, 0, $pos) . $toMove . "\n" . substr($output, $pos);
+                unset($pos, $toMove);
+            }
+
+            return $output;
+        }
+    }
 
     if (function_exists('xoops_cp_header')) return $output;
 

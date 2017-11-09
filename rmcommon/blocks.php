@@ -140,6 +140,7 @@ function show_rm_blocks()
     RMTemplate::getInstance()->add_script('blocks.min.js', 'rmcommon');
     RMTemplate::getInstance()->add_script('jkmenu.js', 'rmcommon');
     RMTemplate::getInstance()->add_style('forms.min.css', 'rmcommon', ['id' => 'forms-css']);
+    RMTemplate::getInstance()->add_script('forms.js', 'rmcommon', ['id' => 'forms-js', 'footer' => 1]);
     RMTemplate::getInstance()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
 
     if (!$rmc_config['blocks_enable']) {

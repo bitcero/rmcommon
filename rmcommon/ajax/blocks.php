@@ -161,7 +161,7 @@ function configure_block(){
         'multiple' => null,
         'selected' => $block->sections(),
         'subpages' => null,
-        'dirname' => false,
+        'dirnames' => false,
         'selectedSubs' => $block->subpages(),
         'dirnames' => false
     ]);
@@ -219,7 +219,12 @@ function save_block_config(){
     }
 
     // Set modules
-    $block->sections($bk_mod);
+    if($bk_mod[0] == '-1'){
+        $block->sections([-1]);
+    } else {
+        $block->sections($bk_mod);
+    }
+
     // Set Groups
     $block->setReadGroups($bk_groups);
 

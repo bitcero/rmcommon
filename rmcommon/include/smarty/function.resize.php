@@ -44,8 +44,8 @@ function smarty_function_resize( $options, $tpl ){
     $width = RMHttpRequest::array_value( 'w', $options, 'integer', 0 );
     $height = RMHttpRequest::array_value( 'h', $options, 'integer', 0 );
     $params = new stdClass();
-    $params->width = $width;
-    $params->height = $height;
+    $params->width = $width == 0 ? null : $width;
+    $params->height = $height == 0 ? null : $height;
     $params->target = $dir;
 
     $resizer = new RMImageResizer();

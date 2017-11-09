@@ -52,7 +52,7 @@ $modversion['onUpdate'] = 'include/install.php';
  * Information for Common Utilities
  */
 $modversion['rmnative'] = 1;
-$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>70,'stage'=>0,'name'=>'Common Utilities');
+$modversion['rmversion'] = array('major'=>2,'minor'=>3,'revision'=>75,'stage'=>0,'name'=>'Common Utilities');
 $modversion['rewrite'] = 1;
 $modversion['url'] = "http://rmcommon.com";
 $modversion['author'] = "Eduardo Cortés";
@@ -91,7 +91,8 @@ $modversion['tables'] = array(
     'mod_rmcommon_blocks',
     'mod_rmcommon_notifications',
     'mod_rmcommon_blocks_positions',
-    'mod_rmcommon_blocks_assignations'
+    'mod_rmcommon_blocks_assignations',
+    'mod_rmcommon_licensing'
 );
 
 // Templates
@@ -649,7 +650,7 @@ $modversion['blocks'][] = array(
 );
 
 $amod = xoops_getActiveModules();
-if(in_array("rmcommon",$amod)){
+if(in_array("rmcommon",$amod) && class_exists("Common\Core\Helpers\Plugins")){
     $plugins = Common\Core\Helpers\Plugins::allInstalled();
     foreach($plugins as $plugin){
         $p = Common\Core\Helpers\Plugins::getInstance()->load($plugin);
