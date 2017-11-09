@@ -91,7 +91,8 @@ $modversion['tables'] = array(
     'mod_rmcommon_blocks',
     'mod_rmcommon_notifications',
     'mod_rmcommon_blocks_positions',
-    'mod_rmcommon_blocks_assignations'
+    'mod_rmcommon_blocks_assignations',
+    'mod_rmcommon_licensing'
 );
 
 // Templates
