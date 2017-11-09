@@ -151,7 +151,7 @@ class RMBlocksFunctions
             }
             $mid = (int)$mid;
             if (!empty($mid)) {
-                $sql .= ' AND m.mid IN (-1,' . $mid;
+                $sql .= ' AND m.mid IN (0,' . $mid;
                 if ($toponlyblock) {
                     $sql .= ',1';
                 }

@@ -195,15 +195,28 @@ class UpdateManager
          * Sends API information
          */
         if($api){
-            $controller = RMFunctions::loadModuleController('dtransport');
-            if(false == $controller){
-                $common->ajax()->notifyError(
-                    __('Module is not compatible with this update process', 'rmcommon'), 1, 1
-                );
+
+            $vars = [];
+            parse_str($query[1], $vars);
+            $license = new \Common\Core\License(md5($vars['type'].'-'.$vars['id']));
+            $data = $license->data;
+
+            if($license->isNew() && $vars['type'] == 'module'){
+                $controller = RMFunctions::loadModuleController($vars['id']);
+                if(false == $controller){
+                    $common->ajax()->notifyError(
+                        __('Module is not compatible with this update process', 'rmcommon'), 1, 1
+                    );
+                }
+                $data = $controller->licenseData();
             }
 
-            $data = $controller->licenseData();
-            $query[1] .= '&data=' . urlencode($data);
+            if('' == $data){
+                $common->ajax()->notifyError(
+                    __('This element must be registered before to update', 'rmcommon'), 1, 1
+                );
+            }
+            $query[1] .= '&data=' . $data;
         }
 
         $siteID = urlencode(md5(crypt(XOOPS_LICENSE_KEY . XOOPS_URL, $common->settings->secretkey)));

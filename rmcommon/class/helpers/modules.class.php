@@ -177,8 +177,6 @@ class RMModules
 
         $modules = XoopsLists::getModulesList();
 
-        print_r($modules);
-
     }
 
     /**

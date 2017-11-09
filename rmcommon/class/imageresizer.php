@@ -293,13 +293,15 @@ class RMImageResizer
         $image->type = $formats[ $data[2] - 1 ];
         $image->mime = $data['mime'];
 
-        $ratio = $image->width < $image->height ? $image->width / $image->height : $image->height / $image->width;
+        //$ratio = $image->width < $image->height ? $image->width / $image->height : $image->height / $image->width;
+        $ratio = $image->width / $image->height;
 
-        if ( !isset($params->width) )
-            $params->width = (int)($params->height * $ratio);
+        if ( !isset($params->width) || $params->width <= 0 )
+            $params->width = (int)($params->height * $ratio);//$ratio >= 1 ? (int)($params->height * $ratio) : (int)($params->height / $ratio);
 
-        if ( !isset($params->height) )
-            $params->height = (int)($params->width * $ratio);
+
+        if ( !isset($params->height) || $params->height <= 0 )
+            $params->height = (int)($params->width / $ratio); //$ratio >= 1 ? (int)($params->width / $ratio) : (int)($params->width / $ratio);
 
         $size_ratio = max( $params->width / $image->width, $params->height / $image->height );
 

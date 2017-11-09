@@ -142,6 +142,37 @@ function xoops_module_update_rmcommon($mod, $prev){
 
     }
 
+	/**
+	 * Verify if licensing table exists.
+	 * If not, we need to create it
+	 */
+	$result = $db->query("SHOW TABLES LIKE '" . $db->prefix("mod_rmcommon_licensing") . "'");
+	if ( $db->getRowsNum($result) <= 0 ) {
+		$sql = "CREATE TABLE `" . $db->prefix("mod_rmcommon_licensing") . "` (
+				  `id_license` int(11) NOT NULL,
+				  `identifier` varchar(32) NOT NULL,
+				  `element` varchar(50) NOT NULL,
+				  `type` varchar(10) NOT NULL,
+				  `data` text NOT NULL,
+				  `date` int(11) NOT NULL,
+				  `expiration` int(11) NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+		if($db->queryF($sql)){
+			$sql = "ALTER TABLE `" . $db->prefix("mod_rmcommon_licensing") . "`
+  ADD PRIMARY KEY (`id_license`),
+  ADD UNIQUE KEY `indentifier` (`identifier`),
+  ADD KEY `element` (`element`),
+  ADD KEY `type` (`type`);";
+			$db->queryF($sql);
+
+			$sql = "ALTER TABLE `" . $db->prefix("mod_rmcommon_licensing") . "`
+  MODIFY `id_license` int(11) NOT NULL AUTO_INCREMENT;";
+			$db->queryF($sql);
+		}
+
+	}
+
     // Change theme from TwoP6 to Helium
     $sql = "UPDATE " . $db->prefix("config") . " SET conf_value='helium' WHERE conf_modid=" . $mod->getVar('mid')
            . " AND conf_name='theme'";

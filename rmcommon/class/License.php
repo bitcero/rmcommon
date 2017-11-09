@@ -31,21 +31,28 @@ namespace Common\Core;
 
 class License extends \RMObject
 {
-    public function __construct($id = null)
+    public function __construct($id = null, $type = null)
     {
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
         $this->_dbtable = $this->db->prefix("mod_rmcommon_licensing");
         $this->setNew();
         $this->initVarsFromTable();
-        if ($id==null){
+
+        $this->setVarType('data', XOBJ_DTYPE_SOURCE);
+
+        if ($id == null) {
             return;
         }
 
-        if(is_string($id)){
+        $filters = null;
+        if (is_string($id)) {
             $this->primary = 'identifier';
+            if (null != $type) {
+                $filters = ['type' => $type];
+            }
         }
 
-        if ($this->loadValues($id)){
+        if ($this->loadValues($id, $filters)) {
             $this->unsetNew();
         }
 

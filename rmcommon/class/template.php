@@ -552,7 +552,6 @@ class RMTemplate
         } else {
 
             $script_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-js' : 'js', $directory, $version);
-
         }
 
         if ($script_url == '')
