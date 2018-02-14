@@ -176,6 +176,57 @@ class Icons extends Attributes
 
     }
 
+    public function iconURL( $icon ){
+
+        /**
+         * Check if this is a SVG icon
+         */
+        if ('svg-' == substr($icon, 0, 4)) {
+
+            $data = explode("-", $icon);
+
+            if (!array_key_exists($data[1], $this->iconsProviders)) {
+                return __('Icon no registered!', 'rmcommon');
+            }
+
+            if (!is_dir($this->iconsProviders[$data[1]])) {
+                return __('Icon no registered!', 'rmcommon');
+            }
+
+            $fileName = substr($icon, strlen($data[0] . '-' . $data[1] . '-'));
+            $filePath = $this->iconsProviders[$data[1]] . '/' . $fileName . '.svg';
+
+            if (!file_exists($filePath)) {
+                return __('Icon no registered!', 'rmcommon');
+            }
+
+            $fileURL = str_replace(XOOPS_ROOT_PATH, XOOPS_URL,$filePath );
+
+            return $fileURL;
+
+        }
+
+        // Relative or absolute url?
+        $matches = array();
+        $absolute = preg_match("/^(http:\/\/|https:\/\/|ftp:\/\/|\/\/)/m", $icon, $matches, PREG_OFFSET_CAPTURE);
+
+        // Icon with absolute path
+        if ($absolute) {
+            return $icon;
+        }
+
+        // Relative image url?
+        $imageFormats = array('.jpg', '.gif', '.png', 'jpeg');
+        if (in_array(substr($icon, -4), $imageFormats)) {
+            return $icon;
+        }
+
+    }
+
+    public function readSVG( $file ){
+        return $this->providerIcon( $file );
+    }
+
     /**
      * Get an icon SVG, font icon or bitmap
      * @param string $icon

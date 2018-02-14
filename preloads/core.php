@@ -115,7 +115,6 @@ class RmcommonCorePreload extends XoopsPreloadItem
         $htmlScripts['inlineHeader'] = $tpl->inline_scripts();
         $htmlScripts['inlineFooter'] = $tpl->inline_scripts(1);
         $htmlStyles = $tpl->get_styles(true);
-
         $xoopsTpl->assign('themeScripts', $htmlScripts);
         $xoopsTpl->assign('themeStyles', $htmlStyles);
         $xoopsTpl->assign('htmlAttributes', $tpl->render_attributes());
