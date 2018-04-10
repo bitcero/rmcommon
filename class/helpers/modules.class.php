@@ -236,7 +236,7 @@ class RMModules
         $paths = $cuSettings->modules_path;
 
         if (isset($paths[$directory])) {
-            return XOOPS_URL . ($admin ? '/admin/' : '') . trim($paths[$directory], '/');
+            return XOOPS_URL . ($admin ? '/admin/' : '/') . trim($paths[$directory], '/');
         } else {
             return XOOPS_URL . '/modules/' . $directory;
         }

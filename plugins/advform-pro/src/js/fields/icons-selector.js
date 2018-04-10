@@ -115,8 +115,7 @@
             return false;
         }
 
-        $(parent).find('input[type="hidden"]').val(icon);
-        $(parent).find('.icons-caption').html(icon);
+        $(parent).find('.icons-caption').val(icon);
 
         if(type == 'font'){
             icon = '<span class="' + icon + '"></span>';
