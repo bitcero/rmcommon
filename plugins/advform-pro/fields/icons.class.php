@@ -35,12 +35,15 @@ class AdvancedIconsField extends RMFormElement
 
         $this->setIfNotSet('name', 'name_error');
         $this->setIfNotSet('value', '');
+        $this->setIfNotSet('placeholder', __('Select an icon...', 'advform-pro'));
         $this->setIfNotSet('id', TextCleaner::getInstance()->sweetstring($this->get('name')));
 
         $this->add('class', 'adv-icons-selector');
         $this->add('class', 'form-control');
         $this->suppressList[] = 'name';
         $this->suppressList[] = 'value';
+        $this->suppressList[] = 'required';
+        $this->suppressList[] = 'placeholder';
         //$this->suppressList[] = 'placeholder';
     }
 
@@ -50,14 +53,25 @@ class AdvancedIconsField extends RMFormElement
 
         $attributes = $this->renderAttributeString();
 
+        $placeholder = $this->has('placeholder') ? $this->get('placeholder') : __('Select an icon...', 'advform-pro');
+
         $field = '<div ' . $attributes . '>';
-        $field .= '<input type="hidden" name="' . $this->get('name') . '" value="' . $this->get('value') . '">';
 
         if('' != $this->get('value')){
             $field .= '<div class="icons-icon">' . $cuIcons->getIcon($this->get('value')) . '</div>';
-            $field .= ' <span class="icons-caption">' . $this->get('value') . '</span>';
+            $field .= ' <input type="text" name="' . $this->get('name') . '" value="' . $this->get('value') . '" class="icons-caption"';
+            if( $this->has('required')){
+                $field .= ' required';
+            }
+            $field .= ' placeholder="' . $placeholder . '">';
         } else {
-            $field .= '<div class="icons-icon"></div> <span class="icons-caption">' . ($this->has('placeholder') ? $this->get('placeholder') : '') . '</span>';
+            $field .= '<div class="icons-icon"></div>';
+
+            $field .= ' <input type="text" name="' . $this->get('name') . '" class="icons-caption"';
+            if( $this->has('required')){
+                $field .= ' required';
+            }
+            $field .= ' value="' . $this->get('value') . '" placeholder="' . $placeholder . '">';
         }
 
         $field .= '<button type="button" class="clear-button">' . $cuIcons->getIcon('svg-rmcommon-trash') . '</button>';

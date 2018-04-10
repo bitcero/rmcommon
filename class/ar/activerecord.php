@@ -121,7 +121,7 @@ abstract class RMActiveRecord
             return $this->$method();
         elseif( isset( $this->_properties[$name] ) )
             return $this->_properties[$name];
-        throw new RMException( sprintf( __( 'Property "%s.%s" is not defined.', 'rmcommon' ), get_class( $this ), $name ) );
+        //throw new RMException( sprintf( __( 'Property "%s.%s" is not defined.', 'rmcommon' ), get_class( $this ), $name ) );
 
     }
 

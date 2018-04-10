@@ -64,7 +64,7 @@ abstract class RMController
             $class = ucfirst($this->parent->directory) . '_' . ucfirst($model) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
         }
 
-        if (is_a($this->model[$model], $class))
+        if (array_key_exists($model, $this->model) && is_a($this->model[$model], $class))
             return $this->model[$model];
 
         $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . (defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '') . '/models/' . strtolower($model) . '.php';

@@ -9,7 +9,7 @@
 
     <!-- SVG icons -->
     <?php if($this->get('svg')): ?>
-        <div class="btn-group <?php echo $this->get('size') != '' ? 'button-group-' . $this->get('size') : ''; ?> adv-icons-svg" id="picker-<?php echo $this->get('id'); ?>">
+        <div class="btn-group dropdown <?php echo $this->get('size') != '' ? 'button-group-' . $this->get('size') : ''; ?> adv-icons-svg" id="picker-<?php echo $this->get('id'); ?>">
             <button type="button" class="btn btn-default dropdown-toggle<?php echo substr( $this->get('default'), 0, 3)=='svg' ? ' active' : ''; ?>" data-toggle="dropdown">
                 <span class="the-icon"><?php _e('SVG Icons', 'advform-pro'); ?></span>
                 <span class="caret"></span>
