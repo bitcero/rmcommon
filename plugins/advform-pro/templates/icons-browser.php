@@ -1,7 +1,7 @@
 <div class="adv-icons-browser" data-parent="<?php echo $parent; ?>">
     <ul class="nav nav-tabs nav-tabs-color" role="tablist">
-        <li role="presentation" class="nav-item active">
-            <a href="#svg-icons" aria-controls="svg-icons" role="tab" data-toggle="tab" class="nav-link">
+        <li role="presentation" class="nav-item">
+            <a href="#svg-icons" aria-controls="svg-icons" role="tab" data-toggle="tab" class="nav-link active">
                 <?php _e('SVG Icons', 'advform-pro'); ?>
             </a>
         </li>
@@ -10,11 +10,11 @@
                 <?php _e('FontAwesome', 'advform-pro'); ?>
             </a>
         </li>
-        <li role="presentation" class="nav-item">
+        <!--li role="presentation" class="nav-item">
             <a href="#glyph-icons" aria-controls="glyph-icons" role="tab" data-toggle="tab" class="nav-link">
                 <?php _e('Glyphicons', 'advform-pro'); ?>
             </a>
-        </li>
+        </li-->
         <li role="presentation" class="nav-item">
             <a href="#moon-icons" aria-controls="moon-icons" role="tab" data-toggle="tab" class="nav-link">
                 <?php _e('Icomoon Icons', 'advform-pro'); ?>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade in active" id="svg-icons">
+        <div role="tabpanel" class="tab-pane fade in show active" id="svg-icons">
             <ul class="adv-icons-list" data-type="svg">
                 <?php foreach($svgIcons as $icon): ?>
                     <li<?php echo $icon == $selectedIcon ? ' class="selected"' : ''; ?>>
@@ -47,8 +47,8 @@
             <ul class="adv-icons-list" data-type="font">
                 <?php foreach($faIcons as $icon): ?>
                     <li<?php echo 'fa ' . $icon == $selectedIcon ? ' class="selected"' : ''; ?>>
-                        <a href="#" data-icon="<?php echo 'fa ' . $icon; ?>" title="<?php echo 'fa ' . $icon; ?>">
-                            <?php echo $cuIcons->getIcon('fa ' . $icon); ?>
+                        <a href="#" data-icon="<?php echo $icon; ?>" title="<?php echo $icon; ?>">
+                            <?php echo $cuIcons->getIcon($icon); ?>
                         </a>
                     </li>
                 <?php endforeach; ?>

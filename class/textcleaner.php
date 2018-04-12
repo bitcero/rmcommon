@@ -105,6 +105,13 @@ class TextCleaner
         return $message;
     }
 
+    public function fixUrl( $url ){
+        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            $url = "http://" . $url;
+        }
+        return $url;
+    }
+
     /**
      * Make links in the text clickable
      *

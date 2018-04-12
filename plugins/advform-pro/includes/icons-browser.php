@@ -64,6 +64,6 @@ $common->ajax()->response(
         'openDialog' => 1,
         'content' => $content,
         'width' => 'large',
-        'color' => 'primary'
+        'color' => 'deep-orange'
     ]
 );

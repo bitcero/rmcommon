@@ -112,6 +112,9 @@ class GravatarService extends \Common\Core\Helpers\ServiceAbstract implements \C
     public function getAvatar($user_or_email, $size = 80, $default = '')
     {
 
+        $name = '';
+        $uname = '';
+
         if (is_object($user_or_email)) {
 
             if (is_a($user_or_email, 'XoopsUser')) {
