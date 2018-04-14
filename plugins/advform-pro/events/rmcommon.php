@@ -69,7 +69,7 @@ class AdvformproPluginRmcommonPreload{
 
     }
 
-    public function eventRmcommonPsr4loader($loader)
+    static function eventRmcommonPsr4loader($loader)
     {
         $loader->addNamespace('Common\Plugins\AdvForm', XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/advform-pro/fields');
         return $loader;

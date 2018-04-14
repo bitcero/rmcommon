@@ -133,7 +133,7 @@ abstract class RMModuleController {
         }
 
         $newAction = explode("-", $action);
-        if(count($newAction > 1)){
+        if(count($newAction) > 1){
             $action = $newAction[0];
             unset($newAction[0]);
             foreach($newAction as $part){
