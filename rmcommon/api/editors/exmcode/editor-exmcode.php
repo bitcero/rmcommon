@@ -113,13 +113,18 @@ var exmCode<?php echo ucfirst($id); ?> = {
         // Cargamos los plugins
         $path = RMCPATH.'/api/editors/exmcode/plugins';
         $dir = opendir($path);
-        while (FALSE !== ($file = readdir($dir))) {
-            if ($file=='.' || $file=='..') continue;
-            if (!is_dir($path.'/'.$file)) continue;
-            if (!is_file($path.'/'.$file.'/plugin.js')) continue;
+        while (false !== ($file = readdir($dir))) {
+            if ($file=='.' || $file=='..') {
+                continue;
+            }
+            if (!is_dir($path.'/'.$file)) {
+                continue;
+            }
+            if (!is_file($path.'/'.$file.'/plugin.js')) {
+                continue;
+            }
 
             include $path.'/'.$file.'/plugin.js';
-
         }
 
         // New plugins from other components

@@ -27,8 +27,10 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phmagick_decorations{
-    function roundCorners(phmagick $p,$i = 15){
+class phmagick_decorations
+{
+    public function roundCorners(phmagick $p, $i = 15)
+    {
 
         //original idea from Leif ��strand <leif@sitelogic.fi>
         $cmd = $p->getBinary('convert');
@@ -47,10 +49,10 @@ class phmagick_decorations{
         return  $p ;
     }
 
-    function dropShadow(phmagick $p,$color = '#000', $offset = 4, $transparency = 60, $top = 4, $left=4){
-
-    	$top = $top > 0 ? '+' . $top : $top;
-    	$left = $left > 0 ? '+' . $left : $left;
+    public function dropShadow(phmagick $p, $color = '#000', $offset = 4, $transparency = 60, $top = 4, $left=4)
+    {
+        $top = $top > 0 ? '+' . $top : $top;
+        $left = $left > 0 ? '+' . $left : $left;
 
         $cmd = $p->getBinary('convert');
         $cmd .= ' -page '.$top.$left.' "' . $p->getSource().'"'  ;
@@ -64,15 +66,15 @@ class phmagick_decorations{
         return  $p ;
     }
 
-    function glow(phmagick $p, $color='#827f00',$offset = 10, $transparency=60){
+    public function glow(phmagick $p, $color='#827f00', $offset = 10, $transparency=60)
+    {
+        $p->requirePlugin('info');
+        list($w, $h) = $p->getInfo($p->getSource());
 
-    	$p->requirePlugin('info');
-    	list ($w, $h) = $p->getInfo($p->getSource());
 
+        $cmd  = $p->getBinary('convert');
 
-    	$cmd  = $p->getBinary('convert');
-
-    	$cmd .= ' "' . $p->getSource() .'" ' ;
+        $cmd .= ' "' . $p->getSource() .'" ' ;
         $cmd .= '( +clone  -background "'.$color.'"  -shadow '.$transparency.'x'.$offset.'-'.($offset/4).'+'.($offset/4).' ) +swap -background none   -layers merge  +repage  ';
 
         $cmd .= ' "' . $p->getDestination().'"'  ;
@@ -91,7 +93,8 @@ class phmagick_decorations{
      * @param $shaddowColor - drop shaddow color
      * @param $background - Image background color (use for jpegs or images that do not support transparency or you will end up with a black background)
      */
-    function fakePolaroid(phmagick $p,$rotate = 6 , $borderColor = "#fff", $background ="none"){
+    public function fakePolaroid(phmagick $p, $rotate = 6, $borderColor = "#fff", $background ="none")
+    {
         $cmd = $p->getBinary('convert');
         $cmd .= ' "' . $p->getSource().'"'  ;
         $cmd .= ' -bordercolor "'. $borderColor.'"  -border 6 -bordercolor grey60 -border 1 -background  "none"   -rotate '. $rotate .' -background  black  ( +clone -shadow 60x4+4+4 ) +swap -background  "'. $background.'"   -flatten';
@@ -113,13 +116,11 @@ class phmagick_decorations{
      * @param $shaddowColor - drop shaddow color
      * @param $background - Image background color (use for jpegs or images that do not support transparency or you will end up with a black background)
      */
-    function polaroid(phmagick $p, $format = null, $rotation= 6, $borderColor="snow", $shaddowColor = "black", $background="none"){
-
-
-
-        if (get_class($format) == 'phMagickTextObject' ){
+    public function polaroid(phmagick $p, $format = null, $rotation= 6, $borderColor="snow", $shaddowColor = "black", $background="none")
+    {
+        if (get_class($format) == 'phMagickTextObject') {
             //
-        }else{
+        } else {
             $tmp = new phMagickTextObject();
             $tmp->text($format);
             $format = $tmp ;
@@ -129,23 +130,29 @@ class phmagick_decorations{
         $cmd .= ' "' . $p->getSource() .'"' ;
 
 
-        if ($format->background !== false)
+        if ($format->background !== false) {
             $cmd .= ' -background "' . $format->background . '"';
+        }
 
-        if ($format->color !== false)
+        if ($format->color !== false) {
             $cmd .= ' -fill "' . $format->color . '"' ;
+        }
 
-        if ($format->font !== false)
+        if ($format->font !== false) {
             $cmd .= ' -font ' . $format->font ;
+        }
 
-        if ($format->fontSize !== false)
+        if ($format->fontSize !== false) {
             $cmd .= ' -pointsize ' . $format->fontSize ;
+        }
 
-        if ($format->pGravity !== false)
+        if ($format->pGravity !== false) {
             $cmd .= ' -gravity ' . $format->pGravity ;
+        }
 
-        if ($format->pText != '')
+        if ($format->pText != '') {
             $cmd .= ' -set caption "' . $format->pText .'"';
+        }
 
         $cmd .= ' -bordercolor "'. $borderColor.'" -background "'.$background.'" -polaroid ' . $rotation .' -background "'. $background.'" -flatten ';
         $cmd .= ' "' . $p->getDestination().'"'  ;
@@ -157,7 +164,8 @@ class phmagick_decorations{
         return  $p ;
     }
 
-    function border(phmagick $p,$borderColor = "#000", $borderSize ="1"){
+    public function border(phmagick $p, $borderColor = "#000", $borderSize ="1")
+    {
         $cmd = $p->getBinary('convert');
         $cmd .= ' "' . $p->getSource() .'"';
         $cmd .= ' -bordercolor "'. $borderColor.'"  -border ' . $borderSize;
@@ -168,5 +176,4 @@ class phmagick_decorations{
         $p->setHistory($p->getDestination());
         return  $p ;
     }
-
 }

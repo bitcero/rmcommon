@@ -19,29 +19,27 @@ class RMPrivileges
      * Loads all user permissions and stores in a stdClass
      * that will functioning as cache
      */
-    private function load_user_permissions(){
-
+    private function load_user_permissions()
+    {
         global $xoopsUser, $xoopsDB;
 
         $privileges = UserPrivileges::get();
         $privileges->allowed = array();
 
         // User must not have any permission
-        if ( !$xoopsUser )
+        if (!$xoopsUser) {
             return;
+        }
 
         $groups = $xoopsUser->getGroups();
 
         $sql = "SELECT * FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
-                `group` IN (" . implode( ",", $groups ) . ")";
-        $result = $xoopsDB->query( $sql );
+                `group` IN (" . implode(",", $groups) . ")";
+        $result = $xoopsDB->query($sql);
 
-        while ( $row = $xoopsDB->fetchArray( $result ) ){
-
+        while ($row = $xoopsDB->fetchArray($result)) {
             $privileges->allowed[$row['element']][$row['key']] = 'allow';
-
         }
-
     }
 
     /**
@@ -52,36 +50,39 @@ class RMPrivileges
      * @param bool $redirect
      * @return mixed
      */
-    static public function verify($module, $action, $method = 'ajax', $redirect = true){
-
+    public static function verify($module, $action, $method = 'ajax', $redirect = true)
+    {
         global $xoopsUser;
 
-        if (!$xoopsUser){
-
-            if ($redirect)
-                self::response( $method );
-            else
+        if (!$xoopsUser) {
+            if ($redirect) {
+                self::response($method);
+            } else {
                 return false;
-
+            }
         }
 
         // Super admin
-        if ( $xoopsUser->uid() == 1 )
+        if ($xoopsUser->uid() == 1) {
             return true;
+        }
 
         $privileges = UserPrivileges::get();
 
-        if ( empty( $privileges->allowed ) )
+        if (empty($privileges->allowed)) {
             self::load_user_permissions();
+        }
 
 
-        if ( isset( $privileges->allowed[$module][$action] ) )
+        if (isset($privileges->allowed[$module][$action])) {
             return true;
+        }
 
-        if ($redirect)
-            self::response( $method );
-        else
+        if ($redirect) {
+            self::response($method);
+        } else {
             return false;
+        }
 
         return null;
     }
@@ -112,86 +113,90 @@ class RMPrivileges
      * @param string $directory MOdule directory
      * @return array|bool|mixed
      */
-    static public function module_permissions( $directory ){
-
-        if ( $directory == '' ) return false;
-
-        $module = RMModules::load_module( $directory );
-
-        if ( !$module )
+    public static function module_permissions($directory)
+    {
+        if ($directory == '') {
             return false;
+        }
 
-        if ( !$module->getInfo( 'permissions' ) )
+        $module = RMModules::load_module($directory);
+
+        if (!$module) {
             return false;
+        }
 
-        $file = XOOPS_ROOT_PATH . '/modules/' . $directory . '/' . $module->getInfo( 'permissions' );
-
-        if ( !is_file( $file ) )
+        if (!$module->getInfo('permissions')) {
             return false;
+        }
+
+        $file = XOOPS_ROOT_PATH . '/modules/' . $directory . '/' . $module->getInfo('permissions');
+
+        if (!is_file($file)) {
+            return false;
+        }
 
         $permissions = include $file;
 
         return $permissions;
-
     }
 
-    static public function read_permissions( $directory, $group ){
+    public static function read_permissions($directory, $group)
+    {
         global $xoopsDB;
 
-        if ( $directory == '' ) return false;
-
-        $module = RMModules::load_module( $directory );
-
-        if ( !$module )
+        if ($directory == '') {
             return false;
+        }
+
+        $module = RMModules::load_module($directory);
+
+        if (!$module) {
+            return false;
+        }
 
         // Permissions on DB
         $sql = "SELECT * FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
                 `group` = $group AND element='$directory'";
 
-        $result = $xoopsDB->query( $sql );
+        $result = $xoopsDB->query($sql);
         $permissions = new stdClass();
 
-        while ( $row = $xoopsDB->fetchArray( $result ) ){
-
+        while ($row = $xoopsDB->fetchArray($result)) {
             $permissions->{$row['key']} = 1;
-
         }
 
         return $permissions;
-
-
     }
 
-    private function response( $method ){
+    private function response($method)
+    {
         global $common;
 
-        if ( $method == 'ajax' ){
+        if ($method == 'ajax') {
             $common->ajax()->prepare();
             $common->ajax()->response(
                 __('You don\'t have required rights to do this action!', 'rmcommon'),
-                1, 0, array(
+                1,
+                0,
+                array(
                     'goto' => XOOPS_URL
                 )
             );
         } else {
-
-            RMUris::redirect_with_message( __('You don\'t have required rights to do this action!', 'rmcommon'), XOOPS_URL, RMMSG_WARN, 'fa fa-warning' );
-
+            RMUris::redirect_with_message(__('You don\'t have required rights to do this action!', 'rmcommon'), XOOPS_URL, RMMSG_WARN, 'fa fa-warning');
         }
-
     }
     
-    public static function getInstance(){
+    public static function getInstance()
+    {
         static $instance;
 
-        if(!isset($instance)){
+        if (!isset($instance)) {
             $instance = new RMPrivileges();
         }
 
         return $instance;
     }
-
 }
 
 
@@ -204,5 +209,4 @@ class UserPrivileges
      * @var array
      */
     public $allowed;
-
 }

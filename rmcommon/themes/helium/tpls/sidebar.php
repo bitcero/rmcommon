@@ -1,7 +1,7 @@
 <div id="he-sidebar">
     <div class="media he-current-user">
         <div class="media-left">
-            <?php if($cuServices->service('avatar')): ?>
+            <?php if ($cuServices->service('avatar')): ?>
             <img src="<?php echo $cuServices->avatar->getAvatarSrc($xoopsUser, 100); ?>" class="media-object"
                  alt="<?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>">
             <?php else: ?>
@@ -28,21 +28,23 @@
                 <h4 class="menu-heading current-module-head">
                     <a href="#menu-<?php echo $currentModule->directory; ?>"><?php echo $currentModule->name; ?></a>
                 </h4>
-                <?php if(!empty($currentModule->menu)): ?>
+                <?php if (!empty($currentModule->menu)): ?>
                 <ul id="menu-<?php echo $currentModule->directory; ?>" class="current-module-menu">
                     <?php foreach ($currentModule->menu as $menu): ?>
                         <li<?php echo $menu['location'] == $common->location ? ' class="active"' : ''; ?>>
-                            <a <?php echo isset($menu['attributes']) ? $xoFunc->render_attributes($menu['attributes']) : ''; ?> href="<?php echo $xoFunc->menuLink((object) $menu, $currentModule); ?>"<?php echo $menu['location'] == $common->location ? ' class="open"' : ''; ?> <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?> data-submenu="yes"<?php endif; ?>>
+                            <a <?php echo isset($menu['attributes']) ? $xoFunc->render_attributes($menu['attributes']) : ''; ?> href="<?php echo $xoFunc->menuLink((object) $menu, $currentModule); ?>"<?php echo $menu['location'] == $common->location ? ' class="open"' : ''; ?> <?php if (array_key_exists('options', $menu) && !empty($menu['options'])): ?> data-submenu="yes"<?php endif; ?>>
                                 <?php echo $xoFunc->menuIcon($menu['icon'], $currentModule->directory); ?>
                                 <?php echo $menu['title']; ?>
-                                <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?>
+                                <?php if (array_key_exists('options', $menu) && !empty($menu['options'])): ?>
                                     <span class="caret"></span>
                                 <?php endif; ?>
                             </a>
-                            <?php if(array_key_exists('options', $menu) && !empty($menu['options'])): ?>
+                            <?php if (array_key_exists('options', $menu) && !empty($menu['options'])): ?>
                                 <ul class="submenu"<?php echo $menu['location'] == $common->location ? ' style="display: block;"' : ''; ?>>
-                                    <?php foreach($menu['options'] as $submenu): ?>
-                                        <?php if(array_key_exists('divider', $submenu)) continue; ?>
+                                    <?php foreach ($menu['options'] as $submenu): ?>
+                                        <?php if (array_key_exists('divider', $submenu)) {
+    continue;
+} ?>
                                         <li>
                                             <a
                                                 href="<?php echo $xoFunc->menuLink((object) $submenu, $currentModule); ?>"
@@ -64,21 +66,23 @@
             <h4 class="menu-heading modules-menu-head">
                 <a href="#menu-modules"><?php _e('Modules', 'rmcommon'); ?></a>
             </h4>
-            <?php if(!empty($activeModules)): ?>
+            <?php if (!empty($activeModules)): ?>
                 <ul id="menu-modules">
-                    <?php foreach($activeModules as $module): ?>
+                    <?php foreach ($activeModules as $module): ?>
                         <li>
-                            <a href="<?php echo RMUris::anchor($module->directory); ?>"<?php if(!empty($module->menu)): ?> data-submenu="yes"<?php endif; ?>>
+                            <a href="<?php echo RMUris::anchor($module->directory); ?>"<?php if (!empty($module->menu)): ?> data-submenu="yes"<?php endif; ?>>
                                 <?php echo $xoFunc->menuIcon($module->icon, $module->directory); ?>
                                 <?php echo $module->name; ?>
-                                <?php if(!empty($module->menu)): ?>
+                                <?php if (!empty($module->menu)): ?>
                                     <span class="caret"></span>
                                 <?php endif; ?>
                             </a>
-                            <?php if(!empty($module->menu)): ?>
+                            <?php if (!empty($module->menu)): ?>
                                 <ul class="submenu">
-                                    <?php foreach($module->menu as $menu): ?>
-                                        <?php if(array_key_exists('divider', $menu)) continue; ?>
+                                    <?php foreach ($module->menu as $menu): ?>
+                                        <?php if (array_key_exists('divider', $menu)) {
+    continue;
+} ?>
                                         <li>
                                             <a href="<?php echo $xoFunc->menuLink((object) $menu, $module); ?>">
                                                 <?php echo $xoFunc->menuIcon($menu['icon'], $module->directory); ?>

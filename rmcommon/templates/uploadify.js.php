@@ -3,9 +3,11 @@ $(document).ready(function(){
     $("#<?php echo $this->name; ?>").uploadify({
         <?php
         $rtn = '';
-        foreach($this->settings() as $name => $value):
+        foreach ($this->settings() as $name => $value):
 
-        if ($value=='') continue;
+        if ($value=='') {
+            continue;
+        }
         if (!is_array($value) && substr($value, 0, 8)=='function') {
             $value = $value;
         } elseif (is_string($value)) {
@@ -16,7 +18,6 @@ $(document).ready(function(){
                 $tmp .= $tmp=='' ? "'$k':'$val'" : ",'$k':'$val'";
             }
             $value = "{".$tmp."}";
-
         }
         $rtn .= $rtn == '' ? "'$name': $value" : ",\n'$name': $value";
 

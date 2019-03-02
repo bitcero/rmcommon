@@ -3,14 +3,14 @@
  * Redirect messages
  */
 $heliumMessages = array();
-if (isset($_SESSION['cu_redirect_messages'])){
-    foreach ($_SESSION['cu_redirect_messages'] as $msg){
+if (isset($_SESSION['cu_redirect_messages'])) {
+    foreach ($_SESSION['cu_redirect_messages'] as $msg) {
         $heliumMessages[] = $msg;
     }
     unset($_SESSION['cu_redirect_messages']);
 }
 
-if(isset($_SESSION['redirect_message'])){
+if (isset($_SESSION['redirect_message'])) {
     $heliumMessages[] = array(
         'text'  => $_SESSION['redirect_message'],
         'icon'  => 'svg-rmcommon-info',
@@ -19,8 +19,7 @@ if(isset($_SESSION['redirect_message'])){
     unset($_SESSION['redirect_message']);
 }
 
-if(!empty($heliumMessages)){
-
+if (!empty($heliumMessages)) {
     $template = 'cuHandler.notify({
                     title: "%s",
                     text: "%s",
@@ -33,15 +32,11 @@ if(!empty($heliumMessages)){
                     }
                 });';
 
-    foreach($heliumMessages as $msg){
-
-        if(is_string($msg['level'])){
-
+    foreach ($heliumMessages as $msg) {
+        if (is_string($msg['level'])) {
             $type = 'alert-' . $msg['level'];
-
         } else {
-
-            switch( $msg['level'] ){
+            switch ($msg['level']) {
                 case RMMSG_DANGER:
                     $icon = 'svg-rmcommon-error';
                     $type = 'alert-danger';
@@ -65,13 +60,10 @@ if(!empty($heliumMessages)){
                     $type = 'alert-info';
                     break;
             }
-
         }
 
         $template = sprintf($template, '', html_entity_decode($msg['text']), $type, $icon);
 
         RMTemplate::get()->add_inline_script($template, 1);
-
     }
-
 }

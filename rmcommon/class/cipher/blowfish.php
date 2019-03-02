@@ -53,7 +53,7 @@ class pcrypt_blowfish
       * @access private
       * @var    array
       */
-    var $sbox0 = array (
+    public $sbox0 = array(
 
     0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7, 0xb8e1afed, 0x6a267e96,
     0xba7c9045, 0xf12c7f99, 0x24a19947, 0xb3916cf7, 0x0801f2e2, 0x858efc16,
@@ -99,7 +99,7 @@ class pcrypt_blowfish
     0xf296ec6b, 0x2a0dd915, 0xb6636521, 0xe7b9f9b6, 0xff34052e, 0xc5855664,
     0x53b02d5d, 0xa99f8fa1, 0x08ba4799, 0x6e85076a);
 
-    var $sbox1 = array(
+    public $sbox1 = array(
     0x4b7a70e9, 0xb5b32944, 0xdb75092e, 0xc4192623, 0xad6ea6b0, 0x49a7df7d,
     0x9cee60b8, 0x8fedb266, 0xecaa8c71, 0x699a17ff, 0x5664526c, 0xc2b19ee1,
     0x193602a5, 0x75094c29, 0xa0591340, 0xe4183a3e, 0x3f54989a, 0x5b429d65,
@@ -144,7 +144,7 @@ class pcrypt_blowfish
     0x675fda79, 0xe3674340, 0xc5c43465, 0x713e38d8, 0x3d28f89e, 0xf16dff20,
     0x153e21e7, 0x8fb03d4a, 0xe6e39f2b, 0xdb83adf7);
 
-    var $sbox2 = array(
+    public $sbox2 = array(
     0xe93d5a68, 0x948140f7, 0xf64c261c, 0x94692934, 0x411520f7, 0x7602d4f7,
     0xbcf46b2e, 0xd4a20068, 0xd4082471, 0x3320f46a, 0x43b7d4b7, 0x500061af,
     0x1e39f62e, 0x97244546, 0x14214f74, 0xbf8b8840, 0x4d95fc1d, 0x96b591af,
@@ -189,7 +189,7 @@ class pcrypt_blowfish
     0xa28514d9, 0x6c51133c, 0x6fd5c7e7, 0x56e14ec4, 0x362abfce, 0xddc6c837,
     0xd79a3234, 0x92638212, 0x670efa8e, 0x406000e0);
 
-    var $sbox3 = array(
+    public $sbox3 = array(
     0x3a39ce37, 0xd3faf5cf, 0xabc27737, 0x5ac52d1b, 0x5cb0679e, 0x4fa33742,
     0xd3822740, 0x99bc9bbe, 0xd5118e9d, 0xbf0f7315, 0xd62d1c7e, 0xc700c47b,
     0xb78c1b6b, 0x21a19045, 0xb26eb1be, 0x6a366eb4, 0x5748ab2f, 0xbc946e79,
@@ -240,7 +240,7 @@ class pcrypt_blowfish
       * @access private
       */
 
-    var $parray = array(
+    public $parray = array(
     0x243f6a88, 0x85a308d3, 0x13198a2e, 0x03707344, 0xa4093822, 0x299f31d0,
     0x082efa98, 0xec4e6c89, 0x452821e6, 0x38d01377, 0xbe5466cf, 0x34e90c6c,
     0xc0ac29b7, 0xc97c50dd, 0x3f84d5b5, 0xb5470917, 0x9216d5d9, 0x8979fb1b);
@@ -250,7 +250,7 @@ class pcrypt_blowfish
       * @access public
       * @var    int $blocksize
       */
-    var $blocksize = 8; //bytes
+    public $blocksize = 8; //bytes
 
     /** Methods */
 
@@ -262,7 +262,7 @@ class pcrypt_blowfish
       * @param  string $key the key used to encrypt and decrypt
       * @return void
       */
-    function pcrypt_blowfish($key)
+    public function pcrypt_blowfish($key)
     {
         $this->bctx = array('p'  => $this->parray,
                             'sb' => array( $this->sbox0, $this->sbox1,
@@ -278,10 +278,9 @@ class pcrypt_blowfish
       * @param  int $Xr right uInt32 part of the block
       * @return void
       */
-    function _blowfish_crypt(&$Xl, &$Xr)
+    public function _blowfish_crypt(&$Xl, &$Xr)
     {
-        for($i = 0; $i < 16; $i++)
-        {
+        for ($i = 0; $i < 16; $i++) {
             $Xl = $Xl ^ $this->bctx['p'][$i];
             $Xr = $this->_F($Xl) ^ $Xr;
 
@@ -307,10 +306,9 @@ class pcrypt_blowfish
       * @param  int $Xr right uInt32 part of the block
       * @return void
       */
-    function _blowfish_decrypt(&$Xl, &$Xr)
+    public function _blowfish_decrypt(&$Xl, &$Xr)
     {
-        for($i = 17; $i >= 2 ; $i--)
-        {
+        for ($i = 17; $i >= 2 ; $i--) {
             $Xl = $Xl ^ $this->bctx['p'][$i];
             $Xr = $this->_F($Xl) ^ $Xr;
 
@@ -337,9 +335,8 @@ class pcrypt_blowfish
       * @param  int $x the block
       * @return int $y the new block
       */
-    function _F($x)
+    public function _F($x)
     {
-
         $d = $x & 0xff;
         $x = $x >> 8;
         $c = $x & 0xff;
@@ -360,24 +357,23 @@ class pcrypt_blowfish
       * @param  string $key the key used to encrypt and decrypt
       * @return void
       */
-    function _init($key)
+    public function _init($key)
     {
         // unpack binary string in unsigned chars
-        $key  = array_values(unpack("C*",$key));
+        $key  = array_values(unpack("C*", $key));
         $keyl = count($key);
 
         $j = 0;
-        for ($i = 0; $i < 18; $i++)
-        {
+        for ($i = 0; $i < 18; $i++) {
 
             // xor P1 with the first 32-bits of the key, xor P2 with the second 32-bits ...
             $data = 0;
-            for($k = 0; $k < 4; $k++)
-            {
+            for ($k = 0; $k < 4; $k++) {
                 $data = ($data << 8) | $key[$j];
                 $j++;
-                if ($j >= $keyl)
+                if ($j >= $keyl) {
                     $j = 0;
+                }
             }
             $this->bctx['p'][$i] = $this->parray[$i] ^ $data;
         }
@@ -385,17 +381,14 @@ class pcrypt_blowfish
         // encrypt the zero-string, replace P1 and P2 with the encrypted data,         encrypt P3 and P4 with the new P1 and P2, do it with all P-array and subkeys
         $datal = 0;
         $datar = 0;
-        for ($i = 0; $i < 18; $i += 2)
-        {
+        for ($i = 0; $i < 18; $i += 2) {
             $this->_blowfish_crypt($datal, $datar);
             $this->bctx['p'][$i] = $datal;
             $this->bctx['p'][$i+1] = $datar;
         }
 
-        for ($i = 0; $i < 4; $i++)
-        {
-            for ($j = 0; $j < 256; $j += 2)
-            {
+        for ($i = 0; $i < 4; $i++) {
+            for ($j = 0; $j < 256; $j += 2) {
                 $this->_blowfish_crypt($datal, $datar);
                 $this->bctx['sb'][$i][$j] = $datal;
                 $this->bctx['sb'][$i][$j+1] = $datar;
@@ -411,15 +404,15 @@ class pcrypt_blowfish
       * @param  string $block the block to be encrypted
       * @return string the block encrypted
       */
-    function _encrypt($block)
+    public function _encrypt($block)
     {
         // unpack the block in unsigned long ints (uInt32)
         $data = array_values(unpack('N*', $block));
 
         // encrypt the block and return the block packed into string
-        $this->_blowfish_crypt($data[0],$data[1]);
+        $this->_blowfish_crypt($data[0], $data[1]);
 
-        return pack('N*',$data[0], $data[1]);
+        return pack('N*', $data[0], $data[1]);
     }
 
     /** This method is called by pcrypt class.
@@ -430,17 +423,14 @@ class pcrypt_blowfish
       * @param  string $block the encrypted block to be decrypted
       * @return string the plain text block
       */
-    function _decrypt($block)
+    public function _decrypt($block)
     {
         // unpack the block in unsigned long ints (uInt32)
         $data = array_values(unpack('N*', $block));
 
         // decrypt the block and return the block packed into string
-        $this->_blowfish_decrypt($data[0],$data[1]);
+        $this->_blowfish_decrypt($data[0], $data[1]);
 
-        return pack('N*',$data[0],$data[1]);
+        return pack('N*', $data[0], $data[1]);
     }
-
 }
-
-

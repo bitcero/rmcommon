@@ -11,22 +11,23 @@
 
 class RMFormRewrite extends RMFormElement
 {
-
     private $default = '';
 
-    public function __construct( $caption, $name, $default = array() ){
-        $this->setCaption( $caption );
-        $this->setName( $name );
+    public function __construct($caption, $name, $default = array())
+    {
+        $this->setCaption($caption);
+        $this->setName($name);
 
         $this->default = $default;
     }
 
-    public function id(){
-        return TextCleaner::getInstance()->sweetstring( $this->getName() );
-
+    public function id()
+    {
+        return TextCleaner::getInstance()->sweetstring($this->getName());
     }
 
-    public function render(){
+    public function render()
+    {
 
         /**
          * Load all modules that supports rewrite feature
@@ -36,22 +37,19 @@ class RMFormRewrite extends RMFormElement
         $modules = array();
 
         foreach ($objects as $mod) {
-
-            if( !$mod->getInfo('rewrite') || $mod->getVar('dirname') == 'rmcommon' )
+            if (!$mod->getInfo('rewrite') || $mod->getVar('dirname') == 'rmcommon') {
                 continue;
+            }
 
             $modules[] = $mod;
-
         }
 
-        unset( $objects, $mod );
+        unset($objects, $mod);
 
         ob_start();
-        require RMTemplate::get()->get_template( 'fields/field-rewrite.php', 'module', 'rmcommon' );
+        require RMTemplate::get()->get_template('fields/field-rewrite.php', 'module', 'rmcommon');
         $field = ob_get_clean();
 
         return $field;
-
     }
-
 }

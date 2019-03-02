@@ -29,9 +29,8 @@
  */
 class HeliumRmcommonPreload
 {
-    static function eventRmcommonAdditionalOptions($settings)
+    public static function eventRmcommonAdditionalOptions($settings)
     {
-
         $settings['categories']['helium'] = __('Helium', 'helium');
 
         $af_available = RMFunctions::plugin_installed('advform');
@@ -57,15 +56,14 @@ class HeliumRmcommonPreload
         );
 
         return $settings;
-
     }
 
-    static function eventRmcommonIncludeCommonLanguage()
+    public static function eventRmcommonIncludeCommonLanguage()
     {
         define('NO_XOOPS_SCRIPTS', true);
     }
 
-    static function eventRmcommonPsr4loader($loader)
+    public static function eventRmcommonPsr4loader($loader)
     {
         $loader->addNamespace('Helium', XOOPS_ROOT_PATH . '/modules/rmcommon/themes/helium/class');
         return $loader;

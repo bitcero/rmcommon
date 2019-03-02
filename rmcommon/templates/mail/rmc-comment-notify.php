@@ -932,10 +932,10 @@ table.divider {
 
                                         <h1 style="Margin-top: 0;color: #565656;font-weight: 700;font-size: 36px;Margin-bottom: 18px;font-family: sans-serif;line-height: 42px"><?php _e('New Comment!', 'bxpress'); ?></h1>
                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 25px">
-                                            <?php if( $comment->status == 'approved' ): ?>
-                                            <?php echo sprintf( __('A new comment has been sent in %s:', 'bxpress'), '<strong>' . $item['name'] . '</strong>' ); ?>
+                                            <?php if ($comment->status == 'approved'): ?>
+                                            <?php echo sprintf(__('A new comment has been sent in %s:', 'bxpress'), '<strong>' . $item['name'] . '</strong>'); ?>
                                             <?php else: ?>
-                                                <?php echo sprintf( __('A new comment has been sent in %s and is waiting for approval:', 'bxpress'), '<strong>' . $item['name'] . '</strong>' ); ?>
+                                                <?php echo sprintf(__('A new comment has been sent in %s and is waiting for approval:', 'bxpress'), '<strong>' . $item['name'] . '</strong>'); ?>
                                             <?php endif; ?>
                                         </p>
 
@@ -945,10 +945,10 @@ table.divider {
 
                                                     <blockquote style="Margin-top: 0;Margin-right: 0;Margin-bottom: 0;padding-right: 0;font-style: italic;font-size: 14px;border-left: 2px solid #e9e9e9;Margin-left: 0;padding-left: 16px;border-left-color: #dddddd">
                                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">
-                                                            <?php echo sprintf( __('%s wrote:', 'rmcommon'), '<strong>' . $name . '</strong>' ); ?>
+                                                            <?php echo sprintf(__('%s wrote:', 'rmcommon'), '<strong>' . $name . '</strong>'); ?>
                                                         </p>
                                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">
-                                                            <?php echo str_replace(array('<p>', '</p>'), '', $comment->getVar('content') ); ?>
+                                                            <?php echo str_replace(array('<p>', '</p>'), '', $comment->getVar('content')); ?>
                                                         </p>
                                                     </blockquote>
 
@@ -957,19 +957,23 @@ table.divider {
                                             </tbody></table>
 
                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">
-                                            <?php if( $comment->status == 'approved' ): ?>
-                                                <?php echo sprintf( __('Click here to %s in %s', 'bxpress'),
-                                                    '<strong><a href="'.$uri.'#comment-'.$comment->id().'">'.__('view the comment', 'rmcommon').'</a></strong>',
-                                                    '<strong><a href="'.$item['url'].'">'.$item['name'].'</a></strong>'); ?>
+                                            <?php if ($comment->status == 'approved'): ?>
+                                                <?php echo sprintf(
+    __('Click here to %s in %s', 'bxpress'),
+    '<strong><a href="'.$uri.'#comment-'.$comment->id().'">'.__('view the comment', 'rmcommon').'</a></strong>',
+    '<strong><a href="'.$item['url'].'">'.$item['name'].'</a></strong>'
+); ?>
                                             <?php else: ?>
-                                                <?php echo sprintf( __('Click here to %s in %s', 'bxpress'),
-                                                    '<strong><a href="'.RMCURL.'/comments.php">'.__('view the comment', 'rmcommon').'</a></strong>',
-                                                    '<strong><a href="'.$item['url'].'">'.$item['name'].'</a></strong>'); ?>
+                                                <?php echo sprintf(
+                                                        __('Click here to %s in %s', 'bxpress'),
+                                                        '<strong><a href="'.RMCURL.'/comments.php">'.__('view the comment', 'rmcommon').'</a></strong>',
+                                                        '<strong><a href="'.$item['url'].'">'.$item['name'].'</a></strong>'
+                                                    ); ?>
                                             <?php endif; ?>
                                         </p>
 
                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">
-                                            <em><?php echo sprintf( __('This is an automatic notification from %s. Please do not respond to this message, the email box is unattended.', 'bxpress'), '<strong>' . $xoopsConfig['sitename'] . '</strong>'); ?></em>
+                                            <em><?php echo sprintf(__('This is an automatic notification from %s. Please do not respond to this message, the email box is unattended.', 'bxpress'), '<strong>' . $xoopsConfig['sitename'] . '</strong>'); ?></em>
                                         </p>
 
                                     </td>
@@ -1003,7 +1007,7 @@ table.divider {
                             <div><div class="column-top" style="font-size: 32px;line-height: 32px">&nbsp;</div></div>
 
                             <p style="text-align:center;Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px;margin-left:30px;margin-right:30px;">
-                                <?php echo sprintf( __('You are receiving this message because you belong to webmasters group in %s.', 'rmcommon'), $xoopsConfig['sitename'] ); ?>
+                                <?php echo sprintf(__('You are receiving this message because you belong to webmasters group in %s.', 'rmcommon'), $xoopsConfig['sitename']); ?>
                             </p>
 
                             <div class="column-bottom" style="font-size: 8px;line-height: 8px">&nbsp;</div>

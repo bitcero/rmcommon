@@ -627,7 +627,9 @@ class Swift_Mime_SimpleMimeEntity implements Swift_Mime_MimeEntity
     protected function _fixHeaders()
     {
         if (count($this->_immediateChildren)) {
-            $this->_setHeaderParameter('Content-Type', 'boundary',
+            $this->_setHeaderParameter(
+                'Content-Type',
+                'boundary',
                 $this->getBoundary()
                 );
             $this->_headers->remove('Content-Transfer-Encoding');

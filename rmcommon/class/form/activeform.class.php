@@ -62,65 +62,72 @@ class RMActiveForm
      *
      * @param array $attributes <p>Array of attributes to be generated with/in the form</p>
      */
-    public function __construct( $attributes = array() ){
+    public function __construct($attributes = array())
+    {
 
         // Default 'method' is post
-        if ( !isset( $attributes['method'] ) )
+        if (!isset($attributes['method'])) {
             $attributes['method'] = 'post';
+        }
 
         // Default 'action' is the current URL
-        if ( !isset( $attributes['action'] ) )
+        if (!isset($attributes['action'])) {
             $attributes['action'] = RMUris::current_url();
+        }
 
         // Default submission method is normal
-        if ( !isset( $attributes['submit-via'] ) )
+        if (!isset($attributes['submit-via'])) {
             $attributes['submit-via'] = 'normal';
+        }
 
         // Default validation is in local client
-        if ( !isset( $attributes['validation'] ) )
+        if (!isset($attributes['validation'])) {
             $attributes['validation'] = 'local';
+        }
 
-        if (array_key_exists('model', $attributes) && is_a($attributes['model'], 'RMActiveRecord')){
+        if (array_key_exists('model', $attributes) && is_a($attributes['model'], 'RMActiveRecord')) {
             $this->model = $attributes['model'];
             unset($attributes['model']);
         }
 
         $this->attributes = $attributes;
-
     }
 
-    public function __call($object, $arguments){
-
-        if ( count( $arguments ) <= 0 )
-            throw new RMException( sprintf( __( 'Form element "%s" must be called providing required parameters.', 'rmcommon' ), $object ) );
+    public function __call($object, $arguments)
+    {
+        if (count($arguments) <= 0) {
+            throw new RMException(sprintf(__('Form element "%s" must be called providing required parameters.', 'rmcommon'), $object));
+        }
 
         $model = $arguments[0];
         $field = $arguments[1];
         $parameters = isset($arguments[2]) ? $arguments[2] : array();
 
-        $file = dirname( __FILE__ ) . '/form-objects/' . strtolower($object) . '.php';
+        $file = dirname(__FILE__) . '/form-objects/' . strtolower($object) . '.php';
 
-        if ( !file_exists( $file ) )
-            throw new RMException( sprintf( __( 'Form element of type "%s" does not exists.', 'rmcommon' ), $object ) );
+        if (!file_exists($file)) {
+            throw new RMException(sprintf(__('Form element of type "%s" does not exists.', 'rmcommon'), $object));
+        }
 
-        $class = 'Active' . ucfirst( $object );
+        $class = 'Active' . ucfirst($object);
 
-        if ( !class_exists( $class ) )
-            include_once( $file );
+        if (!class_exists($class)) {
+            include_once($file);
+        }
 
-        if ( !class_exists( $class ) )
-            throw new RMException( sprintf( __( 'The form element "%s" is not valid.', 'rmcommon' ), $object ) );
+        if (!class_exists($class)) {
+            throw new RMException(sprintf(__('The form element "%s" is not valid.', 'rmcommon'), $object));
+        }
 
         $element = new $class($model, $field, $parameters);
         $element->open();
-
     }
 
     /**
      * Open the &lt;form&gt; tag with all specified parameters.
      */
-    public function open(){
-
+    public function open()
+    {
         $form = '<form ';
         $class = 'active-form';
 
@@ -140,9 +147,8 @@ class RMActiveForm
             )
         );
 
-        foreach ( $this->attributes as $attr => $value ){
-
-            switch ( $attr ){
+        foreach ($this->attributes as $attr => $value) {
+            switch ($attr) {
                 case 'submit-via':
                     $form .= $value == 'ajax' ? ' data-type="ajax"' : '';
                     break;
@@ -157,20 +163,18 @@ class RMActiveForm
                     $form .= $attr . '="' . $value . '"';
                     break;
             }
-
         }
 
         $form .= ' class="' . $class . '">';
 
         echo $form;
-
     }
 
     /**
      * Close the &lt;form&gt; tag
      */
-    public function close(){
+    public function close()
+    {
         echo "</form>";
     }
-
 }

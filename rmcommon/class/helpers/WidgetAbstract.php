@@ -44,7 +44,6 @@ abstract class WidgetAbstract extends Attributes
         parent::__construct($data);
 
         $this->tpl = \RMTemplate::getInstance();
-
     }
 
     /**

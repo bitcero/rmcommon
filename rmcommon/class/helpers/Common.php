@@ -159,7 +159,7 @@ class Common
     public function timeFormat($format = '')
     {
         $formater = RMTimeFormatter::get($format);
-        if('' != $format){
+        if ('' != $format) {
             $formater->format = $format;
         }
         return $formater;
@@ -224,7 +224,6 @@ class Common
      */
     public function path($path = '')
     {
-
         $base = XOOPS_ROOT_PATH . '/modules/rmcommon';
 
         if ('' == trim($path)) {
@@ -232,7 +231,6 @@ class Common
         }
 
         return $base . '/' . ltrim($path, '/');
-
     }
 
     /**
@@ -260,7 +258,6 @@ class Common
         global $xoopsSecurity;
 
         return $xoopsSecurity;
-
     }
 
     /**
@@ -290,26 +287,24 @@ class Common
      */
     public function checkToken($ajax = true, $url = '')
     {
-
         if ($this->security()->check(true, false, 'CUTOKEN')) {
             return true;
         }
 
         if ($ajax) {
-
             $this->ajax()->response(
-                __('Session token expired!', 'rmcommon'), 1, 0, ['reload' => true]
+                __('Session token expired!', 'rmcommon'),
+                1,
+                0,
+                ['reload' => true]
             );
-
         } else {
-
             $this->uris()->redirect_with_message(
                 __('Session token expired!', 'rmcommon'),
-                $url == '' ? XOOPS_URL : $url, RMMSG_ERROR
+                $url == '' ? XOOPS_URL : $url,
+                RMMSG_ERROR
             );
-
         }
-
     }
 
     /**
@@ -366,13 +361,11 @@ class Common
 
     public function help($directory)
     {
-
-        if(false == array_key_exists($directory, $this->helps)){
+        if (false == array_key_exists($directory, $this->helps)) {
             $this->helps[$directory] = new Help($directory);
         }
 
         return $this->helps[$directory];
-
     }
 
     public function crypt($method = null, $key = null)
@@ -380,5 +373,4 @@ class Common
         $crypt = new \Crypt($method, $key);
         return $crypt;
     }
-
 }

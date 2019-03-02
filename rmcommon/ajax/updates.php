@@ -2,19 +2,19 @@
 /**
  * Common Utilities
  * A framework for new XOOPS modules
- * 
+ *
  * Copyright © 2015 Eduardo Cortés
  * -----------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -46,25 +46,29 @@ $modNames = array();
 /**
  * Load existing modules and fetch data to request remote server information
  */
-while($row = $xoopsDB->fetchArray($result)){
+while ($row = $xoopsDB->fetchArray($result)) {
     $mod = new XoopsModule();
     $mod->assignVars($row);
     
     $info =& $mod->getInfo();
     
-    if(!isset($info['rmversion'])) continue;
-    if(!isset($info['updateurl'])) continue;
+    if (!isset($info['rmversion'])) {
+        continue;
+    }
+    if (!isset($info['updateurl'])) {
+        continue;
+    }
     
     $modNames[$mod->dirname()] = $info['name'];
     $v = $info['rmversion'];
 
-    if(isset($v['major']))
+    if (isset($v['major'])) {
         $version = $v['major'].'.'.$v['minor'].'.'.$v['revision'].'.'.$v['stage'];
-    else
+    } else {
         $version = $v['number'].'.'.($v['revision']/10).'.'.$v['status'];
+    }
     
     $urls[$mod->dirname()] = $info['updateurl'] . (strpos($info['updateurl'], '?')===false ? '?' : '&') . 'action=check&id='.$mod->dirname().'&version='.$version;
-    
 }
 
 /**
@@ -73,11 +77,15 @@ while($row = $xoopsDB->fetchArray($result)){
  */
 $total = 0;
 $upds = array();
-foreach($urls as $dir => $url){
+foreach ($urls as $dir => $url) {
     $ret = file_get_contents($url . '&xv=' . urlencode(XOOPS_VERSION));
     $ret = json_decode($ret, true);
-    if($ret['message']==0) continue;
-    if($ret['type']=='error') continue;
+    if ($ret['message']==0) {
+        continue;
+    }
+    if ($ret['type']=='error') {
+        continue;
+    }
     
     $ret['data']['type'] = 'module';
     $ret['data']['dir'] = $dir;
@@ -96,37 +104,45 @@ $urls = array();
 $plugNames = array();
 // Check updates for plugins
 $result = $xoopsDB->query("SELECT dir FROM ".$xoopsDB->prefix("mod_rmcommon_plugins"));
-while($row = $xoopsDB->fetchArray($result)){
+while ($row = $xoopsDB->fetchArray($result)) {
     $plugin = $rmFunc->load_plugin($row['dir']);
-    if(!$plugin) continue;
+    if (!$plugin) {
+        continue;
+    }
     
     $info = $plugin->info();
     
-    if(!isset($info['updateurl'])) continue;
+    if (!isset($info['updateurl'])) {
+        continue;
+    }
     
     $plugNames[$row['dir']] = $info['name'];
     $v = $info['version'];
     
-    if(!is_array($v))
+    if (!is_array($v)) {
         $version = '0.0.0.0';
-    else
+    } else {
         $version = $v['major'].'.'.$v['minor'].'.'.$v['revision'].'.'.$v['stage'];
+    }
 
     $params = "action=check&type=plugin&version=$version&id=$row[dir]";
     
     $urls[$row['dir']] = strpos($info['updateurl'], '?')===false ? $info['updateurl']."?$params" : $info['updateurl']."&$params";
-    
 }
 
 /**
  * Load information from remote server
  * and fetch it for ach plugin
  */
-foreach($urls as $dir => $url){
+foreach ($urls as $dir => $url) {
     $ret = file_get_contents($url);
     $ret = json_decode($ret, true);
-    if($ret['message']==0) continue;
-    if($ret['type']=='error') continue;
+    if ($ret['message']==0) {
+        continue;
+    }
+    if ($ret['type']=='error') {
+        continue;
+    }
     
     $ret['data']['type'] = 'plugin';
     $ret['data']['dir'] = $dir;
@@ -141,11 +157,15 @@ foreach($urls as $dir => $url){
  * Event must return an array with 'dir' => 'url' values
  */
 $urls = $common->events()->trigger('rmcommon.check.updates.themes', []);
-foreach($urls as $dir => $data){
+foreach ($urls as $dir => $data) {
     $ret = file_get_contents($data['url']);
     $ret = json_decode($ret, true);
-    if($ret['message']==0) continue;
-    if($ret['type']=='error') continue;
+    if ($ret['message']==0) {
+        continue;
+    }
+    if ($ret['type']=='error') {
+        continue;
+    }
 
     $ret['data']['type'] = 'theme';
     $ret['data']['dir'] = $dir;

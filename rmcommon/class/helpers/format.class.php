@@ -23,9 +23,8 @@ class RMFormat
      * @param $phone <p>Número teléfonico a formatear
      * @return string
      */
-    static function phone($phone)
+    public static function phone($phone)
     {
-
         $matches = array();
         $found = false;
 
@@ -63,7 +62,6 @@ class RMFormat
 
         //$matches = array_slice( $matches, 1);
         //return implode("&middot;", $matches);
-
     }
 
     /**
@@ -73,25 +71,24 @@ class RMFormat
      * @param bool $local Utilizar formato de localización
      * @return string
      */
-    static function date($date, $format = '', $local = false)
+    public static function date($date, $format = '', $local = false)
     {
-
-        if ($date == '') return null;
+        if ($date == '') {
+            return null;
+        }
 
         $time = strtotime($date);
 
-        if ($time <= 0)
+        if ($time <= 0) {
             return '<code>?</code>';
+        }
 
         if ($local) {
-
             $tf = new RMTimeFormatter($time, $format);
             return $tf->format();
-
         }
 
         return date($format != '' ? $format : 'd/m/Y H:i:s', $time);
-
     }
 
     /**
@@ -103,7 +100,6 @@ class RMFormat
      */
     public static function social_icon($type)
     {
-
         $networks = array(
 
             'twitter' => 'fa-twitter-square',
@@ -126,11 +122,11 @@ class RMFormat
 
         );
 
-        if (isset($networks[$type]))
+        if (isset($networks[$type])) {
             return $networks[$type];
-        else
+        } else {
             return 'fa-chain';
-
+        }
     }
 
     /**
@@ -142,11 +138,11 @@ class RMFormat
      */
     public static function version($version, $name = false)
     {
-
         $rtn = '';
 
-        if ($name)
+        if ($name) {
             $rtn .= (defined($version['name']) ? constant($version['name']) : $version['name']) . ' ';
+        }
 
         // New versioning
         if (isset($version['major'])) {
@@ -173,10 +169,11 @@ class RMFormat
         // Format version of a module with previous versioning system
         $rtn .= $version['number'];
 
-        if ($version['revision'] > 0)
+        if ($version['revision'] > 0) {
             $rtn .= '.' . ($version['revision'] / 100);
-        else
+        } else {
             $rtn .= '.0';
+        }
 
         switch ($version['status']) {
             case '-3':
@@ -193,7 +190,6 @@ class RMFormat
         }
 
         return $rtn;
-
     }
 
     /**
@@ -206,7 +202,6 @@ class RMFormat
      */
     public static function bytes_format($size, $origin = '', $target = '', $abr = true)
     {
-
         $kb = 1000;
         $mb = $kb * 1000;
         $gb = $mb * 1000;
@@ -233,16 +228,16 @@ class RMFormat
         $origin = $origin == '' || !isset($units[$origin]) ? 'b' : $origin;
         $target = !isset($units[$target]) ? '' : $target;
 
-        if ($target != '' && $units[$target] == $units[$origin])
+        if ($target != '' && $units[$target] == $units[$origin]) {
             return sprintf($string[$origin], $size);
+        }
 
         // Convert size to bytes
         $size = $size * $units[$origin];
         // Get bytes in target format only if $target has been provided
-        if ($target != '')
+        if ($target != '') {
             $result = number_format($bytes / $units[$target], 2);
-        else {
-
+        } else {
             switch ($size) {
 
                 case $size < $kb:
@@ -267,11 +262,9 @@ class RMFormat
                     break;
 
             }
-
         }
 
         return sprintf($string[$target], $result);
-
     }
 
     /**
@@ -282,30 +275,28 @@ class RMFormat
      * @param $number
      * @return string
      */
-    static function quantity($number){
-
+    public static function quantity($number)
+    {
         $value = 0;
         $suffix = '';
 
-        if($number < 1000){
+        if ($number < 1000) {
             $value = $number;
             $suffix = '';
-        } elseif($number >= 1000 && $number < 1000000){
+        } elseif ($number >= 1000 && $number < 1000000) {
             $value = number_format($number / 1000, 1);
             $suffix = 'K';
-        } elseif( $number >= 1000000){
+        } elseif ($number >= 1000000) {
             $value = number_format($number / 1000000, 1);
             $suffix = 'M';
         }
 
-        if($value > intval($value)){
+        if ($value > intval($value)) {
             $formatted = $value . $suffix;
         } else {
             $formatted = intval($value) . $suffix;
         }
 
         return $formatted;
-
     }
-
 }

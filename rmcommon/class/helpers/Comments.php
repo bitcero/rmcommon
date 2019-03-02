@@ -62,9 +62,7 @@ class Comments
         global $common;
 
         if ($common->services()->service('comments')) {
-
             return $common->services()->comments->load($parameters);
-
         }
 
         return null;
@@ -97,7 +95,7 @@ class Comments
     {
         global $common;
 
-        if($common->services()->service('comments')){
+        if ($common->services()->service('comments')) {
             return $common->services()->comments->form($parameters);
         }
     }

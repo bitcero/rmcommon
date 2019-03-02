@@ -1,16 +1,16 @@
-<?php if( empty( $images ) ): ?>
+<?php if (empty($images)): ?>
 
     <div class="alert alert-info text-center">
-        <?php _e('There are not images yet!','rmcommon'); ?>
+        <?php _e('There are not images yet!', 'rmcommon'); ?>
     </div>
 
 <?php endif; ?>
 
-<?php foreach( $images as $image ): ?>
+<?php foreach ($images as $image): ?>
 
     <div id="thumbnail-<?php echo $image['id']; ?>" data-id="<?php echo $image['id']; ?>" class="thumbnail-item" style="background-image: url('<?php echo $image['thumb']; ?>');" alt="<?php echo $image['title']; ?>">
         <span class="thumbnail-cover"></span>
-        <?php if( $multi ): ?>
+        <?php if ($multi): ?>
         <a href="#" class="add"><?php echo $cuIcons->getIcon('svg-rmcommon-squares'); ?></a>
         <span class="check"><?php echo $cuIcons->getIcon('svg-rmcommon-ok'); ?></span>
         <?php endif; ?>
@@ -65,39 +65,39 @@
                 <input class="form-control input-sm img-title" type="text" name="title">
             </div>
             <div class="form-group">
-                <label><?php _e('Alternative text:','rmcommon'); ?></label>
+                <label><?php _e('Alternative text:', 'rmcommon'); ?></label>
                 <input class="form-control input-sm img-alt" type="text" name="alt">
             </div>
             <div class="form-group">
-                <label><?php _e('Description:','rmcommon'); ?></label>
+                <label><?php _e('Description:', 'rmcommon'); ?></label>
                 <textarea class="form-control input-sm img-description" name="description"></textarea>
             </div>
             <div class="form-group">
-                <label><?php _e('Link URL:','rmcommon'); ?></label>
+                <label><?php _e('Link URL:', 'rmcommon'); ?></label>
                 <input class="form-control input-sm img-link" type="text" name="link">
                 <div class="btn-group btn-group-xs img-links">
 
                 </div>
             </div>
             <div class="form-group">
-                <label><?php _e('Alignment:','rmcommon'); ?></label><br>
+                <label><?php _e('Alignment:', 'rmcommon'); ?></label><br>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="" checked="checked" /> <?php _e('None','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="" checked="checked" /> <?php _e('None', 'rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="left" /> <?php _e('Left','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="left" /> <?php _e('Left', 'rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="center" /> <?php _e('Center','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="center" /> <?php _e('Center', 'rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="right" /> <?php _e('Right','rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="right" /> <?php _e('Right', 'rmcommon'); ?>
                 </label>
             </div>
             <div class="form-group img-sizes">
 
             </div>
-            <?php if( $type == 'markdown' ): ?>
+            <?php if ($type == 'markdown'): ?>
             <div class="form-group" id="md-as">
                 <label><?php _e('Insert as:', 'rmcommon'); ?></label><br>
                 <label class="radio-inline">
@@ -136,5 +136,5 @@
 </div>
 
 <input type="hidden" name="token" id="ret-token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
-<?php echo $nav->display( false ); ?>
+<?php echo $nav->display(false); ?>
 <input type="hidden" id="filesurl" value="<?php echo $filesurl; ?>">

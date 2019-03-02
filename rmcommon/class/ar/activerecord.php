@@ -73,27 +73,28 @@ abstract class RMActiveRecord
      * @param string $objects Object name related to database tables
      * @param string $owner Object (e.g. rmcommon, mywords, rmcommon_plugin)
      */
-    public function __construct( $objects = null, $owner = null ){
-
-        $objects = trim( $objects );
+    public function __construct($objects = null, $owner = null)
+    {
+        $objects = trim($objects);
 
         $this->db = new RMdb();
         $this->xdb = XoopsDatabaseFactory::getDatabaseConnection();
 
-        if ( '' == $objects || null == $objects ){
-            $this->add_error( __('No objects name has been provided!','rmcommon') );
+        if ('' == $objects || null == $objects) {
+            $this->add_error(__('No objects name has been provided!', 'rmcommon'));
             return false;
         }
 
-        if ( ( ''==$owner || null==$owner ) & !in_array($objects, $this->system_tables) ){
-            $this->add_error( __('No owner has been specified!','rmcommon') );
+        if ((''==$owner || null==$owner) & !in_array($objects, $this->system_tables)) {
+            $this->add_error(__('No owner has been specified!', 'rmcommon'));
             return false;
         }
 
-        if ( in_array( $objects, $this->system_tables ) )
+        if (in_array($objects, $this->system_tables)) {
             $this->db->table = $objects;
-        else
+        } else {
             $this->db->table = 'mod_'.$owner.'_'.$objects;
+        }
 
         $this->columns = $this->db->load_columns();
 
@@ -113,16 +114,16 @@ abstract class RMActiveRecord
      * @throws RMException if the property or event is not defined
      * @see __set
      */
-    public function __get($name){
-
+    public function __get($name)
+    {
         $method = 'get_' . $name;
 
-        if( method_exists( $this, $method ) )
+        if (method_exists($this, $method)) {
             return $this->$method();
-        elseif( isset( $this->_properties[$name] ) )
+        } elseif (isset($this->_properties[$name])) {
             return $this->_properties[$name];
-        throw new RMException( sprintf( __( 'Property "%s.%s" is not defined.', 'rmcommon' ), get_class( $this ), $name ) );
-
+        }
+        throw new RMException(sprintf(__('Property "%s.%s" is not defined.', 'rmcommon'), get_class($this), $name));
     }
 
     /**
@@ -134,16 +135,17 @@ abstract class RMActiveRecord
      * @throws RMException if the property/method is not defined or the property is read only.
      * @see __get
      */
-    public function __set($name,$value){
-
+    public function __set($name, $value)
+    {
         $method = 'set' . $name;
 
-        if ( method_exists( $this, $method ) )
-            return $this->$method( $value );
-        elseif( method_exists( $this,'get_'.$name ) )
-            throw new RMException( sprintf( __( 'Property "%s.%s" is read only.', 'rmcommon' ), get_class( $this ), $name ) );
-        else
+        if (method_exists($this, $method)) {
+            return $this->$method($value);
+        } elseif (method_exists($this, 'get_'.$name)) {
+            throw new RMException(sprintf(__('Property "%s.%s" is read only.', 'rmcommon'), get_class($this), $name));
+        } else {
             $this->_properties[$name] = $value;
+        }
 
         return null;
     }
@@ -162,20 +164,18 @@ abstract class RMActiveRecord
      * @return bool
      * @throws RMException
      */
-    public function setTitles($assignments){
+    public function setTitles($assignments)
+    {
+        if (empty($assignments)) {
+            throw new RMException(__('You must provide an array with columns names and titles as values pair!', 'rmcommon'));
+        }
 
-        if ( empty( $assignments ) )
-            throw new RMException( __( 'You must provide an array with columns names and titles as values pair!', 'rmcommon' ) );
 
-
-        foreach ( $assignments as $column => $title ){
-
-                $this->_properties['columns'][$column]['title'] = $title;
-
+        foreach ($assignments as $column => $title) {
+            $this->_properties['columns'][$column]['title'] = $title;
         }
 
         return true;
-
     }
 
     /**
@@ -183,16 +183,17 @@ abstract class RMActiveRecord
      * @param string $field Field/Column name
      * @return mixed
      */
-    public function title( $field ){
-
-        if($field=='')
+    public function title($field)
+    {
+        if ($field=='') {
             return null;
+        }
 
-        if(isset($this->_properties['columns'][$field]))
+        if (isset($this->_properties['columns'][$field])) {
             return $this->_properties['columns'][$field]['title'];
-        else
+        } else {
             return null;
-
+        }
     }
 
     /**
@@ -248,36 +249,34 @@ abstract class RMActiveRecord
      *
      * @param $relations
      */
-    public function setRelations( $relations ){
-
+    public function setRelations($relations)
+    {
         $this->_properties['relations'][] = $relations;
-
     }
 
     /**
      * Exclude specific keys from results
      * @param array $excluded
      */
-    public function setExcludedFields( $excluded = array() ){
-
-        if( empty( $excluded ) )
+    public function setExcludedFields($excluded = array())
+    {
+        if (empty($excluded)) {
             return;
-
-        foreach( $excluded as $field ){
-            if( !isset( $this->_properties['columns'][$field] ) )
-                continue;
-
-            $this->_properties['excluded_fields'][] = $field;
-
         }
 
+        foreach ($excluded as $field) {
+            if (!isset($this->_properties['columns'][$field])) {
+                continue;
+            }
+
+            $this->_properties['excluded_fields'][] = $field;
+        }
     }
 
-    public function setGroupby( $fields ){
-
+    public function setGroupby($fields)
+    {
         $this->_properties['groupby'] = $fields;
         $this->db->groupby = $fields;
-
     }
 
     /**
@@ -286,25 +285,23 @@ abstract class RMActiveRecord
      * @param bool $object If true, returns an object, false returns an array
      * @return array
      */
-    public function walk_results( $results = null, $object = true ){
-
-        if ( $results == null )
+    public function walk_results($results = null, $object = true)
+    {
+        if ($results == null) {
             $results = $this->results;
+        }
 
         $data = array();
 
-        while( $row = $this->db->database->fetchArray( $results ) ){
-
-            if($object){
+        while ($row = $this->db->database->fetchArray($results)) {
+            if ($object) {
                 $data[] = (object) $row;
             } else {
                 $data[] = $row;
             }
-
         }
 
         return $data;
-
     }
 
     /**
@@ -347,38 +344,33 @@ abstract class RMActiveRecord
      * @param string $value Name of the array key that will be used for values in the new array.
      * @return array
      */
-    public function do_pairs($array, $key, $value){
-
-        if ( !is_array( $array ) || empty( $array ) ){
-            trigger_error( __('Invalid argument in RMActiveRecord::do_pairs. Array is required.', 'rmcommon'), E_USER_ERROR);
+    public function do_pairs($array, $key, $value)
+    {
+        if (!is_array($array) || empty($array)) {
+            trigger_error(__('Invalid argument in RMActiveRecord::do_pairs. Array is required.', 'rmcommon'), E_USER_ERROR);
             return null;
         }
 
-        if ( $key == '' || $value == '' ){
-            trigger_error( __('Invalid argument in RMActiveRecord::do_pairs. A key and value are required.', 'rmcommon'), E_USER_ERROR);
+        if ($key == '' || $value == '') {
+            trigger_error(__('Invalid argument in RMActiveRecord::do_pairs. A key and value are required.', 'rmcommon'), E_USER_ERROR);
             return null;
         }
 
         $new_array = array();
 
-        foreach( $array as $item ){
-
-            if ( is_object($item) ){
-
-                if ( isset( $item->$key ) && isset( $item->$value ) )
+        foreach ($array as $item) {
+            if (is_object($item)) {
+                if (isset($item->$key) && isset($item->$value)) {
                     $new_array[$item->$key] = $item->$value;
-
+                }
             } else {
-
-                if ( isset( $item[$key] ) && isset( $item[$value] ) )
+                if (isset($item[$key]) && isset($item[$value])) {
                     $new_array[$item[$key]] = $item[$value];
-
+                }
             }
-
         }
 
         return $new_array;
-
     }
 
     /**
@@ -389,15 +381,15 @@ abstract class RMActiveRecord
      * @param string $sql
      * @return result of the database query
      */
-    public function query( $sql = '' ){
-
-        if ( $sql == '' )
+    public function query($sql = '')
+    {
+        if ($sql == '') {
             $sql = $this->create_select_statement();
+        }
 
-        $this->results = $this->db->database->query( $sql );
+        $this->results = $this->db->database->query($sql);
 
         return $this->results;
-
     }
 
     /**
@@ -410,59 +402,54 @@ abstract class RMActiveRecord
      * @param array $options Array with options that will overwrite existing parameters
      * @return array
      */
-    protected function create_select_statement( $filters = '', $options = array() ){
+    protected function create_select_statement($filters = '', $options = array())
+    {
 
         // If specified fields to exclude from results...
-        $excluded_fields = isset( $options['exluded_fields'] ) ? $options['excluded_fields'] : (empty($options) ? $this->excluded_fields : array());
-        if( !empty( $excluded_fields ) ){
-
+        $excluded_fields = isset($options['exluded_fields']) ? $options['excluded_fields'] : (empty($options) ? $this->excluded_fields : array());
+        if (!empty($excluded_fields)) {
             $selected_fields = array();
 
-            foreach( $this->_properties['columns'] as $field => $structure ){
-
-                if ( in_array( $field, $excluded_fields ))
+            foreach ($this->_properties['columns'] as $field => $structure) {
+                if (in_array($field, $excluded_fields)) {
                     continue;
+                }
 
                 $selected_fields[] = $field;
-
             }
-
-        } else
+        } else {
             $selected_fields[] = '*';
+        }
 
         // Tables where registers reside in
-        $table = isset( $options['table'] ) ? $options['table'] : $this->db->table;
+        $table = isset($options['table']) ? $options['table'] : $this->db->table;
         $from_tables[] = '`' . $table . '`';
 
         // Is there exists foreign keys
-        $relations = isset( $options['relations'] ) ? $options['relations'] : ( $table == $this->db->table ? $this->relations : array() );
+        $relations = isset($options['relations']) ? $options['relations'] : ($table == $this->db->table ? $this->relations : array());
 
-        if( $relations ){
-
-            if ( !empty( $selected_fields ) ){
-
-                foreach ( $selected_fields as $id => $field ){
-                    $selected_fields[$id] = '`' . $table . '`.' . ( $field == '*' ? $field : '`' . $field . '`');
+        if ($relations) {
+            if (!empty($selected_fields)) {
+                foreach ($selected_fields as $id => $field) {
+                    $selected_fields[$id] = '`' . $table . '`.' . ($field == '*' ? $field : '`' . $field . '`');
                 }
-
             }
 
-            foreach ( $relations as $relation ){
+            foreach ($relations as $relation) {
 
                 // When relations for both tables are stored in a different table (many-to-many)
-                if ( isset( $relation['relations-table'] ) && '' != $relation['relations-table'] )
+                if (isset($relation['relations-table']) && '' != $relation['relations-table']) {
                     //$from_tables[] = '`' . $this->db->prefix( $relation['relations-table'] ) . '`';
-                    $this->db->innerJoin( $this->db->prefix($relation['relations-table']), $relation['foreign-keys'][$relation['relations-table']]);
-
-                //$from_tables[] = '`' . $this->db->prefix( $relation['foreign-table'] ) . '`';
-                $this->db->innerJoin( $this->db->prefix($relation['foreign-table']), $relation['foreign-keys'][$relation['foreign-table']]);
-
-                foreach( $relation['use-keys'] as $key ){
-                    $selected_fields[] = '`'.$this->db->prefix($relation['foreign-table']).'`.`'.$key.'`';
+                    $this->db->innerJoin($this->db->prefix($relation['relations-table']), $relation['foreign-keys'][$relation['relations-table']]);
                 }
 
-            }
+                //$from_tables[] = '`' . $this->db->prefix( $relation['foreign-table'] ) . '`';
+                $this->db->innerJoin($this->db->prefix($relation['foreign-table']), $relation['foreign-keys'][$relation['foreign-table']]);
 
+                foreach ($relation['use-keys'] as $key) {
+                    $selected_fields[] = '`'.$this->db->prefix($relation['foreign-table']).'`.`'.$key.'`';
+                }
+            }
         }
 
         $this->db->filters = $filters;
@@ -472,40 +459,40 @@ abstract class RMActiveRecord
         $select_sql = $this->db->select;
 
         return $select_sql;
-
     }
 
     /**
      * Constructs the ORDER BY statement according to order_results property
      * @return string
      */
-    protected function order_statement(){
-
-        if( $this->order_results=='' )
+    protected function order_statement()
+    {
+        if ($this->order_results=='') {
             return null;
+        }
 
         $sql = " ORDER BY ";
 
-        foreach ( $this->order_results as $column => $sort ){
+        foreach ($this->order_results as $column => $sort) {
             $sql .= $sql == '' ? "`$column` $sort" : ", `$column` $sort";
         }
 
         return $sql;
-
     }
 
-    protected function limit_statement( $start = null ){
-
-        if ( $this->results_x_page <= 0 )
+    protected function limit_statement($start = null)
+    {
+        if ($this->results_x_page <= 0) {
             return null;
+        }
 
-        if ( $start == null )
-            $start = RMHttpRequest::request( 'start', 'integer', 0 );
+        if ($start == null) {
+            $start = RMHttpRequest::request('start', 'integer', 0);
+        }
 
         $sql = " LIMIT $start, ".$this->results_x_page;
 
         return $sql;
-
     }
 
     /**
@@ -513,14 +500,17 @@ abstract class RMActiveRecord
      * @param int $error_number Optional error number
      * @param bool $trigger Trigger a PHP error
      */
-    public function add_error( $error_message, $error_number=0, $trigger = true ){
-        if($error_number>0)
+    public function add_error($error_message, $error_number=0, $trigger = true)
+    {
+        if ($error_number>0) {
             $this->_properties['errors'][$error_number] = $error_message;
-        else
+        } else {
             $this->_properties['errors'][] = $error_message;
+        }
 
-        if ( $trigger )
-            trigger_error( $error_message, E_USER_WARNING );
+        if ($trigger) {
+            trigger_error($error_message, E_USER_WARNING);
+        }
     }
 
     /**
@@ -528,21 +518,24 @@ abstract class RMActiveRecord
      * @param bool $as_html Returns HTML or array
      * @return array or string
      */
-    public function get_errors($as_html = true){
-
-        if(false == $as_html)
+    public function get_errors($as_html = true)
+    {
+        if (false == $as_html) {
             return $this->_properties['errors'];
+        }
 
-        return implode( "<br>\n", $this->_properties['errors']);
+        return implode("<br>\n", $this->_properties['errors']);
     }
 
-    protected function rules( $action = 'new' ){}
+    protected function rules($action = 'new')
+    {
+    }
 
     /**
      * Save current model data with a new registry
      */
-    public function save(){
-
+    public function save()
+    {
         $attributes = $this->attributes;
         $fields = array();
 
@@ -561,34 +554,35 @@ abstract class RMActiveRecord
          * Importante: el valor del índice nombrado como la clave
          * principal siempre debe ser numérico.
          */
-        if ( isset( $vars_container[$this->db->primary_key] ) )
+        if (isset($vars_container[$this->db->primary_key])) {
             $action_type = 'update';
-        else
+        } else {
             $action_type = 'new';
+        }
 
-        $this->data = RMHttpRequest::post( $vars_container, 'array', array() );
+        $this->data = RMHttpRequest::post($vars_container, 'array', array());
 
-        foreach ( $this->columns as $column => $data ){
+        foreach ($this->columns as $column => $data) {
 
             /**
              * Si se trata de un objeto nuevo evitamos la verificación
              * de la clave principal.
              */
-            if ( $column == $this->db->primary_key && $action_type == 'new' )
+            if ($column == $this->db->primary_key && $action_type == 'new') {
                 continue;
+            }
 
             /**
              * Verificamos la integridad de los datos proporcionados.
              */
-            if ( !$this->verify_http_data( $column ) )
+            if (!$this->verify_http_data($column)) {
                 return false;
+            }
 
-            $fields[$column] = isset( $rules[$column] ) ? $rules[$column]( $attributes ) : ( isset( $attributes[$column] ) ? $attributes[$column] : null );
-
+            $fields[$column] = isset($rules[$column]) ? $rules[$column]($attributes) : (isset($attributes[$column]) ? $attributes[$column] : null);
         }
 
-        return $this->db->database->queryF($this->db->getInsert( $fields ));
-
+        return $this->db->database->queryF($this->db->getInsert($fields));
     }
 
     /**
@@ -599,27 +593,24 @@ abstract class RMActiveRecord
      * @param string $column <p>Nombre del campo</p>
      * @return bool
      */
-    private function verify_http_data( $column ){
-
+    private function verify_http_data($column)
+    {
         $values = $this->data;
         $columns = $this->columns;
 
-        if ( !isset( $columns[$column] ) )
+        if (!isset($columns[$column])) {
             return false;
+        }
 
-        if ( $columns[$column]['null'] != 'null' && !isset( $values[$column] ) ){
-
-            if ( $columns['default'] != '' )
+        if ($columns[$column]['null'] != 'null' && !isset($values[$column])) {
+            if ($columns['default'] != '') {
                 $values[$column] = $columns[$column]['default'];
-            else {
-                $this->add_error( sprintf(__('The field "%s" could not be empty.', 'rmcommon'), $columns[$column]['title'] ) );
+            } else {
+                $this->add_error(sprintf(__('The field "%s" could not be empty.', 'rmcommon'), $columns[$column]['title']));
                 return false;
             }
-
         }
 
         return true;
-
     }
-
 }

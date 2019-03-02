@@ -33,11 +33,11 @@
  */
 class RMFormText extends RMFormElement
 {
-    var $_size = 30;
-    var $_max;
-    var $_value = '';
-    var $_password = false;
-    var $_enabled = true;
+    public $_size = 30;
+    public $_max;
+    public $_value = '';
+    public $_password = false;
+    public $_enabled = true;
 
     /**
      * Constructor de la clase
@@ -48,9 +48,8 @@ class RMFormText extends RMFormElement
      * @param string $value Valor por defecto
      * @param bol $password True muestra un campo password
      */
-    function __construct($caption, $name = null, $size = 10, $maxlength = 0, $value = '', $password = false, $enabled = true)
+    public function __construct($caption, $name = null, $size = 10, $maxlength = 0, $value = '', $password = false, $enabled = true)
     {
-
         if (is_array($caption)) {
             parent::__construct($caption);
         } else {
@@ -58,7 +57,7 @@ class RMFormText extends RMFormElement
             $this->setWithDefaults('caption', $caption, '');
             $this->setWithDefaults('name', $name, 'name_error');
             $this->setWithDefaults('size', $size, 10);
-            if($maxlength > 0){
+            if ($maxlength > 0) {
                 $this->setWithDefaults('maxlength', $maxlength, 64);
             }
             $this->set('value', $value);
@@ -108,7 +107,6 @@ class RMFormText extends RMFormElement
      */
     public function render()
     {
-
         if ($this->has('datalist')) {
             $this->add('list', 'list_' . $this->getName());
         }
@@ -125,7 +123,7 @@ class RMFormText extends RMFormElement
  */
 class RMFormSubTitle extends RMFormElement
 {
-    var $_type;
+    public $_type;
 
     /**
      * @param string $caption Texto del subtitulo
@@ -175,14 +173,14 @@ class RMFormSubTitle extends RMFormElement
      * Generamos el c?sigo HTML para crear el subt?tulo.
      * @return string
      */
-    function render()
+    public function render()
     {
         $attributes = $this->renderAttributeString();
 
         if ($this->get('level') > 0) {
             $rtn = "<h" . $this->get('level')." $attributes>";
             $rtn .= $this->get('caption');
-            if($this->get('description')!=''){
+            if ($this->get('description')!='') {
                 $rtn .= '<small>' . $this->get('description') . '</small>';
             }
             $rtn .= '</h' . $this->get('level') . '>';
@@ -270,7 +268,7 @@ class RMFormTextArea extends RMFormElement
      * Establece el texto inicial del campo
      * @param string $value Texto inicial
      */
-    function setValue($value)
+    public function setValue($value)
     {
         $this->_value = $value;
     }
@@ -279,7 +277,7 @@ class RMFormTextArea extends RMFormElement
      * Devuelve el texto inicial del campo
      * @return string
      */
-    function getValue()
+    public function getValue()
     {
         return $this->_value;
     }
@@ -288,7 +286,7 @@ class RMFormTextArea extends RMFormElement
      * Devuelve el código HTML para mostrar el campo
      * @return string
      */
-    function render()
+    public function render()
     {
         $attributes = $this->renderAttributeString();
 
@@ -323,7 +321,7 @@ class RMFormLabel extends RMFormElement
      * Genera el c?digo HTML para mostrar la etiqueta
      * @return string
      */
-    function render()
+    public function render()
     {
         return $this->get('content');
     }

@@ -23,24 +23,22 @@ trait RMModels
      * @param  boolean             $cp     Determina si es un modelo para el panel de control (true) o para la sección frontal
      * @return bool|RMActiveRecord
      */
-    public function load_model( $module, $model, $cp = false ){
-
-        if( '' == trim( $module ) || '' == trim( $model ) )
-
+    public function load_model($module, $model, $cp = false)
+    {
+        if ('' == trim($module) || '' == trim($model)) {
             return false;
+        }
 
-        $path = XOOPS_ROOT_PATH . '/modules/' . $module . ( $cp ? '/admin' : '' ) . '/models';
-        $class = ucfirst( $module ) . '_' . ucfirst( $model ) .  ( $cp ? '_Admin_Model' : '_Model' );
+        $path = XOOPS_ROOT_PATH . '/modules/' . $module . ($cp ? '/admin' : '') . '/models';
+        $class = ucfirst($module) . '_' . ucfirst($model) .  ($cp ? '_Admin_Model' : '_Model');
 
-        if ( is_file( $path .'/' . strtolower( $model ) . '.php' ) ) {
-            include_once  $path .'/' . strtolower( $model ) . '.php';
+        if (is_file($path .'/' . strtolower($model) . '.php')) {
+            include_once  $path .'/' . strtolower($model) . '.php';
             $model = new $class();
-        } else
-
+        } else {
             return false;
+        }
 
         return $model;
-
     }
-
 }

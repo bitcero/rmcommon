@@ -27,13 +27,15 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_color {
-	   function darken(phmagick $p ,$alphaValue = 50){
+class phMagick_color
+{
+    public function darken(phmagick $p, $alphaValue = 50)
+    {
         $percent = 100 - (int) $alphaValue;
 
         //get original file dimentions
 
-        list ($width, $height) = $p->getInfo();
+        list($width, $height) = $p->getInfo();
 
         $cmd = $p->getBinary('composite');
         $cmd .=  ' -blend  ' . $percent . ' ';
@@ -56,13 +58,13 @@ class phMagick_color {
      * @param $alphaValue Integer - 100: white , 0: original color (no change)
      * @return boolean - True: success
      */
-    function brighten(phmagick $p, $alphaValue = 50){
-
+    public function brighten(phmagick $p, $alphaValue = 50)
+    {
         $percent = 100 - (int) $alphaValue;
 
         //get original file dimentions
 
-        list ($width, $height) = $p->getInfo();
+        list($width, $height) = $p->getInfo();
 
         $cmd = $p->getBinary('composite');
         $cmd .=  ' -blend  ' . $percent . ' ';
@@ -91,23 +93,25 @@ class phMagick_color {
 //        return  $p ;
 //    }
 
-	function toGreyScale(phmagick $p, $enhance=2){
-		$cmd   = $p->getBinary('convert');
-		$cmd .= ' -modulate 100,0 ' ;
-		$cmd .= ' -sigmoidal-contrast '.$enhance.'x50%' ;
-		$cmd .= ' -background "none" "' . $p->getSource().'"' ;
-		$cmd .= ' "' . $p->getDestination() .'"';
+    public function toGreyScale(phmagick $p, $enhance=2)
+    {
+        $cmd   = $p->getBinary('convert');
+        $cmd .= ' -modulate 100,0 ' ;
+        $cmd .= ' -sigmoidal-contrast '.$enhance.'x50%' ;
+        $cmd .= ' -background "none" "' . $p->getSource().'"' ;
+        $cmd .= ' "' . $p->getDestination() .'"';
 
-		$p->execute($cmd);
-		$p->setSource($p->getDestination());
-		$p->setHistory($p->getDestination());
-		return  $p ;
-	}
+        $p->execute($cmd);
+        $p->setSource($p->getDestination());
+        $p->setHistory($p->getDestination());
+        return  $p ;
+    }
 
     /**
      * Inverts the image colors
      */
-    function invertColors(phmagick $p){
+    public function invertColors(phmagick $p)
+    {
         $cmd  = $p->getBinary('convert');
         $cmd .= ' "' . $p->getSource() .'"';
         $cmd .= ' -negate ';
@@ -119,29 +123,30 @@ class phMagick_color {
         return  $p ;
     }
 
-    function sepia(phmagick $p, $tone = 90){
-		$cmd   = $p->getBinary('convert');
-		$cmd .= ' -sepia-tone '. $tone .'% ' ;
-		$cmd .= ' -modulate 100,50 ' ;
-		$cmd .= ' -normalize ' ;
-		$cmd .= ' -background "none" "' . $p->getSource() .'"' ;
-		$cmd .= ' "' . $p->getDestination().'"' ;
-	     $p->execute($cmd);
-	     $p->setSource($p->getDestination());
-	     $p->setHistory($p->getDestination());
-	    return  $p ;
+    public function sepia(phmagick $p, $tone = 90)
+    {
+        $cmd   = $p->getBinary('convert');
+        $cmd .= ' -sepia-tone '. $tone .'% ' ;
+        $cmd .= ' -modulate 100,50 ' ;
+        $cmd .= ' -normalize ' ;
+        $cmd .= ' -background "none" "' . $p->getSource() .'"' ;
+        $cmd .= ' "' . $p->getDestination().'"' ;
+        $p->execute($cmd);
+        $p->setSource($p->getDestination());
+        $p->setHistory($p->getDestination());
+        return  $p ;
     }
 
-	function autoLevels(phmagick $p){
-		$cmd  = $p->getBinary('convert');
-		$cmd .= ' -normalize ' ;
-		$cmd .= ' -background "none" "' . $p->getSource().'"'  ;
-		$cmd .= ' "' . $p->getDestination() .'"' ;
+    public function autoLevels(phmagick $p)
+    {
+        $cmd  = $p->getBinary('convert');
+        $cmd .= ' -normalize ' ;
+        $cmd .= ' -background "none" "' . $p->getSource().'"'  ;
+        $cmd .= ' "' . $p->getDestination() .'"' ;
 
-		$p->execute($cmd);
-		$p->setSource($p->getDestination());
-		$p->setHistory($p->getDestination());
-		return  $p ;
-	}
-
+        $p->execute($cmd);
+        $p->setSource($p->getDestination());
+        $p->setHistory($p->getDestination());
+        return  $p ;
+    }
 }

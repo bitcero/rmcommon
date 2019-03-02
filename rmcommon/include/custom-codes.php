@@ -29,14 +29,15 @@
 
 class EnabledCustomCodes
 {
-    public function cuIcon($attrs){
+    public function cuIcon($attrs)
+    {
         global $cuIcons;
 
         $cc = RMCustomCode::get();
 
         //$attrs = $cc->atts(['icon' => ''], $attrs);
 
-        if('' == $attrs['icon']){
+        if ('' == $attrs['icon']) {
             return '';
         }
 
@@ -49,12 +50,13 @@ class EnabledCustomCodes
     /**
      * @return EnabledCustomCodes
      */
-    static function getInstance()
+    public static function getInstance()
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
         $instance = new EnabledCustomCodes();
         return $instance;

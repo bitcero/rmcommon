@@ -36,7 +36,7 @@ class TextCleaner
      * Singleton
      * @return TextCleaner
      */
-    static function getInstance()
+    public static function getInstance()
     {
         static $instance;
         if (!isset($instance)) {
@@ -51,14 +51,15 @@ class TextCleaner
      */
     public function get_emotions()
     {
-
         $rmc_config = RMSettings::cu_settings();
 
-        if (!$rmc_config->dosmileys)
+        if (!$rmc_config->dosmileys) {
             return false;
+        }
 
-        if (!empty($this->emots))
+        if (!empty($this->emots)) {
             return $this->emots;
+        }
 
         // Only a few icons due to these can be extended by plugins or modules
         $url = RMCURL . '/images/emots';
@@ -82,7 +83,6 @@ class TextCleaner
         $this->emots = RMEvents::get()->run_event('rmcommon.get_emotions', $this->emots);
 
         return $this->emots;
-
     }
 
     /**
@@ -90,7 +90,7 @@ class TextCleaner
      * @param    string $message
      * @return    string
      */
-    function smiley($message)
+    public function smiley($message)
     {
         $emots = $this->get_emotions();
         $codes = array();
@@ -124,7 +124,7 @@ class TextCleaner
         return $string;
     }
 
-    function nofollow($text)
+    public function nofollow($text)
     {
         global $wpdb;
         // This is a pre save filter, so text is already escaped.
@@ -133,7 +133,7 @@ class TextCleaner
         return $text;
     }
 
-    function popuplinks($text)
+    public function popuplinks($text)
     {
         $text = preg_replace('/<a (.+?)>/i', "<a $1 target='_blank' rel='external'>", $text);
         return $text;
@@ -149,8 +149,9 @@ class TextCleaner
     {
         $url = $matches[2];
         $url = self::clean_url($url);
-        if (empty($url))
+        if (empty($url)) {
             return $matches[0];
+        }
 
         return $matches[1] . "<a href=\"$url\" rel=\"nofollow\">$url</a>";
     }
@@ -161,8 +162,9 @@ class TextCleaner
         $dest = $matches[2];
         $dest = 'http://' . $dest;
         $dest = self::clean_url($dest);
-        if (empty($dest))
+        if (empty($dest)) {
             return $matches[0];
+        }
         // removed trailing [,;:] from URL
         if (in_array(substr($dest, -1), array('.', ',', ';', ':')) === true) {
             $ret = substr($dest, -1);
@@ -194,7 +196,9 @@ class TextCleaner
 
         $original_url = $url;
 
-        if ('' == $url) return $url;
+        if ('' == $url) {
+            return $url;
+        }
         $url = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $url);
         $strip = array('%0d', '%0a', '%0D', '%0A');
         $url = TextCleaner::replace($strip, $url);
@@ -205,8 +209,9 @@ class TextCleaner
          */
         if (strpos($url, ':') === false &&
             substr($url, 0, 1) != '/' && substr($url, 0, 1) != '#' && !preg_match('/^[a-z0-9-]+?\.php/i', $url)
-        )
+        ) {
             $url = 'http://' . $url;
+        }
 
         // Replace ampersands and single quotes only when displaying.
         if ('display' == $context) {
@@ -214,13 +219,15 @@ class TextCleaner
             $url = str_replace("'", '&#039;', $url);
         }
 
-        if (!is_array($protocols))
+        if (!is_array($protocols)) {
             $protocols = array('http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet');
+        }
 
         $aprotocols = $protocols;
 
-        if (TextCleaner::bad_protocol($url, $protocols) != $url)
+        if (TextCleaner::bad_protocol($url, $protocols) != $url) {
             return '';
+        }
 
         return RMEvents::get()->run_event('rmcommon.clean_url', $url, $original_url, $context);
     }
@@ -240,24 +247,25 @@ class TextCleaner
 
     private function bad_protocol_once($string, $allowed_protocols)
     {
-
         $string2 = preg_split('/:|&#58;|&#x3a;/i', $string, 2);
-        if (isset($string2[1]) && !preg_match('%/\?%', $string2[0]))
+        if (isset($string2[1]) && !preg_match('%/\?%', $string2[0])) {
             $string = TextCleaner::bad_protocol_once2($string2[0]) . trim($string2[1]);
-        else
+        } else {
             $string = preg_replace_callback('/^((&[^;]*;|[\sA-Za-z0-9])*)' . '(:|&#58;|&#[Xx]3[Aa];)\s*/', 'bad_protocol_once2', $string);
+        }
 
         return $string;
     }
 
-    static function bad_protocol_once2($matches)
+    public static function bad_protocol_once2($matches)
     {
         global $aprotocols;
         $allowed_protocols = $aprotocols;
 
         if (is_array($matches)) {
-            if (!isset($matches[1]) || empty($matches[1]))
+            if (!isset($matches[1]) || empty($matches[1])) {
                 return '';
+            }
 
             $string = $matches[1];
         } else {
@@ -270,19 +278,21 @@ class TextCleaner
         $string2 = strtolower($string2);
 
         $allowed = false;
-        foreach ((array)$allowed_protocols as $one_protocol)
+        foreach ((array)$allowed_protocols as $one_protocol) {
             if (strtolower($one_protocol) == $string2) {
                 $allowed = true;
                 break;
             }
+        }
 
-        if ($allowed)
+        if ($allowed) {
             return "$string2:";
-        else
+        } else {
             return '';
+        }
     }
 
-    function decode_entities($string)
+    public function decode_entities($string)
     {
         $string = preg_replace_callback('/&#([0-9]+);/', 'decode_entities_chr', $string);
         $string = preg_replace_callback('/&#[Xx]([0-9A-Fa-f]+);/', 'decode_entities_chr_hexdec', $string);
@@ -335,7 +345,9 @@ class TextCleaner
         $text = preg_replace("[\n|\r|\n\r]", ' ', $text);
         $ret = substr(strip_tags($text), 0, $len);
 
-        if (strlen($text) > $len) $ret .= ' ' . $continue;
+        if (strlen($text) > $len) {
+            $ret .= ' ' . $continue;
+        }
         return $ret;
     }
 
@@ -425,7 +437,7 @@ class TextCleaner
      *
      * @return    string
      */
-    function nl2Br($text)
+    public function nl2Br($text)
     {
         return preg_replace("/(\015\012)|(\015)|(\012)/", "<br />", $text);
     }
@@ -436,7 +448,7 @@ class TextCleaner
      * @param   string $text
      * @return  string
      **/
-    function addslashes($text)
+    public function addslashes($text)
     {
         if (get_magic_quotes_gpc()) {
             $text = stripslashes($text);
@@ -451,7 +463,7 @@ class TextCleaner
     *
     * @return	string
     */
-    static function stripslashes($text)
+    public static function stripslashes($text)
     {
         if (get_magic_quotes_gpc()) {
             $text = stripslashes($text);
@@ -466,7 +478,7 @@ class TextCleaner
     *
     * @return	string
     */
-    function specialchars($string, $quote_style = ENT_NOQUOTES, $charset = 'UTF-8')
+    public function specialchars($string, $quote_style = ENT_NOQUOTES, $charset = 'UTF-8')
     {
         if (0 === strlen($string)) {
             return '';
@@ -505,7 +517,7 @@ class TextCleaner
      * @param   string $text
      * @return  string
      **/
-    function specialchars_decode($string, $quote_style = ENT_NOQUOTES)
+    public function specialchars_decode($string, $quote_style = ENT_NOQUOTES)
     {
         if (0 === strlen($string)) {
             return '';
@@ -564,10 +576,11 @@ class TextCleaner
      * @param int|bool $br Optional. If set, this will convert all remaining line-breaks after paragraphing. Default true.
      * @return string Text which has been converted into correct paragraph tags.
      */
-    function double_br($string, $br = 1)
+    public function double_br($string, $br = 1)
     {
-        if (trim($string) === '')
+        if (trim($string) === '') {
             return '';
+        }
         $string = $string . "\n"; // just to make things a little easier, pad the end
         $string = preg_replace('|<br />\s*<br />|', "\n\n", $string);
         // Space things out a little
@@ -583,8 +596,9 @@ class TextCleaner
         // make paragraphs, including one at the end
         $strings = preg_split('/\n\s*\n/', $string, -1, PREG_SPLIT_NO_EMPTY);
         $string = '';
-        foreach ($strings as $tinkle)
+        foreach ($strings as $tinkle) {
             $string .= '<p>' . trim($tinkle, "\n") . "</p>\n";
+        }
         $string = preg_replace('|<p>\s*</p>|', '', $string); // under certain strange conditions it could create a P of entirely whitespace
         $string = preg_replace('!<p>([^<]+)</(div|address|form)>!', "<p>$1</p></$2>", $string);
         $string = preg_replace('!<p>\s*(</?' . $allblocks . '[^>]*>)\s*</p>!', "$1", $string); // don't pee all over a tag
@@ -600,8 +614,9 @@ class TextCleaner
         }
         $string = preg_replace('!(</?' . $allblocks . '[^>]*>)\s*<br />!', "$1", $string);
         $string = preg_replace('!<br />(\s*</?(?:p|li|div|dl|dd|dt|th|pre|td|ul|ol)[^>]*>)!', '$1', $string);
-        if (strpos($string, '<pre') !== false)
+        if (strpos($string, '<pre') !== false) {
             $string = preg_replace_callback('!(<pre[^>]*>)(.*?)</pre>!is', 'TextCleaner::clean_pre', $string);
+        }
         //$string = preg_replace( "|\n</p>$|", '</p>', $string );
         //$string = preg_replace('/<p>\s*?(' . get_shortcode_regex() . ')\s*<\/p>/s', '$1', $string); // don't auto-p wrap shortcodes that stand alone
 
@@ -618,9 +633,8 @@ class TextCleaner
      * @param bool Clean disabled tags?
      * @return  string
      **/
-    function to_display($text, $dbr = true, $clean_tags = true, $paragraph = true)
+    public function to_display($text, $dbr = true, $clean_tags = true, $paragraph = true)
     {
-
         $rmc_config = RMSettings::cu_settings();
 
         $original_text = $text;
@@ -634,8 +648,9 @@ class TextCleaner
             $text = $md->text($text);
         }
 
-        if (!defined('XOOPS_CPFUNC_LOADED') && !defined('NO_CUSTOM_CODES'))
+        if (!defined('XOOPS_CPFUNC_LOADED') && !defined('NO_CUSTOM_CODES')) {
             $text = $rmCodes->doCode($text);
+        }
 
         if ($rmc_config->dohtml != 1) {
             $text = $this->specialchars($text);
@@ -644,41 +659,46 @@ class TextCleaner
         // Convert [code] tag
         $text = $this->codePreConv($text, $rmc_config->doxcode && !defined('XOOPS_CPFUNC_LOADED'));
 
-        if ($rmc_config->dosmileys && !defined('XOOPS_CPFUNC_LOADED'))
+        if ($rmc_config->dosmileys && !defined('XOOPS_CPFUNC_LOADED')) {
             $text = $this->smiley($text);
+        }
 
         // Decode exmcode
-        if ($rmc_config->doxcode && !defined('XOOPS_CPFUNC_LOADED'))
+        if ($rmc_config->doxcode && !defined('XOOPS_CPFUNC_LOADED')) {
             $text = $this->codeDecode($text, $rmc_config->doimage);
+        }
 
         // Replace breaklines
-        if ($rmc_config->dobr)
+        if ($rmc_config->dobr) {
             $text = $this->nl2Br($text);
+        }
 
-        if ($clean_tags) $text = $this->clean_disabled_tags($text);
+        if ($clean_tags) {
+            $text = $this->clean_disabled_tags($text);
+        }
         $text = $this->make_clickable($text);
         //$text = $this->codeConv($text, $rmc_config->doxcode);	// Ryuji_edit(2003-11-18)
-        if ($paragraph) $text = $this->double_br($text);
+        if ($paragraph) {
+            $text = $this->double_br($text);
+        }
 
         // Before to send the formatted string we send it to interceptor methods
         return RMEvents::get()->run_event('rmcommon.text.todisplay', $text, $original_text);
     }
 
-    function clean_disabled_tags($text)
+    public function clean_disabled_tags($text)
     {
-
         $this->disable_tags = RMEvents::get()->run_event('rmcommon.more.disabled.tags', $this->disable_tags);
 
         $text = preg_replace_callback($this->disable_tags, "preg_striptags", $text);
         return $text;
-
     }
 
     /**
      * Sanitizing of [code] tag
      * from Xoops
      */
-    function codePreConv($text)
+    public function codePreConv($text)
     {
         $patterns = "/\[code([^\]]*?)\](.*)\[\/code\]/sU";
         /*$replacements = "'[code$1]'.base64_encode('$2').'[/code]'";
@@ -690,11 +710,11 @@ class TextCleaner
         return $text;
     }
 
-    function codeConv($text, $exmcode = 1)
+    public function codeConv($text, $exmcode = 1)
     {
-
-        if ($exmcode == 0)
+        if ($exmcode == 0) {
             return $text;
+        }
 
         $patterns = "/\[code([^\]]*?)\](.*)\[\/code\]/sU";
         /*$replacements = "'<div class=\"xoopsCode\"><code>'.\$this->call_code_modifiers(\$this->specialchars(str_replace('\\\"', '\"', base64_decode('$2'))), '$1').'</code></div>'";
@@ -730,12 +750,13 @@ class TextCleaner
      * @param array|string $matches The array or string
      * @return string The pre block without paragraph/line-break conversion.
      */
-    function clean_pre($matches)
+    public function clean_pre($matches)
     {
-        if (is_array($matches))
+        if (is_array($matches)) {
             $text = $matches[1] . $matches[2] . "</pre>";
-        else
+        } else {
             $text = $matches;
+        }
 
         $text = str_replace('<br />', '', $text);
         $text = str_replace('<p>', "\n", $text);
@@ -753,13 +774,11 @@ class TextCleaner
      */
     public function encrypt($string, $encode64 = true)
     {
-
         $rmc_config = RMSettings::cu_settings();
         $crypt = new Crypt();
         $string = $crypt->encrypt($string);
         //if ($encode64) $string = base64_encode($string);
         return $string;
-
     }
 
     /**
@@ -770,14 +789,12 @@ class TextCleaner
      */
     public static function decrypt($string, $encode64 = true)
     {
-
         $rmc_config = RMSettings::cu_settings();
 
         $crypt = new Crypt();
         $string = $crypt->decrypt($string);
 
         return $string;
-
     }
 
     /**
@@ -803,9 +820,7 @@ class TextCleaner
         $repl = array('', '-', '');
         $url = preg_replace($find, $repl, $rtn);
         return $url;
-
     }
-
 }
 
 // For compatibility

@@ -48,33 +48,33 @@ ob_start();
 
 var cuLanguage = {
 
-<?php if ( $common->location == 'groups' ): ?>
+<?php if ($common->location == 'groups'): ?>
 
-    confirmDelete: '<?php _e('Do you really want to delete selected groups? Please note that this action can not be undo.', 'rmcommon' ); ?>',
+    confirmDelete: '<?php _e('Do you really want to delete selected groups? Please note that this action can not be undo.', 'rmcommon'); ?>',
 
-<?php elseif ( $common->location == 'blocks' ): ?>
+<?php elseif ($common->location == 'blocks'): ?>
 
-    deleteBlockMessage: "<?php _e('Do you really want to delete this block?','rmcommon'); ?>",
-    deleteBlock: "<?php _e('Delete Block','rmcommon'); ?>",
-    hideBlock: "<?php _e('Hide Block','rmcommon'); ?>",
-    showBlock: "<?php _e('Show Block','rmcommon'); ?>",
-    blockSettings: "<?php _e('Block Settings','rmcommon'); ?>",
-    save: "<?php _e('Save','rmcommon'); ?>",
-    cancel: "<?php _e('Cancel','rmcommon'); ?>",
-    showPositions: "<?php _e('Show Positions','rmcommon'); ?>",
-    showPositions: "<?php _e('Show Positions','rmcommon'); ?>",
-    showBlocks: "<?php _e('Show Blocks','rmcommon'); ?>",
-    errorShowInPosition: "<?php _e('An error occurred while trying to add block to its position!','rmcommon'); ?>",
-    errorNoPosition: "<?php _e('The position specified for this block does not exists!','rmcommon'); ?>",
-    modulePages: "<?php _e('%s Pages','rmcommon'); ?>",
-    confirmPositionDeletion: "<?php _e('Do you really want to delete selected positions?','rmcommon'); ?>",
-    selectBefore: "<?php _e('You must select at least one position before you can do this action!','rmcommon'); ?>",
+    deleteBlockMessage: "<?php _e('Do you really want to delete this block?', 'rmcommon'); ?>",
+    deleteBlock: "<?php _e('Delete Block', 'rmcommon'); ?>",
+    hideBlock: "<?php _e('Hide Block', 'rmcommon'); ?>",
+    showBlock: "<?php _e('Show Block', 'rmcommon'); ?>",
+    blockSettings: "<?php _e('Block Settings', 'rmcommon'); ?>",
+    save: "<?php _e('Save', 'rmcommon'); ?>",
+    cancel: "<?php _e('Cancel', 'rmcommon'); ?>",
+    showPositions: "<?php _e('Show Positions', 'rmcommon'); ?>",
+    showPositions: "<?php _e('Show Positions', 'rmcommon'); ?>",
+    showBlocks: "<?php _e('Show Blocks', 'rmcommon'); ?>",
+    errorShowInPosition: "<?php _e('An error occurred while trying to add block to its position!', 'rmcommon'); ?>",
+    errorNoPosition: "<?php _e('The position specified for this block does not exists!', 'rmcommon'); ?>",
+    modulePages: "<?php _e('%s Pages', 'rmcommon'); ?>",
+    confirmPositionDeletion: "<?php _e('Do you really want to delete selected positions?', 'rmcommon'); ?>",
+    selectBefore: "<?php _e('You must select at least one position before you can do this action!', 'rmcommon'); ?>",
 
-<?php elseif ( $common->location == 'modules' ): ?>
+<?php elseif ($common->location == 'modules'): ?>
 
     visitWeb: "<?php _e('Visit web site', 'rmcommon'); ?>",
 
-<?php elseif ( $common->location == 'updates' ): ?>
+<?php elseif ($common->location == 'updates'): ?>
 
     version: '<?php _e('Version:', 'rmcommon'); ?>',
     author: '<?php _e('Author:', 'rmcommon'); ?>',
@@ -89,9 +89,9 @@ var cuLanguage = {
 
 <?php endif; ?>
 
-    downloadNews: "<?php _e('Downloading News...', 'rmcommon' ); ?>",
-    downloadNewsError: "<?php _e('Error ocurred while trying to load news.', 'rmcommon' ); ?>",
-    inProgress: "<?php _e('Operation in progress...', 'rmcommon' ); ?>",
+    downloadNews: "<?php _e('Downloading News...', 'rmcommon'); ?>",
+    downloadNewsError: "<?php _e('Error ocurred while trying to load news.', 'rmcommon'); ?>",
+    inProgress: "<?php _e('Operation in progress...', 'rmcommon'); ?>",
     searchResults: "<?php _e('Search Results (%u)', 'rmcommon'); ?>",
     modules: "<?php _e('Modules', 'rmcommon'); ?>",
     resizingLegend: "<?php _e('Resizing %1 from %2', 'rmcommon'); ?>",
@@ -108,4 +108,4 @@ var cuLanguage = {
 <?php
 
 $script = ob_get_clean();
-RMTemplate::get()->add_inline_script( $script );
+RMTemplate::get()->add_inline_script($script);

@@ -39,14 +39,12 @@ class Licensing
     {
         global $common;
 
-        if('' == $common->settings->siteId && 32 != strlen($common->settings->siteId)){
+        if ('' == $common->settings->siteId && 32 != strlen($common->settings->siteId)) {
             $this->siteId = urlencode(md5(crypt(XOOPS_LICENSE_KEY . XOOPS_URL . time(), $common->settings->secretkey)));
             $common->settings()->setValue('rmcommon', 'siteId', $siteId);
         } else {
             $this->siteId = $common->settings->siteId;
         }
-
-
     }
 
     /**
@@ -57,12 +55,20 @@ class Licensing
      */
     public function checkLocal($element, $type)
     {
-        if(''==$element || '' == $type){return false;}
+        if (''==$element || '' == $type) {
+            return false;
+        }
         $identifier = md5($type.'-'.$element);
         $license = new License($identifier);
-        if($license->isNew()){return false;}
-        if(''==$license->data){return false;}
-        if($license->expiration<=time()){return false;}
+        if ($license->isNew()) {
+            return false;
+        }
+        if (''==$license->data) {
+            return false;
+        }
+        if ($license->expiration<=time()) {
+            return false;
+        }
         return true;
     }
 
@@ -71,7 +77,7 @@ class Licensing
         global $common, $xoopsDB;
         $sql = "SELECT * FROM " . $common->db()->prefix('mod_rmcommon_licensing');
         $result = $common->db()->queryF($sql);
-        while($row = $common->db()->fetchArray($result)){
+        while ($row = $common->db()->fetchArray($result)) {
             $license = new License();
             $license->assignVars($row);
             $this->getInfo($license);
@@ -80,24 +86,38 @@ class Licensing
 
     public function getInfo(License $qngn)
     {
-        global $common; $pbzzba = $common;
+        global $common;
+        $pbzzba = $common;
         $svyr = XOOPS_ROOT_PATH;
         //if(false == isset($qngn->type)){return false;}
-        switch($qngn->type){
+        switch ($qngn->type) {
             case 'module':$zbq = $pbzzba->modules()::load($qngn->element);
-                if($zbq->isNew()){return false;}
-                if(false == ($url = $zbq->getInfo('updateurl'))){return false;}
+                if ($zbq->isNew()) {
+                    return false;
+                }
+                if (false == ($url = $zbq->getInfo('updateurl'))) {
+                    return false;
+                }
                 break;
             case 'plugin':$cyhtva = $pbzzba->plugins()->load($qngn->element);
-                if($cyhtva->isNew()){return false;}
-                if(false == ($url = $cyhtva->get_info('updateurl'))){return false;}
+                if ($cyhtva->isNew()) {
+                    return false;
+                }
+                if (false == ($url = $cyhtva->get_info('updateurl'))) {
+                    return false;
+                }
                 break;
             case 'theme':
-                if(false == ($url = $pbzzba->events()->trigger('rmcommon.theme.update.url', false, $qngn->element))){return false;}
+                if (false == ($url = $pbzzba->events()->trigger('rmcommon.theme.update.url', false, $qngn->element))) {
+                    return false;
+                }
                 break;
         }
         $response = $pbzzba->httpRequest()::load_url($url, 'action=verify&type=' . $qngn->type . '&id=' . $qngn->element . '&data=' . $qngn->data);
-        if('8c0735ff'!=$response){$qngn->data='';$qngn->save();}
+        if ('8c0735ff'!=$response) {
+            $qngn->data='';
+            $qngn->save();
+        }
     }
 
     /**
@@ -114,5 +134,4 @@ class Licensing
 
         return $instance;
     }
-
 }

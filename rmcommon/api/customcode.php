@@ -15,12 +15,13 @@ class RMCustomCode
     /**
      * @return RMCustomCode
      */
-    static function get()
+    public static function get()
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
         $instance = new RMCustomCode();
         return $instance;
@@ -74,13 +75,11 @@ class RMCustomCode
      * @param string $tag customcode tag to be searched in post content.
      * @param callable $func Hook to run when customcode is found.
      */
-    function add($tag, $func)
+    public function add($tag, $func)
     {
-
         if (is_callable($func)) {
             $this->custom_codes[$tag] = $func;
         }
-
     }
 
     /**
@@ -91,9 +90,8 @@ class RMCustomCode
      *
      * @param string $tag customcode tag to remove hook for.
      */
-    function remove($tag)
+    public function remove($tag)
     {
-
         unset($this->custom_codes[$tag]);
     }
 
@@ -107,11 +105,9 @@ class RMCustomCode
      * @since 2.5
      * @uses $customcode_tags
      */
-    function removeAll()
+    public function removeAll()
     {
-
         $this->custom_codes = array();
-
     }
 
     /**
@@ -128,9 +124,8 @@ class RMCustomCode
      * @param string $content Content to search for customcodes
      * @return string Content with customcodes filtered out.
      */
-    function doCode($content)
+    public function doCode($content)
     {
-
         if (empty($this->custom_codes) || !is_array($this->custom_codes)) {
             return $content;
         }
@@ -158,9 +153,8 @@ class RMCustomCode
      *
      * @return string The customcode search regular expression
      */
-    function getRegex()
+    public function getRegex()
     {
-
         $tagnames = array_keys($this->custom_codes);
         $tagregexp = join('|', array_map('preg_quote', $tagnames));
 
@@ -208,7 +202,7 @@ class RMCustomCode
      * @param array $m Regular expression match array
      * @return mixed False on failure.
      */
-    function doTag($m)
+    public function doTag($m)
     {
 
         // allow [[foo]] syntax for escaping a tag
@@ -240,23 +234,24 @@ class RMCustomCode
      * @param string $text
      * @return array List of attributes and their value.
      */
-    function parseAtts($text)
+    public function parseAtts($text)
     {
         $atts = array();
         $pattern = '/(\w+)\s*=\s*"([^"]*)"(?:\s|$)|(\w+)\s*=\s*\'([^\']*)\'(?:\s|$)|(\w+)\s*=\s*([^\s\'"]+)(?:\s|$)|"([^"]*)"(?:\s|$)|(\S+)(?:\s|$)/';
         $text = preg_replace("/[\x{00a0}\x{200b}]+/u", " ", $text);
         if (preg_match_all($pattern, $text, $match, PREG_SET_ORDER)) {
             foreach ($match as $m) {
-                if (!empty($m[1]))
+                if (!empty($m[1])) {
                     $atts[strtolower($m[1])] = stripcslashes($m[2]);
-                elseif (!empty($m[3]))
+                } elseif (!empty($m[3])) {
                     $atts[strtolower($m[3])] = stripcslashes($m[4]);
-                elseif (!empty($m[5]))
+                } elseif (!empty($m[5])) {
                     $atts[strtolower($m[5])] = stripcslashes($m[6]);
-                elseif (isset($m[7]) and strlen($m[7]))
+                } elseif (isset($m[7]) and strlen($m[7])) {
                     $atts[] = stripcslashes($m[7]);
-                elseif (isset($m[8]))
+                } elseif (isset($m[8])) {
                     $atts[] = stripcslashes($m[8]);
+                }
             }
         } else {
             $atts = ltrim($text);
@@ -280,15 +275,16 @@ class RMCustomCode
      * @param array $atts User defined attributes in customcode tag.
      * @return array Combined and filtered attribute list.
      */
-    function atts($pairs, $atts)
+    public function atts($pairs, $atts)
     {
         $atts = (array)$atts;
         $out = array();
         foreach ($pairs as $name => $default) {
-            if (array_key_exists($name, $atts))
+            if (array_key_exists($name, $atts)) {
                 $out[$name] = $atts[$name];
-            else
+            } else {
                 $out[$name] = $default;
+            }
         }
         return $out;
     }
@@ -302,18 +298,18 @@ class RMCustomCode
      * @param string $content Content to remove customcode tags.
      * @return string Content without customcode tags.
      */
-    function strip($content)
+    public function strip($content)
     {
-
-        if (empty($this->custom_codes) || !is_array($this->custom_codes))
+        if (empty($this->custom_codes) || !is_array($this->custom_codes)) {
             return $content;
+        }
 
         $pattern = $this->getRegex();
 
         return preg_replace_callback("/$pattern/s", array($this, 'strip'), $content);
     }
 
-    function stripTag($m)
+    public function stripTag($m)
     {
         // allow [[foo]] syntax for escaping a tag
         if ($m[1] == '[' && $m[6] == ']') {
@@ -322,6 +318,4 @@ class RMCustomCode
 
         return $m[1] . $m[6];
     }
-
 }
-

@@ -92,26 +92,22 @@ class RMForm extends \Common\Core\Helpers\Attributes
      * @param string $action Post o Get (Default post)
      * @param bool $addtoken Crea el cdigo de seguridad de la sesin con el formulario (default true)
      */
-    function __construct($title = '', $name = '', $action = '', $method = 'post', $addtoken = true)
+    public function __construct($title = '', $name = '', $action = '', $method = 'post', $addtoken = true)
     {
         global $xoopsSecurity, $xoops;
 
         if (is_array($title)) {
-
             parent::__construct($title);
-
         } else {
-
             parent::__construct([]);
             $this->set('title', $title);
             $this->set('name', $name);
             $this->set('action', $action);
             $this->set('method', $method);
             $this->set('addtoken', $addtoken);
-
         }
 
-        if(false == $this->has('method')){
+        if (false == $this->has('method')) {
             $this->set('method', 'post');
         }
 
@@ -119,7 +115,7 @@ class RMForm extends \Common\Core\Helpers\Attributes
             $this->set('method', 'post');
         }
 
-        if(!$this->has('class')){
+        if (!$this->has('class')) {
             $this->set('class', 'form-horizontal');
         }
 
@@ -129,8 +125,9 @@ class RMForm extends \Common\Core\Helpers\Attributes
         RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', array('footer' => 1));
         RMTemplate::getInstance()->add_script('forms.js', 'rmcommon', array('footer' => 1));
 
-        if ($addtoken) $this->addElement(new RMFormHidden('XOOPS_TOKEN_REQUEST', $xoopsSecurity->createToken()));
-
+        if ($addtoken) {
+            $this->addElement(new RMFormHidden('XOOPS_TOKEN_REQUEST', $xoopsSecurity->createToken()));
+        }
     }
 
     /**
@@ -258,7 +255,9 @@ class RMForm extends \Common\Core\Helpers\Attributes
     public function clear($field = '')
     {
         if ($field != '') {
-            if (isset($this->_fields[$field])) unset($this->_fields[$field]);
+            if (isset($this->_fields[$field])) {
+                unset($this->_fields[$field]);
+            }
             return;
         }
         $this->_fields = array();
@@ -283,14 +282,18 @@ class RMForm extends \Common\Core\Helpers\Attributes
         $ret['field'] = $element;
         $ret['class'] = get_class($element);
         if (get_class($element) == 'RMFormEditor') {
-            if ($element->getType() == 'tiny') $this->editores .= ','.$element->getName();
+            if ($element->getType() == 'tiny') {
+                $this->editores .= ','.$element->getName();
+            }
         }
 
-        if ($required)
+        if ($required) {
             $element->addClass('required');
+        }
 
-        if ($css_type != '')
+        if ($css_type != '') {
             $element->addClass($css_type);
+        }
 
         if ($element->getName() != '') {
             $this->_fields[$element->getName()] = $ret;
@@ -305,7 +308,6 @@ class RMForm extends \Common\Core\Helpers\Attributes
         }
 
         return $element;
-
     }
 
     public function elements()
@@ -326,11 +328,14 @@ class RMForm extends \Common\Core\Helpers\Attributes
      */
     public function addValidateField($name, $type = '', $required = 0, $text = '')
     {
-        if ($name == '') return;
-        if ($text == '') return;
+        if ($name == '') {
+            return;
+        }
+        if ($text == '') {
+            return;
+        }
 
         $this->_othervalidates = ($this->_othervalidates == '' ? "" : ",") . "$name|$type|$required|$text";
-
     }
 
     /**
@@ -378,7 +383,6 @@ class RMForm extends \Common\Core\Helpers\Attributes
         ob_start();
         include RMTemplate::getInstance()->path('rmc-forms.php', 'module', 'rmcommon');
         return ob_get_clean();
-
     }
 
     /**
@@ -391,14 +395,12 @@ class RMForm extends \Common\Core\Helpers\Attributes
      */
     public function renderForTemplate()
     {
-
         $form = array();
         $attributes = $this->renderAttributeString();
 
         $req = '';
         $callmethod = '';
         foreach ($this->_fields as $field) {
-
             $element = $field['field'];
             $form['fields'][] = array(
                 'type' => get_class($element),
@@ -413,7 +415,6 @@ class RMForm extends \Common\Core\Helpers\Attributes
                     $callmethod = 'tinyMCE.triggerSave(); ';
                 }
             }
-
         }
 
         if ($this->_addtoken) {
@@ -433,7 +434,6 @@ class RMForm extends \Common\Core\Helpers\Attributes
         $form['lang_req'] = __('Fields marked with (*) are required.', 'rmcommon');
 
         return $form;
-
     }
 
     /**
@@ -490,5 +490,4 @@ class RMForm extends \Common\Core\Helpers\Attributes
      * @desc Imprime el código javascript para Tiny
      * @param array $editores Array con los nombres de los campos editores
      */
-
 }

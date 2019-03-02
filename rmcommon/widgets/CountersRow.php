@@ -60,23 +60,24 @@ class CountersRow extends WidgetAbstract implements WidgetInterface
         return __CLASS__;
     }
 
-    public function addCounter($data = []){
-        if(empty($data)){
+    public function addCounter($data = [])
+    {
+        if (empty($data)) {
             return false;
         }
 
-        if(is_numeric($data['counter'])){
-            if($data['counter'] >= 1000000){
+        if (is_numeric($data['counter'])) {
+            if ($data['counter'] >= 1000000) {
                 // Millions
                 $reduced = $data['counter'] / 1000000;
-                if(floor($reduced) < $reduced){
+                if (floor($reduced) < $reduced) {
                     $data['counter'] = floor($reduced) . '<small>M+</small>';
                 } else {
                     $data['counter'] = $reduced . '<small>M</small>';
                 }
-            } elseif ($data['counter'] >= 10000){
+            } elseif ($data['counter'] >= 10000) {
                 $reduced = $data['counter'] / 1000;
-                if(floor($reduced) < $reduced){
+                if (floor($reduced) < $reduced) {
                     $data['counter'] = floor($reduced) . '<small>k+</small>';
                 } else {
                     $data['counter'] = $reduced . '<small>k</small>';
@@ -100,12 +101,12 @@ class CountersRow extends WidgetAbstract implements WidgetInterface
         $this->add('class', 'row');
 
         // Widget color
-        if($this->has('color')){
+        if ($this->has('color')) {
             $this->add('class', 'bg-' . $this->get('color'));
         }
 
         // Widget icon
-        if( $this->has('icon') ){
+        if ($this->has('icon')) {
             $this->tpl->assign('icon', $cuIcons->getIcon($this->get('icon')));
         } else {
             $this->tpl->assign('icon', $cuIcons->getIcon('svg-rmcommon-ok-circle'));
@@ -125,11 +126,9 @@ class CountersRow extends WidgetAbstract implements WidgetInterface
      */
     public function template()
     {
-        if('' == $this->tplPath){
+        if ('' == $this->tplPath) {
             $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-row-counters.php', 'module', 'rmcommon');
         }
         return $this->tplPath;
     }
-
-
 }

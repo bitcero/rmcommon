@@ -20,7 +20,6 @@ $common->location = 'modules';
  */
 function modules_template_touch($tpl_id, $clear_old = true)
 {
-
     $tplfile_handler = &xoops_getHandler('tplfile');
     $tplfile = $tplfile_handler->get($tpl_id);
 
@@ -48,7 +47,7 @@ function modules_install_function($dirname)
         $module->loadInfoAsVar($dirname);
         $module->setVar('weight', 1);
         $module->setVar('isactive', 1);
-        $module->setVar('last_update', time() );
+        $module->setVar('last_update', time());
         $error = false;
         $errs = array();
         $msgs = array();
@@ -74,10 +73,10 @@ function modules_install_function($dirname)
             $result = $func($module);
             if (!$result) {
                 $error = true;
-                $errs[] = '<p>' . sprintf( _AM_SYSTEM_MODULES_FAILED_EXECUTE, $func) . '</p>';
+                $errs[] = '<p>' . sprintf(_AM_SYSTEM_MODULES_FAILED_EXECUTE, $func) . '</p>';
                 $errs = array_merge($errs, $module->getErrors());
             } else {
-                $msgs[] = '<p>' . sprintf( _AM_SYSTEM_MODULES_FAILED_SUCESS, "<strong>{$func}</strong>") . '</p>';
+                $msgs[] = '<p>' . sprintf(_AM_SYSTEM_MODULES_FAILED_SUCESS, "<strong>{$func}</strong>") . '</p>';
                 $msgs += $module->getErrors();
             }
         }
@@ -85,7 +84,6 @@ function modules_install_function($dirname)
         if ($error == false) {
             $sqlfile = $module->getInfo('sqlfile');
             if (is_array($sqlfile) && !empty($sqlfile[XOOPS_DB_TYPE])) {
-
                 $sql_file_path = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/' . $sqlfile[XOOPS_DB_TYPE];
                 if (!file_exists($sql_file_path)) {
                     $errs[] = "<p>" . sprintf(_AM_SYSTEM_MODULES_SQL_NOT_FOUND, "<strong>{$sql_file_path}</strong>");
@@ -114,7 +112,6 @@ function modules_install_function($dirname)
                                 $error = true;
                                 break;
                             } else {
-
                                 if (!in_array($prefixed_query[4], $created_tables)) {
                                     $msgs[] = "&nbsp;&nbsp;" . sprintf(_AM_SYSTEM_MODULES_TABLE_CREATED, "<strong>" . $db->prefix($prefixed_query[4]) . "</strong>");
                                     $created_tables[] = $prefixed_query[4];
@@ -251,7 +248,6 @@ function modules_install_function($dirname)
                                     include_once XOOPS_ROOT_PATH . '/class/template.php';
                                     if (!xoops_template_touch($newtplid)) {
                                         $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(_AM_SYSTEM_MODULES_TEMPLATE_COMPILED_FAILED, "<strong>" . $block['template'] . "</strong>") . "</span>";
-
                                     } else {
                                         $msgs[] = "&nbsp;&nbsp;" . sprintf(_AM_SYSTEM_MODULES_TEMPLATE_COMPILED, "<strong>" . $block['template'] . "</strong>");
                                     }
@@ -292,13 +288,13 @@ function modules_install_function($dirname)
                     $options['_NOT_CONFIG_ENABLEINLINE'] = XOOPS_NOTIFICATION_ENABLEINLINE;
                     $options['_NOT_CONFIG_ENABLEBOTH'] = XOOPS_NOTIFICATION_ENABLEBOTH;
 
-                    $configs[] = array ('name' => 'notification_enabled', 'title' => '_NOT_CONFIG_ENABLE', 'description' => '_NOT_CONFIG_ENABLEDSC', 'formtype' => 'select', 'valuetype' => 'int', 'default' => XOOPS_NOTIFICATION_ENABLEBOTH, 'options' => $options);
+                    $configs[] = array('name' => 'notification_enabled', 'title' => '_NOT_CONFIG_ENABLE', 'description' => '_NOT_CONFIG_ENABLEDSC', 'formtype' => 'select', 'valuetype' => 'int', 'default' => XOOPS_NOTIFICATION_ENABLEBOTH, 'options' => $options);
                     // Event-specific notification options
                     // FIXME: doesn't work when update module... can't read back the array of options properly...  " changing to &quot;
                     $options = array();
                     $categories =& notificationCategoryInfo('', $module->getVar('mid'));
                     foreach ($categories as $category) {
-                        $events =& notificationEvents ($category['name'], false, $module->getVar('mid'));
+                        $events =& notificationEvents($category['name'], false, $module->getVar('mid'));
                         foreach ($events as $event) {
                             if (!empty($event['invisible'])) {
                                 continue;
@@ -310,7 +306,7 @@ function modules_install_function($dirname)
                         unset($events);
                     }
                     unset($categories);
-                    $configs[] = array ('name' => 'notification_events', 'title' => '_NOT_CONFIG_EVENTS', 'description' => '_NOT_CONFIG_EVENTSDSC', 'formtype' => 'select_multi', 'valuetype' => 'array', 'default' => array_values($options), 'options' => $options);
+                    $configs[] = array('name' => 'notification_events', 'title' => '_NOT_CONFIG_EVENTS', 'description' => '_NOT_CONFIG_EVENTSDSC', 'formtype' => 'select_multi', 'valuetype' => 'array', 'default' => array_values($options), 'options' => $options);
                 }
 
                 if ($configs != false) {
@@ -335,14 +331,13 @@ function modules_install_function($dirname)
                                 $confop->setVar('confop_name', $key, true);
                                 $confop->setVar('confop_value', $value, true);
                                 $confobj->setConfOptions($confop);
-                                $confop_msgs .= '<br />&nbsp;&nbsp;&nbsp;&nbsp; ' . _AM_SYSTEM_MODULES_CONFIG_ADD . _AM_SYSTEM_MODULES_NAME . ' <strong>' . ( defined($key) ? constant($key) : $key ) . '</strong> ' . _AM_SYSTEM_MODULES_VALUE . ' <strong>' . $value . '</strong> ';
+                                $confop_msgs .= '<br />&nbsp;&nbsp;&nbsp;&nbsp; ' . _AM_SYSTEM_MODULES_CONFIG_ADD . _AM_SYSTEM_MODULES_NAME . ' <strong>' . (defined($key) ? constant($key) : $key) . '</strong> ' . _AM_SYSTEM_MODULES_VALUE . ' <strong>' . $value . '</strong> ';
                                 unset($confop);
                             }
                         }
                         $order++;
                         if ($config_handler->insertConfig($confobj) != false) {
                             $msgs[] = '&nbsp;&nbsp;' . sprintf(_AM_SYSTEM_MODULES_CONFIG_DATA_ADD, "<strong>" . $config['name'] . "</strong>") . $confop_msgs;
-
                         } else {
                             $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(_AM_SYSTEM_MODULES_CONFIG_DATA_ADD_ERROR, "<strong>" . $config['name'] . "</strong>") . "</span>";
                         }
@@ -462,13 +457,12 @@ function modules_install_function($dirname)
  *
  * @return array
  */
-function get_authors( $mod ){
-
-    if ( is_array($mod->getInfo('author')) ){
+function get_authors($mod)
+{
+    if (is_array($mod->getInfo('author'))) {
         return $mod->getInfo('author');
     } else {
-
-        if( $mod->getInfo('rmnative') ){
+        if ($mod->getInfo('rmnative')) {
             $author = array(array(
                 'name'  => $mod->getInfo('author'),
                 'email' => $mod->getInfo('authormail'),
@@ -478,15 +472,14 @@ function get_authors( $mod ){
             ));
             return $author;
         } else {
-
-            if ( '' != $mod->getInfo('author') ){
+            if ('' != $mod->getInfo('author')) {
                 $persons = explode(",", $mod->getInfo('author'));
             } else {
                 $persons = explode(",", $mod->getInfo('credits'));
             }
 
             $authors = array();
-            foreach( $persons as $person ){
+            foreach ($persons as $person) {
                 $authors[] = array(
                     'name'  => $person,
                     'email' => '',
@@ -498,16 +491,14 @@ function get_authors( $mod ){
 
             return $authors;
         }
-
     }
-
 }
 
 /**
  * Parse social icons
  */
-function parse_social_icons( $type ){
-
+function parse_social_icons($type)
+{
     $icons = array(
         'twitter'   => 'fa fa-twitter-square',
         'facebook'  => 'fa fa-facebook-square',
@@ -526,15 +517,16 @@ function parse_social_icons( $type ){
         'default'   => 'fa fa-external-link-square'
     );
 
-    if ( array_key_exists($type, $icons) )
+    if (array_key_exists($type, $icons)) {
         return $icons[$type];
-    else
+    } else {
         return $icons['default'];
-
+    }
 }
 
-function show_modules_list(){
-	global $xoopsSecurity, $cuIcons;
+function show_modules_list()
+{
+    global $xoopsSecurity, $cuIcons;
     
     $installed_modules = array();
     
@@ -548,34 +540,30 @@ function show_modules_list(){
     $result = $db->query($sql);
     $installed_dirs = array();
     
-    while($row = $db->fetchArray($result)){
+    while ($row = $db->fetchArray($result)) {
         $mod = new XoopsModule();
         $mod->assignVars($row);
         $installed_dirs[] = $mod->dirname();
         
-        if (file_exists(XOOPS_ROOT_PATH.'/modules/'.$mod->getVar('dirname').'/class/'.strtolower($mod->getVar('dirname').'controller').'.php')){
+        if (file_exists(XOOPS_ROOT_PATH.'/modules/'.$mod->getVar('dirname').'/class/'.strtolower($mod->getVar('dirname').'controller').'.php')) {
             include_once XOOPS_ROOT_PATH.'/modules/'.$mod->getVar('dirname').'/class/'.strtolower($mod->getVar('dirname').'controller').'.php';
             $class = ucfirst($mod->getVar('dirname')).'Controller';
             $class = new $class();
-            if (method_exists($class, 'get_main_link')){
+            if (method_exists($class, 'get_main_link')) {
                 $main_link = $class->get_main_link();
             } else {
-                
-            if ($mod->getVar('hasmain')){
-                $main_link = XOOPS_URL.'/modules/'.$mod->dirname();
-            } else {
-                $main_link = "#";
-            }
-                
+                if ($mod->getVar('hasmain')) {
+                    $main_link = XOOPS_URL.'/modules/'.$mod->dirname();
+                } else {
+                    $main_link = "#";
+                }
             }
         } else {
-            
-            if ($mod->getVar('hasmain')){
+            if ($mod->getVar('hasmain')) {
                 $main_link = XOOPS_URL.'/modules/'.$mod->dirname();
             } else {
                 $main_link = "#";
             }
-            
         }
         
         // Admin section
@@ -594,7 +582,7 @@ function show_modules_list(){
             'admin_link'    => $admin_link,
             'updated'        => formatTimestamp($mod->getVar('last_update'), 's'),
             'url'        => $mod->getInfo('url'),
-            'authors'        => get_authors( $mod ),
+            'authors'        => get_authors($mod),
             //'avatar'        => RMEvents::get()->run_event('rmcommon.get.avatar', $mod->getInfo('authormail'), 80),
             'license'        => $mod->getInfo('license'),
             'dirname'        => $mod->getInfo('dirname'),
@@ -625,7 +613,7 @@ function show_modules_list(){
                 'version'        => $module->getInfo('rmnative') ? RMModules::format_module_version($module->getInfo('rmversion')) : $module->getInfo('version'),
                 'description'    => $module->getInfo('description'),
                 'image'         => XOOPS_URL.'/modules/'.$module->getInfo('dirname').'/'.$module->getInfo('image'),
-                'authors'        => get_authors( $module ),
+                'authors'        => get_authors($module),
                 'license'        => $module->getInfo('license'),
                 'dirname'        => $module->getInfo('dirname'),
                 'help'        => $module->getInfo('help'),
@@ -638,42 +626,42 @@ function show_modules_list(){
     // Event for available modules
     $available_mods = RMEvents::get()->trigger('rmcommon.available.modules', $available_mods);
 
-	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'));
-	
-	////RMFunctions::create_toolbar();
-	RMTemplate::get()->assign('xoops_pagetitle', __('Modules Management','rmcommon'));
-	RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
-	RMTemplate::get()->add_script('modules.min.js', 'rmcommon');
-        RMTemplate::get()->set_help('http://www.redmexico.com.mx/docs/common-utilities/uso-de-common-utilities/standalone/1/#administrador-de-modulos');
-	xoops_cp_header();
-	include RMTemplate::get()->path('rmc-modules.php', 'module', 'rmcommon');
-	xoops_cp_footer();
-	
+    RMBreadCrumb::get()->add_crumb(__('Modules Management', 'rmcommon'));
+    
+    ////RMFunctions::create_toolbar();
+    RMTemplate::get()->assign('xoops_pagetitle', __('Modules Management', 'rmcommon'));
+    RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
+    RMTemplate::get()->add_script('modules.min.js', 'rmcommon');
+    RMTemplate::get()->set_help('http://www.redmexico.com.mx/docs/common-utilities/uso-de-common-utilities/standalone/1/#administrador-de-modulos');
+    xoops_cp_header();
+    include RMTemplate::get()->path('rmc-modules.php', 'module', 'rmcommon');
+    xoops_cp_footer();
 }
 
 /**
 * This function show a resume of the changes that will be made by module
 */
-function module_install(){
+function module_install()
+{
     global $xoopsSecurity, $rmTpl;
     
-    $dir = rmc_server_var($_GET,'dir','');
+    $dir = rmc_server_var($_GET, 'dir', '');
     
-    if ($dir=='' || !file_exists(XOOPS_ROOT_PATH.'/modules/'.$dir.'/xoops_version.php')){
-        redirectMsg('modules.php', __('Specified module is not valid!','rmcommon'), 1);
+    if ($dir=='' || !file_exists(XOOPS_ROOT_PATH.'/modules/'.$dir.'/xoops_version.php')) {
+        redirectMsg('modules.php', __('Specified module is not valid!', 'rmcommon'), 1);
         die();
     }
     
     $module_handler = xoops_getHandler('module');
-	
-	if ($module = $module_handler->getByDirname($dir)){
-		redirectMsg('modules.php', sprintf(__('%s is already installed!', 'rmcommon'), $module->name()), 1);
-		die();
-	}
+    
+    if ($module = $module_handler->getByDirname($dir)) {
+        redirectMsg('modules.php', sprintf(__('%s is already installed!', 'rmcommon'), $module->name()), 1);
+        die();
+    }
     
     $module = $module_handler->create();
     if (!$module->loadInfo($dir, false)) {
-        redirectMsg('modules.php',__('Sepecified module is not a valid Xoops Module!','rmcommon'), 1);
+        redirectMsg('modules.php', __('Sepecified module is not a valid Xoops Module!', 'rmcommon'), 1);
         die();
     }
     
@@ -683,95 +671,95 @@ function module_install(){
     RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
     //RMFunctions::create_toolbar();
 
-	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'), 'modules.php');
-	RMBreadCrumb::get()->add_crumb(sprintf(__('Install %s','rmcommon'), $module->getInfo('name')));
+    RMBreadCrumb::get()->add_crumb(__('Modules Management', 'rmcommon'), 'modules.php');
+    RMBreadCrumb::get()->add_crumb(sprintf(__('Install %s', 'rmcommon'), $module->getInfo('name')));
 
-	$rmTpl->assign('xoops_pagetitle', sprintf(__('Install %s','rmcommon'), $module->getInfo('name')));
+    $rmTpl->assign('xoops_pagetitle', sprintf(__('Install %s', 'rmcommon'), $module->getInfo('name')));
 
     xoops_cp_header();
     
     include RMTemplate::get()->get_template('rmc-module-preinstall.php', 'module', 'rmcommon');
     
     xoops_cp_footer();
-    
 }
 
-function module_install_now(){
-	global $xoopsSecurity, $xoopsConfig;
-	
-	$mod = RMHttpRequest::post( 'module', 'string', '' );
-	
-	if (!$xoopsSecurity->check()){
-		redirectMsg('modules.php?action=install&dir='.$mod, __('Sorry, this operation could not be completed!', 'rmcommon'), 1);
-		die();
-	}
-	
-	$module_handler = xoops_getHandler('module');
-	
-	if ($module = $module_handler->getByDirname($mod)){
-		redirectMsg('modules.php', sprintf(__('%s is already installed!', 'rmcommon'), $module->name()), 1);
-		die();
-	}
+function module_install_now()
+{
+    global $xoopsSecurity, $xoopsConfig;
+    
+    $mod = RMHttpRequest::post('module', 'string', '');
+    
+    if (!$xoopsSecurity->check()) {
+        redirectMsg('modules.php?action=install&dir='.$mod, __('Sorry, this operation could not be completed!', 'rmcommon'), 1);
+        die();
+    }
+    
+    $module_handler = xoops_getHandler('module');
+    
+    if ($module = $module_handler->getByDirname($mod)) {
+        redirectMsg('modules.php', sprintf(__('%s is already installed!', 'rmcommon'), $module->name()), 1);
+        die();
+    }
 
-    xoops_loadLanguage( 'admin', 'system' );
+    xoops_loadLanguage('admin', 'system');
 
     // Include system language file
     $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin.php';
-    if (file_exists($file)){
+    if (file_exists($file)) {
         include_once $file;
     } else {
         include_once str_replace($xoopsConfig['language'], 'english', $file);
     }
 
     // Include system language file
-	$file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/modulesadmin.php';
-	if (file_exists($file)){
-		include_once $file;
-	} else {
-		include_once str_replace($xoopsConfig['language'], 'english', $file);
-	}
-	
-	include_once XOOPS_ROOT_PATH.'/modules/system/admin/modulesadmin/modulesadmin.php';
+    $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/modulesadmin.php';
+    if (file_exists($file)) {
+        include_once $file;
+    } else {
+        include_once str_replace($xoopsConfig['language'], 'english', $file);
+    }
+    
+    include_once XOOPS_ROOT_PATH.'/modules/system/admin/modulesadmin/modulesadmin.php';
 
     $module_log = modules_install_function($mod); //xoops_module_install($mod);
 
     RMEvents::get()->run_event('rmcommon.installing.module', $mod);
 
     $module_log = RMEvents::get()->run_event('rmcommon.module.installed', $module_log, $mod);
-	
-	//RMFunctions::create_toolbar();
+    
+    //RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
-	xoops_cp_header();
-	
+    xoops_cp_header();
+    
     $module = $module_handler->getByDirname($mod);
     $log_title = sprintf(__('Installation log for %s', 'rmcommon'), $module ? $module->name() : $mod);
     $action = rmc_server_var($_POST, 'action', '');
-	include RMTemplate::get()->get_template('rmc-modules-log.php','module','rmcommon');
-	
-	xoops_cp_footer();
-	
+    include RMTemplate::get()->get_template('rmc-modules-log.php', 'module', 'rmcommon');
+    
+    xoops_cp_footer();
 }
 
 
-function module_uninstall_now(){
+function module_uninstall_now()
+{
     global $xoopsSecurity, $xoopsConfig, $rmTpl, $xoopsDB;
     
-    $dir = RMHttpRequest::post( 'module', 'string', '' );
+    $dir = RMHttpRequest::post('module', 'string', '');
     
-    if (!$xoopsSecurity->check()){
+    if (!$xoopsSecurity->check()) {
         redirectMsg('modules.php', __('Sorry, this operation could not be completed!', 'rmcommon'), 1);
         die();
     }
     
     $module_handler = xoops_getHandler('module');
     
-    if (!$mod = $module_handler->getByDirname($dir)){
+    if (!$mod = $module_handler->getByDirname($dir)) {
         redirectMsg('modules.php', sprintf(__('Module %s is not installed yet!', 'rmcommon'), $mod), 1);
         die();
     }
     
     $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/modulesadmin.php';
-    if (file_exists($file)){
+    if (file_exists($file)) {
         include_once $file;
     } else {
         include_once str_replace($xoopsConfig['language'], 'english', $file);
@@ -785,7 +773,7 @@ function module_uninstall_now(){
 
     // Remove comments
     $sql = "DELETE FROM " . $xoopsDB->prefix("mod_rmcommon_comments") . " WHERE id_obj='$dir'";
-    if ( $xoopsDB->queryF( $sql ) ){
+    if ($xoopsDB->queryF($sql)) {
         $module_log .= '<br><span class="text-success"><span class="fa fa-check"></span> Comments deleted successfully!</span>';
     } else {
         $module_log .= '<br><span class="text-danger"><span class="fa fa-exclamation-triangle"></span> Comments could not be deleted: '.$xoopsDB->error() . '</span>';
@@ -793,7 +781,7 @@ function module_uninstall_now(){
 
     // Remove notifications
     $sql = "DELETE FROM " . $xoopsDB->prefix("mod_rmcommon_notifications") . " WHERE element='$dir' AND `type`='module'";
-    if ( $xoopsDB->queryF( $sql ) ){
+    if ($xoopsDB->queryF($sql)) {
         $module_log .= '<br><span class="text-success"><span class="fa fa-check"></span> Notifications deleted successfully!</span>';
     } else {
         $module_log .= '<br><span class="text-danger"><span class="fa fa-exclamation-triangle"></span> Notifications could not be deleted: '.$xoopsDB->error() . '</span>';
@@ -804,10 +792,10 @@ function module_uninstall_now(){
     //RMFunctions::create_toolbar();
     RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
 
-	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'), 'modules.php');
-	RMBreadCrumb::get()->add_crumb(sprintf(__('%s install log','rmcommon'), $mod->getVar('name')));
+    RMBreadCrumb::get()->add_crumb(__('Modules Management', 'rmcommon'), 'modules.php');
+    RMBreadCrumb::get()->add_crumb(sprintf(__('%s install log', 'rmcommon'), $mod->getVar('name')));
 
-	$rmTpl->assign('xoops_pagetitle', sprintf(__('%s install log','rmcommon'), $mod->getVar('name')));
+    $rmTpl->assign('xoops_pagetitle', sprintf(__('%s install log', 'rmcommon'), $mod->getVar('name')));
 
     xoops_cp_header();
     
@@ -815,14 +803,14 @@ function module_uninstall_now(){
     $module->loadInfo($mod, false);
     $log_title = sprintf(__('Uninstall log for %s', 'rmcommon'), $module ? $module->getInfo('name') : $mod);
     $action = rmc_server_var($_POST, 'action', '');
-    include RMTemplate::get()->get_template('rmc-modules-log.php','module','rmcommon');
+    include RMTemplate::get()->get_template('rmc-modules-log.php', 'module', 'rmcommon');
     
     xoops_cp_footer();
-    
 }
 
 
-function module_update($dirname){
+function module_update($dirname)
+{
     global $xoopsConfig, $xoopsDB;
 
     $dirname = trim($dirname);
@@ -841,11 +829,11 @@ function module_update($dirname){
     
     $log = '';
     if (!$module_handler->insert($module)) {
-        $log .=  sprintf(__('Could not update %s','rmcommon'), $module->getVar('name'));
+        $log .=  sprintf(__('Could not update %s', 'rmcommon'), $module->getVar('name'));
     } else {
         $newmid = $module->getVar('mid');
         $msgs = array();
-        $msgs[] = sprintf(__('Updating module %s','rmcommon'), $module->getVar('name'));
+        $msgs[] = sprintf(__('Updating module %s', 'rmcommon'), $module->getVar('name'));
         $tplfile_handler = xoops_getHandler('tplfile');
         $deltpl = $tplfile_handler->find('default', 'module', $module->getVar('mid'));
         $delng = array();
@@ -860,7 +848,7 @@ function module_update($dirname){
         }
         $templates = $module->getInfo('templates');
         if ($templates != false) {
-            $msgs[] = __('Updating templates...','rmcommon');
+            $msgs[] = __('Updating templates...', 'rmcommon');
             foreach ($templates as $tpl) {
                 $tpl['file'] = trim($tpl['file']);
                 if (!in_array($tpl['file'], $delng)) {
@@ -880,26 +868,26 @@ function module_update($dirname){
                     $tplfile->setVar('tpl_file', $tpl['file'], true);
                     $tplfile->setVar('tpl_desc', $tpl['description'], true);
                     if (!$tplfile_handler->insert($tplfile)) {
-                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('Template %s could not be inserted!','rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
+                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('Template %s could not be inserted!', 'rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
                     } else {
                         $newid = $tplfile->getVar('tpl_id');
-                        $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s inserted to the database.','rmcommon'), "<strong>".$tpl['file']."</strong>");
+                        $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s inserted to the database.', 'rmcommon'), "<strong>".$tpl['file']."</strong>");
                         if ($xoopsConfig['template_set'] == 'default') {
                             if (!modules_template_touch($newid)) {
-                                $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not recompile template %s','rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
+                                $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not recompile template %s', 'rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
                             } else {
-                                $msgs[] = '&nbsp;&nbsp;<span>'.sprintf(__('Template %s recompiled','rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
+                                $msgs[] = '&nbsp;&nbsp;<span>'.sprintf(__('Template %s recompiled', 'rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
                             }
                         }
                     }
                     unset($tpldata);
                 } else {
-                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not delete old template %s. Aborting update of this file.','rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
+                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not delete old template %s. Aborting update of this file.', 'rmcommon'), "<strong>".$tpl['file']."</strong>").'</span>';
                 }
             }
         }
         $blocks = $module->getInfo('blocks');
-        $msgs[] = __('Rebuilding blocks...','rmcommon');
+        $msgs[] = __('Rebuilding blocks...', 'rmcommon');
         if ($blocks != false) {
             $showfuncs = array();
             $funcfiles = array();
@@ -932,7 +920,7 @@ function module_update($dirname){
                         if (!$result) {
                             $msgs[] = "&nbsp;&nbsp;".sprintf(__('ERROR: Could not update %s'), $fblock['name']);
                         } else {
-                            $msgs[] = "&nbsp;&nbsp;".sprintf(__('Block %s updated.','rmcommon'), $fblock['name']).sprintf(__('Block ID: %s','rmcommon'), "<strong>".$fblock['bid']."</strong>");
+                            $msgs[] = "&nbsp;&nbsp;".sprintf(__('Block %s updated.', 'rmcommon'), $fblock['name']).sprintf(__('Block ID: %s', 'rmcommon'), "<strong>".$fblock['bid']."</strong>");
                             if ($template != '') {
                                 $tplfile = $tplfile_handler->find('default', 'block', $fblock['bid']);
                                 if (count($tplfile) == 0) {
@@ -950,17 +938,16 @@ function module_update($dirname){
                                 $tplfile_new->setVar('tpl_lastmodified', time());
                                 $tplfile_new->setVar('tpl_lastimported', 0);
                                 if (!$tplfile_handler->insert($tplfile_new)) {
-                                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not update %s template.','rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
+                                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not update %s template.', 'rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
                                 } else {
-                                    $msgs[] = "&nbsp;&nbsp;".sprintf(__('Template %s updated.','rmcommon'), "<strong>".$block['template']."</strong>");
+                                    $msgs[] = "&nbsp;&nbsp;".sprintf(__('Template %s updated.', 'rmcommon'), "<strong>".$block['template']."</strong>");
                                     if ($xoopsConfig['template_set'] == 'default') {
                                         if (!modules_template_touch($tplfile_new->getVar('tpl_id'))) {
-                                            $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not recompile template %s','rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
+                                            $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not recompile template %s', 'rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
                                         } else {
-                                            $msgs[] = "&nbsp;&nbsp;".sprintf(__('Template %s recompiled','rmcommon'), "<strong>".$block['template']."</strong>");
+                                            $msgs[] = "&nbsp;&nbsp;".sprintf(__('Template %s recompiled', 'rmcommon'), "<strong>".$block['template']."</strong>");
                                         }
                                     }
-
                                 }
                             }
                         }
@@ -972,7 +959,8 @@ function module_update($dirname){
                         $sql = "INSERT INTO ".$xoopsDB->prefix("newblocks")." (bid, mid, func_num, options, name, title, content, side, weight, visible, block_type, isactive, dirname, func_file, show_func, edit_func, template, last_modified) VALUES (".$newbid.", ".$module->getVar('mid').", ".$i.",'".addslashes($options)."','".$block_name."', '".$block_name."', '', 0, 0, 0, '{$block_type}', 1, '".addslashes($dirname)."', '".addslashes($block['file'])."', '".addslashes($block['show_func'])."', '".addslashes($editfunc)."', '".$template."', ".time().")";
                         $result = $xoopsDB->query($sql);
                         if (!$result) {
-                            $msgs[] = '&nbsp;&nbsp;'.sprintf(_('ERROR: Could not create %s','rmcommon'), $block['name']);$log .=  $sql;
+                            $msgs[] = '&nbsp;&nbsp;'.sprintf(_('ERROR: Could not create %s', 'rmcommon'), $block['name']);
+                            $log .=  $sql;
                         } else {
                             if (empty($newbid)) {
                                 $newbid = $xoopsDB->getInsertId();
@@ -990,9 +978,9 @@ function module_update($dirname){
                                 $bperm->setVar('gperm_name', 'block_read');
                                 $bperm->setVar('gperm_modid', 1);
                                 if (!$gperm_handler->insert($bperm)) {
-                                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.__('ERROR: Could not add block access right','rmcommon') .' '.sprintf(__("Block ID: %s",'rmcommon'), "<strong>".$newbid."</strong>"). ' '.sprintf(__('Group ID: %s','rmcommon'), "<strong>".$mygroup."</strong>").'</span>';
+                                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.__('ERROR: Could not add block access right', 'rmcommon') .' '.sprintf(__("Block ID: %s", 'rmcommon'), "<strong>".$newbid."</strong>"). ' '.sprintf(__('Group ID: %s', 'rmcommon'), "<strong>".$mygroup."</strong>").'</span>';
                                 } else {
-                                    $msgs[] = '&nbsp;&nbsp;'.__('Added block access right','rmcommon'). ' ' . sprintf(__("Block ID: %s",'rmcommon'), "<strong>".$newbid."</strong>") . ' ' . sprintf(__('Group ID: %s','rmcommon'), "<strong>".$mygroup."</strong>");
+                                    $msgs[] = '&nbsp;&nbsp;'.__('Added block access right', 'rmcommon'). ' ' . sprintf(__("Block ID: %s", 'rmcommon'), "<strong>".$newbid."</strong>") . ' ' . sprintf(__('Group ID: %s', 'rmcommon'), "<strong>".$mygroup."</strong>");
                                 }
                             }
 
@@ -1008,20 +996,20 @@ function module_update($dirname){
                                 $tplfile->setVar('tpl_lastmodified', time());
                                 $tplfile->setVar('tpl_desc', $block['description'], true);
                                 if (!$tplfile_handler->insert($tplfile)) {
-                                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not insert template %s to the database.','rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
+                                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not insert template %s to the database.', 'rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
                                 } else {
                                     $newid = $tplfile->getVar('tpl_id');
-                                    $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s added to the database','rmcommon'), "<strong>".$block['template']."</strong>");
+                                    $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s added to the database', 'rmcommon'), "<strong>".$block['template']."</strong>");
                                     if ($xoopsConfig['template_set'] == 'default') {
                                         if (!modules_template_touch($newid)) {
-                                            $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Template %s recompile failed','rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
+                                            $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Template %s recompile failed', 'rmcommon'), "<strong>".$block['template']."</strong>").'</span>';
                                         } else {
-                                            $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s recompiled','rmcommon'), "<strong>".$block['template']."</strong>");
+                                            $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Template %s recompiled', 'rmcommon'), "<strong>".$block['template']."</strong>");
                                         }
                                     }
                                 }
                             }
-                            $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Block %s created','rmcommon'), "<strong>".$block['name']."</strong>").sprintf(__("Block ID: %s",'rmcommon'), "<strong>".$newbid."</strong>");
+                            $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Block %s created', 'rmcommon'), "<strong>".$block['name']."</strong>").sprintf(__("Block ID: %s", 'rmcommon'), "<strong>".$newbid."</strong>");
                             $sql = 'INSERT INTO '.$xoopsDB->prefix('block_module_link').' (block_id, module_id) VALUES ('.$newbid.', -1)';
                             $xoopsDB->query($sql);
                         }
@@ -1032,8 +1020,8 @@ function module_update($dirname){
             foreach ($block_arr as $block) {
                 if (!in_array($block->getVar('show_func'), $showfuncs) || !in_array($block->getVar('func_file'), $funcfiles)) {
                     $sql = sprintf("DELETE FROM %s WHERE bid = %u", $xoopsDB->prefix('newblocks'), $block->getVar('bid'));
-                    if(!$xoopsDB->query($sql)) {
-                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not delete block %s','rmcommon'), "<strong>".$block->getVar('name')."</strong>").sprintf(__("Block ID: %s",'rmcommon'), "<strong>".$block->getVar('bid')."</strong>").'</span>';
+                    if (!$xoopsDB->query($sql)) {
+                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.sprintf(__('ERROR: Could not delete block %s', 'rmcommon'), "<strong>".$block->getVar('name')."</strong>").sprintf(__("Block ID: %s", 'rmcommon'), "<strong>".$block->getVar('bid')."</strong>").'</span>';
                     } else {
                         $msgs[] = '&nbsp;&nbsp;Block <strong>'.$block->getVar('name').' deleted. Block ID: <strong>'.$block->getVar('bid').'</strong>';
                         if ($block->getVar('template') != '') {
@@ -1042,9 +1030,9 @@ function module_update($dirname){
                                 $btcount = count($tplfiles);
                                 for ($k = 0; $k < $btcount; $k++) {
                                     if (!$tplfile_handler->delete($tplfiles[$k])) {
-                                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.__('ERROR: Could not remove deprecated block template.','rmcommon'). '(ID: <strong>'.$tplfiles[$k]->getVar('tpl_id').'</strong>)</span>';
+                                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.__('ERROR: Could not remove deprecated block template.', 'rmcommon'). '(ID: <strong>'.$tplfiles[$k]->getVar('tpl_id').'</strong>)</span>';
                                     } else {
-                                        $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Block template %s deprecated','rmcommon'), "<strong>".$tplfiles[$k]->getVar('tpl_file')."</strong>");
+                                        $msgs[] = '&nbsp;&nbsp;'.sprintf(__('Block template %s deprecated', 'rmcommon'), "<strong>".$tplfiles[$k]->getVar('tpl_file')."</strong>");
                                     }
                                 }
                             }
@@ -1063,24 +1051,24 @@ function module_update($dirname){
         $confcount = count($configs);
         $config_delng = array();
         if ($confcount > 0) {
-            $msgs[] = __('Deleting module config options...','rmcommon');
+            $msgs[] = __('Deleting module config options...', 'rmcommon');
             for ($i = 0; $i < $confcount; $i++) {
                 if (!$config_handler->deleteConfig($configs[$i])) {
-                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.__('ERROR: Could not delete config data from the database','rmcommon'). sprintf(__('Config ID: %s','rmcommon'), "<strong>".$configs[$i]->getvar('conf_id')."</strong>").'</span>';
+                    $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">'.__('ERROR: Could not delete config data from the database', 'rmcommon'). sprintf(__('Config ID: %s', 'rmcommon'), "<strong>".$configs[$i]->getvar('conf_id')."</strong>").'</span>';
                     // save the name of config failed to delete for later use
                     $config_delng[] = $configs[$i]->getvar('conf_name');
                 } else {
                     $config_old[$configs[$i]->getvar('conf_name')]['value'] = $configs[$i]->getvar('conf_value', 'N');
                     $config_old[$configs[$i]->getvar('conf_name')]['formtype'] = $configs[$i]->getvar('conf_formtype');
                     $config_old[$configs[$i]->getvar('conf_name')]['valuetype'] = $configs[$i]->getvar('conf_valuetype');
-                    $msgs[] = "&nbsp;&nbsp;".__('Config data deleted from the database.','rmcommon'). ' ' . sprintf(__('Config ID: %s','rmcommon'), "<strong>".$configs[$i]->getVar('conf_id')."</strong>");
+                    $msgs[] = "&nbsp;&nbsp;".__('Config data deleted from the database.', 'rmcommon'). ' ' . sprintf(__('Config ID: %s', 'rmcommon'), "<strong>".$configs[$i]->getVar('conf_id')."</strong>");
                 }
             }
         }
 
         // now reinsert them with the new settings
         $configs = $module->getInfo('config');
-        // Include 
+        // Include
         if ($configs != false) {
             if ($module->getVar('hascomments') != 0) {
                 include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
@@ -1110,14 +1098,14 @@ function module_update($dirname){
             $options['_NOT_CONFIG_ENABLEBOTH'] = XOOPS_NOTIFICATION_ENABLEBOTH;
 
             //$configs[] = array ('name' => 'notification_enabled', 'title' => '_NOT_CONFIG_ENABLED', 'description' => '_NOT_CONFIG_ENABLEDDSC', 'formtype' => 'yesno', 'valuetype' => 'int', 'default' => 1);
-            $configs[] = array ('name' => 'notification_enabled', 'title' => '_NOT_CONFIG_ENABLE', 'description' => '_NOT_CONFIG_ENABLEDSC', 'formtype' => 'select', 'valuetype' => 'int', 'default' => XOOPS_NOTIFICATION_ENABLEBOTH, 'options'=>$options);
+            $configs[] = array('name' => 'notification_enabled', 'title' => '_NOT_CONFIG_ENABLE', 'description' => '_NOT_CONFIG_ENABLEDSC', 'formtype' => 'select', 'valuetype' => 'int', 'default' => XOOPS_NOTIFICATION_ENABLEBOTH, 'options'=>$options);
             // Event specific notification options
             // FIXME: for some reason the default doesn't come up properly
             //  initially is ok, but not when 'update' module..
             $options = array();
-            $categories =& notificationCategoryInfo('',$module->getVar('mid'));
+            $categories =& notificationCategoryInfo('', $module->getVar('mid'));
             foreach ($categories as $category) {
-                $events =& notificationEvents ($category['name'], false, $module->getVar('mid'));
+                $events =& notificationEvents($category['name'], false, $module->getVar('mid'));
                 foreach ($events as $event) {
                     if (!empty($event['invisible'])) {
                         continue;
@@ -1128,7 +1116,7 @@ function module_update($dirname){
                     //$configs[] = array ('name' => notificationGenerateConfig($category,$event,'name'), 'title' => notificationGenerateConfig($category,$event,'title_constant'), 'description' => notificationGenerateConfig($category,$event,'description_constant'), 'formtype' => 'yesno', 'valuetype' => 'int', 'default' => 1);
                 }
             }
-            $configs[] = array ('name' => 'notification_events', 'title' => '_NOT_CONFIG_EVENTS', 'description' => '_NOT_CONFIG_EVENTSDSC', 'formtype' => 'select_multi', 'valuetype' => 'array', 'default' => array_values($options), 'options' => $options);
+            $configs[] = array('name' => 'notification_events', 'title' => '_NOT_CONFIG_EVENTS', 'description' => '_NOT_CONFIG_EVENTSDSC', 'formtype' => 'select_multi', 'valuetype' => 'array', 'default' => array_values($options), 'options' => $options);
         }
 
         if ($configs != false) {
@@ -1163,16 +1151,16 @@ function module_update($dirname){
                             $confop->setVar('confop_name', $key, true);
                             $confop->setVar('confop_value', $value, true);
                             $confobj->setConfOptions($confop);
-                            $confop_msgs .= '<br />&nbsp;&nbsp;&nbsp;&nbsp; ' . __('Config option added','rmcommon') . ' ' . __('Name:','rmcommon') . ' <strong>' . ( defined($key) ? constant($key) : $key ) . '</strong> ' . __('Value:','rmcommon') . ' <strong>' . $value . '</strong> ';
+                            $confop_msgs .= '<br />&nbsp;&nbsp;&nbsp;&nbsp; ' . __('Config option added', 'rmcommon') . ' ' . __('Name:', 'rmcommon') . ' <strong>' . (defined($key) ? constant($key) : $key) . '</strong> ' . __('Value:', 'rmcommon') . ' <strong>' . $value . '</strong> ';
                             unset($confop);
                         }
                     }
                     $order++;
                     if (false != $config_handler->insertConfig($confobj)) {
                         //$msgs[] = '&nbsp;&nbsp;Config <strong>'.$config['name'].'</strong> added to the database.'.$confop_msgs;
-                        $msgs[] = "&nbsp;&nbsp;".sprintf(__('Config %s added to the database','rmcommon'), "<strong>" . $config['name'] . "</strong>") . $confop_msgs;
+                        $msgs[] = "&nbsp;&nbsp;".sprintf(__('Config %s added to the database', 'rmcommon'), "<strong>" . $config['name'] . "</strong>") . $confop_msgs;
                     } else {
-                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(__('ERROR: Could not insert config %s to the database.','rmcommon'), "<strong>" . $config['name'] . "</strong>") . '</span>';
+                        $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(__('ERROR: Could not insert config %s to the database.', 'rmcommon'), "<strong>" . $config['name'] . "</strong>") . '</span>';
                     }
                     unset($confobj);
                 }
@@ -1187,9 +1175,9 @@ function module_update($dirname){
             if (function_exists('xoops_module_update_'.$dirname)) {
                 $func = 'xoops_module_update_'.$dirname;
                 if (!$func($module, $prev_version)) {
-                    $msgs[] = "<p>".sprintf(__('Failed to execute %s','rmcommon'), $func)."</p>";
+                    $msgs[] = "<p>".sprintf(__('Failed to execute %s', 'rmcommon'), $func)."</p>";
                 } else {
-                    $msgs[] = "<p>".sprintf(__('%s executed successfully.','rmcommon'), "<strong>".$func."</strong>")."</p>";
+                    $msgs[] = "<p>".sprintf(__('%s executed successfully.', 'rmcommon'), "<strong>".$func."</strong>")."</p>";
                 }
             }
         }
@@ -1197,7 +1185,7 @@ function module_update($dirname){
         foreach ($msgs as $msg) {
             $log .=  $msg.'<br />';
         }
-        $log .=  "<p>".sprintf(__('Module %s updated successfully!','rmcommon'), "<strong>".$module->getVar('name')."</strong>")."</p>";
+        $log .=  "<p>".sprintf(__('Module %s updated successfully!', 'rmcommon'), "<strong>".$module->getVar('name')."</strong>")."</p>";
     }
     
     // Flush cache files for cpanel GUIs
@@ -1205,17 +1193,16 @@ function module_update($dirname){
     XoopsSystemCpanel::flush();
     
     return $log;
-    
 }
 
 
-function module_update_now(){
-    
+function module_update_now()
+{
     global $xoopsSecurity, $xoopsConfig, $rmTpl;
     
     $mod = rmc_server_var($_POST, 'module', '');
     
-    if (!$xoopsSecurity->check()){
+    if (!$xoopsSecurity->check()) {
         redirectMsg('modules.php', __('Sorry, this operation could not be completed!', 'rmcommon'), 1);
         die();
     }
@@ -1223,14 +1210,14 @@ function module_update_now(){
     $module_handler = xoops_getHandler('module');
     $module = $module_handler->getByDirname($mod);
     
-    if (!$module){
+    if (!$module) {
         redirectMsg('modules.php', sprintf(__('Module %s is not installed yet!', 'rmcommon'), $mod), 1);
         die();
     }
 
     // Include system language file
     $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin.php';
-    if (file_exists($file)){
+    if (file_exists($file)) {
         include_once $file;
     } else {
         include_once str_replace($xoopsConfig['language'], 'english', $file);
@@ -1238,7 +1225,7 @@ function module_update_now(){
 
     // Include system language file
     $file = XOOPS_ROOT_PATH.'/modules/system/language/'.$xoopsConfig['language'].'/admin/modulesadmin.php';
-    if (file_exists($file)){
+    if (file_exists($file)) {
         include_once $file;
     } else {
         include_once str_replace($xoopsConfig['language'], 'english', $file);
@@ -1258,32 +1245,32 @@ function module_update_now(){
     
     $log_title = sprintf(__('Update log for %s', 'rmcommon'), $module ? $module->getInfo('name') : $mod);
 
-	RMBreadCrumb::get()->add_crumb(__('Modules Management','rmcommon'), 'modules.php');
-	RMBreadCrumb::get()->add_crumb($log_title);
+    RMBreadCrumb::get()->add_crumb(__('Modules Management', 'rmcommon'), 'modules.php');
+    RMBreadCrumb::get()->add_crumb($log_title);
 
-	$rmTpl->assign('xoops_pagetitle', $log_title);
+    $rmTpl->assign('xoops_pagetitle', $log_title);
 
     $action = rmc_server_var($_POST, 'action', '');
-    include RMTemplate::get()->get_template('rmc-modules-log.php','module','rmcommon');
+    include RMTemplate::get()->get_template('rmc-modules-log.php', 'module', 'rmcommon');
     
     xoops_cp_footer();
-    
 }
 
 
-function module_disable_now($enable=0){
+function module_disable_now($enable=0)
+{
     global $xoopsSecurity, $xoopsConfig;
     
     $mod = rmc_server_var($_POST, 'module', '');
     
-    if (!$xoopsSecurity->check()){
+    if (!$xoopsSecurity->check()) {
         redirectMsg('modules.php', __('Sorry, this operation could not be completed!', 'rmcommon'), 1);
         die();
     }
     
     $module_handler = xoops_getHandler('module');
     
-    if (!$module = $module_handler->getByDirname($mod)){
+    if (!$module = $module_handler->getByDirname($mod)) {
         redirectMsg('modules.php', sprintf(__('Module %s is not installed yet!', 'rmcommon'), $mod), 1);
         die();
     }
@@ -1292,26 +1279,26 @@ function module_disable_now($enable=0){
     
     $db = XoopsDatabaseFactory::getDatabaseConnection();
     $sql = "UPDATE ".$db->prefix("modules")." SET isactive='$enable' WHERE dirname='$mod'";
-    if (!$db->queryF($sql)){
+    if (!$db->queryF($sql)) {
         redirectMsg('modules.php', sprintf(__('Module %s could not be disabled!', 'rmcommon'), $mod), 1);
         die();
     }
     
     RMEvents::get()->run_event('rmcommon.module.disabled', $module);
     
-    redirectMsg("modules.php", sprintf(__('Module %s successfully disabled!','rmcommon'), $module->name()), 0);
-    
+    redirectMsg("modules.php", sprintf(__('Module %s successfully disabled!', 'rmcommon'), $module->name()), 0);
 }
 
 
-function load_modules_page(){
+function load_modules_page()
+{
     global $xoopsLogger, $xoopsSecurity;
     error_reporting(0);
     $xoopsLogger->activated = false;
     
-    if (!$xoopsSecurity->check(true, rmc_server_var($_POST, 'token', ''))){
+    if (!$xoopsSecurity->check(true, rmc_server_var($_POST, 'token', ''))) {
         echo __("Sorry, you don't have access to this page", 'rmcommon');
-        echo "<br /><a href='javascript:;' onclick='location.reload();'>".__('Click here to refresh','rmcommon')."</a>";
+        echo "<br /><a href='javascript:;' onclick='location.reload();'>".__('Click here to refresh', 'rmcommon')."</a>";
         die();
     }
     
@@ -1320,7 +1307,7 @@ function load_modules_page(){
     $result = $db->query($sql);
     $installed_dirs = array();
     
-    while($row = $db->fetchArray($result)){
+    while ($row = $db->fetchArray($result)) {
         $installed_dirs[] = $row['dirname'];
     }
     
@@ -1347,7 +1334,9 @@ function load_modules_page(){
     $limit = 7;
     $tpages = ceil(count($available_mods)/$limit);
     $page = rmc_server_var($_POST, 'page', 1);
-    if ($page>$tpages) $page = 1;
+    if ($page>$tpages) {
+        $page = 1;
+    }
     $start = ($page<=0 ? 0 : $page-1) * $limit;
 
     $nav = new RMPageNav(count($available_mods), $limit, $page, 3);
@@ -1357,16 +1346,17 @@ function load_modules_page(){
     $available_mods = RMEvents::get()->run_event('rmcommon.available.modules', $available_mods);
     $end = ($page*$limit);
     
-    if ($end>count($available_mods)) $end = count($available_mods);
+    if ($end>count($available_mods)) {
+        $end = count($available_mods);
+    }
     
-    ob_start();
-?>
+    ob_start(); ?>
     <ul class="list-unstyled">
-        <?php for($i=$start;$i<$end;$i++): ?>
+        <?php for ($i=$start;$i<$end;$i++): ?>
         <?php $mod = $available_mods[$i]; ?>
             <li>
                 <div class="the-logo">
-                    <?php if( $mod->getInfo('url')!=''): ?>
+                    <?php if ($mod->getInfo('url')!=''): ?>
                         <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>">
                             <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
                         </a>
@@ -1378,17 +1368,17 @@ function load_modules_page(){
                     <ul>
                         <li class="name">
                             <strong><a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>"><?php echo $mod->getInfo('name'); ?></a></strong>
-                            <small><?php echo $mod->getInfo('rmversion') ? RMFormat::version( $mod->getInfo('rmversion') ) : $mod->getInfo('version'); ?></small>
+                            <small><?php echo $mod->getInfo('rmversion') ? RMFormat::version($mod->getInfo('rmversion')) : $mod->getInfo('version'); ?></small>
                         </li>
                         <li class="install">
                             <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>">
-                                <span class="fa fa-cog"></span> <?php _e('Install','rmcommon'); ?>
+                                <span class="fa fa-cog"></span> <?php _e('Install', 'rmcommon'); ?>
                             </a>
                         </li>
                         <li class="info">
                             <a href="javascript:;" onclick="show_module_info('<?php echo $mod->getInfo('dirname'); ?>');">
                                 <span class="fa fa-info-circle"></span>
-                                <?php _e('Info','rmcommon'); ?>
+                                <?php _e('Info', 'rmcommon'); ?>
                             </a>
                         </li>
                     </ul>
@@ -1407,9 +1397,9 @@ function load_modules_page(){
                     </div>
                     <table class="table">
                         <tr>
-                            <td><?php _e('Version:','rmcommon'); ?></td>
+                            <td><?php _e('Version:', 'rmcommon'); ?></td>
                             <td>
-                                <?php if($mod->getInfo('rmnative')): ?>
+                                <?php if ($mod->getInfo('rmnative')): ?>
                                     <strong><?php echo RMModules::format_module_version($mod->getInfo('rmversion')); ?></strong>
                                 <?php else: ?>
                                     <strong><?php echo $mod->getInfo('version'); ?></strong>
@@ -1435,7 +1425,7 @@ function load_modules_page(){
                         <tr>
                             <td><?php _e('Updatable:', 'rmcommon'); ?></td>
                             <td>
-                                <?php if( $mod->getInfo('updateurl') != '' ): ?>
+                                <?php if ($mod->getInfo('updateurl') != ''): ?>
                                     <span class="fa fa-check"></span>
                                 <?php else: ?>
                                     <span class="fa fa-times text-danger"></span>
@@ -1451,7 +1441,7 @@ function load_modules_page(){
                         <tr>
                             <td><?php _e('XOOPS Official:', 'rmcommon'); ?></td>
                             <td>
-                                <?php if ( $mod->getInfo('official') ): ?>
+                                <?php if ($mod->getInfo('official')): ?>
                                     <span class="fa fa-check"></span>
                                 <?php else: ?>
                                     <span class="fa fa-times text-danger"></span>
@@ -1461,7 +1451,7 @@ function load_modules_page(){
                         <tr>
                             <td><?php _e('C.U. Native:', 'rmcommon'); ?></td>
                             <td>
-                                <?php if ( $mod->getInfo('rmnative') ): ?>
+                                <?php if ($mod->getInfo('rmnative')): ?>
                                     <span class="fa fa-check"></span>
                                 <?php else: ?>
                                     <span class="fa fa-times text-danger"></span>
@@ -1477,15 +1467,14 @@ function load_modules_page(){
                         <tr>
                             <td><?php _e('Released:', 'rmcommon'); ?></td>
                             <td>
-                                <?php if ( $mod->getInfo('releasedate') != '' ): ?>
+                                <?php if ($mod->getInfo('releasedate') != ''): ?>
                                     <?php
-                                    $time = strtotime( $mod->getInfo('releasedate') );
-                                    echo formatTimestamp( $time, 's' );
-                                    ?>
+                                    $time = strtotime($mod->getInfo('releasedate'));
+    echo formatTimestamp($time, 's'); ?>
                                 <?php endif; ?>
                             </td>
                         </tr>
-                        <?php if ( $mod->getInfo('help') != '' && $mod->getInfo('rmnative') ): ?>
+                        <?php if ($mod->getInfo('help') != '' && $mod->getInfo('rmnative')): ?>
                             <tr>
                                 <td>&nbsp;</td>
                                 <td>
@@ -1495,13 +1484,13 @@ function load_modules_page(){
                         <?php endif; ?>
                         <tr>
                             <td colspan="2" class="contact-options text-center">
-                                <?php if ( $mod->getInfo('authormail') ): ?>
-                                    <?php if ( $mod->getInfo('authormail') != '' ): ?>
+                                <?php if ($mod->getInfo('authormail')): ?>
+                                    <?php if ($mod->getInfo('authormail') != ''): ?>
                                         <a target="_blank" href="mailto:<?php echo $mod->getInfo('authormail'); ?>"><span class="fa fa-envelope"></span></a>
                                     <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if ( $mod->getInfo('social') ): ?>
-                                    <?php foreach( $mod->getInfo('social') as $social ): ?>
+                                <?php if ($mod->getInfo('social')): ?>
+                                    <?php foreach ($mod->getInfo('social') as $social): ?>
                                         <a target="_blank" href="<?php echo $social['url']; ?>"><span class="fa fa-<?php echo $social['type']; ?>-square"></span></a>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
@@ -1509,8 +1498,8 @@ function load_modules_page(){
                         </tr>
                         <tr>
                             <td colspan="2" class="text-center">
-                                <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="btn btn-success btn-sm"><?php _e('Install','rmcommon'); ?></a>
-                                <a href="#" onclick="closeInfo();" class="btn btn-warning btn-sm"><?php _e('Close','rmcommon'); ?></a>
+                                <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>" class="btn btn-success btn-sm"><?php _e('Install', 'rmcommon'); ?></a>
+                                <a href="#" onclick="closeInfo();" class="btn btn-warning btn-sm"><?php _e('Close', 'rmcommon'); ?></a>
                             </td>
                         </tr>
                     </table>
@@ -1526,73 +1515,71 @@ function load_modules_page(){
 }
 
 
-function module_rename(){
-	global $xoopsSecurity, $xoopsLogger;
-	
-	error_reporting(0);
-	$xoopsLogger->activated = false;
-	
-	if (!$xoopsSecurity->check()){
-		
-		$ret = array(
-			'error'		=> 1,
-			'message'	=> __('You can not rename modules. Session token not valid!','rmcommon').' '.rmc_server_var($_POST, 'token')
-		);
-		
-		echo json_encode($ret);
-		die();
-		
-	}
-	
-	$id = rmc_server_var($_POST, 'id', 0);
-	$name = trim(rmc_server_var($_POST, 'name', ''));
-	
-	if ($id<=0 || $name==''){
-		$ret = array(
-			'error'		=> 1,
-			'message'	=> __('Data provided is not valid','rmcommon'),
-			'token'	=> $xoopsSecurity->createToken()
-		);
-		
-		echo json_encode($ret);
-		die();
-	}
-	
-	$db = XoopsDatabaseFactory::getDatabaseConnection();
-	$sql = "UPDATE ".$db->prefix("modules")." SET `name`='$name' WHERE mid='$id'";
-	if (!$db->queryF($sql)){
-		$ret = array(
-			'error'		=> 1,
-			'message'	=> __('Module name could not be changed!','rmcommon').'\n'.$db->error(),
-			'token'	=> $xoopsSecurity->createToken()
-		);
-		
-		echo json_encode($ret);
-		die();
-	}
-	
-	$ret = array(
-		'error'=>0,
-		'message'=>__('Module name changed successfully!','rmcommon'),
-		'token'=>$xoopsSecurity->createToken(),
-		'id'=>$id
-	);
-	
-	echo json_encode($ret);
-	
-	die();
-	
+function module_rename()
+{
+    global $xoopsSecurity, $xoopsLogger;
+    
+    error_reporting(0);
+    $xoopsLogger->activated = false;
+    
+    if (!$xoopsSecurity->check()) {
+        $ret = array(
+            'error'		=> 1,
+            'message'	=> __('You can not rename modules. Session token not valid!', 'rmcommon').' '.rmc_server_var($_POST, 'token')
+        );
+        
+        echo json_encode($ret);
+        die();
+    }
+    
+    $id = rmc_server_var($_POST, 'id', 0);
+    $name = trim(rmc_server_var($_POST, 'name', ''));
+    
+    if ($id<=0 || $name=='') {
+        $ret = array(
+            'error'		=> 1,
+            'message'	=> __('Data provided is not valid', 'rmcommon'),
+            'token'	=> $xoopsSecurity->createToken()
+        );
+        
+        echo json_encode($ret);
+        die();
+    }
+    
+    $db = XoopsDatabaseFactory::getDatabaseConnection();
+    $sql = "UPDATE ".$db->prefix("modules")." SET `name`='$name' WHERE mid='$id'";
+    if (!$db->queryF($sql)) {
+        $ret = array(
+            'error'		=> 1,
+            'message'	=> __('Module name could not be changed!', 'rmcommon').'\n'.$db->error(),
+            'token'	=> $xoopsSecurity->createToken()
+        );
+        
+        echo json_encode($ret);
+        die();
+    }
+    
+    $ret = array(
+        'error'=>0,
+        'message'=>__('Module name changed successfully!', 'rmcommon'),
+        'token'=>$xoopsSecurity->createToken(),
+        'id'=>$id
+    );
+    
+    echo json_encode($ret);
+    
+    die();
 }
 
 
 $action = rmc_server_var($_REQUEST, 'action', '');
-switch($action){
+switch ($action) {
     case 'install':
         module_install();
         break;
     case 'install_now':
-    	module_install_now();
-    	break;
+        module_install_now();
+        break;
     case 'uninstall_module':
         module_uninstall_now();
         break;
@@ -1609,10 +1596,10 @@ switch($action){
         load_modules_page();
         break;
     case 'savename':
-    	module_rename();
-    	break;
-	default:
+        module_rename();
+        break;
+    default:
         $_REQUEST['action'] = '';
-		show_modules_list();
-		break;
+        show_modules_list();
+        break;
 }

@@ -53,8 +53,9 @@ trait RMModuleAjax
     {
         global $xoopsSecurity;
 
-        if (1 == $token)
+        if (1 == $token) {
             $data['token'] = $xoopsSecurity->createToken(0, 'CUTOKEN');
+        }
 
         $data['type'] = 1 == $level ? 'error' : 'success';
         $data['message'] = $message;
@@ -64,15 +65,16 @@ trait RMModuleAjax
         header('Content-type: application/json');
         echo json_encode($data);
         die();
-
     }
 
-    public function responseRaw($data){
+    public function responseRaw($data)
+    {
         echo json_encode($data);
         die();
     }
 
-    public function notifyError($message, $token = 1){
+    public function notifyError($message, $token = 1)
+    {
         $this->response($message, 1, $token == 1 ? 1 : 0, [
             'notify' => [
                 'type' => 'alert-danger',

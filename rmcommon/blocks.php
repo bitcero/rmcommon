@@ -62,16 +62,15 @@ function createSQL()
     $sql .= " ORDER BY weight";
 
     return $sql;
-
 }
 
 function show_rm_blocks()
 {
     global $xoopsModule, $xoopsConfig, $wid_globals, $xoopsSecurity, $rmc_config, $rmTpl, $cuIcons;
-    define('RMCSUBLOCATION','blocks');
+    define('RMCSUBLOCATION', 'blocks');
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
-    $modules = RMModules::get_modules_list( 'active' );
+    $modules = RMModules::get_modules_list('active');
 
     $from = rmc_server_var($_GET, 'from', '');
 
@@ -95,7 +94,9 @@ function show_rm_blocks()
     $used_blocks = array();
     while ($row = $db->fetchArray($result)) {
         $mod = RMModules::load_module($row['element']);
-        if(!$mod) continue;
+        if (!$mod) {
+            continue;
+        }
         $used_blocks[$row['canvas']][] = array(
             'id' => $row['bid'],
             'title' => $row['name'],
@@ -103,7 +104,7 @@ function show_rm_blocks()
                 'id' => $mod->mid(),
                 'dir' => $mod->dirname(),
                 'name' => $mod->name(),
-                'icon' => RMModules::icon( $mod->dirname() )
+                'icon' => RMModules::icon($mod->dirname())
             ),
             'canvas' => isset($bpos[$row['canvas']]) ? $bpos[$row['canvas']] : array(),
             'weight' => $row['weight'],
@@ -133,8 +134,8 @@ function show_rm_blocks()
 
     RMTemplate::getInstance()->add_script('jquery.nestable.js', 'rmcommon', array('directory' => 'include'));
 
-    RMBreadCrumb::get()->add_crumb(__('Blocks Management','rmcommon'));
-    $rmTpl->assign('xoops_pagetitle', __('Blocks Management','rmcommon'));
+    RMBreadCrumb::get()->add_crumb(__('Blocks Management', 'rmcommon'));
+    $rmTpl->assign('xoops_pagetitle', __('Blocks Management', 'rmcommon'));
 
     RMTemplate::getInstance()->add_style('blocks.min.css', 'rmcommon', ['id' => 'cu-blocks-css']);
     RMTemplate::getInstance()->add_script('blocks.min.js', 'rmcommon');
@@ -144,10 +145,10 @@ function show_rm_blocks()
     RMTemplate::getInstance()->add_script('jquery-ui.min.js', 'rmcommon', array('directory' => 'include'));
 
     if (!$rmc_config['blocks_enable']) {
-        showMessage(__('Internal blocks manager is currenlty disabled!','rmcommon'), RMMSG_WARN);
+        showMessage(__('Internal blocks manager is currenlty disabled!', 'rmcommon'), RMMSG_WARN);
     }
 
-    RMTemplate::getInstance()->add_script('jquery.checkboxes.js','rmcommon');
+    RMTemplate::getInstance()->add_script('jquery.checkboxes.js', 'rmcommon');
     //include RMCPATH . '/js/cu-js-language.php';
 
     xoops_cp_header();
@@ -157,7 +158,9 @@ function show_rm_blocks()
     $blocks = RMBlocksFunctions::get_available_list($modules);
 
     foreach ($blocks as $id => $block) {
-        if(empty($block['blocks'])) continue;
+        if (empty($block['blocks'])) {
+            continue;
+        }
         foreach ($block['blocks'] as $bid => $val) {
             $str = isset($val['show_func']) ? $val['show_func'] : '';
             $str .= isset($val['edit_func']) ? $val['edit_func'] : '';
@@ -171,11 +174,11 @@ function show_rm_blocks()
     $the_position = isset($_GET['pos']) ? (int)$_GET['pos'] : '';
 
     // Parameters
-    $mid = rmc_server_var($_GET,'mid',0);
+    $mid = rmc_server_var($_GET, 'mid', 0);
     $subpage = isset($_GET['subpage']) ? $_GET['subpage'] : '';
     $group = isset($_GET['group']) ? (int)$_GET['group'] : 0;
-    $visible = rmc_server_var($_GET,'visible',-1);
-    $pid = rmc_server_var($_GET,'pos',0);
+    $visible = rmc_server_var($_GET, 'visible', -1);
+    $pid = rmc_server_var($_GET, 'pos', 0);
 
     include RMTemplate::getInstance()->path("rmc-blocks.php", 'module', 'rmcommon');
 
@@ -185,11 +188,12 @@ function show_rm_blocks()
 /**
 * Save the current positions
 */
-function save_position($edit = 0){
+function save_position($edit = 0)
+{
     global $xoopsSecurity;
 
     if (!$xoopsSecurity->check()) {
-        redirectMsg('blocks.php', __('You are not allowed to do this action!','rmcommon'), 1);
+        redirectMsg('blocks.php', __('You are not allowed to do this action!', 'rmcommon'), 1);
         die();
     }
 
@@ -197,89 +201,94 @@ function save_position($edit = 0){
     $tag = rmc_server_var($_POST, 'postag', '');
 
     if ($name=='') {
-        redirectMsg('blocks.php', __('Please provide a name and tag for this new position!','rmcommon'), RMMSG_ERROR);
+        redirectMsg('blocks.php', __('Please provide a name and tag for this new position!', 'rmcommon'), RMMSG_ERROR);
         die();
     }
 
-    if($tag=='')
+    if ($tag=='') {
         $tag = str_replace("-", "_", TextCleaner::getInstance()->sweetstring($name));
+    }
 
     if ($edit) {
-
         $id = rmc_server_var($_POST, 'id', '');
-        if($id<=0)
-            redirectMsg('blocks.php',__('You must specify a valid position ID!','rmcommon'), 1);
+        if ($id<=0) {
+            redirectMsg('blocks.php', __('You must specify a valid position ID!', 'rmcommon'), 1);
+        }
 
         $pos = new RMBlockPosition($id);
-        if($pos->isNew())
-            redirectMsg('blocks.php', __('Specified position does not exists!','rmcommon'), 1);
-
+        if ($pos->isNew()) {
+            redirectMsg('blocks.php', __('Specified position does not exists!', 'rmcommon'), 1);
+        }
     } else {
         $pos = new RMBlockPosition();
     }
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
 
-    $pos->setVar('name',$name);
-    $pos->setVar('tag',$tag);
-    $pos->setVar('active',1);
+    $pos->setVar('name', $name);
+    $pos->setVar('tag', $tag);
+    $pos->setVar('active', 1);
 
     $sql = "SELECT COUNT(*) FROM ".$db->prefix("mod_rmcommon_blocks_positions")." WHERE name='$name' OR tag='$tag'";
-    if($edit) $sql .= " AND id_position<>$id";
+    if ($edit) {
+        $sql .= " AND id_position<>$id";
+    }
 
     list($num) = $db->fetchRow($db->query($sql));
 
-    if($num>0)
-        redirectMsg('blocks.php', __('Already exists another position with same name or same tag!','rmcommon'), 1);
+    if ($num>0) {
+        redirectMsg('blocks.php', __('Already exists another position with same name or same tag!', 'rmcommon'), 1);
+    }
 
-    if($pos->save())
-        redirectMsg('blocks.php?from=positions',__('Database updated successfully!','rmcommon'));
-    else
-        redirectMsg('blocks.php', __('Errors ocurred while trying to save data','rmcommon').'<br />'.$pos->errors());
-
+    if ($pos->save()) {
+        redirectMsg('blocks.php?from=positions', __('Database updated successfully!', 'rmcommon'));
+    } else {
+        redirectMsg('blocks.php', __('Errors ocurred while trying to save data', 'rmcommon').'<br />'.$pos->errors());
+    }
 }
 
 /**
 * Change the current visibility status for a set of selected widgets
 */
-function toggle_visibility($s){
+function toggle_visibility($s)
+{
     global $xoopsSecurity;
 
     if (!$xoopsSecurity->check()) {
-        redirectMsg('blocks.php', __('You are not allowed to do this action!','rmcommon'), 1);
+        redirectMsg('blocks.php', __('You are not allowed to do this action!', 'rmcommon'), 1);
         die();
     }
 
     $ids = rmc_server_var($_POST, 'ids', array());
 
     if (empty($ids) || !is_array($ids)) {
-        redirectMsg('blocks.php', __('Select at least a block!','rmcommon'), 1);
+        redirectMsg('blocks.php', __('Select at least a block!', 'rmcommon'), 1);
         die();
     }
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    $db->queryF("UPDATE ".$db->prefix("mod_rmcommon_blocks")." SET visible=$s WHERE bid IN (".join(",",$ids).")");
+    $db->queryF("UPDATE ".$db->prefix("mod_rmcommon_blocks")." SET visible=$s WHERE bid IN (".join(",", $ids).")");
 
     if ($db->error()=='') {
-        redirectMsg('blocks.php', __('Database updated successfully','rmcommon'), 0);
+        redirectMsg('blocks.php', __('Database updated successfully', 'rmcommon'), 0);
     } else {
-        redirectMsg('blocks.php', __('Errors ocurred while trying to do this action','rmcommon').'<br />'.$db->error(), 1);
+        redirectMsg('blocks.php', __('Errors ocurred while trying to do this action', 'rmcommon').'<br />'.$db->error(), 1);
     }
-
 }
 
-function delete_positions(){
+function delete_positions()
+{
     global $xoopsSecurity;
 
     if (!$xoopsSecurity->check()) {
-        redirectMsg('blocks.php?from=positions', __('You are not allowed to do this action!','rmcommon'), 1);
+        redirectMsg('blocks.php?from=positions', __('You are not allowed to do this action!', 'rmcommon'), 1);
         die();
     }
 
     $ids = rmc_server_var($_POST, 'ids', array());
 
     if (empty($ids) || !is_array($ids)) {
-        redirectMsg('blocks.php?from=positions', __('You must select at least one position!','rmcommon'), 1);
+        redirectMsg('blocks.php?from=positions', __('You must select at least one position!', 'rmcommon'), 1);
         die();
     }
 
@@ -287,48 +296,57 @@ function delete_positions(){
     foreach ($ids as $id) {
         $pos = new RMBlockPosition($id);
 
-        $pos = RMEvents::get()->run_event('rmcommon.deleting.block.position',$pos);
-        if (!$pos->delete()) $errors .= $pos->errors();
+        $pos = RMEvents::get()->run_event('rmcommon.deleting.block.position', $pos);
+        if (!$pos->delete()) {
+            $errors .= $pos->errors();
+        }
     }
 
     if ($errors!='') {
-        redirectMsg('blocks.php?from=positions', __('There was some errors:','rmcommon').'<br />'.$error, 1);
+        redirectMsg('blocks.php?from=positions', __('There was some errors:', 'rmcommon').'<br />'.$error, 1);
     } else {
-        redirectMsg('blocks.php?from=positions',__('Database updated successfully','rmcommon'), 0);
+        redirectMsg('blocks.php?from=positions', __('Database updated successfully', 'rmcommon'), 0);
     }
 }
 
-function activate_position( $status ){
+function activate_position($status)
+{
     global $xoopsSecurity, $xoopsDB;
 
-    if ( !$xoopsSecurity->check() )
+    if (!$xoopsSecurity->check()) {
         RMUris::redirect_with_message(
             __('Session token is not valid!', 'rmcommon'),
-            'blocks.php', RMMSG_ERROR
+            'blocks.php',
+            RMMSG_ERROR
         );
+    }
 
-    $ids = RMHttpRequest::post( 'ids', 'array', array() );
+    $ids = RMHttpRequest::post('ids', 'array', array());
 
-    if ( !is_array( $ids ) || empty( $ids ) )
+    if (!is_array($ids) || empty($ids)) {
         RMUris::redirect_with_message(
             __('No position id has been provided', 'rmcommon'),
-            'blocks.php', RMMSG_WARN
+            'blocks.php',
+            RMMSG_WARN
         );
+    }
 
-    $sql = "UPDATE " . $xoopsDB->prefix("mod_rmcommon_blocks_positions") . " SET active = " . ( $status == 'active' ? 1 : 0 ) . "
-            WHERE id_position IN (" . implode( ',', $ids ) . ")";
+    $sql = "UPDATE " . $xoopsDB->prefix("mod_rmcommon_blocks_positions") . " SET active = " . ($status == 'active' ? 1 : 0) . "
+            WHERE id_position IN (" . implode(',', $ids) . ")";
 
-    if ( $xoopsDB->queryF( $sql ) )
+    if ($xoopsDB->queryF($sql)) {
         RMUris::redirect_with_message(
-            __( 'Database updated successully!', 'rmcommon' ),
-            'blocks.php', RMMSG_SUCCESS
+            __('Database updated successully!', 'rmcommon'),
+            'blocks.php',
+            RMMSG_SUCCESS
         );
-    else
+    } else {
         RMUris::redirect_with_message(
             __('Errors ocurrs while trying to update data:', 'rmcommon') . $xoopsDB->error(),
-            'blocks.php', RMMSG_ERROR
+            'blocks.php',
+            RMMSG_ERROR
         );
-
+    }
 }
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
@@ -354,7 +372,7 @@ switch ($action) {
         break;
     case 'active':
     case 'inactive':
-        activate_position( $action );
+        activate_position($action);
         break;
     default:
         show_rm_blocks();

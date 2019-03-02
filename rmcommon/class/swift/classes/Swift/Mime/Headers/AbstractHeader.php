@@ -252,7 +252,9 @@ abstract class Swift_Mime_Headers_AbstractHeader implements Swift_Mime_Header
             // and make it a quoted-string
             if (preg_match('/^'.$this->getGrammar()->getDefinition('text').'*$/D', $phraseStr)) {
                 $phraseStr = $this->getGrammar()->escapeSpecials(
-                    $phraseStr, array('"'), $this->getGrammar()->getSpecials()
+                    $phraseStr,
+                    array('"'),
+                    $this->getGrammar()->getSpecials()
                     );
                 $phraseStr = '"'.$phraseStr.'"';
             } else {
@@ -378,9 +380,13 @@ abstract class Swift_Mime_Headers_AbstractHeader implements Swift_Mime_Header
             $firstLineOffset = 0;
         }
 
-        $encodedTextLines = explode("\r\n",
+        $encodedTextLines = explode(
+            "\r\n",
             $this->_encoder->encodeString(
-                $token, $firstLineOffset, 75 - $encodingWrapperLength, $this->_charset
+                $token,
+                $firstLineOffset,
+                75 - $encodingWrapperLength,
+                $this->_charset
                 )
         );
 

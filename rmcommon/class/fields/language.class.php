@@ -25,7 +25,7 @@ class RMFormLanguageField extends RMFormElement
      * @param array $selected Grupo de vlores seleccionado por defecto
      * @param int $cols Numero de columnas para la tabla o filas para un campo select multi
      */
-    function __construct($caption, $name, $multi = 0, $type = 0, $selected = null, $cols = 2)
+    public function __construct($caption, $name, $multi = 0, $type = 0, $selected = null, $cols = 2)
     {
         if (is_array($caption)) {
             parent::__construct($caption);
@@ -46,50 +46,49 @@ class RMFormLanguageField extends RMFormElement
         $this->setIfNotSet('selected', []);
 
         $this->suppressList[] = 'value';
-
     }
 
-    function multi()
+    public function multi()
     {
         return $this->multi;
     }
 
-    function setMulti($value)
+    public function setMulti($value)
     {
         return $this->multi = $value;
     }
 
-    function type()
+    public function type()
     {
         return $this->type;
     }
 
-    function setType($value)
+    public function setType($value)
     {
         return $this->type = $value;
     }
 
-    function selected()
+    public function selected()
     {
         return $this->selected;
     }
 
-    function setSelected($value)
+    public function setSelected($value)
     {
         return $this->selected = $value;
     }
 
-    function render()
+    public function render()
     {
         $files = XoopsLists::getFileListAsArray(XOOPS_ROOT_PATH . '/modules/rmcommon/lang', '');
         $langs = array();
         $langs['en_US'] = 'en';
         foreach ($files as $file => $v) {
-
-            if (substr($file, -3) != '.mo') continue;
+            if (substr($file, -3) != '.mo') {
+                continue;
+            }
 
             $langs[substr($file, 0, -3)] = substr($file, 0, -3);
-
         }
 
         $type = $this->get('type');
@@ -99,7 +98,7 @@ class RMFormLanguageField extends RMFormElement
             $rtn = '<div class="' . $type . '"><ul class="rmoptions_container">';
             $i = 1;
 
-            if($type == 'checkbox'){
+            if ($type == 'checkbox') {
                 $this->set('name', $this->get('name') . '[]');
             }
             $attributes = $this->renderAttributeString();
@@ -120,6 +119,5 @@ class RMFormLanguageField extends RMFormElement
         }
 
         return $rtn;
-
     }
 }

@@ -141,6 +141,4 @@ class UserCard extends WidgetAbstract implements WidgetInterface
 
         return \RMTemplate::getInstance()->render($this->template());
     }
-
-
 }

@@ -8,7 +8,9 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER']=='') die("Not Allowed");
+if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER']=='') {
+    die("Not Allowed");
+}
 
 $url = isset($_REQUEST['url']) ? $_REQUEST['url'] : '';
 

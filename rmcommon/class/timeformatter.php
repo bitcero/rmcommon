@@ -19,7 +19,8 @@ class RMTimeFormatter
     * @param int|string $time <p>Unix timestamp or date in string format</p>
     * @param string $format <p>Format for time (e.g. Created on %M% %d%, %Y%)</p>
     */
-    public function __construct($time=0, $format=''){
+    public function __construct($time=0, $format='')
+    {
         $this->time = $time;
         $this->format = $format;
     }
@@ -29,7 +30,8 @@ class RMTimeFormatter
      * @param string $format
      * @return RMTimeFormatter
      */
-    public static function get($format = ''){
+    public static function get($format = '')
+    {
         static $instance;
 
         if (!isset($instance)) {
@@ -53,20 +55,23 @@ class RMTimeFormatter
      * @param string $format <p>This value is optional. Represents the format for the returned value.</p>
      * @return mixed
      */
-    public function format($time=0, $format='', $offset = true){
-		global $xoopsConfig;
+    public function format($time=0, $format='', $offset = true)
+    {
+        global $xoopsConfig;
 
-        if ( $time <= 0 || strpos( $time, "-" ) !== false )
-            $time = strtotime( $time );
+        if ($time <= 0 || strpos($time, "-") !== false) {
+            $time = strtotime($time);
+        }
 
-        if($offset){
+        if ($offset) {
             $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
         }
 
         $format = $format=='' ? $this->format : $format;
 
-        if ($format=='' || $time<0){echo $format;
-            trigger_error(__('You must provide a valid time and format value to use RMTimeFormatter::format() method','rmcommon'));
+        if ($format=='' || $time<0) {
+            echo $format;
+            trigger_error(__('You must provide a valid time and format value to use RMTimeFormatter::format() method', 'rmcommon'));
             return null;
         }
 
@@ -99,7 +104,6 @@ class RMTimeFormatter
         //return date('i', $time);
 
         return str_replace($find, $replace, $format);
-
     }
 
     /**
@@ -108,28 +112,32 @@ class RMTimeFormatter
     * @param int $time
     * @return string Day name
     */
-    public function days($time = 0){
-
+    public function days($time = 0)
+    {
         $time = $time<=0 ? $this->time : $time;
-        if($time<=0) return null;
+        if ($time<=0) {
+            return null;
+        }
 
         $days = array(
-            __('sunday','rmcommon'),
-            __('monday','rmcommon'),
-            __('tuesday','rmcommon'),
-            __('wednesday','rmcommon'),
-            __('thursday','rmcommon'),
-            __('friday','rmcommon'),
-            __('saturday','rmcommon')
+            __('sunday', 'rmcommon'),
+            __('monday', 'rmcommon'),
+            __('tuesday', 'rmcommon'),
+            __('wednesday', 'rmcommon'),
+            __('thursday', 'rmcommon'),
+            __('friday', 'rmcommon'),
+            __('saturday', 'rmcommon')
         );
 
         return $days[date("w", $time)];
-
     }
 
-    public function months($time=0){
+    public function months($time=0)
+    {
         $time = $time<=0 ? $this->time : $time;
-        if($time<=0) return null;
+        if ($time<=0) {
+            return null;
+        }
 
         $months = array(
             __('january', 'rmcommon'),
@@ -147,53 +155,49 @@ class RMTimeFormatter
         );
 
         return $months[date('n', $time)-1];
-
     }
 
-    public function ago( $time, $format = '%m%-%d%-%Y% %h%:%i%:%s%' ){
-
-        if(false == is_numeric($time)){
+    public function ago($time, $format = '%m%-%d%-%Y% %h%:%i%:%s%')
+    {
+        if (false == is_numeric($time)) {
             $time = strtotime($time);
         }
 
-        if ( $time <= 0 )
+        if ($time <= 0) {
             return __('Some time ago', 'rmcommon');
+        }
 
         // Comentario enviado hace menos de un minuto
-        if ( $time > time() - 60 )
+        if ($time > time() - 60) {
             return __('A moment ago', 'rmcommon');
+        }
 
         // Comentario enviado hace menos de una hora
-        if ( $time > time() - 3600 ){
+        if ($time > time() - 3600) {
             $minutes = ceil((time() - $time) / 60);
-            return sprintf( __('%u minutes ago', 'rmcommon'), $minutes );
+            return sprintf(__('%u minutes ago', 'rmcommon'), $minutes);
         }
 
         /**
          * El comentario fue enviado hace menos de 24 horas
          */
-        if ( $time > time() - (24 * 3600) ){
-
+        if ($time > time() - (24 * 3600)) {
             $d1 = date('d', $time);
             $d2 = date('d', time());
-            if ( $d2 != $d1 )
+            if ($d2 != $d1) {
                 return __('Yesterday', 'rmcommon');
+            }
 
-            $hours = ceil((time() - $time) / 3600 );
-            return sprintf( __('%u hours ago', 'rmcommon'), $hours );
+            $hours = ceil((time() - $time) / 3600);
+            return sprintf(__('%u hours ago', 'rmcommon'), $hours);
         }
 
         // El comentario fue enviado hace menos de 10 días
-        if ( $time > time() - (10 * 86400)){
-
-            $days = ceil( time() - $time) / 86400;
-            return sprintf( __('%u days ago', 'rmcommon'), $days );
-
+        if ($time > time() - (10 * 86400)) {
+            $days = ceil(time() - $time) / 86400;
+            return sprintf(__('%u days ago', 'rmcommon'), $days);
         }
 
         return $this->format($time, $format);
-
     }
-
-
 }

@@ -81,8 +81,9 @@ class UpdateManager
         $rmUtil = RMUtilities::get();
         $tf = new RMTimeFormatter('', '%T% %d%, %Y% at %h%:%i%');
 
-        if (is_file($updfile))
+        if (is_file($updfile)) {
             $updates = unserialize(base64_decode(file_get_contents($updfile)));
+        }
 
         //$rmTpl->add_style('updates.css', 'rmcommon');
         $rmTpl->add_script('updates.js', 'rmcommon');
@@ -104,7 +105,6 @@ class UpdateManager
         xoops_cp_header();
         include $rmTpl->get_template('rmc-updates.php', 'module', 'rmcommon');
         xoops_cp_footer();
-
     }
 
     /**
@@ -118,12 +118,12 @@ class UpdateManager
 
         $xoopsLogger->activated = false;
         $updates = array();
-        if (is_file($updfile))
+        if (is_file($updfile)) {
             $updates = unserialize(base64_decode(file_get_contents($updfile)));
+        }
 
         include $rmTpl->get_template('ajax/rmc-updates-list.php', 'module', 'rmcommon');
         die();
-
     }
 
     /**
@@ -137,13 +137,15 @@ class UpdateManager
 
         $url = $common->httpRequest()::get('url', 'string', '');
 
-        if ($url == '')
+        if ($url == '') {
             jsonReturn(__('Invalid parameters!', 'rmcommon'));
+        }
 
         $data = json_decode(file_get_contents(str_replace('&amp;', '&', $url) . '&action=update-details'), true);
 
-        if ($data['type'] == 'error')
+        if ($data['type'] == 'error') {
             $common->ajax()->notifyError($data['message']);
+        }
 
         /**
          * Todo: Delete next file
@@ -176,44 +178,47 @@ class UpdateManager
         // Data for login
         $credentials = $common->httpRequest()::post('credentials', 'string', '');
 
-        if('' == $url){
+        if ('' == $url) {
             $common->ajax()->notifyError(__('Provided update URL is not valid!', 'rmcommon'));
         }
 
-        if('' == $action){
+        if ('' == $action) {
             $common->ajax()->notifyError(__('No action to process!', 'rmcommon'));
         }
 
         $query = explode("?", $url);
         $query[1] = ($query[1] != '' ? $query[1] . '&' : '') . 'action=' . $action;
 
-        if('' != $credentials){
+        if ('' != $credentials) {
             $query[1] .= '&credentials=' . urlencode($credentials);
         }
 
         /*
          * Sends API information
          */
-        if($api){
-
+        if ($api) {
             $vars = [];
             parse_str($query[1], $vars);
             $license = new \Common\Core\License(md5($vars['type'].'-'.$vars['id']));
             $data = $license->data;
 
-            if($license->isNew() && $vars['type'] == 'module'){
+            if ($license->isNew() && $vars['type'] == 'module') {
                 $controller = RMFunctions::loadModuleController($vars['id']);
-                if(false == $controller){
+                if (false == $controller) {
                     $common->ajax()->notifyError(
-                        __('Module is not compatible with this update process', 'rmcommon'), 1, 1
+                        __('Module is not compatible with this update process', 'rmcommon'),
+                        1,
+                        1
                     );
                 }
                 $data = $controller->licenseData();
             }
 
-            if('' == $data){
+            if ('' == $data) {
                 $common->ajax()->notifyError(
-                    __('This element must be registered before to update', 'rmcommon'), 1, 1
+                    __('This element must be registered before to update', 'rmcommon'),
+                    1,
+                    1
                 );
             }
             $query[1] .= '&data=' . $data;
@@ -227,16 +232,19 @@ class UpdateManager
         $type = 0;
         $message = __('Response from server', 'rmcommon');
 
-        if('error' == $response['type']){
+        if ('error' == $response['type']) {
             $type = 1;
             $message = $response['message'];
 
             $common->ajax()->response(
-                $message, $type, 1, $response
+                $message,
+                $type,
+                1,
+                $response
             );
         }
 
-        if(false == isset($response['code']) || '' == $response['code']){
+        if (false == isset($response['code']) || '' == $response['code']) {
             $common->ajax()->notifyError(__('Unexpected response from updates server. Please try again later.', 'rmcommon'));
         }
 
@@ -244,7 +252,6 @@ class UpdateManager
         $dir = $response['dir'];
         $type = $response['itemtype'];
         dt_download_file($url, $code, $siteID, $dir, $type);
-
     }
 }
 
@@ -260,21 +267,21 @@ function jsonReturn($message, $error = 1, $data = array(), $token = 1)
     );
     echo json_encode($ret);
     die();
-
 }
 
 function dt_download_file($url, $code, $siteID, $dir, $type)
 {
     global $common;
 
-    if('' == $url || '' == $code || '' == $siteID || '' == $dir || '' == $type){
+    if ('' == $url || '' == $code || '' == $siteID || '' == $dir || '' == $type) {
         $common->ajax()->notifyError(__('Unexpected response from updates server. Please try again later.', 'rmcommon'));
     }
 
     //jsonReturn($response['data']['url']);
 
-    if (!is_dir(XOOPS_CACHE_PATH . '/updates/'))
+    if (!is_dir(XOOPS_CACHE_PATH . '/updates/')) {
         mkdir(XOOPS_CACHE_PATH . '/updates/', 511);
+    }
 
     $pos = strpos($url, '?');
     $url .= false === $pos ? '?' : '&';
@@ -282,7 +289,7 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
 
     $file = XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir . '.zip';
 
-    if (false === file_put_contents($file, file_get_contents($url))){
+    if (false === file_put_contents($file, file_get_contents($url))) {
         $common->ajax()->notifyError(__('Unable to download update file!', 'rmcommon'));
     }
 
@@ -302,12 +309,12 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
     // Extract files
     $zip = new ZipArchive();
     $res = $zip->open($file);
-    if ($res !== TRUE){
+    if ($res !== true) {
         $common->ajax()->notifyError(__('Package file is not valid!', 'rmcommon'));
     }
 
     $source = XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir;
-    if (is_dir($source)){
+    if (is_dir($source)) {
         $common->utilities()::delete_directory($source);
     }
 
@@ -319,19 +326,19 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
     // Prepare to copy files
 
     $target = XOOPS_ROOT_PATH . '/modules/';
-    if ($type == 'plugin'){
+    if ($type == 'plugin') {
         $target .= 'rmcommon/plugins/' . $dir;
     }
 
-    if($type == 'theme'){
+    if ($type == 'theme') {
         $target = XOOPS_THEME_PATH . '/' . $dir;
     }
 
-    if('module' == $type){
+    if ('module' == $type) {
         $target .= $dir;
     }
 
-    if (!is_dir($target)){
+    if (!is_dir($target)) {
         $common->ajax()->notifyError(sprintf(__('Target path "%s" does not exists!', 'rmcommon'), $target));
     }
 
@@ -345,7 +352,6 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
     }
 
     if (is_writable($target) && !empty($target)) {
-
         $target = str_replace('\\', '/', $target);
 
         // Deletes dir content to replace with new files
@@ -356,22 +362,22 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
 
         $odir = opendir($source);
         while (($file = readdir($odir)) !== false) {
-            if ($file == '.' || $file == '..') continue;
+            if ($file == '.' || $file == '..') {
+                continue;
+            }
             @rename($source . '/' . $file, $target . '/' . $file);
         }
         closedir($odir);
 
         RMUtilities::delete_directory($source);
-
     } else {
-
         $ftpdata = base64_decode($common->httpRequest()::post('ftp', 'string', ''));
-        if ($ftpdata == ''){
+        if ($ftpdata == '') {
             $common->ajax()->notifyError(__('FTP configuration has not been specified and directory %s could not be written', 'rmcommon'));
         }
 
         parse_str($ftpdata);
-        if ($ftp_server == '' || $ftp_user == '' || $ftp_pass == ''){
+        if ($ftp_server == '' || $ftp_user == '' || $ftp_pass == '') {
             $common->ajax()->notifyError(__('FTP configuration not valid!', 'rmcommon'));
         }
 
@@ -386,7 +392,7 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
 
         $ftp = new RMFtpClient($ftp_server, $ftp_port > 0 ? $ftp_port : 21, $ftp_user, $ftp_pass);
 
-        if (!$ftp->connect()){
+        if (!$ftp->connect()) {
             $common->ajax()->notifyError(sprintf(__('Unable to connect FTP server %s', 'rmcommon'), '<strong>' . $ftp_server . '</strong>'));
         }
 
@@ -398,30 +404,32 @@ function dt_download_file($url, $code, $siteID, $dir, $type)
         deleteFTPDir($ftpConfig->base, $ftp, false);
 
         // Todo: Copy new files
-
     }
 
     // Update uploads file
     $updates = unserialize(base64_decode(file_get_contents(XOOPS_CACHE_PATH . '/updates.chk')));
     $new = array();
     foreach ($updates['updates'] as $upd) {
-
-        if ($upd['data']['type'] == $type && $upd['data']['dir'] == $dir) continue;
+        if ($upd['data']['type'] == $type && $upd['data']['dir'] == $dir) {
+            continue;
+        }
         $new[] = $upd;
-
     }
 
     file_put_contents(XOOPS_CACHE_PATH . '/updates.chk', base64_encode(serialize(array('date' => $updates['date'], 'total' => (int)$updates['total'] - 1, 'updates' => $new))));
 
     $common->ajax()->response(
-        sprintf(__('%s has been updated', 'rmcommon'), '<strong>' . $dir . '</strong>'), 0, 1, [
+        sprintf(__('%s has been updated', 'rmcommon'), '<strong>' . $dir . '</strong>'),
+        0,
+        1,
+        [
             'notify' => [
                 'icon' => 'svg-rmcommon-ok',
                 'type' => 'alert-success'
             ],
             'response' => 'installed'
-    ]);
-
+    ]
+    );
 }
 
 function processFile($file, $ftp)
@@ -439,25 +447,30 @@ function processFile($file, $ftp)
                 $dirs = array_slice($dirs, 0, count($dirs) - 1);
             }
 
-            if (count($dirs) > 0) createDirs($dirs, $ftp);
+            if (count($dirs) > 0) {
+                createDirs($dirs, $ftp);
+            }
 
-            if ($file['type'] == 'file')
+            if ($file['type'] == 'file') {
                 putContents($ftpConfig->base . $file['path'] . ($file['path'] != '/' ? '/' : '') . $file['name'], $ftpConfig->source . $file['path'] . ($file['path'] != '/' ? '/' : '') . $file['name'], $ftp);
+            }
 
             chmodFile($ftpConfig->base . $file['path'] . ($file['path'] != '/' ? '/' : '') . $file['name'], $file['mode'], $ftp);
 
             // Almacenamos el archivo si se debe ejecutar
-            if ($file['action'] == 'run' && $file['type'] == 'file')
+            if ($file['action'] == 'run' && $file['type'] == 'file') {
                 $runFiles[] = $ftpConfig->target . $file['path'] . ($file['path'] != '/' ? '/' : '') . $file['name'];
+            }
 
             break;
 
         case 'delete':
 
-            if ($file['type'] == 'directory')
+            if ($file['type'] == 'directory') {
                 deleteFTPDir($ftpConfig->base . $file['path'] . ($file['path'] != '/' ? '/' : '') . $file['name'], $ftp);
-            else
+            } else {
                 $ftp->delete($ftpConfig->base . $file['path'] . ($file['path'] != '/' ? '/' : '') . $file['name']);
+            }
 
             break;
 
@@ -474,16 +487,15 @@ function createDirs($dirs, RMFtpClient $ftp)
     foreach ($dirs as $dir) {
         $path .= '/' . $dir;
 
-        if (!$ftp->isDir($ftpConfig->base . $path))
+        if (!$ftp->isDir($ftpConfig->base . $path)) {
             $ftp->mkdir($ftpConfig->base . $path);
-
+        }
     }
 }
 
 function chmodFile($file, $mode, $ftp)
 {
     return $ftp->chmod($mode, $file);
-
 }
 
 function putContents($file, $source, $ftp)
@@ -493,7 +505,6 @@ function putContents($file, $source, $ftp)
     $res = $ftp->put($file, $source, FTP_BINARY);
 
     return $res;
-
 }
 
 function deleteFTPDir($dir, $ftp, $root = true)
@@ -502,18 +513,19 @@ function deleteFTPDir($dir, $ftp, $root = true)
 
     $list = $ftp->nlist($dir);
     foreach ($list as $item) {
-        if ($item == '.' || $item == '..') continue;
+        if ($item == '.' || $item == '..') {
+            continue;
+        }
         if ($ftp->isDir($dir . $item)) {
             deleteFTPDir($ftp, $dir . $item);
         } else {
             $ftp->delete($dir . $item);
         }
-
     }
 
-    if ($root)
+    if ($root) {
         $ftp->rmdir($dir);
-
+    }
 }
 
 function download_for_later()
@@ -527,19 +539,23 @@ function download_for_later()
     $type = rmc_server_var($_POST, 'type', '');
     $dir = rmc_server_var($_POST, 'dir', '');
 
-    if ($url == '')
+    if ($url == '') {
         jsonReturn(__('Invalid parameters!', 'rmcommon'));
+    }
 
     // Request access
     $response = json_decode(file_get_contents($url . '&action=identity' . ($cred != '' ? '&l=' . $cred : '')), true);
-    if ($response['error'] == 1)
+    if ($response['error'] == 1) {
         jsonReturn($response['message']);
+    }
 
-    if (!is_dir(XOOPS_CACHE_PATH . '/updates/'))
+    if (!is_dir(XOOPS_CACHE_PATH . '/updates/')) {
         mkdir(XOOPS_CACHE_PATH . '/updates/', 511);
+    }
 
-    if (!file_put_contents(XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir . '.zip', file_get_contents($response['data']['url'])))
+    if (!file_put_contents(XOOPS_CACHE_PATH . '/updates/' . $type . '-' . $dir . '.zip', file_get_contents($response['data']['url']))) {
         jsonReturn(__('Unable to download update file!', 'rmcommon'));
+    }
 
     jsonReturn(__('Downloaded!', 'rmcommon'), 0, array(
         'file' => $type . '-' . $dir . '.zip'
@@ -555,14 +571,16 @@ function get_file_now()
     global $xoopsSecurity;
     $tfile = rmc_server_var($_GET, 'file', '');
 
-    if ($tfile == '')
+    if ($tfile == '') {
         redirectMsg('updates.php', __('File not found!', 'rmcommon'), RMMSG_ERROR);
+    }
 
     $tfile = str_replace(array("/", "\\"), '', $tfile);
 
     $file = XOOPS_CACHE_PATH . '/updates/' . $tfile;
-    if (!is_file($file))
+    if (!is_file($file)) {
         redirectMsg("updates.php", __('File not found!', 'rmcommon') . " $tfile = $file", RMMSG_ERROR);
+    }
 
     header('Content-type: application/zip');
     header('Cache-control: no-store');
@@ -576,7 +594,6 @@ function get_file_now()
     readfile($file);
     unlink($file);
     exit();
-
 }
 
 function update_locally()
@@ -585,19 +602,21 @@ function update_locally()
 
     $xoopsLogger->activated = false;
 
-    if (!$xoopsSecurity->check())
+    if (!$xoopsSecurity->check()) {
         jsonReturn(__('Wrong action!', 'rmcommon'), 1, array(), 0);
+    }
 
     $dir = RMHttpRequest::post('module', 'string', '');
     $type = RMHttpRequest::post('type', 'string', '');
 
-    if ('' == $dir || '' == $type)
+    if ('' == $dir || '' == $type) {
         jsonReturn(__('Data not valid!', 'rmcommon'));
+    }
 
     if ('module' == $type) {
-
-        if (!is_dir(XOOPS_ROOT_PATH . '/modules/' . $dir))
+        if (!is_dir(XOOPS_ROOT_PATH . '/modules/' . $dir)) {
             jsonReturn(__('Module does not exists!', 'rmcommon'));
+        }
 
         xoops_loadLanguage('admin', 'system');
 
@@ -612,24 +631,22 @@ function update_locally()
         $log = module_update($dir);
 
         jsonReturn(__('Module updated locally', 'rmcommon'), 0, array('log' => $log));
-
     } elseif ('plugin' == $type) {
-
-        if (!is_dir(XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $dir))
+        if (!is_dir(XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $dir)) {
             jsonReturn(__('Plugin does not exists!', 'rmcommon'));
+        }
 
         $plugin = new RMPlugin($dir);
         if ($plugin->isNew()) {
             jsonReturn(__('Plugin does not exists!', 'rmcommon'));
         }
 
-        if (!$plugin->on_update())
+        if (!$plugin->on_update()) {
             jsonReturn(sprintf(__('Plugins manager could not update the plugin: %s', 'rmcommon'), $plugin->errors()));
+        }
 
         jsonReturn(__('Plugin updated locally', 'rmcommon'), 0);
-
     }
-
 }
 
 function module_update($dirname)
@@ -771,7 +788,6 @@ function module_update($dirname)
                                             $msgs[] = "&nbsp;&nbsp;" . sprintf(__('Template %s recompiled', 'rmcommon'), "<strong>" . $block['template'] . "</strong>");
                                         }
                                     }
-
                                 }
                             }
                         }
@@ -1017,7 +1033,6 @@ function module_update($dirname)
     XoopsSystemCpanel::flush();
 
     return $log;
-
 }
 
 $updatesManager = new UpdateManager();

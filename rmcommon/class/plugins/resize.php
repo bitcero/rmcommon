@@ -27,8 +27,10 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_resize{
-    function resize(phmagick $p , $width, $height = 0, $exactDimentions = false){
+class phMagick_resize
+{
+    public function resize(phmagick $p, $width, $height = 0, $exactDimentions = false)
+    {
         $modifier = $exactDimentions ? '!' : '>';
 
         //if $width or $height == 0 then we want to resize to fit one measure
@@ -55,41 +57,42 @@ class phMagick_resize{
      * @param $width
      * @param $height
      */
-    function resizeExactly(phmagick $p , $width, $height){
-    	//requires Crop plugin
-    	//requires dimensions plugin
+    public function resizeExactly(phmagick $p, $width, $height)
+    {
+        //requires Crop plugin
+        //requires dimensions plugin
 
-    	$p->requirePlugin('crop');
-    	$p->requirePlugin('info');
+        $p->requirePlugin('crop');
+        $p->requirePlugin('info');
 
-    	list($w,$h) = $p->getInfo($p->getSource());
+        list($w, $h) = $p->getInfo($p->getSource());
 
-    	if($w > $h){
-		    $h = $height;
-		    $w = 0;
-		}else{
-		    $h = 0;
-		    $w = $width;
-		}
+        if ($w > $h) {
+            $h = $height;
+            $w = 0;
+        } else {
+            $h = 0;
+            $w = $width;
+        }
 
-		$p->resize($w, $h)->crop($width, $height);
-
+        $p->resize($w, $h)->crop($width, $height);
     }
 
- /**
-     * Creates a thumbnail of an image, if it doesn't exits
-     *
-     *
-     * @param String $imageUrl - The image Url
-     * @param Mixed $width - String / Integer
-     * @param Mixed $height - String / Integer
-     * @param boolean: False: resizes the image to the exact porportions (aspect ratio not preserved). True: preserves aspect ratio, only resises if image is bigger than specified measures
-     *
-     * @return String - the thumbnail URL
-     */
-    function onTheFly(phmagick $p,$imageUrl, $width, $height, $exactDimentions = false, $webPath = '', $physicalPath=''){
+    /**
+        * Creates a thumbnail of an image, if it doesn't exits
+        *
+        *
+        * @param String $imageUrl - The image Url
+        * @param Mixed $width - String / Integer
+        * @param Mixed $height - String / Integer
+        * @param boolean: False: resizes the image to the exact porportions (aspect ratio not preserved). True: preserves aspect ratio, only resises if image is bigger than specified measures
+        *
+        * @return String - the thumbnail URL
+        */
+    public function onTheFly(phmagick $p, $imageUrl, $width, $height, $exactDimentions = false, $webPath = '', $physicalPath='')
+    {
         //convert web path to physical
-        $basePath = str_replace($webPath,$physicalPath, dirname($imageUrl) );
+        $basePath = str_replace($webPath, $physicalPath, dirname($imageUrl));
         $sourceFile = $basePath .'/'. basename($imageUrl);
 
         //naming the new thumbnail
@@ -98,17 +101,16 @@ class phMagick_resize{
         $P->setSource($sourceFile);
         $p->setDestination($thumbnailFile);
 
-        if (! file_exists($thumbnailFile)){
-            $p->resize($p,$width, $height, $exactDimentions);
+        if (! file_exists($thumbnailFile)) {
+            $p->resize($p, $width, $height, $exactDimentions);
         }
 
-        if (! file_exists($thumbnailFile)){
+        if (! file_exists($thumbnailFile)) {
             //if there was an error, just use original file
             $thumbnailFile = $sourceFile;
         }
 
         //returning the thumbnail url
-        return str_replace($physicalPath, $webPath, $thumbnailFile );
-
+        return str_replace($physicalPath, $webPath, $thumbnailFile);
     }
 }

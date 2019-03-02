@@ -64,8 +64,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_HeaderSet
      */
     public function addMailboxHeader($name, $addresses = null)
     {
-        $this->_storeHeader($name,
-        $this->_factory->createMailboxHeader($name, $addresses));
+        $this->_storeHeader(
+            $name,
+            $this->_factory->createMailboxHeader($name, $addresses)
+        );
     }
 
     /**
@@ -76,8 +78,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_HeaderSet
      */
     public function addDateHeader($name, $timestamp = null)
     {
-        $this->_storeHeader($name,
-        $this->_factory->createDateHeader($name, $timestamp));
+        $this->_storeHeader(
+            $name,
+            $this->_factory->createDateHeader($name, $timestamp)
+        );
     }
 
     /**
@@ -88,8 +92,10 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_HeaderSet
      */
     public function addTextHeader($name, $value = null)
     {
-        $this->_storeHeader($name,
-        $this->_factory->createTextHeader($name, $value));
+        $this->_storeHeader(
+            $name,
+            $this->_factory->createTextHeader($name, $value)
+        );
     }
 
     /**

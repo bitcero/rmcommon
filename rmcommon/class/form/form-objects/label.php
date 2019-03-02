@@ -20,8 +20,8 @@ class ActiveLabel
 {
     use RMFormComponent;
 
-    public function render(){
-
+    public function render()
+    {
         $label = '<label for="' . $this->id . '"';
         $class = $this->required ? 'label-required' : '';
         $title = $this->model->title($this->element);
@@ -29,12 +29,13 @@ class ActiveLabel
         $parameters = $this->parameters;
 
         foreach ($parameters as $attr => $value) {
-            if ( 'class' == $attr )
+            if ('class' == $attr) {
                 $class .= $class != '' ? ' '.$value : $value;
-            elseif ( 'caption' == $attr )
+            } elseif ('caption' == $attr) {
                 $title = $value;
-            else
+            } else {
                 $label .= ' ' . $attr . '="' . $value . '"';
+            }
         }
 
         $label .= '' != $class ? ' class="' . $class . '"' : '';
@@ -44,7 +45,5 @@ class ActiveLabel
         $label .= '</label>';
 
         return $label;
-
     }
-
 }

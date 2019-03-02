@@ -11,10 +11,12 @@
 /**
  * rmcommon constants
  */
-if (!defined('RMCPATH'))
+if (!defined('RMCPATH')) {
     define("RMCPATH", XOOPS_ROOT_PATH . '/modules/rmcommon');
-if (!defined('RMCURL'))
+}
+if (!defined('RMCURL')) {
     define("RMCURL", XOOPS_URL . '/modules/rmcommon');
+}
 define('ABSURL', XOOPS_URL);
 define('ABSPATH', XOOPS_ROOT_PATH);
 define('RMCVERSION', '2.3.7.5');
@@ -106,7 +108,6 @@ if (file_exists($file)) {
 }
 
 if (empty($plugins) || !is_array($plugins)) {
-
     $result = $db->query("SELECT dir FROM " . $db->prefix("mod_rmcommon_plugins") . ' WHERE status=1');
     while ($row = $db->fetchArray($result)) {
         $GLOBALS['installed_plugins'][$row['dir']] = true;
@@ -114,14 +115,11 @@ if (empty($plugins) || !is_array($plugins)) {
         $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $row['dir'], preg_replace("/[^A-Za-z0-9]/", '', $row['dir']) . 'Plugin');
     }
     file_put_contents($file, json_encode($plugins));
-
 } else {
-
     foreach ($plugins as $p) {
         $GLOBALS['installed_plugins'][$p] = true;
         $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $p, ucfirst(preg_replace("/[^A-Za-z0-9]/", '', $p)) . 'Plugin');
     }
-
 }
 
 // Load GUI theme events
@@ -147,8 +145,9 @@ require_once 'api/l10n.php';
 // Load rmcommon language
 load_mod_locale('rmcommon');
 
-if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() != 'rmcommon')
+if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->dirname() != 'rmcommon') {
     load_mod_locale($xoopsModule->dirname());
+}
 
 if (!$cuSettings) {
     _e('Sorry, Red Mexico Common Utilities has not been installed yet!');
@@ -160,12 +159,12 @@ $rmEvents->run_event('rmcommon.base.loaded');
 $rmTpl->add_head_script('var xoUrl = "' . XOOPS_URL . '";');
 
 if ($cuSettings->updates && isset($xoopsOption['pagetype']) && $xoopsOption['pagetype'] == 'admin') {
-
     $interval = $cuSettings->updatesinterval <= 0 ? 7 : $cuSettings->updatesinterval;
-    if (file_exists(XOOPS_CACHE_PATH . '/updates.chk'))
+    if (file_exists(XOOPS_CACHE_PATH . '/updates.chk')) {
         $updates = unserialize(base64_decode(file_get_contents(XOOPS_CACHE_PATH . '/updates.chk')));
-    else
+    } else {
         $updates = array('date' => 0, 'total' => 0, 'updates' => array());
+    }
 
     RMTemplate::getInstance()->add_script('updates.js', 'rmcommon', array('footer' => 1));
 
@@ -175,7 +174,6 @@ if ($cuSettings->updates && isset($xoopsOption['pagetype']) && $xoopsOption['pag
     } else {
         $rmTpl->add_inline_script('$(document).ready(function(){rmCallNotifier(' . $updates['total'] . ');});', 1);
     }
-
 }
 
 /**

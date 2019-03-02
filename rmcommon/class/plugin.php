@@ -60,7 +60,9 @@ class RMPlugin extends RMObject
      */
     public function load_from_dir($dir)
     {
-        if ($dir == '') return false;
+        if ($dir == '') {
+            return false;
+        }
 
         $path = RMCPATH . '/plugins/' . $dir;
 
@@ -82,7 +84,9 @@ class RMPlugin extends RMObject
 
         $class = ucfirst($cleanDir) . 'CUPlugin';
 
-        if (!class_exists($class)) return false;
+        if (!class_exists($class)) {
+            return false;
+        }
 
         $this->plugin = new $class();
         $this->setVar('dir', $dir);
@@ -101,18 +105,17 @@ class RMPlugin extends RMObject
 
     public function plugin($dir = '')
     {
-
         $dir = $dir == '' ? $this->getVar('dir') : $dir;
 
         $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
 
         $class = ucfirst($cleanDir) . 'CUPlugin';
 
-        if (is_a($this->plugin, $class))
+        if (is_a($this->plugin, $class)) {
             return $this->plugin;
+        }
 
         if (!class_exists($class)) {
-
             if ($this->file == '') {
                 $oldFile = RMCPATH . '/plugins/' . $dir . '/' . strtolower($dir) . '-plugin.php';
                 $newFile = RMCPATH . '/plugins/' . $dir . '/' . strtolower($dir) . '.php';
@@ -131,7 +134,6 @@ class RMPlugin extends RMObject
 
         $plugin = new $class();
         return $plugin;
-
     }
 
     public function get_info($name)
@@ -186,17 +188,17 @@ class RMPlugin extends RMObject
 
     private function insert_configs()
     {
-
         $dir = $this->plugin()->get_info('dir');
         $pre_options = $this->plugin->options();
 
-        if (empty($pre_options)) return null;
+        if (empty($pre_options)) {
+            return null;
+        }
 
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $c_options = RMFunctions::plugin_settings($dir);
 
         if (empty($c_options)) {
-
             $sql = '';
             foreach ($pre_options as $name => $option) {
                 $sql .= $sql == '' ? '' : ',';
@@ -211,12 +213,9 @@ class RMPlugin extends RMObject
             } else {
                 return true;
             }
-
         } else {
-
             $sql = '';
             foreach ($pre_options as $name => $option) {
-
                 if (isset($c_options[$name])) {
                     $option['value'] = $c_options[$name]['value'];
                     $sql = "UPDATE " . $db->prefix("mod_rmcommon_settings") . " SET value='$option[value]' WHERE element='$dir' AND type='plugin' AND name='$name'";
@@ -227,7 +226,6 @@ class RMPlugin extends RMObject
                     $db->queryF($sql);
                 }
             }
-
         }
 
         return true;
@@ -235,7 +233,6 @@ class RMPlugin extends RMObject
 
     public function save()
     {
-
         $this->insert_configs();
 
         if ($this->isNew()) {
@@ -247,7 +244,6 @@ class RMPlugin extends RMObject
 
     public function delete()
     {
-
         $dir = $this->plugin()->get_info('dir');
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $sql = "DELETE FROM " . $db->prefix("mod_rmcommon_settings") . " WHERE element='$dir' AND type='plugin'";
@@ -258,5 +254,4 @@ class RMPlugin extends RMObject
 
         return $this->deleteFromTable();
     }
-
 }

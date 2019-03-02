@@ -22,9 +22,8 @@ class RMFormTheme extends RMFormElement
      * @param int $cols Numero de columnas para la tabla o filas para un campo select multi
      * @param string 'GUI' for admin theme
      */
-    function __construct($caption, $name, $multi = 0, $type = 0, $selected = null, $cols = 2, $section = '')
+    public function __construct($caption, $name, $multi = 0, $type = 0, $selected = null, $cols = 2, $section = '')
     {
-
         if (is_array($caption)) {
             parent::__construct($caption);
         } else {
@@ -47,17 +46,16 @@ class RMFormTheme extends RMFormElement
         //$this->suppressList[] = 'multiple';
         $this->suppressList[] = 'selected';
         $this->suppressList[] = 'gui';
-
-
     }
 
 
-    function render()
+    public function render()
     {
-        if ($this->has('gui'))
+        if ($this->has('gui')) {
             $dirs = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . '/modules/rmcommon/themes', '');
-        else
+        } else {
             $dirs = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . '/themes', '');
+        }
 
         $themes = array();
 
@@ -66,18 +64,20 @@ class RMFormTheme extends RMFormElement
         $multiple = $this->has('multiple');
 
         foreach ($dirs as $dir => $v) {
-
             if ($gui) {
-                if (!file_exists(XOOPS_ROOT_PATH . '/modules/rmcommon/themes/' . $dir . '/admin-gui.php')) continue;
+                if (!file_exists(XOOPS_ROOT_PATH . '/modules/rmcommon/themes/' . $dir . '/admin-gui.php')) {
+                    continue;
+                }
             } else {
-                if (!file_exists(XOOPS_ROOT_PATH . '/themes/' . $dir . '/theme.html')) continue;
+                if (!file_exists(XOOPS_ROOT_PATH . '/themes/' . $dir . '/theme.html')) {
+                    continue;
+                }
             }
 
             // Read theme name
             $file = file_get_contents(XOOPS_ROOT_PATH . '/modules/rmcommon/themes/' . $dir . '/admin-gui.php');
             preg_match("/Theme name:\s{0,}(.*)?\n/m", $file, $name);
             $themes[$dir] = isset($name[1]) ? $name[1] : $dir;
-
         }
 
         unset($name);
@@ -85,7 +85,7 @@ class RMFormTheme extends RMFormElement
         if ($this->get('type') == 'checkbox' || $this->get('type') == 'radio') {
 
             // Render attributes
-            if($this->get('type') == 'checkbox'){
+            if ($this->get('type') == 'checkbox') {
                 $this->set('name', $this->get('name') . '[]');
             }
             $attributes = $this->renderAttributeString();
@@ -106,7 +106,5 @@ class RMFormTheme extends RMFormElement
         }
 
         return $rtn;
-
     }
-
 }

@@ -19,15 +19,16 @@ class RMBlocksFunctions
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
 
-        if ($mods == null || empty($mods))
+        if ($mods == null || empty($mods)) {
             $mods = RMModules::get_modules_list();
+        }
 
         $list = array(); // Block list to return
 
         foreach ($mods as $mod) {
-
-            if (!file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod['dirname'] . '/xoops_version.php'))
+            if (!file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod['dirname'] . '/xoops_version.php')) {
                 continue;
+            }
 
             load_mod_locale($mod['dirname']);
             $module = new XoopsModule();
@@ -40,7 +41,6 @@ class RMBlocksFunctions
                 'blocks' => $module->getInfo('blocks'),
                 'icon' => $icon
             );
-
         }
 
         // Event generated to modify the available widgets list
@@ -94,9 +94,9 @@ class RMBlocksFunctions
         $barray = self::get_blocks($groups, $mid, $isStart, XOOPS_BLOCK_VISIBLE, '', 1, $subpage, array_keys($sides));
 
         foreach ($barray as $block) {
-
-            if (!isset($sides[$block->getVar('canvas')]))
+            if (!isset($sides[$block->getVar('canvas')])) {
                 continue;
+            }
 
             $side = $sides[$block->getVar('canvas')];
             if ($content = self::buildBlock($block)) {
@@ -106,12 +106,10 @@ class RMBlocksFunctions
 
         unset($side, $sides, $content, $subpage, $barray, $groups, $startMod);
         return is_array($blocks) ? $blocks : array();
-
     }
 
-    static function get_blocks($groupid, $mid = 0, $toponlyblock = false, $visible = null, $orderby = 'b.weight,b.wid', $isactive = 1, $subpage = '', $canvas = array())
+    public static function get_blocks($groupid, $mid = 0, $toponlyblock = false, $visible = null, $orderby = 'b.weight,b.wid', $isactive = 1, $subpage = '', $canvas = array())
     {
-
         $orderby = $orderby == '' ? 'b.weight,b.bid' : $orderby;
 
         // Get authorized blocks
@@ -143,7 +141,6 @@ class RMBlocksFunctions
 
 
         if (!empty($blockids)) {
-
             $sql = 'SELECT b.* FROM ' . $db->prefix('mod_rmcommon_blocks') . ' b, ' . $db->prefix('mod_rmcommon_blocks_assignations') . ' m WHERE m.bid=b.bid';
             $sql .= ' AND b.isactive=' . $isactive;
             if (isset($visible)) {
@@ -166,8 +163,9 @@ class RMBlocksFunctions
             $sql .= $subpage != '' ? " AND (m.page='$subpage' OR m.page='--')" : '';
             $sql .= ' AND b.bid IN (' . implode(',', $blockids) . ')';
 
-            if (is_array($canvas))
+            if (is_array($canvas)) {
                 $sql .= ' AND b.canvas IN (' . implode(',', $canvas) . ')';
+            }
 
             $sql .= ' ORDER BY ' . $orderby;
             $result = $db->query($sql);
@@ -178,16 +176,13 @@ class RMBlocksFunctions
                 $ret[$myrow['bid']] = $block;
                 unset($block);
             }
-
         }
 
         return $ret;
-
     }
 
-    static function buildBlock($bobj)
+    public static function buildBlock($bobj)
     {
-
         global $xoopsTpl, $xoTheme;
         $template = $xoopsTpl;
 
@@ -237,5 +232,4 @@ class RMBlocksFunctions
         $template->setCompileId();
         return $block;
     }
-
 }

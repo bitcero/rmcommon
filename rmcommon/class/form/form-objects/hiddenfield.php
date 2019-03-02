@@ -13,17 +13,18 @@ class ActiveHiddenField
 {
     use RMFormComponent;
 
-    public function render(){
-
+    public function render()
+    {
         $input = '<input name="' . $this->name . '" type="hidden" id="' . $this->id . '"';
         $class = '';
         $parameters = $this->parameters;
 
         foreach ($parameters as $attr => $value) {
-            if ( 'class' == $attr )
+            if ('class' == $attr) {
                 $class .= $class != '' ? ' '.$value : $value;
-            else
+            } else {
                 $input .= ' ' . $attr . '="' . $value . '"';
+            }
         }
 
         $input .= '' != $class ? ' class="' . $class . '"' : '';
@@ -31,7 +32,5 @@ class ActiveHiddenField
         $input .= '>';
 
         return $input;
-
     }
-
 }

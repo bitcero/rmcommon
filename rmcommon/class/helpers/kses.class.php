@@ -432,10 +432,9 @@ class RMKses
 
     private $protocols = array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet', 'mms', 'rtsp', 'svn', 'tel', 'fax', 'xmpp' );
 
-    public function __construct(){
-
-        $this->add_global_attributes( $this->post_tags );
-
+    public function __construct()
+    {
+        $this->add_global_attributes($this->post_tags);
     }
 
     /**
@@ -456,17 +455,17 @@ class RMKses
      * @param array $allowed_protocols Optional. Allowed protocol in links.
      * @return string Filtered content with only allowed HTML elements
      */
-    public function filter( $string, $allowed_html, $allowed_protocols = array() ) {
-
-        if ( empty( $allowed_protocols ) )
+    public function filter($string, $allowed_html, $allowed_protocols = array())
+    {
+        if (empty($allowed_protocols)) {
             $allowed_protocols = $this->protocols;
+        }
 
-        $string = $this->no_null( $string );
-        $string = $this->js_entities( $string );
-        $string = $this->normalize_entities( $string );
-        $string = RMEvents::get()->run_event( 'rmcommon.kses.filter', $string, $allowed_html, $allowed_protocols );
-        return $this->split( $string, $allowed_html, $allowed_protocols );
-
+        $string = $this->no_null($string);
+        $string = $this->js_entities($string);
+        $string = $this->normalize_entities($string);
+        $string = RMEvents::get()->run_event('rmcommon.kses.filter', $string, $allowed_html, $allowed_protocols);
+        return $this->split($string, $allowed_html, $allowed_protocols);
     }
 
     /**
@@ -477,7 +476,8 @@ class RMKses
      * @param string $string
      * @return string
      */
-    protected function no_null($string) {
+    protected function no_null($string)
+    {
         $string = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', '', $string);
         $string = preg_replace('/(\\\\0)+/', '', $string);
 
@@ -490,7 +490,8 @@ class RMKses
      * @param string $string
      * @return string
      */
-    protected function js_entities($string) {
+    protected function js_entities($string)
+    {
         return preg_replace('%&\s*\{[^}]*(\}\s*;?|$)%', '', $string);
     }
 
@@ -503,16 +504,17 @@ class RMKses
      * @param string $string Content to normalize entities
      * @return string Content with normalized entities
      */
-    protected function normalize_entities($string) {
+    protected function normalize_entities($string)
+    {
         # Disarm all entities by converting & to &amp;
 
         $string = str_replace('&', '&amp;', $string);
 
         # Change back the allowed entities in our entity whitelist
 
-        $string = preg_replace_callback( '/&amp;([A-Za-z]{2,8}[0-9]{0,2});/', array( $this, 'named_entities' ), $string );
-        $string = preg_replace_callback( '/&amp;#(0*[0-9]{1,7});/', array( $this, 'normalize_entities2' ), $string );
-        $string = preg_replace_callback( '/&amp;#[Xx](0*[0-9A-Fa-f]{1,6});/', array( $this, 'normalize_entities3' ), $string );
+        $string = preg_replace_callback('/&amp;([A-Za-z]{2,8}[0-9]{0,2});/', array( $this, 'named_entities' ), $string);
+        $string = preg_replace_callback('/&amp;#(0*[0-9]{1,7});/', array( $this, 'normalize_entities2' ), $string);
+        $string = preg_replace_callback('/&amp;#[Xx](0*[0-9A-Fa-f]{1,6});/', array( $this, 'normalize_entities3' ), $string);
 
         return $string;
     }
@@ -524,14 +526,16 @@ class RMKses
      * @param array $matches preg_replace_callback() matches array
      * @return string Correctly encoded entity
      */
-    private function named_entities($matches) {
+    private function named_entities($matches)
+    {
         global $allowedentitynames;
 
-        if ( empty($matches[1]) )
+        if (empty($matches[1])) {
             return '';
+        }
 
         $i = $matches[1];
-        return ( ( ! in_array($i, $allowedentitynames) ) ? "&amp;$i;" : "&$i;" );
+        return ((! in_array($i, $allowedentitynames)) ? "&amp;$i;" : "&$i;");
     }
 
     /**
@@ -541,13 +545,15 @@ class RMKses
      * @param array $matches preg_replace_callback() matches array
      * @return string Correctly encoded entity
      */
-    private function normalize_entities2($matches) {
-        if ( empty($matches[1]) )
+    private function normalize_entities2($matches)
+    {
+        if (empty($matches[1])) {
             return '';
+        }
 
         $i = $matches[1];
         if (valid_unicode($i)) {
-            $i = str_pad(ltrim($i,'0'), 3, '0', STR_PAD_LEFT);
+            $i = str_pad(ltrim($i, '0'), 3, '0', STR_PAD_LEFT);
             $i = "&#$i;";
         } else {
             $i = "&amp;#$i;";
@@ -563,12 +569,14 @@ class RMKses
      * @param array $matches preg_replace_callback() matches array
      * @return string Correctly encoded entity
      */
-    private function normalize_entities3($matches) {
-        if ( empty($matches[1]) )
+    private function normalize_entities3($matches)
+    {
+        if (empty($matches[1])) {
             return '';
+        }
 
         $hexchars = $matches[1];
-        return ( ( ! valid_unicode(hexdec($hexchars)) ) ? "&amp;#x$hexchars;" : '&#x'.ltrim($hexchars,'0').';' );
+        return ((! valid_unicode(hexdec($hexchars))) ? "&amp;#x$hexchars;" : '&#x'.ltrim($hexchars, '0').';');
     }
 
     /**
@@ -577,11 +585,12 @@ class RMKses
      * @param int $i Unicode value
      * @return bool True if the value was a valid Unicode number
      */
-    protected function valid_unicode($i) {
-        return ( $i == 0x9 || $i == 0xa || $i == 0xd ||
+    protected function valid_unicode($i)
+    {
+        return ($i == 0x9 || $i == 0xa || $i == 0xd ||
             ($i >= 0x20 && $i <= 0xd7ff) ||
             ($i >= 0xe000 && $i <= 0xfffd) ||
-            ($i >= 0x10000 && $i <= 0x10ffff) );
+            ($i >= 0x10000 && $i <= 0x10ffff));
     }
 
     /**
@@ -594,16 +603,18 @@ class RMKses
      * @param array $allowed_protocols Allowed protocols to keep
      * @return string Content with fixed HTML tags
      */
-    protected function split( $string, $allowed_html, $allowed_protocols ) {
+    protected function split($string, $allowed_html, $allowed_protocols)
+    {
         global $pass_allowed_html, $pass_allowed_protocols;
         $pass_allowed_html = $allowed_html;
         $pass_allowed_protocols = $allowed_protocols;
-        return preg_replace_callback( '%(<!--.*?(-->|$))|(<[^>]*(>|$)|>)%', array( $this, 'split_callback' ), $string );
+        return preg_replace_callback('%(<!--.*?(-->|$))|(<[^>]*(>|$)|>)%', array( $this, 'split_callback' ), $string);
     }
 
-    private function split_callback( $match ) {
+    private function split_callback($match)
+    {
         global $pass_allowed_html, $pass_allowed_protocols;
-        return $this->split2( $match[0], $pass_allowed_html, $pass_allowed_protocols );
+        return $this->split2($match[0], $pass_allowed_html, $pass_allowed_protocols);
     }
 
     /**
@@ -621,19 +632,23 @@ class RMKses
      * @param array $allowed_protocols Allowed protocols to keep
      * @return string Fixed HTML element
      */
-    private function split2($string, $allowed_html, $allowed_protocols) {
+    private function split2($string, $allowed_html, $allowed_protocols)
+    {
         $string = $this->stripslashes($string);
 
-        if (substr($string, 0, 1) != '<')
+        if (substr($string, 0, 1) != '<') {
             return '&gt;';
+        }
         # It matched a ">" character
 
-        if ( '<!--' == substr( $string, 0, 4 ) ) {
-            $string = str_replace( array('<!--', '-->'), '', $string );
-            while ( $string != ($newstring = $this->filter( $string, $allowed_html, $allowed_protocols ) ) )
+        if ('<!--' == substr($string, 0, 4)) {
+            $string = str_replace(array('<!--', '-->'), '', $string);
+            while ($string != ($newstring = $this->filter($string, $allowed_html, $allowed_protocols))) {
                 $string = $newstring;
-            if ( $string == '' )
+            }
+            if ($string == '') {
                 return '';
+            }
             // prevent multiple dashes in comments
             $string = preg_replace('/--+/', '-', $string);
             // prevent three dashes closing a comment
@@ -642,26 +657,30 @@ class RMKses
         }
         # Allow HTML comments
 
-        if (!preg_match('%^<\s*(/\s*)?([a-zA-Z0-9]+)([^>]*)>?$%', $string, $matches))
+        if (!preg_match('%^<\s*(/\s*)?([a-zA-Z0-9]+)([^>]*)>?$%', $string, $matches)) {
             return '';
+        }
         # It's seriously malformed
 
         $slash = trim($matches[1]);
         $elem = $matches[2];
         $attrlist = $matches[3];
 
-        if ( ! is_array( $allowed_html ) )
-            $allowed_html = $this->allowed_html( $allowed_html );
+        if (! is_array($allowed_html)) {
+            $allowed_html = $this->allowed_html($allowed_html);
+        }
 
-        if ( ! isset($allowed_html[strtolower($elem)]) )
+        if (! isset($allowed_html[strtolower($elem)])) {
             return '';
+        }
         # They are using a not allowed HTML element
 
-        if ($slash != '')
+        if ($slash != '') {
             return "</$elem>";
+        }
         # No attributes are allowed for closing elements
 
-        return $this->attr( $elem, $attrlist, $allowed_html, $allowed_protocols );
+        return $this->attr($elem, $attrlist, $allowed_html, $allowed_protocols);
     }
 
     /**
@@ -671,25 +690,25 @@ class RMKses
      *  post | strip | data | entities or the name of a field filter such as pre_user_description.
      * @return array List of allowed tags and their allowed attributes.
      */
-    protected function allowed_html( $context = '' ) {
-
-        switch ( $context ) {
+    protected function allowed_html($context = '')
+    {
+        switch ($context) {
             case 'full':
-                return RMEvents::get()->run_event( 'rmcommon.kses.allowed.html', $this->post_tags, $context );
+                return RMEvents::get()->run_event('rmcommon.kses.allowed.html', $this->post_tags, $context);
                 break;
             case 'reduced':
                 $tags = $this->tags;
                 $tags['a']['rel'] = true;
-                return RMEvents::get()->run_event( 'rmcommon.kses.allowed.html', $tags, $context );
+                return RMEvents::get()->run_event('rmcommon.kses.allowed.html', $tags, $context);
                 break;
             case 'none':
-                return RMEvents::get()->run_event( 'rmcommon.kses.allowed.html', array(), $context );
+                return RMEvents::get()->run_event('rmcommon.kses.allowed.html', array(), $context);
                 break;
             case 'entities':
-                return RMEvents::get()->run_event( 'rmcommon.kses.allowed.html', $this->entity_names, $context );
+                return RMEvents::get()->run_event('rmcommon.kses.allowed.html', $this->entity_names, $context);
                 break;
             default:
-                return RMEvents::get()->run_event( 'rmcommon.kses.allowed.html', $this->tags, $context );
+                return RMEvents::get()->run_event('rmcommon.kses.allowed.html', $this->tags, $context);
         }
     }
 
@@ -708,22 +727,26 @@ class RMKses
      * @param array $allowed_protocols Allowed protocols to keep
      * @return string Sanitized HTML element
      */
-    protected function attr( $element, $attr, $allowed_html, $allowed_protocols ) {
+    protected function attr($element, $attr, $allowed_html, $allowed_protocols)
+    {
         # Is there a closing XHTML slash at the end of the attributes?
 
-        if ( ! is_array( $allowed_html ) )
-            $allowed_html = $this->allowed_html( $allowed_html );
+        if (! is_array($allowed_html)) {
+            $allowed_html = $this->allowed_html($allowed_html);
+        }
 
         $xhtml_slash = '';
-        if (preg_match('%\s*/\s*$%', $attr))
+        if (preg_match('%\s*/\s*$%', $attr)) {
             $xhtml_slash = ' /';
+        }
 
         # Are any attributes allowed at all for this element?
-        if ( ! isset($allowed_html[strtolower($element)]) || count($allowed_html[strtolower($element)]) == 0 )
+        if (! isset($allowed_html[strtolower($element)]) || count($allowed_html[strtolower($element)]) == 0) {
             return "<$element$xhtml_slash>";
+        }
 
         # Split it
-        $attrarr = $this->hair( $attr, $allowed_protocols );
+        $attrarr = $this->hair($attr, $allowed_protocols);
 
         # Go through $attrarr, and save the allowed attributes for this element
         # in $attr2
@@ -731,40 +754,43 @@ class RMKses
 
         $allowed_attr = $allowed_html[strtolower($element)];
         foreach ($attrarr as $arreach) {
-            if ( ! isset( $allowed_attr[strtolower($arreach['name'])] ) )
-                continue; # the attribute is not allowed
+            if (! isset($allowed_attr[strtolower($arreach['name'])])) {
+                continue;
+            } # the attribute is not allowed
 
             $current = $allowed_attr[strtolower($arreach['name'])];
-            if ( $current == '' )
-                continue; # the attribute is not allowed
+            if ($current == '') {
+                continue;
+            } # the attribute is not allowed
 
-            if ( strtolower( $arreach['name'] ) == 'style' ) {
+            if (strtolower($arreach['name']) == 'style') {
                 $orig_value = $arreach['value'];
-                $value = $this->safecss_filter_attr( $orig_value );
+                $value = $this->safecss_filter_attr($orig_value);
 
-                if ( empty( $value ) )
+                if (empty($value)) {
                     continue;
+                }
 
                 $arreach['value'] = $value;
-                $arreach['whole'] = str_replace( $orig_value, $value, $arreach['whole'] );
+                $arreach['whole'] = str_replace($orig_value, $value, $arreach['whole']);
             }
 
-            if ( ! is_array($current) ) {
+            if (! is_array($current)) {
                 $attr2 .= ' '.$arreach['whole'];
-                # there are no checks
-
+            # there are no checks
             } else {
                 # there are some checks
                 $ok = true;
                 foreach ($current as $currkey => $currval) {
-                    if ( ! $this->check_attr_val($arreach['value'], $arreach['vless'], $currkey, $currval) ) {
+                    if (! $this->check_attr_val($arreach['value'], $arreach['vless'], $currkey, $currval)) {
                         $ok = false;
                         break;
                     }
                 }
 
-                if ( $ok )
-                    $attr2 .= ' '.$arreach['whole']; # it passed them
+                if ($ok) {
+                    $attr2 .= ' '.$arreach['whole'];
+                } # it passed them
             } # if !is_array($current)
         } # foreach
 
@@ -789,7 +815,8 @@ class RMKses
      * @param array $allowed_protocols Allowed protocols to keep
      * @return array List of attributes after parsing
      */
-    protected function hair($attr, $allowed_protocols) {
+    protected function hair($attr, $allowed_protocols)
+    {
         $attrarr = array();
         $mode = 0;
         $attrname = '';
@@ -801,49 +828,47 @@ class RMKses
             $working = 0; # Was the last operation successful?
 
             switch ($mode) {
-                case 0 : # attribute name, href for instance
+                case 0: # attribute name, href for instance
 
-                    if ( preg_match('/^([-a-zA-Z:]+)/', $attr, $match ) ) {
+                    if (preg_match('/^([-a-zA-Z:]+)/', $attr, $match)) {
                         $attrname = $match[1];
                         $working = $mode = 1;
-                        $attr = preg_replace( '/^[-a-zA-Z:]+/', '', $attr );
+                        $attr = preg_replace('/^[-a-zA-Z:]+/', '', $attr);
                     }
 
                     break;
 
-                case 1 : # equals sign or valueless ("selected")
+                case 1: # equals sign or valueless ("selected")
 
-                    if (preg_match('/^\s*=\s*/', $attr)) # equals sign
-                    {
+                    if (preg_match('/^\s*=\s*/', $attr)) { # equals sign
                         $working = 1;
                         $mode = 2;
                         $attr = preg_replace('/^\s*=\s*/', '', $attr);
                         break;
                     }
 
-                    if (preg_match('/^\s+/', $attr)) # valueless
-                    {
+                    if (preg_match('/^\s+/', $attr)) { # valueless
                         $working = 1;
                         $mode = 0;
-                        if(false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array ('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
+                        if (false === array_key_exists($attrname, $attrarr)) {
+                            $attrarr[$attrname] = array('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
                         }
                         $attr = preg_replace('/^\s+/', '', $attr);
                     }
 
                     break;
 
-                case 2 : # attribute value, a URL after href= for instance
+                case 2: # attribute value, a URL after href= for instance
 
-                    if (preg_match('%^"([^"]*)"(\s+|/?$)%', $attr, $match))
+                    if (preg_match('%^"([^"]*)"(\s+|/?$)%', $attr, $match)) {
                         # "value"
-                    {
                         $thisval = $match[1];
-                        if ( in_array(strtolower($attrname), $uris) )
+                        if (in_array(strtolower($attrname), $uris)) {
                             $thisval = $this->bad_protocol($thisval, $allowed_protocols);
+                        }
 
-                        if(false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array ('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
+                        if (false === array_key_exists($attrname, $attrarr)) {
+                            $attrarr[$attrname] = array('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
                         }
                         $working = 1;
                         $mode = 0;
@@ -851,15 +876,15 @@ class RMKses
                         break;
                     }
 
-                    if (preg_match("%^'([^']*)'(\s+|/?$)%", $attr, $match))
+                    if (preg_match("%^'([^']*)'(\s+|/?$)%", $attr, $match)) {
                         # 'value'
-                    {
                         $thisval = $match[1];
-                        if ( in_array(strtolower($attrname), $uris) )
+                        if (in_array(strtolower($attrname), $uris)) {
                             $thisval = $this->bad_protocol($thisval, $allowed_protocols);
+                        }
 
-                        if(false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array ('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname='$thisval'", 'vless' => 'n');
+                        if (false === array_key_exists($attrname, $attrarr)) {
+                            $attrarr[$attrname] = array('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname='$thisval'", 'vless' => 'n');
                         }
                         $working = 1;
                         $mode = 0;
@@ -867,15 +892,15 @@ class RMKses
                         break;
                     }
 
-                    if (preg_match("%^([^\s\"']+)(\s+|/?$)%", $attr, $match))
+                    if (preg_match("%^([^\s\"']+)(\s+|/?$)%", $attr, $match)) {
                         # value
-                    {
                         $thisval = $match[1];
-                        if ( in_array(strtolower($attrname), $uris) )
+                        if (in_array(strtolower($attrname), $uris)) {
                             $thisval = $this->bad_protocol($thisval, $allowed_protocols);
+                        }
 
-                        if(false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array ('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
+                        if (false === array_key_exists($attrname, $attrarr)) {
+                            $attrarr[$attrname] = array('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
                         }
                         # We add quotes to conform to W3C's HTML spec.
                         $working = 1;
@@ -886,17 +911,17 @@ class RMKses
                     break;
             } # switch
 
-            if ($working == 0) # not well formed, remove and try again
-            {
+            if ($working == 0) { # not well formed, remove and try again
                 $attr = $this->html_error($attr);
                 $mode = 0;
             }
         } # while
 
-        if ($mode == 1 && false === array_key_exists($attrname, $attrarr))
+        if ($mode == 1 && false === array_key_exists($attrname, $attrarr)) {
             # special case, for when the attribute list ends with a valueless
             # attribute like "selected"
-            $attrarr[$attrname] = array ('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
+            $attrarr[$attrname] = array('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
+        }
 
         return $attrarr;
     }
@@ -913,17 +938,19 @@ class RMKses
      * @param array $allowed_protocols Allowed protocols to keep
      * @return string Filtered content
      */
-    function bad_protocol($string, $allowed_protocols) {
+    public function bad_protocol($string, $allowed_protocols)
+    {
         $string = $this->no_null($string);
         $iterations = 0;
 
         do {
             $original_string = $string;
             $string = $this->bad_protocol_once($string, $allowed_protocols);
-        } while ( $original_string != $string && ++$iterations < 6 );
+        } while ($original_string != $string && ++$iterations < 6);
 
-        if ( $original_string != $string )
+        if ($original_string != $string) {
             return '';
+        }
 
         return $string;
     }
@@ -938,17 +965,20 @@ class RMKses
      * @param string $allowed_protocols Allowed protocols
      * @return string Sanitized content
      */
-    private function bad_protocol_once($string, $allowed_protocols, $count = 1 ) {
-        $string2 = preg_split( '/:|&#0*58;|&#x0*3a;/i', $string, 2 );
-        if ( isset($string2[1]) && ! preg_match('%/\?%', $string2[0]) ) {
-            $string = trim( $string2[1] );
-            $protocol = $this->bad_protocol_once2( $string2[0], $allowed_protocols );
-            if ( 'feed:' == $protocol ) {
-                if ( $count > 2 )
+    private function bad_protocol_once($string, $allowed_protocols, $count = 1)
+    {
+        $string2 = preg_split('/:|&#0*58;|&#x0*3a;/i', $string, 2);
+        if (isset($string2[1]) && ! preg_match('%/\?%', $string2[0])) {
+            $string = trim($string2[1]);
+            $protocol = $this->bad_protocol_once2($string2[0], $allowed_protocols);
+            if ('feed:' == $protocol) {
+                if ($count > 2) {
                     return '';
-                $string = $this->bad_protocol_once( $string, $allowed_protocols, ++$count );
-                if ( empty( $string ) )
+                }
+                $string = $this->bad_protocol_once($string, $allowed_protocols, ++$count);
+                if (empty($string)) {
                     return $string;
+                }
             }
             $string = $protocol . $string;
         }
@@ -964,23 +994,26 @@ class RMKses
      * @param string $allowed_protocols Allowed protocols
      * @return string Sanitized content
      */
-    private function bad_protocol_once2( $string, $allowed_protocols ) {
+    private function bad_protocol_once2($string, $allowed_protocols)
+    {
         $string2 = $this->decode_entities($string);
         $string2 = preg_replace('/\s/', '', $string2);
         $string2 = $this->no_null($string2);
         $string2 = strtolower($string2);
 
         $allowed = false;
-        foreach ( (array) $allowed_protocols as $one_protocol )
-            if ( strtolower($one_protocol) == $string2 ) {
+        foreach ((array) $allowed_protocols as $one_protocol) {
+            if (strtolower($one_protocol) == $string2) {
                 $allowed = true;
                 break;
             }
+        }
 
-        if ($allowed)
+        if ($allowed) {
             return "$string2:";
-        else
+        } else {
             return '';
+        }
     }
 
     /**
@@ -993,9 +1026,10 @@ class RMKses
      * @param string $string Content to change entities
      * @return string Content after decoded entities
      */
-    protected function decode_entities($string) {
-        $string = preg_replace_callback( '/&#([0-9]+);/', array( $this, 'decode_entities_chr' ), $string );
-        $string = preg_replace_callback( '/&#[Xx]([0-9A-Fa-f]+);/', array( $this, 'decode_entities_chr_hexdec' ), $string );
+    protected function decode_entities($string)
+    {
+        $string = preg_replace_callback('/&#([0-9]+);/', array( $this, 'decode_entities_chr' ), $string);
+        $string = preg_replace_callback('/&#[Xx]([0-9A-Fa-f]+);/', array( $this, 'decode_entities_chr_hexdec' ), $string);
 
         return $string;
     }
@@ -1004,16 +1038,18 @@ class RMKses
      * @param array $match preg match
      * @return string
      */
-    private function decode_entities_chr( $match ) {
-        return chr( $match[1] );
+    private function decode_entities_chr($match)
+    {
+        return chr($match[1]);
     }
 
     /**
      * @param array $match preg match
      * @return string
      */
-    private function decode_entities_chr_hexdec( $match ) {
-        return chr( hexdec( $match[1] ) );
+    private function decode_entities_chr_hexdec($match)
+    {
+        return chr(hexdec($match[1]));
     }
 
     /**
@@ -1025,29 +1061,31 @@ class RMKses
      * @param string $string
      * @return string
      */
-    protected function html_error($string) {
+    protected function html_error($string)
+    {
         return preg_replace('/^("[^"]*("|$)|\'[^\']*(\'|$)|\S)*\s*/', '', $string);
     }
 
     /**
      * Inline CSS filter
      */
-    protected function safecss_filter_attr( $css ) {
-
-        $css = $this->no_null( $css );
+    protected function safecss_filter_attr($css)
+    {
+        $css = $this->no_null($css);
         $css = str_replace(array("\n","\r","\t"), '', $css);
 
-        if ( preg_match( '%[\\(&=}]|/\*%', $css ) ) // remove any inline css containing \ ( & } = or comments
+        if (preg_match('%[\\(&=}]|/\*%', $css)) { // remove any inline css containing \ ( & } = or comments
             return '';
+        }
 
-        $css_array = explode( ';', trim( $css ) );
+        $css_array = explode(';', trim($css));
 
         /**
          * Filter list of allowed CSS attributes.
          *
          * @param array $attr List of allowed CSS attributes.
          */
-        $allowed_attr = apply_filters( 'safe_style_css', array( 'text-align', 'margin', 'color', 'float',
+        $allowed_attr = apply_filters('safe_style_css', array( 'text-align', 'margin', 'color', 'float',
             'border', 'background', 'background-color', 'border-bottom', 'border-bottom-color',
             'border-bottom-style', 'border-bottom-width', 'border-collapse', 'border-color', 'border-left',
             'border-left-color', 'border-left-style', 'border-left-width', 'border-right', 'border-right-color',
@@ -1057,27 +1095,31 @@ class RMKses
             'font-variant', 'font-weight', 'height', 'letter-spacing', 'line-height', 'margin-bottom',
             'margin-left', 'margin-right', 'margin-top', 'overflow', 'padding', 'padding-bottom',
             'padding-left', 'padding-right', 'padding-top', 'text-decoration', 'text-indent', 'vertical-align',
-            'width' ) );
+            'width' ));
 
-        if ( empty($allowed_attr) )
+        if (empty($allowed_attr)) {
             return $css;
+        }
 
         $css = '';
-        foreach ( $css_array as $css_item ) {
-            if ( $css_item == '' )
+        foreach ($css_array as $css_item) {
+            if ($css_item == '') {
                 continue;
-            $css_item = trim( $css_item );
+            }
+            $css_item = trim($css_item);
             $found = false;
-            if ( strpos( $css_item, ':' ) === false ) {
+            if (strpos($css_item, ':') === false) {
                 $found = true;
             } else {
-                $parts = explode( ':', $css_item );
-                if ( in_array( trim( $parts[0] ), $allowed_attr ) )
+                $parts = explode(':', $css_item);
+                if (in_array(trim($parts[0]), $allowed_attr)) {
                     $found = true;
+                }
             }
-            if ( $found ) {
-                if( $css != '' )
+            if ($found) {
+                if ($css != '') {
                     $css .= ';';
+                }
                 $css .= $css_item;
             }
         }
@@ -1097,58 +1139,66 @@ class RMKses
      * @param mixed $checkvalue What constraint the value should pass
      * @return bool Whether check passes
      */
-    protected function check_attr_val($value, $vless, $checkname, $checkvalue) {
+    protected function check_attr_val($value, $vless, $checkname, $checkvalue)
+    {
         $ok = true;
 
         switch (strtolower($checkname)) {
-            case 'maxlen' :
+            case 'maxlen':
                 # The maxlen check makes sure that the attribute value has a length not
                 # greater than the given value. This can be used to avoid Buffer Overflows
                 # in WWW clients and various Internet servers.
 
-                if (strlen($value) > $checkvalue)
+                if (strlen($value) > $checkvalue) {
                     $ok = false;
+                }
                 break;
 
-            case 'minlen' :
+            case 'minlen':
                 # The minlen check makes sure that the attribute value has a length not
                 # smaller than the given value.
 
-                if (strlen($value) < $checkvalue)
+                if (strlen($value) < $checkvalue) {
                     $ok = false;
+                }
                 break;
 
-            case 'maxval' :
+            case 'maxval':
                 # The maxval check does two things: it checks that the attribute value is
                 # an integer from 0 and up, without an excessive amount of zeroes or
                 # whitespace (to avoid Buffer Overflows). It also checks that the attribute
                 # value is not greater than the given value.
                 # This check can be used to avoid Denial of Service attacks.
 
-                if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value))
+                if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
                     $ok = false;
-                if ($value > $checkvalue)
+                }
+                if ($value > $checkvalue) {
                     $ok = false;
+                }
                 break;
 
-            case 'minval' :
+            case 'minval':
                 # The minval check makes sure that the attribute value is a positive integer,
                 # and that it is not smaller than the given value.
 
-                if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value))
+                if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value)) {
                     $ok = false;
-                if ($value < $checkvalue)
+                }
+                if ($value < $checkvalue) {
                     $ok = false;
+                }
                 break;
 
-            case 'valueless' :
+            case 'valueless':
                 # The valueless check makes sure if the attribute has a value
                 # (like <a href="blah">) or not (<option selected>). If the given value
                 # is a "y" or a "Y", the attribute must not have a value.
                 # If the given value is an "n" or an "N", the attribute must have one.
 
-                if (strtolower($checkvalue) != $vless)
+                if (strtolower($checkvalue) != $vless) {
                     $ok = false;
+                }
                 break;
         } # switch
 
@@ -1160,7 +1210,8 @@ class RMKses
      *
      * @return string KSES Version Number
      */
-    public function version() {
+    public function version()
+    {
         return '0.2.2';
     }
 
@@ -1174,7 +1225,8 @@ class RMKses
      * @param string $string String to strip slashes
      * @return string Fixed string with quoted slashes
      */
-    function stripslashes($string) {
+    public function stripslashes($string)
+    {
         return preg_replace('%\\\\"%', '"', $string);
     }
 
@@ -1184,7 +1236,8 @@ class RMKses
      * @param array $value An array of attributes.
      * @return array The array of attributes with global attributes added.
      */
-    private function add_global_attributes( $value ) {
+    private function add_global_attributes($value)
+    {
         $global_attributes = array(
             'class' => true,
             'id' => true,
@@ -1193,11 +1246,13 @@ class RMKses
             'role' => true,
         );
 
-        if ( true === $value )
+        if (true === $value) {
             $value = array();
+        }
 
-        if ( is_array( $value ) )
-            return array_merge( $value, $global_attributes );
+        if (is_array($value)) {
+            return array_merge($value, $global_attributes);
+        }
 
         return $value;
     }

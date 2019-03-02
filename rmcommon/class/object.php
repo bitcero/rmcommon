@@ -133,8 +133,9 @@ class RMObject
     {
 
         // Verificamos columnas
-        if (isset($this->vars[$name]))
+        if (isset($this->vars[$name])) {
             return $this->setVar($name, $value);
+        }
 
         return null;
     }
@@ -147,8 +148,9 @@ class RMObject
     public function __get($name)
     {
         // Verificamos columnas
-        if (isset($this->vars[$name]))
+        if (isset($this->vars[$name])) {
             return $this->getVar($name);
+        }
         return null;
     }
 
@@ -157,17 +159,17 @@ class RMObject
      *
      * @access public
      */
-    function setNew()
+    public function setNew()
     {
         $this->_isNew = true;
     }
 
-    function unsetNew()
+    public function unsetNew()
     {
         $this->_isNew = false;
     }
 
-    function isNew()
+    public function isNew()
     {
         return $this->_isNew;
     }
@@ -179,17 +181,17 @@ class RMObject
      * used for modified objects only
      * @access public
      */
-    function setDirty()
+    public function setDirty()
     {
         $this->_isDirty = true;
     }
 
-    function unsetDirty()
+    public function unsetDirty()
     {
         $this->_isDirty = false;
     }
 
-    function isDirty()
+    public function isDirty()
     {
         return $this->_isDirty;
     }
@@ -206,9 +208,11 @@ class RMObject
      * @param int $maxlength for XOBJ_DTYPE_TXTBOX type only
      * @param string $option does this data have any select options?
      */
-    function initVar($key, $data_type, $value = null, $required = false, $maxlength = null, $options = '')
+    public function initVar($key, $data_type, $value = null, $required = false, $maxlength = null, $options = '')
     {
-        if (isset($this->vars[$key])) return;
+        if (isset($this->vars[$key])) {
+            return;
+        }
         $this->vars[$key] = array('value' => $value, 'required' => $required, 'data_type' => $data_type, 'maxlength' => $maxlength, 'changed' => false, 'options' => $options);
     }
 
@@ -217,9 +221,11 @@ class RMObject
      * @param string $var Nombre de la variable
      * @param int $type Tipo de Dato
      */
-    function setVarType($var, $type)
+    public function setVarType($var, $type)
     {
-        if (!isset($this->vars[$var])) return false;
+        if (!isset($this->vars[$var])) {
+            return false;
+        }
         return $this->vars[$var]['data_type'] = $type;
     }
 
@@ -228,9 +234,11 @@ class RMObject
      * @param string $var Nombre de la variable
      * @param int $len Longitud del campo o null
      */
-    function setVarLen($var, $len = null)
+    public function setVarLen($var, $len = null)
     {
-        if (!isset($this->vars[$var])) return false;
+        if (!isset($this->vars[$var])) {
+            return false;
+        }
         return $this->vars[$var]['maxlength'] = $len;
     }
 
@@ -239,9 +247,11 @@ class RMObject
      * @param string $var Nombre de la variable
      * @param bool $required
      */
-    function setVarRequired($var, $required)
+    public function setVarRequired($var, $required)
     {
-        if (!isset($this->vars[$var])) return false;
+        if (!isset($this->vars[$var])) {
+            return false;
+        }
         return $this->vars[$var]['required'] = $required;
     }
 
@@ -252,7 +262,7 @@ class RMObject
      * @param string $key name of the variable to assign
      * @param mixed $value value to assign
      */
-    function assignVar($key, $value)
+    public function assignVar($key, $value)
     {
         if (isset($value) && isset($this->vars[$key])) {
             $this->vars[$key]['value'] =& $value;
@@ -265,9 +275,11 @@ class RMObject
      * @access private
      * @param array $var_array associative array of values to assign
      */
-    function assignVars($var_arr)
+    public function assignVars($var_arr)
     {
-        if (empty($var_arr)) return;
+        if (empty($var_arr)) {
+            return;
+        }
         foreach ($var_arr as $key => $value) {
             $this->assignVar($key, stripslashes($value));
         }
@@ -284,7 +296,7 @@ class RMObject
      * @param mixed $value value to assign
      * @param bool $not_gpc
      */
-    function setVar($key, $value, $not_gpc = false)
+    public function setVar($key, $value, $not_gpc = false)
     {
         if (!empty($key) && isset($value) && isset($this->vars[$key])) {
             $this->vars[$key]['value'] =& $value;
@@ -301,7 +313,7 @@ class RMObject
      * @param array $var_arr associative array of values to assign
      * @param bool $not_gpc
      */
-    function setVars($var_arr, $not_gpc = false)
+    public function setVars($var_arr, $not_gpc = false)
     {
         foreach ($var_arr as $key => $value) {
             $this->setVar($key, $value, $not_gpc);
@@ -319,7 +331,7 @@ class RMObject
      * @param array $var_arr associative array of values to assign
      * @param string $pref prefix (only keys starting with the prefix will be set)
      */
-    function setFormVars($var_arr = null, $pref = 'xo_', $not_gpc = false)
+    public function setFormVars($var_arr = null, $pref = 'xo_', $not_gpc = false)
     {
         $len = strlen($pref);
         foreach ($var_arr as $key => $value) {
@@ -349,7 +361,6 @@ class RMObject
         }
 
         return $ret;
-
     }
 
     /**
@@ -360,7 +371,7 @@ class RMObject
      * @param int $maxDepth Maximum level of recursion to use if some vars are objects themselves
      * @return array associative array of key->value pairs
      */
-    function getValues($keys = null, $format = 's', $maxDepth = 1)
+    public function getValues($keys = null, $format = 's', $maxDepth = 1)
     {
         if (!isset($keys)) {
             $keys = array_keys($this->vars);
@@ -388,11 +399,11 @@ class RMObject
      * @param string $format format to use for the output
      * @return mixed formatted value of the variable
      */
-    function getVar($key, $format = 's')
+    public function getVar($key, $format = 's')
     {
-
-        if (!isset($this->vars[$key]))
+        if (!isset($this->vars[$key])) {
             return null;
+        }
 
         $ret = $this->vars[$key]['value'];
 
@@ -508,7 +519,6 @@ class RMObject
                         default:
                             break 1;
                     }
-
                 }
                 break;
         }
@@ -623,7 +633,7 @@ class RMObject
      * @param string $filtername name of the filter
      * @access public
      */
-    function registerFilter($filtername)
+    public function registerFilter($filtername)
     {
         $this->_filters[] = $filtername;
     }
@@ -633,7 +643,7 @@ class RMObject
      *
      * @access private
      */
-    function _loadFilters()
+    public function _loadFilters()
     {
         //include_once ABSPATH.'/class/filters/filter.php';
         //foreach ($this->_filters as $f) {
@@ -647,7 +657,7 @@ class RMObject
      * @access public
      * @return object clone
      */
-    function rmClone()
+    public function rmClone()
     {
         $class = get_class($this);
         $clone = new $class();
@@ -665,7 +675,7 @@ class RMObject
      * @param string $value error to add
      * @access public
      */
-    function setErrors($err_str)
+    public function setErrors($err_str)
     {
         $this->_errors[] = trim($err_str);
     }
@@ -676,7 +686,7 @@ class RMObject
      * @return array an array of errors
      * @access public
      */
-    function getErrors()
+    public function getErrors()
     {
         return $this->errors(false);
     }
@@ -687,7 +697,7 @@ class RMObject
      * @return string html listing the errors
      * @access public
      */
-    function getHtmlErrors()
+    public function getHtmlErrors()
     {
         return $this->errores(true);
     }
@@ -718,15 +728,11 @@ class RMObject
         }
 
         if ($html) {
-
             foreach ($this->_errors as $k) {
                 $ret .= "$k<br>";
             }
-
         } else {
-
             return $this->_errors;
-
         }
 
         return $ret;
@@ -803,7 +809,6 @@ class RMObject
      */
     protected function getColumns()
     {
-
         static $objectColumns;
         static $primaryCols;
         if (!empty($objectColumns[get_class($this)])) {
@@ -834,7 +839,6 @@ class RMObject
      */
     protected function initVarsFromTable()
     {
-
         foreach ($this->getColumns() as $k => $v) {
             $efes = array();
             preg_match("/(.+)(\(([,0-9]+)\))/", $v['Type'], $efes);
@@ -903,12 +907,10 @@ class RMObject
             $this->initVar($v['Field'], $type, $v['Default'], false, $lon);
             $this->vars[$v['Field']]['dbtype'] = $efes[1];
 
-            if(in_array($v['Field'], $this->noTranslate)){
+            if (in_array($v['Field'], $this->noTranslate)) {
                 $this->vars[$v['Field']]['translate'] = 0;
             }
-
         }
-
     }
 
     /**
@@ -920,7 +922,6 @@ class RMObject
      */
     protected function loadValues($id, $filters = null)
     {
-
         $id = $this->escape($id);
 
         $sql = "SELECT * FROM $this->_dbtable WHERE `$this->primary`='$id'";
@@ -928,12 +929,12 @@ class RMObject
         /**
          * Added on Sep-05-2017
          */
-        if(null != $filters && is_array($filters) && false == empty($filters)){
-            foreach($filters as $column => $value){
+        if (null != $filters && is_array($filters) && false == empty($filters)) {
+            foreach ($filters as $column => $value) {
                 $column = $this->escape($column);
                 $value = $this->escape($value);
 
-                if('' == $column){
+                if ('' == $column) {
                     continue;
                 }
 
@@ -942,7 +943,9 @@ class RMObject
         }
 
         $result = $this->db->query($sql);
-        if ($this->db->getRowsNum($result) <= 0) return false;
+        if ($this->db->getRowsNum($result) <= 0) {
+            return false;
+        }
 
         $row = $this->db->fetchArray($result);
         foreach ($row as $k => $v) {
@@ -978,19 +981,20 @@ class RMObject
      */
     protected function loadValuesFiltered($filter = '')
     {
-
-        if (get_magic_quotes_gpc())
+        if (get_magic_quotes_gpc()) {
             $filter = stripslashes($filter);
+        }
 
         $sql = "SELECT * FROM $this->_dbtable WHERE $filter";
         $result = $this->db->query($sql);
-        if ($this->db->getRowsNum($result) <= 0) return false;
+        if ($this->db->getRowsNum($result) <= 0) {
+            return false;
+        }
 
         $row = $this->db->fetchArray($result);
         $this->assignVars($row);
 
         return true;
-
     }
 
     /**
@@ -1007,15 +1011,18 @@ class RMObject
          */
         $query = '';
         foreach ($values as $k => $v) {
-            if (get_magic_quotes_gpc())
+            if (get_magic_quotes_gpc()) {
                 $v = stripslashes($v);
+            }
             $values[$k] = $this->escape($v);
             $query .= $query == '' ? "`$k`='$v'" : " AND `$k`='$v'";
         }
 
         $sql = "SELECT * FROM $this->_dbtable WHERE $query";
         $result = $this->db->queryF($sql);
-        if ($this->db->getRowsNum($result) <= 0) return false;
+        if ($this->db->getRowsNum($result) <= 0) {
+            return false;
+        }
 
         $row = $this->db->fetchArray($result);
         $myts = TextCleaner::getInstance();
@@ -1024,10 +1031,10 @@ class RMObject
         }
 
         return true;
-
     }
 
-    protected function saveTranslated(){
+    protected function saveTranslated()
+    {
         // Added for translate support
         if (!$this->isNew() && Services::getInstance()->isThereProvider('language') && '' != $this->ownerName && '' != $this->ownerType) {
             $result = Services::getInstance()->language->saveData([
@@ -1063,9 +1070,9 @@ class RMObject
         // Added for translation support
         $translate = $this->saveTranslated();
 
-        if(true === $translate){
+        if (true === $translate) {
             return true;
-        }elseif(false === $translate){
+        } elseif (false === $translate) {
             return false;
         }
 
@@ -1073,7 +1080,9 @@ class RMObject
         $fields = '';
         $values = '';
         foreach ($this->_tblcolumns as $k) {
-            if ($k['Extra'] == 'auto_increment') continue;
+            if ($k['Extra'] == 'auto_increment') {
+                continue;
+            }
             $fields .= ($fields == '') ? "`$k[Field]`" : ", `$k[Field]`";
             $values .= ($values == '') ? "'" . $this->escape($this->cleanVars[$k['Field']]) . "'" : ", '" . $this->escape($this->cleanVars[$k['Field']]) . "'";
         }
@@ -1088,7 +1097,6 @@ class RMObject
             $this->unsetNew();
             return true;
         }
-
     }
 
     /**
@@ -1096,7 +1104,9 @@ class RMObject
      */
     protected function updateTable()
     {
-        if (empty($this->_tblcolumns)) $this->getColumns();
+        if (empty($this->_tblcolumns)) {
+            $this->getColumns();
+        }
 
         $myts = TextCleaner::getInstance();
         $this->cleanVars();
@@ -1104,9 +1114,9 @@ class RMObject
         // Added for translation support
         $translate = $this->saveTranslated();
 
-        if(true === $translate){
+        if (true === $translate) {
             return true;
-        }elseif(false === $translate){
+        } elseif (false === $translate) {
             return false;
         }
 
@@ -1115,7 +1125,9 @@ class RMObject
 
 
         foreach ($this->_tblcolumns as $k) {
-            if ($k['Extra'] == 'auto_increment') continue;
+            if ($k['Extra'] == 'auto_increment') {
+                continue;
+            }
             $fields .= $fields == '' ? "`$k[Field]`='" . addslashes($this->cleanVars[$k['Field']]) . "'" : ", `$k[Field]`='" . addslashes($this->cleanVars[$k['Field']]) . "'";
         }
 
@@ -1144,10 +1156,10 @@ class RMObject
             $this->deleteTranslated();
             return true;
         }
-
     }
 
-    public function deleteTranslated(){
+    public function deleteTranslated()
+    {
         // Added for translate support
         if (!$this->isNew() && Services::getInstance()->isThereProvider('language') && '' != $this->ownerName && '' != $this->ownerType) {
             $result = Services::getInstance()->language->deleteData([
@@ -1180,15 +1192,17 @@ class RMObject
         return mysqli_real_escape_string($this->db->conn, $string);
     }
 
-    public function save(){
-        if($this->isNew()){
+    public function save()
+    {
+        if ($this->isNew()) {
             return $this->saveToTable();
         } else {
             return $this->updateTable();
         }
     }
 
-    public function delete(){
+    public function delete()
+    {
         return $this->deleteFromTable();
     }
 }

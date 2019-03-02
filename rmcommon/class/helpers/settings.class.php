@@ -14,7 +14,6 @@
  */
 class RMSettings
 {
-
     private static $plugin_settings = array();
     private static $modules_settings = array();
 
@@ -25,12 +24,11 @@ class RMSettings
      * @param string $name
      * @return stdClass
      */
-    static function cu_settings($name = '')
+    public static function cu_settings($name = '')
     {
         global $cuSettings;
 
         if (!isset($cuSettings)) {
-
             $cuSettings = new stdClass();
 
             $db = XoopsDatabaseFactory::getDatabaseConnection();
@@ -49,7 +47,6 @@ class RMSettings
                 $config->assignVars($row);
                 $cuSettings->{$config->getVar('conf_name')} = $config->getConfValueForOutput();
             }
-
         }
 
         $name = trim($name);
@@ -69,17 +66,19 @@ class RMSettings
      * @param bool $values
      * @return array
      */
-    static function plugin_settings($dir, $values = false)
+    public static function plugin_settings($dir, $values = false)
     {
-
-        if ($dir == '') return null;
+        if ($dir == '') {
+            return null;
+        }
 
         if (!isset(self::$plugin_settings[$dir])) {
-
             $db = XoopsDatabaseFactory::getDatabaseConnection();
             $sql = "SELECT * FROM " . $db->prefix("mod_rmcommon_settings") . " WHERE element='$dir'";
             $result = $db->query($sql);
-            if ($db->getRowsNum($result) <= 0) return null;
+            if ($db->getRowsNum($result) <= 0) {
+                return null;
+            }
             $configs = array();
             while ($row = $db->fetchArray($result)) {
                 $configs[$row['name']] = $row;
@@ -87,10 +86,11 @@ class RMSettings
 
             $configs = self::option_value_output($configs);
             self::$plugin_settings[$dir] = $configs;
-
         }
 
-        if (!$values) return (object)self::$plugin_settings[$dir];
+        if (!$values) {
+            return (object)self::$plugin_settings[$dir];
+        }
 
         $ret = array();
         foreach (self::$plugin_settings[$dir] as $name => $conf) {
@@ -98,7 +98,6 @@ class RMSettings
         }
 
         return (object)$ret;
-
     }
 
     /**
@@ -109,9 +108,7 @@ class RMSettings
 
     private static function option_value_output($settings)
     {
-
         foreach ($settings as $name => $data) {
-
             switch ($data['valuetype']) {
                 case 'int':
                     $settings[$name]['value'] = (int)$data['value'];
@@ -148,37 +145,34 @@ class RMSettings
         global $xoopsModuleConfig, $xoopsModule;
 
         if (isset(self::$modules_settings[$directory])) {
-
-            if ($option != '' & isset(self::$modules_settings[$directory][$option]))
+            if ($option != '' & isset(self::$modules_settings[$directory][$option])) {
                 return self::$modules_settings[$directory][$option];
+            }
 
             return (object)self::$modules_settings[$directory];
-
         }
 
         if (isset($xoopsModuleConfig) && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $directory && $xoopsModule->getVar('isactive'))) {
-
             self::$modules_settings[$directory] = $xoopsModuleConfig;
 
-            if ($option != '' && isset($xoopsModuleConfig[$option]))
+            if ($option != '' && isset($xoopsModuleConfig[$option])) {
                 return $xoopsModuleConfig[$option];
-            else
+            } else {
                 return (object)$xoopsModuleConfig;
-
+            }
         } else {
             $module_handler = xoops_getHandler('module');
             $module = $module_handler->getByDirname($directory);
             $config_handler = xoops_getHandler('config');
             if ($module) {
-
                 $moduleConfig = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
                 self::$modules_settings[$directory] = $moduleConfig;
 
-                if ($option != '' && isset($moduleConfig[$option]))
+                if ($option != '' && isset($moduleConfig[$option])) {
                     return $moduleConfig[$option];
-                else
+                } else {
                     return (object)$moduleConfig;
-
+                }
             }
         }
         return null;
@@ -188,11 +182,11 @@ class RMSettings
     {
         global $xoopsModule, $xoopsDB;
 
-        if('' == $directory || '' == $option){
+        if ('' == $directory || '' == $option) {
             return false;
         }
 
-        if($xoopsModule && $xoopsModule->getVar('dirname') == $directory){
+        if ($xoopsModule && $xoopsModule->getVar('dirname') == $directory) {
             $mod = $xoopsModule;
         } else {
             $module_handler = xoops_getHandler('module');
@@ -200,13 +194,13 @@ class RMSettings
         }
 
         $item = new Rmcommon_Config_Item($option, $mod->getVar('mid'));
-        if($item->isNew()){
+        if ($item->isNew()) {
             return false;
         }
 
         $item->set_value($value);
 
-        if($item->save()){
+        if ($item->save()) {
             return true;
         }
 
@@ -225,9 +219,9 @@ class RMSettings
      */
     public static function render_field($field)
     {
-
-        if (empty($field))
+        if (empty($field)) {
             return null;
+        }
 
         $tc = TextCleaner::getInstance();
 
@@ -290,7 +284,7 @@ class RMSettings
                     $value = defined($value) ? constant($value) : $value;
                     $caption = defined($caption) ? constant($caption) : $caption;
 
-                    if($field->type == 'array'){
+                    if ($field->type == 'array') {
                         $checked = in_array($value, $field->value);
                     } else {
                         $checked = $value == $field->value;
@@ -429,12 +423,10 @@ class RMSettings
         }
 
         return $ele->render();
-
     }
 
     public static function write_rewrite_js()
     {
-
         $paths = self::cu_settings('modules_path');
 
         $content = "var cu_modules = {\n";
@@ -446,7 +438,5 @@ class RMSettings
         $content .= "};\n";
 
         RMTemplate::getInstance()->add_inline_script($content, 0);
-
     }
-
 }

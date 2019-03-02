@@ -53,7 +53,7 @@ class RMFormEditor extends RMFormElement
      * @param string $type Tipo de Editor. Posibles valores: tiny, html, xoops, simple, markdown, quill
      * @update Added quill editor as default option
      */
-    function __construct($caption, $name = null, $width = '100%', $height = '300px', $default = '', $type = '', $change = 1, $ele = array('op'))
+    public function __construct($caption, $name = null, $width = '100%', $height = '300px', $default = '', $type = '', $change = 1, $ele = array('op'))
     {
         $rmc_config = RMSettings::cu_settings();
 
@@ -76,7 +76,6 @@ class RMFormEditor extends RMFormElement
 
         $this->setIfNotSet('type', $type == '' ? $rmc_config->editor_type : $type);
         $this->setIfNotSet('value', '');
-
     }
 
     /**
@@ -198,7 +197,7 @@ class RMFormEditor extends RMFormElement
 
         $this->renderAttributeString();
 
-        if ('' != $this->get('id')){
+        if ('' != $this->get('id')) {
             TinyEditor::getInstance()->add_config('elements', '#' . $this->get('id'), true);
         }
         RMTemplate::getInstance()->add_style('editor-tiny.min.css', 'rmcommon');
@@ -263,8 +262,7 @@ class RMFormEditor extends RMFormElement
         $plugins = array();
         $plugins = RMEvents::get()->run_event('rmcommon.html.editor.plugins', $plugins, $this->get('id'));
 
-        $rtn .= "<div class=\"quicktags\"><div id=\"ed_toolbar_" . $this->get('id') . "\"></div></div>" . (!empty
-            ($plugins) ? "<div class='ed-qt-plugins'><span class='plugin'>" . implode('</span><span class="plugin">', $plugins) . "</span></div>" : '') . "
+        $rtn .= "<div class=\"quicktags\"><div id=\"ed_toolbar_" . $this->get('id') . "\"></div></div>" . (!empty($plugins) ? "<div class='ed-qt-plugins'><span class='plugin'>" . implode('</span><span class="plugin">', $plugins) . "</span></div>" : '') . "
 		<div class='txtarea-container' style='height: " . $this->get('height') . ";'><textarea id='" . $this->get('id') . "' name='" . $this->get('name') . "' class='" . $this->get('class') . "'>" . $this->get('value') . "</textarea></div>
 		</div>";
         return $rtn;
@@ -285,12 +283,10 @@ class RMFormEditor extends RMFormElement
 
     public function renderMarkdown()
     {
-
         $editor = new Editor_Markdown($this->get('id'), $this->md_options);
         $editor->attr('style', 'height: ' . $this->get('height'));
         $editor->content = $this->get('value');
         return $editor->render();
-
     }
 
     /**
@@ -300,7 +296,9 @@ class RMFormEditor extends RMFormElement
      */
     public function exmcode_buttons($buttons)
     {
-        if ($buttons == '') return;
+        if ($buttons == '') {
+            return;
+        }
 
         $this->ex_buttons = $buttons;
     }

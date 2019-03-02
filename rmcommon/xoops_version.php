@@ -26,8 +26,9 @@
  * @url          http://www.eduardocortes.mx
  */
 
-if (!function_exists("__")){
-    function __($text, $d = ''){
+if (!function_exists("__")) {
+    function __($text, $d = '')
+    {
         return $text;
     }
 }
@@ -114,7 +115,7 @@ $cu_settings['categories'] = array(
 // Jquery cdn
 $cu_settings['config'][] = array(
     'name'          => 'cdn_jquery',
-    'title'         => __( 'Use CDN for jQuery', 'rmcommon' ),
+    'title'         => __('Use CDN for jQuery', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -124,7 +125,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'cdn_jquery_url',
-    'title'         => __( 'jQuery CDN URI', 'rmcommon' ),
+    'title'         => __('jQuery CDN URI', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
@@ -134,7 +135,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'cdn_jqueryui_url',
-    'title'         => __( 'jQuery UI CDN URI', 'rmcommon' ),
+    'title'         => __('jQuery UI CDN URI', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
@@ -144,7 +145,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'cdn_bootstrap',
-    'title'         => __( 'Use CDN for Bootstrap', 'rmcommon' ),
+    'title'         => __('Use CDN for Bootstrap', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -154,7 +155,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'cdn_bootstrap_url',
-    'title'         => __( 'Bootstrap CDN URI', 'rmcommon' ),
+    'title'         => __('Bootstrap CDN URI', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
@@ -164,7 +165,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'cdn_jsbootstrap_url',
-    'title'         => __( 'Bootstrap Javascript CDN URI', 'rmcommon' ),
+    'title'         => __('Bootstrap Javascript CDN URI', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
@@ -174,7 +175,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'cdn_fa',
-    'title'         => __( 'Use CDN for FontAwesome', 'rmcommon' ),
+    'title'         => __('Use CDN for FontAwesome', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -184,7 +185,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'cdn_fa_url',
-    'title'         => __( 'FontAwesome CDN URI', 'rmcommon' ),
+    'title'         => __('FontAwesome CDN URI', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
@@ -194,7 +195,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'development',
-    'title'         => __( 'Enable development stage', 'rmcommon' ),
+    'title'         => __('Enable development stage', 'rmcommon'),
     'description'   => __('Enable features for development stage, such as disable CSS and JS files caching and more.', 'rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -205,7 +206,7 @@ $cu_settings['config'][] = array(
 // URL Rewriting
 $cu_settings['config'][] = array(
     'name'          => 'permalinks',
-    'title'         => __( 'Enable URL rewriting', 'rmcommon' ),
+    'title'         => __('Enable URL rewriting', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -216,8 +217,8 @@ $cu_settings['config'][] = array(
 // Modules path rewriting
 $cu_settings['config'][] = array(
     'name'          => 'modules_path',
-    'title'         => __( 'New rewrite paths for supported modules', 'rmcommon' ),
-    'description'   => __( 'Indicate the new paths for supported modules. This path must be used to form new rewrited URLs for modules.', 'rmcommon' ),
+    'title'         => __('New rewrite paths for supported modules', 'rmcommon'),
+    'description'   => __('Indicate the new paths for supported modules. This path must be used to form new rewrited URLs for modules.', 'rmcommon'),
     'formtype'      => 'modules-rewrite',
     'valuetype'    => 'array',
     'default'       => '',
@@ -239,7 +240,7 @@ $cu_settings['config'][] = array(
 */
 $cu_settings['config'][] = array(
     'name'          => 'lang',
-    'title'         => __('Language to use','rmcommon'),
+    'title'         => __('Language to use', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'cu-language',
     'valuetype'     => 'text',
@@ -249,7 +250,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'theme',
-    'title'         => __('Admin theme','rmcommon'),
+    'title'         => __('Admin theme', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'cu-theme',
     'valuetype'     => 'text',
@@ -259,7 +260,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'gui_disable',
-    'title'         => __('Disable new GUI when working on non native modules?','rmcommon'),
+    'title'         => __('Disable new GUI when working on non native modules?', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -270,24 +271,24 @@ $cu_settings['config'][] = array(
 // Editor
 $cu_settings['config'][] = array(
     'name'          => 'editor_type',
-    'title'         => __('Select the default editor','rmcommon'),
+    'title'         => __('Select the default editor', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'select',
     'valuetype'     => 'text',
     'default'       => 'tiny',
     'options'       => array(
         //__('Visual Editor Quill','rmcommon') =>'quill',
-        __('Visual Editor TinyMCE','rmcommon') =>'tiny',
-        __('HTML Editor','rmcommon') => 'html',
-        __('Simple Editor','rmcommon') => 'simple',
-        __('Markdown Editor','rmcommon') => 'markdown'
+        __('Visual Editor TinyMCE', 'rmcommon') =>'tiny',
+        __('HTML Editor', 'rmcommon') => 'html',
+        __('Simple Editor', 'rmcommon') => 'simple',
+        __('Markdown Editor', 'rmcommon') => 'markdown'
     ),
     'category'      => 'general'
 );
 
 $cu_settings['config'][] = array(
     'name'          => 'markdown',
-    'title'         => __('Parse MarkDown','rmcommon'),
+    'title'         => __('Parse MarkDown', 'rmcommon'),
     'description'   => __('This option enables the parsing for Markdown code for text. Must be enabled when "Markdown Editor" is selected.', 'rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -298,8 +299,8 @@ $cu_settings['config'][] = array(
 // JQuery inclusion
 $cu_settings['config'][] = array(
     'name'          => 'jquery',
-    'title'         => __('Enable JQuery for front end','rmcommon'),
-    'description'   => __('When this option is enabled, Common Utilities will include JQuery automatically. Please, disable this option only when your theme include jquery by default.','rmcommon'),
+    'title'         => __('Enable JQuery for front end', 'rmcommon'),
+    'description'   => __('When this option is enabled, Common Utilities will include JQuery automatically. Please, disable this option only when your theme include jquery by default.', 'rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
     'default'       => '1',
@@ -309,7 +310,7 @@ $cu_settings['config'][] = array(
 // Images store type
 $cu_settings['config'][] = array(
     'name'          => 'imagestore',
-    'title'         => __('Arrange images by date','rmcommon'),
+    'title'         => __('Arrange images by date', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -320,7 +321,7 @@ $cu_settings['config'][] = array(
 // Images Categories list limit number
 $cu_settings['config'][] = array(
     'name'          => 'catsnumber',
-    'title'         => __('Limit for image categories list.','rmcommon'),
+    'title'         => __('Limit for image categories list.', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
@@ -330,7 +331,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'imgsnumber',
-    'title'         => __('Image manager: number of images per page','rmcommon'),
+    'title'         => __('Image manager: number of images per page', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
@@ -340,16 +341,18 @@ $cu_settings['config'][] = array(
 
 // Secure Key
 global $common;
-if (!isset($xoopsSecurity)) $xoopsSecurity = new XoopsSecurity();
+if (!isset($xoopsSecurity)) {
+    $xoopsSecurity = new XoopsSecurity();
+}
 
-if(null == $common){
+if (null == $common) {
     require_once 'class/utilities.php';
 }
 
 $cu_settings['config'][] = array(
     'name'          => 'secretkey',
-    'title'         => __('Secret Key','rmcommon'),
-    'description'   => __('Provide a secret key used to encrypt information.','rmcommon'),
+    'title'         => __('Secret Key', 'rmcommon'),
+    'description'   => __('Provide a secret key used to encrypt information.', 'rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
     'default'       => RMUtilities::randomString(60),
@@ -359,7 +362,7 @@ $cu_settings['config'][] = array(
 // Formato HTML5
 $cu_settings['config'][] = array(
     'name'          => 'dohtml',
-    'title'         => __('Allow HTMl in text','rmcommon'),
+    'title'         => __('Allow HTMl in text', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -369,7 +372,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'dosmileys',
-    'title'         => __('Allow smilies in text','rmcommon'),
+    'title'         => __('Allow smilies in text', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -379,7 +382,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'doxcode',
-    'title'         => __('Allow XoopsCode','rmcommon'),
+    'title'         => __('Allow XoopsCode', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -389,7 +392,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'doimage',
-    'title'         => __('Allow images in text','rmcommon'),
+    'title'         => __('Allow images in text', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -399,7 +402,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'dobr',
-    'title'         => __('Auto add line breaks in text','rmcommon'),
+    'title'         => __('Auto add line breaks in text', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -409,7 +412,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'mods_number',
-    'title'         => __('Modules number on dashboard','rmcommon'),
+    'title'         => __('Modules number on dashboard', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
@@ -420,7 +423,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'rssimage',
-    'title'         => __('Image for RSS feeds','rmcommon'),
+    'title'         => __('Image for RSS feeds', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
@@ -431,7 +434,7 @@ $cu_settings['config'][] = array(
 // Comments
 $cu_settings['config'][] = array(
     'name'          => 'enable_comments',
-    'title'         => __('Enable comments','rmcommon'),
+    'title'         => __('Enable comments', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -441,7 +444,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'anonymous_comments',
-    'title'         => __('Allow anonymous users to post comments','rmcommon'),
+    'title'         => __('Allow anonymous users to post comments', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -451,7 +454,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'approve_reg_coms',
-    'title'         => __('Automatically approve comments by registered users','rmcommon'),
+    'title'         => __('Automatically approve comments by registered users', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -461,7 +464,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'approve_anon_coms',
-    'title'         => __('Automatically approve comments by anonymous users','rmcommon'),
+    'title'         => __('Automatically approve comments by anonymous users', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -471,7 +474,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'allow_edit',
-    'title'         => __('Allow users to edit their comments','rmcommon'),
+    'title'         => __('Allow users to edit their comments', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -481,7 +484,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'edit_limit',
-    'title'         => __('Time limit to edit a comment (in hours).','rmcommon'),
+    'title'         => __('Time limit to edit a comment (in hours).', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
@@ -491,7 +494,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'comments_notify',
-    'title'         => __('Notify administrators about new comments','rmcommon'),
+    'title'         => __('Notify administrators about new comments', 'rmcommon'),
     'description'   => __('By enabling this option, Common Utilities will send a notification to webmasters every time that a new comment is posted.', 'rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -502,14 +505,14 @@ $cu_settings['config'][] = array(
 /** Mailer Configurations **/
 $cu_settings['config'][] = array(
     'name'          => 'transport',
-    'title'         => __('Mailer method','rmcommon'),
+    'title'         => __('Mailer method', 'rmcommon'),
     'description'   => __('Common Utilities will use this method to send emails.', 'rmcommon'),
     'formtype'      => 'select',
     'valuetype'     => 'text',
     'options'       => array(
-        __('PHP Mail()','rmcommon') => 'mail',
-        __('SMTP','rmcommon') => 'smtp',
-        __('Sendmail','rmcommon') => 'sendmail'
+        __('PHP Mail()', 'rmcommon') => 'mail',
+        __('SMTP', 'rmcommon') => 'smtp',
+        __('Sendmail', 'rmcommon') => 'sendmail'
     ),
     'default'       => 'mail',
     'category'      => 'email'
@@ -517,8 +520,8 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'smtp_server',
-    'title'         => __('SMTP server to use','rmcommon'),
-    'description'   => __('Specify the server through with the emails will be sent.','rmcommon'),
+    'title'         => __('SMTP server to use', 'rmcommon'),
+    'description'   => __('Specify the server through with the emails will be sent.', 'rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
     'default'       => '',
@@ -527,14 +530,14 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'smtp_crypt',
-    'title'         => __('SMTP encryption','rmcommon'),
-    'description'   => __('For SSL or TLS encryption to work, your PHP installation must have appropriate OpenSSL transports wrappers.','rmcommon'),
+    'title'         => __('SMTP encryption', 'rmcommon'),
+    'description'   => __('For SSL or TLS encryption to work, your PHP installation must have appropriate OpenSSL transports wrappers.', 'rmcommon'),
     'formtype'      => 'select',
     'valuetype'     => 'text',
     'options'       => array(
-        __('None','rmcommon') => 'none',
-        __('SSL','rmcommon') => 'ssl',
-        __('TLS','rmcommon') => 'tls'
+        __('None', 'rmcommon') => 'none',
+        __('SSL', 'rmcommon') => 'ssl',
+        __('TLS', 'rmcommon') => 'tls'
     ),
     'default'       => 'none',
     'category'      => 'email'
@@ -542,8 +545,8 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'smtp_port',
-    'title'         => __('SMTP server port','rmcommon'),
-    'description'   => __('Note that you must to write the appropriate port based on your encryption type selection.','rmcommon'),
+    'title'         => __('SMTP server port', 'rmcommon'),
+    'description'   => __('Note that you must to write the appropriate port based on your encryption type selection.', 'rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
     'default'       => 25,
@@ -552,7 +555,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'smtp_user',
-    'title'         => __('SMTP username','rmcommon'),
+    'title'         => __('SMTP username', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
@@ -562,7 +565,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'smtp_pass',
-    'title'         => __('SMTP password','rmcommon'),
+    'title'         => __('SMTP password', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'password',
     'valuetype'     => 'text',
@@ -572,8 +575,8 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'sendmail_path',
-    'title'         => __('Sendmail path','rmcommon'),
-    'description'   => __('Input the command for sendmail, including the correct command line flags. The default to use is "/usr/sbin/sendmail -bs" if this is not specified.','rmcommon'),
+    'title'         => __('Sendmail path', 'rmcommon'),
+    'description'   => __('Input the command for sendmail, including the correct command line flags. The default to use is "/usr/sbin/sendmail -bs" if this is not specified.', 'rmcommon'),
     'formtype'      => 'textbox',
     'valuetype'     => 'text',
     'default'       => '/usr/sbin/sendmail -bs',
@@ -582,7 +585,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'rss_enable',
-    'title'         => __('Enable RSS Center','rmcommon'),
+    'title'         => __('Enable RSS Center', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -592,7 +595,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'blocks_enable',
-    'title'         => __('Enable internal blocks manager','rmcommon'),
+    'title'         => __('Enable internal blocks manager', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
@@ -602,8 +605,8 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'updates',
-    'title'         => __('Activate updates','rmcommon'),
-    'description'   => __('When this option is enabled, Common Utilities will search automatically updates for modules and other components.','rmcommon'),
+    'title'         => __('Activate updates', 'rmcommon'),
+    'description'   => __('When this option is enabled, Common Utilities will search automatically updates for modules and other components.', 'rmcommon'),
     'formtype'      => 'yesno',
     'valuetype'     => 'int',
     'default'       => 1,
@@ -612,7 +615,7 @@ $cu_settings['config'][] = array(
 
 $cu_settings['config'][] = array(
     'name'          => 'updatesinterval',
-    'title'         => __('Days between updates search','rmcommon'),
+    'title'         => __('Days between updates search', 'rmcommon'),
     'description'   => '',
     'formtype'      => 'textbox',
     'valuetype'     => 'int',
@@ -621,7 +624,7 @@ $cu_settings['config'][] = array(
 );
 
 // Additional configurations
-if( class_exists('RMEvents') ){
+if (class_exists('RMEvents')) {
     $cu_settings = RMEvents::get()->run_event('rmcommon.additional.options', $cu_settings);
 }
 
@@ -633,8 +636,8 @@ unset($cu_settings);
 
 $modversion['blocks'][] = array(
     'file' => "comments.php",
-    'name' => __('Comments','rmcommon'),
-    'description' => __('Show comments from internal comments system','rmcommon'),
+    'name' => __('Comments', 'rmcommon'),
+    'description' => __('Show comments from internal comments system', 'rmcommon'),
     'show_func' => "rmc_bkcomments_show",
     'edit_func' => "rmc_bkcomments_edit",
     'template' => 'rmc_bk_comments.html',
@@ -643,27 +646,27 @@ $modversion['blocks'][] = array(
 
 $modversion['blocks'][] = array(
     'file' => "custom.php",
-    'name' => __('Custom Block','rmcommon'),
-    'description' => __('Allows to create a block with custom content.','rmcommon'),
+    'name' => __('Custom Block', 'rmcommon'),
+    'description' => __('Allows to create a block with custom content.', 'rmcommon'),
     'show_func' => "",
     'type' => 'custom'
 );
 
 $amod = xoops_getActiveModules();
-if(in_array("rmcommon",$amod) && class_exists("Common\Core\Helpers\Plugins")){
+if (in_array("rmcommon", $amod) && class_exists("Common\Core\Helpers\Plugins")) {
     $plugins = Common\Core\Helpers\Plugins::allInstalled();
-    foreach($plugins as $plugin){
+    foreach ($plugins as $plugin) {
         $p = Common\Core\Helpers\Plugins::getInstance()->load($plugin);
-        if(!method_exists($p, 'blocks')) continue;
-        foreach($p->blocks() as $block){
+        if (!method_exists($p, 'blocks')) {
+            continue;
+        }
+        foreach ($p->blocks() as $block) {
             $block['type'] = 'plugin';
             $modversion['blocks'][] = $block;
         }
-
     }
-
 }
 
 $modversion['subpages'] = array(
-    'error404'=> __('Error 404', 'rmcommon' )
+    'error404'=> __('Error 404', 'rmcommon')
 );

@@ -4,7 +4,7 @@
     <?php _e('Next are the notifications that you are subscriben in our site. To cancel any of these, uncheck the box.', 'rmcommon'); ?>
 </p>
 
-<?php foreach( $elements as $index => $element ): ?>
+<?php foreach ($elements as $index => $element): ?>
     <h3><a href="<?php echo $element['link']; ?>"><?php echo $element['name']; ?></a></h3>
 
     <div class="panel panel-default">
@@ -19,7 +19,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach( $items[$index] as $item ): ?>
+                <?php foreach ($items[$index] as $item): ?>
                     <tr>
                         <td><?php echo $item['caption']; ?></td>
                         <td>

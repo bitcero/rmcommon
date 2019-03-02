@@ -16,7 +16,8 @@ class RMImageResizer
      * @param string $file Archivo existente
      * @param string $filetarget Archivo destino
      */
-    public function __construct($file='', $filetarget=''){
+    public function __construct($file='', $filetarget='')
+    {
         $this->file = $file;
         $this->filetarget = $filetarget;
     }
@@ -24,26 +25,30 @@ class RMImageResizer
      * Establece el archivo destino
      * @param string $file Ruta completa al archivo destino
      */
-    public function setTargetFile($file){
+    public function setTargetFile($file)
+    {
         $this->filetarget = $file;
     }
     /**
      * Obtiene la ruta completa del archivo destino
      */
-    public function getTargetFile(){
+    public function getTargetFile()
+    {
         return $this->filetarget;
     }
     /**
      * Establece el archivo origen
      * @param string $file Ruta completa al archivo origen
      */
-    public function setSourceFile($file){
+    public function setSourceFile($file)
+    {
         $this->file = $file;
     }
     /**
      * Obtiene la ruta completa del archivo origen
      */
-    public function getSourceFile(){
+    public function getSourceFile()
+    {
         return $this->file;
     }
     /**
@@ -51,12 +56,13 @@ class RMImageResizer
      * hayan sido especificados
      * @return bool
      */
-    private function checkFiles(){
-        if ($this->file==''){
+    private function checkFiles()
+    {
+        if ($this->file=='') {
             $this->addError(_RMS_CF_FILEEMPTY);
             return false;
         }
-        if ($this->filetarget==''){
+        if ($this->filetarget=='') {
             $this->addError(_RMS_CF_NOTARGET);
             return false;
         }
@@ -71,23 +77,28 @@ class RMImageResizer
      * @param int $green Valor Verde para la im?gen generada
      * @param int $blue Valor Azul para la im?gen generada
      */
-    public function resizeAndCrop($tw,$th,$red=255,$green=255,$blue=255){
+    public function resizeAndCrop($tw, $th, $red=255, $green=255, $blue=255)
+    {
+        if (!$this->checkFiles()) {
+            return false;
+        }
 
-        if (!$this->checkFiles()) return false;
-
-        if (!file_exists($this->file)){
+        if (!file_exists($this->file)) {
             $this->addError(_RMS_CF_FILENOEXISTS);
             return false;
         }
 
         list($wo, $ho) = getimagesize($this->file);
         $percent = 0;
-        $height = $ho * $percent; $width = $wo * $percent;
+        $height = $ho * $percent;
+        $width = $wo * $percent;
 
         $format = $this->getFormat();
 
         $image = $this->createImage($format);
-        if ($wo==$tw && $ho==$th) return true;
+        if ($wo==$tw && $ho==$th) {
+            return true;
+        }
 
         if ($wo < $ho) {
             $height = ($tw / $wo) * $ho;
@@ -95,18 +106,18 @@ class RMImageResizer
             $width = ($th / $ho) * $wo;
         }
 
-        if ($width < $tw){
+        if ($width < $tw) {
             //if the width is smaller than supplied thumbnail size
             $width = $tw;
             $height = ($tw/ $wo) * $ho;
         }
 
-        if ($height < $th){
+        if ($height < $th) {
             $height = $th;
             $width = ($th / $ho) * $wo;
         }
 
-        $thumb = imagecreatetruecolor($width , $height);
+        $thumb = imagecreatetruecolor($width, $height);
         $bgcolor = imagecolorallocate($thumb, $red, $green, $blue);
         imagefilledrectangle($thumb, 0, 0, $width, $height, $bgcolor);
         imagealphablending($thumb, true);
@@ -115,13 +126,13 @@ class RMImageResizer
         $thumb2 = imagecreatetruecolor($tw, $th);
         // true color for best quality
         $bgcolor = imagecolorallocate($thumb2, $red, $green, $blue);
-        imagefilledrectangle($thumb2, 0, 0,    $tw , $th , $bgcolor);
+        imagefilledrectangle($thumb2, 0, 0, $tw, $th, $bgcolor);
         imagealphablending($thumb2, true);
 
         $w1 =($width/2) - ($tw/2);
         $h1 = ($height/2) - ($th/2);
 
-        imagecopyresampled($thumb2, $thumb, 0,0, $w1, $h1, $tw, $th,$tw, $th);
+        imagecopyresampled($thumb2, $thumb, 0, 0, $w1, $h1, $tw, $th, $tw, $th);
 
         return $this->imageFromFormat($format, $thumb2);
     }
@@ -130,29 +141,32 @@ class RMImageResizer
      * @param int $width Ancho de la im?gen
      * @param bool $force Crea una im?gen anque esta sea mas peque?a que el ancho dado
      */
-    public function resizeWidth($width, $force = false){
-        if (!$this->checkFiles()) return false;
+    public function resizeWidth($width, $force = false)
+    {
+        if (!$this->checkFiles()) {
+            return false;
+        }
 
         $datos = getimagesize($this->file);
         $ratio = ($datos[0] / $width);
         $height = round($datos[1] / $ratio);
 
-        if (!$force){
-            if ($width >= $datos[0]){
-                if ($this->file != $this->filetarget){
+        if (!$force) {
+            if ($width >= $datos[0]) {
+                if ($this->file != $this->filetarget) {
                     copy($this->file, $this->filetarget);
                 }
                 return true;
             }
         }
 
-        $thumb = imagecreatetruecolor($width,$height);
-        $bgcolor = imagecolorallocate($thumb, 255,255,255);
+        $thumb = imagecreatetruecolor($width, $height);
+        $bgcolor = imagecolorallocate($thumb, 255, 255, 255);
         imagefilledrectangle($thumb, 0, 0, $width, $height, $bgcolor);
         imagealphablending($thumb, true);
         $format = $this->getFormat();
         $image = $this->createImage($format);
-        imagecopyresampled ($thumb, $image, 0, 0, 0, 0, $width, $height, $datos[0], $datos[1]);
+        imagecopyresampled($thumb, $image, 0, 0, 0, 0, $width, $height, $datos[0], $datos[1]);
         return $this->imageFromFormat($format, $thumb);
     }
     /**
@@ -162,11 +176,13 @@ class RMImageResizer
      * @param int $height Alto de la im?gen
      * @param bool $force Crea una im?gen aunque esta sea mas peque?a que el ancho dado
      */
-    public function resizeWidthOrHeight($width, $height, $force = false){
-
-        if (!$this->checkFiles()) return false;
+    public function resizeWidthOrHeight($width, $height, $force = false)
+    {
+        if (!$this->checkFiles()) {
+            return false;
+        }
         $datos = getimagesize($this->file);
-        if ($datos[0] >= $datos[1]){
+        if ($datos[0] >= $datos[1]) {
             $ratio = ($datos[0] / $width);
             $height = round($datos[1] / $ratio);
         } else {
@@ -174,23 +190,23 @@ class RMImageResizer
             $width = round($datos[0] / $ratio);
         }
 
-        $thumb = imagecreatetruecolor($width,$height);
+        $thumb = imagecreatetruecolor($width, $height);
         $format = $this->getFormat();
         $image = $this->createImage($format);
-        imagecopyresampled ($thumb, $image, 0, 0, 0, 0, $width, $height, $datos[0], $datos[1]);
+        imagecopyresampled($thumb, $image, 0, 0, 0, 0, $width, $height, $datos[0], $datos[1]);
         return $this->imageFromFormat($format, $thumb);
-
     }
     /**
      * Creamos la im?gen en memoria
      * @return object
      */
-    private function createImage($format){
-        switch($format){
+    private function createImage($format)
+    {
+        switch ($format) {
             case 'image/jpeg':
                 return imagecreatefromjpeg($this->file);
                 break;
-            case 'image/gif';
+            case 'image/gif':
                 return imagecreatefromgif($this->file);
                 break;
             case 'image/png':
@@ -202,12 +218,13 @@ class RMImageResizer
     /**
      * Guarda la im?gen modificada
      */
-    private function imageFromFormat($format, $image, $quality=90){
-        switch ($format){
+    private function imageFromFormat($format, $image, $quality=90)
+    {
+        switch ($format) {
             case 'image/jpeg':
                 return imagejpeg($image, $this->filetarget, $quality);
                    break;
-            case 'image/gif';
+            case 'image/gif':
                 return imagegif($image, $this->filetarget);
                 break;
             case 'image/png':
@@ -220,12 +237,13 @@ class RMImageResizer
      * Obtiene el formato de la im?gen
      * @return string
      */
-    private function getFormat(){
-        if(preg_match("/.jpg/i", $this->file)){
+    private function getFormat()
+    {
+        if (preg_match("/.jpg/i", $this->file)) {
             $format = 'image/jpeg';
-        } elseif (preg_match("/.gif/i", $this->file)){
+        } elseif (preg_match("/.gif/i", $this->file)) {
             $format = 'image/gif';
-        } elseif (preg_match("/.png/i", $this->file)){
+        } elseif (preg_match("/.png/i", $this->file)) {
             $format = 'image/png';
         }
 
@@ -246,44 +264,45 @@ class RMImageResizer
      * @param array|object $params Parameters to use
      * @return stdClass
      */
-    static public function resize( $file, $params ){
-
-        if ( empty( $file ) ) {
+    public static function resize($file, $params)
+    {
+        if (empty($file)) {
             trigger_error(__('Resize Image: You must provide a valid file for image.', 'rmcommon'), E_USER_WARNING);
             return false;
         }
 
-        if ( is_array( $params ) )
+        if (is_array($params)) {
             $params = (object) $params;
+        }
 
         /*
          * Default method for resize images is "crop"
          */
-        $params->method = !isset( $params->method ) ? 'crop' : $params->method;
+        $params->method = !isset($params->method) ? 'crop' : $params->method;
         /*
          * Default directory target for resize images is "uploads/resizer"
          */
-        $params->target = !isset( $params->target ) ? 'resizer' : $params->target;
+        $params->target = !isset($params->target) ? 'resizer' : $params->target;
         /*
          * Enable or disable cache verification
          */
-        $params->cache = !isset( $params->cache ) ? true : $params->cache;
-        $params->quality = !isset( $params->quality ) ? 80 : $params->quality;
+        $params->cache = !isset($params->cache) ? true : $params->cache;
+        $params->quality = !isset($params->quality) ? 80 : $params->quality;
 
-        $file = str_replace( XOOPS_URL, XOOPS_ROOT_PATH, $file);
+        $file = str_replace(XOOPS_URL, XOOPS_ROOT_PATH, $file);
 
-        if(!file_exists($file) && 0 != strpos($file, 'http')){
+        if (!file_exists($file) && 0 != strpos($file, 'http')) {
             return false;
         }
 
-        try{
-            $data = getimagesize( $file );
-        } catch ( Exception $e ){
-            trigger_error( $e->getMessage() );
+        try {
+            $data = getimagesize($file);
+        } catch (Exception $e) {
+            trigger_error($e->getMessage());
             return false;
         }
 
-        $file_info = pathinfo( $file );
+        $file_info = pathinfo($file);
 
         $formats = array( 'gif', 'jpg', 'png', 'swf', 'psd', 'bmp', 'tiff', 'tiff', 'jpc', 'jp2', 'jpx', 'jb2', 'swc', 'iff', 'wbmp', 'xbm' );
 
@@ -296,87 +315,87 @@ class RMImageResizer
         //$ratio = $image->width < $image->height ? $image->width / $image->height : $image->height / $image->width;
         $ratio = $image->width / $image->height;
 
-        if ( !isset($params->width) || $params->width <= 0 )
-            $params->width = (int)($params->height * $ratio);//$ratio >= 1 ? (int)($params->height * $ratio) : (int)($params->height / $ratio);
+        if (!isset($params->width) || $params->width <= 0) {
+            $params->width = (int)($params->height * $ratio);
+        }//$ratio >= 1 ? (int)($params->height * $ratio) : (int)($params->height / $ratio);
 
 
-        if ( !isset($params->height) || $params->height <= 0 )
-            $params->height = (int)($params->width / $ratio); //$ratio >= 1 ? (int)($params->width / $ratio) : (int)($params->width / $ratio);
+        if (!isset($params->height) || $params->height <= 0) {
+            $params->height = (int)($params->width / $ratio);
+        } //$ratio >= 1 ? (int)($params->width / $ratio) : (int)($params->width / $ratio);
 
-        $size_ratio = max( $params->width / $image->width, $params->height / $image->height );
+        $size_ratio = max($params->width / $image->width, $params->height / $image->height);
 
-        $crop_w = round( $params->width / $size_ratio );
-        $crop_h = round( $params->height / $size_ratio );
-        $s_x = floor( ( $image->width - $crop_w ) / 2 );
-        $s_y = floor( ( $image->height - $crop_h ) / 2 );
+        $crop_w = round($params->width / $size_ratio);
+        $crop_h = round($params->height / $size_ratio);
+        $s_x = floor(($image->width - $crop_w) / 2);
+        $s_y = floor(($image->height - $crop_h) / 2);
 
         $accepted_formats = array( 'gif', 'jpg', 'png' );
-        if ( !in_array( $image->type, $accepted_formats ) ){
-            trigger_error( __('Image format could not be accepted for resize', 'rmcommon'), E_WARNING );
+        if (!in_array($image->type, $accepted_formats)) {
+            trigger_error(__('Image format could not be accepted for resize', 'rmcommon'), E_WARNING);
             return false;
         }
 
         // Check cache
-        if ( $params->cache ){
-
+        if ($params->cache) {
             $cache_file = XOOPS_UPLOAD_PATH . '/' . $params->target . '/' . $file_info['filename'] . '-' . $params->width . '.' . $params->height . '.' . $file_info['extension'];
-            if ( file_exists( $cache_file ) ){
-
+            if (file_exists($cache_file)) {
                 $image_resize = new stdClass();
-                $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $cache_file );
+                $image_resize->url       = str_replace(XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $cache_file);
                 $image_resize->path      = $cache_file;
                 $image_resize->width     = $params->width;
                 $image_resize->height    = $params->height;
 
                 return $image_resize;
-
             }
-
         }
 
-        if ( $image->type == 'gif' ){
-            $original = imagecreatefromgif( $file );
-        } elseif ( $image->type == 'jpg' ){
-            $original = imagecreatefromjpeg( $file );
-        } elseif ( $image->type == 'png' ){
-            $original = imagecreatefrompng( $file );
+        if ($image->type == 'gif') {
+            $original = imagecreatefromgif($file);
+        } elseif ($image->type == 'jpg') {
+            $original = imagecreatefromjpeg($file);
+        } elseif ($image->type == 'png') {
+            $original = imagecreatefrompng($file);
         }
 
-        $target = imagecreatetruecolor( $params->width, $params->height );
-        if ( $image->type == 'png' ){
-            imagealphablending( $target, false );
-            imagesavealpha( $target, true );
+        $target = imagecreatetruecolor($params->width, $params->height);
+        if ($image->type == 'png') {
+            imagealphablending($target, false);
+            imagesavealpha($target, true);
         }
 
-        imagecopyresampled( $target, $original, 0, 0, (int) $s_x, (int) $s_y, (int) $params->width, (int) $params->height, (int) $crop_w, (int) $crop_h );
+        imagecopyresampled($target, $original, 0, 0, (int) $s_x, (int) $s_y, (int) $params->width, (int) $params->height, (int) $crop_w, (int) $crop_h);
 
         $target_file = XOOPS_UPLOAD_PATH . '/' . $params->target;
-        if ( !is_dir( $target_file ) )
-            mkdir( $target_file, 0777 );
+        if (!is_dir($target_file)) {
+            mkdir($target_file, 0777);
+        }
 
         $target_file .= '/' . $file_info['filename'] . '-' . $params->width . '.' . $params->height . '.' . $file_info['extension'];
 
-        if ( $image->type == 'gif' )
-            imagegif( $target, $target_file );
-        elseif ( $image->type == 'jpg' )
-            imagejpeg( $target, $target_file, $params->quality );
-        elseif ( $image->type == 'png' )
-            imagepng( $target, $target_file, ceil( $params->quality / 10) );
+        if ($image->type == 'gif') {
+            imagegif($target, $target_file);
+        } elseif ($image->type == 'jpg') {
+            imagejpeg($target, $target_file, $params->quality);
+        } elseif ($image->type == 'png') {
+            imagepng($target, $target_file, ceil($params->quality / 10));
+        }
 
         $image_resize = new stdClass();
-        $image_resize->url       = str_replace( XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $target_file );
+        $image_resize->url       = str_replace(XOOPS_UPLOAD_PATH, XOOPS_UPLOAD_URL, $target_file);
         $image_resize->path      = $target_file;
         $image_resize->width     = $params->width;
         $image_resize->height    = $params->height;
 
         return $image_resize;
-
     }
 
-    static function getInstance(){
+    public static function getInstance()
+    {
         static $instance;
 
-        if(!isset($instance)){
+        if (!isset($instance)) {
             $instance = new RMImageResizer();
         }
 

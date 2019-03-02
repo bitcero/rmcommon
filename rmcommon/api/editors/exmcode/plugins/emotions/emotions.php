@@ -17,21 +17,21 @@ include_once RMCPATH.'/loader.php';
 XoopsLogger::getInstance()->activated = false;
 XoopsLogger::getInstance()->renderingEnabled = false;
 
-load_mod_locale('rmcommon','emots-');
+load_mod_locale('rmcommon', 'emots-');
 
 $db = XoopsDatabaseFactory::getDatabaseConnection();
 $result = $db->query("SELECT * FROM ".$db->prefix("smiles")." ORDER BY id");
-while ($row = $db->fetchArray($result)){
-	$emotions[] = array(
-		'id'=>$row['id'], 
-		'file'=>XOOPS_UPLOAD_URL.'/'.$row['smile_url'],
-		'desc'=>$row['emotion'],
-		'code'=>$row['code']
-	);
+while ($row = $db->fetchArray($result)) {
+    $emotions[] = array(
+        'id'=>$row['id'],
+        'file'=>XOOPS_UPLOAD_URL.'/'.$row['smile_url'],
+        'desc'=>$row['emotion'],
+        'code'=>$row['code']
+    );
 }
 
 // Load new icons from plugins
-RMEvents::get()->run_event('rmcommon.load_emotions',$emotions,'exmcode');
+RMEvents::get()->run_event('rmcommon.load_emotions', $emotions, 'exmcode');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -60,7 +60,7 @@ RMEvents::get()->run_event('rmcommon.load_emotions',$emotions,'exmcode');
 <div class="container">
     <div class="row">
         <div class="col-xs-12 emotions">
-            <?php foreach($emotions as $icon): ?>
+            <?php foreach ($emotions as $icon): ?>
                 <a href="#" data-code="<?php echo $icon['code']; ?>">
                     <img src="<?php echo $icon['file']; ?>" title="<?php echo $icon['desc']; ?>" alt="<?php echo $icon['code']; ?>" />
                 </a>

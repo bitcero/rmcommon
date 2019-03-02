@@ -27,33 +27,41 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_text{
-/**
-     * Draws an image with the submited string, usefull for water marks
-     *
-     * @param $text String - the text to draw an image from
-     * @param $format phMagickTextObject - the text configuration
-     */
-    function fromString(phmagick $p, $text = '', phMagickTextObject $format = null){
-
-        if(is_null($format)) $format = new phMagickTextObject();
+class phMagick_text
+{
+    /**
+         * Draws an image with the submited string, usefull for water marks
+         *
+         * @param $text String - the text to draw an image from
+         * @param $format phMagickTextObject - the text configuration
+         */
+    public function fromString(phmagick $p, $text = '', phMagickTextObject $format = null)
+    {
+        if (is_null($format)) {
+            $format = new phMagickTextObject();
+        }
 
         $cmd  = $p->getBinary('convert');
 
-        if ($format->background !== false)
+        if ($format->background !== false) {
             $cmd .= ' -background "' . $format->background . '"';
+        }
 
-        if ($format->color !== false)
+        if ($format->color !== false) {
             $cmd .= ' -fill "' . $format->color . '"' ;
+        }
 
-        if ($format->font !== false)
+        if ($format->font !== false) {
             $cmd .= ' -font ' . $format->font ;
+        }
 
-        if ($format->fontSize !== false)
+        if ($format->fontSize !== false) {
             $cmd .= ' -pointsize ' . $format->fontSize ;
+        }
 
-        if (($format->pText != '') && ($text = '') )
+        if (($format->pText != '') && ($text = '')) {
             $text = $format->pText ;
+        }
 
         $cmd .= ' label:"'. $text .'"';
         $cmd .= ' "' . $p->getDestination().'"' ;
@@ -64,5 +72,3 @@ class phMagick_text{
         return  $p ;
     }
 }
-
-

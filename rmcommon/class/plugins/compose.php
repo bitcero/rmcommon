@@ -27,15 +27,17 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_compose{
-/**
-     * Add's an watermark to an image
-     *
-     * @param $watermarkImage String - Image path
-     * @param $gravity phMagickGravity - The placement of the watermark
-     * @param $transparency Integer - 1 to 100 the tranparency of the watermark (100 = opaque)
-     */
-    function watermark(phmagick $p, $watermarkImage, $gravity = 'center', $transparency = 50){
+class phMagick_compose
+{
+    /**
+         * Add's an watermark to an image
+         *
+         * @param $watermarkImage String - Image path
+         * @param $gravity phMagickGravity - The placement of the watermark
+         * @param $transparency Integer - 1 to 100 the tranparency of the watermark (100 = opaque)
+         */
+    public function watermark(phmagick $p, $watermarkImage, $gravity = 'center', $transparency = 50)
+    {
         //composite -gravity SouthEast watermark.png original-image.png output-image.png
         $cmd   = $p->getBinary('composite');
         $cmd .= ' -dissolve ' . $transparency ;
@@ -56,8 +58,9 @@ class phMagick_compose{
      *
      * @param $paths Array of Strings - the paths of the images to join
      */
-    function tile(phmagick $p,  Array $paths = null, $tileWidth = '', $tileHeight=1){
-        if( is_null($paths) ) {
+    public function tile(phmagick $p, array $paths = null, $tileWidth = '', $tileHeight=1)
+    {
+        if (is_null($paths)) {
             $paths = $p->getHistory(phMagickHistory::returnArray);
         }
         $cmd  = $p->getBinary('montage');
@@ -77,8 +80,9 @@ class phMagick_compose{
      * @param $file  String - the path to the file
      * @param $ext   String - the extention of the generated image
      */
-    function acquireFrame(phmagick $p, $file, $frames=0){
-       // $cmd = 'echo "" | '; //just a workarround for videos,
+    public function acquireFrame(phmagick $p, $file, $frames=0)
+    {
+        // $cmd = 'echo "" | '; //just a workarround for videos,
         //                    imagemagick first converts all frames then deletes all but the first
         $cmd = $p->getBinary('convert');
         $cmd .= ' "' . $file .'"['.$frames.']' ;

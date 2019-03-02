@@ -15,11 +15,10 @@
 
 class RMBreadCrumb
 {
-
     private $crumbs = array();
 
-    public function construct(){
-
+    public function construct()
+    {
     }
 
     /**
@@ -34,9 +33,11 @@ class RMBreadCrumb
     * @param array  Submenu for this item. This paramter must be passed as array containing caption, link and [icon]
     * @return int Id for item
     */
-    public function add_crumb($caption, $link='', $icon='', $menu=array()){
-
-        if(trim($caption)=='') return 0;
+    public function add_crumb($caption, $link='', $icon='', $menu=array())
+    {
+        if (trim($caption)=='') {
+            return 0;
+        }
 
         $this->crumbs[] = array(
             'caption' => $caption,
@@ -47,7 +48,6 @@ class RMBreadCrumb
 
         end($this->crumbs);
         return key($this->crumbs);
-
     }
 
     /**
@@ -57,11 +57,15 @@ class RMBreadCrumb
     * @param string Link address
     * @param string Icon url for this item
     */
-    public function add_menu($id, $caption, $link, $icon=''){
+    public function add_menu($id, $caption, $link, $icon='')
+    {
+        if (trim($caption)=='' || trim($link)=='') {
+            return 0;
+        }
 
-        if(trim($caption)=='' || trim($link)=='') return 0;
-
-        if(!isset($this->crumbs[$id])) return 0;
+        if (!isset($this->crumbs[$id])) {
+            return 0;
+        }
 
         $this->crumbs[$id]['menu'] = array(
             'caption' => $caption,
@@ -75,12 +79,14 @@ class RMBreadCrumb
     /**
     * Clear the crumbs array
     */
-    public function clear(){
+    public function clear()
+    {
         $this->crumbs = array();
     }
 
-    public function count(){
-        return count( $this->crumbs );
+    public function count()
+    {
+        return count($this->crumbs);
     }
 
     /**
@@ -88,13 +94,14 @@ class RMBreadCrumb
     *
     * @return string
     */
-    public function render(){
+    public function render()
+    {
         global $cuIcons, $xoopsModule;
 
         RMTemplate::getInstance()->add_style('breadcrumb.css', 'rmcommon');
 
         // Include module controller if exists
-        if($xoopsModule){
+        if ($xoopsModule) {
             $controller = RMFunctions::loadModuleController($xoopsModule->getVar('dirname'));
         } else {
             $controller = false;
@@ -106,7 +113,6 @@ class RMBreadCrumb
 
         $ret = ob_get_clean();
         return $ret;
-
     }
 
     /**
@@ -114,7 +120,8 @@ class RMBreadCrumb
      * @staticvar <type> $instance
      * @return RMBreadCrumb
      */
-    static function get(){
+    public static function get()
+    {
         static $instance;
 
         if (!isset($instance)) {
@@ -122,7 +129,5 @@ class RMBreadCrumb
         }
 
         return $instance;
-
     }
-
 }

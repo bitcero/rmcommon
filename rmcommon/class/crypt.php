@@ -36,13 +36,13 @@ class Crypt
     {
         global $common;
 
-        if(null == $method){
+        if (null == $method) {
             $this->method = $this->getMethod();
         } else {
             $this->method = in_array($method, $this->allMethods()) ? $method : $this->getMethod();
         }
 
-        if(null == $key){
+        if (null == $key) {
             $this->key = $common->settings->secretkey;
         } else {
             $this->key = $key;
@@ -51,7 +51,7 @@ class Crypt
 
     private function allMethods()
     {
-        if(false == empty($this->allMethods)){
+        if (false == empty($this->allMethods)) {
             return $this->allMethods;
         }
 
@@ -68,7 +68,7 @@ class Crypt
     {
         global $common;
 
-        if(null == $key){
+        if (null == $key) {
             $this->key = $common->settings->secretkey;
         } else {
             $this->key = $key;
@@ -77,16 +77,16 @@ class Crypt
 
     public function setMethod($method = null)
     {
-        if(null == $method){
+        if (null == $method) {
             $this->method = $this->getMethod();
         } else {
             $this->method = in_array($method, $this->allMethods()) ? $method : $this->getMethod();
         }
     }
 
-    public function encrypt($string){
-
-        if('' == trim($string)){
+    public function encrypt($string)
+    {
+        if ('' == trim($string)) {
             throw new RMException(__('Nothing to encrypt', 'rmcommon'));
         }
 
@@ -94,19 +94,17 @@ class Crypt
 
         $data = openssl_encrypt($string, $this->method, $this->key, 0, $vector);
         return base64_encode($data . '::' . $vector);
-
     }
 
     public function decrypt($string)
     {
-        if('' == trim($string)){
+        if ('' == trim($string)) {
             throw new RMException(__('Nothing to decrypt', 'rmcommon'));
         }
 
         $string = base64_decode($string);
         list($data, $vector) = explode('::', $string, 2);
 
-        return openssl_decrypt( $data, $this->method, $this->key, 0, $vector);
-
+        return openssl_decrypt($data, $this->method, $this->key, 0, $vector);
     }
 }

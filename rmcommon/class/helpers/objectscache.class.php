@@ -11,7 +11,6 @@
 
 class ObjectsCache
 {
-
     use RMSingleton;
 
     private $cache = array();
@@ -22,10 +21,9 @@ class ObjectsCache
      * @param $key
      * @param $value
      */
-    public function set_cache( $module, $key, $value ){
-
+    public function set_cache($module, $key, $value)
+    {
         $this->cache[ $module ][ $key ] = $value;
-
     }
 
     /**
@@ -35,16 +33,16 @@ class ObjectsCache
      * @param  string      $return <p>Kind of value that funtion will return: 'value' or ''.</p>
      * @return object|bool
      */
-    public function cached( $module, $key, $return = 'value' ){
-
-        if ( !isset( $this->cache[$module][$key] ) )
+    public function cached($module, $key, $return = 'value')
+    {
+        if (!isset($this->cache[$module][$key])) {
             return false;
+        }
 
-        if ( $return == 'value' )
+        if ($return == 'value') {
             return $this->cache[ $module ][ $key ];
+        }
 
         return true;
-
     }
-
 }

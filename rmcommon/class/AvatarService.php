@@ -34,11 +34,11 @@
 
 class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements \Common\Core\Helpers\ServiceInterface
 {
-
-    private function loadWithEmail($email){
+    private function loadWithEmail($email)
+    {
         // Worst option but we need to handle
         $user = new RMUser($email, true);
-        if($user->isNew()){
+        if ($user->isNew()) {
             $avatar = 'avatars/blank.gif';
         } else {
             $avatar = $user->user_avatar;
@@ -85,7 +85,6 @@ class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements
         global $common;
 
         if (is_object($user_or_email)) {
-
             if (is_a($user_or_email, 'XoopsUser')) {
                 // Best option
                 $avatar = $user_or_email->getVar('user_avatar');
@@ -95,26 +94,22 @@ class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements
             } else {
                 $avatar = $this->loadWithEmail($user_or_email->email);
             }
-
         } else {
-
             $avatar = $this->loadWithEmail($user_or_email);
             $email = $user_or_email;
         }
 
-        if(!file_exists(XOOPS_UPLOAD_PATH . '/' . $avatar)){
+        if (!file_exists(XOOPS_UPLOAD_PATH . '/' . $avatar)) {
             $avatar = 'avatars/' . $avatar;
 
-            if(!file_exists(XOOPS_UPLOAD_PATH . '/' . $avatar)){
+            if (!file_exists(XOOPS_UPLOAD_PATH . '/' . $avatar)) {
                 $avatar = $default;
             }
-
         }
 
         $avatar = $common->uris()->relative_url(XOOPS_UPLOAD_URL . '/' . $avatar);
 
         return $avatar;
-
     }
 
     /**
@@ -134,9 +129,7 @@ class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements
      */
     public function getAvatar($user_or_email, $size = 80, $default = '')
     {
-
         if (is_object($user_or_email)) {
-
             if (is_a($user_or_email, 'XoopsUser')) {
                 $name = $user_or_email->getVar('name');
                 $uname = $user_or_email->getVar('uname');
@@ -147,12 +140,10 @@ class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements
                 $name = $user_or_email->name;
                 $uname = $user_or_email->uname;
             }
-
         }
 
         $avatar = '<img src="' . $this->getAvatarSrc($user_or_email, $size, $default) . '" alt="' . ($name != '' ? $name : $uname) . '">';
         return $avatar;
-
     }
 
     /**
@@ -162,12 +153,12 @@ class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
         $instance = new XoopsAvatarService();
 
         return $instance;
     }
-
 }

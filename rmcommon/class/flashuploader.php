@@ -20,7 +20,8 @@ class RMFlashUploader
     * @param array SWFUploader settings
     * @return RMFlashUploader
     */
-    public function __construct($name, $url, $settings = array()){
+    public function __construct($name, $url, $settings = array())
+    {
         // Generate settings for uploadify
         $this->settings = array(
             'swf'                   => RMCURL.'/include/uploadify.swf',
@@ -29,12 +30,12 @@ class RMFlashUploader
             'buttonClass'           => '',
             'buttonCursor'          => 'hand',
             'buttonImage'           => null,
-            'buttonText'            => __('Select Files','rmcommon'),
+            'buttonText'            => __('Select Files', 'rmcommon'),
             'checkExisting'         => false,
             'debug'                 => false,
             'fileObjName'           => 'Filedata',
             'fileSizeLimit'         => '512KB',
-            'fileTypeDesc'          => __('All Files','rmcommon'),
+            'fileTypeDesc'          => __('All Files', 'rmcommon'),
             'fileTypeExts'          => '*.*',
             'formData'              => array(),
             'height'                => 30,
@@ -72,16 +73,17 @@ class RMFlashUploader
         );
 
         foreach ($settings as $key => $value) {
-            if (!isset($this->settings[$key])) continue;
+            if (!isset($this->settings[$key])) {
+                continue;
+            }
             $this->settings[$key] = $value;
         }
 
         $this->name = $name;
-
     }
 
-    public function add_setting($name, $value){
-
+    public function add_setting($name, $value)
+    {
         $convert = array(
             'scriptData'    => 'formData',
             'onComplete'    => 'onUploadComplete',
@@ -97,17 +99,23 @@ class RMFlashUploader
             'onProgress'    => 'onUploadProgress'
         );
 
-        if(isset($convert[$name])) $name = $convert[$name];
+        if (isset($convert[$name])) {
+            $name = $convert[$name];
+        }
 
-        if (!isset($this->settings[$name])) return false;
+        if (!isset($this->settings[$name])) {
+            return false;
+        }
         $this->settings[$name] = $value;
 
         return true;
-
     }
 
-    public function get_setting($name){
-        if (!isset($this->settings[$name])) return false;
+    public function get_setting($name)
+    {
+        if (!isset($this->settings[$name])) {
+            return false;
+        }
         return $this->settings[$name];
     }
 
@@ -116,21 +124,25 @@ class RMFlashUploader
     *
     * @param array $settings
     */
-    public function add_settings($settings){
+    public function add_settings($settings)
+    {
         foreach ($settings as $key => $value) {
-            if (!isset($this->settings[$key])) continue;
+            if (!isset($this->settings[$key])) {
+                continue;
+            }
             $this->settings[$key] = $value;
         }
     }
 
-    public function settings(){
+    public function settings()
+    {
         return $this->settings;
     }
 
-    public function render(){
-
-        RMTemplate::get()->add_script('swfobject.js', 'rmcommon', array('directory' => 'include') );
-        RMTemplate::get()->add_script('jquery.uploadify.js', 'rmcommon', array('directory' => 'include') );
+    public function render()
+    {
+        RMTemplate::get()->add_script('swfobject.js', 'rmcommon', array('directory' => 'include'));
+        RMTemplate::get()->add_script('jquery.uploadify.js', 'rmcommon', array('directory' => 'include'));
         RMTemplate::get()->add_style('uploadify.css', 'rmcommon');
 
         ob_start();

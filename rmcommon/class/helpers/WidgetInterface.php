@@ -62,5 +62,4 @@ interface WidgetInterface
      * @return mixed
      */
     public function getHtml();
-
 }

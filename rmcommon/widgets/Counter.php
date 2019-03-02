@@ -44,17 +44,14 @@ class Counter extends WidgetAbstract implements WidgetInterface
 
     public function __construct($data = [])
     {
-
         $this->suppressList = ['color', 'icon', 'format'];
 
-        if(false === empty($data)){
-
+        if (false === empty($data)) {
             parent::__construct($data);
 
-            if(!$this->has('format')){
+            if (!$this->has('format')) {
                 $this->set('format', 'y');
             }
-
         }
     }
 
@@ -62,7 +59,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
     {
         parent::__construct($data);
 
-        if(!$this->has('format')){
+        if (!$this->has('format')) {
             $this->set('format', 'y');
         }
     }
@@ -87,12 +84,12 @@ class Counter extends WidgetAbstract implements WidgetInterface
         $this->add('class', 'widget-counter');
 
         // Widget color
-        if($this->has('color')){
+        if ($this->has('color')) {
             $this->add('class', 'bg-' . $this->get('color'));
         }
 
         // Widget icon
-        if( $this->has('icon') ){
+        if ($this->has('icon')) {
             $this->tpl->assign('icon', $cuIcons->getIcon($this->get('icon')));
         } else {
             $this->tpl->assign('icon', $cuIcons->getIcon('svg-rmcommon-ok-circle'));
@@ -113,7 +110,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
      */
     public function template()
     {
-        if('' == $this->tplPath){
+        if ('' == $this->tplPath) {
             $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-counter.php', 'module', 'rmcommon');
         }
         return $this->tplPath;
@@ -128,13 +125,14 @@ class Counter extends WidgetAbstract implements WidgetInterface
      * @return bool
      * @throws \RMException
      */
-    public function addCell($caption, $value){
-        if('' == $caption || '' == $value){
+    public function addCell($caption, $value)
+    {
+        if ('' == $caption || '' == $value) {
             trigger_error(__('You must provide the caption and value when add a new cell to Counter Widget', 'rmcommon'));
             return false;
         }
 
-        if(count($this->cells) >= 4){
+        if (count($this->cells) >= 4) {
             trigger_error(__('It is not possible to add more than 4 cells to this widget', 'rmcommon'));
             return false;
         }
@@ -145,20 +143,20 @@ class Counter extends WidgetAbstract implements WidgetInterface
          */
         $format = $this->has('format') && $this->get('format') == 'y';
 
-        if(is_numeric($value) && $format){
+        if (is_numeric($value) && $format) {
 
             // Format for numbers
-            if($value >= 1000000){
+            if ($value >= 1000000) {
                 // Millions
                 $reduced = $value / 1000000;
-                if(floor($reduced) < $reduced){
+                if (floor($reduced) < $reduced) {
                     $value = floor($reduced) . 'M+';
                 } else {
                     $value = $reduced . 'M';
                 }
-            } elseif ($value >= 10000){
+            } elseif ($value >= 10000) {
                 $reduced = $value / 1000;
-                if(floor($reduced) < $reduced){
+                if (floor($reduced) < $reduced) {
                     $value = floor($reduced) . 'k+';
                 } else {
                     $value = $reduced . 'k';
@@ -166,14 +164,11 @@ class Counter extends WidgetAbstract implements WidgetInterface
             } elseif ($value > 1000) {
                 $value = number_format($value / 1000, 1) . 'k';
             }
-
-        } elseif(is_numeric($value)) {
-
+        } elseif (is_numeric($value)) {
             $value = number_format($value, 2);
-            if((int)$value == $value){
+            if ((int)$value == $value) {
                 $value = (int)$value;
             }
-
         }
 
         $this->cells[] = (object) ['caption' => $caption, 'value' => $value];

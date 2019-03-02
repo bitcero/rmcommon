@@ -36,4 +36,4 @@ ob_start();
 <?php
     $script = ob_get_clean();
 
-    echo str_replace( "</body>", $script . "\n" . '</body>', $content );
+    echo str_replace("</body>", $script . "\n" . '</body>', $content);

@@ -34,7 +34,9 @@ function rmc_autoloader($class)
 {
     global $xoopsModule;
 
-    if (class_exists($class)) return;
+    if (class_exists($class)) {
+        return;
+    }
 
     /**
      * New autoloader method
@@ -46,15 +48,12 @@ function rmc_autoloader($class)
     $data = explode("_", strtolower($class));
 
     if (count($data) >= 2) {
-
         if ('editor' == $data[0]) {
-
             $file = RMCPATH . '/api/editors/' . $data[1] . '/' . strtolower($data[1]) . '.php';
             if (file_exists($file)) {
                 require $file;
                 return null;
             }
-
         } elseif (is_dir(XOOPS_ROOT_PATH . '/modules/' . $data[0])) {
 
             // Module exists! Then will search for /{dir}/{class}.class.php
@@ -73,9 +72,7 @@ function rmc_autoloader($class)
                     return;
                 }
             }
-
         }
-
     }
 
     /**
@@ -85,9 +82,13 @@ function rmc_autoloader($class)
 
     $class = strtolower($class);
 
-    if ($class == 'xoopskernel') return;
+    if ($class == 'xoopskernel') {
+        return;
+    }
 
-    if (substr($class, 0, 2) == 'rm') $class = substr($class, 2);
+    if (substr($class, 0, 2) == 'rm') {
+        $class = substr($class, 2);
+    }
 
     if (substr($class, strlen($class) - strlen('handler')) == 'handler') {
         $class = substr($class, 0, strlen($class) - 7);
@@ -111,7 +112,6 @@ function rmc_autoloader($class)
     }
 
     foreach ($paths as $path) {
-
         if (file_exists(RMCPATH . $path . '/' . $class . '.class.php')) {
             include_once RMCPATH . $path . '/' . $class . '.class.php';
             break;
@@ -128,9 +128,7 @@ function rmc_autoloader($class)
             include_once XOOPS_ROOT_PATH . $path . '/' . $class . '.class.php';
             break;
         }
-
     }
-
 }
 
 spl_autoload_register('rmc_autoloader');

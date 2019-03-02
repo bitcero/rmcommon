@@ -27,32 +27,44 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_info{
-	function getInfo(phmagick $p, $file=''){
-		if ($file == '') $file = $p->getSource();
-		return getimagesize  ($file);
-	}
+class phMagick_info
+{
+    public function getInfo(phmagick $p, $file='')
+    {
+        if ($file == '') {
+            $file = $p->getSource();
+        }
+        return getimagesize($file);
+    }
 
-	function getWidth(phmagick $p, $file=''){
-		list($width, $height, $type, $attr) = $this->getInfo($p, $file);
-		return $width;
-	}
+    public function getWidth(phmagick $p, $file='')
+    {
+        list($width, $height, $type, $attr) = $this->getInfo($p, $file);
+        return $width;
+    }
 
-	function getHeight(phmagick $p, $file=''){
-	   list($width, $height, $type, $attr)	 = $this->getInfo($p, $file);
-	   return $height;
-	}
+    public function getHeight(phmagick $p, $file='')
+    {
+        list($width, $height, $type, $attr)	 = $this->getInfo($p, $file);
+        return $height;
+    }
 
 
-	function getBits(phmagick $p, $file=''){
-	   if ($file == '') $file = $p->getSource();
-	   $info =  getimagesize  ($file);
-	   return $info["bits"];
-	}
+    public function getBits(phmagick $p, $file='')
+    {
+        if ($file == '') {
+            $file = $p->getSource();
+        }
+        $info =  getimagesize($file);
+        return $info["bits"];
+    }
 
-	function getMime(phmagick $p, $file=''){
-		if ($file == '') $file = $p->getSource();
-       $info =  getimagesize  ($file);
-       return $info["mime"];
-	}
+    public function getMime(phmagick $p, $file='')
+    {
+        if ($file == '') {
+            $file = $p->getSource();
+        }
+        $info =  getimagesize($file);
+        return $info["mime"];
+    }
 }

@@ -82,33 +82,29 @@ class TileBox extends WidgetAbstract implements WidgetInterface
         parent::__construct($data);
         $this->add('class', 'widget-tile-box');
 
-        if($data['type'] == 'user'){
+        if ($data['type'] == 'user') {
             $this->add('class', 'user');
 
-            if(!is_a($data['user'], 'XoopsUser') && (int)$data['user'] <= 0){
+            if (!is_a($data['user'], 'XoopsUser') && (int)$data['user'] <= 0) {
                 return false;
             }
 
-            if(is_a($data['user'], 'XoopsUser')){
+            if (is_a($data['user'], 'XoopsUser')) {
                 $common->template()->assign('user', $data['user']);
             } else {
-
                 $user = new \XoopsUser($data['user']);
                 $common->template()->assign('user', $user);
-
             }
-
         } else {
             $this->add('class', 'counter');
             $this->add('class', $data['style'] != '' ? ($data['style'] == 'progress' ? 'with-progress' : $data['style']) : 'default');
         }
 
-        if(true == $data['solid'] && 'progress' != $data['style']){
+        if (true == $data['solid'] && 'progress' != $data['style']) {
             $this->add('class', 'solid bg-' . $data['color']);
         }
 
         $common->template()->assign('settings', (object) $data);
-
     }
 
     /**
@@ -139,11 +135,9 @@ class TileBox extends WidgetAbstract implements WidgetInterface
      */
     public function template()
     {
-        if('' == $this->tplPath){
+        if ('' == $this->tplPath) {
             $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-tilebox.php', 'module', 'rmcommon');
         }
         return $this->tplPath;
     }
-
-
 }

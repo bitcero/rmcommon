@@ -40,7 +40,7 @@ $system_menu = array(
 );
 
 // Current Module Menu
-if($xoopsModule->getVar('dirname') != 'rmcommon'){
+if ($xoopsModule->getVar('dirname') != 'rmcommon') {
     $currentModule = array(
         'name' => $xoopsModule->getVar('name'),
         'directory' => $xoopsModule->getVar('dirname'),
@@ -77,7 +77,6 @@ foreach ($modulesList as $item) {
         'rewrite' => $module->getInfo('rewrite'),
         'icon' => false === $module->getInfo('icon') ? XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') : $module->getInfo('icon')
     );
-
 }
 
 // Other Menus
@@ -161,14 +160,14 @@ $userRank = $xoopsUser->rank();
 $helpLinks = RMTemplate::getInstance()->help();
 
 // Body classess
-if ( !array_key_exists('sidebar', $_COOKIE) || $_COOKIE['sidebar'] == 'visible' ){
+if (!array_key_exists('sidebar', $_COOKIE) || $_COOKIE['sidebar'] == 'visible') {
     RMTemplate::getInstance()->add_attribute('html', ['class' => 'sidebar']);
 }
 if (RMBreadCrumb::get()->count() > 0) {
     RMTemplate::getInstance()->add_attribute('html', ['class' => 'with-breadcrumb']);
 }
 
-if(count(RMTemplate::getInstance()->get_toolbar()) > 0){
+if (count(RMTemplate::getInstance()->get_toolbar()) > 0) {
     RMTemplate::getInstance()->add_body_class('with-toolbar');
 }
 
@@ -178,11 +177,11 @@ RMTemplate::getInstance()->add_attribute('html', [
 
 // The logo
 $logoHelium = trim($cuSettings->helium_logo);
-if ('' == $logoHelium){
+if ('' == $logoHelium) {
     $logoHelium = HELIUM_URL . '/images/logo-he.svg';
 }
 
-if(substr($logoHelium, -4) == '.svg'){
+if (substr($logoHelium, -4) == '.svg') {
     $logoHelium = file_get_contents($logoHelium);
 } else {
     $logoHelium = '<img src="' . $logoHelium . '">';

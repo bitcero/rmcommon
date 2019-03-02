@@ -37,22 +37,18 @@ while ($row = $db->fetchArray($result)) {
         if (method_exists($class, 'get_main_link')) {
             $main_link = $class->get_main_link();
         } else {
-
             if ($mod->getVar('hasmain')) {
                 $main_link = XOOPS_URL.'/modules/'.$mod->dirname();
             } else {
                 $main_link = "#";
             }
-
         }
     } else {
-
         if ($mod->getVar('hasmain')) {
             $main_link = XOOPS_URL.'/modules/'.$mod->dirname();
         } else {
             $main_link = "#";
         }
-
     }
 
     // Admin section
@@ -85,7 +81,7 @@ $modules = RMEvents::get()->run_event('rmcommon.installed.modules', $modules, $i
 
 //include dirname(dirname(__FILE__)).'/include/modules.php';
 
-foreach($modules as $mod): ?>
+foreach ($modules as $mod): ?>
 <a rel="tooltip" href="<?php echo $mod['admin_link']; ?>" title="<?php echo $mod['name']; ?>">
     <img src="<?php echo $mod['image']; ?>" alt="<?php echo $mod['name']; ?>" />
     <span><?php echo $mod['name']; ?></span>

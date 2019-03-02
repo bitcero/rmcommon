@@ -128,7 +128,6 @@ abstract class RMFormElement extends Attributes
      */
     public function setName($name)
     {
-
         $this->set('name', $name);
 
         return $this;
@@ -156,7 +155,6 @@ abstract class RMFormElement extends Attributes
      */
     public function id()
     {
-
         return $this->get('id', '');
     }
 
@@ -264,7 +262,7 @@ abstract class RMFormElement extends Attributes
      *
      * @deprecated
      */
-    public function getExtra( $encode = false )
+    public function getExtra($encode = false)
     {
         if (!$encode) {
             return implode(' ', $this->extra);
@@ -364,5 +362,5 @@ abstract class RMFormElement extends Attributes
     /**
      * Abstract method to be implemented on each field
      */
-    abstract function render();
+    abstract public function render();
 }

@@ -15,18 +15,19 @@ class RMJsonResponse
 {
     use RMSingleton, RMProperties;
 
-    static function respond( $message, $type = 'success', $token = 0, $data = array() ){
+    public static function respond($message, $type = 'success', $token = 0, $data = array())
+    {
         global $xoopsSecurity;
 
         $return['message'] = $message;
         $return['type'] = $type;
         $return['token'] = $token ? $xoopsSecurity->createToken() : '';
 
-        if ( !empty( $data ) )
-            $return = array_merge( $return, $data );
+        if (!empty($data)) {
+            $return = array_merge($return, $data);
+        }
 
-        echo json_encode( $return );
+        echo json_encode($return);
         die();
-
     }
 }

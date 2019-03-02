@@ -40,13 +40,11 @@ class Plugins
      */
     public static function isInstalled($dir)
     {
-
         if (isset($GLOBALS['installed_plugins'][$dir])) {
             return true;
         } else {
             return false;
         }
-
     }
 
     /**
@@ -56,7 +54,6 @@ class Plugins
      */
     public function load($dir)
     {
-
         if (array_key_exists($dir, $this->loadedPlugins)) {
             return $this->loadedPlugins[$dir];
         }
@@ -68,7 +65,6 @@ class Plugins
         } else {
             return false;
         }
-
     }
 
     /**
@@ -91,7 +87,7 @@ class Plugins
         // Load plugin controller
         if (file_exists($oldFile)) {
             include_once $oldFile;
-        } elseif(file_exists($newFile)){
+        } elseif (file_exists($newFile)) {
             include_once $newFile;
         } else {
             return false;
@@ -101,8 +97,9 @@ class Plugins
 
         $class = ucfirst($cleanDir) . 'CUPlugin';
 
-        if (!class_exists($class))
+        if (!class_exists($class)) {
             return false;
+        }
 
         $plugin = $class::getInstance();
         return $plugin;
@@ -114,7 +111,6 @@ class Plugins
      */
     public static function allInstalled()
     {
-
         $db = \XoopsDatabaseFactory::getDatabaseConnection();
         $result = $db->query("SELECT dir FROM " . $db->prefix("mod_rmcommon_plugins") . ' WHERE status=1');
         $plugins = array();
@@ -126,7 +122,6 @@ class Plugins
         $plugins = \RMEvents::get()->run_event("rmcommon.installed.plugins", $plugins);
 
         return $plugins;
-
     }
 
     /**
@@ -134,12 +129,11 @@ class Plugins
      * @param $dir
      * @return array
      */
-    public static function settings($dir){
-
+    public static function settings($dir)
+    {
         $settings = \RMSettings::plugin_settings($dir, true);
 
         return $settings;
-
     }
 
 
@@ -147,8 +141,9 @@ class Plugins
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
         $instance = new Plugins();
 

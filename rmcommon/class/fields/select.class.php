@@ -26,20 +26,19 @@ class RMFormSelect extends RMFormElement
      * @param int $multi Seleccion múltiple (0 = Inactivo, 1 = Activo)
      * @param array $selected Selected option
      */
-    function __construct($caption, $name = '', $multi = 0, $selected = null)
+    public function __construct($caption, $name = '', $multi = 0, $selected = null)
     {
-
         if (is_array($caption)) {
             parent::__construct($caption);
         } else {
             parent::__construct([]);
             $this->setWithDefaults('caption', $caption, '');
             $this->setWithDefaults('name', $name, 'name_error');
-            if($multi){
+            if ($multi) {
                 $this->set('multiple', null);
             }
 
-            if(is_array($selected)){
+            if (is_array($selected)) {
                 $this->set('value', $selected);
             }
         }
@@ -110,7 +109,7 @@ class RMFormSelect extends RMFormElement
      * Devuelve el array de opciones del elemento.
      * @return array
      */
-    function getOptions()
+    public function getOptions()
     {
         return $this->_options;
     }
@@ -118,20 +117,19 @@ class RMFormSelect extends RMFormElement
 
     public function addGroup($label, $id)
     {
-
-        if ('' == trim($id) || '' == trim($label))
+        if ('' == trim($id) || '' == trim($label)) {
             return false;
+        }
 
         $this->_groups[$id] = array('label' => $label, 'options' => array());
         $this->current_group = $id;
-
     }
 
     /**
      * Genera el código HTML para este elemento.
      * @return string
      */
-    function render()
+    public function render()
     {
         $this->setIfNotSet('class', 'form-control');
         $attributes = $this->renderAttributeString();
@@ -178,5 +176,3 @@ class RMFormSelect extends RMFormElement
         return $rtn;
     }
 }
-
-

@@ -8,7 +8,8 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-function rmc_bkcomments_show($options){
+function rmc_bkcomments_show($options)
+{
     global $cuServices;
 
     $db = XoopsDatabaseFactory::getDatabaseConnection();
@@ -36,7 +37,6 @@ function rmc_bkcomments_show($options){
             $editor = $ecache[$com->getVar('user')];
 
             if ($editor->getVar('xuid')>0) {
-
                 if (!isset($ucache[$editor->getVar('xuid')])) {
                     $ucache[$editor->getVar('xuid')] = new XoopsUser($editor->getVar('xuid'));
                 }
@@ -51,9 +51,7 @@ function rmc_bkcomments_show($options){
                     'avatar'=> $cuServices->avatar->getAvatarSrc($user->getVar('email'), 100),
                     'rank'  => $user->rank(),
                 );
-
             } else {
-
                 $poster = array(
                     'id'    => 0,
                     'name'  => $editor->getVar('name'),
@@ -62,7 +60,6 @@ function rmc_bkcomments_show($options){
                     'avatar'=> RMCURL.'/images/avatar.gif',
                     'rank'  => ''
                 );
-
             }
         }
 
@@ -70,18 +67,17 @@ function rmc_bkcomments_show($options){
         $cpath = XOOPS_ROOT_PATH.'/modules/'.$row['id_obj'].'/class/'.$row['id_obj'].'controller.php';
 
         if (is_file($cpath)) {
-            if(!class_exists(ucfirst($row['id_obj']).'Controller'))
+            if (!class_exists(ucfirst($row['id_obj']).'Controller')) {
                 include_once $cpath;
+            }
 
             $class = ucfirst($row['id_obj']).'Controller';
             $controller = new $class();
             $item = $controller->get_item($row['params'], $com);
             $item_url = $controller->get_item_url($row['params'], $com);
         } else {
-
-            $item = __('Unknow','rmcommon');
+            $item = __('Unknow', 'rmcommon');
             $item_url = '';
-
         }
 
         if (isset($mods[$row['id_obj']])) {
@@ -118,62 +114,60 @@ function rmc_bkcomments_show($options){
     RMTemplate::get()->add_style('bk_comments.css', 'rmcommon');
 
     return $block;
-
 }
 
-function rmc_bkcomments_edit($options){
-
+function rmc_bkcomments_edit($options)
+{
     $form = '<div class="form-horizontal">';
 
-    ob_start();
-    ?>
+    ob_start(); ?>
     <div class="control-group">
-        <label class="control-label" for="number-comments"><?php _e('Number of Comments:','rmcommon'); ?></label>
+        <label class="control-label" for="number-comments"><?php _e('Number of Comments:', 'rmcommon'); ?></label>
         <div class="controls">
             <input type="text" size="5" name="options[0]" value="<?php echo $options[0]; ?>" id="number-comments">
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label"><?php _e('Show module name:','rmcommon'); ?></label>
+        <label class="control-label"><?php _e('Show module name:', 'rmcommon'); ?></label>
         <div class="controls">
             <label class="radio inline">
-                <input type="radio" name="options[1]" value="1"'<?php echo $options[1]==1 ? ' checked="checked"':''; ?>><?php _e('Yes','rmcommon'); ?>
+                <input type="radio" name="options[1]" value="1"'<?php echo $options[1]==1 ? ' checked="checked"':''; ?>><?php _e('Yes', 'rmcommon'); ?>
             </label>
             <label class="radio inline">
-                <input type="radio" name="options[1]" value="1"'<?php echo $options[1]==0 ? ' checked="checked"':''; ?>><?php _e('No','rmcommon'); ?>
+                <input type="radio" name="options[1]" value="1"'<?php echo $options[1]==0 ? ' checked="checked"':''; ?>><?php _e('No', 'rmcommon'); ?>
             </label>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label"><?php _e('Show item name:','rmcommon'); ?></label>
+        <label class="control-label"><?php _e('Show item name:', 'rmcommon'); ?></label>
         <div class="controls">
             <label class="radio inline">
-                <input type="radio" name="options[2]" value="1"'<?php echo $options[2]==1 ? ' checked="checked"':''; ?>><?php _e('Yes','rmcommon'); ?>
+                <input type="radio" name="options[2]" value="1"'<?php echo $options[2]==1 ? ' checked="checked"':''; ?>><?php _e('Yes', 'rmcommon'); ?>
             </label>
             <label class="radio inline">
-                <input type="radio" name="options[2]" value="1"'<?php echo $options[2]==0 ? ' checked="checked"':''; ?>><?php _e('No','rmcommon'); ?>
+                <input type="radio" name="options[2]" value="1"'<?php echo $options[2]==0 ? ' checked="checked"':''; ?>><?php _e('No', 'rmcommon'); ?>
             </label>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label"><?php _e('Show username:','rmcommon'); ?></label>
+        <label class="control-label"><?php _e('Show username:', 'rmcommon'); ?></label>
         <div class="controls">
             <label class="radio inline">
-                <input type="radio" name="options[3]" value="1"'<?php echo $options[3]==1 ? ' checked="checked"':''; ?>><?php _e('Yes','rmcommon'); ?>
+                <input type="radio" name="options[3]" value="1"'<?php echo $options[3]==1 ? ' checked="checked"':''; ?>><?php _e('Yes', 'rmcommon'); ?>
             </label>
             <label class="radio inline">
-                <input type="radio" name="options[3]" value="1"'<?php echo $options[3]==0 ? ' checked="checked"':''; ?>><?php _e('No','rmcommon'); ?>
+                <input type="radio" name="options[3]" value="1"'<?php echo $options[3]==0 ? ' checked="checked"':''; ?>><?php _e('No', 'rmcommon'); ?>
             </label>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label"><?php _e('Show date:','rmcommon'); ?></label>
+        <label class="control-label"><?php _e('Show date:', 'rmcommon'); ?></label>
         <div class="controls">
             <label class="radio inline">
-                <input type="radio" name="options[4]" value="1"'<?php echo $options[4]==1 ? ' checked="checked"':''; ?>><?php _e('Yes','rmcommon'); ?>
+                <input type="radio" name="options[4]" value="1"'<?php echo $options[4]==1 ? ' checked="checked"':''; ?>><?php _e('Yes', 'rmcommon'); ?>
             </label>
             <label class="radio inline">
-                <input type="radio" name="options[4]" value="1"'<?php echo $options[4]==0 ? ' checked="checked"':''; ?>><?php _e('No','rmcommon'); ?>
+                <input type="radio" name="options[4]" value="1"'<?php echo $options[4]==0 ? ' checked="checked"':''; ?>><?php _e('No', 'rmcommon'); ?>
             </label>
         </div>
     </div>
@@ -183,5 +177,4 @@ function rmc_bkcomments_edit($options){
     $form .= '</div>';
 
     return $form;
-
 }

@@ -14,17 +14,17 @@
  */
 class RMFormFile extends RMFormElement
 {
-	private $_size = 30;
-	private $_limit = 0;
-	/**
-	 * Constructor de la clase
-	 * @param string $caption Texto de la etiqueta
-	 * @param string $name Nombre del campo
-	 * @param int $size Longitud del campo (Por defecto 30)
+    private $_size = 30;
+    private $_limit = 0;
+    /**
+     * Constructor de la clase
+     * @param string $caption Texto de la etiqueta
+     * @param string $name Nombre del campo
+     * @param int $size Longitud del campo (Por defecto 30)
      * @param int Limite en bytes para el tamaño del archivo
-	 */
-	public function __construct($caption, $name = '', $size=30, $limit=0){
-
+     */
+    public function __construct($caption, $name = '', $size=30, $limit=0)
+    {
         if (is_array($caption)) {
             parent::__construct($caption);
         } else {
@@ -35,31 +35,33 @@ class RMFormFile extends RMFormElement
         }
 
         $this->set('type', 'file');
-
-	}
-	/**
-	 * Modifica la longitud del campo
-	 * @param int $size Longitud
-	 */
-	public function setSize($size){
-		if ($size > 0){ $this->_size = $size; }
-	}
-	/**
-	 * Devuelve la longitud actual del campo
-	 * @return int
-	 */
-	public function getSize(){
-		return $this->_size;
-	}
-	/**
-	 * Genera el c?digo HTML para mostrar el campo
-	 * @return string
-	 */
-	public function render(){
-
+    }
+    /**
+     * Modifica la longitud del campo
+     * @param int $size Longitud
+     */
+    public function setSize($size)
+    {
+        if ($size > 0) {
+            $this->_size = $size;
+        }
+    }
+    /**
+     * Devuelve la longitud actual del campo
+     * @return int
+     */
+    public function getSize()
+    {
+        return $this->_size;
+    }
+    /**
+     * Genera el c?digo HTML para mostrar el campo
+     * @return string
+     */
+    public function render()
+    {
         $attributes = $this->renderAttributeString();
 
         return '<input ' . $attributes . '>';
-	}
+    }
 }
-

@@ -21,31 +21,32 @@ $xoopsLogger->activated = false;
 */
 class RMProxy
 {
-	private $url = '';
-	private $type = '';
-	
-	function __construct($url, $type='text/html'){
-		$this->url = $url;
-		$this->type = $type;
-	}
-	
-	function get(){
-
-		global $exmConfig;
-		// Creamos la petición
-		$hdrs = array(
-			'http'=>array(
-				'method'=>"GET",
-				'header'=>"Accept-language: "._LANGCODE."\r\n" .
+    private $url = '';
+    private $type = '';
+    
+    public function __construct($url, $type='text/html')
+    {
+        $this->url = $url;
+        $this->type = $type;
+    }
+    
+    public function get()
+    {
+        global $exmConfig;
+        // Creamos la petición
+        $hdrs = array(
+            'http'=>array(
+                'method'=>"GET",
+                'header'=>"Accept-language: "._LANGCODE."\r\n" .
                                     "Referer: ".XOOPS_URL."\r\n"
-			)
-		);
-		
-		$context = stream_context_create($hdrs);
-		$content = file_get_contents(urldecode($this->url), false, $context);
+            )
+        );
+        
+        $context = stream_context_create($hdrs);
+        $content = file_get_contents(urldecode($this->url), false, $context);
 
-		header("Content-Type: $this->type");
+        header("Content-Type: $this->type");
 
-		return $content;
-	}
+        return $content;
+    }
 }

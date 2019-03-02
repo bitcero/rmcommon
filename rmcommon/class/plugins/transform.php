@@ -27,8 +27,10 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_transform{
-    function rotate (phmagick $p,$degrees=45){
+class phMagick_transform
+{
+    public function rotate(phmagick $p, $degrees=45)
+    {
         $cmd   = $p->getBinary('convert');
         $cmd .= ' -background "transparent" -rotate ' . $degrees ;
         $cmd .= '  "' . $p->getSource().'"' ;
@@ -44,7 +46,8 @@ class phMagick_transform{
      * Flips the image vericaly
      * @return unknown_type
      */
-    function flipVertical(phmagick $p){
+    public function flipVertical(phmagick $p)
+    {
         $cmd  = $p->getBinary('convert');
         $cmd .= ' -flip ' ;
         $cmd .= ' "' . $p->getSource() .'"';
@@ -60,7 +63,8 @@ class phMagick_transform{
      * Flips the image horizonaly
      * @return unknown_type
      */
-    function flipHorizontal(phmagick $p){
+    public function flipHorizontal(phmagick $p)
+    {
         $cmd  = $p->getBinary('convert');
         $cmd .= ' -flop ' ;
         $cmd .= ' "' . $p->getSource() .'"';
@@ -72,26 +76,27 @@ class phMagick_transform{
         return  $p ;
     }
 
-/**
-     * Flips the image horizonaly and verticaly
-     * @return unknown_type
-     */
-    function reflection(phmagick $p, $size = 60, $transparency = 50){
-    	$p->requirePlugin('info');
+    /**
+         * Flips the image horizonaly and verticaly
+         * @return unknown_type
+         */
+    public function reflection(phmagick $p, $size = 60, $transparency = 50)
+    {
+        $p->requirePlugin('info');
 
-    	$source = $p->getSource();
+        $source = $p->getSource();
 
-    	//invert image
-    	$this->flipVertical($p);
+        //invert image
+        $this->flipVertical($p);
 
-    	//crop it to $size%
+        //crop it to $size%
         list($w, $h) = $p->getInfo($p->getDestination());
-        $p->crop($w, $h * ($size/100),0,0,phMagickGravity::None);
+        $p->crop($w, $h * ($size/100), 0, 0, phMagickGravity::None);
 
         //make a image fade to transparent
         $cmd  = $p->getBinary('convert');
         $cmd .= ' "' . $p->getSource() .'"';
-        $cmd .= ' ( -size ' . $w.'x'. ( $h * ($size/100)) .' gradient: ) ';
+        $cmd .= ' ( -size ' . $w.'x'. ($h * ($size/100)) .' gradient: ) ';
         $cmd .= ' +matte -compose copy_opacity -composite ';
         $cmd .= ' "' . $p->getDestination().'"' ;
 
@@ -101,7 +106,7 @@ class phMagick_transform{
         $file = dirname($p->getDestination()) . '/'. uniqid() . '.png';
 
         $cmd  = $p->getBinary('convert');
-        $cmd .= '  -size ' . $w.'x'. ( $h * ($size/100)) .' xc:none  ';
+        $cmd .= '  -size ' . $w.'x'. ($h * ($size/100)) .' xc:none  ';
         $cmd .= ' "' . $file .'"' ;
 
         $p->execute($cmd);
@@ -129,7 +134,4 @@ class phMagick_transform{
         $p->setHistory($p->getDestination());
         return  $p ;
     }
-
-
-
 }

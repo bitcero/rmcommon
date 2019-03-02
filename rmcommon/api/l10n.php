@@ -13,16 +13,18 @@ require RMCPATH.'/class/gettext/streams.php';
 * Provides a method to get the current locale
 * If does not exists a locale then returns en_US
 */
-function get_locale(){
+function get_locale()
+{
     static $exm_locale;
     global $cuSettings;
 
-    if(!isset($exm_locale) || $exm_locale == ''){
+    if (!isset($exm_locale) || $exm_locale == '') {
         $exm_locale = RMEvents::get()->trigger('rmcommon.get.locale', $cuSettings->lang);
     }
 
-    if ($exm_locale=='')
+    if ($exm_locale=='') {
         $exm_locale = 'en';
+    }
 
     return $exm_locale;
 }
@@ -36,17 +38,19 @@ function get_locale(){
 * @param string $domain Unique identifier for this file
 * @param string Local path to file
 */
-function load_locale_file($domain, $file) {
+function load_locale_file($domain, $file)
+{
     global $l10n;
 
-    if(isset($l10n[$domain]))
-
+    if (isset($l10n[$domain])) {
         return;
+    }
 
-    if ( is_readable($file))
+    if (is_readable($file)) {
         $cache = new CachedFileReader($file);
-    else
+    } else {
         return;
+    }
 
     $gettext = new gettext_reader($cache);
 
@@ -54,8 +58,9 @@ function load_locale_file($domain, $file) {
         $l10n[$domain]->load_tables();
         $gettext->load_tables();
         $l10n[$domain]->cache_translations = array_merge($gettext->cache_translations, $l10n[$domain]->cache_translations);
-    } else
+    } else {
         $l10n[$domain] = $gettext;
+    }
 
     unset($input, $gettext);
 }
@@ -68,29 +73,32 @@ function load_locale_file($domain, $file) {
 * @param string Unique identifier for language file
 * @param string prefix for file name
 */
-function load_mod_locale($domain, $prefix=''){
+function load_mod_locale($domain, $prefix='')
+{
     $exm_locale = get_locale();
 
-    if ($domain=='')
+    if ($domain=='') {
         return;
+    }
 
     $path = XOOPS_ROOT_PATH.'/modules/'.$domain.'/lang/'.$prefix.$exm_locale.'.mo';
     load_locale_file($prefix.$domain, $path);
-
 }
 
 /**
 * Read a MO file for translate a plugin
 */
-function load_plugin_locale($plugin, $prefix='', $module='rmcommon'){
+function load_plugin_locale($plugin, $prefix='', $module='rmcommon')
+{
     $exm_locale = get_locale();
 
-    if ($plugin=='') return;
+    if ($plugin=='') {
+        return;
+    }
 
     $path = XOOPS_ROOT_PATH.'/modules/'.$module.'/plugins/'.$plugin.'/lang/'.$prefix.$exm_locale.'.mo';
 
     load_locale_file($prefix.$plugin, $path);
-
 }
 
 /**
@@ -99,9 +107,12 @@ function load_plugin_locale($plugin, $prefix='', $module='rmcommon'){
 * @param string Prefix for file
 * @param bool True for admin section, false for front section
 */
-function load_theme_locale($theme, $prefix='', $gui=false){
+function load_theme_locale($theme, $prefix='', $gui=false)
+{
     $exm_locale = get_locale();
-    if ($theme=='') return;
+    if ($theme=='') {
+        return;
+    }
 
     if ($gui) {
         $path = RMCPATH.'/themes/'.$theme.'/lang/'.$prefix.$exm_locale.'.mo';
@@ -114,11 +125,13 @@ function load_theme_locale($theme, $prefix='', $gui=false){
 /**
 * Allows to translate string from exm system elements
 */
-function translate($text, $domain = 'system'){
+function translate($text, $domain = 'system')
+{
     global $l10n;
 
-    if ( !class_exists( 'RMEvents' ) )
+    if (!class_exists('RMEvents')) {
         return $l10n[$domain]->translate($text);
+    }
 
     if (isset($l10n[$domain])) {
         return RMEvents::get()->run_event('rmcommon.get_locale_text', $l10n[$domain]->translate($text), $text, $domain);
@@ -134,7 +147,8 @@ function translate($text, $domain = 'system'){
 * The teme name must be specified with prefix "theme_". eg. "theme_exm" or "theme_simplex"
 * @return print string
 */
-function _e($text, $domain='rmcommon'){
+function _e($text, $domain='rmcommon')
+{
     echo translate($text, $domain);
 }
 
@@ -145,6 +159,7 @@ function _e($text, $domain='rmcommon'){
 * The teme name must be specified with prefix "theme_". eg. "theme_exm" or "theme_simplex"
 * @return string
 */
-function __($text, $domain='rmcommon'){
+function __($text, $domain='rmcommon')
+{
     return translate($text, $domain);
 }

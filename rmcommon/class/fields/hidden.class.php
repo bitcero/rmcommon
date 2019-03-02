@@ -20,7 +20,6 @@ class RMFormHidden extends RMFormElement
      */
     public function __construct($name, $value)
     {
-
         if (is_array($name)) {
             parent::__construct($name);
         } else {
@@ -30,14 +29,13 @@ class RMFormHidden extends RMFormElement
         }
 
         $this->setIfNotSet('id', $name);
-
     }
 
     /**
      * Establece el valor del elemento.
      * @param string $value Valor del elemento
      */
-    function setValue($value)
+    public function setValue($value)
     {
         $this->set('value', $value);
     }
@@ -46,7 +44,7 @@ class RMFormHidden extends RMFormElement
      * Devuelve el valor del elemento
      * @return string
      */
-    function getValue()
+    public function getValue()
     {
         return $this->get('value');
     }
@@ -55,7 +53,7 @@ class RMFormHidden extends RMFormElement
      * Genera el c?digo HTML para mostrar el elemento
      * @return string
      */
-    function render()
+    public function render()
     {
         $attributes = $this->renderAttributeString();
 
@@ -63,4 +61,3 @@ class RMFormHidden extends RMFormElement
         return $ret;
     }
 }
-

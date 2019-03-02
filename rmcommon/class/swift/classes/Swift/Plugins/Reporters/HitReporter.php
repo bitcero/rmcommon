@@ -25,39 +25,37 @@ class Swift_Plugins_Reporters_HitReporter implements Swift_Plugins_Reporter
    * @var array
    * @access private
    */
-  private $_failures = array();
-  private $_failures_cache = array();
+    private $_failures = array();
+    private $_failures_cache = array();
   
-  /**
-   * Notifies this ReportNotifier that $address failed or succeeded.
-   * @param Swift_Mime_Message $message
-   * @param string $address
-   * @param int $result from {@link RESULT_PASS, RESULT_FAIL}
-   */
-  public function notify(Swift_Mime_Message $message, $address, $result)
-  {
-    if (self::RESULT_FAIL == $result && !isset($this->_failures_cache[$address]))
+    /**
+     * Notifies this ReportNotifier that $address failed or succeeded.
+     * @param Swift_Mime_Message $message
+     * @param string $address
+     * @param int $result from {@link RESULT_PASS, RESULT_FAIL}
+     */
+    public function notify(Swift_Mime_Message $message, $address, $result)
     {
-      $this->_failures[] = $address;
-      $this->_failures_cache[$address] = true;
+        if (self::RESULT_FAIL == $result && !isset($this->_failures_cache[$address])) {
+            $this->_failures[] = $address;
+            $this->_failures_cache[$address] = true;
+        }
     }
-  }
   
-  /**
-   * Get an array of addresses for which delivery failed.
-   * @return array
-   */
-  public function getFailedRecipients()
-  {
-    return $this->_failures;
-  }
+    /**
+     * Get an array of addresses for which delivery failed.
+     * @return array
+     */
+    public function getFailedRecipients()
+    {
+        return $this->_failures;
+    }
   
-  /**
-   * Clear the buffer (empty the list).
-   */
-  public function clear()
-  {
-    $this->_failures = $this->_failures_cache = array();
-  }
-  
+    /**
+     * Clear the buffer (empty the list).
+     */
+    public function clear()
+    {
+        $this->_failures = $this->_failures_cache = array();
+    }
 }

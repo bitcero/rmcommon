@@ -77,7 +77,6 @@ class Services
          * priority over other components for same service.
          */
         foreach ($services as $service) {
-
             if (!file_exists($service['file'])) {
                 continue;
             }
@@ -87,27 +86,21 @@ class Services
             // Assign current enabled service
 
             if (array_key_exists($service['service'], $this->enabledProviders)) {
-
                 if ($this->enabledProviders[$service['service']] == $service['id']) {
                     $this->services[$service['service']] = $this->allServices[$service['service']][$service['id']];
                 }
-
             } else {
-
                 $this->services[$service['service']] = $this->allServices[$service['service']][$service['id']];
 
                 $this->registerProvider($service['service'], $service['id']);
-
             }
 
             $tempProviders[$service['service']] = $service['id'];
-
         }
 
-        if(!empty(array_diff($this->enabledProviders, $tempProviders))){
+        if (!empty(array_diff($this->enabledProviders, $tempProviders))) {
             $this->saveProviders(array_intersect($this->enabledProviders, $tempProviders));
         }
-
     }
 
     /**
@@ -142,7 +135,6 @@ class Services
         $service = $class::getInstance();
 
         return $service;
-
     }
 
     /**
@@ -150,8 +142,9 @@ class Services
      * @param $service Service name
      * @return bool
      */
-    public function isThereProvider($service){
-        if(array_key_exists($service, $this->enabledProviders)){
+    public function isThereProvider($service)
+    {
+        if (array_key_exists($service, $this->enabledProviders)) {
             return true;
         } else {
             return false;
@@ -203,7 +196,6 @@ class Services
         // Save file
         $this->saveProviders($enabledProviders);
         return true;
-
     }
 
     /**
@@ -223,7 +215,6 @@ class Services
      */
     public function __get($name)
     {
-
         if ('' == $name) {
             throw new \Exception(__('Service name could not be empty!', 'rmcommon'));
         }
@@ -234,19 +225,19 @@ class Services
 
         $service = new ServiceFallback();
         return $service;
-
     }
 
     /**
      * Singleton
      * @return Services
      */
-    static public function getInstance()
+    public static function getInstance()
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
         $instance = new Services();
 
@@ -257,7 +248,7 @@ class Services
 /**
  * Interfase for services providers
  */
-Interface ServiceInterface
+interface ServiceInterface
 {
     /**
      * Singleton method for providers
@@ -282,5 +273,4 @@ abstract class ServiceAbstract
 
 class ServiceFallback extends ServiceAbstract
 {
-
 }

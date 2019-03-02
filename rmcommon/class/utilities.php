@@ -13,7 +13,7 @@ class RMUtilities
     /**
      * Gets a singleton
      */
-    static function get()
+    public static function get()
     {
         static $instance;
         if (!isset($instance)) {
@@ -29,12 +29,15 @@ class RMUtilities
      */
     public function delete_file($filepath)
     {
-        if ($filepath == '') return false;
+        if ($filepath == '') {
+            return false;
+        }
 
-        if (!file_exists($filepath)) return true;
+        if (!file_exists($filepath)) {
+            return true;
+        }
 
         return unlink($filepath);
-
     }
 
     /**
@@ -43,17 +46,19 @@ class RMUtilities
     private function hexToRGB($color)
     {
         // Transformamos el color hex a rgb
-        if ($color[0] == '#')
+        if ($color[0] == '#') {
             $color = substr($color, 1);
+        }
 
-        if (strlen($color) == 6)
+        if (strlen($color) == 6) {
             list($r, $g, $b) = array($color[0] . $color[1],
                 $color[2] . $color[3],
                 $color[4] . $color[5]);
-        elseif (strlen($color) == 3)
+        } elseif (strlen($color) == 3) {
             list($r, $g, $b) = array($color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]);
-        else
+        } else {
             list($r, $g, $b) = array("FF", "FF", "FF");
+        }
 
         $r = hexdec($r);
         $g = hexdec($g);
@@ -74,28 +79,27 @@ class RMUtilities
      * @param bool $useAlpha
      * @return string
      */
-    static public function randomString($options_or_size, $useDigits = true, $useSpecial = true, $onlyUpper = false, $useAlpha = true)
+    public static function randomString($options_or_size, $useDigits = true, $useSpecial = true, $onlyUpper = false, $useAlpha = true)
     {
         $upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $lowerLetters = "abcdefghijklmnopqrstuvwxyz";
         $digits = "0123456789";
         $specialChars = "?@#\$%&()=/\\~!.:,;-_+*[]{}";
         
-        if(is_array($options_or_size)){
-            
-            if(array_key_exists('upperLetters', $options_or_size)){
+        if (is_array($options_or_size)) {
+            if (array_key_exists('upperLetters', $options_or_size)) {
                 $upperLetters = $options_or_size['upperLetters'];
             }
 
-            if(array_key_exists('lowerLetters', $options_or_size)){
+            if (array_key_exists('lowerLetters', $options_or_size)) {
                 $lowerLetters = $options_or_size['lowerLetters'];
             }
 
-            if(array_key_exists('digits', $options_or_size)){
+            if (array_key_exists('digits', $options_or_size)) {
                 $digits = $options_or_size['digits'];
             }
 
-            if(array_key_exists('specialChars', $options_or_size)){
+            if (array_key_exists('specialChars', $options_or_size)) {
                 $specialChars = $options_or_size['specialChars'];
             }
             
@@ -104,15 +108,20 @@ class RMUtilities
             $useSpecial = array_key_exists('special', $options_or_size) ? $options_or_size['special'] : true;
             $useAlpha = array_key_exists('alpha', $options_or_size) ? $options_or_size['alpha'] : true;
             $onlyUpper = array_key_exists('upper', $options_or_size) ? $options_or_size['upper'] : false;
-            
         } else {
             $size = (int) $options_or_size;
         }
 
         $que = array();
-        if ($useAlpha) $que[] = 'alpha';
-        if ($useDigits) $que[] = 'digit';
-        if ($useSpecial) $que[] = 'special';
+        if ($useAlpha) {
+            $que[] = 'alpha';
+        }
+        if ($useDigits) {
+            $que[] = 'digit';
+        }
+        if ($useSpecial) {
+            $que[] = 'special';
+        }
 
         $rtn = '';
 
@@ -133,7 +142,6 @@ class RMUtilities
         }
 
         return $rtn;
-
     }
 
     /**
@@ -152,9 +160,7 @@ class RMUtilities
      */
     public function formatBytesSize($size)
     {
-
         return RMFormat::bytes_format($size, 'bytes');
-
     }
 
     /**
@@ -164,7 +170,7 @@ class RMUtilities
      * @param array Path of excluded files or folders
      * @return bool
      */
-    static function delete_directory($path, $root = true, $exclude = array())
+    public static function delete_directory($path, $root = true, $exclude = array())
     {
         $path = str_replace('\\', '/', $path);
         if (substr($path, 0, strlen($path) - 1) != '/') {
@@ -172,7 +178,9 @@ class RMUtilities
         }
         $dir = opendir($path);
         while (($file = readdir($dir)) !== false) {
-            if ($file == '.' || $file == '..') continue;
+            if ($file == '.' || $file == '..') {
+                continue;
+            }
 
             if (in_array($path . $file, $exclude)) {
                 continue;
@@ -185,13 +193,13 @@ class RMUtilities
             }
         }
         closedir($dir);
-        if ($root)
+        if ($root) {
             @rmdir($path);
+        }
     }
 
-    static function copy_directory($source, $target)
+    public static function copy_directory($source, $target)
     {
-
         $source = str_replace('\\', '/', $source);
         $target = str_replace('\\', '/', $target);
 
@@ -281,10 +289,8 @@ class RMUtilities
      */
     public function getVersion($includename = true, $module = '', $type = 0)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMModules', 'get_module_version'));
         return RMModules::get_module_version($module, $includename, $type == 0 ? 'verbose' : 'raw');
-
     }
 
     /**
@@ -297,10 +303,8 @@ class RMUtilities
      */
     public function format_version($version, $name = false)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMModules', 'format_module_version'), E_USER_DEPRECATED);
         return RMModules::format_module_version($version, $name);
-
     }
 
     /**
@@ -315,15 +319,14 @@ class RMUtilities
      */
     public function module_config($directory, $option = '')
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMSettings', 'module_settings()'), E_USER_DEPRECATED);
         $settings = RMSettings::module_settings($directory, $option);
 
-        if (is_object($settings))
+        if (is_object($settings)) {
             return (array)$settings;
-        else
+        } else {
             return $settings;
-
+        }
     }
 
     /**
@@ -339,5 +342,4 @@ class RMUtilities
         $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
         $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
     }
-
 }

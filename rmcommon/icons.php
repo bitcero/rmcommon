@@ -40,7 +40,7 @@ $providers = \RMEvents::get()->trigger('rmcommon.register.icon.provider', []);
 
 $action = $common->httpRequest()->request('action', 'string', '');
 
-switch($action){
+switch ($action) {
 
     case 'load-icons':
 
@@ -50,14 +50,14 @@ switch($action){
         $size = $common->httpRequest()->get('size', 'integer', 32);
 
         $tempProviders = [];
-        foreach($providers as $item){
+        foreach ($providers as $item) {
             $tempProviders[$item['id']] = $item;
         }
         unset($item);
         $providers = $tempProviders;
         unset($tempProviders);
 
-        if(!array_key_exists($provider, $providers) && 'rmcommon' != $provider){
+        if (!array_key_exists($provider, $providers) && 'rmcommon' != $provider) {
             $common->ajax()->notifyError(__('Icons provider does not exists!', 'rmcommon'));
         }
 
@@ -73,7 +73,10 @@ switch($action){
         $common->template()->assign('size', $size);
 
         $common->ajax()->response(
-            sprintf(__('Icons from %s', 'rmcommon'), $name), 0, 1, [
+            sprintf(__('Icons from %s', 'rmcommon'), $name),
+            0,
+            1,
+            [
                 'content' => $common->template()->render('ajax/ajax-icons.php', 'module', 'rmcommon')
             ]
         );
@@ -86,13 +89,11 @@ switch($action){
         $common->template()->append('providers', ['id' => 'rmcommon', 'name' => 'Common Utilities']);
 
         foreach ($providers as $provider) {
-
             if (!is_dir($provider['directory'])) {
                 continue;
             }
 
             $common->template()->append('providers', ['id' => $provider['id'], 'name' => isset($provider['name']) ? $provider['name'] : $provider['id']]);
-
         }
 
         $common->template()->assign('selectedProvider', ['id' => 'rmcommon', 'name' => 'Common Utilities']);

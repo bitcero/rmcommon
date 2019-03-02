@@ -20,8 +20,9 @@ include '../../../mainfile.php';
 /**
  * Load rewrite modules configuration
  */
-if (file_exists( XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js' ) )
+if (file_exists(XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js')) {
     include XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js';
+}
 
 /**
  * Load the ajax modules controller

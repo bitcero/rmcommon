@@ -1,4 +1,4 @@
-<h1 class="cu-section-title"><?php _e('Dashboard','rmcommon'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Dashboard', 'rmcommon'); ?></h1>
 
 <!-- Top Widgets -->
 <ul class="top-widgets">
@@ -31,7 +31,7 @@
             </div>
             <div class="box-content">
                 <ul class="comments">
-                    <?php foreach($comments as $comment): ?>
+                    <?php foreach ($comments as $comment): ?>
                         <li>
                             <p><?php echo $comment->text; ?></p>
                             <cite><a href="<?php echo RMUris::relative_url('/userinfo.php?uid=' . $comment->poster->id); ?>">&mdash; <?php echo $comment->poster->name; ?></a></cite>
@@ -50,10 +50,10 @@
     <div class="size-1" data-dashboard="item" style="display: none;" id="updater-info">
         <div class="cu-box box-warning">
             <div class="box-header">
-                <h3 class="box-title"><?php echo sprintf(__('%s Updates Available!','rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></h3>
+                <h3 class="box-title"><?php echo sprintf(__('%s Updates Available!', 'rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></h3>
             </div>
             <div class="box-content">
-                <p class="text-warning"><?php echo sprintf(__('Please %s to view available updates.','rmcommon'), '<a href="updates.php">'.__('click here','rmcommon').'</a>'); ?></p>
+                <p class="text-warning"><?php echo sprintf(__('Please %s to view available updates.', 'rmcommon'), '<a href="updates.php">'.__('click here', 'rmcommon').'</a>'); ?></p>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
 
             <div class="box-content">
                 <ul class="management-tools">
-                    <?php foreach($managementTools as $tool): ?>
+                    <?php foreach ($managementTools as $tool): ?>
                         <li>
                             <a href="<?php echo $tool->link; ?>">
                                 <?php echo $cuIcons->getIcon($tool->icon . ' text-' . $tool->color); ?>
@@ -87,7 +87,7 @@
         <div class="cu-box">
             <div class="box-header">
                 <span class="fa fa-caret-up box-handler"></span>
-                <h3 class="box-title"><?php _e('Recent News','rmcommon'); ?></h3>
+                <h3 class="box-title"><?php _e('Recent News', 'rmcommon'); ?></h3>
             </div>
             <div class="box-content collapsable" id="rmc-recent-news">
 
@@ -106,7 +106,7 @@
     <!--// End recent news -->
 
     <!-- Third part panels -->
-    <?php if($dashboardPanels): foreach($dashboardPanels as $panel): ?>
+    <?php if ($dashboardPanels): foreach ($dashboardPanels as $panel): ?>
         <?php echo $panel; ?>
     <?php endforeach; endif; ?>
 

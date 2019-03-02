@@ -29,7 +29,6 @@
  */
 class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements \Common\Core\Helpers\ServiceInterface
 {
-
     public function load($parameters)
     {
         global $xoopsUser, $common, $cuSettings, $cuServices;
@@ -57,7 +56,6 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
         $comms = array();
 
         while ($row = $db->fetchArray($result)) {
-
             $com = new \RMComment();
             $com->assignVars($row);
 
@@ -69,7 +67,6 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
             $editor = $ecache[$com->getVar('user')];
 
             if ($editor->getVar('xuid') > 0) {
-
                 if (!isset($ucache[$editor->getVar('xuid')])) {
                     $ucache[$editor->getVar('xuid')] = new \XoopsUser($editor->getVar('xuid'));
                 }
@@ -85,9 +82,7 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
                     'rank' => $user->rank(),
                     'url' => $user->getVar('url') != 'http://' ? $user->getVar('url') : ''
                 );
-
             } else {
-
                 $poster = array(
                     'id' => 0,
                     'name' => $editor->getVar('name'),
@@ -97,7 +92,6 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
                     'rank' => '',
                     'url' => $editor->getVar('url') != 'http://' ? $editor->getVar('url') : ''
                 );
-
             }
 
             if ($xoopsUser && $xoopsUser->isAdmin()) {
@@ -149,22 +143,25 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
         
         extract($parameters);
 
-        if ( !$cuSettings->enable_comments )
+        if (!$cuSettings->enable_comments) {
             return false;
+        }
 
-        if ( !$xoopsUser && !$cuSettings->anonymous_comments )
+        if (!$xoopsUser && !$cuSettings->anonymous_comments) {
             return false;
+        }
 
-        if (!defined('COMMENTS_INCLUDED'))
+        if (!defined('COMMENTS_INCLUDED')) {
             define('COMMENTS_INCLUDED', 1);
+        }
 
         $xoopsTpl->assign('enable_comments_form', 1);
 
         $form = array(
             'show_name'     => !($xoopsUser),
-            'lang_name'     => __('Name','rmcommon'),
+            'lang_name'     => __('Name', 'rmcommon'),
             'show_email'    => !($xoopsUser),
-            'lang_email'    => __('Email address','rmcommon'),
+            'lang_email'    => __('Email address', 'rmcommon'),
             'show_url'      => !($xoopsUser),
             'lang_url'      => __('Web site', 'rmcommon'),
             'lang_text'     => __('Your comment', 'rmcommon'),
@@ -179,7 +176,7 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
             'action'		=> 'save'
         );
 
-        if($common->services()->service('captcha')){
+        if ($common->services()->service('captcha')) {
             $form['fields'] = [
                 'captcha' => $common->services()->captcha->render()
             ];
@@ -190,14 +187,14 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
 
         $form = $common->events()->trigger('rmcommon.comments.form', $form, $object, $identifier, $type);
         \RMTemplate::getInstance()->add_jquery();
-        \RMTemplate::getInstance()->add_script( 'jquery.validate.min.js', 'rmcommon', ['footer' => 1] );
+        \RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', ['footer' => 1]);
         \RMTemplate::getInstance()->add_inline_script('$(document).ready(function(){
         	$("#rmc-comment-form").validate({
         		messages: {
-        			comment_name: "'.__('Please specify your name','rmcommon').'",
-        			comment_email: "'.__('Please specify a valid email','rmcommon').'",
-        			comment_text: "'.__('Please write a message','rmcommon').'",
-        			comment_url: "'.__('Please enter a valid URL','rmcommon').'"
+        			comment_name: "'.__('Please specify your name', 'rmcommon').'",
+        			comment_email: "'.__('Please specify a valid email', 'rmcommon').'",
+        			comment_text: "'.__('Please write a message', 'rmcommon').'",
+        			comment_url: "'.__('Please enter a valid URL', 'rmcommon').'"
         		}
         	});
         });', 1);

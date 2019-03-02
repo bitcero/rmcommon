@@ -24,22 +24,22 @@ class RMFtpClient
     * @param string Nombre de usuario
     * @param string Contraseña de conexión
     */
-    public function __construct($server,$port=21,$uname='',$pass=''){
-        
+    public function __construct($server, $port=21, $uname='', $pass='')
+    {
         $this->server = $server;
         $this->port = $port;
         $this->uname = $uname;
         $this->pass = $pass;
-        
     }
     
     /**
     * @desc Coneción al servidor
     * @return bool
     */
-    public function connect($ssl = false, $timeout = 90){
+    public function connect($ssl = false, $timeout = 90)
+    {
         $this->connection = $ssl ? ftp_ssl_connect($this->server, $this->port, $timeout) : ftp_connect($this->server, $this->port, $timeout);
-        if (!ftp_login($this->connection, $this->uname, $this->pass)){
+        if (!ftp_login($this->connection, $this->uname, $this->pass)) {
             return false;
         } else {
             return true;
@@ -50,7 +50,8 @@ class RMFtpClient
     * @desc Activa el modo pasivo
     * @param bool Activar o desactivar
     */
-    public function pasv($bool = true){
+    public function pasv($bool = true)
+    {
         ftp_pasv($this->connection, $bool);
     }
     
@@ -58,7 +59,8 @@ class RMFtpClient
     * @desc Directorio Actual
     * @return string Directorio Actual
     */
-    public function pwd(){
+    public function pwd()
+    {
         return ftp_pwd($this->connection);
     }
     
@@ -67,7 +69,8 @@ class RMFtpClient
     * @param string Directorio existente en el servidor
     * return bool
     */
-    public function chdir($dir){
+    public function chdir($dir)
+    {
         return ftp_chdir($this->connection, $dir);
     }
     
@@ -76,7 +79,8 @@ class RMFtpClient
     * @param string Ruta existente del archivo
     * @return bool
     */
-    public function delete($ruta){
+    public function delete($ruta)
+    {
         return ftp_delete($this->connection, $ruta);
     }
     
@@ -86,7 +90,8 @@ class RMFtpClient
     * @param string Ruta del archivo
     * @return bool o octal
     */
-    public function chmod($mode, $ruta){
+    public function chmod($mode, $ruta)
+    {
         return ftp_chmod($this->connection, (int)$mode, $ruta);
     }
     
@@ -98,7 +103,8 @@ class RMFtpClient
     * @param int Desde donde se empieza a descargar el archivo
     * @return bool
     */
-    public function get($local, $remote, $mode = FTP_ASCII, $pos = 0){
+    public function get($local, $remote, $mode = FTP_ASCII, $pos = 0)
+    {
         return ftp_get($this->connection, $local, $remote, $mode, $pos);
     }
     
@@ -107,7 +113,8 @@ class RMFtpClient
     * @param string Ruta válida del archivo
     * @return int
     */
-    public function mtime($ruta){
+    public function mtime($ruta)
+    {
         return ftp_mdtm($this->connection, $ruta);
     }
     
@@ -116,7 +123,8 @@ class RMFtpClient
     * @param string Directorio
     * @return string or false
     */
-    public function mkdir($dir){
+    public function mkdir($dir)
+    {
         return ftp_mkdir($this->connection, $dir);
     }
     
@@ -125,7 +133,8 @@ class RMFtpClient
     * @param string Directorio
     * @return array or false
     */
-    public function nlist($dir){
+    public function nlist($dir)
+    {
         return ftp_nlist($this->connection, $dir);
     }
     
@@ -137,7 +146,8 @@ class RMFtpClient
     * @param int Posición de inicio
     * return bool
     */
-    public function put($remote, $local, $mode = FTP_ASCII, $pos = 0){
+    public function put($remote, $local, $mode = FTP_ASCII, $pos = 0)
+    {
         return ftp_put($this->connection, $remote, $local, $mode, $pos);
     }
     
@@ -147,7 +157,8 @@ class RMFtpClient
     * @param bool Modo recursivo
     * @return array
     */
-    public function rawlist($dir, $mode = false){
+    public function rawlist($dir, $mode = false)
+    {
         return ftp_rawlist($this->connection, $dir, $mode);
     }
     
@@ -157,7 +168,8 @@ class RMFtpClient
     * @param string Nuevo nombre
     * @return bool
     */
-    public function rename($old, $new){
+    public function rename($old, $new)
+    {
         return ftp_rename($this->connection, $old, $new);
     }
     
@@ -166,7 +178,8 @@ class RMFtpClient
     * @param string ruta al directorio
     * @return bool
     */
-    public function rmdir($dir){
+    public function rmdir($dir)
+    {
         return ftp_rmdir($this->connection, $dir);
     }
     
@@ -175,11 +188,13 @@ class RMFtpClient
     * @param string Ruta del archivo
     * @return int
     */
-    public function size($file){
+    public function size($file)
+    {
         return ftp_size($this->connection, $file);
     }
     
-    public function systype(){
+    public function systype()
+    {
         return ftp_systype($this->connection);
     }
     
@@ -188,9 +203,10 @@ class RMFtpClient
     * @param string Directorio a comprobar
     * @return bool
     */
-    public function isDir($dir){
+    public function isDir($dir)
+    {
         $current = $this->pwd();
-        if ($this->chdir($dir)){
+        if ($this->chdir($dir)) {
             $this->chdir($current);
             return true;
         } else {
@@ -201,7 +217,8 @@ class RMFtpClient
     /**
     * @desc Cierra la conexión FTP
     */
-    public function close(){
-        ftp_close($this->connection);   
+    public function close()
+    {
+        ftp_close($this->connection);
     }
 }

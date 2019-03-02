@@ -15,21 +15,21 @@ include '../../../mainfile.php';
 XoopsLogger::getInstance()->activated = false;
 XoopsLogger::getInstance()->renderingEnabled = false;
 
-load_mod_locale('rmcommon','emots-');
+load_mod_locale('rmcommon', 'emots-');
 
 $db = XoopsDatabaseFactory::getDatabaseConnection();
 $result = $db->query("SELECT * FROM ".$db->prefix("smiles")." ORDER BY id");
-while ($row = $db->fetchArray($result)){
-	$emotions[] = array(
-		'id'=>$row['id'], 
-		'file'=>XOOPS_UPLOAD_URL.'/'.$row['smile_url'],
-		'desc'=>$row['emotion'],
-		'code'=>$row['code']
-	);
+while ($row = $db->fetchArray($result)) {
+    $emotions[] = array(
+        'id'=>$row['id'],
+        'file'=>XOOPS_UPLOAD_URL.'/'.$row['smile_url'],
+        'desc'=>$row['emotion'],
+        'code'=>$row['code']
+    );
 }
 
 // Load new icons from plugins
-RMEvents::get()->run_event('rmcommon.load_emotions',$emotions,'tiny');
+RMEvents::get()->run_event('rmcommon.load_emotions', $emotions, 'tiny');
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -57,15 +57,15 @@ RMEvents::get()->run_event('rmcommon.load_emotions',$emotions,'tiny');
 <table width="100%" cellpadding="2" cellspacing="0">
 <tr align="center">
 <?php $i = 0; ?>
-<?php foreach($emotions as $icon): ?>
-<?php if($i>=6): ?>
+<?php foreach ($emotions as $icon): ?>
+<?php if ($i>=6): ?>
 	</tr><tr>
-<?php 
-	$i=0;
-	endif; ?>
+<?php
+    $i=0;
+    endif; ?>
 <td><img src="<?php echo $icon['file']; ?>" title="<?php echo $icon['desc']; ?>" alt="<?php echo $icon['code']; ?>" /><br /><?php echo $icon['code']; ?></td>
-<?php 
-	$i++;
+<?php
+    $i++;
 endforeach; ?>
 </tr>
 </table>

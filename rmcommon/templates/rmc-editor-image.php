@@ -18,7 +18,9 @@
             <select name="category" onchange="$('#select-category').submit();" class="form-control">
                 <option value="0"<?php echo $cat->isNew() ? ' selected="selected"' : ''; ?>><?php _e('Select...', 'rmcommon'); ?></option>
                 <?php foreach ($categories as $catego): ?>
-                    <?php if (!$catego->user_allowed_toupload($xoopsUser)) continue; ?>
+                    <?php if (!$catego->user_allowed_toupload($xoopsUser)) {
+    continue;
+} ?>
                     <option
                         value="<?php echo $catego->id(); ?>"<?php echo $cat->id() == $catego->id() ? ' selected="selected"' : ''; ?>><?php echo $catego->getVar('name'); ?></option>
                 <?php endforeach; ?>
@@ -129,7 +131,9 @@
         <select name="category" id="category-field" onchange="show_library();" class="form-control">
             <option value="0"<?php echo $cat->isNew() ? ' selected="selected"' : ''; ?>><?php _e('Select...', 'rmcommon'); ?></option>
             <?php foreach ($categories as $catego): ?>
-                <?php if (!$catego->user_allowed_toupload($xoopsUser)) continue; ?>
+                <?php if (!$catego->user_allowed_toupload($xoopsUser)) {
+    continue;
+} ?>
                 <option
                     value="<?php echo $catego->id(); ?>"<?php echo $cat->id() == $catego->id() ? ' selected="selected"' : ''; ?>><?php echo $catego->getVar('name'); ?></option>
             <?php endforeach; ?>

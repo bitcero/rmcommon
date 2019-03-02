@@ -1,8 +1,8 @@
-<?php if( empty( $modules ) ): ?>
+<?php if (empty($modules)): ?>
     <span class="label label-default"><?php _e('There are not modules that support rewrite feature.', 'rmcommon'); ?></span>
 <?php endif; ?>
 
-<?php foreach( $modules as $module ): ?>
+<?php foreach ($modules as $module): ?>
 
     <div class="form-group<?php echo $this->getClass(); ?>">
         <label for="<?php echo $this->id(); ?>-<?php echo $module->getVar('dirname'); ?>"><strong><?php echo $module->getVar('name'); ?></strong></label>

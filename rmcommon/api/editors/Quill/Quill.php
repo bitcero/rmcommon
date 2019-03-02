@@ -60,8 +60,7 @@ class Quill implements Editor
      */
     public function setOptions($name, $value)
     {
-
-        if(is_array($name)){
+        if (is_array($name)) {
             $this->options = array_merge($this->options, $name);
         } else {
             $this->options[$name] = $value;
@@ -70,7 +69,7 @@ class Quill implements Editor
 
     public function getOptions($name = null)
     {
-        if(null == $name){
+        if (null == $name) {
             return $this->options;
         } else {
             return $this->options[$name];
@@ -94,7 +93,7 @@ class Quill implements Editor
         );
 
         $theme = $this->options['theme'];
-        if('' == $theme){
+        if ('' == $theme) {
             $theme = 'snow';
         }
 
@@ -108,7 +107,7 @@ class Quill implements Editor
             ]
         );
 
-        if ('' == $template || false == file_exists($template)){
+        if ('' == $template || false == file_exists($template)) {
             $template = $common->template()->path('api/quill.php', 'module', 'rmcommon');
         }
 
@@ -118,7 +117,6 @@ class Quill implements Editor
         $html = $common->template()->render($template);
 
         return $html;
-
     }
 
     public function js()

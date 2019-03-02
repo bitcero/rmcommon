@@ -2,19 +2,19 @@
 /**
  * Common Utilities Notifications Interface
  * A helper class that allows to integrate notifications with modules and plugins
- * 
+ *
  * Copyright © 2015 Eduardo Cortés
  * -----------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -35,19 +35,19 @@ abstract class Rmcommon_ANotifications
      * @param string $event Evetn name
      * @return bool
      */
-    public abstract function is_valid($event);
+    abstract public function is_valid($event);
 
     /**
      * Indicates if the notification email uses HTML or not
      * @return bool
      */
-    public abstract function use_html();
+    abstract public function use_html();
 
     /**
      * Returns the string to be used in From Name email field
      * @return string
      */
-    public abstract function from_name();
+    abstract public function from_name();
 
     /**
      * Generate the subject for a notification event
@@ -56,7 +56,7 @@ abstract class Rmcommon_ANotifications
      *
      * @return mixed
      */
-    public abstract function subject($event, $params);
+    abstract public function subject($event, $params);
 
     /**
      * Creates the body for notification message
@@ -65,33 +65,33 @@ abstract class Rmcommon_ANotifications
      *
      * @return mixed
      */
-    public abstract function body($event, $params);
+    abstract public function body($event, $params);
 
     /**
      * Must return an array with element data
      * @return array
      */
-    public abstract function element_data();
+    abstract public function element_data();
 
     /**
      * Must return an array with object data
      * @return array
      */
-    public abstract function object_data($event);
+    abstract public function object_data($event);
 
     /**
      * Get an event object
      * @param string $name Event name
      * @return bool|RMNotificationItem
      */
-    public function event( $name ){
-
-        if ( !array_key_exists( $name, $this->events ) )
+    public function event($name)
+    {
+        if (!array_key_exists($name, $this->events)) {
             return false;
+        }
 
-        $event = new RMNotificationItem( $this->events[$name] );
+        $event = new RMNotificationItem($this->events[$name]);
         return $event;
-
     }
 
     /**
@@ -140,6 +140,4 @@ abstract class Rmcommon_ANotifications
         return $this->events[$event];
 
     }*/
-
-
 }

@@ -61,7 +61,6 @@ class Icons extends Attributes
      */
     private function loadProviders()
     {
-
         $providers = array();
         $providers = \RMEvents::get()->trigger('rmcommon.register.icon.provider', $providers);
 
@@ -70,7 +69,6 @@ class Icons extends Attributes
         }
 
         foreach ($providers as $provider) {
-
             if ($provider['id'] == '') {
                 continue;
             }
@@ -85,14 +83,11 @@ class Icons extends Attributes
             }
 
             $this->iconsProviders[$provider['id']] = $provider['directory'];
-
         }
-
     }
 
     public function getIconsList($providers = [])
     {
-
         if (empty($providers)) {
             $providers = array_keys($this->iconsProviders);
         }
@@ -100,7 +95,6 @@ class Icons extends Attributes
         $list = [];
 
         foreach ($providers as $id) {
-
             if (!array_key_exists($id, $this->iconsProviders)) {
                 continue;
             }
@@ -117,11 +111,9 @@ class Icons extends Attributes
 
                 $list[] = 'svg-' . $id . '-' . substr($file, 0, strlen($file) - 4);
             }
-
         }
 
         return $list;
-
     }
 
     /**
@@ -150,7 +142,6 @@ class Icons extends Attributes
      */
     private function providerIcon($icon)
     {
-
         $data = explode("-", $icon);
 
         if ('svg' != $data[0]) {
@@ -173,7 +164,6 @@ class Icons extends Attributes
         }
 
         return file_get_contents($filePath);
-
     }
 
     /**
@@ -183,7 +173,6 @@ class Icons extends Attributes
      */
     public function getIcon($icon, $attributes = [])
     {
-
         parent::__construct($attributes);
         $this->add('class', 'cu-icon');
 
@@ -205,7 +194,6 @@ class Icons extends Attributes
             // Index 0 has the SVG icon
             $iconSVG = $this->providerIcon($iconExploded[0]);
             return '<span ' . $renderedAttrs . '>' . $iconSVG . '</span>';
-
         }
 
         $renderedAttrs = $this->renderAttributeString();
@@ -232,15 +220,15 @@ class Icons extends Attributes
 
         // Last option: icon font
         return '<span '.$renderedAttrs.'><span class="' . $icon . '"></span></span>';
-
     }
 
     public static function getInstance()
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
         $instance = new Icons();
 

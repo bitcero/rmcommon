@@ -44,20 +44,18 @@ class CategoriesComponent
      */
     public function __construct($owner, $key, $id = 0)
     {
-        if('' == $owner || '' == $key){
+        if ('' == $owner || '' == $key) {
             throw new \RMException(__('Categories component requires from a owner and key.', 'rmcommon'));
         }
 
         $this->owner = $owner;
         $this->key = $key;
 
-        if ($id > 0){
-
+        if ($id > 0) {
             $this->category = new Category($id);
-            if($this->category->isNew()){
+            if ($this->category->isNew()) {
                 throw new \RMException(__('Category does not exists', 'rmcommon'));
             }
-
         }
     }
 

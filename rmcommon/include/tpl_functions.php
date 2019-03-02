@@ -11,29 +11,30 @@
 /**
 * This file contains a set of useful functions for template designers
 */
-function tpl_cycle($values, $delimiter = ',', $reset = false){
+function tpl_cycle($values, $delimiter = ',', $reset = false)
+{
     static $cycle_index;
 
     if (trim($values)=='') {
         return null;
     }
 
-    if(is_array($values)) {
+    if (is_array($values)) {
         $cycle_array = $values;
     } else {
-        $cycle_array = explode($delimiter,$values);
+        $cycle_array = explode($delimiter, $values);
     }
 
-    if(!isset($cycle_index) || $reset) {
-    	$cycle_index = 0;
+    if (!isset($cycle_index) || $reset) {
+        $cycle_index = 0;
     }
 
     $retval = $cycle_array[$cycle_index];
 
-    if ( $cycle_index >= count($cycle_array) -1 ) {
-    	$cycle_index = 0;
+    if ($cycle_index >= count($cycle_array) -1) {
+        $cycle_index = 0;
     } else {
-    	$cycle_index++;
+        $cycle_index++;
     }
 
     return $retval;
@@ -47,12 +48,14 @@ function tpl_cycle($values, $delimiter = ',', $reset = false){
 * @param mixed Default value to return if the var is not located.
 * @return any
 */
-function rmc_server_var($from, $key, $default=''){
-	$ret = isset($from[$key]) ? $from[$key] : $default;
-	return $ret;
+function rmc_server_var($from, $key, $default='')
+{
+    $ret = isset($from[$key]) ? $from[$key] : $default;
+    return $ret;
 }
 
-function showMessage($message, $level=0, $icon = ''){
+function showMessage($message, $level=0, $icon = '')
+{
     global $common;
     $common->utilities()->showMessage($message, $level, $icon);
 }
@@ -68,15 +71,15 @@ function showMessage($message, $level=0, $icon = ''){
  * @param int $level Indicates the level of the message (error, info, warn, etc.) You can use the constants RMMSG_INFO, RMMSG_WARN... or you can specify your own level number
  * @param string $icon URL for an icon to show in message. This value is used by templates.
  */
-function redirectMsg($url, $msg='', $level=5, $icon=''){
-
+function redirectMsg($url, $msg='', $level=5, $icon='')
+{
     RMUris::redirect_with_message($msg, $url, $level, $icon);
-
 }
 
 /**
  * @deprecated
  */
-function xoops_cp_location($location){
+function xoops_cp_location($location)
+{
     return;
 }

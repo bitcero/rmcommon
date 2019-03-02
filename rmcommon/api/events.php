@@ -8,7 +8,9 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-if (!defined('XOOPS_ROOT_PATH')) die("Sorry, there are not <a href='../'>nothing here</a>");
+if (!defined('XOOPS_ROOT_PATH')) {
+    die("Sorry, there are not <a href='../'>nothing here</a>");
+}
 
 //include_once 'langs/english.php';
 
@@ -16,11 +18,11 @@ include_once RMCPATH.'/class/textcleaner.php';
 
 class RMEvents
 {
-
     private $_events = array();
     private $_preloads = array();
 
-    public function __construct(){
+    public function __construct()
+    {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
 
         $result = $db->query("SELECT dirname FROM ".$db->prefix("modules")." WHERE isactive='1'");
@@ -56,27 +58,29 @@ class RMEvents
                 }
             }
         }
-
     }
 
     /**
     * Get an singleton instance for events api
     */
-    static function get(){
+    public static function get()
+    {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
         $instance = new RMEvents();
 
         return $instance;
     }
 
-    public function load_extra_preloads($dir, $name){
+    public function load_extra_preloads($dir, $name)
+    {
         $dir = rtrim($dir, '/');
         $extra = array();
-         if (is_dir($dir.'/events')) {
+        if (is_dir($dir.'/events')) {
             $file_list = XoopsLists::getFileListAsArray($dir.'/events');
             foreach ($file_list as $file) {
                 if (preg_match('/(\.php)$/i', $file)) {
@@ -101,18 +105,19 @@ class RMEvents
                 }
             }
         }
-
     }
 
     /**
-	* @desc Almacena toda la información de la API
-	*/
+    * @desc Almacena toda la información de la API
+    */
     public function trigger($event_name, $value=null)
     {
         $pre = $event_name;
         $event_name = strtolower(str_replace('.', '', $event_name));
         $args = func_get_args();
-        if (!isset($this->_events[$event_name])) return $value;
+        if (!isset($this->_events[$event_name])) {
+            return $value;
+        }
 
         $xoopsLogger = XoopsLogger::getInstance();
 
@@ -132,10 +137,8 @@ class RMEvents
      *
      * @deprecated Use trigger instead
      */
-    public function run_event($event_name, $value = null){
-
+    public function run_event($event_name, $value = null)
+    {
         return call_user_func_array(array($this, 'trigger'), func_get_args());
-
     }
-
 }

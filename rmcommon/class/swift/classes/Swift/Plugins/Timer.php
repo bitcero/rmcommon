@@ -21,6 +21,5 @@ interface Swift_Plugins_Timer
    * Get the current UNIX timestamp.
    * @return int
    */
-  public function getTimestamp();
-  
+    public function getTimestamp();
 }

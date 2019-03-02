@@ -45,5 +45,5 @@ interface iCommentsController
      * Loads an existing instance of the controller
      * @return object
      */
-    static function getInstance();
+    public static function getInstance();
 }
