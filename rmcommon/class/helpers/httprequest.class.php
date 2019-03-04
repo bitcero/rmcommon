@@ -17,7 +17,7 @@ class RMHttpRequest
         return self::get_http_parameter('request', $key, $type, $default);
     }
 
-    public static function get($key, $type, $default = '')
+    public static function get($key, $type = 'string', $default = '')
     {
         return self::get_http_parameter('get', $key, $type, $default);
     }

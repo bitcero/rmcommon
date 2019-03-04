@@ -75,7 +75,7 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
             if ($this->_canonical) {
                 $toencode = $this->_canonicalize($toencode);
             }
-            $wrapped = $this->_safeWordWrap($toencode, $maxLineLength, "\r\n");
+            $wrapped = $this->_safeWordwrap($toencode, $maxLineLength, "\r\n");
             $lastLinePos = mb_strrpos($wrapped, "\r\n");
             $leftOver = mb_substr($wrapped, $lastLinePos);
             $wrapped = mb_substr($wrapped, 0, $lastLinePos);

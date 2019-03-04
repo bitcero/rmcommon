@@ -13,7 +13,7 @@ $aprotocols = [];
 /**
  * Handles many methods for formatting output.
  */
-class textcleaner
+class TextCleaner
 {
     private $protocols = [];
     /**

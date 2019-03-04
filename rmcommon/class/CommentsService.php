@@ -202,7 +202,7 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
 
         $xoopsTpl->assign('cf', $form);
 
-        return $xoopsTpl->fetch(RMCPATH . '/templates/rmc-comments-form.html');
+        return $xoopsTpl->fetch(RMCPATH . '/templates/rmc-comments-form.tpl');
     }
 
     public static function getInstance()

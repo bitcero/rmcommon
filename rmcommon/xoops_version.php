@@ -96,9 +96,9 @@ $modversion['tables'] = [
 ];
 
 // Templates
-$modversion['templates'][1]['file'] = 'rmc-comments-display.html';
+$modversion['templates'][1]['file'] = 'rmc-comments-display.tpl';
 $modversion['templates'][1]['description'] = 'Comments list';
-$modversion['templates'][2]['file'] = 'rmc-comments-form.html';
+$modversion['templates'][2]['file'] = 'rmc-comments-form.tpl';
 $modversion['templates'][2]['description'] = 'Shows the comments form';
 
 // Settings categories
@@ -638,7 +638,7 @@ $modversion['blocks'][] = [
     'description' => __('Show comments from internal comments system', 'rmcommon'),
     'show_func' => 'rmc_bkcomments_show',
     'edit_func' => 'rmc_bkcomments_edit',
-    'template' => 'rmc_bk_comments.html',
+    'template' => 'rmc_bk_comments.tpl',
     'options' => '5|1|1|1|1',
 ];
 
