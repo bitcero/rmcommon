@@ -9,16 +9,15 @@
  * URI: http://www.redmexico.com.mx
  */
 
-
 /**
  * Class RMActiveForm
  */
-
 class RMActiveForm
 {
     use RMProperties;
 
     private $model;
+
     /**
      * Class constructor for the &lt;form&gt; tag. This method accept a list of attributes and parameters that
      * could be inserted in form.
@@ -62,9 +61,8 @@ class RMActiveForm
      *
      * @param array $attributes <p>Array of attributes to be generated with/in the form</p>
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
-
         // Default 'method' is post
         if (!isset($attributes['method'])) {
             $attributes['method'] = 'post';
@@ -101,9 +99,9 @@ class RMActiveForm
 
         $model = $arguments[0];
         $field = $arguments[1];
-        $parameters = isset($arguments[2]) ? $arguments[2] : array();
+        $parameters = isset($arguments[2]) ? $arguments[2] : [];
 
-        $file = dirname(__FILE__) . '/form-objects/' . strtolower($object) . '.php';
+        $file = __DIR__ . '/form-objects/' . mb_strtolower($object) . '.php';
 
         if (!file_exists($file)) {
             throw new RMException(sprintf(__('Form element of type "%s" does not exists.', 'rmcommon'), $object));
@@ -134,27 +132,27 @@ class RMActiveForm
         RMTemplate::get()->add_script(
             'forms/active-form.js',
             'rmcommon',
-            array(
-                'location' => 'footer'
-            )
+            [
+                'location' => 'footer',
+            ]
         );
 
         RMTemplate::get()->add_style(
             'active-form.css',
             'rmcommon',
-            array(
-                'location' => 'footer'
-            )
+            [
+                'location' => 'footer',
+            ]
         );
 
         foreach ($this->attributes as $attr => $value) {
             switch ($attr) {
                 case 'submit-via':
-                    $form .= $value == 'ajax' ? ' data-type="ajax"' : '';
+                    $form .= 'ajax' == $value ? ' data-type="ajax"' : '';
                     break;
                 case 'validation':
-                    $class .= $value == 'local' ? ' validate-form' : '';
-                    RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', array('directory' => 'include', 'location' => 'footer', 'id' => 'validate-js'));
+                    $class .= 'local' == $value ? ' validate-form' : '';
+                    RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', ['directory' => 'include', 'location' => 'footer', 'id' => 'validate-js']);
                     break;
                 case 'class':
                     $class .= ' ' . $value;
@@ -175,6 +173,6 @@ class RMActiveForm
      */
     public function close()
     {
-        echo "</form>";
+        echo '</form>';
     }
 }

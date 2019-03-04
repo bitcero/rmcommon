@@ -29,42 +29,46 @@
  */
 class phMagick_info
 {
-    public function getInfo(phmagick $p, $file='')
+    public function getInfo(phmagick $p, $file = '')
     {
-        if ($file == '') {
+        if ('' == $file) {
             $file = $p->getSource();
         }
+
         return getimagesize($file);
     }
 
-    public function getWidth(phmagick $p, $file='')
+    public function getWidth(phmagick $p, $file = '')
     {
         list($width, $height, $type, $attr) = $this->getInfo($p, $file);
+
         return $width;
     }
 
-    public function getHeight(phmagick $p, $file='')
+    public function getHeight(phmagick $p, $file = '')
     {
-        list($width, $height, $type, $attr)	 = $this->getInfo($p, $file);
+        list($width, $height, $type, $attr) = $this->getInfo($p, $file);
+
         return $height;
     }
 
-
-    public function getBits(phmagick $p, $file='')
+    public function getBits(phmagick $p, $file = '')
     {
-        if ($file == '') {
+        if ('' == $file) {
             $file = $p->getSource();
         }
-        $info =  getimagesize($file);
-        return $info["bits"];
+        $info = getimagesize($file);
+
+        return $info['bits'];
     }
 
-    public function getMime(phmagick $p, $file='')
+    public function getMime(phmagick $p, $file = '')
     {
-        if ($file == '') {
+        if ('' == $file) {
             $file = $p->getSource();
         }
-        $info =  getimagesize($file);
-        return $info["mime"];
+        $info = getimagesize($file);
+
+        return $info['mime'];
     }
 }

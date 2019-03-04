@@ -25,6 +25,8 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
+ * @param mixed $options
+ * @param mixed $tpl
  */
 
 /**
@@ -36,7 +38,6 @@
  * <img src="<{resize file=url_to_an_image w=width_value h=height_value}>">
  * </pre>
  */
-
 function smarty_function_resize($options, $tpl)
 {
     $file = RMHttpRequest::array_value('file', $options, 'string', '');
@@ -44,11 +45,12 @@ function smarty_function_resize($options, $tpl)
     $width = RMHttpRequest::array_value('w', $options, 'integer', 0);
     $height = RMHttpRequest::array_value('h', $options, 'integer', 0);
     $params = new stdClass();
-    $params->width = $width == 0 ? null : $width;
-    $params->height = $height == 0 ? null : $height;
+    $params->width = 0 == $width ? null : $width;
+    $params->height = 0 == $height ? null : $height;
     $params->target = $dir;
 
     $resizer = new RMImageResizer();
     $image = $resizer->resize($file, $params);
+
     return $image->url;
 }

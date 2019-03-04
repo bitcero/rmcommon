@@ -10,67 +10,71 @@
 
 class RMFlashUploader
 {
-    private $settings = array();
+    private $settings = [];
     public $name = '';
+
     /**
-    * Constructor
-    *
-    * @param string Name of instance
-    * @param string Target uploader url (e.g. uploader.php)
-    * @param array SWFUploader settings
-    * @return RMFlashUploader
-    */
-    public function __construct($name, $url, $settings = array())
+     * Constructor
+     *
+     * @param string Name of instance
+     * @param string Target uploader url (e.g. uploader.php)
+     * @param array SWFUploader settings
+     * @param mixed $name
+     * @param mixed $url
+     * @param mixed $settings
+     * @return RMFlashUploader
+     */
+    public function __construct($name, $url, $settings = [])
     {
         // Generate settings for uploadify
-        $this->settings = array(
-            'swf'                   => RMCURL.'/include/uploadify.swf',
-            'uploader'              => $url,
-            'auto'                  => false,
-            'buttonClass'           => '',
-            'buttonCursor'          => 'hand',
-            'buttonImage'           => null,
-            'buttonText'            => __('Select Files', 'rmcommon'),
-            'checkExisting'         => false,
-            'debug'                 => false,
-            'fileObjName'           => 'Filedata',
-            'fileSizeLimit'         => '512KB',
-            'fileTypeDesc'          => __('All Files', 'rmcommon'),
-            'fileTypeExts'          => '*.*',
-            'formData'              => array(),
-            'height'                => 30,
-            'method'                => 'post',
-            'multi'                 => true,
-            'overrideEvents'        => '',
-            'preventCaching'        => true,
-            'progressData'          => 'percentage',
-            'queueID'               => false,
-            'queueSizeLimit'        => 100,
-            'removeCompleted'       => true,
-            'removeTimeout'         => 2,
-            'requeueErrors'         => false,
-            'successTimeout'        => 30,
-            'uploadLimit'           => 999,
-            'width'                 => 120,
-            'onCancel'              => '',
-            'onClearQueue'          => '',
-            'onDestroy'             => '',
-            'onDialogClose'         => '',
-            'onDialogOpen'          => '',
-            'onDisable'             => '',
-            'onEnable'              => '',
-            'onFallback'            => '',
-            'onInit'                => '',
-            'onQueueComplete'       => '',
-            'onSelect'              => '',
-            'onSelectError'         => '',
-            'onSWFReady'            => '',
-            'onUploadComplete'      => '',
-            'onUploadError'         => '',
-            'onUploadProgress'      => '',
-            'onUploadStart'         => '',
-            'onUploadSuccess'       => ''
-        );
+        $this->settings = [
+            'swf' => RMCURL . '/include/uploadify.swf',
+            'uploader' => $url,
+            'auto' => false,
+            'buttonClass' => '',
+            'buttonCursor' => 'hand',
+            'buttonImage' => null,
+            'buttonText' => __('Select Files', 'rmcommon'),
+            'checkExisting' => false,
+            'debug' => false,
+            'fileObjName' => 'Filedata',
+            'fileSizeLimit' => '512KB',
+            'fileTypeDesc' => __('All Files', 'rmcommon'),
+            'fileTypeExts' => '*.*',
+            'formData' => [],
+            'height' => 30,
+            'method' => 'post',
+            'multi' => true,
+            'overrideEvents' => '',
+            'preventCaching' => true,
+            'progressData' => 'percentage',
+            'queueID' => false,
+            'queueSizeLimit' => 100,
+            'removeCompleted' => true,
+            'removeTimeout' => 2,
+            'requeueErrors' => false,
+            'successTimeout' => 30,
+            'uploadLimit' => 999,
+            'width' => 120,
+            'onCancel' => '',
+            'onClearQueue' => '',
+            'onDestroy' => '',
+            'onDialogClose' => '',
+            'onDialogOpen' => '',
+            'onDisable' => '',
+            'onEnable' => '',
+            'onFallback' => '',
+            'onInit' => '',
+            'onQueueComplete' => '',
+            'onSelect' => '',
+            'onSelectError' => '',
+            'onSWFReady' => '',
+            'onUploadComplete' => '',
+            'onUploadError' => '',
+            'onUploadProgress' => '',
+            'onUploadStart' => '',
+            'onUploadSuccess' => '',
+        ];
 
         foreach ($settings as $key => $value) {
             if (!isset($this->settings[$key])) {
@@ -84,20 +88,20 @@ class RMFlashUploader
 
     public function add_setting($name, $value)
     {
-        $convert = array(
-            'scriptData'    => 'formData',
-            'onComplete'    => 'onUploadComplete',
+        $convert = [
+            'scriptData' => 'formData',
+            'onComplete' => 'onUploadComplete',
             'onAllComplete' => 'onQueueComplete',
-            'fileExt'       => 'fileTypeExts',
-            'fileDesc'      => 'fileTypeDesc',
-            'buttonImg'     => 'buttonImage',
-            'fileDataName'  => 'fileObjName',
-            'checkScript'   => 'checkExisting',
-            'sizeLimit'     => 'fileSizeLimit',
-            'onOpen'        => 'onDialogOpen',
-            'onError'       => 'onUploadError',
-            'onProgress'    => 'onUploadProgress'
-        );
+            'fileExt' => 'fileTypeExts',
+            'fileDesc' => 'fileTypeDesc',
+            'buttonImg' => 'buttonImage',
+            'fileDataName' => 'fileObjName',
+            'checkScript' => 'checkExisting',
+            'sizeLimit' => 'fileSizeLimit',
+            'onOpen' => 'onDialogOpen',
+            'onError' => 'onUploadError',
+            'onProgress' => 'onUploadProgress',
+        ];
 
         if (isset($convert[$name])) {
             $name = $convert[$name];
@@ -116,14 +120,15 @@ class RMFlashUploader
         if (!isset($this->settings[$name])) {
             return false;
         }
+
         return $this->settings[$name];
     }
 
     /**
-    * Add several settings items at once
-    *
-    * @param array $settings
-    */
+     * Add several settings items at once
+     *
+     * @param array $settings
+     */
     public function add_settings($settings)
     {
         foreach ($settings as $key => $value) {
@@ -141,8 +146,8 @@ class RMFlashUploader
 
     public function render()
     {
-        RMTemplate::get()->add_script('swfobject.js', 'rmcommon', array('directory' => 'include'));
-        RMTemplate::get()->add_script('jquery.uploadify.js', 'rmcommon', array('directory' => 'include'));
+        RMTemplate::get()->add_script('swfobject.js', 'rmcommon', ['directory' => 'include']);
+        RMTemplate::get()->add_script('jquery.uploadify.js', 'rmcommon', ['directory' => 'include']);
         RMTemplate::get()->add_style('uploadify.css', 'rmcommon');
 
         ob_start();

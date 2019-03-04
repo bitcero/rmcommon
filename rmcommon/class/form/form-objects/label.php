@@ -30,7 +30,7 @@ class ActiveLabel
 
         foreach ($parameters as $attr => $value) {
             if ('class' == $attr) {
-                $class .= $class != '' ? ' '.$value : $value;
+                $class .= '' != $class ? ' ' . $value : $value;
             } elseif ('caption' == $attr) {
                 $title = $value;
             } else {

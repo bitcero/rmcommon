@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-//@require 'Swift/Events/SendListener.php';
-//@require 'Swift/Events/SendEvent.php';
-//@require 'Swift/Plugins/Reporter.php';
+//@require __DIR__ . '/Swift/Events/SendListener.php';
+//@require __DIR__ . '/Swift/Events/SendEvent.php';
+//@require __DIR__ . '/Swift/Plugins/Reporter.php';
 
 /**
  * Does real time reporting of pass/fail for each recipient.
@@ -20,14 +20,13 @@
  */
 class Swift_Plugins_ReporterPlugin implements Swift_Events_SendListener
 {
-  
-  /**
-   * The reporter backend which takes notifications.
-   * @var Swift_Plugin_Reporter
-   * @access private
-   */
+    /**
+     * The reporter backend which takes notifications.
+     * @var Swift_Plugin_Reporter
+     * @access private
+     */
     private $_reporter;
-  
+
     /**
      * Create a new ReporterPlugin using $reporter.
      * @param Swift_Plugins_Reporter $reporter
@@ -36,14 +35,14 @@ class Swift_Plugins_ReporterPlugin implements Swift_Events_SendListener
     {
         $this->_reporter = $reporter;
     }
-  
+
     /**
      * Not used.
      */
     public function beforeSendPerformed(Swift_Events_SendEvent $evt)
     {
     }
-  
+
     /**
      * Invoked immediately after the Message is sent.
      * @param Swift_Events_SendEvent $evt

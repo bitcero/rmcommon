@@ -10,7 +10,6 @@ Smart-B ERP
 @version    $Id$
 ----------------------------------------
 **/
-
 class RMPrivileges
 {
     use RMModuleAjax;
@@ -24,7 +23,7 @@ class RMPrivileges
         global $xoopsUser, $xoopsDB;
 
         $privileges = UserPrivileges::get();
-        $privileges->allowed = array();
+        $privileges->allowed = [];
 
         // User must not have any permission
         if (!$xoopsUser) {
@@ -33,11 +32,11 @@ class RMPrivileges
 
         $groups = $xoopsUser->getGroups();
 
-        $sql = "SELECT * FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
-                `group` IN (" . implode(",", $groups) . ")";
+        $sql = 'SELECT * FROM ' . $xoopsDB->prefix('mod_rmcommon_permissions') . ' WHERE
+                `group` IN (' . implode(',', $groups) . ')';
         $result = $xoopsDB->query($sql);
 
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $privileges->allowed[$row['element']][$row['key']] = 'allow';
         }
     }
@@ -63,7 +62,7 @@ class RMPrivileges
         }
 
         // Super admin
-        if ($xoopsUser->uid() == 1) {
+        if (1 == $xoopsUser->uid()) {
             return true;
         }
 
@@ -72,7 +71,6 @@ class RMPrivileges
         if (empty($privileges->allowed)) {
             self::load_user_permissions();
         }
-
 
         if (isset($privileges->allowed[$module][$action])) {
             return true;
@@ -115,7 +113,7 @@ class RMPrivileges
      */
     public static function module_permissions($directory)
     {
-        if ($directory == '') {
+        if ('' == $directory) {
             return false;
         }
 
@@ -144,7 +142,7 @@ class RMPrivileges
     {
         global $xoopsDB;
 
-        if ($directory == '') {
+        if ('' == $directory) {
             return false;
         }
 
@@ -155,13 +153,13 @@ class RMPrivileges
         }
 
         // Permissions on DB
-        $sql = "SELECT * FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") ." WHERE
+        $sql = 'SELECT * FROM ' . $xoopsDB->prefix('mod_rmcommon_permissions') . " WHERE
                 `group` = $group AND element='$directory'";
 
         $result = $xoopsDB->query($sql);
         $permissions = new stdClass();
 
-        while ($row = $xoopsDB->fetchArray($result)) {
+        while (false !== ($row = $xoopsDB->fetchArray($result))) {
             $permissions->{$row['key']} = 1;
         }
 
@@ -172,33 +170,32 @@ class RMPrivileges
     {
         global $common;
 
-        if ($method == 'ajax') {
+        if ('ajax' == $method) {
             $common->ajax()->prepare();
             $common->ajax()->response(
                 __('You don\'t have required rights to do this action!', 'rmcommon'),
                 1,
                 0,
-                array(
-                    'goto' => XOOPS_URL
-                )
+                [
+                    'goto' => XOOPS_URL,
+                ]
             );
         } else {
             RMUris::redirect_with_message(__('You don\'t have required rights to do this action!', 'rmcommon'), XOOPS_URL, RMMSG_WARN, 'fa fa-warning');
         }
     }
-    
+
     public static function getInstance()
     {
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new RMPrivileges();
+            $instance = new self();
         }
 
         return $instance;
     }
 }
-
 
 class UserPrivileges
 {

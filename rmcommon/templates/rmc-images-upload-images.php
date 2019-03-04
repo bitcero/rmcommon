@@ -1,4 +1,4 @@
-<?php if (false == $isupdate): ?>
+<?php if (false === $isupdate): ?>
 <h1 class="cu-section-title"><?php _e('Upload Images', 'rmcommon'); ?></h1>
 <div class="select-image-category">
 	<form name="frmcat" method="get" action="images.php" class="form-inline">
@@ -6,17 +6,17 @@
 	<select name="category" class="form-control">
 		<option value=""><?php _e('Select...', 'rmcommon'); ?></option>
 		<?php foreach ($categories as $category): ?>
-		<option value="<?php echo $category['id']; ?>"<?php echo $cat->id()==$category['id'] ? ' selected="selected"' : '' ?>><?php echo $category['name']; ?></option>
+		<option value="<?php echo $category['id']; ?>"<?php echo $cat->id() == $category['id'] ? ' selected="selected"' : '' ?>><?php echo $category['name']; ?></option>
 		<?php endforeach; ?>
 	</select>
 	<button type="submit" class="btn btn-info"><?php _e('Change Category', 'rmcommon'); ?></button>
     <button type="button" class="btn btn-pink" data-action="upload-more"><?php _e('Upload More', 'rmcommon'); ?></button>
-	<input type="hidden" name="action" value="new" />
+	<input type="hidden" name="action" value="new">
 	</form>
 </div>
 <?php endif; ?>
 
-<?php if (false == $cat->isNew()): ?>
+<?php if (false === $cat->isNew()): ?>
 
     <?php if ($showControls): ?>
     <div id="upload-controls">

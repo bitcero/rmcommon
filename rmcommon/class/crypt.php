@@ -25,8 +25,7 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.eduardocortes.mx
  */
-
-class Crypt
+class crypt
 {
     private $method;
     private $key;
@@ -36,13 +35,13 @@ class Crypt
     {
         global $common;
 
-        if (null == $method) {
+        if (null === $method) {
             $this->method = $this->getMethod();
         } else {
-            $this->method = in_array($method, $this->allMethods()) ? $method : $this->getMethod();
+            $this->method = in_array($method, $this->allMethods(), true) ? $method : $this->getMethod();
         }
 
-        if (null == $key) {
+        if (null === $key) {
             $this->key = $common->settings->secretkey;
         } else {
             $this->key = $key;
@@ -51,24 +50,25 @@ class Crypt
 
     private function allMethods()
     {
-        if (false == empty($this->allMethods)) {
+        if (false === empty($this->allMethods)) {
             return $this->allMethods;
         }
 
         $this->allMethods = openssl_get_cipher_methods();
+
         return $this->allMethods;
     }
 
     private function getMethod()
     {
-        return in_array('aes-256-cbc', $this->allMethods()) ? 'aes-256-cbc' : 'aes-128-cbc';
+        return in_array('aes-256-cbc', $this->allMethods(), true) ? 'aes-256-cbc' : 'aes-128-cbc';
     }
 
     public function setKey($key = null)
     {
         global $common;
 
-        if (null == $key) {
+        if (null === $key) {
             $this->key = $common->settings->secretkey;
         } else {
             $this->key = $key;
@@ -77,10 +77,10 @@ class Crypt
 
     public function setMethod($method = null)
     {
-        if (null == $method) {
+        if (null === $method) {
             $this->method = $this->getMethod();
         } else {
-            $this->method = in_array($method, $this->allMethods()) ? $method : $this->getMethod();
+            $this->method = in_array($method, $this->allMethods(), true) ? $method : $this->getMethod();
         }
     }
 
@@ -93,6 +93,7 @@ class Crypt
         $vector = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->method));
 
         $data = openssl_encrypt($string, $this->method, $this->key, 0, $vector);
+
         return base64_encode($data . '::' . $vector);
     }
 
@@ -102,7 +103,7 @@ class Crypt
             throw new RMException(__('Nothing to decrypt', 'rmcommon'));
         }
 
-        $string = base64_decode($string);
+        $string = base64_decode($string, true);
         list($data, $vector) = explode('::', $string, 2);
 
         return openssl_decrypt($data, $this->method, $this->key, 0, $vector);

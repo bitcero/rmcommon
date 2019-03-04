@@ -11,18 +11,18 @@
 class RMComment extends RMObject
 {
     /**
-    * User owner
-    */
-    private $user = array();
+     * User owner
+     */
+    private $user = [];
 
-    public function __construct($id=null)
+    public function __construct($id = null)
     {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("mod_rmcommon_comments");
+        $this->_dbtable = $this->db->prefix('mod_rmcommon_comments');
         $this->setNew();
         $this->initVarsFromTable();
 
-        if ($id==null) {
+        if (null === $id) {
             return null;
         }
 
@@ -44,9 +44,9 @@ class RMComment extends RMObject
     {
         $db = $this->db;
 
-        $sql = "SELECT * FROM ".$db->prefix("mod_rmcommon_comments_assignations")." WHERE id_user=".$this->getVar('user');
+        $sql = 'SELECT * FROM ' . $db->prefix('mod_rmcommon_comments_assignations') . ' WHERE id_user=' . $this->getVar('user');
         $result = $db->query($sql);
-        if ($db->getRowsNum($result)<=0) {
+        if ($db->getRowsNum($result) <= 0) {
             return;
         }
 
@@ -55,11 +55,10 @@ class RMComment extends RMObject
     }
 
     /**
-    * Save comment
-    */
+     * Save comment
+     */
     public function save()
     {
-
         // To check or modify data before save this
         $ret = RMEvents::get()->run_event('rmcommon.saving.comment', $this);
 
@@ -73,8 +72,8 @@ class RMComment extends RMObject
     }
 
     /**
-    * Delete Comment
-    */
+     * Delete Comment
+     */
     public function delete()
     {
         if (!$this->deleteFromTable()) {
@@ -82,7 +81,7 @@ class RMComment extends RMObject
         }
 
         // Update comments parent
-        $sql = "UPDATE ".$this->db->prefix("mod_rmcommon_comments")." SET parent=".$this->getVar('parent')." WHERE parent=".$this->id();
+        $sql = 'UPDATE ' . $this->db->prefix('mod_rmcommon_comments') . ' SET parent=' . $this->getVar('parent') . ' WHERE parent=' . $this->id();
         if (!$this->db->queryF($sql)) {
             $this->addError($this->db->error());
         }
@@ -93,13 +92,14 @@ class RMComment extends RMObject
             return true;
         }
 
-        if ($user->getVar('xuid')<=0) {
+        if ($user->getVar('xuid') <= 0) {
             return true;
         }
 
-        $sql = "UPDATE ".$this->db->prefix("users")." SET posts=posts-1 WHERE uid=".$user->getVar('xuid');
+        $sql = 'UPDATE ' . $this->db->prefix('users') . ' SET posts=posts-1 WHERE uid=' . $user->getVar('xuid');
         if (!$this->db->queryF($sql)) {
             $this->addError($this->db->error());
+
             return false;
         }
 

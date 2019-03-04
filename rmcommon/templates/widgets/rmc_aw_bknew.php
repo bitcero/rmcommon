@@ -9,5 +9,5 @@
             <?php endforeach; ?>
         <?php endforeach; ?>
     </select>
-    <input type="button" id="add-now-btn" value="<?php _e('Add Block', 'rmcommon'); ?>" />
+    <input type="button" id="add-now-btn" value="<?php _e('Add Block', 'rmcommon'); ?>">
 </div>

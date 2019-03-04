@@ -25,6 +25,7 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
+ * @param mixed $class
  */
 
 /**
@@ -45,30 +46,32 @@ function rmc_autoloader($class)
      * from the file name.
      * Common Utilities will search for "PATH/module/classname.class.php" file
      */
-    $data = explode("_", strtolower($class));
+    $data = explode('_', mb_strtolower($class));
 
     if (count($data) >= 2) {
         if ('editor' == $data[0]) {
-            $file = RMCPATH . '/api/editors/' . $data[1] . '/' . strtolower($data[1]) . '.php';
+            $file = RMCPATH . '/api/editors/' . $data[1] . '/' . mb_strtolower($data[1]) . '.php';
             if (file_exists($file)) {
                 require $file;
+
                 return null;
             }
         } elseif (is_dir(XOOPS_ROOT_PATH . '/modules/' . $data[0])) {
-
             // Module exists! Then will search for /{dir}/{class}.class.php
-            $name = substr(strtolower($class), strlen($data[0]) + 1);
-            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . strtolower(str_replace('_', '-', $name)) . '.class.php';
+            $name = mb_substr(mb_strtolower($class), mb_strlen($data[0]) + 1);
+            $file = XOOPS_ROOT_PATH . '/modules/' . $data[0] . '/class/' . mb_strtolower(str_replace('_', '-', $name)) . '.class.php';
             if (is_file($file)) {
                 require $file;
+
                 return;
             }
 
             // Helpers from rmcommon have a different name structure
             if ('rmcommon' == $data[0]) {
-                $file = XOOPS_ROOT_PATH . '/modules/rmcommon/class/helpers/' . strtolower(str_replace("_", ".", $class)) . '.class.php';
+                $file = XOOPS_ROOT_PATH . '/modules/rmcommon/class/helpers/' . mb_strtolower(str_replace('_', '.', $class)) . '.class.php';
                 if (is_file($file)) {
                     require $file;
+
                     return;
                 }
             }
@@ -78,25 +81,25 @@ function rmc_autoloader($class)
     /**
      * Old method maintained for backward compatibility
      */
-    $class = str_replace("\\", "/", $class);
+    $class = str_replace('\\', '/', $class);
 
-    $class = strtolower($class);
+    $class = mb_strtolower($class);
 
-    if ($class == 'xoopskernel') {
+    if ('xoopskernel' == $class) {
         return;
     }
 
-    if (substr($class, 0, 2) == 'rm') {
-        $class = substr($class, 2);
+    if ('rm' == mb_substr($class, 0, 2)) {
+        $class = mb_substr($class, 2);
     }
 
-    if (substr($class, strlen($class) - strlen('handler')) == 'handler') {
-        $class = substr($class, 0, strlen($class) - 7);
+    if ('handler' == mb_substr($class, mb_strlen($class) - mb_strlen('handler'))) {
+        $class = mb_substr($class, 0, mb_strlen($class) - 7);
     }
 
-    $class = str_replace("_", "-", $class);
+    $class = str_replace('_', '-', $class);
 
-    $paths = array(
+    $paths = [
         '/api',
         '/class',
         '/class/ar',
@@ -105,27 +108,27 @@ function rmc_autoloader($class)
         '/class/fields',
         '/class/form',
         '/kernel',
-    );
+    ];
 
-    if (is_a($xoopsModule, 'XoopsModule') && $xoopsModule->dirname() != 'system') {
+    if (is_a($xoopsModule, 'XoopsModule') && 'system' != $xoopsModule->dirname()) {
         $paths[] = '/modules/' . $xoopsModule->dirname() . '/class';
     }
 
     foreach ($paths as $path) {
         if (file_exists(RMCPATH . $path . '/' . $class . '.class.php')) {
-            include_once RMCPATH . $path . '/' . $class . '.class.php';
+            require_once RMCPATH . $path . '/' . $class . '.class.php';
             break;
         } elseif (file_exists(RMCPATH . $path . '/' . $class . '.php')) {
-            include_once RMCPATH . $path . '/' . $class . '.php';
+            require_once RMCPATH . $path . '/' . $class . '.php';
             break;
         } elseif (file_exists(RMCPATH . $path . '/' . $class . '.trait.php')) {
-            include_once RMCPATH . $path . '/' . $class . '.trait.php';
+            require_once RMCPATH . $path . '/' . $class . '.trait.php';
             break;
         } elseif (file_exists(XOOPS_ROOT_PATH . $path . '/' . $class . '.php')) {
-            include_once XOOPS_ROOT_PATH . $path . '/' . $class . '.php';
+            require_once XOOPS_ROOT_PATH . $path . '/' . $class . '.php';
             break;
         } elseif (file_exists(XOOPS_ROOT_PATH . $path . '/' . $class . '.class.php')) {
-            include_once XOOPS_ROOT_PATH . $path . '/' . $class . '.class.php';
+            require_once XOOPS_ROOT_PATH . $path . '/' . $class . '.class.php';
             break;
         }
     }

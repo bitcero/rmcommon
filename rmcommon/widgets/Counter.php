@@ -100,7 +100,6 @@ class Counter extends WidgetAbstract implements WidgetInterface
 
         // Calculate cells
 
-
         return \RMTemplate::getInstance()->render($this->template());
     }
 
@@ -113,6 +112,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
         if ('' == $this->tplPath) {
             $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-counter.php', 'module', 'rmcommon');
         }
+
         return $this->tplPath;
     }
 
@@ -122,18 +122,20 @@ class Counter extends WidgetAbstract implements WidgetInterface
      *
      * @param $caption
      * @param $value
-     * @return bool
      * @throws \RMException
+     * @return bool
      */
     public function addCell($caption, $value)
     {
         if ('' == $caption || '' == $value) {
             trigger_error(__('You must provide the caption and value when add a new cell to Counter Widget', 'rmcommon'));
+
             return false;
         }
 
         if (count($this->cells) >= 4) {
             trigger_error(__('It is not possible to add more than 4 cells to this widget', 'rmcommon'));
+
             return false;
         }
 
@@ -141,10 +143,9 @@ class Counter extends WidgetAbstract implements WidgetInterface
          * Check if value is a number and if it must be formatted.
          * Remember to assign attribute 'format' to enable this.
          */
-        $format = $this->has('format') && $this->get('format') == 'y';
+        $format = $this->has('format') && 'y' == $this->get('format');
 
         if (is_numeric($value) && $format) {
-
             // Format for numbers
             if ($value >= 1000000) {
                 // Millions
@@ -172,6 +173,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
         }
 
         $this->cells[] = (object) ['caption' => $caption, 'value' => $value];
+
         return true;
     }
 }

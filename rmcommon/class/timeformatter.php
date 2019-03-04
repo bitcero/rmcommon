@@ -14,12 +14,12 @@ class RMTimeFormatter
     public $format = '';
 
     /**
-    * Initialize this class
-    *
-    * @param int|string $time <p>Unix timestamp or date in string format</p>
-    * @param string $format <p>Format for time (e.g. Created on %M% %d%, %Y%)</p>
-    */
-    public function __construct($time=0, $format='')
+     * Initialize this class
+     *
+     * @param int|string $time <p>Unix timestamp or date in string format</p>
+     * @param string $format <p>Format for time (e.g. Created on %M% %d%, %Y%)</p>
+     */
+    public function __construct($time = 0, $format = '')
     {
         $this->time = $time;
         $this->format = $format;
@@ -35,7 +35,7 @@ class RMTimeFormatter
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new RMTimeFormatter(0, $format);
+            $instance = new self(0, $format);
         }
 
         return $instance;
@@ -53,29 +53,31 @@ class RMTimeFormatter
      *
      * @param int|string $time <p>Time to format</p>
      * @param string $format <p>This value is optional. Represents the format for the returned value.</p>
+     * @param mixed $offset
      * @return mixed
      */
-    public function format($time=0, $format='', $offset = true)
+    public function format($time = 0, $format = '', $offset = true)
     {
         global $xoopsConfig;
 
-        if ($time <= 0 || strpos($time, "-") !== false) {
+        if ($time <= 0 || false !== mb_strpos($time, '-')) {
             $time = strtotime($time);
         }
 
         if ($offset) {
-            $time = xoops_getUserTimestamp($time<=0 ? $this->time : $time, '');
+            $time = xoops_getUserTimestamp($time <= 0 ? $this->time : $time, '');
         }
 
-        $format = $format=='' ? $this->format : $format;
+        $format = '' == $format ? $this->format : $format;
 
-        if ($format=='' || $time<0) {
+        if ('' == $format || $time < 0) {
             echo $format;
             trigger_error(__('You must provide a valid time and format value to use RMTimeFormatter::format() method', 'rmcommon'));
+
             return null;
         }
 
-        $find = array(
+        $find = [
             '%d%', // Day number
             '%D%', // Day name
             '%m%', // Month number
@@ -85,21 +87,21 @@ class RMTimeFormatter
             '%Y%', // Year with four digits (e.g. 2004, 2005, etc.)
             '%h%', // Hour
             '%i%', // Minute
-            '%s%' // Second
-        );
+            '%s%', // Second
+        ];
 
-        $replace = array(
+        $replace = [
             date('d', $time),
             $this->days($time),
             date('m', $time),
             $this->months($time),
-            substr($this->months($time), 0, 3),
+            mb_substr($this->months($time), 0, 3),
             date('y', $time),
             date('Y', $time),
             date('H', $time),
             date('i', $time),
-            date('s', $time)
-        );
+            date('s', $time),
+        ];
 
         //return date('i', $time);
 
@@ -107,39 +109,39 @@ class RMTimeFormatter
     }
 
     /**
-    * Day name for time formatting
-    *
-    * @param int $time
-    * @return string Day name
-    */
+     * Day name for time formatting
+     *
+     * @param int $time
+     * @return string Day name
+     */
     public function days($time = 0)
     {
-        $time = $time<=0 ? $this->time : $time;
-        if ($time<=0) {
+        $time = $time <= 0 ? $this->time : $time;
+        if ($time <= 0) {
             return null;
         }
 
-        $days = array(
+        $days = [
             __('sunday', 'rmcommon'),
             __('monday', 'rmcommon'),
             __('tuesday', 'rmcommon'),
             __('wednesday', 'rmcommon'),
             __('thursday', 'rmcommon'),
             __('friday', 'rmcommon'),
-            __('saturday', 'rmcommon')
-        );
+            __('saturday', 'rmcommon'),
+        ];
 
-        return $days[date("w", $time)];
+        return $days[date('w', $time)];
     }
 
-    public function months($time=0)
+    public function months($time = 0)
     {
-        $time = $time<=0 ? $this->time : $time;
-        if ($time<=0) {
+        $time = $time <= 0 ? $this->time : $time;
+        if ($time <= 0) {
             return null;
         }
 
-        $months = array(
+        $months = [
             __('january', 'rmcommon'),
             __('february', 'rmcommon'),
             __('march', 'rmcommon'),
@@ -152,14 +154,14 @@ class RMTimeFormatter
             __('october', 'rmcommon'),
             __('november', 'rmcommon'),
             __('december', 'rmcommon'),
-        );
+        ];
 
-        return $months[date('n', $time)-1];
+        return $months[date('n', $time) - 1];
     }
 
     public function ago($time, $format = '%m%-%d%-%Y% %h%:%i%:%s%')
     {
-        if (false == is_numeric($time)) {
+        if (false === is_numeric($time)) {
             $time = strtotime($time);
         }
 
@@ -175,6 +177,7 @@ class RMTimeFormatter
         // Comentario enviado hace menos de una hora
         if ($time > time() - 3600) {
             $minutes = ceil((time() - $time) / 60);
+
             return sprintf(__('%u minutes ago', 'rmcommon'), $minutes);
         }
 
@@ -189,12 +192,14 @@ class RMTimeFormatter
             }
 
             $hours = ceil((time() - $time) / 3600);
+
             return sprintf(__('%u hours ago', 'rmcommon'), $hours);
         }
 
         // El comentario fue enviado hace menos de 10 días
         if ($time > time() - (10 * 86400)) {
             $days = ceil(time() - $time) / 86400;
+
             return sprintf(__('%u days ago', 'rmcommon'), $days);
         }
 

@@ -26,117 +26,116 @@
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
-
-defined('XOOPS_MAINFILE_INCLUDED') or die("No access");
+defined('XOOPS_MAINFILE_INCLUDED') || die('No access');
 
 if (!function_exists('__')) {
-    include_once XOOPS_ROOT_PATH.'/modules/rmcommon/loader.php';
+    require_once XOOPS_ROOT_PATH . '/modules/rmcommon/loader.php';
 }
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Dashboard', 'rmcommon'),
-    'link' => "index.php",
-    'icon' => "svg-rmcommon-dashboard text-red",
-    'location' => "dashboard"
-);
+    'link' => 'index.php',
+    'icon' => 'svg-rmcommon-dashboard text-red',
+    'location' => 'dashboard',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Modules', 'rmcommon'),
-    'link' => "modules.php",
-    'icon' => "svg-rmcommon-module text-green",
-    'location' => "modules"
-);
+    'link' => 'modules.php',
+    'icon' => 'svg-rmcommon-module text-green',
+    'location' => 'modules',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Blocks', 'rmcommon'),
-    'link' => "blocks.php",
-    'icon' => "svg-rmcommon-blocks text-teal",
-    'location' => "blocks"
-);
+    'link' => 'blocks.php',
+    'icon' => 'svg-rmcommon-blocks text-teal',
+    'location' => 'blocks',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Users', 'rmcommon'),
     'link' => 'users.php',
     'icon' => 'svg-rmcommon-users text-blue',
-    'location' => 'users'
-);
+    'location' => 'users',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Groups', 'rmcommon'),
     'link' => 'groups.php',
     'icon' => 'svg-rmcommon-group text-blue-grey',
-    'location' => 'groups'
-);
+    'location' => 'groups',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Images', 'rmcommon'),
-    'link' => "images.php",
-    'icon' => "svg-rmcommon-images text-cyan",
-    'location' => "imgmanager",
-    'options' => array(0 => array(
-                    'title'		=>	__('Categories', 'rmcommon'),
-                    'link'		=> 'images.php?action=showcats',
-                    'selected'	=> 'rmc_imgcats',
-                    'icon'      => 'svg-rmcommon-folder text-orange',
-            ), 1 => array(
-                    'title'		=>	__('New category', 'rmcommon'),
-                    'link'		=> 'images.php?action=newcat',
-                    'selected'	=> 'rmc_imgnewcat',
-                    'icon'      => 'svg-rmcommon-folder-plus text-orange',
-            ), 2 => array(
-                    'divider'   => 1
-            ), 3 => array(
-                    'title'		=>	__('Images', 'rmcommon'),
-                    'link'		=> 'images.php',
-                    'selected'	=> 'rmc_images',
-                    'icon'      => 'svg-rmcommon-camera text-success'
-            ), 4 => array(
-                    'title'		=>	__('Add images', 'rmcommon'),
-                    'link'		=> 'images.php?action=new',
-                    'selected'	=> 'rmc_newimages',
-                    'icon'      => 'svg-rmcommon-camera-plus text-success',
-            )
-    )
-);
+    'link' => 'images.php',
+    'icon' => 'svg-rmcommon-images text-cyan',
+    'location' => 'imgmanager',
+    'options' => [0 => [
+                    'title' => __('Categories', 'rmcommon'),
+                    'link' => 'images.php?action=showcats',
+                    'selected' => 'rmc_imgcats',
+                    'icon' => 'svg-rmcommon-folder text-orange',
+            ], 1 => [
+                    'title' => __('New category', 'rmcommon'),
+                    'link' => 'images.php?action=newcat',
+                    'selected' => 'rmc_imgnewcat',
+                    'icon' => 'svg-rmcommon-folder-plus text-orange',
+            ], 2 => [
+                    'divider' => 1,
+            ], 3 => [
+                    'title' => __('Images', 'rmcommon'),
+                    'link' => 'images.php',
+                    'selected' => 'rmc_images',
+                    'icon' => 'svg-rmcommon-camera text-success',
+            ], 4 => [
+                    'title' => __('Add images', 'rmcommon'),
+                    'link' => 'images.php?action=new',
+                    'selected' => 'rmc_newimages',
+                    'icon' => 'svg-rmcommon-camera-plus text-success',
+            ],
+    ],
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Comments', 'rmcommon'),
-    'link' => "comments.php",
-    'icon' => "svg-rmcommon-comments text-orange",
-    'location' => "comments"
-);
+    'link' => 'comments.php',
+    'icon' => 'svg-rmcommon-comments text-orange',
+    'location' => 'comments',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Plugins', 'rmcommon'),
-    'link' => "plugins.php",
-    'icon' => "svg-rmcommon-plug text-danger",
-    'location' => "plugins"
-);
+    'link' => 'plugins.php',
+    'icon' => 'svg-rmcommon-plug text-danger',
+    'location' => 'plugins',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Services', 'rmcommon'),
-    'link' => "services.php",
-    'icon' => "svg-rmcommon-services text-deep-purple",
-    'location' => "services"
-);
+    'link' => 'services.php',
+    'icon' => 'svg-rmcommon-services text-deep-purple',
+    'location' => 'services',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Updates', 'rmcommon'),
-    'link' => "updates.php",
-    'icon' => "svg-rmcommon-update text-success",
-    'location' => "updates"
-);
+    'link' => 'updates.php',
+    'icon' => 'svg-rmcommon-update text-success',
+    'location' => 'updates',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('Icons', 'rmcommon'),
-    'link' => "icons.php",
-    'icon' => "svg-rmcommon-vector text-blue",
-    'location' => "icons"
-);
+    'link' => 'icons.php',
+    'icon' => 'svg-rmcommon-vector text-blue',
+    'location' => 'icons',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => __('About', 'rmcommon'),
-    'link' => "about.php",
-    'icon' => "svg-rmcommon-info text-info",
-    'location' => "about"
-);
+    'link' => 'about.php',
+    'icon' => 'svg-rmcommon-info text-info',
+    'location' => 'about',
+];

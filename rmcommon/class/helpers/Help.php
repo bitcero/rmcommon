@@ -41,14 +41,14 @@ class Help
 
         $path = XOOPS_ROOT_PATH . '/modules/' . $directory . '/include/help.php';
 
-        if (false == is_file($path)) {
-            throw new \RMException(__("File with docs URL does not exists", 'rmcommon'));
+        if (false === is_file($path)) {
+            throw new \RMException(__('File with docs URL does not exists', 'rmcommon'));
         }
 
         $this->urls = include($path);
 
         if (empty($this->urls)) {
-            throw new \RMException(__("File with docs URL is empty", 'rmcommon'));
+            throw new \RMException(__('File with docs URL is empty', 'rmcommon'));
         }
 
         $this->urls = (object) $this->urls;
@@ -58,13 +58,13 @@ class Help
     public function get($id)
     {
         if ('' == $id) {
-            throw new \RMException(__("You must provide an ID for help item", 'rmcommon'));
+            throw new \RMException(__('You must provide an ID for help item', 'rmcommon'));
         }
 
         if (isset($this->urls->{$id})) {
             return $this->baseURL . $this->urls->{$id};
-        } else {
-            return '';
         }
+
+        return '';
     }
 }

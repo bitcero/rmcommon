@@ -10,7 +10,6 @@
  * URI: http://www.redmexico.com.mx
  * --------------------------------------------------------------
  */
-
 trait RMSingleton
 {
     private static $instance;
@@ -18,7 +17,7 @@ trait RMSingleton
     public static function get()
     {
         if (!(self::$instance instanceof self)) {
-            self::$instance = new self;
+            self::$instance = new self();
         }
 
         return self::$instance;

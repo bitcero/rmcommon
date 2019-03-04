@@ -24,12 +24,12 @@ class RMHtaccess
 
     public function __construct($module)
     {
-        if (trim($module)=='') {
+        if ('' == trim($module)) {
             return false;
         }
 
         $this->module = $module;
-        $this->file = XOOPS_ROOT_PATH.'/.htaccess';
+        $this->file = XOOPS_ROOT_PATH . '/.htaccess';
 
         $this->content = file_get_contents($this->file);
 
@@ -55,7 +55,7 @@ class RMHtaccess
     {
         if (function_exists('apache_get_modules')) {
             $mods = apache_get_modules();
-            if (!in_array('mod_rewrite', $mods)) {
+            if (!in_array('mod_rewrite', $mods, true)) {
                 return false;
             }
         }
@@ -68,19 +68,20 @@ class RMHtaccess
      */
     private function checkHealth()
     {
-        if (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache')===false && strpos($_SERVER['SERVER_SOFTWARE'], 'LiteSpeed')===false) {
+        if (false === mb_strpos($_SERVER['SERVER_SOFTWARE'], 'Apache') && false === mb_strpos($_SERVER['SERVER_SOFTWARE'], 'LiteSpeed')) {
             $this->apache = false;
         }
 
         if (function_exists('apache_get_modules')) {
             $mods = apache_get_modules();
-            if (!in_array('mod_rewrite', $mods)) {
+            if (!in_array('mod_rewrite', $mods, true)) {
                 $this->rewrite = false;
             }
         }
 
         if (!$this->apache || !$this->rewrite) {
             showMessage(__('URL rewriting requires an Apache Server and mod_rewrite enabled!', 'dtransport'), RMMSG_WARN);
+
             return false;
         }
 
@@ -88,15 +89,15 @@ class RMHtaccess
             $this->content .= "\nRewriteEngine On\n";
         }
 
-        $base = parse_url(XOOPS_URL.'/');
-        $this->base = isset($base['path']) ? rtrim($base['path'], '/').'/' : '/';
-        $rb = "RewriteBase ".$this->base."\n";
+        $base = parse_url(XOOPS_URL . '/');
+        $this->base = isset($base['path']) ? rtrim($base['path'], '/') . '/' : '/';
+        $rb = 'RewriteBase ' . $this->base . "\n";
 
-        if (strpos($this->content, $rb)===false) {
-            if (preg_match("/RewriteBase/", $this->content)) {
+        if (false === mb_strpos($this->content, $rb)) {
+            if (preg_match('/RewriteBase/', $this->content)) {
                 preg_replace("/RewriteBase\s{1,}(.*)\n/", $rb, $this->content);
             } else {
-                $this->content .= $rb."\n";
+                $this->content .= $rb . "\n";
             }
         }
 
@@ -112,22 +113,20 @@ class RMHtaccess
             $this->content .= "RewriteCond %{REQUEST_FILENAME} !-d\n";
         }
 
-
-
         return null;
     }
 
     public function verifyCode($code = '')
     {
-        if ($code!='') {
-            if (strpos($this->content, $code)!==false) {
+        if ('' != $code) {
+            if (false !== mb_strpos($this->content, $code)) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         }
 
-        if (preg_match_all("/# begin rmcommon\n(.*)\n# end rmcommon$/is", $this->content, $match) === false) {
+        if (false === preg_match_all("/# begin rmcommon\n(.*)\n# end rmcommon$/is", $this->content, $match)) {
             print_r($match);
         } else {
             print_r($match);
@@ -142,8 +141,8 @@ class RMHtaccess
         $replace = str_replace( "# begin $this->module\n$rule\n# end $this->module\n", '', $this->content, $count );*/
 
         $this->content = preg_replace("/\# begin " . $this->module . ".*\# end " . $this->module . "\n?/sm", '', $this->content);
-        return true;
 
+        return true;
         /*$initial = strpos( $this->content, "# begin " . $this->module );
         if (false === $initial )
             return true;
@@ -161,12 +160,13 @@ class RMHtaccess
     private function makeCode()
     {
         $code = "# begin $this->module\n$this->rules\n# end $this->module\n";
+
         return $code;
     }
 
     public function write($rules = '')
     {
-        if ($rules=='') {
+        if ('' == $rules) {
             return file_put_contents($this->file, $this->content);
         }
 
@@ -183,15 +183,15 @@ class RMHtaccess
         $oldExists = false;
 
         if (!is_writable($this->file)) {
-            return $this->bCode.$code;
+            return $this->bCode . $code;
         }
 
         $this->content .= "$code";
 
         if (file_put_contents($this->file, $this->content)) {
             return true;
-        } else {
-            return $code;
         }
+
+        return $code;
     }
 }

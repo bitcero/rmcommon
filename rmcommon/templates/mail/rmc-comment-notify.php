@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
 <title><?php _e('New Comment!', 'bxpress'); ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 body {
     margin: 0;
@@ -888,8 +888,8 @@ table.divider {
     }
 </style>
 <![endif]-->
-<meta name="robots" content="noindex,nofollow" />
-<meta property="og:title" content="New Comment" />
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="New Comment">
 </head>
 <body style="margin: 0;mso-line-height-rule: exactly;padding: 0;min-width: 100%;background-color: #fbfbfb"><style type="text/css">
     body,.wrapper,.emb-editor-canvas{background-color:#fbfbfb}.border{background-color:#e9e9e9}h1{color:#565656}.wrapper h1{}.wrapper h1{font-family:sans-serif}@media only screen and (min-width: 0){.wrapper h1{font-family:Avenir,sans-serif !important}}h1{}.one-col h1{line-height:42px}.two-col h1{line-height:32px}.three-col h1{line-height:26px}.wrapper .one-col-feature h1{line-height:58px}@media only screen and (max-width: 620px){h1{line-height:42px !important}}h2{color:#555}.wrapper h2{}.wrapper h2{font-family:Georgia,serif}h2{}.one-col h2{line-height:32px}.two-col h2{line-height:26px}.three-col h2{line-height:22px}.wrapper .one-col-feature h2{line-height:52px}@media only screen and (max-width: 620px){h2{line-height:32px !important}}h3{color:#555}.wrapper h3{}.wrapper h3{font-family:Georgia,serif}h3{}.one-col h3{line-height:26px}.two-col h3{line-height:22px}.three-col
@@ -932,7 +932,7 @@ table.divider {
 
                                         <h1 style="Margin-top: 0;color: #565656;font-weight: 700;font-size: 36px;Margin-bottom: 18px;font-family: sans-serif;line-height: 42px"><?php _e('New Comment!', 'bxpress'); ?></h1>
                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 25px">
-                                            <?php if ($comment->status == 'approved'): ?>
+                                            <?php if ('approved' == $comment->status): ?>
                                             <?php echo sprintf(__('A new comment has been sent in %s:', 'bxpress'), '<strong>' . $item['name'] . '</strong>'); ?>
                                             <?php else: ?>
                                                 <?php echo sprintf(__('A new comment has been sent in %s and is waiting for approval:', 'bxpress'), '<strong>' . $item['name'] . '</strong>'); ?>
@@ -948,7 +948,7 @@ table.divider {
                                                             <?php echo sprintf(__('%s wrote:', 'rmcommon'), '<strong>' . $name . '</strong>'); ?>
                                                         </p>
                                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">
-                                                            <?php echo str_replace(array('<p>', '</p>'), '', $comment->getVar('content')); ?>
+                                                            <?php echo str_replace(['<p>', '</p>'], '', $comment->getVar('content')); ?>
                                                         </p>
                                                     </blockquote>
 
@@ -957,17 +957,17 @@ table.divider {
                                             </tbody></table>
 
                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">
-                                            <?php if ($comment->status == 'approved'): ?>
+                                            <?php if ('approved' == $comment->status): ?>
                                                 <?php echo sprintf(
     __('Click here to %s in %s', 'bxpress'),
-    '<strong><a href="'.$uri.'#comment-'.$comment->id().'">'.__('view the comment', 'rmcommon').'</a></strong>',
-    '<strong><a href="'.$item['url'].'">'.$item['name'].'</a></strong>'
+    '<strong><a href="' . $uri . '#comment-' . $comment->id() . '">' . __('view the comment', 'rmcommon') . '</a></strong>',
+    '<strong><a href="' . $item['url'] . '">' . $item['name'] . '</a></strong>'
 ); ?>
                                             <?php else: ?>
                                                 <?php echo sprintf(
                                                         __('Click here to %s in %s', 'bxpress'),
-                                                        '<strong><a href="'.RMCURL.'/comments.php">'.__('view the comment', 'rmcommon').'</a></strong>',
-                                                        '<strong><a href="'.$item['url'].'">'.$item['name'].'</a></strong>'
+                                                        '<strong><a href="' . RMCURL . '/comments.php">' . __('view the comment', 'rmcommon') . '</a></strong>',
+                                                        '<strong><a href="' . $item['url'] . '">' . $item['name'] . '</a></strong>'
                                                     ); ?>
                                             <?php endif; ?>
                                         </p>

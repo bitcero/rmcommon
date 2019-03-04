@@ -26,10 +26,9 @@
  * @link         http://eduardocortes.mx
  * @link         http://rmcommon.com
  */
-
 trait RMErrors
 {
-    private $errors = array();
+    private $errors = [];
 
     protected function add_error($error)
     {
@@ -39,7 +38,7 @@ trait RMErrors
     public function errors($text = true)
     {
         if ($text) {
-            return implode("<br> ", $this->errors);
+            return implode('<br> ', $this->errors);
         }
 
         return $this->errors;

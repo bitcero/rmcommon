@@ -32,7 +32,7 @@
  * by including it in HEAD section of HTML code
  *
  * Example:
- * <code>include_once (RMCPATH . '/js/cu-js-language.php';</code>
+ * <code>require_once (RMCPATH . '/js/cu-js-language.php';</code>
  *
  * This, will include the next HTML script:
  * <code>
@@ -48,11 +48,11 @@ ob_start();
 
 var cuLanguage = {
 
-<?php if ($common->location == 'groups'): ?>
+<?php if ('groups' == $common->location): ?>
 
     confirmDelete: '<?php _e('Do you really want to delete selected groups? Please note that this action can not be undo.', 'rmcommon'); ?>',
 
-<?php elseif ($common->location == 'blocks'): ?>
+<?php elseif ('blocks' == $common->location): ?>
 
     deleteBlockMessage: "<?php _e('Do you really want to delete this block?', 'rmcommon'); ?>",
     deleteBlock: "<?php _e('Delete Block', 'rmcommon'); ?>",
@@ -70,11 +70,11 @@ var cuLanguage = {
     confirmPositionDeletion: "<?php _e('Do you really want to delete selected positions?', 'rmcommon'); ?>",
     selectBefore: "<?php _e('You must select at least one position before you can do this action!', 'rmcommon'); ?>",
 
-<?php elseif ($common->location == 'modules'): ?>
+<?php elseif ('modules' == $common->location): ?>
 
     visitWeb: "<?php _e('Visit web site', 'rmcommon'); ?>",
 
-<?php elseif ($common->location == 'updates'): ?>
+<?php elseif ('updates' == $common->location): ?>
 
     version: '<?php _e('Version:', 'rmcommon'); ?>',
     author: '<?php _e('Author:', 'rmcommon'); ?>',

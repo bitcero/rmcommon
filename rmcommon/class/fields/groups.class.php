@@ -15,7 +15,7 @@
 class RMFormGroups extends RMFormElement
 {
     private $_multi = 0;
-    private $_select = array();
+    private $_select = [];
     /**
      * Posibles valores
      * 0 = Select, 1 = Menu
@@ -23,13 +23,17 @@ class RMFormGroups extends RMFormElement
     private $_showtype = 0;
     private $_showdesc = 0;
     private $_cols = 2;
-    
+
     /**
      * Constructor de la clase
      * @param mixed $caption Texto de la etiqueta
      * @param string $name Nombre del campo
+     * @param mixed $multi
+     * @param mixed $type
+     * @param mixed $cols
+     * @param mixed $selected
      */
-    public function __construct($caption, $name='', $multi=0, $type=0, $cols=2, $selected=array())
+    public function __construct($caption, $name = '', $multi = 0, $type = 0, $cols = 2, $selected = [])
     {
         if (is_array($caption)) {
             parent::__construct($caption);
@@ -40,7 +44,7 @@ class RMFormGroups extends RMFormElement
             if ($multi) {
                 $this->setWithDefaults('multiple', null, null);
             }
-            $this->setWithDefaults('type', $type == 0 ? 'select' : ($multi == 1 ? 'checkbox' : 'radio'), 'select');
+            $this->setWithDefaults('type', 0 == $type ? 'select' : (1 == $multi ? 'checkbox' : 'radio'), 'select');
             $this->setWithDefaults('value', $selected, []);
         }
 
@@ -53,6 +57,7 @@ class RMFormGroups extends RMFormElement
         $this->suppressList[] = 'value';
         $this->suppressList[] = 'description';
     }
+
     /**
      * Establece el comportamiento de seleccion del campo groups.
      * Si $_multi = 0 entonces olo se puede seleccionar un grupo a la vez. En caso contrario
@@ -61,11 +66,12 @@ class RMFormGroups extends RMFormElement
      */
     public function setMulti($value)
     {
-        if ($value==0 || $value==1) {
-            $this->setName($value ? str_replace('[]', '', $this->getName()).'[]' : str_replace('[]', '', $this->getName()));
+        if (0 == $value || 1 == $value) {
+            $this->setName($value ? str_replace('[]', '', $this->getName()) . '[]' : str_replace('[]', '', $this->getName()));
             $this->_multi = $value;
         }
     }
+
     /**
      * Devuelve el valor multi del campo groups.
      * @return int
@@ -74,6 +80,7 @@ class RMFormGroups extends RMFormElement
     {
         return $this->_multi;
     }
+
     /**
      * Indica los elementos seleccionados por defecto.
      * Este valor debe ser pasado como un array conteniendo los ideneitificadores
@@ -90,6 +97,7 @@ class RMFormGroups extends RMFormElement
             $this->_select = explode(',', $value);
         }
     }
+
     /**
      * Devuelve el array con los identificadores de los grupos
      * seleccionado por defecto.
@@ -99,6 +107,7 @@ class RMFormGroups extends RMFormElement
     {
         return $this->_select;
     }
+
     /**
      * Establece la forma en que se mostrarán los grupos.
      * Esto puede ser en forma de lista o en forma de menu
@@ -106,10 +115,11 @@ class RMFormGroups extends RMFormElement
      */
     public function setShowType($value)
     {
-        if ($value==0 || $value==1) {
+        if (0 == $value || 1 == $value) {
             $this->_showtype = $value;
         }
     }
+
     /**
      * Devuelve el identificador de la forma en que se muestran los elementos
      * @return int
@@ -118,6 +128,7 @@ class RMFormGroups extends RMFormElement
     {
         return $this->_showtype;
     }
+
     /**
      * Establece si se muestra la descripción de cada grupo o no.
      * Esta valor solo puede afectar cuando lso grupos se muestran
@@ -126,10 +137,11 @@ class RMFormGroups extends RMFormElement
      */
     public function showDesc($value)
     {
-        if ($value==0 || $value==1) {
+        if (0 == $value || 1 == $value) {
             $this->_showdesc = $value;
         }
     }
+
     /**
      * Devuelve si esta activa o no la opción para mostrar la descrpición de los grupos
      * @return int
@@ -138,6 +150,7 @@ class RMFormGroups extends RMFormElement
     {
         return $this->_showdesc;
     }
+
     /**
      * Establece el número de columnas para el menu.
      * Cuando los grupos se mostrarán en forma de menú esta opción
@@ -146,10 +159,11 @@ class RMFormGroups extends RMFormElement
      */
     public function setCols($value)
     {
-        if ($value>0) {
+        if ($value > 0) {
             $this->_cols = $value;
         }
     }
+
     /**
      * Devuelve el número de columnas del menú.
      * @return int
@@ -158,6 +172,7 @@ class RMFormGroups extends RMFormElement
     {
         return $this->_cols;
     }
+
     /**
      * Genera el código HTML para mostrar la lista o menú de grupos
      * @return string
@@ -165,76 +180,76 @@ class RMFormGroups extends RMFormElement
     public function render()
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $result = $db->query("SELECT * FROM ".$db->prefix("groups")." ORDER BY `name`");
+        $result = $db->query('SELECT * FROM ' . $db->prefix('groups') . ' ORDER BY `name`');
         $rtn = '';
         $col = 1;
-        
+
         $typeinput = $this->get('type');
         $name = $this->getName();
         $selected = $this->get('value');
-        $selected = is_array($selected) ? $selected : array($selected);
+        $selected = is_array($selected) ? $selected : [$selected];
 
-        if ($typeinput == 'radio' || $typeinput == 'checkbox') {
+        if ('radio' == $typeinput || 'checkbox' == $typeinput) {
             $this->remove('id');
-            if ($typeinput == 'checkbox') {
+            if ('checkbox' == $typeinput) {
                 $this->set('name', $this->get('name') . '[]');
             }
 
             $attributes = $this->renderAttributeString();
 
-            $rtn = "<ul class='groups_field_list ".$this->id()."_groups'>";
+            $rtn = "<ul class='groups_field_list " . $this->id() . "_groups'>";
 
-            if ($typeinput == 'checkbox') {
+            if ('checkbox' == $typeinput) {
                 $rtn .= "<li><label><input $attributes value='0'";
                 if (is_array($selected)) {
-                    if (in_array(0, $selected)) {
-                        $rtn .= " checked";
+                    if (in_array(0, $selected, true)) {
+                        $rtn .= ' checked';
                     }
                 }
-                $rtn .= ">".__('All', 'rmcommon')."</label></li>";
+                $rtn .= '>' . __('All', 'rmcommon') . '</label></li>';
             }
 
-            while ($row = $db->fetchArray($result)) {
+            while (false !== ($row = $db->fetchArray($result))) {
                 $rtn .= "<li><label><input $attributes value='$row[groupid]'";
                 if (is_array($this->_select)) {
-                    if (in_array($row['groupid'], $selected)) {
-                        $rtn .= " checked";
+                    if (in_array($row['groupid'], $selected, true)) {
+                        $rtn .= ' checked';
                     }
                 }
                 $rtn .= "> $row[name]</label>";
-                
+
                 if ($this->_showdesc) {
-                    $rtn .= "<br /><small style='font-size: 10px;' class='description'>$row[description]</small>";
+                    $rtn .= "<br><small style='font-size: 10px;' class='description'>$row[description]</small>";
                 }
-                
-                $rtn .= "</li>";
-                
+
+                $rtn .= '</li>';
+
                 $col++;
             }
-            $rtn .= "</ul>";
+            $rtn .= '</ul>';
         } else {
             $this->setIfNotSet('class', 'form-control');
             $attributes = $this->renderAttributeString();
             $rtn = "<select $attributes\"><option value='0'";
             if (is_array($selected)) {
-                if (in_array(0, $selected)) {
-                    $rtn .= " selected";
+                if (in_array(0, $selected, true)) {
+                    $rtn .= ' selected';
                 }
             }
-            
-            $rtn .= ">".__('Select...', 'rmcommon')."</option>";
-            
-            while ($row = $db->fetchArray($result)) {
+
+            $rtn .= '>' . __('Select...', 'rmcommon') . '</option>';
+
+            while (false !== ($row = $db->fetchArray($result))) {
                 $rtn .= "<option value='$row[groupid]'";
-                if (in_array($row['groupid'], $selected)) {
-                    $rtn .= " selected";
+                if (in_array($row['groupid'], $selected, true)) {
+                    $rtn .= ' selected';
                 }
-                $rtn .= ">".$row['name']."</option>";
+                $rtn .= '>' . $row['name'] . '</option>';
             }
-            
-            $rtn .= "</select>";
+
+            $rtn .= '</select>';
         }
-        
+
         return $rtn;
     }
 }

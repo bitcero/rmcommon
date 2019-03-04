@@ -8,7 +8,6 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 class ActiveButton
 {
     use RMFormComponent;
@@ -24,7 +23,7 @@ class ActiveButton
 
         foreach ($parameters as $attr => $value) {
             if ('class' == $attr) {
-                $class .= $class != '' ? ' '.$value : $value;
+                $class .= '' != $class ? ' ' . $value : $value;
             } elseif ('type' == $attr) {
                 $type = $value;
             } elseif ('caption' == $attr || 'value' == $attr) {

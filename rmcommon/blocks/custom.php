@@ -11,6 +11,6 @@
 function rmc_bkcustom_show($options)
 {
     $ret['content'] = $options[0];
-    
+
     return $ret;
 }

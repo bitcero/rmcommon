@@ -1,6 +1,6 @@
 <?php
 
-require '../../mainfile.php';
+require dirname(__DIR__) . '/../mainfile.php';
 
 $common->ajax()->prepare();
 
@@ -10,10 +10,10 @@ if ('' == trim($doc)) {
     exit();
 }
 
-$doc = explode(":", $doc);
+$doc = explode(':', $doc);
 
 // Check if doc is valid
-if (count($doc)<2 || count($doc)>3) {
+if (count($doc) < 2 || count($doc) > 3) {
     exit(__('No valid help data!', 'rmcommon'));
 }
 
@@ -24,7 +24,7 @@ if (array_key_exists(2, $doc)) {
     $type = 'module';
 }
 
-if (!in_array($type, ['module', 'plugin', 'theme', 'gui'])) {
+if (!in_array($type, ['module', 'plugin', 'theme', 'gui'], true)) {
     exit(__('Not valid help component type!', 'rmcommon'));
 }
 

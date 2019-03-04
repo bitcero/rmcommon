@@ -24,72 +24,70 @@
  *
  * @version 0.2.2
  * @copyright (C) 2002, 2003, 2005
- * @author Ulf Harnhammar <http://advogato.org/person/metaur/>
+ * @author Ulf Harnhammar <http://advogato.org/person/metaur>
  * @author Eduardo Cortés <http://eduardocortes.mx>
  *
  * @package Helpers
  * @subpackage KSES
- *
  */
-
 class RMKses
 {
     use RMSingleton;
 
-    private $post_tags = array(
-        'address' => array(),
-        'a' => array(
+    private $post_tags = [
+        'address' => [],
+        'a' => [
             'href' => true,
             'rel' => true,
             'rev' => true,
             'name' => true,
             'target' => true,
-        ),
-        'abbr' => array(),
-        'acronym' => array(),
-        'area' => array(
+        ],
+        'abbr' => [],
+        'acronym' => [],
+        'area' => [
             'alt' => true,
             'coords' => true,
             'href' => true,
             'nohref' => true,
             'shape' => true,
             'target' => true,
-        ),
-        'article' => array(
+        ],
+        'article' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'aside' => array(
+        ],
+        'aside' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'b' => array(),
-        'big' => array(),
-        'blockquote' => array(
+        ],
+        'b' => [],
+        'big' => [],
+        'blockquote' => [
             'cite' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'br' => array(),
-        'button' => array(
+        ],
+        'br' => [],
+        'button' => [
             'disabled' => true,
             'name' => true,
             'type' => true,
             'value' => true,
-        ),
-        'caption' => array(
+        ],
+        'caption' => [
             'align' => true,
-        ),
-        'cite' => array(
+        ],
+        'cite' => [
             'dir' => true,
             'lang' => true,
-        ),
-        'code' => array(),
-        'col' => array(
+        ],
+        'code' => [],
+        'col' => [
             'align' => true,
             'char' => true,
             'charoff' => true,
@@ -97,53 +95,53 @@ class RMKses
             'dir' => true,
             'valign' => true,
             'width' => true,
-        ),
-        'del' => array(
+        ],
+        'del' => [
             'datetime' => true,
-        ),
-        'dd' => array(),
-        'dfn' => array(),
-        'details' => array(
+        ],
+        'dd' => [],
+        'dfn' => [],
+        'details' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'open' => true,
             'xml:lang' => true,
-        ),
-        'div' => array(
+        ],
+        'div' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'dl' => array(),
-        'dt' => array(),
-        'em' => array(),
-        'fieldset' => array(),
-        'figure' => array(
+        ],
+        'dl' => [],
+        'dt' => [],
+        'em' => [],
+        'fieldset' => [],
+        'figure' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'figcaption' => array(
+        ],
+        'figcaption' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'font' => array(
+        ],
+        'font' => [
             'color' => true,
             'face' => true,
             'size' => true,
-        ),
-        'footer' => array(
+        ],
+        'footer' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'form' => array(
+        ],
+        'form' => [
             'action' => true,
             'accept' => true,
             'accept-charset' => true,
@@ -151,45 +149,45 @@ class RMKses
             'method' => true,
             'name' => true,
             'target' => true,
-        ),
-        'h1' => array(
+        ],
+        'h1' => [
             'align' => true,
-        ),
-        'h2' => array(
+        ],
+        'h2' => [
             'align' => true,
-        ),
-        'h3' => array(
+        ],
+        'h3' => [
             'align' => true,
-        ),
-        'h4' => array(
+        ],
+        'h4' => [
             'align' => true,
-        ),
-        'h5' => array(
+        ],
+        'h5' => [
             'align' => true,
-        ),
-        'h6' => array(
+        ],
+        'h6' => [
             'align' => true,
-        ),
-        'header' => array(
-            'align' => true,
-            'dir' => true,
-            'lang' => true,
-            'xml:lang' => true,
-        ),
-        'hgroup' => array(
+        ],
+        'header' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'hr' => array(
+        ],
+        'hgroup' => [
+            'align' => true,
+            'dir' => true,
+            'lang' => true,
+            'xml:lang' => true,
+        ],
+        'hr' => [
             'align' => true,
             'noshade' => true,
             'size' => true,
             'width' => true,
-        ),
-        'i' => array(),
-        'img' => array(
+        ],
+        'i' => [],
+        'img' => [
             'alt' => true,
             'align' => true,
             'border' => true,
@@ -200,73 +198,73 @@ class RMKses
             'src' => true,
             'usemap' => true,
             'width' => true,
-        ),
-        'ins' => array(
+        ],
+        'ins' => [
             'datetime' => true,
             'cite' => true,
-        ),
-        'kbd' => array(),
-        'label' => array(
+        ],
+        'kbd' => [],
+        'label' => [
             'for' => true,
-        ),
-        'legend' => array(
+        ],
+        'legend' => [
             'align' => true,
-        ),
-        'li' => array(
+        ],
+        'li' => [
             'align' => true,
             'value' => true,
-        ),
-        'map' => array(
+        ],
+        'map' => [
             'name' => true,
-        ),
-        'mark' => array(),
-        'menu' => array(
+        ],
+        'mark' => [],
+        'menu' => [
             'type' => true,
-        ),
-        'nav' => array(
+        ],
+        'nav' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'p' => array(
+        ],
+        'p' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'pre' => array(
+        ],
+        'pre' => [
             'width' => true,
-        ),
-        'q' => array(
+        ],
+        'q' => [
             'cite' => true,
-        ),
-        's' => array(),
-        'samp' => array(),
-        'span' => array(
+        ],
+        's' => [],
+        'samp' => [],
+        'span' => [
             'dir' => true,
             'align' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'section' => array(
+        ],
+        'section' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'small' => array(),
-        'strike' => array(),
-        'strong' => array(),
-        'sub' => array(),
-        'summary' => array(
+        ],
+        'small' => [],
+        'strike' => [],
+        'strong' => [],
+        'sub' => [],
+        'summary' => [
             'align' => true,
             'dir' => true,
             'lang' => true,
             'xml:lang' => true,
-        ),
-        'sup' => array(),
-        'table' => array(
+        ],
+        'sup' => [],
+        'table' => [
             'align' => true,
             'bgcolor' => true,
             'border' => true,
@@ -276,14 +274,14 @@ class RMKses
             'rules' => true,
             'summary' => true,
             'width' => true,
-        ),
-        'tbody' => array(
+        ],
+        'tbody' => [
             'align' => true,
             'char' => true,
             'charoff' => true,
             'valign' => true,
-        ),
-        'td' => array(
+        ],
+        'td' => [
             'abbr' => true,
             'align' => true,
             'axis' => true,
@@ -299,21 +297,21 @@ class RMKses
             'scope' => true,
             'valign' => true,
             'width' => true,
-        ),
-        'textarea' => array(
+        ],
+        'textarea' => [
             'cols' => true,
             'rows' => true,
             'disabled' => true,
             'name' => true,
             'readonly' => true,
-        ),
-        'tfoot' => array(
+        ],
+        'tfoot' => [
             'align' => true,
             'char' => true,
             'charoff' => true,
             'valign' => true,
-        ),
-        'th' => array(
+        ],
+        'th' => [
             'abbr' => true,
             'align' => true,
             'axis' => true,
@@ -328,63 +326,63 @@ class RMKses
             'scope' => true,
             'valign' => true,
             'width' => true,
-        ),
-        'thead' => array(
+        ],
+        'thead' => [
             'align' => true,
             'char' => true,
             'charoff' => true,
             'valign' => true,
-        ),
-        'title' => array(),
-        'tr' => array(
+        ],
+        'title' => [],
+        'tr' => [
             'align' => true,
             'bgcolor' => true,
             'char' => true,
             'charoff' => true,
             'valign' => true,
-        ),
-        'tt' => array(),
-        'u' => array(),
-        'ul' => array(
+        ],
+        'tt' => [],
+        'u' => [],
+        'ul' => [
             'type' => true,
-        ),
-        'ol' => array(
+        ],
+        'ol' => [
             'start' => true,
             'type' => true,
-        ),
-        'var' => array(),
-    );
+        ],
+        'var' => [],
+    ];
 
-    private $tags = array(
-        'a' => array(
+    private $tags = [
+        'a' => [
             'href' => true,
             'title' => true,
-        ),
-        'abbr' => array(
+        ],
+        'abbr' => [
             'title' => true,
-        ),
-        'acronym' => array(
+        ],
+        'acronym' => [
             'title' => true,
-        ),
-        'b' => array(),
-        'blockquote' => array(
+        ],
+        'b' => [],
+        'blockquote' => [
             'cite' => true,
-        ),
-        'cite' => array(),
-        'code' => array(),
-        'del' => array(
+        ],
+        'cite' => [],
+        'code' => [],
+        'del' => [
             'datetime' => true,
-        ),
-        'em' => array(),
-        'i' => array(),
-        'q' => array(
+        ],
+        'em' => [],
+        'i' => [],
+        'q' => [
             'cite' => true,
-        ),
-        'strike' => array(),
-        'strong' => array(),
-    );
+        ],
+        'strike' => [],
+        'strong' => [],
+    ];
 
-    private $entity_names = array(
+    private $entity_names = [
         'nbsp',    'iexcl',  'cent',    'pound',  'curren', 'yen',
         'brvbar',  'sect',   'uml',     'copy',   'ordf',   'laquo',
         'not',     'shy',    'reg',     'macr',   'deg',    'plusmn',
@@ -428,9 +426,9 @@ class RMKses
         'rang',    'loz',    'spades',  'clubs',  'hearts', 'diams',
         'sup1',    'sup2',   'sup3',    'frac14', 'frac12', 'frac34',
         'there4',
-    );
+    ];
 
-    private $protocols = array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet', 'mms', 'rtsp', 'svn', 'tel', 'fax', 'xmpp' );
+    private $protocols = [ 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet', 'mms', 'rtsp', 'svn', 'tel', 'fax', 'xmpp' ];
 
     public function __construct()
     {
@@ -455,7 +453,7 @@ class RMKses
      * @param array $allowed_protocols Optional. Allowed protocol in links.
      * @return string Filtered content with only allowed HTML elements
      */
-    public function filter($string, $allowed_html, $allowed_protocols = array())
+    public function filter($string, $allowed_html, $allowed_protocols = [])
     {
         if (empty($allowed_protocols)) {
             $allowed_protocols = $this->protocols;
@@ -465,6 +463,7 @@ class RMKses
         $string = $this->js_entities($string);
         $string = $this->normalize_entities($string);
         $string = RMEvents::get()->run_event('rmcommon.kses.filter', $string, $allowed_html, $allowed_protocols);
+
         return $this->split($string, $allowed_html, $allowed_protocols);
     }
 
@@ -512,9 +511,9 @@ class RMKses
 
         # Change back the allowed entities in our entity whitelist
 
-        $string = preg_replace_callback('/&amp;([A-Za-z]{2,8}[0-9]{0,2});/', array( $this, 'named_entities' ), $string);
-        $string = preg_replace_callback('/&amp;#(0*[0-9]{1,7});/', array( $this, 'normalize_entities2' ), $string);
-        $string = preg_replace_callback('/&amp;#[Xx](0*[0-9A-Fa-f]{1,6});/', array( $this, 'normalize_entities3' ), $string);
+        $string = preg_replace_callback('/&amp;([A-Za-z]{2,8}[0-9]{0,2});/', [ $this, 'named_entities' ], $string);
+        $string = preg_replace_callback('/&amp;#(0*[0-9]{1,7});/', [ $this, 'normalize_entities2' ], $string);
+        $string = preg_replace_callback('/&amp;#[Xx](0*[0-9A-Fa-f]{1,6});/', [ $this, 'normalize_entities3' ], $string);
 
         return $string;
     }
@@ -535,7 +534,8 @@ class RMKses
         }
 
         $i = $matches[1];
-        return ((! in_array($i, $allowedentitynames)) ? "&amp;$i;" : "&$i;");
+
+        return ((!in_array($i, $allowedentitynames, true)) ? "&amp;$i;" : "&$i;");
     }
 
     /**
@@ -576,7 +576,8 @@ class RMKses
         }
 
         $hexchars = $matches[1];
-        return ((! valid_unicode(hexdec($hexchars))) ? "&amp;#x$hexchars;" : '&#x'.ltrim($hexchars, '0').';');
+
+        return ((!valid_unicode(hexdec($hexchars))) ? "&amp;#x$hexchars;" : '&#x' . ltrim($hexchars, '0') . ';');
     }
 
     /**
@@ -587,7 +588,7 @@ class RMKses
      */
     protected function valid_unicode($i)
     {
-        return ($i == 0x9 || $i == 0xa || $i == 0xd ||
+        return (0x9 == $i || 0xa == $i || 0xd == $i ||
             ($i >= 0x20 && $i <= 0xd7ff) ||
             ($i >= 0xe000 && $i <= 0xfffd) ||
             ($i >= 0x10000 && $i <= 0x10ffff));
@@ -608,12 +609,14 @@ class RMKses
         global $pass_allowed_html, $pass_allowed_protocols;
         $pass_allowed_html = $allowed_html;
         $pass_allowed_protocols = $allowed_protocols;
-        return preg_replace_callback('%(<!--.*?(-->|$))|(<[^>]*(>|$)|>)%', array( $this, 'split_callback' ), $string);
+
+        return preg_replace_callback('%(<!--.*?(-->|$))|(<[^>]*(>|$)|>)%', [ $this, 'split_callback' ], $string);
     }
 
     private function split_callback($match)
     {
         global $pass_allowed_html, $pass_allowed_protocols;
+
         return $this->split2($match[0], $pass_allowed_html, $pass_allowed_protocols);
     }
 
@@ -636,23 +639,24 @@ class RMKses
     {
         $string = $this->stripslashes($string);
 
-        if (substr($string, 0, 1) != '<') {
+        if ('<' != mb_substr($string, 0, 1)) {
             return '&gt;';
         }
         # It matched a ">" character
 
-        if ('<!--' == substr($string, 0, 4)) {
-            $string = str_replace(array('<!--', '-->'), '', $string);
+        if ('<!--' == mb_substr($string, 0, 4)) {
+            $string = str_replace(['<!--', '-->'], '', $string);
             while ($string != ($newstring = $this->filter($string, $allowed_html, $allowed_protocols))) {
                 $string = $newstring;
             }
-            if ($string == '') {
+            if ('' == $string) {
                 return '';
             }
             // prevent multiple dashes in comments
             $string = preg_replace('/--+/', '-', $string);
             // prevent three dashes closing a comment
             $string = preg_replace('/-$/', '', $string);
+
             return "<!--{$string}-->";
         }
         # Allow HTML comments
@@ -666,16 +670,16 @@ class RMKses
         $elem = $matches[2];
         $attrlist = $matches[3];
 
-        if (! is_array($allowed_html)) {
+        if (!is_array($allowed_html)) {
             $allowed_html = $this->allowed_html($allowed_html);
         }
 
-        if (! isset($allowed_html[strtolower($elem)])) {
+        if (!isset($allowed_html[mb_strtolower($elem)])) {
             return '';
         }
         # They are using a not allowed HTML element
 
-        if ($slash != '') {
+        if ('' != $slash) {
             return "</$elem>";
         }
         # No attributes are allowed for closing elements
@@ -699,10 +703,11 @@ class RMKses
             case 'reduced':
                 $tags = $this->tags;
                 $tags['a']['rel'] = true;
+
                 return RMEvents::get()->run_event('rmcommon.kses.allowed.html', $tags, $context);
                 break;
             case 'none':
-                return RMEvents::get()->run_event('rmcommon.kses.allowed.html', array(), $context);
+                return RMEvents::get()->run_event('rmcommon.kses.allowed.html', [], $context);
                 break;
             case 'entities':
                 return RMEvents::get()->run_event('rmcommon.kses.allowed.html', $this->entity_names, $context);
@@ -731,7 +736,7 @@ class RMKses
     {
         # Is there a closing XHTML slash at the end of the attributes?
 
-        if (! is_array($allowed_html)) {
+        if (!is_array($allowed_html)) {
             $allowed_html = $this->allowed_html($allowed_html);
         }
 
@@ -741,7 +746,7 @@ class RMKses
         }
 
         # Are any attributes allowed at all for this element?
-        if (! isset($allowed_html[strtolower($element)]) || count($allowed_html[strtolower($element)]) == 0) {
+        if (!isset($allowed_html[mb_strtolower($element)]) || 0 == count($allowed_html[mb_strtolower($element)])) {
             return "<$element$xhtml_slash>";
         }
 
@@ -752,18 +757,18 @@ class RMKses
         # in $attr2
         $attr2 = '';
 
-        $allowed_attr = $allowed_html[strtolower($element)];
+        $allowed_attr = $allowed_html[mb_strtolower($element)];
         foreach ($attrarr as $arreach) {
-            if (! isset($allowed_attr[strtolower($arreach['name'])])) {
+            if (!isset($allowed_attr[mb_strtolower($arreach['name'])])) {
                 continue;
             } # the attribute is not allowed
 
-            $current = $allowed_attr[strtolower($arreach['name'])];
-            if ($current == '') {
+            $current = $allowed_attr[mb_strtolower($arreach['name'])];
+            if ('' == $current) {
                 continue;
             } # the attribute is not allowed
 
-            if (strtolower($arreach['name']) == 'style') {
+            if ('style' == mb_strtolower($arreach['name'])) {
                 $orig_value = $arreach['value'];
                 $value = $this->safecss_filter_attr($orig_value);
 
@@ -775,21 +780,21 @@ class RMKses
                 $arreach['whole'] = str_replace($orig_value, $value, $arreach['whole']);
             }
 
-            if (! is_array($current)) {
-                $attr2 .= ' '.$arreach['whole'];
+            if (!is_array($current)) {
+                $attr2 .= ' ' . $arreach['whole'];
             # there are no checks
             } else {
                 # there are some checks
                 $ok = true;
                 foreach ($current as $currkey => $currval) {
-                    if (! $this->check_attr_val($arreach['value'], $arreach['vless'], $currkey, $currval)) {
+                    if (!$this->check_attr_val($arreach['value'], $arreach['vless'], $currkey, $currval)) {
                         $ok = false;
                         break;
                     }
                 }
 
                 if ($ok) {
-                    $attr2 .= ' '.$arreach['whole'];
+                    $attr2 .= ' ' . $arreach['whole'];
                 } # it passed them
             } # if !is_array($current)
         } # foreach
@@ -817,14 +822,14 @@ class RMKses
      */
     protected function hair($attr, $allowed_protocols)
     {
-        $attrarr = array();
+        $attrarr = [];
         $mode = 0;
         $attrname = '';
-        $uris = array('xmlns', 'profile', 'href', 'src', 'cite', 'classid', 'codebase', 'data', 'usemap', 'longdesc', 'action');
+        $uris = ['xmlns', 'profile', 'href', 'src', 'cite', 'classid', 'codebase', 'data', 'usemap', 'longdesc', 'action'];
 
         # Loop through the whole attribute list
 
-        while (strlen($attr) != 0) {
+        while (0 != mb_strlen($attr)) {
             $working = 0; # Was the last operation successful?
 
             switch ($mode) {
@@ -837,7 +842,6 @@ class RMKses
                     }
 
                     break;
-
                 case 1: # equals sign or valueless ("selected")
 
                     if (preg_match('/^\s*=\s*/', $attr)) { # equals sign
@@ -851,24 +855,23 @@ class RMKses
                         $working = 1;
                         $mode = 0;
                         if (false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
+                            $attrarr[$attrname] = ['name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y'];
                         }
                         $attr = preg_replace('/^\s+/', '', $attr);
                     }
 
                     break;
-
                 case 2: # attribute value, a URL after href= for instance
 
                     if (preg_match('%^"([^"]*)"(\s+|/?$)%', $attr, $match)) {
                         # "value"
                         $thisval = $match[1];
-                        if (in_array(strtolower($attrname), $uris)) {
+                        if (in_array(mb_strtolower($attrname), $uris, true)) {
                             $thisval = $this->bad_protocol($thisval, $allowed_protocols);
                         }
 
                         if (false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
+                            $attrarr[$attrname] = ['name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n'];
                         }
                         $working = 1;
                         $mode = 0;
@@ -879,12 +882,12 @@ class RMKses
                     if (preg_match("%^'([^']*)'(\s+|/?$)%", $attr, $match)) {
                         # 'value'
                         $thisval = $match[1];
-                        if (in_array(strtolower($attrname), $uris)) {
+                        if (in_array(mb_strtolower($attrname), $uris, true)) {
                             $thisval = $this->bad_protocol($thisval, $allowed_protocols);
                         }
 
                         if (false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname='$thisval'", 'vless' => 'n');
+                            $attrarr[$attrname] = ['name' => $attrname, 'value' => $thisval, 'whole' => "$attrname='$thisval'", 'vless' => 'n'];
                         }
                         $working = 1;
                         $mode = 0;
@@ -895,12 +898,12 @@ class RMKses
                     if (preg_match("%^([^\s\"']+)(\s+|/?$)%", $attr, $match)) {
                         # value
                         $thisval = $match[1];
-                        if (in_array(strtolower($attrname), $uris)) {
+                        if (in_array(mb_strtolower($attrname), $uris, true)) {
                             $thisval = $this->bad_protocol($thisval, $allowed_protocols);
                         }
 
                         if (false === array_key_exists($attrname, $attrarr)) {
-                            $attrarr[$attrname] = array('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
+                            $attrarr[$attrname] = ['name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n'];
                         }
                         # We add quotes to conform to W3C's HTML spec.
                         $working = 1;
@@ -911,16 +914,16 @@ class RMKses
                     break;
             } # switch
 
-            if ($working == 0) { # not well formed, remove and try again
+            if (0 == $working) { # not well formed, remove and try again
                 $attr = $this->html_error($attr);
                 $mode = 0;
             }
         } # while
 
-        if ($mode == 1 && false === array_key_exists($attrname, $attrarr)) {
+        if (1 == $mode && false === array_key_exists($attrname, $attrarr)) {
             # special case, for when the attribute list ends with a valueless
             # attribute like "selected"
-            $attrarr[$attrname] = array('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
+            $attrarr[$attrname] = ['name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y'];
         }
 
         return $attrarr;
@@ -963,12 +966,13 @@ class RMKses
      *
      * @param string $string Content to check for bad protocols
      * @param string $allowed_protocols Allowed protocols
+     * @param mixed $count
      * @return string Sanitized content
      */
     private function bad_protocol_once($string, $allowed_protocols, $count = 1)
     {
         $string2 = preg_split('/:|&#0*58;|&#x0*3a;/i', $string, 2);
-        if (isset($string2[1]) && ! preg_match('%/\?%', $string2[0])) {
+        if (isset($string2[1]) && !preg_match('%/\?%', $string2[0])) {
             $string = trim($string2[1]);
             $protocol = $this->bad_protocol_once2($string2[0], $allowed_protocols);
             if ('feed:' == $protocol) {
@@ -999,11 +1003,11 @@ class RMKses
         $string2 = $this->decode_entities($string);
         $string2 = preg_replace('/\s/', '', $string2);
         $string2 = $this->no_null($string2);
-        $string2 = strtolower($string2);
+        $string2 = mb_strtolower($string2);
 
         $allowed = false;
         foreach ((array) $allowed_protocols as $one_protocol) {
-            if (strtolower($one_protocol) == $string2) {
+            if (mb_strtolower($one_protocol) == $string2) {
                 $allowed = true;
                 break;
             }
@@ -1011,9 +1015,9 @@ class RMKses
 
         if ($allowed) {
             return "$string2:";
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
@@ -1028,8 +1032,8 @@ class RMKses
      */
     protected function decode_entities($string)
     {
-        $string = preg_replace_callback('/&#([0-9]+);/', array( $this, 'decode_entities_chr' ), $string);
-        $string = preg_replace_callback('/&#[Xx]([0-9A-Fa-f]+);/', array( $this, 'decode_entities_chr_hexdec' ), $string);
+        $string = preg_replace_callback('/&#([0-9]+);/', [ $this, 'decode_entities_chr' ], $string);
+        $string = preg_replace_callback('/&#[Xx]([0-9A-Fa-f]+);/', [ $this, 'decode_entities_chr_hexdec' ], $string);
 
         return $string;
     }
@@ -1068,11 +1072,12 @@ class RMKses
 
     /**
      * Inline CSS filter
+     * @param mixed $css
      */
     protected function safecss_filter_attr($css)
     {
         $css = $this->no_null($css);
-        $css = str_replace(array("\n","\r","\t"), '', $css);
+        $css = str_replace(["\n", "\r", "\t"], '', $css);
 
         if (preg_match('%[\\(&=}]|/\*%', $css)) { // remove any inline css containing \ ( & } = or comments
             return '';
@@ -1085,7 +1090,7 @@ class RMKses
          *
          * @param array $attr List of allowed CSS attributes.
          */
-        $allowed_attr = apply_filters('safe_style_css', array( 'text-align', 'margin', 'color', 'float',
+        $allowed_attr = apply_filters('safe_style_css', [ 'text-align', 'margin', 'color', 'float',
             'border', 'background', 'background-color', 'border-bottom', 'border-bottom-color',
             'border-bottom-style', 'border-bottom-width', 'border-collapse', 'border-color', 'border-left',
             'border-left-color', 'border-left-style', 'border-left-width', 'border-right', 'border-right-color',
@@ -1095,7 +1100,7 @@ class RMKses
             'font-variant', 'font-weight', 'height', 'letter-spacing', 'line-height', 'margin-bottom',
             'margin-left', 'margin-right', 'margin-top', 'overflow', 'padding', 'padding-bottom',
             'padding-left', 'padding-right', 'padding-top', 'text-decoration', 'text-indent', 'vertical-align',
-            'width' ));
+            'width', ]);
 
         if (empty($allowed_attr)) {
             return $css;
@@ -1103,21 +1108,21 @@ class RMKses
 
         $css = '';
         foreach ($css_array as $css_item) {
-            if ($css_item == '') {
+            if ('' == $css_item) {
                 continue;
             }
             $css_item = trim($css_item);
             $found = false;
-            if (strpos($css_item, ':') === false) {
+            if (false === mb_strpos($css_item, ':')) {
                 $found = true;
             } else {
                 $parts = explode(':', $css_item);
-                if (in_array(trim($parts[0]), $allowed_attr)) {
+                if (in_array(trim($parts[0]), $allowed_attr, true)) {
                     $found = true;
                 }
             }
             if ($found) {
-                if ($css != '') {
+                if ('' != $css) {
                     $css .= ';';
                 }
                 $css .= $css_item;
@@ -1143,26 +1148,24 @@ class RMKses
     {
         $ok = true;
 
-        switch (strtolower($checkname)) {
+        switch (mb_strtolower($checkname)) {
             case 'maxlen':
                 # The maxlen check makes sure that the attribute value has a length not
                 # greater than the given value. This can be used to avoid Buffer Overflows
                 # in WWW clients and various Internet servers.
 
-                if (strlen($value) > $checkvalue) {
+                if (mb_strlen($value) > $checkvalue) {
                     $ok = false;
                 }
                 break;
-
             case 'minlen':
                 # The minlen check makes sure that the attribute value has a length not
                 # smaller than the given value.
 
-                if (strlen($value) < $checkvalue) {
+                if (mb_strlen($value) < $checkvalue) {
                     $ok = false;
                 }
                 break;
-
             case 'maxval':
                 # The maxval check does two things: it checks that the attribute value is
                 # an integer from 0 and up, without an excessive amount of zeroes or
@@ -1177,7 +1180,6 @@ class RMKses
                     $ok = false;
                 }
                 break;
-
             case 'minval':
                 # The minval check makes sure that the attribute value is a positive integer,
                 # and that it is not smaller than the given value.
@@ -1189,14 +1191,13 @@ class RMKses
                     $ok = false;
                 }
                 break;
-
             case 'valueless':
                 # The valueless check makes sure if the attribute has a value
                 # (like <a href="blah">) or not (<option selected>). If the given value
                 # is a "y" or a "Y", the attribute must not have a value.
                 # If the given value is an "n" or an "N", the attribute must have one.
 
-                if (strtolower($checkvalue) != $vless) {
+                if (mb_strtolower($checkvalue) != $vless) {
                     $ok = false;
                 }
                 break;
@@ -1238,16 +1239,16 @@ class RMKses
      */
     private function add_global_attributes($value)
     {
-        $global_attributes = array(
+        $global_attributes = [
             'class' => true,
             'id' => true,
             'style' => true,
             'title' => true,
             'role' => true,
-        );
+        ];
 
         if (true === $value) {
-            $value = array();
+            $value = [];
         }
 
         if (is_array($value)) {

@@ -8,7 +8,6 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 class ActiveRadio
 {
     use RMFormComponent;
@@ -31,10 +30,10 @@ class ActiveRadio
 
         $input = '';
         foreach ($options as $value => $option) {
-            $input .= '<label' . ($class != '' ? ' class="' . $class .'"' : '') . '>';
-            $input .= '<input type="radio" name="' . $this->name . '" id="' . $this->id . $value . '" value="' . $value .'"';
+            $input .= '<label' . ('' != $class ? ' class="' . $class . '"' : '') . '>';
+            $input .= '<input type="radio" name="' . $this->name . '" id="' . $this->id . $value . '" value="' . $value . '"';
             $input .= $this->required ? ' required' : '';
-            $input .= $attributes . ($value == $checked ? ' checked="checked"' : '') . '> ' . $option . '</label>';
+            $input .= $attributes . ($value == $checked ? ' checked' : '') . '> ' . $option . '</label>';
         }
 
         return $input;

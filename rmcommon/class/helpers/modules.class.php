@@ -68,7 +68,7 @@ class RMModules
         global $xoopsModule;
 
         //global $version;
-        if ($module != '') {
+        if ('' != $module) {
             if ($xoopsModule && $xoopsModule->dirname() == $module) {
                 $mod = $xoopsModule;
             } else {
@@ -79,10 +79,10 @@ class RMModules
         }
 
         $mod->loadInfoAsVar($module);
-        $version =& $mod->getInfo('rmversion');
-        $version = is_array($version) ? $version : array('major' => $version, 'minor' => 0, 'revision' => 0, 'stage' => 0, 'name' => $mod->getInfo('name'));
+        $version = &$mod->getInfo('rmversion');
+        $version = is_array($version) ? $version : ['major' => $version, 'minor' => 0, 'revision' => 0, 'stage' => 0, 'name' => $mod->getInfo('name')];
 
-        if ($type == 'raw') {
+        if ('raw' == $type) {
             return $version;
         }
 
@@ -103,17 +103,17 @@ class RMModules
 
     /**
      * Load a given Xoops Module
-     * @param  string|integer $id Indentifier of module. Could be dirname or numeric ID
+     * @param  string|int $id Indentifier of module. Could be dirname or numeric ID
      * @return XoopsModule
      */
     public static function load($id)
     {
-        $module_handler = xoops_gethandler('module');
+        $moduleHandler = xoops_getHandler('module');
 
         if (is_numeric($id)) {
-            $module = $module_handler->get($id);
+            $module = $moduleHandler->get($id);
         } else {
-            $module = $module_handler->getByDirname($id);
+            $module = $moduleHandler->getByDirname($id);
         }
 
         if ($module) {
@@ -147,23 +147,23 @@ class RMModules
 
         $active = null;
 
-        if ($status == 'inactive') {
+        if ('inactive' == $status) {
             $active = 0;
-        } elseif ($status == 'active') {
+        } elseif ('active' == $status) {
             $active = 1;
         }
 
-        $sql = "SELECT mid, name, dirname FROM " . $db->prefix("modules");
+        $sql = 'SELECT mid, name, dirname FROM ' . $db->prefix('modules');
 
         if (isset($active)) {
             $sql .= " WHERE isactive=$active";
         }
 
-        $sql .= " ORDER BY name";
+        $sql .= ' ORDER BY name';
         $result = $db->query($sql);
-        $modules = array();
+        $modules = [];
 
-        while ($row = $db->fetchArray($result)) {
+        while (false !== ($row = $db->fetchArray($result))) {
             $modules[] = $row;
         }
 
@@ -193,8 +193,8 @@ class RMModules
             $mod = self::load_module($dirname);
         }
 
-        if ($mod->getInfo('main_menu') && $mod->getInfo('main_menu') != '' && file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu'))) {
-            $main_menu = array();
+        if ($mod->getInfo('main_menu') && '' != $mod->getInfo('main_menu') && file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu'))) {
+            $main_menu = [];
             include XOOPS_ROOT_PATH . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('main_menu');
 
             return $main_menu;
@@ -213,7 +213,7 @@ class RMModules
             $mod = self::load_module($dirname);
         }
 
-        $icon =& $mod->getInfo('icon');
+        $icon = &$mod->getInfo('icon');
         $icon = '' != $icon ? $icon : XOOPS_URL . '/modules/' . $dirname . '/' . $mod->getInfo('image');
 
         return $icon;
@@ -235,8 +235,8 @@ class RMModules
 
         if (isset($paths[$directory])) {
             return XOOPS_URL . ($admin ? '/admin/' : '') . trim($paths[$directory], '/');
-        } else {
-            return XOOPS_URL . '/modules/' . $directory;
         }
+
+        return XOOPS_URL . '/modules/' . $directory;
     }
 }

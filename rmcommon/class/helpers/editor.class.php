@@ -24,10 +24,9 @@
  * @author        Eduardo Cortés <i.bitcero@gmail.com>
  * @since         2.2
  */
-
 abstract class RMEditor
 {
-    protected $attributes = array();
+    protected $attributes = [];
 
     public function attr($name, $value)
     {

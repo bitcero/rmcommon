@@ -25,8 +25,7 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.eduardocortes.mx
  */
-
-if ($widgetSettings->type == 'large'):
+if ('large' == $widgetSettings->type):
     // LARGE WIDGET
 ?>
 
@@ -50,13 +49,13 @@ if ($widgetSettings->type == 'large'):
                 <div class="media-body">
                     <h3 class="media-heading"><?php echo $widgetSettings->name; ?></h3>
                     <?php if ('' != $widgetSettings->charge): ?><small class="card-charge"><?php echo $widgetSettings->charge; ?></small><?php endif; ?>
-                    <?php if (false == empty($widgetSettings->mainButton)): ?>
+                    <?php if (false === empty($widgetSettings->mainButton)): ?>
                         <a href="<?php echo $widgetSettings->mainButton['link']; ?>" class="btn btn-<?php echo $widgetSettings->color; ?> main-button"><?php echo $widgetSettings->mainButton['caption']; ?></a>
                     <?php endif; ?>
                 </div>
             </div>
 
-            <?php if (false == empty($widgetSettings->counters)): ?>
+            <?php if (false === empty($widgetSettings->counters)): ?>
                 <div class="card-counters">
                     <ul>
                         <?php foreach ($widgetSettings->counters as $i => $counter): if ($i > 2) {
@@ -74,13 +73,13 @@ if ($widgetSettings->type == 'large'):
             <?php endif; ?>
         </section>
 
-        <?php if ($widgetSettings->info != '' || false == empty($widgetSettings->social)): ?>
+        <?php if ('' != $widgetSettings->info || false === empty($widgetSettings->social)): ?>
         <section class="secondary-section">
             <?php if ('' != $widgetSettings->info): ?>
             <div class="card-info"><?php echo $widgetSettings->info; ?></div>
             <?php endif; ?>
 
-            <?php if (false == empty($widgetSettings->social)): ?>
+            <?php if (false === empty($widgetSettings->social)): ?>
             <div class="card-social">
                 <ul>
                     <?php foreach ($widgetSettings->social as $social): ?>
@@ -104,7 +103,7 @@ if ($widgetSettings->type == 'large'):
 
 <?php
 
-elseif ($widgetSettings->type == 'large-header'):
+elseif ('large-header' == $widgetSettings->type):
     // LARGE WIDGET WITH HEADER
 
 ?>
@@ -128,7 +127,7 @@ elseif ($widgetSettings->type == 'large-header'):
             <?php if ('' != $widgetSettings->charge): ?><small class="card-charge"><?php echo $widgetSettings->charge; ?></small><?php endif; ?>
         </header>
 
-        <?php if (false == empty($widgetSettings->counters)): ?>
+        <?php if (false === empty($widgetSettings->counters)): ?>
             <section class="card-counters">
                 <ul>
                     <?php foreach ($widgetSettings->counters as $i => $counter): if ($i > 2) {
@@ -145,7 +144,7 @@ elseif ($widgetSettings->type == 'large-header'):
             </section>
         <?php endif; ?>
 
-        <?php if (false == empty($widgetSettings->mainButton)): ?>
+        <?php if (false === empty($widgetSettings->mainButton)): ?>
             <div class="card-button">
                 <a href="<?php echo $widgetSettings->mainButton['link']; ?>" class="btn btn-<?php echo $widgetSettings->color; ?> main-button">
                     <?php if ('' != $widgetSettings->mainButton['icon']): ?>
@@ -160,7 +159,7 @@ elseif ($widgetSettings->type == 'large-header'):
             <div class="card-info"><?php echo $widgetSettings->info; ?></div>
         <?php endif; ?>
 
-        <?php if (false == empty($widgetSettings->social)): ?>
+        <?php if (false === empty($widgetSettings->social)): ?>
             <div class="card-social">
                 <ul>
                     <?php foreach ($widgetSettings->social as $social): ?>
@@ -182,7 +181,7 @@ elseif ($widgetSettings->type == 'large-header'):
 
 <?php
 
-elseif ($widgetSettings->type == 'large-big-header'):
+elseif ('large-big-header' == $widgetSettings->type):
     // LARGE WIDGET WITH BIG HEADER
 
 ?>
@@ -208,7 +207,7 @@ elseif ($widgetSettings->type == 'large-big-header'):
 
     </header>
 
-    <?php if (false == empty($widgetSettings->counters)): ?>
+    <?php if (false === empty($widgetSettings->counters)): ?>
     <section class="card-counters">
         <ul>
             <?php foreach ($widgetSettings->counters as $i => $counter): if ($i > 2) {
@@ -230,10 +229,10 @@ elseif ($widgetSettings->type == 'large-big-header'):
     </section>
 <?php endif; ?>
 
-    <?php if (false == empty($widgetSettings->mainButton) || false == empty($widgetSettings->addonButton)): ?>
+    <?php if (false === empty($widgetSettings->mainButton) || false === empty($widgetSettings->addonButton)): ?>
         <div class="card-button">
 
-            <?php if (false == empty($widgetSettings->mainButton)): ?>
+            <?php if (false === empty($widgetSettings->mainButton)): ?>
 
                 <a href="<?php echo $widgetSettings->mainButton['link']; ?>" class="btn btn-<?php echo $widgetSettings->color; ?> main-button">
                     <?php if ('' != $widgetSettings->mainButton['icon']): ?>
@@ -244,7 +243,7 @@ elseif ($widgetSettings->type == 'large-big-header'):
 
             <?php endif; ?>
 
-            <?php if (false == empty($widgetSettings->addonButton)): ?>
+            <?php if (false === empty($widgetSettings->addonButton)): ?>
                 <a href="<?php echo $widgetSettings->addonButton['link']; ?>" class="btn btn-<?php echo $widgetSettings->addonButton['color'] ? $widgetSettings->addonButton['color'] : $widgetSettings->color; ?> main-button">
                     <?php if ('' != $widgetSettings->addonButton['icon']): ?>
                         <?php echo $common->icons()->getIcon($widgetSettings->addonButton['icon']); ?>
@@ -260,7 +259,7 @@ elseif ($widgetSettings->type == 'large-big-header'):
     <div class="card-info"><?php echo $widgetSettings->info; ?></div>
 <?php endif; ?>
 
-    <?php if (false == empty($widgetSettings->social)): ?>
+    <?php if (false === empty($widgetSettings->social)): ?>
     <div class="card-social">
         <ul>
             <?php foreach ($widgetSettings->social as $social): ?>
@@ -282,7 +281,7 @@ elseif ($widgetSettings->type == 'large-big-header'):
 
 <?php
 
-elseif ($widgetSettings->type == 'tiny'):
+elseif ('tiny' == $widgetSettings->type):
     // TINY WIDGET
 
 ?>
@@ -321,7 +320,7 @@ elseif ($widgetSettings->type == 'tiny'):
 
 <?php
 
-elseif ($widgetSettings->type == 'small'):
+elseif ('small' == $widgetSettings->type):
     // SMALL WIDGET
 
 ?>
@@ -347,7 +346,7 @@ elseif ($widgetSettings->type == 'small'):
                 <div class="card-line"><?php echo $widgetSettings->info; ?></div>
             <?php endif; ?>
 
-            <?php if (false == empty($widgetSettings->mainButton)): ?>
+            <?php if (false === empty($widgetSettings->mainButton)): ?>
                 <div class="card-button">
                     <a href="<?php echo $widgetSettings->mainButton['link']; ?>" class="btn btn-<?php echo $widgetSettings->color; ?> btn-sm main-button">
                         <?php if ('' != $widgetSettings->mainButton['icon']): ?>
@@ -366,7 +365,7 @@ elseif ($widgetSettings->type == 'small'):
     </div>
 <?php
 
-elseif ($widgetSettings->type == 'medium'):
+elseif ('medium' == $widgetSettings->type):
     // MEDIUM WIDGET
 
 ?>
@@ -390,7 +389,7 @@ elseif ($widgetSettings->type == 'medium'):
                 <div class="media-body">
                     <h3 class="media-heading"><?php echo $widgetSettings->name; ?></h3>
                     <?php if ('' != $widgetSettings->charge): ?><small class="card-charge"><?php echo $widgetSettings->charge; ?></small><?php endif; ?>
-                    <?php if (false == empty($widgetSettings->lines)): ?>
+                    <?php if (false === empty($widgetSettings->lines)): ?>
                         <ul class="card-lines">
                             <?php foreach ($widgetSettings->lines as $line): ?>
                             <li><?php echo $line; ?></li>

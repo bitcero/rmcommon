@@ -26,9 +26,7 @@
  * @link         http://eduardocortes.mx
  * @link         http://rmcommon.com
  */
-
 if ('cu-notification-subscribe' == $page) {
-
     // Process subscriptions
 
     class Response
@@ -58,7 +56,6 @@ if ('cu-notification-subscribe' == $page) {
         $event
     );
 } elseif ('cu-notification-list' == $page) {
-
     // Show subscriptions list
 
     global $xoopsUser, $cuSettings;
@@ -81,25 +78,24 @@ if ('cu-notification-subscribe' == $page) {
         );
     }
 
-    $elements = array();
-    $items = array();
+    $elements = [];
+    $items = [];
     $tf = new RMTimeFormatter(0, __('%M% %d%, %Y%', 'rmcommon'));
     $crypt = new Crypt(null, $cuSettings->secretkey);
 
     foreach ($subscriptions as $item) {
         $class = ucfirst($item->element . '_Notifications');
         if (!class_exists($class)) {
-
             // Include controller file
             if ('plugin' == $event->type) {
-                $file = XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $item->element . '/class/' . strtolower($item->element) . '.notifications.class.php';
+                $file = XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $item->element . '/class/' . mb_strtolower($item->element) . '.notifications.class.php';
             } elseif ('theme' == $event->type) {
-                $file = XOOPS_ROOT_PATH . '/themes/' . $item->element . '/class/' . strtolower($item->element) . '.notifications.class.php';
+                $file = XOOPS_ROOT_PATH . '/themes/' . $item->element . '/class/' . mb_strtolower($item->element) . '.notifications.class.php';
             } else {
-                $file = XOOPS_ROOT_PATH . '/modules/' . $item->element . '/class/' . strtolower($item->element) . '.notifications.class.php';
+                $file = XOOPS_ROOT_PATH . '/modules/' . $item->element . '/class/' . mb_strtolower($item->element) . '.notifications.class.php';
             }
 
-            include_once $file;
+            require_once $file;
             if (!class_exists($class)) {
                 continue;
             }
@@ -116,24 +112,24 @@ if ('cu-notification-subscribe' == $page) {
             $elements[$item->type . '_' . $item->element] = $notifications->element_data();
         }
 
-        $items[$item->type . '_' . $item->element][] = array(
-            'caption'   => $event->caption,
-            'element'    => $elements[$item->type . '_' . $item->element],
-            'params'    => $item->params,
-            'type'      => $item->type,
-            'event'     => $item->event,
-            'object'    => $notifications->object_data($item),
-            'date'      => $tf->format($item->date),
-            'hash'      => $crypt->encrypt(json_encode(array(
+        $items[$item->type . '_' . $item->element][] = [
+            'caption' => $event->caption,
+            'element' => $elements[$item->type . '_' . $item->element],
+            'params' => $item->params,
+            'type' => $item->type,
+            'event' => $item->event,
+            'object' => $notifications->object_data($item),
+            'date' => $tf->format($item->date),
+            'hash' => $crypt->encrypt(json_encode([
                 'event' => $item->event,
                 'element' => $item->element,
                 'type' => $item->type,
-                'params' => $item->params
-            )))
-        );
+                'params' => $item->params,
+            ])),
+        ];
     }
 
-    RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', array('footer' => 1, 'id' => 'cuhandler'));
+    RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', ['footer' => 1, 'id' => 'cuhandler']);
 
     RMTemplate::get()->header();
 

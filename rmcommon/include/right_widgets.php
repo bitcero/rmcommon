@@ -13,10 +13,10 @@ function rmc_available_mods()
     global $available_mods, $xoopsSecurity;
 
     $ret['title'] = __('Available Modules', 'rmcommon');
-    $ret['icon'] = RMCURL.'/images/modules.png';
+    $ret['icon'] = RMCURL . '/images/modules.png';
 
     $limit = 7;
-    $tpages = ceil(count($available_mods)/$limit);
+    $tpages = ceil(count($available_mods) / $limit);
 
     $nav = new RMPageNav(count($available_mods), $limit, 1, 3);
     $nav->target_url('#" onclick="load_page({PAGE_NUM});');
@@ -24,16 +24,16 @@ function rmc_available_mods()
     ob_start();
     $i = 0; ?>
 	<div class="rmc_widget_content_reduced rmc-modules-widget">
-        <img id="img-load" src="images/loading.gif" style="display: none; margin: 15px auto;" />
+        <img id="img-load" src="images/loading.gif" style="display: none; margin: 15px auto;">
         <div id="mods-widget-container">
             <ul class="list-unstyled">
                 <?php foreach ($available_mods as $mod): ?>
-                <?php if ($i==$limit) {
+                <?php if ($i == $limit) {
         break;
     } ?>
                     <li>
                         <div class="the-logo">
-                            <?php if ($mod->getInfo('url')!=''): ?>
+                            <?php if ('' != $mod->getInfo('url')): ?>
                             <a href="modules.php?action=install&amp;dir=<?php echo $mod->getInfo('dirname'); ?>">
                                 <img src="<?php echo XOOPS_URL; ?>/modules/<?php echo $mod->getInfo('dirname'); ?>/<?php echo $mod->getInfo('image'); ?>" alt="<?php echo $mod->getInfo('dirname'); ?>">
                             </a>
@@ -102,7 +102,7 @@ function rmc_available_mods()
                                 <tr>
                                     <td><?php _e('Updatable:', 'rmcommon'); ?></td>
                                     <td>
-                                        <?php if ($mod->getInfo('updateurl') != ''): ?>
+                                        <?php if ('' != $mod->getInfo('updateurl')): ?>
                                             <span class="fa fa-check"></span>
                                         <?php else: ?>
                                             <span class="fa fa-times text-danger"></span>
@@ -144,14 +144,14 @@ function rmc_available_mods()
                                 <tr>
                                     <td><?php _e('Released:', 'rmcommon'); ?></td>
                                     <td>
-                                        <?php if ($mod->getInfo('releasedate') != ''): ?>
+                                        <?php if ('' != $mod->getInfo('releasedate')): ?>
                                             <?php
                                             $time = strtotime($mod->getInfo('releasedate'));
     echo formatTimestamp($time, 's'); ?>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
-                                <?php if ($mod->getInfo('help') != '' && $mod->getInfo('rmnative')): ?>
+                                <?php if ('' != $mod->getInfo('help') && $mod->getInfo('rmnative')): ?>
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td>
@@ -162,7 +162,7 @@ function rmc_available_mods()
                                 <tr>
                                     <td colspan="2" class="contact-options text-center">
                                         <?php if ($mod->getInfo('authormail')): ?>
-                                            <?php if ($mod->getInfo('authormail') != ''): ?>
+                                            <?php if ('' != $mod->getInfo('authormail')): ?>
                                                 <a target="_blank" href="mailto:<?php echo $mod->getInfo('authormail'); ?>"><span class="fa fa-envelope"></span></a>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -186,7 +186,7 @@ function rmc_available_mods()
     endforeach; ?>
             </ul>
         <?php $nav->display(false); ?>
-            <input type="hidden" id="token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
+            <input type="hidden" id="token" value="<?php echo $xoopsSecurity->createToken(); ?>">
         </div>
 	</div>
 <?php
@@ -197,8 +197,8 @@ function rmc_available_mods()
 }
 
 /**
-* Show the widget with blocks positions
-*/
+ * Show the widget with blocks positions
+ */
 function rmc_blocks_new()
 {
     $db = XoopsDatabaseFactory::getDatabaseConnection();
@@ -206,17 +206,17 @@ function rmc_blocks_new()
     $blocks = RMBlocksFunctions::get_available_list($modules);
 
     // Get intalled modules
-    $result = $db->query("SELECT * FROM ".$db->prefix("modules")." WHERE isactive=1 ORDER BY `name`");
-    while ($row = $db->fetchArray($result)) {
-        $modules[] = array('dir'=>$row['dirname'], 'name'=>$row['name']);
+    $result = $db->query('SELECT * FROM ' . $db->prefix('modules') . ' WHERE isactive=1 ORDER BY `name`');
+    while (false !== ($row = $db->fetchArray($result))) {
+        $modules[] = ['dir' => $row['dirname'], 'name' => $row['name']];
     }
 
     // Cargamos los grupos
-    $sql = "SELECT groupid, name FROM " . $db->prefix("groups") . " ORDER BY name";
+    $sql = 'SELECT groupid, name FROM ' . $db->prefix('groups') . ' ORDER BY name';
     $result = $db->query($sql);
-    $groups = array();
-    while ($row = $db->fetchArray($result)) {
-        $groups[] = array('id' => $row['groupid'], 'name' => $row['name']);
+    $groups = [];
+    while (false !== ($row = $db->fetchArray($result))) {
+        $groups[] = ['id' => $row['groupid'], 'name' => $row['name']];
     }
 
     $widget['title'] = 'Add Block';
@@ -229,8 +229,8 @@ function rmc_blocks_new()
 }
 
 /**
-* Add new position
-*/
+ * Add new position
+ */
 function rmc_blocks_addpos()
 {
     global $xoopsSecurity;

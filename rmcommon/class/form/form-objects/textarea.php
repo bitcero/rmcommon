@@ -10,7 +10,6 @@
  * URI: http://www.redmexico.com.mx
  * --------------------------------------------------------------
  */
-
 class ActiveTextArea
 {
     use RMFormComponent;
@@ -25,7 +24,7 @@ class ActiveTextArea
 
         foreach ($parameters as $attr => $value) {
             if ('class' == $attr) {
-                $class .= $class != '' ? ' '.$value : $value;
+                $class .= '' != $class ? ' ' . $value : $value;
             } elseif ('value' == $attr) {
                 $text = $value;
             } else {

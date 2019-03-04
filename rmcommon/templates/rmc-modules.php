@@ -10,8 +10,8 @@
 </script>
 
 <form action="modules.php" method="post" id="form-modules">
-    <input type="hidden" name="action" id="mod-action" value="" />
-    <input type="hidden" name="module" id="mod-dir" value="" />
+    <input type="hidden" name="action" id="mod-action" value="">
+    <input type="hidden" name="module" id="mod-dir" value="">
     <?php echo $xoopsSecurity->getTokenHTML(); ?>
 </form>
 
@@ -57,13 +57,13 @@
                         </tfoot>
                         <tbody>
                         <?php foreach ($modules as $mod): ?>
-                            <tr class="<?php echo tpl_cycle("even,odd"); ?><?php echo $mod['active'] ? '' : ' inactive'; ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
+                            <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $mod['active'] ? '' : ' inactive'; ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
                                 <td class="logo">
                                     <a href="<?php if ($mod['active']): ?><?php echo $mod['admin_link']; ?><?php else: ?>#<?php endif; ?>" title="<?php echo $mod['realname']; ?>">
-                                        <?php if (substr($mod['icon'], 0, 5) == '<span'): ?>
+                                        <?php if ('<span' == mb_substr($mod['icon'], 0, 5)): ?>
                                             <?php echo $mod['icon']; ?>
                                         <?php else: ?>
-                                            <img src="<?php echo $mod['icon']; ?>" alt="<?php echo $mod['name']; ?>" />
+                                            <img src="<?php echo $mod['icon']; ?>" alt="<?php echo $mod['name']; ?>">
                                         <?php endif; ?>
                                     </a>
                                 </td>
@@ -76,7 +76,7 @@
                     <?php endif; ?>
                     </span>
                                     <a href="#" class="rename text-info"><span class="fa fa-edit"></span> <?php _e('Edit', 'rmcommon'); ?></a>
-                                    <?php if ($mod['help'] != ''): ?>
+                                    <?php if ('' != $mod['help']): ?>
                                         <a href="<?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?>" class="help cu-help-button text-success" title="<?php echo sprintf(__('%s Help', 'rmcommon'), $mod['name']); ?>"><span class="fa fa-question-circle"></span> <?php _e('Help', 'rmcommon'); ?></a>
                                     <?php endif; ?>
                                     <small class="help-block"><?php echo $mod['description']; ?></small>
@@ -144,7 +144,7 @@
                                             <span class="fa fa-refresh text-success"></span>
                                         </a>
                                         <?php if ($mod['active']): ?>
-                                            <?php if ($mod['dirname']!='system'): ?>
+                                            <?php if ('system' != $mod['dirname']): ?>
                                                 <a href="#" class="btn btn-default disable_button" title="<?php _e('Disable', 'rmcommon'); ?>">
                                                     <span class="fa fa-lock text-warning"></span>
                                                 </a>
@@ -159,7 +159,7 @@
                                                 <span class="fa fa-unlock text-info"></span>
                                             </a>
                                         <?php endif; ?>
-                                        <?php if ($mod['dirname']!='system'): ?>
+                                        <?php if ('system' != $mod['dirname']): ?>
                                             <a href="#" class="btn btn-default uninstall_button" title="<?php _e('Uninstall', 'rmcommon'); ?>" data-dir="<?php echo $mod['dirname']; ?>">
                                                 <span class="fa fa-minus-circle text-danger"></span>
                                             </a>
@@ -200,15 +200,15 @@
                         </tfoot>
                         <tbody>
                         <?php foreach ($available_mods as $mod): ?>
-                            <tr class="<?php echo tpl_cycle("even,odd"); ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
+                            <tr class="<?php echo tpl_cycle('even,odd'); ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
                                 <td class="logo">
-                                    <img src="<?php echo $mod['image']; ?>" alt="<?php echo $mod['name']; ?>" />
+                                    <img src="<?php echo $mod['image']; ?>" alt="<?php echo $mod['name']; ?>">
                                 </td>
                                 <td class="name" align="left">
                                     <span class="the_name">
                                         <?php echo $mod['name']; ?>
                                     </span>
-                                    <?php if ($mod['help'] != ''): ?>
+                                    <?php if ('' != $mod['help']): ?>
                                         <a href="<?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?>" class="help cu-help-button text-success" title="<?php echo sprintf(__('%s Help', 'rmcommon'), $mod['name']); ?>"><span class="fa fa-question-circle"></span> <?php _e('Help', 'rmcommon'); ?></a>
                                     <?php endif; ?>
                                     <small class="help-block"><?php echo $mod['description']; ?></small>
@@ -287,7 +287,7 @@
             <div class="modal-body info-container">
                 <div class="row header">
                     <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
-                        <img src="#" alt="#" class="img-responsive" />
+                        <img src="#" alt="#" class="img-responsive">
                     </div>
                     <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 text-right">
                         <h3></h3>

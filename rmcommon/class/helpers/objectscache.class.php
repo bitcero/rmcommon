@@ -8,12 +8,11 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 class ObjectsCache
 {
     use RMSingleton;
 
-    private $cache = array();
+    private $cache = [];
 
     /**
      * Set new key in cache
@@ -39,7 +38,7 @@ class ObjectsCache
             return false;
         }
 
-        if ($return == 'value') {
+        if ('value' == $return) {
             return $this->cache[ $module ][ $key ];
         }
 

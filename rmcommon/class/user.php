@@ -10,12 +10,12 @@
 
 class RMUser extends RMObject
 {
-    private $groups = array();
+    private $groups = [];
 
-    public function __construct($id='', $use_email = false, $pass = null)
+    public function __construct($id = '', $use_email = false, $pass = null)
     {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("users");
+        $this->_dbtable = $this->db->prefix('users');
         $this->setNew();
         $this->initVarsFromTable();
 
@@ -30,7 +30,7 @@ class RMUser extends RMObject
             $this->primary = 'email';
             $loaded = $this->loadValues($id);
             $this->primary = 'uid';
-        } elseif ($id != '' && is_numeric($id)) {
+        } elseif ('' != $id && is_numeric($id)) {
             $loaded = $this->loadValues((int)$id);
         } elseif ('' != $id) {
             $this->primary = 'uname';
@@ -38,8 +38,9 @@ class RMUser extends RMObject
             $this->primary = 'uid';
         }
 
-        if ($loaded && null == $pass) {
+        if ($loaded && null === $pass) {
             $this->unsetNew();
+
             return;
         }
 
@@ -50,9 +51,9 @@ class RMUser extends RMObject
 
     public function setGroups($groupsArr)
     {
-        $this->groups = array();
+        $this->groups = [];
         if (is_array($groupsArr)) {
-            $this->groups =& $groupsArr;
+            $this->groups = &$groupsArr;
         }
     }
 
@@ -62,32 +63,32 @@ class RMUser extends RMObject
             return $this->groups;
         }
 
-        $sql = 'SELECT groupid FROM '.$this->db->prefix('groups_users_link').' WHERE uid=' . (int)$this->getVar('uid');
+        $sql = 'SELECT groupid FROM ' . $this->db->prefix('groups_users_link') . ' WHERE uid=' . (int)$this->getVar('uid');
         $result = $this->db->query($sql);
 
         if (!$result) {
             return false;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $this->groups[] = $myrow['groupid'];
         }
 
         return $this->groups;
     }
 
-    public function groups($data=false, $fields='groupid')
+    public function groups($data = false, $fields = 'groupid')
     {
-        $groups =& $this->getGroups();
+        $groups = &$this->getGroups();
 
-        if (false == $data || $fields=='') {
+        if (false === $data || '' == $fields) {
             return $groups;
         }
 
         // Gets all groups based in their id
-        $sql = "SELECT ".($fields!='' ? "$fields" : '')." FROM ".$this->db->prefix("groups")." WHERE groupid IN(".implode(',', $groups).")";
+        $sql = 'SELECT ' . ('' != $fields ? "$fields" : '') . ' FROM ' . $this->db->prefix('groups') . ' WHERE groupid IN(' . implode(',', $groups) . ')';
         $result = $this->db->query($sql);
-        $groups = array();
-        while ($row = $this->db->fetchArray($result)) {
+        $groups = [];
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $groups[] = $row;
         }
 
@@ -96,14 +97,14 @@ class RMUser extends RMObject
 
     public function isAdmin($module_id = null)
     {
-        if (is_null($module_id)) {
+        if (null === $module_id) {
             $module_id = isset($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('mid', 'n') : 1;
         } elseif ((int)$module_id < 1) {
             $module_id = 0;
         }
-        $moduleperm_handler = xoops_getHandler('groupperm');
+        $modulepermHandler = xoops_getHandler('groupperm');
 
-        return $moduleperm_handler->checkRight('module_admin', $module_id, $this->getGroups());
+        return $modulepermHandler->checkRight('module_admin', $module_id, $this->getGroups());
     }
 
     public function save()
@@ -111,35 +112,35 @@ class RMUser extends RMObject
         $ret = true;
         $status = $this->isNew();
         /**
-        * Guardmaos los datos del usuarios
-        */
+         * Guardmaos los datos del usuarios
+         */
         if ($this->isNew()) {
             $ret = $this->saveToTable();
         } else {
             $ret = $this->updateTable();
         }
         /**
-        * Si ocurrió un error al guardar los datos
-        * entonces salimos del método. No se pueden
-        * guardar los grupos hasta que esto se haya realizado
-        */
+         * Si ocurrió un error al guardar los datos
+         * entonces salimos del método. No se pueden
+         * guardar los grupos hasta que esto se haya realizado
+         */
         if (!$ret) {
             return $ret;
         }
         /**
-        * Asignamos los grupos
-        */
+         * Asignamos los grupos
+         */
         if (!empty($this->groups)) {
             if (!$this->isNew()) {
-                $this->db->queryF("DELETE FROM ".$this->db->prefix("groups_users_link")." WHERE uid='".$this->getVar('uid')."'");
+                $this->db->queryF('DELETE FROM ' . $this->db->prefix('groups_users_link') . " WHERE uid='" . $this->getVar('uid') . "'");
             }
 
-            $sql = "INSERT INTO ".$this->db->prefix("groups_users_link")." (`groupid`,`uid`) VALUES ";
+            $sql = 'INSERT INTO ' . $this->db->prefix('groups_users_link') . ' (`groupid`,`uid`) VALUES ';
             foreach ($this->groups as $k) {
-                $sql .= "('$k','".$this->getVar('uid')."'),";
+                $sql .= "('$k','" . $this->getVar('uid') . "'),";
             }
 
-            $sql = substr($sql, 0, strlen($sql) - 1);
+            $sql = mb_substr($sql, 0, mb_strlen($sql) - 1);
 
             $this->db->queryF($sql);
         }

@@ -15,7 +15,6 @@
  */
 trait RMModuleAjax
 {
-
     /**
      * Prepares the system for an AJAX response.
      * This function deactivate the XoopsLogger rendering
@@ -49,7 +48,7 @@ trait RMModuleAjax
      * @param int $token <p>If this parameter is set to 1, then a security token will be sent to client.</p>
      * @param array $data <p>Array with data to send. Each array index must correspond to a parameter to send to client.</p>
      */
-    public function response($message, $level = 0, $token = 1, $data = array())
+    public function response($message, $level = 0, $token = 1, $data = [])
     {
         global $xoopsSecurity;
 
@@ -75,11 +74,11 @@ trait RMModuleAjax
 
     public function notifyError($message, $token = 1)
     {
-        $this->response($message, 1, $token == 1 ? 1 : 0, [
+        $this->response($message, 1, 1 == $token ? 1 : 0, [
             'notify' => [
                 'type' => 'alert-danger',
-                'icon' => 'svg-rmcommon-error'
-            ]
+                'icon' => 'svg-rmcommon-error',
+            ],
         ]);
     }
 
@@ -100,7 +99,7 @@ trait RMModuleAjax
      * @param array $data
      * @deprecated
      */
-    public function ajax_response($message, $level = 0, $token = 1, $data = array())
+    public function ajax_response($message, $level = 0, $token = 1, $data = [])
     {
         $this->response($message, $level, $token, $data);
     }

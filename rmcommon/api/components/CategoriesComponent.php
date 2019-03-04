@@ -41,6 +41,7 @@ class CategoriesComponent
      *
      * @param string $owner
      * @param string $key
+     * @param mixed $id
      */
     public function __construct($owner, $key, $id = 0)
     {
@@ -68,6 +69,7 @@ class CategoriesComponent
     public function renderForm()
     {
         $form = $this->template()->path('api/rmc-categories-form.php', 'module', 'rmcommon');
+
         return $form;
     }
 }

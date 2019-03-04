@@ -25,6 +25,7 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
+ * @param mixed $output
  */
 
 /**
@@ -43,15 +44,15 @@ function cu_render_output($output)
      * Temporal solution to ModuleAdmin __constructor method
      * @todo Delete
      */
-    if (false == $common->isAjax) {
-        $pos = strpos($output, '<!DOCTYPE');
+    if (false === $common->isAjax) {
+        $pos = mb_strpos($output, '<!DOCTYPE');
         if ($pos > 0) {
-            $toMove = substr($output, 0, $pos);
-            $output = substr($output, $pos);
+            $toMove = mb_substr($output, 0, $pos);
+            $output = mb_substr($output, $pos);
 
             if (!$xoopsModule || !$xoopsModule->getInfo('rmnative')) {
-                $pos = strpos($output, '</head>', 0);
-                $output = substr($output, 0, $pos) . $toMove . "\n" . substr($output, $pos);
+                $pos = mb_strpos($output, '</head>', 0);
+                $output = mb_substr($output, 0, $pos) . $toMove . "\n" . mb_substr($output, $pos);
                 unset($pos, $toMove);
             }
 
@@ -70,7 +71,7 @@ function cu_render_output($output)
         }
     }
 
-    include_once RMTemplate::get()->path('rmc-header.php', 'module', 'rmcommon');
+    require_once RMTemplate::get()->path('rmc-header.php', 'module', 'rmcommon');
     /*$rtn = $htmlStyles;
     $rtn .= $htmlScripts['header'];
     $rtn .= $htmlScripts['inlineHeader'];*/
@@ -82,10 +83,10 @@ function cu_render_output($output)
         $str = "<meta\s+name=['\"]??" . $name . "['\"]??\s+content=['\"]??(.+)['\"]??\s*\/?>";
         if (preg_match($str, $page)) {
             $find[] = $str;
-            $str = "meta name=\"$name\" content=\"$content\" />\n";
+            $str = "meta name=\"$name\" content=\"$content\">\n";
             $repl[] = $str;
         } else {
-            $rtn .= "\n<meta name=\"$name\" content=\"$content\" />";
+            $rtn .= "\n<meta name=\"$name\" content=\"$content\">";
         }
     }
 
@@ -96,14 +97,14 @@ function cu_render_output($output)
     $headerRendered = false;
     $footerRendered = false;
 
-    if (false !== $pos = strpos($page, '<!-- RMTemplateHeader -->')) {
+    if (false !== $pos = mb_strpos($page, '<!-- RMTemplateHeader -->')) {
         // Replace RMTemplateHeader with scripts and styles
         $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
         $page = str_replace('<!-- RMTemplateHeader -->', $ssContent, $page);
         $headerRendered = true;
     }
 
-    if (false !== $pos = strpos($page, '<!-- RMTemplateFooter -->')) {
+    if (false !== $pos = mb_strpos($page, '<!-- RMTemplateFooter -->')) {
         // Replace RMTemplateHeader with scripts and styles
         $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
         $page = str_replace('<!-- RMTemplateFooter -->', $ssContent, $page);
@@ -112,21 +113,21 @@ function cu_render_output($output)
 
     // Inject code if this is a standard theme
     // Natives themes must to include appropiate code
-    if (false == $common->nativeTheme) {
-        $pos = strpos($page, "</head>");
-        if ($pos !== false && false == $headerRendered) {
+    if (false === $common->nativeTheme) {
+        $pos = mb_strpos($page, '</head>');
+        if (false !== $pos && false === $headerRendered) {
             $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
-            $ret = substr($page, 0, $pos) . "\n";
+            $ret = mb_substr($page, 0, $pos) . "\n";
             $ret .= $ssContent;
-            $page = $ret . substr($page, $pos);
+            $page = $ret . mb_substr($page, $pos);
         }
 
-        $pos = strpos($page, "</body>");
-        if ($pos !== false && false == $footerRendered) {
+        $pos = mb_strpos($page, '</body>');
+        if (false !== $pos && false === $footerRendered) {
             $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
-            $ret = substr($page, 0, $pos) . "\n";
+            $ret = mb_substr($page, 0, $pos) . "\n";
             $ret .= $ssContent;
-            $page = $ret . substr($page, $pos);
+            $page = $ret . mb_substr($page, $pos);
         }
     }
 

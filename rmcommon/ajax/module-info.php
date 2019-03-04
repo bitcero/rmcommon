@@ -8,14 +8,13 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $ajax = new Rmcommon_Ajax();
 $ajax->prepare_ajax_response();
 
 $dirname = RMHttpRequest::get('module', 'string', '');
-if ($dirname == '') {
+if ('' == $dirname) {
     $ajax->ajax_response(
         __('Please specify a valid module dirname!', 'rmcommon'),
         1,
@@ -32,8 +31,8 @@ if (!$module) {
     );
 }
 
-$url =& $module->getInfo('updateurl');
-$url .= false === strpos($url, '?') ? '?' : '&';
+$url = &$module->getInfo('updateurl');
+$url .= false === mb_strpos($url, '?') ? '?' : '&';
 $url .= 'action=data&id=' . $module->dirname();
 
 echo file_get_contents($url);

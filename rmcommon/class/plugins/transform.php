@@ -29,17 +29,18 @@
  */
 class phMagick_transform
 {
-    public function rotate(phmagick $p, $degrees=45)
+    public function rotate(phmagick $p, $degrees = 45)
     {
-        $cmd   = $p->getBinary('convert');
-        $cmd .= ' -background "transparent" -rotate ' . $degrees ;
-        $cmd .= '  "' . $p->getSource().'"' ;
-        $cmd .= ' "' . $p->getDestination().'"' ;
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' -background "transparent" -rotate ' . $degrees;
+        $cmd .= '  "' . $p->getSource() . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
@@ -48,15 +49,16 @@ class phMagick_transform
      */
     public function flipVertical(phmagick $p)
     {
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' -flip ' ;
-        $cmd .= ' "' . $p->getSource() .'"';
-        $cmd .= ' "' . $p->getDestination() .'"';
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' -flip ';
+        $cmd .= ' "' . $p->getSource() . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
@@ -65,21 +67,24 @@ class phMagick_transform
      */
     public function flipHorizontal(phmagick $p)
     {
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' -flop ' ;
-        $cmd .= ' "' . $p->getSource() .'"';
-        $cmd .= ' "' . $p->getDestination().'"' ;
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' -flop ';
+        $cmd .= ' "' . $p->getSource() . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
-         * Flips the image horizonaly and verticaly
-         * @return unknown_type
-         */
+     * Flips the image horizonaly and verticaly
+     * @param mixed $size
+     * @param mixed $transparency
+     * @return unknown_type
+     */
     public function reflection(phmagick $p, $size = 60, $transparency = 50)
     {
         $p->requirePlugin('info');
@@ -91,47 +96,48 @@ class phMagick_transform
 
         //crop it to $size%
         list($w, $h) = $p->getInfo($p->getDestination());
-        $p->crop($w, $h * ($size/100), 0, 0, phMagickGravity::None);
+        $p->crop($w, $h * ($size / 100), 0, 0, phMagickGravity::None);
 
         //make a image fade to transparent
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' "' . $p->getSource() .'"';
-        $cmd .= ' ( -size ' . $w.'x'. ($h * ($size/100)) .' gradient: ) ';
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' "' . $p->getSource() . '"';
+        $cmd .= ' ( -size ' . $w . 'x' . ($h * ($size / 100)) . ' gradient: ) ';
         $cmd .= ' +matte -compose copy_opacity -composite ';
-        $cmd .= ' "' . $p->getDestination().'"' ;
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
 
         //apply desired transparency, by creating a transparent image and merge the mirros image on to it with the desired transparency
-        $file = dirname($p->getDestination()) . '/'. uniqid() . '.png';
+        $file = dirname($p->getDestination()) . '/' . uniqid() . '.png';
 
-        $cmd  = $p->getBinary('convert');
-        $cmd .= '  -size ' . $w.'x'. ($h * ($size/100)) .' xc:none  ';
-        $cmd .= ' "' . $file .'"' ;
+        $cmd = $p->getBinary('convert');
+        $cmd .= '  -size ' . $w . 'x' . ($h * ($size / 100)) . ' xc:none  ';
+        $cmd .= ' "' . $file . '"';
 
         $p->execute($cmd);
 
-        $cmd   = $p->getBinary('composite');
-        $cmd .= ' -dissolve ' . $transparency ;
-        $cmd .= ' "' . $p->getDestination() .'"' ;
-        $cmd .= ' ' . $file ;
-        $cmd .= ' "' . $p->getDestination() .'"' ;
+        $cmd = $p->getBinary('composite');
+        $cmd .= ' -dissolve ' . $transparency;
+        $cmd .= ' "' . $p->getDestination() . '"';
+        $cmd .= ' ' . $file;
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
 
         unlink($file);
 
         //append the source and the relfex
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' "' . $source .'"' ;
-        $cmd .= ' "' . $p->getDestination().'"' ;
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' "' . $source . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
         $cmd .= ' -append ';
-        $cmd .= ' "' . $p->getDestination().'"' ;
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
 
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 }

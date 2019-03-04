@@ -16,12 +16,13 @@ class RMFormButton extends RMFormElement
 {
     private $_type = 'submit';
     private $_value = '';
+
     /**
      * @param string $caption Nombre del elemento de formulario
      * @param string $value Texto del Bot?n (Ej. Enviar, Cancelar)
      * @param string $type Tipo de bot?n (Ej. submit, button). Por defecto el valor es 'submit'
      */
-    public function __construct($caption, $value='', $type = 'submit')
+    public function __construct($caption, $value = '', $type = 'submit')
     {
         if (is_array($caption)) {
             parent::__construct($caption);
@@ -37,6 +38,7 @@ class RMFormButton extends RMFormElement
 
         $this->suppressList[] = 'caption';
     }
+
     /**
      * Establece o modifica el tipo del bot?n
      * @param string $type Submit o Button
@@ -45,14 +47,17 @@ class RMFormButton extends RMFormElement
     {
         $this->_type = $type;
     }
+
     /**
      * Recupera el tipo de bot?n
+     * @param mixed $type
      * @return string
      */
     public function getType($type)
     {
         return $this->_type;
     }
+
     /**
      * Establece o modifica el texto del bot?n
      * @param string $value Texto del bot?n
@@ -61,6 +66,7 @@ class RMFormButton extends RMFormElement
     {
         $this->_value = $value;
     }
+
     /**
      * Recupera el texto del bot?n
      * @return string
@@ -69,6 +75,7 @@ class RMFormButton extends RMFormElement
     {
         return $this->_value;
     }
+
     /**
      * Genera el c?digo HTML para mostrar el bot?n
      * @return string C?digo HTML del Bot?n
@@ -77,6 +84,7 @@ class RMFormButton extends RMFormElement
     {
         $attributes = $this->renderAttributeString();
         $ret = "<button $attributes>" . $this->get('caption') . '</button>';
+
         return $ret;
     }
 }
@@ -88,14 +96,14 @@ class RMFormButton extends RMFormElement
 class RMFormButtonGroup extends RMFormElement
 {
     private $sep = '';
-    private $buttons = array();
+    private $buttons = [];
     private $ok = '';
-    
+
     /**
      * @param string $caption Texto de la celda
      * @param string $separator Separador de botones. Puede ser cualquier car?cter (HTML)
      */
-    public function __construct($caption='&nbsp;', $separator=' ')
+    public function __construct($caption = '&nbsp;', $separator = ' ')
     {
         $this->setCaption($caption);
         $this->sep = $separator;
@@ -111,10 +119,11 @@ class RMFormButtonGroup extends RMFormElement
      * @param bool $ok
      * @return bool
      */
-    public function addButton($name, $value = '', $type = 'button', $extra='', $ok=false)
+    public function addButton($name, $value = '', $type = 'button', $extra = '', $ok = false)
     {
         if (is_a($name, 'RMFormButton')) {
             $this->buttons[] = $name;
+
             return true;
         }
 
@@ -122,9 +131,9 @@ class RMFormButtonGroup extends RMFormElement
         $this->buttons[$index] = new RMFormButton([
             'id' => $name,
             'caption' => $value,
-            'type' => $type
+            'type' => $type,
         ]);
-        if (trim($extra)!='') {
+        if ('' != trim($extra)) {
             $this->buttons[$index]->setExtra($extra);
         }
         /**
@@ -135,6 +144,7 @@ class RMFormButtonGroup extends RMFormElement
             $this->ok = $name;
         }
     }
+
     /**
      * Obtiene el array con los botones del grupo
      * @return arrar Array de elementos EXMButton
@@ -153,15 +163,15 @@ class RMFormButtonGroup extends RMFormElement
     public function render()
     {
         $ret = '';
-        
+
         foreach ($this->buttons as $k => $button) {
-            if ($ret=='') {
+            if ('' == $ret) {
                 $ret = $button->render();
             } else {
                 $ret .= $this->sep . $button->render();
             }
         }
-        
+
         return $ret;
     }
 }

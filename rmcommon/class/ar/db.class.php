@@ -14,23 +14,23 @@
  */
 class RMDb
 {
-    private $_properties = array(
+    private $_properties = [
         // XOOPS database object
-        'database'      => '',
+        'database' => '',
         // Main table to use
-        'table'         => '',
+        'table' => '',
         // Table columns
-        'columns'       => array(),
+        'columns' => [],
         // Primary key
-        'primary_key'   => '',
+        'primary_key' => '',
         // Relations to other tables
-        'relations'     => array(),
+        'relations' => [],
         // Inner Joins sentences
-        'inner_joins'   => array(),
+        'inner_joins' => [],
         // Group by instruction
-        'groupby'       => '',
-        'filters'       => array(),
-    );
+        'groupby' => '',
+        'filters' => [],
+    ];
 
     public function __construct()
     {
@@ -43,8 +43,8 @@ class RMDb
      * Returns a property value, or execute a method based on its name.
      *
      * @param string $name the property name or method name
-     * @return mixed the property value or method return
      * @throws RMException if the property or event is not defined
+     * @return mixed the property value or method return
      * @see __set
      */
     public function __get($name)
@@ -65,8 +65,8 @@ class RMDb
      *
      * @param string $name the property name or the method
      * @param mixed $value the property value
-     * @return mixed
      * @throws RMException if the property/method is not defined or the property is read only.
+     * @return mixed
      * @see __get
      */
     public function __set($name, $value)
@@ -79,11 +79,10 @@ class RMDb
             return $this->_properties[$name] = $value;
         }
 
-        if (method_exists($this, 'get'.$name)) {
+        if (method_exists($this, 'get' . $name)) {
             throw new RMException(sprintf(__('Property "%s::%s" is read only.', 'rmcommon'), get_class($this), $name));
-        } else {
-            throw new RMException(sprintf(__('Property "%s::%s" is not defined.', 'rmcommon'), get_class($this), $name));
         }
+        throw new RMException(sprintf(__('Property "%s::%s" is not defined.', 'rmcommon'), get_class($this), $name));
     }
 
     /**
@@ -104,7 +103,7 @@ class RMDb
      */
     public function setTable($name)
     {
-        if ($name == '') {
+        if ('' == $name) {
             throw new RMException(__('Table name could not be empty.', 'rmcommon'));
         }
 
@@ -127,22 +126,22 @@ class RMDb
         }
 
         // Get columns
-        $columns_result = $this->database->queryF("SHOW COLUMNS IN ".$this->table);
+        $columns_result = $this->database->queryF('SHOW COLUMNS IN ' . $this->table);
 
-        while ($column = $this->database->fetchArray($columns_result)) {
-            $this->_properties['columns'][$column['Field']] = array(
-                'primary'   => $column['Key']=='PRI' ? true : false,
-                'type'      => preg_replace("/\([0-9]+\)/", '', $column['Type']),
-                'len'       => preg_replace("/[^0-9]/", '', $column['Type']),
-                'null'      => $column['Null']=='NO' ? false : true,
-                'default'   => $column['Default'],
-                'extra'     => $column['Extra'],
-                'unique'    => 0,
-                'index'     => false,
-                'title'     => $column['Field'],
-            );
+        while (false !== ($column = $this->database->fetchArray($columns_result))) {
+            $this->_properties['columns'][$column['Field']] = [
+                'primary' => 'PRI' == $column['Key'] ? true : false,
+                'type' => preg_replace("/\([0-9]+\)/", '', $column['Type']),
+                'len' => preg_replace('/[^0-9]/', '', $column['Type']),
+                'null' => 'NO' == $column['Null'] ? false : true,
+                'default' => $column['Default'],
+                'extra' => $column['Extra'],
+                'unique' => 0,
+                'index' => false,
+                'title' => $column['Field'],
+            ];
 
-            if ($column['Key'] == 'PRI') {
+            if ('PRI' == $column['Key']) {
                 $this->primary_key = $column['Field'];
             }
         }
@@ -150,9 +149,9 @@ class RMDb
         unset($columns_result);
 
         // Get indexes
-        $indexes = $this->database->queryF("SHOW INDEXES IN ".$this->table);
-        while ($row = $this->database->fetchArray($indexes)) {
-            $this->_properties['columns'][$row['Column_name']]['unique'] = $row['Non_unique']==0 ? 1 : 0;
+        $indexes = $this->database->queryF('SHOW INDEXES IN ' . $this->table);
+        while (false !== ($row = $this->database->fetchArray($indexes))) {
+            $this->_properties['columns'][$row['Column_name']]['unique'] = 0 == $row['Non_unique'] ? 1 : 0;
             $this->_properties['columns'][$row['Column_name']]['index'] = true;
         }
 
@@ -169,7 +168,7 @@ class RMDb
      */
     public function innerJoin($table, $on_field)
     {
-        if (empty($table) || $on_field == '') {
+        if (empty($table) || '' == $on_field) {
             throw new RMException(__('No INNER JOIN parameters has been provided.', 'rmcommon'));
         }
 
@@ -208,37 +207,37 @@ class RMDb
             $this->_properties['select'] = '*';
         }
 
-        $this->_properties['select'] = implode(", ", $fields);
+        $this->_properties['select'] = implode(', ', $fields);
     }
 
     public function getSelect()
     {
-        $select = "SELECT ".$this->_properties['select']." FROM ";
+        $select = 'SELECT ' . $this->_properties['select'] . ' FROM ';
 
         if (!empty($this->_properties['inner_joins'])) {
-            $select .= '(' . implode(", ", $this->from);
-            $select .= implode(" ", $this->inner_joins) . ')';
+            $select .= '(' . implode(', ', $this->from);
+            $select .= implode(' ', $this->inner_joins) . ')';
         } else {
-            $select .= implode(", ", $this->from);
+            $select .= implode(', ', $this->from);
         }
 
         $filters = $this->filters;
 
         if (!empty($filters)) {
-            $conditions = array();
+            $conditions = [];
 
             foreach ($filters as $field => $filter) {
                 $condition = '';
-                $condition .= isset($filter['table']) ? '`'.$this->prefix($filter['table']).'`.' : '';
-                $condition .= '`'.$field.'`' . $filter['operator'] . $this->escape($filter['value']);
+                $condition .= isset($filter['table']) ? '`' . $this->prefix($filter['table']) . '`.' : '';
+                $condition .= '`' . $field . '`' . $filter['operator'] . $this->escape($filter['value']);
                 $conditions[] = $condition;
             }
 
-            $select .= " WHERE " . implode(" ", $conditions);
+            $select .= ' WHERE ' . implode(' ', $conditions);
         }
 
-        if ($this->groupby != '') {
-            $select .= " GROUP BY " . $this->groupby;
+        if ('' != $this->groupby) {
+            $select .= ' GROUP BY ' . $this->groupby;
         }
 
         return $select;
@@ -250,14 +249,14 @@ class RMDb
             return null;
         }
 
-        $fields = array();
-        $values = array();
+        $fields = [];
+        $values = [];
         foreach ($data as $field => $value) {
             $fields[] = $field;
             $values[] = $value;
         }
 
-        $insert = "INSERT INTO " . $this->table . ' (`' . implode("`,`", $fields) . "`) VALUES ('" . implode("','", $values) . "');";
+        $insert = 'INSERT INTO ' . $this->table . ' (`' . implode('`,`', $fields) . "`) VALUES ('" . implode("','", $values) . "');";
 
         return $insert;
     }
@@ -265,6 +264,7 @@ class RMDb
     /**
      * Escape a string for secure use
      * @param string String to escape
+     * @param mixed $string
      * @return string Escaped string
      */
     public function escape($string)
@@ -272,7 +272,8 @@ class RMDb
         if (method_exists($this->database, 'escape')) {
             return $this->database->escape($string);
         }
-        return mysql_real_escape_string($string);
+
+        return $GLOBALS['xoopsDB']->escape($string);
     }
 
     /**

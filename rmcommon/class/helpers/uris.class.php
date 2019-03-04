@@ -32,7 +32,6 @@
  */
 class RMUris
 {
-
     /**
      * Encode array keys to make a valid url string
      *
@@ -53,26 +52,26 @@ class RMUris
     public static function current_url()
     {
         $pageURL = 'http';
-        if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {
-            $pageURL .= "s";
+        if (isset($_SERVER['HTTPS']) && 'on' == mb_strtolower($_SERVER['HTTPS'])) {
+            $pageURL .= 's';
         }
-        $pageURL .= "://";
-        $pageURL .= $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+        $pageURL .= '://';
+        $pageURL .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
         return $pageURL;
     }
 
-
-    public static function anchor($module, $controller = '', $action = '', $parameters = array())
+    public static function anchor($module, $controller = '', $action = '', $parameters = [])
     {
         global $cuSettings;
 
-        if ($module == '') {
+        if ('' == $module) {
             return null;
         }
 
         $url = XOOPS_URL;
 
-        $paths = isset($cuSettings->modules_path) ? $cuSettings->modules_path : array();
+        $paths = isset($cuSettings->modules_path) ? $cuSettings->modules_path : [];
         $path = isset($paths[$module]) ? $paths[$module] : '/' . $module;
 
         if (defined('XOOPS_CPFUNC_LOADED')) {
@@ -86,12 +85,12 @@ class RMUris
             $url .= $cuSettings->permalinks ? $path : '/modules/' . $module;
         }
 
-        if ($controller == '') {
+        if ('' == $controller) {
             return $url;
         }
 
         $url .= $cuSettings->permalinks ? '/' . $controller . '/' : '/' . $controller . '/';
-        $url .= $action != '' ? $action . '/' : '';
+        $url .= '' != $action ? $action . '/' : '';
         $query = '';
 
         foreach ($parameters as $name => $value) {
@@ -101,7 +100,7 @@ class RMUris
         return $url . $query;
     }
 
-    public static function relative_anchor($module, $controller, $action = '', $parameters = array())
+    public static function relative_anchor($module, $controller, $action = '', $parameters = [])
     {
         $url = self::anchor($module, $controller, $action, $parameters);
 
@@ -118,14 +117,14 @@ class RMUris
     public static function relative_url($path = '')
     {
         $url = 'http';
-        if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") {
-            $url .= "s";
+        if (isset($_SERVER['HTTPS']) && 'on' == mb_strtolower($_SERVER['HTTPS'])) {
+            $url .= 's';
         }
-        $url .= "://";
-        $url .= $_SERVER["HTTP_HOST"];
+        $url .= '://';
+        $url .= $_SERVER['HTTP_HOST'];
 
-        if (false === strpos($path, XOOPS_URL)) {
-            $path = XOOPS_URL . '/' . ltrim($path, "/");
+        if (false === mb_strpos($path, XOOPS_URL)) {
+            $path = XOOPS_URL . '/' . ltrim($path, '/');
         }
 
         $url = str_replace($url, '', $path);
@@ -158,7 +157,7 @@ class RMUris
         }
 
         if (!headers_sent()) {
-            header('location: ' . preg_replace("/[&]amp;/i", '&', $url));
+            header('location: ' . preg_replace('/[&]amp;/i', '&', $url));
             die();
         }
 
@@ -175,11 +174,12 @@ class RMUris
      */
     public static function image($module, $image)
     {
-        if ($module == '') {
+        if ('' == $module) {
             return false;
         }
 
         $url = XOOPS_URL . '/modules/' . $module . '/images/' . $image;
+
         return $url;
     }
 
@@ -192,14 +192,14 @@ class RMUris
      */
     public static function file($module, $file, $directory = '')
     {
-        if ($module == '' || $file == '') {
+        if ('' == $module || '' == $file) {
             return '';
         }
 
         $partial = trim($module, '/');
         $partial = trim($partial, '\\');
 
-        if ($directory != '') {
+        if ('' != $directory) {
             $partial .= trim($directory, '/');
         }
 
@@ -224,15 +224,12 @@ class RMUris
         $url = XOOPS_URL;
 
         switch ($page) {
-
             case 'rss':
                 $url .= $cuSettings->permalinks ? '/rss/' : '/backend.php';
                 break;
-
             default:
                 $url .= '/' . $page;
                 break;
-
         }
 
         return $url;

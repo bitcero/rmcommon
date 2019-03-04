@@ -30,45 +30,46 @@
 class phMagick_text
 {
     /**
-         * Draws an image with the submited string, usefull for water marks
-         *
-         * @param $text String - the text to draw an image from
-         * @param $format phMagickTextObject - the text configuration
-         */
+     * Draws an image with the submited string, usefull for water marks
+     *
+     * @param $text String - the text to draw an image from
+     * @param $format phMagickTextObject - the text configuration
+     */
     public function fromString(phmagick $p, $text = '', phMagickTextObject $format = null)
     {
-        if (is_null($format)) {
+        if (null === $format) {
             $format = new phMagickTextObject();
         }
 
-        $cmd  = $p->getBinary('convert');
+        $cmd = $p->getBinary('convert');
 
-        if ($format->background !== false) {
+        if (false !== $format->background) {
             $cmd .= ' -background "' . $format->background . '"';
         }
 
-        if ($format->color !== false) {
-            $cmd .= ' -fill "' . $format->color . '"' ;
+        if (false !== $format->color) {
+            $cmd .= ' -fill "' . $format->color . '"';
         }
 
-        if ($format->font !== false) {
-            $cmd .= ' -font ' . $format->font ;
+        if (false !== $format->font) {
+            $cmd .= ' -font ' . $format->font;
         }
 
-        if ($format->fontSize !== false) {
-            $cmd .= ' -pointsize ' . $format->fontSize ;
+        if (false !== $format->fontSize) {
+            $cmd .= ' -pointsize ' . $format->fontSize;
         }
 
-        if (($format->pText != '') && ($text = '')) {
-            $text = $format->pText ;
+        if (('' != $format->pText) && ($text = '')) {
+            $text = $format->pText;
         }
 
-        $cmd .= ' label:"'. $text .'"';
-        $cmd .= ' "' . $p->getDestination().'"' ;
+        $cmd .= ' label:"' . $text . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 }

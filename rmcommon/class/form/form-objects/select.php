@@ -43,14 +43,14 @@ class ActiveSelect
         $input = '<select name="' . $this->name . '" id="' . $this->id . '"';
         $class = $this->required ? 'required' : '';
         $selected = '';
-        $options = array();
+        $options = [];
         $default_option = '';
 
         $parameters = $this->parameters;
 
         foreach ($parameters as $attr => $value) {
             if ('class' == $attr) {
-                $class .= $class != '' ? ' '.$value : $value;
+                $class .= '' != $class ? ' ' . $value : $value;
             } elseif ('value' == $attr) {
                 $selected = $value;
             } elseif ('options' == $attr) {
@@ -66,12 +66,12 @@ class ActiveSelect
         $input .= $this->required ? ' required' : '';
         $input .= '>';
 
-        if ($default_option != '') {
-            $input .= '<option value=""' . ($selected == '' ? ' selected' : '').'>' . $default_option . '</option>';
+        if ('' != $default_option) {
+            $input .= '<option value=""' . ('' == $selected ? ' selected' : '') . '>' . $default_option . '</option>';
         }
 
         foreach ($options as $value => $text) {
-            $input .= '<option value="' . $value . '"' . ($selected == $value ? ' selected' : '').'>' . $text . '</option>';
+            $input .= '<option value="' . $value . '"' . ($selected == $value ? ' selected' : '') . '>' . $text . '</option>';
         }
 
         $input .= '</select>';

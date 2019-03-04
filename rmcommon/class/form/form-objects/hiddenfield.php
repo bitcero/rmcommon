@@ -8,7 +8,6 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 class ActiveHiddenField
 {
     use RMFormComponent;
@@ -21,7 +20,7 @@ class ActiveHiddenField
 
         foreach ($parameters as $attr => $value) {
             if ('class' == $attr) {
-                $class .= $class != '' ? ' '.$value : $value;
+                $class .= '' != $class ? ' ' . $value : $value;
             } else {
                 $input .= ' ' . $attr . '="' . $value . '"';
             }

@@ -48,7 +48,7 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
         $header = new Swift_Mime_Headers_OpenDKIMHeader('DKIM-Signature');
         $headerVal = $this->_dkimHandler->getSignatureHeader();
         if (!$headerVal) {
-            throw new Swift_SwiftException('OpenDKIM Error: '.$this->_dkimHandler->getError());
+            throw new Swift_SwiftException('OpenDKIM Error: ' . $this->_dkimHandler->getError());
         }
         $header->setValue($headerVal);
         $headers->set($header);
@@ -62,9 +62,9 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
         if (is_bool($bodyLen)) {
             $bodyLen = -1;
         }
-        $hash = $this->_hashAlgorithm == 'rsa-sha1' ? OpenDKIMSign::ALG_RSASHA1 : OpenDKIMSign::ALG_RSASHA256;
-        $bodyCanon = $this->_bodyCanon == 'simple' ? OpenDKIMSign::CANON_SIMPLE : OpenDKIMSign::CANON_RELAXED;
-        $headerCanon = $this->_headerCanon == 'simple' ? OpenDKIMSign::CANON_SIMPLE : OpenDKIMSign::CANON_RELAXED;
+        $hash = 'rsa-sha1' == $this->_hashAlgorithm ? OpenDKIMSign::ALG_RSASHA1 : OpenDKIMSign::ALG_RSASHA256;
+        $bodyCanon = 'simple' == $this->_bodyCanon ? OpenDKIMSign::CANON_SIMPLE : OpenDKIMSign::CANON_RELAXED;
+        $headerCanon = 'simple' == $this->_headerCanon ? OpenDKIMSign::CANON_SIMPLE : OpenDKIMSign::CANON_RELAXED;
         $this->_dkimHandler = new OpenDKIMSign($this->_privateKey, $this->_selector, $this->_domainName, $headerCanon, $bodyCanon, $hash, $bodyLen);
         // Hardcode signature Margin for now
         $this->_dkimHandler->setMargin(78);
@@ -73,7 +73,7 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
             OpenDKIM::setOption(OpenDKIM::OPTS_FIXEDTIME, time());
         } else {
             if (!OpenDKIM::setOption(OpenDKIM::OPTS_FIXEDTIME, $this->_signatureTimestamp)) {
-                throw new Swift_SwiftException('Unable to force signature timestamp ['.openssl_error_string().']');
+                throw new Swift_SwiftException('Unable to force signature timestamp [' . openssl_error_string() . ']');
             }
         }
         if (isset($this->_signerIdentity)) {
@@ -82,11 +82,11 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
         $listHeaders = $headers->listAll();
         foreach ($listHeaders as $hName) {
             // Check if we need to ignore Header
-            if (!isset($this->_ignoredHeaders[strtolower($hName)])) {
+            if (!isset($this->_ignoredHeaders[mb_strtolower($hName)])) {
                 $tmp = $headers->getAll($hName);
                 if ($headers->has($hName)) {
                     foreach ($tmp as $header) {
-                        if ($header->getFieldBody() != '') {
+                        if ('' != $header->getFieldBody()) {
                             $htosign = $header->toString();
                             $this->_dkimHandler->header($htosign);
                             $this->_signedHeaders[] = $header->getFieldName();
@@ -177,13 +177,13 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
         if (!$this->_peclLoaded) {
             return parent::_canonicalizeBody($string);
         }
-        if (false && $this->dropFirstLF === true) {
-            if ($string[0] == "\r" && $string[1] == "\n") {
-                $string = substr($string, 2);
+        if (false && true === $this->dropFirstLF) {
+            if ("\r" == $string[0] && "\n" == $string[1]) {
+                $string = mb_substr($string, 2);
             }
         }
         $this->dropFirstLF = false;
-        if (strlen($string)) {
+        if (mb_strlen($string)) {
             $this->_dkimHandler->body($string);
         }
     }

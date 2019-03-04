@@ -17,7 +17,7 @@
             </li>
 
             <!-- Common Utilities Menu -->
-            <li class="dropdown<?php if ($xoopsModule->dirname()=='rmcommon'): ?> active<?php endif; ?> rmcommon-menu">
+            <li class="dropdown<?php if ('rmcommon' == $xoopsModule->dirname()): ?> active<?php endif; ?> rmcommon-menu">
                 <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                     <?php echo $cuIcons->getIcon('svg-rmcommon-rmcommon'); ?>
                 </a>
@@ -123,7 +123,7 @@
                 </a>
             </li>
 
-            <li class="dropdown<?php if ($xoopsModule->dirname()=='system'): ?> active<?php endif; ?> system-menu">
+            <li class="dropdown<?php if ('system' == $xoopsModule->dirname()): ?> active<?php endif; ?> system-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                     <?php echo $cuIcons->getIcon('svg-rmcommon-gear'); ?>
                 </a>
@@ -172,7 +172,7 @@
                                     <li class="nav_item">
                                         <a href="<?php echo $net['url']; ?>" target="_blank">
                                             <?php if (isset($net['type'])): ?>
-                                                <?php echo $cuIcons->getIcon("fa fa-" . $net['type']); ?>
+                                                <?php echo $cuIcons->getIcon('fa fa-' . $net['type']); ?>
                                             <?php endif; ?>
                                             <?php echo $net['title']; ?>
                                         </a>
@@ -183,19 +183,19 @@
                     <?php endif; ?>
                     <li>
                         <a href="<?php echo RMCURL; ?>">
-                            <?php echo $cuIcons->getIcon("fa fa-dashboard"); ?>
+                            <?php echo $cuIcons->getIcon('fa fa-dashboard'); ?>
                             <?php _e('Control Panel', 'rmcommon'); ?>
                         </a>
                     </li>
                     <li>
                         <a href="<?php echo XOOPS_URL; ?>" target="_blank">
-                            <?php echo $cuIcons->getIcon("fa fa-home"); ?>
+                            <?php echo $cuIcons->getIcon('fa fa-home'); ?>
                             <?php _e('View Home Page', 'rmcommon'); ?>
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="http://www.xoops.org" target="_blank">
+                        <a href="https://www.xoops.org" target="_blank">
                             <?php echo $cuIcons->getIcon('svg-rmcommon-xoops'); ?>
                             XOOPS.org
                         </a>
@@ -208,7 +208,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="<?php echo RMUris::relative_url(XOOPS_URL .'/user.php?op=logout'); ?>">
+                        <a href="<?php echo RMUris::relative_url(XOOPS_URL . '/user.php?op=logout'); ?>">
                             <?php echo $cuIcons->getIcon('svg-rmcommon-power-off text-danger'); ?>
                             <?php _e('Close Session', 'helium'); ?>
                         </a>
@@ -217,8 +217,8 @@
             </li>
 
             <?php if (!empty($helpLinks)): ?>
-                <li class="help-menu<?php if (count($helpLinks) == 1): ?> dropdown<?php endif; ?>">
-                    <?php if (count($helpLinks) == 1): ?>
+                <li class="help-menu<?php if (1 == count($helpLinks)): ?> dropdown<?php endif; ?>">
+                    <?php if (1 == count($helpLinks)): ?>
                         <a href="<?php echo $helpLinks[0]['link']; ?>" data-action="help">
                             <?php echo $cuIcons->getIcon('svg-rmcommon-question'); ?>
                         </a>

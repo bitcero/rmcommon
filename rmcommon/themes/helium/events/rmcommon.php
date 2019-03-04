@@ -35,25 +35,25 @@ class HeliumRmcommonPreload
 
         $af_available = RMFunctions::plugin_installed('advform');
 
-        $settings['config'][] = array(
+        $settings['config'][] = [
             'name' => 'helium_logo',
             'title' => __('Logo to use', 'rmcommon'),
             'description' => __('You can specify a logo as bitmap but SVG is recommended. The logo will be resize to 29 pixels of height.', 'helium'),
             'formtype' => $af_available ? 'image-url' : 'textbox',
             'valuetype' => 'text',
             'default' => RMCPATH . '/themes/helium/images/logo-he.svg',
-            'category' => 'helium'
-        );
+            'category' => 'helium',
+        ];
 
-        $settings['config'][] = array(
+        $settings['config'][] = [
             'name' => 'helium_xoops_metas',
             'title' => __('Render XOOPS metas?', 'rmcommon'),
             'description' => __('By enabling this option Helium will render inside &gt;head&lt; tag the XOOPS scripts, styles and metas.', 'helium'),
             'formtype' => 'yesno',
             'valuetype' => 'int',
             'default' => 0,
-            'category' => 'helium'
-        );
+            'category' => 'helium',
+        ];
 
         return $settings;
     }
@@ -66,6 +66,7 @@ class HeliumRmcommonPreload
     public static function eventRmcommonPsr4loader($loader)
     {
         $loader->addNamespace('Helium', XOOPS_ROOT_PATH . '/modules/rmcommon/themes/helium/class');
+
         return $loader;
     }
 }

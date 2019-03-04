@@ -1,6 +1,6 @@
 <div id="he-content">
     <div class="container-fluid">
-        <?php include 'toolbar.php'; ?>
+        <?php require __DIR__ . '/toolbar.php'; ?>
 
         <?php echo RMBreadCrumb::get()->render(); ?>
 

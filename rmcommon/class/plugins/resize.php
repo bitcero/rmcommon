@@ -35,20 +35,20 @@ class phMagick_resize
 
         //if $width or $height == 0 then we want to resize to fit one measure
         //if any of them is sent as 0 resize will fail because we are trying to resize to 0 px
-        $width  = $width  == 0 ? '' : $width ;
-        $height = $height == 0 ? '' : $height ;
+        $width = 0 == $width ? '' : $width;
+        $height = 0 == $height ? '' : $height;
 
         $cmd = $p->getBinary('convert');
-        $cmd .=  ' -scale "'. $width .'x'. $height . $modifier ;
-        $cmd .= '" -quality '. $p->getImageQuality() ;
-        $cmd .=  ' -strip ';
-        $cmd .= ' "' . $p->getSource() .'" "'. $p->getDestination().'"';
-
+        $cmd .= ' -scale "' . $width . 'x' . $height . $modifier;
+        $cmd .= '" -quality ' . $p->getImageQuality();
+        $cmd .= ' -strip ';
+        $cmd .= ' "' . $p->getSource() . '" "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
@@ -79,33 +79,36 @@ class phMagick_resize
     }
 
     /**
-        * Creates a thumbnail of an image, if it doesn't exits
-        *
-        *
-        * @param String $imageUrl - The image Url
-        * @param Mixed $width - String / Integer
-        * @param Mixed $height - String / Integer
-        * @param boolean: False: resizes the image to the exact porportions (aspect ratio not preserved). True: preserves aspect ratio, only resises if image is bigger than specified measures
-        *
-        * @return String - the thumbnail URL
-        */
-    public function onTheFly(phmagick $p, $imageUrl, $width, $height, $exactDimentions = false, $webPath = '', $physicalPath='')
+     * Creates a thumbnail of an image, if it doesn't exits
+     *
+     *
+     * @param string $imageUrl - The image Url
+     * @param mixed $width - String / Integer
+     * @param mixed $height - String / Integer
+     * @param boolean: False: resizes the image to the exact porportions (aspect ratio not preserved). True: preserves aspect ratio, only resises if image is bigger than specified measures
+     * @param mixed $exactDimentions
+     * @param mixed $webPath
+     * @param mixed $physicalPath
+     *
+     * @return string - the thumbnail URL
+     */
+    public function onTheFly(phmagick $p, $imageUrl, $width, $height, $exactDimentions = false, $webPath = '', $physicalPath = '')
     {
         //convert web path to physical
         $basePath = str_replace($webPath, $physicalPath, dirname($imageUrl));
-        $sourceFile = $basePath .'/'. basename($imageUrl);
+        $sourceFile = $basePath . '/' . basename($imageUrl);
 
         //naming the new thumbnail
-        $thumbnailFile = $basePath . '/'.$width . '_' . $height . '_' . basename($imageUrl) ;
+        $thumbnailFile = $basePath . '/' . $width . '_' . $height . '_' . basename($imageUrl);
 
         $P->setSource($sourceFile);
         $p->setDestination($thumbnailFile);
 
-        if (! file_exists($thumbnailFile)) {
+        if (!file_exists($thumbnailFile)) {
             $p->resize($p, $width, $height, $exactDimentions);
         }
 
-        if (! file_exists($thumbnailFile)) {
+        if (!file_exists($thumbnailFile)) {
             //if there was an error, just use original file
             $thumbnailFile = $sourceFile;
         }

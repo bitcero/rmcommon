@@ -74,7 +74,7 @@ class TileBox extends WidgetAbstract implements WidgetInterface
             'caption' => '',
             'solid' => false,
             'footer' => '',
-            'link' => ''
+            'link' => '',
         ];
 
         $data = array_merge($defaults, $data);
@@ -82,7 +82,7 @@ class TileBox extends WidgetAbstract implements WidgetInterface
         parent::__construct($data);
         $this->add('class', 'widget-tile-box');
 
-        if ($data['type'] == 'user') {
+        if ('user' == $data['type']) {
             $this->add('class', 'user');
 
             if (!is_a($data['user'], 'XoopsUser') && (int)$data['user'] <= 0) {
@@ -97,10 +97,10 @@ class TileBox extends WidgetAbstract implements WidgetInterface
             }
         } else {
             $this->add('class', 'counter');
-            $this->add('class', $data['style'] != '' ? ($data['style'] == 'progress' ? 'with-progress' : $data['style']) : 'default');
+            $this->add('class', '' != $data['style'] ? ('progress' == $data['style'] ? 'with-progress' : $data['style']) : 'default');
         }
 
-        if (true == $data['solid'] && 'progress' != $data['style']) {
+        if (true === $data['solid'] && 'progress' != $data['style']) {
             $this->add('class', 'solid bg-' . $data['color']);
         }
 
@@ -138,6 +138,7 @@ class TileBox extends WidgetAbstract implements WidgetInterface
         if ('' == $this->tplPath) {
             $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-tilebox.php', 'module', 'rmcommon');
         }
+
         return $this->tplPath;
     }
 }

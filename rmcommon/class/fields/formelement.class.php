@@ -26,7 +26,6 @@
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
-
 use Common\Core\Helpers\Attributes;
 
 /**
@@ -35,13 +34,12 @@ use Common\Core\Helpers\Attributes;
  */
 abstract class RMFormElement extends Attributes
 {
-
     /**
      * @var string[] list of attributes to NOT render
      */
     protected $suppressList = ['caption', 'datalist', 'description', 'option', 'form'];
 
-    private $extra = array();
+    private $extra = [];
 
     /**
      * __construct
@@ -50,7 +48,7 @@ abstract class RMFormElement extends Attributes
      *                           Control attributes:
      *                               ElementFactory::FORM_KEY optional form or tray to hold this element
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         parent::__construct($attributes);
     }
@@ -72,11 +70,12 @@ abstract class RMFormElement extends Attributes
         // generate id from name if not already set
         if (!$this->has('id')) {
             $id = $this->get('name');
-            if (substr($id, -2) === '[]') {
-                $id = substr($id, 0, strlen($id) - 2);
+            if ('[]' === mb_substr($id, -2)) {
+                $id = mb_substr($id, 0, mb_strlen($id) - 2);
             }
             $this->set('id', $id);
         }
+
         return parent::renderAttributeString();
     }
 
@@ -95,6 +94,7 @@ abstract class RMFormElement extends Attributes
             $ret .= '<option value="' . htmlspecialchars($datalist, ENT_QUOTES) . '">' . "\n";
         }
         $ret .= '</datalist>' . "\n";
+
         return $ret;
     }
 
@@ -108,14 +108,12 @@ abstract class RMFormElement extends Attributes
      * @param mixed  $value   attribute value
      * @param mixed  $default default value
      * @param array  $enum    optional list of valid values
-     *
-     * @return void
      */
     public function setWithDefaults($name, $value, $default = null, $enum = null)
     {
         if (empty($value)) {
             $value = $default;
-        } elseif (null !== $enum && !in_array($value, $enum)) {
+        } elseif (null !== $enum && !in_array($value, $enum, true)) {
             $value = $default;
         }
         $this->set($name, $value);
@@ -146,6 +144,7 @@ abstract class RMFormElement extends Attributes
     public function setId($id)
     {
         $this->set('id', $id);
+
         return $this;
     }
 
@@ -166,12 +165,14 @@ abstract class RMFormElement extends Attributes
     public function setClass($class)
     {
         $this->add('class', (string)$class);
+
         return $this;
     }
 
     public function addClass($class)
     {
         $this->add('class', (string)$class);
+
         return $this;
     }
 
@@ -182,9 +183,10 @@ abstract class RMFormElement extends Attributes
     public function getClass()
     {
         $class = $this->get('class', false);
-        if ($class === false) {
+        if (false === $class) {
             return false;
         }
+
         return htmlspecialchars(implode(' ', $class), ENT_QUOTES);
     }
 
@@ -196,6 +198,7 @@ abstract class RMFormElement extends Attributes
     public function setCaption($caption)
     {
         $this->set('caption', $caption);
+
         return $this;
     }
 
@@ -216,6 +219,7 @@ abstract class RMFormElement extends Attributes
     public function setDescription($description)
     {
         $this->set('description', $description);
+
         return $this;
     }
 
@@ -227,6 +231,7 @@ abstract class RMFormElement extends Attributes
     public function getDescription($encode = false)
     {
         $description = $this->get('description', '');
+
         return $encode ? htmlspecialchars($description, ENT_QUOTES) : $description;
     }
 
@@ -245,7 +250,7 @@ abstract class RMFormElement extends Attributes
     public function setExtra($extra, $replace = false)
     {
         if ($replace) {
-            $this->extra = array(trim($extra));
+            $this->extra = [trim($extra)];
         } else {
             $this->extra[] = trim($extra);
         }
@@ -267,19 +272,22 @@ abstract class RMFormElement extends Attributes
         if (!$encode) {
             return implode(' ', $this->extra);
         }
-        $value = array();
+        $value = [];
         foreach ($this->extra as $val) {
             $value[] = str_replace('>', '&gt;', str_replace('<', '&lt;', $val));
         }
+
         return empty($value) ? '' : implode(' ', $value);
     }
 
     /**
      * @desc Asigna el formulario (nombre) al elemento actual
+     * @param mixed $name
      */
     public function setForm($name)
     {
         $this->set('form', $name);
+
         return $this;
     }
 
@@ -296,8 +304,6 @@ abstract class RMFormElement extends Attributes
      *
      * @param string $name  attribute name
      * @param mixed  $value attribute value
-     *
-     * @return void
      */
     public function setIfNotEmpty($name, $value)
     {
@@ -315,8 +321,6 @@ abstract class RMFormElement extends Attributes
      *
      * @param string $name  attribute name
      * @param mixed  $value attribute value
-     *
-     * @return void
      */
     public function setIfNotSet($name, $value)
     {
@@ -330,8 +334,6 @@ abstract class RMFormElement extends Attributes
      * setTitle - set the title for the element
      *
      * @param string $title title for element
-     *
-     * @return void
      */
     public function setTitle($title)
     {
@@ -347,16 +349,15 @@ abstract class RMFormElement extends Attributes
     {
         if ($this->has('title')) {
             return $this->get('title');
-        } else {
-            if ($this->has(':pattern_description')) {
-                return htmlspecialchars(
+        }
+        if ($this->has(':pattern_description')) {
+            return htmlspecialchars(
                     strip_tags($this->get('caption') . ' - ' . $this->get(':pattern_description')),
                     ENT_QUOTES
                 );
-            } else {
-                return htmlspecialchars(strip_tags($this->get('caption')), ENT_QUOTES);
-            }
         }
+
+        return htmlspecialchars(strip_tags($this->get('caption')), ENT_QUOTES);
     }
 
     /**

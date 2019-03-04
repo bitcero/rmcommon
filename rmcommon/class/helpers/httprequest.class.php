@@ -8,7 +8,6 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 class RMHttpRequest
 {
     use RMSingleton;
@@ -40,6 +39,10 @@ class RMHttpRequest
 
     /**
      * Permite obtener un valor de un array y filtrarlo para un manejo seguro
+     * @param mixed $key
+     * @param mixed $haystack
+     * @param mixed $type
+     * @param mixed $default
      */
     public static function array_value($key, $haystack, $type, $default = '')
     {
@@ -73,46 +76,46 @@ class RMHttpRequest
      */
     protected static function get_http_parameter($method, $key, $type, $default = '')
     {
-        if ($key == '') {
+        if ('' == $key) {
             return null;
         }
 
-        $method = strtolower($method);
+        $method = mb_strtolower($method);
 
-        if (!in_array($method, array( 'get', 'post', 'request', 'put', 'delete' ))) {
+        if (!in_array($method, [ 'get', 'post', 'request', 'put', 'delete' ], true)) {
             return null;
         }
 
-        if ($type == '') {
+        if ('' == $type) {
             trigger_error(__('Get values from URL parameters without specify a valid type, can result in security issues. Please consider to specify a type before to get URL params.', 'rmcommon'), E_WARNING);
         }
 
         switch ($method) {
             case 'get':
-                $_DATA =& $_GET;
+                $_DATA = &$_GET;
                 break;
             case 'post':
-                $_DATA =& $_POST;
+                $_DATA = &$_POST;
                 break;
             case 'request':
-                $_DATA =& $_REQUEST;
+                $_DATA = &$_REQUEST;
                 break;
             case 'put':
             case 'delete':
                 parse_str(file_get_contents('php://input'));
                 if (isset(${$key})) {
                     return self::clean_value(${$key}, $type);
-                } else {
-                    return self::clean_value($default, $type);
                 }
+
+                    return self::clean_value($default, $type);
                 break;
         }
 
         if (isset($_DATA[$key])) {
             return self::clean_value($_DATA[$key], $type);
-        } else {
-            return self::clean_value($default, $type);
         }
+
+        return self::clean_value($default, $type);
     }
 
     /**
@@ -126,7 +129,6 @@ class RMHttpRequest
         $return = null;
 
         switch ($type) {
-
             case 'bool':
                 $return = (bool) $value;
                 break;
@@ -181,7 +183,7 @@ class RMHttpRequest
      * @param array $parameters <p>List of parameters that will be loaded from any of previous three methods.</p>
      * @return stdClass
      */
-    public static function collect_data($source = "post", $parameters = array())
+    public static function collect_data($source = 'post', $parameters = [])
     {
         if (empty($parameters)) {
             return false;
@@ -190,9 +192,9 @@ class RMHttpRequest
         $collected = new stdClass();
 
         foreach ($parameters as $var => $type) {
-            if ($source == 'post') {
+            if ('post' == $source) {
                 $collected->$var = self::post($var, $type, '');
-            } elseif ($source == 'request') {
+            } elseif ('request' == $source) {
                 $collected->$var = self::request($var, $type, '');
             } else {
                 $collected->$var = self::get($var, $type, '');
@@ -212,32 +214,32 @@ class RMHttpRequest
      */
     public static function load_url($url, $query = '', $post = false)
     {
-
         // Form the query
         if (is_array($query)) {
             $query = http_build_query($query);
         }
 
         if ($post) {
-            if ($query == '') {
-                $query = explode("?", $url);
+            if ('' == $query) {
+                $query = explode('?', $url);
                 $url = $query[0];
                 $query = $query[1];
             }
 
-            $options = array(
-                'http' => array(
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
+            $options = [
+                'http' => [
+                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method' => 'POST',
                     'content' => $query,
-                )
-            );
-            $context  = stream_context_create($options);
+                ],
+            ];
+            $context = stream_context_create($options);
             $result = file_get_contents($url, false, $context);
+
             return $result;
         }
 
-        if ($query != '') {
+        if ('' != $query) {
             $url .= '?' . $query;
         }
 

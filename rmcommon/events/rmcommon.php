@@ -16,7 +16,7 @@ class RmcommonRmcommonPreload
             return null;
         }
 
-        include_once RMCPATH.'/include/right_widgets.php';
+        require_once RMCPATH . '/include/right_widgets.php';
 
         global $xoopsModule;
         /*if (RMCLOCATION=='modules' && $xoopsModule->dirname()=='rmcommon' && rmc_server_var($_REQUEST, 'action', '')=='')
@@ -52,8 +52,8 @@ class RmcommonRmcommonPreload
          */
         RMEvents::get()->trigger('rmcommon.load.codes');
 
-        if (substr($p['path'], -11)=='backend.php' && $config->rss_enable) {
-            include_once RMCPATH.'/rss.php';
+        if ('backend.php' == mb_substr($p['path'], -11) && $config->rss_enable) {
+            require_once RMCPATH . '/rss.php';
             die();
         }
     }
@@ -70,23 +70,23 @@ class RmcommonRmcommonPreload
      */
     public static function eventRmcommonSavedSettings($dirname, $save, $add, $delete)
     {
-        if ($dirname != 'rmcommon') {
+        if ('rmcommon' != $dirname) {
             return $dirname;
         }
 
-        $base = parse_url(XOOPS_URL.'/');
-        $base = isset($base['path']) ? rtrim($base['path'], '/').'/' : '/';
-        $rules = "ErrorDocument 404 ".$base ."modules/rmcommon/404.php\n";
+        $base = parse_url(XOOPS_URL . '/');
+        $base = isset($base['path']) ? rtrim($base['path'], '/') . '/' : '/';
+        $rules = 'ErrorDocument 404 ' . $base . "modules/rmcommon/404.php\n";
         foreach ($save['modules_path'] as $mod => $path) {
-            $path = ltrim($path, "/");
+            $path = ltrim($path, '/');
             $rules .= "RewriteRule ^$path/?(.*)$ modules/$mod/index.php/$1 [L]\n";
             $rules .= "RewriteRule ^admin/$path/?(.*)$ modules/$mod/admin/index.php/$2 [L]\n";
         }
 
-        if ($save['permalinks'] == 0) {
+        if (0 == $save['permalinks']) {
             $ht = new RMHtaccess('rmcommon');
             $htResult = $ht->removeRule();
-            if ($htResult!==true) {
+            if (true !== $htResult) {
                 showMessage(
                     __('An error ocurred while trying to delete .htaccess rules!', 'rmcommon') . '<br>' .
                     __('Please delete lines starting with <code># begin rmcommon</code> and ending with <code># end rmcommon</code>', 'rmcommon'),
@@ -101,7 +101,7 @@ class RmcommonRmcommonPreload
 
         $ht = new RMHtaccess('rmcommon');
         $htResult = $ht->write($rules);
-        if ($htResult!==true) {
+        if (true !== $htResult) {
             showMessage(__('An error ocurred while trying to write .htaccess file!', 'rmcommon') . '<br>' .
                     __('Please try to add manually next lines:', 'rmcommon') . '<br><code>' . nl2br($rules) . '</code>', RMMSG_ERROR);
         }
@@ -119,11 +119,11 @@ class RmcommonRmcommonPreload
 
         $plugins[] = '<a href="#"
                         onclick="launch_image_manager($(this));"
-                        data-id="'.$id.'" data-multiple="yes"
-                        data-title="'.__('Images Manager', 'rmcommon').'"
-                        data-type="'.$type.'"
+                        data-id="' . $id . '" data-multiple="yes"
+                        data-title="' . __('Images Manager', 'rmcommon') . '"
+                        data-type="' . $type . '"
                         title="' . __('Images', 'rmcommon') . '"
-                        >'. $cuIcons->getIcon('svg-rmcommon-images').'<span class="caption">' . __('Images', 'rmcommon') . '</span></a>';
+                        >' . $cuIcons->getIcon('svg-rmcommon-images') . '<span class="caption">' . __('Images', 'rmcommon') . '</span></a>';
 
         return $plugins;
     }
@@ -131,6 +131,7 @@ class RmcommonRmcommonPreload
     public static function eventRmcommonSmartyPlugins($plugins)
     {
         $plugins['rmcommon'] = RMCPATH . '/include/smarty';
+
         return $plugins;
     }
 
@@ -142,21 +143,21 @@ class RmcommonRmcommonPreload
     public static function eventRmcommonGetServices($services)
     {
         $services[] = [
-            'id'            => 'xoops-avatar', // provider id
-            'name'          => 'XOOPS Avatars', // Provider name
-            'description'   => __('Service provider to use avatars from XOOPS', 'rmcommon'),
-            'service'       => 'avatar', // Service to provide
-            'file'          => RMCPATH . '/class/AvatarService.php',
-            'class'         => 'XoopsAvatarService'
+            'id' => 'xoops-avatar', // provider id
+            'name' => 'XOOPS Avatars', // Provider name
+            'description' => __('Service provider to use avatars from XOOPS', 'rmcommon'),
+            'service' => 'avatar', // Service to provide
+            'file' => RMCPATH . '/class/AvatarService.php',
+            'class' => 'XoopsAvatarService',
         ];
 
         $services[] = [
-            'id'            => 'cu-comments', // provider id
-            'name'          => 'Comentarios', // Provider name
-            'description'   => __('Comentarios de Common Utilities para XOOPS', 'rmcommon'),
-            'service'       => 'comments', // Service to provide
-            'file'          => RMCPATH . '/class/CommentsService.php',
-            'class'         => 'CUCommentsService'
+            'id' => 'cu-comments', // provider id
+            'name' => 'Comentarios', // Provider name
+            'description' => __('Comentarios de Common Utilities para XOOPS', 'rmcommon'),
+            'service' => 'comments', // Service to provide
+            'file' => RMCPATH . '/class/CommentsService.php',
+            'class' => 'CUCommentsService',
         ];
 
         return $services;

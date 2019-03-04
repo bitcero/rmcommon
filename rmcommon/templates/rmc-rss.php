@@ -11,7 +11,7 @@
     <managingEditor><?php echo $rss_channel['editor']; ?></managingEditor>
     <webMaster><?php echo $rss_channel['webmaster']; ?></webMaster>
     <language><?php echo $rss_channel['language ']; ?></language>
-    <?php if ($rss_channel['image']['url'] != ""): ?>
+    <?php if ('' != $rss_channel['image']['url']): ?>
     <image>
       <title><?php echo $rss_channel['title']; ?></title>
       <url><?php echo $rss_channel['image']['url']; ?></url>

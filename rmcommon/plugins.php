@@ -26,11 +26,10 @@
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
-
-include_once '../../include/cp_header.php';
+require_once dirname(__DIR__) . '/../include/cp_header.php';
 
 $p = isset($_REQUEST['p']) ? $_REQUEST['p'] : '';
-if ($p == '') {
+if ('' == $p) {
     $common->location = 'plugins';
 } else {
     $common->location = $p . '-main';
@@ -43,11 +42,11 @@ function rm_reload_plugins()
     $path = RMCPATH . '/plugins';
     $dir_list = XoopsLists::getDirListAsArray($path);
 
-    $installed_plugins = array();
+    $installed_plugins = [];
 
     foreach ($dir_list as $dir) {
-        $oldFile = $path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php';
-        $newFile = $path . '/' . $dir . '/' . strtolower($dir) . '.php';
+        $oldFile = $path . '/' . $dir . '/' . mb_strtolower($dir) . '-plugin.php';
+        $newFile = $path . '/' . $dir . '/' . mb_strtolower($dir) . '.php';
 
         if (!file_exists($oldFile) && !file_exists($newFile)) {
             continue;
@@ -60,7 +59,7 @@ function rm_reload_plugins()
         }
     }
 
-    $plugins = array();
+    $plugins = [];
     foreach ($installed_plugins as $p) {
         $plugins[] = $p->getVar('dir');
     }
@@ -75,12 +74,12 @@ function show_rm_plugins()
     $path = RMCPATH . '/plugins';
     $dir_list = XoopsLists::getDirListAsArray($path);
 
-    $available_plugins = array();
-    $installed_plugins = array();
+    $available_plugins = [];
+    $installed_plugins = [];
 
     foreach ($dir_list as $dir) {
-        $oldFile = $path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php';
-        $newFile = $path . '/' . $dir . '/' . strtolower($dir) . '.php';
+        $oldFile = $path . '/' . $dir . '/' . mb_strtolower($dir) . '-plugin.php';
+        $newFile = $path . '/' . $dir . '/' . mb_strtolower($dir) . '.php';
 
         if (!file_exists($oldFile) && !file_exists($newFile)) {
             continue;
@@ -116,7 +115,7 @@ function show_rm_plugins()
 function install_rm_plugin()
 {
     $name = rmc_server_var($_GET, 'plugin', '');
-    if ($name == '') {
+    if ('' == $name) {
         redirectMsg('plugins.php', __('You must specify a existing plugin', 'rmcommon'), 1);
         die();
     }
@@ -139,7 +138,7 @@ function install_rm_plugin()
     }
 
     if (!$plugin->on_install()) {
-        redirectMsg('plugins.php', __('The plugin has been inserted on database, but erros ocurred on this process.', 'rmcommon') . '<br />' . $plugin->errors(), 1);
+        redirectMsg('plugins.php', __('The plugin has been inserted on database, but erros ocurred on this process.', 'rmcommon') . '<br>' . $plugin->errors(), 1);
         die();
     }
 
@@ -151,7 +150,7 @@ function install_rm_plugin()
 function uninstall_rm_plugin()
 {
     $name = rmc_server_var($_GET, 'plugin', '');
-    if ($name == '') {
+    if ('' == $name) {
         redirectMsg('plugins.php', __('You must specify a existing plugin', 'rmcommon'), 1);
         die();
     }
@@ -169,7 +168,7 @@ function uninstall_rm_plugin()
     }
 
     if (!$plugin->on_uninstall()) {
-        redirectMsg('plugins.php', __('The plugin has been deleted from database, but erros ocurred on this process.', 'rmcommon') . '<br />' . $plugin->errors(), 1);
+        redirectMsg('plugins.php', __('The plugin has been deleted from database, but erros ocurred on this process.', 'rmcommon') . '<br>' . $plugin->errors(), 1);
         die();
     }
 
@@ -181,7 +180,7 @@ function uninstall_rm_plugin()
 function update_rm_plugin()
 {
     $name = rmc_server_var($_GET, 'plugin', '');
-    if ($name == '') {
+    if ('' == $name) {
         redirectMsg('plugins.php', __('You must specify a existing plugin', 'rmcommon'), 1);
         die();
     }
@@ -199,7 +198,7 @@ function update_rm_plugin()
     }
 
     if (!$plugin->on_update()) {
-        redirectMsg('plugins.php', __('The database has been updated, but erros ocurred on this process.', 'rmcommon') . '<br />' . $plugin->errors(), 1);
+        redirectMsg('plugins.php', __('The database has been updated, but erros ocurred on this process.', 'rmcommon') . '<br>' . $plugin->errors(), 1);
         die();
     }
 
@@ -211,7 +210,7 @@ function update_rm_plugin()
 function activate_rm_plugin($q)
 {
     $name = rmc_server_var($_GET, 'plugin', '');
-    if ($name == '') {
+    if ('' == $name) {
         redirectMsg('plugins.php', __('You must specify a existing plugin', 'rmcommon'), 1);
         die();
     }
@@ -231,7 +230,7 @@ function activate_rm_plugin($q)
     }
 
     if (!$plugin->on_activate($q)) {
-        redirectMsg('plugins.php', __('The database has been updated, but erros ocurred on this process.', 'rmcommon') . '<br />' . $plugin->errors(), 1);
+        redirectMsg('plugins.php', __('The database has been updated, but erros ocurred on this process.', 'rmcommon') . '<br>' . $plugin->errors(), 1);
         die();
     }
 
@@ -245,7 +244,7 @@ function configure_rm_plugin()
     global $rmTpl, $common;
 
     $name = rmc_server_var($_GET, 'plugin', '');
-    if ($name == '') {
+    if ('' == $name) {
         redirectMsg('plugins.php', __('You must specify a existing plugin', 'rmcommon'), 1);
         die();
     }
@@ -287,41 +286,41 @@ function configure_rm_plugin()
         switch ($option['field']) {
             case 'checkbox_groups':
             case 'group_multi':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 1, 3, array($option['value']));
-                if ($option['desc'] != '') {
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 1, 3, [$option['value']]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'radio_groups':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 1, 3, array($option['value']));
-                if ($option['desc'] != '') {
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 1, 3, [$option['value']]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'group':
             case 'select_groups':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 0, 3, array($option['value']));
-                if ($option['desc'] != '') {
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 0, 0, 3, [$option['value']]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'select_groups_multi':
-                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 0, 3, array($option['value']));
-                if ($option['desc'] != '') {
+                $ele = new RMFormGroups($option['caption'], 'conf_' . $config, 1, 0, 3, [$option['value']]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'editor':
-                if ($cuSettings->editor_type == 'tiny') {
+                if ('tiny' == $cuSettings->editor_type) {
                     $tiny = TinyEditor::getInstance();
                     $tiny->add_config('elements', 'conf_' . $config);
                 }
-                $ele = new RMFormEditor($option['caption'], 'conf_' . $config, is_numeric($option['size']) ? '90%' : $option['size'], '300px', $option['value'], '', 1, array('op'));
-                if ($option['desc'] != '') {
+                $ele = new RMFormEditor($option['caption'], 'conf_' . $config, is_numeric($option['size']) ? '90%' : $option['size'], '300px', $option['value'], '', 1, ['op']);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -329,7 +328,7 @@ function configure_rm_plugin()
             case 'theme':
             case 'select_theme':
                 $ele = new RMFormTheme($option['caption'], 'conf_' . $config, 0, 0, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -337,21 +336,21 @@ function configure_rm_plugin()
             case 'theme_multi':
             case 'select_theme_multi':
                 $ele = new RMFormTheme($option['caption'], 'conf_' . $config, 0, 1, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'checkbox_theme':
                 $ele = new RMFormTheme($option['caption'], 'conf_' . $config, 1, 1, $option['value'], 4);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'select_theme_admin':
                 $ele = new RMFormTheme($option['caption'], 'conf_' . $config, 0, 0, $option['value'], 3, 'GUI');
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -361,13 +360,13 @@ function configure_rm_plugin()
                     'caption' => $option['caption'],
                     'name' => 'conf_' . $config,
                     'value' => $option['value'],
-                    'description' => $option['desc']
+                    'description' => $option['desc'],
                 ]);
 
                 break;
             case 'select':
                 $ele = new RMFormSelect($option['caption'], 'conf_' . $config, 0, [$option['value']]);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -378,7 +377,7 @@ function configure_rm_plugin()
                 break;
             case 'select_multi':
                 $ele = new RMFormSelect($option['caption'], 'conf_' . $config . '[]', 1, $option['value']);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -390,21 +389,21 @@ function configure_rm_plugin()
             case 'language':
             case 'select_language':
                 $ele = new RMFormLanguageField($option['caption'], 'conf_' . $config, 0, 0, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'select_language_multi':
                 $ele = new RMFormLanguageField($option['caption'], 'conf_' . $config, 1, 0, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'checkbox_language':
                 $ele = new RMFormLanguageField($option['caption'], 'conf_' . $config, 1, 1, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -412,32 +411,32 @@ function configure_rm_plugin()
             case 'startpage':
             case 'select_modules':
                 $ele = new RMFormModules($option['caption'], 'conf_' . $config, 0, 0, $option['value'], 3);
-                $ele->setInserted(array('--' => __('None', 'rmcommon')));
-                if ($option['desc'] != '') {
+                $ele->setInserted(['--' => __('None', 'rmcommon')]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'select_modules_multi':
                 $ele = new RMFormModules($option['caption'], 'conf_' . $config, 1, 0, $option['value'], 3);
-                $ele->setInserted(array('--' => __('None', 'rmcommon')));
-                if ($option['desc'] != '') {
+                $ele->setInserted(['--' => __('None', 'rmcommon')]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'checkbox_modules':
                 $ele = new RMFormModules($option['caption'], 'conf_' . $config, 1, 1, $option['value'], 3);
-                $ele->setInserted(array('--' => __('None', 'rmcommon')));
-                if ($option['desc'] != '') {
+                $ele->setInserted(['--' => __('None', 'rmcommon')]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'radio_modules':
                 $ele = new RMFormModules($option['caption'], 'conf_' . $config, 0, 1, $option['value'], 3);
-                $ele->setInserted(array('--' => __('None', 'rmcommon')));
-                if ($option['desc'] != '') {
+                $ele->setInserted(['--' => __('None', 'rmcommon')]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -445,36 +444,36 @@ function configure_rm_plugin()
             case 'timezone':
             case 'select_timezone':
                 $ele = new RMFormTimeZoneField($option['caption'], 'conf_' . $config, 0, 0, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'select_timezone_multi':
                 $ele = new RMFormTimeZoneField($option['caption'], 'conf_' . $config, 0, 1, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'checkbox_timezone':
                 $ele = new RMFormTimeZoneField($option['caption'], 'conf_' . $config, 1, 1, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'radio_timezone':
                 $ele = new RMFormTimeZoneField($option['caption'], 'conf_' . $config, 1, 0, $option['value'], 3);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'tplset':
                 $ele = new RMFormSelect($option['caption'], 'conf_' . $config);
-                $tplset_handler = exm_gethandler('tplset');
-                $tplsetlist =& $tplset_handler->getList();
+                $tplsetHandler = exm_gethandler('tplset');
+                $tplsetlist = &$tplsetHandler->getList();
                 asort($tplsetlist);
                 foreach ($tplsetlist as $key => $name) {
                     $ele->addOption($key, $name, $option['value'] == $key ? 1 : 0);
@@ -482,15 +481,15 @@ function configure_rm_plugin()
 
                 break;
             case 'textarea':
-                $ele = new RMFormTextArea($option['caption'], 'conf_' . $config, 5, $option['size'] > 0 ? $option['size'] : 50, $option['valuetype'] == 'array' ? TextCleaner::getInstance()->specialchars(implode('|', $option['value'])) : TextCleaner::getInstance()->specialchars($option['value']));
-                if ($option['desc'] != '') {
+                $ele = new RMFormTextArea($option['caption'], 'conf_' . $config, 5, $option['size'] > 0 ? $option['size'] : 50, 'array' == $option['valuetype'] ? TextCleaner::getInstance()->specialchars(implode('|', $option['value'])) : TextCleaner::getInstance()->specialchars($option['value']));
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
                 break;
             case 'module_cache':
                 $ele = new RMFormCacheModuleField($option['caption'], 'conf_' . $config, $option['value']);
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -498,7 +497,7 @@ function configure_rm_plugin()
             case 'user_select':
                 $ele = new RMFormUser($option['caption'], 'conf_' . $config, $form->getName(), $option['value'], 'select', $limit = '300', '');
                 $ele->setOnPage("document.forms[0].op.value='config';");
-                if ($option['desc'] != '') {
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
 
@@ -508,7 +507,7 @@ function configure_rm_plugin()
                     'caption' => $option['caption'],
                     'name' => 'conf_' . $config,
                     'value' => $option['value'],
-                    'description' => $option['desc']
+                    'description' => $option['desc'],
                 ]);
                 //$ele = new RMFormRadio($option['caption'], 'conf_' . $config, 1);
                 //if ($option['desc'] != '') $ele->setDescription($option['desc']);
@@ -519,8 +518,8 @@ function configure_rm_plugin()
 
                 break;
             case 'select_editor':
-                $ele = new RMFormSelect($option['caption'], 'conf_' . $config, 0, array($option['value']));
-                if ($option['desc'] != '') {
+                $ele = new RMFormSelect($option['caption'], 'conf_' . $config, 0, [$option['value']]);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
                 $ele->addOption('tiny', __('Visual Editor', 'rmcommon'));
@@ -534,14 +533,14 @@ function configure_rm_plugin()
                     'type' => 'email',
                     'caption' => $option['caption'],
                     'name' => 'conf_' . $config,
-                    'value' => $option['value']
+                    'value' => $option['value'],
                 ]);
                 break;
             case 'textbox':
             case 'password':
             default:
-                $ele = new RMFormText($option['caption'], 'conf_' . $config, isset($option['size']) ? $option['size'] : 50, null, $option['valuetype'] == 'array' ? implode('|', $option['value']) : $option['value'], $option['fieldtype'] == 'password' ? 1 : 0);
-                if ($option['desc'] != '') {
+                $ele = new RMFormText($option['caption'], 'conf_' . $config, isset($option['size']) ? $option['size'] : 50, null, 'array' == $option['valuetype'] ? implode('|', $option['value']) : $option['value'], 'password' == $option['fieldtype'] ? 1 : 0);
+                if ('' != $option['desc']) {
                     $ele->setDescription($option['desc']);
                 }
                 //$form->addElement($ele, false, $option['valuetype']=='int' || $option['valuetype']=='float' ? 'num' : '');
@@ -577,10 +576,10 @@ function configure_rm_plugin()
             'select_theme_multi',
             'select_theme',
             'group',
-            'select_group'
+            'select_group',
         ];
 
-        if (in_array($option['fieldtype'], $controls)) {
+        if (in_array($option['fieldtype'], $controls, true)) {
             $ele->add('class', 'form-control');
         }
 
@@ -592,19 +591,19 @@ function configure_rm_plugin()
         'caption' => __('Save Settings', 'rmcommon'),
         'type' => 'submit',
         'class' => 'btn btn-primary btn-lg',
-        'name' => 'send'
+        'name' => 'send',
     ]));
     $ele->addButton(new RMFormButton([
         'caption' => __('Cancel', 'rmcommon'),
         'type' => 'button',
-        'onclick' => "history.go(-1);",
-        'class' => 'btn btn-default btn-lg'
+        'onclick' => 'history.go(-1);',
+        'class' => 'btn btn-default btn-lg',
     ]));
 
     $form->addElement($ele);
 
     // Other components can add items to database
-    $form = RMEvents::get()->run_event("rmcommon.settings.form", $form, $plugin);
+    $form = RMEvents::get()->run_event('rmcommon.settings.form', $form, $plugin);
 
     //RMFunctions::create_toolbar();
 
@@ -623,7 +622,7 @@ function save_settings_rm_plugin()
     global $xoopsSecurity;
 
     $name = rmc_server_var($_POST, 'plugin', '');
-    if ($name == '') {
+    if ('' == $name) {
         redirectMsg('plugins.php', __('You must specify a existing plugin', 'rmcommon'), 1);
         die();
     }
@@ -647,7 +646,7 @@ function save_settings_rm_plugin()
 
     $options = $plugin->options();
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    $confs = array();
+    $confs = [];
     foreach ($options as $k => $option) {
         if (!isset($_POST['conf_' . $k])) {
             continue;
@@ -655,7 +654,7 @@ function save_settings_rm_plugin()
         $value = $_POST['conf_' . $k];
         $option['value'] = is_array($value) ? serialize($value) : $value;
 
-        $db->queryF("UPDATE " . $db->prefix("mod_rmcommon_settings") . " SET value='$option[value]' WHERE element='$name' AND type='plugin' AND name='$k'");
+        $db->queryF('UPDATE ' . $db->prefix('mod_rmcommon_settings') . " SET value='$option[value]' WHERE element='$name' AND type='plugin' AND name='$k'");
     }
 
     $events = RMEvents::get();
@@ -672,34 +671,35 @@ function save_settings_rm_plugin()
 
 /**
  * This function allows to plugins to show their own options
+ * @param mixed $dir
  */
 function main_rm_plugin($dir)
 {
     $path = RMCPATH . '/plugins';
 
-    $oldFile = $path . '/' . $dir . '/' . strtolower($dir) . '-plugin.php';
-    $newFile = $path . '/' . $dir . '/' . strtolower($dir) . '.php';
+    $oldFile = $path . '/' . $dir . '/' . mb_strtolower($dir) . '-plugin.php';
+    $newFile = $path . '/' . $dir . '/' . mb_strtolower($dir) . '.php';
 
     if (!file_exists($oldFile) && !file_exists($newFile)) {
-        header("location: plugins.php");
+        header('location: plugins.php');
         die();
     }
 
     $plugin = new RMPlugin($dir);
     if ($plugin->isNew()) {
-        header("location: plugins.php");
+        header('location: plugins.php');
         die();
     }
 
     if (!$plugin->get_info('hasmain')) {
-        header("location: plugins.php");
+        header('location: plugins.php');
         die();
     }
 
     $plugin = Common\Core\Helpers\Plugins::getInstance()->load($dir);
 
     if (!method_exists($plugin, 'main')) {
-        header("location: plugins.php");
+        header('location: plugins.php');
         die();
     }
 
@@ -717,7 +717,7 @@ RMEvents::get()->run_event('rmcommon.plugins.check.actions');
  */
 $dir = $common->httpRequest()->request('p', 'string', '');
 
-if ($dir != '') {
+if ('' != $dir) {
     main_rm_plugin($dir);
     die();
 }

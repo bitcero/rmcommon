@@ -5,21 +5,21 @@ $(document).ready(function(){
         $rtn = '';
         foreach ($this->settings() as $name => $value):
 
-        if ($value=='') {
+        if ('' == $value) {
             continue;
         }
-        if (!is_array($value) && substr($value, 0, 8)=='function') {
+        if (!is_array($value) && 'function' == mb_substr($value, 0, 8)) {
             $value = $value;
         } elseif (is_string($value)) {
             $value = "'$value'";
         } elseif (is_array($value)) {
             $tmp = '';
             foreach ($value as $k => $val) {
-                $tmp .= $tmp=='' ? "'$k':'$val'" : ",'$k':'$val'";
+                $tmp .= '' == $tmp ? "'$k':'$val'" : ",'$k':'$val'";
             }
-            $value = "{".$tmp."}";
+            $value = '{' . $tmp . '}';
         }
-        $rtn .= $rtn == '' ? "'$name': $value" : ",\n'$name': $value";
+        $rtn .= '' == $rtn ? "'$name': $value" : ",\n'$name': $value";
 
         endforeach;
         echo $rtn;

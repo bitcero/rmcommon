@@ -25,7 +25,7 @@ abstract class Swift_ByteStream_AbstractFilterableInputStream implements Swift_I
      *
      * @var Swift_StreamFilter[]
      */
-    private $_filters = array();
+    private $_filters = [];
 
     /**
      * A buffer for writing.
@@ -37,7 +37,7 @@ abstract class Swift_ByteStream_AbstractFilterableInputStream implements Swift_I
      *
      * @var Swift_InputByteStream[]
      */
-    private $_mirrors = array();
+    private $_mirrors = [];
 
     /**
      * Commit the given bytes to the storage medium immediately.
@@ -131,7 +131,7 @@ abstract class Swift_ByteStream_AbstractFilterableInputStream implements Swift_I
     {
         foreach ($this->_mirrors as $k => $stream) {
             if ($is === $stream) {
-                if ($this->_writeBuffer !== '') {
+                if ('' !== $this->_writeBuffer) {
                     $stream->write($this->_writeBuffer);
                 }
                 unset($this->_mirrors[$k]);
@@ -147,7 +147,7 @@ abstract class Swift_ByteStream_AbstractFilterableInputStream implements Swift_I
      */
     public function flushBuffers()
     {
-        if ($this->_writeBuffer !== '') {
+        if ('' !== $this->_writeBuffer) {
             $this->_doWrite($this->_writeBuffer);
         }
         $this->_flush();

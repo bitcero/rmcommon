@@ -37,16 +37,16 @@ class Swift_Transport_Esmtp_Auth_CramMd5Authenticator implements Swift_Transport
     public function authenticate(Swift_Transport_SmtpAgent $agent, $username, $password)
     {
         try {
-            $challenge = $agent->executeCommand("AUTH CRAM-MD5\r\n", array(334));
-            $challenge = base64_decode(substr($challenge, 4));
+            $challenge = $agent->executeCommand("AUTH CRAM-MD5\r\n", [334]);
+            $challenge = base64_decode(mb_substr($challenge, 4), true);
             $message = base64_encode(
-                $username.' '.$this->_getResponse($password, $challenge)
+                $username . ' ' . $this->_getResponse($password, $challenge)
                 );
-            $agent->executeCommand(sprintf("%s\r\n", $message), array(235));
+            $agent->executeCommand(sprintf("%s\r\n", $message), [235]);
 
             return true;
         } catch (Swift_TransportException $e) {
-            $agent->executeCommand("RSET\r\n", array(250));
+            $agent->executeCommand("RSET\r\n", [250]);
 
             return false;
         }
@@ -62,19 +62,19 @@ class Swift_Transport_Esmtp_Auth_CramMd5Authenticator implements Swift_Transport
      */
     private function _getResponse($secret, $challenge)
     {
-        if (strlen($secret) > 64) {
+        if (mb_strlen($secret) > 64) {
             $secret = pack('H32', md5($secret));
         }
 
-        if (strlen($secret) < 64) {
+        if (mb_strlen($secret) < 64) {
             $secret = str_pad($secret, 64, chr(0));
         }
 
-        $k_ipad = substr($secret, 0, 64) ^ str_repeat(chr(0x36), 64);
-        $k_opad = substr($secret, 0, 64) ^ str_repeat(chr(0x5C), 64);
+        $k_ipad = mb_substr($secret, 0, 64) ^ str_repeat(chr(0x36), 64);
+        $k_opad = mb_substr($secret, 0, 64) ^ str_repeat(chr(0x5C), 64);
 
-        $inner = pack('H32', md5($k_ipad.$challenge));
-        $digest = md5($k_opad.$inner);
+        $inner = pack('H32', md5($k_ipad . $challenge));
+        $digest = md5($k_opad . $inner);
 
         return $digest;
     }

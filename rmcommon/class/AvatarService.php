@@ -31,7 +31,6 @@
  * This file provides the service to show avatars from database
  * Class AvatarService
  */
-
 class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements \Common\Core\Helpers\ServiceInterface
 {
     private function loadWithEmail($email)
@@ -142,7 +141,8 @@ class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements
             }
         }
 
-        $avatar = '<img src="' . $this->getAvatarSrc($user_or_email, $size, $default) . '" alt="' . ($name != '' ? $name : $uname) . '">';
+        $avatar = '<img src="' . $this->getAvatarSrc($user_or_email, $size, $default) . '" alt="' . ('' != $name ? $name : $uname) . '">';
+
         return $avatar;
     }
 
@@ -157,7 +157,7 @@ class XoopsAvatarService extends \Common\Core\Helpers\ServiceAbstract implements
             return $instance;
         }
 
-        $instance = new XoopsAvatarService();
+        $instance = new self();
 
         return $instance;
     }

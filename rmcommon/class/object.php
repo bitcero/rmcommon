@@ -27,13 +27,11 @@
  * @url          http://www.eduardocortes.mx
  */
 
-
 /**
  * Basado en el archivo kernel/object.php de XOOPS
  * creado por Kazumi Ono (AKA onokazu)
  */
-
-use \Common\Core\Helpers\Services;
+use Common\Core\Helpers\Services;
 
 /**
  * Base class for all objects in the Xoops kernel (and beyond)
@@ -51,9 +49,7 @@ class RMObject
      * @var string
      */
     protected $ownerType = '';
-    /**
-     *
-     */
+
     protected $noTranslate = [];
     /**
      * holds all variables(properties) of an object
@@ -61,7 +57,7 @@ class RMObject
      * @var array
      * @access protected
      **/
-    protected $vars = array();
+    protected $vars = [];
 
     /**
      * variables cleaned for store in DB
@@ -69,7 +65,7 @@ class RMObject
      * @var array
      * @access protected
      */
-    public $cleanVars = array();
+    public $cleanVars = [];
 
     /**
      * is it a newly created object?
@@ -93,30 +89,30 @@ class RMObject
      * @var array
      * @access private
      */
-    private $_errors = array();
+    private $_errors = [];
 
     /**
      * additional filters registered dynamically by a child class object
      *
      * @access private
      */
-    private $_filters = array();
+    private $_filters = [];
     /**
      * Almacena el nombre de la clave primaria en la base de datos (columna)
      * esta por defecto es 'id'
      */
     protected $primary = 'id';
     protected $db = null;
-    protected $_log = array();
+    protected $_log = [];
     protected $_dbtable = '';
-    private $_tblcolumns = array();
+    private $_tblcolumns = [];
     private $_uniquefield = '';
 
     /**
      * Almacena las columnas (variables) de un objeto
      */
-    private $objectColumns = array();
-    private $primaryCols = array();
+    private $objectColumns = [];
+    private $primaryCols = [];
 
     public function id()
     {
@@ -131,7 +127,6 @@ class RMObject
      */
     public function __set($name, $value)
     {
-
         // Verificamos columnas
         if (isset($this->vars[$name])) {
             return $this->setVar($name, $value);
@@ -151,6 +146,7 @@ class RMObject
         if (isset($this->vars[$name])) {
             return $this->getVar($name);
         }
+
         return null;
     }
 
@@ -173,6 +169,7 @@ class RMObject
     {
         return $this->_isNew;
     }
+
     /**#@-*/
 
     /**#@+
@@ -195,6 +192,7 @@ class RMObject
     {
         return $this->_isDirty;
     }
+
     /**#@-*/
 
     /**
@@ -207,13 +205,15 @@ class RMObject
      * @param bool $required require html form input?
      * @param int $maxlength for XOBJ_DTYPE_TXTBOX type only
      * @param string $option does this data have any select options?
+     * @param null|mixed $value
+     * @param mixed $options
      */
     public function initVar($key, $data_type, $value = null, $required = false, $maxlength = null, $options = '')
     {
         if (isset($this->vars[$key])) {
             return;
         }
-        $this->vars[$key] = array('value' => $value, 'required' => $required, 'data_type' => $data_type, 'maxlength' => $maxlength, 'changed' => false, 'options' => $options);
+        $this->vars[$key] = ['value' => $value, 'required' => $required, 'data_type' => $data_type, 'maxlength' => $maxlength, 'changed' => false, 'options' => $options];
     }
 
     /**
@@ -226,6 +226,7 @@ class RMObject
         if (!isset($this->vars[$var])) {
             return false;
         }
+
         return $this->vars[$var]['data_type'] = $type;
     }
 
@@ -239,6 +240,7 @@ class RMObject
         if (!isset($this->vars[$var])) {
             return false;
         }
+
         return $this->vars[$var]['maxlength'] = $len;
     }
 
@@ -252,6 +254,7 @@ class RMObject
         if (!isset($this->vars[$var])) {
             return false;
         }
+
         return $this->vars[$var]['required'] = $required;
     }
 
@@ -265,7 +268,7 @@ class RMObject
     public function assignVar($key, $value)
     {
         if (isset($value) && isset($this->vars[$key])) {
-            $this->vars[$key]['value'] =& $value;
+            $this->vars[$key]['value'] = &$value;
         }
     }
 
@@ -274,6 +277,7 @@ class RMObject
      *
      * @access private
      * @param array $var_array associative array of values to assign
+     * @param mixed $var_arr
      */
     public function assignVars($var_arr)
     {
@@ -299,7 +303,7 @@ class RMObject
     public function setVar($key, $value, $not_gpc = false)
     {
         if (!empty($key) && isset($value) && isset($this->vars[$key])) {
-            $this->vars[$key]['value'] =& $value;
+            $this->vars[$key]['value'] = &$value;
             $this->vars[$key]['not_gpc'] = $not_gpc;
             $this->vars[$key]['changed'] = true;
             $this->setDirty();
@@ -330,23 +334,25 @@ class RMObject
      * @access private
      * @param array $var_arr associative array of values to assign
      * @param string $pref prefix (only keys starting with the prefix will be set)
+     * @param mixed $not_gpc
      */
     public function setFormVars($var_arr = null, $pref = 'xo_', $not_gpc = false)
     {
-        $len = strlen($pref);
+        $len = mb_strlen($pref);
         foreach ($var_arr as $key => $value) {
-            if ($pref == substr($key, 0, $len)) {
-                $this->setVar(substr($key, $len), $value, $not_gpc);
+            if ($pref == mb_substr($key, 0, $len)) {
+                $this->setVar(mb_substr($key, $len), $value, $not_gpc);
             }
         }
     }
-
 
     /**
      * returns all variables for the object
      *
      * @param bool Return formated vars?
      * @param string Format type (s,e,p,f)
+     * @param mixed $formated
+     * @param mixed $format
      * @return array associative array of key->value pairs
      */
     public function getVars($formated = false, $format = 's')
@@ -355,7 +361,7 @@ class RMObject
             return $this->vars;
         }
 
-        $ret = array();
+        $ret = [];
         foreach ($this->vars as $key => $var) {
             $ret[$key] = $this->getVar($key, $format);
         }
@@ -376,7 +382,7 @@ class RMObject
         if (!isset($keys)) {
             $keys = array_keys($this->vars);
         }
-        $vars = array();
+        $vars = [];
         foreach ($keys as $key) {
             if (isset($this->vars[$key])) {
                 if (is_object($this->vars[$key]) && is_a($this->vars[$key], 'RMObject')) {
@@ -388,6 +394,7 @@ class RMObject
                 }
             }
         }
+
         return $vars;
     }
 
@@ -408,14 +415,14 @@ class RMObject
         $ret = $this->vars[$key]['value'];
 
         switch ($this->vars[$key]['data_type']) {
-
             case XOBJ_DTYPE_TXTBOX:
-                switch (strtolower($format)) {
+                switch (mb_strtolower($format)) {
                     case 's':
                     case 'show':
                     case 'e':
                     case 'edit':
                         $ts = TextCleaner::getInstance();
+
                         return $ts->specialchars($ret);
                         break;
                     case 'p':
@@ -423,6 +430,7 @@ class RMObject
                     case 'f':
                     case 'formpreview':
                         $ts = TextCleaner::getInstance();
+
                         return $ts->specialchars($ts->stripSlashesGPC($ret));
                         break 1;
                     case 'n':
@@ -432,7 +440,7 @@ class RMObject
                 }
                 break;
             case XOBJ_DTYPE_TXTAREA:
-                switch (strtolower($format)) {
+                switch (mb_strtolower($format)) {
                     case 's':
                     case 'show':
                         return TextCleaner::getInstance()->to_display($ret);
@@ -440,21 +448,24 @@ class RMObject
                     case 'e':
                     case 'edit':
                         $ts = TextCleaner::getInstance();
+
                         return $ts->specialchars($ts->stripslashes($ret));
                         break;
                     case 'p':
                     case 'preview':
                         $ts = TextCleaner::getInstance();
                         $html = !empty($this->vars['dohtml']['value']) ? 1 : 0;
-                        $xcode = (!isset($this->vars['doxcode']['value']) || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
-                        $smiley = (!isset($this->vars['dosmiley']['value']) || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
-                        $image = (!isset($this->vars['doimage']['value']) || $this->vars['doimage']['value'] == 1) ? 1 : 0;
-                        $br = (!isset($this->vars['dobr']['value']) || $this->vars['dobr']['value'] == 1) ? 1 : 0;
+                        $xcode = (!isset($this->vars['doxcode']['value']) || 1 == $this->vars['doxcode']['value']) ? 1 : 0;
+                        $smiley = (!isset($this->vars['dosmiley']['value']) || 1 == $this->vars['dosmiley']['value']) ? 1 : 0;
+                        $image = (!isset($this->vars['doimage']['value']) || 1 == $this->vars['doimage']['value']) ? 1 : 0;
+                        $br = (!isset($this->vars['dobr']['value']) || 1 == $this->vars['dobr']['value']) ? 1 : 0;
+
                         return $ts->previewTarea($ret, $html, $smiley, $xcode, $image, $br);
                         break 1;
                     case 'f':
                     case 'formpreview':
                         $ts = TextCleaner::getInstance();
+
                         return htmlspecialchars($ts->stripSlashesGPC($ret), ENT_QUOTES);
                         break 1;
                     case 'n':
@@ -465,14 +476,14 @@ class RMObject
                 }
                 break;
             case XOBJ_DTYPE_ARRAY:
-                if (!is_array($ret) && trim($ret) != '') {
+                if (!is_array($ret) && '' != trim($ret)) {
                     $ret = unserialize($ret);
                 } else {
                     $ret = $ret;
                 }
                 break;
             case XOBJ_DTYPE_SOURCE:
-                switch (strtolower($format)) {
+                switch (mb_strtolower($format)) {
                     case 's':
                     case 'show':
                         break 1;
@@ -483,11 +494,13 @@ class RMObject
                     case 'p':
                     case 'preview':
                         $ts = TextCleaner::getInstance();
+
                         return $ts->stripSlashesGPC($ret);
                         break 1;
                     case 'f':
                     case 'formpreview':
                         $ts = TextCleaner::getInstance();
+
                         return htmlspecialchars($ts->stripSlashesGPC($ret), ENT_QUOTES);
                         break 1;
                     case 'n':
@@ -497,20 +510,21 @@ class RMObject
                 }
                 break;
             default:
-                if ($this->vars[$key]['options'] != '' && $ret != '') {
-                    switch (strtolower($format)) {
+                if ('' != $this->vars[$key]['options'] && '' != $ret) {
+                    switch (mb_strtolower($format)) {
                         case 's':
                         case 'show':
                             $selected = explode('|', $ret);
                             $options = explode('|', $this->vars[$key]['options']);
                             $i = 1;
-                            $ret = array();
+                            $ret = [];
                             foreach ($options as $op) {
-                                if (in_array($i, $selected)) {
+                                if (in_array($i, $selected, true)) {
                                     $ret[] = $op;
                                 }
                                 $i++;
                             }
+
                             return implode(', ', $ret);
                         case 'e':
                         case 'edit':
@@ -522,6 +536,7 @@ class RMObject
                 }
                 break;
         }
+
         return $ret;
     }
 
@@ -536,7 +551,7 @@ class RMObject
     {
         $ts = TextCleaner::getInstance();
         $existing_errors = $this->getErrors();
-        $this->_errors = array();
+        $this->_errors = [];
         foreach ($this->vars as $k => $v) {
             $cleanv = $v['value'];
             if (!$v['changed']) {
@@ -544,18 +559,18 @@ class RMObject
                 $cleanv = is_string($cleanv) ? trim($cleanv) : $cleanv;
                 switch ($v['data_type']) {
                     case XOBJ_DTYPE_TXTBOX:
-                        if ($v['required'] && $cleanv != '0' && $cleanv == '') {
+                        if ($v['required'] && '0' != $cleanv && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue;
                         }
-                        if (isset($v['maxlength']) && strlen($cleanv) > (int)$v['maxlength']) {
+                        if (isset($v['maxlength']) && mb_strlen($cleanv) > (int)$v['maxlength']) {
                             $this->setErrors(sprintf(_XOBJ_ERR_SHORTERTHAN, $k, (int)$v['maxlength']));
                             continue;
                         }
                         $cleanv = TextCleaner::stripslashes($cleanv);
                         break;
                     case XOBJ_DTYPE_TXTAREA:
-                        if ($v['required'] && $cleanv != '0' && $cleanv == '') {
+                        if ($v['required'] && '0' != $cleanv && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue;
                         }
@@ -569,22 +584,22 @@ class RMObject
                         $cleanv = (int)$cleanv;
                         break;
                     case XOBJ_DTYPE_EMAIL:
-                        if ($v['required'] && $cleanv == '') {
+                        if ($v['required'] && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue;
                         }
-                        if ($cleanv != '' && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $cleanv)) {
-                            $this->setErrors("Invalid Email");
+                        if ('' != $cleanv && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $cleanv)) {
+                            $this->setErrors('Invalid Email');
                             continue;
                         }
                         $cleanv = TextCleaner::stripslashes($cleanv);
                         break;
                     case XOBJ_DTYPE_URL:
-                        if ($v['required'] && $cleanv == '') {
+                        if ($v['required'] && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue;
                         }
-                        if ($cleanv != '' && !preg_match("/^http[s]*:\/\//i", $cleanv)) {
+                        if ('' != $cleanv && !preg_match("/^http[s]*:\/\//i", $cleanv)) {
                             $cleanv = 'http://' . $cleanv;
                         }
                         $cleanv = TextCleaner::stripslashes($cleanv);
@@ -601,16 +616,18 @@ class RMObject
                         break;
                 }
             }
-            $this->cleanVars[$k] =& $cleanv;
+            $this->cleanVars[$k] = &$cleanv;
             unset($cleanv);
         }
 
         if (count($this->_errors) > 0) {
             $this->_errors = array_merge($existing_errors, $this->_errors);
+
             return false;
         }
         $this->_errors = array_merge($existing_errors, $this->_errors);
         $this->unsetDirty();
+
         return true;
     }
 
@@ -623,8 +640,8 @@ class RMObject
             $var['value'] = '';
         }
         $this->_isNew = true;
-        $this->_errors = array();
-        $this->_filters = array();
+        $this->_errors = [];
+        $this->_filters = [];
     }
 
     /**
@@ -645,9 +662,9 @@ class RMObject
      */
     public function _loadFilters()
     {
-        //include_once ABSPATH.'/class/filters/filter.php';
+        //require_once ABSPATH.'/class/filters/filter.php';
         //foreach ($this->_filters as $f) {
-        //    include_once ABSPATH.'/class/filters/'.strtolower($f).'php';
+        //    require_once ABSPATH.'/class/filters/'.strtolower($f).'php';
         //}
     }
 
@@ -666,6 +683,7 @@ class RMObject
         }
         // need this to notify the handler class that this is a newly created object
         $clone->setNew();
+
         return $clone;
     }
 
@@ -673,6 +691,7 @@ class RMObject
      * add an error
      *
      * @param string $value error to add
+     * @param mixed $err_str
      * @access public
      */
     public function setErrors($err_str)
@@ -724,7 +743,7 @@ class RMObject
         $ret = '';
 
         if (count($this->_errors) <= 0) {
-            return $html ? '' : array();
+            return $html ? '' : [];
         }
 
         if ($html) {
@@ -746,9 +765,9 @@ class RMObject
     {
         if (isset($this->vars[$var])) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -758,7 +777,7 @@ class RMObject
      */
     protected function logger($event, $style = '')
     {
-        $rtn = array();
+        $rtn = [];
         $rtn['event'] = $event;
         $rtn['style'] = $style;
         $this->_log[] = $rtn;
@@ -769,7 +788,7 @@ class RMObject
      */
     protected function clearLogger()
     {
-        $this->_log = array();
+        $this->_log = [];
     }
 
     /**
@@ -789,13 +808,13 @@ class RMObject
         $rtn = '';
         foreach ($this->_log as $k) {
             $rtn .= "<div style='padding: 2px;";
-            if ($k['style'] != '') {
-                if (stripos($k['style'], 'text-align:') == '') {
+            if ('' != $k['style']) {
+                if ('' == mb_stripos($k['style'], 'text-align:')) {
                     $rtn .= ' text-align: left;';
                 }
                 $rtn .= ' ' . $k['style'];
             }
-            $rtn .= "'>" . (trim($k['event']) == '' ? '&nbsp;' : $k['event']) . "</div>\n";
+            $rtn .= "'>" . ('' == trim($k['event']) ? '&nbsp;' : $k['event']) . "</div>\n";
         }
 
         return $rtn;
@@ -815,22 +834,23 @@ class RMObject
             $this->primary = $primaryCols[get_class($this)];
             $this->_uniquefield = $primaryCols[get_class($this)];
             $this->_tblcolumns = $objectColumns[get_class($this)];
-            return $objectColumns[get_class($this)];
-        } else {
-            if (empty($this->_tblcolumns)) {
-                $result = $this->db->queryF("SHOW COLUMNS IN " . $this->_dbtable);
-                while ($row = $this->db->fetchArray($result)) {
-                    if ($row['Extra'] == 'auto_increment') {
-                        $this->primary = $row['Field'];
-                        $this->_uniquefield = $row['Field']; // To prevent issues
-                        $primaryCols[get_class($this)] = $row['Field'];
-                    }
-                    $this->_tblcolumns[$row['Field']] = $row;
-                }
-            }
-            $objectColumns[get_class($this)] = $this->_tblcolumns;
+
             return $objectColumns[get_class($this)];
         }
+        if (empty($this->_tblcolumns)) {
+            $result = $this->db->queryF('SHOW COLUMNS IN ' . $this->_dbtable);
+            while (false !== ($row = $this->db->fetchArray($result))) {
+                if ('auto_increment' == $row['Extra']) {
+                    $this->primary = $row['Field'];
+                    $this->_uniquefield = $row['Field']; // To prevent issues
+                    $primaryCols[get_class($this)] = $row['Field'];
+                }
+                $this->_tblcolumns[$row['Field']] = $row;
+            }
+        }
+        $objectColumns[get_class($this)] = $this->_tblcolumns;
+
+        return $objectColumns[get_class($this)];
     }
 
     /**
@@ -840,7 +860,7 @@ class RMObject
     protected function initVarsFromTable()
     {
         foreach ($this->getColumns() as $k => $v) {
-            $efes = array();
+            $efes = [];
             preg_match("/(.+)(\(([,0-9]+)\))/", $v['Type'], $efes);
             if (!isset($efes[1])) {
                 $efes[1] = $v['Type'];
@@ -900,14 +920,12 @@ class RMObject
                     $type = XOBJ_DTYPE_OTHER;
                     $lon = null;
                     break;
-
-
             }
 
             $this->initVar($v['Field'], $type, $v['Default'], false, $lon);
             $this->vars[$v['Field']]['dbtype'] = $efes[1];
 
-            if (in_array($v['Field'], $this->noTranslate)) {
+            if (in_array($v['Field'], $this->noTranslate, true)) {
                 $this->vars[$v['Field']]['translate'] = 0;
             }
         }
@@ -929,7 +947,7 @@ class RMObject
         /**
          * Added on Sep-05-2017
          */
-        if (null != $filters && is_array($filters) && false == empty($filters)) {
+        if (null != $filters && is_array($filters) && false === empty($filters)) {
             foreach ($filters as $column => $value) {
                 $column = $this->escape($column);
                 $value = $this->escape($value);
@@ -971,13 +989,14 @@ class RMObject
                 'element' => $this->ownerName,
                 'type' => $this->ownerType,
                 'id' => $this->vars[$this->_uniquefield]['value'],
-                'object' => strtolower(get_class($this))
+                'object' => mb_strtolower(get_class($this)),
             ]);
         }
     }
 
     /**
      * Load the object values from database with a filtered query
+     * @param mixed $filter
      */
     protected function loadValuesFiltered($filter = '')
     {
@@ -1015,7 +1034,7 @@ class RMObject
                 $v = stripslashes($v);
             }
             $values[$k] = $this->escape($v);
-            $query .= $query == '' ? "`$k`='$v'" : " AND `$k`='$v'";
+            $query .= '' == $query ? "`$k`='$v'" : " AND `$k`='$v'";
         }
 
         $sql = "SELECT * FROM $this->_dbtable WHERE $query";
@@ -1043,7 +1062,7 @@ class RMObject
                 'element' => $this->ownerName,
                 'type' => $this->ownerType,
                 'id' => $this->id(),
-                'object' => strtolower(get_class($this))
+                'object' => mb_strtolower(get_class($this)),
             ]);
 
             /**
@@ -1080,23 +1099,24 @@ class RMObject
         $fields = '';
         $values = '';
         foreach ($this->_tblcolumns as $k) {
-            if ($k['Extra'] == 'auto_increment') {
+            if ('auto_increment' == $k['Extra']) {
                 continue;
             }
-            $fields .= ($fields == '') ? "`$k[Field]`" : ", `$k[Field]`";
-            $values .= ($values == '') ? "'" . $this->escape($this->cleanVars[$k['Field']]) . "'" : ", '" . $this->escape($this->cleanVars[$k['Field']]) . "'";
+            $fields .= ('' == $fields) ? "`$k[Field]`" : ", `$k[Field]`";
+            $values .= ('' == $values) ? "'" . $this->escape($this->cleanVars[$k['Field']]) . "'" : ", '" . $this->escape($this->cleanVars[$k['Field']]) . "'";
         }
 
-        $sql .= $fields . ") VALUES (" . $values . ")";
+        $sql .= $fields . ') VALUES (' . $values . ')';
 
         if (!$this->db->queryF($sql)) {
             $this->addError($this->db->error() . $sql);
+
             return false;
-        } else {
-            $this->setVar($this->primary, $this->db->getInsertId());
-            $this->unsetNew();
-            return true;
         }
+        $this->setVar($this->primary, $this->db->getInsertId());
+        $this->unsetNew();
+
+        return true;
     }
 
     /**
@@ -1123,23 +1143,23 @@ class RMObject
         $sql = "UPDATE $this->_dbtable SET ";
         $fields = '';
 
-
         foreach ($this->_tblcolumns as $k) {
-            if ($k['Extra'] == 'auto_increment') {
+            if ('auto_increment' == $k['Extra']) {
                 continue;
             }
-            $fields .= $fields == '' ? "`$k[Field]`='" . addslashes($this->cleanVars[$k['Field']]) . "'" : ", `$k[Field]`='" . addslashes($this->cleanVars[$k['Field']]) . "'";
+            $fields .= '' == $fields ? "`$k[Field]`='" . addslashes($this->cleanVars[$k['Field']]) . "'" : ", `$k[Field]`='" . addslashes($this->cleanVars[$k['Field']]) . "'";
         }
 
         $sql .= $fields . " WHERE `$this->primary`='" . $this->getVar($this->primary) . "'";
 
         $this->db->queryF($sql);
-        if ($this->db->error() != '') {
+        if ('' != $this->db->error()) {
             $this->addError($this->db->error());
+
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**
@@ -1149,13 +1169,14 @@ class RMObject
     {
         $sql = "DELETE FROM $this->_dbtable WHERE `$this->primary`='" . $this->getVar($this->primary) . "'";
         $this->db->queryF($sql);
-        if ($this->db->error() != '') {
+        if ('' != $this->db->error()) {
             $this->addError($this->db->error());
+
             return false;
-        } else {
-            $this->deleteTranslated();
-            return true;
         }
+        $this->deleteTranslated();
+
+        return true;
     }
 
     public function deleteTranslated()
@@ -1166,7 +1187,7 @@ class RMObject
                 'element' => $this->ownerName,
                 'type' => $this->ownerType,
                 'id' => $this->id(),
-                'object' => strtolower(get_class($this))
+                'object' => mb_strtolower(get_class($this)),
             ]);
 
             /**
@@ -1182,6 +1203,7 @@ class RMObject
     /**
      * Escape a string for secure use
      * @param string String to escape
+     * @param mixed $string
      * @return string Escaped string
      */
     protected function escape($string)
@@ -1189,16 +1211,17 @@ class RMObject
         if (method_exists($this->db, 'escape')) {
             return $this->db->escape($string);
         }
-        return mysqli_real_escape_string($this->db->conn, $string);
+
+        return $GLOBALS['xoopsDB']->escape($this->db->conn, $string);
     }
 
     public function save()
     {
         if ($this->isNew()) {
             return $this->saveToTable();
-        } else {
-            return $this->updateTable();
         }
+
+        return $this->updateTable();
     }
 
     public function delete()

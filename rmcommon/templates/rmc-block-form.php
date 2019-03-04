@@ -2,7 +2,7 @@
 
 <ul class="nav nav-tabs settings-nav">
     <li class="active"><a href="#general-content" data-toggle="tab"><?php _e('General Settings', 'rmcommon'); ?></a></li>
-    <?php if ($block_options || $block->getVar('type')=='custom'): ?>
+    <?php if ($block_options || 'custom' == $block->getVar('type')): ?>
         <li><a href="#custom-content" data-toggle="tab"><?php _e('Custom Options', 'rmcommon'); ?></a></li>
     <?php endif; ?>
 </ul>
@@ -19,7 +19,7 @@
                 <div class="form-group">
 
                     <label for="bk-name"><strong><?php _e('Block Title', 'rmcommon'); ?></strong></label>
-                    <input type="text" name="bk_name" size="50" class="form-control input-lg" value="<?php echo $block->getVar('name'); ?>" />
+                    <input type="text" name="bk_name" size="50" class="form-control input-lg" value="<?php echo $block->getVar('name'); ?>">
 
                 </div>
 
@@ -30,7 +30,7 @@
                             <label for="bk-pos"><strong><?php _e('Block position', 'rmcommon'); ?></strong></label>
                             <select name="bk_pos" id="bk-pos" class="form-control">
                                 <?php foreach ($positions as $pos): ?>
-                                    <option value="<?php echo $pos['id_position']; ?>"<?php echo $block->getVar('canvas')==$pos['id_position']?' selected="selected"' : ''; ?>><?php echo $pos['name']; ?></option>
+                                    <option value="<?php echo $pos['id_position']; ?>"<?php echo $block->getVar('canvas') == $pos['id_position'] ? ' selected="selected"' : ''; ?>><?php echo $pos['name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="col-md-4 col-lg-4">
                         <div class="form-group">
                             <label for="bk-weight"><strong><?php _e('Block weight', 'rmcommon'); ?></strong></label>
-                            <input type="text" class="form-control" name="bk_weight" id="bk-weight" value="<?php echo $block->getVar('weight'); ?>" />
+                            <input type="text" class="form-control" name="bk_weight" id="bk-weight" value="<?php echo $block->getVar('weight'); ?>">
                         </div>
                     </div>
 
@@ -69,10 +69,10 @@
                         <div class="form-group">
                             <label for="bk-visible"><strong><?php _e('Visible', 'rmcommon'); ?></strong></label><br>
                             <div class="radio-inline">
-                                <label><input type="radio" value="1" name="bk_visible" id="bk-visible" <?php echo $block->getVar('visible')==1?'checked="checked"':''; ?>/> <?php _e('Yes', 'rmcommon'); ?></label>
+                                <label><input type="radio" value="1" name="bk_visible" id="bk-visible" <?php echo 1 == $block->getVar('visible') ? 'checked' : ''; ?>> <?php _e('Yes', 'rmcommon'); ?></label>
                             </div>
                             <div class="radio-inline">
-                                <label><input type="radio" value="0" name="bk_visible" <?php echo $block->getVar('visible')==0?'checked="checked"':''; ?>/> <?php _e('No', 'rmcommon'); ?></label>
+                                <label><input type="radio" value="0" name="bk_visible" <?php echo 0 == $block->getVar('visible') ? 'checked' : ''; ?>> <?php _e('No', 'rmcommon'); ?></label>
                             </div>
                         </div>
 
@@ -98,11 +98,11 @@
             </div>
             <!--// End general content -->
 
-            <?php if ($block_options || $block->getVar('type')=='custom'): ?>
+            <?php if ($block_options || 'custom' == $block->getVar('type')) : ?>
             <!-- Custom Content -->
             <div class="tab-pane" id="custom-content">
                 <?php echo $block_options; ?>
-                <?php if ($block->getVar('type')=='custom'): ?>
+                <?php if ('custom' == $block->getVar('type')): ?>
                     <legend><?php _e('Custom Block Content', 'rmcommon'); ?></legend>
                     <div class="form-group">
                         <textarea cols="45" rows="10" name="bk_content" id="bk-content" class="form-control" style="height: 300px;"><?php echo htmlspecialchars($block->getVar('content')); ?></textarea>
@@ -111,10 +111,10 @@
                     <div class="form-group">
                         <label for="c-type"><strong><?php _e('Content type:', 'rmcommon'); ?></strong></label>
                         <select name="bk_ctype" id="c-type" class="form-control">
-                            <option value="TEXT"<?php echo $block->getVar('content_type')=='TEXT' ? ' selected="selected"' : ''; ?>><?php _e('Formatted text', 'rmcommon'); ?></option>
-                            <option value="HTML"<?php echo $block->getVar('content_type')=='HTML' ? ' selected="selected"' : ''; ?>><?php _e('HTML block', 'rmcommon'); ?></option>
-                            <option value="PHP"<?php echo $block->getVar('content_type')=='PHP' ? ' selected="selected"' : ''; ?>><?php _e('PHP block', 'rmcommon'); ?></option>
-                            <option value="XOOPS"<?php echo $block->getVar('content_type')=='XOOPS' ? ' selected="selected"' : ''; ?>><?php _e('XOOPS code', 'rmcommon'); ?></option>
+                            <option value="TEXT"<?php echo 'TEXT' == $block->getVar('content_type') ? ' selected="selected"' : ''; ?>><?php _e('Formatted text', 'rmcommon'); ?></option>
+                            <option value="HTML"<?php echo 'HTML' == $block->getVar('content_type') ? ' selected="selected"' : ''; ?>><?php _e('HTML block', 'rmcommon'); ?></option>
+                            <option value="PHP"<?php echo 'PHP' == $block->getVar('content_type') ? ' selected="selected"' : ''; ?>><?php _e('PHP block', 'rmcommon'); ?></option>
+                            <option value="XOOPS"<?php echo 'XOOPS' == $block->getVar('content_type') ? ' selected="selected"' : ''; ?>><?php _e('XOOPS code', 'rmcommon'); ?></option>
                         </select>
                     </div>
 
@@ -132,8 +132,8 @@
         <button type="button" onclick="blocksAjax.sendConfig();" class="btn btn-lg btn-primary pull-right"><?php _e('Save Settings', 'rmcommon'); ?></button>
     </div>
 
-    <input type="hidden" name="action" value="saveconfig" />
-    <input type="hidden" name="bid" value="<?php echo $id; ?>" />
+    <input type="hidden" name="action" value="saveconfig">
+    <input type="hidden" name="bid" value="<?php echo $id; ?>">
     <input type="hidden" name="XOOPS_TOKEN_REQUEST" value="<?php echo $xoopsSecurity->createToken(); ?>">
 </fieldset>
 </form>

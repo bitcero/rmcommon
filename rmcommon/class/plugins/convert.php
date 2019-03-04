@@ -33,12 +33,13 @@ class phMagick_convert
     {
         $cmd = $p->getBinary('convert');
         $cmd .= ' -quality ' . $p->getImageQuality();
-        $cmd .= ' "' . $p->getSource() .'"  "'. $p->getDestination().'"';
+        $cmd .= ' "' . $p->getSource() . '"  "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     public function save(phmagick $p)

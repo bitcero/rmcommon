@@ -41,7 +41,7 @@
 				</tr>
 			<?php endif; ?>
 			<?php foreach ($installed_plugins as $plugin): ?>
-				<tr class="<?php echo tpl_cycle("even,odd"); ?>" valign="top">
+				<tr class="<?php echo tpl_cycle('even,odd'); ?>" valign="top">
 					<td>
 						<?php if ($plugin->get_info('hasmain')): ?>
 							<strong><a href="plugins.php?p=<?php echo $plugin->get_info('dir'); ?>"><?php echo $plugin->getVar('name'); ?></a></strong>
@@ -68,15 +68,15 @@
 						<strong><?php echo is_array($plugin->get_info('version')) ? RMModules::format_module_version($plugin->get_info('version')) : $plugin->get_info('version'); ?></strong>
 					</td>
 					<td align="center">
-						<?php if ($plugin->get_info('web')!=''): ?>
+						<?php if ('' != $plugin->get_info('web')): ?>
 							<strong><a href="<?php echo $plugin->get_info('web'); ?>"><?php echo $plugin->get_info('author'); ?></a></strong>
 						<?php else: ?>
 							<strong><?php echo $plugin->get_info('author'); ?></strong>
-						<?php endif; ?><br />
+						<?php endif; ?><br>
 						<?php echo $plugin->get_info('email'); ?>
 					</td>
 					<td align="center">
-						<?php echo $plugin->getVar('status')?__('Active', 'rmcommon'):__('Inactive', 'rmcommon'); ?>
+						<?php echo $plugin->getVar('status') ? __('Active', 'rmcommon') : __('Inactive', 'rmcommon'); ?>
 					</td>
 				</tr>
 			<?php endforeach; ?>
@@ -111,7 +111,7 @@
 				</tr>
 			<?php endif; ?>
 			<?php foreach ($available_plugins as $plugin): ?>
-				<tr class="<?php echo tpl_cycle("even,odd"); ?>" valign="top">
+				<tr class="<?php echo tpl_cycle('even,odd'); ?>" valign="top">
 					<td>
 						<strong><?php echo $plugin->get_info('name'); ?></strong>
 			<span class="cu-item-options">
@@ -126,11 +126,11 @@
 						<strong><?php echo RMFormat::version($plugin->get_info('version')); ?></strong>
 					</td>
 					<td align="center">
-						<?php if ($plugin->get_info('web')!=''): ?>
+						<?php if ('' != $plugin->get_info('web')): ?>
 							<strong><a href="<?php echo $plugin->get_info('web'); ?>"><?php echo $plugin->get_info('author'); ?></a></strong>
 						<?php else: ?>
 							<strong><?php echo $plugin->get_info('author'); ?></strong>
-						<?php endif; ?><br />
+						<?php endif; ?><br>
 						<?php echo $plugin->get_info('email'); ?>
 					</td>
 				</tr>

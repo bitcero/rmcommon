@@ -15,7 +15,7 @@ abstract class RMController
     /**
      * Controller data
      */
-    private $data = array();
+    private $data = [];
     /**
      * @var string Default action to use in this method. Can be changed in Controller::__construct method.
      */
@@ -56,22 +56,22 @@ abstract class RMController
     {
         if ('' == $model) {
             $model = $this->parent->controller;
-            $class = ucfirst($this->parent->directory) . '_' . ucfirst($this->parent->controller) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
+            $class = ucfirst($this->parent->directory) . '_' . ucfirst($this->parent->controller) . '_' . (defined('XOOPS_CPFUNC_LOADED') ? 'Admin_' : '') . 'Model';
         } else {
-            $class = ucfirst($this->parent->directory) . '_' . ucfirst($model) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
+            $class = ucfirst($this->parent->directory) . '_' . ucfirst($model) . '_' . (defined('XOOPS_CPFUNC_LOADED') ? 'Admin_' : '') . 'Model';
         }
 
         if (is_a($this->model[$model], $class)) {
             return $this->model[$model];
         }
 
-        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . (defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '') . '/models/' . strtolower($model) . '.php';
+        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . (defined('XOOPS_CPFUNC_LOADED') ? '/admin' : '') . '/models/' . mb_strtolower($model) . '.php';
 
         if (!file_exists($file)) {
             throw new RMException(sprintf(__('The model "%s" does not exists!', 'rmcommon'), $model));
         }
 
-        include_once $file;
+        require_once $file;
 
         $this->model[$model] = new $class();
         $this->model[$model]->controller = $this;
@@ -98,10 +98,10 @@ abstract class RMController
      * @param array $parameters Parameters as associative array
      * @return string
      */
-    public function url($action = '', $parameters = array())
+    public function url($action = '', $parameters = [])
     {
         $url = $this->parent->url . '/' . $this->controller . '/' . $action;
-        $url = trim($url, "/");
+        $url = trim($url, '/');
         $query = '';
 
         foreach ($parameters as $var => $value) {
@@ -120,7 +120,7 @@ abstract class RMController
         $acceptableMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 
         if (is_string($acceptedMethods)) {
-            if (!in_array($acceptedMethods, $acceptableMethods)) {
+            if (!in_array($acceptedMethods, $acceptableMethods, true)) {
                 throw new RMException(__('Provided request method is not acceptable!', 'rmcommon'));
             }
 
@@ -137,17 +137,16 @@ abstract class RMController
 
         $currentMethod = $_SERVER['REQUEST_METHOD'];
 
-        return in_array($currentMethod, $acceptedMethods);
+        return in_array($currentMethod, $acceptedMethods, true);
     }
-
 
     protected function getParameter($name, $type = 'string', $default = '')
     {
         if (isset($this->parameters[$name])) {
             return RMHttpRequest::array_value($name, $this->parameters, $type, $default);
-        } else {
-            return RMHttpRequest::request($name, $type, $default);
         }
+
+        return RMHttpRequest::request($name, $type, $default);
     }
 
     protected function display()

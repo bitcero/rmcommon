@@ -8,12 +8,11 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-
 class RMFormRewrite extends RMFormElement
 {
     private $default = '';
 
-    public function __construct($caption, $name, $default = array())
+    public function __construct($caption, $name, $default = [])
     {
         $this->setCaption($caption);
         $this->setName($name);
@@ -28,16 +27,15 @@ class RMFormRewrite extends RMFormElement
 
     public function render()
     {
-
         /**
          * Load all modules that supports rewrite feature
          */
-        $module_handler = xoops_getHandler('module');
-        $objects = $module_handler->getObjects();
-        $modules = array();
+        $moduleHandler = xoops_getHandler('module');
+        $objects = $moduleHandler->getObjects();
+        $modules = [];
 
         foreach ($objects as $mod) {
-            if (!$mod->getInfo('rewrite') || $mod->getVar('dirname') == 'rmcommon') {
+            if (!$mod->getInfo('rewrite') || 'rmcommon' == $mod->getVar('dirname')) {
                 continue;
             }
 

@@ -10,7 +10,6 @@ Smart-B ERP
 @version    $Id$
 ----------------------------------------
 **/
-
 class RMLoader
 {
     public static function api($name, $class)
@@ -24,7 +23,7 @@ class RMLoader
             return false;
         }
 
-        include_once $dir . '/' . $class . '.class.php';
+        require_once $dir . '/' . $class . '.class.php';
 
         return null;
     }

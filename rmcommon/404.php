@@ -25,12 +25,11 @@
  * @license      GPL v2
  * @link         http://eduardocortes.mx
  */
-
 if (!isset($xoopsOption['module_subpage'])) {
     $xoopsOption['module_subpage'] = 'error404';
 }
 
-require '../../mainfile.php';
+require dirname(__DIR__) . '/../mainfile.php';
 
 RMTemplate::get()->header();
 

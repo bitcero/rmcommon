@@ -36,7 +36,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
      *
      * @var string[]
      */
-    protected static $_qpMap = array(
+    protected static $_qpMap = [
         0 => '=00', 1 => '=01', 2 => '=02', 3 => '=03', 4 => '=04',
         5 => '=05', 6 => '=06', 7 => '=07', 8 => '=08', 9 => '=09',
         10 => '=0A', 11 => '=0B', 12 => '=0C', 13 => '=0D', 14 => '=0E',
@@ -89,16 +89,16 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
         245 => '=F5', 246 => '=F6', 247 => '=F7', 248 => '=F8', 249 => '=F9',
         250 => '=FA', 251 => '=FB', 252 => '=FC', 253 => '=FD', 254 => '=FE',
         255 => '=FF',
-        );
+        ];
 
-    protected static $_safeMapShare = array();
+    protected static $_safeMapShare = [];
 
     /**
      * A map of non-encoded ascii characters.
      *
      * @var string[]
      */
-    protected $_safeMap = array();
+    protected $_safeMap = [];
 
     /**
      * Creates a new QpEncoder for the given CharacterStream.
@@ -120,7 +120,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
 
     public function __sleep()
     {
-        return array('_charStream', '_filter');
+        return ['_charStream', '_filter'];
     }
 
     public function __wakeup()
@@ -141,7 +141,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
     protected function initSafeMap()
     {
         foreach (array_merge(
-            array(0x09, 0x20),
+            [0x09, 0x20],
             range(0x21, 0x3C),
             range(0x3E, 0x7E)
         ) as $byte) {
@@ -170,7 +170,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
 
         $thisLineLength = $maxLineLength - $firstLineOffset;
 
-        $lines = array();
+        $lines = [];
         $lNo = 0;
         $lines[$lNo] = '';
         $currentLine = &$lines[$lNo++];
@@ -202,8 +202,8 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
 
             $enc = $this->_encodeByteSequence($bytes, $size);
 
-            $i = strpos($enc, '=0D=0A');
-            $newLineLength = $lineLen + ($i === false ? $size : $i);
+            $i = mb_strpos($enc, '=0D=0A');
+            $newLineLength = $lineLen + (false === $i ? $size : $i);
 
             if ($currentLine && $newLineLength >= $thisLineLength) {
                 $lines[$lNo] = '';
@@ -214,11 +214,11 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
 
             $currentLine .= $enc;
 
-            if ($i === false) {
+            if (false === $i) {
                 $lineLen += $size;
             } else {
                 // 6 is the length of '=0D=0A'.
-                $lineLen = $size - strrpos($enc, '=0D=0A') - 6;
+                $lineLen = $size - mb_strrpos($enc, '=0D=0A') - 6;
             }
         }
 
@@ -238,7 +238,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
     /**
      * Encode the given byte array into a verbatim QP form.
      *
-     * @param integer[] $bytes
+     * @param int[] $bytes
      * @param int       $size
      *
      * @return string
@@ -265,7 +265,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
      *
      * @param int $size number of bytes to read
      *
-     * @return integer[]
+     * @return int[]
      */
     protected function _nextSequence($size = 4)
     {
@@ -282,11 +282,11 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
     protected function _standardize($string)
     {
         $string = str_replace(
-            array("\t=0D=0A", ' =0D=0A', '=0D=0A'),
-            array("=09\r\n", "=20\r\n", "\r\n"),
+            ["\t=0D=0A", ' =0D=0A', '=0D=0A'],
+            ["=09\r\n", "=20\r\n", "\r\n"],
             $string
             );
-        switch ($end = ord(substr($string, -1))) {
+        switch ($end = ord(mb_substr($string, -1))) {
             case 0x09:
             case 0x20:
                 $string = substr_replace($string, self::$_qpMap[$end], -1);

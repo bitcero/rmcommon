@@ -53,7 +53,7 @@
                 <h3 class="box-title"><?php echo sprintf(__('%s Updates Available!', 'rmcommon'), '<span class="badge badge-warning">%s</span>'); ?></h3>
             </div>
             <div class="box-content">
-                <p class="text-warning"><?php echo sprintf(__('Please %s to view available updates.', 'rmcommon'), '<a href="updates.php">'.__('click here', 'rmcommon').'</a>'); ?></p>
+                <p class="text-warning"><?php echo sprintf(__('Please %s to view available updates.', 'rmcommon'), '<a href="updates.php">' . __('click here', 'rmcommon') . '</a>'); ?></p>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-//@require 'Swift/Mime/Message.php';
+//@require __DIR__ . '/Swift/Mime/Message.php';
 
 /**
  * The Reporter plugin sends pass/fail notification to a Reporter.
@@ -18,13 +18,12 @@
  */
 interface Swift_Plugins_Reporter
 {
-  
-  /** The recipient was accepted for delivery */
+    /** The recipient was accepted for delivery */
     const RESULT_PASS = 0x01;
-  
+
     /** The recipient could not be accepted */
     const RESULT_FAIL = 0x10;
-  
+
     /**
      * Notifies this ReportNotifier that $address failed or succeeded.
      * @param Swift_Mime_Message $message

@@ -8,7 +8,6 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 trait RMFormComponent
 {
     use RMProperties;
@@ -77,7 +76,7 @@ trait RMFormComponent
 
     final protected function get_id()
     {
-        return strtolower(str_replace('Admin', '', $this->model_name)) . '-' . $this->element;
+        return mb_strtolower(str_replace('Admin', '', $this->model_name)) . '-' . $this->element;
     }
 
     public function open()

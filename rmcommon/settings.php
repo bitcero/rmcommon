@@ -8,7 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-include_once '../../include/cp_header.php';
+require_once dirname(__DIR__) . '/../include/cp_header.php';
 //require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
 $common->location = 'cu-settings';
 
@@ -24,25 +24,25 @@ function show_configurable_items()
 {
     global $xoopsModule, $cuSettings, $xoopsModuleConfig, $rmTpl;
 
-    $rmTpl->add_style("settings.css", 'rmcommon', array('footer' => 1));
+    $rmTpl->add_style('settings.css', 'rmcommon', ['footer' => 1]);
     $db = XoopsDatabaseFactory::getDatabaseConnection();
-    $sql = "SELECT mid FROM " . $db->prefix("modules") . " WHERE dirname='system' OR hasconfig=1 ORDER BY name ASC";
+    $sql = 'SELECT mid FROM ' . $db->prefix('modules') . " WHERE dirname='system' OR hasconfig=1 ORDER BY name ASC";
     $result = $db->query($sql);
 
     $mh = xoops_getHandler('module');
-    $modules = array();
+    $modules = [];
 
-    while ($row = $db->fetchArray($result)) {
+    while (false !== ($row = $db->fetchArray($result))) {
         $mod = $mh->get($row['mid']);
-        $modules[] = array(
+        $modules[] = [
             'id' => $mod->mid(),
             'name' => $mod->getVar('name'),
-            'logo' => XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('image')
-        );
+            'logo' => XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('image'),
+        ];
     }
 
     $rmTpl->header();
-    include $rmTpl->get_template("rmc-settings.php", 'module', 'rmcommon');
+    include $rmTpl->get_template('rmc-settings.php', 'module', 'rmcommon');
     $rmTpl->footer();
 }
 
@@ -57,7 +57,7 @@ function show_module_preferences()
     $token = RMHttpRequest::get('CUTOKEN_REQUEST', 'string', '');
     $ajax = new AjaxResponse();
 
-    $is_popup = $quick == 1 && $token != '';
+    $is_popup = 1 == $quick && '' != $token;
 
     if ($is_popup) {
         $ajax->prepare();
@@ -66,7 +66,7 @@ function show_module_preferences()
                 __('Unauthorized action', 'rmcommon'),
                 1,
                 0,
-                array('reload' => true)
+                ['reload' => true]
             );
         }
     }
@@ -94,10 +94,10 @@ function show_module_preferences()
     /**
      * Verify if module is rmcommon native or not
      */
-    if ($module->getInfo('rmnative') != 1) {
+    if (1 != $module->getInfo('rmnative')) {
         RMUris::redirect_with_message(
             __('This module can not be configured with Common Utilities', 'rmcommon'),
-            XOOPS_URL. '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $mod,
+            XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $mod,
             RMMSG_INFO
         );
     }
@@ -108,30 +108,30 @@ function show_module_preferences()
     $values = RMSettings::module_settings($module->getVar('dirname'));
     $configs = $module->getInfo('config');
     $settings_categories = $module->getInfo('categories');
-    $categories = array();
+    $categories = [];
 
     if (empty($settings_categories)) {
-        $categories = array(
-            'all' => array(
-                'caption' => __('Preferences', 'rmcommon')
-            )
-        );
+        $categories = [
+            'all' => [
+                'caption' => __('Preferences', 'rmcommon'),
+            ],
+        ];
     } else {
         foreach ($settings_categories as $category => $caption) {
             // Verify if category has been provided in array format
             if (is_array($caption) && array_key_exists('caption', $caption)) {
                 $categories[$category] = $caption;
             } else {
-                $categories[$category] = array('caption' => $caption);
+                $categories[$category] = ['caption' => $caption];
             }
         }
     }
 
     unset($settings_categories);
 
-    $fields = array(); // Container for all fields and values
+    $fields = []; // Container for all fields and values
     foreach ($configs as $option) {
-        $name = ucfirst($module->getVar('dirname')).'['.$option['name'].']';
+        $name = ucfirst($module->getVar('dirname')) . '[' . $option['name'] . ']';
 
         $field = new stdClass();
         $field->name = $name;
@@ -149,7 +149,7 @@ function show_module_preferences()
             $categories[$category]['fields'][$field->id] = $field;
         } else {
             if (!isset($categories['all'])) {
-                $categories['all'] = array('caption' => __('Preferences', 'rmcommon'));
+                $categories['all'] = ['caption' => __('Preferences', 'rmcommon')];
             }
 
             $categories['all']['fields'][$field->id] = $field;
@@ -158,7 +158,7 @@ function show_module_preferences()
 
     $categories = RMEvents::get()->trigger('rmcommon.settings.fields', $categories, $module);
 
-    $rmTpl->add_style('settings.css', 'rmcommon', array('footer' => 1));
+    $rmTpl->add_style('settings.css', 'rmcommon', ['footer' => 1]);
 
     /* Breadcrumb */
     $bc = RMBreadCrumb::get();
@@ -185,14 +185,14 @@ function show_module_preferences()
             sprintf(__('%s Settings', 'rmcommon'), $module->getVar('name')),
             0,
             1,
-            array(
+            [
                 'content' => $response,
                 'width' => 'large',
                 'closeButton' => 1,
                 'id' => 'cu-settings-form',
                 'color' => 'primary',
-                'solid' => true
-            )
+                'solid' => true,
+            ]
         );
     }
 }
@@ -212,7 +212,7 @@ function save_module_settings()
         $common->ajax()->prepare();
     }
 
-    if ($mod == '') {
+    if ('' == $mod) {
         RMUris::redirect_with_message(__('A module has not been specified!', 'rmcommon'), 'settings.php', RMMSG_ERROR);
     }
 
@@ -244,10 +244,10 @@ function save_module_settings()
     }
 
     $current_settings = (array) RMSettings::module_settings($module->getVar('dirname'));
-    $new_settings = RMHttpRequest::post(ucfirst($module->getVar('dirname')), 'array', array());
+    $new_settings = RMHttpRequest::post(ucfirst($module->getVar('dirname')), 'array', []);
 
-    $configs =& $module->getInfo('config');
-    $fields = array(); // Container for all fields and values
+    $configs = &$module->getInfo('config');
+    $fields = []; // Container for all fields and values
     foreach ($configs as $option) {
         $id = $option['name'];
 
@@ -263,7 +263,6 @@ function save_module_settings()
         $category = isset($option['category']) ? $option['category'] : 'all';
         $fields[$id] = $field;
     }
-
 
     /**
      * This keys already exists in database
@@ -285,7 +284,7 @@ function save_module_settings()
      */
     $keys = array_keys($to_delete);
     if (!empty($keys)) {
-        $sql = "DELETE FROM " . $xoopsDB->prefix("config") . " WHERE conf_modid = " . $module->mid() . " AND (conf_name = '" . implode("' OR conf_name='", $keys) . "')";
+        $sql = 'DELETE FROM ' . $xoopsDB->prefix('config') . ' WHERE conf_modid = ' . $module->mid() . " AND (conf_name = '" . implode("' OR conf_name='", $keys) . "')";
         if (!$xoopsDB->queryF($sql)) {
             $errors .= $xoopsDB->error() . '<br>';
         }
@@ -343,13 +342,13 @@ function save_module_settings()
             __('Settings saved successfully!', 'rmcommon'),
             0,
             1,
-            array(
+            [
                 'closeWindow' => '#cu-settings-form',
-                'notify' => array(
+                'notify' => [
                     'icon' => 'svg-rmcommon-ok-circle',
-                    'type' => 'alert-success'
-                )
-            )
+                    'type' => 'alert-success',
+                ],
+            ]
         );
     } else {
         RMUris::redirect_with_message(__('Settings saved successfully!', 'rmcommon'), $goto, RMMSG_SUCCESS, 'fa fa-check');
@@ -359,23 +358,19 @@ function save_module_settings()
 $action = RMHttpRequest::request('action', 'string', '');
 
 switch ($action) {
-
     /**
      * Show options for a specific element
      */
     case 'configure':
         show_module_preferences();
         break;
-
     /**
      * Save settings for a single module
      */
     case 'save-settings':
         save_module_settings();
         break;
-
     default:
         show_configurable_items();
         break;
-
 }

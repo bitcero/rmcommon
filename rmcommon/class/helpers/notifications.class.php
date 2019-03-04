@@ -39,7 +39,7 @@ class RMNotifications
      * Stores all notification items
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * Counter for notifications forms
@@ -80,20 +80,20 @@ class RMNotifications
             return null;
         }
 
-        $items = array();
+        $items = [];
         $user_groups = $xoopsUser->getGroups();
         $crypt = new Crypt(null, $cuSettings->secretkey);
         $subscriptions = $this->subscriptions();
 
         // Check permissions
         foreach ($this->items as $item) {
-            $item->type = $item->type != '' ? $item->type : 'module';
-            $item->hash = $crypt->encrypt(json_encode(array(
+            $item->type = '' != $item->type ? $item->type : 'module';
+            $item->hash = $crypt->encrypt(json_encode([
                 'event' => $item->event,
                 'element' => $item->element,
                 'type' => $item->type,
-                'params' => $item->params
-            )));
+                'params' => $item->params,
+            ]));
 
             // Check if users is subscribed to current event
             $id = hash('crc32', $item->event . ':' . $item->element . ':' . $item->type . ':' . $item->params);
@@ -110,7 +110,7 @@ class RMNotifications
 
             // Check if users were provided and current user is allowed
             if (array_key_exists('users', $item->permissions) && count($item->permissions['users']) > 0) {
-                if (in_array($xoopsUser->uid(), $item->permissions['users'])) {
+                if (in_array($xoopsUser->uid(), $item->permissions['users'], true)) {
                     $items[] = $item->data();
                     continue;
                 }
@@ -132,13 +132,13 @@ class RMNotifications
             }
         }
 
-        $this->items = array();
+        $this->items = [];
 
         if (empty($items)) {
             return null;
         }
 
-        RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', array('footer' => 1, 'id' => 'cuhandler'));
+        RMTemplate::get()->add_script('cu-handler.js', 'rmcommon', ['footer' => 1, 'id' => 'cuhandler']);
 
         ob_start();
         include RMTemplate::get()->get_template('rmc-notifications-options.php', 'module', 'rmcommon');
@@ -164,15 +164,17 @@ class RMNotifications
 
         if (!$xoopsUser) {
             $this->add_error(__('No user has been specified', 'rmcommon'));
+
             return false;
         }
 
         if ('' == $event) {
             $this->add_error(__('No event name has been specified', 'rmcommon'));
+
             return false;
         }
 
-        include_once RMCPATH . '/class/crypt.php';
+        require_once RMCPATH . '/class/crypt.php';
         $crypt = new Crypt(null, $cuSettings->secretkey);
         $event = $crypt->decrypt($event);
         $event = json_decode($event);
@@ -181,18 +183,19 @@ class RMNotifications
 
         // Include controller file
         if ('plugin' == $event->type) {
-            $file = XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $event->element . '/class/' . strtolower($event->element) . '.notifications.class.php';
+            $file = XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $event->element . '/class/' . mb_strtolower($event->element) . '.notifications.class.php';
         } elseif ('theme' == $event->type) {
-            $file = XOOPS_ROOT_PATH . '/themes/' . $event->element . '/class/' . strtolower($event->element) . '.notifications.class.php';
+            $file = XOOPS_ROOT_PATH . '/themes/' . $event->element . '/class/' . mb_strtolower($event->element) . '.notifications.class.php';
         } else {
-            $file = XOOPS_ROOT_PATH . '/modules/' . $event->element . '/class/' . strtolower($event->element) . '.notifications.class.php';
+            $file = XOOPS_ROOT_PATH . '/modules/' . $event->element . '/class/' . mb_strtolower($event->element) . '.notifications.class.php';
         }
 
-        include_once $file;
+        require_once $file;
         $class = ucfirst($event->element) . '_Notifications';
 
         if (!class_exists(ucfirst($event->element) . '_Notifications')) {
             $this->add_error(__('There are not a notifications controller for this element', 'rmcommon'));
+
             return false;
         }
 
@@ -201,6 +204,7 @@ class RMNotifications
 
         if (!$notification->is_valid($event->event)) {
             $this->add_error(__('Specified event is not valid for this element', 'rmcommon'));
+
             return false;
         }
 
@@ -214,21 +218,20 @@ class RMNotifications
         if (!$status && $subscribed) {
             if ($this->unsubscribe($event)) {
                 return $event;
-            } else {
-                return false;
             }
+
+            return false;
         }
 
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $sql = "INSERT INTO " . $db->prefix("mod_rmcommon_notifications") . " (`event`,`element`,`params`,`uid`,`type`,`date`)
-                VALUES ('$event->event', '$event->element', '$event->params', '".$xoopsUser->uid()."',
+        $sql = 'INSERT INTO ' . $db->prefix('mod_rmcommon_notifications') . " (`event`,`element`,`params`,`uid`,`type`,`date`)
+                VALUES ('$event->event', '$event->element', '$event->params', '" . $xoopsUser->uid() . "',
                 '$event->type', now())";
 
         if ($db->queryF($sql)) {
             return $event;
-        } else {
-            $this->add_error($db->error());
         }
+        $this->add_error($db->error());
 
         return false;
     }
@@ -246,30 +249,30 @@ class RMNotifications
     {
         global $xoopsUser;
 
-        if (0 >= $uid && !$xoopsUser) {
+        if ($uid <= 0 && !$xoopsUser) {
             return false;
         }
 
-        $uid = $uid == 0 ? $xoopsUser->uid() : $uid;
+        $uid = 0 == $uid ? $xoopsUser->uid() : $uid;
 
-        $type = $type == '' ? $type : 'module';
+        $type = '' == $type ? $type : 'module';
 
         if ('' == $event || '' == $element) {
             return false;
         }
 
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $sql = "SELECT COUNT(*) FROM " . $db->prefix("mod_rmcommon_notifications") . " WHERE
-                event = '$event' AND element = '$element' " . ($params!=''?" AND params = '$params'" : '') . "
+        $sql = 'SELECT COUNT(*) FROM ' . $db->prefix('mod_rmcommon_notifications') . " WHERE
+                event = '$event' AND element = '$element' " . ('' != $params ? " AND params = '$params'" : '') . "
                 AND `type` = '$type' AND uid = $uid";
 
         list($exists) = $db->fetchRow($db->query($sql));
 
         if ($exists) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -281,14 +284,14 @@ class RMNotifications
      */
     public function unsubscribe($event)
     {
-        $event->type = $event->type == '' ? 'module' : $event->type;
+        $event->type = '' == $event->type ? 'module' : $event->type;
 
-        if ('' == $event->event || '' == $event->element || 0 >= $event->uid) {
+        if ('' == $event->event || '' == $event->element || $event->uid <= 0) {
             return false;
         }
 
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $sql = "DELETE FROM " . $db->prefix("mod_rmcommon_notifications") . " WHERE
+        $sql = 'DELETE FROM ' . $db->prefix('mod_rmcommon_notifications') . " WHERE
                 event = '$event->event' AND element = '$event->element' AND
                 params = '$event->params' AND type = '$event->type' AND uid = $event->uid";
 
@@ -311,14 +314,14 @@ class RMNotifications
 
         // Include controller file
         if ('plugin' == $event->type) {
-            $file = XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $event->element . '/class/' . strtolower($event->element) . '.notifications.class.php';
+            $file = XOOPS_ROOT_PATH . '/modules/rmcommon/plugins/' . $event->element . '/class/' . mb_strtolower($event->element) . '.notifications.class.php';
         } elseif ('theme' == $event->type) {
-            $file = XOOPS_ROOT_PATH . '/themes/' . $event->element . '/class/' . strtolower($event->element) . '.notifications.class.php';
+            $file = XOOPS_ROOT_PATH . '/themes/' . $event->element . '/class/' . mb_strtolower($event->element) . '.notifications.class.php';
         } else {
-            $file = XOOPS_ROOT_PATH . '/modules/' . $event->element . '/class/' . strtolower($event->element) . '.notifications.class.php';
+            $file = XOOPS_ROOT_PATH . '/modules/' . $event->element . '/class/' . mb_strtolower($event->element) . '.notifications.class.php';
         }
 
-        include_once $file;
+        require_once $file;
         $class = ucfirst($event->element) . '_Notifications';
 
         if (!class_exists($class)) {
@@ -331,7 +334,7 @@ class RMNotifications
         $users = $this->users($event);
 
         // Get the email body
-        $xoopsMailer =& xoops_getMailer();
+        $xoopsMailer = &xoops_getMailer();
         $xoopsMailer->useMail();
         $xoopsMailer->setHTML($notification->use_html());
 
@@ -357,14 +360,14 @@ class RMNotifications
         }
 
         $db = $xoopsDB;
-        $sql = "SELECT users.* FROM " . $db->prefix("users") . " users
-                INNER JOIN " . $db->prefix("mod_rmcommon_notifications") . " n ON users.uid = n.uid WHERE
+        $sql = 'SELECT users.* FROM ' . $db->prefix('users') . ' users
+                INNER JOIN ' . $db->prefix('mod_rmcommon_notifications') . " n ON users.uid = n.uid WHERE
                 n.event = '$event->event' AND n.element = '$event->element' AND n.params = '$event->params'
                 ANd n.`type` = '$event->type'";
         $result = $db->query($sql);
 
-        $users = array();
-        while ($row = $db->fetchArray($result)) {
+        $users = [];
+        while (false !== ($row = $db->fetchArray($result))) {
             $user = new XoopsUser();
             $user->assignVars($row);
             $users[] = $user;
@@ -385,29 +388,28 @@ class RMNotifications
 
         $db = $xoopsDB;
 
-        $sql = "SELECT * FROM " . $db->prefix("mod_rmcommon_notifications") . " WHERE uid=$uid ORDER BY element, `type`";
+        $sql = 'SELECT * FROM ' . $db->prefix('mod_rmcommon_notifications') . " WHERE uid=$uid ORDER BY element, `type`";
         $result = $db->query($sql);
-        $subscriptions = array();
+        $subscriptions = [];
 
-        while ($row = $db->fetchArray($result)) {
+        while (false !== ($row = $db->fetchArray($result))) {
             $id = $row['event'] . ':' . $row['element'] . ':' . $row['type'] . ':' . $row['params'];
-            $subscriptions[hash('crc32', $id, false)] = (object) array(
-                'event'     => $row['event'],
-                'element'   => $row['element'],
-                'params'    => $row['params'],
-                'type'      => $row['type'],
-                'date'      => $row['date']
-            );
+            $subscriptions[hash('crc32', $id, false)] = (object) [
+                'event' => $row['event'],
+                'element' => $row['element'],
+                'params' => $row['params'],
+                'type' => $row['type'],
+                'date' => $row['date'],
+            ];
         }
 
         return $subscriptions;
     }
 }
 
-
 class RMNotificationItem
 {
-    private $data = array();
+    private $data = [];
     private $new = true;
 
     /**
@@ -434,6 +436,7 @@ class RMNotificationItem
 
         $this->data = $event;
         $this->new = false;
+
         return $this;
     }
 
@@ -451,6 +454,7 @@ class RMNotificationItem
         }
 
         $this->data['params'] = $params;
+
         return $this;
     }
 
@@ -486,6 +490,7 @@ class RMNotificationItem
         }
 
         $this->data['permissions'] = $permissions;
+
         return $this;
     }
 
@@ -516,13 +521,14 @@ class RMNotificationItem
         }
 
         // Allowed data indexes
-        $allowed = array('hash','type', 'subscribed');
+        $allowed = ['hash', 'type', 'subscribed'];
 
-        if (!in_array($index, $allowed)) {
+        if (!in_array($index, $allowed, true)) {
             return false;
         }
 
         $this->data[$index] = $value;
+
         return true;
     }
 

@@ -25,23 +25,18 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.eduardocortes.mx
  */
-
-require dirname(dirname(dirname(__FILE__))) . '/include/cp_header.php';
+require dirname(dirname(__DIR__)) . '/include/cp_header.php';
 $common->location = 'icons';
 
 // Add scripts
 $common->template()->add_script('icons.min.js', 'rmcommon', ['footer' => 1, 'id' => 'icons-js']);
 
-
-
 // Load providers
 $providers = \RMEvents::get()->trigger('rmcommon.register.icon.provider', []);
-
 
 $action = $common->httpRequest()->request('action', 'string', '');
 
 switch ($action) {
-
     case 'load-icons':
 
         $common->ajax()->prepare();
@@ -77,12 +72,11 @@ switch ($action) {
             0,
             1,
             [
-                'content' => $common->template()->render('ajax/ajax-icons.php', 'module', 'rmcommon')
+                'content' => $common->template()->render('ajax/ajax-icons.php', 'module', 'rmcommon'),
             ]
         );
 
         break;
-
     default:
         // SHOW ICONS
 
@@ -108,5 +102,4 @@ switch ($action) {
         $common->template()->display('rmc-icons.php', 'module', 'rmcommon');
         $common->template()->footer();
         break;
-
 }

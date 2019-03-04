@@ -58,6 +58,7 @@ class RMFormHidden extends RMFormElement
         $attributes = $this->renderAttributeString();
 
         $ret = '<input type="hidden" ' . $attributes . '>';
+
         return $ret;
     }
 }

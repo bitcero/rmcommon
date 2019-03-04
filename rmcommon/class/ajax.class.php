@@ -21,7 +21,7 @@ class Rmcommon_Ajax
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new Rmcommon_Ajax();
+            $instance = new self();
         }
 
         return $instance;

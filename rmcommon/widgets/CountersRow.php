@@ -86,7 +86,7 @@ class CountersRow extends WidgetAbstract implements WidgetInterface
                 $data['counter'] = number_format($data['counter'] / 1000, 1) . '<small>k</small>';
             }
         }
-        
+
         $this->counters[] = (object) $data;
     }
 
@@ -129,6 +129,7 @@ class CountersRow extends WidgetAbstract implements WidgetInterface
         if ('' == $this->tplPath) {
             $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-row-counters.php', 'module', 'rmcommon');
         }
+
         return $this->tplPath;
     }
 }

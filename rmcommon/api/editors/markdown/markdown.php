@@ -23,7 +23,6 @@
  * @subpackage    Editors
  * @since         2.2
  */
-
 class Editor_Markdown extends RMEditor
 {
     /*
@@ -34,13 +33,13 @@ class Editor_Markdown extends RMEditor
      * @var array Default configuration options
      * @link http://codemirror.net/doc/manual.html
      */
-    private $defaults = array();
+    private $defaults = [];
     /**
      * @var array Plugins that will be loaded when editor render
      */
-    private $enabled_plugins = array(
-        'link' => array()
-    );
+    private $enabled_plugins = [
+        'link' => [],
+    ];
 
     public $content = '';
 
@@ -49,20 +48,19 @@ class Editor_Markdown extends RMEditor
      * @param string $id Editor identifier (must be unique)
      * @param array $options Editor initial values (See {@link:http://codemirror.net/doc/manual.html#config Configuration})
      */
-    public function __construct($id, $options = array())
+    public function __construct($id, $options = [])
     {
         $this->id = $id;
 
-        $this->defaults = array(
-            'value'             => '',
-            'mode'              => 'gfm',
-            'theme'             => 'default',
-            'lineWrapping'      => 'true'
-        );
+        $this->defaults = [
+            'value' => '',
+            'mode' => 'gfm',
+            'theme' => 'default',
+            'lineWrapping' => 'true',
+        ];
 
         if (!empty($options)) {
             foreach ($options as $name => $value) {
-
                 // Prevent change of markdown
                 if ('mode' == $name) {
                     continue;
@@ -77,7 +75,7 @@ class Editor_Markdown extends RMEditor
      * Set the plugins that will be loaded with editor
      * @param array $plugins Plugins active
      */
-    public function set_plugins($plugins = array())
+    public function set_plugins($plugins = [])
     {
         $this->enabled_plugins = $plugins;
     }
@@ -101,7 +99,7 @@ class Editor_Markdown extends RMEditor
         $options = '{';
 
         foreach ($this->defaults as $name => $value) {
-            $options .= $name .': ' . (is_string($value) ? '"' . $value . '",' : $value . ';');
+            $options .= $name . ': ' . (is_string($value) ? '"' . $value . '",' : $value . ';');
         }
 
         $options .= '}';
@@ -122,7 +120,7 @@ class Editor_Markdown extends RMEditor
         $plugins .= '}';
 
         $script = 'function initMD(id){$(document).ready( function() {
-mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'");';
+mdEditor.init(id, ' . $options . ',' . $plugins . '); } );} initMD("' . $this->id . '");';
 
         return $script;
     }
@@ -135,32 +133,32 @@ mdEditor.init(id, ' . $options . ','. $plugins .'); } );} initMD("'.$this->id.'"
     {
         global $cuIcons;
 
-        RMTemplate::get()->add_script('codemirror.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown'));
-        RMTemplate::get()->add_script('mode/overlay.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown'));
-        RMTemplate::get()->add_script('mode/xml.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown'));
-        RMTemplate::get()->add_script('mode/markdown.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown'));
-        RMTemplate::get()->add_script('mode/gfm.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown'));
-        RMTemplate::get()->add_script('mode/meta.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown'));
-        RMTemplate::get()->add_script('markdown-editor.min.js', 'rmcommon', array('footer' => 1, 'directory' => 'api/editors/markdown'));
-        RMTemplate::get()->add_style('markdown-editor.min.css', 'rmcommon', array('directory' => 'api/editors/markdown'));
+        RMTemplate::get()->add_script('codemirror.js', 'rmcommon', ['footer' => 1, 'directory' => 'api/editors/markdown']);
+        RMTemplate::get()->add_script('mode/overlay.js', 'rmcommon', ['footer' => 1, 'directory' => 'api/editors/markdown']);
+        RMTemplate::get()->add_script('mode/xml.js', 'rmcommon', ['footer' => 1, 'directory' => 'api/editors/markdown']);
+        RMTemplate::get()->add_script('mode/markdown.js', 'rmcommon', ['footer' => 1, 'directory' => 'api/editors/markdown']);
+        RMTemplate::get()->add_script('mode/gfm.js', 'rmcommon', ['footer' => 1, 'directory' => 'api/editors/markdown']);
+        RMTemplate::get()->add_script('mode/meta.js', 'rmcommon', ['footer' => 1, 'directory' => 'api/editors/markdown']);
+        RMTemplate::get()->add_script('markdown-editor.min.js', 'rmcommon', ['footer' => 1, 'directory' => 'api/editors/markdown']);
+        RMTemplate::get()->add_style('markdown-editor.min.css', 'rmcommon', ['directory' => 'api/editors/markdown']);
         RMTemplate::getInstance()->add_fontawesome();
         RMTemplate::get()->add_inline_script($this->render_js(), 1);
 
-        $plugins = array();
+        $plugins = [];
         $plugins = RMEvents::get()->run_event('rmcommon.editor.top.plugins', $plugins, 'markdown', $this->id);
 
-        $rtn = 	"<div class='ed-container' id='".$this->id."-ed-container'>";
-        $rtn .= "  <div class='ed-plugins' id='".$this->id."-ed-plugins'>
-		              <span class='plugin'>".implode('</span> <span class="plugin">', $plugins).'</span>
-		              <button type="button" class="plugin full-screen" accesskey="s" title="'. __('Toggle full screen [S]', 'rmcommon') . '">
-		              '.$cuIcons->getIcon('svg-rmcommon-fullscreen').$cuIcons->getIcon('svg-rmcommon-exit-fullscreen').'
+        $rtn = "<div class='ed-container' id='" . $this->id . "-ed-container'>";
+        $rtn .= "  <div class='ed-plugins' id='" . $this->id . "-ed-plugins'>
+		              <span class='plugin'>" . implode('</span> <span class="plugin">', $plugins) . '</span>
+		              <button type="button" class="plugin full-screen" accesskey="s" title="' . __('Toggle full screen [S]', 'rmcommon') . '">
+		              ' . $cuIcons->getIcon('svg-rmcommon-fullscreen') . $cuIcons->getIcon('svg-rmcommon-exit-fullscreen') . '
 		              </button>
                    </div>';
-        $rtn .= "  <div class='ed-buttons' id='".$this->id."-buttons-container'>";
+        $rtn .= "  <div class='ed-buttons' id='" . $this->id . "-buttons-container'>";
         $rtn .= '    <div class="toolbar-1"></div>';
-        $rtn .= "  </div>";
-        $rtn .= "  <div class=\"txtarea-container\"". $this->render_attributes() ."><textarea id='".$this->id."' name='".$this->id."'>".$this->content."</textarea></div>";
-        $rtn .= "</div>";
+        $rtn .= '  </div>';
+        $rtn .= '  <div class="txtarea-container"' . $this->render_attributes() . "><textarea id='" . $this->id . "' name='" . $this->id . "'>" . $this->content . '</textarea></div>';
+        $rtn .= '</div>';
 
         return $rtn;
     }

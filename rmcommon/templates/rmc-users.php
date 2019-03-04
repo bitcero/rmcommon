@@ -4,11 +4,11 @@
     <div class="basic_options">
 	<span class="sections">
 		<label for="search-key"><?php _e('Search:', 'rmcommon'); ?></label>
-		<input class="form-control" type="text" name="keyw" id="search-key" size="15" value="<?php echo $srhkeyw; ?>" />
+		<input class="form-control" type="text" name="keyw" id="search-key" size="15" value="<?php echo $srhkeyw; ?>">
 	</span>
 	<span class="sections">
 		<label for="users-number"><?php _e('Show:', 'rmcommon'); ?></label>
-		<input class="form-control" type="text" name="limit" id="users-number" size="6" value="<?php echo $limit; ?>" />
+		<input class="form-control" type="text" name="limit" id="users-number" size="6" value="<?php echo $limit; ?>">
 	</span>
 	<span class="sections">
         <label>&nbsp;</label>
@@ -69,9 +69,9 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="<?php _e('Posts between:', 'rmcommon'); ?>"><?php _e('Posts between:', 'rmcommon'); ?></label><br>
-                                <input type="text" class="form-control inline" name="posts1" id="users-posts1" value="<?php echo (int) $srhposts1; ?>" size="5" />
+                                <input type="text" class="form-control inline" name="posts1" id="users-posts1" value="<?php echo (int) $srhposts1; ?>" size="5">
                                 <?php _e('and', 'rmcommon'); ?>
-                                <input type="text" class="form-control inline" name="posts2" id="users-posts2" value="<?php echo (int) $srhposts2 > 0 ? (int) $posts2 : ''; ?>" size="5" />
+                                <input type="text" class="form-control inline" name="posts2" id="users-posts2" value="<?php echo (int) $srhposts2 > 0 ? (int) $posts2 : ''; ?>" size="5">
                             </div>
                         </div>
 
@@ -152,11 +152,11 @@
     <div class="row">
         <div class="col-sm-6 col-md-3">
             <select name="order" id="user-order" class="form-control">
-                <option value=""<?php echo $order=='' ? ' selected="selected"' : ''; ?>><?php _e('Order by...', 'rmcommon'); ?></option>
-                <option value="uid"<?php echo $order=='uid' ? ' selected="selected"' : ''; ?>><?php _e('ID', 'rmcommon'); ?></option>
-                <option value="uname"<?php echo $order=='uname' ? ' selected="selected"' : ''; ?>><?php _e('Username', 'rmcommon'); ?></option>
-                <option value="name"<?php echo $order=='name' ? ' selected="selected"' : ''; ?>><?php _e('Name', 'rmcommon'); ?></option>
-                <option value="email"<?php echo $order=='email' ? ' selected="selected"' : ''; ?>><?php _e('Email', 'rmcommon'); ?></option>
+                <option value=""<?php echo '' == $order ? ' selected="selected"' : ''; ?>><?php _e('Order by...', 'rmcommon'); ?></option>
+                <option value="uid"<?php echo 'uid' == $order ? ' selected="selected"' : ''; ?>><?php _e('ID', 'rmcommon'); ?></option>
+                <option value="uname"<?php echo 'uname' == $order ? ' selected="selected"' : ''; ?>><?php _e('Username', 'rmcommon'); ?></option>
+                <option value="name"<?php echo 'name' == $order ? ' selected="selected"' : ''; ?>><?php _e('Name', 'rmcommon'); ?></option>
+                <option value="email"<?php echo 'email' == $order ? ' selected="selected"' : ''; ?>><?php _e('Email', 'rmcommon'); ?></option>
             </select>
             <button type="button" class="btn btn-default" onclick="$('#order').val($('#user-order').val()); submit();"><?php _e('Sort', 'rmcommon'); ?></button>
         </div>
@@ -182,7 +182,7 @@
             <table class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th width="20" class="text-center"><input type="checkbox" class="checkall" id="checkall-top" data-checkbox="users" /></th>
+                    <th width="20" class="text-center"><input type="checkbox" class="checkall" id="checkall-top" data-checkbox="users"></th>
                     <th class="text-center"><?php _e('ID', 'rmcommon'); ?></th>
                     <th><?php _e('Username', 'rmcommon'); ?></th>
                     <th><?php _e('Name', 'rmcommon'); ?></th>
@@ -193,7 +193,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (count($users)<=0): ?>
+                <?php if (count($users) <= 0): ?>
                     <tr class="even">
                         <td colspan="8" class="text-center">
                             <span class="text-danger"><?php _e('There are not any user registered.', 'rmcommon'); ?></span>
@@ -205,12 +205,12 @@
 
                 $qstring = '';
                 foreach (RMTemplate::get()->get_vars() as $var => $value) {
-                    $qstring .= $qstring=='' ? $var.'='.$value : '&amp;'.$var.'='.$value;
+                    $qstring .= '' == $qstring ? $var . '=' . $value : '&amp;' . $var . '=' . $value;
                 }
 
                 foreach ($users as $user):
                     ?>
-                    <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $user['level']<=0 ? ' user_inactive' : '' ?>" valign="top">
+                    <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $user['level'] <= 0 ? ' user_inactive' : '' ?>" valign="top">
                         <td class="text-center"><input type="checkbox" name="ids[]" id="item-<?php echo $user['uid']; ?>" value="<?php echo $user['uid']; ?>" data-oncheck="users"></td>
                         <td class="text-center"><?php echo $user['uid']; ?></td>
                         <td nowrap="nowrap">
@@ -228,12 +228,12 @@
                             <?php
                             $str = '';
                             foreach ($user['groups'] as $group):
-                                $str = $str=='' ? $xgh->get($group)->name() : ', '.$xgh->get($group)->name();
+                                $str = '' == $str ? $xgh->get($group)->name() : ', ' . $xgh->get($group)->name();
                                 echo $str;
                             endforeach; ?>
                         </td>
-                        <td class="text-center <?php echo $user['level']<=0 ? ' text-danger' : ' text-success'; ?>">
-                            <?php echo $user['level']<=0 ? $cuIcons->getIcon('svg-rmcommon-close') : $cuIcons->getIcon('svg-rmcommon-ok-circle'); ?>
+                        <td class="text-center <?php echo $user['level'] <= 0 ? ' text-danger' : ' text-success'; ?>">
+                            <?php echo $user['level'] <= 0 ? $cuIcons->getIcon('svg-rmcommon-close') : $cuIcons->getIcon('svg-rmcommon-ok-circle'); ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -258,11 +258,11 @@
         <div class="row">
             <div class="col-md-3">
                 <select name="order" id="user-order-bottom" class="form-control">
-                    <option value=""<?php echo $order=='' ? ' selected="selected"' : ''; ?>><?php _e('Order by...', 'rmcommon'); ?></option>
-                    <option value="uid"<?php echo $order=='uid' ? ' selected="selected"' : ''; ?>><?php _e('ID', 'rmcommon'); ?></option>
-                    <option value="uname"<?php echo $order=='uname' ? ' selected="selected"' : ''; ?>><?php _e('Username', 'rmcommon'); ?></option>
-                    <option value="name"<?php echo $order=='name' ? ' selected="selected"' : ''; ?>><?php _e('Name', 'rmcommon'); ?></option>
-                    <option value="email"<?php echo $order=='email' ? ' selected="selected"' : ''; ?>><?php _e('Email', 'rmcommon'); ?></option>
+                    <option value=""<?php echo '' == $order ? ' selected="selected"' : ''; ?>><?php _e('Order by...', 'rmcommon'); ?></option>
+                    <option value="uid"<?php echo 'uid' == $order ? ' selected="selected"' : ''; ?>><?php _e('ID', 'rmcommon'); ?></option>
+                    <option value="uname"<?php echo 'uname' == $order ? ' selected="selected"' : ''; ?>><?php _e('Username', 'rmcommon'); ?></option>
+                    <option value="name"<?php echo 'name' == $order ? ' selected="selected"' : ''; ?>><?php _e('Name', 'rmcommon'); ?></option>
+                    <option value="email"<?php echo 'email' == $order ? ' selected="selected"' : ''; ?>><?php _e('Email', 'rmcommon'); ?></option>
                 </select>
                 <button type="button" class="btn btn-default" onclick="$('#order').val($('#user-order').val()); submit();"><?php _e('Sort', 'rmcommon'); ?></button>
             </div>

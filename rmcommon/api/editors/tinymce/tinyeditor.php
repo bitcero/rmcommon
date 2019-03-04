@@ -9,24 +9,25 @@
 // --------------------------------------------------------------
 
 /**
-* This files allow to exigent people to control every aspect of tinymce
-* from exmsystem
-*/
-class TinyEditor
+ * This files allow to exigent people to control every aspect of tinymce
+ * from exmsystem
+ */
+class tinyeditor
 {
-    public $configuration = array();
+    public $configuration = [];
 
     public static function getInstance()
     {
         static $instance;
         if (!isset($instance)) {
-            $instance = new TinyEditor();
+            $instance = new self();
         }
+
         return $instance;
     }
 
     // Configuración
-    public function add_config($names, $values, $replace=false)
+    public function add_config($names, $values, $replace = false)
     {
         if (is_array($names) && is_array($values)) {
             foreach ($names as $i => $name) {
@@ -35,7 +36,7 @@ class TinyEditor
                     $this->configuration[$name] = $values[$i];
                 } else {
                     // Not replace, verify...
-                    $this->configuration[$name] = isset($this->configuration[$name]) ? ",".$values[$i] : $values[$i];
+                    $this->configuration[$name] = isset($this->configuration[$name]) ? ',' . $values[$i] : $values[$i];
                 }
             }
         } else {
@@ -77,7 +78,7 @@ class TinyEditor
                     $elements = $this->configuration['elements'];
         unset($this->configuration['elements']);
 
-        echo substr(json_encode($this->configuration), 1, -1) . ','; ?>
+        echo mb_substr(json_encode($this->configuration), 1, -1) . ','; ?>
                     setup: function(ed){
                         ed.on('keyup', function(e){
                             if ($(editor).isDirty())

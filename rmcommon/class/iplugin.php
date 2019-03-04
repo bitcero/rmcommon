@@ -31,9 +31,9 @@
  */
 abstract class RMIPlugin
 {
-    protected $info = array();
-    protected $settings = array();
-    protected $errors = array();
+    protected $info = [];
+    protected $settings = [];
+    protected $errors = [];
 
     public function on_install()
     {
@@ -57,7 +57,7 @@ abstract class RMIPlugin
 
     public function options()
     {
-        return array();
+        return [];
     }
 
     public function get_info($name)
@@ -65,6 +65,7 @@ abstract class RMIPlugin
         if (!isset($this->info[$name])) {
             return '';
         }
+
         return $this->info[$name];
     }
 
@@ -92,10 +93,10 @@ abstract class RMIPlugin
     public function errors($lines = true)
     {
         if ($lines) {
-            return implode("<br>", $this->errors);
-        } else {
-            return $this->errors;
+            return implode('<br>', $this->errors);
         }
+
+        return $this->errors;
     }
 
     public function path()

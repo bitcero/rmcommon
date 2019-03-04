@@ -37,7 +37,7 @@
 				<label for="cat"><?php _e('Category:', 'rmcommon'); ?></label>
                 <select name="cat" id="cat" class="form-control">
                     <?php foreach ($categories as $catego): ?>
-                        <option value="<?php echo $catego['id']; ?>"<?php echo $catego['id']==$cat->id() ? ' selected="selected"' : ''; ?>><?php echo $catego['name']; ?></option>
+                        <option value="<?php echo $catego['id']; ?>"<?php echo $catego['id'] == $cat->id() ? ' selected="selected"' : ''; ?>><?php echo $catego['name']; ?></option>
                     <?php endforeach; ?>
                 </select>
 			</div>
@@ -54,15 +54,15 @@
 
 			<?php echo $rmEvents->run_event('rmcommon.image.edit.form'); ?>
 
-			<input type="hidden" name="action" value="update" />
-			<input type="hidden" name="id" value="<?php echo $id; ?>" />
-			<input type="hidden" name="page" value="<?php echo $page; ?>" />
-			<input type="hidden" name="XOOPS_TOKEN_REQUEST" value="<?php echo $xoopsSecurity->createToken(); ?>" />
+			<input type="hidden" name="action" value="update">
+			<input type="hidden" name="id" value="<?php echo $id; ?>">
+			<input type="hidden" name="page" value="<?php echo $page; ?>">
+			<input type="hidden" name="XOOPS_TOKEN_REQUEST" value="<?php echo $xoopsSecurity->createToken(); ?>">
 		</form>
 	</div>
 
 	<div class="col-md-2 col-lg-2">
-		<img src="<?php echo $image_data['thumbnail']; ?>" alt="" />
+		<img src="<?php echo $image_data['thumbnail']; ?>" alt="">
 	</div>
 
 </div>

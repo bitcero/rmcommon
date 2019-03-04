@@ -38,7 +38,6 @@ namespace Common\Core\Helpers;
  */
 interface WidgetInterface
 {
-
     /**
      * Returns internal id for widget
      * @return mixed

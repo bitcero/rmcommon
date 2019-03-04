@@ -31,7 +31,6 @@ namespace Common\Core\Helpers;
 
 class Comments
 {
-
     /**
      * Get all comments for given parameters
      *
@@ -89,7 +88,6 @@ class Comments
      *
      * @param array $parameters
      * return mixed
-     *
      */
     public function form($parameters)
     {
@@ -105,7 +103,7 @@ class Comments
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new Comments();
+            $instance = new self();
         }
 
         return $instance;

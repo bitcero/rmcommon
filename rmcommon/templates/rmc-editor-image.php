@@ -25,11 +25,11 @@
                         value="<?php echo $catego->id(); ?>"<?php echo $cat->id() == $catego->id() ? ' selected="selected"' : ''; ?>><?php echo $catego->getVar('name'); ?></option>
                 <?php endforeach; ?>
             </select>
-            <input type="hidden" name="type" value="<?php echo $type; ?>"/>
-            <input type="hidden" name="name" value="<?php echo $en; ?>"/>
-            <input type="hidden" name="target" value="<?php echo $target; ?>"/>
-            <input type="hidden" name="multi" value="<?php echo $multi ? 'yes' : 'no'; ?>"/>
-            <input type="hidden" name="idcontainer" value="<?php echo $container; ?>"/>
+            <input type="hidden" name="type" value="<?php echo $type; ?>">
+            <input type="hidden" name="name" value="<?php echo $en; ?>">
+            <input type="hidden" name="target" value="<?php echo $target; ?>">
+            <input type="hidden" name="multi" value="<?php echo $multi ? 'yes' : 'no'; ?>">
+            <input type="hidden" name="idcontainer" value="<?php echo $container; ?>">
         </form>
     </div>
     <?php if (!$cat->isNew()): ?>
@@ -74,7 +74,7 @@
             <label for="url-title"><?php _e('Title:', 'rmcommon'); ?></label>
         </div>
         <div class="col-sm-8 col-md-10">
-            <input type="text" id="url-title" class="form-control" value=""/>
+            <input type="text" id="url-title" class="form-control" value="">
         </div>
     </div>
 
@@ -83,7 +83,7 @@
             <label for="url-alt"><?php _e('Alternative text:', 'rmcommon'); ?></label>
         </div>
         <div class="col-sm-8 col-md-10">
-            <input type="text" id="url-alt" class="form-control" value=""/>
+            <input type="text" id="url-alt" class="form-control" value="">
         </div>
     </div>
 
@@ -92,7 +92,7 @@
             <label><?php _e('Alignment:', 'rmcommon'); ?></label>
         </div>
         <div class="col-sm-8 col-md-10">
-            <label class="radio-inline"><input type="radio" name="align_url" value="" checked="checked"> <?php _e('None', 'rmcommon'); ?></label>
+            <label class="radio-inline"><input type="radio" name="align_url" value="" checked> <?php _e('None', 'rmcommon'); ?></label>
             <label class="radio-inline"><input type="radio" name="align_url" value="left"> <?php _e('Left', 'rmcommon'); ?></label>
             <label class="radio-inline"><input type="radio" name="align_url" value="center"> <?php _e('Center', 'rmcommon'); ?></label>
             <label class="radio-inline"><input type="radio" name="align_url" value="right"> <?php _e('Right', 'rmcommon'); ?></label>
@@ -115,8 +115,8 @@
         </div>
         <div class="col-sm-8 col-md-10">
             <a href="javascript:;" class="btn btn-primary"
-               onclick="<?php if ($type == 'exmcode'): ?>insert_from_url('xoops');<?php else: ?>insert_from_url('tiny');<?php endif; ?>"><?php _e('Insert Image', 'rmcommon'); ?></a>
-            <?php if ($type == 'exmcode'): ?>
+               onclick="<?php if ('exmcode' == $type): ?>insert_from_url('xoops');<?php else: ?>insert_from_url('tiny');<?php endif; ?>"><?php _e('Insert Image', 'rmcommon'); ?></a>
+            <?php if ('exmcode' == $type): ?>
                 <a href="javascript:;" onclick="exmPopup.closePopup();" class="btn btn-default"><?php _e('Cancel', 'rmcommon'); ?></a>
             <?php endif; ?>
         </div>
@@ -138,19 +138,19 @@
                     value="<?php echo $catego->id(); ?>"<?php echo $cat->id() == $catego->id() ? ' selected="selected"' : ''; ?>><?php echo $catego->getVar('name'); ?></option>
             <?php endforeach; ?>
         </select>
-        <input type="hidden" name="XOOPS_TOKEN_REQUEST" id="xoops-token" value="<?php echo $xoopsSecurity->createToken(); ?>"/>
+        <input type="hidden" name="XOOPS_TOKEN_REQUEST" id="xoops-token" value="<?php echo $xoopsSecurity->createToken(); ?>">
     </div>
     <div id="library-content" class="loading">
 
     </div>
 </div>
 
-<input type="hidden" name="type" id="type" value="<?php echo $type; ?>"/>
-<input type="hidden" name="editor" id="editor" value="<?php echo $editor; ?>"/>
-<input type="hidden" name="name" id="name" value="<?php echo $en; ?>"/>
-<input type="hidden" name="target" id="target" value="<?php echo $target; ?>"/>
-<input type="hidden" name="multi" id="multi" value="<?php echo $multi ? 'yes' : 'no'; ?>"/>
-<input type="hidden" name="idcontainer" id="idcontainer" value="<?php echo $container; ?>"/>
+<input type="hidden" name="type" id="type" value="<?php echo $type; ?>">
+<input type="hidden" name="editor" id="editor" value="<?php echo $editor; ?>">
+<input type="hidden" name="name" id="name" value="<?php echo $en; ?>">
+<input type="hidden" name="target" id="target" value="<?php echo $target; ?>">
+<input type="hidden" name="multi" id="multi" value="<?php echo $multi ? 'yes' : 'no'; ?>">
+<input type="hidden" name="idcontainer" id="idcontainer" value="<?php echo $container; ?>">
 <input type="hidden" id="cu-token" value="<?php echo $common->security()->createToken(0, 'CUTOKEN'); ?>">
 <span id="parameters">
 <?php

@@ -15,7 +15,7 @@
 header('Content-type: text/javascript');
 error_reporting(0);
 $xoopsOption['nocommon'] = 1;
-include '../../../mainfile.php';
+require  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
 /**
  * Load rewrite modules configuration

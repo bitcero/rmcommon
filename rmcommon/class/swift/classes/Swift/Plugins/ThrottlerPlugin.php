@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-//@require 'Swift/Events/SendEvent.php';
-//@require 'Swift/Plugins/BandwidthMonitorPlugin.php';
-//@require 'Swift/Plugins/Sleeper.php';
-//@require 'Swift/Plugins/Timer.php';
+//@require __DIR__ . '/Swift/Events/SendEvent.php';
+//@require __DIR__ . '/Swift/Plugins/BandwidthMonitorPlugin.php';
+//@require __DIR__ . '/Swift/Plugins/Sleeper.php';
+//@require __DIR__ . '/Swift/Plugins/Timer.php';
 
 /**
  * Throttles the rate at which emails are sent.
@@ -21,41 +21,40 @@
  */
 class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin implements Swift_Plugins_Sleeper, Swift_Plugins_Timer
 {
-  
-  /** Flag for throttling in bytes per minute */
+    /** Flag for throttling in bytes per minute */
     const BYTES_PER_MINUTE = 0x01;
-  
+
     /** Flag for throttling in emails per minute */
     const MESSAGES_PER_MINUTE = 0x10;
-  
+
     /**
      * The Sleeper instance for sleeping.
      * @var Swift_Plugins_Sleeper
      * @access private
      */
     private $_sleeper;
-  
+
     /**
      * The Timer instance which provides the timestamp.
      * @var Swift_Plugins_Timer
      * @access private
      */
     private $_timer;
-  
+
     /**
      * The time at which the first email was sent.
      * @var int
      * @access private
      */
     private $_start;
-  
+
     /**
      * The rate at which messages should be sent.
      * @var int
      * @access private
      */
     private $_rate;
-  
+
     /**
      * The mode for throttling.
      * This is {@link BYTES_PER_MINUTE} or {@link MESSAGES_PER_MINUTE}
@@ -63,14 +62,14 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
      * @access private
      */
     private $_mode;
-  
+
     /**
      * An internal counter of the number of messages sent.
      * @var int
      * @access private
      */
     private $_messages = 0;
-  
+
     /**
      * Create a new ThrottlerPlugin.
      * @param int $rate
@@ -89,7 +88,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
         $this->_sleeper = $sleeper;
         $this->_timer = $timer;
     }
-  
+
     /**
      * Invoked immediately before the Message is sent.
      * @param Swift_Events_SendEvent $evt
@@ -101,18 +100,18 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
             $this->_start = $time;
         }
         $duration = $time - $this->_start;
-    
+
         if (self::BYTES_PER_MINUTE == $this->_mode) {
             $sleep = $this->_throttleBytesPerMinute($duration);
         } else {
             $sleep = $this->_throttleMessagesPerMinute($duration);
         }
-    
+
         if ($sleep > 0) {
             $this->sleep($sleep);
         }
     }
-  
+
     /**
      * Invoked when a Message is sent.
      * @param Swift_Events_SendEvent $evt
@@ -122,7 +121,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
         parent::sendPerformed($evt);
         ++$this->_messages;
     }
-  
+
     /**
      * Sleep for $seconds.
      * @param int $seconds
@@ -135,7 +134,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
             sleep($seconds);
         }
     }
-  
+
     /**
      * Get the current UNIX timestamp
      * @return int
@@ -144,13 +143,13 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
     {
         if (isset($this->_timer)) {
             return $this->_timer->getTimestamp();
-        } else {
-            return time();
         }
+
+        return time();
     }
-  
+
     // -- Private methods
-  
+
     /**
      * Get a number of seconds to sleep for.
      * @param int $timePassed
@@ -160,9 +159,10 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
     private function _throttleBytesPerMinute($timePassed)
     {
         $expectedDuration = $this->getBytesOut() / ($this->_rate / 60);
+
         return (int) ceil($expectedDuration - $timePassed);
     }
-  
+
     /**
      * Get a number of seconds to sleep for.
      * @param int $timePassed
@@ -172,6 +172,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
     private function _throttleMessagesPerMinute($timePassed)
     {
         $expectedDuration = $this->_messages / ($this->_rate / 60);
+
         return (int) ceil($expectedDuration - $timePassed);
     }
 }

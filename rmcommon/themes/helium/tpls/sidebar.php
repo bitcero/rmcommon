@@ -10,7 +10,7 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">
-                <?php echo $xoopsUser->getVar('name') != '' ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>
+                <?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>
             </h4>
             <span><?php echo $userRank['title']; ?></span>
         </div>

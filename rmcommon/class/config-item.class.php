@@ -10,7 +10,6 @@
 
 class Rmcommon_Config_Item extends RMObject
 {
-
     /**
      * Loads the specified item
      * @param string $name <p>Name of the configuration option</p>
@@ -18,25 +17,24 @@ class Rmcommon_Config_Item extends RMObject
      */
     public function __construct($name = '', $mod = 0)
     {
-
         // Prevent to be translated
         $this->noTranslate = [
             'conf_name',
             'conf_title',
             'conf_desc',
             'conf_formtype',
-            'conf_valuetype'
+            'conf_valuetype',
         ];
 
         $this->ownerName = 'rmcommon';
         $this->ownerType = 'module';
 
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("config");
+        $this->_dbtable = $this->db->prefix('config');
         $this->setNew();
         $this->initVarsFromTable();
 
-        if ($name == '' || $mod <= 0) {
+        if ('' == $name || $mod <= 0) {
             return;
         }
 
@@ -44,7 +42,7 @@ class Rmcommon_Config_Item extends RMObject
 
         $sql = "SELECT * FROM $this->_dbtable WHERE `conf_name`='$name' AND `conf_modid`=$mod";
         $result = $this->db->query($sql);
-        if ($this->db->getRowsNum($result)<=0) {
+        if ($this->db->getRowsNum($result) <= 0) {
             return;
         }
 
@@ -61,6 +59,7 @@ class Rmcommon_Config_Item extends RMObject
      *
      * @param mixed  $value      Value
      * @param string $type_Value type
+     * @param mixed $type
      */
     public function set_value($value, $type = '')
     {
@@ -86,9 +85,9 @@ class Rmcommon_Config_Item extends RMObject
     {
         if ($this->isNew()) {
             return $this->saveToTable();
-        } else {
-            return $this->updateTable();
         }
+
+        return $this->updateTable();
     }
 
     public function delete()

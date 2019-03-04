@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-//@require 'Swift/Events/SendListener.php';
-//@require 'Swift/Events/SendEvent.php';
-//@require 'Swift/Plugins/Decorator/Replacements.php';
+//@require __DIR__ . '/Swift/Events/SendListener.php';
+//@require __DIR__ . '/Swift/Events/SendEvent.php';
+//@require __DIR__ . '/Swift/Plugins/Decorator/Replacements.php';
 
 /**
  * Allows customization of Messages on-the-fly.
@@ -22,10 +22,9 @@
  */
 class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_Plugins_Decorator_Replacements
 {
-
-  /** The replacement map */
+    /** The replacement map */
     private $_replacements;
-  
+
     /** The body as it was before replacements */
     private $_orginalBody;
 
@@ -33,7 +32,7 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
     private $_originalSubject;
 
     /** Bodies of children before they are replaced */
-    private $_originalChildBodies = array();
+    private $_originalChildBodies = [];
 
     /** The Message that was last replaced */
     private $_lastMessage;
@@ -120,7 +119,7 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
             $this->_lastMessage = $message;
         }
     }
-  
+
     /**
      * Find a map of replacements for the address.
      *
@@ -139,12 +138,12 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
     {
         if ($this->_replacements instanceof Swift_Plugins_Decorator_Replacements) {
             return $this->_replacements->getReplacementsFor($address);
-        } else {
-            return isset($this->_replacements[$address])
+        }
+
+        return isset($this->_replacements[$address])
         ? $this->_replacements[$address]
         : null
         ;
-        }
     }
 
     /**
@@ -179,7 +178,7 @@ class Swift_Plugins_DecoratorPlugin implements Swift_Events_SendListener, Swift_
                         $child->setBody($this->_originalChildBodies[$id]);
                     }
                 }
-                $this->_originalChildBodies = array();
+                $this->_originalChildBodies = [];
             }
             $this->_lastMessage = null;
         }

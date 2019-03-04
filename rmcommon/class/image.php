@@ -9,9 +9,8 @@
 // --------------------------------------------------------------
 
 /**
-* Class to handle images created from Image Manager
-*/
-
+ * Class to handle images created from Image Manager
+ */
 class RMImage extends RMObject
 {
     use RMSingleton;
@@ -24,23 +23,23 @@ class RMImage extends RMObject
      * Stores all sizes for category
      * @param array
      */
-    private $sizes = array();
+    private $sizes = [];
 
-    public function __construct($id=null)
+    public function __construct($id = null)
     {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("mod_rmcommon_images");
+        $this->_dbtable = $this->db->prefix('mod_rmcommon_images');
         $this->setNew();
         $this->initVarsFromTable();
-        if ($id==null) {
+        if (null === $id) {
             return;
         }
-        
+
         if ($this->loadValues($id)) {
             $this->unsetNew();
         }
     }
-    
+
     public function id()
     {
         return $this->getVar('id_img');
@@ -53,10 +52,10 @@ class RMImage extends RMObject
      */
     public function load_from_params($params)
     {
-        if ($params=='') {
+        if ('' == $params) {
             return false;
         }
-        $p = explode(":", $params);
+        $p = explode(':', $params);
 
         if ((int)$p[0] <= 0) {
             return false;
@@ -66,9 +65,9 @@ class RMImage extends RMObject
             $this->unsetNew();
         }
         $this->selected_size = (int)$p[1];
-        
-        $p[2] = $p[2]!='' ? urldecode($p[2]) : '';
-        $p[3] = $p[3]!='' ? urldecode($p[3]) : '';
+
+        $p[2] = '' != $p[2] ? urldecode($p[2]) : '';
+        $p[3] = '' != $p[3] ? urldecode($p[3]) : '';
 
         return $p[2];
     }
@@ -97,7 +96,8 @@ class RMImage extends RMObject
      */
     public function get_files_url()
     {
-        $url = XOOPS_UPLOAD_URL.'/'.date('Y', $this->getVar('date')).'/'.date('m', $this->getVar('date'));
+        $url = XOOPS_UPLOAD_URL . '/' . date('Y', $this->getVar('date')) . '/' . date('m', $this->getVar('date'));
+
         return $url;
     }
 
@@ -107,18 +107,20 @@ class RMImage extends RMObject
      */
     public function get_files_path()
     {
-        $path = XOOPS_UPLOAD_PATH.'/'.date('Y', $this->getVar('date')).'/'.date('m', $this->getVar('date'));
+        $path = XOOPS_UPLOAD_PATH . '/' . date('Y', $this->getVar('date')) . '/' . date('m', $this->getVar('date'));
+
         return $path;
     }
 
     /**
      * Constructs the URL for image according to defined size
      * @param int Specific size to construct the url
+     * @param mixed $size
      * @return string
      */
     public function url($size = '')
     {
-        if ($size != '' && $this->selected_size != '') {
+        if ('' != $size && '' != $this->selected_size) {
             $size = $this->selected_size;
         }
 
@@ -127,20 +129,20 @@ class RMImage extends RMObject
         }
 
         $this->get_sizes_data();
-        
+
         $url = $this->get_files_url();
         $info = pathinfo($this->getVar('file'));
 
         foreach ($this->sizes as $item) {
             if ($item['name'] == $size) {
-                $url .= '/sizes/'.$info['filename'].'-'.$item['name'];
-                $url .= '.'.$info['extension'];
+                $url .= '/sizes/' . $info['filename'] . '-' . $item['name'];
+                $url .= '.' . $info['extension'];
+
                 return $url;
             }
         }
 
         $url .= '/' . $this->getVar('file');
-
 
         return $url;
     }
@@ -154,10 +156,10 @@ class RMImage extends RMObject
         $this->get_sizes_data();
         $ps = 0; // Previous size
         $small = 0;
-        
+
         foreach ($this->sizes as $k => $size) {
-            $ps = $ps==0?$size['width']:$ps;
-            if ($size['width']<$ps) {
+            $ps = 0 == $ps ? $size['width'] : $ps;
+            if ($size['width'] < $ps) {
                 $ps = $size['width'];
                 $small = $k;
             }
@@ -165,47 +167,47 @@ class RMImage extends RMObject
 
         return $this->url($small);
     }
-    
+
     /**
-    * Get all image versions with url
-    * @return array
-    */
+     * Get all image versions with url
+     * @return array
+     */
     public function get_all_versions()
     {
         if ($this->isNew()) {
             return false;
         }
-        
+
         $this->get_sizes_data();
-        $ret = array();
+        $ret = [];
         foreach ($this->sizes as $k => $size) {
             $ret[$size['name']] = $this->url($k);
         }
-        
+
         return $ret;
     }
-    
+
     public function get_version($name)
     {
         if ($this->isNew()) {
             return false;
         }
-        
+
         $this->get_sizes_data();
-        $ret = array();
+        $ret = [];
         foreach ($this->sizes as $k => $size) {
             if ($size['name'] == $name) {
                 return $this->url($name);
             }
         }
-        
+
         return '';
     }
 
     public function get_by_size($width)
     {
         $sizes = $this->get_sizes_data();
-        $sorted = array();
+        $sorted = [];
         foreach ($sizes as $i => $size) {
             $sorted[ $i ] = $size['width'];
         }
@@ -219,34 +221,35 @@ class RMImage extends RMObject
 
         return $this->getOriginal();
     }
-    
+
     public function getOriginal()
     {
         $url = $this->get_files_url();
         $url .= '/' . $this->getVar('file');
+
         return $url;
     }
-    
+
     public function save()
     {
         if ($this->isNew()) {
             return $this->saveToTable();
-        } else {
-            return $this->updateTable();
         }
+
+        return $this->updateTable();
     }
-    
+
     public function delete()
     {
-        $path = XOOPS_UPLOAD_PATH.'/'.date('Y', $this->getVar('date')).'/'.date('m', $this->getVar('date')).'/';
+        $path = XOOPS_UPLOAD_PATH . '/' . date('Y', $this->getVar('date')) . '/' . date('m', $this->getVar('date')) . '/';
         $sizes = $this->get_sizes_data();
-        
+
         $info = pathinfo($this->getVar('file'));
         foreach ($sizes as $size) {
-            unlink($path.'sizes/'.$info['filename'].'-'.$this->sizes[$size]['name'].'.'.$info['extension']);
+            unlink($path . 'sizes/' . $info['filename'] . '-' . $this->sizes[$size]['name'] . '.' . $info['extension']);
         }
-        unlink($path.$this->getVar('file'));
-        
+        unlink($path . $this->getVar('file'));
+
         return $this->deleteFromTable();
     }
 }

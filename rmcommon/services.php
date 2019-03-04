@@ -25,8 +25,7 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.eduardocortes.mx
  */
-
-include_once '../../include/cp_header.php';
+require_once dirname(__DIR__) . '/../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
 $common->location = 'services';
 
@@ -85,7 +84,7 @@ function services_assign_provider()
                     'title' => __('Services', 'rmcommon'),
                     'type' => 'alert-danger',
                     'icon' => 'svg-rmcommon-error',
-                ]
+                ],
             ]
         );
     }
@@ -93,7 +92,7 @@ function services_assign_provider()
     $common->services()->registerProvider($service, $provider);
 
     $common->ajax()->response(
-        sprintf(__('Provider %s for service %s registered successfully', 'rmcommon'), '<strong>' . $name . '</strong>', '<strong>' . strtoupper($service) . '</strong>'),
+        sprintf(__('Provider %s for service %s registered successfully', 'rmcommon'), '<strong>' . $name . '</strong>', '<strong>' . mb_strtoupper($service) . '</strong>'),
         0,
         1,
         [
@@ -101,7 +100,7 @@ function services_assign_provider()
                 'title' => __('Services', 'rmcommon'),
                 'type' => 'alert-success',
                 'icon' => 'svg-rmcommon-ok-circle',
-            ]
+            ],
         ]
     );
 }

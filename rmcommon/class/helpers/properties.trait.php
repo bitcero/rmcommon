@@ -10,7 +10,6 @@
  * URI: http://www.redmexico.com.mx
  * --------------------------------------------------------------
  */
-
 trait RMProperties
 {
     protected static $properties;
@@ -37,7 +36,7 @@ trait RMProperties
             return $this->$method($value);
         }
 
-        if (method_exists($this, 'get_'.$name)) {
+        if (method_exists($this, 'get_' . $name)) {
             throw new RMException(sprintf(__('Property "%s.%s" is read only.', 'rmcommon'), get_class($this), $name));
         }
 

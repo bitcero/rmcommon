@@ -8,55 +8,55 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-include_once RMCPATH.'/class/swift/swift_required.php';
+require_once RMCPATH . '/class/swift/swift_required.php';
 
 /**
-* Mailer Class
-*
-* @since 2.0
-* @package API
-* @author Eduardo Cortés <i.bitcero@gmail.com>
-* @license: GPL v2
-*/
+ * Mailer Class
+ *
+ * @since 2.0
+ * @package API
+ * @author Eduardo Cortés <i.bitcero@gmail.com>
+ * @license: GPL v2
+ */
 class RMMailer
 {
     /**
-    * The transport class
-    */
+     * The transport class
+     */
     private $swTransport;
     /**
-    * The message class
-    */
+     * The message class
+     */
     private $swMessage;
     /**
-    * The mailet class
-    */
+     * The mailet class
+     */
     private $swMailer;
     /**
-    * Errors when sending
-    */
-    private $errors = array();
+     * Errors when sending
+     */
+    private $errors = [];
 
-    private $vars = array();
+    private $vars = [];
     private $template = '';
     private $tpl_type = '';
 
-    private $xusers = array();
-
+    private $xusers = [];
 
     /**
-    * Class constructor.
-    * Load all data from configurations and generate the initial clases
-    * to manage the email
-    *
-    * @param string Content type for message body. It usually text/plain or text/html.
-    * 		Default is 'text/plain' but can be changed later
-    */
+     * Class constructor.
+     * Load all data from configurations and generate the initial clases
+     * to manage the email
+     *
+     * @param string Content type for message body. It usually text/plain or text/html.
+     * 		Default is 'text/plain' but can be changed later
+     * @param mixed $content_type
+     */
     public function __construct($content_type = 'text/plain')
     {
         $config = RMSettings::cu_settings();
-        $config_handler = xoops_gethandler('config');
-        $xconfig = $config_handler->getConfigsByCat(XOOPS_CONF_MAILER);
+        $configHandler = xoops_getHandler('config');
+        $xconfig = $configHandler->getConfigsByCat(XOOPS_CONF_MAILER);
 
         // Instantiate the Swit Transport according to our preferences
         // We can change this preferences later
@@ -65,7 +65,7 @@ class RMMailer
                 $this->swTransport = Swift_MailTransport::newInstance();
                 break;
             case 'smtp':
-                $this->swTransport = Swift_SmtpTransport::newInstance($config->smtp_server, $config->smtp_port, $config->smtp_crypt!='none' ? $config->smtp_crypt : '');
+                $this->swTransport = Swift_SmtpTransport::newInstance($config->smtp_server, $config->smtp_port, 'none' != $config->smtp_crypt ? $config->smtp_crypt : '');
                 $this->swTransport->setUsername($config->smtp_user);
                 $this->swTransport->setPassword($config->smtp_pass);
                 break;
@@ -78,7 +78,7 @@ class RMMailer
         // Also this object could be change later with message() method
         $this->swMessage = Swift_Message::newInstance();
         $this->swMessage->setReplyTo($xconfig['from']);
-        $this->swMessage->setFrom(array($xconfig['from'] => $xconfig['fromname']));
+        $this->swMessage->setFrom([$xconfig['from'] => $xconfig['fromname']]);
         $this->swMessage->setContentType($content_type);
     }
 
@@ -89,105 +89,113 @@ class RMMailer
 
     public function set_from_xuser($user)
     {
-        if (strtolower(get_class($user))=='xoopsuser') {
+        if ('xoopsuser' == mb_strtolower(get_class($user))) {
             $this->fromuser = $user;
-        } elseif ($user>0) {
+        } elseif ($user > 0) {
             $this->fromuser = new XoopsUser($user);
         }
     }
 
     /**
-    * Creating the mail transport
-    */
+     * Creating the mail transport
+     */
     public function &transport()
     {
         return $this->swTransport;
     }
 
     /**
-    * Next functions allows to manage the Message object.
-    * You can obtain directly the Swift Message object and work directly with it.
-    */
+     * Next functions allows to manage the Message object.
+     * You can obtain directly the Swift Message object and work directly with it.
+     */
 
     /**
-    * Get the message object
-    *
-    * @return object
-    */
+     * Get the message object
+     *
+     * @return object
+     */
     public function &message()
     {
         return $this->swMessage;
     }
 
     /**
-    * Get the subject line
-    *
-    * @return string
-    */
+     * Get the subject line
+     *
+     * @return string
+     */
     public function get_subject()
     {
         return $this->swMessage->getSubject();
     }
 
     /**
-    * Set the subject line
-    *
-    * @param string Subject line
-    */
+     * Set the subject line
+     *
+     * @param string Subject line
+     * @param mixed $subject
+     */
     public function set_subject($subject)
     {
         $this->swMessage->setSubject($subject);
     }
 
     /**
-    * Returns the body content
-    *
-    */
+     * Returns the body content
+     */
     public function get_body()
     {
         return $this->swMessage->getBody();
     }
 
     /**
-    * Set the body content and additionally can set the content_type
-    * If content type is not provided then it leaves without changes
-    *
-    * @param string $body
-    * @param string $content_type
-    */
-    public function set_body($body, $content_type='')
+     * Set the body content and additionally can set the content_type
+     * If content type is not provided then it leaves without changes
+     *
+     * @param string $body
+     * @param string $content_type
+     */
+    public function set_body($body, $content_type = '')
     {
-        $this->swMessage->setBody($body, $content_type!='' ? $content_type : $this->swMessage->getContentType());
+        $this->swMessage->setBody($body, '' != $content_type ? $content_type : $this->swMessage->getContentType());
     }
 
     /**
-    * Adds a part to message body.
-    *
-    * @param string Part body content
-    * @param string Content type, default is text/html
-    */
-    public function add_part($content, $type='text/html')
+     * Adds a part to message body.
+     *
+     * @param string Part body content
+     * @param string Content type, default is text/html
+     * @param mixed $content
+     * @param mixed $type
+     */
+    public function add_part($content, $type = 'text/html')
     {
         $this->swMessage->addPart($content, $type);
     }
 
     /**
-    * Attach a file
-    * Note: Always is preferible get the Message object and work directly with it and with Attachement object
-    *
-    * @param string Type of file. Can be 'path' for existent files or 'dynamic' for dynamic content
-    * @param string File path, when type = 'path'. The file must exists. Also can be a URL
-    * @param string Content type for file (mime type)
-    * @param string Set file name in the message
-    * @param mixed Content for dynamic content
-    * @param string File disposition (inline)
-    */
-    public function attach_content($type='path', $path = '', $content_type = '', $name='', $content=null, $disposition='')
+     * Attach a file
+     * Note: Always is preferible get the Message object and work directly with it and with Attachement object
+     *
+     * @param string Type of file. Can be 'path' for existent files or 'dynamic' for dynamic content
+     * @param string File path, when type = 'path'. The file must exists. Also can be a URL
+     * @param string Content type for file (mime type)
+     * @param string Set file name in the message
+     * @param mixed Content for dynamic content
+     * @param string File disposition (inline)
+     * @param mixed $type
+     * @param mixed $path
+     * @param mixed $content_type
+     * @param mixed $name
+     * @param null|mixed $content
+     * @param mixed $disposition
+     */
+    public function attach_content($type = 'path', $path = '', $content_type = '', $name = '', $content = null, $disposition = '')
     {
         switch ($type) {
             case 'path':
 
-                if (trim($path)=='' || !is_file($path)) {
+                if ('' == trim($path) || !is_file($path)) {
                     return;
                 }
                 $att = Swift_Attachment::fromPath($path);
@@ -195,7 +203,7 @@ class RMMailer
                 break;
             case 'dynamic':
 
-                if ($content==null || $content=='') {
+                if (null === $content || '' == $content) {
                     return;
                 }
                 $att = Swift_Attachment::newInstance($content);
@@ -203,13 +211,13 @@ class RMMailer
                 break;
         }
 
-        if (trim($name)!='') {
+        if ('' != trim($name)) {
             $att->setFilename($name);
         }
-        if (trim($content_type)!='') {
+        if ('' != trim($content_type)) {
             $att->setContentType($content_type);
         }
-        if (trim($disposition)!='') {
+        if ('' != trim($disposition)) {
             $att->setDisposition($disposition);
         }
 
@@ -217,28 +225,34 @@ class RMMailer
     }
 
     /**
-    * Embed files into message
-    * Note: Is better to use the Message object directly
-    *
-    * @param string Path or dynamic
-    * @param string|mixed Path to file or file content when type is dynamic
-    * @param string File name
-    * @param string Mime type of image
-    * @return int
-    */
-    public function embed($type, $file='', $name=null, $content_type=null)
+     * Embed files into message
+     * Note: Is better to use the Message object directly
+     *
+     * @param string Path or dynamic
+     * @param string|mixed Path to file or file content when type is dynamic
+     * @param string File name
+     * @param string Mime type of image
+     * @param mixed $type
+     * @param mixed $file
+     * @param null|mixed $name
+     * @param null|mixed $content_type
+     * @return int
+     */
+    public function embed($type, $file = '', $name = null, $content_type = null)
     {
         switch ($type) {
             case 'path':
-                if ($file=='') {
+                if ('' == $file) {
                     return null;
                 }
+
                 return $this->swMessage->embed(Swift_Image::fromPath($file));
                 break;
             case 'dynamic':
-                if ($file==null || $file=='') {
+                if (null === $file || '' == $file) {
                     return null;
                 }
+
                 return $this->swMessage->embed(Swift_Image::newInstance($file, $name, $content_type));
         }
 
@@ -246,80 +260,90 @@ class RMMailer
     }
 
     /**
-    * set all recipients in one go
-    *
-    * @param array Recipientes data array('recipient@address.com'=>'Recipient Name','recipent2@address.com',...)
-    */
-    public function set_to($recipients = array())
+     * set all recipients in one go
+     *
+     * @param array Recipientes data array('recipient@address.com'=>'Recipient Name','recipent2@address.com',...)
+     * @param mixed $recipients
+     */
+    public function set_to($recipients = [])
     {
         if (empty($recipients)) {
             return null;
         }
+
         return $this->swMessage->setTo($recipients);
     }
 
     /**
-    * Get recipients for this message
-    * @return array
-    */
+     * Get recipients for this message
+     * @return array
+     */
     public function get_to()
     {
         return $this->swMessage->getTo();
     }
 
     /**
-    * Add single recipient
-    * @param string Email address
-    * @param string Name
-    */
-    public function add_to($mail, $name='')
+     * Add single recipient
+     * @param string Email address
+     * @param string Name
+     * @param mixed $mail
+     * @param mixed $name
+     */
+    public function add_to($mail, $name = '')
     {
-        if ($mail=='') {
+        if ('' == $mail) {
             return null;
         }
+
         return $this->swMessage->addTo($mail, $name);
     }
 
     /**
-    * This methods are similar to previous but for Cc recipients
-    * @param array Recipientes data array('recipient@address.com'=>'Recipient Name','recipent2@address.com',...)
-    */
-    public function set_cc($recipients = array())
+     * This methods are similar to previous but for Cc recipients
+     * @param array Recipientes data array('recipient@address.com'=>'Recipient Name','recipent2@address.com',...)
+     * @param mixed $recipients
+     */
+    public function set_cc($recipients = [])
     {
         if (empty($recipients)) {
             return null;
         }
+
         return $this->swMessage->setCc($recipients);
     }
 
     /**
-    * Get recipients for this message
-    * @return array
-    */
+     * Get recipients for this message
+     * @return array
+     */
     public function get_cc()
     {
         return $this->swMessage->getCc();
     }
 
     /**
-    * Add single recipient
-    * @param string Email address
-    * @param string Name
-    */
-    public function add_cc($mail, $name='')
+     * Add single recipient
+     * @param string Email address
+     * @param string Name
+     * @param mixed $mail
+     * @param mixed $name
+     */
+    public function add_cc($mail, $name = '')
     {
-        if ($mail=='') {
+        if ('' == $mail) {
             return null;
         }
 
         return $this->swMessage->addCc($mail, $name);
     }
 
-    public function set_bcc($recipients = array())
+    public function set_bcc($recipients = [])
     {
         if (empty($recipients)) {
             return null;
         }
+
         return $this->swMessage->seBcc($recipients);
     }
 
@@ -328,9 +352,9 @@ class RMMailer
         return $this->swMessage->getBcc();
     }
 
-    public function add_bcc($mail, $name='')
+    public function add_bcc($mail, $name = '')
     {
-        if ($mail=='') {
+        if ('' == $mail) {
             return null;
         }
 
@@ -338,32 +362,34 @@ class RMMailer
     }
 
     /**
-    * Add Users as recipients for message.
-    * Users can be passed as object or as ids
-    *
-    * @param array Users (ids or objects)
-    */
-    public function add_users($users, $field='to')
+     * Add Users as recipients for message.
+     * Users can be passed as object or as ids
+     *
+     * @param array Users (ids or objects)
+     * @param mixed $users
+     * @param mixed $field
+     */
+    public function add_users($users, $field = 'to')
     {
         if (!is_array($users)) {
             return;
         }
 
         foreach ($users as $user) {
-            if (is_a($user, "XoopsUser")) {
-                $this->add_user($user->getVar('email'), $user->getVar('name')!='' ? $user->getVar('name') : $user->getVar('uname'), $field);
+            if (is_a($user, 'XoopsUser')) {
+                $this->add_user($user->getVar('email'), '' != $user->getVar('name') ? $user->getVar('name') : $user->getVar('uname'), $field);
             } else {
                 $user = new XoopsUser($user);
                 if ($user->isNew()) {
                     continue;
                 }
-                $this->add_user($user->getVar('email'), $user->getVar('name')!='' ? $user->getVar('name') : $user->getVar('uname'), $field);
+                $this->add_user($user->getVar('email'), '' != $user->getVar('name') ? $user->getVar('name') : $user->getVar('uname'), $field);
             }
             $this->xusers[] = $user;
         }
     }
 
-    public function add_user($mail, $name='', $field='to')
+    public function add_user($mail, $name = '', $field = 'to')
     {
         switch ($field) {
             case 'to':
@@ -379,43 +405,47 @@ class RMMailer
     }
 
     /**
-    * Add xoops users object to recipients list
-    *
-    * @param mixed A xoopsuser object or an array of xoopsuser objects
-    */
-    public function add_xoops_users($users, $field='to')
+     * Add xoops users object to recipients list
+     *
+     * @param mixed A xoopsuser object or an array of xoopsuser objects
+     * @param mixed $users
+     * @param mixed $field
+     */
+    public function add_xoops_users($users, $field = 'to')
     {
         if (is_array($users)) {
             foreach ($users as $uid) {
                 $user = new RMUser($uid);
-                if (strtolower(get_class($user))=='rmuser') {
+                if ('rmuser' == mb_strtolower(get_class($user))) {
                     $this->xusers[] = $user;
-                    $this->add_user($user->getVar('email'), $user->getVar('name')!='' ? $user->getVar('name') : $user->getVar('uname'), $field);
+                    $this->add_user($user->getVar('email'), '' != $user->getVar('name') ? $user->getVar('name') : $user->getVar('uname'), $field);
                 }
             }
         } else {
             $user = new RMUser($users);
 
-            if (strtolower(get_class($users))=='xoopsuser') {
+            if ('xoopsuser' == mb_strtolower(get_class($users))) {
                 $this->xusers[] = $user;
-                $this->add_user($users->getVar('email'), $users->getVar('name')!='' ? $users->getVar('name') : $users->getVar('uname'), $field);
+                $this->add_user($users->getVar('email'), '' != $users->getVar('name') ? $users->getVar('name') : $users->getVar('uname'), $field);
             } else {
-                $this->add_user($user->email, $user->name !='' ? $user->name : $user->uname, $field);
+                $this->add_user($user->email, '' != $user->name ? $user->name : $user->uname, $field);
             }
         }
     }
 
     /**
-    * Sets the return path
-    * @param string Email for return path
-    */
+     * Sets the return path
+     * @param string Email for return path
+     * @param mixed $mail
+     */
     public function set_return_path($mail)
     {
-        if ($mail=='') {
+        if ('' == $mail) {
             return;
         }
         $this->swMessage->setReturnPath($mail);
     }
+
     public function get_return_path()
     {
         return $this->swMessage->getReturnPath();
@@ -427,12 +457,14 @@ class RMMailer
     }
 
     /**
-    * Assign a template to generate the message body
-    *
-    * @param string Path to file
-    * @param string Template type. It can be "old" or ''
-    */
-    public function template($file, $type='')
+     * Assign a template to generate the message body
+     *
+     * @param string Path to file
+     * @param string Template type. It can be "old" or ''
+     * @param mixed $file
+     * @param mixed $type
+     */
+    public function template($file, $type = '')
     {
         if (file_exists($file)) {
             $this->template = $file;
@@ -440,9 +472,9 @@ class RMMailer
     }
 
     /**
-    * Get errors
-    * @return array
-    */
+     * Get errors
+     * @return array
+     */
     public function errors()
     {
         return $this->errors;
@@ -450,24 +482,25 @@ class RMMailer
 
     public function create_body()
     {
-        if ($this->get_body()!='') {
+        if ('' != $this->get_body()) {
             return;
         }
 
-        if ($this->template=='') {
+        if ('' == $this->template) {
             return;
         }
 
-        if ($this->tpl_type=='old') {
+        if ('old' == $this->tpl_type) {
             global $xoopsTpl;
 
             $ret = file_get_contents($this->template);
 
             foreach ($this->vars as $name => $value) {
-                $ret = str_replace('{'.$name.'}', $value, $ret);
+                $ret = str_replace('{' . $name . '}', $value, $ret);
             }
 
             $this->set_body($ret);
+
             return;
         }
 
@@ -493,16 +526,16 @@ class RMMailer
 
         $this->create_body();
 
-        $pm_handler = &xoops_gethandler('privmessage');
-        $pm = &$pm_handler->create();
-        $pm->setVar("subject", $this->get_subject());
+        $pmHandler =  xoops_getHandler('privmessage');
+        $pm = &$pmHandler->create();
+        $pm->setVar('subject', $this->get_subject());
         // RMV-NOTIFY
         $pm->setVar('from_userid', $this->fromuser->uid());
-        $pm->setVar("msg_text", $this->get_body());
+        $pm->setVar('msg_text', $this->get_body());
 
         foreach ($this->xusers as $user) {
-            $pm->setVar("to_userid", $user->uid());
-            $pm_handler->insert($pm);
+            $pm->setVar('to_userid', $user->uid());
+            $pmHandler->insert($pm);
         }
 
         return null;
@@ -512,6 +545,7 @@ class RMMailer
     {
         $this->create_body();
         $this->swMailer = Swift_Mailer::newInstance($this->swTransport);
+
         return $this->swMailer->send($this->swMessage, $this->errors);
     }
 
@@ -519,6 +553,7 @@ class RMMailer
     {
         $this->create_body();
         $this->swMailer = Swift_Mailer::newInstance($this->swTransport);
+
         return $this->swMailer->send($this->swMessage, $this->errors);
     }
 }

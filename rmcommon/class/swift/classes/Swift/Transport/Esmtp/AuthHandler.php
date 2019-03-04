@@ -20,7 +20,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @var Swift_Transport_Esmtp_Authenticator[]
      */
-    private $_authenticators = array();
+    private $_authenticators = [];
 
     /**
      * The username for authentication.
@@ -48,7 +48,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @var string[]
      */
-    private $_esmtpParams = array();
+    private $_esmtpParams = [];
 
     /**
      * Create a new AuthHandler with $authenticators for support.
@@ -171,8 +171,9 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
             $count = 0;
             foreach ($this->_getAuthenticatorsForAgent() as $authenticator) {
                 if (in_array(
-                    strtolower($authenticator->getAuthKeyword()),
-                    array_map('strtolower', $this->_esmtpParams)
+                    mb_strtolower($authenticator->getAuthKeyword()),
+                    array_map('strtolower', $this->_esmtpParams),
+                    true
                 )) {
                     ++$count;
                     if ($authenticator->authenticate($agent, $this->_username, $this->_password)) {
@@ -181,8 +182,8 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
                 }
             }
             throw new Swift_TransportException(
-                'Failed to authenticate on SMTP server with username "'.
-                $this->_username.'" using '.$count.' possible authenticators'
+                'Failed to authenticate on SMTP server with username "' .
+                $this->_username . '" using ' . $count . ' possible authenticators'
                 );
         }
     }
@@ -192,7 +193,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      */
     public function getMailParams()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -200,13 +201,17 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      */
     public function getRcptParams()
     {
-        return array();
+        return [];
     }
 
     /**
      * Not used.
+     * @param mixed $command
+     * @param mixed $codes
+     * @param null|mixed $failedRecipients
+     * @param mixed $stop
      */
-    public function onCommand(Swift_Transport_SmtpAgent $agent, $command, $codes = array(), &$failedRecipients = null, &$stop = false)
+    public function onCommand(Swift_Transport_SmtpAgent $agent, $command, $codes = [], &$failedRecipients = null, &$stop = false)
     {
     }
 
@@ -231,7 +236,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      */
     public function exposeMixinMethods()
     {
-        return array('setUsername', 'getUsername', 'setPassword', 'getPassword', 'setAuthMode', 'getAuthMode');
+        return ['setUsername', 'getUsername', 'setPassword', 'getPassword', 'setAuthMode', 'getAuthMode'];
     }
 
     /**
@@ -250,16 +255,16 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      */
     protected function _getAuthenticatorsForAgent()
     {
-        if (!$mode = strtolower($this->_auth_mode)) {
+        if (!$mode = mb_strtolower($this->_auth_mode)) {
             return $this->_authenticators;
         }
 
         foreach ($this->_authenticators as $authenticator) {
-            if (strtolower($authenticator->getAuthKeyword()) == $mode) {
-                return array($authenticator);
+            if (mb_strtolower($authenticator->getAuthKeyword()) == $mode) {
+                return [$authenticator];
             }
         }
 
-        throw new Swift_TransportException('Auth mode '.$mode.' is invalid');
+        throw new Swift_TransportException('Auth mode ' . $mode . ' is invalid');
     }
 }

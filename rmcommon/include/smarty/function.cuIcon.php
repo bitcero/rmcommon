@@ -24,11 +24,13 @@
  * @copyright    2009 - 2014 Eduardo Cortés
  * @license      GPL v2
  * @link         http://eduardocortes.mx
+ * @param mixed $params
+ * @param mixed $smarty
  */
 
 /**
-* This function enable the capacity of translate themes for Xoops
-*/
+ * This function enable the capacity of translate themes for Xoops
+ */
 function smarty_function_cuIcon($params, &$smarty)
 {
     global $cuIcons;

@@ -80,7 +80,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
      */
     public function setAddress($address)
     {
-        if (is_null($address)) {
+        if (null === $address) {
             $this->_address = null;
         } elseif ('' == $address) {
             $this->_address = '';
@@ -117,7 +117,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
     {
         if (!$this->getCachedValue()) {
             if (isset($this->_address)) {
-                $this->setCachedValue('<'.$this->_address.'>');
+                $this->setCachedValue('<' . $this->_address . '>');
             }
         }
 
@@ -134,7 +134,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
     private function _assertValidAddress($address)
     {
         if (!preg_match(
-            '/^'.$this->getGrammar()->getDefinition('addr-spec').'$/D',
+            '/^' . $this->getGrammar()->getDefinition('addr-spec') . '$/D',
             $address
         )) {
             throw new Swift_RfcComplianceException(

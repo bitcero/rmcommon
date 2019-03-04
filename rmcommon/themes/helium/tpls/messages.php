@@ -2,7 +2,7 @@
 /**
  * Redirect messages
  */
-$heliumMessages = array();
+$heliumMessages = [];
 if (isset($_SESSION['cu_redirect_messages'])) {
     foreach ($_SESSION['cu_redirect_messages'] as $msg) {
         $heliumMessages[] = $msg;
@@ -11,11 +11,11 @@ if (isset($_SESSION['cu_redirect_messages'])) {
 }
 
 if (isset($_SESSION['redirect_message'])) {
-    $heliumMessages[] = array(
-        'text'  => $_SESSION['redirect_message'],
-        'icon'  => 'svg-rmcommon-info',
-        'level' => RMMSG_INFO
-    );
+    $heliumMessages[] = [
+        'text' => $_SESSION['redirect_message'],
+        'icon' => 'svg-rmcommon-info',
+        'level' => RMMSG_INFO,
+    ];
     unset($_SESSION['redirect_message']);
 }
 

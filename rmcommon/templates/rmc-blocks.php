@@ -1,6 +1,6 @@
 <h1 class="cu-section-title"><?php _e('Blocks Administration', 'rmcommon'); ?></h1>
 
-<?php $from = rmc_server_var($_REQUEST, 'from', '')=='positions'?true:false; ?>
+<?php $from = 'positions' == rmc_server_var($_REQUEST, 'from', '') ? true : false; ?>
 
 <div role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
@@ -18,7 +18,7 @@
 
             <div id="bks-and-pos" class="row">
                 <div id="form-pos" class="col-md-3 col-lg-3">
-                    <form name="frmaddpos" id="frm-add-pos" method="post" action="blocks.php" />
+                    <form name="frmaddpos" id="frm-add-pos" method="post" action="blocks.php">
                     <fieldset>
                         <legend>Add Position</legend>
 
@@ -34,8 +34,8 @@
                             <span class="help-block"><?php _e('Specify a name for the smarty tag to use in templates (eg. left_blocks). This tag will be used as Smarty tag (eg. &lt;{$left_blocks}&gt).', 'rmcommon'); ?></span>
                         </div>
 
-                        <input type="submit" class="btn btn-info btn-large" name="bk_add_pos" id="add-position" value="<?php _e('Add Position', 'rmcommon'); ?>" />
-                        <input type="hidden" name="action" value="save_position" />
+                        <input type="submit" class="btn btn-info btn-large" name="bk_add_pos" id="add-position" value="<?php _e('Add Position', 'rmcommon'); ?>">
+                        <input type="hidden" name="action" value="save_position">
                         <?php echo $xoopsSecurity->getTokenHTML(); ?>
 
                         <h4><?php _e('How to implement blocks', 'rmcommon'); ?></h4>
@@ -107,7 +107,7 @@
                         </span>
                                     </td>
                                     <td align="center">&lt;{$xoBlocks.<span class="ptag"><?php echo $pos['tag']; ?></span>}&gt;</td>
-                                    <td align="center"><span class="fa <?php echo $pos['active'] == 1 ? 'fa-check text-success' : 'fa-times text-danger'; ?>"></span></td>
+                                    <td align="center"><span class="fa <?php echo 1 == $pos['active'] ? 'fa-check text-success' : 'fa-times text-danger'; ?>"></span></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -251,7 +251,7 @@
 <!--/ Positions -->
 
 <div id="settings-blocker"></div>
-<div id="settings-loading"><img src="images/loadinga.gif" width="16" height="16" alt="<?php _e('Loading', 'rmcomon'); ?>" /><?php _e('Loading data...', 'rmcommon'); ?></div>
+<div id="settings-loading"><img src="images/loadinga.gif" width="16" height="16" alt="<?php _e('Loading', 'rmcomon'); ?>"><?php _e('Loading data...', 'rmcommon'); ?></div>
 <div id="settings-form-window">
     
 </div>

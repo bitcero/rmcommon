@@ -26,7 +26,6 @@
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
-
 class EnabledCustomCodes
 {
     public function cuIcon($attrs)
@@ -58,7 +57,8 @@ class EnabledCustomCodes
             return $instance;
         }
 
-        $instance = new EnabledCustomCodes();
+        $instance = new self();
+
         return $instance;
     }
 }
@@ -70,4 +70,4 @@ $enabledCC = new EnabledCustomCodes();
  * <pre>
  * [cuicon icon=svg-rmcommon-rmcommon attr1="attr1" attr2="attr2" ...]
  */
-$rmCodes->add('cuicon', array($enabledCC, 'cuIcon'));
+$rmCodes->add('cuicon', [$enabledCC, 'cuIcon']);

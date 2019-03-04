@@ -26,10 +26,10 @@
  * @link         http://eduardocortes.mx
  * @link         http://rmcommon.com
  */
-
 abstract class Rmcommon_ANotifications
 {
     protected $events;
+
     /**
      * Determines if an event exists in the module and if the user have permissions to subscribe
      * @param string $event Evetn name
@@ -53,6 +53,7 @@ abstract class Rmcommon_ANotifications
      * Generate the subject for a notification event
      *
      * @param string $event Event identifier
+     * @param mixed $params
      *
      * @return mixed
      */
@@ -62,6 +63,7 @@ abstract class Rmcommon_ANotifications
      * Creates the body for notification message
      *
      * @param array $params
+     * @param mixed $event
      *
      * @return mixed
      */
@@ -75,6 +77,7 @@ abstract class Rmcommon_ANotifications
 
     /**
      * Must return an array with object data
+     * @param mixed $event
      * @return array
      */
     abstract public function object_data($event);
@@ -91,6 +94,7 @@ abstract class Rmcommon_ANotifications
         }
 
         $event = new RMNotificationItem($this->events[$name]);
+
         return $event;
     }
 
@@ -98,7 +102,6 @@ abstract class Rmcommon_ANotifications
      * Set permissions for specific event
      * @param string $event Event index name (generally event name)
      * @param array $permissions Array with users and groups indexes
-     * @return bool
      *
     public function permissions( $event, $permissions ){
 
@@ -117,7 +120,6 @@ abstract class Rmcommon_ANotifications
      * Set parameters for specific event
      * @param string $event Event index name (generally event name)
      * @param string $id The parameter identifier
-     * @return bool
      *
     public function parameters( $event, $params ){
         if ( !array_key_exists( $event, $this->events ) )
@@ -130,6 +132,8 @@ abstract class Rmcommon_ANotifications
     /**
      * Return the event array
      * @param string $event Event index name
+     * @return bool
+     * @return bool
      * @return array
      *
     public function event( $event ){

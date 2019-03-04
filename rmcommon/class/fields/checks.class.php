@@ -13,7 +13,7 @@
  */
 class RMFormCheck extends RMFormElement
 {
-    private $_options = array();
+    private $_options = [];
 
     /**
      * @param string $caption Texto de la etiqueta
@@ -41,7 +41,7 @@ class RMFormCheck extends RMFormElement
                     'value' => TextCleaner::getInstance()->clean_disabled_tags($value),
                     'selected' => $caption['selected'],
                     'extra' => $caption['extra'],
-                    'name' => $caption['name']
+                    'name' => $caption['name'],
                 ];
             }
         }
@@ -56,7 +56,7 @@ class RMFormCheck extends RMFormElement
      */
     public function addOption($caption, $name, $value, $state = 0)
     {
-        $rtn = array();
+        $rtn = [];
         $rtn['caption'] = TextCleaner::getInstance()->clean_disabled_tags($caption);
         $rtn['value'] = TextCleaner::getInstance()->clean_disabled_tags($value);
         $rtn['selected'] = $state ? 'selected' : '';
@@ -82,28 +82,29 @@ class RMFormCheck extends RMFormElement
         $attributes = $this->renderAttributeString();
 
         $rtn = '';
-        if ($this->get('display') == 'inline') {
-            $rtn .= "";
+        if ('inline' == $this->get('display')) {
+            $rtn .= '';
             $cols = 1;
             foreach ($this->_options as $k => $v) {
-                $rtn .= "<label class='checkbox-inline'><input $attributes name='".$v['name']."[]' value='$v[value]' ";
+                $rtn .= "<label class='checkbox-inline'><input $attributes name='" . $v['name'] . "[]' value='$v[value]' ";
                 //if ($v['state']==1){
-                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked " : '');
+                $rtn .= RMHttpRequest::request($this->get('name')) == $v['value'] ? 'checked ' : ('selected' == $v['selected'] ? 'checked ' : '');
                 //}
                 $rtn .= "> $v[caption]</label>";
                 $cols++;
             }
-            $rtn .= "";
+            $rtn .= '';
         } else {
             foreach ($this->_options as $k => $v) {
                 $rtn .= "<div class='checkbox'><label><input $attributes name='$v[name]' value='$v[value]' ";
                 //if ($v['state']==1){
-                //	$rtn .= "checked='checked' ";
+                //	$rtn .= "checked ";
                 //}
-                $rtn .= RMHttpRequest::request($this->get('name'), 'string') == $v['value'] ? "checked " : ($v['selected'] == 'selected' ? "checked " : '');
+                $rtn .= RMHttpRequest::request($this->get('name'), 'string') == $v['value'] ? 'checked ' : ('selected' == $v['selected'] ? 'checked ' : '');
                 $rtn .= "> $v[caption]</label></div>";
             }
         }
+
         return $rtn;
     }
 }
@@ -113,12 +114,12 @@ class RMFormCheck extends RMFormElement
  */
 class RMFormRadio extends RMFormElement
 {
-    private $_options = array();
+    private $_options = [];
 
     /**
      * @param string $caption Texto de la etiqueta.
      * @param string $name Nombre del campo.
-     * @param integer $inline Show inline controls or as list
+     * @param int $inline Show inline controls or as list
      * @param int $type 1 = Tabla, 0 = Lista
      * @param int $cols Numero de columnas de la tabla
      */
@@ -147,14 +148,14 @@ class RMFormRadio extends RMFormElement
                         'caption' => TextCleaner::getInstance()->clean_disabled_tags($option['caption']),
                         'value' => TextCleaner::getInstance()->clean_disabled_tags($value),
                         'selected' => $caption['selected'],
-                        'extra' => $caption['extra']
+                        'extra' => $caption['extra'],
                     ];
                 } else {
                     $this->_options[] = [
                         'caption' => TextCleaner::getInstance()->clean_disabled_tags($option),
                         'value' => TextCleaner::getInstance()->clean_disabled_tags($value),
                         'selected' => '',
-                        'extra' => ''
+                        'extra' => '',
                     ];
                 }
             }
@@ -166,10 +167,11 @@ class RMFormRadio extends RMFormElement
      * @param string $caption Texto de la etiqueta
      * @param mixed $value valor del elemento
      * @param int $state 0 Desactivado, 1 Activado
+     * @param mixed $extra
      */
     public function addOption($caption, $value, $state = 0, $extra = '')
     {
-        $rtn = array();
+        $rtn = [];
         $rtn['caption'] = TextCleaner::getInstance()->clean_disabled_tags($caption);
         $rtn['value'] = TextCleaner::getInstance()->clean_disabled_tags($value);
         $rtn['selected'] = $state;
@@ -200,16 +202,17 @@ class RMFormRadio extends RMFormElement
             foreach ($this->_options as $k => $v) {
                 $rtn .= '<label class="radio-inline">';
                 $rtn .= "<input $attributes value='$v[value]' ";
-                $rtn .= RMHttpRequest::request($this->get('name'), 'string', '') == $v['value'] ? "checked " : ($v['value'] == $this->get('value') ? "checked='checked' " : '');
-                $rtn .= ($v['extra'] != '' ? "$v[extra] " : '') . "> $v[caption]</label>";
+                $rtn .= RMHttpRequest::request($this->get('name'), 'string', '') == $v['value'] ? 'checked ' : ($v['value'] == $this->get('value') ? "checked " : '');
+                $rtn .= ('' != $v['extra'] ? "$v[extra] " : '') . "> $v[caption]</label>";
             }
         } else {
             foreach ($this->_options as $k => $v) {
                 $rtn .= "<div class=\"radio\"><label><input $attributes value='$v[value]' ";
-                $rtn .= RMHttpRequest::request($this->get('name', 'string', ''), 'mixed') == $v['value'] ? "checked " : ($v['value'] == $this->get('value') ? " checked " : '');
-                $rtn .= ($v['extra'] != '' ? "$v[extra] " : '') . "> $v[caption]</label></div>";
+                $rtn .= RMHttpRequest::request($this->get('name', 'string', ''), 'mixed') == $v['value'] ? 'checked ' : ($v['value'] == $this->get('value') ? ' checked ' : '');
+                $rtn .= ('' != $v['extra'] ? "$v[extra] " : '') . "> $v[caption]</label></div>";
             }
         }
+
         return $rtn;
     }
 }
@@ -267,19 +270,19 @@ class RMFormYesNo extends RMFormElement
 
         $rtn = "<label class=\"radio-inline\"><input type='radio' $attributes value='1' ";
 
-        if ($this->get('value') == 'yes' || (int)$this->get('value') == 1) {
-            $rtn .= "checked";
+        if ('yes' == $this->get('value') || 1 == (int)$this->get('value')) {
+            $rtn .= 'checked';
         }
 
-
-        $rtn .= "> " . __('Yes', 'rmcommon') . "</label>";
+        $rtn .= '> ' . __('Yes', 'rmcommon') . '</label>';
         $rtn .= "<label class=\"radio-inline\"><input type='radio' $attributes value='0' ";
 
-        if ($this->get('value') == 'no' || (int)$this->get('value') == 0) {
-            $rtn .= "checked";
+        if ('no' == $this->get('value') || 0 == (int)$this->get('value')) {
+            $rtn .= 'checked';
         }
 
-        $rtn .= "> " . __('No', 'rmcommon') . '</label>';
+        $rtn .= '> ' . __('No', 'rmcommon') . '</label>';
+
         return $rtn;
     }
 }

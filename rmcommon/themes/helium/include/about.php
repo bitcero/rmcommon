@@ -37,7 +37,7 @@
         <hr>
         <div class="text-center">
             <a href="http://www.xoopsmexico.net" class="btn btn-success">Visitar Xoops México</a>
-            <a href="http://www.xoops.org" class="btn btn-info">Visitar XOOPS.org</a>
+            <a href="https://www.xoops.org" class="btn btn-info">Visitar XOOPS.org</a>
         </div>
     </div>
     <div class="col-md-8">

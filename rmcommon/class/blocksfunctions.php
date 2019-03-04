@@ -13,17 +13,18 @@ class RMBlocksFunctions
     /**
      * Get the available widgets list
      *
+     * @param null|mixed $mods
      * @return array
      */
     public static function get_available_list($mods = null)
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
 
-        if ($mods == null || empty($mods)) {
+        if (null === $mods || empty($mods)) {
             $mods = RMModules::get_modules_list();
         }
 
-        $list = array(); // Block list to return
+        $list = []; // Block list to return
 
         foreach ($mods as $mod) {
             if (!file_exists(XOOPS_ROOT_PATH . '/modules/' . $mod['dirname'] . '/xoops_version.php')) {
@@ -34,31 +35,34 @@ class RMBlocksFunctions
             $module = new XoopsModule();
             $module->loadInfoAsVar($mod['dirname']);
 
-            $icon =& $module->getInfo('icon');
+            $icon = &$module->getInfo('icon');
 
-            $list[$mod['dirname']] = array(
+            $list[$mod['dirname']] = [
                 'name' => $mod['name'],
                 'blocks' => $module->getInfo('blocks'),
-                'icon' => $icon
-            );
+                'icon' => $icon,
+            ];
         }
 
         // Event generated to modify the available widgets list
         $list = RMEvents::get()->run_event('rmcommon.available.widgets', $list);
+
         return $list;
     }
 
     /**
      * Get blocks positions
+     * @param mixed $active
      */
     public static function block_positions($active = '')
     {
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $result = $db->query("SELECT * FROM " . $db->prefix("mod_rmcommon_blocks_positions") . ($active != '' ? ' WHERE active=' . $active : ''));
-        $pos = array();
-        while ($row = $db->fetchArray($result)) {
+        $result = $db->query('SELECT * FROM ' . $db->prefix('mod_rmcommon_blocks_positions') . ('' != $active ? ' WHERE active=' . $active : ''));
+        $pos = [];
+        while (false !== ($row = $db->fetchArray($result))) {
             $pos[$row['id_position']] = $row;
         }
+
         return $pos;
     }
 
@@ -69,27 +73,27 @@ class RMBlocksFunctions
     {
         global $xoopsConfig, $xoopsModule, $xoopsUser, $xoopsOption;
 
-        $sides = array();
+        $sides = [];
 
         foreach (self::block_positions(1) as $id => $row) {
             $sides[$id] = $row['tag'];
-            $blocks[$row['tag']] = array();
+            $blocks[$row['tag']] = [];
         }
 
-        $startMod = ($xoopsConfig['startpage'] == '--') ? 'system' : $xoopsConfig['startpage'];
+        $startMod = ('--' == $xoopsConfig['startpage']) ? 'system' : $xoopsConfig['startpage'];
         if (@is_object($xoopsModule)) {
-            list($mid, $dirname) = array($xoopsModule->getVar('mid'), $xoopsModule->getVar('dirname'));
-            $isStart = (substr($_SERVER['PHP_SELF'], -9) == 'index.php' && $xoopsConfig['startpage'] == $dirname);
+            list($mid, $dirname) = [$xoopsModule->getVar('mid'), $xoopsModule->getVar('dirname')];
+            $isStart = ('index.php' == mb_substr($_SERVER['PHP_SELF'], -9) && $xoopsConfig['startpage'] == $dirname);
         } else {
             $sys = RMModules::load_module('system');
-            list($mid, $dirname) = array($sys->getVar('mid'), 'system');
+            list($mid, $dirname) = [$sys->getVar('mid'), 'system'];
             $isStart = !@empty($GLOBALS['xoopsOption']['show_cblock']);
         }
 
-        $groups = @is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+        $groups = @is_object($xoopsUser) ? $xoopsUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 
         $subpage = isset($xoopsOption['module_subpage']) ? $xoopsOption['module_subpage'] : '';
-        $barray = array(); // Array of retrieved blocks
+        $barray = []; // Array of retrieved blocks
 
         $barray = self::get_blocks($groups, $mid, $isStart, XOOPS_BLOCK_VISIBLE, '', 1, $subpage, array_keys($sides));
 
@@ -105,20 +109,21 @@ class RMBlocksFunctions
         }
 
         unset($side, $sides, $content, $subpage, $barray, $groups, $startMod);
-        return is_array($blocks) ? $blocks : array();
+
+        return is_array($blocks) ? $blocks : [];
     }
 
-    public static function get_blocks($groupid, $mid = 0, $toponlyblock = false, $visible = null, $orderby = 'b.weight,b.wid', $isactive = 1, $subpage = '', $canvas = array())
+    public static function get_blocks($groupid, $mid = 0, $toponlyblock = false, $visible = null, $orderby = 'b.weight,b.wid', $isactive = 1, $subpage = '', $canvas = [])
     {
-        $orderby = $orderby == '' ? 'b.weight,b.bid' : $orderby;
+        $orderby = '' == $orderby ? 'b.weight,b.bid' : $orderby;
 
         // Get authorized blocks
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $ret = array();
-        $sql = "SELECT DISTINCT
+        $ret = [];
+        $sql = 'SELECT DISTINCT
                     gperm_itemid
                 FROM
-                    " . $db->prefix('group_permission') . "
+                    ' . $db->prefix('group_permission') . "
                 WHERE
                     (gperm_name = 'rmblock_read')
                 AND
@@ -134,11 +139,10 @@ class RMBlocksFunctions
 
         $result = $db->query($sql);
 
-        $blockids = array();
-        while ($myrow = $db->fetchArray($result)) {
+        $blockids = [];
+        while (false !== ($myrow = $db->fetchArray($result))) {
             $blockids[] = $myrow['gperm_itemid'];
         }
-
 
         if (!empty($blockids)) {
             $sql = 'SELECT b.* FROM ' . $db->prefix('mod_rmcommon_blocks') . ' b, ' . $db->prefix('mod_rmcommon_blocks_assignations') . ' m WHERE m.bid=b.bid';
@@ -160,7 +164,7 @@ class RMBlocksFunctions
                     $sql .= ' AND m.app_id=0';
                 }*/
             }
-            $sql .= $subpage != '' ? " AND (m.page='$subpage' OR m.page='--')" : '';
+            $sql .= '' != $subpage ? " AND (m.page='$subpage' OR m.page='--')" : '';
             $sql .= ' AND b.bid IN (' . implode(',', $blockids) . ')';
 
             if (is_array($canvas)) {
@@ -169,8 +173,8 @@ class RMBlocksFunctions
 
             $sql .= ' ORDER BY ' . $orderby;
             $result = $db->query($sql);
-            
-            while ($myrow = $db->fetchArray($result)) {
+
+            while (false !== ($myrow = $db->fetchArray($result))) {
                 $block = new RMInternalBlock();
                 $block->assignVars($myrow);
                 $ret[$myrow['bid']] = $block;
@@ -186,14 +190,14 @@ class RMBlocksFunctions
         global $xoopsTpl, $xoTheme;
         $template = $xoopsTpl;
 
-        $block = array(
+        $block = [
             'id' => $bobj->getVar('bid'),
             'module' => $bobj->getVar('dirname'),
             'title' => $bobj->getVar('name'),
             // 'name'        => strtolower( preg_replace( '/[^0-9a-zA-Z_]/', '', str_replace( ' ', '_', $bobj->getVar( 'name' ) ) ) ),
             'weight' => $bobj->getVar('weight'),
-            'type' => $bobj->getVar('element_type')
-        );
+            'type' => $bobj->getVar('element_type'),
+        ];
 
         $bcachetime = (int)$bobj->getVar('bcachetime');
         if (empty($bcachetime)) {
@@ -203,9 +207,9 @@ class RMBlocksFunctions
             $template->cache_lifetime = $bcachetime;
         }
         $template->setCompileId($bobj->getVar('dirname', 'n'));
-        if ($bobj->getVar('element_type') == 'plugin') {
+        if ('plugin' == $bobj->getVar('element_type')) {
             $tplName = XOOPS_ROOT_PATH . '/modules/' . $bobj->getVar('element') . '/plugins/' . $bobj->getVar('dirname') . '/templates/blocks/' . $bobj->getVar('template');
-        } elseif ($bobj->getVar('element_type') == 'theme') {
+        } elseif ('theme' == $bobj->getVar('element_type')) {
             $tplName = XOOPS_ROOT_PATH . '/themes/' . $bobj->getVar('dirname') . '/templates/blocks/' . $bobj->getVar('template');
         } else {
             $tplName = ($tplName = $bobj->getVar('template')) ? "db:$tplName" : 'db:system_block_dummy.html';
@@ -230,6 +234,7 @@ class RMBlocksFunctions
         }
 
         $template->setCompileId();
+
         return $block;
     }
 }

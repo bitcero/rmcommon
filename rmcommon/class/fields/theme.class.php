@@ -10,7 +10,6 @@
 
 class RMFormTheme extends RMFormElement
 {
-
     /**
      * Constructor
      * @param string $caption
@@ -21,6 +20,7 @@ class RMFormTheme extends RMFormElement
      * @param array $selected Grupo de vlores seleccionado por defecto
      * @param int $cols Numero de columnas para la tabla o filas para un campo select multi
      * @param string 'GUI' for admin theme
+     * @param mixed $section
      */
     public function __construct($caption, $name, $multi = 0, $type = 0, $selected = null, $cols = 2, $section = '')
     {
@@ -33,9 +33,9 @@ class RMFormTheme extends RMFormElement
             if ($multi) {
                 $this->setWithDefaults('multiple', null, null);
             }
-            $this->setWithDefaults('type', $type == 0 ? 'select' : 'radio', 'select');
+            $this->setWithDefaults('type', 0 == $type ? 'select' : 'radio', 'select');
             $this->setWithDefaults('selected', $selected, []);
-            if (strtolower($section) == 'gui') {
+            if ('gui' == mb_strtolower($section)) {
                 $this->set('gui', null);
             }
         }
@@ -48,7 +48,6 @@ class RMFormTheme extends RMFormElement
         $this->suppressList[] = 'gui';
     }
 
-
     public function render()
     {
         if ($this->has('gui')) {
@@ -57,7 +56,7 @@ class RMFormTheme extends RMFormElement
             $dirs = XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . '/themes', '');
         }
 
-        $themes = array();
+        $themes = [];
 
         $gui = $this->has('gui');
         $selected = $this->get('selected');
@@ -82,27 +81,26 @@ class RMFormTheme extends RMFormElement
 
         unset($name);
 
-        if ($this->get('type') == 'checkbox' || $this->get('type') == 'radio') {
-
+        if ('checkbox' == $this->get('type') || 'radio' == $this->get('type')) {
             // Render attributes
-            if ($this->get('type') == 'checkbox') {
+            if ('checkbox' == $this->get('type')) {
                 $this->set('name', $this->get('name') . '[]');
             }
             $attributes = $this->renderAttributeString();
 
             $rtn = '<ul class="rmoptions_container">';
             foreach ($themes as $k => $name) {
-                $rtn .= "<li><label><input $attributes value='$k' " . (is_array($selected) ? (in_array($k, $selected) ? " checked='checked'" : '') : '') . "> $name</label></li>";
+                $rtn .= "<li><label><input $attributes value='$k' " . (is_array($selected) ? (in_array($k, $selected, true) ? " checked" : '') : '') . "> $name</label></li>";
             }
-            $rtn .= "</ul>";
+            $rtn .= '</ul>';
         } else {
             $this->setIfNotSet('class', 'form-control');
             $attributes = $this->renderAttributeString();
             $rtn = "<select $attributes>";
             foreach ($themes as $k => $name) {
-                $rtn .= "<option value='$k'" . (is_array($selected) ? (in_array($k, $selected) ? " selected='selected'" : '') : '') . ">$name</option>";
+                $rtn .= "<option value='$k'" . (is_array($selected) ? (in_array($k, $selected, true) ? " selected='selected'" : '') : '') . ">$name</option>";
             }
-            $rtn .= "</select>";
+            $rtn .= '</select>';
         }
 
         return $rtn;

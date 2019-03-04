@@ -35,13 +35,13 @@ class Services
      * All service providers existing on system
      * @var array
      */
-    private $allServices = array();
+    private $allServices = [];
 
     /**
      * Services with assigned provider
      * @var array
      */
-    private $services = array();
+    private $services = [];
 
     private $servicesFile = '';
 
@@ -59,7 +59,7 @@ class Services
          * The component must return a service identifier and the
          * class name to run this service.
          */
-        $services = array();
+        $services = [];
         $services = \RMEvents::get()->trigger('rmcommon.get.services', $services);
 
         /**
@@ -107,8 +107,8 @@ class Services
      * Loads an specific service controller
      *
      * @param $name
-     * @return mixed
      * @throws \Exception
+     * @return mixed
      */
     public function service($name)
     {
@@ -118,6 +118,7 @@ class Services
 
         if (!array_key_exists($name, $this->services)) {
             trigger_error(sprintf(__('There are not any service installed for %s!', 'rmcommon'), '<strong>' . $name . '</strong>'));
+
             return false;
         }
 
@@ -125,7 +126,7 @@ class Services
             throw new \Exception(sprintf(__('File for service %s does not exists!', 'rmcommon'), '<strong>' . $name . '</strong>'));
         }
 
-        include_once $this->services[$name]['file'];
+        require_once $this->services[$name]['file'];
 
         if (!class_exists($this->services[$name]['class'])) {
             throw new \Exception(sprintf(__('The class %s for service %s does not exists!', 'rmcommon'), '<strong>' . $this->service[$name]['class'] . '</strong>', '<strong>' . $name . '</strong>'));
@@ -146,9 +147,9 @@ class Services
     {
         if (array_key_exists($service, $this->enabledProviders)) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -183,7 +184,6 @@ class Services
      */
     public function registerProvider($service, $provider)
     {
-
         // Check that service and provider are correct
         if ('' == trim($provider) || '' == trim($service)) {
             return false;
@@ -195,6 +195,7 @@ class Services
 
         // Save file
         $this->saveProviders($enabledProviders);
+
         return true;
     }
 
@@ -210,8 +211,8 @@ class Services
     /**
      * Returns a service provider
      * @param $name
-     * @return ServiceFallback|mixed
      * @throws \Exception
+     * @return ServiceFallback|mixed
      */
     public function __get($name)
     {
@@ -224,6 +225,7 @@ class Services
         }
 
         $service = new ServiceFallback();
+
         return $service;
     }
 
@@ -239,7 +241,7 @@ class Services
             return $instance;
         }
 
-        $instance = new Services();
+        $instance = new self();
 
         return $instance;
     }
@@ -261,12 +263,14 @@ abstract class ServiceAbstract
     public function __call($name, $arguments)
     {
         trigger_error(sprintf(__('There are not service using %s method'), $name));
+
         return null;
     }
 
     public static function __callStatic($name, $arguments)
     {
         trigger_error(sprintf(__('There are not service using %s method'), $name));
+
         return null;
     }
 }

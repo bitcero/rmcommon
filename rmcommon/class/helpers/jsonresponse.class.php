@@ -10,12 +10,11 @@ Smart-B ERP
 @version    $Id$
 ----------------------------------------
 **/
-
 class RMJsonResponse
 {
     use RMSingleton, RMProperties;
 
-    public static function respond($message, $type = 'success', $token = 0, $data = array())
+    public static function respond($message, $type = 'success', $token = 0, $data = [])
     {
         global $xoopsSecurity;
 

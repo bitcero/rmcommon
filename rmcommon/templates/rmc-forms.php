@@ -15,21 +15,21 @@
 
                 foreach ($elements as $data):
                     //print_r($data);
-                    $field =& $data['field'];
+                    $field = &$data['field'];
 
-                    if ($data['class']=='RMFormHidden'):
+                    if ('RMFormHidden' == $data['class']):
                         echo $field->render();
-                    elseif ($data['class']=='RMFormSubTitle'):
+                    elseif ('RMFormSubTitle' == $data['class']):
                         ?>
                         <h3><?php echo $field->render(); ?></h3>
-                        <?php if ($field->getDescription()!=''): ?><span class="help-block"><?php echo $field->getDescription(); ?></span><?php endif; ?>
+                        <?php if ('' != $field->getDescription()): ?><span class="help-block"><?php echo $field->getDescription(); ?></span><?php endif; ?>
 
                         <?php
                     else:
                         ?>
                         <div id="row_<?php echo $field->getName(); ?>" class="form-group">
                             <div class="col-md-3">
-                                <?php if ($field->getCaption()!=''): ?><label for="<?php echo $field->getName(); ?>"><?php echo $field->getCaption(); ?></label><?php else: ?>&nbsp;<?php endif; ?>
+                                <?php if ('' != $field->getCaption()): ?><label for="<?php echo $field->getName(); ?>"><?php echo $field->getCaption(); ?></label><?php else: ?>&nbsp;<?php endif; ?>
                             </div>
                             <div class="col-md-9">
                                 <?php echo $field->render(); ?>
@@ -44,7 +44,7 @@
                                         <?php
                                 }
                                 ?>
-                                <?php if ($field->getDescription() != ''): ?><span class="help-block"><?php echo $field->getDescription(); ?></span><?php endif; ?>
+                                <?php if ('' != $field->getDescription()): ?><span class="help-block"><?php echo $field->getDescription(); ?></span><?php endif; ?>
                             </div>
                         </div>
                         <?php

@@ -9,9 +9,9 @@
 // --------------------------------------------------------------
 
 /**
-* This file allows to default theme manage the xoops methas
-* from $xoTheme
-*/
+ * This file allows to default theme manage the xoops methas
+ * from $xoTheme
+ */
 ?>
 <!-- Xoops Metas -->
 <?php
@@ -24,13 +24,12 @@ if (isset($GLOBALS['xoTheme'])) {
         switch ($type) {
             case 'script':
                 foreach ($xoTheme->metas[$type] as $id => $attrs) {
-                    
                     // Prevent xoops.js
-                    if ($id==XOOPS_URL.'/include/xoops.js') {
+                    if ($id == XOOPS_URL . '/include/xoops.js') {
                         continue;
                     }
-                    
-                    $str .= "<script" . $xoTheme->renderAttributes($attrs) . ">";
+
+                    $str .= '<script' . $xoTheme->renderAttributes($attrs) . '>';
                     if (@$attrs['_']) {
                         $str .= "\n//<![CDATA[\n" . $attrs['_'] . "\n//]]>";
                     }
@@ -39,7 +38,7 @@ if (isset($GLOBALS['xoTheme'])) {
                 break;
             case 'link':
                 foreach ($xoTheme->metas[$type] as $rel => $attrs) {
-                    $str .= '<link rel="' . $rel . '"' . $xoTheme->renderAttributes($attrs) . " />\n";
+                    $str .= '<link rel="' . $rel . '"' . $xoTheme->renderAttributes($attrs) . ">\n";
                 }
                 break;
             case 'stylesheet':
@@ -49,28 +48,28 @@ if (isset($GLOBALS['xoTheme'])) {
                         continue;
                     }
 
-                    if (preg_match("/^" . str_replace("/", "\\/", XOOPS_URL) . "\/language\/.*\/style.css/", $attrs['href'])) {
+                    if (preg_match('/^' . str_replace('/', '\\/', XOOPS_URL) . "\/language\/.*\/style.css/", $attrs['href'])) {
                         continue;
                     }
 
                     if (@$attrs['_']) {
                         $str .= '<style' . $xoTheme->renderAttributes($attrs) . ">\n/* <![CDATA[ */\n" . $attrs['_'] . "\n/* //]]> */\n</style>";
                     } else {
-                        $str .= '<link rel="stylesheet"' . $xoTheme->renderAttributes($attrs) . " />\n";
+                        $str .= '<link rel="stylesheet"' . $xoTheme->renderAttributes($attrs) . ">\n";
                     }
                 }
                 break;
             case 'http':
                 foreach ($xoTheme->metas[$type] as $name => $value) {
-                    $str .= '<meta http-equiv="' . htmlspecialchars($name, ENT_QUOTES) . '" content="' . htmlspecialchars($value, ENT_QUOTES) . "\" />\n";
+                    $str .= '<meta http-equiv="' . htmlspecialchars($name, ENT_QUOTES) . '" content="' . htmlspecialchars($value, ENT_QUOTES) . "\">\n";
                 }
                 break;
             default:
                 foreach ($xoTheme->metas[$type] as $name => $value) {
-                    if ($name=='description'||$name=='keywords'||$name=='copyright') {
+                    if ('description' == $name || 'keywords' == $name || 'copyright' == $name) {
                         continue;
                     }
-                    $str .= '<meta name="' . htmlspecialchars($name, ENT_QUOTES) . '" content="' . htmlspecialchars($value, ENT_QUOTES) . '" />'."\n";
+                    $str .= '<meta name="' . htmlspecialchars($name, ENT_QUOTES) . '" content="' . htmlspecialchars($value, ENT_QUOTES) . '">' . "\n";
                 }
                 break;
             }

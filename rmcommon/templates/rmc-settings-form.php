@@ -11,7 +11,7 @@
     <?php
     $i = 0;
     foreach ($categories as $id => $category): ?>
-        <li<?php echo $i==0 ? ' class="active"' : ''; ?>>
+        <li<?php echo 0 == $i ? ' class="active"' : ''; ?>>
             <a href="#category-<?php echo $id; ?>-<?php echo $sufix; ?>" data-toggle="tab" title="<?php echo $category['caption']; ?>">
                 <?php if (array_key_exists('icon', $category)): ?>
                     <?php echo $cuIcons->getIcon($category['icon']); ?>
@@ -38,7 +38,7 @@
         $i = 0;
         foreach ($categories as $id => $category):
             ?>
-            <div class="tab-pane fade in<?php echo $i==0 ? ' active' : ''; ?>" id="category-<?php echo $id; ?>-<?php echo $sufix; ?>">
+            <div class="tab-pane fade in<?php echo 0 == $i ? ' active' : ''; ?>" id="category-<?php echo $id; ?>-<?php echo $sufix; ?>">
 
                 <?php if (!isset($category['fields'])): ?>
                     <span class="label label-danger"><?php _e('There are not fields in this category.', 'rmcommon'); ?></span>
@@ -54,7 +54,7 @@
                             <div class="row form-group">
                                 <div class="col-md-4 col-lg-4">
                                     <label for="<?php echo $id; ?>"><?php echo $field->caption; ?></label>
-                                    <?php if ($field->description != ''): ?>
+                                    <?php if ('' != $field->description): ?>
                                         <span class="help-block"><?php echo $field->description; ?></span>
                                     <?php endif; ?>
                                 </div>

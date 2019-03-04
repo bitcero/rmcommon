@@ -3,7 +3,7 @@
     <div class="panel-heading">
         <?php _e('Notifications', 'rmcommon'); ?>
     </div>
-    <form name="frmnotifications" id="notification-form-<?php echo $this::$index;?>" method="post" action="<?php echo RMUris::relative_url(RMUris::current_url()); ?>">
+    <form name="frmnotifications" id="notification-form-<?php echo $this::$index; ?>" method="post" action="<?php echo RMUris::relative_url(RMUris::current_url()); ?>">
         <div class="panel-body">
             <?php foreach ($items as $item): ?>
                 <div class="checkbox">

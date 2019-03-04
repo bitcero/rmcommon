@@ -82,22 +82,22 @@
             <div class="form-group">
                 <label><?php _e('Alignment:', 'rmcommon'); ?></label><br>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="" checked="checked" /> <?php _e('None', 'rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="" checked> <?php _e('None', 'rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="left" /> <?php _e('Left', 'rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="left"> <?php _e('Left', 'rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="center" /> <?php _e('Center', 'rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="center"> <?php _e('Center', 'rmcommon'); ?>
                 </label>
                 <label class="radio-inline">
-                    <input class="img-align" type="radio" name="align" value="right" /> <?php _e('Right', 'rmcommon'); ?>
+                    <input class="img-align" type="radio" name="align" value="right"> <?php _e('Right', 'rmcommon'); ?>
                 </label>
             </div>
             <div class="form-group img-sizes">
 
             </div>
-            <?php if ($type == 'markdown'): ?>
+            <?php if ('markdown' == $type): ?>
             <div class="form-group" id="md-as">
                 <label><?php _e('Insert as:', 'rmcommon'); ?></label><br>
                 <label class="radio-inline">
@@ -110,7 +110,7 @@
             <?php endif; ?>
             <div class="form-group">
                 <input type="hidden" name="id" value="" class="img-id">
-                <input type="hidden" name="type" value="<?php echo $type!=''?$type:'tiny'; ?>" id="insert-type">
+                <input type="hidden" name="type" value="<?php echo '' != $type ? $type : 'tiny'; ?>" id="insert-type">
                 <input type="hidden" name="target" value="<?php echo $target; ?>" id="insert-target">
                 <input type="hidden" name="container" value="<?php echo $container; ?>" id="insert-container">
                 <button type="button" class="btn btn-primary btn-insert"><?php _e('Send Image', 'rmcommon'); ?></button>
@@ -135,6 +135,6 @@
     </div>
 </div>
 
-<input type="hidden" name="token" id="ret-token" value="<?php echo $xoopsSecurity->createToken(); ?>" />
+<input type="hidden" name="token" id="ret-token" value="<?php echo $xoopsSecurity->createToken(); ?>">
 <?php echo $nav->display(false); ?>
 <input type="hidden" id="filesurl" value="<?php echo $filesurl; ?>">

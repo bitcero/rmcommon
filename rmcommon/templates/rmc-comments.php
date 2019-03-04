@@ -8,7 +8,7 @@
         <form name="search_form" class="pull-right" method="get" action="comments.php">
             <div class="comm-search-control">
                 <div class="input-group">
-                    <input type="search" name="w" id="wsearch" value="<?php echo isset($keyw) ? $keyw : '' ?>" size="20" class="form-control input-sm" />
+                    <input type="search" name="w" id="wsearch" value="<?php echo isset($keyw) ? $keyw : '' ?>" size="20" class="form-control input-sm">
                 <span class="input-group-btn">
                     <button type="button" title="<?php _e('Search', 'rmcommon'); ?>" onclick="$('#wsearch').val()==''?alert('<?php _e('You need something to search!', 'rmcommon'); ?>'):submit();" class="btn btn-info btn-sm">
                         <i class="fa fa-search"></i>
@@ -35,16 +35,16 @@
 	<button type="submit" class="btn btn-default" onclick="if($('#action-select').val()=='delete') return confirm('Do you really want to delete selected comments?');"><?php _e('Apply', 'rmcommon'); ?></button>
 
 	<ul class="nav nav-pills pull-right">
-		<li<?php if ($filter==''): ?> class="active"<?php endif; ?>>
+		<li<?php if ('' == $filter): ?> class="active"<?php endif; ?>>
 			<a href="comments.php"><?php _e('View all', 'rmcommon'); ?></a>
 		</li>
-		<li<?php if ($filter=='waiting'): ?> class="active"<?php endif; ?>>
+		<li<?php if ('waiting' == $filter): ?> class="active"<?php endif; ?>>
 			<a href="comments.php?filter=waiting"><?php _e('Unapproved', 'rmcommon'); ?></a>
 		</li>
-		<li<?php if ($filter=='approved'): ?> class="active"<?php endif; ?>>
+		<li<?php if ('approved' == $filter): ?> class="active"<?php endif; ?>>
 			<a href="comments.php?filter=approved"><?php _e('Approved', 'rmcommon'); ?></a>
 		</li>
-		<li<?php if ($filter=='spam'): ?> class="active"<?php endif; ?>>
+		<li<?php if ('spam' == $filter): ?> class="active"<?php endif; ?>>
 			<a href="comments.php?filter=spam"><?php _e('SPAM', 'rmcommon'); ?></a>
 		</li>
 	</ul>
@@ -56,7 +56,7 @@
                 <table class="table" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th width="20"><input type="checkbox" id="checkall" value="" onclick="$('#list-comments').toggleCheckboxes(':not(#checkall)');" /></th>
+                        <th width="20"><input type="checkbox" id="checkall" value="" onclick="$('#list-comments').toggleCheckboxes(':not(#checkall)');"></th>
                         <th align="left"><?php _e('Author', 'rmcommon'); ?></th>
                         <th align="left"><?php _e('Comment', 'rmcommon'); ?></th>
                         <th><?php _e('Status', 'rmcommon'); ?></th>
@@ -66,7 +66,7 @@
                     </thead>
                     <tfoot>
                     <tr>
-                        <th width="20"><input type="checkbox" id="checkall2" value="" onclick="$('#list-comments').toggleCheckboxes(':not(#checkall2)');" /></th>
+                        <th width="20"><input type="checkbox" id="checkall2" value="" onclick="$('#list-comments').toggleCheckboxes(':not(#checkall2)');"></th>
                         <th align="left"><?php _e('Author', 'rmcommon'); ?></th>
                         <th align="left"><?php _e('Comment', 'rmcommon'); ?></th>
                         <th><?php _e('Status', 'rmcommon'); ?></th>
@@ -75,29 +75,29 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    <?php if (count($comments)<=0): ?>
+                    <?php if (count($comments) <= 0): ?>
                         <tr class="head">
                             <td colspan="6" align="center"><span class="text-error"><?php _e('There are not comments yet!', 'rmcommon'); ?></span></td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($comments as $com): ?>
-                            <tr class="<?php echo tpl_cycle("even,odd"); ?>" valign="top"<?php if ($com['status']=='spam'): ?> style="color: #F00;"<?php endif; ?>>
-                                <td align="center"><input type="checkbox" name="coms[]" id="com-<?php echo $com['id']; ?>" value="<?php echo $com['id']; ?>" /></td>
-                                <td class="poster_cell"><img class="poster_avatar" src="<?php echo $com['poster']['avatar']; ?>" />
+                            <tr class="<?php echo tpl_cycle('even,odd'); ?>" valign="top"<?php if ('spam' == $com['status']): ?> style="color: #F00;"<?php endif; ?>>
+                                <td align="center"><input type="checkbox" name="coms[]" id="com-<?php echo $com['id']; ?>" value="<?php echo $com['id']; ?>"></td>
+                                <td class="poster_cell"><img class="poster_avatar" src="<?php echo $com['poster']['avatar']; ?>">
                                     <strong><?php echo $com['poster']['name']; ?></strong>
-        <span class="poster_data"><a href="mailto:<?php echo $com['poster']['email']; ?>"><?php echo $com['poster']['email']; ?></a><br />
+        <span class="poster_data"><a href="mailto:<?php echo $com['poster']['email']; ?>"><?php echo $com['poster']['email']; ?></a><br>
             <?php echo $com['ip']; ?></span></td>
                                 <td><span class="comment_date"><?php echo $com['posted']; ?></span>
                                     <?php echo $com['text']; ?>
                                     <span class="cu-item-options">
         	<a href="comments.php?id=<?php echo $com['id']; ?>&amp;action=edit&amp;page=<?php echo $page; ?>&amp;filter=<?php echo $filter; ?>&amp;w=<?php echo $keyw; ?>"><?php _e('Edit', 'rmcommon'); ?></a> |
         	<a href="javascript:;" onclick="confirm_delete(<?php echo $com['id']; ?>);"><?php _e('Delete', 'rmcommon'); ?></a> |
-                                        <?php if ($com['status']=='approved'): ?>
+                                        <?php if ('approved' == $com['status']): ?>
                                             <a href="javascript:;" onclick="approve_action(<?php echo $com['id']; ?>,'unapprove');"><?php _e('Unnaprove', 'rmcommon'); ?></a>
                                         <?php else: ?>
                                             <a href="javascript:;" onclick="approve_action(<?php echo $com['id']; ?>,'approve');"><?php _e('Approve', 'rmcommon'); ?></a>
                                         <?php endif; ?>
-                                        <?php if ($com['status']!='spam'): ?>
+                                        <?php if ('spam' != $com['status']): ?>
                                             | <a href="javascript:;" onclick="approve_action(<?php echo $com['id']; ?>,'spam');"><?php _e('Spam', 'rmcommon'); ?></a>
                                         <?php endif; ?>
         </span>
@@ -114,14 +114,14 @@
                                         case 'spam':
                                             echo "<span style='color: #F00;'>";
                                             _e('SPAM', 'rmcommon');
-                                            echo "</span>";
+                                            echo '</span>';
                                             break;
                                     }
                                     ?>
                                 </td>
                                 <td align="center"><?php echo $com['module']; ?></td>
                                 <td align="center">
-                                    <?php if (isset($com['item'])): ?><a href="<?php echo $com['item_url']; ?>"><?php echo $com['item']; ?></a><?php else: echo "&nbsp;"; endif; ?>
+                                    <?php if (isset($com['item'])): ?><a href="<?php echo $com['item_url']; ?>"><?php echo $com['item']; ?></a><?php else: echo '&nbsp;'; endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -142,8 +142,8 @@
 </select>
 <button type="submit" onclick="if($('#action-select').val()=='delete') return confirm('Do you really want to delete selected comments?');" class="btn btn-default"><?php _e('Apply', 'rmcommon'); ?></button>
 </div>
-<input type="hidden" name="filter" value="<?php echo $filter; ?>" />
-<input type="hidden" name="w" value="<?php echo $keyw; ?>" />
-<input type="hidden" name="page" value="<?php echo $page; ?>" />
+<input type="hidden" name="filter" value="<?php echo $filter; ?>">
+<input type="hidden" name="w" value="<?php echo $keyw; ?>">
+<input type="hidden" name="page" value="<?php echo $page; ?>">
 <?php echo $xoopsSecurity->getTokenHTML(); ?>
 </form>

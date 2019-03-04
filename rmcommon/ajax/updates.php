@@ -30,45 +30,44 @@
 /**
  * This file allows to load updates information from the remote server
  */
-
 include dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 $xoopsLogger->activated = false;
 
 set_time_limit(0);
 
 // Get modules
-$sql = "SELECT * FROM ".$xoopsDB->prefix("modules")." WHERE isactive=1";
+$sql = 'SELECT * FROM ' . $xoopsDB->prefix('modules') . ' WHERE isactive=1';
 $result = $xoopsDB->query($sql);
 
-$urls = array();
-$modNames = array();
+$urls = [];
+$modNames = [];
 
 /**
  * Load existing modules and fetch data to request remote server information
  */
-while ($row = $xoopsDB->fetchArray($result)) {
+while (false !== ($row = $xoopsDB->fetchArray($result))) {
     $mod = new XoopsModule();
     $mod->assignVars($row);
-    
-    $info =& $mod->getInfo();
-    
+
+    $info = &$mod->getInfo();
+
     if (!isset($info['rmversion'])) {
         continue;
     }
     if (!isset($info['updateurl'])) {
         continue;
     }
-    
+
     $modNames[$mod->dirname()] = $info['name'];
     $v = $info['rmversion'];
 
     if (isset($v['major'])) {
-        $version = $v['major'].'.'.$v['minor'].'.'.$v['revision'].'.'.$v['stage'];
+        $version = $v['major'] . '.' . $v['minor'] . '.' . $v['revision'] . '.' . $v['stage'];
     } else {
-        $version = $v['number'].'.'.($v['revision']/10).'.'.$v['status'];
+        $version = $v['number'] . '.' . ($v['revision'] / 10) . '.' . $v['status'];
     }
-    
-    $urls[$mod->dirname()] = $info['updateurl'] . (strpos($info['updateurl'], '?')===false ? '?' : '&') . 'action=check&id='.$mod->dirname().'&version='.$version;
+
+    $urls[$mod->dirname()] = $info['updateurl'] . (false === mb_strpos($info['updateurl'], '?') ? '?' : '&') . 'action=check&id=' . $mod->dirname() . '&version=' . $version;
 }
 
 /**
@@ -76,58 +75,57 @@ while ($row = $xoopsDB->fetchArray($result)) {
  * for each module
  */
 $total = 0;
-$upds = array();
+$upds = [];
 foreach ($urls as $dir => $url) {
     $ret = file_get_contents($url . '&xv=' . urlencode(XOOPS_VERSION));
     $ret = json_decode($ret, true);
-    if ($ret['message']==0) {
+    if (0 == $ret['message']) {
         continue;
     }
-    if ($ret['type']=='error') {
+    if ('error' == $ret['type']) {
         continue;
     }
-    
+
     $ret['data']['type'] = 'module';
     $ret['data']['dir'] = $dir;
     $ret['data']['name'] = $modNames[$dir];
     $upds[] = $ret;
-    
+
     $total++;
 }
-
 
 /**
  * Now load all installed plugins to search for updates
  */
 $rmFunc = RMFunctions::get();
-$urls = array();
-$plugNames = array();
+$urls = [];
+$plugNames = [];
 // Check updates for plugins
-$result = $xoopsDB->query("SELECT dir FROM ".$xoopsDB->prefix("mod_rmcommon_plugins"));
-while ($row = $xoopsDB->fetchArray($result)) {
+$result = $xoopsDB->query('SELECT dir FROM ' . $xoopsDB->prefix('mod_rmcommon_plugins'));
+while (false !== ($row = $xoopsDB->fetchArray($result))) {
     $plugin = $rmFunc->load_plugin($row['dir']);
     if (!$plugin) {
         continue;
     }
-    
+
     $info = $plugin->info();
-    
+
     if (!isset($info['updateurl'])) {
         continue;
     }
-    
+
     $plugNames[$row['dir']] = $info['name'];
     $v = $info['version'];
-    
+
     if (!is_array($v)) {
         $version = '0.0.0.0';
     } else {
-        $version = $v['major'].'.'.$v['minor'].'.'.$v['revision'].'.'.$v['stage'];
+        $version = $v['major'] . '.' . $v['minor'] . '.' . $v['revision'] . '.' . $v['stage'];
     }
 
     $params = "action=check&type=plugin&version=$version&id=$row[dir]";
-    
-    $urls[$row['dir']] = strpos($info['updateurl'], '?')===false ? $info['updateurl']."?$params" : $info['updateurl']."&$params";
+
+    $urls[$row['dir']] = false === mb_strpos($info['updateurl'], '?') ? $info['updateurl'] . "?$params" : $info['updateurl'] . "&$params";
 }
 
 /**
@@ -137,18 +135,18 @@ while ($row = $xoopsDB->fetchArray($result)) {
 foreach ($urls as $dir => $url) {
     $ret = file_get_contents($url);
     $ret = json_decode($ret, true);
-    if ($ret['message']==0) {
+    if (0 == $ret['message']) {
         continue;
     }
-    if ($ret['type']=='error') {
+    if ('error' == $ret['type']) {
         continue;
     }
-    
+
     $ret['data']['type'] = 'plugin';
     $ret['data']['dir'] = $dir;
     $ret['data']['name'] = $plugNames[$dir];
     $upds[] = $ret;
-    
+
     $total++;
 }
 
@@ -160,10 +158,10 @@ $urls = $common->events()->trigger('rmcommon.check.updates.themes', []);
 foreach ($urls as $dir => $data) {
     $ret = file_get_contents($data['url']);
     $ret = json_decode($ret, true);
-    if ($ret['message']==0) {
+    if (0 == $ret['message']) {
         continue;
     }
-    if ($ret['type']=='error') {
+    if ('error' == $ret['type']) {
         continue;
     }
 
@@ -176,12 +174,12 @@ foreach ($urls as $dir => $data) {
 }
 
 // Write file with updates information
-file_put_contents(XOOPS_CACHE_PATH.'/updates.chk', base64_encode(serialize(array('date'=>time(),'total'=>$total,'updates'=>$upds))));
+file_put_contents(XOOPS_CACHE_PATH . '/updates.chk', base64_encode(serialize(['date' => time(), 'total' => $total, 'updates' => $upds])));
 
 \Common\Core\Helpers\Licensing::getInstance()->checkRemote();
 
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Content-type: application/json');
-echo json_encode(array('total'=>$total));
+echo json_encode(['total' => $total]);
 die();

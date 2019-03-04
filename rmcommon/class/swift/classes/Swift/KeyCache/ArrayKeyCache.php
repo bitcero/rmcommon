@@ -20,7 +20,7 @@ class Swift_KeyCache_ArrayKeyCache implements Swift_KeyCache
      *
      * @var array
      */
-    private $_contents = array();
+    private $_contents = [];
 
     /**
      * An InputStream for cloning.
@@ -65,8 +65,8 @@ class Swift_KeyCache_ArrayKeyCache implements Swift_KeyCache
                 break;
             default:
                 throw new Swift_SwiftException(
-                    'Invalid mode ['.$mode.'] used to set nsKey='.
-                    $nsKey.', itemKey='.$itemKey
+                    'Invalid mode [' . $mode . '] used to set nsKey=' .
+                    $nsKey . ', itemKey=' . $itemKey
                     );
         }
     }
@@ -98,8 +98,8 @@ class Swift_KeyCache_ArrayKeyCache implements Swift_KeyCache
                 break;
             default:
                 throw new Swift_SwiftException(
-                    'Invalid mode ['.$mode.'] used to set nsKey='.
-                    $nsKey.', itemKey='.$itemKey
+                    'Invalid mode [' . $mode . '] used to set nsKey=' .
+                    $nsKey . ', itemKey=' . $itemKey
                     );
         }
     }
@@ -201,7 +201,7 @@ class Swift_KeyCache_ArrayKeyCache implements Swift_KeyCache
     private function _prepareCache($nsKey)
     {
         if (!array_key_exists($nsKey, $this->_contents)) {
-            $this->_contents[$nsKey] = array();
+            $this->_contents[$nsKey] = [];
         }
     }
 }

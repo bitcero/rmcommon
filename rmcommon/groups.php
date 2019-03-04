@@ -11,7 +11,7 @@
 // Constant to specify the internal location
 // Could be useful for themes, plugins and modules
 
-include '../../include/cp_header.php';
+require  dirname(dirname(__DIR__)) . '/include/cp_header.php';
 $common->location = 'groups';
 
 /**
@@ -23,16 +23,16 @@ function show_groups_list()
 
     define('RMCSUBLOCATION', 'allgroups');
 
-    list($total) = $xoopsDB->fetchRow($xoopsDB->query("SELECT COUNT(*) FROM " . $xoopsDB->prefix("groups")));
+    list($total) = $xoopsDB->fetchRow($xoopsDB->query('SELECT COUNT(*) FROM ' . $xoopsDB->prefix('groups')));
     $navigation = new RMPageNav($total, 20, RMHttpRequest::get('page', 'integer', 1));
     $navigation->target_url(RMCURL . '/users.php?action=groups&amp;page={PAGE_NUM}');
 
-    $sql = "SELECT g.*, (SELECT COUNT(*) FROM ". $xoopsDB->prefix("groups_users_link") . "
-            WHERE groupid = g.groupid) as total_users FROM " . $xoopsDB->prefix("groups") . " as g ORDER BY g.name
-            LIMIT " . $navigation->start() . ", 20";
+    $sql = 'SELECT g.*, (SELECT COUNT(*) FROM ' . $xoopsDB->prefix('groups_users_link') . '
+            WHERE groupid = g.groupid) as total_users FROM ' . $xoopsDB->prefix('groups') . ' as g ORDER BY g.name
+            LIMIT ' . $navigation->start() . ', 20';
     $result = $xoopsDB->query($sql);
-    $groups = array();
-    while ($row = $xoopsDB->fetchArray($result)) {
+    $groups = [];
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $groups[] = (object) $row;
     }
 
@@ -45,7 +45,7 @@ function show_groups_list()
     RMTemplate::get()->assign('xoops_pagetitle', __('Groups Management', 'rmcommon'));
 
     RMFunctions::get()->create_toolbar();
-    RMTemplate::get()->add_script('cu-groups.js', 'rmcommon', array('footer' => 1));
+    RMTemplate::get()->add_script('cu-groups.js', 'rmcommon', ['footer' => 1]);
     include RMCPATH . '/js/cu-js-language.php';
 
     RMTemplate::get()->header();
@@ -74,13 +74,13 @@ function show_group_form()
 
     $form = new RMForm('');
 
-    $result = $xoopsDB->query("SELECT * FROM " . $xoopsDB->prefix("modules") . " ORDER BY name ASC");
-    $modules = array();
+    $result = $xoopsDB->query('SELECT * FROM ' . $xoopsDB->prefix('modules') . ' ORDER BY name ASC');
+    $modules = [];
 
     $admin_rights = $group->load_permissions('module_admin');
     $access_rights = $group->load_permissions('module_read');
 
-    while ($row = $xoopsDB->fetchArray($result)) {
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $modules[$row['mid']] = (object) $row;
         $modules[$row['mid']]->permissions = RMPrivileges::module_permissions($row['dirname']);
         $modules[$row['mid']]->privileges = RMPrivileges::read_permissions($row['dirname'], $group->id());
@@ -96,13 +96,13 @@ function show_group_form()
         $group->isNew() ? __('Create new group', 'rmcommon') : sprintf(__('Edit group "%s"', 'rmcommon'), $group->getVar('name')),
         0,
         1,
-        array(
+        [
             'content' => $content,
             'width' => 'xlarge',
             'color' => 'green',
             'windowId' => 'window-form-groups',
-            'id' => 'groups-dialog'
-        )
+            'id' => 'groups-dialog',
+        ]
     );
 }
 
@@ -119,9 +119,9 @@ function save_group_data()
             __('Session token expired', 'rmcommon'),
             1,
             0,
-            array(
-                'reload' => 'reload'
-            )
+            [
+                'reload' => 'reload',
+            ]
         );
     }
 
@@ -130,7 +130,7 @@ function save_group_data()
     $icon = RMHttpRequest::post('icon', 'string', '');
     $id = RMHttpRequest::post('id', 'integer', 0);
 
-    if ($name == '') {
+    if ('' == $name) {
         $ajax->ajax_response(
             __('No name has been provided.', 'rmcommon'),
             1,
@@ -138,7 +138,7 @@ function save_group_data()
         );
     }
 
-    if ($description == '') {
+    if ('' == $description) {
         $ajax->ajax_response(
             __('Description has not been provided.', 'rmcommon'),
             1,
@@ -153,9 +153,9 @@ function save_group_data()
                 __('Specified group does not exists. Please try again.', 'rmcommon'),
                 1,
                 1,
-                array(
-                    'closeWindow' => 'window-form-groups'
-                )
+                [
+                    'closeWindow' => 'window-form-groups',
+                ]
             );
         }
     } else {
@@ -175,41 +175,41 @@ function save_group_data()
     }
 
     // Guardamos los permisos de administración
-    $admin = RMHttpRequest::post('admin_modules', 'array', array());
+    $admin = RMHttpRequest::post('admin_modules', 'array', []);
     if (!$group->set_admin_permissions($admin)) {
         $ajax->ajax_response(
             __('Administrative rights could not be saved.', 'rmcommon') . "\n" . $group->errors(),
             1,
             1,
-            array(
-                'reload' => 'reload'
-            )
+            [
+                'reload' => 'reload',
+            ]
         );
     }
 
     // Guardamos los permisos operativos
-    $read = RMHttpRequest::post('read_modules', 'array', array());
+    $read = RMHttpRequest::post('read_modules', 'array', []);
     if (!$group->set_read_permissions($read)) {
         $ajax->ajax_response(
             __('Access rights could not be saved.', 'rmcommon') . "\n" . $group->errors(),
             1,
             1,
-            array(
-                'reload' => 'reload'
-            )
+            [
+                'reload' => 'reload',
+            ]
         );
     }
 
     // Guardamos los permisos específicos
-    $admin = RMHttpRequest::post('specific_perms', 'array', array());
+    $admin = RMHttpRequest::post('specific_perms', 'array', []);
     if (!$group->set_specific_permissions($admin)) {
         $ajax->ajax_response(
             __('Specific permissions could not be saved.', 'rmcommon') . "\n" . $group->errors(),
             1,
             1,
-            array(
-                'reload' => 'reload'
-            )
+            [
+                'reload' => 'reload',
+            ]
         );
     }
 
@@ -220,9 +220,9 @@ function save_group_data()
         __('Data saved successfully.', 'rmcommon'),
         0,
         1,
-        array(
-            'reload' => 'reload'
-        )
+        [
+            'reload' => 'reload',
+        ]
     );
 }
 
@@ -238,29 +238,29 @@ function delete_group_data()
             __('Session token expired!', 'rmcommon'),
             1,
             0,
-            array('action' => 'reload')
+            ['action' => 'reload']
         );
     }
 
-    $ids = RMHttpRequest::post('ids', 'array', array());
+    $ids = RMHttpRequest::post('ids', 'array', []);
 
     if (empty($ids)) {
         $ajax->ajax_response(__('You must select at least one group. Please, try again.', 'rmcommon'), 1, 1);
     }
 
-    $to_delete = array_search(XOOPS_GROUP_ADMIN, $ids);
+    $to_delete = array_search(XOOPS_GROUP_ADMIN, $ids, true);
 
     if (false !== $to_delete) {
         unset($ids[$to_delete]);
     }
 
-    $to_delete = array_search(XOOPS_GROUP_USERS, $ids);
+    $to_delete = array_search(XOOPS_GROUP_USERS, $ids, true);
 
     if (false !== $to_delete) {
         unset($ids[$to_delete]);
     }
 
-    $to_delete = array_search(XOOPS_GROUP_ANONYMOUS, $ids);
+    $to_delete = array_search(XOOPS_GROUP_ANONYMOUS, $ids, true);
 
     if (false !== $to_delete) {
         unset($ids[$to_delete]);
@@ -276,26 +276,26 @@ function delete_group_data()
 
     $errors = '';
     // Eliminar permisos del grupo
-    $sql = "DELETE FROM " . $xoopsDB->prefix("group_permission")." WHERE gperm_groupid IN (" . implode(",", $ids).")";
+    $sql = 'DELETE FROM ' . $xoopsDB->prefix('group_permission') . ' WHERE gperm_groupid IN (' . implode(',', $ids) . ')';
 
     if (!$xoopsDB->queryF($sql)) {
         $errors .= $xoopsDB->error();
     }
 
     // Eliminar permisos específicos
-    $sql = "DELETE FROM " . $xoopsDB->prefix("mod_rmcommon_permissions") . " WHERE `group` IN (" . implode(",", $ids) . ")";
+    $sql = 'DELETE FROM ' . $xoopsDB->prefix('mod_rmcommon_permissions') . ' WHERE `group` IN (' . implode(',', $ids) . ')';
     if (!$xoopsDB->queryF($sql)) {
         $errors .= '<br>' . $xoopsDB->error();
     }
 
     // Eliminar relaciones con usuarios
-    $sql = "DELETE FROM " . $xoopsDB->prefix("groups_users_link") . " WHERE `groupid` IN (" . implode(",", $ids) . ")";
+    $sql = 'DELETE FROM ' . $xoopsDB->prefix('groups_users_link') . ' WHERE `groupid` IN (' . implode(',', $ids) . ')';
     if (!$xoopsDB->queryF($sql)) {
         $errors .= '<br>' . $xoopsDB->error();
     }
 
     // Eliminar datos del grupo
-    $sql = "DELETE FROM " . $xoopsDB->prefix("groups") . " WHERE `groupid` IN (" . implode(",", $ids) . ")";
+    $sql = 'DELETE FROM ' . $xoopsDB->prefix('groups') . ' WHERE `groupid` IN (' . implode(',', $ids) . ')';
     if (!$xoopsDB->queryF($sql)) {
         $errors .= '<br>' . $xoopsDB->error();
     }
@@ -303,7 +303,7 @@ function delete_group_data()
     if ('' == $errors) {
         showMessage(__('Selected groups has been deleted.', 'rmcommon'), RMMSG_SUCCESS, 'fa fa-remove-circle');
 
-        $ajax->ajax_response('', 0, 1, array( 'reload' => true ));
+        $ajax->ajax_response('', 0, 1, [ 'reload' => true ]);
     } else {
         $ajax->ajax_response(__('Errors ocurred while trying to delete selected groups.', 'rmcommon') . "\n" . $errors, 1, 1);
     }
@@ -313,21 +313,16 @@ function delete_group_data()
 $action = RMHttpRequest::request('action', 'string', '');
 
 switch ($action) {
-
     case 'new-group':
         show_group_form();
         break;
-
     case 'save-group':
         save_group_data();
         break;
-
     case 'delete-group':
         delete_group_data();
         break;
-
     default:
         show_groups_list();
         break;
-
 }

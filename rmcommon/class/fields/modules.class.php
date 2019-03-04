@@ -8,17 +8,16 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-
 class RMFormModules extends RMFormElement
 {
     private $multi = 0;
     private $type = 0;
     private $selected = null;
     private $cols = 2;
-    private $inserted = array();
+    private $inserted = [];
     private $dirnames = true;
     private $subpages = 0;
-    private $selectedSubPages = array();
+    private $selectedSubPages = [];
 
     /**
      * Constructor
@@ -36,6 +35,7 @@ class RMFormModules extends RMFormElement
      * @param array $insert Array con valores para agregar a la lista
      * @param bool $dirnames Devolver nombres de directorios (true) o ids (false)
      * @param int Mostrar Subpáginas
+     * @param mixed $subpages
      */
     public function __construct($caption, $name = '', $multi = 0, $type = 0, $selected = null, $cols = 2, $insert = null, $dirnames = true, $subpages = 0)
     {
@@ -73,7 +73,7 @@ class RMFormModules extends RMFormElement
         $this->setIfNotSet('type', $type ? 'radio' : 'select');
         $this->setIfNotSet('value', []);
 
-        if (false == is_array($this->get('value'))) {
+        if (false === is_array($this->get('value'))) {
             $this->set('value', [$this->get('value')]);
         }
 
@@ -101,7 +101,7 @@ class RMFormModules extends RMFormElement
 
     public function setMulti($value)
     {
-        if ($value == 0 || $value == 1) {
+        if (0 == $value || 1 == $value) {
             //$this->setName($value ? str_replace('[]','',$this->getName()).'[]' : str_replace('[]','',$this->getName()));
             $this->multi = $value;
         }
@@ -148,7 +148,7 @@ class RMFormModules extends RMFormElement
      */
     public function setInserted($value)
     {
-        $this->inserted = array();
+        $this->inserted = [];
         $this->inserted = $value;
     }
 
@@ -171,6 +171,7 @@ class RMFormModules extends RMFormElement
     /**
      * @desc Establece las subpáginas seleccionadas por defecto
      * @param array Subpáginas seleccionadas
+     * @param mixed $subs
      */
     public function subpages($subs)
     {
@@ -179,15 +180,15 @@ class RMFormModules extends RMFormElement
 
     public function render()
     {
-        $module_handler = xoops_gethandler('module');
+        $moduleHandler = xoops_getHandler('module');
         $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
         $criteria->add(new Criteria('isactive', 1));
         if ($this->get('subpages')) {
             $criteria->add(new Criteria('dirname', 'system'), 'OR');
         }
-        $modules = array();
+        $modules = [];
 
-        if ($this->get('type') != 'radio') {
+        if ('radio' != $this->get('type')) {
             $modules[-1] = __('All', 'rmcommon');
         }
 
@@ -195,10 +196,10 @@ class RMFormModules extends RMFormElement
             $modules = $this->get('insert');
         }
 
-        $modulesList = $module_handler->getList($criteria, $this->get('dirnames'));
+        $modulesList = $moduleHandler->getList($criteria, $this->get('dirnames'));
 
         // Add system module if not excluded
-        if (!$this->has('system') || !$this->get('system') == false) {
+        if (!$this->has('system') || false === !$this->get('system')) {
             $modules[1] = __('System', 'rmcommon');
         }
 
@@ -209,14 +210,14 @@ class RMFormModules extends RMFormElement
         $type = $this->get('type');
         $selected = $this->get('value');
 
-        if ($type == 'radio' || $type == 'checkbox') {
+        if ('radio' == $type || 'checkbox' == $type) {
             // Add js script
             // RMTemplate::getInstance()->add_script('modules_field.js', 'rmcommon', array('directory' => 'include'));
 
-            $pagesOptions = array();
+            $pagesOptions = [];
             $attributes = $this->renderAttributeString();
 
-            if ($type == 'checkbox') {
+            if ('checkbox' == $type) {
                 $name = $this->get('name') . '[%s]';
             }
 
@@ -232,14 +233,14 @@ class RMFormModules extends RMFormElement
                     $subpages = $app->getInfo('subpages');
                 }
 
-                $rtn .= "<li>";
-                $rtn .= "<input $attributes name=\"".sprintf($name, $k)."\"
+                $rtn .= '<li>';
+                $rtn .= "<input $attributes name=\"" . sprintf($name, $k) . "\"
                         value='$k'" .
-                        ($k == -1 ? " data-all" : " data-module=\"$k\"") .
+                        (-1 == $k ? ' data-all' : " data-module=\"$k\"") .
                         " id='" . $this->get('id') . "-$k'" .
-                            (is_array($selected) && in_array($k, $selected) ? " checked" : '') . "> ";
+                            (is_array($selected) && in_array($k, $selected, true) ? ' checked' : '') . '> ';
 
-                if (1 == $k || (false == empty($subpages) && $this->has('subpages') && $k > -1)) {
+                if (1 == $k || (false === empty($subpages) && $this->has('subpages') && $k > -1)) {
                     $rtn .= '<a href="#">' . $v . '</a>';
                 } else {
                     $rtn .= $v;
@@ -248,35 +249,35 @@ class RMFormModules extends RMFormElement
                 /**
                  * Mostramos las subpáginas
                  */
-                if ($this->has('subpages') && ($k != '' && $k != -1)) {
-                    if ($app->dirname() == 'system') {
-                        $subpages = array(
+                if ($this->has('subpages') && ('' != $k && -1 != $k)) {
+                    if ('system' == $app->dirname()) {
+                        $subpages = [
                             'home-page' => __('Home Page', 'rmcommon'),
                             'user' => __('User page', 'dtransport'),
                             'profile' => __('User profile page', 'rmcommon'),
                             'register' => __('Users registration', 'rmcommon'),
                             'edit-user' => __('Edit user', 'rmcommon'),
                             'readpm' => __('Read PM', 'rmcommon'),
-                            'pm' => __('Private messages', 'rmcomon')
-                        );
+                            'pm' => __('Private messages', 'rmcomon'),
+                        ];
                     } else {
-                        $subpages =& $app->getInfo('subpages');
+                        $subpages = &$app->getInfo('subpages');
                     }
                     if (!empty($subpages)) {
                         $selectedSubs = $this->has('selectedSubs') ? $this->get('selectedSubs') : [];
                         $cr = 0;
 
-                        $rtns = "<ul class=\"subpages-container subpages-" . $k . "\" data-module=\"" . $k . "\">";
+                        $rtns = '<ul class="subpages-container subpages-' . $k . '" data-module="' . $k . '">';
                         $j = 2;
                         $cr = 2;
                         if (!is_array($subpages)) {
-                            $subpages = array();
+                            $subpages = [];
                         }
 
                         foreach ($subpages as $page => $caption) {
                             $rtns .= "<li class='checkbox'>
                                         <label>
-                                            <input type='checkbox' data-parent='" . $k . "' name='" . sprintf($name, $k) . "[subpages][$page]' id='subpages-$k-$page' value='$page'" . (is_array($subpages) && @in_array($page, $selectedSubs[$k]) ? " checked='checked'" : '') . " /> $caption</label></li>";
+                                            <input type='checkbox' data-parent='" . $k . "' name='" . sprintf($name, $k) . "[subpages][$page]' id='subpages-$k-$page' value='$page'" . (is_array($subpages) && @in_array($page, $selectedSubs[$k], true) ? " checked" : '') . "> $caption</label></li>";
                             $j++;
                             $cr++;
                         }
@@ -287,12 +288,12 @@ class RMFormModules extends RMFormElement
                     }
                 }
 
-                $rtn .= "</li>";
+                $rtn .= '</li>';
                 $i++;
             }
 
-            $rtn .= "</ul>
-		            </div>";
+            $rtn .= '</ul>
+		            </div>';
 
             if ($this->has('subpages')) {
                 $rtn .= '<div><h4>' . __('Inner Pages', 'rmcommon') . '</h4>';
@@ -304,7 +305,7 @@ class RMFormModules extends RMFormElement
                 $rtn .= '</div>';
             }
 
-            $rtn .= "</div>";
+            $rtn .= '</div>';
         } else {
             if ($this->has('multiple')) {
                 $this->set('name', $this->get('name') . '[' . $k . ']');
@@ -314,9 +315,9 @@ class RMFormModules extends RMFormElement
 
             $rtn = "<select $attributes>";
             foreach ($modules as $k => $v) {
-                $rtn .= "<option value='$k'" . (is_array($selected) ? (in_array($k, $selected) ? " value" : '') : '') . ">$v</option>";
+                $rtn .= "<option value='$k'" . (is_array($selected) ? (in_array($k, $selected, true) ? ' value' : '') : '') . ">$v</option>";
             }
-            $rtn .= "</select>";
+            $rtn .= '</select>';
         }
 
         return $rtn;

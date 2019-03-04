@@ -10,7 +10,7 @@ class RMCustomCode
     /**
      * Contains all custom codes registered
      */
-    private $custom_codes = array();
+    private $custom_codes = [];
 
     /**
      * @return RMCustomCode
@@ -23,7 +23,8 @@ class RMCustomCode
             return $instance;
         }
 
-        $instance = new RMCustomCode();
+        $instance = new self();
+
         return $instance;
     }
 
@@ -107,7 +108,7 @@ class RMCustomCode
      */
     public function removeAll()
     {
-        $this->custom_codes = array();
+        $this->custom_codes = [];
     }
 
     /**
@@ -130,7 +131,8 @@ class RMCustomCode
             return $content;
         }
         $pattern = $this->getRegex();
-        return preg_replace_callback("/$pattern/s", array($this, 'doTag'), $content);
+
+        return preg_replace_callback("/$pattern/s", [$this, 'doTag'], $content);
     }
 
     /**
@@ -156,7 +158,7 @@ class RMCustomCode
     public function getRegex()
     {
         $tagnames = array_keys($this->custom_codes);
-        $tagregexp = join('|', array_map('preg_quote', $tagnames));
+        $tagregexp = implode('|', array_map('preg_quote', $tagnames));
 
         // WARNING! Do not change this regex without changing do_customcode_tag() and strip_customcode_tag()
         // Also, see customcode_unautop() and customcode.js.
@@ -204,10 +206,9 @@ class RMCustomCode
      */
     public function doTag($m)
     {
-
         // allow [[foo]] syntax for escaping a tag
-        if ($m[1] == '[' && $m[6] == ']') {
-            return substr($m[0], 1, -1);
+        if ('[' == $m[1] && ']' == $m[6]) {
+            return mb_substr($m[0], 1, -1);
         }
 
         $tag = $m[2];
@@ -216,10 +217,9 @@ class RMCustomCode
         if (isset($m[5])) {
             // enclosing tag - extra parameter
             return $m[1] . call_user_func($this->custom_codes[$tag], $attr, $m[5], $tag) . $m[6];
-        } else {
-            // self-closing tag
-            return $m[1] . call_user_func($this->custom_codes[$tag], $attr, null, $tag) . $m[6];
         }
+        // self-closing tag
+        return $m[1] . call_user_func($this->custom_codes[$tag], $attr, null, $tag) . $m[6];
     }
 
     /**
@@ -236,18 +236,18 @@ class RMCustomCode
      */
     public function parseAtts($text)
     {
-        $atts = array();
+        $atts = [];
         $pattern = '/(\w+)\s*=\s*"([^"]*)"(?:\s|$)|(\w+)\s*=\s*\'([^\']*)\'(?:\s|$)|(\w+)\s*=\s*([^\s\'"]+)(?:\s|$)|"([^"]*)"(?:\s|$)|(\S+)(?:\s|$)/';
-        $text = preg_replace("/[\x{00a0}\x{200b}]+/u", " ", $text);
+        $text = preg_replace("/[\x{00a0}\x{200b}]+/u", ' ', $text);
         if (preg_match_all($pattern, $text, $match, PREG_SET_ORDER)) {
             foreach ($match as $m) {
                 if (!empty($m[1])) {
-                    $atts[strtolower($m[1])] = stripcslashes($m[2]);
+                    $atts[mb_strtolower($m[1])] = stripcslashes($m[2]);
                 } elseif (!empty($m[3])) {
-                    $atts[strtolower($m[3])] = stripcslashes($m[4]);
+                    $atts[mb_strtolower($m[3])] = stripcslashes($m[4]);
                 } elseif (!empty($m[5])) {
-                    $atts[strtolower($m[5])] = stripcslashes($m[6]);
-                } elseif (isset($m[7]) and strlen($m[7])) {
+                    $atts[mb_strtolower($m[5])] = stripcslashes($m[6]);
+                } elseif (isset($m[7]) and mb_strlen($m[7])) {
                     $atts[] = stripcslashes($m[7]);
                 } elseif (isset($m[8])) {
                     $atts[] = stripcslashes($m[8]);
@@ -256,6 +256,7 @@ class RMCustomCode
         } else {
             $atts = ltrim($text);
         }
+
         return $atts;
     }
 
@@ -278,7 +279,7 @@ class RMCustomCode
     public function atts($pairs, $atts)
     {
         $atts = (array)$atts;
-        $out = array();
+        $out = [];
         foreach ($pairs as $name => $default) {
             if (array_key_exists($name, $atts)) {
                 $out[$name] = $atts[$name];
@@ -286,6 +287,7 @@ class RMCustomCode
                 $out[$name] = $default;
             }
         }
+
         return $out;
     }
 
@@ -306,14 +308,14 @@ class RMCustomCode
 
         $pattern = $this->getRegex();
 
-        return preg_replace_callback("/$pattern/s", array($this, 'strip'), $content);
+        return preg_replace_callback("/$pattern/s", [$this, 'strip'], $content);
     }
 
     public function stripTag($m)
     {
         // allow [[foo]] syntax for escaping a tag
-        if ($m[1] == '[' && $m[6] == ']') {
-            return substr($m[0], 1, -1);
+        if ('[' == $m[1] && ']' == $m[6]) {
+            return mb_substr($m[0], 1, -1);
         }
 
         return $m[1] . $m[6];

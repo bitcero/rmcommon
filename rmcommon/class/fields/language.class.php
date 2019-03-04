@@ -12,7 +12,7 @@ class RMFormLanguageField extends RMFormElement
 {
     private $multi = 0;
     private $type = 0;
-    private $selected = array();
+    private $selected = [];
     private $cols = 2;
 
     /**
@@ -81,41 +81,41 @@ class RMFormLanguageField extends RMFormElement
     public function render()
     {
         $files = XoopsLists::getFileListAsArray(XOOPS_ROOT_PATH . '/modules/rmcommon/lang', '');
-        $langs = array();
+        $langs = [];
         $langs['en_US'] = 'en';
         foreach ($files as $file => $v) {
-            if (substr($file, -3) != '.mo') {
+            if ('.mo' != mb_substr($file, -3)) {
                 continue;
             }
 
-            $langs[substr($file, 0, -3)] = substr($file, 0, -3);
+            $langs[mb_substr($file, 0, -3)] = mb_substr($file, 0, -3);
         }
 
         $type = $this->get('type');
         $selected = $this->get('selected');
 
-        if ($type == 'radio' || $type == 'checkbox') {
+        if ('radio' == $type || 'checkbox' == $type) {
             $rtn = '<div class="' . $type . '"><ul class="rmoptions_container">';
             $i = 1;
 
-            if ($type == 'checkbox') {
+            if ('checkbox' == $type) {
                 $this->set('name', $this->get('name') . '[]');
             }
             $attributes = $this->renderAttributeString();
 
             foreach ($langs as $k) {
-                $rtn .= "<li><label><input $attributes value='$k'" . (is_array($selected) ? (in_array($k, $selected) ? " checked" : '') : '') . "> $k</label></li>";
+                $rtn .= "<li><label><input $attributes value='$k'" . (is_array($selected) ? (in_array($k, $selected, true) ? ' checked' : '') : '') . "> $k</label></li>";
             }
 
-            $rtn .= "</ul></div>";
+            $rtn .= '</ul></div>';
         } else {
             $this->setIfNotSet('class', 'form-control');
             $attributes = $this->renderAttributeString();
             $rtn = "<select $attributes>";
             foreach ($langs as $k) {
-                $rtn .= "<option value='$k'" . (is_array($selected) ? (in_array($k, $selected) ? " selected='selected'" : '') : '') . ">$k</option>";
+                $rtn .= "<option value='$k'" . (is_array($selected) ? (in_array($k, $selected, true) ? " selected='selected'" : '') : '') . ">$k</option>";
             }
-            $rtn .= "</select>";
+            $rtn .= '</select>';
         }
 
         return $rtn;

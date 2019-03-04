@@ -1,4 +1,4 @@
-<h1 class="cu-section-title"><?php _e('Images Manager', 'rmcommon'); echo ': '.$category->getVar('name'); ?></h1>
+<h1 class="cu-section-title"><?php _e('Images Manager', 'rmcommon'); echo ': ' . $category->getVar('name'); ?></h1>
 <form name="list_images" method="post" action="images.php" id="list-images" class="form-inline">
 <div class="cu-bulk-actions">
     <div class="row">
@@ -13,7 +13,7 @@
 
             <select name="category" onchange="window.location = 'images.php?category='+$(this).val();" id="category-select" class="form-control">
                 <?php foreach ($categories as $catego): ?>
-                    <option value="<?php echo $catego['id']; ?>"<?php echo $catego['id']==$cat ? ' selected="selected"' : ''; ?>><?php echo $catego['name']; ?></option>
+                    <option value="<?php echo $catego['id']; ?>"<?php echo $catego['id'] == $cat ? ' selected="selected"' : ''; ?>><?php echo $catego['name']; ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -33,7 +33,7 @@
             <table class="table" cellspacing="0">
                 <thead>
                 <tr>
-                    <th width="30" align="center"><input type="checkbox" name="checkall" id="checkall" onclick="$('#list-images').toggleCheckboxes(':not(#checkall)');" /></th>
+                    <th width="30" align="center"><input type="checkbox" name="checkall" id="checkall" onclick="$('#list-images').toggleCheckboxes(':not(#checkall)');"></th>
                     <th align="left" width="70"><?php _e('File', 'rmcommon'); ?></th>
                     <th><?php _e('Details', 'rmcommon'); ?></th>
                     <th><?php _e('Author', 'rmcommon'); ?></th>
@@ -49,8 +49,8 @@
                     </tr>
                 <?php endif; ?>
                 <?php foreach ($images as $image): ?>
-                    <tr class="<?php echo tpl_cycle("even,odd"); ?>">
-                        <td align="center"><input type="checkbox" name="imgs[<?php echo $image['id']; ?>]" value="<?php echo $image['id']; ?>" /></td>
+                    <tr class="<?php echo tpl_cycle('even,odd'); ?>">
+                        <td align="center"><input type="checkbox" name="imgs[<?php echo $image['id']; ?>]" value="<?php echo $image['id']; ?>"></td>
                         <td>
                             <a href="<?php echo $image['big']; ?>" class="bigimages">
                                 <img src="<?php echo $image['file']; ?>" alt="" style="max-width: 70px; max-height: 50px;">
@@ -58,7 +58,7 @@
                         </td>
                         <td>
                             <strong><?php echo $image['title']; ?></strong>
-                            <?php if ($image['desc']!=''): ?>
+                            <?php if ('' != $image['desc']): ?>
                                 <span class="description"><?php echo $image['desc']; ?></span>
                             <?php endif; ?>
                             <span class="cu-item-options">
@@ -85,6 +85,6 @@
         </div>
     </div>
 
-<input type="hidden" name="category" value="<?php echo $cat; ?>" />
-<input type="hidden" name="page" value="<?php echo $page; ?>" />
+<input type="hidden" name="category" value="<?php echo $cat; ?>">
+<input type="hidden" name="page" value="<?php echo $page; ?>">
 </form>

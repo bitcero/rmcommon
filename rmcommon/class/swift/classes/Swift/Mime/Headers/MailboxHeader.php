@@ -20,7 +20,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      *
      * @var string[]
      */
-    private $_mailboxes = array();
+    private $_mailboxes = [];
 
     /**
      * Creates a new MailboxHeader with $name.
@@ -231,7 +231,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
     public function getFieldBody()
     {
         // Compute the string value of the header only if needed
-        if (is_null($this->getCachedValue())) {
+        if (null === $this->getCachedValue()) {
             $this->setCachedValue($this->createMailboxListString($this->_mailboxes));
         }
 
@@ -249,7 +249,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      */
     protected function normalizeMailboxes(array $mailboxes)
     {
-        $actualMailboxes = array();
+        $actualMailboxes = [];
 
         foreach ($mailboxes as $key => $value) {
             if (is_string($key)) {
@@ -324,13 +324,13 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      */
     private function _createNameAddressStrings(array $mailboxes)
     {
-        $strings = array();
+        $strings = [];
 
         foreach ($mailboxes as $email => $name) {
             $mailboxStr = $email;
-            if (!is_null($name)) {
+            if (null !== $name) {
                 $nameStr = $this->createDisplayNameString($name, empty($strings));
-                $mailboxStr = $nameStr.' <'.$mailboxStr.'>';
+                $mailboxStr = $nameStr . ' <' . $mailboxStr . '>';
             }
             $strings[] = $mailboxStr;
         }
@@ -348,11 +348,11 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
     private function _assertValidAddress($address)
     {
         if (!preg_match(
-            '/^'.$this->getGrammar()->getDefinition('addr-spec').'$/D',
+            '/^' . $this->getGrammar()->getDefinition('addr-spec') . '$/D',
             $address
         )) {
             throw new Swift_RfcComplianceException(
-                'Address in mailbox given ['.$address.
+                'Address in mailbox given [' . $address .
                 '] does not comply with RFC 2822, 3.6.2.'
                 );
         }

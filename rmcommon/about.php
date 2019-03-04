@@ -8,10 +8,10 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-include '../../include/cp_header.php';
+require  dirname(dirname(__DIR__)) . '/include/cp_header.php';
 $common->location = 'about';
 
-RMTemplate::getInstance()->add_style('about.min.css', 'rmcommon', ['id'=>'about-css']);
+RMTemplate::getInstance()->add_style('about.min.css', 'rmcommon', ['id' => 'about-css']);
 
 RMTemplate::get()->header(); ?>
 
@@ -74,7 +74,7 @@ RMTemplate::get()->header(); ?>
     <div class="info">
         <h3>A fully new design with great improvements and additions.</h3>
         <p>
-            Never was so easy to use and take advantage of <a href="http://www.xoops.org" target="_blank">XOOPS</a> and
+            Never was so easy to use and take advantage of <a href="https://www.xoops.org" target="_blank">XOOPS</a> and
             <a href="http://www.rmcommon.com" target="_blank">Common Utilities.</a> All the power, modularity and features of both are available for you with
             the best appearance ever.
         </p>

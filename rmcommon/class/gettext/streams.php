@@ -20,7 +20,6 @@
 
 */
 
-
   // Simple class to wrap file streams, string streams, etc.
   // seek is essential, and it should be byte stream
 class StreamReader
@@ -55,7 +54,7 @@ class StringReader
     public $_pos;
     public $_str;
 
-    public function __construct($str='')
+    public function __construct($str = '')
     {
         $this->_str = $str;
         $this->_pos = 0;
@@ -63,10 +62,10 @@ class StringReader
 
     public function read($bytes)
     {
-        $data = substr($this->_str, $this->_pos, $bytes);
+        $data = mb_substr($this->_str, $this->_pos, $bytes);
         $this->_pos += $bytes;
-        if (strlen($this->_str)<$this->_pos) {
-            $this->_pos = strlen($this->_str);
+        if (mb_strlen($this->_str) < $this->_pos) {
+            $this->_pos = mb_strlen($this->_str);
         }
 
         return $data;
@@ -75,9 +74,10 @@ class StringReader
     public function seekto($pos)
     {
         $this->_pos = $pos;
-        if (strlen($this->_str)<$this->_pos) {
-            $this->_pos = strlen($this->_str);
+        if (mb_strlen($this->_str) < $this->_pos) {
+            $this->_pos = mb_strlen($this->_str);
         }
+
         return $this->_pos;
     }
 
@@ -88,7 +88,7 @@ class StringReader
 
     public function length()
     {
-        return strlen($this->_str);
+        return mb_strlen($this->_str);
     }
 }
 
@@ -101,7 +101,7 @@ class FileReader
     public function FileReader($filename)
     {
         if (file_exists($filename)) {
-            $this->_length=filesize($filename);
+            $this->_length = filesize($filename);
             $this->_pos = 0;
             $this->_fd = fopen($filename, 'rb');
             if (!$this->_fd) {
@@ -112,6 +112,7 @@ class FileReader
             $this->error = 2; // File doesn't exist
             return false;
         }
+
         return null;
     }
 
@@ -124,22 +125,23 @@ class FileReader
             // the discussions at PHP Bugs suggest it's the intended behaviour
             $data = '';
             while ($bytes > 0) {
-                $chunk  = fread($this->_fd, $bytes);
-                $data  .= $chunk;
-                $bytes -= strlen($chunk);
+                $chunk = fread($this->_fd, $bytes);
+                $data .= $chunk;
+                $bytes -= mb_strlen($chunk);
             }
             $this->_pos = ftell($this->_fd);
 
             return $data;
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     public function seekto($pos)
     {
         fseek($this->_fd, $pos);
         $this->_pos = ftell($this->_fd);
+
         return $this->_pos;
     }
 
@@ -166,7 +168,7 @@ class CachedFileReader extends StringReader
     public function CachedFileReader($filename)
     {
         if (file_exists($filename)) {
-            $length=filesize($filename);
+            $length = filesize($filename);
             $fd = fopen($filename, 'rb');
 
             if (!$fd) {
@@ -179,6 +181,7 @@ class CachedFileReader extends StringReader
             $this->error = 2; // File doesn't exist
             return false;
         }
+
         return null;
     }
 }

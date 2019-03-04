@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-//@require 'Swift/Events/SendListener.php';
-//@require 'Swift/Events/SendEvent.php';
-//@require 'Swift/Events/CommandListener.php';
-//@require 'Swift/Events/CommandEvent.php';
-//@require 'Swift/Events/ResponseListener.php';
-//@require 'Swift/Events/ResponseEvent.php';
-//@require 'Swift/InputByteStream.php';
+//@require __DIR__ . '/Swift/Events/SendListener.php';
+//@require __DIR__ . '/Swift/Events/SendEvent.php';
+//@require __DIR__ . '/Swift/Events/CommandListener.php';
+//@require __DIR__ . '/Swift/Events/CommandEvent.php';
+//@require __DIR__ . '/Swift/Events/ResponseListener.php';
+//@require __DIR__ . '/Swift/Events/ResponseEvent.php';
+//@require __DIR__ . '/Swift/InputByteStream.php';
 
 /**
  * Reduces network flooding when sending large amounts of mail.
@@ -28,31 +28,30 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
   Swift_Events_ResponseListener,
     Swift_InputByteStream
 {
-  
-  /**
-   * The outgoing traffic counter.
-   * @var int
-   * @access private
-   */
+    /**
+     * The outgoing traffic counter.
+     * @var int
+     * @access private
+     */
     private $_out = 0;
-  
+
     /**
      * The incoming traffic counter.
      * @var int
      * @access private
      */
     private $_in = 0;
-  
+
     /** Bound byte streams */
-    private $_mirrors = array();
-  
+    private $_mirrors = [];
+
     /**
      * Not used.
      */
     public function beforeSendPerformed(Swift_Events_SendEvent $evt)
     {
     }
-  
+
     /**
      * Invoked immediately after the Message is sent.
      * @param Swift_Events_SendEvent $evt
@@ -62,7 +61,7 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
         $message = $evt->getMessage();
         $message->toByteStream($this);
     }
-  
+
     /**
      * Invoked immediately following a command being sent.
      * @param Swift_Events_ResponseEvent $evt
@@ -70,9 +69,9 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
     public function commandSent(Swift_Events_CommandEvent $evt)
     {
         $command = $evt->getCommand();
-        $this->_out += strlen($command);
+        $this->_out += mb_strlen($command);
     }
-  
+
     /**
      * Invoked immediately following a response coming back.
      * @param Swift_Events_ResponseEvent $evt
@@ -80,28 +79,28 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
     public function responseReceived(Swift_Events_ResponseEvent $evt)
     {
         $response = $evt->getResponse();
-        $this->_in += strlen($response);
+        $this->_in += mb_strlen($response);
     }
-  
+
     /**
      * Called when a message is sent so that the outgoing counter can be increased.
      * @param string $bytes
      */
     public function write($bytes)
     {
-        $this->_out += strlen($bytes);
+        $this->_out += mb_strlen($bytes);
         foreach ($this->_mirrors as $stream) {
             $stream->write($bytes);
         }
     }
-  
+
     /**
      * Not used.
      */
     public function commit()
     {
     }
-  
+
     /**
      * Attach $is to this stream.
      * The stream acts as an observer, receiving all data that is written.
@@ -113,7 +112,7 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
     {
         $this->_mirrors[] = $is;
     }
-  
+
     /**
      * Remove an already bound stream.
      * If $is is not bound, no errors will be raised.
@@ -130,7 +129,7 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
             }
         }
     }
-  
+
     /**
      * Not used.
      */
@@ -140,7 +139,7 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
             $stream->flushBuffers();
         }
     }
-  
+
     /**
      * Get the total number of bytes sent to the server.
      * @return int
@@ -149,7 +148,7 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
     {
         return $this->_out;
     }
-  
+
     /**
      * Get the total number of bytes received from the server.
      * @return int
@@ -158,7 +157,7 @@ class Swift_Plugins_BandwidthMonitorPlugin implements
     {
         return $this->_in;
     }
-  
+
     /**
      * Reset the internal counters to zero.
      */

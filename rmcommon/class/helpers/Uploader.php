@@ -44,7 +44,7 @@ class Uploader
         'accept', 'renameFilename', 'autoProcessQueue', 'previewTemplate', 'forceFallback', 'fallback',
         //language options
         'dictDefaultMessage', 'dictFallbackMessage', 'dictFallbackText', 'dictInvalidFileType', 'dictFileTooBig',
-        'dictReponseError', 'dictCancelUpload', 'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesEsceeded'
+        'dictReponseError', 'dictCancelUpload', 'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesEsceeded',
     ];
 
     protected $htmlID = '';
@@ -53,6 +53,7 @@ class Uploader
     /**
      * Uploader constructor.
      * @param array $options
+     * @param mixed $htmlID
      */
     public function __construct($htmlID, $options = [])
     {
@@ -61,7 +62,7 @@ class Uploader
         $explodedID = explode('-', $htmlID);
 
         foreach ($explodedID as $part) {
-            $this->camelizedID .= '' == $this->camelizedID ? strtolower($part) :  ucfirst($part);
+            $this->camelizedID .= '' == $this->camelizedID ? mb_strtolower($part) : ucfirst($part);
         }
 
         $this->options = $options;
@@ -87,9 +88,9 @@ class Uploader
     {
         if (array_key_exists($name, $this->options)) {
             return $this->options[$name];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -135,9 +136,9 @@ class Uploader
         $params = '';
 
         foreach ($this->options as $name => $value) {
-            if (in_array($name, $this->acceptedOptions)) {
-                $params .= $params == '' ? '' : ",\n";
-                $params .= $name . ':' . (is_string($value) ? '"'.$value.'"' : $value);
+            if (in_array($name, $this->acceptedOptions, true)) {
+                $params .= '' == $params ? '' : ",\n";
+                $params .= $name . ':' . (is_string($value) ? '"' . $value . '"' : $value);
             }
         }
 

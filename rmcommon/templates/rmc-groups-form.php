@@ -1,10 +1,10 @@
 <?php
-$form = new RMActiveForm(array(
-    'id'            => 'form-add-group',
-    'data-type'     => 'ajax',
-    'validation'    => 'local',
-    'action'        => RMCURL.'/groups.php'
-));
+$form = new RMActiveForm([
+    'id' => 'form-add-group',
+    'data-type' => 'ajax',
+    'validation' => 'local',
+    'action' => RMCURL . '/groups.php',
+]);
 ?>
 <div class="cu-content-with-footer">
     <?php $form->open(); ?>
@@ -13,18 +13,18 @@ $form = new RMActiveForm(array(
         <div class="col-md-4">
 
             <div class="form-group">
-                <label for="group-name"><?php _e('Group Name', 'rmcommon') ; ?></label>
+                <label for="group-name"><?php _e('Group Name', 'rmcommon'); ?></label>
                 <input type="text" name="name" id="group-name" class="form-control required" value="<?php echo $group->getVar('name'); ?>">
             </div>
 
             <div class="form-group">
-                <label for="group-description"><?php _e('Description', 'rmcommon') ; ?></label>
+                <label for="group-description"><?php _e('Description', 'rmcommon'); ?></label>
                 <textarea type="text" name="description" id="group-description" class="form-control required" rows="4"><?php echo $group->getVar('description', 'e'); ?></textarea>
             </div>
 
-            <small class="help-block"><?php _e("Select <strong>admin rights</strong> and <strong>access rights</strong> to
+            <small class="help-block"><?php _e('Select <strong>admin rights</strong> and <strong>access rights</strong> to
             new group. Remember that specific permissions allows to control with more detail the operations that
-            users can do according to the groups that they belongs.", 'rmcommon'); ?></small>
+            users can do according to the groups that they belongs.', 'rmcommon'); ?></small>
 
         </div>
         <div class="col-md-8">
@@ -47,7 +47,7 @@ $form = new RMActiveForm(array(
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="admin_check" value="0" class="check-all" data-checkbox="admin-module">
-                                    <strong><?php _e("All Modules", 'rmcommon'); ?></strong>
+                                    <strong><?php _e('All Modules', 'rmcommon'); ?></strong>
                                 </label>
                             </div>
 
@@ -77,7 +77,7 @@ $form = new RMActiveForm(array(
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="read_check" value="0" class="check-all" data-checkbox="read-module">
-                                    <strong><?php _e("All modules", 'rmcommon'); ?></strong>
+                                    <strong><?php _e('All modules', 'rmcommon'); ?></strong>
                                 </label>
                             </div>
                             <?php foreach ($modules as $module): ?>
@@ -121,7 +121,7 @@ $form = new RMActiveForm(array(
                             <?php foreach ($item->permissions as $id => $perm): ?>
                                 <div class="checkbox">
                                     <label>
-                                        <input data-oncheck="<?php echo $item->dirname; ?>-perms" type="checkbox" name="specific_perms[<?php echo $item->dirname; ?>][]" value="<?php echo $id; ?>"<?php echo isset($item->privileges->$id) ? ' checked' : ($perm['default']=='allow' ? ' checked' : ''); ?>>
+                                        <input data-oncheck="<?php echo $item->dirname; ?>-perms" type="checkbox" name="specific_perms[<?php echo $item->dirname; ?>][]" value="<?php echo $id; ?>"<?php echo isset($item->privileges->$id) ? ' checked' : ('allow' == $perm['default'] ? ' checked' : ''); ?>>
                                         <?php echo $perm['caption']; ?>
                                     </label>
                                 </div>

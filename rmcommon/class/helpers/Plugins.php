@@ -42,9 +42,9 @@ class Plugins
     {
         if (isset($GLOBALS['installed_plugins'][$dir])) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -62,9 +62,9 @@ class Plugins
 
         if (false !== $this->loadedPlugins[$dir]) {
             return $this->loadedPlugins[$dir];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -79,21 +79,21 @@ class Plugins
         }
 
         // dirnames must be in lowercase format
-        $dir = strtolower($dir);
+        $dir = mb_strtolower($dir);
 
         $oldFile = RMCPATH . '/plugins/' . $dir . '/' . $dir . '-plugin.php';
         $newFile = RMCPATH . '/plugins/' . $dir . '/' . $dir . '.php';
 
         // Load plugin controller
         if (file_exists($oldFile)) {
-            include_once $oldFile;
+            require_once $oldFile;
         } elseif (file_exists($newFile)) {
-            include_once $newFile;
+            require_once $newFile;
         } else {
             return false;
         }
 
-        $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
+        $cleanDir = preg_replace('/[^A-Za-z0-9]/', '', $dir);
 
         $class = ucfirst($cleanDir) . 'CUPlugin';
 
@@ -102,6 +102,7 @@ class Plugins
         }
 
         $plugin = $class::getInstance();
+
         return $plugin;
     }
 
@@ -112,14 +113,14 @@ class Plugins
     public static function allInstalled()
     {
         $db = \XoopsDatabaseFactory::getDatabaseConnection();
-        $result = $db->query("SELECT dir FROM " . $db->prefix("mod_rmcommon_plugins") . ' WHERE status=1');
-        $plugins = array();
+        $result = $db->query('SELECT dir FROM ' . $db->prefix('mod_rmcommon_plugins') . ' WHERE status=1');
+        $plugins = [];
 
-        while ($row = $db->fetchArray($result)) {
+        while (false !== ($row = $db->fetchArray($result))) {
             $plugins[] = $row['dir'];
         }
 
-        $plugins = \RMEvents::get()->run_event("rmcommon.installed.plugins", $plugins);
+        $plugins = \RMEvents::get()->run_event('rmcommon.installed.plugins', $plugins);
 
         return $plugins;
     }
@@ -136,7 +137,6 @@ class Plugins
         return $settings;
     }
 
-
     public static function getInstance()
     {
         static $instance;
@@ -145,7 +145,7 @@ class Plugins
             return $instance;
         }
 
-        $instance = new Plugins();
+        $instance = new self();
 
         return $instance;
     }
