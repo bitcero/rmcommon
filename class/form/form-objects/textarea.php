@@ -10,13 +10,12 @@
  * URI: http://www.redmexico.com.mx
  * --------------------------------------------------------------
  */
-
 class ActiveTextArea
 {
     use RMFormComponent;
 
-    public function render(){
-
+    public function render()
+    {
         $input = '<textarea name="' . $this->name . '" id="' . $this->id . '"';
         $class = $this->required ? 'required' : '';
         $text = '';
@@ -24,12 +23,13 @@ class ActiveTextArea
         $parameters = $this->parameters;
 
         foreach ($parameters as $attr => $value) {
-            if ( 'class' == $attr )
-                $class .= $class != '' ? ' '.$value : $value;
-            elseif ( 'value' == $attr )
+            if ('class' == $attr) {
+                $class .= '' != $class ? ' ' . $value : $value;
+            } elseif ('value' == $attr) {
                 $text = $value;
-            else
+            } else {
                 $input .= ' ' . $attr . '="' . $value . '"';
+            }
         }
 
         $input .= '' != $class ? ' class="' . $class . '"' : '';
@@ -39,7 +39,5 @@ class ActiveTextArea
         $input .= '>' . $text . '</textarea>';
 
         return $input;
-
     }
-
 }

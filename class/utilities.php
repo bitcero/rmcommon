@@ -13,12 +13,13 @@ class RMUtilities
     /**
      * Gets a singleton
      */
-    static function get()
+    public static function get()
     {
         static $instance;
         if (!isset($instance)) {
-            $instance = new RMUtilities();
+            $instance = new self();
         }
+
         return $instance;
     }
 
@@ -29,36 +30,43 @@ class RMUtilities
      */
     public function delete_file($filepath)
     {
-        if ($filepath == '') return false;
+        if ('' == $filepath) {
+            return false;
+        }
 
-        if (!file_exists($filepath)) return true;
+        if (!file_exists($filepath)) {
+            return true;
+        }
 
         return unlink($filepath);
-
     }
 
     /**
      * Determina el color rgb a partir de una cadena HEX
+     * @param mixed $color
      */
     private function hexToRGB($color)
     {
         // Transformamos el color hex a rgb
-        if ($color[0] == '#')
-            $color = substr($color, 1);
+        if ('#' == $color[0]) {
+            $color = mb_substr($color, 1);
+        }
 
-        if (strlen($color) == 6)
-            list($r, $g, $b) = array($color[0] . $color[1],
+        if (6 == mb_strlen($color)) {
+            list($r, $g, $b) = [$color[0] . $color[1],
                 $color[2] . $color[3],
-                $color[4] . $color[5]);
-        elseif (strlen($color) == 3)
-            list($r, $g, $b) = array($color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]);
-        else
-            list($r, $g, $b) = array("FF", "FF", "FF");
+                $color[4] . $color[5], ];
+        } elseif (3 == mb_strlen($color)) {
+            list($r, $g, $b) = [$color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]];
+        } else {
+            list($r, $g, $b) = ['FF', 'FF', 'FF'];
+        }
 
         $r = hexdec($r);
         $g = hexdec($g);
         $b = hexdec($b);
-        return array('r' => $r, 'g' => $g, 'b' => $b);
+
+        return ['r' => $r, 'g' => $g, 'b' => $b];
     }
 
     /**
@@ -72,47 +80,52 @@ class RMUtilities
      * @param bool $useSpecial
      * @param bool $useUpper
      * @param bool $useAlpha
+     * @param mixed $onlyUpper
      * @return string
      */
-    static public function randomString($options_or_size, $useDigits = true, $useSpecial = true, $onlyUpper = false, $useAlpha = true)
+    public static function randomString($options_or_size, $useDigits = true, $useSpecial = true, $onlyUpper = false, $useAlpha = true)
     {
-        $upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $lowerLetters = "abcdefghijklmnopqrstuvwxyz";
-        $digits = "0123456789";
-        $specialChars = "?@#\$%&()=/\\~!.:,;-_+*[]{}";
-        
-        if(is_array($options_or_size)){
-            
-            if(array_key_exists('upperLetters', $options_or_size)){
+        $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
+        $digits = '0123456789';
+        $specialChars = '?@#$%&()=/\\~!.:,;-_+*[]{}';
+
+        if (is_array($options_or_size)) {
+            if (array_key_exists('upperLetters', $options_or_size)) {
                 $upperLetters = $options_or_size['upperLetters'];
             }
 
-            if(array_key_exists('lowerLetters', $options_or_size)){
+            if (array_key_exists('lowerLetters', $options_or_size)) {
                 $lowerLetters = $options_or_size['lowerLetters'];
             }
 
-            if(array_key_exists('digits', $options_or_size)){
+            if (array_key_exists('digits', $options_or_size)) {
                 $digits = $options_or_size['digits'];
             }
 
-            if(array_key_exists('specialChars', $options_or_size)){
+            if (array_key_exists('specialChars', $options_or_size)) {
                 $specialChars = $options_or_size['specialChars'];
             }
-            
+
             $size = array_key_exists('size', $options_or_size) ? $options_or_size['size'] : 40;
             $useDigits = array_key_exists('digit', $options_or_size) ? $options_or_size['digit'] : true;
             $useSpecial = array_key_exists('special', $options_or_size) ? $options_or_size['special'] : true;
             $useAlpha = array_key_exists('alpha', $options_or_size) ? $options_or_size['alpha'] : true;
             $onlyUpper = array_key_exists('upper', $options_or_size) ? $options_or_size['upper'] : false;
-            
         } else {
             $size = (int) $options_or_size;
         }
 
-        $que = array();
-        if ($useAlpha) $que[] = 'alpha';
-        if ($useDigits) $que[] = 'digit';
-        if ($useSpecial) $que[] = 'special';
+        $que = [];
+        if ($useAlpha) {
+            $que[] = 'alpha';
+        }
+        if ($useDigits) {
+            $que[] = 'digit';
+        }
+        if ($useSpecial) {
+            $que[] = 'special';
+        }
 
         $rtn = '';
 
@@ -120,28 +133,29 @@ class RMUtilities
             $op = $que[random_int(0, count($que) - 1)];
             switch ($op) {
                 case 'alpha':
-                    $what = $onlyUpper ? $upperLetters : (random_int(0, 1) == 0 ? $upperLetters : $lowerLetters);
-                    $rtn .= substr($what, random_int(0, strlen($what) - 1), 1);
+                    $what = $onlyUpper ? $upperLetters : (0 == random_int(0, 1) ? $upperLetters : $lowerLetters);
+                    $rtn .= mb_substr($what, random_int(0, mb_strlen($what) - 1), 1);
                     break;
                 case 'digit':
-                    $rtn .= substr($digits, random_int(0, strlen($digits) - 1), 1);
+                    $rtn .= mb_substr($digits, random_int(0, mb_strlen($digits) - 1), 1);
                     break;
                 case 'special':
-                    $rtn .= substr($specialChars, random_int(0, strlen($specialChars) - 1), 1);
+                    $rtn .= mb_substr($specialChars, random_int(0, mb_strlen($specialChars) - 1), 1);
                     break;
             }
         }
 
         return $rtn;
-
     }
 
     /**
      * Add a slash (/) to the end of string
+     * @param mixed $string
      */
     public function add_slash($string)
     {
-        $string = rtrim($string, "/");
+        $string = rtrim($string, '/');
+
         return $string . '/';
     }
 
@@ -152,9 +166,7 @@ class RMUtilities
      */
     public function formatBytesSize($size)
     {
-
         return RMFormat::bytes_format($size, 'bytes');
-
     }
 
     /**
@@ -162,19 +174,22 @@ class RMUtilities
      * @param string $path Ruta del directorio
      * @param bool $root Specify if the folder root must be deleted too
      * @param array Path of excluded files or folders
+     * @param mixed $exclude
      * @return bool
      */
-    static function delete_directory($path, $root = true, $exclude = array())
+    public static function delete_directory($path, $root = true, $exclude = [])
     {
         $path = str_replace('\\', '/', $path);
-        if (substr($path, 0, strlen($path) - 1) != '/') {
+        if ('/' != mb_substr($path, 0, mb_strlen($path) - 1)) {
             $path .= '/';
         }
         $dir = opendir($path);
-        while (($file = readdir($dir)) !== false) {
-            if ($file == '.' || $file == '..') continue;
+        while (false !== ($file = readdir($dir))) {
+            if ('.' == $file || '..' == $file) {
+                continue;
+            }
 
-            if (in_array($path . $file, $exclude)) {
+            if (in_array($path . $file, $exclude, true)) {
                 continue;
             }
 
@@ -185,13 +200,13 @@ class RMUtilities
             }
         }
         closedir($dir);
-        if ($root)
+        if ($root) {
             @rmdir($path);
+        }
     }
 
-    static function copy_directory($source, $target)
+    public static function copy_directory($source, $target)
     {
-
         $source = str_replace('\\', '/', $source);
         $target = str_replace('\\', '/', $target);
 
@@ -204,8 +219,8 @@ class RMUtilities
 
         $dir = opendir($source);
 
-        while (($file = readdir($dir)) !== false) {
-            if ($file == '.' || $file == '..') {
+        while (false !== ($file = readdir($dir))) {
+            if ('.' == $file || '..' == $file) {
                 continue;
             }
 
@@ -216,6 +231,7 @@ class RMUtilities
             }
         }
         closedir($dir);
+
         return true;
     }
 
@@ -228,15 +244,15 @@ class RMUtilities
      * @param array $data Array of data that will be inserted as data-{key} in HTML code
      * @return string
      */
-    public function image_manager($name, $id = '', $default = '', $data = array())
+    public function image_manager($name, $id = '', $default = '', $data = [])
     {
         global $common;
 
         $common->template()->add_style('pop-images-manager.min.css', 'rmcommon', ['id' => 'images-manager-css']);
 
-        $id = $id == '' ? $name : $id;
+        $id = '' == $id ? $name : $id;
 
-        if ($default != '') {
+        if ('' != $default) {
             $img = new RMImage();
             $img->load_from_params($default);
         }
@@ -247,12 +263,12 @@ class RMUtilities
         }
         $ret .= '>';
         $ret .= '<div class="thumbnail">';
-        if ($default != '' && !$img->isNew()) {
-            $ret .= '<a href="' . $img->url() . '" target="_blank"><img src="' . $img->get_by_size(300) . '" /></a>';
-            $ret .= '<input type="hidden" name="' . $name . '" id="' . $id . '" value="' . $default . '" />';
-            $ret .= '<br /><a href="#" class="removeButton removeButton-' . $id . '">' . __('Remove Image', 'rmcommon') . '</a>';
+        if ('' != $default && !$img->isNew()) {
+            $ret .= '<a href="' . $img->url() . '" target="_blank"><img src="' . $img->get_by_size(300) . '"></a>';
+            $ret .= '<input type="hidden" name="' . $name . '" id="' . $id . '" value="' . $default . '">';
+            $ret .= '<br><a href="#" class="removeButton removeButton-' . $id . '">' . __('Remove Image', 'rmcommon') . '</a>';
         } else {
-            $ret .= '<input type="hidden" name="' . $name . '" id="' . $id . '" value="" />';
+            $ret .= '<input type="hidden" name="' . $name . '" id="' . $id . '" value="">';
         }
         $ret .= '</div>';
         $ret .= '<span class="image_manager_launcher btn btn-success">' . __('Select...', 'rmcommon') . '</span>';
@@ -281,10 +297,9 @@ class RMUtilities
      */
     public function getVersion($includename = true, $module = '', $type = 0)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMModules', 'get_module_version'));
-        return RMModules::get_module_version($module, $includename, $type == 0 ? 'verbose' : 'raw');
 
+        return RMModules::get_module_version($module, $includename, 0 == $type ? 'verbose' : 'raw');
     }
 
     /**
@@ -297,10 +312,9 @@ class RMUtilities
      */
     public function format_version($version, $name = false)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMModules', 'format_module_version'), E_USER_DEPRECATED);
-        return RMModules::format_module_version($version, $name);
 
+        return RMModules::format_module_version($version, $name);
     }
 
     /**
@@ -315,15 +329,14 @@ class RMUtilities
      */
     public function module_config($directory, $option = '')
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMSettings', 'module_settings()'), E_USER_DEPRECATED);
         $settings = RMSettings::module_settings($directory, $option);
 
-        if (is_object($settings))
+        if (is_object($settings)) {
             return (array)$settings;
-        else
-            return $settings;
+        }
 
+        return $settings;
     }
 
     /**
@@ -339,5 +352,4 @@ class RMUtilities
         $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
         $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
     }
-
 }

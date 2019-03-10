@@ -8,12 +8,14 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER']=='') die("Not Allowed");
+if (!isset(\Xmf\Request::getString('HTTP_REFERER', '', 'SERVER')) || '' == \Xmf\Request::getString('HTTP_REFERER', '', 'SERVER')) {
+    die('Not Allowed');
+}
 
 $url = isset($_REQUEST['url']) ? $_REQUEST['url'] : '';
 
 $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 'text/html';
 
-include_once '../class/proxy.php';
+require_once dirname(__DIR__) . '/class/proxy.php';
 $proxy = new RMProxy($url, $type);
 echo $proxy->get();

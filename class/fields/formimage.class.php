@@ -9,28 +9,28 @@
 // --------------------------------------------------------------
 
 /**
-* Esta clase crea un campo para imágen utilizando
-* el administrador de imágenes de Common Utilities
-*/
+ * Esta clase crea un campo para imágen utilizando
+ * el administrador de imágenes de Common Utilities
+ */
 class RMFormImage extends RMFormElement
 {
     private $default = '';
-    private $data = array();
-    
-    public function __construct($caption, $name, $default='', $data = array() ){
-        
+    private $data = [];
+
+    public function __construct($caption, $name, $default = '', $data = [])
+    {
         $this->setCaption($caption);
         $this->setName($name);
         $this->default = $default;
         $this->data = $data;
-        
+
         !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
     }
-    
-    public function render(){
-        
+
+    public function render()
+    {
         $util = RMUtilities::get();
-        return $util->image_manager( $this->getName(), $this->id(), $this->default, $this->data );
-        
+
+        return $util->image_manager($this->getName(), $this->id(), $this->default, $this->data);
     }
 }

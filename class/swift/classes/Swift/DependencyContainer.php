@@ -31,7 +31,7 @@ class Swift_DependencyContainer
     private static $_instance = null;
 
     /** The data container */
-    private $_store = array();
+    private $_store = [];
 
     /** The current endpoint in the data container */
     private $_endPoint;
@@ -99,7 +99,7 @@ class Swift_DependencyContainer
     {
         if (!$this->has($itemName)) {
             throw new Swift_DependencyException(
-                'Cannot lookup dependency "'.$itemName.'" since it is not registered.'
+                'Cannot lookup dependency "' . $itemName . '" since it is not registered.'
                 );
         }
 
@@ -124,7 +124,7 @@ class Swift_DependencyContainer
      */
     public function createDependenciesFor($itemName)
     {
-        $args = array();
+        $args = [];
         if (isset($this->_store[$itemName]['args'])) {
             $args = $this->_resolveArgs($this->_store[$itemName]['args']);
         }
@@ -147,7 +147,7 @@ class Swift_DependencyContainer
      */
     public function register($itemName)
     {
-        $this->_store[$itemName] = array();
+        $this->_store[$itemName] = [];
         $this->_endPoint = &$this->_store[$itemName];
 
         return $this;
@@ -241,7 +241,7 @@ class Swift_DependencyContainer
     public function withDependencies(array $lookups)
     {
         $endPoint = &$this->_getEndPoint();
-        $endPoint['args'] = array();
+        $endPoint['args'] = [];
         foreach ($lookups as $lookup) {
             $this->addConstructorLookup($lookup);
         }
@@ -263,9 +263,9 @@ class Swift_DependencyContainer
     {
         $endPoint = &$this->_getEndPoint();
         if (!isset($endPoint['args'])) {
-            $endPoint['args'] = array();
+            $endPoint['args'] = [];
         }
-        $endPoint['args'][] = array('type' => 'value', 'item' => $value);
+        $endPoint['args'][] = ['type' => 'value', 'item' => $value];
 
         return $this;
     }
@@ -284,9 +284,9 @@ class Swift_DependencyContainer
     {
         $endPoint = &$this->_getEndPoint();
         if (!isset($this->_endPoint['args'])) {
-            $endPoint['args'] = array();
+            $endPoint['args'] = [];
         }
-        $endPoint['args'][] = array('type' => 'lookup', 'item' => $lookup);
+        $endPoint['args'][] = ['type' => 'lookup', 'item' => $lookup];
 
         return $this;
     }
@@ -341,7 +341,7 @@ class Swift_DependencyContainer
     /** Get an argument list with dependencies resolved */
     private function _resolveArgs(array $args)
     {
-        $resolved = array();
+        $resolved = [];
         foreach ($args as $argDefinition) {
             switch ($argDefinition['type']) {
                 case 'lookup':
@@ -360,7 +360,7 @@ class Swift_DependencyContainer
     private function _lookupRecursive($item)
     {
         if (is_array($item)) {
-            $collection = array();
+            $collection = [];
             foreach ($item as $k => $v) {
                 $collection[$k] = $this->_lookupRecursive($v);
             }

@@ -31,7 +31,6 @@ namespace Common\Core\Helpers;
 
 class Comments
 {
-
     /**
      * Get all comments for given parameters
      *
@@ -62,9 +61,7 @@ class Comments
         global $common;
 
         if ($common->services()->service('comments')) {
-
             return $common->services()->comments->load($parameters);
-
         }
 
         return null;
@@ -91,13 +88,12 @@ class Comments
      *
      * @param array $parameters
      * return mixed
-     *
      */
     public function form($parameters)
     {
         global $common;
 
-        if($common->services()->service('comments')){
+        if ($common->services()->service('comments')) {
             return $common->services()->comments->form($parameters);
         }
     }
@@ -107,7 +103,7 @@ class Comments
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new Comments();
+            $instance = new self();
         }
 
         return $instance;

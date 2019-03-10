@@ -40,7 +40,7 @@ class Swift_Mime_MimePart extends Swift_Mime_SimpleMimeEntity
     {
         parent::__construct($headers, $encoder, $cache, $grammar);
         $this->setContentType('text/plain');
-        if (!is_null($charset)) {
+        if (null !== $charset) {
             $this->setCharset($charset);
         }
     }
@@ -193,8 +193,8 @@ class Swift_Mime_MimePart extends Swift_Mime_SimpleMimeEntity
     /** Encode charset when charset is not utf-8 */
     protected function _convertString($string)
     {
-        $charset = strtolower($this->getCharset());
-        if (!in_array($charset, array('utf-8', 'iso-8859-1', ''))) {
+        $charset = mb_strtolower($this->getCharset());
+        if (!in_array($charset, ['utf-8', 'iso-8859-1', ''], true)) {
             // mb_convert_encoding must be the first one to check, since iconv cannot convert some words.
             if (function_exists('mb_convert_encoding')) {
                 $string = mb_convert_encoding($string, $charset, 'utf-8');

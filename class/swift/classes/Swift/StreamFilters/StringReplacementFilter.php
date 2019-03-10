@@ -42,9 +42,9 @@ class Swift_StreamFilters_StringReplacementFilter implements Swift_StreamFilter
      */
     public function shouldBuffer($buffer)
     {
-        $endOfBuffer = substr($buffer, -1);
+        $endOfBuffer = mb_substr($buffer, -1);
         foreach ((array) $this->_search as $needle) {
-            if (false !== strpos($needle, $endOfBuffer)) {
+            if (false !== mb_strpos($needle, $endOfBuffer)) {
                 return true;
             }
         }

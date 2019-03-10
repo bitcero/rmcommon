@@ -4,10 +4,10 @@
         <meta charset="<?php echo $this->get_var('charset'); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            <?php if($this->get_var('xoops_pagetitle')!=''): ?>
+            <?php if ('' != $this->get_var('xoops_pagetitle')): ?>
                 <?php echo $this->get_var('xoops_pagetitle'); ?> -
             <?php endif; ?>
-            <?php echo isset($xoopsModule) ? $xoopsModule->getInfo('name').' - ' : ''; ?><?php echo $xoopsConfig['sitename']; ?>
+            <?php echo isset($xoopsModule) ? $xoopsModule->getInfo('name') . ' - ' : ''; ?><?php echo $xoopsConfig['sitename']; ?>
         </title>
         <!-- Styles -->
         <?php echo $heliumStyles; ?>
@@ -16,20 +16,22 @@
         <?php echo $heliumScripts['header']; ?>
         <?php echo RMTemplate::get()->inline_scripts(); ?>
 
-        <?php if($showXoopsMetas){ include_once 'include/xoops_metas.php'; } ?>
+        <?php if ($showXoopsMetas) {
+    require_once __DIR__ . '/include/xoops_metas.php';
+} ?>
     </head>
     <body <?php echo RMTemplate::getInstance()->render_attributes('body'); ?>>
 
         <!-- Top bar -->
-        <?php require 'tpls/topbar.php'; ?>
+        <?php require __DIR__ . '/tpls/topbar.php'; ?>
 
-        <?php require 'tpls/sidebar.php'; ?>
+        <?php require __DIR__ . '/tpls/sidebar.php'; ?>
 
         <!-- Content -->
-        <?php require 'tpls/content.php'; ?>
+        <?php require __DIR__ . '/tpls/content.php'; ?>
 
         <!-- System messages -->
-        <?php require 'tpls/messages.php'; ?>
+        <?php require __DIR__ . '/tpls/messages.php'; ?>
 
         <div id="he-context-help">
             <span class="fa fa-question-circle help-switch"></span>
@@ -42,7 +44,7 @@
         <?php echo RMTemplate::get()->inline_scripts(1); ?>
         <?php echo $heliumScripts['heads']; ?>
 
-        <?php if($xoopsConfig['debug_mode'] == 1): ?>
+        <?php if (1 == $xoopsConfig['debug_mode']): ?>
         <div id="he-logger-output">
             <a href="#" class="close-logger"><?php echo $cuIcons->getIcon('svg-rmcommon-double-arrow-up'); ?> <?php _e('Debug Log', 'rmcommon'); ?></a>
             <!--{xo-logger-output}-->

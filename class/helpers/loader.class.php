@@ -10,20 +10,21 @@ Smart-B ERP
 @version    $Id$
 ----------------------------------------
 **/
-
 class RMLoader
 {
-    static function api($name, $class){
-
-        if (class_exists($class))
+    public static function api($name, $class)
+    {
+        if (class_exists($class)) {
             return false;
+        }
 
         $dir = RMCPATH . '/api/' . $name;
-        if (!is_dir($dir))
+        if (!is_dir($dir)) {
             return false;
+        }
 
-        include_once $dir . '/' . $class . '.class.php';
+        require_once $dir . '/' . $class . '.class.php';
 
-    return null;
+        return null;
     }
 }

@@ -115,7 +115,7 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
      */
     public function toString()
     {
-        return $this->_fieldName.': '.$this->_value;
+        return $this->_fieldName . ': ' . $this->_value;
     }
 
     /**
@@ -130,6 +130,7 @@ class Swift_Mime_Headers_OpenDKIMHeader implements Swift_Mime_Header
 
     /**
      * Ignored.
+     * @param mixed $charset
      */
     public function setCharset($charset)
     {

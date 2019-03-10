@@ -11,7 +11,7 @@
     <managingEditor><?php echo $rss_channel['editor']; ?></managingEditor>
     <webMaster><?php echo $rss_channel['webmaster']; ?></webMaster>
     <language><?php echo $rss_channel['language ']; ?></language>
-    <?php if($rss_channel['image']['url'] != ""): ?>
+    <?php if ('' != $rss_channel['image']['url']): ?>
     <image>
       <title><?php echo $rss_channel['title']; ?></title>
       <url><?php echo $rss_channel['image']['url']; ?></url>
@@ -20,7 +20,7 @@
       <height><?php echo $rss_channel['image']['height']; ?></height>
     </image>
     <?php endif; ?>
-    <?php foreach($rss_items as $item): ?>
+    <?php foreach ($rss_items as $item): ?>
     <item>
       <title><?php echo $item['title']; ?></title>
       <link><?php echo $item['link']; ?></link>

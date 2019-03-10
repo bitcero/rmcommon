@@ -8,8 +8,7 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-include_once '../../../mainfile.php';
-
+require_once dirname(__DIR__) . '/../../mainfile.php';
 
 global $xoopsLogger, $xoopsConfig;
 $xoopsLogger->renderingEnabled = false;
@@ -17,35 +16,36 @@ error_reporting(0);
 $xoopsLogger->activated = false;
 
 /**
-* @desc Proxy para realizar peticiones fuero del servidor
-*/
+ * @desc Proxy para realizar peticiones fuero del servidor
+ */
 class RMProxy
 {
-	private $url = '';
-	private $type = '';
-	
-	function __construct($url, $type='text/html'){
-		$this->url = $url;
-		$this->type = $type;
-	}
-	
-	function get(){
+    private $url = '';
+    private $type = '';
 
-		global $exmConfig;
-		// Creamos la petición
-		$hdrs = array(
-			'http'=>array(
-				'method'=>"GET",
-				'header'=>"Accept-language: "._LANGCODE."\r\n" .
-                                    "Referer: ".XOOPS_URL."\r\n"
-			)
-		);
-		
-		$context = stream_context_create($hdrs);
-		$content = file_get_contents(urldecode($this->url), false, $context);
+    public function __construct($url, $type = 'text/html')
+    {
+        $this->url = $url;
+        $this->type = $type;
+    }
 
-		header("Content-Type: $this->type");
+    public function get()
+    {
+        global $exmConfig;
+        // Creamos la petición
+        $hdrs = [
+            'http' => [
+                'method' => 'GET',
+                'header' => 'Accept-language: ' . _LANGCODE . "\r\n" .
+                                    'Referer: ' . XOOPS_URL . "\r\n",
+            ],
+        ];
 
-		return $content;
-	}
+        $context = stream_context_create($hdrs);
+        $content = file_get_contents(urldecode($this->url), false, $context);
+
+        header("Content-Type: $this->type");
+
+        return $content;
+    }
 }

@@ -9,16 +9,15 @@
  * URI: http://www.redmexico.com.mx
  */
 
-
 /**
  * Class RMActiveForm
  */
-
 class RMActiveForm
 {
     use RMProperties;
 
     private $model;
+
     /**
      * Class constructor for the &lt;form&gt; tag. This method accept a list of attributes and parameters that
      * could be inserted in form.
@@ -62,93 +61,98 @@ class RMActiveForm
      *
      * @param array $attributes <p>Array of attributes to be generated with/in the form</p>
      */
-    public function __construct( $attributes = array() ){
-
+    public function __construct($attributes = [])
+    {
         // Default 'method' is post
-        if ( !isset( $attributes['method'] ) )
+        if (!isset($attributes['method'])) {
             $attributes['method'] = 'post';
+        }
 
         // Default 'action' is the current URL
-        if ( !isset( $attributes['action'] ) )
+        if (!isset($attributes['action'])) {
             $attributes['action'] = RMUris::current_url();
+        }
 
         // Default submission method is normal
-        if ( !isset( $attributes['submit-via'] ) )
+        if (!isset($attributes['submit-via'])) {
             $attributes['submit-via'] = 'normal';
+        }
 
         // Default validation is in local client
-        if ( !isset( $attributes['validation'] ) )
+        if (!isset($attributes['validation'])) {
             $attributes['validation'] = 'local';
+        }
 
-        if (array_key_exists('model', $attributes) && is_a($attributes['model'], 'RMActiveRecord')){
+        if (array_key_exists('model', $attributes) && is_a($attributes['model'], 'RMActiveRecord')) {
             $this->model = $attributes['model'];
             unset($attributes['model']);
         }
 
         $this->attributes = $attributes;
-
     }
 
-    public function __call($object, $arguments){
-
-        if ( count( $arguments ) <= 0 )
-            throw new RMException( sprintf( __( 'Form element "%s" must be called providing required parameters.', 'rmcommon' ), $object ) );
+    public function __call($object, $arguments)
+    {
+        if (count($arguments) <= 0) {
+            throw new RMException(sprintf(__('Form element "%s" must be called providing required parameters.', 'rmcommon'), $object));
+        }
 
         $model = $arguments[0];
         $field = $arguments[1];
-        $parameters = isset($arguments[2]) ? $arguments[2] : array();
+        $parameters = isset($arguments[2]) ? $arguments[2] : [];
 
-        $file = dirname( __FILE__ ) . '/form-objects/' . strtolower($object) . '.php';
+        $file = __DIR__ . '/form-objects/' . mb_strtolower($object) . '.php';
 
-        if ( !file_exists( $file ) )
-            throw new RMException( sprintf( __( 'Form element of type "%s" does not exists.', 'rmcommon' ), $object ) );
+        if (!file_exists($file)) {
+            throw new RMException(sprintf(__('Form element of type "%s" does not exists.', 'rmcommon'), $object));
+        }
 
-        $class = 'Active' . ucfirst( $object );
+        $class = 'Active' . ucfirst($object);
 
-        if ( !class_exists( $class ) )
-            include_once( $file );
+        if (!class_exists($class)) {
+            include_once($file);
+        }
 
-        if ( !class_exists( $class ) )
-            throw new RMException( sprintf( __( 'The form element "%s" is not valid.', 'rmcommon' ), $object ) );
+        if (!class_exists($class)) {
+            throw new RMException(sprintf(__('The form element "%s" is not valid.', 'rmcommon'), $object));
+        }
 
         $element = new $class($model, $field, $parameters);
         $element->open();
-
     }
 
     /**
      * Open the &lt;form&gt; tag with all specified parameters.
      */
-    public function open(){
-
+    public function open()
+    {
         $form = '<form ';
         $class = 'active-form';
 
         RMTemplate::get()->add_script(
             'forms/active-form.js',
             'rmcommon',
-            array(
-                'location' => 'footer'
-            )
+            [
+                'location' => 'footer',
+            ]
         );
 
         RMTemplate::get()->add_style(
             'active-form.css',
             'rmcommon',
-            array(
-                'location' => 'footer'
-            )
+            [
+                'location' => 'footer',
+            ]
         );
 
-        foreach ( $this->attributes as $attr => $value ){
-
-            switch ( $attr ){
+        foreach ($this->attributes as $attr => $value) {
+            switch ($attr) {
                 case 'submit-via':
-                    $form .= $value == 'ajax' ? ' data-type="ajax"' : '';
+                    $form .= 'ajax' == $value ? ' data-type="ajax"' : '';
                     break;
                 case 'validation':
-                    $class .= $value == 'local' ? ' validate-form' : '';
-                    RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', array('directory' => 'include', 'location' => 'footer', 'id' => 'validate-js'));
+                    $class .= 'local' == $value ? ' validate-form' : '';
+                    RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', ['directory' => 'include', 'location' => 'footer', 'id' => 'validate-js']);
                     break;
                 case 'class':
                     $class .= ' ' . $value;
@@ -157,20 +161,18 @@ class RMActiveForm
                     $form .= $attr . '="' . $value . '"';
                     break;
             }
-
         }
 
         $form .= ' class="' . $class . '">';
 
         echo $form;
-
     }
 
     /**
      * Close the &lt;form&gt; tag
      */
-    public function close(){
-        echo "</form>";
+    public function close()
+    {
+        echo '</form>';
     }
-
 }

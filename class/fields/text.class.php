@@ -27,17 +27,16 @@
  * @url          http://www.eduardocortes.mx
  */
 
-
 /**
  * Clase para la creación de campos TEXT o PASSWORD
  */
 class RMFormText extends RMFormElement
 {
-    var $_size = 30;
-    var $_max;
-    var $_value = '';
-    var $_password = false;
-    var $_enabled = true;
+    public $_size = 30;
+    public $_max;
+    public $_value = '';
+    public $_password = false;
+    public $_enabled = true;
 
     /**
      * Constructor de la clase
@@ -47,10 +46,11 @@ class RMFormText extends RMFormElement
      * @param int $max Longitud m?xima de car?cteres del campo
      * @param string $value Valor por defecto
      * @param bol $password True muestra un campo password
+     * @param mixed $maxlength
+     * @param mixed $enabled
      */
-    function __construct($caption, $name = null, $size = 10, $maxlength = 0, $value = '', $password = false, $enabled = true)
+    public function __construct($caption, $name = null, $size = 10, $maxlength = 0, $value = '', $password = false, $enabled = true)
     {
-
         if (is_array($caption)) {
             parent::__construct($caption);
         } else {
@@ -58,7 +58,7 @@ class RMFormText extends RMFormElement
             $this->setWithDefaults('caption', $caption, '');
             $this->setWithDefaults('name', $name, 'name_error');
             $this->setWithDefaults('size', $size, 10);
-            if($maxlength > 0){
+            if ($maxlength > 0) {
                 $this->setWithDefaults('maxlength', $maxlength, 64);
             }
             $this->set('value', $value);
@@ -99,6 +99,7 @@ class RMFormText extends RMFormElement
         } else {
             $value = $this->get('value', '');
         }
+
         return $value;
     }
 
@@ -108,7 +109,6 @@ class RMFormText extends RMFormElement
      */
     public function render()
     {
-
         if ($this->has('datalist')) {
             $this->add('list', 'list_' . $this->getName());
         }
@@ -125,7 +125,7 @@ class RMFormText extends RMFormElement
  */
 class RMFormSubTitle extends RMFormElement
 {
-    var $_type;
+    public $_type;
 
     /**
      * @param string $caption Texto del subtitulo
@@ -153,7 +153,6 @@ class RMFormSubTitle extends RMFormElement
      * Establece el tipo de titulo.
      * 0 = TH, 1 = TD
      * @param int $type Tipo de t?tulo
-     * @return null
      * @deprecated
      */
     public function setType($type)
@@ -175,20 +174,21 @@ class RMFormSubTitle extends RMFormElement
      * Generamos el c?sigo HTML para crear el subt?tulo.
      * @return string
      */
-    function render()
+    public function render()
     {
         $attributes = $this->renderAttributeString();
 
         if ($this->get('level') > 0) {
-            $rtn = "<h" . $this->get('level')." $attributes>";
+            $rtn = '<h' . $this->get('level') . " $attributes>";
             $rtn .= $this->get('caption');
-            if($this->get('description')!=''){
+            if ('' != $this->get('description')) {
                 $rtn .= '<small>' . $this->get('description') . '</small>';
             }
             $rtn .= '</h' . $this->get('level') . '>';
         } else {
-            $rtn = "<span $attributes>" . $this->get('caption') . "</span>";
+            $rtn = "<span $attributes>" . $this->get('caption') . '</span>';
         }
+
         return $rtn;
     }
 }
@@ -270,7 +270,7 @@ class RMFormTextArea extends RMFormElement
      * Establece el texto inicial del campo
      * @param string $value Texto inicial
      */
-    function setValue($value)
+    public function setValue($value)
     {
         $this->_value = $value;
     }
@@ -279,7 +279,7 @@ class RMFormTextArea extends RMFormElement
      * Devuelve el texto inicial del campo
      * @return string
      */
-    function getValue()
+    public function getValue()
     {
         return $this->_value;
     }
@@ -288,11 +288,12 @@ class RMFormTextArea extends RMFormElement
      * Devuelve el código HTML para mostrar el campo
      * @return string
      */
-    function render()
+    public function render()
     {
         $attributes = $this->renderAttributeString();
 
-        $ret = "<textarea $attributes>" . (isset($_REQUEST[$this->get('name')]) ? $_REQUEST[$this->get('name')] : $this->get('value')) . "</textarea>";
+        $ret = "<textarea $attributes>" . (isset($_REQUEST[$this->get('name')]) ? $_REQUEST[$this->get('name')] : $this->get('value')) . '</textarea>';
+
         return $ret;
     }
 }
@@ -305,6 +306,7 @@ class RMFormLabel extends RMFormElement
     /**
      * @param string $caption Texto de la etiqueta
      * @param string $cell Contenido de la celda
+     * @param mixed $id
      */
     public function __construct($caption, $cell = '', $id = '')
     {
@@ -323,7 +325,7 @@ class RMFormLabel extends RMFormElement
      * Genera el c?digo HTML para mostrar la etiqueta
      * @return string
      */
-    function render()
+    public function render()
     {
         return $this->get('content');
     }

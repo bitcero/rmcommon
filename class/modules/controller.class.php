@@ -15,7 +15,7 @@ abstract class RMController
     /**
      * Controller data
      */
-    private $data = array();
+    private $data = [];
     /**
      * @var string Default action to use in this method. Can be changed in Controller::__construct method.
      */
@@ -38,10 +38,8 @@ abstract class RMController
 
     protected function __construct()
     {
-
         $this->tpl = RMTemplate::getInstance();
         $this->tpl->assign('controller', $this);
-
     }
 
     /**
@@ -56,31 +54,30 @@ abstract class RMController
      */
     protected function model($model = '')
     {
-
-        if('' == $model){
+        if ('' == $model) {
             $model = $this->parent->controller;
-            $class = ucfirst($this->parent->directory) . '_' . ucfirst($this->parent->controller) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
+            $class = ucfirst($this->parent->directory) . '_' . ucfirst($this->parent->controller) . '_' . (defined('XOOPS_CPFUNC_LOADED') ? 'Admin_' : '') . 'Model';
         } else {
-            $class = ucfirst($this->parent->directory) . '_' . ucfirst($model) . '_' . (defined("XOOPS_CPFUNC_LOADED") ? 'Admin_' : '') . 'Model';
+            $class = ucfirst($this->parent->directory) . '_' . ucfirst($model) . '_' . (defined('XOOPS_CPFUNC_LOADED') ? 'Admin_' : '') . 'Model';
         }
 
-        if (array_key_exists($model, $this->model) && is_a($this->model[$model], $class))
+        if (is_a($this->model[$model], $class)) {
             return $this->model[$model];
+        }
 
-        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . (defined("XOOPS_CPFUNC_LOADED") ? '/admin' : '') . '/models/' . strtolower($model) . '.php';
+        $file = XOOPS_ROOT_PATH . '/modules/' . $this->parent->directory . (defined('XOOPS_CPFUNC_LOADED') ? '/admin' : '') . '/models/' . mb_strtolower($model) . '.php';
 
-        if (!file_exists($file)){
+        if (!file_exists($file)) {
             throw new RMException(sprintf(__('The model "%s" does not exists!', 'rmcommon'), $model));
         }
 
-        include_once $file;
+        require_once $file;
 
         $this->model[$model] = new $class();
         $this->model[$model]->controller = $this;
         $this->model[$model]->module = $this->module;
 
         return $this->model[$model];
-
     }
 
     /**
@@ -101,11 +98,10 @@ abstract class RMController
      * @param array $parameters Parameters as associative array
      * @return string
      */
-    public function url($action = '', $parameters = array())
+    public function url($action = '', $parameters = [])
     {
-
         $url = $this->parent->url . '/' . $this->controller . '/' . $action;
-        $url = trim($url, "/");
+        $url = trim($url, '/');
         $query = '';
 
         foreach ($parameters as $var => $value) {
@@ -113,12 +109,10 @@ abstract class RMController
         }
 
         return $url . $query;
-
     }
 
     protected function acceptMethod($acceptedMethods)
     {
-
         if (empty($acceptedMethods)) {
             throw new RMException(__('You must provide a valid request method name to be accepted!', 'rmcommon'));
         }
@@ -126,49 +120,37 @@ abstract class RMController
         $acceptableMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 
         if (is_string($acceptedMethods)) {
-
-            if (!in_array($acceptedMethods, $acceptableMethods)) {
+            if (!in_array($acceptedMethods, $acceptableMethods, true)) {
                 throw new RMException(__('Provided request method is not acceptable!', 'rmcommon'));
             }
 
             $acceptedMethods = [$acceptedMethods];
-
         } elseif (is_array($acceptedMethods)) {
-
             $acceptedMethods = array_intersect($acceptableMethods, $acceptedMethods);
 
             if (empty($acceptedMethods)) {
                 throw new RMException(__('You must provide a valid request method name to be accepted!', 'rmcommon'));
             }
-
         } else {
             throw new RMException(__('You must provide a valid request method name to be accepted!', 'rmcommon'));
         }
 
         $currentMethod = $_SERVER['REQUEST_METHOD'];
 
-        return in_array($currentMethod, $acceptedMethods);
-
+        return in_array($currentMethod, $acceptedMethods, true);
     }
-
 
     protected function getParameter($name, $type = 'string', $default = '')
     {
-
         if (isset($this->parameters[$name])) {
             return RMHttpRequest::array_value($name, $this->parameters, $type, $default);
-        } else {
-            return RMHttpRequest::request($name, $type, $default);
         }
 
+        return RMHttpRequest::request($name, $type, $default);
     }
 
     protected function display()
     {
         $this->parent->display();
     }
-
 }
-
-
-

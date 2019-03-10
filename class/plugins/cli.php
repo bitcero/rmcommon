@@ -28,17 +28,16 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-
-
-class phMagick_cli{
-	function cmd(phmagick $p, $string){
-		/*var list
-		  %width
-		  %height
-		  %source
-		  %destination
-		  %tmp
-		 */
-
-	}
+class phMagick_cli
+{
+    public function cmd(phmagick $p, $string)
+    {
+        /*var list
+          %width
+          %height
+          %source
+          %destination
+          %tmp
+         */
+    }
 }

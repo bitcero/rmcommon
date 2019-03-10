@@ -5,7 +5,7 @@
 * http://eduardocortes.mx
 */
 <?php
-    require '../../../../../mainfile.php';
+    require dirname(__DIR__) . '/../../../../mainfile.php';
     XoopsLogger::getInstance()->activated = false;
     XoopsLogger::getInstance()->renderingEnabled = false;
     $id = rmc_server_var($_GET, 'id', '');
@@ -37,7 +37,7 @@
 					e.focus();
 
 					var r = document.selection.createRange();
-					if (r == null) {
+					if (r === null) {
 						return { start: 0, end: e.value.length, length: 0 }
 					}
 
@@ -104,22 +104,27 @@ var exmCode<?php echo ucfirst($id); ?> = {
     // Init
 	init: function(path, lang){
         var x = this;
-        x.url = '<?php echo RMCURL.'/api/editors/exmcode'; ?>';
+        x.url = '<?php echo RMCURL . '/api/editors/exmcode'; ?>';
         x.editor_path = x.url;
         x.ed = '<?php echo $id; ?>';
         x.name = 'exmCode<?php echo ucfirst($id); ?>';
         // Add plugins
         <?php
         // Cargamos los plugins
-        $path = RMCPATH.'/api/editors/exmcode/plugins';
+        $path = RMCPATH . '/api/editors/exmcode/plugins';
         $dir = opendir($path);
-        while (FALSE !== ($file = readdir($dir))) {
-            if ($file=='.' || $file=='..') continue;
-            if (!is_dir($path.'/'.$file)) continue;
-            if (!is_file($path.'/'.$file.'/plugin.js')) continue;
+        while (false !== ($file = readdir($dir))) {
+            if ('.' == $file || '..' == $file) {
+                continue;
+            }
+            if (!is_dir($path . '/' . $file)) {
+                continue;
+            }
+            if (!is_file($path . '/' . $file . '/plugin.js')) {
+                continue;
+            }
 
-            include $path.'/'.$file.'/plugin.js';
-
+            include $path . '/' . $file . '/plugin.js';
         }
 
         // New plugins from other components
@@ -175,10 +180,10 @@ var exmCode<?php echo ucfirst($id); ?> = {
                 var b = '<span class="buttons" id="<?php echo $id; ?>-'+d.name+'" accesskey="'+d.key+'" title="'+d.title+'" onclick="'+x.name+'.button_press(\''+d.name+'\');">';
                 b += "<span>";
                 if (d.icon!=undefined) {
-                    b += "<img src='"+d.icon+"' alt='' />";
+                    b += "<img src='"+d.icon+"' alt=''>";
                 }
                 if (d.type=='dropdown') {
-                    b += "<span class='dropdown'><img src='"+x.editor_path+"/images/down.png' alt='' /></span>";
+                    b += "<span class='dropdown'><img src='"+x.editor_path+"/images/down.png' alt=''></span>";
                 }
                 b += (d.text!=undefined ? d.text : '')+"</span>";
                 b += "</span>";

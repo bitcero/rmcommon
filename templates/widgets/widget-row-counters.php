@@ -1,6 +1,6 @@
-<?php if('solid' == $type): ?>
+<?php if ('solid' == $type): ?>
     <div class="widget-counters-row">
-        <?php foreach($counters as $counter): ?>
+        <?php foreach ($counters as $counter): ?>
             <div class="row-widget solid counter-<?php echo count($counters); ?> bg-<?php echo $counter->color; ?>">
                 <div>
                     <div class="col-xs-5 the-caption">
@@ -18,7 +18,7 @@
     </div>
 <?php else: ?>
     <div class="widget-counters-row">
-        <?php foreach($counters as $counter): ?>
+        <?php foreach ($counters as $counter): ?>
             <div class="row-widget counter-<?php echo count($counters); ?>">
                 <div>
                     <div class="col-xs-5 the-caption">

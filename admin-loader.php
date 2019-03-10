@@ -9,10 +9,10 @@
 // --------------------------------------------------------------
 
 /**
-* Admin loader file
-*/
+ * Admin loader file
+ */
 
-//require_once 'loader.php';
+//require_once __DIR__ . '/loader.php';
 
 // Usefull admin clases
 $tpl = RMTemplate::get();
@@ -20,19 +20,19 @@ $tpl = RMTemplate::get();
 $rmc_config = RMSettings::cu_settings();
 $rmc_theme = isset($rmc_config->theme) ? $rmc_config->theme : 'helium';
 
-if (!file_exists(RMCPATH.'/themes/'.$rmc_theme.'/admin-gui.php')){
-	$rmc_theme = 'helium';
+if (!file_exists(RMCPATH . '/themes/' . $rmc_theme . '/admin-gui.php')) {
+    $rmc_theme = 'helium';
 }
 
-RMTemplate::get()->add_style('general.min.css','rmcommon');
+RMTemplate::get()->add_style('general.min.css', 'rmcommon');
 
-define('RMTHEMEPATH', RMCPATH.'/themes/'.$rmc_theme);
-define('RMTHEMEURL', RMCURL.'/themes/'.$rmc_theme);
+define('RMTHEMEPATH', RMCPATH . '/themes/' . $rmc_theme);
+define('RMTHEMEURL', RMCURL . '/themes/' . $rmc_theme);
 
 // Load theme events
 //RMEvents::get()->load_extra_preloads(RMTHEMEPATH, ucfirst($rmc_theme).'Theme');
 
-header ("Expires: Mon, 26 Jul 1990 05:00:00 GMT");
-header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header ("Cache-Control: no-cache, must-revalidate");
-header ("Pragma: no-cache");
+header('Expires: Mon, 26 Jul 1990 05:00:00 GMT');
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+header('Cache-Control: no-cache, must-revalidate');
+header('Pragma: no-cache');

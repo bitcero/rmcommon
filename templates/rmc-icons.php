@@ -5,7 +5,7 @@
                 <?php _e('Proveedor:', 'rmcommon'); ?>
             </span>
             <select name="provider" id="provider" class="form-control">
-                <?php foreach($providers as $provider): ?>
+                <?php foreach ($providers as $provider): ?>
                     <option value="<?php echo $provider['id']; ?>"><?php echo $provider['name']; ?></option>
                 <?php endforeach; ?>
             </select>
@@ -40,7 +40,7 @@
     </div>
     <div class="panel-body">
         <ul class="icons-grid" data-size="32" data-provider="<?php echo $selectedProvider['name']; ?>">
-            <?php foreach($icons as $icon): ?>
+            <?php foreach ($icons as $icon): ?>
                 <li data-icon="<?php echo str_replace($providerPrefix, '', $icon); ?>">
                     <a href="#" title="<?php echo str_replace($providerPrefix, '', $icon); ?>" data-icon="<?php echo $icon; ?>"><?php echo $cuIcons->getIcon($icon); ?></a>
                 </li>

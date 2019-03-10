@@ -31,9 +31,9 @@
  */
 abstract class RMIPlugin
 {
-    protected $info = array();
-    protected $settings = array();
-    protected $errors = array();
+    protected $info = [];
+    protected $settings = [];
+    protected $errors = [];
 
     public function on_install()
     {
@@ -57,15 +57,16 @@ abstract class RMIPlugin
 
     public function options()
     {
-        return array();
+        return [];
     }
 
-    function get_info($name)
+    public function get_info($name)
     {
+        if (!isset($this->info[$name])) {
+            return '';
+        }
 
-        if (!isset($this->info[$name])) return '';
         return $this->info[$name];
-
     }
 
     public function info()
@@ -75,32 +76,27 @@ abstract class RMIPlugin
 
     public function settings($name = '')
     {
-
         $settings = empty($this->settings) ? RMFunctions::get()->plugin_settings($this->get_info('dir'), true) : $this->settings;
 
-        if (isset($settings[$name]))
-
+        if (isset($settings[$name])) {
             return $settings[$name];
+        }
 
         return $settings;
-
     }
 
     public function addError($error_string)
     {
-
         $this->errors[] = $error_string;
-
     }
 
     public function errors($lines = true)
     {
+        if ($lines) {
+            return implode('<br>', $this->errors);
+        }
 
-        if ($lines)
-            return implode("<br>", $this->errors);
-        else
-            return $this->errors;
-
+        return $this->errors;
     }
 
     public function path()
@@ -118,6 +114,5 @@ abstract class RMIPlugin
         return \Common\Core\Helpers\Plugins::isInstalled($this->info['dir']);
     }
 
-    abstract static function getInstance();
-
+    abstract public static function getInstance();
 }

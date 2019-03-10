@@ -44,7 +44,7 @@ class Uploader
         'accept', 'renameFilename', 'autoProcessQueue', 'previewTemplate', 'forceFallback', 'fallback',
         //language options
         'dictDefaultMessage', 'dictFallbackMessage', 'dictFallbackText', 'dictInvalidFileType', 'dictFileTooBig',
-        'dictReponseError', 'dictCancelUpload', 'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesEsceeded'
+        'dictReponseError', 'dictCancelUpload', 'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesEsceeded',
     ];
 
     protected $htmlID = '';
@@ -53,6 +53,7 @@ class Uploader
     /**
      * Uploader constructor.
      * @param array $options
+     * @param mixed $htmlID
      */
     public function __construct($htmlID, $options = [])
     {
@@ -60,8 +61,8 @@ class Uploader
 
         $explodedID = explode('-', $htmlID);
 
-        foreach($explodedID as $part){
-            $this->camelizedID .= '' == $this->camelizedID ? strtolower($part) :  ucfirst($part);
+        foreach ($explodedID as $part) {
+            $this->camelizedID .= '' == $this->camelizedID ? mb_strtolower($part) : ucfirst($part);
         }
 
         $this->options = $options;
@@ -83,33 +84,37 @@ class Uploader
      * @param $name
      * @return mixed|bool
      */
-    public function getOption($name){
-        if(array_key_exists($name, $this->options)){
+    public function getOption($name)
+    {
+        if (array_key_exists($name, $this->options)) {
             return $this->options[$name];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
      * Retrieves all stored options
      * @return array
      */
-    public function getAllOptions(){
+    public function getAllOptions()
+    {
         return $this->options;
     }
 
     /**
      * Empty stored options
      */
-    public function clearOptions(){
+    public function clearOptions()
+    {
         $this->options = [];
     }
 
     /**
      * Include the dropzone js file required to work.
      */
-    public function includeDropzone(){
+    public function includeDropzone()
+    {
         global $common;
 
         $common->template()->add_script('dropzone.min.js', 'rmcommon', ['id' => 'dropzone', 'footer' => 1]);
@@ -120,22 +125,21 @@ class Uploader
      * {@link http://www.dropzonejs.com/#usage}
      * @param bool $addDropzone
      */
-    public function render($addDropzone = true){
+    public function render($addDropzone = true)
+    {
         global $common;
 
-        if($addDropzone){
+        if ($addDropzone) {
             $this->includeDropzone();
         }
 
         $params = '';
 
-        foreach($this->options as $name => $value){
-
-            if(in_array($name, $this->acceptedOptions)){
-                $params .= $params == '' ? '' : ",\n";
-                $params .= $name . ':' . (is_string($value) ? '"'.$value.'"' : $value);
+        foreach ($this->options as $name => $value) {
+            if (in_array($name, $this->acceptedOptions, true)) {
+                $params .= '' == $params ? '' : ",\n";
+                $params .= $name . ':' . (is_string($value) ? '"' . $value . '"' : $value);
             }
-
         }
 
         $script = 'Dropzone.options.' . $this->camelizedID . ' = {';
@@ -145,7 +149,5 @@ class Uploader
         $script .= '};';
 
         $common->template()->add_inline_script($script, 1);
-
     }
-
 }

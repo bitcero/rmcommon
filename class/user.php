@@ -10,138 +10,146 @@
 
 class RMUser extends RMObject
 {
-    private $groups = array();
+    private $groups = [];
 
-    public function __construct($id='', $use_email = false, $pass = null ){
-
+    public function __construct($id = '', $use_email = false, $pass = null)
+    {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("users");
+        $this->_dbtable = $this->db->prefix('users');
         $this->setNew();
         $this->initVarsFromTable();
 
         /**
          * Find user using the email
          */
-        if ( $use_email ){
-
-            if ( '' == $id )
+        if ($use_email) {
+            if ('' == $id) {
                 return null;
+            }
 
             $this->primary = 'email';
             $loaded = $this->loadValues($id);
             $this->primary = 'uid';
-
-        } elseif($id != '' && is_numeric($id)){
+        } elseif ('' != $id && is_numeric($id)) {
             $loaded = $this->loadValues((int)$id);
-        } elseif('' != $id) {
+        } elseif ('' != $id) {
             $this->primary = 'uname';
             $loaded = $this->loadValues($id);
             $this->primary = 'uid';
         }
 
-        if($loaded && null == $pass){
+        if ($loaded && null === $pass) {
             $this->unsetNew();
+
             return;
         }
 
-        if(password_verify($pass, $this->pass)){
+        if (password_verify($pass, $this->pass)) {
             $this->unsetNew();
         }
     }
 
-    function setGroups($groupsArr){
-        $this->groups = array();
-        if (is_array($groupsArr))
-                $this->groups =& $groupsArr;
+    public function setGroups($groupsArr)
+    {
+        $this->groups = [];
+        if (is_array($groupsArr)) {
+            $this->groups = &$groupsArr;
+        }
     }
 
-    public function getGroups(){
+    public function getGroups()
+    {
+        if (!empty($this->groups)) {
+            return $this->groups;
+        }
 
-        if (!empty($this->groups)) return $this->groups;
-
-        $sql = 'SELECT groupid FROM '.$this->db->prefix('groups_users_link').' WHERE uid=' . (int)$this->getVar('uid');
+        $sql = 'SELECT groupid FROM ' . $this->db->prefix('groups_users_link') . ' WHERE uid=' . (int)$this->getVar('uid');
         $result = $this->db->query($sql);
 
         if (!$result) {
             return false;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $this->groups[] = $myrow['groupid'];
         }
 
         return $this->groups;
     }
 
-    function groups($data=false, $fields='groupid'){
-        $groups =& $this->getGroups();
+    public function groups($data = false, $fields = 'groupid')
+    {
+        $groups = &$this->getGroups();
 
-        if (false == $data || $fields=='') return $groups;
+        if (false === $data || '' == $fields) {
+            return $groups;
+        }
 
         // Gets all groups based in their id
-        $sql = "SELECT ".($fields!='' ? "$fields" : '')." FROM ".$this->db->prefix("groups")." WHERE groupid IN(".implode(',',$groups).")";
+        $sql = 'SELECT ' . ('' != $fields ? "$fields" : '') . ' FROM ' . $this->db->prefix('groups') . ' WHERE groupid IN(' . implode(',', $groups) . ')';
         $result = $this->db->query($sql);
-        $groups = array();
-        while ($row = $this->db->fetchArray($result)) {
+        $groups = [];
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $groups[] = $row;
         }
 
         return $groups;
     }
 
-    function isAdmin($module_id = null)
+    public function isAdmin($module_id = null)
     {
-        if (is_null($module_id)) {
+        if (null === $module_id) {
             $module_id = isset($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('mid', 'n') : 1;
         } elseif ((int)$module_id < 1) {
             $module_id = 0;
         }
-        $moduleperm_handler = xoops_getHandler('groupperm');
+        $modulepermHandler = xoops_getHandler('groupperm');
 
-        return $moduleperm_handler->checkRight('module_admin', $module_id, $this->getGroups());
+        return $modulepermHandler->checkRight('module_admin', $module_id, $this->getGroups());
     }
 
-    function save(){
+    public function save()
+    {
         $ret = true;
         $status = $this->isNew();
         /**
-        * Guardmaos los datos del usuarios
-        */
+         * Guardmaos los datos del usuarios
+         */
         if ($this->isNew()) {
-                $ret = $this->saveToTable();
+            $ret = $this->saveToTable();
         } else {
-                $ret = $this->updateTable();
+            $ret = $this->updateTable();
         }
         /**
-        * Si ocurrió un error al guardar los datos
-        * entonces salimos del método. No se pueden
-        * guardar los grupos hasta que esto se haya realizado
-        */
-        if (!$ret) return $ret;
+         * Si ocurrió un error al guardar los datos
+         * entonces salimos del método. No se pueden
+         * guardar los grupos hasta que esto se haya realizado
+         */
+        if (!$ret) {
+            return $ret;
+        }
         /**
-        * Asignamos los grupos
-        */
+         * Asignamos los grupos
+         */
         if (!empty($this->groups)) {
-            if (!$this->isNew())
-                $this->db->queryF("DELETE FROM ".$this->db->prefix("groups_users_link")." WHERE uid='".$this->getVar('uid')."'");
-
-            $sql = "INSERT INTO ".$this->db->prefix("groups_users_link")." (`groupid`,`uid`) VALUES ";
-            foreach ($this->groups as $k) {
-                $sql .= "('$k','".$this->getVar('uid')."'),";
+            if (!$this->isNew()) {
+                $this->db->queryF('DELETE FROM ' . $this->db->prefix('groups_users_link') . " WHERE uid='" . $this->getVar('uid') . "'");
             }
 
-            $sql = substr($sql, 0, strlen($sql) - 1);
+            $sql = 'INSERT INTO ' . $this->db->prefix('groups_users_link') . ' (`groupid`,`uid`) VALUES ';
+            foreach ($this->groups as $k) {
+                $sql .= "('$k','" . $this->getVar('uid') . "'),";
+            }
+
+            $sql = mb_substr($sql, 0, mb_strlen($sql) - 1);
 
             $this->db->queryF($sql);
         }
 
         return $ret;
-
     }
 
-    public function delete(){
-
+    public function delete()
+    {
         $this->deleteFromTable();
-
     }
-
 }

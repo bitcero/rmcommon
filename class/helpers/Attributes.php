@@ -9,10 +9,7 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
-
 namespace Common\Core\Helpers;
-
-use Common\Core\Helpers\AttributeInterface;
 
 /**
  * Attributes - Base class for HTML attributes
@@ -31,7 +28,7 @@ class Attributes extends \ArrayObject implements AttributeInterface
      *
      * @param array $attributes array of attribute name => value pairs
      */
-    public function __construct($attributes = array())
+    public function __construct($attributes = [])
     {
         parent::__construct([]);
         if (!empty($attributes)) {
@@ -44,8 +41,6 @@ class Attributes extends \ArrayObject implements AttributeInterface
      *
      * @param string          $name  name of the attribute
      * @param string|string[] $value value for the attribute
-     *
-     * @return void
      */
     public function add($name, $value)
     {
@@ -57,7 +52,7 @@ class Attributes extends \ArrayObject implements AttributeInterface
             $values = (array) $values;
         }
         foreach ($value as $v) {
-            if (!in_array($v, $values)) {
+            if (!in_array($v, $values, true)) {
                 $values[] = $v;
             }
         }
@@ -73,8 +68,6 @@ class Attributes extends \ArrayObject implements AttributeInterface
      * Add attributes to the render suppression list
      *
      * @param string|string[] $names attributes to suppress
-     *
-     * @return void
      */
     protected function suppressRender($names)
     {
@@ -95,14 +88,15 @@ class Attributes extends \ArrayObject implements AttributeInterface
      *
      * @param string $name attribute name to check
      *
-     * @return boolean true if this attribute should be rendered, false otherwise
+     * @return bool true if this attribute should be rendered, false otherwise
      */
     protected function doRender($name)
     {
-        if ((':' === substr($name, 0, 1))
-            || (in_array($name, $this->suppressRenderAttributes))) {
+        if ((':' === mb_substr($name, 0, 1))
+            || (in_array($name, $this->suppressRenderAttributes, true))) {
             return false;
         }
+
         return true;
     }
 
@@ -118,23 +112,24 @@ class Attributes extends \ArrayObject implements AttributeInterface
             if (!$this->doRender($name)) {
                 continue;
             }
-            if ($name === 'name'
+            if ('name' === $name
                 && $this->has('multiple')
-                && substr($value, -2) !== '[]'
+                && '[]' !== mb_substr($value, -2)
             ) {
                 $value .= '[]';
             }
             if (is_array($value)) {
                 // arrays can be used for class attributes, space separated
-                $set = '="' . htmlspecialchars(implode(' ', $value), ENT_QUOTES) .'"';
-            } elseif ($value===null) {
+                $set = '="' . htmlspecialchars(implode(' ', $value), ENT_QUOTES) . '"';
+            } elseif (null === $value) {
                 // null indicates attribute minimization (name only,) like autofocus or readonly
                 $set = '';
             } else {
-                $set = '="' . htmlspecialchars($value, ENT_QUOTES) .'"';
+                $set = '="' . htmlspecialchars($value, ENT_QUOTES) . '"';
             }
             $rendered .= htmlspecialchars($name, ENT_QUOTES) . $set . ' ';
         }
+
         return $rendered;
     }
 
@@ -151,6 +146,7 @@ class Attributes extends \ArrayObject implements AttributeInterface
         if ($this->offsetExists($name)) {
             return $this->offsetGet($name);
         }
+
         return $default;
     }
 
@@ -159,15 +155,13 @@ class Attributes extends \ArrayObject implements AttributeInterface
      *
      * @param string $name  Name of the attribute option
      * @param mixed  $value Value of the attribute option
-     *
-     * @return void
      */
-    public function set($name, $value=null)
+    public function set($name, $value = null)
     {
         // convert boolean to strings, so getAttribute can return boolean
         // false for attributes that are not defined
-        $value = ($value===false) ? '0' : $value;
-        $value = ($value===true) ? '1' : $value;
+        $value = (false === $value) ? '0' : $value;
+        $value = (true === $value) ? '1' : $value;
 
         $this->offsetSet($name, $value);
     }
@@ -177,7 +171,7 @@ class Attributes extends \ArrayObject implements AttributeInterface
      *
      * @param string $name An attribute name.
      *
-     * @return boolean TRUE if the given attribute exists, otherwise FALSE.
+     * @return bool TRUE if the given attribute exists, otherwise FALSE.
      */
     public function has($name)
     {
@@ -210,7 +204,7 @@ class Attributes extends \ArrayObject implements AttributeInterface
      */
     public function clear()
     {
-        return $this->exchangeArray(array());
+        return $this->exchangeArray([]);
     }
 
     // extras
@@ -245,6 +239,7 @@ class Attributes extends \ArrayObject implements AttributeInterface
     public function setAll($values)
     {
         $oldValues = $this->exchangeArray($values);
+
         return $oldValues;
     }
 
@@ -252,8 +247,6 @@ class Attributes extends \ArrayObject implements AttributeInterface
      * Set multiple attributes by using an associative array
      *
      * @param array $values array of new attributes
-     *
-     * @return void
      */
     public function setMerge($values)
     {
@@ -272,19 +265,17 @@ class Attributes extends \ArrayObject implements AttributeInterface
      *                      value will be appended to the end of the
      *                      array rather than added with the key $name.
      * @param mixed  $value An attribute array item value.
-     *
-     * @return void
      */
     public function setArrayItem($stem, $name, $value)
     {
-        $newValue = array();
+        $newValue = [];
         if ($this->offsetExists($stem)) {
             $newValue = $this->offsetGet($stem);
             if (!is_array($newValue)) {
-                $newValue = array();
+                $newValue = [];
             }
         }
-        if ($name === null || $name === '') {
+        if (null === $name || '' === $name) {
             $newValue[] = $value;
         } else {
             $newValue[$name] = $value;
@@ -302,16 +293,17 @@ class Attributes extends \ArrayObject implements AttributeInterface
      */
     public function getAllLike($nameLike = null)
     {
-        if ($nameLike === null) {
+        if (null === $nameLike) {
             return $this->getArrayCopy();
         }
 
-        $likeSet = array();
+        $likeSet = [];
         foreach ($this as $k => $v) {
-            if (substr($k, 0, strlen($nameLike))==$nameLike) {
-                $likeSet[$k]=$v;
+            if (mb_substr($k, 0, mb_strlen($nameLike)) == $nameLike) {
+                $likeSet[$k] = $v;
             }
         }
+
         return $likeSet;
     }
 }

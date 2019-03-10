@@ -23,27 +23,26 @@ class RMFormat
      * @param $phone <p>Número teléfonico a formatear
      * @return string
      */
-    static function phone($phone)
+    public static function phone($phone)
     {
-
-        $matches = array();
+        $matches = [];
         $found = false;
 
-        $patterns = array(
+        $patterns = [
             '/^(\d{3})[^\d]*(\d{4})$/', // Número local
             '/^(\d{3})[^\d]*(\d{3})[^\d]*(\d{4})$/', // Celular o con clave lada (sin 044)
             '/^(\d{3})(\d{1})[^\d]*(\d{2})[^\d]*(\d{4})$/', // Celular o con clave lada (sin 044)
             '/^(0\d{2})[^\d]*(\d{3})[^\d]*(\d{3})[^\d]*(\d{4})$/', // Celular con 044 al principio,
-            '/^(\d{2})[^\d]*(\d{3})[^\d]*(\d{3})[^\d]*(\d{4})$/' // Con código de país
-        );
+            '/^(\d{2})[^\d]*(\d{3})[^\d]*(\d{3})[^\d]*(\d{4})$/', // Con código de país
+        ];
 
-        $replaces = array(
+        $replaces = [
             '$1&middot;$2',
             '($1) $2&middot;$3',
             '($1) $2$3&middot;$4',
             '$1 ($2) $3&middot;$4',
             '+$1 ($2) $3&middot;$4',
-        );
+        ];
 
         $formatted = preg_replace($patterns, $replaces, $phone);
         /*foreach ( $patterns as $search ){
@@ -60,10 +59,8 @@ class RMFormat
         */
 
         return $formatted;
-
         //$matches = array_slice( $matches, 1);
         //return implode("&middot;", $matches);
-
     }
 
     /**
@@ -73,25 +70,25 @@ class RMFormat
      * @param bool $local Utilizar formato de localización
      * @return string
      */
-    static function date($date, $format = '', $local = false)
+    public static function date($date, $format = '', $local = false)
     {
-
-        if ($date == '') return null;
+        if ('' == $date) {
+            return null;
+        }
 
         $time = strtotime($date);
 
-        if ($time <= 0)
+        if ($time <= 0) {
             return '<code>?</code>';
-
-        if ($local) {
-
-            $tf = new RMTimeFormatter($time, $format);
-            return $tf->format();
-
         }
 
-        return date($format != '' ? $format : 'd/m/Y H:i:s', $time);
+        if ($local) {
+            $tf = new RMTimeFormatter($time, $format);
 
+            return $tf->format();
+        }
+
+        return date('' != $format ? $format : 'd/m/Y H:i:s', $time);
     }
 
     /**
@@ -103,9 +100,7 @@ class RMFormat
      */
     public static function social_icon($type)
     {
-
-        $networks = array(
-
+        $networks = [
             'twitter' => 'fa-twitter-square',
             'linkedin' => 'fa-linkedin-square',
             'github' => 'fa-github-alt',
@@ -123,14 +118,13 @@ class RMFormat
             'foursquare' => 'fa-foursquare',
             'vimeo' => 'fa-vimeo-square',
             'vimeo' => 'fa-vimeo-square',
+        ];
 
-        );
-
-        if (isset($networks[$type]))
+        if (isset($networks[$type])) {
             return $networks[$type];
-        else
-            return 'fa-chain';
+        }
 
+        return 'fa-chain';
     }
 
     /**
@@ -142,11 +136,11 @@ class RMFormat
      */
     public static function version($version, $name = false)
     {
-
         $rtn = '';
 
-        if ($name)
+        if ($name) {
             $rtn .= (defined($version['name']) ? constant($version['name']) : $version['name']) . ' ';
+        }
 
         // New versioning
         if (isset($version['major'])) {
@@ -167,16 +161,18 @@ class RMFormat
                     $rtn .= '';
                     break;
             }
+
             return $rtn;
         }
 
         // Format version of a module with previous versioning system
         $rtn .= $version['number'];
 
-        if ($version['revision'] > 0)
+        if ($version['revision'] > 0) {
             $rtn .= '.' . ($version['revision'] / 100);
-        else
+        } else {
             $rtn .= '.0';
+        }
 
         switch ($version['status']) {
             case '-3':
@@ -193,7 +189,6 @@ class RMFormat
         }
 
         return $rtn;
-
     }
 
     /**
@@ -206,45 +201,41 @@ class RMFormat
      */
     public static function bytes_format($size, $origin = '', $target = '', $abr = true)
     {
-
         $kb = 1000;
         $mb = $kb * 1000;
         $gb = $mb * 1000;
         $tb = $gb * 1000;
 
-        $units = array(
+        $units = [
             'b' => 1,
             'kb' => $kb,
             'mb' => $mb,
             'gb' => $gb,
-            'tb' => $tb
-        );
+            'tb' => $tb,
+        ];
 
-        $string = array(
-
+        $string = [
             'b' => $abr ? __('%s b', 'rmcommon') : __('%s Bytes', 'rmcommon'),
             'kb' => $abr ? __('%s KB', 'rmcommon') : __('%s Kilobytes', 'rmcommon'),
             'mb' => $abr ? __('%s MB', 'rmcommon') : __('%s Megabytes', 'rmcommon'),
             'gb' => $abr ? __('%s GB', 'rmcommon') : __('%s Gigabytes', 'rmcommon'),
             'tb' => $abr ? __('%s TB', 'rmcommon') : __('%s Terabytes', 'rmcommon'),
+        ];
 
-        );
-
-        $origin = $origin == '' || !isset($units[$origin]) ? 'b' : $origin;
+        $origin = '' == $origin || !isset($units[$origin]) ? 'b' : $origin;
         $target = !isset($units[$target]) ? '' : $target;
 
-        if ($target != '' && $units[$target] == $units[$origin])
+        if ('' != $target && $units[$target] == $units[$origin]) {
             return sprintf($string[$origin], $size);
+        }
 
         // Convert size to bytes
         $size = $size * $units[$origin];
         // Get bytes in target format only if $target has been provided
-        if ($target != '')
+        if ('' != $target) {
             $result = number_format($bytes / $units[$target], 2);
-        else {
-
+        } else {
             switch ($size) {
-
                 case $size < $kb:
                     $result = $size;
                     $target = 'b';
@@ -265,13 +256,10 @@ class RMFormat
                     $result = number_format($size / $tb, 2);
                     $target = 'tb';
                     break;
-
             }
-
         }
 
         return sprintf($string[$target], $result);
-
     }
 
     /**
@@ -282,30 +270,28 @@ class RMFormat
      * @param $number
      * @return string
      */
-    static function quantity($number){
-
+    public static function quantity($number)
+    {
         $value = 0;
         $suffix = '';
 
-        if($number < 1000){
+        if ($number < 1000) {
             $value = $number;
             $suffix = '';
-        } elseif($number >= 1000 && $number < 1000000){
+        } elseif ($number >= 1000 && $number < 1000000) {
             $value = number_format($number / 1000, 1);
             $suffix = 'K';
-        } elseif( $number >= 1000000){
+        } elseif ($number >= 1000000) {
             $value = number_format($number / 1000000, 1);
             $suffix = 'M';
         }
 
-        if($value > intval($value)){
+        if ($value > intval($value)) {
             $formatted = $value . $suffix;
         } else {
             $formatted = intval($value) . $suffix;
         }
 
         return $formatted;
-
     }
-
 }

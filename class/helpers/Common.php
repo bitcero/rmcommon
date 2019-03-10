@@ -30,19 +30,17 @@
 namespace Common\Core\Helpers;
 
 use RMBreadCrumb;
-use RMSettings;
-use RMTemplate;
-use RMHttpRequest;
 use RMCustomCode;
 use RMEvents;
-use RMUtilities;
 use RMFormat;
-use RMTimeFormatter;
-use RMPrivileges;
-use RMUris;
-use Common\Core\Helpers\Icons;
+use RMHttpRequest;
 use RMModules;
-use Common\Core\Helpers\Services;
+use RMPrivileges;
+use RMSettings;
+use RMTemplate;
+use RMTimeFormatter;
+use RMUris;
+use RMUtilities;
 
 class Common
 {
@@ -159,9 +157,10 @@ class Common
     public function timeFormat($format = '')
     {
         $formater = RMTimeFormatter::get($format);
-        if('' != $format){
+        if ('' != $format) {
             $formater->format = $format;
         }
+
         return $formater;
     }
 
@@ -224,7 +223,6 @@ class Common
      */
     public function path($path = '')
     {
-
         $base = XOOPS_ROOT_PATH . '/modules/rmcommon';
 
         if ('' == trim($path)) {
@@ -232,7 +230,6 @@ class Common
         }
 
         return $base . '/' . ltrim($path, '/');
-
     }
 
     /**
@@ -243,6 +240,7 @@ class Common
     public function url($path = '')
     {
         $path = $this->path($path);
+
         return str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path);
     }
 
@@ -252,6 +250,7 @@ class Common
     public function ajax()
     {
         $this->isAjax = true;
+
         return \Rmcommon_Ajax::getInstance();
     }
 
@@ -260,7 +259,6 @@ class Common
         global $xoopsSecurity;
 
         return $xoopsSecurity;
-
     }
 
     /**
@@ -279,6 +277,7 @@ class Common
     public function app()
     {
         $app = App::getInstance();
+
         return $app;
     }
 
@@ -290,26 +289,24 @@ class Common
      */
     public function checkToken($ajax = true, $url = '')
     {
-
         if ($this->security()->check(true, false, 'CUTOKEN')) {
             return true;
         }
 
         if ($ajax) {
-
             $this->ajax()->response(
-                __('Session token expired!', 'rmcommon'), 1, 0, ['reload' => true]
+                __('Session token expired!', 'rmcommon'),
+                1,
+                0,
+                ['reload' => true]
             );
-
         } else {
-
             $this->uris()->redirect_with_message(
                 __('Session token expired!', 'rmcommon'),
-                $url == '' ? XOOPS_URL : $url, RMMSG_ERROR
+                '' == $url ? XOOPS_URL : $url,
+                RMMSG_ERROR
             );
-
         }
-
     }
 
     /**
@@ -318,6 +315,7 @@ class Common
     public function resize()
     {
         $resizer = \RMImageResizer::getInstance();
+
         return $resizer;
     }
 
@@ -328,6 +326,7 @@ class Common
     public function comments()
     {
         $comments = Comments::getInstance();
+
         return $comments;
     }
 
@@ -340,6 +339,7 @@ class Common
     public function widgets()
     {
         $widgets = Widgets::getInstance();
+
         return $widgets;
     }
 
@@ -351,7 +351,7 @@ class Common
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new Common();
+            $instance = new self();
         }
 
         return $instance;
@@ -366,19 +366,17 @@ class Common
 
     public function help($directory)
     {
-
-        if(false == array_key_exists($directory, $this->helps)){
+        if (false === array_key_exists($directory, $this->helps)) {
             $this->helps[$directory] = new Help($directory);
         }
 
         return $this->helps[$directory];
-
     }
 
     public function crypt($method = null, $key = null)
     {
         $crypt = new \Crypt($method, $key);
+
         return $crypt;
     }
-
 }

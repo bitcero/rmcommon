@@ -16,11 +16,12 @@ class Rmcommon_Ajax
 {
     use RMModuleAjax;
 
-    public static function getInstance(){
+    public static function getInstance()
+    {
         static $instance;
 
-        if(!isset($instance)){
-            $instance = new Rmcommon_Ajax();
+        if (!isset($instance)) {
+            $instance = new self();
         }
 
         return $instance;

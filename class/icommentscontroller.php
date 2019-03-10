@@ -8,33 +8,43 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-interface iCommentsController
+interface icommentscontroller
 {
     /**
      * Add 1 to comments internal counter of the module
      * @param RMComment
+     * @param mixed $comment
      */
     public function increment_comments_number($comment);
+
     /**
      * Reduce in 1 the comments internal counter of the module
      * @param RMComment
+     * @param mixed $comment
      */
     public function reduce_comments_number($comment);
+
     /**
      * Get the element related to a specific comment
      * @param string Parameters to identify the comment
      * @param RMComment Comment object
      * @param bool Return item with url or without
+     * @param mixed $params
+     * @param mixed $com
      * @return string
      */
     public function get_item($params, $com);
+
     /**
      * Get the element url
      * @param string Parameters to identify the comment
      * @param RMComment Comment object
+     * @param mixed $params
+     * @param mixed $com
      * @return string
      */
     public function get_item_url($params, $com);
+
     /**
      * Return the link to module or element owner of the comment
      * @return string
@@ -45,5 +55,5 @@ interface iCommentsController
      * Loads an existing instance of the controller
      * @return object
      */
-    static function getInstance();
+    public static function getInstance();
 }

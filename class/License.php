@@ -34,13 +34,13 @@ class License extends \RMObject
     public function __construct($id = null, $type = null)
     {
         $this->db = \XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("mod_rmcommon_licensing");
+        $this->_dbtable = $this->db->prefix('mod_rmcommon_licensing');
         $this->setNew();
         $this->initVarsFromTable();
 
         $this->setVarType('data', XOBJ_DTYPE_SOURCE);
 
-        if ($id == null) {
+        if (null === $id) {
             return;
         }
 

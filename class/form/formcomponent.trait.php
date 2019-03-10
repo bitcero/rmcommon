@@ -8,7 +8,6 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 trait RMFormComponent
 {
     use RMProperties;
@@ -30,14 +29,16 @@ trait RMFormComponent
      *                                    );</pre>
      * @throws RMException
      */
-    public function __construct($model, $element, $parameters){
+    public function __construct($model, $element, $parameters)
+    {
         $this->model = $model;
         $this->element = $element;
         $this->parameters = $parameters;
         $this->model_name = get_class($model);
 
-        if ( 'ActiveButton' == __CLASS__ )
+        if ('ActiveButton' == __CLASS__) {
             return;
+        }
 
         $columns = $model->columns;
 
@@ -46,17 +47,16 @@ trait RMFormComponent
 
         $columns = $model->columns;
 
-        if ( isset( $columns[$element] ) && 1 != $columns[$element]['null'] ) {
+        if (isset($columns[$element]) && 1 != $columns[$element]['null']) {
             $this->required = true;
 
-            if ( !isset($parameters['data-msg-required']) ) {
-                $parameters['data-msg-required'] = __('This field is required.','rmcommon');
+            if (!isset($parameters['data-msg-required'])) {
+                $parameters['data-msg-required'] = __('This field is required.', 'rmcommon');
                 $this->parameters = $parameters;
             }
-
-        }else
-            $this->required = isset( $parameters['required'] ) ? $parameters['required'] : false;
-
+        } else {
+            $this->required = isset($parameters['required']) ? $parameters['required'] : false;
+        }
     }
 
     /**
@@ -69,20 +69,18 @@ trait RMFormComponent
      * <pre>Model[element]</pre>
      * @return string
      */
-    final protected function get_name(){
-        return str_replace('Admin', '', $this->model_name ) . '[' . $this->element . ']';
-
+    final protected function get_name()
+    {
+        return str_replace('Admin', '', $this->model_name) . '[' . $this->element . ']';
     }
 
-    final protected function get_id(){
-        return strtolower( str_replace('Admin', '', $this->model_name ) ) . '-' . $this->element;
-
+    final protected function get_id()
+    {
+        return mb_strtolower(str_replace('Admin', '', $this->model_name)) . '-' . $this->element;
     }
 
-    public function open(){
-
+    public function open()
+    {
         echo $this->render();
-
     }
-
 }

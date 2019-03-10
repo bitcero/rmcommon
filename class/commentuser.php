@@ -10,42 +10,44 @@
 
 class RMCommentUser extends RMObject
 {
-    public function __construct($id=null){
+    public function __construct($id = null)
+    {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("mod_rmcommon_comments_assignations");
+        $this->_dbtable = $this->db->prefix('mod_rmcommon_comments_assignations');
         $this->setNew();
         $this->initVarsFromTable();
-        if ($id==null){
+        if (null === $id) {
             return;
         }
-        
-        if ($this->loadValues($id)){
-			$this->unsetNew();
-			return;
+
+        if ($this->loadValues($id)) {
+            $this->unsetNew();
+
+            return;
         }
-        
+
         $this->primary = 'email';
-        if ($this->loadValues($id)){
-			$this->unsetNew();
-			$this->primary = 'id_user';
-			return;
+        if ($this->loadValues($id)) {
+            $this->unsetNew();
+            $this->primary = 'id_user';
+
+            return;
         }
-        
+
         $this->primary = 'id_user';
-		return;
-        
     }
-    
-    public function id(){
+
+    public function id()
+    {
         return $this->getVar('id_user');
     }
-    
-    public function save(){
-        if($this->isNew()){
+
+    public function save()
+    {
+        if ($this->isNew()) {
             return $this->saveToTable();
-        } else {
-            return $this->updateTable();
         }
+
+        return $this->updateTable();
     }
-    
 }
