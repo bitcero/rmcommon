@@ -50,7 +50,7 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
         $this->_path = $path;
         $this->_mode = $writable ? 'w+b' : 'rb';
 
-        if (function_exists('get_magic_quotes_runtime') && @get_magic_quotes_runtime() == 1) {
+        if (function_exists('get_magic_quotes_runtime') && 1 == @get_magic_quotes_runtime()) {
             $this->_quotes = true;
         }
     }
@@ -94,7 +94,7 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
 
             // If we read one byte after reaching the end of the file
             // feof() will return false and an empty string is returned
-            if ($bytes === '' && feof($fp)) {
+            if ('' === $bytes && feof($fp)) {
                 $this->_resetReadHandle();
 
                 return false;
@@ -141,10 +141,10 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
         if (!isset($this->_reader)) {
             if (!$this->_reader = fopen($this->_path, 'rb')) {
                 throw new Swift_IoException(
-                    'Unable to open file for reading ['.$this->_path.']'
+                    'Unable to open file for reading [' . $this->_path . ']'
                 );
             }
-            if ($this->_offset != 0) {
+            if (0 != $this->_offset) {
                 $this->_getReadStreamSeekableStatus();
                 $this->_seekReadStreamToPosition($this->_offset);
             }
@@ -159,7 +159,7 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
         if (!isset($this->_writer)) {
             if (!$this->_writer = fopen($this->_path, $this->_mode)) {
                 throw new Swift_IoException(
-                    'Unable to open file for writing ['.$this->_path.']'
+                    'Unable to open file for writing [' . $this->_path . ']'
                 );
             }
         }
@@ -186,10 +186,10 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
     /** Streams in a readOnly stream ensuring copy if needed */
     private function _seekReadStreamToPosition($offset)
     {
-        if ($this->_seekable === null) {
+        if (null === $this->_seekable) {
             $this->_getReadStreamSeekableStatus();
         }
-        if ($this->_seekable === false) {
+        if (false === $this->_seekable) {
             $currentPos = ftell($this->_reader);
             if ($currentPos < $offset) {
                 $toDiscard = $offset - $currentPos;
@@ -216,7 +216,7 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
         fclose($this->_reader);
         $source = fopen($this->_path, 'rb');
         if (!$source) {
-            throw new Swift_IoException('Unable to open file for copying ['.$this->_path.']');
+            throw new Swift_IoException('Unable to open file for copying [' . $this->_path . ']');
         }
         fseek($tmpFile, 0, SEEK_SET);
         while (!feof($source)) {

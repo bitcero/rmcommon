@@ -33,12 +33,12 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-lg"><{$cf.lang_submit}></button>
     </div>
-    <input type="hidden" name="uri" value="<{$cf.uri}>" />
-    <input type="hidden" name="params" value="<{$cf.params}>" />
-    <input type="hidden" name="type" value="<{$cf.type}>" />
-    <input type="hidden" name="object" value="<{$cf.object}>" />
-    <input type="hidden" name="action" value="<{$cf.action}>" />
-    <input type="hidden" name="update" value="<{$cf.update}>" />
+    <input type="hidden" name="uri" value="<{$cf.uri}>">
+    <input type="hidden" name="params" value="<{$cf.params}>">
+    <input type="hidden" name="type" value="<{$cf.type}>">
+    <input type="hidden" name="object" value="<{$cf.object}>">
+    <input type="hidden" name="action" value="<{$cf.action}>">
+    <input type="hidden" name="update" value="<{$cf.update}>">
 
 </form>
 </div>

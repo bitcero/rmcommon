@@ -9,25 +9,34 @@
 // --------------------------------------------------------------
 
 /**
-* @desc Clase para el manejo de campos de formulario de tipo usuarios
-*/
+ * @desc Clase para el manejo de campos de formulario de tipo usuarios
+ */
 class RMFormUser extends RMFormElement
 {
-	// Eventos
-	private $_onchange = '';
-	
-	/**
-	* @param string Texto del campo
-	* @param string Nombre del Campo
-	* @param bool Seleccion múltiple
-	* @param array Valores seleccionados por defecto
-	* @param int Limite de resultados por página de usuarios
-	* @param int Ancho de la ventana
-	* @param int Alto de la ventana
-	*/
-	public function __construct($caption = '', $name = '', $multi = false, $select=array(), $limit=20, $width=600,$height=300, $showall = 0, $enable=true){
+    // Eventos
+    private $_onchange = '';
 
-        if(is_array($caption)){
+    /**
+     * @param string Texto del campo
+     * @param string Nombre del Campo
+     * @param bool Seleccion múltiple
+     * @param array Valores seleccionados por defecto
+     * @param int Limite de resultados por página de usuarios
+     * @param int Ancho de la ventana
+     * @param int Alto de la ventana
+     * @param mixed $caption
+     * @param mixed $name
+     * @param mixed $multi
+     * @param mixed $select
+     * @param mixed $limit
+     * @param mixed $width
+     * @param mixed $height
+     * @param mixed $showall
+     * @param mixed $enable
+     */
+    public function __construct($caption = '', $name = '', $multi = false, $select = [], $limit = 20, $width = 600, $height = 300, $showall = 0, $enable = true)
+    {
+        if (is_array($caption)) {
             parent::__construct($caption);
         } else {
             parent::__construct([]);
@@ -37,141 +46,157 @@ class RMFormUser extends RMFormElement
             $this->setWithDefaults('name', $name, 'name_error');
             $this->setWithDefaults('showall', $showall, 0);
             $this->setWithDefaults('can_change', $enable, true);
-            $this->setWithDefaults('selected', $select, array());
-            $this->setWithDefaults('title', $multi ? __('Select users', 'rmcommon') : __('Select user', 'rmcommon'), array());
+            $this->setWithDefaults('selected', $select, []);
+            $this->setWithDefaults('title', $multi ? __('Select users', 'rmcommon') : __('Select user', 'rmcommon'), []);
         }
 
         $this->add('class', 'form_users_container');
-        if ($this->get('multi')){
+        if ($this->get('multi')) {
             $this->add('class', 'checkbox');
         } else {
             $this->add('class', 'radio');
         }
 
-        $this->setIfNotSet('selected', array());
-        $this->setIfNotSet('title', $multi ? __('Select users', 'rmcommon') : __('Select user', 'rmcommon'), array());
+        $this->setIfNotSet('selected', []);
+        $this->setIfNotSet('title', $multi ? __('Select users', 'rmcommon') : __('Select user', 'rmcommon'), []);
         $this->setIfNotSet('id', $this->get('name'));
 
-        $this->suppressList = array_merge($this->suppressList, ['limit', 'multi', 'showall', 'can_change', 'selected','title']);
+        $this->suppressList = array_merge($this->suppressList, ['limit', 'multi', 'showall', 'can_change', 'selected', 'title']);
 
         !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
-	}
-	
-	public function button($enable){
-		$this->can_change = $enable;
-	}
-	
-	/**
-	* @desc Crea un manejador para el evento onchange
-	*/
-	public function onChange($action){
-		$this->_onchange = base64_encode(addslashes($action));
-	}
-	
-	/**
-	* Show the Users field
-	* This field needs that form.css, jquery.css and forms.js would be included.
-	*/
-	public function render(){
-		
-		RMTemplate::getInstance()->add_script('forms.js', 'rmcommon', array('footer' => 1));
-		RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon',  array('directory' => 'include', 'footer' => 1));
-		RMTemplate::getInstance()->add_style('forms.min.css','rmcommon', ['id' => 'forms-css']);
+    }
+
+    public function button($enable)
+    {
+        $this->can_change = $enable;
+    }
+
+    /**
+     * @desc Crea un manejador para el evento onchange
+     * @param mixed $action
+     */
+    public function onChange($action)
+    {
+        $this->_onchange = base64_encode(addslashes($action));
+    }
+
+    /**
+     * Show the Users field
+     * This field needs that form.css, jquery.css and forms.js would be included.
+     */
+    public function render()
+    {
+        RMTemplate::getInstance()->add_script('forms.js', 'rmcommon', ['footer' => 1]);
+        RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', ['directory' => 'include', 'footer' => 1]);
+        RMTemplate::getInstance()->add_style('forms.min.css', 'rmcommon', ['id' => 'forms-css']);
 
         $attributes = $this->renderAttributeString();
-		
-		$rtn = '<div id="'.$this->id().'-users-container" ' . $attributes . '>
-				<ul id="'.$this->id().'-users-list">';
-		$db = XoopsDatabaseFactory::getDatabaseConnection();
-		
-		if ($this->get('showall') && in_array(0, $this->get('selected'))){
-			$rtn .= "<li id='".$this->id()."-exmuser-0'>\n
-                        <label>
-                        <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove(0); return false;\">&times;</a>
-                        <input type='".($this->get('multi') ? 'checkbox' : 'radio')."' name='".($this->get('multi') ? $this->get('name').'[]' : $this->get('name'))."' id='".$this->id()."-0'
-				 		value='0' checked='checked' /> ".__('All Users','rmcommon')."
-                        </label></li>";
-		}
-        
-        $selected = $this->get('selected');
-		
-		if (is_array($selected) && !empty($selected) && !(count($selected)==1 && $selected[0]==0)){
-			$sql = "SELECT uid,uname FROM ".$db->prefix("users")." WHERE ";
-			$sql1 = '';
-			if ($this->get('multi')){
-				foreach ($selected as $id){
-					if ($id!=0) $sql1 .= $sql1 == '' ? "uid='$id'" : " OR uid='$id'";
-				}
-			} else {
-				if ($selected[0]!=0) $sql1 = "uid='".$selected[0]."'";
-			}
-			$result = $db->query($sql.$sql1);
-			$selected = '';
-			while ($row = $db->fetchArray($result)){
-				$rtn .= "<li id='".$this->id()."-exmuser-$row[uid]'>\n
-						<label>";
-                $rtn .= $this->get('can_change') ? " <a href='#' onclick=\"users_field_name='".$this->id()."'; usersField.remove($row[uid]); return false;\">&times;</a>" : '';
-                $rtn .= "<input type='".($this->get('multi') ? 'checkbox' : 'radio')."' name='".($this->get('multi') ? $this->get('name').'[]' : $this->get('name'))."' id='".$this->id()."-".$row['uid']."'
-				 		value='$row[uid]' checked='checked' /> 
-                        $row[uname] ";
-                $rtn .= "</label></li>";
-			}
-		}
-		
-		$rtn .= "</ul><br />";
-		if ($this->get('can_change')){
-			$rtn .= "<button type='button' class='btn btn-info btn-sm' data-title='".$this->get('title')."' onclick=\"usersField.form_search_users('".$this->id()."',".$this->get('limit').",".intval($this->get('multi')).",'".XOOPS_URL."');\">".__('Users...','rmcommon')."</button>";
-		    /*$rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
-					    <div class="modal-dialog">
-					        <div class="modal-content">
-					            <div class="modal-header">
-					                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					                <h4 class="modal-title">'.__('Select users', 'rmcommon').'</h4>
-					            </div>
-					            <div class="modal-body">
 
-					            </div>
-					        </div>
-					    </div>
-					</div>';*/
-		}
-		$rtn .= '</div>';
-		return $rtn;
-	}
+        $rtn = '<div id="' . $this->id() . '-users-container" ' . $attributes . '>
+				<ul id="' . $this->id() . '-users-list">';
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+
+        if ($this->get('showall') && in_array(0, $this->get('selected'), true)) {
+            $rtn .= "<li id='" . $this->id() . "-exmuser-0'>\n
+                        <label>
+                        <a href='#' onclick=\"users_field_name='" . $this->id() . "'; usersField.remove(0); return false;\">&times;</a>
+                        <input type='" . ($this->get('multi') ? 'checkbox' : 'radio') . "' name='" . ($this->get('multi') ? $this->get('name') . '[]' : $this->get('name')) . "' id='" . $this->id() . "-0'
+				 		value='0' checked> " . __('All Users', 'rmcommon') . '
+                        </label></li>';
+        }
+
+        $selected = $this->get('selected');
+
+        if (is_array($selected) && !empty($selected) && !(1 == count($selected) && 0 == $selected[0])) {
+            $sql = 'SELECT uid,uname FROM ' . $db->prefix('users') . ' WHERE ';
+            $sql1 = '';
+            if ($this->get('multi')) {
+                foreach ($selected as $id) {
+                    if (0 != $id) {
+                        $sql1 .= '' == $sql1 ? "uid='$id'" : " OR uid='$id'";
+                    }
+                }
+            } else {
+                if (0 != $selected[0]) {
+                    $sql1 = "uid='" . $selected[0] . "'";
+                }
+            }
+            $result = $db->query($sql . $sql1);
+            $selected = '';
+            while (false !== ($row = $db->fetchArray($result))) {
+                $rtn .= "<li id='" . $this->id() . "-exmuser-$row[uid]'>\n
+						<label>";
+                $rtn .= $this->get('can_change') ? " <a href='#' onclick=\"users_field_name='" . $this->id() . "'; usersField.remove($row[uid]); return false;\">&times;</a>" : '';
+                $rtn .= "<input type='" . ($this->get('multi') ? 'checkbox' : 'radio') . "' name='" . ($this->get('multi') ? $this->get('name') . '[]' : $this->get('name')) . "' id='" . $this->id() . '-' . $row['uid'] . "'
+				 		value='$row[uid]' checked> 
+                        $row[uname] ";
+                $rtn .= '</label></li>';
+            }
+        }
+
+        $rtn .= '</ul><br>';
+        if ($this->get('can_change')) {
+            $rtn .= "<button type='button' class='btn btn-info btn-sm' data-title='" . $this->get('title') . "' onclick=\"usersField.form_search_users('" . $this->id() . "'," . $this->get('limit') . ',' . intval($this->get('multi')) . ",'" . XOOPS_URL . "');\">" . __('Users...', 'rmcommon') . '</button>';
+            /*$rtn .= '<div class="modal fade smartb-form-dialog users-form-selector" id="'.$this->id().'-dialog-search">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">'.__('Select users', 'rmcommon').'</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>';*/
+        }
+        $rtn .= '</div>';
+
+        return $rtn;
+    }
 }
 
 class RMFormFormUserSelect extends RMFormElement
 {
-    private $selected = array();
+    private $selected = [];
     private $limit = 100;
     private $width = 600;
     private $height = 300;
     private $showall = 0;
-    
+
     // Eventos
     private $_onchange = '';
-    
+
     /**
-    * @param string Texto del campo
-    * @param string Nombre del Campo
-    * @param bool Seleccion múltiple
-    * @param array Valores seleccionados por defecto
-    * @param int Limite de resultados por página de usuarios
-    * @param int Ancho de la ventana
-    * @param int Alto de la ventana
-    */
-    public function __construct($caption, $name, $select=array(), $limit=36, $width=600,$height=300, $showall = 0){
+     * @param string Texto del campo
+     * @param string Nombre del Campo
+     * @param bool Seleccion múltiple
+     * @param array Valores seleccionados por defecto
+     * @param int Limite de resultados por página de usuarios
+     * @param int Ancho de la ventana
+     * @param int Alto de la ventana
+     * @param mixed $caption
+     * @param mixed $name
+     * @param mixed $select
+     * @param mixed $limit
+     * @param mixed $width
+     * @param mixed $height
+     * @param mixed $showall
+     */
+    public function __construct($caption, $name, $select = [], $limit = 36, $width = 600, $height = 300, $showall = 0)
+    {
         $this->selected = $select;
         $this->limit = $limit;
         $this->setCaption($caption);
         $this->setName($name);
-        $this->width = $width<=0 ? 600 : $width;
-        $this->height = $height<=0 ? 300 : $height;
+        $this->width = $width <= 0 ? 600 : $width;
+        $this->height = $height <= 0 ? 300 : $height;
         $this->showall = $showall;
         !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
     }
-    
-    public function render(){
-        
+
+    public function render()
+    {
     }
 }

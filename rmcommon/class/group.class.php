@@ -12,150 +12,155 @@ class Rmcommon_Group extends RMObject
 {
     use RMProperties;
 
-    public function __construct( $id = null ){
-
+    public function __construct($id = null)
+    {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("groups");
+        $this->_dbtable = $this->db->prefix('groups');
         $this->setNew();
         $this->initVarsFromTable();
 
-        if ( null == $id || 0 >= $id )
+        if (null === $id || $id <= 0) {
             return null;
+        }
 
-        if (!$this->loadValues( $id ))
+        if (!$this->loadValues($id)) {
             return false;
+        }
 
         $this->unsetNew();
 
         return null;
     }
 
-    public function save(){
-
-        if ( $this->isNew() )
+    public function save()
+    {
+        if ($this->isNew()) {
             return $this->saveToTable();
-        else
-            return $this->updateTable();
+        }
 
+        return $this->updateTable();
     }
 
-    public function set_admin_permissions( $perms ){
-
-        if ( $this->isNew() || empty( $perms ) )
+    public function set_admin_permissions($perms)
+    {
+        if ($this->isNew() || empty($perms)) {
             return true;
+        }
 
         // Eliminamos los permisos actuales
-        $sql = "DELETE FROM " . $this->db->prefix("group_permission") . " WHERE gperm_groupid = " . $this->id() . " AND gperm_name = 'module_admin'";
-        $this->db->queryF( $sql );
+        $sql = 'DELETE FROM ' . $this->db->prefix('group_permission') . ' WHERE gperm_groupid = ' . $this->id() . " AND gperm_name = 'module_admin'";
+        $this->db->queryF($sql);
 
         //Almacenamos los nuevos permisos
-        $sql = "INSERT INTO " . $this->db->prefix("group_permission") . " (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES ";
+        $sql = 'INSERT INTO ' . $this->db->prefix('group_permission') . ' (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES ';
 
-        foreach ( $perms as $item )
-            $sql .= "(" . $this->id() . ", $item, 1, 'module_admin'),";
+        foreach ($perms as $item) {
+            $sql .= '(' . $this->id() . ", $item, 1, 'module_admin'),";
+        }
 
-        $result = $this->db->queryF( rtrim($sql,',') );
+        $result = $this->db->queryF(rtrim($sql, ','));
 
-        if ( !$result )
-            $this->addError( $this->db->error() );
+        if (!$result) {
+            $this->addError($this->db->error());
+        }
 
         return $result;
-
     }
 
-    public function set_read_permissions( $perms ){
-
-        if ( $this->isNew() || empty( $perms ) )
+    public function set_read_permissions($perms)
+    {
+        if ($this->isNew() || empty($perms)) {
             return true;
+        }
 
         // Eliminamos los permisos actuales
-        $sql = "DELETE FROM " . $this->db->prefix("group_permission") . " WHERE gperm_groupid = " . $this->id() . " AND gperm_name = 'module_read'";
-        $this->db->queryF( $sql );
+        $sql = 'DELETE FROM ' . $this->db->prefix('group_permission') . ' WHERE gperm_groupid = ' . $this->id() . " AND gperm_name = 'module_read'";
+        $this->db->queryF($sql);
 
         //Almacenamos los nuevos permisos
-        $sql = "INSERT INTO " . $this->db->prefix("group_permission") . " (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES ";
+        $sql = 'INSERT INTO ' . $this->db->prefix('group_permission') . ' (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES ';
 
-        foreach ( $perms as $item )
-            $sql .= "(" . $this->id() . ", $item, 1, 'module_read'),";
+        foreach ($perms as $item) {
+            $sql .= '(' . $this->id() . ", $item, 1, 'module_read'),";
+        }
 
-        $result = $this->db->queryF( rtrim($sql, ",") );
+        $result = $this->db->queryF(rtrim($sql, ','));
 
-        if ( !$result )
-            $this->addError( $this->db->error() );
+        if (!$result) {
+            $this->addError($this->db->error());
+        }
 
         return $result;
-
     }
 
-    public function set_specific_permissions( $perms ){
-
-        if ( $this->isNew() || empty( $perms ) )
+    public function set_specific_permissions($perms)
+    {
+        if ($this->isNew() || empty($perms)) {
             return true;
+        }
 
         // Eliminamos los permisos actuales
-        $sql = "DELETE FROM " . $this->db->prefix("mod_rmcommon_permissions") . " WHERE `group` = '" . $this->id() . "'";
-        $this->db->queryF( $sql );
+        $sql = 'DELETE FROM ' . $this->db->prefix('mod_rmcommon_permissions') . " WHERE `group` = '" . $this->id() . "'";
+        $this->db->queryF($sql);
 
-        $sql = "INSERT INTO " . $this->db->prefix("mod_rmcommon_permissions") . " (`group`, `element`, `key`) VALUES ";
+        $sql = 'INSERT INTO ' . $this->db->prefix('mod_rmcommon_permissions') . ' (`group`, `element`, `key`) VALUES ';
 
-        foreach ( $perms as $element => $perm ){
-            foreach ( $perm as $key ){
-                $sql .= "(" . $this->id() . ", '" . $element . "', '$key'),";
+        foreach ($perms as $element => $perm) {
+            foreach ($perm as $key) {
+                $sql .= '(' . $this->id() . ", '" . $element . "', '$key'),";
             }
         }
 
-        $result = $this->db->queryF( rtrim($sql, ",") );
+        $result = $this->db->queryF(rtrim($sql, ','));
 
-        if ( !$result )
-            $this->addError( $this->db->error() );
+        if (!$result) {
+            $this->addError($this->db->error());
+        }
 
         return $result;
-
     }
 
-    public function load_permissions( $type = 'specific' ){
-
-        if ($type=='specific'){
-
-            if ( !empty($this->specific_perms) )
+    public function load_permissions($type = 'specific')
+    {
+        if ('specific' == $type) {
+            if (!empty($this->specific_perms)) {
                 return $this->specific_perms;
+            }
 
-            $sql = "SELECT * FROM " . $this->db->prefix("mod_rmcommon_permissions") . " WHERE `group` = " . $this->id();
-            $return = array();
+            $sql = 'SELECT * FROM ' . $this->db->prefix('mod_rmcommon_permissions') . ' WHERE `group` = ' . $this->id();
+            $return = [];
             $result = $this->db->query($sql);
-            while( $row = $this->db->fetchArray( $result ) ){
-                $return[] = array( $row['element'], $row['key'] );
+            while (false !== ($row = $this->db->fetchArray($result))) {
+                $return[] = [ $row['element'], $row['key'] ];
             }
 
             $this->specific_perms = $return;
+
             return $return;
-
-        } elseif ( $type== 'module_admin ') {
-
-            if ( !empty($this->admin_perms) )
+        } elseif ('module_admin ' == $type) {
+            if (!empty($this->admin_perms)) {
                 return $this->admin_perms;
-
-        } elseif ( $type == 'module_read' ){
-
-            if ( !empty($this->read_perms) )
+            }
+        } elseif ('module_read' == $type) {
+            if (!empty($this->read_perms)) {
                 return $this->read_perms;
-
+            }
         }
 
-        $sql = "SELECT * FROM " . $this->db->prefix("group_permission") . " WHERE gperm_groupid = " . $this->id();
-        $return = array();
+        $sql = 'SELECT * FROM ' . $this->db->prefix('group_permission') . ' WHERE gperm_groupid = ' . $this->id();
+        $return = [];
         $result = $this->db->query($sql);
-        while( $row = $this->db->fetchArray( $result ) ){
+        while (false !== ($row = $this->db->fetchArray($result))) {
             $return[$row['gperm_name']][$row['gperm_itemid']] = $row['gperm_itemid'];
         }
 
-        $this->admin_perms = isset($return['module_admin']) ? $return['module_admin'] : array();
-        $this->read_perms = isset($return['module_read']) ? $return['module_read'] :  array();
+        $this->admin_perms = isset($return['module_admin']) ? $return['module_admin'] : [];
+        $this->read_perms = isset($return['module_read']) ? $return['module_read'] : [];
 
-        if ($type == 'module_admin')
+        if ('module_admin' == $type) {
             return $this->admin_perms;
-        else
-            return $this->read_perms;
+        }
 
+        return $this->read_perms;
     }
 }

@@ -25,15 +25,15 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.eduardocortes.mx
  */
-
-include_once '../../include/cp_header.php';
+require_once dirname(__DIR__) . '/../include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/modules/rmcommon/admin-loader.php';
 $common->location = 'services';
 
 /**
  * Show all registered services
  */
-function services_manager_list(){
+function services_manager_list()
+{
     global $common, $xoops;
 
     $common->breadcrumb()->add_crumb(__('Services Manager', 'rmcommon'));
@@ -50,20 +50,23 @@ function services_manager_list(){
     $common->template()->display('rmc-services.php');
 
     $common->template()->footer();
-
 }
 
 /**
  * Write to file a new provider for specific service
  */
-function services_assign_provider(){
+function services_assign_provider()
+{
     global $xoopsSecurity, $common;
 
     $common->ajax()->prepare();
 
-    if(!$xoopsSecurity->check(true, false, 'CUTOKEN')){
+    if (!$xoopsSecurity->check(true, false, 'CUTOKEN')) {
         $common->ajax()->response(
-            __('Not authorized!', 'rmcommon'), 1, 0, ['reload' => true]
+            __('Not authorized!', 'rmcommon'),
+            1,
+            0,
+            ['reload' => true]
         );
     }
 
@@ -71,14 +74,17 @@ function services_assign_provider(){
     $provider = $common->httpRequest()->post('provider', 'string', '');
     $name = $common->httpRequest()->post('name', 'string', '');
 
-    if('' == $service || '' == $provider){
+    if ('' == $service || '' == $provider) {
         $common->ajax()->response(
-            __('Service name or provider name are not valid!', 'rmcommon'), 1, 1, [
+            __('Service name or provider name are not valid!', 'rmcommon'),
+            1,
+            1,
+            [
                 'notify' => [
                     'title' => __('Services', 'rmcommon'),
                     'type' => 'alert-danger',
                     'icon' => 'svg-rmcommon-error',
-                ]
+                ],
             ]
         );
     }
@@ -86,20 +92,22 @@ function services_assign_provider(){
     $common->services()->registerProvider($service, $provider);
 
     $common->ajax()->response(
-        sprintf(__('Provider %s for service %s registered successfully', 'rmcommon'), '<strong>' . $name . '</strong>', '<strong>' . strtoupper($service) . '</strong>'), 0, 1, [
+        sprintf(__('Provider %s for service %s registered successfully', 'rmcommon'), '<strong>' . $name . '</strong>', '<strong>' . mb_strtoupper($service) . '</strong>'),
+        0,
+        1,
+        [
             'notify' => [
                 'title' => __('Services', 'rmcommon'),
                 'type' => 'alert-success',
                 'icon' => 'svg-rmcommon-ok-circle',
-            ]
+            ],
         ]
     );
-
 }
 
 $action = RMHttpRequest::request('action', 'string', '');
 
-switch($action){
+switch ($action) {
     case 'assign-provider':
         services_assign_provider();
         break;

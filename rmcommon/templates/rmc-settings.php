@@ -13,7 +13,7 @@
             <?php _e('Click on any element to see its configuration options.', 'rmcommon'); ?>
         </p>
         <div class="text-center">
-            <?php foreach( $modules as $module ): ?>
+            <?php foreach ($modules as $module): ?>
 
                 <a href="settings.php?mod=<?php echo $module['id']; ?>&amp;action=configure" class="settings-item">
                     <img src="<?php echo $module['logo']; ?>" alt="<?php echo $module['name']; ?>">

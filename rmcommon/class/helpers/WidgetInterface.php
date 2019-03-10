@@ -38,7 +38,6 @@ namespace Common\Core\Helpers;
  */
 interface WidgetInterface
 {
-
     /**
      * Returns internal id for widget
      * @return mixed
@@ -62,5 +61,4 @@ interface WidgetInterface
      * @return mixed
      */
     public function getHtml();
-
 }

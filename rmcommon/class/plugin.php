@@ -14,7 +14,7 @@
 class RMPlugin extends RMObject
 {
     private $dir = '';
-    private $settings = array();
+    private $settings = [];
 
     // The file used for plugin
     private $file = '';
@@ -26,11 +26,11 @@ class RMPlugin extends RMObject
     public function __construct($id = null)
     {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("mod_rmcommon_plugins");
+        $this->_dbtable = $this->db->prefix('mod_rmcommon_plugins');
         $this->setNew();
         $this->initVarsFromTable();
 
-        if ($id == null) {
+        if (null === $id) {
             return null;
         }
 
@@ -38,6 +38,7 @@ class RMPlugin extends RMObject
         if (is_numeric($id) && $this->loadValues($id)) {
             $this->unsetNew();
             $this->load_from_dir($this->getVar('dir'));
+
             return true;
         }
 
@@ -56,33 +57,38 @@ class RMPlugin extends RMObject
     /**
      * This method must be called before to access the plugin methods
      * @param string Directory name
+     * @param mixed $dir
      * @return bool
      */
     public function load_from_dir($dir)
     {
-        if ($dir == '') return false;
+        if ('' == $dir) {
+            return false;
+        }
 
         $path = RMCPATH . '/plugins/' . $dir;
 
         // backward compatibility
-        $oldFile = $path . '/' . strtolower($dir) . '-plugin.php';
-        $newFile = $path . '/' . strtolower($dir) . '.php';
+        $oldFile = $path . '/' . mb_strtolower($dir) . '-plugin.php';
+        $newFile = $path . '/' . mb_strtolower($dir) . '.php';
 
         if (is_file($oldFile)) {
             $this->file = $oldFile;
-            include_once $oldFile;
+            require_once $oldFile;
         } elseif (is_file($newFile)) {
             $this->file = $newFile;
-            include_once $newFile;
+            require_once $newFile;
         } else {
             return false;
         }
 
-        $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
+        $cleanDir = preg_replace('/[^A-Za-z0-9]/', '', $dir);
 
         $class = ucfirst($cleanDir) . 'CUPlugin';
 
-        if (!class_exists($class)) return false;
+        if (!class_exists($class)) {
+            return false;
+        }
 
         $this->plugin = new $class();
         $this->setVar('dir', $dir);
@@ -101,28 +107,27 @@ class RMPlugin extends RMObject
 
     public function plugin($dir = '')
     {
+        $dir = '' == $dir ? $this->getVar('dir') : $dir;
 
-        $dir = $dir == '' ? $this->getVar('dir') : $dir;
-
-        $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
+        $cleanDir = preg_replace('/[^A-Za-z0-9]/', '', $dir);
 
         $class = ucfirst($cleanDir) . 'CUPlugin';
 
-        if (is_a($this->plugin, $class))
+        if (is_a($this->plugin, $class)) {
             return $this->plugin;
+        }
 
         if (!class_exists($class)) {
-
-            if ($this->file == '') {
-                $oldFile = RMCPATH . '/plugins/' . $dir . '/' . strtolower($dir) . '-plugin.php';
-                $newFile = RMCPATH . '/plugins/' . $dir . '/' . strtolower($dir) . '.php';
+            if ('' == $this->file) {
+                $oldFile = RMCPATH . '/plugins/' . $dir . '/' . mb_strtolower($dir) . '-plugin.php';
+                $newFile = RMCPATH . '/plugins/' . $dir . '/' . mb_strtolower($dir) . '.php';
 
                 if (file_exists($oldFile)) {
                     $this->file = $oldFile;
-                    include_once $oldFile;
+                    require_once $oldFile;
                 } elseif (file_exists($newFile)) {
                     $this->file = $newFile;
-                    include_once $newFile;
+                    require_once $newFile;
                 } else {
                     return false;
                 }
@@ -130,8 +135,8 @@ class RMPlugin extends RMObject
         }
 
         $plugin = new $class();
-        return $plugin;
 
+        return $plugin;
     }
 
     public function get_info($name)
@@ -141,8 +146,9 @@ class RMPlugin extends RMObject
 
     public function on_install()
     {
-        if (false == $this->plugin->on_install()) {
+        if (false === $this->plugin->on_install()) {
             $this->addError($this->plugin->errors());
+
             return false;
         }
 
@@ -153,6 +159,7 @@ class RMPlugin extends RMObject
     {
         if (!$this->plugin->on_update()) {
             $this->addError($this->plugin->errors());
+
             return false;
         }
 
@@ -163,6 +170,7 @@ class RMPlugin extends RMObject
     {
         if (!$this->plugin->on_uninstall()) {
             $this->addError($this->plugin->errors());
+
             return false;
         }
 
@@ -173,6 +181,7 @@ class RMPlugin extends RMObject
     {
         if (!$this->plugin->on_activate($q)) {
             $this->addError($this->plugin->errors());
+
             return false;
         }
 
@@ -186,48 +195,44 @@ class RMPlugin extends RMObject
 
     private function insert_configs()
     {
-
         $dir = $this->plugin()->get_info('dir');
         $pre_options = $this->plugin->options();
 
-        if (empty($pre_options)) return null;
+        if (empty($pre_options)) {
+            return null;
+        }
 
         $db = XoopsDatabaseFactory::getDatabaseConnection();
         $c_options = RMFunctions::plugin_settings($dir);
 
         if (empty($c_options)) {
-
             $sql = '';
             foreach ($pre_options as $name => $option) {
-                $sql .= $sql == '' ? '' : ',';
+                $sql .= '' == $sql ? '' : ',';
                 $sql .= "('$dir','$name','plugin','$option[value]','$option[valuetype]')";
             }
 
-            $sql = "INSERT INTO " . $db->prefix("mod_rmcommon_settings") . " (`element`,`name`,`type`,`value`,`valuetype`) VALUES " . $sql;
+            $sql = 'INSERT INTO ' . $db->prefix('mod_rmcommon_settings') . ' (`element`,`name`,`type`,`value`,`valuetype`) VALUES ' . $sql;
 
             if (!$db->queryF($sql)) {
                 $this->addError($this->db->error());
+
                 return false;
+            }
+
+            return true;
+        }
+        $sql = '';
+        foreach ($pre_options as $name => $option) {
+            if (isset($c_options[$name])) {
+                $option['value'] = $c_options[$name]['value'];
+                $sql = 'UPDATE ' . $db->prefix('mod_rmcommon_settings') . " SET value='$option[value]' WHERE element='$dir' AND type='plugin' AND name='$name'";
+                $db->queryF($sql);
             } else {
-                return true;
-            }
-
-        } else {
-
-            $sql = '';
-            foreach ($pre_options as $name => $option) {
-
-                if (isset($c_options[$name])) {
-                    $option['value'] = $c_options[$name]['value'];
-                    $sql = "UPDATE " . $db->prefix("mod_rmcommon_settings") . " SET value='$option[value]' WHERE element='$dir' AND type='plugin' AND name='$name'";
-                    $db->queryF($sql);
-                } else {
-                    $sql = "INSERT INTO " . $db->prefix("mod_rmcommon_settings") . " (`element`,`name`,`type`,`value`,`valuetype`) VALUES
+                $sql = 'INSERT INTO ' . $db->prefix('mod_rmcommon_settings') . " (`element`,`name`,`type`,`value`,`valuetype`) VALUES
                             ('$dir','$name','plugin','$option[value]','$option[valuetype]')";
-                    $db->queryF($sql);
-                }
+                $db->queryF($sql);
             }
-
         }
 
         return true;
@@ -235,28 +240,26 @@ class RMPlugin extends RMObject
 
     public function save()
     {
-
         $this->insert_configs();
 
         if ($this->isNew()) {
             return $this->saveToTable();
-        } else {
-            return $this->updateTable();
         }
+
+        return $this->updateTable();
     }
 
     public function delete()
     {
-
         $dir = $this->plugin()->get_info('dir');
         $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $sql = "DELETE FROM " . $db->prefix("mod_rmcommon_settings") . " WHERE element='$dir' AND type='plugin'";
+        $sql = 'DELETE FROM ' . $db->prefix('mod_rmcommon_settings') . " WHERE element='$dir' AND type='plugin'";
         if (!$db->queryF($sql)) {
             $this->addError($db->error());
+
             return false;
         }
 
         return $this->deleteFromTable();
     }
-
 }

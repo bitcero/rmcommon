@@ -1,17 +1,17 @@
-<h1 class="cu-section-title" xmlns="http://www.w3.org/1999/html"><?php _e('Modules Management','rmcommon'); ?></h1>
+<h1 class="cu-section-title" xmlns="http://www.w3.org/1999/html"><?php _e('Modules Management', 'rmcommon'); ?></h1>
 <script type="text/javascript">
     <!--
-    var message = "<?php _e('Do you really want to uninstall selected module?','rmcommon'); ?>";
-    var message_upd = "<?php _e('Do you really want to update selected module?','rmcommon'); ?>";
-    var message_dis = "<?php _e('Do you really want to disable selected module?','rmcommon'); ?>";
-    var message_name = "<?php _e('New name must be different from current name!','rmcommon'); ?>";
-    var message_wname = "<?php _e('You must provide a new name!','rmcommon'); ?>";
+    var message = "<?php _e('Do you really want to uninstall selected module?', 'rmcommon'); ?>";
+    var message_upd = "<?php _e('Do you really want to update selected module?', 'rmcommon'); ?>";
+    var message_dis = "<?php _e('Do you really want to disable selected module?', 'rmcommon'); ?>";
+    var message_name = "<?php _e('New name must be different from current name!', 'rmcommon'); ?>";
+    var message_wname = "<?php _e('You must provide a new name!', 'rmcommon'); ?>";
     -->
 </script>
 
 <form action="modules.php" method="post" id="form-modules">
-    <input type="hidden" name="action" id="mod-action" value="" />
-    <input type="hidden" name="module" id="mod-dir" value="" />
+    <input type="hidden" name="action" id="mod-action" value="">
+    <input type="hidden" name="module" id="mod-dir" value="">
     <?php echo $xoopsSecurity->getTokenHTML(); ?>
 </form>
 
@@ -40,44 +40,44 @@
                         <thead>
                         <tr>
                             <th class="logo">&nbsp;</th>
-                            <th><?php _e('Name','rmcommon'); ?></th>
-                            <th class="text-center"><?php _e('Version','rmcommon'); ?></th>
-                            <th class="text-center"><?php _e('Author','rmcommon'); ?></th>
-                            <th colspan="4" class="text-center"><?php _e('Options','rmcommon'); ?></th>
+                            <th><?php _e('Name', 'rmcommon'); ?></th>
+                            <th class="text-center"><?php _e('Version', 'rmcommon'); ?></th>
+                            <th class="text-center"><?php _e('Author', 'rmcommon'); ?></th>
+                            <th colspan="4" class="text-center"><?php _e('Options', 'rmcommon'); ?></th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th class="logo"><?php _e('Image','rmcommon'); ?></th>
-                            <th><?php _e('Name','rmcommon'); ?></th>
-                            <th><?php _e('Version','rmcommon'); ?></th>
-                            <th><?php _e('Author','rmcommon'); ?></th>
-                            <th><?php _e('Options','rmcommon'); ?></th>
+                            <th class="logo"><?php _e('Image', 'rmcommon'); ?></th>
+                            <th><?php _e('Name', 'rmcommon'); ?></th>
+                            <th><?php _e('Version', 'rmcommon'); ?></th>
+                            <th><?php _e('Author', 'rmcommon'); ?></th>
+                            <th><?php _e('Options', 'rmcommon'); ?></th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <?php foreach($modules as $mod): ?>
-                            <tr class="<?php echo tpl_cycle("even,odd"); ?><?php echo $mod['active'] ? '' : ' inactive'; ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
+                        <?php foreach ($modules as $mod): ?>
+                            <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $mod['active'] ? '' : ' inactive'; ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
                                 <td class="logo">
-                                    <a href="<?php if($mod['active']): ?><?php echo $mod['admin_link']; ?><?php else: ?>#<?php endif; ?>" title="<?php echo $mod['realname']; ?>">
-                                        <?php if(substr($mod['icon'], 0, 5) == '<span'): ?>
+                                    <a href="<?php if ($mod['active']): ?><?php echo $mod['admin_link']; ?><?php else: ?>#<?php endif; ?>" title="<?php echo $mod['realname']; ?>">
+                                        <?php if ('<span' == mb_substr($mod['icon'], 0, 5)): ?>
                                             <?php echo $mod['icon']; ?>
                                         <?php else: ?>
-                                            <img src="<?php echo $mod['icon']; ?>" alt="<?php echo $mod['name']; ?>" />
+                                            <img src="<?php echo $mod['icon']; ?>" alt="<?php echo $mod['name']; ?>">
                                         <?php endif; ?>
                                     </a>
                                 </td>
                                 <td class="name" align="left">
                     <span class="the_name">
-                    <?php if($mod['active']): ?>
+                    <?php if ($mod['active']): ?>
                         <a href="<?php echo $mod['admin_link']; ?>"><?php echo $mod['name']; ?></a>
                     <?php else: ?>
                         <?php echo $mod['name']; ?>
                     <?php endif; ?>
                     </span>
-                                    <a href="#" class="rename text-info"><span class="fa fa-edit"></span> <?php _e('Edit','rmcommon'); ?></a>
-                                    <?php if( $mod['help'] != '' ): ?>
-                                        <a href="<?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?>" class="help cu-help-button text-success" title="<?php echo sprintf(__('%s Help', 'rmcommon'), $mod['name']); ?>"><span class="fa fa-question-circle"></span> <?php _e('Help','rmcommon'); ?></a>
+                                    <a href="#" class="rename text-info"><span class="fa fa-edit"></span> <?php _e('Edit', 'rmcommon'); ?></a>
+                                    <?php if ('' != $mod['help']): ?>
+                                        <a href="<?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?>" class="help cu-help-button text-success" title="<?php echo sprintf(__('%s Help', 'rmcommon'), $mod['name']); ?>"><span class="fa fa-question-circle"></span> <?php _e('Help', 'rmcommon'); ?></a>
                                     <?php endif; ?>
                                     <small class="help-block"><?php echo $mod['description']; ?></small>
                                 </td>
@@ -85,8 +85,8 @@
                                     <?php echo $mod['version']; ?>
                                 </td>
                                 <td class="author" nowrap>
-                                    <?php foreach( $mod['authors'] as $author ): ?>
-                                        <?php if( '' != $author['url'] ): ?>
+                                    <?php foreach ($mod['authors'] as $author): ?>
+                                        <?php if ('' != $author['url']): ?>
                                             <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
                                                 <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=40" alt="<?php echo $author['aka']; ?>">
                                             </a>
@@ -105,7 +105,7 @@
                         <span class="version"><?php echo $mod['version']; ?></span>
                         <span class="dirname"><?php echo $mod['dirname']; ?></span>
                         <span class="author">
-                            <?php foreach($mod['authors'] as $author): ?>
+                            <?php foreach ($mod['authors'] as $author): ?>
                                 <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
                                     <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=60" alt="<?php echo $author['aka']; ?>">
                                 </a>
@@ -116,8 +116,8 @@
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
                         <span class="active"><?php echo $mod['active']; ?></span>
                         <span class="social">
-                            <?php if( $mod['social'] ): ?>
-                                <?php foreach( $mod['social'] as $social ): ?>
+                            <?php if ($mod['social']): ?>
+                                <?php foreach ($mod['social'] as $social): ?>
                                     <a href="<?php echo $social['url']; ?>" target="_blank" title="<?php echo $social['title']; ?>">
                                         <span class="fa fa-<?php echo $social['type']; ?>"></span>
                                     </a>
@@ -128,8 +128,8 @@
                                 </td>
                                 <td class="actions" nowrap>
                                     <div class="btn-group">
-                                        <?php if( '' != $mod['url'] ): ?>
-                                            <a href="<?php echo $mod['url']; ?>" target="_blank" class="btn btn-default" title="<?php _e('Visit module website','rmcommon'); ?>">
+                                        <?php if ('' != $mod['url']): ?>
+                                            <a href="<?php echo $mod['url']; ?>" target="_blank" class="btn btn-default" title="<?php _e('Visit module website', 'rmcommon'); ?>">
                                                 <span class="fa fa-globe"></span>
                                             </a>
                                         <?php else: ?>
@@ -137,15 +137,15 @@
                                                 <span class="fa fa-globe text-muted"></span>
                                             </a>
                                         <?php endif; ?>
-                                        <a href="#" class="btn btn-default data_button" title="<?php _e('Show information','rmcommon'); ?>">
+                                        <a href="#" class="btn btn-default data_button" title="<?php _e('Show information', 'rmcommon'); ?>">
                                             <span class="fa fa-info-circle text-info"></span>
                                         </a>
-                                        <a href="#" class="btn btn-default update_button" title="<?php _e('Update','rmcommon'); ?>">
+                                        <a href="#" class="btn btn-default update_button" title="<?php _e('Update', 'rmcommon'); ?>">
                                             <span class="fa fa-refresh text-success"></span>
                                         </a>
-                                        <?php if($mod['active']): ?>
-                                            <?php if($mod['dirname']!='system'): ?>
-                                                <a href="#" class="btn btn-default disable_button" title="<?php _e('Disable','rmcommon'); ?>">
+                                        <?php if ($mod['active']): ?>
+                                            <?php if ('system' != $mod['dirname']): ?>
+                                                <a href="#" class="btn btn-default disable_button" title="<?php _e('Disable', 'rmcommon'); ?>">
                                                     <span class="fa fa-lock text-warning"></span>
                                                 </a>
                                             <?php else: ?>
@@ -154,13 +154,13 @@
                                                 </a>
                                             <?php endif; ?>
                                         <?php endif; ?>
-                                        <?php if(!$mod['active']): ?>
-                                            <a href="#" class="btn btn-default enable_button" title="<?php _e('Enable','rmcommon'); ?>">
+                                        <?php if (!$mod['active']): ?>
+                                            <a href="#" class="btn btn-default enable_button" title="<?php _e('Enable', 'rmcommon'); ?>">
                                                 <span class="fa fa-unlock text-info"></span>
                                             </a>
                                         <?php endif; ?>
-                                        <?php if($mod['dirname']!='system'): ?>
-                                            <a href="#" class="btn btn-default uninstall_button" title="<?php _e('Uninstall','rmcommon'); ?>" data-dir="<?php echo $mod['dirname']; ?>">
+                                        <?php if ('system' != $mod['dirname']): ?>
+                                            <a href="#" class="btn btn-default uninstall_button" title="<?php _e('Uninstall', 'rmcommon'); ?>" data-dir="<?php echo $mod['dirname']; ?>">
                                                 <span class="fa fa-minus-circle text-danger"></span>
                                             </a>
                                         <?php else: ?>
@@ -183,33 +183,33 @@
                         <thead>
                         <tr>
                             <th class="logo">&nbsp;</th>
-                            <th><?php _e('Name','rmcommon'); ?></th>
-                            <th class="text-center"><?php _e('Version','rmcommon'); ?></th>
-                            <th class="text-center"><?php _e('Author','rmcommon'); ?></th>
-                            <th colspan="4" class="text-center"><?php _e('Options','rmcommon'); ?></th>
+                            <th><?php _e('Name', 'rmcommon'); ?></th>
+                            <th class="text-center"><?php _e('Version', 'rmcommon'); ?></th>
+                            <th class="text-center"><?php _e('Author', 'rmcommon'); ?></th>
+                            <th colspan="4" class="text-center"><?php _e('Options', 'rmcommon'); ?></th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th class="logo"><?php _e('Image','rmcommon'); ?></th>
-                            <th><?php _e('Name','rmcommon'); ?></th>
-                            <th><?php _e('Version','rmcommon'); ?></th>
-                            <th><?php _e('Author','rmcommon'); ?></th>
-                            <th><?php _e('Options','rmcommon'); ?></th>
+                            <th class="logo"><?php _e('Image', 'rmcommon'); ?></th>
+                            <th><?php _e('Name', 'rmcommon'); ?></th>
+                            <th><?php _e('Version', 'rmcommon'); ?></th>
+                            <th><?php _e('Author', 'rmcommon'); ?></th>
+                            <th><?php _e('Options', 'rmcommon'); ?></th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <?php foreach($available_mods as $mod): ?>
-                            <tr class="<?php echo tpl_cycle("even,odd"); ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
+                        <?php foreach ($available_mods as $mod): ?>
+                            <tr class="<?php echo tpl_cycle('even,odd'); ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">
                                 <td class="logo">
-                                    <img src="<?php echo $mod['image']; ?>" alt="<?php echo $mod['name']; ?>" />
+                                    <img src="<?php echo $mod['image']; ?>" alt="<?php echo $mod['name']; ?>">
                                 </td>
                                 <td class="name" align="left">
                                     <span class="the_name">
                                         <?php echo $mod['name']; ?>
                                     </span>
-                                    <?php if( $mod['help'] != '' ): ?>
-                                        <a href="<?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?>" class="help cu-help-button text-success" title="<?php echo sprintf(__('%s Help', 'rmcommon'), $mod['name']); ?>"><span class="fa fa-question-circle"></span> <?php _e('Help','rmcommon'); ?></a>
+                                    <?php if ('' != $mod['help']): ?>
+                                        <a href="<?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?>" class="help cu-help-button text-success" title="<?php echo sprintf(__('%s Help', 'rmcommon'), $mod['name']); ?>"><span class="fa fa-question-circle"></span> <?php _e('Help', 'rmcommon'); ?></a>
                                     <?php endif; ?>
                                     <small class="help-block"><?php echo $mod['description']; ?></small>
                                 </td>
@@ -217,8 +217,8 @@
                                     <?php echo $mod['version']; ?>
                                 </td>
                                 <td class="author" nowrap>
-                                    <?php foreach( $mod['authors'] as $author ): ?>
-                                        <?php if( '' != $author['url'] ): ?>
+                                    <?php foreach ($mod['authors'] as $author): ?>
+                                        <?php if ('' != $author['url']): ?>
                                             <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
                                                 <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=40" alt="<?php echo $author['aka']; ?>">
                                             </a>
@@ -237,7 +237,7 @@
                         <span class="version"><?php echo $mod['version']; ?></span>
                         <span class="dirname"><?php echo $mod['dirname']; ?></span>
                         <span class="author">
-                            <?php foreach($mod['authors'] as $author): ?>
+                            <?php foreach ($mod['authors'] as $author): ?>
                                 <a href="<?php echo $author['url']; ?>" target="_blank" title="<?php echo $author['name']; ?>">
                                     <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=60" alt="<?php echo $author['aka']; ?>">
                                 </a>
@@ -248,8 +248,8 @@
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
                         <span class="active"></span>
                         <span class="social">
-                            <?php if( $mod['social'] ): ?>
-                                <?php foreach( $mod['social'] as $social ): ?>
+                            <?php if ($mod['social']): ?>
+                                <?php foreach ($mod['social'] as $social): ?>
                                     <a href="<?php echo $social['url']; ?>" target="_blank" title="<?php echo $social['title']; ?>">
                                         <span class="fa fa-<?php echo $social['type']; ?>"></span>
                                     </a>
@@ -282,12 +282,12 @@
         <div class="modal-content">
             <div class="modal-header cu-titlebar">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><?php _e('Module Information','rmcommon'); ?></h4>
+                <h4 class="modal-title"><?php _e('Module Information', 'rmcommon'); ?></h4>
             </div>
             <div class="modal-body info-container">
                 <div class="row header">
                     <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
-                        <img src="#" alt="#" class="img-responsive" />
+                        <img src="#" alt="#" class="img-responsive">
                     </div>
                     <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 text-right">
                         <h3></h3>
@@ -298,32 +298,32 @@
 
                 <div class="row form-group">
                     <div class="col-sm-6">
-                        <label><?php _e('Current Version:','rmcommon'); ?></label>
+                        <label><?php _e('Current Version:', 'rmcommon'); ?></label>
                         <span class="form-control version"></span>
                     </div>
                     <div class="col-sm-6">
-                        <label><?php _e('Directory:','rmcommon'); ?></label>
+                        <label><?php _e('Directory:', 'rmcommon'); ?></label>
                         <span class="form-control dirname"></span>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-sm-6">
-                        <label><?php _e('Author(s):','rmcommon'); ?></label>
-                        <span class="author"><?php _e('Not provided','rmcommon'); ?></span>
+                        <label><?php _e('Author(s):', 'rmcommon'); ?></label>
+                        <span class="author"><?php _e('Not provided', 'rmcommon'); ?></span>
                     </div>
                     <div class="col-sm-6">
-                        <label><?php _e('Module web site:','rmcommon'); ?></label>
-                        <span class="form-control web"><?php _e('Not provided','rmcommon'); ?></span>
+                        <label><?php _e('Module web site:', 'rmcommon'); ?></label>
+                        <span class="form-control web"><?php _e('Not provided', 'rmcommon'); ?></span>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-sm-6">
-                        <label><?php _e('License:','rmcommon'); ?></label>
+                        <label><?php _e('License:', 'rmcommon'); ?></label>
                         <span class="form-control license"></span>
                     </div>
                     <div class="col-sm-6">
-                        <label><?php _e('Help:','rmcommon'); ?></label>
-                        <span class="form-control help"><?php _e('Not provided','rmcommon'); ?></span>
+                        <label><?php _e('Help:', 'rmcommon'); ?></label>
+                        <span class="form-control help"><?php _e('Not provided', 'rmcommon'); ?></span>
                     </div>
                 </div>
                 <div class="row">

@@ -30,14 +30,14 @@ class Swift_Validate
      */
     public static function email($email)
     {
-        if (self::$grammar === null) {
+        if (null === self::$grammar) {
             self::$grammar = Swift_DependencyContainer::getInstance()
                 ->lookup('mime.grammar');
         }
 
         return (bool) preg_match(
-                '/^'.self::$grammar->getDefinition('addr-spec').'$/D',
-                $email
+            '/^' . self::$grammar->getDefinition('addr-spec') . '$/D',
+            $email
             );
     }
 }

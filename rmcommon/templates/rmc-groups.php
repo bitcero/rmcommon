@@ -19,14 +19,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if( empty($groups) ): ?>
+                <?php if (empty($groups)): ?>
                     <tr>
                         <td class="text-center">
-                            <span class="label label-info"><?php _e('There are not groups registered yet.', 'rmcommon' ); ?></span>
+                            <span class="label label-info"><?php _e('There are not groups registered yet.', 'rmcommon'); ?></span>
                         </td>
                     </tr>
                 <?php endif; ?>
-                <?php foreach( $groups as $group ): ?>
+                <?php foreach ($groups as $group): ?>
                     <tr>
                         <td class="text-center">
                             <label class="rdbox rdbox-default">
@@ -58,7 +58,7 @@
     <div class="panel-footer">
         <div class="row">
             <div class="col-md-5 col-lg-5">
-                <?php echo $navigation->display( false ); ?>
+                <?php echo $navigation->display(false); ?>
             </div>
             <div class="col-md-7 col-lg-7 text-right">
                 <?php echo $navigation->get_showing(); ?>

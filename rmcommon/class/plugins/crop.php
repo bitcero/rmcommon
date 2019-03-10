@@ -27,9 +27,9 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_crop{
-/**
-     *
+class phMagick_crop
+{
+    /**
      * @param $width Integer
      * @param $height Integer
      * @param $top Integer - The Y coordinate for the left corner of the crop rectangule
@@ -37,19 +37,23 @@ class phMagick_crop{
      * @param $gravity phMagickGravity - The initial placement of the crop rectangule
      * @return unknown_type
      */
-    function crop(phmagick $p, $width, $height, $top = 0, $left = 0, $gravity = 'center'){
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' ' . $p->getSource() ;
+    public function crop(phmagick $p, $width, $height, $top = 0, $left = 0, $gravity = 'center')
+    {
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' ' . $p->getSource();
 
-        if (($gravity != '')|| ($gravity != phMagickGravity::None) )  $cmd .= ' -gravity ' . $gravity ;
+        if (('' != $gravity) || (phMagickGravity::None != $gravity)) {
+            $cmd .= ' -gravity ' . $gravity;
+        }
 
-        $cmd .= ' -crop ' . (int)$width . 'x'.(int)$height ;
-        $cmd .= '+' . $left.'+'.$top;
-        $cmd .= ' ' . $p->getDestination() ;
+        $cmd .= ' -crop ' . (int)$width . 'x' . (int)$height;
+        $cmd .= '+' . $left . '+' . $top;
+        $cmd .= ' ' . $p->getDestination();
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 }

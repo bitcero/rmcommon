@@ -40,13 +40,11 @@ class Plugins
      */
     public static function isInstalled($dir)
     {
-
         if (isset($GLOBALS['installed_plugins'][$dir])) {
             return true;
-        } else {
-            return false;
         }
 
+        return false;
     }
 
     /**
@@ -56,7 +54,6 @@ class Plugins
      */
     public function load($dir)
     {
-
         if (array_key_exists($dir, $this->loadedPlugins)) {
             return $this->loadedPlugins[$dir];
         }
@@ -65,10 +62,9 @@ class Plugins
 
         if (false !== $this->loadedPlugins[$dir]) {
             return $this->loadedPlugins[$dir];
-        } else {
-            return false;
         }
 
+        return false;
     }
 
     /**
@@ -83,28 +79,30 @@ class Plugins
         }
 
         // dirnames must be in lowercase format
-        $dir = strtolower($dir);
+        $dir = mb_strtolower($dir);
 
         $oldFile = RMCPATH . '/plugins/' . $dir . '/' . $dir . '-plugin.php';
         $newFile = RMCPATH . '/plugins/' . $dir . '/' . $dir . '.php';
 
         // Load plugin controller
         if (file_exists($oldFile)) {
-            include_once $oldFile;
-        } elseif(file_exists($newFile)){
-            include_once $newFile;
+            require_once $oldFile;
+        } elseif (file_exists($newFile)) {
+            require_once $newFile;
         } else {
             return false;
         }
 
-        $cleanDir = preg_replace("/[^A-Za-z0-9]/", '', $dir);
+        $cleanDir = preg_replace('/[^A-Za-z0-9]/', '', $dir);
 
         $class = ucfirst($cleanDir) . 'CUPlugin';
 
-        if (!class_exists($class))
+        if (!class_exists($class)) {
             return false;
+        }
 
         $plugin = $class::getInstance();
+
         return $plugin;
     }
 
@@ -114,19 +112,17 @@ class Plugins
      */
     public static function allInstalled()
     {
-
         $db = \XoopsDatabaseFactory::getDatabaseConnection();
-        $result = $db->query("SELECT dir FROM " . $db->prefix("mod_rmcommon_plugins") . ' WHERE status=1');
-        $plugins = array();
+        $result = $db->query('SELECT dir FROM ' . $db->prefix('mod_rmcommon_plugins') . ' WHERE status=1');
+        $plugins = [];
 
-        while ($row = $db->fetchArray($result)) {
+        while (false !== ($row = $db->fetchArray($result))) {
             $plugins[] = $row['dir'];
         }
 
-        $plugins = \RMEvents::get()->run_event("rmcommon.installed.plugins", $plugins);
+        $plugins = \RMEvents::get()->run_event('rmcommon.installed.plugins', $plugins);
 
         return $plugins;
-
     }
 
     /**
@@ -134,23 +130,22 @@ class Plugins
      * @param $dir
      * @return array
      */
-    public static function settings($dir){
-
+    public static function settings($dir)
+    {
         $settings = \RMSettings::plugin_settings($dir, true);
 
         return $settings;
-
     }
-
 
     public static function getInstance()
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
-        $instance = new Plugins();
+        $instance = new self();
 
         return $instance;
     }

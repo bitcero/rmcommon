@@ -8,22 +8,22 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 class ActiveHiddenField
 {
     use RMFormComponent;
 
-    public function render(){
-
+    public function render()
+    {
         $input = '<input name="' . $this->name . '" type="hidden" id="' . $this->id . '"';
         $class = '';
         $parameters = $this->parameters;
 
         foreach ($parameters as $attr => $value) {
-            if ( 'class' == $attr )
-                $class .= $class != '' ? ' '.$value : $value;
-            else
+            if ('class' == $attr) {
+                $class .= '' != $class ? ' ' . $value : $value;
+            } else {
                 $input .= ' ' . $attr . '="' . $value . '"';
+            }
         }
 
         $input .= '' != $class ? ' class="' . $class . '"' : '';
@@ -31,7 +31,5 @@ class ActiveHiddenField
         $input .= '>';
 
         return $input;
-
     }
-
 }

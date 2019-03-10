@@ -31,7 +31,7 @@ namespace Common\Core\Helpers;
 
 class Icons extends Attributes
 {
-    private $iconsProviders = array();
+    private $iconsProviders = [];
     private $noIcon = '';
 
     public function __construct()
@@ -41,7 +41,7 @@ class Icons extends Attributes
         $this->loadProviders();
 
         // Add javascript support
-        $jsProviders = array();
+        $jsProviders = [];
         foreach ($this->iconsProviders as $provider => $path) {
             $jsProviders[$provider] = \RMUris::relative_url(str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path));
         }
@@ -56,13 +56,12 @@ class Icons extends Attributes
      *
      * 'id' key must have an unique identifier to load icons from 'directory'.
      *
-     * @return bool
      * @throws \Exception
+     * @return bool
      */
     private function loadProviders()
     {
-
-        $providers = array();
+        $providers = [];
         $providers = \RMEvents::get()->trigger('rmcommon.register.icon.provider', $providers);
 
         if (empty($providers)) {
@@ -70,8 +69,7 @@ class Icons extends Attributes
         }
 
         foreach ($providers as $provider) {
-
-            if ($provider['id'] == '') {
+            if ('' == $provider['id']) {
                 continue;
             }
 
@@ -79,20 +77,18 @@ class Icons extends Attributes
                 continue;
             }
 
-            if ($provider['id'] == 'rmcommon') {
+            if ('rmcommon' == $provider['id']) {
                 throw new \Exception(__('Illegal attempt to replace "Common Utilities" icons provider!', 'rmcommon'));
+
                 return false;
             }
 
             $this->iconsProviders[$provider['id']] = $provider['directory'];
-
         }
-
     }
 
     public function getIconsList($providers = [])
     {
-
         if (empty($providers)) {
             $providers = array_keys($this->iconsProviders);
         }
@@ -100,7 +96,6 @@ class Icons extends Attributes
         $list = [];
 
         foreach ($providers as $id) {
-
             if (!array_key_exists($id, $this->iconsProviders)) {
                 continue;
             }
@@ -111,17 +106,15 @@ class Icons extends Attributes
 
             $dir = opendir($this->iconsProviders[$id]);
             while (false !== ($file = readdir($dir))) {
-                if ($file == '.' || $file == '..' || substr($file, -4) != '.svg' || substr($file, 0, 1) == '.') {
+                if ('.' == $file || '..' == $file || '.svg' != mb_substr($file, -4) || '.' == mb_substr($file, 0, 1)) {
                     continue;
                 }
 
-                $list[] = 'svg-' . $id . '-' . substr($file, 0, strlen($file) - 4);
+                $list[] = 'svg-' . $id . '-' . mb_substr($file, 0, mb_strlen($file) - 4);
             }
-
         }
 
         return $list;
-
     }
 
     /**
@@ -150,8 +143,7 @@ class Icons extends Attributes
      */
     private function providerIcon($icon)
     {
-
-        $data = explode("-", $icon);
+        $data = explode('-', $icon);
 
         if ('svg' != $data[0]) {
             return '';
@@ -165,7 +157,7 @@ class Icons extends Attributes
             return $this->noIcon;
         }
 
-        $fileName = substr($icon, strlen($data[0] . '-' . $data[1] . '-'));
+        $fileName = mb_substr($icon, mb_strlen($data[0] . '-' . $data[1] . '-'));
         $filePath = $this->iconsProviders[$data[1]] . '/' . $fileName . '.svg';
 
         if (!file_exists($filePath)) {
@@ -173,76 +165,74 @@ class Icons extends Attributes
         }
 
         return file_get_contents($filePath);
-
     }
 
     /**
      * Get an icon SVG, font icon or bitmap
      * @param string $icon
+     * @param mixed $attributes
      * @return string
      */
     public function getIcon($icon, $attributes = [])
     {
-
         parent::__construct($attributes);
         $this->add('class', 'cu-icon');
 
         /**
          * Check if this is a SVG icon
          */
-        if ('svg-' == substr($icon, 0, 4)) {
-
+        if ('svg-' == mb_substr($icon, 0, 4)) {
             /**
              * The icon has additional css classes?
              * If yes, then the classes must be separated by a blank space
              * (e.g. svg-rmcommon-rmcommon text-blue)
              */
-            $iconExploded = explode(" ", trim($icon));
+            $iconExploded = explode(' ', trim($icon));
 
             $this->add('class', str_replace($iconExploded[0], ' ', $icon));
             $renderedAttrs = $this->renderAttributeString();
 
             // Index 0 has the SVG icon
             $iconSVG = $this->providerIcon($iconExploded[0]);
-            return '<span ' . $renderedAttrs . '>' . $iconSVG . '</span>';
 
+            return '<span ' . $renderedAttrs . '>' . $iconSVG . '</span>';
         }
 
         $renderedAttrs = $this->renderAttributeString();
 
         // Relative or absolute url?
-        $matches = array();
+        $matches = [];
         $absolute = preg_match("/^(http:\/\/|https:\/\/|ftp:\/\/|\/\/)/m", $icon, $matches, PREG_OFFSET_CAPTURE);
-        $is_svg = substr($icon, -4) == '.svg';
+        $is_svg = '.svg' == mb_substr($icon, -4);
 
         // Icon with absolute path
         if ($absolute) {
             if ($is_svg) {
-                return '<span '.$renderedAttrs.'>' . file_get_contents($icon) . '</span>'; //returns SVG code
-            } else {
-                return '<span '.$renderedAttrs.'><img src="' . $icon . '"></span>'; // returns image URL
+                return '<span ' . $renderedAttrs . '>' . file_get_contents($icon) . '</span>'; //returns SVG code
             }
+
+            return '<span ' . $renderedAttrs . '><img src="' . $icon . '"></span>'; // returns image URL
         }
 
         // Relative image url?
-        $imageFormats = array('.jpg', '.gif', '.png', 'jpeg');
-        if (in_array(substr($icon, -4), $imageFormats)) {
-            return '<span '.$renderedAttrs.'><img src="' . $icon . '"></span>';
+        $imageFormats = ['.jpg', '.gif', '.png', 'jpeg'];
+        if (in_array(mb_substr($icon, -4), $imageFormats, true)) {
+            return '<span ' . $renderedAttrs . '><img src="' . $icon . '"></span>';
         }
 
         // Last option: icon font
-        return '<span '.$renderedAttrs.'><span class="' . $icon . '"></span></span>';
-
+        return '<span ' . $renderedAttrs . '><span class="' . $icon . '"></span></span>';
     }
 
     public static function getInstance()
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
-        $instance = new Icons();
+        $instance = new self();
 
         return $instance;
     }

@@ -27,48 +27,54 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_compose{
-/**
+class phMagick_compose
+{
+    /**
      * Add's an watermark to an image
      *
      * @param $watermarkImage String - Image path
      * @param $gravity phMagickGravity - The placement of the watermark
      * @param $transparency Integer - 1 to 100 the tranparency of the watermark (100 = opaque)
      */
-    function watermark(phmagick $p, $watermarkImage, $gravity = 'center', $transparency = 50){
+    public function watermark(phmagick $p, $watermarkImage, $gravity = 'center', $transparency = 50)
+    {
         //composite -gravity SouthEast watermark.png original-image.png output-image.png
-        $cmd   = $p->getBinary('composite');
-        $cmd .= ' -dissolve ' . $transparency ;
-        $cmd .= ' -gravity ' . $gravity ;
-        $cmd .= ' ' . $watermarkImage ;
-        $cmd .= ' "' . $p->getSource() .'"' ;
-        $cmd .= ' "' . $p->getDestination() .'"' ;
+        $cmd = $p->getBinary('composite');
+        $cmd .= ' -dissolve ' . $transparency;
+        $cmd .= ' -gravity ' . $gravity;
+        $cmd .= ' ' . $watermarkImage;
+        $cmd .= ' "' . $p->getSource() . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
-     *
      * Joins severall imagens in one tab strip
      *
      * @param $paths Array of Strings - the paths of the images to join
+     * @param mixed $tileWidth
+     * @param mixed $tileHeight
      */
-    function tile(phmagick $p,  Array $paths = null, $tileWidth = '', $tileHeight=1){
-        if( is_null($paths) ) {
+    public function tile(phmagick $p, array $paths = null, $tileWidth = '', $tileHeight = 1)
+    {
+        if (null === $paths) {
             $paths = $p->getHistory(phMagickHistory::returnArray);
         }
-        $cmd  = $p->getBinary('montage');
-        $cmd .= ' -geometry x+0+0 -tile '.$tileWidth.'x'.$tileHeight.' ';
+        $cmd = $p->getBinary('montage');
+        $cmd .= ' -geometry x+0+0 -tile ' . $tileWidth . 'x' . $tileHeight . ' ';
         $cmd .= implode(' ', $paths);
-        $cmd .= ' "' . $p->getDestination() .'"' ;
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
@@ -76,17 +82,20 @@ class phMagick_compose{
      * it grabs the first frame / page from the source file
      * @param $file  String - the path to the file
      * @param $ext   String - the extention of the generated image
+     * @param mixed $frames
      */
-    function acquireFrame(phmagick $p, $file, $frames=0){
-       // $cmd = 'echo "" | '; //just a workarround for videos,
+    public function acquireFrame(phmagick $p, $file, $frames = 0)
+    {
+        // $cmd = 'echo "" | '; //just a workarround for videos,
         //                    imagemagick first converts all frames then deletes all but the first
         $cmd = $p->getBinary('convert');
-        $cmd .= ' "' . $file .'"['.$frames.']' ;
-        $cmd .= ' "' . $p->getDestination().'"'  ;
+        $cmd .= ' "' . $file . '"[' . $frames . ']';
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 }

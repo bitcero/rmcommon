@@ -29,7 +29,6 @@
  */
 class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements \Common\Core\Helpers\ServiceInterface
 {
-
     public function load($parameters)
     {
         global $xoopsUser, $common, $cuSettings, $cuServices;
@@ -49,15 +48,14 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
         //$rmc_config = RMSettings::cu_settings();
 
         $identifier = urlencode($identifier);
-        $sql = "SELECT * FROM " . $db->prefix("mod_rmcommon_comments") . " WHERE status='approved' AND id_obj='$object' AND params='$identifier' AND type='$type' AND parent='$parent'" . ($user == null ? '' : " AND user='$user'") . " ORDER BY posted";
+        $sql = 'SELECT * FROM ' . $db->prefix('mod_rmcommon_comments') . " WHERE status='approved' AND id_obj='$object' AND params='$identifier' AND type='$type' AND parent='$parent'" . (null === $user ? '' : " AND user='$user'") . ' ORDER BY posted';
         $result = $db->query($sql);
 
-        $ucache = array();
-        $ecache = array();
-        $comms = array();
+        $ucache = [];
+        $ecache = [];
+        $comms = [];
 
-        while ($row = $db->fetchArray($result)) {
-
+        while (false !== ($row = $db->fetchArray($result))) {
             $com = new \RMComment();
             $com->assignVars($row);
 
@@ -69,35 +67,31 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
             $editor = $ecache[$com->getVar('user')];
 
             if ($editor->getVar('xuid') > 0) {
-
                 if (!isset($ucache[$editor->getVar('xuid')])) {
                     $ucache[$editor->getVar('xuid')] = new \XoopsUser($editor->getVar('xuid'));
                 }
 
                 $user = $ucache[$editor->getVar('xuid')];
 
-                $poster = array(
+                $poster = [
                     'id' => $user->getVar('uid'),
-                    'name' => $user->getVar('name') != '' ? $user->getVar('name') : $user->getVar('uname'),
+                    'name' => '' != $user->getVar('name') ? $user->getVar('name') : $user->getVar('uname'),
                     'email' => $user->getVar('email'),
                     'posts' => $user->getVar('posts'),
                     'avatar' => $cuServices->service('avatar') ? $cuServices->avatar->getAvatarSrc($xoopsUser, 0) : XOOPS_UPLOAD_URL . '/' . $user->getVar('image'),
                     'rank' => $user->rank(),
-                    'url' => $user->getVar('url') != 'http://' ? $user->getVar('url') : ''
-                );
-
+                    'url' => 'http://' != $user->getVar('url') ? $user->getVar('url') : '',
+                ];
             } else {
-
-                $poster = array(
+                $poster = [
                     'id' => 0,
                     'name' => $editor->getVar('name'),
                     'email' => $editor->getVar('email'),
                     'posts' => 0,
                     'avatar' => '',
                     'rank' => '',
-                    'url' => $editor->getVar('url') != 'http://' ? $editor->getVar('url') : ''
-                );
-
+                    'url' => 'http://' != $editor->getVar('url') ? $editor->getVar('url') : '',
+                ];
             }
 
             if ($xoopsUser && $xoopsUser->isAdmin()) {
@@ -111,15 +105,15 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
                 }
             }
 
-            $comms[] = array(
+            $comms[] = [
                 'id' => $row['id_com'],
                 'text' => \TextCleaner::getInstance()->clean_disabled_tags(\TextCleaner::getInstance()->popuplinks(\TextCleaner::getInstance()->nofollow($com->getVar('content')))),
                 'poster' => $poster,
                 'posted' => sprintf(__('Posted on %s'), formatTimestamp($com->getVar('posted'), 'l')),
                 'ip' => $com->getVar('ip'),
                 'edit' => $editlink,
-                'time' => $com->getVar('posted')
-            );
+                'time' => $com->getVar('posted'),
+            ];
 
             unset($editor);
         }
@@ -131,57 +125,61 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
 
         if ($assign) {
             $xoopsTpl->assign('comments', $comms);
+
             return true;
-        } else {
-            return $comms;
         }
+
+        return $comms;
     }
 
     public function form($parameters)
     {
         global $xoopsTpl, $xoopsRequestUri, $xoopsUser, $cuSettings, $common;
-        
+
         $url = '';
         $object = '';
         $identifier = '';
         $file = '';
         $type = 'module';
-        
+
         extract($parameters);
 
-        if ( !$cuSettings->enable_comments )
+        if (!$cuSettings->enable_comments) {
             return false;
+        }
 
-        if ( !$xoopsUser && !$cuSettings->anonymous_comments )
+        if (!$xoopsUser && !$cuSettings->anonymous_comments) {
             return false;
+        }
 
-        if (!defined('COMMENTS_INCLUDED'))
+        if (!defined('COMMENTS_INCLUDED')) {
             define('COMMENTS_INCLUDED', 1);
+        }
 
         $xoopsTpl->assign('enable_comments_form', 1);
 
-        $form = array(
-            'show_name'     => !($xoopsUser),
-            'lang_name'     => __('Name','rmcommon'),
-            'show_email'    => !($xoopsUser),
-            'lang_email'    => __('Email address','rmcommon'),
-            'show_url'      => !($xoopsUser),
-            'lang_url'      => __('Web site', 'rmcommon'),
-            'lang_text'     => __('Your comment', 'rmcommon'),
-            'lang_submit'   => __('Submit Comment', 'rmcommon'),
-            'lang_title'    => __('Submit a comment', 'rmcommon'),
-            'uri'			=> urlencode(\RMUris::current_url()),
-            'actionurl'		=> RMCURL.'/post-comment.php',
-            'params'		=> urlencode($identifier),
-            'update'        => urlencode(str_replace(XOOPS_ROOT_PATH, '', $file)),
-            'type'			=> $type,
-            'object'		=> $object,
-            'action'		=> 'save'
-        );
+        $form = [
+            'show_name' => !($xoopsUser),
+            'lang_name' => __('Name', 'rmcommon'),
+            'show_email' => !($xoopsUser),
+            'lang_email' => __('Email address', 'rmcommon'),
+            'show_url' => !($xoopsUser),
+            'lang_url' => __('Web site', 'rmcommon'),
+            'lang_text' => __('Your comment', 'rmcommon'),
+            'lang_submit' => __('Submit Comment', 'rmcommon'),
+            'lang_title' => __('Submit a comment', 'rmcommon'),
+            'uri' => urlencode(\RMUris::current_url()),
+            'actionurl' => RMCURL . '/post-comment.php',
+            'params' => urlencode($identifier),
+            'update' => urlencode(str_replace(XOOPS_ROOT_PATH, '', $file)),
+            'type' => $type,
+            'object' => $object,
+            'action' => 'save',
+        ];
 
-        if($common->services()->service('captcha')){
+        if ($common->services()->service('captcha')) {
             $form['fields'] = [
-                'captcha' => $common->services()->captcha->render()
+                'captcha' => $common->services()->captcha->render(),
             ];
         }
 
@@ -190,21 +188,21 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
 
         $form = $common->events()->trigger('rmcommon.comments.form', $form, $object, $identifier, $type);
         \RMTemplate::getInstance()->add_jquery();
-        \RMTemplate::getInstance()->add_script( 'jquery.validate.min.js', 'rmcommon', ['footer' => 1] );
+        \RMTemplate::getInstance()->add_script('jquery.validate.min.js', 'rmcommon', ['footer' => 1]);
         \RMTemplate::getInstance()->add_inline_script('$(document).ready(function(){
         	$("#rmc-comment-form").validate({
         		messages: {
-        			comment_name: "'.__('Please specify your name','rmcommon').'",
-        			comment_email: "'.__('Please specify a valid email','rmcommon').'",
-        			comment_text: "'.__('Please write a message','rmcommon').'",
-        			comment_url: "'.__('Please enter a valid URL','rmcommon').'"
+        			comment_name: "' . __('Please specify your name', 'rmcommon') . '",
+        			comment_email: "' . __('Please specify a valid email', 'rmcommon') . '",
+        			comment_text: "' . __('Please write a message', 'rmcommon') . '",
+        			comment_url: "' . __('Please enter a valid URL', 'rmcommon') . '"
         		}
         	});
         });', 1);
 
         $xoopsTpl->assign('cf', $form);
 
-        return $xoopsTpl->fetch(RMCPATH . '/templates/rmc-comments-form.html');
+        return $xoopsTpl->fetch(RMCPATH . '/templates/rmc-comments-form.tpl');
     }
 
     public static function getInstance()
@@ -212,7 +210,7 @@ class CUCommentsService extends \Common\Core\Helpers\ServiceAbstract implements 
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new CUCommentsService();
+            $instance = new self();
         }
 
         return $instance;

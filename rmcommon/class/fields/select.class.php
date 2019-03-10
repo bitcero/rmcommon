@@ -15,9 +15,9 @@ class RMFormSelect extends RMFormElement
 {
     private $_rows = 5;
     private $_multi = 0;
-    private $_options = array();
+    private $_options = [];
     private $_selected = null;
-    private $_groups = array();
+    private $_groups = [];
     private $current_group = '';
 
     /**
@@ -26,20 +26,19 @@ class RMFormSelect extends RMFormElement
      * @param int $multi Seleccion múltiple (0 = Inactivo, 1 = Activo)
      * @param array $selected Selected option
      */
-    function __construct($caption, $name = '', $multi = 0, $selected = null)
+    public function __construct($caption, $name = '', $multi = 0, $selected = null)
     {
-
         if (is_array($caption)) {
             parent::__construct($caption);
         } else {
             parent::__construct([]);
             $this->setWithDefaults('caption', $caption, '');
             $this->setWithDefaults('name', $name, 'name_error');
-            if($multi){
+            if ($multi) {
                 $this->set('multiple', null);
             }
 
-            if(is_array($selected)){
+            if (is_array($selected)) {
                 $this->set('value', $selected);
             }
         }
@@ -74,6 +73,8 @@ class RMFormSelect extends RMFormElement
      * @param string $text Texto que mostrará la opción
      * @param int $select 1 selecciona por defecto la opción.
      * @param bol $disabled Mustra como inactiva esta opción.
+     * @param mixed $caption
+     * @param mixed $style
      */
     public function addOption($value, $caption, $select = 0, $disabled = false, $style = '')
     {
@@ -95,6 +96,7 @@ class RMFormSelect extends RMFormElement
 
     /**
      * Establece una opción como seleccionada
+     * @param mixed $index
      */
     public function setSelected($index)
     {
@@ -110,28 +112,26 @@ class RMFormSelect extends RMFormElement
      * Devuelve el array de opciones del elemento.
      * @return array
      */
-    function getOptions()
+    public function getOptions()
     {
         return $this->_options;
     }
 
-
     public function addGroup($label, $id)
     {
-
-        if ('' == trim($id) || '' == trim($label))
+        if ('' == trim($id) || '' == trim($label)) {
             return false;
+        }
 
-        $this->_groups[$id] = array('label' => $label, 'options' => array());
+        $this->_groups[$id] = ['label' => $label, 'options' => []];
         $this->current_group = $id;
-
     }
 
     /**
      * Genera el código HTML para este elemento.
      * @return string
      */
-    function render()
+    public function render()
     {
         $this->setIfNotSet('class', 'form-control');
         $attributes = $this->renderAttributeString();
@@ -145,7 +145,7 @@ class RMFormSelect extends RMFormElement
 
         foreach ($options as $k => $v) {
             $rtn .= "<option value='$v'";
-            if (is_array($selected) && in_array($v, $selected)) {
+            if (is_array($selected) && in_array($v, $selected, true)) {
                 $rtn .= " selected='selected'";
             }
             $rtn .= ">$k</option>";
@@ -174,9 +174,8 @@ class RMFormSelect extends RMFormElement
 
         }*/
 
-        $rtn .= "</select>";
+        $rtn .= '</select>';
+
         return $rtn;
     }
 }
-
-

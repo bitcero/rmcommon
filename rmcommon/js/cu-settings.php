@@ -15,13 +15,14 @@
 header('Content-type: text/javascript');
 error_reporting(0);
 $xoopsOption['nocommon'] = 1;
-include '../../../mainfile.php';
+require  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
 /**
  * Load rewrite modules configuration
  */
-if (file_exists( XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js' ) )
+if (file_exists(XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js')) {
     include XOOPS_VAR_PATH . '/caches/xoops_cache/cu-rewrite.js';
+}
 
 /**
  * Load the ajax modules controller

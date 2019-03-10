@@ -45,10 +45,10 @@ class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterRe
      */
     public function getCharPositions($string, $startOffset, &$currentMap, &$ignoredChars)
     {
-        $strlen = strlen($string);
+        $strlen = mb_strlen($string);
         // % and / are CPU intensive, so, maybe find a better way
         $ignored = $strlen % $this->_width;
-        $ignoredChars = substr($string, -$ignored);
+        $ignoredChars = mb_substr($string, -$ignored);
         $currentMap = $this->_width;
 
         return ($strlen - $ignored) / $this->_width;

@@ -12,7 +12,6 @@ global $rmc_config;
 
 class RMFormDate extends RMFormElement
 {
-
     private $_date = 0;
     private $options = 0;
     private $year_range = '';
@@ -36,9 +35,11 @@ class RMFormDate extends RMFormElement
      * @param string $date Fecha en formato 'yyyy-mm-14'
      * @param string Year range (eg. 2000:2020)
      * @param int Show time and time format (0 = Hide, 1 = Show date and time, 2 = Show only time)
+     * @param mixed $year_range
+     * @param mixed $time
      */
-    function __construct($caption, $name = '', $date='', $year_range='', $time=0){
-
+    public function __construct($caption, $name = '', $date = '', $year_range = '', $time = 0)
+    {
         if (is_array($caption)) {
             parent::__construct($caption);
         } else {
@@ -46,13 +47,13 @@ class RMFormDate extends RMFormElement
             $this->setWithDefaults('caption', $caption, '');
             $this->setWithDefaults('name', $name, 'name_error');
             $this->setWithDefaults('value', $date, '');
-            $this->setWithDefaults('yearRange', $year_range, (date('Y',time()) - 15).':'.(date('Y',time()) + 15));
+            $this->setWithDefaults('yearRange', $year_range, (date('Y', time()) - 15) . ':' . (date('Y', time()) + 15));
 
-            if ($time==0) {
+            if (0 == $time) {
                 $this->set('options', 'date');
-            } elseif( $time == 1) {
+            } elseif (1 == $time) {
                 $this->set('options', 'date-time');
-            } elseif( $time == 2 ){
+            } elseif (2 == $time) {
                 $this->set('options', 'time');
                 //$this->options = "showHour: false, showMinute: false, showSecond: false";
             }
@@ -60,57 +61,54 @@ class RMFormDate extends RMFormElement
 
         $this->setIfNotSet('value', date('Y-m-d'));
         $this->setIfNotSet('options', 'date');
-        $this->setIfNotSet('yearRange', (date('Y',time()) - 15).':'.(date('Y',time()) + 15));
+        $this->setIfNotSet('yearRange', (date('Y', time()) - 15) . ':' . (date('Y', time()) + 15));
         $this->add('class', 'form-control');
 
         $this->suppressList[] = 'options';
         $this->suppressList[] = 'yearRange';
 
         RMTemplate::getInstance()->add_jquery();
-        RMTemplate::getInstance()->add_script('jquery-ui-timepicker-addon.js', 'rmcommon', array('directory' => 'include'));
+        RMTemplate::getInstance()->add_script('jquery-ui-timepicker-addon.js', 'rmcommon', ['directory' => 'include']);
         RMTemplate::getInstance()->add_script('dates.js', 'rmcommon');
     }
 
     /**
-    * Set options for widget
-    * See documentation in http://trentrichardson.com/examples/timepicker/
-    * @param string Options in javascript format (eg. showHour: false, showMinute: false)
-    */
-    public function options($options){
-
+     * Set options for widget
+     * See documentation in http://trentrichardson.com/examples/timepicker/
+     * @param string Options in javascript format (eg. showHour: false, showMinute: false)
+     * @param mixed $options
+     */
+    public function options($options)
+    {
         $this->set('options', $options);
-
     }
 
-    public function render(){
+    public function render()
+    {
         global $exmConfig;
 
         $attrs = $this->renderAttributeString();
 
-        if ($this->get('options') == 'date-time') {
-            RMTemplate::getInstance()->add_inline_script("var ".$this->id()."_time = 1;
+        if ('date-time' == $this->get('options')) {
+            RMTemplate::getInstance()->add_inline_script('var ' . $this->id() . "_time = 1;
             \n$(function(){
-            \n$(\"#exmdate-".$this->get('id')."\").datetimepicker({changeMonth: true,changeYear: true, yearRange: '".$this->get('yearRange')."'});
+            \n$(\"#exmdate-" . $this->get('id') . "\").datetimepicker({changeMonth: true,changeYear: true, yearRange: '" . $this->get('yearRange') . "'});
             \n});", 1);
-
-        } elseif ($this->get('options')=='time') {
-            RMTemplate::getInstance()->add_inline_script("var ".$this->get('name')."_time = 2;
+        } elseif ('time' == $this->get('options')) {
+            RMTemplate::getInstance()->add_inline_script('var ' . $this->get('name') . "_time = 2;
             \n$(function(){
-            \n$(\"#exmdate-".$this->id()."\").timepicker({changeMonth: true,changeYear: true, yearRange: '".$this->get('yearRange')."', timeOnlyTitle: '".__('Choose Time','rmcommon')."'});
+            \n$(\"#exmdate-" . $this->id() . "\").timepicker({changeMonth: true,changeYear: true, yearRange: '" . $this->get('yearRange') . "', timeOnlyTitle: '" . __('Choose Time', 'rmcommon') . "'});
             \n});", 1);
-
-        } elseif ($this->get('options')=='date') {
-            RMTemplate::getInstance()->add_inline_script("var ".$this->get('name')."_time = 0;
+        } elseif ('date' == $this->get('options')) {
+            RMTemplate::getInstance()->add_inline_script('var ' . $this->get('name') . "_time = 0;
             \n$(function(){
-            \n$(\"#exmdate-".$this->id()."\").datepicker({changeMonth: true,changeYear: true, yearRange: '".$this->get('yearRange')."', showHour: false, showMinute: false, showSecond: false});
+            \n$(\"#exmdate-" . $this->id() . "\").datepicker({changeMonth: true,changeYear: true, yearRange: '" . $this->get('yearRange') . "', showHour: false, showMinute: false, showSecond: false});
             \n});", 1);
-
         }
 
-        $rtn = "<input type='text' class='exmdates_field ".$this->getClass()."' name='text_".$this->get('name')."' id=\"exmdate-".$this->id()."\"' size='20' maxlength='19' value='".$this->get('value')."' />
+        $rtn = "<input type='text' class='exmdates_field " . $this->getClass() . "' name='text_" . $this->get('name') . "' id=\"exmdate-" . $this->id() . "\"' size='20' maxlength='19' value='" . $this->get('value') . "'>
                     <input type='hidden' $attrs>";
 
         return $rtn;
     }
-
 }

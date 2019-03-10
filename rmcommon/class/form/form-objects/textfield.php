@@ -8,13 +8,12 @@
  * License: GPL 2.0
  * URI: http://www.redmexico.com.mx
  */
-
 class ActiveTextField
 {
     use RMFormComponent;
 
-    public function render(){
-
+    public function render()
+    {
         $input = '<input type="text" name="' . $this->name . '" id="' . $this->id . '"';
         $class = $this->required ? 'required' : '';
         $max = 0;
@@ -22,12 +21,13 @@ class ActiveTextField
         $parameters = $this->parameters;
 
         foreach ($parameters as $attr => $value) {
-            if ( 'class' == $attr )
-                $class .= $class != '' ? ' '.$value : $value;
-            elseif ( 'maxlength' == $attr )
+            if ('class' == $attr) {
+                $class .= '' != $class ? ' ' . $value : $value;
+            } elseif ('maxlength' == $attr) {
                 $max = $value;
-            else
+            } else {
                 $input .= ' ' . $attr . '="' . $value . '"';
+            }
         }
 
         $input .= '' != $class ? ' class="' . $class . '"' : '';
@@ -39,7 +39,5 @@ class ActiveTextField
         $input .= '>';
 
         return $input;
-
     }
-
 }

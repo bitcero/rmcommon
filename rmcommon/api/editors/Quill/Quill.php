@@ -49,7 +49,7 @@ class Quill implements Editor
                 'toolbar' => '#' . $this->name . '-toolbar',
             ],
             'placeholder' => '',
-            'readOnly' => false
+            'readOnly' => false,
         ];
     }
 
@@ -60,8 +60,7 @@ class Quill implements Editor
      */
     public function setOptions($name, $value)
     {
-
-        if(is_array($name)){
+        if (is_array($name)) {
             $this->options = array_merge($this->options, $name);
         } else {
             $this->options[$name] = $value;
@@ -70,11 +69,11 @@ class Quill implements Editor
 
     public function getOptions($name = null)
     {
-        if(null == $name){
+        if (null === $name) {
             return $this->options;
-        } else {
-            return $this->options[$name];
         }
+
+        return $this->options[$name];
     }
 
     public function render($template = '')
@@ -89,12 +88,12 @@ class Quill implements Editor
                 'footer' => 1,
                 'required' => 'jquery',
                 'directory' => 'api/editors/Quill',
-                'id' => 'quill-js'
+                'id' => 'quill-js',
             ]
         );
 
         $theme = $this->options['theme'];
-        if('' == $theme){
+        if ('' == $theme) {
             $theme = 'snow';
         }
 
@@ -104,11 +103,11 @@ class Quill implements Editor
             'rmcommon',
             [
                 'directory' => 'api/editors/Quill',
-                'id' => 'quill-css'
+                'id' => 'quill-css',
             ]
         );
 
-        if ('' == $template || false == file_exists($template)){
+        if ('' == $template || false === file_exists($template)) {
             $template = $common->template()->path('api/quill.php', 'module', 'rmcommon');
         }
 
@@ -118,12 +117,12 @@ class Quill implements Editor
         $html = $common->template()->render($template);
 
         return $html;
-
     }
 
     public function js()
     {
-        $js = 'var ' . preg_replace("/[^a-zA-Z]/", '', $this->name) . "Editor = new Quill('#" . $this->name . "', " . json_encode($this->options) . ");";
+        $js = 'var ' . preg_replace('/[^a-zA-Z]/', '', $this->name) . "Editor = new Quill('#" . $this->name . "', " . json_encode($this->options) . ');';
+
         return $js;
     }
 }

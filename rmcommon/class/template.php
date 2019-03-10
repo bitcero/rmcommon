@@ -25,8 +25,7 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.eduardocortes.mx
  */
-
-include_once RMCPATH . '/include/tpl_functions.php';
+require_once RMCPATH . '/include/tpl_functions.php';
 
 /**
  * This file can handle templates for all modules and themes
@@ -37,27 +36,24 @@ class RMTemplate
     /**
      * Stores the information for 'HEAD' section of template
      */
-    public $tpl_head = array();
+    public $tpl_head = [];
     /**
      * Stores the scripts information to include in theme
      */
-    public $tpl_scripts = array();
-    public $tpl_hscripts = array();
-    public $tpl_fscripts = array();
+    public $tpl_scripts = [];
+    public $tpl_hscripts = [];
+    public $tpl_fscripts = [];
 
-    /**
-     *
-     */
     private $attributes = [];
 
     /**
      * Stores all styles for HEAD section
      */
-    public $tpl_styles = array();
+    public $tpl_styles = [];
     /**
      * Menu options for current element
      */
-    private $tpl_menus = array();
+    private $tpl_menus = [];
     /**
      * Template Vars
      */
@@ -65,23 +61,23 @@ class RMTemplate
     /**
      * Messages for template
      */
-    private $messages = array();
+    private $messages = [];
     /**
      * Menus for admin gui
      */
-    private $menus = array();
+    private $menus = [];
     /**
      * Toolbar for admin gui
      */
-    private $toolbar = array();
+    private $toolbar = [];
     /**
      * Help link
      */
-    private $help_link = array();
+    private $help_link = [];
     /**
      * Metas
      */
-    private $metas = array();
+    private $metas = [];
     /**
      * Version to add as parameter to scripts and styles
      */
@@ -90,23 +86,25 @@ class RMTemplate
     /**
      * Body classes
      */
-    private $body_classes = array();
+    private $body_classes = [];
 
-    function __construct()
+    public function __construct()
     {
         global $cuSettings;
 
-        $this->version = str_replace(" ", '-', RMCVERSION);
+        $this->version = str_replace(' ', '-', RMCVERSION);
 
         if (defined('XOOPS_CPFUNC_LOADED')) {
             $this->add_jquery(true, true);
+
             return true;
         }
 
-        if ($cuSettings->jquery) return true;
+        if ($cuSettings->jquery) {
+            return true;
+        }
 
         $this->add_jquery(true);
-
     }
 
     /**
@@ -114,38 +112,36 @@ class RMTemplate
      * @staticvar <type> $instance
      * @return RMTemplate
      */
-    static function getInstance()
+    public static function getInstance()
     {
         static $instance;
 
         if (!isset($instance)) {
-            $instance = new RMTemplate();
+            $instance = new self();
         }
 
         return $instance;
-
     }
 
     /**
      * @return RMTemplate
      * @deprecated
      */
-    static function get()
+    public static function get()
     {
         return self::getInstance();
     }
 
-    /**
-     *
-     */
     public function header()
     {
         global $xoopsModule, $xoopsConfig, $xoopsOption, $xoopsTpl;
 
-        if (defined('XOOPS_CPFUNC_LOADED'))
-            xoops_cp_header(); //ob_start();
-        else
+        if (defined('XOOPS_CPFUNC_LOADED')) {
+            xoops_cp_header();
+        } //ob_start();
+        else {
             include XOOPS_ROOT_PATH . '/header.php';
+        }
     }
 
     public function footer()
@@ -161,7 +157,6 @@ class RMTemplate
                $xoopsTpl;
 
         if (defined('XOOPS_CPFUNC_LOADED')) {
-
             $content = ob_get_clean();
 
             $content = $common->events()->trigger('rmcommon.raw.content', $content);
@@ -178,7 +173,7 @@ class RMTemplate
             $rm_theme_url = RMCURL . '/themes/' . $theme;
 
             // Check if there are redirect messages
-            $redirect_messages = array();
+            $redirect_messages = [];
             if (isset($_SESSION['redirect_message'])) {
                 foreach ($_SESSION['redirect_message'] as $msg) {
                     $redirect_messages[] = $msg;
@@ -186,7 +181,7 @@ class RMTemplate
                 unset($_SESSION['redirect_message']);
             }
 
-            include_once RMCPATH . '/themes/' . $theme . '/admin-gui.php';
+            require_once RMCPATH . '/themes/' . $theme . '/admin-gui.php';
             $output = ob_get_clean();
 
             $output = RMEvents::get()->trigger('rmcommon.admin.output', $output);
@@ -194,17 +189,13 @@ class RMTemplate
             echo $output;
 
             RMEvents::get()->trigger('rmcommon.footer.admin.end', $output);
-
         } else {
-
             $vars = $this->get_vars();
 
             $xoopsTpl->assign($vars);
 
             require XOOPS_ROOT_PATH . '/footer.php';
-
         }
-
     }
 
     /**
@@ -213,13 +204,17 @@ class RMTemplate
      * @param string Elemernt type: module, builder or plugin
      * @param string Module name
      * @param string Element name, only when type is plugin or builder
+     * @param mixed $file
+     * @param mixed $type
+     * @param mixed $module
+     * @param mixed $element
      * @return string Template path
      */
     public static function path($file, $type = 'module', $module = '', $element = '')
     {
         global $cuSettings, $xoopsConfig, $xoopsModule;
 
-        $type = $type == '' ? 'module' : $type;
+        $type = '' == $type ? 'module' : $type;
 
         if ('' == $module && !$xoopsModule) {
             $module = 'rmcommon';
@@ -227,21 +222,23 @@ class RMTemplate
             $module = $xoopsModule->getVar('dirname');
         }
 
-        if (!function_exists("xoops_cp_header")) {
-
+        if (!function_exists('xoops_cp_header')) {
             $theme = $xoopsConfig['theme_set'];
             $where = XOOPS_THEME_PATH . '/' . $theme;
-            $where .= $type == 'module' ? '/modules/' : '/' . $element . 's/';
-            $where .= $module . ($element != '' ? '/' . $element : '');
+            $where .= 'module' == $type ? '/modules/' : '/' . $element . 's/';
+            $where .= $module . ('' != $element ? '/' . $element : '');
 
-            if (is_file($where . '/' . $file)) return $where . '/' . $file;
+            if (is_file($where . '/' . $file)) {
+                return $where . '/' . $file;
+            }
 
             $where = XOOPS_ROOT_PATH . '/modules/' . $module . '/templates';
-            $where .= $type != 'module' ? "/$type" : '';
+            $where .= 'module' != $type ? "/$type" : '';
             $where .= "/$file";
 
-            if (is_file($where)) return $where;
-
+            if (is_file($where)) {
+                return $where;
+            }
         }
 
         $theme = isset($cuSettings->theme) ? $cuSettings->theme : 'default';
@@ -254,27 +251,26 @@ class RMTemplate
          * Construct path according to element type
          */
         $where = 'modules/' . $module;
-        $where .= $type == 'plugin' ? '/plugins/' . $element : '';
+        $where .= 'plugin' == $type ? '/plugins/' . $element : '';
 
         if ('module' == $type || 'plugin' == $type) {
             $where = 'modules/' . $module;
-            $where .= $type == 'plugin' ? '/plugins/' . $element : '';
+            $where .= 'plugin' == $type ? '/plugins/' . $element : '';
             $lpath = RMCPATH . '/themes/' . $theme . '/' . $where . '/' . $file;
         } else {
             $where = 'modules/' . $module . '/builders/' . $module;
             $lpath = RMCPATH . '/themes/' . $theme . '/builders/' . $file;
         }
 
-        if (file_exists($lpath))
+        if (file_exists($lpath)) {
             return $lpath;
+        }
 
         if ('builder' == $type) {
             return XOOPS_ROOT_PATH . '/modules/' . $module . '/templates/builders/' . $file;
-        } else {
-            return XOOPS_ROOT_PATH . '/' . $where . '/templates/' . $file;
         }
 
-
+        return XOOPS_ROOT_PATH . '/' . $where . '/templates/' . $file;
     }
 
     /**
@@ -323,8 +319,9 @@ class RMTemplate
             $template = static::path($file, $type, $module, $element);
         }
 
-        if(!file_exists($template)){
+        if (!file_exists($template)) {
             throw new RMException(__("Template $template does not exists!", 'rmcommon'));
+
             return false;
         }
 
@@ -335,8 +332,8 @@ class RMTemplate
         ob_start();
         require $template;
         $content = ob_get_clean();
-        return $content;
 
+        return $content;
     }
 
     public function display($file, $type = 'module', $module = '', $element = '')
@@ -347,15 +344,16 @@ class RMTemplate
     /**
      * Set the location identifier for current page
      * This identifier will help to RMCommon to find widgets, forms, etc
+     * @param mixed $id
      */
     public function location_id($id)
     {
-
     }
 
     /**
      * Add a help lint to manage diferents sections
      * @param string Link to help resource
+     * @param mixed $link
      */
     public function set_help($link)
     {
@@ -366,11 +364,11 @@ class RMTemplate
 
     public function help($single = 0)
     {
-        if ($single)
-
+        if ($single) {
             return $this->help_link[0]['link'];
-        else
-            return $this->help_link;
+        }
+
+        return $this->help_link;
     }
 
     /**
@@ -381,20 +379,22 @@ class RMTemplate
      */
     public function add_help($caption, $link)
     {
-        $this->help_link[] = array(
+        $this->help_link[] = [
             'caption' => $caption,
-            'link' => $link
-        );
+            'link' => $link,
+        ];
     }
 
     /**
      * Add a message to show in theme
      * @param string Message to show
      * @param int Level of message (1 will show error)
+     * @param mixed $message
+     * @param mixed $level
      */
     public function add_message($message, $level = 0)
     {
-        $this->messages[] = array('text' => $message, 'level' => $level);
+        $this->messages[] = ['text' => $message, 'level' => $level];
     }
 
     /**
@@ -415,8 +415,7 @@ class RMTemplate
     {
         // Dynamic header (It must be be an array)
         if (is_array($head)):
-            array_merge($this->tpl_head, $head);
-        else:
+            array_merge($this->tpl_head, $head); else:
             $this->tpl_head[] = $head;
         endif;
     }
@@ -510,7 +509,7 @@ class RMTemplate
      * @param string $owner Owner type for the script|style. Can be 'theme' or empty
      * @return bool
      */
-    public function add_script($file, $element = '', $options = array(), $owner = '')
+    public function add_script($file, $element = '', $options = [], $owner = '')
     {
         global $xoopsModule, $cuSettings, $xoopsConfig;
 
@@ -522,12 +521,13 @@ class RMTemplate
             unset($options['id']);
         }
 
-        if ($file == 'jquery.min.js' || $cuSettings->cdn_jquery_url == $file) {
+        if ('jquery.min.js' == $file || $cuSettings->cdn_jquery_url == $file) {
             return $this->add_jquery(false);
         }
 
-        if (FALSE !== strpos($file, 'bootstrap.js') || FALSE !== strpos($file, 'bootstrap.min.js') && 'theme' != $owner)
+        if (false !== mb_strpos($file, 'bootstrap.js') || false !== mb_strpos($file, 'bootstrap.min.js') && 'theme' != $owner) {
             return $this->add_bootstrap('js');
+        }
 
         // Check if file is a full URL
         $remote_script = preg_match("/^(\/\/)|(http:\/\/)|(https:\/\/)|(\/\/)/", $file);
@@ -535,40 +535,43 @@ class RMTemplate
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';
 
-        if ($element == '')
+        if ('' == $element) {
             $remote_script = 1;
+        }
 
-        if (false == $idProvided) {
+        if (false === $idProvided) {
             $parts = pathinfo($file);
             $id = str_replace('.min', '', $parts['filename']);
-            $id = strtolower($element) . '-' . TextCleaner::getInstance()->sweetstring($id) . '-js';
+            $id = mb_strtolower($element) . '-' . TextCleaner::getInstance()->sweetstring($id) . '-js';
             unset($parts);
         }
 
         if ($remote_script > 0) {
-
             $script_url = $file;
-
         } else {
-
-            $script_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-js' : 'js', $directory, $version);
+            $script_url = $this->generate_url($file, $element, 'theme' == $owner ? 'theme-js' : 'js', $directory, $version);
         }
 
-        if ($script_url == '')
+        if ('' == $script_url) {
             return false;
+        }
 
         if (array_key_exists($id, $this->tpl_scripts) && $this->tpl_scripts[$id]['url'] != $script_url) {
             $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
-            trigger_error(sprintf(__('Script %s will be replaced for new value in file %s on line %s', 'classifieds'), '<strong>' . $id . '</strong>',
-                '<strong>' . $trace[0]['file'] . '</strong>', '<strong>' . $trace[0]['line'] . '</strong>'));
+            trigger_error(sprintf(
+                __('Script %s will be replaced for new value in file %s on line %s', 'classifieds'),
+                '<strong>' . $id . '</strong>',
+                '<strong>' . $trace[0]['file'] . '</strong>',
+                '<strong>' . $trace[0]['line'] . '</strong>'
+            ));
         }
 
         // Add the new script to array (replacing old if exists)
-        $this->tpl_scripts[$id] = array(
+        $this->tpl_scripts[$id] = [
             'url' => $script_url,
             'type' => isset($options['type']) ? $options['type'] : 'text/javascript',
             'footer' => isset($options['footer']) ? $options['footer'] : (isset($options['location']) && $options['location'] = 'footer' ? 1 : 0),
-        );
+        ];
 
         // Delete unused options
         unset($options['version']);
@@ -579,7 +582,6 @@ class RMTemplate
         $this->tpl_scripts[$id] = array_merge($this->tpl_scripts[$id], $options);
 
         return true;
-
     }
 
     /**
@@ -596,34 +598,35 @@ class RMTemplate
     {
         global $xoopsConfig, $rmEvents, $cuSettings;
 
-        if ($file == '')
+        if ('' == $file) {
             return '';
-
-        if($cuSettings->development){
-            $version = date('dmyhis', time());
-        } else {
-            $version = $version == '' ? str_replace(" ", "-", RMCVERSION) : $version;
         }
 
-        if ($type == 'js' || $type == 'css') {
+        if ($cuSettings->development) {
+            $version = date('dmyhis', time());
+        } else {
+            $version = '' == $version ? str_replace(' ', '-', RMCVERSION) : $version;
+        }
+
+        if ('js' == $type || 'css' == $type) {
             // Possibles paths in order of importance
             // 1. Theme
             if (defined('XOOPS_CPFUNC_LOADED')) {
                 $paths['theme'] = RMCPATH . '/themes/' . $cuSettings->theme . "/$type/" . $element;
-                $paths['theme'] .= $directory != '' ? '/' . $directory : '';
+                $paths['theme'] .= '' != $directory ? '/' . $directory : '';
             } else {
                 $paths['theme'] = XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'] . "/$type/" . $element;
-                $paths['theme'] .= $directory != '' ? '/' . $directory : '';
+                $paths['theme'] .= '' != $directory ? '/' . $directory : '';
             }
 
             $paths['theme'] .= '/' . ltrim($file, '/');
 
             // 2. Module
             $paths['module'] = XOOPS_ROOT_PATH . '/modules/' . $element;
-            $paths['module'] .= $directory != '' ? '/' . $directory : '';
+            $paths['module'] .= '' != $directory ? '/' . $directory : '';
             $paths['module'] .= "/$type/" . ltrim($file, '/');
         } else {
-            $type = $type == 'theme-css' ? 'css' : 'js';
+            $type = 'theme-css' == $type ? 'css' : 'js';
 
             // Add path for theme script|style
             if (defined('XOOPS_CPFUNC_LOADED')) {
@@ -631,31 +634,29 @@ class RMTemplate
             } else {
                 $paths['theme'] = XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'];
             }
-            $paths['theme'] .= $directory != '' ? '/' . $directory : '';
+            $paths['theme'] .= '' != $directory ? '/' . $directory : '';
             $paths['theme'] .= "/$type/" . ltrim($file, '/');
-
         }
 
         // Allow other components to add new paths where scripts can be searched
         $paths = RMEvents::get()->run_event('rmcommon.scripts.paths', $paths, $file, $element, $directory, $version);
 
         foreach ($paths as $path) {
-
-            if (!file_exists(preg_replace("/(.*)(\?.*)$/", '$1', $path)))
+            if (!file_exists(preg_replace("/(.*)(\?.*)$/", '$1', $path))) {
                 continue;
+            }
 
             $url = RMUris::relative_url(str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path));
             // Check if parameter 'version' exists in url
-            if (!preg_match("/.*(\?.*)$/", $url))
-
+            if (!preg_match("/.*(\?.*)$/", $url)) {
                 return $url . '?version=' . $version;
+            }
 
-            if (!preg_match("/.*(version=).*$/", $url))
-
+            if (!preg_match('/.*(version=).*$/', $url)) {
                 return $url . '&version=' . $version;
+            }
 
             return $url;
-
         }
 
         return null;
@@ -681,7 +682,7 @@ class RMTemplate
      */
     public function add_inline_script($script, $footer = 0)
     {
-        if ($script == '') {
+        if ('' == $script) {
             return false;
         }
 
@@ -690,6 +691,7 @@ class RMTemplate
         } else {
             $this->tpl_hscripts[] = $script;
         }
+
         return true;
     }
 
@@ -707,10 +709,8 @@ class RMTemplate
         $scripts = $footer ? $this->tpl_fscripts : $this->tpl_hscripts;
 
         foreach ($scripts as $script) {
-
             $ret .= $script . "\n";
-            $ret .= "//" . str_repeat("-", 20) . "\n";
-
+            $ret .= '//' . str_repeat('-', 20) . "\n";
         }
 
         $ret .= '</script>';
@@ -721,163 +721,156 @@ class RMTemplate
     /**
      * Add rmcommon JS handler
      */
-    public function addCuHandler(){
+    public function addCuHandler()
+    {
         $this->tpl_scripts['rmcommon-js'] = [
             'url' => RMUris::relative_url(RMCURL . '/js/cu-handler.js'),
             'type' => 'text/javascript',
-            'footer' => 1
+            'footer' => 1,
         ];
     }
 
     /**
      * Add jQuery script to site header
+     * @param mixed $ui
+     * @param mixed $force
      */
     public function add_jquery($ui = true, $force = false)
     {
         global $cuSettings;
 
-        if (!$cuSettings->jquery && !$force) return true;
+        if (!$cuSettings->jquery && !$force) {
+            return true;
+        }
 
         if (!isset($this->tpl_scripts['jquery'])) {
-
             if ($cuSettings->cdn_jquery) {
-
-                $this->tpl_scripts['jquery'] = array(
+                $this->tpl_scripts['jquery'] = [
                     'url' => $cuSettings->cdn_jquery_url,
                     'type' => 'text/javascript',
                     'footer' => 0,
-                );
-
+                ];
             } else {
-
-                $this->tpl_scripts['jquery'] = array(
+                $this->tpl_scripts['jquery'] = [
                     'url' => RMUris::relative_url(RMCURL . '/include/js/jquery.min.js'),
                     'type' => 'text/javascript',
                     'footer' => 0,
-                );
-
+                ];
             }
-
         }
 
         if ($ui && !isset($this->tpl_scripts['jqueryui'])) {
-
             if ($cuSettings->cdn_jquery) {
-
-                $this->tpl_scripts['jqueryui'] = array(
+                $this->tpl_scripts['jqueryui'] = [
                     'url' => $cuSettings->cdn_jqueryui_url,
                     'type' => 'text/javascript',
                     'footer' => 0,
-                );
+                ];
 
                 $this->tpl_styles['jqueryui-css'] = [
                     'url' => 'https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css',
                     'type' => 'text/css',
-                    'footer' => 0
+                    'footer' => 0,
                 ];
-
             } else {
-
-                $this->tpl_scripts['jqueryui'] = array(
+                $this->tpl_scripts['jqueryui'] = [
                     'url' => RMUris::relative_url(RMCURL . '/include/js/jquery-ui.min.js'),
                     'type' => 'text/javascript',
                     'footer' => 0,
-                );
+                ];
 
                 $this->tpl_styles['jqueryui-css'] = [
                     'url' => RMUris::relative_url(RMCURL . '/css/js-widgets.css'),
                     'type' => 'text/css',
-                    'footer' => 0
+                    'footer' => 0,
                 ];
-
             }
-
         }
 
-
         return true;
-
     }
 
     /**
      * Add jQuery script to site header
+     * @param mixed $type
      */
     public function add_bootstrap($type = 'css')
     {
         global $cuSettings;
 
-        if ($type == 'css' && isset($this->tpl_styles['bootstrap']))
+        if ('css' == $type && isset($this->tpl_styles['bootstrap'])) {
             return true;
+        }
 
-        if ($type == 'js' && isset($this->tpl_scripts['bootstrap']))
+        if ('js' == $type && isset($this->tpl_scripts['bootstrap'])) {
             return true;
+        }
 
         if ($cuSettings->cdn_bootstrap) {
-
-            if ('js' == $type)
-                $this->tpl_scripts['jsbootstrap'] = array(
+            if ('js' == $type) {
+                $this->tpl_scripts['jsbootstrap'] = [
                     'url' => $cuSettings->cdn_jsbootstrap_url,
                     'type' => 'text/javascript',
                     'footer' => 1,
-                );
-            else
-                $this->tpl_styles['bootstrap'] = array(
+                ];
+            } else {
+                $this->tpl_styles['bootstrap'] = [
                     'url' => $cuSettings->cdn_bootstrap_url,
                     'type' => 'text/css',
                     'footer' => 0,
-                );
+                ];
+            }
 
             return true;
-
         }
 
-        if ('js' == $type)
-            $this->tpl_scripts['jsbootstrap'] = array(
+        if ('js' == $type) {
+            $this->tpl_scripts['jsbootstrap'] = [
                 'url' => RMUris::relative_url(RMCURL . '/js/bootstrap.min.js'),
                 'type' => 'text/javascript',
                 'footer' => 1,
-            );
-        else
-            $this->tpl_styles['bootstrap'] = array(
+            ];
+        } else {
+            $this->tpl_styles['bootstrap'] = [
                 'url' => RMUris::relative_url(RMCURL . '/css/bootstrap.min.css'),
                 'type' => 'text/css',
                 'footer' => 0,
-            );
+            ];
+        }
 
         return true;
-
     }
 
     public function add_fontawesome()
     {
         global $cuSettings;
 
-        if (isset($this->tpl_styles['fontawesome']))
+        if (isset($this->tpl_styles['fontawesome'])) {
             return true;
+        }
 
         if ($cuSettings->cdn_fa) {
-
-            $this->tpl_styles['fontawesome'] = array(
+            $this->tpl_styles['fontawesome'] = [
                 'url' => $cuSettings->cdn_fa_url,
                 'type' => 'text/css',
                 'footer' => 0,
-            );
-            return true;
+            ];
 
+            return true;
         }
 
-        $this->tpl_styles['fontawesome'] = array(
+        $this->tpl_styles['fontawesome'] = [
             'url' => RMUris::relative_url(RMCURL . '/css/font-awesome.min.css'),
             'type' => 'text/css',
             'footer' => 0,
-        );
+        ];
 
         return true;
-
     }
 
     /**
      * Get all scripts stored in class
+     * @param mixed $make
      */
     public function get_scripts($make = false)
     {
@@ -890,7 +883,7 @@ class RMTemplate
             return $this->tpl_scripts;
         }
 
-        $rtn = array('footer' => '', 'header' => '');
+        $rtn = ['footer' => '', 'header' => ''];
         foreach ($this->tpl_scripts as $id => $script) {
             if ($script['footer']) {
                 $rtn['footer'] .= "\n" . '<script type="' . $script['type'] . '" id="' . $id . '" src="' . $script['url'] .
@@ -910,7 +903,6 @@ class RMTemplate
         }
 
         return $rtn;
-
     }
 
     /**
@@ -919,7 +911,6 @@ class RMTemplate
      */
     private function process_scripts()
     {
-
         $scripts = [];
         $missing = [];
 
@@ -943,12 +934,10 @@ class RMTemplate
             } else {
                 $missing[$id] = $item;
             }
-
         }
 
         // Now read $missing array
         foreach ($missing as $id => $script) {
-
             // Check if script has been added
             if (array_key_exists('required', $script) && array_key_exists($script['required'], $scripts)) {
                 $scripts = $this->insert_script_after($scripts, $script['required'], $id, $script);
@@ -963,19 +952,17 @@ class RMTemplate
             }
 
             $scripts[$id] = $script;
-
         }
 
         $this->tpl_scripts = $scripts;
-        return true;
 
+        return true;
     }
 
     private function insert_script_after($scripts, $required, $id, $data)
     {
-
         $total = count($scripts);
-        $return = array();
+        $return = [];
 
         foreach ($scripts as $ids => $script) {
             $return[$ids] = $script;
@@ -986,7 +973,6 @@ class RMTemplate
         }
 
         return $return;
-
     }
 
     /**
@@ -994,7 +980,7 @@ class RMTemplate
      */
     public function clear_scripts()
     {
-        $this->tpl_scripts = array();
+        $this->tpl_scripts = [];
     }
 
     /**
@@ -1006,28 +992,30 @@ class RMTemplate
      * @param array $options Additional parameters to add to style code.
      * @param string $owner Type of owner element. Possible values can be 'theme' or empty;
      */
-    public function add_style($file, $element = '', $options = array(), $owner = '')
+    public function add_style($file, $element = '', $options = [], $owner = '')
     {
-
         global $xoopsModule, $cuSettings, $xoopsConfig;
         // Check if file is a full URL
         $remote_script = preg_match("/^(http:\/\/)|(https:\/\/)|(\/\/)/", $file);
 
-        if ('theme' != $owner && (FALSE !== strpos($file, 'bootstrap.css') || FALSE !== strpos($file, 'bootstrap.min.css')))
+        if ('theme' != $owner && (false !== mb_strpos($file, 'bootstrap.css') || false !== mb_strpos($file, 'bootstrap.min.css'))) {
             return $this->add_bootstrap('css');
+        }
 
-        if ($cuSettings->cdn_fa && (FALSE !== strpos($file, 'font-awesome.css') || FALSE !== strpos($file, 'font-awesome.min.css')))
+        if ($cuSettings->cdn_fa && (false !== mb_strpos($file, 'font-awesome.css') || false !== mb_strpos($file, 'font-awesome.min.css'))) {
             return $this->add_fontawesome();
+        }
 
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';
 
-        if ($owner == 'theme')
-            $element = $element == '' ? (defined('XOOPS_CPFUNC_LOADED') ? $cuSettings->theme : $xoopsConfig['theme_set']) : $element;
-        else
-            $element = $element == '' ? ($xoopsModule ? $xoopsModule->getVar('dirname') : '') : $element;
+        if ('theme' == $owner) {
+            $element = '' == $element ? (defined('XOOPS_CPFUNC_LOADED') ? $cuSettings->theme : $xoopsConfig['theme_set']) : $element;
+        } else {
+            $element = '' == $element ? ($xoopsModule ? $xoopsModule->getVar('dirname') : '') : $element;
+        }
 
-        if (isset($options['id']) && $options['id'] != '') {
+        if (isset($options['id']) && '' != $options['id']) {
             $id = $options['id'];
             unset($options['id']);
             $providedId = true;
@@ -1035,32 +1023,29 @@ class RMTemplate
             $providedId = false;
         }
 
-        if(false == $providedId){
+        if (false === $providedId) {
             $parts = pathinfo($file);
             $id = str_replace('.min', '', $parts['filename']);
-            $id = strtolower($element) . '-' . TextCleaner::getInstance()->sweetstring($id) . '-css';
+            $id = mb_strtolower($element) . '-' . TextCleaner::getInstance()->sweetstring($id) . '-css';
             unset($parts);
         }
 
         if ($remote_script > 0) {
-
             $style_url = $file;
-
         } else {
-
-            $style_url = $this->generate_url($file, $element, $owner == 'theme' ? 'theme-css' : 'css', $directory, $version);
-
+            $style_url = $this->generate_url($file, $element, 'theme' == $owner ? 'theme-css' : 'css', $directory, $version);
         }
 
-        if ($style_url == '')
+        if ('' == $style_url) {
             return;
+        }
 
         // Add the new script to array (replacing old if exists)
-        $this->tpl_styles[$id] = array(
+        $this->tpl_styles[$id] = [
             'url' => $style_url,
             'type' => isset($options['type']) ? $options['type'] : 'text/css',
             'footer' => isset($options['footer']) ? $options['footer'] : 0,
-        );
+        ];
 
         // Delete unused options
         unset($options['version']);
@@ -1069,7 +1054,6 @@ class RMTemplate
         unset($options['type']);
 
         $this->tpl_styles[$id] = array_merge($this->tpl_styles[$id], $options);
-
     }
 
     /**
@@ -1078,16 +1062,16 @@ class RMTemplate
      */
     public function get_redirection_messages()
     {
-
-        if (isset($_SESSION['redirect_message']))
+        if (isset($_SESSION['redirect_message'])) {
             return $_SESSION['redirect_message'];
-        else
-            return array();
+        }
 
+        return [];
     }
 
     /**
      * Get all styles stored in class
+     * @param mixed $make
      */
     public function get_styles($make = false)
     {
@@ -1102,12 +1086,12 @@ class RMTemplate
 
         $rtn = '';
         foreach ($this->tpl_styles as $id => $style) {
-
-            $style['type'] = !isset($style['type']) || $style['type'] == '' ? 'text/css' : $style['type'];
+            $style['type'] = !isset($style['type']) || '' == $style['type'] ? 'text/css' : $style['type'];
 
             $rtn .= "\n" . '<link rel="stylesheet" type="' . $style['type'] . '" id="' . $id . '" href="' .
                 $style['url'] . '">';
         }
+
         return $rtn;
     }
 
@@ -1117,7 +1101,6 @@ class RMTemplate
      */
     private function process_styles()
     {
-
         $styles = [];
         $missing = [];
 
@@ -1131,12 +1114,10 @@ class RMTemplate
             } else {
                 $missing[$id] = $item;
             }
-
         }
 
         // Now read $missing array
         foreach ($missing as $id => $style) {
-
             // Check if script has been added
             if (array_key_exists('required', $style) && array_key_exists($style['required'], $styles)) {
                 $styles = $this->insert_script_after($styles, $style['required'], $id, $style);
@@ -1151,38 +1132,42 @@ class RMTemplate
             }
 
             $styles[$id] = $style;
-
         }
 
         $this->tpl_styles = $styles;
-        return true;
 
+        return true;
     }
 
     /**
      * Clear all styles stored previously.
      * @param string Style ID
+     * @param null|mixed $id
      * @return bool
      */
     public function clear_styles($id = null)
     {
-        if (null == $id) {
-            $this->tpl_styles = array();
+        if (null === $id) {
+            $this->tpl_styles = [];
+
             return true;
         }
 
         if (array_key_exists($id, $this->tpl_styles)) {
             unset($this->tpl_styles[$id]);
+
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
      * Assign template vars
      * @param string|array Variable name or array with multiple variables and their values
      * @param any Var value
+     * @param mixed $var
+     * @param null|mixed $value
      */
     public function assign($var, $value = null)
     {
@@ -1199,6 +1184,8 @@ class RMTemplate
      * Store vars inside template as array
      * @param string Var name
      * @param mixed Var valu
+     * @param mixed $varname
+     * @param mixed $value
      */
     public function append($varname, $value)
     {
@@ -1217,6 +1204,7 @@ class RMTemplate
      * Get a single template var
      *
      * @param string Var name
+     * @param mixed $varname
      * @return any
      */
     public function get_var($varname)
@@ -1237,21 +1225,30 @@ class RMTemplate
      * @param string Option link url
      * @param string Option icon url
      * @param string Target window (_clank, _self, etc.)
+     * @param mixed $caption
+     * @param mixed $link
+     * @param mixed $icon
+     * @param mixed $class
+     * @param mixed $target
      */
     public function add_menu_option($caption, $link, $icon = '', $class = '', $target = '')
     {
-        if ($caption == '' || $link == '') return;
+        if ('' == $caption || '' == $link) {
+            return;
+        }
 
         $id = crc32($link);
 
-        if (isset($this->tpl_menus[$id])) return;
+        if (isset($this->tpl_menus[$id])) {
+            return;
+        }
 
-        $this->tpl_menus[$id] = array('caption' => $caption, 'link' => $link, 'icon' => $icon, 'class' => $class, 'target' => $target, 'type' => 'normal');
+        $this->tpl_menus[$id] = ['caption' => $caption, 'link' => $link, 'icon' => $icon, 'class' => $class, 'target' => $target, 'type' => 'normal'];
     }
 
     public function add_separator()
     {
-        $this->tpl_menus = array('type' => 'separator');
+        $this->tpl_menus = ['type' => 'separator'];
     }
 
     /**
@@ -1259,7 +1256,6 @@ class RMTemplate
      */
     public function menu_options()
     {
-
         $this->tpl_menus = RMEvents::get()->run_event('rmcommon.menus_options', $this->tpl_menus, $this);
 
         return $this->tpl_menus;
@@ -1267,17 +1263,23 @@ class RMTemplate
 
     /**
      * Menu Widgets
+     * @param mixed $title
+     * @param mixed $link
+     * @param mixed $icon
+     * @param mixed $class
+     * @param mixed $location
+     * @param mixed $options
      */
-    public function add_menu($title, $link, $icon = '', $class = '', $location = '', $options = array())
+    public function add_menu($title, $link, $icon = '', $class = '', $location = '', $options = [])
     {
-        $this->menus[] = array(
+        $this->menus[] = [
             'title' => $title,
             'link' => $link,
             'icon' => $icon,
             'class' => $class,
             'location' => $location,
-            'options' => $options
-        );
+            'options' => $options,
+        ];
     }
 
     public function get_menus()
@@ -1312,26 +1314,20 @@ class RMTemplate
      * @param array $attributes <p>HTML attributes</p>
      * @param array $options <p>Options to add to this tool</p>
      */
-    public function add_tool($data, $link = '', $icon = '', $location = '', $attributes = array(), $options = array())
+    public function add_tool($data, $link = '', $icon = '', $location = '', $attributes = [], $options = [])
     {
-
         if (is_array($data)) {
-
             $this->toolbar[] = $data;
-
         } else {
-
-            $this->toolbar[] = array(
+            $this->toolbar[] = [
                 'title' => $data,
                 'link' => $link,
                 'icon' => $icon,
                 'location' => $location,
                 'attributes' => $attributes,
-                'options' => $options
-            );
-
+                'options' => $options,
+            ];
         }
-
     }
 
     public function get_toolbar()
@@ -1345,19 +1341,19 @@ class RMTemplate
          *     Current XOOPS module (verify if variable is defined
          *     Is admin side or not
          */
-        $this->toolbar = $common->events()->trigger('rmcommon.render.toolbar', $this->toolbar, $xoopsModule, XOOPS_CPFUNC_LOADED );
+        $this->toolbar = $common->events()->trigger('rmcommon.render.toolbar', $this->toolbar, $xoopsModule, XOOPS_CPFUNC_LOADED);
 
         return $this->toolbar;
     }
 
     /**
      * Add metas to head
+     * @param mixed $name
+     * @param mixed $content
      */
     public function add_meta($name, $content)
     {
-
         $this->metas[$name] = $content;
-
     }
 
     public function get_metas()
@@ -1373,8 +1369,9 @@ class RMTemplate
     {
         global $xoopsTpl, $xoopsConfig;
 
-        if (is_a($xoopsTpl, 'XoopsTpl'))
+        if (is_a($xoopsTpl, 'XoopsTpl')) {
             return $xoopsTpl;
+        }
 
         // include Smarty template engine and initialize it
         require_once $GLOBALS['xoops']->path('class/template.php');
@@ -1386,36 +1383,33 @@ class RMTemplate
         $xoopsThemeFactory->allowedThemes = $xoopsConfig['theme_set_allowed'];
         $xoopsThemeFactory->defaultTheme = $xoopsConfig['theme_set'];
 
-        $xoTheme = $xoopsThemeFactory->createInstance(array('contentTemplate' => @$xoopsOption['template_main']));
-        $xoopsTpl =& $xoTheme->template;
+        $xoTheme = $xoopsThemeFactory->createInstance(['contentTemplate' => @$xoopsOption['template_main']]);
+        $xoopsTpl = &$xoTheme->template;
 
         return $xoopsTpl;
-
     }
 
     public function fetch_smarty($tpl_file, $element, $type = 'module', $plugin = '')
     {
-
         $file = $this->get_template($tpl_file, $type, $element, $plugin);
 
         $tpl = $this->xo_tpl();
-        return $tpl->fetch($file);
 
+        return $tpl->fetch($file);
     }
 
     public function add_body_class($class)
     {
-
-        if ('' == $class)
+        if ('' == $class) {
             return null;
+        }
 
         $this->body_classes[] = $class;
-
     }
 
     public function body_classes()
     {
-        return implode(" ", $this->body_classes);
+        return implode(' ', $this->body_classes);
     }
 
     /**
@@ -1427,33 +1421,29 @@ class RMTemplate
      */
     public function add_attribute($element, $attributes)
     {
-
-        if (!in_array($element, ['html', 'body'])) {
+        if (!in_array($element, ['html', 'body'], true)) {
             return false;
         }
 
         foreach ($attributes as $id => $value) {
-
-            if(!array_key_exists($element, $this->attributes)){
+            if (!array_key_exists($element, $this->attributes)) {
                 $this->attributes[$element][$id] = $value;
                 continue;
             }
 
-            if(array_key_exists($id, $this->attributes[$element])){
+            if (array_key_exists($id, $this->attributes[$element])) {
                 $this->attributes[$element][$id] = $this->attributes[$element][$id] . ' ' . $value;
             } else {
                 $this->attributes[$element][$id] = $value;
             }
-
         }
 
         return true;
-
     }
 
     public function clear_attributes($element)
     {
-        if (!in_array($element, ['html', 'body'])) {
+        if (!in_array($element, ['html', 'body'], true)) {
             return false;
         }
 
@@ -1476,32 +1466,29 @@ class RMTemplate
             return false;
         }*/
 
-        if ('' != $element && false == array_key_exists($element, $this->attributes)) {
+        if ('' != $element && false === array_key_exists($element, $this->attributes)) {
             return null;
         }
 
-        if('' == $element){
-
+        if ('' == $element) {
             $ret = [];
 
-            foreach ($this->attributes as $element => $values){
+            foreach ($this->attributes as $element => $values) {
                 $ret[$element] = $this->render_attributes($element);
             }
 
             return $ret;
-
-        } else {
-            $return = '';
-            foreach ($this->attributes[$element] as $id => $value) {
-                if (null == $value) {
-                    $return .= $id . ' ';
-                } else {
-                    $return .= $id . '="' . $value . '" ';
-                }
-            }
-
-            return trim($return);
         }
+        $return = '';
+        foreach ($this->attributes[$element] as $id => $value) {
+            if (null === $value) {
+                $return .= $id . ' ';
+            } else {
+                $return .= $id . '="' . $value . '" ';
+            }
+        }
+
+        return trim($return);
     }
 
     /*
@@ -1512,95 +1499,113 @@ class RMTemplate
     /**
      * This function add a script directly from an element
      * @deprecated
+     * @param mixed $file
+     * @param mixed $element
+     * @param mixed $subfolder
+     * @param mixed $type
+     * @param mixed $more
+     * @param mixed $footer
      */
     public function add_local_script($file, $element = 'rmcommon', $subfolder = '', $type = 'text/javascript', $more = '', $footer = false)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMTemplate', 'add_script'), E_USER_DEPRECATED);
 
         $this->add_script(
             $file,
             $element,
-            array(
+            [
                 'directory' => $subfolder,
                 'type' => $type,
                 'footer' => $footer,
                 'data-extra' => $more,
-            )
+            ]
         );
-
     }
 
     /**
      * @deprecated Use add_script() instead
+     * @param mixed $script
+     * @param mixed $theme
+     * @param mixed $subfolder
+     * @param mixed $type
+     * @param mixed $more
+     * @param mixed $footer
      */
     public function add_theme_script($script, $theme = '', $subfolder = '', $type = 'text/javascript', $more = '', $footer = false)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMTemplate', 'add_script'), E_USER_DEPRECATED);
 
         $this->add_script(
             $script,
             $theme,
-            array(
+            [
                 'footer' => $footer,
                 'type' => $type,
                 'data-extra' => $more,
-            ),
+            ],
             'theme'
         );
-
     }
 
     /**
      * @deprecated Use add_style() instead.
+     * @param mixed $sheet
+     * @param mixed $element
+     * @param mixed $subfolder
+     * @param mixed $media
+     * @param mixed $more
+     * @param mixed $footer
      */
     public function add_xoops_style($sheet, $element = 'rmcommon', $subfolder = '', $media = 'all', $more = '', $footer = false)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMTemplate', 'add_style()'), E_USER_DEPRECATED);
 
         $this->add_style(
             $sheet,
             $element,
-            array(
+            [
                 'directory' => $subfolder,
                 'media' => $media,
                 'data-extra' => $more,
-                'footer' => $footer
-            )
+                'footer' => $footer,
+            ]
         );
-
     }
 
     /**
      * @deprecated Use add_style() instead
+     * @param mixed $sheet
+     * @param mixed $theme
+     * @param mixed $subfolder
+     * @param mixed $media
+     * @param mixed $more
+     * @param mixed $footer
      */
     public function add_theme_style($sheet, $theme = '', $subfolder = '', $media = 'all', $more = '', $footer = false)
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMTemplate', 'add_style()'), E_USER_DEPRECATED);
 
         $this->add_style(
             $sheet,
             $theme,
-            array(
+            [
                 'directory' => $subfolder,
                 'media' => $media,
                 'data-extra' => $more,
-                'footer' => $footer
-            ),
+                'footer' => $footer,
+            ],
             'theme'
         );
-
     }
 
     /**
      * @deprecated Use generate_url() instead.
+     * @param mixed $sheet
+     * @param mixed $element
+     * @param mixed $subfolder
      */
     public function style_url($sheet, $element = 'rmcommon', $subfolder = '')
     {
-
         trigger_error(sprintf(__('Method %s is deprecated. Use %s::%s instead.', 'rmcommon'), __METHOD__, 'RMTemplate', 'generate_url()'), E_USER_DEPRECATED);
 
         return $this->generate_url($sheet, $element, 'css');
@@ -1623,7 +1628,6 @@ class RMTemplate
     public function head_scripts()
     {
         return $this->inline_scripts(0);
-
     }
 
     /**
@@ -1638,5 +1642,4 @@ class RMTemplate
     {
         return static::path($file, $type, $module, $element);
     }
-
 }

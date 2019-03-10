@@ -38,8 +38,6 @@ interface AttributeInterface
      *
      * @param string $name  Name of the attribute option
      * @param mixed  $value Value of the attribute option
-     *
-     * @return void
      */
     public function set($name, $value);
 
@@ -48,7 +46,7 @@ interface AttributeInterface
      *
      * @param string $name An attribute name.
      *
-     * @return boolean TRUE if the given attribute exists, otherwise FALSE.
+     * @return bool TRUE if the given attribute exists, otherwise FALSE.
      */
     public function has($name);
 

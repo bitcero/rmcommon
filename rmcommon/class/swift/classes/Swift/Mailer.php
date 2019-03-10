@@ -52,7 +52,7 @@ class Swift_Mailer
     public function createMessage($service = 'message')
     {
         return Swift_DependencyContainer::getInstance()
-            ->lookup('message.'.$service);
+            ->lookup('message.' . $service);
     }
 
     /**

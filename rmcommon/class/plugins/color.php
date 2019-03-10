@@ -27,57 +27,61 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_color {
-	   function darken(phmagick $p ,$alphaValue = 50){
+class phMagick_color
+{
+    public function darken(phmagick $p, $alphaValue = 50)
+    {
         $percent = 100 - (int) $alphaValue;
 
         //get original file dimentions
 
-        list ($width, $height) = $p->getInfo();
+        list($width, $height) = $p->getInfo();
 
         $cmd = $p->getBinary('composite');
-        $cmd .=  ' -blend  ' . $percent . ' ';
-        $cmd .= '"'.$p->getSource().'"';
-        $cmd .= ' -size '. $width .'x'. $height.' xc:black ';
-        $cmd .= '-matte "' . $p->getDestination().'"' ;
+        $cmd .= ' -blend  ' . $percent . ' ';
+        $cmd .= '"' . $p->getSource() . '"';
+        $cmd .= ' -size ' . $width . 'x' . $height . ' xc:black ';
+        $cmd .= '-matte "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
-     *
      *  Brightens an image, defualt: 50%
      *
      * @param $imageFile String - Physical path of the umage file
      * @param $newFile String - Physical path of the generated image
      * @param $alphaValue Integer - 100: white , 0: original color (no change)
-     * @return boolean - True: success
+     * @return bool - True: success
      */
-    function brighten(phmagick $p, $alphaValue = 50){
-
+    public function brighten(phmagick $p, $alphaValue = 50)
+    {
         $percent = 100 - (int) $alphaValue;
 
         //get original file dimentions
 
-        list ($width, $height) = $p->getInfo();
+        list($width, $height) = $p->getInfo();
 
         $cmd = $p->getBinary('composite');
-        $cmd .=  ' -blend  ' . $percent . ' ';
-        $cmd .= '"'.$p->getSource().'"';
-        $cmd .= ' -size '. $width .'x'. $height.' xc:white ';
-        $cmd .= '-matte "' . $p->getDestination().'"' ;
+        $cmd .= ' -blend  ' . $percent . ' ';
+        $cmd .= '"' . $p->getSource() . '"';
+        $cmd .= ' -size ' . $width . 'x' . $height . ' xc:white ';
+        $cmd .= '-matte "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
     /**
      * Convert's the image to grayscale
+     * @param mixed $enhance
      */
 //    function toGrayScale(phmagick $p){
 //        $cmd  = $p->getBinary('convert');
@@ -91,57 +95,64 @@ class phMagick_color {
 //        return  $p ;
 //    }
 
-	function toGreyScale(phmagick $p, $enhance=2){
-		$cmd   = $p->getBinary('convert');
-		$cmd .= ' -modulate 100,0 ' ;
-		$cmd .= ' -sigmoidal-contrast '.$enhance.'x50%' ;
-		$cmd .= ' -background "none" "' . $p->getSource().'"' ;
-		$cmd .= ' "' . $p->getDestination() .'"';
-
-		$p->execute($cmd);
-		$p->setSource($p->getDestination());
-		$p->setHistory($p->getDestination());
-		return  $p ;
-	}
-
-    /**
-     * Inverts the image colors
-     */
-    function invertColors(phmagick $p){
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' "' . $p->getSource() .'"';
-        $cmd .= ' -negate ';
-        $cmd .= ' "' . $p->getDestination() .'"';
+    public function toGreyScale(phmagick $p, $enhance = 2)
+    {
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' -modulate 100,0 ';
+        $cmd .= ' -sigmoidal-contrast ' . $enhance . 'x50%';
+        $cmd .= ' -background "none" "' . $p->getSource() . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
 
         $p->execute($cmd);
         $p->setSource($p->getDestination());
         $p->setHistory($p->getDestination());
-        return  $p ;
+
+        return  $p;
     }
 
-    function sepia(phmagick $p, $tone = 90){
-		$cmd   = $p->getBinary('convert');
-		$cmd .= ' -sepia-tone '. $tone .'% ' ;
-		$cmd .= ' -modulate 100,50 ' ;
-		$cmd .= ' -normalize ' ;
-		$cmd .= ' -background "none" "' . $p->getSource() .'"' ;
-		$cmd .= ' "' . $p->getDestination().'"' ;
-	     $p->execute($cmd);
-	     $p->setSource($p->getDestination());
-	     $p->setHistory($p->getDestination());
-	    return  $p ;
+    /**
+     * Inverts the image colors
+     */
+    public function invertColors(phmagick $p)
+    {
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' "' . $p->getSource() . '"';
+        $cmd .= ' -negate ';
+        $cmd .= ' "' . $p->getDestination() . '"';
+
+        $p->execute($cmd);
+        $p->setSource($p->getDestination());
+        $p->setHistory($p->getDestination());
+
+        return  $p;
     }
 
-	function autoLevels(phmagick $p){
-		$cmd  = $p->getBinary('convert');
-		$cmd .= ' -normalize ' ;
-		$cmd .= ' -background "none" "' . $p->getSource().'"'  ;
-		$cmd .= ' "' . $p->getDestination() .'"' ;
+    public function sepia(phmagick $p, $tone = 90)
+    {
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' -sepia-tone ' . $tone . '% ';
+        $cmd .= ' -modulate 100,50 ';
+        $cmd .= ' -normalize ';
+        $cmd .= ' -background "none" "' . $p->getSource() . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
+        $p->execute($cmd);
+        $p->setSource($p->getDestination());
+        $p->setHistory($p->getDestination());
 
-		$p->execute($cmd);
-		$p->setSource($p->getDestination());
-		$p->setHistory($p->getDestination());
-		return  $p ;
-	}
+        return  $p;
+    }
 
+    public function autoLevels(phmagick $p)
+    {
+        $cmd = $p->getBinary('convert');
+        $cmd .= ' -normalize ';
+        $cmd .= ' -background "none" "' . $p->getSource() . '"';
+        $cmd .= ' "' . $p->getDestination() . '"';
+
+        $p->execute($cmd);
+        $p->setSource($p->getDestination());
+        $p->setHistory($p->getDestination());
+
+        return  $p;
+    }
 }

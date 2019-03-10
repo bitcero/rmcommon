@@ -26,42 +26,39 @@
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
  */
-
-$rmcommon_permissions = array(
-
+$rmcommon_permissions = [
     /**
      * Modules managament privileges
      */
-    'admin-modules' => array(
+    'admin-modules' => [
         'caption' => __('Modules management (Install, uninstall and update)', 'rmcommon'),
-        'default' => 'deny'
-    ),
+        'default' => 'deny',
+    ],
 
-    'admin-images' => array(
+    'admin-images' => [
         'caption' => __('Images management', 'rmcommon'),
-        'default' => 'deny'
-    ),
+        'default' => 'deny',
+    ],
 
-    'admin-comments' => array(
+    'admin-comments' => [
         'caption' => __('Comments management', 'rmcommon'),
-        'default' => 'deny'
-    ),
+        'default' => 'deny',
+    ],
 
-    'admin-plugins' => array(
+    'admin-plugins' => [
         'caption' => __('Plugins management (Install, uninstall and update)', 'rmcommon'),
-        'default' => 'deny'
-    ),
+        'default' => 'deny',
+    ],
 
-    'admin-groups' => array(
+    'admin-groups' => [
         'caption' => __('Groups management (create, delete and update)', 'rmcommon'),
-        'default' => 'deny'
-    ),
+        'default' => 'deny',
+    ],
 
-    'configure-system' => array(
+    'configure-system' => [
         'caption' => __('Grant access to system and modules configuration.', 'rmcommon'),
-        'default' => 'deny'
-    ),
-
-);
+        'default' => 'deny',
+    ],
+];
 
 return $rmcommon_permissions;

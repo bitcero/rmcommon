@@ -25,6 +25,7 @@
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
  * @url          http://www.redmexico.com.mx
  * @url          http://www.eduardocortes.mx
+ * @param mixed $output
  */
 
 /**
@@ -43,15 +44,15 @@ function cu_render_output($output)
      * Temporal solution to ModuleAdmin __constructor method
      * @todo Delete
      */
-    if(false == $common->isAjax) {
-        $pos = strpos($output, '<!DOCTYPE');
-        if($pos > 0){
-            $toMove = substr($output, 0, $pos);
-            $output = substr($output, $pos);
+    if (false === $common->isAjax) {
+        $pos = mb_strpos($output, '<!DOCTYPE');
+        if ($pos > 0) {
+            $toMove = mb_substr($output, 0, $pos);
+            $output = mb_substr($output, $pos);
 
-            if(!$xoopsModule || !$xoopsModule->getInfo('rmnative')){
-                $pos = strpos($output, '</head>', 0);
-                $output = substr($output, 0, $pos) . $toMove . "\n" . substr($output, $pos);
+            if (!$xoopsModule || !$xoopsModule->getInfo('rmnative')) {
+                $pos = mb_strpos($output, '</head>', 0);
+                $output = mb_substr($output, 0, $pos) . $toMove . "\n" . mb_substr($output, $pos);
                 unset($pos, $toMove);
             }
 
@@ -59,7 +60,9 @@ function cu_render_output($output)
         }
     }
 
-    if (function_exists('xoops_cp_header')) return $output;
+    if (function_exists('xoops_cp_header')) {
+        return $output;
+    }
 
     $page = $output;
     if ($xoopsTpl) {
@@ -68,7 +71,7 @@ function cu_render_output($output)
         }
     }
 
-    include_once RMTemplate::get()->path('rmc-header.php', 'module', 'rmcommon');
+    require_once RMTemplate::get()->path('rmc-header.php', 'module', 'rmcommon');
     /*$rtn = $htmlStyles;
     $rtn .= $htmlScripts['header'];
     $rtn .= $htmlScripts['inlineHeader'];*/
@@ -77,34 +80,31 @@ function cu_render_output($output)
     $find = [];
     $repl = [];
     foreach ($metas as $name => $content) {
-
         $str = "<meta\s+name=['\"]??" . $name . "['\"]??\s+content=['\"]??(.+)['\"]??\s*\/?>";
         if (preg_match($str, $page)) {
             $find[] = $str;
-            $str = "meta name=\"$name\" content=\"$content\" />\n";
+            $str = "meta name=\"$name\" content=\"$content\">\n";
             $repl[] = $str;
         } else {
-
-            $rtn .= "\n<meta name=\"$name\" content=\"$content\" />";
-
+            $rtn .= "\n<meta name=\"$name\" content=\"$content\">";
         }
-
     }
 
-    if (!empty($find))
+    if (!empty($find)) {
         $page = preg_replace($find, $repl, $page);
+    }
 
     $headerRendered = false;
     $footerRendered = false;
 
-    if(FALSE !== $pos = strpos($page, '<!-- RMTemplateHeader -->')){
+    if (false !== $pos = mb_strpos($page, '<!-- RMTemplateHeader -->')) {
         // Replace RMTemplateHeader with scripts and styles
         $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
         $page = str_replace('<!-- RMTemplateHeader -->', $ssContent, $page);
         $headerRendered = true;
     }
 
-    if(FALSE !== $pos = strpos($page, '<!-- RMTemplateFooter -->')){
+    if (false !== $pos = mb_strpos($page, '<!-- RMTemplateFooter -->')) {
         // Replace RMTemplateHeader with scripts and styles
         $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
         $page = str_replace('<!-- RMTemplateFooter -->', $ssContent, $page);
@@ -113,21 +113,21 @@ function cu_render_output($output)
 
     // Inject code if this is a standard theme
     // Natives themes must to include appropiate code
-    if(false == $common->nativeTheme){
-        $pos = strpos($page, "</head>");
-        if ($pos !== FALSE && false == $headerRendered){
+    if (false === $common->nativeTheme) {
+        $pos = mb_strpos($page, '</head>');
+        if (false !== $pos && false === $headerRendered) {
             $ssContent = $rtn . $htmlStyles . $htmlScripts['header'] . $htmlScripts['inlineHeader'];
-            $ret = substr($page, 0, $pos) . "\n";
+            $ret = mb_substr($page, 0, $pos) . "\n";
             $ret .= $ssContent;
-            $page = $ret . substr($page, $pos);
+            $page = $ret . mb_substr($page, $pos);
         }
 
-        $pos = strpos($page, "</body>");
-        if ($pos !== FALSE && false == $footerRendered){
+        $pos = mb_strpos($page, '</body>');
+        if (false !== $pos && false === $footerRendered) {
             $ssContent = $htmlScripts['footer'] . $htmlScripts['inlineFooter'];
-            $ret = substr($page, 0, $pos) . "\n";
+            $ret = mb_substr($page, 0, $pos) . "\n";
             $ret .= $ssContent;
-            $page = $ret . substr($page, $pos);
+            $page = $ret . mb_substr($page, $pos);
         }
     }
 

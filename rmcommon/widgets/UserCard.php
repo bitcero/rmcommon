@@ -50,7 +50,7 @@ class UserCard extends WidgetAbstract implements WidgetInterface
             'info',
             'social',
             'headerBg',
-            'headerGradient'
+            'headerGradient',
         ];
     }
 
@@ -95,15 +95,15 @@ class UserCard extends WidgetAbstract implements WidgetInterface
 
         // Get user data
         if (is_a($data['user'], 'XoopsUser')) {
-            $data['name'] = $data['user']->getVar('name') == '' ? $data['user']->getVar('name') : $data['user']->getVar('uname');
+            $data['name'] = '' == $data['user']->getVar('name') ? $data['user']->getVar('name') : $data['user']->getVar('uname');
             $data['email'] = $data['user']->email;
         } elseif ($data['user'] > 0) {
             $xUser = new XoopsUser($data['user']);
-            $data['name'] = $xUser->getVar('name') == '' ? $xUser->getVar('name') : $xUser->getVar('uname');
+            $data['name'] = '' == $xUser->getVar('name') ? $xUser->getVar('name') : $xUser->getVar('uname');
             $data['email'] = $xUser->email;
         }
 
-        if (false == array_key_exists('name', $data) || '' == $data['name']) {
+        if (false === array_key_exists('name', $data) || '' == $data['name']) {
             throw new \RMException(__('the widget UserCard requires the user name', 'rmcommon'));
         }
 
@@ -127,6 +127,7 @@ class UserCard extends WidgetAbstract implements WidgetInterface
         if ('' == $this->tplPath) {
             $this->tplPath = \RMTemplate::getInstance()->path('widgets/widget-usercard.php', 'module', 'rmcommon');
         }
+
         return $this->tplPath;
     }
 
@@ -141,6 +142,4 @@ class UserCard extends WidgetAbstract implements WidgetInterface
 
         return \RMTemplate::getInstance()->render($this->template());
     }
-
-
 }

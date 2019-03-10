@@ -31,13 +31,13 @@ namespace Common\Core\Helpers;
 
 class Widgets
 {
-    private $widgetsProviders = array();
+    private $widgetsProviders = [];
 
     public function __construct()
     {
         $this->widgetsProviders['rmcommon'] = [
             'path' => RMCPATH . '/widgets',
-            'namespace' => 'Common\Widgets'
+            'namespace' => 'Common\Widgets',
         ];
         $this->loadProviders();
     }
@@ -50,13 +50,12 @@ class Widgets
      *
      * 'id' key must have an unique identifier to load icons from 'directory'.
      *
-     * @return bool
      * @throws \Exception
+     * @return bool
      */
     private function loadProviders()
     {
-
-        $providers = array();
+        $providers = [];
         $providers = \RMEvents::get()->trigger('rmcommon.register.widgets.provider', $providers);
 
         if (empty($providers)) {
@@ -64,8 +63,7 @@ class Widgets
         }
 
         foreach ($providers as $provider) {
-
-            if ($provider['id'] == '') {
+            if ('' == $provider['id']) {
                 continue;
             }
 
@@ -73,27 +71,24 @@ class Widgets
                 continue;
             }
 
-            if ($provider['id'] == 'rmcommon') {
+            if ('rmcommon' == $provider['id']) {
                 throw new \Exception(__('Illegal attempt to replace "Common Utilities" widgets provider!', 'rmcommon'));
+
                 return false;
             }
 
             $this->widgetsProviders[$provider['id']] = [
                 'path' => $provider['path'],
-                'namespace' => rtrim($provider['namespace'], '\\')
+                'namespace' => rtrim($provider['namespace'], '\\'),
             ];
-
         }
-
     }
 
     public function getWidgetsList($providers = [])
     {
-
         /**
          * @todo: Make routines to request a widgets list and information from module
          */
-
     }
 
     /**
@@ -104,49 +99,52 @@ class Widgets
      */
     public function load($provider, $widgetName)
     {
-
-        if('' == $widgetName || '' == $provider){
+        if ('' == $widgetName || '' == $provider) {
             return false;
         }
 
-        if(false === array_key_exists($provider, $this->widgetsProviders)){
+        if (false === array_key_exists($provider, $this->widgetsProviders)) {
             trigger_error(sprintf(__('Attempt to load a widget from a non existent provider: %s', 'rmcommon'), $provider));
+
             return false;
         }
 
         // File path
         $path = $this->widgetsProviders[$provider]['path'] . '/' . $widgetName . '.php';
-        if(false === file_exists($path)){
+        if (false === file_exists($path)) {
             trigger_error(sprintf(__('Attempt to load a non existent widget: %s', 'rmcommon'), $widgetName));
+
             return false;
         }
 
-        include_once $path;
+        require_once $path;
 
-        if(false === class_exists($this->widgetsProviders[$provider]['namespace'] . '\\' . $widgetName)){
+        if (false === class_exists($this->widgetsProviders[$provider]['namespace'] . '\\' . $widgetName)) {
             trigger_error(sprintf(__('Attempt to load a non existent widget: %s', 'rmcommon'), $widgetName));
+
             return false;
         }
 
         $widgetClass = $this->widgetsProviders[$provider]['namespace'] . '\\' . $widgetName;
         $widget = new $widgetClass();
-        if(false === is_subclass_of($widget, 'Common\Core\Helpers\WidgetAbstract')){
+        if (false === is_subclass_of($widget, 'Common\Core\Helpers\WidgetAbstract')) {
             trigger_error(sprintf(__('Attempt to load a non valid widget: %s. Widgets must be extended from WidgetAbstract.', 'rmcommon'), $widgetName));
+
             return false;
         }
 
         return $widget;
-
     }
 
     public static function getInstance()
     {
         static $instance;
 
-        if (isset($instance))
+        if (isset($instance)) {
             return $instance;
+        }
 
-        $instance = new Widgets();
+        $instance = new self();
 
         return $instance;
     }

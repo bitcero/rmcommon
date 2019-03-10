@@ -8,42 +8,44 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-if ( !defined( 'XOOPS_MAINFILE_INCLUDED' ) )
-    require '../../mainfile.php';
+if (!defined('XOOPS_MAINFILE_INCLUDED')) {
+    require dirname(__DIR__) . '/../mainfile.php';
+}
 
 /**
-* Show all RSS options
-*/
-function show_rss_options(){
+ * Show all RSS options
+ */
+function show_rss_options()
+{
     global $xoopsTpl, $xoopsConfig;
 
-    include XOOPS_ROOT_PATH.'/header.php';
-    $xoopsTpl->assign('xoops_pagetitle', __('RSS Center','rmcommon'));
+    include XOOPS_ROOT_PATH . '/header.php';
+    $xoopsTpl->assign('xoops_pagetitle', __('RSS Center', 'rmcommon'));
 
-    $feeds = array();
+    $feeds = [];
     $feeds = RMEvents::get()->run_event('rmcommon.get.feeds.list', $feeds);
 
     RMTemplate::get()->add_style('rss.css', 'rmcommon');
     include RMTemplate::get()->get_template('rmc-rss-center.php', 'module', 'rmcommon');
 
-    include XOOPS_ROOT_PATH.'/footer.php';
-
+    include XOOPS_ROOT_PATH . '/footer.php';
 }
 
-function show_rss_content(){
+function show_rss_content()
+{
     global $xoopsConfig;
 
-    include_once $GLOBALS['xoops']->path('class/template.php');
+    require_once $GLOBALS['xoops']->path('class/template.php');
     $tpl = new XoopsTpl();
-    $module = rmc_server_var($_GET,'mod','');
+    $module = rmc_server_var($_GET, 'mod', '');
 
-    if ($module=='') {
-        redirect_header('backend.php', 1, __('Choose an option to see its feed','rmcommon'));
+    if ('' == $module) {
+        redirect_header('backend.php', 1, __('Choose an option to see its feed', 'rmcommon'));
         die();
     }
 
-    if (!file_exists(XOOPS_ROOT_PATH.'/modules/'.$module.'/rss.php')) {
-        redirect_header('backend.php', 1, __('This module does not support rss feeds','rmcommon'));
+    if (!file_exists(XOOPS_ROOT_PATH . '/modules/' . $module . '/rss.php')) {
+        redirect_header('backend.php', 1, __('This module does not support rss feeds', 'rmcommon'));
         die();
     }
 
@@ -53,7 +55,7 @@ function show_rss_content(){
     }
     header('Content-Type:text/xml; charset=utf-8');
 
-    include XOOPS_ROOT_PATH.'/modules/'.$module.'/rss.php';
+    include XOOPS_ROOT_PATH . '/modules/' . $module . '/rss.php';
 
     if (!isset($rss_channel['image'])) {
         $rmc_config = RMSettings::cu_settings();
@@ -64,10 +66,9 @@ function show_rss_content(){
     }
 
     include RMTemplate::get()->get_template('rmc-rss.php', 'module', 'rmcommon');
-
 }
 
-$action = RMHttpRequest::get( 'action', 'string', '' );
+$action = RMHttpRequest::get('action', 'string', '');
 
 switch ($action) {
     case 'showfeed':

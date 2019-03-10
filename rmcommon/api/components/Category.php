@@ -33,10 +33,10 @@ class Category extends \RMObject
     public function __construct($id = null)
     {
         $this->db = XoopsDatabaseFactory::getDatabaseConnection();
-        $this->_dbtable = $this->db->prefix("mod_rmcommon_categories");
+        $this->_dbtable = $this->db->prefix('mod_rmcommon_categories');
         $this->setNew();
         $this->initVarsFromTable();
-        if ($id == null) {
+        if (null === $id) {
             return;
         }
 
