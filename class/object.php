@@ -561,18 +561,18 @@ class RMObject
                     case XOBJ_DTYPE_TXTBOX:
                         if ($v['required'] && '0' != $cleanv && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
-                            continue;
+                            break;
                         }
                         if (isset($v['maxlength']) && mb_strlen($cleanv) > (int)$v['maxlength']) {
                             $this->setErrors(sprintf(_XOBJ_ERR_SHORTERTHAN, $k, (int)$v['maxlength']));
-                            continue;
+                            break;
                         }
                         $cleanv = TextCleaner::stripslashes($cleanv);
                         break;
                     case XOBJ_DTYPE_TXTAREA:
                         if ($v['required'] && '0' != $cleanv && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
-                            continue;
+                            break;
                         }
 
                         $cleanv = TextCleaner::stripslashes($cleanv);
@@ -586,18 +586,18 @@ class RMObject
                     case XOBJ_DTYPE_EMAIL:
                         if ($v['required'] && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
-                            continue;
+                            break;
                         }
                         if ('' != $cleanv && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $cleanv)) {
                             $this->setErrors('Invalid Email');
-                            continue;
+                            break;
                         }
                         $cleanv = TextCleaner::stripslashes($cleanv);
                         break;
                     case XOBJ_DTYPE_URL:
                         if ($v['required'] && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
-                            continue;
+                            break;
                         }
                         if ('' != $cleanv && !preg_match("/^http[s]*:\/\//i", $cleanv)) {
                             $cleanv = 'http://' . $cleanv;
