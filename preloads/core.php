@@ -104,7 +104,7 @@ class RmcommonCorePreload extends XoopsPreloadItem
 
     public static function eventCoreFooterStart()
     {
-        global $xoopsTpl;
+        global $common;
 
         // Assign scripts and styles
         $tpl = RMTemplate::getInstance();
@@ -113,9 +113,9 @@ class RmcommonCorePreload extends XoopsPreloadItem
         $htmlScripts['inlineFooter'] = $tpl->inline_scripts(1);
         $htmlStyles = $tpl->get_styles(true);
 
-        $xoopsTpl->assign('themeScripts', $htmlScripts);
-        $xoopsTpl->assign('themeStyles', $htmlStyles);
-        $xoopsTpl->assign('htmlAttributes', $tpl->render_attributes());
+        $common->xoopsTpl()->assign('themeScripts', $htmlScripts);
+        $common->xoopsTpl()->assign('themeStyles', $htmlStyles);
+        $common->xoopsTpl()->assign('htmlAttributes', $tpl->render_attributes());
 
         RMEvents::get()->trigger('rmcommon.footer.start');
     }
