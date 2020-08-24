@@ -33,19 +33,21 @@
                     <tr class="even">
                         <td><strong><?php _e('Author:', 'rmcommon'); ?></strong></td>
                         <td colspan="2">
-                            <?php if ($module->getInfo('authorurl')): ?>
+                          <?php
+                          $authors = $module->getInfo('author');
+                          if(is_array($authors)): ?>
+                            <?php foreach($authors as $author): ?>
+                                  <a href="<?php echo $author['url']; ?>"><?php echo $author['name']; ?></a>
+                            <?php endforeach; ?>
+                          <?php else: ?>
+                            <?php if ($authors['authorurl']): ?>
                                 <a href="<?php echo $module->getInfo('authorurl'); ?>"><?php echo $module->getInfo('author'); ?></a>
                             <?php else: ?>
                                 <?php echo $module->getInfo('author'); ?>
                             <?php endif; ?>
+                          <?php endif; ?>
                         </td>
                     </tr>
-                    <?php if ($module->getInfo('rmnative')): ?>
-                        <tr class="odd">
-                            <td><strong><?php _e('Author Web:', 'rmcommon'); ?></strong></td>
-                            <td colspan="2"><a href="<?php echo $module->getInfo('authorurl'); ?>" target="_blank"><?php echo $module->getInfo('authorweb'); ?></a></td>
-                        </tr>
-                    <?php endif; ?>
                     <tr class="even">
                         <td><strong><?php _e('Description:', 'rmcommon'); ?></strong></td>
                         <td colspan="2"><?php echo $module->getInfo('description'); ?></td>
