@@ -84,6 +84,51 @@
 
     <!-- Recent News -->
     <div class="size-1" data-dashboard="item">
+
+        <div class="cu-box">
+                <?php
+                $user = $common->widgets()->load('rmcommon', 'UserCard');
+                $user->setup([
+                    'type' => 'large-header',
+                    'image' => 'https://www.gravatar.com/avatar/a888698732624c0a1d4da48f1e5c6bb4?s=200',
+                    'name' => 'Eduardo Cortes',
+                    'link' => 'https://www.eduardocortes.mx',
+                    'charge' => 'Web Developer (Freelance)',
+                    'mainButton' => [
+                        'caption' => __('Website', 'mywords'),
+                        'link' => 'https://www.eduardocortes.mx',
+                        'icon' => 'svg-rmcommon-user',
+                    ],
+                    'color' => 'grey',
+                    'highlight' => 'bottom',
+                    'info' => __('Hello! I\'m the developer of Common Utilities and other modules that you\'ve propabily had used. If you are interested on my work, please visit my website to find more information.', 'mywords'),
+                    'social' => [
+                        [
+                            'icon' => 'svg-rmcommon-world',
+                            'link' => 'https://www.eduardocortes.mx/blog/',
+                        ],
+                        [
+                            'icon' => 'svg-rmcommon-twitter',
+                            'link' => 'https://www.twitter.com/bitcero',
+                        ],
+                        [
+                            'icon' => 'svg-rmcommon-facebook',
+                            'link' => 'https://www.facebook.com/bitcero',
+                        ],
+                        [
+                            'icon' => 'svg-rmcommon-instagram',
+                            'link' => 'https://www.instagram.com/bitcero',
+                        ],
+                        [
+                            'icon' => 'svg-rmcommon-github',
+                            'link' => 'https://www.github.com/bitcero',
+                        ],
+                    ],
+                ]);
+                $user->display();
+                ?>
+        </div>
+
         <div class="cu-box">
             <div class="box-header">
                 <span class="fa fa-caret-up box-handler"></span>

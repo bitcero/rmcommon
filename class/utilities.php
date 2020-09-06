@@ -352,4 +352,10 @@ class RMUtilities
         $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
         $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
     }
+
+    public function showError($code, $message)
+    {
+      $content = "<strong>Error [$code]</strong><br><br><p>$message</p>";
+      $this->showMessage($content, RMMSG_ERROR, 'svg-rmcommon-warning');
+    }
 }

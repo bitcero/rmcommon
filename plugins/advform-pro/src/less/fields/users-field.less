@@ -1,0 +1,40 @@
+.select2-results{
+
+  .adv-users-field-result{
+    position: relative;
+    padding: 0px;
+
+    &:after{
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    > img{
+      width: 40px;
+      height: 40px;
+      float: left;
+    }
+
+    > .user-meta{
+      margin-left: 50px;
+      font-size: 0.8em;
+
+      > .user-name{
+        font-weight: 700;
+        display: block;
+        padding: 3px 0 1px;
+        line-height: 1;
+        font-size: @font-size-base;
+      }
+
+      > .user-uid, > .user-email{
+        display: inline-block;
+        padding: 0;
+        margin-right: 6px;
+      }
+    }
+
+  }
+
+}

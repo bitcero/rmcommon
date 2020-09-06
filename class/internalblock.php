@@ -63,11 +63,11 @@ class RMInternalBlock extends RMObject
         $this->unsetNew();
 
         $file = XOOPS_ROOT_PATH . '/modules/' . $this->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/blocks.php';
-
+        
         if (file_exists($file)) {
-            @require_once $file;
+            @include_once $file;
         } else {
-            @require_once str_replace('/' . $xoopsConfig['language'] . '/', '/english/', $file);
+            @include_once str_replace('/' . $xoopsConfig['language'] . '/', '/english/', $file);
         }
 
         // Cargamos los grupos con permisos

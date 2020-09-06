@@ -147,13 +147,13 @@ function insert_block()
  */
 function configure_block()
 {
-    global $xoopsSecurity;
+    global $xoopsSecurity, $common;
 
     if (!$xoopsSecurity->check()) {
         response(__('Sorry, you are not allowed to view this page', 'rmcommon'), [], 1, 0);
     }
 
-    $id = rmc_server_var($_POST, 'block', 0);
+    $id = $common->httpRequest()::post('block', 'integer', 0);
 
     if ($id <= 0) {
         response(__('The block that you specified seems to be invalid. Please try again', 'rmcommon'), [], 1, 1);

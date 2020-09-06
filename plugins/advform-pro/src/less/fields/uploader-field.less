@@ -1,0 +1,24 @@
+[data-advf-field="uploader"]{
+  border: 1px dashed rgba(0,0,0,0.2);
+  padding: 30px 15px;
+  position: relative;
+  transition: ease all 250ms;
+  cursor: pointer;
+
+  .dz-message{
+    padding: 0;
+    margin: 20px 0;
+    text-align: center;
+    color: rgba(0,0,0,0.3);
+    text-transform: uppercase;
+  }
+
+  &.dz-drag-hover{
+    background-color: rgba(0,0,0,0.05);
+  }
+
+  &.dz-started > .dz-message{
+    dispaly: none;
+  }
+
+}
