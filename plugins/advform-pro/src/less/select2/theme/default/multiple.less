@@ -1,0 +1,120 @@
+.select2-selection--multiple {
+  cursor: text;
+
+  .select2-selection__rendered {
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    width: 100%;
+
+    li {
+      list-style: none;
+    }
+  }
+
+  .select2-selection__placeholder {
+    color: #999;
+
+    margin-top: 5px;
+
+    float: left;
+  }
+
+  .select2-selection__clear {
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+
+  .select2-selection__choice {
+    background-color: @theme-main-color;
+
+    border: 0;
+    border-radius: @border-radius-base;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    //margin-top: 5px;
+    padding: 0 20px 0 10px;
+    line-height: @input-height-base - 10px;
+    color: @theme-main-color-text;
+    font-size: floor(@font-size-base * 0.9);
+    position: relative;
+  }
+
+  .select2-selection__choice__remove {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    color: @theme-main-color-text;
+    cursor: pointer;
+    background-color: darken(@theme-main-color, 5%);
+    display: block;
+    font-weight: bold;
+    width: 14px;
+    text-align: center;
+    font-size: 1.2em;
+    transition: ease all 250ms;
+    border-radius: 0 @border-radius-base @border-radius-base 0;
+
+    &:before{
+      content: "\00d7";
+      display: block;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 16px!important;
+      text-align: center;
+      line-height: 24px;
+    }
+
+    &:hover {
+      background-color: @brand-danger;
+
+      &:before{
+        color: #FFF;
+      }
+
+    }
+  }
+
+  &.form-control{
+    padding: 4px 0px 3px;
+  }
+
+}
+
+&[dir="rtl"] {
+  .select2-selection--multiple {
+    .select2-selection__choice, .select2-selection__placeholder, .select2-search--inline {
+      float: right;
+    }
+
+    .select2-selection__choice {
+      margin-left: 5px;
+      margin-right: auto;
+    }
+
+    .select2-selection__choice__remove {
+      margin-left: 2px;
+      margin-right: auto;
+    }
+  }
+}
+
+&.select2-container--focus {
+  .select2-selection--multiple {
+    border: solid @input-border-focus 1px;
+    outline: 0;
+  }
+}
+
+&.select2-container--disabled {
+  .select2-selection--multiple {
+    background-color: #eee;
+    cursor: default;
+  }
+
+  .select2-selection__choice__remove {
+    display: none;
+  }
+}

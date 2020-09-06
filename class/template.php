@@ -201,13 +201,9 @@ class RMTemplate
     /**
      * Get a template from Current RMCommon Theme
      * @param string Template file name
-     * @param string Elemernt type: module, builder or plugin
-     * @param string Module name
+     * @param string Element type: module, builder or plugin
+     * @param string Muste be the module name or theme name.
      * @param string Element name, only when type is plugin or builder
-     * @param mixed $file
-     * @param mixed $type
-     * @param mixed $module
-     * @param mixed $element
      * @return string Template path
      */
     public static function path($file, $type = 'module', $module = '', $element = '')
@@ -223,8 +219,16 @@ class RMTemplate
         }
 
         if (!function_exists('xoops_cp_header')) {
-            $theme = $xoopsConfig['theme_set'];
-            $where = XOOPS_THEME_PATH . '/' . $theme;
+
+            // If type is 'theme' then return the template path directly
+            if('theme' == $type){
+                $where = XOOPS_THEME_PATH . '/' . $module . '/' . $file;
+
+                return is_file($where) ? $where : false;
+            }
+
+            // Search for template in the theme folder
+            $where = XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set']; // 'themes/$theme
             $where .= 'module' == $type ? '/modules/' : '/' . $element . 's/';
             $where .= $module . ('' != $element ? '/' . $element : '');
 
@@ -293,12 +297,12 @@ class RMTemplate
      * <pre>
      * $template->render('template-file.php', 'module', 'my-module');
      * </pre>
-     *
      * @param $file
      * @param string $type
      * @param string $module
      * @param string $element
-     * @return string
+     * @return bool|false|string
+     * @throws RMException
      */
     public function render($file, $type = '', $module = '', $element = '')
     {

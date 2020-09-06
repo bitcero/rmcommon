@@ -108,4 +108,4 @@ var cuLanguage = {
 <?php
 
 $script = ob_get_clean();
-RMTemplate::get()->add_inline_script($script);
+RMTemplate::getInstance()->add_inline_script($script);

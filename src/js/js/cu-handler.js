@@ -257,8 +257,8 @@ var cuHandler = {
 
     showLoader: function () {
 
-        $(".cu-window-loader").hide();
-        $(".cu-window-blocker").hide();
+        $(".cu-window-loader").remove();
+        $(".cu-window-blocker").remove();
 
         var html = '<div class="cu-window-blocker"></div>';
         html += '<div class="cu-window-loader">' +
@@ -266,15 +266,25 @@ var cuHandler = {
             '<button class="close" type="button">&times;</button>' +
             '<span>' +
             '<span class="cu-icon cu-spinner" style="animation: cu-spin 1s infinite steps(10)">' +
-            '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path d="M5.233 2.056C5.23 1.063 6.033.253 7.027.25c.994-.003 1.803.8 1.806 1.794.004.994-.8 1.802-1.794 1.806-1 .003-1.81-.8-1.81-1.794zm3.824 1.568c-.003-.993.8-1.802 1.792-1.806.99-.003 1.8.8 1.8 1.793 0 1-.8 1.81-1.8 1.81-1 .01-1.8-.8-1.81-1.79zm2.495 3.81c-.002-.497.398-.9.896-.903.497 0 .902.4.904.9 0 .5-.402.9-.897.91-.498.01-.902-.39-.903-.89zm-1.57 3.824c-.003-.496.4-.9.895-.903.498 0 .903.4.904.897.01.498-.4.9-.89.904-.49.002-.9-.4-.9-.898zM6.17 12.853c-.002-.496.4-.9.897-.902.497 0 .9.4.903.9.002.5-.4.9-.897.91-.498.01-.902-.4-.903-.89zm-3.824-1.57c-.002-.495.4-.9.897-.902.496 0 .9.4.902.9.002.5-.4.9-.896.91-.5 0-.91-.4-.91-.9zM1.87 3.65c-.003-.746.6-1.352 1.345-1.354.746-.002 1.352.6 1.354 1.345 0 .75-.6 1.36-1.35 1.36-.75.01-1.35-.6-1.36-1.34zM.637 7.472c-.002-.56.45-1.014 1.01-1.016.56-.002 1.013.45 1.015 1.01 0 .56-.45 1.014-1.008 1.016S.64 8.03.638 7.472z"/></svg>' +
+            '<svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n' +
+            '  viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">\n' +
+            '    <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">\n' +
+            '      <animateTransform \n' +
+            '         attributeName="transform" \n' +
+            '         attributeType="XML" \n' +
+            '         type="rotate"\n' +
+            '         dur="1s" \n' +
+            '         from="0 50 50"\n' +
+            '         to="360 50 50" \n' +
+            '         repeatCount="indefinite" />\n' +
+            '  </path>\n' +
+            '</svg>' +
             '</span>' + ' ' + cuLanguage.inProgress + '</span>' +
             '</div></div>';
 
         $('body').append(html);
-
-        $(".cu-window-blocker").fadeIn(0, function () {
-            $(".cu-window-loader").fadeIn(1);
-        });
+        $("div.cu-window-blocker").show();
+        $("div.cu-window-loader").addClass('active');
 
     },
 
