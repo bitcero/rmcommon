@@ -103,14 +103,12 @@ subsequents themes.
   line-height: normal;
   font-weight: normal;
   text-align: left;
-  -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   direction: ltr;
   max-width: none;
 }
 .mce-widget button {
-  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -119,7 +117,7 @@ subsequents themes.
   -webkit-user-select: none;
   -o-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+      user-select: none;
 }
 .mce-fade {
   opacity: 0;
@@ -161,7 +159,7 @@ div.mce-fullscreen {
 div.mce-edit-area {
   background: #FFF;
   -webkit-filter: none;
-  filter: none;
+          filter: none;
 }
 .mce-statusbar {
   position: relative;
@@ -294,8 +292,6 @@ div.mce-tinymce-inline {
 }
 .mce-branding-powered-by {
   background: #f9f9f9;
-  background: -moz-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
-  background: -webkit-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f9f9f9));
   background: -o-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: linear-gradient(to bottom, #f9f9f9 0%, #f9f9f9 100%);
@@ -492,25 +488,21 @@ div.mce-tinymce-inline {
 }
 .mce-edit-aria-container > .mce-container-body {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 .mce-edit-aria-container > .mce-container-body .mce-edit-area {
   -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 .mce-edit-aria-container > .mce-container-body .mce-sidebar > .mce-container-body {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   height: 100%;
 }
 .mce-edit-aria-container > .mce-container-body .mce-sidebar-panel {
@@ -535,8 +527,6 @@ div.mce-tinymce-inline {
   border: 1px solid transparent;
   border-color: transparent;
   background: #2980b9;
-  background: -moz-linear-gradient(top, #2980b9 0%, #3498db 100%);
-  background: -webkit-linear-gradient(top, #2980b9 0%, #3498db 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#2980b9), to(#3498db));
   background: -o-linear-gradient(top, #2980b9 0%, #3498db 100%);
   background: linear-gradient(to bottom, #2980b9 0%, #3498db 100%);
@@ -607,8 +597,6 @@ div.mce-tinymce-inline {
 .mce-panel {
   border: 0 solid #e1e1e1;
   background: #f9f9f9;
-  background: -moz-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
-  background: -webkit-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f9f9f9));
   background: -o-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: linear-gradient(to bottom, #f9f9f9 0%, #f9f9f9 100%);
@@ -717,8 +705,8 @@ div.mce-fullscreen {
   left: 0;
   opacity: 0;
   -webkit-transform: scale(0.1);
-  -ms-transform: scale(0.1);
-  transform: scale(0.1);
+      -ms-transform: scale(0.1);
+          transform: scale(0.1);
   -webkit-transition: opacity 150ms ease-in, -webkit-transform 100ms ease-in;
   transition: opacity 150ms ease-in, -webkit-transform 100ms ease-in;
   -o-transition: transform 100ms ease-in, opacity 150ms ease-in;
@@ -727,8 +715,8 @@ div.mce-fullscreen {
 }
 .mce-window.mce-in {
   -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
   opacity: 1;
 }
 .mce-window-head {
@@ -931,8 +919,6 @@ div.mce-fullscreen {
   width: 0%;
   height: 100%;
   background: #dfdfdf;
-  background: -moz-linear-gradient(top, #dfdfdf 0%, #cccccc 100%);
-  background: -webkit-linear-gradient(top, #dfdfdf 0%, #cccccc 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#cccccc));
   background: -o-linear-gradient(top, #dfdfdf 0%, #cccccc 100%);
   background: linear-gradient(to bottom, #dfdfdf 0%, #cccccc 100%);
@@ -1080,13 +1066,11 @@ body .mce-abs-layout-item,
   border: 1px solid #aeaeae;
   border-color: transparent transparent transparent transparent;
   position: relative;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.75);
   display: inline-block;
   *display: inline;
   *zoom: 1;
   background: #f9f9f9;
-  background: -moz-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
-  background: -webkit-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f9f9f9));
   background: -o-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: linear-gradient(to bottom, #f9f9f9 0%, #f9f9f9 100%);
@@ -1113,8 +1097,6 @@ body .mce-abs-layout-item,
 .mce-btn.mce-active,
 .mce-btn.mce-active:hover {
   background: #e0e0e0;
-  background: -moz-linear-gradient(top, #e0e0e0 0%, #ececec 100%);
-  background: -webkit-linear-gradient(top, #e0e0e0 0%, #ececec 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#ececec));
   background: -o-linear-gradient(top, #e0e0e0 0%, #ececec 100%);
   background: linear-gradient(to bottom, #e0e0e0 0%, #ececec 100%);
@@ -1124,8 +1106,6 @@ body .mce-abs-layout-item,
 }
 .mce-btn:active {
   background: #e7e7e7;
-  background: -moz-linear-gradient(top, #e7e7e7 0%, #ececec 100%);
-  background: -webkit-linear-gradient(top, #e7e7e7 0%, #ececec 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#e7e7e7), to(#ececec));
   background: -o-linear-gradient(top, #e7e7e7 0%, #ececec 100%);
   background: linear-gradient(to bottom, #e7e7e7 0%, #ececec 100%);
@@ -1165,8 +1145,6 @@ body .mce-abs-layout-item,
   border: 1px solid transparent;
   border-color: transparent;
   background: #2980b9;
-  background: -moz-linear-gradient(top, #2980b9 0%, #3498db 100%);
-  background: -webkit-linear-gradient(top, #2980b9 0%, #3498db 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#2980b9), to(#3498db));
   background: -o-linear-gradient(top, #2980b9 0%, #3498db 100%);
   background: linear-gradient(to bottom, #2980b9 0%, #3498db 100%);
@@ -1176,8 +1154,6 @@ body .mce-abs-layout-item,
 .mce-primary:hover,
 .mce-primary:focus {
   background: #2472a4;
-  background: -moz-linear-gradient(top, #2472a4 0%, #258cd1 100%);
-  background: -webkit-linear-gradient(top, #2472a4 0%, #258cd1 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#2472a4), to(#258cd1));
   background: -o-linear-gradient(top, #2472a4 0%, #258cd1 100%);
   background: linear-gradient(to bottom, #2472a4 0%, #258cd1 100%);
@@ -1196,8 +1172,6 @@ body .mce-abs-layout-item,
 .mce-primary.mce-active:hover,
 .mce-primary:not(.mce-disabled):active {
   background: #20638f;
-  background: -moz-linear-gradient(top, #20638f 0%, #217dbb 100%);
-  background: -webkit-linear-gradient(top, #20638f 0%, #217dbb 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#20638f), to(#217dbb));
   background: -o-linear-gradient(top, #20638f 0%, #217dbb 100%);
   background: linear-gradient(to bottom, #20638f 0%, #217dbb 100%);
@@ -1263,7 +1237,7 @@ body .mce-abs-layout-item,
   border: 0;
   background: transparent;
   -webkit-filter: none;
-  filter: none;
+          filter: none;
 }
 .mce-btn-flat:hover,
 .mce-btn-flat.mce-active,
@@ -1272,7 +1246,7 @@ body .mce-abs-layout-item,
   border: 0;
   background: #e0e0e0;
   -webkit-filter: none;
-  filter: none;
+          filter: none;
 }
 .mce-btn-has-text .mce-ico {
   padding-right: 5px;
@@ -1316,8 +1290,6 @@ i.mce-i-checkbox {
   margin: 0 3px 0 0;
   border: 1px solid #c5c5c5;
   background: #f9f9f9;
-  background: -moz-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
-  background: -webkit-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f9f9f9));
   background: -o-linear-gradient(top, #f9f9f9 0%, #f9f9f9 100%);
   background: linear-gradient(to bottom, #f9f9f9 0%, #f9f9f9 100%);
@@ -1521,7 +1493,6 @@ i.mce-i-checkbox {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr='#ffffff', endColorstr='#00ffffff');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='#ffffff', endColorstr='#00ffffff')";
   background: -webkit-gradient(linear, left top, right top, from(#ffffff), to(rgba(255, 255, 255, 0)));
-  background: -webkit-linear-gradient(left, #ffffff, rgba(255, 255, 255, 0));
   background: -o-linear-gradient(left, #ffffff, rgba(255, 255, 255, 0));
   background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0));
 }
@@ -1529,7 +1500,6 @@ i.mce-i-checkbox {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#00000000', endColorstr='#000000');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#00000000', endColorstr='#000000')";
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(#000000));
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
   background: -o-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000);
 }
@@ -1660,7 +1630,7 @@ i.mce-i-checkbox {
   display: inline-block;
   *display: inline;
   *zoom: 1;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.75);
   overflow: hidden;
   border: 1px solid red;
 }
@@ -1714,7 +1684,7 @@ i.mce-i-checkbox {
   display: inline-block;
   *display: inline;
   *zoom: 1;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.75);
   overflow: hidden;
 }
 .mce-label.mce-autoscroll {
@@ -1744,7 +1714,7 @@ i.mce-i-checkbox {
   border-color: transparent;
   background: transparent;
   -webkit-filter: none;
-  filter: none;
+          filter: none;
 }
 .mce-menubar .mce-menubtn button {
   color: #333;
@@ -1764,7 +1734,7 @@ i.mce-i-checkbox {
   border-color: #c6c6c6;
   background: #fff;
   -webkit-filter: none;
-  filter: none;
+          filter: none;
 }
 /* MenuButton */
 .mce-menubtn button {
@@ -1777,7 +1747,7 @@ i.mce-i-checkbox {
   display: inline-block;
   overflow-x: hidden;
   -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
+     text-overflow: ellipsis;
   width: 90px;
 }
 .mce-menubtn.mce-fixed-width.mce-btn-small span {
@@ -1886,8 +1856,6 @@ i.mce-i-checkbox {
   text-decoration: none;
   color: white;
   background: #2980b9;
-  background: -moz-linear-gradient(top, #2980b9 0%, #3498db 100%);
-  background: -webkit-linear-gradient(top, #2980b9 0%, #3498db 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#2980b9), to(#3498db));
   background: -o-linear-gradient(top, #2980b9 0%, #3498db 100%);
   background: linear-gradient(to bottom, #2980b9 0%, #3498db 100%);
@@ -1898,7 +1866,7 @@ i.mce-i-checkbox {
   color: #093;
   overflow: hidden;
   -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
 }
 .mce-menu-item-link b {
@@ -1907,7 +1875,7 @@ i.mce-i-checkbox {
 .mce-menu-item-ellipsis {
   display: block;
   -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -1927,7 +1895,7 @@ div.mce-menu .mce-menu-item-sep,
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   cursor: default;
   -webkit-filter: none;
-  filter: none;
+          filter: none;
 }
 div.mce-menu .mce-menu-item b {
   font-weight: bold;
@@ -2119,8 +2087,6 @@ i.mce-i-resize {
 }
 .mce-splitbtn .mce-open.mce-active {
   background: #e0e0e0;
-  background: -moz-linear-gradient(top, #e0e0e0 0%, #ececec 100%);
-  background: -webkit-linear-gradient(top, #e0e0e0 0%, #ececec 100%);
   background: -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#ececec));
   background: -o-linear-gradient(top, #e0e0e0 0%, #ececec 100%);
   background: linear-gradient(to bottom, #e0e0e0 0%, #ececec 100%);
@@ -2161,7 +2127,7 @@ i.mce-i-resize {
   border-width: 0 1px 0 0;
   background: #ffffff;
   padding: 8px;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.75);
   height: 13px;
   cursor: pointer;
 }

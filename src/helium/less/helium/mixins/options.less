@@ -8,4 +8,16 @@
     transform: scale(1.1,1.1);
   }
 
+  &.bordered{
+    background-color: transparent;
+    border: 1px solid @color;
+    color: @color;
+
+    &:hover{
+      border: 1px solid darken(@color, 10%);
+      color: @text;
+      background-color: @color;
+    }
+  }
+
 }

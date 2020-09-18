@@ -127,8 +127,8 @@
 }
 
 .cu-bulk-actions{
-  background: @he-header-bg-color;
-  padding: 15px;
+  //background: @he-header-bg-color;
+  padding: 15px 0 0;
   border-radius: @border-radius-base;
   margin-bottom: 10px;
 
@@ -254,6 +254,10 @@
         color: @he-bulk-dropdown-link-active;
       }
     }
+  }
+
+  &.bottom{
+    padding: 0 0 15px;
   }
 
 }
@@ -521,7 +525,7 @@ IMAGE MANAGER
 ----------------------------*/
 .cu-options{
 
-  a{
+  a, button{
     display: inline-block;
     padding: 6px 12px;
     border-radius: @border-radius-base;
@@ -564,83 +568,84 @@ IMAGE MANAGER
   .red{
     .options-variation(@color-red, @color-text-red);
   }
-  
+
   .pink{
     .options-variation(@color-pink, @color-text-pink);
   }
-  
+
   .purple{
     .options-variation(@color-purple, @color-text-purple);
   }
-  
+
   .deep-purple{
     .options-variation(@color-deep-purple, @color-text-deep-purple);
   }
-  
+
   .indigo{
     .options-variation(@color-indigo, @color-text-indigo);
   }
-  
+
   .blue{
     .options-variation(@color-blue, @color-text-blue);
   }
-  
+
   .light-blue{
     .options-variation(@color-light-blue, @color-text-light-blue);
   }
-  
+
   .cyan{
     .options-variation(@color-cyan, @color-text-cyan);
   }
-  
+
   .teal{
     .options-variation(@color-teal, @color-text-teal);
   }
-  
+
   .green{
     .options-variation(@color-green, @color-text-green);
   }
-  
+
   .light-green{
     .options-variation(@color-light-green, @color-text-light-green);
   }
-  
+
   .light-lime{
     .options-variation(@color-lime, @color-text-lime);
   }
-  
+
   .yellow{
     .options-variation(@color-yellow, @color-text-yellow);
   }
-  
+
   .amber{
     .options-variation(@color-amber, @color-text-amber);
   }
-  
+
   .orange{
     .options-variation(@color-orange, @color-text-orange);
   }
-  
+
   .deep-orange{
     .options-variation(@color-deep-orange, @color-text-deep-orange);
   }
-  
+
   .brown{
     .options-variation(@color-brown, @color-text-brown);
   }
-  
+
   .grey{
     .options-variation(@color-grey, @color-text-grey);
   }
-  
+
   .blue-grey{
     .options-variation(@color-blue-grey, @color-text-blue-grey);
   }
-  
+
   .midnight{
     .options-variation(@color-midnight, @color-text-midnight);
   }
-  
+
+
 
 }
 
