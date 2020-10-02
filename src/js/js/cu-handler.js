@@ -795,10 +795,7 @@ var cuHandler = {
      * @param options To be passed to PNotify plugin
      */
     notify: function (options) {
-
-        //PNotify.prototype.options.styling = 'bootstrap3';
         return new PNotify(options);
-
     },
 
     /**

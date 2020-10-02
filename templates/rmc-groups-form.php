@@ -81,9 +81,6 @@ $form = new RMActiveForm([
                                 </label>
                             </div>
                             <?php foreach ($modules as $module): ?>
-                                <?php if (!$module->hasmain) {
-    continue;
-} ?>
                                 <div class="checkbox">
                                     <label>
                                         <input
