@@ -98,7 +98,7 @@ class FileReader
     public $_fd;
     public $_length;
 
-    public function FileReader($filename)
+    public function __construct($filename)
     {
         if (file_exists($filename)) {
             $this->_length = filesize($filename);
@@ -165,7 +165,7 @@ class FileReader
 // over it (it assumes knowledge of StringReader internals)
 class CachedFileReader extends StringReader
 {
-    public function CachedFileReader($filename)
+    public function __construct($filename)
     {
         if (file_exists($filename)) {
             $length = filesize($filename);

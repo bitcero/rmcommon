@@ -618,12 +618,14 @@ class RMTemplate
             if (defined('XOOPS_CPFUNC_LOADED')) {
                 $paths['theme'] = RMCPATH . '/themes/' . $cuSettings->theme . "/$type/" . $element;
                 $paths['theme'] .= '' != $directory ? '/' . $directory : '';
-            } else {
+            } elseif($xoopsConfig) {
                 $paths['theme'] = XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'] . "/$type/" . $element;
                 $paths['theme'] .= '' != $directory ? '/' . $directory : '';
             }
 
-            $paths['theme'] .= '/' . ltrim($file, '/');
+            if($xoopsConfig){
+                $paths['theme'] .= '/' . ltrim($file, '/');
+            }
 
             // 2. Module
             $paths['module'] = XOOPS_ROOT_PATH . '/modules/' . $element;
