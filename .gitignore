@@ -27,3 +27,4 @@ prepros.cfg
 */prepros-9.config
 
 src/css/
+docs/_build/
