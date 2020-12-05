@@ -132,7 +132,7 @@ RMTemplate::get()->header(); ?>
 
         <div class="row feature-info">
             <div class="screenshot">
-                <img src="http://rmcommon.com/images/md-editor.png" alt="Markdown Editor">
+                <img src="https://raw.githubusercontent.com/bitcero/rmcommon/gh-pages/images/md-editor.png" alt="Markdown Editor">
             </div>
             <div class="info">
                 <h3>
@@ -148,7 +148,7 @@ RMTemplate::get()->header(); ?>
 
         <div class="row feature-info">
             <div class="screenshot">
-                <img src="http://rmcommon.com/images/svg-icons.svg" alt="SVG icons">
+                <img src="https://raw.githubusercontent.com/bitcero/rmcommon/gh-pages/images/svg-icons.svg" alt="SVG icons">
             </div>
             <div class="info">
                 <h3>
@@ -163,7 +163,7 @@ RMTemplate::get()->header(); ?>
 
         <div class="row feature-info">
             <div class="screenshot">
-                <img src="http://rmcommon.com/images/inline-help.png" alt="Inline Help">
+                <img src="https://raw.githubusercontent.com/bitcero/rmcommon/gh-pages/images/inline-help.png" alt="Inline Help">
             </div>
             <div class="info">
                 <h3>
@@ -179,7 +179,7 @@ RMTemplate::get()->header(); ?>
 
         <div class="row feature-info">
             <div class="screenshot">
-                <img src="http://rmcommon.com/images/updates.png" alt="Automatic Updates">
+                <img src="https://raw.githubusercontent.com/bitcero/rmcommon/gh-pages/images/updates.png" alt="Automatic Updates">
             </div>
             <div class="info">
                 <h3>
