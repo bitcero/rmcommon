@@ -266,6 +266,8 @@ class RMImageResizer
     {
         if (preg_match('/.jpg/i', $this->file)) {
             $format = 'image/jpeg';
+        } elseif (preg_match('/.jpeg/i', $this->file)) {
+          $format = 'image/jpeg';
         } elseif (preg_match('/.gif/i', $this->file)) {
             $format = 'image/gif';
         } elseif (preg_match('/.png/i', $this->file)) {
