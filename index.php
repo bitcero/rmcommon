@@ -33,7 +33,7 @@ function get_modules_list()
             'name' => $mod->getVar('name'),
             'dirname' => $mod->getVar('dirname'),
             'real_name' => $mod->getInfo('name'),
-            'version' => is_array($mod->getInfo('rmversion')) ? RMModules::format_module_version($mod->getInfo('rmversion')) : $mod->getVar('version') / 100,
+            'version' => is_array($mod->getInfo('rmversion')) ? RMModules::format_module_version($mod->getInfo('rmversion')) : $mod->getVar('version'),
             'icon' => $module_icon,
             'logo' => $module_logo,
             'admin' => $mod->getVar('hasadmin') ? XOOPS_URL . '/modules/' . $mod->getVar('dirname') . '/' . $mod->getInfo('adminindex') : '',
@@ -134,7 +134,12 @@ function show_dashboard()
     $counterComments->addCell(__('Approved', 'rmcommon'), $approved);
     $counterComments->addCell(__('Waiting', 'rmcommon'), $waiting);
 
-    @$ratio = $approved / ($approved + $waiting);
+    if ($approved <= 0 || $waiting <= 0){
+        $ratio = 0;
+    } else {
+        $ratio = $approved / ($approved + $waiting);
+    }
+
     if ($ratio < 1) {
         $ratio = number_format($ratio, 2);
     }

@@ -176,7 +176,7 @@ RMTemplate::getInstance()->add_attribute('html', [
 ]);
 
 // The logo
-$logoHelium = trim($cuSettings->helium_logo);
+$logoHelium = isset($cuSettings->helium_logo) ? trim($cuSettings->helium_logo) : '';
 if ('' == $logoHelium) {
     $logoHelium = HELIUM_URL . '/images/logo-he.svg';
 }
@@ -188,7 +188,7 @@ if ('.svg' == mb_substr($logoHelium, -4)) {
 }
 
 // Xoops Metas
-$showXoopsMetas = $cuSettings->helium_xoops_metas;
+$showXoopsMetas = isset($cuSettings->helium_xoops_metas) ? $cuSettings->helium_xoops_metas : false;
 
 // Display theme
 require_once HELIUM_PATH . '/theme.php';
