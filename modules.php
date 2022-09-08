@@ -58,9 +58,15 @@ function modules_install_function($dirname)
             $msgs[] = '<a href="' . XOOPS_URL . '/modules/' . $module->getInfo('dirname', 'e') . '/' . $module->getInfo('adminindex') . '"><img src="' . XOOPS_URL . '/modules/' . $dirname . '/' . trim($module->getInfo('image')) . '" alt=""></a>';
         }
         $msgs[] = '<strong>' . _VERSION . ':</strong> ' . $module->getInfo('version') . '&nbsp;' . $module->getInfo('module_status');
-        if (false !== $module->getInfo('author') && '' != trim($module->getInfo('author'))) {
+
+        if (
+            false !== $module->getInfo('author') && 
+            false === is_array($module->getInfo('author')) &&
+            '' != trim($module->getInfo('author'))
+            ) {
             $msgs[] = '<strong>' . _AUTHOR . ':</strong> ' . htmlspecialchars(trim($module->getInfo('author')));
         }
+
         $msgs[] = '</div><div class="logger">';
         // Load module specific install script if any
         $install_script = $module->getInfo('onInstall');
