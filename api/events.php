@@ -42,10 +42,13 @@ class RMEvents
             }
         }
 
+        // print_r($this->_preloads); die("Preloads");
+
         // Set Events
         foreach ($this->_preloads as $preload) {
             require_once XOOPS_ROOT_PATH . '/modules/' . $preload['module'] . '/events/' . $preload['file'] . '.php';
-            $class_name = ucfirst($preload['module']) . ucfirst($preload['file']) . 'Preload';
+            $class_name = $this->constructClassName($preload['module']) . ucfirst($preload['file']) . 'Preload';
+   
             if (!class_exists($class_name)) {
                 continue;
             }
@@ -142,5 +145,19 @@ class RMEvents
     public function run_event($event_name, $value = null)
     {
         return call_user_func_array([$this, 'trigger'], func_get_args());
+    }
+
+    private function constructClassName($moduleName)
+    {
+        $matches = [];
+        $regex = '/[a-z|A-Z|0-9]{1,}/m';
+        preg_match_all($regex, $moduleName, $matches, PREG_SET_ORDER, 0);
+        $newName = '';
+
+        foreach($matches as $match) {
+            $newName .= implode("", array_map('ucfirst', $match));
+        }
+
+        return $newName;
     }
 }
