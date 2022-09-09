@@ -933,11 +933,20 @@ class RMTemplate
         foreach ($this->tpl_scripts as $id => $item) {
             if (!array_key_exists('required', $item)) {
                 $scripts[$id] = $item;
+                continue;
             }
 
-            if (array_key_exists('required', $item) && array_key_exists($item['required'], $scripts)) {
+            if ( false === is_array($item['required']) && array_key_exists($item['required'], $scripts)){
                 $scripts = $this->insert_script_after($scripts, $item['required'], $id, $item);
-            } else {
+                continue;
+            }
+
+            foreach( $item['required'] as $required ){
+                if(array_key_exists($required, $scripts)){
+                    $scripts = $this->insert_script_after($scripts, $item['required'], $id, $item);
+                    continue;
+                }
+
                 $missing[$id] = $item;
             }
         }
@@ -945,6 +954,7 @@ class RMTemplate
         // Now read $missing array
         foreach ($missing as $id => $script) {
             // Check if script has been added
+            print_r($script);
             if (array_key_exists('required', $script) && array_key_exists($script['required'], $scripts)) {
                 $scripts = $this->insert_script_after($scripts, $script['required'], $id, $script);
                 continue;
@@ -1004,13 +1014,13 @@ class RMTemplate
         // Check if file is a full URL
         $remote_script = preg_match("/^(http:\/\/)|(https:\/\/)|(\/\/)/", $file);
 
-        if ('theme' != $owner && (false !== mb_strpos($file, 'bootstrap.css') || false !== mb_strpos($file, 'bootstrap.min.css'))) {
-            return $this->add_bootstrap('css');
-        }
+        // if ('theme' != $owner && (false !== mb_strpos($file, 'bootstrap.css') || false !== mb_strpos($file, 'bootstrap.min.css'))) {
+        //     return $this->add_bootstrap('css');
+        // }
 
-        if ($cuSettings->cdn_fa && (false !== mb_strpos($file, 'font-awesome.css') || false !== mb_strpos($file, 'font-awesome.min.css'))) {
-            return $this->add_fontawesome();
-        }
+        // if ($cuSettings->cdn_fa && (false !== mb_strpos($file, 'font-awesome.css') || false !== mb_strpos($file, 'font-awesome.min.css'))) {
+        //     return $this->add_fontawesome();
+        // }
 
         $version = isset($options['version']) ? $options['version'] : '';
         $directory = isset($options['directory']) ? $options['directory'] : '';
