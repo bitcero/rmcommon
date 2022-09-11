@@ -4,7 +4,7 @@ Styles for about page
 
 .welcome-box{
   .cu-icon.rmcommon-logo{
-    .cu-icon-size(84px);
+    @include cu-icon-size(84px);
     .cu-icon-color(#000000);
     > svg{
       > circle{
@@ -152,7 +152,7 @@ Styles for about page
 
   .cu-icon{
     .cu-icon-color(@color-text-midnight);
-    .cu-icon-size(80px);
+    @include cu-icon-size(80px);
   }
 }
 
@@ -224,7 +224,7 @@ Styles for about page
 
 .bug-report{
   .cu-icon{
-    .cu-icon-size(64px);
+    @include cu-icon-size(64px);
   }
 
   .media-body{

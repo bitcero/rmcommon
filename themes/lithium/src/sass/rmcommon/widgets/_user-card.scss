@@ -83,7 +83,7 @@
         height: 24px;
 
         .cu-icon{
-          .cu-icon-size(14px);
+          @include cu-icon-size(14px);
         }
       }
     }
@@ -160,7 +160,7 @@
 
         .btn-sm{
           .cu-icon{
-            .cu-icon-size(11px);
+            @include cu-icon-size(11px);
           }
         }
       }
@@ -301,7 +301,7 @@
       margin: 10px 0 10px;
 
       .cu-icon{
-        .cu-icon-size(14px);
+        @include cu-icon-size(14px);
       }
     }
 
@@ -386,7 +386,7 @@
             width: 36px;
 
             .cu-icon{
-              .cu-icon-size(16px);
+              @include cu-icon-size(16px);
             }
 
           }
@@ -431,7 +431,7 @@
       }
 
       .cu-icon{
-        .cu-icon-size(14px);
+        @include cu-icon-size(14px);
       }
     }
 

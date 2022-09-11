@@ -7887,23 +7887,23 @@ CU BOXES
 }
 /*
 .box-primary{
-  .box-variation(@brand-primary, @btn-primary-color);
+  .box-variation($primary, @btn-primary-color);
 }
 
 .box-info{
-  .box-variation(@brand-info, @btn-info-color);
+  .box-variation($info, @btn-info-color);
 }
 
 .box-success{
-  .box-variation(@brand-success, @btn-success-color);
+  .box-variation($success, @btn-success-color);
 }
 
 .box-warning{
-  .box-variation(@brand-warning, @btn-warning-color);
+  .box-variation($warning, @btn-warning-color);
 }
 
 .box-danger{
-  .box-variation(@brand-danger, @btn-danger-color);
+  .box-variation($danger, @btn-danger-color);
 }
 
 .box-red{

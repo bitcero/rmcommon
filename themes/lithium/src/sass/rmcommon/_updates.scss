@@ -262,7 +262,7 @@
   width: 500px;
   z-index: 1051;
   background: #FFF;
-  color: darken(@brand-warning, 25%);
+  color: darken($warning, 25%);
   padding: 15px;
   border-radius: 4px;
   -moz-border-radius: 4px;
@@ -275,7 +275,7 @@
     font-size: @font-size-base * 1.1;
     color: @text-color;
     margin: -15px -15px 15px -15px;
-    background-color: @brand-warning;
+    background-color: $warning;
     color: @btn-warning-color;
     padding: 10px;
     border-radius: @border-radius-large @border-radius-large 0 0;
@@ -285,7 +285,7 @@
     overflow: hidden;
 
     .cu-icon{
-      .cu-icon-size(48px);
+      @include cu-icon-size(48px);
       float: left;
     }
 

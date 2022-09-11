@@ -1,10 +1,10 @@
-@mixin options-variation($color, $text){
+@mixin options-variation($color){
   background-color: $color;
-  color: $text;
+  color: color-contrast($color);
 
   &:hover{
     background-color: darken($color, 10%);
-    color: $text;
+    color: color-contrast($color);
     transform: scale(1.1,1.1);
   }
 
@@ -15,7 +15,7 @@
 
     &:hover{
       border: 1px solid darken($color, 10%);
-      color: $text;
+      color: color-contrast($color);
       background-color: $color;
     }
   }

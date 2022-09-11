@@ -39,7 +39,7 @@
       margin: 3px;
 
       .cu-icon{
-        .cu-icon-size(32px);
+        @include cu-icon-size(32px);
       }
 
       > a{
@@ -62,7 +62,7 @@
     &[data-size="48"]{
        > li{
          .cu-icon{
-           .cu-icon-size(48px);
+           @include cu-icon-size(48px);
          }
 
          > a{
@@ -76,7 +76,7 @@
     &[data-size="64"]{
       > li{
         .cu-icon{
-          .cu-icon-size(64px);
+          @include cu-icon-size(64px);
         }
 
         > a{
@@ -131,7 +131,7 @@
       }
 
       .cu-icon{
-        .cu-icon-size(56px);
+        @include cu-icon-size(56px);
       }
 
       @media(min-width: @screen-sm){

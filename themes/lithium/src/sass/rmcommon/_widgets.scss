@@ -3,10 +3,10 @@
   border-radius: @border-radius-large;
 
   .cu-icon{
-    .cu-icon-size(32px);
+    @include cu-icon-size(32px);
 
     @media(min-width: @screen-md-min){
-      .cu-icon-size(48px);
+      @include cu-icon-size(48px);
     }
   }
 
@@ -87,7 +87,7 @@
 
     .the-caption{
       .cu-icon{
-        .cu-icon-size(32px);
+        @include cu-icon-size(32px);
       }
 
       .caption{
@@ -237,7 +237,7 @@
         position: absolute;
         top: 20px; right: 20px;
         .cu-icon{
-          .cu-icon-size(24px);
+          @include cu-icon-size(24px);
           .cu-icon-color(lighten(@gray-light, 20%));
         }
       }
@@ -255,7 +255,7 @@
         right: 20px;
 
         .cu-icon{
-          .cu-icon-size(40px);
+          @include cu-icon-size(40px);
         }
       }
 
@@ -279,7 +279,7 @@
       }
 
       .cu-icon{
-        .cu-icon-size(32px);
+        @include cu-icon-size(32px);
       }
     }
 

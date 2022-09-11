@@ -68,7 +68,7 @@
     cursor: move;
 
   .cu-icon{
-    .cu-icon-size(16px);
+    @include cu-icon-size(16px);
     margin-right: 4px;
   }
 }
@@ -184,7 +184,7 @@ AVAILABLE LIST
       color: #000;
 
       .cu-icon{
-        .cu-icon-size(14px);
+        @include cu-icon-size(14px);
         display: inline;
       }
     }
@@ -364,7 +364,7 @@ AVAILABLE LIST
     color: rgba(0,0,0,0.3);
 
   .cu-icon{
-    .cu-icon-size(16px);
+    @include cu-icon-size(16px);
 
     &.rmcommon-icon circle{
       opacity: 1;

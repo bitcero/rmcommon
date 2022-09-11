@@ -19,10 +19,10 @@
 
       &.active{
         > a{
-          color: @text-color;
+          color: $body-color;
 
           &:hover{
-            color: @text-color;
+            color: $body-color;
           }
         }
       }
@@ -64,7 +64,7 @@
         text-align: center;
         margin: 0 auto 5px auto;
         transition: ease all 250ms;
-        .cu-icon-size(28px);
+        @include cu-icon-size(28px);
         .cu-icon-color(rgba(red(@btn-primary-color), green(@btn-primary-color), blue(@btn-primary-color), 0.5));
       }
 
@@ -96,7 +96,7 @@
           display: none;
         }
         > .cu-icon{
-          .cu-icon-size(24px);
+          @include cu-icon-size(24px);
         }
       }
     }
@@ -113,7 +113,7 @@
       }
 
       &.active > a{
-        color: @text-color!important;
+        color: $body-color!important;
       }
     }
 

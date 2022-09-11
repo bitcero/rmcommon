@@ -1,7 +1,7 @@
 @import 'mixins/modals';
 
 .cu-box{
-  background-color: @cu-box-bg;
+  background-color: $cu-box-bg;
   border-radius: $border-radius;
   box-shadow: 0 3px 15px fadeout(black, 90%);
   margin-bottom: 20px;
@@ -27,7 +27,7 @@
           font-size: 1em;
           border: 0;
           border-bottom: 3px solid transparent;
-          color: @text-color;
+          color: $body-color;
 
           &:hover, &:focus{
             border-color: transparent;
@@ -41,7 +41,7 @@
             border-color: transparent;
 
             &:hover{
-              color: @text-color;
+              color: $body-color;
             }
           }
         }
@@ -85,7 +85,7 @@
       transition: ease all 250ms;
 
       &:hover{
-        color: @text-color;
+        color: $body-color;
       }
     }
 
@@ -227,7 +227,7 @@ CU BOXES
 .modal-body {
   //position: relative;
   padding: @panel-body-padding;
-  color: @text-color;
+  color: $body-color;
   overflow: auto;
 
   .nav-tabs.nav-tabs-color{
@@ -250,7 +250,7 @@ CU BOXES
         text-align: center;
         margin: 0 auto 5px auto;
         transition: ease all 250ms;
-        .cu-icon-size(28px);
+        @include cu-icon-size(28px);
         .cu-icon-color(rgba(red(@btn-primary-color), green(@btn-primary-color), blue(@btn-primary-color), 0.5));
       }
 
@@ -282,7 +282,7 @@ CU BOXES
           display: none;
         }
         > .cu-icon{
-          .cu-icon-size(24px);
+          @include cu-icon-size(24px);
         }
       }
     }
@@ -378,11 +378,11 @@ CU BOXES
 }
 
 .box-success{
-  .box-variation(@brand-success, @btn-success-color);
+  .box-variation($success, @btn-success-color);
 }
 
 .box-warning{
-  .box-variation(@brand-warning, @btn-warning-color);
+  .box-variation($warning, @btn-warning-color);
 }
 
 .box-danger{
@@ -479,7 +479,7 @@ CU BOXES
 }
 
 .modal-success{
-  .modal-variant(@brand-success, @btn-success-color);
+  .modal-variant($success, @btn-success-color);
 }
 
 .modal-info{
@@ -487,7 +487,7 @@ CU BOXES
 }
 
 .modal-warning{
-  .modal-variant(@brand-warning, @btn-warning-color);
+  .modal-variant($warning, @btn-warning-color);
 }
 
 .modal-danger{

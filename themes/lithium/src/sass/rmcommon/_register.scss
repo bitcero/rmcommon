@@ -44,7 +44,7 @@ body.registering{
     color: #000;
 
     > strong{
-      color: @brand-primary;
+      color: $primary;
     }
   }
 
@@ -79,14 +79,14 @@ body.registering{
 
     &.error{
 
-      color: @brand-danger;
+      color: $danger;
 
       > label{
-        color: @brand-danger;
+        color: $danger;
       }
 
       .form-control{
-        border-color: @brand-danger;
+        border-color: $danger;
       }
 
     }

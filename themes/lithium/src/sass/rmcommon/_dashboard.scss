@@ -63,7 +63,7 @@ own dashboards using the same look and feel that in rmcommon.
         background: @color-grey-100;
 
         > .cu-icon{
-          .cu-icon-size(30px);
+          @include cu-icon-size(30px);
           transition: ease all 250ms;
         }
 
@@ -88,7 +88,7 @@ own dashboards using the same look and feel that in rmcommon.
         @media(min-width: @screen-md-min){
           text-align: left;
           > .cu-icon{
-            .cu-icon-size(24px);
+            @include cu-icon-size(24px);
             margin-right: 5px;
           }
 

@@ -10,7 +10,7 @@
 }
 
 .text-success{
-  .text-emphasis-variant(@brand-success);
+  .text-emphasis-variant($success);
 }
 
 .text-info{
@@ -18,7 +18,7 @@
 }
 
 .text-warning{
-  .text-emphasis-variant(@brand-warning);
+  .text-emphasis-variant($warning);
 }
 
 .text-red{

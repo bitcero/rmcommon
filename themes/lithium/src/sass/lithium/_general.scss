@@ -145,8 +145,8 @@
   .btn{
     transition: ease all 250ms;
     text-transform: uppercase;
-    font-size: floor($btn-danger-color * 0.9);
-    line-height: ceil($btn-danger-color * 1.4);
+    font-size: floor($font-size-base * 0.9);
+    line-height: ceil($font-size-base * 1.4);
   }
 
   .btn-default{
@@ -233,7 +233,7 @@
 
     a:not(.button){
       color: $lithium-bulk-dropdown-link;
-      font-size: floor($danger * 0.9);
+      font-size: floor($font-size-base * 0.9);
       text-transform: uppercase;
       padding: 6px 15px 6px 10px;
 
@@ -546,106 +546,104 @@ IMAGE MANAGER
   }
 
   .primary{
-    .options-variation($primary, @btn-primary-color);
+    @include options-variation($primary);
   }
 
   .info{
-    .options-variation($info, @btn-info-color);
+    @include options-variation($info);
   }
 
   .success{
-    .options-variation(@brand-success, @btn-success-color);
+    @include options-variation($success);
   }
 
   .warning{
-    .options-variation(@brand-warning, @btn-warning-color);
+    @include options-variation($warning);
   }
 
   .danger{
-    .options-variation($danger, $danger);
+    @include options-variation($danger);
   }
 
   .red{
-    .options-variation($color-red, $color-text-red);
+    @include options-variation($color-red);
   }
 
   .pink{
-    .options-variation($color-pink, $color-text-pink);
+    @include options-variation($color-pink);
   }
 
   .purple{
-    .options-variation($color-purple, $color-text-purple);
+    @include options-variation($color-purple);
   }
 
   .deep-purple{
-    .options-variation($color-deep-purple, $color-text-deep-purple);
+    @include options-variation($color-deep-purple);
   }
 
   .indigo{
-    .options-variation($color-indigo, $color-text-indigo);
+    @include options-variation($color-indigo);
   }
 
   .blue{
-    .options-variation($color-blue, $color-text-blue);
+    @include options-variation($color-blue);
   }
 
   .light-blue{
-    .options-variation($color-light-blue, $color-text-light-blue);
+    @include options-variation($color-light-blue);
   }
 
   .cyan{
-    .options-variation($color-cyan, $color-text-cyan);
+    @include options-variation($color-cyan);
   }
 
   .teal{
-    .options-variation($color-teal, $color-text-teal);
+    @include options-variation($color-teal);
   }
 
   .green{
-    .options-variation($color-green, $color-text-green);
+    @include options-variation($color-green);
   }
 
   .light-green{
-    .options-variation($color-light-green, $color-text-light-green);
+    @include options-variation($color-light-green);
   }
 
   .light-lime{
-    .options-variation($color-lime, $color-text-lime);
+    @include options-variation($color-lime);
   }
 
   .yellow{
-    .options-variation($color-yellow, $color-text-yellow);
+    @include options-variation($color-yellow);
   }
 
   .amber{
-    .options-variation($color-amber, $color-text-amber);
+    @include options-variation($color-amber);
   }
 
   .orange{
-    .options-variation($color-orange, $color-text-orange);
+    @include options-variation($color-orange);
   }
 
   .deep-orange{
-    .options-variation($color-deep-orange, $color-text-deep-orange);
+    @include options-variation($color-deep-orange);
   }
 
   .brown{
-    .options-variation($color-brown, $color-text-brown);
+    @include options-variation($color-brown);
   }
 
   .grey{
-    .options-variation($color-grey, $color-text-grey);
+    @include options-variation($color-grey);
   }
 
   .blue-grey{
-    .options-variation($color-blue-grey, $color-text-blue-grey);
+    @include options-variation($color-blue-grey);
   }
 
   .midnight{
-    .options-variation($color-midnight, $color-text-midnight);
+    @include options-variation($color-midnight);
   }
-
-
 
 }
 
