@@ -1,0 +1,154 @@
+/**
+This file containes the variables used in Lithium Theme.
+If you need to make some change in colors or basic styles, you can copy
+this file with a new name and make all required changes. After
+that, recompile file with a new theme name
+*/
+
+/*
+1. MIXINS
+------------------------------
+*/
+@import 'mixins/svg-icons';
+@import 'mixins/boxes';
+@import 'mixins/utilities';
+@import 'mixins/options';
+@import '../bootstrap/mixins/panels';
+@import '../bootstrap/mixins/buttons';
+@import '../bootstrap/mixins/alerts';
+@import "mixins/notify";
+
+//== Breakpoints for columns
+//
+//##
+
+// Screen width xtra large
+@screen-xl:     1700px;
+@screen-xl-min: @screen-xl;
+@screen-lg-max: @screen-xl - 1;
+
+/*
+2. THEME COLORS
+------------------------------
+We have stablished a basic set
+of names for LITHIUM and all
+subsequents themes.
+*/
+@import "colors";
+
+@theme-main-color: @color-deep-purple;//#259dab;
+@theme-main-color-text: #FFF;
+@theme-secondary-color: @color-midnight; //#2574ab;
+@theme-secondary-color-text: #FFF;
+
+/*
+3. Theme Header
+------------------------------
+*/
+@lithium-header-bg-color:              #FFFFFF;
+@lithium-header-logo-bg:               #1E222B;
+@lithium-header-svg-logo-color:        #259DAB;
+@lithium-header-toggle-color:          #778395;
+@lithium-header-toggle-hover:          #9fa8bc;
+@lithium-header-dropdown-border:       1px solid rgba(38, 43, 54, 0.1);
+@lithium-header-menu-color:            #505b72;
+@lithium-header-menu-hover-bg:         @lithium-header-bg-color;
+@lithium-header-menu-hover:            @lithium-header-toggle-hover;
+@lithium-header-rmc-color:             @lithium-header-svg-logo-color;
+@lithium-header-rmc-hover:             #74DE02;
+
+/*
+4. Sidebar
+------------------------------
+*/
+@lithium-sidebar-bg:                   #FFFFFF;
+@lithium-sidebar-user-bg:              @lithium-header-bg-color;
+@lithium-sidebar-user-border:          #657390;
+@lithium-sidebar-user-name:            rgba(255,255,255,0.8);//@gray-lighter;
+@lithium-sidebar-user-charge:          @lithium-header-svg-logo-color;
+@lithium-sidebar-search-bg:            darken(#FFF, 5%);//@color-blue-grey;
+@lithium-sidebar-search-input:         #f8f8f8;
+@lithium-sidebar-search-color:         darken(@lithium-sidebar-search-bg, 35%);
+@lithium-sidebar-search-pholder:       darken(@lithium-sidebar-search-bg, 30%);//lighten(@lithium-sidebar-search-bg, 10%);
+@lithium-sidebar-search-focus-bg:      #FFF; //@lithium-sidebar-user-bg;
+@lithium-sidebar-search-focus-color:   darken(@lithium-sidebar-search-bg, 50%); //@lithium-sidebar-search-bg;
+@lithium-sidebar-heading-color:        @lithium-header-toggle-hover;
+@lithium-sidebar-menu-border:          1px solid #EAECF0;
+@lithium-sidebar-menu-color:           #505b72;
+@lithium-sidebar-menu-hover:           darken(@lithium-sidebar-menu-color, 15%);
+@lithium-sidebar-menu-hover-bg:        rgba(0,0,0,0.03);
+@lithium-sidebar-icon-color:           @lithium-header-svg-logo-color;
+@lithium-sidebar-submenu-bg:           #F6F7F8;
+@lithium-sidebar-submenu-color:        @lithium-sidebar-user-border;
+@lithium-sidebar-submenu-icon-color:   @lithium-header-toggle-hover;
+@lithium-sidebar-active-color:         #FFF;
+
+/*
+5. Breadcrumb
+------------------------------
+*/
+@lithium-breadcrumb-links:             lighten(@theme-main-color, 5%);
+@lithium-breadcrumb-links-hover:       darken(@theme-main-color, 5%);
+
+/*
+6. CU Boxes
+------------------------------
+*/
+@cu-box-bg:                       #FFF;
+
+/*
+7. Toolbar
+------------------------------
+*/
+@lithium-toolbar-bg:                   lighten(@body-bg, 5%); //transparent;
+@lithium-toolbar-item-bg:              transparent; //#FFF;
+@lithium-toolbar-color:                darken(@body-bg, 30%);//@text-color;
+@lithium-toolbar-hover-bg:             rgba(255,255,255,0.1);//@theme-main-color;
+@lithium-toolbar-hover-color:          rgba(0,0,0,0.6);
+@lithium-toolbar-active-bg:            transparent;
+@lithium-toolbar-active-color:         @theme-main-color;
+@lithium-toolbar-disabled-bg:          transparent;
+@lithium-toolbar-disabled-color:       rgba(0,0,0,0.15);
+
+/*
+8. BULK ACTIONS
+------------------------------
+*/
+@lithium-bulk-bg:                      @lithium-header-bg-color;
+@lithium-bulk-default-btn-bg:          @color-teal;
+@lithium-bulk-default-btn-color:       @color-text-teal;
+@lithium-bulk-link-color:              @color-cyan;
+@lithium-bulk-link-color-hover:        @color-amber;
+@lithium-bulk-dropdown-link:           lighten(@color-blue-grey, 10%);
+@lithium-bulk-dropdown-link-hover:     lighten(@color-blue-grey, 25%);
+@lithium-bulk-dropdown-link-active:    #FFF;
+
+/*
+9. CONTEXTUAL ITEM OPTIONS
+------------------------------
+*/
+@lithium-item-option-bg:               @color-blue-grey;
+@lithium-item-option-bg-hover:         @color-teal;
+@lithium-item-option-color:            @color-text-midnight;
+@lithium-item-option-color-hover:      #FFF;
+
+/*
+10. TABS
+------------------------------
+*/
+@lithium-tab-active-bg:                transparent;
+@lithium-tab-active-color:             @theme-main-color;
+@lithium-tab-content-bg:               transparent;
+
+/*
+11. FONTS
+------------------------------
+*/
+@font-primary: @font-family-base;
+@font-secondary: 'Open Sans Condensed', sans-serif;
+
+/*
+12. TABLES
+------------------------------
+ */
+@lithium-table-th-bg:                  #f3f2f7;

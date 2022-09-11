@@ -1,0 +1,241 @@
+/*
+Styles for about page
+*/
+
+.welcome-box{
+  .cu-icon.rmcommon-logo{
+    .cu-icon-size(84px);
+    .cu-icon-color(#000000);
+    > svg{
+      > circle{
+        fill: #65C100;
+        opacity: 1;
+      }
+    }
+  }
+
+  .media-heading{
+    font-weight: 700;
+    color: @color-midnight;
+  }
+}
+
+.color-bar{
+  padding: 0;
+  margin: 30px 0;
+
+  > ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+
+    > li{
+      float: left;
+      width: 4%;
+      height: 50px;
+    }
+  }
+}
+
+.page-header{
+  border-bottom-color: rgba(0,0,0,0.1);
+
+  > h2{
+    font-weight: 700;
+    color: @color-blue;
+    font-family: @font-secondary;
+    font-size: 3em;
+  }
+
+  > p{
+    font-size: 1.8em;
+    color: @color-midnight;
+  }
+}
+
+/* INTRODUCING LITHIUM */
+#introduce-lithium{
+
+  margin: 15px -15px 0;
+
+
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  > .info{
+    width: 100%;
+    float: none;
+    padding:  0 15px 15px;
+    text-align: center;
+
+    > h3{
+      font-size: 2em;
+      color: @color-midnight;
+      font-weight: 700;
+      line-height: 1.3;
+      font-family: @font-secondary;
+    }
+
+    p, ul{
+      font-size: 1.3em;
+      line-height: 1.5;
+
+      a{
+        font-weight: 700;
+      }
+
+      em{
+        color: @color-midnight;
+      }
+    }
+  }
+
+  > .screenshot{
+    width: 100%;
+    float: none;
+    height: 300px;
+    background: url("http://rmcommon.com/images/lithium-01.png") no-repeat left top;
+    background-size: auto 500px;
+  }
+
+  @media(min-width: @screen-sm-min){
+
+    > .info{
+      width: 40%;
+      float: left;
+      padding:  0 15px 0 30px;
+      text-align: left;
+
+      > h3{
+      }
+
+      p, ul{
+        font-size: 1.1em;
+      }
+    }
+
+    > .screenshot{
+      width: 60%;
+      float: left;
+      height: 500px;
+      background-size: auto 700px;
+    }
+
+  }
+
+  @media(min-width: @screen-md-min){
+    > .info{
+      > h3{
+        font-size: 2.5em;
+      }
+
+      p, ul{
+        font-size: 1.2em;
+      }
+    }
+  }
+
+}
+
+#lithium-features{
+  background: @color-midnight;
+  color: lighten(@color-midnight, 48%);
+  margin: 0 -15px 30px;
+  padding: 30px 7px 30px 8px;
+  text-align: center;
+
+  .cu-icon{
+    .cu-icon-color(@color-text-midnight);
+    .cu-icon-size(80px);
+  }
+}
+
+.feature-info{
+  margin-bottom: 25px;
+
+  .screenshot{
+    width: 100%;
+    float: none;
+    padding: 15px;
+
+    > img{
+      max-width: 100%;
+      border: 6px solid rgba(0,0,0,0.08);
+      padding: 1px;
+    }
+  }
+
+  .info{
+    width: 100%;
+    padding: 15px;
+
+    > h3{
+      color: @color-midnight;
+      line-height: 1.5;
+      font-weight: 700;
+      margin-bottom: 20px;
+
+      > small{
+        display: block;
+        color: lighten(@color-midnight, 10%);
+      }
+    }
+
+
+  }
+
+  @media(min-width: @screen-sm-min){
+    .screenshot{
+      width: 50%;
+      padding: 5px 10px;
+    }
+
+    .info{
+      float: left;
+      width: 50%;
+      padding: 5px 10px;
+      font-size: 1.2em;
+
+      > h3{
+        font-size: 1.8em;
+      }
+    }
+
+    &:nth-child(odd){
+      .screenshot{
+        float: left;
+      }
+    }
+
+    &:nth-child(even){
+      .screenshot{
+        float: right;
+      }
+    }
+  }
+
+}
+
+.bug-report{
+  .cu-icon{
+    .cu-icon-size(64px);
+  }
+
+  .media-body{
+    color: @color-midnight;
+    line-height: 1.5;
+    font-size: 1.2em;
+  }
+
+  .media-heading{
+    font-weight: 700;
+    color: @color-midnight;
+    margin-bottom: 10px;
+  }
+}
