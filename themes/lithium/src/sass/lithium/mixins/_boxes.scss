@@ -43,8 +43,8 @@
   }
 
   .box-footer{
-    background-color: $panel-default-heading-bg;
-    color: $panel-default-text;
+    background-color: $cu-box-footer-bg;
+    color: color-contrast($cu-box-footer-bg);
   }
 
   &.box-solid{

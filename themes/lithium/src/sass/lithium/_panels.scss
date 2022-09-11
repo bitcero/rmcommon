@@ -56,7 +56,7 @@
     li > a{
       border: 0;
       background-color: transparent;
-      color: rgba(red(@btn-primary-color), green(@btn-primary-color), blue(@btn-primary-color), 0.5);
+      color: rgba(red($primary), green($primary), blue($primary), 0.5);
       transition: ease color 250ms;
 
       > .cu-icon{
@@ -65,13 +65,13 @@
         margin: 0 auto 5px auto;
         transition: ease all 250ms;
         @include cu-icon-size(28px);
-        .cu-icon-color(rgba(red(@btn-primary-color), green(@btn-primary-color), blue(@btn-primary-color), 0.5));
+        @include cu-icon-color(rgba(red($primary), green($primary), blue($primary), 0.5));
       }
 
       &:hover{
-        color: @btn-primary-color;
+        color: $primary;
         > .cu-icon{
-          .cu-icon-color(@btn-primary-color);
+          @include cu-icon-color($primary);
         }
       }
     }
@@ -80,9 +80,9 @@
       background-color: transparent!important;
       border: 0;
       border-bottom: 4px solid #FFF;
-      color: @btn-primary-color;
+      color: $primary;
       > .cu-icon{
-        .cu-icon-color(@btn-primary-color);
+        @include cu-icon-color($primary);
       }
     }
 

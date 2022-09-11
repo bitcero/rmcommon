@@ -135,7 +135,7 @@
             position: relative;
 
             > .cu-icon{
-              //.cu-icon-color($lithium-sidebar-icon-color);
+              //@include cu-icon-color($lithium-sidebar-icon-color);
               @include cu-icon-size(16px);
               margin-right: 10px;
             }

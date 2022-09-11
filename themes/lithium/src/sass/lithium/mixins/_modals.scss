@@ -1,32 +1,34 @@
-.modal-variant(@color, @text){
+@mixin modal-variant($color){
+  $text: color-contrast($color);
+
   .modal-header{
-    background-color: @color;
-    color: @text;
+    background-color: $color;
+    color: $text;
     border-bottom: 0!important;
   }
   .modal-body .nav-tabs.nav-tabs-color{
-    background-color: @color;
+    background-color: $color;
 
     li > a{
-      color: rgba(red(@text), green(@text), blue(@text), 0.5);
+      color: rgba(red($text), green($text), blue($text), 0.5);
 
       > .cu-icon{
-        .cu-icon-color(rgba(red(@text), green(@text), blue(@text), 0.5));
+        @include cu-icon-color(rgba(red($text), green($text), blue($text), 0.5));
       }
 
       &:hover{
-        color: @text;
+        color: $text;
         > .cu-icon{
-          .cu-icon-color(@text);
+          @include cu-icon-color($text);
         }
       }
     }
 
     li.active > a{
-      color: @text;
+      color: $text;
 
       > .cu-icon{
-        .cu-icon-color(@text);
+        @include cu-icon-color($text);
       }
     }
 
@@ -34,8 +36,8 @@
 
   .modal-body .nav-tabs:not(.nav-tabs-color){
     li.active > a{
-      background: @color;
-      color: @text;
+      background: $color;
+      color: $text;
     }
   }
 
