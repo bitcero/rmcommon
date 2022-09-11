@@ -85,7 +85,10 @@
       margin-right: 2px;
       line-height: @line-height-base;
       border: 1px solid transparent;
-      border-radius: @border-radius-base @border-radius-base 0 0;
+      border-radius: 0;
+      transition: ease all 250ms;
+      background-color: transparent;
+
       &:hover {
         border-color: @nav-tabs-link-hover-border-color @nav-tabs-link-hover-border-color @nav-tabs-border-color;
       }

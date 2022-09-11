@@ -21,14 +21,16 @@
 } ?>
     </head>
     <body <?php echo RMTemplate::getInstance()->render_attributes('body'); ?>>
-
-        <!-- Top bar -->
-        <?php require __DIR__ . '/tpls/topbar.php'; ?>
-
         <?php require __DIR__ . '/tpls/sidebar.php'; ?>
 
-        <!-- Content -->
-        <?php require __DIR__ . '/tpls/content.php'; ?>
+        <?php require __DIR__ . '/tpls/topbar.php'; ?>
+
+        <main id="he-main-content">
+            <!-- Top bar -->
+
+            <!-- Content -->
+          <?php require __DIR__ . '/tpls/content.php'; ?>
+        </main>
 
         <!-- System messages -->
         <?php require __DIR__ . '/tpls/messages.php'; ?>

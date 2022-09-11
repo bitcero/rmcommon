@@ -1,10 +1,6 @@
 <!-- Menu bar -->
 <nav role="navigation" id="he-topbar">
 
-    <a class="navbar-brand he-logo" href="<?php echo RMCURL; ?>">
-        <?php echo $logoHelium; ?>
-    </a>
-
     <div class="he-topbar-collapse">
 
         <ul class="main-options">

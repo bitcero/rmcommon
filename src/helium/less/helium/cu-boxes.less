@@ -3,7 +3,7 @@
 .cu-box{
   background-color: @cu-box-bg;
   border-radius: @border-radius-base;
-  box-shadow: none;
+  box-shadow: 0 3px 15px fadeout(black, 90%);
   margin-bottom: 20px;
   position: relative;
 
@@ -17,24 +17,27 @@
     > .nav-tabs{
       padding: 15px 15px 0;
       border-bottom-color: transparent;
+      background-color: transparent;
+      border-radius: @border-radius-base @border-radius-base 0 0;
 
       > li{
 
         > a{
           outline: 0;
+          font-size: 1em;
+          border: 0;
+          border-bottom: 3px solid transparent;
+          color: @text-color;
 
-          text-transform: uppercase;
-          font-size: 0.85em;
           &:hover, &:focus{
-            background-color: transparent;
             border-color: transparent;
             text-decoration: none;
+            background-color: transparent;
           }
         }
 
         &.active{
           > a{
-            color: @text-color;
             border-color: transparent;
 
             &:hover{
@@ -134,110 +137,6 @@
       }
     }
   }
-}
-
-.box-primary{
-  .box-variation(@brand-primary, @btn-primary-color);
-}
-
-.box-info{
-  .box-variation(@brand-info, @btn-info-color);
-}
-
-.box-success{
-  .box-variation(@brand-success, @btn-success-color);
-}
-
-.box-warning{
-  .box-variation(@brand-warning, @btn-warning-color);
-}
-
-.box-danger{
-  .box-variation(@brand-danger, @btn-danger-color);
-}
-
-.box-red{
-  .box-variation(@color-red, @color-text-red);
-}
-
-.box-pink{
-  .box-variation(@color-pink, @color-text-pink);
-}
-
-.box-purple{
-  .box-variation(@color-purple, @color-text-purple);
-}
-
-.box-deep-purple{
-  .box-variation(@color-deep-purple, @color-text-deep-purple);
-}
-
-.box-indigo{
-  .box-variation(@color-indigo, @color-text-indigo);
-}
-
-.box-blue{
-  .box-variation(@color-blue, @color-text-blue);
-}
-
-.box-light-blue{
-  .box-variation(@color-light-blue, @color-text-light-blue);
-}
-
-.box-light-blue{
-  .box-variation(@color-light-blue, @color-text-light-blue);
-}
-
-.box-cyan{
-  .box-variation(@color-cyan, @color-text-cyan);
-}
-
-.box-teal{
-  .box-variation(@color-teal, @color-text-teal);
-}
-
-.box-green{
-  .box-variation(@color-green, @color-text-green);
-}
-
-.box-light-green{
-  .box-variation(@color-light-green, @color-text-light-green);
-}
-
-.box-lime{
-  .box-variation(@color-lime, @color-text-lime);
-}
-
-.box-yellow{
-  .box-variation(@color-yellow, @color-text-yellow);
-}
-
-.box-amber{
-  .box-variation(@color-amber, @color-text-amber);
-}
-
-.box-orange{
-  .box-variation(@color-orange, @color-text-orange);
-}
-
-.box-deep-orange{
-  .box-variation(@color-deep-orange, @color-text-deep-orange);
-}
-
-.box-brown{
-  .box-variation(@color-brown, @color-text-brown);
-}
-
-.box-grey{
-  .box-variation(@color-grey, @color-text-grey);
-}
-
-.box-blue-grey{
-  .box-variation(@color-blue-grey, @color-text-blue-grey);
-}
-
-.box-midnight{
-  .box-variation(@color-midnight, @color-text-midnight);
 }
 
 /*
@@ -468,6 +367,112 @@ CU BOXES
     margin-left: 0;
   }
 }
+
+/*
+.box-primary{
+  .box-variation(@brand-primary, @btn-primary-color);
+}
+
+.box-info{
+  .box-variation(@brand-info, @btn-info-color);
+}
+
+.box-success{
+  .box-variation(@brand-success, @btn-success-color);
+}
+
+.box-warning{
+  .box-variation(@brand-warning, @btn-warning-color);
+}
+
+.box-danger{
+  .box-variation(@brand-danger, @btn-danger-color);
+}
+
+.box-red{
+  .box-variation(@color-red, @color-text-red);
+}
+
+.box-pink{
+  .box-variation(@color-pink, @color-text-pink);
+}
+
+.box-purple{
+  .box-variation(@color-purple, @color-text-purple);
+}
+
+.box-deep-purple{
+  .box-variation(@color-deep-purple, @color-text-deep-purple);
+}
+
+.box-indigo{
+  .box-variation(@color-indigo, @color-text-indigo);
+}
+
+.box-blue{
+  .box-variation(@color-blue, @color-text-blue);
+}
+
+.box-light-blue{
+  .box-variation(@color-light-blue, @color-text-light-blue);
+}
+
+.box-light-blue{
+  .box-variation(@color-light-blue, @color-text-light-blue);
+}
+
+.box-cyan{
+  .box-variation(@color-cyan, @color-text-cyan);
+}
+
+.box-teal{
+  .box-variation(@color-teal, @color-text-teal);
+}
+
+.box-green{
+  .box-variation(@color-green, @color-text-green);
+}
+
+.box-light-green{
+  .box-variation(@color-light-green, @color-text-light-green);
+}
+
+.box-lime{
+  .box-variation(@color-lime, @color-text-lime);
+}
+
+.box-yellow{
+  .box-variation(@color-yellow, @color-text-yellow);
+}
+
+.box-amber{
+  .box-variation(@color-amber, @color-text-amber);
+}
+
+.box-orange{
+  .box-variation(@color-orange, @color-text-orange);
+}
+
+.box-deep-orange{
+  .box-variation(@color-deep-orange, @color-text-deep-orange);
+}
+
+.box-brown{
+  .box-variation(@color-brown, @color-text-brown);
+}
+
+.box-grey{
+  .box-variation(@color-grey, @color-text-grey);
+}
+
+.box-blue-grey{
+  .box-variation(@color-blue-grey, @color-text-blue-grey);
+}
+
+.box-midnight{
+  .box-variation(@color-midnight, @color-text-midnight);
+}
+*/
 
 .modal-red{
   .modal-variant(@color-red, @color-text-red);

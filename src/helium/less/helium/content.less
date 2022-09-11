@@ -1,56 +1,56 @@
 #he-content{
   transition: ease all 300ms;
+  position: relative;
+  padding-top: 10px;
 
-  .sidebar &{
-    transform: translateX(220px);
-
-    @media(min-width: @screen-md-min){
-      margin-left: 220px;
-      transform: none;
-    }
+  &.with-breadcrumb{
+    padding-top: 50px;
   }
 
-  > .container-fluid{
-    padding: 15px;
-    position: relative;
-
-    /*
+  /*
     --------------
       BREADCRUMB
     -------------- */
-    > .rmc-breadcrumb{
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      border-radius: 0;
-      display: none;
-      font-size: 0.8em;
+  > .rmc-breadcrumb{
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    border-radius: 0;
+    display: none;
+    font-size: 14px;
+    background-color: transparent;
+    padding: 8px 5px;
 
-      a{
-        color: @he-breadcrumb-links;
+    a{
+      color: @he-breadcrumb-links;
+      transition: ease color 250ms;
 
-        &:hover{
-          color: @he-breadcrumb-links-hover;
-        }
-
+      &:hover{
+        color: @he-breadcrumb-links-hover;
       }
 
-      > li + li:before{
-        content: "\f105";
-        font-family: FontAwesome;
-      }
-
-      @media(min-width: @screen-sm-min){
-        display: block;
-      }
     }
 
-    /*
-    -------------------
-      SECTIONS TITLES
-    ------------------- */
-    .cu-section-title{
-      display: none;
+    > li + li:before{
+      content: "\f105";
+      font-family: FontAwesome;
     }
+
+    @media(min-width: @screen-sm-min){
+      display: block;
+    }
+  }
+
+  /*
+  -------------------
+    SECTIONS TITLES
+  ------------------- */
+  .cu-section-title{
+    display: none;
+  }
+
+  > .container-fluid{
+    padding-top: 50px;
+    position: relative;
 
     @media(min-width: @screen-sm-min){
       .with-breadcrumb.with-toolbar &{
@@ -75,12 +75,22 @@
   .nav-tabs:not(.nav-tabs-color){
     > li.active > a{
       background-color: @he-tab-active-bg;
+      color: @he-tab-active-color;
+      border-bottom-color: @theme-main-color;
     }
   }
 
   .tab-content{
     background-color: @he-tab-content-bg;
     padding: @grid-gutter-width * 2;
+
+    &.no-padding{
+      padding: @grid-gutter-width 0 0;
+    }
+  }
+
+  .no-margin{
+    margin: 0;
   }
 
 }

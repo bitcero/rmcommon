@@ -36,7 +36,7 @@ subsequents themes.
 */
 @import "colors";
 
-@theme-main-color: @color-blue-600;//#259dab;
+@theme-main-color: @color-deep-purple;//#259dab;
 @theme-main-color-text: #FFF;
 @theme-secondary-color: @color-midnight; //#2574ab;
 @theme-secondary-color-text: #FFF;
@@ -45,7 +45,7 @@ subsequents themes.
 3. Theme Header
 ------------------------------
 */
-@he-header-bg-color:              #262B36;
+@he-header-bg-color:              #FFFFFF;
 @he-header-logo-bg:               #1E222B;
 @he-header-svg-logo-color:        #259DAB;
 @he-header-toggle-color:          #778395;
@@ -67,7 +67,7 @@ subsequents themes.
 @he-sidebar-user-name:            rgba(255,255,255,0.8);//@gray-lighter;
 @he-sidebar-user-charge:          @he-header-svg-logo-color;
 @he-sidebar-search-bg:            darken(#FFF, 5%);//@color-blue-grey;
-@he-sidebar-search-input:         darken(@he-sidebar-search-bg, 5%);
+@he-sidebar-search-input:         #f8f8f8;
 @he-sidebar-search-color:         darken(@he-sidebar-search-bg, 35%);
 @he-sidebar-search-pholder:       darken(@he-sidebar-search-bg, 30%);//lighten(@he-sidebar-search-bg, 10%);
 @he-sidebar-search-focus-bg:      #FFF; //@he-sidebar-user-bg;
@@ -87,8 +87,8 @@ subsequents themes.
 5. Breadcrumb
 ------------------------------
 */
-@he-breadcrumb-links:             @text-color;
-@he-breadcrumb-links-hover:       @brand-primary;
+@he-breadcrumb-links:             lighten(@theme-main-color, 5%);
+@he-breadcrumb-links-hover:       darken(@theme-main-color, 5%);
 
 /*
 6. CU Boxes
@@ -136,8 +136,9 @@ subsequents themes.
 10. TABS
 ------------------------------
 */
-@he-tab-active-bg:                #FFF;
-@he-tab-content-bg:               #FFF;
+@he-tab-active-bg:                transparent;
+@he-tab-active-color:             @theme-main-color;
+@he-tab-content-bg:               transparent;
 
 /*
 11. FONTS
@@ -145,3 +146,9 @@ subsequents themes.
 */
 @font-primary: @font-family-base;
 @font-secondary: 'Open Sans Condensed', sans-serif;
+
+/*
+12. TABLES
+------------------------------
+ */
+@he-table-th-bg:                  #f3f2f7;
