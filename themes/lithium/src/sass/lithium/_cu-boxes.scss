@@ -221,7 +221,7 @@ CU BOXES
 }
 
 .modal-content{
-  background-color: #FFF; //@body-bg;
+  background-color: #FFF; //$body-bg;
 }
 
 .modal-body {
@@ -382,7 +382,7 @@ CU BOXES
 }
 
 .box-warning{
-  @include box-variation($warning, @btn-warning-color);
+  @include box-variation($warning, $warning);
 }
 
 .box-danger{

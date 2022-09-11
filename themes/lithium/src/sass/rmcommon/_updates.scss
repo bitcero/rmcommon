@@ -17,15 +17,15 @@
       display: block;
       padding: 4px 6px;
       font-size: 0.7em;
-      background-color: @color-midnight;
-      color: @color-text-midnight;
-      border-radius: 0 0 @border-radius-large 0;
+      background-color: $color-midnight;
+      color: $color-text-midnight;
+      border-radius: 0 0 $border-radius-lg 0;
       text-transform: uppercase;
     }
 
     .label-type{
       font-weight: 700;
-      color: @color-midnight;
+      color: $color-midnight;
     }
 
     h5{
@@ -36,7 +36,7 @@
     }
 
     > div{
-      //border-radius: @border-radius-base;
+      //border-radius: $border-radius;
 
       &:after{
         content: '';
@@ -48,31 +48,31 @@
 
     &.plugin{
       .type{
-        background-color: @color-green;
+        background-color: $color-green;
       }
       .label-type{
-        color: @color-green!important;
+        color: $color-green!important;
       }
     }
 
     &.theme{
       .type{
-        background-color: @color-purple;
+        background-color: $color-purple;
       }
       .label-type{
-        color: @color-purple!important;
+        color: $color-purple!important;
       }
     }
 
     &.apikey{
-      background-color: fade(@color-blue, 5%);
-      border-color: fade(@color-blue-800, 40%);
+      background-color: fade($color-blue, 5%);
+      border-color: fade($color-blue-800, 40%);
     }
 
     .update-buttons{
       text-align: center;
 
-      @media(min-width: @screen-sm){
+      @include media-breakpoint-up(sm){
         text-align: right;
       }
     }
@@ -99,11 +99,11 @@
       border-top: 1px solid rgba(0,0,0,0.1);
     }
 
-    @media(min-width: @screen-sm){
+    @include media-breakpoint-up(sm){
       width: 80%;
     }
 
-    @media(min-width: @screen-md){
+    @include media-breakpoint-up(md){
       width: 800px;
     }
 
@@ -124,7 +124,7 @@
   transition: ease all 250ms;
 }
 .upd-item-process{
-  background-color: @color-green-50!important;
+  background-color: $color-green-50!important;
 }
 
 #login-blocker, #files-blocker{
@@ -229,7 +229,7 @@
     }
   }
 
-  @media(min-width: @screen-sm){
+  @include media-breakpoint-up(sm){
 
     display: table;
     width: 100%;
@@ -267,18 +267,18 @@
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-  -o-border-radius: @border-radius-large;
+  -o-border-radius: $border-radius-lg;
   border: 1px solid rgba(0,0,0,0.4);
   box-shadow: 0 0 30px rgba(0,0,0,0.4);
 
   h4{
-    font-size: @font-size-base * 1.1;
-    color: @text-color;
+    font-size: $font-size-base * 1.1;
+    color: $body-color;
     margin: -15px -15px 15px -15px;
     background-color: $warning;
-    color: @btn-warning-color;
+    color: color-contrast($warning);
     padding: 10px;
-    border-radius: @border-radius-large @border-radius-large 0 0;
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
   }
 
   .content{
@@ -342,12 +342,12 @@
   .title{
     padding: 10px;
     font-weight: bold;
-    background-color: @theme-main-color;
+    background-color: $theme-main-color;
 
     > h4{
       margin: 0;
-      color: @theme-secondary-color-text;
-      font-size: @font-size-base;
+      color: $theme-secondary-color-text;
+      font-size: $font-size-base;
       text-transform: uppercase;
     }
 

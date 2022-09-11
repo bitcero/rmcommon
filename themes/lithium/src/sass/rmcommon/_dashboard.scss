@@ -20,7 +20,7 @@ own dashboards using the same look and feel that in rmcommon.
       padding: 5px;
     }
 
-    @media(min-width: @screen-sm-min){
+    @include media-breakpoint-up(sm){
       width: 25%;
     }
 
@@ -58,9 +58,9 @@ own dashboards using the same look and feel that in rmcommon.
         text-align: center;
         display: block;
         padding: 10px;
-        border-radius: @border-radius-large;
+        border-radius: $border-radius-lg;
         transition: ease all 250ms;
-        background: @color-grey-100;
+        background: $gray-100;
 
         > .cu-icon{
           @include cu-icon-size(30px);
@@ -74,18 +74,18 @@ own dashboards using the same look and feel that in rmcommon.
           text-transform: uppercase;
           font-size: 0.8em;
           font-weight: 600;
-          color: @text-color;
+          color: $body-color;
         }
 
         &:hover{
-          background-color: @color-midnight;
-          color: @color-text-midnight;
+          background-color: $color-midnight;
+          color: $color-text-midnight;
           > .title{
-            color: @color-text-midnight;
+            color: $color-text-midnight;
           }
         }
 
-        @media(min-width: @screen-md-min){
+        @include media-breakpoint-up(md){
           text-align: left;
           > .cu-icon{
             @include cu-icon-size(24px);
@@ -144,7 +144,7 @@ own dashboards using the same look and feel that in rmcommon.
 
       > time{
         font-size: 0.9em;
-        color: @gray-light;
+        color: $gray-300;
         display: inline-block;
         margin-right: 5px;
       }
@@ -163,10 +163,10 @@ own dashboards using the same look and feel that in rmcommon.
 
   & + .box-footer{
     > .btn{
-      color: @text-color;
+      color: $body-color;
 
       &:hover{
-        color: @link-hover-color;
+        color: $link-hover-color;
       }
     }
   }
@@ -178,8 +178,8 @@ Dashboard panels
 html.dashboard{
 
   .size-1, .size-2, .size-3, .size-4{
-    padding-left:  (@grid-gutter-width / 2);
-    padding-right: (@grid-gutter-width / 2);
+    padding-left:  ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
     width: 100%;
   }
 
@@ -195,7 +195,7 @@ html.dashboard{
 
   }
 
-  @media(min-width: @screen-md-min){
+  @include media-breakpoint-up(md){
 
     .size-1{
       width: 33.33333333%
@@ -225,7 +225,7 @@ html.dashboard{
 
   }
 
-  @media(min-width: @screen-lg-min){
+  @include media-breakpoint-up(lg){
     .size-lg-1{
       width: 25%;
     }

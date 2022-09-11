@@ -1,8 +1,8 @@
 #he-toolbar{
 
   background-color: $lithium-toolbar-bg;
-  .vertical-gradient($lithium-toolbar-bg, lighten($lithium-toolbar-bg, 10%));
-  margin-bottom: @grid-gutter-width;
+  @include vertical-gradient($lithium-toolbar-bg, lighten($lithium-toolbar-bg, 10%));
+  margin-bottom: $grid-gutter-width;
   margin-left: -15px;
   margin-right: -15px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -23,7 +23,7 @@
       font-size: 0.8em;
       transition: ease all 250ms;
       display: block;
-      padding: @grid-gutter-width;
+      padding: $grid-gutter-width;
       transition: ease all 250ms;
 
       > .cu-icon{
@@ -44,7 +44,7 @@
         //.vertical-gradient($theme-main-color, @theme-secondary-color);
 
         > .cu-icon{
-          @include cu-icon-color($lithium-toolbar-hover-color)!important;
+          @include cu-icon-color($lithium-toolbar-hover-color);
           > svg{
             fill: $lithium-toolbar-hover-color!important;
           }
@@ -63,7 +63,7 @@
         //text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
 
         > .cu-icon{
-          @include cu-icon-color($lithium-toolbar-disabled-color)!important;
+          @include cu-icon-color($lithium-toolbar-disabled-color);
           svg{
             fill: $lithium-toolbar-disabled-color!important;
           }
@@ -102,12 +102,12 @@
 
           > a{
             background-color: $lithium-toolbar-active-bg;//$lithium-toolbar-hover-bg;
-            .vertical-gradient(lighten($lithium-toolbar-bg, 10%), $lithium-toolbar-bg);
+            @include vertical-gradient(lighten($lithium-toolbar-bg, 10%), $lithium-toolbar-bg);
             color: $lithium-toolbar-active-color!important;
             //box-shadow: inset 2px 0 1px rgba(0,0,0,0.2), inset -2px 0 1px rgba(0,0,0,0.2);
 
             > .cu-icon{
-              @include cu-icon-color($lithium-toolbar-active-color)!important;
+              @include cu-icon-color($lithium-toolbar-active-color);
               > svg{
                 fill: $lithium-toolbar-active-color!important;
               }

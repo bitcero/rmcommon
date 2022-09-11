@@ -1,11 +1,11 @@
 .widget-counter{
   padding: 15px;
-  border-radius: @border-radius-large;
+  border-radius: $border-radius-lg;
 
   .cu-icon{
     @include cu-icon-size(32px);
 
-    @media(min-width: @screen-md-min){
+    @include media-breakpoint-up(md){
       @include cu-icon-size(48px);
     }
   }
@@ -25,7 +25,7 @@
       line-height: 1;
     }
 
-    @media(min-width: @screen-md-min){
+    @include media-breakpoint-up(md){
       > small{
         font-size: 1em;
       }
@@ -56,7 +56,7 @@
       font-family: 'Open Sans Condensed', sans-serif;
     }
 
-    @media(min-width: @screen-md-min){
+    @include media-breakpoint-up(md){
       small{
         font-size: 0.85em;
       }
@@ -78,7 +78,7 @@
 
   .row-widget{
     float: left;
-    padding: @padding-large-horizontal;
+    padding: $modal-inner-padding;
     position: relative;
 
     &:last-child{
@@ -91,7 +91,7 @@
       }
 
       .caption{
-        font-size: @font-size-base;
+        font-size: $font-size-base;
         font-weight: 300;
         display: block;
         text-transform: uppercase;
@@ -106,7 +106,7 @@
 
       .the-caption{
         .cu-icon{
-          .cu-icon-color(lighten(@gray-light, 20%));
+          @include cu-icon-color($gray-300);
         }
 
         .caption{
@@ -121,7 +121,7 @@
       display: block;
       left: 15px; right: 15px; bottom: 15px;
       height: 4px;
-      background-color: @gray-lighter;
+      background-color: $gray-100;
 
       > span{
         display: block;
@@ -134,7 +134,7 @@
     .the-counter{
       line-height: 1;
       text-align: right;
-      font-size: ceil(@font-size-base * 3.4);
+      font-size: ceil($font-size-base * 3.4);
       font-weight: 300;
     }
 
@@ -151,7 +151,7 @@
       width: 100%;
     }
 
-    @media(min-width: @screen-sm){
+    @include media-breakpoint-up(sm){
       &.counter-2{
         width: 50%;
       }
@@ -171,7 +171,7 @@
       }
     }
 
-    @media(min-width: @screen-md){
+    @include media-breakpoint-up(md){
       &.counter-5,
       &.counter-6,
       &.counter-7,
@@ -188,8 +188,8 @@
 
 .widget-tile-box{
   background-color: #FFF;
-  padding: @padding-large-horizontal;
-  border-radius: @border-radius-base;
+  padding: $modal-inner-padding;
+  border-radius: $border-radius;
   box-shadow: 0 0 4px rgba(0,0,0,0.1);
   position: relative;
   margin-bottom: 20px;
@@ -199,20 +199,20 @@
     .caption{
       text-transform: uppercase;
       font-weight: 500;
-      //color: @gray-light;
+      //color: $gray-300;
       margin-bottom: 10px;
     }
 
     .counter{
-      font-size: ceil(@font-size-base * 2.2);
-      color: @color-midnight;
+      font-size: ceil($font-size-base * 2.2);
+      color: $color-midnight;
       font-weight: 500;
       line-height: 1;
     }
 
     .icon{
       .cu-icon{
-        .cu-icon-color(lighten(@gray-light, 30%));
+        @include cu-icon-color(lighten($gray-300, 30%));
       }
     }
 
@@ -228,7 +228,7 @@
 
     .footer{
       margin-top: 10px;
-      color: lighten(@gray-light, 15%);
+      color: lighten($gray-300, 15%);
     }
 
     &.default{
@@ -238,7 +238,7 @@
         top: 20px; right: 20px;
         .cu-icon{
           @include cu-icon-size(24px);
-          .cu-icon-color(lighten(@gray-light, 20%));
+          @include cu-icon-color(lighten($gray-300, 20%));
         }
       }
 
@@ -273,7 +273,7 @@
         top: 50%;
         margin-top: -26px;
         left: 20px;
-        border: 1px dashed lighten(@gray-light, 20%);
+        border: 1px dashed lighten($gray-300, 20%);
         border-radius: 50%;
         padding: 10px;
       }
@@ -300,7 +300,7 @@
       color: #FFF!important;
 
       .icon .cu-icon{
-        .cu-icon-color(#FFF);
+        @include cu-icon-color(#FFF);
       }
 
       .counter{
@@ -328,15 +328,15 @@
 
     .name{
       font-weight: 500;
-      font-size: ceil(@font-size-base * 1.2);
+      font-size: ceil($font-size-base * 1.2);
       text-align: center;
-      color: @color-midnight;
+      color: $color-midnight;
     }
 
     .email{
       text-align: center;
       margin-top: 3px;
-      color: lighten(@gray-light, 25%);
+      color: lighten($gray-300, 25%);
     }
 
   }

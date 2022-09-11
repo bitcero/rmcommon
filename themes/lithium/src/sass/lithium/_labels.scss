@@ -1,62 +1,62 @@
-@import '../bootstrap/mixins/labels';
+@import 'mixins/labels';
 
 .label-red {
-  .label-variant($color-red);
+  @include label-variant($color-red);
 }
 .label-pink {
-  .label-variant($color-pink);
+  @include label-variant($color-pink);
 }
 .label-purple {
-  .label-variant($color-purple);
+  @include label-variant($color-purple);
 }
 .label-deep-purple {
-  .label-variant($color-deep-purple);
+  @include label-variant($color-deep-purple);
 }
 .label-indigo {
-  .label-variant($color-indigo);
+  @include label-variant($color-indigo);
 }
 .label-blue {
-  .label-variant($color-blue);
+  @include label-variant($color-blue);
 }
 .label-light-blue {
-  .label-variant($color-light-blue);
+  @include label-variant($color-light-blue);
 }
 .label-cyan {
-  .label-variant($color-cyan);
+  @include label-variant($color-cyan);
 }
 .label-teal {
-  .label-variant($color-teal);
+  @include label-variant($color-teal);
 }
 .label-green {
-  .label-variant($color-green);
+  @include label-variant($color-green);
 }
 .label-light-green {
-  .label-variant($color-light-green);
+  @include label-variant($color-light-green);
 }
 .label-lime {
-  .label-variant($color-lime);
+  @include label-variant($color-lime);
 }
 .label-yellow {
-  .label-variant($color-yellow);
+  @include label-variant($color-yellow);
 }
 .label-amber {
-  .label-variant($color-amber);
+  @include label-variant($color-amber);
 }
 .label-orange {
-  .label-variant($color-orange);
+  @include label-variant($color-orange);
 }
 .label-deep-orange {
-  .label-variant($color-deep-orange);
+  @include label-variant($color-deep-orange);
 }
 .label-brown {
-  .label-variant($color-brown);
+  @include label-variant($color-brown);
 }
 .label-grey {
-  .label-variant($color-grey);
+  @include label-variant($color-grey);
 }
 .label-blue-grey {
-  .label-variant($color-blue-grey);
+  @include label-variant($color-blue-grey);
 }
 .label-midnight {
-  .label-variant($color-midnight);
+  @include label-variant($color-midnight);
 }
