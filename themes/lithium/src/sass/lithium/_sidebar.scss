@@ -7,7 +7,7 @@
   background-color: $lithium-sidebar-bg;
   transform: translateX(-220px);
   transition: ease all 300ms;
-  box-shadow: 2px 0 25px fadeout(black, 95%);
+  box-shadow: 2px 0 25px transparentize($black, 0.95);
 
   > .he-current-user{
     background-color: $lithium-sidebar-user-bg;

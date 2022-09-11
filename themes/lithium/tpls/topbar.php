@@ -14,7 +14,7 @@
 
             <!-- Common Utilities Menu -->
             <li class="dropdown<?php if ('rmcommon' == $xoopsModule->dirname()): ?> active<?php endif; ?> rmcommon-menu">
-                <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php echo $cuIcons->getIcon('svg-rmcommon-rmcommon'); ?>
                 </a>
                 <ul class="dropdown-menu">
