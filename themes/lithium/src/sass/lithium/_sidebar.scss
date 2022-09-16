@@ -3,9 +3,9 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 220px;
+  width: $lithium-sidebar-width;
   background-color: $lithium-sidebar-bg;
-  transform: translateX(-220px);
+  transform: translateX(-$lithium-sidebar-width);
   transition: ease all 300ms;
   box-shadow: 2px 0 25px transparentize($black, 0.95);
 

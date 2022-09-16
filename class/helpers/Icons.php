@@ -173,7 +173,7 @@ class Icons extends Attributes
      * @param mixed $attributes
      * @return string
      */
-    public function getIcon($icon, $attributes = [])
+    public function getIcon($icon, $attributes = [], $addSpanTag = true)
     {
         parent::__construct($attributes);
         $this->add('class', 'cu-icon');
@@ -195,7 +195,11 @@ class Icons extends Attributes
             // Index 0 has the SVG icon
             $iconSVG = $this->providerIcon($iconExploded[0]);
 
-            return '<span ' . $renderedAttrs . '>' . $iconSVG . '</span>';
+            if ($addSpanTag){
+              return '<span ' . $renderedAttrs . '>' . $iconSVG . '</span>';
+            }
+
+            return $iconSVG;
         }
 
         $renderedAttrs = $this->renderAttributeString();
@@ -221,7 +225,11 @@ class Icons extends Attributes
         }
 
         // Last option: icon font
+      if ($addSpanTag){
         return '<span ' . $renderedAttrs . '><span class="' . $icon . '"></span></span>';
+      }
+
+      return '<span class="' . $icon . '"></span>';
     }
 
     public static function getInstance()
