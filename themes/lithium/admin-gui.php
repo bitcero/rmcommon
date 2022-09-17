@@ -13,8 +13,8 @@ load_theme_locale('lithium', '', true);
 
 global $xoopsUser, $xoopsSecurity, $cuIcons, $cuServices;
 
-define('LITHIUM_PATH', RMCPATH . '/themes/lithium');
-define('LITHIUM_URL', RMCURL . '/themes/lithium');
+const LITHIUM_PATH = RMCPATH . '/themes/lithium';
+const LITHIUM_URL = RMCURL . '/themes/lithium';
 
 require_once LITHIUM_PATH . '/class/LithiumHelper.class.php';
 $xoFunc = new LithiumHelper();

@@ -1,4 +1,4 @@
-<div id="he-sidebar">
+<div id="li-sidebar" class="show">
     <div class="media he-current-user">
         <div class="media-left">
             <?php if ($cuServices->service('avatar')): ?>

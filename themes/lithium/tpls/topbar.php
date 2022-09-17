@@ -1,7 +1,7 @@
 <!-- Menu bar -->
-<nav role="navigation" id="he-topbar">
+<nav role="navigation" id="li-topbar">
 
-    <div class="he-topbar-collapse d-flex justify-content-between align-items-center">
+    <div class="li-topbar-collapse d-flex justify-content-between align-items-center">
 
         <ul class="main-options d-flex align-items-center">
 

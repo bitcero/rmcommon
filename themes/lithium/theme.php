@@ -25,7 +25,7 @@
 
         <?php require __DIR__ . '/tpls/topbar.php'; ?>
 
-        <main id="he-main-content">
+        <main id="li-main-content">
             <!-- Top bar -->
 
             <!-- Content -->

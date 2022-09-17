@@ -1,4 +1,4 @@
-<div id="he-content" class="<?php echo $common->breadcrumb()->count() > 0 ? 'with-breadcrumb' : ''; ?>">
+<div id="li-content" class="<?php echo $common->breadcrumb()->count() > 0 ? 'with-breadcrumb' : ''; ?>">
   <?php require __DIR__ . '/toolbar.php'; ?>
 
   <?php echo RMBreadCrumb::get()->render(); ?>
