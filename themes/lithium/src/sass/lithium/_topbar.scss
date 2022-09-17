@@ -4,7 +4,7 @@
   background-color: $lithium-header-bg-color;
   border-radius: 10px;
   margin-bottom: 0;
-  box-shadow: 0 3px 10px transparentize($black, 0.9);
+  box-shadow: 0 3px 25px transparentize($black, 0.9);
   transition: ease all 300ms;
   z-index: 1000;
 
@@ -39,13 +39,13 @@
     > ul > li{
 
       > a{
-        padding: 0 15px;
+        padding: 0 8px;
         transition: ease all 250ms;
         color: $lithium-header-toggle-color;
 
         > svg{
-          width: pxToRem(24);
-          height: pxToRem(24);
+          width: pxToRem(20);
+          height: pxToRem(20);
           fill: currentColor;
         }
 
@@ -81,6 +81,24 @@
         }
       }
 
+      &.rmcommon-menu{
+
+        > a{
+          @include cu-icon-color($lithium-header-svg-logo-color);
+
+          &:hover{
+            @include cu-icon-color($lithium-header-rmc-hover);
+          }
+        }
+
+        &.open > a {
+          background: transparent;
+          .cu-icon {
+            @include cu-icon-color($lithium-header-rmc-hover);
+          }
+        }
+
+      }
     }
   }
 
@@ -88,20 +106,21 @@
     padding: 0;
     border-color: $gray-200;
     box-shadow: 0 3px 10px  fade-out($black, 0.9);
+    font-size: pxToRem(14);
 
     > li{
-      border-bottom: 1px solid rgba(0,0,0,0.05);
 
       > a{
         color: $lithium-header-menu-color;
         border-radius: 0;
-        padding: 0 pxToRem(13);
+        padding: pxToRem(9) pxToRem(15);
         min-width: pxToRem(200);
+        line-height: pxToRem(14 * 1.5);
 
         > span {
           > svg{
-            width: pxToRem(20);
-            height: pxToRem(20);
+            width: pxToRem(16);
+            height: pxToRem(16);
             fill: currentColor;
             margin-right: pxToRem(10);
           }
@@ -130,10 +149,6 @@
           .cu-icon{
             @include cu-icon-size(24px);
           }
-        }
-
-        @include media-breakpoint-up(md){
-          padding: 6px 10px;
         }
 
       }
@@ -213,36 +228,6 @@
 
       > .cu-icon{
         @include cu-icon-color($lithium-header-toggle-hover);
-      }
-    }
-
-  }
-
-  .rmcommon-menu{
-
-    > a{
-
-      .cu-icon{
-
-        @include cu-icon-color($lithium-header-svg-logo-color);
-
-        circle{
-          fill: #fff;
-        }
-
-      }
-
-      &:hover{
-        .cu-icon{
-          @include cu-icon-color($lithium-header-rmc-hover);
-        }
-      }
-    }
-
-    &.open > a {
-      background: transparent;
-      .cu-icon {
-        @include cu-icon-color($lithium-header-rmc-hover);
       }
     }
 
@@ -402,6 +387,41 @@
 
     .he-logo{
       transform: translateX(0);
+    }
+  }
+
+  .user-menu{
+    margin-left: pxToRem(10);
+    > a{
+      .user-meta{
+        text-align: right;
+        padding-right: pxToRem(10);
+
+        .user-name{
+          display: block;
+          font-size: pxToRem(14);
+          font-weight: 700;
+        }
+
+        .user-role{
+          display: block;
+          font-size: pxToRem(11);
+        }
+      }
+
+      .user-avatar{
+        img{
+            width: pxToRem(40);
+            height: pxToRem(40);
+            border-radius: 50%;
+        }
+      }
+
+      &:hover{
+        .user-meta{
+          color: $gray-700;
+        }
+      }
     }
   }
 }

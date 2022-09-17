@@ -1,21 +1,4 @@
 <div id="li-sidebar" class="show">
-    <div class="media he-current-user">
-        <div class="media-left">
-            <?php if ($cuServices->service('avatar')): ?>
-            <img src="<?php echo $cuServices->avatar->getAvatarSrc($xoopsUser, 100); ?>" class="media-object"
-                 alt="<?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>">
-            <?php else: ?>
-            <img class="media-object" src="<?php echo LITHIUM_URL; ?>/images/avatar.png" alt="<?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>">
-            <?php endif; ?>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading">
-                <?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>
-            </h4>
-            <span><?php echo $userRank['title']; ?></span>
-        </div>
-    </div>
-
     <div class="module-search">
         <input type="text" value="" class="form-control" id="filter-module" placeholder="<?php _e('Search modules...', 'rmcommon'); ?>">
     </div>

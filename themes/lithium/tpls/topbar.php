@@ -4,18 +4,10 @@
     <div class="li-topbar-collapse d-flex justify-content-between align-items-center">
 
         <ul class="main-options d-flex align-items-center">
-
-            <!-- Toggel sidebar -->
-            <li>
-                <a href="#" class="toggle-menu">
-                    <?php echo $cuIcons->getIcon('fa fa-bars'); ?>
-                </a>
-            </li>
-
             <!-- Common Utilities Menu -->
             <li class="dropdown<?php if ('rmcommon' == $xoopsModule->dirname()): ?> active<?php endif; ?> rmcommon-menu">
-                <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php echo $cuIcons->getIcon('svg-rmcommon-rmcommon', [], false); ?>
+                <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
+                    <?php echo $cuIcons->getIcon('svg-lithium-utilities', [], false); ?>
                 </a>
                 <ul class="dropdown-menu">
                     <?php foreach ($rmcommon_menu['menu'] as $menu): ?>
@@ -59,7 +51,14 @@
             <?php if ($other_menu): ?>
                 <?php foreach ($other_menu as $item): ?>
                     <li class="dropdown <?php echo $item['class']; ?>">
-                        <a href="<?php echo $item['link']; ?>" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"<?php echo array_key_exists('title', $item) ? ' title="' . $item['title'] . '"' : ''; ?>>
+                        <a
+                            href="<?php echo $item['link']; ?>"
+                            class="dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            data-bs-offset="0,24"
+                            <?php echo array_key_exists('title', $item) ? ' title="' . $item['title'] . '"' : ''; ?>
+                        >
                             <?php echo array_key_exists('icon', $item) ? $cuIcons->getIcon($item['icon']) : ''; ?>
                             <?php if (array_key_exists('caption', $item)): ?>
                             <span class="caption"><?php echo $item['caption']; ?></span>
@@ -119,10 +118,10 @@
             </li>
 
             <li class="dropdown<?php if ('system' == $xoopsModule->dirname()): ?> active<?php endif; ?> system-menu">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php echo $cuIcons->getIcon('svg-rmcommon-gear', [], false); ?>
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
+                    <?php echo $cuIcons->getIcon('svg-lithium-system', [], false); ?>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-md-end">
                     <?php foreach ($system_menu['menu'] as $menu): ?>
                         <?php if (isset($menu['divider'])): ?>
                             <li class="divider"></li>
@@ -158,10 +157,10 @@
 
             <!-- Quick menu -->
             <li class="dropdown quick-menu">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php echo $cuIcons->getIcon('svg-rmcommon-lightning', [], false); ?>
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
+                    <?php echo $cuIcons->getIcon('svg-lithium-lightning', [], false); ?>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-md-end">
                     <?php if ($xoopsModule->getInfo('social')): ?>
                         <li class="dropdown-submenu">
                             <a class="dropdown-item" href="#" tabindex="-1" onclick="return false;">
@@ -233,13 +232,13 @@
                 <li class="help-menu<?php if (1 == count($helpLinks)): ?> dropdown<?php endif; ?>">
                     <?php if (1 == count($helpLinks)): ?>
                         <a href="<?php echo $helpLinks[0]['link']; ?>" data-action="help">
-                            <?php echo $cuIcons->getIcon('svg-rmcommon-question'); ?>
+                            <?php echo $cuIcons->getIcon('svg-lithium-question', [], false); ?>
                         </a>
                     <?php else: ?>
-                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
                             <?php echo $cuIcons->getIcon('svg-rmcommon-question'); ?>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-md-end">
                             <?php foreach ($helpLinks as $help): ?>
                                 <li>
                                     <a href="<?php echo $help['link']; ?>" target="_blank" data-action="help">
@@ -254,9 +253,53 @@
             <?php endif; ?>
 
             <li class="dropdown user-menu">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <?php echo $cuIcons->getIcon('svg-rmcommon-user-circle', [], false); ?>
+                <a href="#"
+                   class="d-flex justify-content-end align-items-center dropdown-toggle"
+                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,15">
+                    <div class="user-meta">
+                        <span class="user-name">
+                            <?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>
+                        </span>
+                        <span class="user-role"><?php echo $userRank['title']; ?></span>
+                    </div>
+                    <div class="user-avatar">
+                      <?php if ($cuServices->service('avatar')): ?>
+                          <img src="<?php echo $cuServices->avatar->getAvatarSrc($xoopsUser, 100); ?>" class="media-object"
+                               alt="<?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>">
+                      <?php else: ?>
+                          <img class="media-object" src="<?php echo LITHIUM_URL; ?>/images/avatar.png" alt="<?php echo '' != $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'); ?>">
+                      <?php endif; ?>
+                    </div>
                 </a>
+                <ul class="dropdown-menu dropdown-menu-md-end">
+                    <li>
+                        <a class="dropdown-item" href="<?php echo $common->url(); ?>/users.php?action=edit&amp;uid=<?php echo $xoopsUser->getVar('uid'); ?>">
+                            <span>
+                                <?php echo $cuIcons->getIcon('svg-lithium-edit-profile', [], false); ?>
+                                <?php _e('Edit Profile', 'lithium'); ?>
+                            </span>
+                        </a>
+                    </li>
+                      <?php foreach ($lithium_user_menu as $menu): ?>
+                          <li>
+                              <a class="dropdown-item" href="<?php echo $menu['link']; ?>">
+                                    <span>
+                                        <?php echo $cuIcons->getIcon($menu['icon'], [], false); ?>
+                                        <?php echo $menu['caption']; ?>
+                                    </span>
+                              </a>
+                          </li>
+                      <?php endforeach; ?>
+                    <li class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="<?php echo RMUris::relative_url(XOOPS_URL . '/user.php?op=logout'); ?>">
+                            <span>
+                                <?php echo $cuIcons->getIcon('svg-lithium-logout text-danger', [], false); ?>
+                                <?php _e('Logout', 'lithium'); ?>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
 
