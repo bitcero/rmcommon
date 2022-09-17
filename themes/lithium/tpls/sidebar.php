@@ -1,4 +1,19 @@
 <div id="li-sidebar" class="show">
+    <div class="theme-logo">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="logo">
+                <a href="<?php echo $common->url(); ?>">
+                  <?php echo $logoLithium; ?>
+                </a>
+            </div>
+            <div class="sidebar-toggle">
+                <a href="#" class="btn btn-link" id="toggle-sidebar">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <div class="module-search">
         <input type="text" value="" class="form-control" id="filter-module" placeholder="<?php _e('Search modules...', 'rmcommon'); ?>">
     </div>

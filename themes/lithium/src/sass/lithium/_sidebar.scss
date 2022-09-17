@@ -10,6 +10,24 @@
   box-shadow: 2px 0 25px transparentize($black, 0.95);
   transform: translateX(-$lithium-sidebar-width);
 
+  > .theme-logo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: pxToRem(20) pxToRem(15);
+
+    .logo{
+      display: block;
+      width: 60%;
+      height: 100%;
+
+      img, svg{
+        max-width: 100%;
+        max-height: pxToRem(50);
+      }
+    }
+  }
 
   > .module-search{
     position: absolute;

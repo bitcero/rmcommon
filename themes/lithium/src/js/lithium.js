@@ -286,18 +286,18 @@ function updatesNotifier(count) {
   };
 
   // Add class 'show-sidebar' to body if shidebar cookie is set
-  if (cookie.get('show-sidebar') === 'true') {
+  if (cookie.get('show-sidebar') !== 'false') {
     document.body.classList.add('show-sidebar');
   }
 
   // Handle sidebar toggle
-  let menuToggler = document.querySelector('.toggle-menu');
+  let menuToggler = document.querySelector('#toggle-sidebar');
 
   menuToggler.addEventListener('click', function () {
     const sidebar = document.querySelector('body');
     const sidebarState = sidebar.classList.contains('show-sidebar');
 
     sidebar.classList.toggle('show-sidebar');
-    cookie.set('show-sidebar', !sidebarState);
+    cookie.set('show-sidebar', sidebarState ? 'false' : 'true', 365);
   });
 })();

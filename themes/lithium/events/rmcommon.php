@@ -14,7 +14,7 @@ class LithiumRmcommonPreload
       'description' => __('You can specify a logo as bitmap but SVG is recommended. The logo will be resize to 29 pixels of height.', 'lithium'),
       'formtype' => $af_available ? 'image-url' : 'textbox',
       'valuetype' => 'text',
-      'default' => RMCPATH . '/themes/lithium/images/logo-he.svg',
+      'default' => RMCPATH . '/themes/lithium/assets/images/logo-lithium.svg',
       'category' => 'lithium',
     ];
 

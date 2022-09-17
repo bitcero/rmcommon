@@ -178,7 +178,7 @@ RMTemplate::getInstance()->add_attribute('html', [
 // The logo
 $logoLithium = isset($cuSettings->lithium_logo) ? trim($cuSettings->lithium_logo) : '';
 if ('' == $logoLithium) {
-    $logoLithium = LITHIUM_URL . '/images/logo-he.svg';
+    $logoLithium = LITHIUM_URL . '/assets/images/logo-lithium.svg';
 }
 
 if ('.svg' == mb_substr($logoLithium, -4)) {
