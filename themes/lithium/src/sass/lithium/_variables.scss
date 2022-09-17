@@ -44,7 +44,7 @@ $theme-secondary-color-text: #FFF;
 */
 $lithium-header-bg-color:              #FFFFFF;
 $lithium-header-logo-bg:               #1E222B;
-$lithium-header-svg-logo-color:        #259DAB;
+$lithium-header-svg-logo-color:        $primary;
 $lithium-header-toggle-color:          #778395;
 $lithium-header-toggle-hover:          $primary;
 $lithium-header-dropdown-border:       1px solid rgba(38, 43, 54, 0.1);
