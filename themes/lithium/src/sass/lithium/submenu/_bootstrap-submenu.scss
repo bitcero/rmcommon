@@ -1,0 +1,106 @@
+@import "mixins";
+
+//
+// Sub-Menus
+// --------------------------------------------------
+
+.dropdown-submenu > a:after {
+  content: "";
+  float: right;
+  margin-right: 0;
+
+@include media-breakpoint-down(sm){
+    margin-top: 25px!important;
+  }
+}
+
+@include media-breakpoint-up (md) {
+  .dropdown-submenu {
+    position: relative;
+
+    @include make-caret(4px, left, top, bottom);
+
+    .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -6px;
+      border-top-left-radius: 0;
+
+      &:after{
+        left: -8px!important;
+        top: 10px!important;
+        border-left: 0!important;
+        border-bottom: 8px solid transparent!important;
+        border-right: 8px solid #fff!important;
+        border-top: 8px solid transparent!important;
+      }
+
+      .dropup &,
+      .navbar-fixed-bottom & {
+        top: auto;
+        bottom: 0;
+        margin-top: 0px;
+        margin-bottom: -6px;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: 0;
+      }
+    }
+
+    &.open{
+      > a, > a:focus{
+        background-color: $lithium-header-menu-hover-bg;
+        color: $lithium-header-menu-hover!important;
+
+        > .cu-icon{
+          @include cu-icon-color($lithium-header-menu-hover);
+        }
+      }
+    }
+
+  }
+
+  .navbar-right{
+    .dropdown-submenu{
+      .dropdown-menu{
+        left: auto;
+        right: 100%;
+
+        border: 0!important;
+        box-shadow: 0 0 1px 1px rgba(38,43,54, 0.15)!important;
+
+        &:after{
+          left: auto!important;
+          right: -8px!important;
+          border-right: 0!important;
+          border-bottom: 8px solid transparent!important;
+          border-left: 8px solid #fff!important;
+          border-top: 8px solid transparent!important;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down (md) {
+  .dropdown-submenu {
+    @include make-caret(($line-height-base - $caret-width) / 2, top, left, right);
+
+    .dropdown-menu {
+      position: static;
+      margin-top: 0;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  .dropdown-menu > .dropdown-submenu {
+    .dropdown > &,
+    .btn-group > & {
+      @include make-nested-list(30px, 0, 4);
+    }
+
+    .navbar-nav > .dropdown > & {
+      @include make-nested-list(35px, 0, 4);
+    }
+  }
+}

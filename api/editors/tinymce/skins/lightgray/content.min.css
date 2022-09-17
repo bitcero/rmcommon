@@ -55,6 +55,10 @@ subsequents themes.
 11. FONTS
 ------------------------------
 */
+/*
+12. TABLES
+------------------------------
+ */
 /* BASE COLORS */
 /*@color-red:           #F44336;
 @color-pink:          #E91E63;
@@ -203,8 +207,7 @@ figure.image figcaption {
   -webkit-user-modify: read-only;
   -moz-user-select: all;
   -moz-user-modify: read-only;
-  -ms-user-select: all;
-      user-select: all;
+  user-select: all;
   user-modify: read-only;
   width: 9px !important;
   height: 9px !important;

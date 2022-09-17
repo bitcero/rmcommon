@@ -1,0 +1,195 @@
+@import 'mixins/panels';
+
+/*
+ TABS IN PANELS
+*/
+.panel{
+
+  > .nav-tabs{
+    padding: 15px 15px 0;
+
+    > li{
+
+      > a{
+        outline: none;
+
+        &:hover, &:focus{
+          background-color: rgba(0,0,0,0.1);
+          border-color: transparent;
+        }
+      }
+
+      &.active{
+        > a{
+          color: $body-color;
+
+          &:hover{
+            color: $body-color;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  /* Panel toolbars */
+  > .panel-toolbar{
+    background-color: fadeout(black, 95%);
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    padding: 5px;
+  }
+
+  > .panel-body{
+    .nav-tabs{
+      margin: -$modal-inner-padding -$modal-inner-padding 0;
+    }
+  }
+
+  .nav-tabs.nav-tabs-color{
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: $nav-link-padding-y $nav-link-padding-x 0;
+    background-color: $primary;
+    border-bottom: 0;
+
+    li > a{
+      border: 0;
+      background-color: transparent;
+      color: rgba(red($primary), green($primary), blue($primary), 0.5);
+      transition: ease color 250ms;
+
+      > .cu-icon{
+        display: block;
+        text-align: center;
+        margin: 0 auto 5px auto;
+        transition: ease all 250ms;
+        @include cu-icon-size(28px);
+        @include cu-icon-color(rgba(red($primary), green($primary), blue($primary), 0.5));
+      }
+
+      &:hover{
+        color: $primary;
+        > .cu-icon{
+          @include cu-icon-color($primary);
+        }
+      }
+    }
+
+    li.active > a{
+      background-color: transparent!important;
+      border: 0;
+      border-bottom: 4px solid #FFF;
+      color: $primary;
+      > .cu-icon{
+        @include cu-icon-color($primary);
+      }
+    }
+
+    & + .tab-content{
+
+    }
+
+    @include media-breakpoint-up(sm){
+      li > a{
+        > .caption{
+          display: none;
+        }
+        > .cu-icon{
+          @include cu-icon-size(24px);
+        }
+      }
+    }
+  }
+
+  .nav-tabs:not(.nav-tabs-color){
+
+    li{
+      > a{
+        text-transform: uppercase;
+        font-size: 0.9em;
+        border: 0;
+        border-radius: $border-radius $border-radius 0 0;
+      }
+
+      &.active > a{
+        color: $body-color!important;
+      }
+    }
+
+  }
+
+  > .panel-heading + .nav-tabs{
+    padding-top: 0;
+  }
+
+}
+
+.panel-default{
+  > .panel-heading + .nav-tabs{
+    padding-top: 15px;
+  }
+}
+
+.panel-red {
+  @include panel-variant($color-red, $color-text-red, $color-red, $color-red);
+}
+.panel-pink {
+  @include panel-variant($color-pink, $color-text-pink, $color-pink, $color-pink);
+}
+.panel-purple {
+  @include panel-variant($color-purple, $color-text-purple, $color-purple, $color-purple);
+}
+.panel-deep-purple {
+  @include panel-variant($color-deep-purple, $color-text-deep-purple, $color-deep-purple, $color-deep-purple);
+}
+.panel-indigo {
+  @include panel-variant($color-indigo, $color-text-indigo, $color-indigo, $color-indigo);
+}
+.panel-blue {
+  @include panel-variant($color-blue, $color-text-blue, $color-blue, $color-blue);
+}
+.panel-light-blue {
+  @include panel-variant($color-light-blue, $color-text-light-blue, $color-light-blue, $color-light-blue);
+}
+.panel-cyan {
+  @include panel-variant($color-cyan, $color-text-cyan, $color-cyan, $color-cyan);
+}
+.panel-teal {
+  @include panel-variant($color-teal, $color-text-teal, $color-teal, $color-teal);
+}
+.panel-green {
+  @include panel-variant($color-green, $color-text-green, $color-green, $color-green);
+}
+.panel-light-green {
+  @include panel-variant($color-light-green, $color-text-light-green, $color-light-green, $color-light-green);
+}
+.panel-lime {
+  @include panel-variant($color-lime, $color-text-lime, $color-lime, $color-lime);
+}
+.panel-yellow {
+  @include panel-variant($color-yellow, $color-text-yellow, $color-yellow, $color-yellow);
+}
+.panel-amber {
+  @include panel-variant($color-amber, $color-text-amber, $color-amber, $color-amber);
+}
+.panel-orange {
+  @include panel-variant($color-orange, $color-text-orange, $color-orange, $color-orange);
+}
+.panel-deep-orange {
+  @include panel-variant($color-deep-orange, $color-text-deep-orange, $color-deep-orange, $color-deep-orange);
+}
+.panel-brown {
+  @include panel-variant($color-brown, $color-text-brown, $color-brown, $color-brown);
+}
+.panel-grey {
+  @include panel-variant($color-grey, $color-text-grey, $color-grey, $color-grey);
+}
+.panel-blue-grey {
+  @include panel-variant($color-blue-grey, $color-text-blue-grey, $color-blue-grey, $color-blue-grey);
+}
+.panel-midnight {
+  @include panel-variant($color-midnight, $color-text-midnight, $color-midnight, $color-midnight);
+}

@@ -1,0 +1,347 @@
+.widget-counter{
+  padding: 15px;
+  border-radius: $border-radius-lg;
+
+  .cu-icon{
+    @include cu-icon-size(32px);
+
+    @include media-breakpoint-up(md){
+      @include cu-icon-size(48px);
+    }
+  }
+
+  .first-cell{
+    > small{
+      text-transform: uppercase;
+      display: block;
+      line-height: 1;
+      font-size: 0.9em;
+      font-family: 'Open Sans Condensed', sans-serif;
+    }
+    > em{
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    @include media-breakpoint-up(md){
+      > small{
+        font-size: 1em;
+      }
+      > em{
+        font-size: 35px;
+      }
+    }
+  }
+
+  .other-cells{
+    margin-top: 10px;
+
+    small{
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      display: block;
+      line-height: 1;
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-weight: 400;
+    }
+
+    em{
+      font-size: 18px;
+      line-height: 1;
+      display: block;
+      font-weight: 700;
+      font-style: normal;
+      font-family: 'Open Sans Condensed', sans-serif;
+    }
+
+    @include media-breakpoint-up(md){
+      small{
+        font-size: 0.85em;
+      }
+      em{
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+}
+
+.widget-counters-row{
+
+  &:after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .row-widget{
+    float: left;
+    padding: $modal-inner-padding;
+    position: relative;
+
+    &:last-child{
+      border-right: 0;
+    }
+
+    .the-caption{
+      .cu-icon{
+        @include cu-icon-size(32px);
+      }
+
+      .caption{
+        font-size: $font-size-base;
+        font-weight: 300;
+        display: block;
+        text-transform: uppercase;
+        margin-top: 20px;
+      }
+
+    }
+
+    &:not(.solid){
+
+      border-right: 1px solid rgba(0,0,0,0.08);
+
+      .the-caption{
+        .cu-icon{
+          @include cu-icon-color($gray-300);
+        }
+
+        .caption{
+          margin: 15px 0;
+        }
+      }
+
+    }
+
+    .border{
+      position: absolute;
+      display: block;
+      left: 15px; right: 15px; bottom: 15px;
+      height: 4px;
+      background-color: $gray-100;
+
+      > span{
+        display: block;
+        position: absolute;
+        left: 0; bottom: 0; top: 0;
+        width: 41.66666667%;
+      }
+    }
+
+    .the-counter{
+      line-height: 1;
+      text-align: right;
+      font-size: ceil($font-size-base * 3.4);
+      font-weight: 300;
+    }
+
+    &.counter-1,
+    &.counter-2,
+    &.counter-3,
+    &.counter-4,
+    &.counter-5,
+    &.counter-6,
+    &.counter-7,
+    &.counter-8,
+    &.counter-9,
+    &.counter-10{
+      width: 100%;
+    }
+
+    @include media-breakpoint-up(sm){
+      &.counter-2{
+        width: 50%;
+      }
+
+      &.counter-3{
+        width: 33.33333%;
+      }
+
+      &.counter-4,
+      &.counter-5,
+      &.counter-6,
+      &.counter-7,
+      &.counter-8,
+      &.counter-9,
+      &.counter-10{
+        width: 25%;
+      }
+    }
+
+    @include media-breakpoint-up(md){
+      &.counter-5,
+      &.counter-6,
+      &.counter-7,
+      &.counter-8,
+      &.counter-9,
+      &.counter-10{
+        width: 20%;
+      }
+    }
+
+  }
+
+}
+
+.widget-tile-box{
+  background-color: #FFF;
+  padding: $modal-inner-padding;
+  border-radius: $border-radius;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  position: relative;
+  margin-bottom: 20px;
+
+  &.counter{
+
+    .caption{
+      text-transform: uppercase;
+      font-weight: 500;
+      //color: $gray-300;
+      margin-bottom: 10px;
+    }
+
+    .counter{
+      font-size: ceil($font-size-base * 2.2);
+      color: $color-midnight;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .icon{
+      .cu-icon{
+        @include cu-icon-color(lighten($gray-300, 30%));
+      }
+    }
+
+    .link{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      .btn{
+        line-height: 1;
+      }
+    }
+
+    .footer{
+      margin-top: 10px;
+      color: lighten($gray-300, 15%);
+    }
+
+    &.default{
+
+      .icon{
+        position: absolute;
+        top: 20px; right: 20px;
+        .cu-icon{
+          @include cu-icon-size(24px);
+          @include cu-icon-color(lighten($gray-300, 20%));
+        }
+      }
+
+    }
+
+    &.icon-right{
+
+      padding-right: 65px;
+
+      .icon{
+        position: absolute;
+        top: 50%;
+        margin-top: -20px;
+        right: 20px;
+
+        .cu-icon{
+          @include cu-icon-size(40px);
+        }
+      }
+
+      .footer{
+        margin-right: -45px;
+      }
+
+    }
+
+    &.icon-left{
+      padding-left: 88px;
+
+      .icon{
+        position: absolute;
+        top: 50%;
+        margin-top: -26px;
+        left: 20px;
+        border: 1px dashed lighten($gray-300, 20%);
+        border-radius: 50%;
+        padding: 10px;
+      }
+
+      .cu-icon{
+        @include cu-icon-size(32px);
+      }
+    }
+
+    &.with-progress{
+      .progress{
+        margin-top: 15px;
+        margin-bottom: 0;
+        height: 6px;
+
+        .progress-bar-striped{
+          background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+          background-size: 20px 20px;
+        }
+      }
+    }
+
+    &.solid{
+      color: #FFF!important;
+
+      .icon .cu-icon{
+        @include cu-icon-color(#FFF);
+      }
+
+      .counter{
+        color: inherit;
+      }
+
+      .footer{
+        color: rgba(255,255,255,0.8);
+      }
+    }
+
+  }
+
+  &.user{
+
+    .avatar{
+      text-align: center;
+      margin-bottom: 7px;
+
+      > img{
+        width: 40%;
+        border-radius: 50%;
+      }
+    }
+
+    .name{
+      font-weight: 500;
+      font-size: ceil($font-size-base * 1.2);
+      text-align: center;
+      color: $color-midnight;
+    }
+
+    .email{
+      text-align: center;
+      margin-top: 3px;
+      color: lighten($gray-300, 25%);
+    }
+
+  }
+
+}
+
+// User Card
+@import "widgets/user-card";

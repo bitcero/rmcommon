@@ -1,0 +1,62 @@
+@import 'mixins/labels';
+
+.label-red {
+  @include label-variant($color-red);
+}
+.label-pink {
+  @include label-variant($color-pink);
+}
+.label-purple {
+  @include label-variant($color-purple);
+}
+.label-deep-purple {
+  @include label-variant($color-deep-purple);
+}
+.label-indigo {
+  @include label-variant($color-indigo);
+}
+.label-blue {
+  @include label-variant($color-blue);
+}
+.label-light-blue {
+  @include label-variant($color-light-blue);
+}
+.label-cyan {
+  @include label-variant($color-cyan);
+}
+.label-teal {
+  @include label-variant($color-teal);
+}
+.label-green {
+  @include label-variant($color-green);
+}
+.label-light-green {
+  @include label-variant($color-light-green);
+}
+.label-lime {
+  @include label-variant($color-lime);
+}
+.label-yellow {
+  @include label-variant($color-yellow);
+}
+.label-amber {
+  @include label-variant($color-amber);
+}
+.label-orange {
+  @include label-variant($color-orange);
+}
+.label-deep-orange {
+  @include label-variant($color-deep-orange);
+}
+.label-brown {
+  @include label-variant($color-brown);
+}
+.label-grey {
+  @include label-variant($color-grey);
+}
+.label-blue-grey {
+  @include label-variant($color-blue-grey);
+}
+.label-midnight {
+  @include label-variant($color-midnight);
+}

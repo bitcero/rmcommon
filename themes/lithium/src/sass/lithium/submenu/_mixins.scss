@@ -1,0 +1,24 @@
+@mixin make-caret($margin-top, $begin, $left, $right) {
+  > a:after {
+    margin-top: $margin-top;
+
+    // dashed: fix caret size for Mozilla Firefox
+    border-#{begin}: $caret-width dashed;
+
+    border-#{left}: $caret-width solid transparent;
+    border-#{right}: $caret-width solid transparent;
+  }
+}
+
+@mixin make-nested-list($offset, $i, $n) {
+  @if ($i < $n) {
+    > .dropdown-menu > li {
+      &.dropdown-header,
+      > a {
+        padding-left: $offset + (10 * $i);
+      }
+
+      @include make-nested-list($offset, $i + 1, $n);
+    }
+  }
+}

@@ -1,0 +1,455 @@
+#li-topbar{
+  top: 20px; left: pxToRem(40); right: 40px;
+  height: 78px;
+  background-color: $lithium-header-bg-color;
+  border-radius: 10px;
+  margin-bottom: 0;
+  box-shadow: 0 3px 25px transparentize($black, 0.9);
+  transition: ease all 300ms;
+  z-index: 1000;
+
+  .show-sidebar &{
+    left: calc($lithium-sidebar-width + pxToRem(40))
+  }
+
+  a{
+    transition: ease all 250ms;
+    outline: 0;
+  }
+
+  .main-options{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .right-options{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .li-topbar-collapse{
+
+    position: absolute;
+    top: 0; left: 10px;
+    bottom: 0; right: 10px;
+    transition: ease all 300ms;
+
+    > ul > li{
+
+      > a{
+        padding: 0 8px;
+        transition: ease all 250ms;
+        color: $lithium-header-toggle-color;
+
+        > svg{
+          width: pxToRem(20);
+          height: pxToRem(20);
+          fill: currentColor;
+        }
+
+        &:hover, &:focus{
+          background-color: transparent;
+          color: $lithium-header-toggle-hover;
+        }
+
+        &:after{
+          display: none;
+        }
+      }
+
+      &.dropdown{
+        position: static;
+
+        @include media-breakpoint-up(md){
+          position: relative;
+        }
+
+      }
+
+      &.open{
+        @include media-breakpoint-down(sm){
+          > .dropdown-menu{
+            transform: translateX(0);
+          }
+
+        }
+
+        > a{
+          background-color: transparent;
+        }
+      }
+
+      &.rmcommon-menu{
+
+        > a{
+          @include cu-icon-color($lithium-header-svg-logo-color);
+
+          &:hover{
+            @include cu-icon-color($lithium-header-rmc-hover);
+          }
+        }
+
+        &.open > a {
+          background: transparent;
+          .cu-icon {
+            @include cu-icon-color($lithium-header-rmc-hover);
+          }
+        }
+
+      }
+    }
+  }
+
+  .dropdown-menu{
+    padding: 0;
+    border-color: $gray-200;
+    box-shadow: 0 3px 10px  fade-out($black, 0.9);
+    font-size: pxToRem(14);
+
+    > li{
+
+      > a{
+        color: $lithium-header-menu-color;
+        border-radius: 0;
+        padding: pxToRem(9) pxToRem(15);
+        min-width: pxToRem(200);
+        line-height: pxToRem(14 * 1.5);
+
+        > span {
+          > svg{
+            width: pxToRem(16);
+            height: pxToRem(16);
+            fill: currentColor;
+            margin-right: pxToRem(10);
+          }
+
+          > span{
+            font-size: pxToRem(20);
+            margin-right: pxToRem(10);
+            margin-right: pxToRem(10);
+          }
+        }
+
+        &:hover{
+          background-color: $lithium-header-menu-hover-bg;
+          color: $lithium-header-menu-hover;
+
+          > .cu-icon{
+            @include cu-icon-color($lithium-header-menu-hover);
+          }
+
+        }
+
+        @include media-breakpoint-down(sm){
+          text-transform: uppercase;
+          font-weight: 700;
+
+          .cu-icon{
+            @include cu-icon-size(24px);
+          }
+        }
+
+      }
+    }
+
+    .dropdown-menu{
+      border: $lithium-header-dropdown-border;
+
+      @include media-breakpoint-down(sm){
+        width: 100%;
+        border: 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        background: rgba(0,0,0,0.05);
+
+        li{
+
+          padding-left: 20px;
+          border: 0;
+          transition: ease all 250ms;
+
+          > a{
+            line-height: 40px;
+            text-transform: none;
+            font-weight: 400;
+            padding-left: 15px;
+            border-left: 1px solid rgba(0,0,0,0.1);
+            position: relative;
+
+            .cu-icon{
+              @include cu-icon-size(14px);
+              position: absolute;
+              left: -7px;
+              top: 12px;
+            }
+
+            &:hover{
+              background: transparent;
+              color: $theme-main-color-text!important;
+              .cu-icon{
+                @include cu-icon-color($theme-main-color-text);
+                svg{fill: $theme-main-color-text!important;}
+              }
+            }
+
+          }
+
+          &:hover{
+            background: $theme-main-color;
+          }
+
+        }
+
+      }
+
+    }
+
+    @include media-breakpoint-down(sm){
+      padding: 0;
+
+      .divider{display: none;}
+    }
+
+  }
+
+  .toggle-menu{
+    display: inline;
+    text-align: center;
+    color: $lithium-header-toggle-color;
+
+    > .cu-icon{
+      @include cu-icon-size(32px);
+      @include cu-icon-color($lithium-header-toggle-color);
+    }
+
+    &:hover{
+      color: $lithium-header-toggle-hover;
+
+      > .cu-icon{
+        @include cu-icon-color($lithium-header-toggle-hover);
+      }
+    }
+
+  }
+
+  .system-menu{
+
+    > a:hover, &.open > a{
+      .cu-icon{
+        @include cu-icon-color($color-light-blue);
+        > svg > circle{
+          fill: $color-light-blue;
+        }
+      }
+    }
+  }
+
+  .quick-menu{
+
+    &:hover{
+      > a > .cu-icon{
+        @include cu-icon-color($color-amber);
+        > svg > circle{
+          fill: $color-amber;
+        }
+      }
+    }
+
+    &.open{
+      > a > .cu-icon{
+        @include cu-icon-color($color-amber);
+        > svg > circle{
+          fill: $color-amber;
+        }
+      }
+    }
+
+  }
+
+  .help-menu{
+
+    &:hover{
+      .cu-icon{
+        @include cu-icon-color($color-light-blue);
+        > svg > circle{
+          fill: $color-light-blue;
+        }
+      }
+    }
+
+  }
+
+  .user-menu{
+
+    &:hover{
+      .cu-icon{
+        @include cu-icon-color($color-green);
+        > svg > circle{
+          fill: $color-green;
+        }
+      }
+    }
+
+  }
+
+  > .he-options{
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    transition: ease all 300ms;
+
+    .sidebar &{
+      transform: translateX($lithium-sidebar-width);
+
+    @include media-breakpoint-up(md){
+        transform: translateX(0);
+        left: $lithium-sidebar-width;
+      }
+    }
+
+  }
+
+  > .he-system-options{
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    transition: ease all 300ms;
+    width: auto;
+    overflow: hidden;
+
+    > a{
+
+      display: block;
+      line-height: 78px;
+      font-size: 32px;
+      padding: 0 8px;
+      position: relative;
+      float: left;
+      text-align: center;
+      color: $lithium-header-toggle-color;
+
+      &:hover{
+        color: $lithium-header-toggle-hover;
+      }
+
+      .cu-icon{
+        @include cu-icon-color(#139EE8);
+        @include cu-icon-size(32px);
+      }
+
+    }
+  }
+
+@include media-breakpoint-up(md){
+
+    position: fixed;
+    height: 64px;
+
+    .he-logo{
+      height: 63px;
+
+      svg{
+        width: 109px;
+        height: 29px;
+      }
+    }
+
+    .he-topbar-collapse{
+      > ul > li > a{
+        padding: 0 10px;
+        line-height: 64px;
+        font-size: 21px;
+
+        > .cu-icon{
+          @include cu-icon-size(21px);
+        }
+
+      }
+    }
+
+    .toggle-menu, .toggle-system{
+      line-height: 64px;
+      font-size: 21px;
+      width: 64px;
+    }
+
+  }
+
+  .sidebar &{
+
+    .he-topbar-collapse{
+
+      transform: translateX($lithium-sidebar-width);
+
+    @include media-breakpoint-up(min){
+        transform: translateX(0);
+      }
+    }
+
+    .he-logo{
+      transform: translateX(0);
+    }
+  }
+
+  .user-menu{
+    margin-left: pxToRem(10);
+    > a{
+      .user-meta{
+        text-align: right;
+        padding-right: pxToRem(10);
+
+        .user-name{
+          display: block;
+          font-size: pxToRem(14);
+          font-weight: 700;
+        }
+
+        .user-role{
+          display: block;
+          font-size: pxToRem(11);
+        }
+      }
+
+      .user-avatar{
+        img{
+            width: pxToRem(40);
+            height: pxToRem(40);
+            border-radius: 50%;
+        }
+      }
+
+      &:hover{
+        .user-meta{
+          color: $gray-700;
+        }
+      }
+    }
+  }
+}
+
+#updater-info-top{
+  display: none;
+
+  > a{
+    position: relative;
+    .cu-icon{
+      @include cu-icon-color($color-green);
+    }
+
+    em{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 16px;
+      border-radius: 14px;
+      background-color: $color-deep-orange;
+      color: $color-text-deep-orange;
+      font-size: 10px;
+      font-weight: 700;
+      display: block;
+      padding: 0 5px;
+      height: 16px;
+      line-height: 16px;
+      font-style: normal;
+    }
+  }
+}

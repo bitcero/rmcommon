@@ -1,0 +1,60 @@
+.btn-red {
+  @include button-variant($color-text-red, $color-text-red);
+}
+.btn-pink {
+  @include button-variant($color-text-pink, $color-text-pink);
+}
+.btn-purple {
+  @include button-variant($color-text-purple, $color-text-purple);
+}
+.btn-deep-purple {
+  @include button-variant($color-text-deep-purple, $color-text-deep-purple);
+}
+.btn-indigo {
+  @include button-variant($color-text-indigo, $color-text-indigo);
+}
+.btn-blue {
+  @include button-variant($color-text-blue, $color-text-blue);
+}
+.btn-light-blue {
+  @include button-variant($color-text-light-blue, $color-text-light-blue);
+}
+.btn-cyan {
+  @include button-variant($color-text-cyan, $color-text-cyan);
+}
+.btn-teal {
+  @include button-variant($color-text-teal, $color-text-teal);
+}
+.btn-green {
+  @include button-variant($color-text-green, $color-text-green);
+}
+.btn-light-green {
+  @include button-variant($color-text-light-green, $color-text-light-green);
+}
+.btn-lime {
+  @include button-variant($color-text-lime, $color-text-lime);
+}
+.btn-yellow {
+  @include button-variant($color-text-yellow, $color-text-yellow);
+}
+.btn-amber {
+  @include button-variant($color-text-amber, $color-text-amber);
+}
+.btn-orange {
+  @include button-variant($color-text-orange, $color-text-orange);
+}
+.btn-deep-orange {
+  @include button-variant($color-text-deep-orange, $color-text-deep-orange);
+}
+.btn-brown {
+  @include button-variant($color-text-brown, $color-text-brown);
+}
+.btn-grey {
+  @include button-variant($color-text-grey, $color-text-grey);
+}
+.btn-blue-grey {
+  @include button-variant($color-text-blue-grey, $color-text-blue-grey);
+}
+.btn-midnight {
+  @include button-variant($color-text-midnight, $color-text-midnight);
+}

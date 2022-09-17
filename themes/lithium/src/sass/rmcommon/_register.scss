@@ -1,0 +1,138 @@
+body.registering{
+  overflow: hidden!important;
+}
+#rmc-register-overlay{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0; right: 0; bottom: 0;
+  background-color: fade($body-bg, 85%);//rgba(255,255,255,0.8);
+  z-index: 1000;
+}
+
+#rmc-register-form, #rmc-reactivate-form{
+  display: none;
+  position: absolute;
+  width: 480px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  z-index: 1001;
+  border-radius: $border-radius-lg;
+  padding: ceil($modal-inner-padding * 1.6);
+  border: 1px solid $theme-main-color;
+
+  > .close{
+    font-size: 1.8em;
+    float: none;
+    position: absolute;
+    top: 10px; right: 10px;
+    transition: ease all 250ms;
+
+    &:hover{
+      color: $theme-main-color;
+    }
+  }
+
+  > h1{
+    margin: 0 0 40px 0;
+    line-height: 1;
+    font-weight: 300;
+    text-align: center;
+    font-size: ceil($font-size-base * 2);
+    color: #000;
+
+    > strong{
+      color: $primary;
+    }
+  }
+
+  .form-group{
+
+    > label{
+      color: $theme-main-color;
+      margin-bottom: 10px;
+    }
+
+    > .form-control{
+      border: 0;
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid rgba(0,0,0,0.3);
+      font-size: ceil($font-size-base * 1.3);
+      transition: ease all 250ms;
+      border-radius: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      height: auto;
+      line-height: 1;
+
+      &:focus{
+        border-bottom: 2px solid $theme-main-color;
+      }
+    }
+
+    &.control{
+      margin-top: 30px;
+    }
+
+    &.error{
+
+      color: $danger;
+
+      > label{
+        color: $danger;
+      }
+
+      .form-control{
+        border-color: $danger;
+      }
+
+    }
+
+  }
+
+  > h3{
+    text-align: center;
+    font-weight: 300;
+    font-size: ceil($font-size-base * 1.5);
+    margin: 0 0 15px 0;
+  }
+
+  > p{
+    font-size: ceil($font-size-base * 1.2);
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  > code{
+    display: block;
+    padding: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+    //background-color: rgba(0,0,0,0.05);
+    text-align: center;
+    font-size: 1.3em;
+  }
+}
+
+#rmc-reactivate-form{
+  background-color: $color-midnight;
+  color: #FFF;
+
+  > h1{
+    color: lighten($color-midnight, 50%);
+
+    > strong{
+      color: $color-cyan;
+    }
+  }
+
+  label{
+    color: $color-cyan;
+  }
+
+  .help-block > strong{
+    color: $color-cyan;
+  }
+}

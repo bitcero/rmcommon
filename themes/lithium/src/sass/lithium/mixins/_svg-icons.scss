@@ -1,0 +1,36 @@
+/*
+Format for SVG icons
+*/
+
+@mixin cu-icon-size($size: 14px, $squared: true){
+
+  font-size: $size;
+
+  @if $squared == true {
+    width: $size;
+    height: $size;
+  }
+
+  @if $squared == false {
+    height: $size;
+  }
+
+  > *{
+
+    @if $squared == true {
+      width: $size;
+      height: $size;
+    }
+
+    @if $squared == false {
+      height: $size;
+    }
+
+  }
+
+}
+
+@mixin cu-icon-color($color: currentColor){
+  fill: $color;
+  color: $color;
+}

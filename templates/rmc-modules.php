@@ -33,10 +33,10 @@
             </li>
         </ul>
 
-        <div class="tab-content" id="des-mods-container">
+        <div class="tab-content no-padding" id="des-mods-container">
             <div class="tab-pane fade in active" id="installed">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover no-margin">
                         <thead>
                         <tr>
                             <th class="logo">&nbsp;</th>
@@ -46,15 +46,6 @@
                             <th colspan="4" class="text-center"><?php _e('Options', 'rmcommon'); ?></th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th class="logo"><?php _e('Image', 'rmcommon'); ?></th>
-                            <th><?php _e('Name', 'rmcommon'); ?></th>
-                            <th><?php _e('Version', 'rmcommon'); ?></th>
-                            <th><?php _e('Author', 'rmcommon'); ?></th>
-                            <th><?php _e('Options', 'rmcommon'); ?></th>
-                        </tr>
-                        </tfoot>
                         <tbody>
                         <?php foreach ($modules as $mod): ?>
                             <tr class="<?php echo tpl_cycle('even,odd'); ?><?php echo $mod['active'] ? '' : ' inactive'; ?>" id="module-<?php echo $mod['dirname']; ?>" valign="middle" align="center">

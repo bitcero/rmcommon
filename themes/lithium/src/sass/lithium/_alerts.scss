@@ -1,0 +1,117 @@
+/*
+ ALERT WITH ICON
+*/
+.alert-icon{
+
+  padding-left: 70px;
+  position: relative;
+  min-height: 70px;
+
+  > .cu-icon{
+    @include cu-icon-size(40px);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
+}
+
+.alert-primary {
+  @include alert-variant($primary, $primary, color-contrast($primary));
+}
+
+.alert-success {
+  @include alert-variant($success, $success, color-contrast($success));
+}
+
+.alert-info {
+  @include alert-variant($info, $info, color-contrast($info));
+}
+
+.alert-warning {
+  @include alert-variant($warning, $warning, color-contrast($warning));
+}
+
+.alert-danger {
+  @include alert-variant($danger, $danger, color-contrast($danger));
+}
+
+.alert-red {
+  @include alert-variant($color-red, $color-red, color-contrast($color-red));
+}
+
+.alert-pink {
+  @include alert-variant($color-pink, $color-pink, color-contrast($color-pink));
+}
+
+.alert-purple {
+  @include alert-variant($color-purple, $color-purple, color-contrast($color-purple));
+}
+
+.alert-deep-purple {
+  @include alert-variant($color-deep-purple, $color-deep-purple, color-contrast($color-deep-purple));
+}
+
+.alert-indigo {
+  @include alert-variant($color-indigo, $color-indigo, color-contrast($color-indigo));
+}
+
+.alert-blue {
+  @include alert-variant($color-blue, $color-blue, color-contrast($color-blue));
+}
+
+.alert-light-blue {
+  @include alert-variant($color-light-blue, $color-light-blue, color-contrast($color-light-blue));
+}
+
+.alert-cyan {
+  @include alert-variant($color-cyan, $color-cyan, color-contrast($color-cyan));
+}
+
+.alert-teal {
+  @include alert-variant($color-teal, $color-teal, color-contrast($color-teal));
+}
+
+.alert-green {
+  @include alert-variant($color-green, $color-green, color-contrast($color-green));
+}
+
+.alert-light-green {
+  @include alert-variant($color-light-green, $color-light-green, color-contrast($color-light-green));
+}
+
+.alert-lime {
+  @include alert-variant($color-lime, $color-lime, color-contrast($color-lime));
+}
+
+.alert-yellow {
+  @include alert-variant($color-yellow, $color-yellow, color-contrast($color-yellow));
+}
+
+.alert-amber {
+  @include alert-variant($color-amber, $color-amber, color-contrast($color-amber));
+}
+
+.alert-orange {
+  @include alert-variant($color-orange, $color-orange, color-contrast($color-orange));
+}
+
+.alert-deep-orange {
+  @include alert-variant($color-deep-orange, $color-deep-orange, color-contrast($color-deep-orange));
+}
+
+.alert-brown {
+  @include alert-variant($color-brown, $color-brown, color-contrast($color-brown));
+}
+
+.alert-grey {
+  @include alert-variant($color-grey, $color-grey, color-contrast($color-grey));
+}
+
+.alert-blue-grey {
+  @include alert-variant($color-blue-grey, $color-blue-grey, color-contrast($color-blue-grey));
+}
+
+.alert-midnight {
+  @include alert-variant($color-midnight, $color-midnight, color-contrast($color-midnight));
+}

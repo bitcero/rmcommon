@@ -1,0 +1,12 @@
+#li-main-content{
+  margin-left: 0;
+  padding: pxToRem(10) 40px 40px;
+  margin-top: pxToRem(94);
+  position: relative;
+  transition: ease margin-left 300ms;
+  z-index: 1;
+
+  .show-sidebar &{
+    margin-left: $lithium-sidebar-width;
+  }
+}

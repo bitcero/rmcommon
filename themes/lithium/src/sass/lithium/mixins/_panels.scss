@@ -1,0 +1,74 @@
+// Panels
+@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+  border-color: $border;
+
+  & > .panel-heading {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+
+    + .panel-collapse > .panel-body {
+      border-top-color: $border;
+    }
+    .badge {
+      color: $heading-bg-color;
+      background-color: $heading-text-color;
+    }
+  }
+  & > .panel-footer {
+    + .panel-collapse > .panel-body {
+      border-bottom-color: $border;
+    }
+  }
+
+  & > .nav-tabs{
+    background-color: $heading-bg-color;
+
+    > li{
+      > a{
+        color: fade($heading-text-color, 60%);
+        transition: ease all 250ms;
+
+        &:hover{
+          color: $heading-text-color;
+        }
+      }
+    }
+  }
+
+  .nav-tabs.nav-tabs-color{
+    background-color: $heading-bg-color;
+
+    li > a{
+      color: rgba(red($heading-text-color), green($heading-text-color), blue($heading-text-color), 0.5);
+
+      > .cu-icon{
+        @include cu-icon-color(rgba(red($heading-text-color), green($heading-text-color), blue($heading-text-color), 0.5));
+      }
+
+      &:hover{
+        color: $heading-text-color;
+        > .cu-icon{
+          @include cu-icon-color($heading-text-color);
+        }
+      }
+    }
+
+    li.active > a{
+      color: $heading-text-color;
+
+      > .cu-icon{
+        @include cu-icon-color($heading-text-color);
+      }
+    }
+
+  }
+
+  .nav-tabs:not(.nav-tabs-color){
+    li.active > a{
+      background: $heading-bg-color;
+      color: $heading-text-color;
+    }
+  }
+
+}

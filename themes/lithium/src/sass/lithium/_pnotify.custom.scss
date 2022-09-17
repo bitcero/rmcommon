@@ -1,0 +1,235 @@
+/*
+Author  : Hunter Perrin
+Version : 2.1.0
+Link    : http://sciactive.com/pnotify/
+*/
+/* -- Notice */
+.ui-pnotify {
+  top: 15px;
+  right: 15px;
+  position: absolute;
+  height: auto;
+  /* Ensures notices are above everything */
+  z-index: 9999;
+
+  @media (max-width: 400px) {
+    left: 15px;
+  }
+
+  @media (min-width: 401px) {
+    width: 300px;
+    top: 25px;
+    right: 25px;
+  }
+
+  @include media-breakpoint-up (sm) {
+    width: 400px;
+  }
+
+}
+
+/* Hides position: fixed from IE6 */
+html > body > .ui-pnotify {
+  position: fixed;
+}
+
+.ui-pnotify{
+
+  > .alert{
+    background-color: #f2f2f2!important;
+    padding: 5px 10px 12px;
+    position: relative;
+    color: $body-color;
+    border: 1px solid #f2f2f2;
+    margin-bottom: 0;
+
+    &.alert-success {
+      @include notify-variant($success, #FFFFFF);
+    }
+
+    &.alert-danger{
+      @include notify-variant($danger,  #FFFFFF);
+    }
+
+    &.alert-warning{
+      @include notify-variant($warning,  #FFFFFF);
+    }
+
+    &.alert-primary{
+      @include notify-variant($primary,  #FFFFFF);
+    }
+
+    &.alert-info{
+      @include notify-variant($info,  #FFFFFF);
+    }
+
+    &.alert-blue{
+      @include notify-variant($color-blue,  #FFFFFF);
+    }
+
+    &.alert-red{
+      @include notify-variant($color-red,  #FFFFFF);
+    }
+
+    &.alert-pink{
+      @include notify-variant($color-pink,  #FFFFFF);
+    }
+
+    &.alert-purple{
+      @include notify-variant($color-purple,  #FFFFFF);
+    }
+
+    &.alert-deep-purple{
+      @include notify-variant($color-deep-purple,  #FFFFFF);
+    }
+
+    &.alert-indigo{
+      @include notify-variant($color-indigo,  #FFFFFF);
+    }
+
+    &.alert-light-blue{
+      @include notify-variant($color-light-blue,  #FFFFFF);
+    }
+
+    &.alert-cyan{
+      @include notify-variant($color-cyan,  #FFFFFF);
+    }
+
+    &.alert-teal{
+      @include notify-variant($color-teal,  #FFFFFF);
+    }
+
+    &.alert-green{
+      @include notify-variant($color-green,  #FFFFFF);
+    }
+
+    &.alert-light-green{
+      @include notify-variant($color-light-green,  #FFFFFF);
+    }
+
+    &.alert-lime{
+      @include notify-variant($color-lime,  #FFFFFF);
+    }
+
+    &.alert-yellow{
+      @include notify-variant($color-yellow,  #FFFFFF);
+    }
+
+    &.alert-amber{
+      @include notify-variant($color-amber,  #FFFFFF);
+    }
+
+    &.alert-orange{
+      @include notify-variant($color-orange,  #FFFFFF);
+    }
+
+    &.alert-deep-orange{
+      @include notify-variant($color-deep-orange,  #FFFFFF);
+    }
+
+    &.alert-brown{
+      @include notify-variant($color-brown,  #FFFFFF);
+    }
+
+    &.alert-grey{
+      @include notify-variant($color-grey,  #FFFFFF);
+    }
+
+    /*&.alert-light-grey{
+      @include notify-variant($color-light-grey,  @gray);
+    }*/
+
+    &.alert-blue-grey{
+      @include notify-variant($color-blue-grey,  #FFFFFF);
+    }
+
+    &.alert-midnight{
+      @include notify-variant($color-midnight,  #FFFFFF);
+    }
+
+    .ui-pnotify-closer, .ui-pnotify-sticker {
+      > .cu-icon {
+        @include cu-icon-size(16px);
+      }
+
+    }
+
+    .ui-pnotify-closer{
+      position: absolute;
+      top: 5px; right: 5px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .ui-pnotify-sticker {
+      position: absolute;
+      top: 5px;
+      right: 26px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .ui-pnotify-icon {
+    position: absolute;
+    display: block;
+    top: 0; left: 0; bottom: 0;
+    width: 38px;
+    text-align: center;
+    font-size: 18px;
+
+    .cu-icon {
+      position: absolute;
+      top: 50%; left: 50%;
+      margin-top: -9px;
+      margin-left: -9px;
+      @include cu-icon-size(18px);
+    }
+
+  }
+
+  .ui-pnotify-text {
+    display: block;
+    margin-left: 48px;
+    margin-right: 0px;
+  }
+
+}
+
+.ui-pnotify .ui-pnotify-shadow {
+  -webkit-box-shadow: 0px 2px 10px rgba(50, 50, 50, 0.5);
+  -moz-box-shadow: 0px 2px 10px rgba(50, 50, 50, 0.5);
+  box-shadow: 0px 2px 10px rgba(50, 50, 50, 0.5);
+}
+
+.ui-pnotify-container {
+  background-position: 0 0;
+  padding: 15px;
+  height: 100%;
+  min-height: 50px;
+  margin: 0;
+}
+
+.ui-pnotify-container.ui-pnotify-sharp {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.ui-pnotify-title {
+  display: block;
+  margin-bottom: .4em;
+  margin-top: 0;
+  margin-left: 60px;
+}
+
+/* Alternate stack initial positioning. */
+.ui-pnotify.stack-topleft, .ui-pnotify.stack-bottomleft {
+  left: 25px;
+  right: auto;
+}
+
+.ui-pnotify.stack-bottomright, .ui-pnotify.stack-bottomleft {
+  bottom: 25px;
+  top: auto;
+}

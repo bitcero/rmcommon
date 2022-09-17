@@ -42,6 +42,10 @@ th {
   > thead > tr > th {
     vertical-align: bottom;
     border-bottom: 2px solid @table-border-color;
+    border-top: 1px solid @table-border-color;
+    background-color: @he-table-th-bg;
+    text-transform: uppercase;
+    font-size: 13px;
   }
   // Remove top border from thead by default
   > caption + thead,
@@ -50,7 +54,7 @@ th {
     > tr:first-child {
       > th,
       > td {
-        border-top: 0;
+
       }
     }
   }

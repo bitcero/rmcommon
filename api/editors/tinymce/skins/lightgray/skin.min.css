@@ -54,6 +54,10 @@ subsequents themes.
 11. FONTS
 ------------------------------
 */
+/*
+12. TABLES
+------------------------------
+ */
 /* BASE COLORS */
 /*@color-red:           #F44336;
 @color-pink:          #E91E63;
@@ -552,7 +556,7 @@ div.mce-tinymce-inline {
   overflow: hidden;
 }
 .mce-container {
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .mce-scrollbar {
   position: absolute;

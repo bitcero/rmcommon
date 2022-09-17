@@ -1,44 +1,14 @@
 #he-topbar{
-  top: 0; left: 0; right: 0;
+  top: 20px; left: 260px; right: 40px;
   height: 78px;
   background-color: @he-header-bg-color;
-  border-radius: 0;
+  border-radius: 10px;
   margin-bottom: 0;
+  box-shadow: 0 3px 10px fadeout(black, 90%);
 
   a{
     transition: ease all 250ms;
     outline: 0;
-  }
-
-  .he-logo{
-    width: 220px;
-    height: 77px;
-    padding-top: 19px;
-    background-color: @he-header-logo-bg;
-    text-align: center;
-    //transform: translateX(-220px);
-    transition: ease all 300ms;
-    display: block;
-    transform: translateX(-220px);
-
-    > svg{
-      fill: @he-header-svg-logo-color;
-      width: 146px;
-      height: 39px;
-    }
-
-    > img{
-      height: 29px;
-      text-align: center;
-      margin: 0 auto;
-    }
-
-    .sidebar &{
-      @media(min-width: @screen-sm-min){
-        transform: translateX(0);
-      }
-    }
-
   }
 
   .main-options{
@@ -62,8 +32,8 @@
   .he-topbar-collapse{
 
     position: absolute;
-    top: 0; left: 0;
-    bottom: 0; right: 0;
+    top: 0; left: 10px;
+    bottom: 0; right: 10px;
     transition: ease all 300ms;
 
     > ul > li{
@@ -306,7 +276,7 @@
         .cu-icon-color(@he-header-svg-logo-color);
 
         circle{
-          fill: #000;
+          fill: #fff;
         }
 
       }
@@ -475,7 +445,6 @@
       transform: translateX(220px);
 
       @media(min-width: @screen-md-min){
-        left: 220px;
         transform: translateX(0);
       }
     }

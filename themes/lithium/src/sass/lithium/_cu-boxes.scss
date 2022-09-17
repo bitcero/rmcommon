@@ -1,0 +1,571 @@
+@import 'mixins/modals';
+
+.cu-box{
+  background-color: $cu-box-bg;
+  border-radius: $border-radius;
+  box-shadow: 0 3px 15px fadeout(black, 90%);
+  margin-bottom: 20px;
+  position: relative;
+
+  .box-content{
+    padding: 20px;
+
+    &.no-padding{
+      padding: 0!important;
+    }
+
+    > .nav-tabs{
+      padding: 15px 15px 0;
+      border-bottom-color: transparent;
+      background-color: transparent;
+      border-radius: $border-radius $border-radius 0 0;
+
+      > li{
+
+        > a{
+          outline: 0;
+          font-size: 1em;
+          border: 0;
+          border-bottom: 3px solid transparent;
+          color: $body-color;
+
+          &:hover, &:focus{
+            border-color: transparent;
+            text-decoration: none;
+            background-color: transparent;
+          }
+        }
+
+        &.active{
+          > a{
+            border-color: transparent;
+
+            &:hover{
+              color: $body-color;
+            }
+          }
+        }
+
+      }
+
+    }
+
+    &:after{
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+  }
+
+  .box-header{
+    padding: 20px;
+    font-size: 1.1em;
+    font-weight: 700;
+    position: relative;
+    border-radius: $border-radius $border-radius 0 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+
+    .box-title{
+      font-size: 0.9em;
+      margin: 0;
+      margin: 0;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .box-handler{
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 32px;
+      line-height: 55px;
+      text-align: center;
+      color: rgba(0,0,0, 0.3);
+      cursor: pointer;
+      transition: ease all 250ms;
+
+      &:hover{
+        color: $body-color;
+      }
+    }
+
+    & + .box-content > .nav-tabs{
+      padding-top: 0;
+    }
+
+  }
+
+  .box-footer{
+    padding: 10px 20px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    background-color: $cu-box-footer-bg;
+    font-size: 0.9em;
+  }
+
+  &.collapsed{
+
+    .box-header{
+      border-radius: $border-radius;
+      .box-handler{
+        transform: rotate(180deg);
+      }
+    }
+
+    .box-footer{
+      display: none;
+    }
+
+  }
+
+  > .table:last-child,
+  > .table-responsive:last-child > .table:last-child{
+    margin-bottom: 0;
+  }
+
+}
+
+.box-default{
+  @include box-variation($cu-box-header-bg, $body-color);
+
+  > .box-content{
+    > .nav-tabs{
+      border-bottom-color: $nav-tabs-border-color;
+
+      > li.active > a{
+        border-color: $nav-tabs-border-color;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+}
+
+/*
+CU BOXES
+----------------------------- */
+/* Dialogs */
+.cu-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  display: none;
+  overflow: auto;
+  overflow-y: scroll;
+
+  &.in{
+
+    .cu-dialog-dialog {
+      -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+
+  }
+
+}
+
+.bootbox {
+
+  @include media-breakpoint-up(sm){
+    .xlarge, .large, .medium{
+      width: 95%;
+    }
+
+    .dsmall, .xsmall{
+      width: 75%;
+    }
+
+  }
+
+  @include media-breakpoint-up(md){
+    .xlarge{
+      width: 95%;
+    }
+
+    .large{
+      width: 85%;
+    }
+
+    .medium{
+      width: 70%;
+    }
+
+    .dsmall{
+      width: 55%;
+    }
+
+    .xsmall{
+      width: 45%;
+    }
+  }
+
+}
+
+.cu-dialog-content {
+  position: relative;
+  background-color: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.modal-content{
+  background-color: #FFF; //$body-bg;
+}
+
+.modal-body {
+  //position: relative;
+  padding: $modal-inner-padding;
+  color: $body-color;
+  overflow: auto;
+
+  .nav-tabs.nav-tabs-color{
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: -$modal-inner-padding -$modal-inner-padding 0;
+    padding: $nav-link-padding-y $nav-link-padding-x 0;
+    background-color: $primary;
+    border-bottom: 0;
+
+    li > a{
+      border: 0;
+      background-color: transparent;
+      color: transparentize($primary, 0.5);
+      transition: ease color 250ms;
+
+      > .cu-icon{
+        display: block;
+        text-align: center;
+        margin: 0 auto 5px auto;
+        transition: ease all 250ms;
+        @include cu-icon-size(28px);
+        @include cu-icon-color(transparentize($primary, 0.5));
+      }
+
+      &:hover{
+        color: $primary;
+        > .cu-icon{
+          @include cu-icon-color($primary);
+        }
+      }
+    }
+
+    li.active > a{
+      background-color: transparent;
+      border: 0;
+      border-bottom: 4px solid #FFF;
+      color: $primary;
+      > .cu-icon{
+        @include cu-icon-color($primary);
+      }
+    }
+
+    & + .tab-content{
+
+    }
+
+    @include media-breakpoint-down(sm){
+      li > a{
+        > .caption{
+          display: none;
+        }
+        > .cu-icon{
+          @include cu-icon-size(24px);
+        }
+      }
+    }
+  }
+
+  .nav-tabs:not(.nav-tabs-color){
+
+    li > a{
+      text-transform: uppercase;
+      font-size: 0.80em;
+      border: 0;
+      border-radius: $border-radius $border-radius 0 0;
+    }
+
+  }
+
+  .tab-content{
+    background-color: #FFF;
+    padding: $modal-inner-padding;
+    font-size: 0.9em;
+    //max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0 -$modal-inner-padding 0 -$modal-inner-padding;
+    border: 0;
+    border-top: 0;
+
+    &.with-border{
+      border: 1px solid $nav-tabs-border-color;
+      border-top: 0;
+      margin: 0;
+      max-height: none;
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+  }
+
+}
+
+.modal-header {
+  min-height: 16.428571429px;
+  padding: $modal-header-padding-y $modal-header-padding-x;
+  border-bottom: 0;
+  font-weight: bold;
+  background-color: $primary;
+  color: $primary;
+
+}
+
+.cu-content-footer{
+  background: rgba(0,0,0,0.05);
+  border-top: rgba(0,0,0,0.1);
+  padding: $cu-box-footer-padding;
+  margin: -$cu-box-footer-padding -$cu-box-footer-padding -$cu-box-footer-padding;
+  text-align: right;
+}
+
+.cu-dialog-footer {
+  padding: 19px 20px 20px;
+  margin-top: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+
+  &:before, &:after{
+    display: table;
+    content: " ";
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  .btn + .btn {
+    margin-bottom: 0;
+    margin-left: 5px;
+  }
+
+  .btn-group .btn + .btn {
+    margin-left: -1px;
+  }
+
+  .btn-block + .btn-block {
+    margin-left: 0;
+  }
+}
+
+/*
+.box-primary{
+  @include box-variation($primary, $primary);
+}
+
+.box-info{
+  @include box-variation($info, @btn-info-color);
+}
+
+.box-success{
+  @include box-variation($success, @btn-success-color);
+}
+
+.box-warning{
+  @include box-variation($warning, $warning);
+}
+
+.box-danger{
+  @include box-variation($danger, $danger);
+}
+
+.box-red{
+  @include box-variation($color-red, $color-text-red);
+}
+
+.box-pink{
+  @include box-variation($color-pink, $color-text-pink);
+}
+
+.box-purple{
+  @include box-variation($color-purple, $color-text-purple);
+}
+
+.box-deep-purple{
+  @include box-variation($color-deep-purple, $color-text-deep-purple);
+}
+
+.box-indigo{
+  @include box-variation($color-indigo, $color-text-indigo);
+}
+
+.box-blue{
+  @include box-variation($color-blue, $color-text-blue);
+}
+
+.box-light-blue{
+  @include box-variation($color-light-blue, $color-text-light-blue);
+}
+
+.box-light-blue{
+  @include box-variation($color-light-blue, $color-text-light-blue);
+}
+
+.box-cyan{
+  @include box-variation($color-cyan, $color-text-cyan);
+}
+
+.box-teal{
+  @include box-variation($color-teal, $color-text-teal);
+}
+
+.box-green{
+  @include box-variation($color-green, $color-text-green);
+}
+
+.box-light-green{
+  @include box-variation($color-light-green, $color-text-light-green);
+}
+
+.box-lime{
+  @include box-variation($color-lime, $color-text-lime);
+}
+
+.box-yellow{
+  @include box-variation($color-yellow, $color-text-yellow);
+}
+
+.box-amber{
+  @include box-variation($color-amber, $color-text-amber);
+}
+
+.box-orange{
+  @include box-variation($color-orange, $color-text-orange);
+}
+
+.box-deep-orange{
+  @include box-variation($color-deep-orange, $color-text-deep-orange);
+}
+
+.box-brown{
+  @include box-variation($color-brown, $color-text-brown);
+}
+
+.box-grey{
+  @include box-variation($color-grey, $color-text-grey);
+}
+
+.box-blue-grey{
+  @include box-variation($color-blue-grey, $color-text-blue-grey);
+}
+
+.box-midnight{
+  @include box-variation($color-midnight, $color-text-midnight);
+}
+*/
+
+.modal-red{
+  @include modal-variant($color-red);
+}
+
+.modal-success{
+  @include modal-variant($success);
+}
+
+.modal-info{
+  @include modal-variant($info);
+}
+
+.modal-warning{
+  @include modal-variant($warning);
+}
+
+.modal-danger{
+  @include modal-variant($danger);
+}
+
+.modal-pink{
+  @include modal-variant($color-pink);
+}
+
+.modal-purple {
+  @include modal-variant($color-purple);
+}
+
+.modal-deep-purple {
+  @include modal-variant($color-deep-purple);
+}
+
+.modal-indigo {
+  @include modal-variant($color-indigo);
+}
+
+.modal-blue {
+  @include modal-variant($color-blue);
+}
+
+.modal-light-blue {
+  @include modal-variant($color-light-blue);
+}
+
+.modal-cyan {
+  @include modal-variant($color-cyan);
+}
+
+.modal-teal {
+  @include modal-variant($color-teal);
+}
+
+.modal-green {
+  @include modal-variant($color-green);
+}
+
+.modal-light-green {
+  @include modal-variant($color-light-green);
+}
+
+.modal-lime {
+  @include modal-variant($color-lime);
+}
+
+.modal-yellow {
+  @include modal-variant($color-yellow);
+}
+
+.modal-amber {
+  @include modal-variant($color-amber);
+}
+
+.modal-orange {
+  @include modal-variant($color-orange);
+}
+
+.modal-deep-orange {
+  @include modal-variant($color-deep-orange);
+}
+
+.modal-brown {
+  @include modal-variant($color-brown);
+}
+
+.modal-grey {
+  @include modal-variant($color-grey);
+}
+
+.modal-blue-grey {
+  @include modal-variant($color-blue-grey);
+}
+
+.modal-midnight {
+  @include modal-variant($color-midnight);
+}

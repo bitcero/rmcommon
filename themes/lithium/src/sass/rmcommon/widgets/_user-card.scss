@@ -1,0 +1,444 @@
+.widget-user-card{
+
+  background-color: #FFF;
+  margin-bottom: 20px;
+
+  .card-highlight{
+    height: 4px;
+
+    &:last-child{
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+
+    &:first-child{
+      border-radius: $border-radius $border-radius 0 0;
+    }
+  }
+
+  .card-charge{
+    font-size: $font-size-base;
+    display: block;
+  }
+
+  .card-counters{
+    margin-top: 25px;
+
+    &:after{
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .counter-item{
+        text-align: center;
+        border-right: 1px solid rgba(0,0,0,0.09);
+        float: left;
+        width: 33.333333333%;
+
+        &:last-child{
+          border-right: 0;
+        }
+
+        .value{
+          font-size: ceil($font-size-base * 1.8);
+          display: block;
+          margin-bottom: 10px;
+          line-height: 1;
+        }
+        .caption{
+          display: block;
+        }
+      }
+
+    }
+
+  }
+
+  .card-info{
+    font-size: ceil($font-size-base * 1.2);
+    font-weight: 300;
+    text-align: center;
+    color: lighten($body-color, 10%);
+    padding: $modal-inner-padding;
+  }
+
+  .card-social{
+
+    margin-top: 15px;
+
+    > ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+
+      > li{
+        display: inline-block;
+        width: 32px;
+        height: 24px;
+
+        .cu-icon{
+          @include cu-icon-size(14px);
+        }
+      }
+    }
+
+  }
+
+  &.card-tiny{
+
+    .card-container {
+      padding: $modal-inner-padding;
+      &:after{
+        content: '';
+        display: table;
+        clear: both;
+      }
+    }
+
+    .card-avatar{
+      float: left;
+      width: 65px;
+
+      img{
+        max-width: 65px;
+        max-height: 65px;
+        border-radius: 50%;
+      }
+    }
+
+    .card-content{
+      margin-left: 80px;
+
+      .card-name{
+        //font-weight: normal;
+        margin: 10px 0 0;
+        line-height: 1;
+        font-size: floor($h1-font-size * 0.75);
+      }
+
+      .card-line{
+        margin-top: 10px;
+      }
+    }
+
+  }
+
+  &.card-small{
+
+    .card-container{
+      padding: 25px;
+      text-align: center;
+
+      .card-avatar{
+
+        img{
+          max-width: 75px;
+          max-height: 75px;
+          border-radius: 50%;
+        }
+      }
+
+      .card-name{
+        font-size: floor($h3-font-size * 0.8);
+        margin-top: 15px;
+        margin-bottom: 3px;
+        line-height: 1;
+      }
+
+      .card-line{
+        font-size: floor($font-size-base * 0.9);
+      }
+
+      .card-button{
+        margin-top: 10px;
+
+        .btn-sm{
+          .cu-icon{
+            @include cu-icon-size(11px);
+          }
+        }
+      }
+
+    }
+
+  }
+
+  &.card-medium{
+
+    .card-container{
+      padding: 25px;
+
+      &:after{
+        content: '';
+        display: table;
+        clear: both;
+      }
+
+      .media-object{
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 50%;
+      }
+
+      .media-left{
+        padding-right: 20px;
+      }
+
+      .media-heading{
+        font-size: floor($h3-font-size * 0.8);
+        font-weight: normal;
+      }
+
+      .card-charge{
+        font-size: floor($font-size-base * 0.9);
+      }
+
+      .card-lines{
+        margin-top: 20px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: ceil($font-size-base * 1.1);
+
+        > li{
+          padding: 6px 0;
+          color: lighten($body-color, 15%);
+        }
+      }
+
+    }
+
+  }
+
+  &.card-large{
+
+    .main-section{
+      padding: ceil($modal-inner-padding * 1.1);
+      border-bottom: 1px solid rgba(0,0,0,0.09);
+    }
+
+    .secondary-section{
+      padding: ceil($modal-inner-padding * 1.1);
+    }
+
+    .media-left{
+      padding-right: $modal-inner-padding+5;
+    }
+
+    .media-object{
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 50%;
+    }
+
+    .media-heading{
+      font-weight: normal;
+      font-size: ceil($h3-font-size * 0.9);
+    }
+
+    .main-button{
+      margin: 10px 0;
+    }
+
+  }
+
+  &.card-large-header{
+
+    .card-header{
+      height: 120px;
+      border-radius: $border-radius $border-radius 0 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+
+      .header-gradient{
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: -moz-linear-gradient(top, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,0.35) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%);
+        background: linear-gradient(to bottom, rgba(255,255,255,0.35) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59ffffff', endColorstr='#00ffffff',GradientType=0 );
+      }
+    }
+
+    header{
+      position: relative;
+      margin-top: -60px;
+      text-align: center;
+
+      .card-avatar{
+        max-width: 120px;
+        max-height: 120px;
+        border-radius: 50%;
+        //box-shadow: 0 0 4px 2px rgba(0,0,0,0.4);
+        border: 3px solid rgba(255,255,255,0.7);
+      }
+
+      .card-name{
+        font-size: floor($h3-font-size * 0.9);
+        margin: 10px 0 0;
+        line-height: 1;
+      }
+
+      .card-charge{
+        margin: 10px;
+      }
+
+    }
+
+    .card-counters{
+      margin-bottom: 25px;
+    }
+
+    .card-button{
+      text-align: center;
+      margin: 10px 0 10px;
+
+      .cu-icon{
+        @include cu-icon-size(14px);
+      }
+    }
+
+    .card-social{
+      padding-bottom: $modal-inner-padding;
+    }
+
+  }
+
+  &.card-large-big-header{
+
+    .card-header{
+      padding: 30px;
+      text-align: center;
+      border-radius: $border-radius $border-radius 0 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+
+      .card-avatar{
+        max-width: 120px;
+        max-height: 120px;
+        border-radius: 50%;
+        //box-shadow: 0 0 4px 2px rgba(0,0,0,0.4);
+        border: 4px solid rgba(255,255,255,0.08);
+      }
+
+      .card-name{
+        font-size: floor($h3-font-size * 0.9);
+        margin: 10px 0 0;
+        line-height: 1;
+      }
+
+      .card-charge{
+        margin: 10px;
+      }
+
+      &.with-gradient{
+        padding: 0;
+      }
+
+      .header-gradient{
+        padding: 30px;
+        background: -moz-linear-gradient(top, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,0.35) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%);
+        background: linear-gradient(to bottom, rgba(255,255,255,0.35) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59ffffff', endColorstr='#00ffffff',GradientType=0 );
+      }
+
+      &.no-gradient{
+        .card-name, .card-charge{
+          text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+      }
+
+    }
+
+    .card-counters{
+      margin-top: 15px;
+      margin-bottom: 10px;
+      text-align: left;
+
+      ul{
+        padding: 10px 20px;
+
+        > li{
+          display: block;
+          float: none;
+          border-bottom: 1px solid rgba(0,0,0,0.09);
+          border-right: 0;
+          width: 100%;
+          padding: 14px 0;
+
+          &:after{
+            content: '';
+            display: table;
+            clear: both;
+          }
+
+          .icon{
+            float: left;
+            width: 36px;
+
+            .cu-icon{
+              @include cu-icon-size(16px);
+            }
+
+          }
+
+          .value{
+            font-size: floor($font-size-base * 0.8);
+            float: right;
+            padding: 3px 5px;
+            text-align: center;
+            width: 45px;
+            border-radius: $border-radius;
+            margin: 0;
+            margin-top: 2px;
+          }
+
+          .caption{
+            text-align: left;
+            margin-left: 46px;
+            margin-right: 55px;
+          }
+
+        }
+
+      }
+    }
+
+    .card-button{
+      text-align: center;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+
+      .btn{
+        font-weight: 700!important;
+      }
+
+      .btn:first-child{
+        margin-right: 3px;
+      }
+
+      .btn:last-child{
+        margin-left: 3px;
+      }
+
+      .cu-icon{
+        @include cu-icon-size(14px);
+      }
+    }
+
+    .card-social{
+      padding-bottom: $h3-font-size;
+    }
+
+  }
+
+}
