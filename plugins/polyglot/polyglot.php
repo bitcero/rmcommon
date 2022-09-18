@@ -57,7 +57,7 @@ class PolyglotCUPlugin extends \RMIPlugin
             'version' => array('major' => 0, 'minor' => 53, 'revision' => 38, 'stage' => -3, 'name' => 'Polyglot'),
             'author' => 'Eduardo Cortés',
             'email' => 'i.bitcero@gmail.com',
-            'web' => 'http://eduardocortes.mx',
+            'web' => 'https://eduardocortes.mx',
             'dir' => 'polyglot',
             //'updateurl' => 'http://www.xoopsmexico.net/modules/vcontrol/',
             'hasmain' => true

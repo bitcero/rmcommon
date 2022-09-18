@@ -1,8 +1,8 @@
 /*!
- * More info at [www.rmcommon.com](http://www.rmcommon.com)
+ * More info at [www.rmcommon.com](https://rmcommon.bitcero.dev)
  *
  * Author:  Eduardo Cortés
- * URI:     http://eduardocortes.mx
+ * URI:     https://eduardocortes.mx
  * Parte del proyecto "Common Utilities"
  *
  * Copyright (c) 2016, Eduardo Cortés Hervis

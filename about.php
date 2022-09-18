@@ -75,7 +75,7 @@ RMTemplate::get()->header(); ?>
         <h3>A fully new design with great improvements and additions.</h3>
         <p>
             Never was so easy to use and take advantage of <a href="https://www.xoops.org" target="_blank">XOOPS</a> and
-            <a href="http://www.rmcommon.com" target="_blank">Common Utilities.</a> All the power, modularity and features of both are available for you with
+            <a href="https://rmcommon.bitcero.dev" target="_blank">Common Utilities.</a> All the power, modularity and features of both are available for you with
             the best appearance ever.
         </p>
         <p>

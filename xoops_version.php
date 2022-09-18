@@ -54,11 +54,11 @@ $modversion['onUpdate'] = 'include/install.php';
 $modversion['rmnative'] = 1;
 $modversion['rmversion'] = ['major' => 2, 'minor' => 3, 'revision' => 75, 'stage' => 0, 'name' => 'Common Utilities'];
 $modversion['rewrite'] = 1;
-$modversion['url'] = 'http://rmcommon.com';
+$modversion['url'] = 'https://rmcommon.bitcero.dev';
 $modversion['author'] = 'Eduardo Cortés';
 $modversion['authormail'] = 'i.bitcero@gmail.com';
 $modversion['authorweb'] = 'Eduardo Cortés';
-$modversion['authorurl'] = 'http://eduardocortes.mx';
+$modversion['authorurl'] = 'https://eduardocortes.mx';
 $modversion['updateurl'] = 'https://sys.eduardocortes.mx/updates/';
 $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 
@@ -70,7 +70,7 @@ $modversion['social'][1] = ['title' => __('Facebook', 'rmcommon'), 'type' => 'fa
 $modversion['social'][2] = ['title' => __('Instagram', 'rmcommon'), 'type' => 'instagram', 'url' => 'http://www.instagram.com/eduardocortesh/'];
 $modversion['social'][3] = ['title' => __('LinkedIn', 'rmcommon'), 'type' => 'linkedin-square', 'url' => 'http://www.linkedin.com/in/bitcero/'];
 $modversion['social'][4] = ['title' => __('GitHub', 'rmcommon'), 'type' => 'github', 'url' => 'http://www.github.com/bitcero/'];
-$modversion['social'][5] = ['title' => __('My Blog', 'rmcommon'), 'type' => 'quote-left', 'url' => 'http://eduardocortes.mx'];
+$modversion['social'][5] = ['title' => __('My Blog', 'rmcommon'), 'type' => 'quote-left', 'url' => 'https://eduardocortes.mx'];
 
 $modversion['hasAdmin'] = 1;
 $modversion['adminindex'] = 'index.php';

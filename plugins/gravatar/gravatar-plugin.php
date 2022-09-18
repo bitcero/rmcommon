@@ -21,7 +21,7 @@ class GravatarCUPlugin extends RMIPlugin
             'version'        => array('major'=>1,'minor'=>2,'revision'=>18, 'stage'=>0,'name'=>'Gravatars'),
             'author'        => 'Eduardo Cortés',
             'email'            => 'i.bitcero@gmail.com',
-            'web'            => 'http://eduardocortes.mx',
+            'web'            => 'https://eduardocortes.mx',
             'dir'            => 'gravatar',
             //'updateurl'     => 'https://www.xoopsmexico.net/modules/vcontrol/'
         );

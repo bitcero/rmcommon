@@ -1,8 +1,8 @@
 /*!
 MarkDown editor for Common Utilities
-http://rmcommon.com
+https://rmcommon.bitcero.dev
 author: Eduardo Cortés <i.bitcero@gmail.com>
-Website: http://eduardocortes.mx
+Website: https://eduardocortes.mx
 This component is part of Common Utilities
  */
 
