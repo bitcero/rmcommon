@@ -80,8 +80,8 @@ $lithium-sidebar-icon-color:           $lithium-header-svg-logo-color;
 $lithium-sidebar-submenu-bg:           $lithium-sidebar-bg;
 $lithium-sidebar-submenu-color:        $lithium-sidebar-user-border;
 $lithium-sidebar-submenu-icon-color:   $lithium-header-toggle-hover;
-$lithium-sidebar-active-color:         var(--#{$prefix}primary);
-$lithium-sidebar-active-bg:            transparentize($primary, 0.95);
+$lithium-sidebar-active-color:         $white;
+$lithium-sidebar-active-bg:            $primary;
 
 /*
 5. Breadcrumb

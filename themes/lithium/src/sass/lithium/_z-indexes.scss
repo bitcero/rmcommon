@@ -2,7 +2,10 @@
   z-index: 100;
 }
 #li-sidebar{
-  z-index: 101;
+  z-index: 110;
+}
+.sidebar-overlay{
+  z-index: 109;
 }
 #li-content{
   z-index: 1;

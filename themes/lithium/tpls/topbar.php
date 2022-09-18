@@ -4,6 +4,12 @@
     <div class="li-topbar-collapse d-flex justify-content-between align-items-center">
 
         <ul class="main-options d-flex align-items-center">
+            <li class="li-menu-toggle d-xl-none">
+                <a href="#">
+                  <?php echo $cuIcons->getIcon('svg-lithium-menu', [], false); ?>
+                </a>
+            </li>
+
             <!-- Common Utilities Menu -->
             <li class="dropdown<?php if ('rmcommon' == $xoopsModule->dirname()): ?> active<?php endif; ?> rmcommon-menu">
                 <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">

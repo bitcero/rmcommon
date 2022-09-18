@@ -1,4 +1,4 @@
-<div id="li-sidebar" class="show">
+<div id="li-sidebar">
     <div class="theme-logo">
         <div class="d-flex align-items-center justify-content-between">
             <div class="logo d-flex align-items-center justify-content-start">
@@ -9,9 +9,15 @@
                     <?php echo $lithium_logo_text; ?>
                 </span>
             </div>
-            <div class="sidebar-toggle">
+            <div class="sidebar-toggle d-none d-xl-block">
                 <a href="#" class="btn btn-link" id="toggle-sidebar">
                     <span class="visually-hidden">Toggle sidebar</span>
+                </a>
+            </div>
+            <div class="menu-toggle d-xl-none">
+                <a href="#">
+                    <?php echo $common->icons()->getIcon('svg-lithium-cross', [], false); ?>
+                    <span class="visually-hidden">Toggle menu</span>
                 </a>
             </div>
         </div>
@@ -118,3 +124,4 @@
     </div>
 
 </div>
+<div class="sidebar-overlay"></div>
