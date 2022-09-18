@@ -313,9 +313,11 @@ function updatesNotifier(count) {
     toggleSidebarVisibility();
   });
 
-  document.querySelector('.menu-toggle').addEventListener('click', function (e) {
-    e.preventDefault();
-    toggleSidebarVisibility();
+  const menuTogglers = document.querySelectorAll("div.menu-toggle, div.sidebar-overlay");
+  menuTogglers.forEach(item => {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
+      toggleSidebarVisibility();
+    });
   });
-
 })();
