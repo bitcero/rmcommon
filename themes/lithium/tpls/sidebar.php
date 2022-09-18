@@ -48,9 +48,7 @@
                             <?php if (array_key_exists('options', $menu) && !empty($menu['options'])): ?>
                                 <ul class="submenu"<?php echo $menu['location'] == $common->location ? ' style="display: block;"' : ''; ?>>
                                     <?php foreach ($menu['options'] as $submenu): ?>
-                                        <?php if (array_key_exists('divider', $submenu)) {
-    continue;
-} ?>
+                                        <?php if (array_key_exists('divider', $submenu)) { continue; } ?>
                                         <li>
                                             <a
                                                 href="<?php echo $xoFunc->menuLink((object) $submenu, $currentModule); ?>"

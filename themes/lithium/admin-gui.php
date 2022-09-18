@@ -101,6 +101,7 @@ $this->add_style('schemes/' . $color_scheme,'lithium', array('id'=>'color-scheme
 unset($color_scheme);
 */
 
+$this->add_jquery(false, false);
 $this->add_style('font-awesome.min.css', 'rmcommon', ['footer' => 1]);
 $this->add_style('icomoon.min.css', 'rmcommon', ['footer' => 1]);
 $this->add_style('jquery.window.css', 'lithium', ['footer' => 1], 'theme');
