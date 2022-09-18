@@ -101,6 +101,7 @@ $this->add_style('schemes/' . $color_scheme,'lithium', array('id'=>'color-scheme
 unset($color_scheme);
 */
 
+$this->add_jquery(false, false);
 $this->add_style('font-awesome.min.css', 'rmcommon', ['footer' => 1]);
 $this->add_style('icomoon.min.css', 'rmcommon', ['footer' => 1]);
 $this->add_style('jquery.window.css', 'lithium', ['footer' => 1], 'theme');
@@ -176,15 +177,16 @@ RMTemplate::getInstance()->add_attribute('html', [
 ]);
 
 // The logo
-$logoLithium = isset($cuSettings->lithium_logo) ? trim($cuSettings->lithium_logo) : '';
-if ('' == $logoLithium) {
-    $logoLithium = LITHIUM_URL . '/images/logo-he.svg';
+$lithium_logo_icon = isset($cuSettings->lithium_logo_icon) ? trim($cuSettings->lithium_logo_icon) : '';
+$lithium_logo_text = isset($cuSettings->lithium_logo_text) ? trim($cuSettings->lithium_logo_text) : 'Utilities';
+if ('' == $lithium_logo_icon) {
+  $lithium_logo_icon = LITHIUM_URL . '/assets/icons/lithium.svg';
 }
 
-if ('.svg' == mb_substr($logoLithium, -4)) {
-    $logoLithium = file_get_contents($logoLithium);
+if ('.svg' == mb_substr($lithium_logo_icon, -4)) {
+  $lithium_logo_icon = file_get_contents($lithium_logo_icon);
 } else {
-    $logoLithium = '<img src="' . $logoLithium . '">';
+  $lithium_logo_icon = '<img src="' . $lithium_logo_icon . '">';
 }
 
 // Xoops Metas

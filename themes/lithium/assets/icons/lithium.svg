@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   id="Capa_1"
+   x="0px"
+   y="0px"
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs145" />
+<path
+   style="fill:#7367f0;fill-opacity:1"
+   d="m 241,181 c 0,33 -27,60 -60,60 H 60 C 27,241 0,214 0,181 V 60 C 0,27 27,0 60,0 h 121 c 33,0 60,27 60,60 z"
+   id="path104" />
+<path
+   style="fill:#9e95f5;fill-opacity:1"
+   d="m 512,452 c 0,33 -27,60 -60,60 H 331 c -33,0 -60,-27 -60,-60 V 331 c 0,-33 27,-60 60,-60 h 121 c 33,0 60,27 60,60 z"
+   id="path106" />
+<path
+   style="fill:#7367f0;fill-opacity:1"
+   d="M 17.625,494.375 C 28.5,505.25 43.5,512 60,512 h 121 c 33,0 60,-27 60,-60 V 331 c 0,-49.626 40.374,-90 90,-90 h 121 c 33,0 60,-27 60,-60 V 60 c 0,-16.5 -6.75,-31.5 -17.625,-42.375 h -15 l -461.75,461.75 z"
+   id="path108" />
+<path
+   style="fill:#9e95f5;fill-opacity:1"
+   d="M 452,0 H 331 c -33,0 -60,27 -60,60 v 121 c 0,49.626 -40.374,90 -90,90 H 60 C 27,271 0,298 0,331 v 121 c 0,16.5 6.75,31.5 17.625,42.375 L 494.375,17.625 C 483.5,6.75 468.5,0 452,0 Z"
+   id="path110" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</svg>

@@ -9,12 +9,22 @@ class LithiumRmcommonPreload
     $af_available = RMFunctions::plugin_installed('advform');
 
     $settings['config'][] = [
-      'name' => 'lithium_logo',
-      'title' => __('Logo to use', 'rmcommon'),
-      'description' => __('You can specify a logo as bitmap but SVG is recommended. The logo will be resize to 29 pixels of height.', 'lithium'),
+      'name' => 'lithium_logo_icon',
+      'title' => __('Icon to use as logo', 'lithium'),
+      'description' => __('You can specify a logo as bitmap but SVG is recommended.', 'lithium'),
       'formtype' => $af_available ? 'image-url' : 'textbox',
       'valuetype' => 'text',
-      'default' => RMCPATH . '/themes/lithium/images/logo-he.svg',
+      'default' => RMCPATH . '/themes/lithium/assets/icons/lithium.svg',
+      'category' => 'lithium',
+    ];
+
+    $settings['config'][] = [
+      'name' => 'lithium_logo_text',
+      'title' => __('Logo text', 'lithium'),
+      'description' => __('Specify your app name.', 'lithium'),
+      'formtype' => 'textbox',
+      'valuetype' => 'text',
+      'default' => 'Common Utilities',
       'category' => 'lithium',
     ];
 

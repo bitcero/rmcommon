@@ -1,5 +1,7 @@
-#li-topbar{
-  top: 20px; left: pxToRem(40); right: 40px;
+#li-topbar {
+  top: 20px;
+  left: calc($lithium-sidebar-collapsed-width + pxToRem(40));
+  right: 40px;
   height: 78px;
   background-color: $lithium-header-bg-color;
   border-radius: 10px;
@@ -8,91 +10,94 @@
   transition: ease all 300ms;
   z-index: 1000;
 
-  .show-sidebar &{
+  .show-sidebar & {
     left: calc($lithium-sidebar-width + pxToRem(40))
   }
 
-  a{
+  a {
     transition: ease all 250ms;
     outline: 0;
   }
 
-  .main-options{
+  .main-options {
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .right-options{
+  .right-options {
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .li-topbar-collapse{
+  .li-topbar-collapse {
 
     position: absolute;
-    top: 0; left: 10px;
-    bottom: 0; right: 10px;
+    top: 0;
+    left: 10px;
+    bottom: 0;
+    right: 10px;
     transition: ease all 300ms;
 
-    > ul > li{
+    > ul > li {
 
-      > a{
+      > a {
         padding: 0 8px;
         transition: ease all 250ms;
         color: $lithium-header-toggle-color;
 
-        > svg{
+        > svg {
           width: pxToRem(20);
           height: pxToRem(20);
           fill: currentColor;
         }
 
-        &:hover, &:focus{
+        &:hover, &:focus {
           background-color: transparent;
           color: $lithium-header-toggle-hover;
         }
 
-        &:after{
+        &:after {
           display: none;
         }
       }
 
-      &.dropdown{
+      &.dropdown {
         position: static;
 
-        @include media-breakpoint-up(md){
+        @include media-breakpoint-up(md) {
           position: relative;
         }
 
       }
 
-      &.open{
-        @include media-breakpoint-down(sm){
-          > .dropdown-menu{
+      &.open {
+        @include media-breakpoint-down(sm) {
+          > .dropdown-menu {
             transform: translateX(0);
           }
 
         }
 
-        > a{
+        > a {
           background-color: transparent;
         }
       }
 
-      &.rmcommon-menu{
+      &.rmcommon-menu {
 
-        > a{
+        > a {
           @include cu-icon-color($lithium-header-svg-logo-color);
 
-          &:hover{
+          &:hover {
             @include cu-icon-color($lithium-header-rmc-hover);
           }
         }
 
         &.open > a {
           background: transparent;
+
           .cu-icon {
             @include cu-icon-color($lithium-header-rmc-hover);
           }
@@ -102,15 +107,15 @@
     }
   }
 
-  .dropdown-menu{
+  .dropdown-menu {
     padding: 0;
     border-color: $gray-200;
-    box-shadow: 0 3px 10px  fade-out($black, 0.9);
+    box-shadow: 0 3px 10px fade-out($black, 0.9);
     font-size: pxToRem(14);
 
-    > li{
+    > li {
 
-      > a{
+      > a {
         color: $lithium-header-menu-color;
         border-radius: 0;
         padding: pxToRem(9) pxToRem(15);
@@ -118,35 +123,32 @@
         line-height: pxToRem(14 * 1.5);
 
         > span {
-          > svg{
+          > svg {
             width: pxToRem(16);
             height: pxToRem(16);
             fill: currentColor;
             margin-right: pxToRem(10);
           }
 
-          > span{
+          > span {
             font-size: pxToRem(20);
             margin-right: pxToRem(10);
             margin-right: pxToRem(10);
           }
         }
 
-        &:hover{
+        &:hover {
           background-color: $lithium-header-menu-hover-bg;
           color: $lithium-header-menu-hover;
 
-          > .cu-icon{
+          > .cu-icon {
             @include cu-icon-color($lithium-header-menu-hover);
           }
 
         }
 
-        @include media-breakpoint-down(sm){
-          text-transform: uppercase;
-          font-weight: 700;
-
-          .cu-icon{
+        @include media-breakpoint-down(sm) {
+          .cu-icon {
             @include cu-icon-size(24px);
           }
         }
@@ -154,48 +156,52 @@
       }
     }
 
-    .dropdown-menu{
+    .dropdown-menu {
       border: $lithium-header-dropdown-border;
 
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         width: 100%;
         border: 0;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
-        background: rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        background: rgba(0, 0, 0, 0.05);
 
-        li{
+        li {
 
           padding-left: 20px;
           border: 0;
           transition: ease all 250ms;
 
-          > a{
+          > a {
             line-height: 40px;
             text-transform: none;
             font-weight: 400;
             padding-left: 15px;
-            border-left: 1px solid rgba(0,0,0,0.1);
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
             position: relative;
 
-            .cu-icon{
+            .cu-icon {
               @include cu-icon-size(14px);
               position: absolute;
               left: -7px;
               top: 12px;
             }
 
-            &:hover{
+            &:hover {
               background: transparent;
-              color: $theme-main-color-text!important;
-              .cu-icon{
+              color: $theme-main-color-text !important;
+
+              .cu-icon {
                 @include cu-icon-color($theme-main-color-text);
-                svg{fill: $theme-main-color-text!important;}
+
+                svg {
+                  fill: $theme-main-color-text !important;
+                }
               }
             }
 
           }
 
-          &:hover{
+          &:hover {
             background: $theme-main-color;
           }
 
@@ -205,61 +211,66 @@
 
     }
 
-    @include media-breakpoint-down(sm){
+    @include media-breakpoint-down(sm) {
       padding: 0;
 
-      .divider{display: none;}
+      .divider {
+        display: none;
+      }
     }
 
   }
 
-  .toggle-menu{
+  .toggle-menu {
     display: inline;
     text-align: center;
     color: $lithium-header-toggle-color;
 
-    > .cu-icon{
+    > .cu-icon {
       @include cu-icon-size(32px);
       @include cu-icon-color($lithium-header-toggle-color);
     }
 
-    &:hover{
+    &:hover {
       color: $lithium-header-toggle-hover;
 
-      > .cu-icon{
+      > .cu-icon {
         @include cu-icon-color($lithium-header-toggle-hover);
       }
     }
 
   }
 
-  .system-menu{
+  .system-menu {
 
-    > a:hover, &.open > a{
-      .cu-icon{
+    > a:hover, &.open > a {
+      .cu-icon {
         @include cu-icon-color($color-light-blue);
-        > svg > circle{
+
+        > svg > circle {
           fill: $color-light-blue;
         }
       }
     }
   }
 
-  .quick-menu{
+  .quick-menu {
 
-    &:hover{
-      > a > .cu-icon{
+    &:hover {
+      > a > .cu-icon {
         @include cu-icon-color($color-amber);
-        > svg > circle{
+
+        > svg > circle {
           fill: $color-amber;
         }
       }
     }
 
-    &.open{
-      > a > .cu-icon{
+    &.open {
+      > a > .cu-icon {
         @include cu-icon-color($color-amber);
-        > svg > circle{
+
+        > svg > circle {
           fill: $color-amber;
         }
       }
@@ -267,12 +278,13 @@
 
   }
 
-  .help-menu{
+  .help-menu {
 
-    &:hover{
-      .cu-icon{
+    &:hover {
+      .cu-icon {
         @include cu-icon-color($color-light-blue);
-        > svg > circle{
+
+        > svg > circle {
           fill: $color-light-blue;
         }
       }
@@ -280,12 +292,13 @@
 
   }
 
-  .user-menu{
+  .user-menu {
 
-    &:hover{
-      .cu-icon{
+    &:hover {
+      .cu-icon {
         @include cu-icon-color($color-green);
-        > svg > circle{
+
+        > svg > circle {
           fill: $color-green;
         }
       }
@@ -293,15 +306,17 @@
 
   }
 
-  > .he-options{
+  > .he-options {
     position: absolute;
-    top: 0; left: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
     transition: ease all 300ms;
 
-    .sidebar &{
+    .sidebar & {
       transform: translateX($lithium-sidebar-width);
 
-    @include media-breakpoint-up(md){
+      @include media-breakpoint-up(md) {
         transform: translateX(0);
         left: $lithium-sidebar-width;
       }
@@ -309,14 +324,16 @@
 
   }
 
-  > .he-system-options{
+  > .he-system-options {
     position: absolute;
-    top: 0; right: 0; bottom: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     transition: ease all 300ms;
     width: auto;
     overflow: hidden;
 
-    > a{
+    > a {
 
       display: block;
       line-height: 78px;
@@ -327,11 +344,11 @@
       text-align: center;
       color: $lithium-header-toggle-color;
 
-      &:hover{
+      &:hover {
         color: $lithium-header-toggle-hover;
       }
 
-      .cu-icon{
+      .cu-icon {
         @include cu-icon-color(#139EE8);
         @include cu-icon-size(32px);
       }
@@ -339,34 +356,34 @@
     }
   }
 
-@include media-breakpoint-up(md){
+  @include media-breakpoint-up(md) {
 
     position: fixed;
     height: 64px;
 
-    .he-logo{
+    .he-logo {
       height: 63px;
 
-      svg{
+      svg {
         width: 109px;
         height: 29px;
       }
     }
 
-    .he-topbar-collapse{
-      > ul > li > a{
+    .he-topbar-collapse {
+      > ul > li > a {
         padding: 0 10px;
         line-height: 64px;
         font-size: 21px;
 
-        > .cu-icon{
+        > .cu-icon {
           @include cu-icon-size(21px);
         }
 
       }
     }
 
-    .toggle-menu, .toggle-system{
+    .toggle-menu, .toggle-system {
       line-height: 64px;
       font-size: 21px;
       width: 64px;
@@ -374,68 +391,92 @@
 
   }
 
-  .sidebar &{
+  .sidebar & {
 
-    .he-topbar-collapse{
+    .he-topbar-collapse {
 
       transform: translateX($lithium-sidebar-width);
 
-    @include media-breakpoint-up(min){
+      @include media-breakpoint-up(min) {
         transform: translateX(0);
       }
     }
 
-    .he-logo{
+    .he-logo {
       transform: translateX(0);
     }
   }
 
-  .user-menu{
+  .user-menu {
     margin-left: pxToRem(10);
-    > a{
-      .user-meta{
+
+    > a {
+      .user-meta {
         text-align: right;
         padding-right: pxToRem(10);
 
-        .user-name{
+        .user-name {
           display: block;
           font-size: pxToRem(14);
           font-weight: 700;
         }
 
-        .user-role{
+        .user-role {
           display: block;
           font-size: pxToRem(11);
         }
       }
 
-      .user-avatar{
-        img{
-            width: pxToRem(40);
-            height: pxToRem(40);
-            border-radius: 50%;
+      .user-avatar {
+        img {
+          width: pxToRem(40);
+          height: pxToRem(40);
+          border-radius: 50%;
         }
       }
 
-      &:hover{
-        .user-meta{
+      &:hover {
+        .user-meta {
           color: $gray-700;
         }
       }
     }
   }
+
+  @include media-breakpoint-down(xl){
+    left: pxToRem(40);
+
+    .show-sidebar & {
+      left: pxToRem(40);
+    }
+  }
+
+  @include media-breakpoint-down(sm){
+    left: pxToRem(20);
+    top: pxToRem(20);
+    right: pxToRem(20);
+    position: fixed;
+
+    .show-sidebar & {
+      left: pxToRem(20);
+      top: pxToRem(20);
+      right: pxToRem(20);
+      position: fixed;
+    }
+  }
 }
 
-#updater-info-top{
+#updater-info-top {
   display: none;
 
-  > a{
+  > a {
     position: relative;
-    .cu-icon{
+
+    .cu-icon {
       @include cu-icon-color($color-green);
     }
 
-    em{
+    em {
       position: absolute;
       top: 0px;
       right: 0px;

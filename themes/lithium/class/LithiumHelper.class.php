@@ -60,7 +60,7 @@ class LithiumHelper
             return $cuIcons->getIcon(\RMUris::relative_url(XOOPS_URL . '/modules/' . $module . '/' . $icon));
         }
 
-        return $cuIcons->getIcon($icon);
+        return $cuIcons->getIcon($icon, [], false);
     }
 
     public static function is_absolute_url($url)

@@ -40,7 +40,7 @@
                                   <a href="<?php echo $author['url']; ?>"><?php echo $author['name']; ?></a>
                             <?php endforeach; ?>
                           <?php else: ?>
-                            <?php if ($authors['authorurl']): ?>
+                            <?php if (is_array($authors) && $authors['authorurl']): ?>
                                 <a href="<?php echo $module->getInfo('authorurl'); ?>"><?php echo $module->getInfo('author'); ?></a>
                             <?php else: ?>
                                 <?php echo $module->getInfo('author'); ?>

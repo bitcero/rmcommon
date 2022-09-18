@@ -1,78 +1,143 @@
-#li-sidebar{
+#li-sidebar {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: $lithium-sidebar-width;
+  width: $lithium-sidebar-collapsed-width;
   background-color: $lithium-sidebar-bg;
-  transform: translateX(-$lithium-sidebar-width);
   transition: ease all 300ms;
   box-shadow: 2px 0 25px transparentize($black, 0.95);
-  transform: translateX(-$lithium-sidebar-width);
+  overflow: hidden;
 
-
-  > .module-search{
-    position: absolute;
-    top: 78px;
+  > .theme-logo {
+    position: relative;
+    top: 0;
     left: 0;
     right: 0;
-    padding: 10px 15px;
-    //background: $lithium-sidebar-search-bg;
+    padding: pxToRem(20) pxToRem(15);
 
-    > .form-control{
-      border-radius: 50px;
-      background: url(../images/search.png) no-repeat 10px;
-      background-color: $lithium-sidebar-search-input;
-      color: $lithium-sidebar-search-color;
-      border: 1px solid rgba(0,0,0,0.05);
-      box-shadow: none;
-      transition: ease all 250ms;
-      padding-left: 30px;
+    > div {
+      width: 100%;
+      max-width: calc($lithium-sidebar-width - pxToRem(30));
+    }
 
-      &::-webkit-input-placeholder{
-        color: $lithium-sidebar-search-pholder!important;
+    .logo {
+      padding: pxToRem(0) pxToRem(7);
+
+      img, svg {
+        width: pxToRem(36);
+        height: pxToRem(36);
+        margin-right: pxToRem(15);
       }
 
-      &::-moz-placeholder{
-        color: $lithium-sidebar-search-pholder!important;
-        opacity: 1;
+      .logo-text {
+        max-width: calc($lithium-sidebar-width - pxToRem(29 + 15 + 70));
+        font-weight: 700;
+        font-size: pxToRem(20);
+        color: $primary;
+        transition: ease all 300ms;
       }
+    }
 
-      &:-ms-input-placeholder{
-        color: $lithium-sidebar-search-pholder!important;
-      }
+    .sidebar-toggle {
+      a {
+        border: 2px solid $primary;
+        display: block;
+        width: pxToRem(20);
+        height: pxToRem(20);
+        padding: 0;
+        border-radius: 50%;
+        position: relative;
+        box-shadow: none;
 
-      &:focus{
-        border: 1px solid rgba(0,0,0,0.1);
-        background-color: $lithium-sidebar-search-focus-bg;
-        color: $lithium-sidebar-search-focus-color;
+        &:after {
+          content: '';
+          display: none;
+          width: pxToRem(6);
+          height: pxToRem(6);
+          background-color: $primary;
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+          .show-sidebar & {
+            display: block;
+          }
+        }
       }
     }
   }
 
-  > .menu-wrapper{
-
+  > .menu-wrapper {
     position: absolute;
-    top: 132px;
+    top: pxToRem(78);
     bottom: 0;
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
 
-    > .sidebar-menu{
+    > .module-search {
+      padding: pxToRem(10) pxToRem(7);
+      margin: 0 pxToRem(15) pxToRem(15);
+
+      > .form-control {
+        border-radius: 50px;
+        background: url(../images/search.png) no-repeat 10px;
+        background-color: $lithium-sidebar-bg;
+        color: $lithium-sidebar-search-color;
+        border: 1px solid $lithium-sidebar-bg;
+        box-shadow: none;
+        transition: ease all 250ms;
+        padding-left: 30px;
+
+        &::-webkit-input-placeholder {
+          color: $lithium-sidebar-search-pholder !important;
+        }
+
+        &::-moz-placeholder {
+          color: $lithium-sidebar-search-pholder !important;
+          opacity: 1;
+        }
+
+        &:-ms-input-placeholder {
+          color: $lithium-sidebar-search-pholder !important;
+        }
+
+        &:focus {
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          background-color: $lithium-sidebar-search-focus-bg;
+          color: $lithium-sidebar-search-focus-color;
+        }
+      }
+
+      .show-sidebar & {
+        padding: pxToRem(10) pxToRem(15);
+        margin: 0 pxToRem(15) pxToRem(15);
+
+        > .form-control {
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          background-color: $lithium-sidebar-search-input;
+        }
+      }
+    }
+
+    > .sidebar-menu {
       position: relative;
       height: 100%;
 
-      .menu-heading{
+      .menu-heading {
         font-size: 0.85em;
         text-transform: uppercase;
         margin: 0;
-        border-bottom: $lithium-sidebar-menu-border;
 
-        > a{
+        > a {
           display: block;
-          padding: 10px 15px;
+          padding: pxToRem(10) pxToRem(15);
           color: $lithium-sidebar-heading-color;
+          margin: 0 pxToRem(15);
 
-          &:hover{
+          &:hover {
             text-decoration: none;
             color: darken($lithium-sidebar-heading-color, 10%);
           }
@@ -80,124 +145,131 @@
 
       }
 
-      ul{
+      ul {
         list-style: none;
         margin: 0;
         padding: 0 0 10px 0;
       }
 
-      > ul{
+      > ul {
 
         margin-bottom: 10px;
 
         /* ROOT MENU */
-        > li{
-          border-bottom: $lithium-sidebar-menu-border;
+        > li {
+          //border-bottom: $lithium-sidebar-menu-border;
 
           > a {
             display: block;
-            padding: 12px 14px;
-            font-weight: 700;
-            font-size: 0.9em;
-            text-transform: uppercase;
+            padding: pxToRem(9) pxToRem(15);
+            margin: 0 pxToRem(15);
+            font-size: pxToRem(15);
             color: $lithium-sidebar-menu-color;
             transition: ease all 200ms;
             position: relative;
+            border-radius: 5px;
 
-            > .cu-icon{
-              //@include cu-icon-color($lithium-sidebar-icon-color);
-              @include cu-icon-size(16px);
-              margin-right: 10px;
+            svg, img {
+              width: pxToRem(20);
+              height: pxToRem(20);
+              margin-right: pxToRem(15);
+              fill: currentColor;
             }
 
-            > .caret{
-              float: right;
-              display: block;
-              position: absolute;
-              top: 20px; right: 12px;
-              border-top-color: rgba(red($lithium-sidebar-menu-color), green($lithium-sidebar-menu-color), blue($lithium-sidebar-menu-color), 0.5);
-              transition: ease all 200ms;
+            svg:last-child {
+              width: pxToRem(16);
+              height: pxToRem(16);
+              color: currentColor;
+              fill: currentColor;
+              margin: 0;
             }
 
-            &:hover{
+            &:hover {
               background-color: $lithium-sidebar-menu-hover-bg;
               color: $lithium-sidebar-menu-hover;
               text-decoration: none;
+              padding-left: pxToRem(26);
 
-              > .caret{
+              > .caret {
                 border-top-color: $lithium-sidebar-menu-hover;
               }
 
             }
 
-            &.open{
-              > .caret{
-                transform: rotate(180deg);
+            &.open {
+              svg:last-child {
+                transform: rotate(90deg);
               }
             }
 
           }
 
-          &.active > a{
-            color: $lithium-sidebar-active-color!important;
-            @include horizontal-gradient($theme-main-color, $theme-secondary-color);
+          &.active > a {
+            color: $lithium-sidebar-active-color !important;
+            background-color: $lithium-sidebar-active-bg;
+            box-shadow: 0 0 12px transparentize($lithium-sidebar-active-bg, 0.4);
 
-            > .cu-icon{
+            > .cu-icon {
               @include cu-icon-color($lithium-sidebar-active-color);
-              svg{
-                fill: $lithium-sidebar-active-color!important;
+
+              svg {
+                fill: $lithium-sidebar-active-color !important;
               }
             }
 
-            > .caret{
-              border-top-color: $lithium-sidebar-active-color;
+            > .caret {
               transition: ease all 200ms;
             }
           }
 
           /* SUBMENU */
-          > ul{
+          > ul {
             background-color: $lithium-sidebar-submenu-bg;
-            border-top: $lithium-sidebar-menu-border;
+            //border-top: $lithium-sidebar-menu-border;
             padding: 0;
             display: none;
-            font-size: 0.85em;
+            font-size: pxToRem(14);
 
-            > li{
-              margin-left: 22px;
-              border-left: 1px solid #DBDFE6;
+            > li {
+              margin-left: pxToRem(40);
+              border-left: 1px solid $gray-400;
+              position: relative;
 
-              > a{
+              &:before {
+                content: '';
                 display: block;
-                padding: 5px 5px 5px 18px;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: pxToRem(10);
+                height: pxToRem(10);
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                border: 1px solid $gray-400;
+                background-color: $lithium-sidebar-bg;
+              }
+
+              > a {
+                display: block;
+                padding: pxToRem(8) pxToRem(20) pxToRem(8) pxToRem(25);
                 font-weight: 400;
                 color: $lithium-sidebar-menu-color;
                 position: relative;
                 transition: ease all 200ms;
 
-                > .cu-icon{
-                  @include cu-icon-color($lithium-sidebar-submenu-icon-color);
-                  @include cu-icon-size(12px);
-                  position: absolute;
-                  left: -6px;
-                  top: 7px;
-                  transition: ease all 200ms;
+                svg, img {
+                  width: pxToRem(16);
+                  height: pxToRem(16);
+                  margin-right: pxToRem(10);
                 }
 
-                &:hover{
+                &:hover {
                   color: $lithium-sidebar-menu-hover;
-                  > .cu-icon{
+
+                  > .cu-icon {
                     @include cu-icon-color($lithium-sidebar-menu-hover);
                   }
                 }
-              }
-
-              &:first-child{
-                padding-top: 7px;
-              }
-
-              &:last-child{
-                padding-bottom: 7px;
               }
 
             }
@@ -212,7 +284,74 @@
 
   }
 
-  .show-sidebar &{
-    transform: translateX(0);
+  .menu-title {
+    transition: ease all 300ms;
+    max-width: calc($lithium-sidebar-width - pxToRem(95));
+    width: 0;
+
+    .show-sidebar & {
+      width: auto;
+    }
+  }
+
+  .logo-text {
+    width: 0;
+
+    .show-sidebar & {
+      width: auto;
+    }
+  }
+
+  .show-sidebar & {
+    width: $lithium-sidebar-width;
+  }
+
+  &.sidebar-hover {
+    width: $lithium-sidebar-width;
+
+    .menu-title {
+      width: auto;
+    }
+
+    .logo-text {
+      width: auto;
+    }
+
+    .module-search {
+      padding: pxToRem(10) pxToRem(15);
+      margin: 0 pxToRem(15) pxToRem(15);
+
+      > .form-control {
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        background-color: $lithium-sidebar-search-input;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(xl) {
+    width: $lithium-sidebar-width;
+    transform: translateX(-$lithium-sidebar-width);
+
+    &.show{
+        transform: translateX(0);
+    }
+  }
+
+}
+
+.sidebar-overlay {
+  background-color: transparentize($gray-800, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: ease all 300ms;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
   }
 }
