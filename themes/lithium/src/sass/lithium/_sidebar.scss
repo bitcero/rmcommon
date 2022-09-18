@@ -16,14 +16,25 @@
     right: 0;
     padding: pxToRem(20) pxToRem(15);
 
-    .logo{
-      display: block;
-      width: 60%;
-      height: 100%;
+    > div{
+      width: 100%;
+      max-width: calc($lithium-sidebar-width - pxToRem(30));
+    }
 
+    .logo{
+      padding: pxToRem(0) pxToRem(7);
       img, svg{
-        max-width: 100%;
-        max-height: pxToRem(50);
+        width: pxToRem(36);
+        height: pxToRem(36);
+        margin-right: pxToRem(15);
+      }
+
+      .logo-text{
+        max-width: calc($lithium-sidebar-width - pxToRem(29 + 15 + 70));
+        font-weight: 700;
+        font-size: pxToRem(20);
+        color: $primary;
+        transition: ease all 300ms;
       }
     }
 
@@ -64,16 +75,15 @@
     left: 0; right: 0;
 
     > .module-search{
-      padding: pxToRem(10) pxToRem(15);
-      margin: 0 pxToRem(15) pxToRem(20);
-      //background: $lithium-sidebar-search-bg;
+      padding: pxToRem(10) pxToRem(7);
+      margin: 0 pxToRem(15) pxToRem(15);
 
       > .form-control{
         border-radius: 50px;
         background: url(../images/search.png) no-repeat 10px;
-        background-color: $lithium-sidebar-search-input;
+        background-color: $lithium-sidebar-bg;
         color: $lithium-sidebar-search-color;
-        border: 1px solid rgba(0,0,0,0.05);
+        border: 1px solid $lithium-sidebar-bg;
         box-shadow: none;
         transition: ease all 250ms;
         padding-left: 30px;
@@ -97,6 +107,16 @@
           color: $lithium-sidebar-search-focus-color;
         }
       }
+
+      .show-sidebar &{
+        padding: pxToRem(10) pxToRem(15);
+        margin: 0 pxToRem(15) pxToRem(15);
+
+        > .form-control{
+          border: 1px solid rgba(0,0,0,0.05);
+          background-color: $lithium-sidebar-search-input;
+        }
+      }
     }
 
     > .sidebar-menu{
@@ -107,7 +127,6 @@
         font-size: 0.85em;
         text-transform: uppercase;
         margin: 0;
-        //border-bottom: $lithium-sidebar-menu-border;
 
         > a{
           display: block;
@@ -145,6 +164,7 @@
             color: $lithium-sidebar-menu-color;
             transition: ease all 200ms;
             position: relative;
+            border-radius: 5px;
 
             svg, img{
               width: pxToRem(20);
@@ -206,8 +226,8 @@
             font-size: pxToRem(14);
 
             > li{
-              margin-left: pxToRem(35);
-              border-left: 1px solid #DBDFE6;
+              margin-left: pxToRem(40);
+              border-left: 1px solid $gray-400;
               position: relative;
 
               &:before{
@@ -220,13 +240,13 @@
                 height: pxToRem(10);
                 transform: translate(-50%, -50%);
                 border-radius: 50%;
-                border: 1px solid #DBDFE6;
+                border: 1px solid $gray-400;
                 background-color: $lithium-sidebar-bg;
               }
 
               > a{
                 display: block;
-                padding: pxToRem(8) pxToRem(20) pxToRem(8) pxToRem(10);
+                padding: pxToRem(8) pxToRem(20) pxToRem(8) pxToRem(25);
                 font-weight: 400;
                 color: $lithium-sidebar-menu-color;
                 position: relative;
@@ -260,6 +280,15 @@
 
   .menu-title{
     transition: ease all 300ms;
+    max-width: calc($lithium-sidebar-width - pxToRem(95));
+    width: 0;
+
+    .show-sidebar &{
+      width: auto;
+    }
+  }
+
+  .logo-text{
     width: 0;
 
     .show-sidebar &{
@@ -276,6 +305,20 @@
 
     .menu-title{
       width: auto;
+    }
+
+    .logo-text{
+      width: auto;
+    }
+
+    .module-search{
+      padding: pxToRem(10) pxToRem(15);
+      margin: 0 pxToRem(15) pxToRem(15);
+
+      > .form-control{
+        border: 1px solid rgba(0,0,0,0.05);
+        background-color: $lithium-sidebar-search-input;
+      }
     }
   }
 }

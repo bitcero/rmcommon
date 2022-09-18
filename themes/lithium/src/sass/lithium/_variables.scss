@@ -80,7 +80,7 @@ $lithium-sidebar-icon-color:           $lithium-header-svg-logo-color;
 $lithium-sidebar-submenu-bg:           $lithium-sidebar-bg;
 $lithium-sidebar-submenu-color:        $lithium-sidebar-user-border;
 $lithium-sidebar-submenu-icon-color:   $lithium-header-toggle-hover;
-$lithium-sidebar-active-color:         $primary;
+$lithium-sidebar-active-color:         var(--#{$prefix}primary);
 $lithium-sidebar-active-bg:            transparentize($primary, 0.95);
 
 /*

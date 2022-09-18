@@ -1,10 +1,13 @@
 <div id="li-sidebar" class="show">
     <div class="theme-logo">
         <div class="d-flex align-items-center justify-content-between">
-            <div class="logo">
+            <div class="logo d-flex align-items-center justify-content-start">
                 <a href="<?php echo $common->url(); ?>">
-                  <?php echo $logoLithium; ?>
+                  <?php echo $lithium_logo_icon; ?>
                 </a>
+                <span class="logo-text text-truncate">
+                    <?php echo $lithium_logo_text; ?>
+                </span>
             </div>
             <div class="sidebar-toggle">
                 <a href="#" class="btn btn-link" id="toggle-sidebar">
@@ -56,7 +59,6 @@
                                                 class="d-flex align-items-center justify-content-between"
                                             >
                                               <span class="d-flex align-items-center justify-content-start">
-                                                <?php echo isset($submenu['icon']) ? $xoFunc->menuIcon($submenu['icon'], $currentModule->directory) : ''; ?>
                                                   <span class="menu-title text-truncate"><?php echo $submenu['title']; ?></span>
                                               </span>
                                             </a>
@@ -95,13 +97,13 @@
                             <?php if (!empty($module->menu)): ?>
                                 <ul class="submenu">
                                     <?php foreach ($module->menu as $menu): ?>
-                                        <?php if (array_key_exists('divider', $menu)) {
-    continue;
-} ?>
+                                        <?php if (array_key_exists('divider', $menu)) { continue; } ?>
                                         <li>
-                                            <a href="<?php echo $xoFunc->menuLink((object) $menu, $module); ?>">
-                                                <?php echo $xoFunc->menuIcon($menu['icon'], $module->directory); ?>
-                                                <?php echo $menu['title']; ?>
+                                            <a
+                                                href="<?php echo $xoFunc->menuLink((object) $menu, $module); ?>"
+                                                class="d-flex align-items-center justify-content-between"
+                                            >
+                                                <span class="menu-title text-truncate"><?php echo $menu['title']; ?></span>
                                             </a>
                                         </li>
                                     <?php endforeach; ?>

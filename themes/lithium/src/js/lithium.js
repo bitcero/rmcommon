@@ -281,6 +281,11 @@ function updatesNotifier(count) {
     }
   });
   sidebar.addEventListener('mouseleave', function () {
+    const hadHover = sidebar.classList.contains('sidebar-hover');
     sidebar.classList.remove('sidebar-hover');
+
+    if(hadHover) {
+      $('.sidebar-menu .submenu').slideUp().siblings('a').removeClass('open');
+    }
   });
 })();
