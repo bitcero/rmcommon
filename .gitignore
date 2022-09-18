@@ -24,7 +24,7 @@ prepros.cfg
 # PHPStorm projects
 .idea/
 
-*/prepros-9.config
+*/prepros-6.config
 
 src/css/
 docs/_build/

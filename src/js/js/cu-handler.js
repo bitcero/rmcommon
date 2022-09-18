@@ -955,8 +955,6 @@ $(document).ready(function () {
         cuHandler.createDataTable($(this));
     });
 
-    $("*[data-rel='tooltip']").tooltip();
-
     /**
      * Activar comandos
      */
