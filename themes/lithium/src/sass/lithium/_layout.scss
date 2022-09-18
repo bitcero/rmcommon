@@ -22,7 +22,7 @@
   }
 
   @include media-breakpoint-down(sm){
-    margin-left: 0;
+    margin: pxToRem(96) pxToRem(20) pxToRem(40);
     padding: pxToRem(10) 0 pxToRem(20);
 
     .show-sidebar &{

@@ -334,6 +334,24 @@
 
     &.show{
         transform: translateX(0);
+
+      .menu-title {
+        width: auto;
+      }
+
+      .logo-text {
+        width: auto;
+      }
+
+      .module-search {
+        padding: pxToRem(10) pxToRem(15);
+        margin: 0 pxToRem(15) pxToRem(15);
+
+        > .form-control {
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          background-color: $lithium-sidebar-search-input;
+        }
+      }
     }
   }
 
