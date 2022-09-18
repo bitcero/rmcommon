@@ -21,7 +21,7 @@ class LightBoxCUPlugin extends RMIPlugin
             'version'       => array('major' => 1, 'minor' => 12, 'revision' => 20, 'stage' => 0, 'name' => 'Lightbox Plugin'),
             'author'        => 'Eduardo Cortés',
             'email'         => 'i.bitcero@gmail.com',
-            'web'           => 'http://eduardocortes.mx',
+            'web'           => 'https://eduardocortes.mx',
             'dir'           => 'lightbox',
             //'updateurl'     => 'https://www.xoopsmexico.net/modules/vcontrol/',
             'hasmain'       => true

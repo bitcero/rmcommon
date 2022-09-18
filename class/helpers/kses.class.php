@@ -25,7 +25,7 @@
  * @version 0.2.2
  * @copyright (C) 2002, 2003, 2005
  * @author Ulf Harnhammar <http://advogato.org/person/metaur>
- * @author Eduardo Cortés <http://eduardocortes.mx>
+ * @author Eduardo Cortés <https://eduardocortes.mx>
  *
  * @package Helpers
  * @subpackage KSES

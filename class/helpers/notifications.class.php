@@ -23,8 +23,8 @@
  * @author       Eduardo Cortés
  * @copyright    Eduardo Cortés
  * @license      GPL 2
- * @link         http://eduardocortes.mx
- * @link         http://rmcommon.com
+ * @link         https://eduardocortes.mx
+ * @link         https://rmcommon.bitcero.dev
  */
 
 /**

@@ -42,7 +42,7 @@ class RecaptchaCUPlugin extends RMIPlugin
             'version' => array('major' => 0, 'minor' => 0, 'revision' => 5, 'stage' => -2, 'name' => 'reCaptcha for Xoops'),
             'author' => 'Eduardo Cortés',
             'email' => 'i.bitcero@gmail.com',
-            'web' => 'http://eduardocortes.mx',
+            'web' => 'https://eduardocortes.mx',
             'dir' => 'recaptcha',
             //'updateurl' => 'https://www.xoopsmexico.net/modules/vcontrol/'
         );

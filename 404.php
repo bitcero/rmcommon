@@ -23,7 +23,7 @@
  * @author       Eduardo Cortés <yo@eduardocortes.mx>
  * @copyright    2009 - 2014 Eduardo Cortés
  * @license      GPL v2
- * @link         http://eduardocortes.mx
+ * @link         https://eduardocortes.mx
  */
 if (!isset($xoopsOption['module_subpage'])) {
     $xoopsOption['module_subpage'] = 'error404';

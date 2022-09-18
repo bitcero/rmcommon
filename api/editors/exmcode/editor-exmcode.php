@@ -2,7 +2,7 @@
 * $Id$
 * ExmCode Editor
 * Author: Eduardo Cortés <i.bitcero@gmail.com>
-* http://eduardocortes.mx
+* https://eduardocortes.mx
 */
 <?php
     require dirname(__DIR__) . '/../../../../mainfile.php';

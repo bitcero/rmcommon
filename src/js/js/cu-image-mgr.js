@@ -1,8 +1,8 @@
 /**
  * Image manager field
  * @author Eduardo Cortés <i.bitcero@gmail.com>
- * @link   http://eduardocortes.mx
- * @link   http://rmcommon.com
+ * @link   https://eduardocortes.mx
+ * @link   https://rmcommon.bitcero.dev
  */
 
 $(document).ready(function(){

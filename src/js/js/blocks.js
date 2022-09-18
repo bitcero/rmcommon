@@ -1,8 +1,8 @@
 /**
  * Blocks controller for Common Utilities
  * @author Eduardo Cortés <i.bitcero@gmail.com>
- * @link   http://eduardocortes.mx
- * @link   http://rmcommon.com
+ * @link   https://eduardocortes.mx
+ * @link   https://rmcommon.bitcero.dev
  */
 
 var blocksAjax = {
