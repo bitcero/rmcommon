@@ -59,6 +59,7 @@ $lithium-header-rmc-hover:             $primary;
 ------------------------------
 */
 $lithium-sidebar-width:                pxToRem(260);
+$lithium-sidebar-collapsed-width:      pxToRem(80);
 $lithium-sidebar-bg:                   #FFFFFF;
 $lithium-sidebar-user-bg:              $lithium-header-bg-color;
 $lithium-sidebar-user-border:          #657390;
@@ -70,16 +71,17 @@ $lithium-sidebar-search-color:         darken($lithium-sidebar-search-bg, 35%);
 $lithium-sidebar-search-pholder:       darken($lithium-sidebar-search-bg, 30%);//lighten($lithium-sidebar-search-bg, 10%);
 $lithium-sidebar-search-focus-bg:      #FFF; //$lithium-sidebar-user-bg;
 $lithium-sidebar-search-focus-color:   darken($lithium-sidebar-search-bg, 50%); //$lithium-sidebar-search-bg;
-$lithium-sidebar-heading-color:        $lithium-header-toggle-hover;
+$lithium-sidebar-heading-color:        $gray-500;
 $lithium-sidebar-menu-border:          1px solid #EAECF0;
-$lithium-sidebar-menu-color:           #505b72;
+$lithium-sidebar-menu-color:           $gray-600;
 $lithium-sidebar-menu-hover:           darken($lithium-sidebar-menu-color, 15%);
-$lithium-sidebar-menu-hover-bg:        rgba(0,0,0,0.03);
+$lithium-sidebar-menu-hover-bg:        transparent;
 $lithium-sidebar-icon-color:           $lithium-header-svg-logo-color;
-$lithium-sidebar-submenu-bg:           #F6F7F8;
+$lithium-sidebar-submenu-bg:           $lithium-sidebar-bg;
 $lithium-sidebar-submenu-color:        $lithium-sidebar-user-border;
 $lithium-sidebar-submenu-icon-color:   $lithium-header-toggle-hover;
-$lithium-sidebar-active-color:         #FFF;
+$lithium-sidebar-active-color:         $primary;
+$lithium-sidebar-active-bg:            transparentize($primary, 0.95);
 
 /*
 5. Breadcrumb

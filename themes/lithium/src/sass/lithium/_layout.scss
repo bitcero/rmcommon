@@ -1,5 +1,5 @@
 #li-main-content{
-  margin-left: 0;
+  margin-left: $lithium-sidebar-collapsed-width;
   padding: pxToRem(10) 40px 40px;
   margin-top: pxToRem(94);
   position: relative;
