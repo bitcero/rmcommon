@@ -25,7 +25,7 @@ prepros.cfg
 .idea/
 
 */prepros.config
-*/prepros-6.config
+*prepros-6.config
 
 src/css/
 docs/_build/

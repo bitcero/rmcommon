@@ -29,7 +29,7 @@
         <?php require __DIR__ . '/tpls/topbar.php'; ?>
 
         <main id="li-main-content">
-            <!-- Top bar -->
+          <?php echo RMBreadCrumb::get()->render(); ?>
 
             <!-- Content -->
           <?php require __DIR__ . '/tpls/content.php'; ?>
