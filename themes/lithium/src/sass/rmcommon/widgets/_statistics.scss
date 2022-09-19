@@ -1,0 +1,90 @@
+@mixin widget-stats-color($color) {
+  .icon {
+    > span {
+      background-color: transparentize($color, 0.8);
+      color: $color;
+
+      > svg {
+        fill: $color;
+      }
+    }
+  }
+}
+
+.widget-statistics {
+  .widget-titles {
+    margin-bottom: pxToRem(30);
+
+    .widget-title {
+      color: $gray-600;
+
+      &.title-lg {
+        font-size: pxToRem(18);
+        font-weight: 500;
+      }
+
+      &.title-md {
+        font-size: pxToRem(15);
+        font-weight: 500;
+      }
+
+      &.title-sm {
+        font-size: pxToRem(12);
+        font-weight: 400;
+      }
+    }
+  }
+
+  .widget-content {
+    .data-item {
+      .icon {
+        margin-right: pxToRem(20);
+
+        > span {
+          display: block;
+          width: pxToRem(48);
+          height: pxToRem(48);
+          line-height: pxToRem(48);
+          border-radius: 50%;
+          background-color: $gray-200;
+          position: relative;
+
+          svg, img {
+            width: pxToRem(24);
+            height: pxToRem(24);
+            margin: 0 auto;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            fill: $gray-600;
+          }
+        }
+      }
+
+      .value {
+        font-size: pxToRem(18);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .title {
+        font-size: pxToRem(12);
+        font-weight: 400;
+        margin: 0;
+        color: lighten($body-color, 20%);
+      }
+
+      &.primary {
+        @include widget-stats-color($primary);
+      }
+
+      @each $color, $value in $colors {
+        &.#{$color} {
+          @include widget-stats-color($value);
+        }
+      }
+    }
+  }
+}

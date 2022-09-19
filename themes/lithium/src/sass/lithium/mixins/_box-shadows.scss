@@ -1,0 +1,13 @@
+@mixin lithium-box-shadow($shadow_size: lg) {
+  @if $shadow_size == sm {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  } @else if $shadow_size == md {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  } @else if $shadow_size == lg {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  } @else if $shadow_size == xl {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  } @else {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+}
