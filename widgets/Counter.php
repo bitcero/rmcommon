@@ -2,7 +2,7 @@
 /**
  * Common Utilities Framework for Xoops
  *
- * Copyright © 2015 Eduardo Cortés http://www.redmexico.com.mx
+ * Copyright © 2015 Eduardo Cortés https://bitcero.dev
  * -------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * -------------------------------------------------------------
- * @copyright    Eduardo Cortés (http://www.redmexico.com.mx)
+ * @copyright    Eduardo Cortés (https://bitcero.dev)
  * @license      GNU GPL 2
  * @package      rmcommon
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
- * @url          http://www.redmexico.com.mx
+ * @url          https://bitcero.dev
  * @url          http://www.eduardocortes.mx
  */
 
@@ -85,7 +85,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
 
         // Widget color
         if ($this->has('color')) {
-            $this->add('class', 'bg-' . $this->get('color'));
+            $this->add('class', $this->get('color'));
         }
 
         // Widget icon

@@ -4,7 +4,7 @@
 Smart-B ERP
 @package:   Sistema Base
 @author     Red México
-@author     http://www.redmexico.com.mx
+@author     https://bitcero.dev
 @author     Eduardo Cortés
 @copyright  2013 Red México
 @version    $Id$

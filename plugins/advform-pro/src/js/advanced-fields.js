@@ -1,7 +1,7 @@
 /*!
  Advanced Form Fields for Common Utilities
  @author: Eduardo Cortés (AKA bitcero)
- @url: http://www.redmexico.com.mx
+ @url: https://bitcero.dev
  @license: GPL 2
 */
 

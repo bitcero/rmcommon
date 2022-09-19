@@ -11,6 +11,57 @@
 require_once dirname(__DIR__) . '/../include/cp_header.php';
 $common->location = 'dashboard';
 
+function construct_statistics($comments, $modules, $users)
+{
+  global $common;
+
+  $widget = $common->widgets()->load('rmcommon', 'WidgetStatistics');
+  $widget->setup([
+    'class' => 'box-default'
+  ]);
+  $widget->add_title(__('Statistics', 'rmcommon'), 'lg');
+  $widget->add_title(__('Your XOOPS statistics', 'rmcommon'), 'sm');
+
+  $icons_classes = 'col-sm-6 col-md-6 col-xl-3 mb-3 mb-md-3 mb-xl-0';
+
+  $widget->add_stat(
+    value: $common->format()->quantity($comments),
+    title: __('Comments', 'rmcommon'),
+    icon: 'svg-lithium-comments',
+    color: 'primary',
+    css_classes: $icons_classes
+  );
+
+  $widget->add_stat(
+    value: $common->format()->quantity($modules),
+    title: __('Modules', 'rmcommon'),
+    icon: 'svg-lithium-modules',
+    color: 'cyan',
+    css_classes: $icons_classes
+  );
+
+  $widget->add_stat(
+    value: $common->format()->quantity($users),
+    title: __('Users', 'rmcommon'),
+    icon: 'svg-lithium-user',
+    color: 'red',
+    css_classes: $icons_classes
+  );
+
+  $online_handler = xoops_getHandler('online');
+  $onlines = $online_handler->getAll();
+
+  $widget->add_stat(
+    value: $common->format()->quantity(count($onlines)),
+    title: __('On line', 'rmcommon'),
+    icon: 'svg-lithium-plug',
+    color: 'green',
+    css_classes: $icons_classes
+  );
+
+  return $widget;
+}
+
 function get_modules_list()
 {
     $db = XoopsDatabaseFactory::getDatabaseConnection();
@@ -85,7 +136,7 @@ function show_dashboard()
     // Modules counter
     $counterModules = new Common\Widgets\Counter([
         'id' => 'counter-modules',
-        'color' => 'red',
+        'color' => 'pink',
         'icon' => 'svg-rmcommon-module',
         'class' => 'animated bounceIn',
     ]);
@@ -148,7 +199,7 @@ function show_dashboard()
 
     $counterSystem = new Common\Widgets\Counter([
         'id' => 'counter-system',
-        'color' => 'deep-orange',
+        'color' => 'primary',
         'icon' => 'svg-rmcommon-rmcommon',
         'class' => 'animated bounceIn',
     ]);
@@ -165,6 +216,14 @@ function show_dashboard()
     }
 
     $counterSystem->addCell('MySQL', $version[0]);
+
+    if('lithium' == $common->settings->theme){
+      $widget_statistics = construct_statistics(
+        comments: $approved + $waiting,
+        modules: count($available_mods) + count($installed_modules),
+        users: $total,
+      );
+    }
 
     // Management Tools
     $managementTools[] = (object) [

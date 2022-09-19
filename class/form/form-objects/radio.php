@@ -6,7 +6,7 @@
  * Author: Eduardo Cortes
  * Email: i.bitcero@gmail.com
  * License: GPL 2.0
- * URI: http://www.redmexico.com.mx
+ * URI: https://bitcero.dev
  */
 class ActiveRadio
 {

@@ -2,7 +2,7 @@
 /**
  * Helium Theme
  *
- * Copyright © 2015 Red Mexico http://www.redmexico.com.mx
+ * Copyright © 2015 Red Mexico https://bitcero.dev
  * -------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * -------------------------------------------------------------
- * @copyright    Red Mexico (http://www.redmexico.com.mx)
+ * @copyright    Red Mexico (https://bitcero.dev)
  * @license      GNU GPL 2
  * @package      helium
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
- * @url          http://www.redmexico.com.mx
+ * @url          https://bitcero.dev
  * @url          http://www.eduardocortes.mx
  */
 class HeliumHelper

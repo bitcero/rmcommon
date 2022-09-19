@@ -19,11 +19,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * -------------------------------------------------------------
- * @copyright    Eduardo Cortés (http://www.redmexico.com.mx)
+ * @copyright    Eduardo Cortés (https://bitcero.dev)
  * @license      GNU GPL 2
  * @package      rmcommon
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
- * @url          http://www.redmexico.com.mx
+ * @url          https://bitcero.dev
  * @url          http://www.eduardocortes.mx
  */
 $rmcommon_permissions = [

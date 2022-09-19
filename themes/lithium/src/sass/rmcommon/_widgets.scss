@@ -1,73 +1,6 @@
-.widget-counter{
-  padding: 15px;
-  border-radius: $border-radius-lg;
-
-  .cu-icon{
-    @include cu-icon-size(32px);
-
-    @include media-breakpoint-up(md){
-      @include cu-icon-size(48px);
-    }
-  }
-
-  .first-cell{
-    > small{
-      text-transform: uppercase;
-      display: block;
-      line-height: 1;
-      font-size: 0.9em;
-      font-family: 'Open Sans Condensed', sans-serif;
-    }
-    > em{
-      font-size: 25px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    @include media-breakpoint-up(md){
-      > small{
-        font-size: 1em;
-      }
-      > em{
-        font-size: 35px;
-      }
-    }
-  }
-
-  .other-cells{
-    margin-top: 10px;
-
-    small{
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      display: block;
-      line-height: 1;
-      font-family: 'Open Sans Condensed', sans-serif;
-      font-weight: 400;
-    }
-
-    em{
-      font-size: 18px;
-      line-height: 1;
-      display: block;
-      font-weight: 700;
-      font-style: normal;
-      font-family: 'Open Sans Condensed', sans-serif;
-    }
-
-    @include media-breakpoint-up(md){
-      small{
-        font-size: 0.85em;
-      }
-      em{
-        font-size: 1.6rem;
-      }
-    }
-  }
-
+.widget{
+  min-height: pxToRem(150);
 }
-
 .widget-counters-row{
 
   &:after{
@@ -343,5 +276,7 @@
 
 }
 
-// User Card
+// Widgets
 @import "widgets/user-card";
+@import "widgets/counter";
+@import "widgets/statistics";

@@ -60,11 +60,11 @@
   }
 
   .card-info{
-    font-size: ceil($font-size-base * 1.2);
+    font-size: $font-size-base;
     font-weight: 300;
     text-align: center;
     color: lighten($body-color, 10%);
-    padding: $modal-inner-padding;
+    padding: $cu-box-content-padding;
   }
 
   .card-social{

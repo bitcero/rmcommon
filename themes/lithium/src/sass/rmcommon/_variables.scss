@@ -1,8 +1,11 @@
-//== Breakpoints for columns
-//
-//##
+@import "lithium/functions/to-rem";
+
 
 // Screen width xtra large
 @screen-xl:     1700px;
 @screen-xl-min: @screen-xl;
 @screen-lg-max: @screen-xl - 1;
+
+$widgets-default-bg: $white;
+
+$cu-box-content-padding: pxToRem(20) pxToRem(30);
