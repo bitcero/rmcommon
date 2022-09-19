@@ -1,6 +1,6 @@
 #li-topbar {
   top: 20px;
-  left: calc($lithium-sidebar-collapsed-width + pxToRem(40));
+  left: calc(#{$lithium-sidebar-collapsed-width} + #{pxToRem(40)});
   right: 40px;
   height: 78px;
   background-color: $lithium-header-bg-color;

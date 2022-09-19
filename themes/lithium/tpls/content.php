@@ -1,8 +1,6 @@
 <div id="li-content" class="<?php echo $common->breadcrumb()->count() > 0 ? 'with-breadcrumb' : ''; ?>">
   <?php require __DIR__ . '/toolbar.php'; ?>
 
-  <?php echo RMBreadCrumb::get()->render(); ?>
-
   <?php if (!empty($right_widgets)): ?>
       <div class="row">
           <div class="col-md-8 col-lg-9">

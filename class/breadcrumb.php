@@ -104,7 +104,7 @@ class RMBreadCrumb
      */
     public function render()
     {
-        global $cuIcons, $xoopsModule;
+        global $cuIcons, $xoopsModule, $common;
 
         RMTemplate::getInstance()->add_style('breadcrumb.css', 'rmcommon');
 

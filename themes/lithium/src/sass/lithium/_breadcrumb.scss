@@ -1,0 +1,18 @@
+/*
+    --------------
+      BREADCRUMB
+    -------------- */
+.rmc-breadcrumb{
+  .breadcrumb-item{
+    display: flex;
+  }
+  a{
+    svg{
+      width: pxToRem(16);
+      height: pxToRem(16);
+      fill: currentColor;
+      vertical-align: text-top;
+    }
+
+  }
+}
