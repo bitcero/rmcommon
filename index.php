@@ -85,7 +85,7 @@ function show_dashboard()
     // Modules counter
     $counterModules = new Common\Widgets\Counter([
         'id' => 'counter-modules',
-        'color' => 'red',
+        'color' => 'pink',
         'icon' => 'svg-rmcommon-module',
         'class' => 'animated bounceIn',
     ]);

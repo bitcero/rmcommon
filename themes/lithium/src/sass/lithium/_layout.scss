@@ -11,18 +11,17 @@
   }
 
   @include media-breakpoint-down(xl){
-    margin-left: 0;
+    margin: pxToRem(96) pxToRem(20) pxToRem(40);
     padding: pxToRem(10) 0 pxToRem(40);
 
     .show-sidebar &{
-      margin-left: pxToRem(40);
-      margin-right: pxToRem(40);
+      margin-left: pxToRem(20);
+      margin-right: pxToRem(20);
       padding: pxToRem(10) 0 pxToRem(40);
     }
   }
 
-  @include media-breakpoint-down(sm){
-    margin: pxToRem(96) pxToRem(20) pxToRem(40);
+  @include media-breakpoint-down(lg){
     padding: pxToRem(10) 0 pxToRem(20);
 
     .show-sidebar &{

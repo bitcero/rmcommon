@@ -2,7 +2,7 @@
 /**
  * Common Utilities Framework for Xoops
  *
- * Copyright © 2015 Eduardo Cortés http://www.redmexico.com.mx
+ * Copyright © 2015 Eduardo Cortés https://bitcero.dev
  * -------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

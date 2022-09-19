@@ -12,18 +12,8 @@ own dashboards using the same look and feel that in rmcommon.
   padding: 0;
 
   > li{
-    margin: 0 0 5px 0;
-
-    @media(min-width: 401px){
-      float: left;
-      width: 50%;
-      padding: 5px;
-    }
-
-    @include media-breakpoint-up(sm){
-      width: 25%;
-    }
-
+    padding: 0 pxToRem(15);
+    width: 100%;
   }
 
   &:after{

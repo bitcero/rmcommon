@@ -635,7 +635,7 @@ function show_modules_list()
     RMTemplate::get()->assign('xoops_pagetitle', __('Modules Management', 'rmcommon'));
     RMTemplate::get()->add_style('modules.min.css', 'rmcommon');
     RMTemplate::get()->add_script('modules.min.js', 'rmcommon');
-    RMTemplate::get()->set_help('http://www.redmexico.com.mx/docs/common-utilities/uso-de-common-utilities/standalone/1/#administrador-de-modulos');
+    RMTemplate::get()->set_help('https://bitcero.dev/docs/common-utilities/uso-de-common-utilities/standalone/1/#administrador-de-modulos');
     xoops_cp_header();
     include RMTemplate::get()->path('rmc-modules.php', 'module', 'rmcommon');
     xoops_cp_footer();

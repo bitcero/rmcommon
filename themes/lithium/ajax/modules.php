@@ -1,7 +1,7 @@
 <?php
 /*
 Theme name: Two Point Six
-Theme URI: http://www.redmexico.com.mx
+Theme URI: https://bitcero.dev
 Version: 1.0
 Author: bitcero
 Author URI: http://www.bitcero.info

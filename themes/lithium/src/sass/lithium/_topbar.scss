@@ -444,14 +444,6 @@
   }
 
   @include media-breakpoint-down(xl){
-    left: pxToRem(40);
-
-    .show-sidebar & {
-      left: pxToRem(40);
-    }
-  }
-
-  @include media-breakpoint-down(sm){
     left: pxToRem(20);
     top: pxToRem(20);
     right: pxToRem(20);
@@ -463,6 +455,10 @@
       right: pxToRem(20);
       position: fixed;
     }
+  }
+
+  @include media-breakpoint-down(sm){
+
   }
 }
 

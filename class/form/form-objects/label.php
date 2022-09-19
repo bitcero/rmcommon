@@ -7,7 +7,7 @@
  * Author: Eduardo Cortes
  * Email: i.bitcero@gmail.com
  * License: Private
- * URI: http://www.redmexico.com.mx
+ * URI: https://bitcero.dev
  * --------------------------------------------------------------
  */
 

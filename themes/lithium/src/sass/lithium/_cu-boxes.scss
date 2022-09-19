@@ -3,7 +3,7 @@
 .cu-box{
   background-color: $cu-box-bg;
   border-radius: $border-radius;
-  box-shadow: 0 3px 15px fadeout(black, 90%);
+  @include lithium-box-shadow(lg);
   margin-bottom: 20px;
   position: relative;
 
@@ -136,6 +136,12 @@
         border-bottom-color: transparent;
       }
     }
+  }
+}
+
+@each $name, $color in $colors{
+  .box-#{$name}{
+    @include box-variation($color, $body-color);
   }
 }
 

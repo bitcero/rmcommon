@@ -3,7 +3,7 @@
 /**
  * Recaptcha plugin for Common Utilities
  *
- * Copyright © 2015 Eduardo Cortés http://www.redmexico.com.mx
+ * Copyright © 2015 Eduardo Cortés https://bitcero.dev
  * -------------------------------------------------------------
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * -------------------------------------------------------------
- * @copyright    Eduardo Cortés (http://www.redmexico.com.mx)
+ * @copyright    Eduardo Cortés (https://bitcero.dev)
  * @license      GNU GPL 2
  * @package      recaptcha
  * @author       Eduardo Cortés (AKA bitcero)    <i.bitcero@gmail.com>
- * @url          http://www.redmexico.com.mx
+ * @url          https://bitcero.dev
  * @url          http://www.eduardocortes.mx
  */
 class RecaptchaCUPlugin extends RMIPlugin

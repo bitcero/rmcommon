@@ -5,7 +5,7 @@
 // Utilidades comunes para módulos de Red México
 // CopyRight © 2005 - 2006. Red México
 // Autor: BitC3R0
-// http://www.redmexico.com.mx
+// https://bitcero.dev
 // http://www.exmsystem.net
 // --------------------------------------------
 // This program is free software; you can redistribute it and/or

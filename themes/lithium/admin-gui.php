@@ -1,7 +1,7 @@
 <?php
 /*
 Theme name: Lithium Theme
-Theme URI: http://www.redmexico.com.mx
+Theme URI: https://bitcero.dev
 Version: 1.0
 Author: Eduardo Cortés
 Author URI: http://www.eduardocortes.mx
