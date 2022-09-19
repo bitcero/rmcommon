@@ -85,7 +85,7 @@ class Counter extends WidgetAbstract implements WidgetInterface
 
         // Widget color
         if ($this->has('color')) {
-            $this->add('class', 'bg-' . $this->get('color'));
+            $this->add('class', $this->get('color'));
         }
 
         // Widget icon

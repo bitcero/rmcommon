@@ -1,3 +1,6 @@
+.widget{
+  min-height: pxToRem(150);
+}
 .widget-counters-row{
 
   &:after{
@@ -273,8 +276,7 @@
 
 }
 
-// User Card
+// Widgets
 @import "widgets/user-card";
-
-// Counter
 @import "widgets/counter";
+@import "widgets/statistics";

@@ -1,20 +1,21 @@
-@mixin box-variation($color, $text){
+@mixin box-variation($color_original, $text){
+  $color: lighten($color_original, 25%);
 
   .box-header{
     background-color: $color;
-    color: $text;
+    color: color-contrast($color);
     border-bottom-color: transparent;
 
     .box-title{
-      color: $text;
+      color: color-contrast($color);
     }
 
     .box-handler{
-      color: rgba(red($text), green($text), blue($text), 0.3);
+      color: rgba(red(color-contrast($color)), green(color-contrast($color)), blue(color-contrast($color)), 0.3);
     }
 
     .box-handler:hover{
-      color: $text;
+      color: color-contrast($color);
     }
 
     + .box-content{
@@ -30,11 +31,11 @@
 
       > li{
         > a{
-          color: fade($text, 60%);
+          color: fade(color-contrast($color), 60%);
           transition: ease all 250ms;
 
           &:hover{
-            color: $text;
+            color: color-contrast($color);
           }
         }
       }
@@ -43,13 +44,13 @@
   }
 
   .box-footer{
-    background-color: $cu-box-footer-bg;
-    color: color-contrast($cu-box-footer-bg);
+    background-color: transparentize($color, 0.8);
+    color: $color_original;
   }
 
   &.box-solid{
     background-color: $color;
-    color: $text;
+    color: color-contrast($color);;
 
     .box-header  + .box-content{
       padding-top: 0;
@@ -58,11 +59,11 @@
     .box-content{
 
       *:not(.form-control) {
-        color: rgba(red($text), green($text), blue($text), 0.7);
+        color: rgba(red(color-contrast($color)), green(color-contrast($color)), blue(color-contrast($color)), 0.7);
       }
 
       a{
-        color: $text;
+        color: color-contrast($color);
 
         &:hover{
           text-decoration: underline;
@@ -70,21 +71,21 @@
       }
 
       > .nav-tabs > li.active > a{
-        background-color: fade($text, 18%)!important;
-        color: $text;
+        background-color: fade(color-contrast($color), 18%)!important;
+        color: color-contrast($color);;
       }
 
       > .tab-content{
-        background-color: fade($text, 18%)!important;
+        background-color: fade(color-contrast($color), 18%)!important;
       }
     }
 
     .box-footer{
-      background-color: $color;
-      color: $text;
+      background-color: darken($color, 3%);
+      color: color-contrast(darken($color, 3%));
 
       a{
-        color: $text;
+        color: color-contrast($color);
         &:hover{
           text-decoration: underline;
         }

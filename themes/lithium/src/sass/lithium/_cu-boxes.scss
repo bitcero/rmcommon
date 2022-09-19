@@ -8,7 +8,7 @@
   position: relative;
 
   .box-content{
-    padding: 20px;
+    padding: pxToRem(20) pxToRem(30);
 
     &.no-padding{
       padding: 0!important;
@@ -139,7 +139,7 @@
   }
 }
 
-@each $name, $color in $colors{
+@each $name, $color in $theme-colors{
   .box-#{$name}{
     @include box-variation($color, $body-color);
   }

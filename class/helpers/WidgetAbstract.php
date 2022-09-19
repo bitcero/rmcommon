@@ -39,9 +39,11 @@ abstract class WidgetAbstract extends Attributes
 
     protected $tpl;
 
-    public function __construct($data)
+    public function __construct($data = [])
     {
         parent::__construct($data);
+
+        $this->add('class', 'widget');
 
         $this->tpl = \RMTemplate::getInstance();
     }

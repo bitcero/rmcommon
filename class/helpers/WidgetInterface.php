@@ -46,9 +46,9 @@ interface WidgetInterface
 
     /**
      * Initialize the widget
-     * @param mixed $parameters
+     * @param array $parameters
      */
-    public function setup($parameters);
+    public function setup(array $parameters);
 
     /**
      * Returns the template used for this widget
