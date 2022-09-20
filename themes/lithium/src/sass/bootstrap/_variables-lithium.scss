@@ -670,8 +670,8 @@ $mark-bg:                     $yellow-100 !default;
 // Customizes the `.table` component with basic values, each used across all table variations.
 
 // scss-docs-start table-variables
-$table-cell-padding-y:        .5rem !default;
-$table-cell-padding-x:        .5rem !default;
+$table-cell-padding-y:        .7rem !default;
+$table-cell-padding-x:        .7rem !default;
 $table-cell-padding-y-sm:     .25rem !default;
 $table-cell-padding-x-sm:     .25rem !default;
 
@@ -693,7 +693,7 @@ $table-active-bg:             rgba($black, $table-active-bg-factor) !default;
 
 $table-hover-color:           $table-color !default;
 $table-hover-bg-factor:       .075 !default;
-$table-hover-bg:              rgba($black, $table-hover-bg-factor) !default;
+$table-hover-bg:              $body-bg !default; //rgba($black, $table-hover-bg-factor) !default;
 
 $table-border-factor:         .1 !default;
 $table-border-width:          $border-width !default;
@@ -719,6 +719,19 @@ $table-variants: (
   "danger":     shift-color($danger, $table-bg-scale),
   "light":      $light,
   "dark":       $dark,
+  "blue":       shift-color($blue, $table-bg-scale),
+  "indigo":     shift-color($indigo, $table-bg-scale),
+  "purple":     shift-color($purple, $table-bg-scale),
+  "pink":       shift-color($pink, $table-bg-scale),
+  "red":        shift-color($red, $table-bg-scale),
+  "orange":     shift-color($orange, $table-bg-scale),
+  "yellow":     shift-color($yellow, $table-bg-scale),
+  "green":      shift-color($green, $table-bg-scale),
+  "teal":       shift-color($teal, $table-bg-scale),
+  "cyan":       shift-color($cyan, $table-bg-scale),
+  "white":      shift-color($white, $table-bg-scale),
+  "gray":       shift-color($gray-600, $table-bg-scale),
+  "gray-dark":  shift-color($gray-800, $table-bg-scale)
 ) !default;
 // scss-docs-end table-loop
 

@@ -1,0 +1,12 @@
+.table{
+  border-top: 1px solid $table-border-color;
+  thead{
+    tr{
+      th{
+        background-color: $lithium-table-th-bg;
+        text-transform: uppercase;
+        color: $lithium-table-head-color;
+      }
+    }
+  }
+}
