@@ -301,7 +301,7 @@
                                                 <?php echo $common->icons()->getIcon('svg-lithium-floppy-disk', [], false); ?>
                                             </span>
                                         </a>
-                                        <a href="#" class="btn btn-link text-info data_button">
+                                        <a href="#" class="btn btn-link text-info data_button" data-bs-toggle="modal" data-bs-target="#info-module">
                                           <span class="text-info">
                                                 <?php echo $common->icons()->getIcon('svg-lithium-info', [], false); ?>
                                             </span>
