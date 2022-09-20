@@ -529,7 +529,7 @@ function parse_social_icons($type)
 
 function show_modules_list()
 {
-    global $xoopsSecurity, $cuIcons;
+    global $xoopsSecurity, $cuIcons, $common;
 
     $installed_modules = [];
 

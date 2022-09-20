@@ -1,0 +1,25 @@
+.modules-page {
+  th, td{
+    padding-top: pxToRem(14);
+    padding-bottom: pxToRem(14);
+  }
+  .actions {
+    svg {
+      fill: currentColor;
+      width: pxToRem(20);
+      height: pxToRem(20);
+    }
+  }
+
+  .logo{
+    svg {
+      fill: currentColor;
+      width: pxToRem(36);
+      height: pxToRem(36);
+    }
+  }
+
+  .rmcommon-icon > svg{
+    fill: $green;
+  }
+}

@@ -15,7 +15,7 @@
   <?php echo $xoopsSecurity->getTokenHTML(); ?>
 </form>
 
-<div class="cu-box">
+<div class="cu-box modules-page">
 
     <div class="box-content no-padding" role="tablist">
         <ul class="nav nav-tabs">
@@ -57,7 +57,7 @@
                                     <a href="<?php if ($mod['active']): ?><?php echo $mod['admin_link']; ?><?php else: ?>#<?php endif; ?>"
                                        title="<?php echo $mod['realname']; ?>">
                                       <?php if ('<span' == mb_substr($mod['icon'], 0, 5)): ?>
-                                        <?php echo $mod['icon']; ?>
+                                        <?php echo str_replace('cu-icon', '', $mod['icon']); ?>
                                       <?php else: ?>
                                           <img src="<?php echo $mod['icon']; ?>" alt="<?php echo $mod['name']; ?>">
                                       <?php endif; ?>
@@ -135,52 +135,70 @@
                     </span>
                                 </td>
                                 <td class="actions" nowrap>
-                                    <div class="btn-group">
+                                    <div class="d-flex align-items-center justify-content-center">
                                       <?php if ('' != $mod['url']): ?>
-                                          <a href="<?php echo $mod['url']; ?>" target="_blank" class="btn btn-default"
+                                          <a href="<?php echo $mod['url']; ?>" target="_blank" class="btn btn-link"
                                              title="<?php _e('Visit module website', 'rmcommon'); ?>">
-                                              <span class="fa fa-globe"></span>
+                                              <span class="text-dark">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-globe', [], false); ?>
+                                            </span>
                                           </a>
                                       <?php else: ?>
-                                          <a href="#" class="btn btn-default" onclick="return false;">
-                                              <span class="fa fa-globe text-muted"></span>
+                                          <a href="#" class="btn btn-link" onclick="return false;">
+                                              <span class="text-muted">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-globe', [], false); ?>
+                                            </span>
                                           </a>
                                       <?php endif; ?>
-                                        <a href="#" class="btn btn-default data_button"
+                                        <a href="#" class="btn btn-link data_button"
                                            title="<?php _e('Show information', 'rmcommon'); ?>">
-                                            <span class="fa fa-info-circle text-info"></span>
+                                            <span class="text-info">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-info', [], false); ?>
+                                            </span>
                                         </a>
                                         <a href="#" class="btn btn-default update_button"
                                            title="<?php _e('Update', 'rmcommon'); ?>">
-                                            <span class="fa fa-refresh text-success"></span>
+                                            <span class="text-success">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-refresh', [], false); ?>
+                                            </span>
                                         </a>
                                       <?php if ($mod['active']): ?>
                                         <?php if ('system' != $mod['dirname']): ?>
                                               <a href="#" class="btn btn-default disable_button"
                                                  title="<?php _e('Disable', 'rmcommon'); ?>">
-                                                  <span class="fa fa-lock text-warning"></span>
+                                                  <span class="text-success">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-enable', [], false); ?>
+                                            </span>
                                               </a>
                                         <?php else: ?>
                                               <a href="#" class="btn btn-default" aria-disabled="true" disabled>
-                                                  <span class="fa fa-lock text-muted"></span>
+                                                  <span class="text-muted">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-enable', [], false); ?>
+                                            </span>
                                               </a>
                                         <?php endif; ?>
                                       <?php endif; ?>
                                       <?php if (!$mod['active']): ?>
                                           <a href="#" class="btn btn-default enable_button"
                                              title="<?php _e('Enable', 'rmcommon'); ?>">
-                                              <span class="fa fa-unlock text-info"></span>
+                                              <span class="text-muted">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-disable', [], false); ?>
+                                            </span>
                                           </a>
                                       <?php endif; ?>
                                       <?php if ('system' != $mod['dirname']): ?>
                                           <a href="#" class="btn btn-default uninstall_button"
                                              title="<?php _e('Uninstall', 'rmcommon'); ?>"
                                              data-dir="<?php echo $mod['dirname']; ?>">
-                                              <span class="fa fa-minus-circle text-danger"></span>
+                                              <span class="text-danger">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-remove', [], false); ?>
+                                            </span>
                                           </a>
                                       <?php else: ?>
                                           <a href="#" class="btn btn-default" aria-disabled="true" disabled>
-                                              <span class="fa fa-minus-circle text-muted"></span>
+                                              <span class="text-muted">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-remove', [], false); ?>
+                                            </span>
                                           </a>
                                       <?php endif; ?>
                                     </div>
@@ -275,14 +293,20 @@
                         </span>
                     </span>
                                 </td>
-                                <td class="cu-options" nowrap>
-                                    <a href="modules.php?action=install&amp;dir=<?php echo $mod['dirname']; ?>"
-                                       title="<?php _e('Install', 'rmcommon'); ?>" class="bg-success">
-                                      <?php echo $cuIcons->getIcon('svg-rmcommon-plus'); ?>
-                                    </a>
-                                    <a href="#" class="bg-info data_button">
-                                      <?php echo $cuIcons->getIcon('svg-rmcommon-info'); ?>
-                                    </a>
+                                <td class="actions text-center" nowrap>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a href="modules.php?action=install&amp;dir=<?php echo $mod['dirname']; ?>"
+                                           title="<?php _e('Install', 'rmcommon'); ?>" class="btn btn-link text-success">
+                                      <span class="text-success">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-floppy-disk', [], false); ?>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="btn btn-link text-info data_button">
+                                          <span class="text-info">
+                                                <?php echo $common->icons()->getIcon('svg-lithium-info', [], false); ?>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
