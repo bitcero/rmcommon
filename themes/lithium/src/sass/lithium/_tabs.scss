@@ -1,0 +1,31 @@
+.nav-tabs {
+  .nav-item{
+    padding: 0 pxToRem(3);
+  }
+  .nav-link {
+    color: lighten($body-color, 40%);
+    border: 0;
+    border-bottom: 3px solid transparent;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+
+    .cu-icon {
+      @include cu-icon-size(pxToRem(14));
+    }
+
+    svg {
+      width: pxToRem(14);
+      height: pxToRem(14);
+      margin-right: pxToRem(5);
+      fill: currentColor;
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: var(--#{$prefix}nav-tabs-link-active-color);
+    background-color: var(--#{$prefix}nav-tabs-link-active-bg);
+    border-color: var(--#{$prefix}nav-tabs-link-active-border-color);
+  }
+}

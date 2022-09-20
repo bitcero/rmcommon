@@ -21,13 +21,13 @@
         <ul class="nav nav-tabs">
             <li class="nav-item" role="presentation">
                 <button id="installed-tab" class="nav-link active" data-bs-toggle="tab" data-bs-target="#installed" type="button" aria-controls="installed" aria-selected="true">
-                    <?php echo $cuIcons->getIcon('svg-rmcommon-gear'); ?>
+                    <?php echo $cuIcons->getIcon('svg-lithium-floppy-disk', [], false); ?>
                     <span class="caption">Installed</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button id="available-tab" class="nav-link" data-bs-toggle="tab" data-bs-target="#available" type="button" aria-controls="available" aria-selected="false">
-                    <?php echo $cuIcons->getIcon('svg-rmcommon-plus'); ?>
+                    <?php echo $cuIcons->getIcon('svg-lithium-downloads', [], false); ?>
                     <span class="caption">Available</span>
                 </button>
             </li>
