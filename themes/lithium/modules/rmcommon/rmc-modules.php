@@ -80,7 +80,7 @@
                                                   class="fa fa-question-circle"></span> <?php _e('Help', 'rmcommon'); ?>
                                       </a>
                                   <?php endif; ?>
-                                    <small class="text-muted d-block"><?php echo $mod['description']; ?></small>
+                                    <small class="text-muted d-block description"><?php echo $mod['description']; ?></small>
                                 </td>
                                 <td class="text-center" nowrap>
                                   <?php echo $mod['version']; ?>
@@ -109,15 +109,13 @@
                         <span class="oname"><?php echo $mod['realname']; ?></span>
                         <span class="version"><?php echo $mod['version']; ?></span>
                         <span class="dirname"><?php echo $mod['dirname']; ?></span>
-                        <span class="author">
-                            <?php foreach ($mod['authors'] as $author): ?>
-                                <a href="<?php echo $author['url']; ?>" target="_blank"
-                                   title="<?php echo $author['name']; ?>">
-                                    <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=60"
-                                         alt="<?php echo $author['aka']; ?>">
-                                </a>
-                            <?php endforeach; ?>
-                        </span>
+                        <?php $authors = [];
+                        foreach ($mod['authors'] as $author) {
+                          $author['img'] = "https://www.gravatar.com/avatar/" . md5($author['email']) . "?s=60";
+                          $authors[] = $author;
+                        }
+                        ?>
+                        <span class="author"><?php echo json_encode($authors); ?></span>
                         <span class="url"><?php echo $mod['url']; ?></span>
                         <span class="license"><?php echo $mod['license']; ?></span>
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
@@ -126,8 +124,8 @@
                             <?php if ($mod['social']): ?>
                               <?php foreach ($mod['social'] as $social): ?>
                                     <a href="<?php echo $social['url']; ?>" target="_blank"
-                                       title="<?php echo $social['title']; ?>">
-                                        <span class="fa fa-<?php echo $social['type']; ?>"></span>
+                                       title="<?php echo $social['title']; ?>" class="ms-1 me-1">
+                                        <?php echo $common->icons()->getIcon('svg-lithium-' . $social['type'], [], false); ?>
                                     </a>
                               <?php endforeach; ?>
                             <?php endif; ?>
@@ -151,6 +149,7 @@
                                           </a>
                                       <?php endif; ?>
                                         <a href="#" class="btn btn-link data_button"
+                                           data-bs-toggle="modal" data-bs-target="#info-module"
                                            title="<?php _e('Show information', 'rmcommon'); ?>">
                                             <span class="text-info">
                                                 <?php echo $common->icons()->getIcon('svg-lithium-info', [], false); ?>
@@ -268,15 +267,14 @@
                         <span class="oname"><?php echo $mod['name']; ?></span>
                         <span class="version"><?php echo $mod['version']; ?></span>
                         <span class="dirname"><?php echo $mod['dirname']; ?></span>
-                        <span class="author">
-                            <?php foreach ($mod['authors'] as $author): ?>
-                                <a href="<?php echo $author['url']; ?>" target="_blank"
-                                   title="<?php echo $author['name']; ?>">
-                                    <img src="http://www.gravatar.com/avatar/<?php echo md5($author['email']); ?>?s=60"
-                                         alt="<?php echo $author['aka']; ?>">
-                                </a>
-                            <?php endforeach; ?>
-                        </span>
+                        <?php
+                        $authors = [];
+                        foreach ($mod['authors'] as $author) {
+                          $author['img'] = "https://www.gravatar.com/avatar/" . md5($author['email']) . "?s=60";
+                          $authors[] = $author;
+                        }
+                        ?>
+                        <span class="author"><?php echo json_encode($authors); ?></span>
                         <span class="url"><?php echo isset($mod['url']) ? $mod['url'] : ''; ?></span>
                         <span class="license"><?php echo $mod['license']; ?></span>
                         <span class="help"><?php echo preg_match("/(http|\.{2})/i", $mod['help']) ? $mod['help'] : '../' . $mod['dirname'] . '/' . $mod['help']; ?></span>
@@ -285,8 +283,8 @@
                             <?php if ($mod['social']): ?>
                               <?php foreach ($mod['social'] as $social): ?>
                                     <a href="<?php echo $social['url']; ?>" target="_blank"
-                                       title="<?php echo $social['title']; ?>">
-                                        <span class="fa fa-<?php echo $social['type']; ?>"></span>
+                                       title="<?php echo $social['title']; ?>" class="ms-1 me-1">
+                                        <?php echo $common->icons()->getIcon('svg-lithium-' . $social['type'], [], false); ?>
                                     </a>
                               <?php endforeach; ?>
                             <?php endif; ?>
@@ -320,63 +318,63 @@
 </div>
 
 <div class="modal fade" id="info-module">
-    <div class="modal-dialog xlarge">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header cu-titlebar">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><?php _e('Module Information', 'rmcommon'); ?></h4>
+            <div class="modal-header">
+                <h5 class="modal-title"><?php _e('Module Information', 'rmcommon'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body info-container">
-                <div class="row header">
-                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
-                        <img src="#" alt="#" class="img-responsive">
-                    </div>
-                    <div class="col-xs-8 col-sm-8 col-md-9 col-lg-9 text-right">
+                <div class="d-flex align-items-center header">
+                    <img src="#" alt="#" class="img-responsive me-2">
+                    <div class="">
                         <h3></h3>
-                        <span class="help-block desc"></span>
+                        <span class="text-muted desc"></span>
                     </div>
                 </div>
-                <hr>
 
-                <div class="row form-group">
-                    <div class="col-sm-6">
-                        <label><?php _e('Current Version:', 'rmcommon'); ?></label>
-                        <span class="form-control version"></span>
+                <hr class="mt-3 mb-3"/>
+
+                <div class="d-sm-flex justify-content-between mb-3 mb-sm-0 module-details">
+                    <div class="module-details-items">
+                        <div class="d-sm-flex mb-2">
+                            <strong class="me-sm-2 mb-1 mb-sm-0"><?php _e('Current Version:', 'rmcommon'); ?></strong>
+                            <span class="version"></span>
+                        </div>
+
+                        <div class="d-sm-flex mb-2">
+                            <strong class="me-sm-2 mb-1 mb-sm-0"><?php _e('Directory:', 'rmcommon'); ?></strong>
+                            <span class="dirname"></span>
+                        </div>
+
+                        <div class="d-sm-flex mb-2">
+                            <strong class="me-sm-2 mb-1 mb-sm-0"><?php _e('Module web site:', 'rmcommon'); ?></strong>
+                            <span class="web"></span>
+                        </div>
+
+                        <div class="d-sm-flex mb-2">
+                            <strong class="me-sm-2 mb-1 mb-sm-0"><?php _e('License:', 'rmcommon'); ?></strong>
+                            <span class="license"></span>
+                        </div>
+
+                        <div class="d-sm-flex mb-2">
+                            <strong class="me-sm-2 mb-1 mb-sm-0"><?php _e('Help:', 'rmcommon'); ?></strong>
+                            <span class="help"><?php _e('Not provided', 'rmcommon'); ?></span>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label><?php _e('Directory:', 'rmcommon'); ?></label>
-                        <span class="form-control dirname"></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-6">
-                        <label><?php _e('Author(s):', 'rmcommon'); ?></label>
-                        <span class="author"><?php _e('Not provided', 'rmcommon'); ?></span>
-                    </div>
-                    <div class="col-sm-6">
-                        <label><?php _e('Module web site:', 'rmcommon'); ?></label>
-                        <span class="form-control web"><?php _e('Not provided', 'rmcommon'); ?></span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-6">
-                        <label><?php _e('License:', 'rmcommon'); ?></label>
-                        <span class="form-control license"></span>
-                    </div>
-                    <div class="col-sm-6">
-                        <label><?php _e('Help:', 'rmcommon'); ?></label>
-                        <span class="form-control help"><?php _e('Not provided', 'rmcommon'); ?></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 text-center">
-                        <span class="social"></span>
+
+                    <div class="module-authors-social mt-4 mt-md-0">
+                        <div class="mb-4">
+                            <span class="author"></span>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center social mt-4"></div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary"
-                        data-dismiss="modal"><?php _e('Close', 'rmcommon'); ?></button>
+                <button type="button" class="btn btn-lg btn-primary"
+                        data-bs-dismiss="modal"><?php _e('Close', 'rmcommon'); ?></button>
             </div>
         </div>
     </div>

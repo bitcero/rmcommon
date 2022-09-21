@@ -7393,7 +7393,7 @@ CU BOXES
 }
 
 .modal-body {
-  padding: 1rem;
+  padding: 2.1428571429rem;
   color: #212529;
   overflow: auto;
 }
@@ -7485,12 +7485,12 @@ CU BOXES
 }
 
 .modal-header {
-  min-height: 16.428571429px;
-  padding: 1rem 1rem;
-  border-bottom: 0;
-  font-weight: bold;
-  background-color: #7367f0;
-  color: #7367f0;
+  background-color: #F8F8F8;
+}
+
+.modal-footer {
+  padding-left: 2.1428571429rem;
+  padding-right: 2.1428571429rem;
 }
 
 .cu-content-footer {
@@ -7525,111 +7525,6 @@ CU BOXES
   margin-left: 0;
 }
 
-/*
-.box-primary{
-  @include box-variation($primary, $primary);
-}
-
-.box-info{
-  @include box-variation($info, @btn-info-color);
-}
-
-.box-success{
-  @include box-variation($success, @btn-success-color);
-}
-
-.box-warning{
-  @include box-variation($warning, $warning);
-}
-
-.box-danger{
-  @include box-variation($danger, $danger);
-}
-
-.box-red{
-  @include box-variation($color-red, $color-text-red);
-}
-
-.box-pink{
-  @include box-variation($color-pink, $color-text-pink);
-}
-
-.box-purple{
-  @include box-variation($color-purple, $color-text-purple);
-}
-
-.box-deep-purple{
-  @include box-variation($color-deep-purple, $color-text-deep-purple);
-}
-
-.box-indigo{
-  @include box-variation($color-indigo, $color-text-indigo);
-}
-
-.box-blue{
-  @include box-variation($color-blue, $color-text-blue);
-}
-
-.box-light-blue{
-  @include box-variation($color-light-blue, $color-text-light-blue);
-}
-
-.box-light-blue{
-  @include box-variation($color-light-blue, $color-text-light-blue);
-}
-
-.box-cyan{
-  @include box-variation($color-cyan, $color-text-cyan);
-}
-
-.box-teal{
-  @include box-variation($color-teal, $color-text-teal);
-}
-
-.box-green{
-  @include box-variation($color-green, $color-text-green);
-}
-
-.box-light-green{
-  @include box-variation($color-light-green, $color-text-light-green);
-}
-
-.box-lime{
-  @include box-variation($color-lime, $color-text-lime);
-}
-
-.box-yellow{
-  @include box-variation($color-yellow, $color-text-yellow);
-}
-
-.box-amber{
-  @include box-variation($color-amber, $color-text-amber);
-}
-
-.box-orange{
-  @include box-variation($color-orange, $color-text-orange);
-}
-
-.box-deep-orange{
-  @include box-variation($color-deep-orange, $color-text-deep-orange);
-}
-
-.box-brown{
-  @include box-variation($color-brown, $color-text-brown);
-}
-
-.box-grey{
-  @include box-variation($color-grey, $color-text-grey);
-}
-
-.box-blue-grey{
-  @include box-variation($color-blue-grey, $color-text-blue-grey);
-}
-
-.box-midnight{
-  @include box-variation($color-midnight, $color-text-midnight);
-}
-*/
 .modal-red .modal-header {
   background-color: #e85354;
   color: #000;
