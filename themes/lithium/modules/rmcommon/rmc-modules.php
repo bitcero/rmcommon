@@ -155,7 +155,7 @@
                                                 <?php echo $common->icons()->getIcon('svg-lithium-info', [], false); ?>
                                             </span>
                                         </a>
-                                        <a href="#" class="btn btn-default update_button"
+                                        <a href="#" class="btn btn-link update_button"
                                            title="<?php _e('Update', 'rmcommon'); ?>">
                                             <span class="text-success">
                                                 <?php echo $common->icons()->getIcon('svg-lithium-refresh', [], false); ?>
@@ -163,14 +163,14 @@
                                         </a>
                                       <?php if ($mod['active']): ?>
                                         <?php if ('system' != $mod['dirname']): ?>
-                                              <a href="#" class="btn btn-default disable_button"
+                                              <a href="#" class="btn btn-link disable_button"
                                                  title="<?php _e('Disable', 'rmcommon'); ?>">
                                                   <span class="text-success">
                                                 <?php echo $common->icons()->getIcon('svg-lithium-enable', [], false); ?>
                                             </span>
                                               </a>
                                         <?php else: ?>
-                                              <a href="#" class="btn btn-default" aria-disabled="true" disabled>
+                                              <a href="#" class="btn btn-link" aria-disabled="true" disabled>
                                                   <span class="text-muted">
                                                 <?php echo $common->icons()->getIcon('svg-lithium-enable', [], false); ?>
                                             </span>
@@ -178,7 +178,7 @@
                                         <?php endif; ?>
                                       <?php endif; ?>
                                       <?php if (!$mod['active']): ?>
-                                          <a href="#" class="btn btn-default enable_button"
+                                          <a href="#" class="btn btn-link enable_button"
                                              title="<?php _e('Enable', 'rmcommon'); ?>">
                                               <span class="text-muted">
                                                 <?php echo $common->icons()->getIcon('svg-lithium-disable', [], false); ?>
@@ -186,7 +186,7 @@
                                           </a>
                                       <?php endif; ?>
                                       <?php if ('system' != $mod['dirname']): ?>
-                                          <a href="#" class="btn btn-default uninstall_button"
+                                          <a href="#" class="btn btn-link uninstall_button"
                                              title="<?php _e('Uninstall', 'rmcommon'); ?>"
                                              data-dir="<?php echo $mod['dirname']; ?>">
                                               <span class="text-danger">
@@ -194,7 +194,7 @@
                                             </span>
                                           </a>
                                       <?php else: ?>
-                                          <a href="#" class="btn btn-default" aria-disabled="true" disabled>
+                                          <a href="#" class="btn btn-link" aria-disabled="true" disabled>
                                               <span class="text-muted">
                                                 <?php echo $common->icons()->getIcon('svg-lithium-remove', [], false); ?>
                                             </span>

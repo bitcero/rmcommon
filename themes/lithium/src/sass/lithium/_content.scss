@@ -5,6 +5,10 @@
 
   &.with-breadcrumb {
     padding-top: pxToRem(20);
+
+    @include media-breakpoint-down(sm){
+      padding-top: 0;
+    }
   }
 
   /*
