@@ -334,6 +334,30 @@ $theme-colors: (
 ) !default;
 // scss-docs-end theme-colors-map
 
+$theme-text-colors: (
+  "primary":    $white,
+  "secondary":  $white,
+  "success":    $white,
+  "info":       $gray-900,
+  "warning":    $white,
+  "danger":     $white,
+  "light":      $white,
+  "dark":       $white,
+  "blue":       $white,
+  "indigo":     $white,
+  "purple":     $white,
+  "pink":       $white,
+  "red":        $white,
+  "orange":     $white,
+  "yellow":     $gray-900,
+  "green":      $white,
+  "teal":       $white,
+  "cyan":       $gray-900,
+  "white":      $gray-900,
+  "gray":       $white,
+  "gray-dark":  $white
+) !default;
+
 // Characters which are escaped by the escape-svg function
 $escaped-characters: (
   ("<", "%3c"),
