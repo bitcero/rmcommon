@@ -2,16 +2,17 @@
   top: 20px;
   left: calc(#{$lithium-sidebar-collapsed-width} + #{pxToRem(40)});
   right: 40px;
-  height: 78px;
+  height: pxToRem(64);
   background-color: $lithium-header-bg-color;
   border-radius: 10px;
   margin-bottom: 0;
   box-shadow: 0 3px 25px transparentize($black, 0.9);
   transition: ease all 300ms;
   z-index: 1000;
+  position: absolute;
 
   .show-sidebar & {
-    left: calc($lithium-sidebar-width + pxToRem(40))
+    left: calc(#{$lithium-sidebar-width} + #{pxToRem(40)})
   }
 
   a {
@@ -447,18 +448,16 @@
     left: pxToRem(20);
     top: pxToRem(20);
     right: pxToRem(20);
-    position: fixed;
 
     .show-sidebar & {
       left: pxToRem(20);
       top: pxToRem(20);
       right: pxToRem(20);
-      position: fixed;
     }
   }
 
   @include media-breakpoint-down(sm){
-
+    position: absolute;
   }
 }
 

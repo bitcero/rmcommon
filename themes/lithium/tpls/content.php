@@ -1,5 +1,4 @@
 <div id="li-content" class="<?php echo $common->breadcrumb()->count() > 0 ? 'with-breadcrumb' : ''; ?>">
-  <?php require __DIR__ . '/toolbar.php'; ?>
 
   <?php if (!empty($right_widgets)): ?>
       <div class="row">

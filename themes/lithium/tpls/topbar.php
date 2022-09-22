@@ -12,7 +12,7 @@
 
             <!-- Common Utilities Menu -->
             <li class="dropdown<?php if ('rmcommon' == $xoopsModule->dirname()): ?> active<?php endif; ?> rmcommon-menu">
-                <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
+                <a href="<?php echo RMCURL; ?>" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26">
                     <?php echo $cuIcons->getIcon('svg-lithium-utilities', [], false); ?>
                 </a>
                 <ul class="dropdown-menu">
@@ -62,7 +62,7 @@
                             class="dropdown-toggle"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
-                            data-bs-offset="0,24"
+                            data-bs-offset="0,26"
                             <?php echo array_key_exists('title', $item) ? ' title="' . $item['title'] . '"' : ''; ?>
                         >
                             <?php echo array_key_exists('icon', $item) ? $cuIcons->getIcon($item['icon']) : ''; ?>
@@ -124,7 +124,7 @@
             </li>
 
             <li class="dropdown<?php if ('system' == $xoopsModule->dirname()): ?> active<?php endif; ?> system-menu">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26">
                     <?php echo $cuIcons->getIcon('svg-lithium-system', [], false); ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-md-end">
@@ -163,7 +163,7 @@
 
             <!-- Quick menu -->
             <li class="dropdown quick-menu">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26">
                     <?php echo $cuIcons->getIcon('svg-lithium-lightning', [], false); ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-md-end">
@@ -241,7 +241,7 @@
                             <?php echo $cuIcons->getIcon('svg-lithium-question', [], false); ?>
                         </a>
                     <?php else: ?>
-                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,24">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26">
                             <?php echo $cuIcons->getIcon('svg-rmcommon-question'); ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-md-end">

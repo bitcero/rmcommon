@@ -31,6 +31,8 @@
         <main id="li-main-content">
           <?php echo RMBreadCrumb::get()->render(); ?>
 
+          <?php require __DIR__ . '/tpls/toolbar.php'; ?>
+
             <!-- Content -->
           <?php require __DIR__ . '/tpls/content.php'; ?>
         </main>

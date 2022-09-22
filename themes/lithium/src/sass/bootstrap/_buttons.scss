@@ -2,6 +2,8 @@
 // Base styles
 //
 
+@use "sass:map";
+
 .btn {
   // scss-docs-start btn-css-vars
   --#{$prefix}btn-padding-x: #{$btn-padding-x};
@@ -122,7 +124,7 @@
         $active-border: tint-color($value, $btn-active-border-tint-amount)
       );
     } @else {
-      @include button-variant($value, $value);
+      @include button-variant($value, $value, map-get($theme-text-colors, $color));
     }
   }
 }

@@ -65,12 +65,11 @@ $modversion['icon'] = 'svg-rmcommon-rmcommon rmcommon-icon';
 // PERMISSIONS
 $modversion['permissions'] = 'include/permissions.php';
 
-$modversion['social'][0] = ['title' => __('Twitter', 'rmcommon'), 'type' => 'twitter', 'url' => 'http://www.twitter.com/bitcero/'];
-$modversion['social'][1] = ['title' => __('Facebook', 'rmcommon'), 'type' => 'facebook-square', 'url' => 'http://www.facebook.com/eduardo.cortes.hervis/'];
-$modversion['social'][2] = ['title' => __('Instagram', 'rmcommon'), 'type' => 'instagram', 'url' => 'http://www.instagram.com/eduardocortesh/'];
-$modversion['social'][3] = ['title' => __('LinkedIn', 'rmcommon'), 'type' => 'linkedin-square', 'url' => 'http://www.linkedin.com/in/bitcero/'];
-$modversion['social'][4] = ['title' => __('GitHub', 'rmcommon'), 'type' => 'github', 'url' => 'http://www.github.com/bitcero/'];
-$modversion['social'][5] = ['title' => __('My Blog', 'rmcommon'), 'type' => 'quote-left', 'url' => 'https://eduardocortes.mx'];
+$modversion['social'][0] = ['title' => __('Twitter', 'rmcommon'), 'type' => 'twitter', 'url' => 'https://www.twitter.com/bitcero/'];
+$modversion['social'][2] = ['title' => __('Instagram', 'rmcommon'), 'type' => 'instagram', 'url' => 'https://www.instagram.com/bitcero/'];
+$modversion['social'][3] = ['title' => __('LinkedIn', 'rmcommon'), 'type' => 'linkedin', 'url' => 'https://www.linkedin.com/in/eduardo-cortes/'];
+$modversion['social'][4] = ['title' => __('GitHub', 'rmcommon'), 'type' => 'github', 'url' => 'https://bitcero.dev'];
+$modversion['social'][5] = ['title' => __('My Blog', 'rmcommon'), 'type' => 'blog', 'url' => 'https://eduardocortes.mx'];
 
 $modversion['hasAdmin'] = 1;
 $modversion['adminindex'] = 'index.php';
