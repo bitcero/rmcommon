@@ -11,7 +11,7 @@
     padding: pxToRem(20) pxToRem(30);
 
     &.no-padding{
-      padding: 0!important;
+      padding: 0;
     }
 
     > .nav-tabs{

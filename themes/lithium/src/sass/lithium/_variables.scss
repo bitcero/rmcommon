@@ -104,11 +104,11 @@ $cu-box-footer-padding:           $modal-inner-padding * .5;
 7. Toolbar
 ------------------------------
 */
-$lithium-toolbar-bg:                   lighten($body-bg, 5%); //transparent;
+$lithium-toolbar-bg:                   $white; //transparent;
 $lithium-toolbar-item-bg:              transparent; //#FFF;
-$lithium-toolbar-color:                darken($body-bg, 30%);//$text-color;
-$lithium-toolbar-hover-bg:             rgba(255,255,255,0.1);//$theme-main-color;
-$lithium-toolbar-hover-color:          rgba(0,0,0,0.6);
+$lithium-toolbar-color:                $lithium-header-toggle-color;
+$lithium-toolbar-hover-bg:             lighten($primary, 10%);//$theme-main-color;
+$lithium-toolbar-hover-color:          $white;
 $lithium-toolbar-active-bg:            transparent;
 $lithium-toolbar-active-color:         $theme-main-color;
 $lithium-toolbar-disabled-bg:          transparent;
