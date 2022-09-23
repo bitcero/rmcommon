@@ -11,6 +11,10 @@
 require_once dirname(__DIR__) . '/../include/cp_header.php';
 $common->location = 'modules';
 
+if (!defined('_AM_SYSTEM_DBUPDATED')) {
+    define('_AM_SYSTEM_DBUPDATED', 'Database Updated Successfully!');
+}
+
 /**
  * function to update compiled template file in templates_c folder
  *
