@@ -34,7 +34,7 @@
                         <td><strong><?php _e('Author:', 'rmcommon'); ?></strong></td>
                         <td colspan="2">
                           <?php
-                          $authors = $module->getInfo('author');
+                          $authors = $module->getInfo('cu_native') ? $module->getInfo('authors') : $module->getInfo('author');
                           if(is_array($authors)): ?>
                             <?php foreach($authors as $author): ?>
                                   <a href="<?php echo $author['url']; ?>"><?php echo $author['name']; ?></a>

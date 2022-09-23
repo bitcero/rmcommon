@@ -51,11 +51,20 @@ $modversion['onUpdate'] = 'include/install.php';
 /**
  * Information for Common Utilities
  */
-$modversion['rmnative'] = 1;
+$modversion['cu_native'] = true;
+$modversion['rmnative'] = 1; // Will be deprecated
 $modversion['rmversion'] = ['major' => 2, 'minor' => 3, 'revision' => 75, 'stage' => 0, 'name' => 'Common Utilities'];
 $modversion['rewrite'] = 1;
 $modversion['url'] = 'https://rmcommon.bitcero.dev';
 $modversion['author'] = 'Eduardo Cortés';
+$modversion['authors'] = [
+  [
+    'name' => 'Eduardo Cortes',
+    'email' => 'i.bitcero@gmail.com',
+    'url' => 'https://bitcero.dev',
+    'aka' => 'bitcero'
+  ]
+];
 $modversion['authormail'] = 'i.bitcero@gmail.com';
 $modversion['authorweb'] = 'Eduardo Cortés';
 $modversion['authorurl'] = 'https://eduardocortes.mx';
