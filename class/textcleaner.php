@@ -826,7 +826,7 @@ class TextCleaner
     }
 
     /**
-     * Clean an string by deleting all blank spaces and other
+     * Clean a string by deleting all blank spaces and other
      * chars
      * @param mixed $value
      * @param mixed $lower
@@ -834,12 +834,12 @@ class TextCleaner
     public static function sweetstring($value, $lower = true)
     {
         // Tranformamos todo a minusculas
-        $rtn = $lower ? mb_strtolower(utf8_decode($value)) : $value;
+        $rtn = $lower ? mb_strtolower(mb_convert_encoding($value, 'ISO-8859-1', 'UTF-8')) : $value;
 
         //Rememplazamos caracteres especiales latinos
         $find = ['á', 'é', 'í', 'ó', 'ú', 'ñ'];
         $repl = ['a', 'e', 'i', 'o', 'u', 'n'];
-        $rtn = str_replace($find, $repl, utf8_encode($rtn));
+        $rtn = str_replace($find, $repl, mb_convert_encoding($rtn, 'UTF-8', 'ISO-8859-1'));
 
         // Añadimos los guiones
         $find = [' ', '&', '\r\n', '\n', '+'];
