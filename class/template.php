@@ -918,59 +918,71 @@ class RMTemplate
    */
   private function process_scripts()
   {
-    $scripts = [];
-    $missing = [];
+    $with_deps = [];
+    $without_deps = [];
 
     if (array_key_exists('jquery', $this->tpl_scripts)) {
-      $scripts['jquery'] = $this->tpl_scripts['jquery'];
+      $without_deps['jquery'] = $this->tpl_scripts['jquery'];
       unset($this->tpl_scripts['jquery']);
     }
 
     if (array_key_exists('rmcommon-js', $this->tpl_scripts)) {
-      $scripts['rmcommon-js'] = $this->tpl_scripts['rmcommon-js'];
+      $without_deps['rmcommon-js'] = $this->tpl_scripts['rmcommon-js'];
       unset($this->tpl_scripts['rmcommon-js']);
     }
 
-    foreach ($this->tpl_scripts as $id => $item) {
-      if (!array_key_exists('required', $item)) {
-        $scripts[$id] = $item;
+    if (array_key_exists('bootstrap-js', $this->tpl_scripts)) {
+      $without_deps['bootstrap-js'] = $this->tpl_scripts['bootstrap-js'];
+      unset($this->tpl_scripts['bootstrap-js']);
+    }
+
+    foreach ($this->tpl_scripts as $id => $script) {
+      if (isset($script['required']) && !empty($script['required'])) {
+        $with_deps[$id] = $script;
+      } else {
+        $without_deps[$id] = $script;
+      }
+    }
+
+    $with_deps_ordered = [];
+
+    // Remove scripts with dependencies already existing in $without_deps
+    foreach($with_deps as $id => $script){
+      if(array_key_exists($script['required'], $with_deps)){
         continue;
       }
 
-      if (false === is_array($item['required']) && array_key_exists($item['required'], $scripts)) {
-        $scripts = $this->insert_script_after($scripts, $item['required'], $id, $item);
-        continue;
-      }
+      $with_deps_ordered[$id] = $script;
+    }
 
-      foreach ($item['required'] as $required) {
-        if (array_key_exists($required, $scripts)) {
-          $scripts = $this->insert_script_after($scripts, $item['required'], $id, $item);
+    $found = true;
+    $count = 0;
+    while (!empty($with_deps) && $found == true) {
+      foreach ($with_deps as $id => $script) {
+        if (array_key_exists($script['required'], $with_deps_ordered)) {
+          $with_deps_ordered[$id] = $script;
+          unset($with_deps[$id]);
+          break;
+        }
+
+        if (array_key_exists($script['required'], $without_deps)) {
+          $without_deps[$id] = $script;
+          unset($with_deps[$id]);
+          break;
+        }
+
+        if (array_key_exists($script['required'], $with_deps)) {
           continue;
         }
 
-        $missing[$id] = $item;
+        $found = false;
       }
     }
 
-    // Now read $missing array
-    foreach ($missing as $id => $script) {
-      // Check if script has been added
-      if (array_key_exists('required', $script) && array_key_exists($script['required'], $scripts)) {
-        $scripts = $this->insert_script_after($scripts, $script['required'], $id, $script);
-        continue;
-      }
+    $with_deps = array_merge($with_deps_ordered, $with_deps);
+    unset($with_deps_ordered);
 
-      // Check is required script exists in missing array
-      if (array_key_exists('required', $script) && array_key_exists($script['required'], $missing)) {
-        $scripts[$script['required']] = $missing[$script['required']];
-        $scripts = $this->insert_script_after($scripts, $script['required'], $id, $script);
-        continue;
-      }
-
-      $scripts[$id] = $script;
-    }
-
-    $this->tpl_scripts = $scripts;
+    $this->tpl_scripts = array_merge($without_deps, $with_deps);
 
     return true;
   }
