@@ -172,8 +172,12 @@ if (count(RMTemplate::getInstance()->get_toolbar()) > 0) {
     RMTemplate::getInstance()->add_body_class('with-toolbar');
 }
 
-RMTemplate::getInstance()->add_attribute('html', [
+RMTemplate::getInstance()->add_attribute('body', [
     'class' => RMTemplate::getInstance()->body_classes(),
+]);
+
+$common->template()->add_attribute('body', [
+    'class' => $xoopsModule->dirname(),
 ]);
 
 // The logo

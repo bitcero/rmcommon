@@ -3,10 +3,7 @@
 ------------------------------*/
 .cu-icon{
   fill: currentColor;
-  display: inline-block;
   line-height: 1;
-  vertical-align: text-top;
-  vertical-align: middle;
 
   &.icon2x{
     @include cu-icon-size(32px);

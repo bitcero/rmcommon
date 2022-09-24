@@ -955,7 +955,6 @@ class RMTemplate
     // Now read $missing array
     foreach ($missing as $id => $script) {
       // Check if script has been added
-      print_r($script);
       if (array_key_exists('required', $script) && array_key_exists($script['required'], $scripts)) {
         $scripts = $this->insert_script_after($scripts, $script['required'], $id, $script);
         continue;
@@ -1479,7 +1478,6 @@ class RMTemplate
 
   public function render_attributes($element)
   {
-
     if ('' != $element && false === array_key_exists($element, $this->attributes)) {
       return null;
     }
