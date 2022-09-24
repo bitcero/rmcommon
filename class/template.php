@@ -916,7 +916,7 @@ class RMTemplate
    * This function recreates the scripts array in order to
    * verify accomplish of dependencies
    */
-  private function process_scripts()
+  private function process_scripts(): void
   {
     $with_deps = [];
     $without_deps = [];
@@ -956,7 +956,6 @@ class RMTemplate
     }
 
     $found = true;
-    $count = 0;
     while (!empty($with_deps) && $found == true) {
       foreach ($with_deps as $id => $script) {
         if (array_key_exists($script['required'], $with_deps_ordered)) {
@@ -983,8 +982,6 @@ class RMTemplate
     unset($with_deps_ordered);
 
     $this->tpl_scripts = array_merge($without_deps, $with_deps);
-
-    return true;
   }
 
   private function insert_script_after($scripts, $required, $id, $data)
