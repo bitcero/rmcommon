@@ -392,7 +392,7 @@ class RMSettings
         $ele = RMEvents::get()->trigger('rmcommon.load.form.field', $ele, $field);
         $ele->set('id', $field->id);
 
-        $skipControls = ['radio', 'checkbox', 'yesno'];
+        $skipControls = ['radio', 'checkbox', 'yesno', 'select', 'cu-theme'];
 
         if (!in_array($field->field, $skipControls, true)) {
             $ele->add('class', 'form-control');
