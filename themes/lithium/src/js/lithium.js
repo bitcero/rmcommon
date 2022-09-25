@@ -93,15 +93,15 @@ function updatesNotifier(count) {
     /**
      * Prepare scrollbar
      */
-    $("#he-sidebar > .menu-wrapper > .sidebar-menu").perfectScrollbar({
+    $("#li-sidebar > .menu-wrapper > .sidebar-menu").perfectScrollbar({
       suppressScrollX: true
     });
 
-    $(".he-topbar-collapse > ul > li > .dropdown-menu").perfectScrollbar({
+    $(".li-topbar-collapse > ul > li > .dropdown-menu").perfectScrollbar({
       supressScrollX: true
     });
 
-    $("#he-toolbar").perfectScrollbar({
+    $("#li-toolbar").perfectScrollbar({
       suppressScrollY: true,
       useBothWheelAxes: true
     });
@@ -115,7 +115,7 @@ function updatesNotifier(count) {
       $parent.toggleClass('collapsed');
       $parent.find('.box-content').slideToggle(function () {
         // Notify to masonry when needed
-        if ($("html").hasClass('dashboard')) {
+        if ($("body").hasClass('dashboard')) {
           $('[data-container="dashboard"]').trigger('containerUpdated');
         }
       });
@@ -177,12 +177,11 @@ function updatesNotifier(count) {
     });
 
     // Is dashboard?
-    if ($("html").hasClass('dashboard')) {
+    if ($("body").hasClass('dashboard')) {
 
       var $dashboard, $timer;
 
       $.getScript(cuHandler.url('/modules/rmcommon/themes/lithium/js/masonry.pkgd.min.js'), function (data, textStatus, jqxhr) {
-
         $dashboard = $('[data-container="dashboard"]').masonry({
           itemSelector: '[data-dashboard="item"]',
           columnWidth: '.size-1',
@@ -193,7 +192,7 @@ function updatesNotifier(count) {
       /**
        * When boxes has loaded from server
        */
-      $('html.dashboard [data-container="dashboard"]').bind('containerUpdated', function () {
+      $('body.dashboard [data-container="dashboard"]').bind('containerUpdated', function () {
         $dashboard.masonry('reloadItems');
         $dashboard.masonry('layout');
       });

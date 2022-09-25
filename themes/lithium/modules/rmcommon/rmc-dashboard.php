@@ -25,7 +25,7 @@
 
 <div class="clearfix visible-xs"></div>
 
-<div class="row" data-news="load" data-boxes="load" data-module="rmcommon" data-target="#rmc-recent-news" data-box="rmcommon-dashboard" data-container="dashboard">
+<div data-news="load" data-boxes="load" data-module="rmcommon" data-target="#rmc-recent-news" data-box="rmcommon-dashboard" data-container="dashboard">
 
     <div class="size-1" data-dashboard="item">
         <div class="cu-box box-primary" id="recent-comments">
@@ -63,7 +63,7 @@
     </div>
 
     <!-- Management Tools -->
-    <div class="size-1" data-dashboard="item">
+    <div class="size-2" data-dashboard="item">
         <div class="cu-box box-teal" id="management-box">
             <div class="box-header">
                 <span class="fa fa-caret-up box-handler"></span>
@@ -88,7 +88,6 @@
 
     <!-- Recent News -->
     <div class="size-1" data-dashboard="item">
-
         <div class="cu-box">
           <?php
           $user = $common->widgets()->load('rmcommon', 'UserCard');
@@ -128,7 +127,9 @@
           $user->display();
           ?>
         </div>
+    </div>
 
+    <div class="size-1" data-dashboard="item">
         <div class="cu-box">
             <div class="box-header">
                 <span class="fa fa-caret-up box-handler"></span>
@@ -139,10 +140,10 @@
             </div>
             <div class="box-footer">
                 <a href="http://www.eduardocortes.mx" target="_blank" class="btn btn-link">
-                    <?php _e('Author\'s Website', 'rmcommon'); ?>
+                  <?php _e('Author\'s Website', 'rmcommon'); ?>
                 </a>
                 <a href="http://xoops.org" target="_blank" class="btn btn-link pull-right">
-                    <?php echo $cuIcons->getIcon('svg-rmcommon-xoops'); ?>
+                  <?php echo $cuIcons->getIcon('svg-rmcommon-xoops'); ?>
                     Xoops.org
                 </a>
             </div>

@@ -17,7 +17,7 @@ function construct_statistics($comments, $modules, $users)
 
   $widget = $common->widgets()->load('rmcommon', 'WidgetStatistics');
   $widget->setup([
-    'class' => 'box-default'
+    'class' => 'animated bounceIn box-default',
   ]);
   $widget->add_title(__('Statistics', 'rmcommon'), 'lg');
   $widget->add_title(__('Your XOOPS statistics', 'rmcommon'), 'sm');

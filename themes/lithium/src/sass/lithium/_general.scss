@@ -1,27 +1,27 @@
 /*
  SVG ICONS
 ------------------------------*/
-.cu-icon{
+.cu-icon {
   fill: currentColor;
   line-height: 1;
 
-  &.icon2x{
+  &.icon2x {
     @include cu-icon-size(32px);
   }
 
-  &.icon3x{
+  &.icon3x {
     @include cu-icon-size(48px);
   }
 
-  &.icon4x{
+  &.icon4x {
     @include cu-icon-size(64px);
   }
 
-  &.icon5x{
+  &.icon5x {
     @include cu-icon-size(96px);
   }
 
-  &.icon6x{
+  &.icon6x {
     @include cu-icon-size(128px);
   }
 }
@@ -30,23 +30,27 @@
 /*
  LOGGER OUTPUT
 ------------------------------*/
-#he-logger-output{
+#he-logger-output {
   position: fixed;
-  bottom: 0; left: 0; right: 0; top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 50px;
   z-index: 1205;
   background-color: $color-midnight;
   color: lighten($color-midnight, 50%);
   transform: translateY(100%);
   transition: ease all 300ms;
 
-  a{
+  a {
     color: $danger;
   }
 
-  .close-logger{
+  .close-logger {
     display: block;
     position: absolute;
-    top: -40px; right: 10px;
+    top: -40px;
+    right: 10px;
     line-height: 40px;
     padding: 0 20px;
     background: $danger;
@@ -55,15 +59,15 @@
     text-transform: uppercase;
     font-weight: 700;
 
-    .cu-icon{
+    .cu-icon {
       transition: ease all 300ms;
     }
   }
 
-  #xo-logger-tabs{
+  #xo-logger-tabs {
     margin-bottom: 20px;
 
-    > a{
+    > a {
       display: inline-block;
       padding: 5px;
       background-color: $danger;
@@ -75,61 +79,67 @@
     }
   }
 
-  table{
-    tr{
-      &:hover{
-        background-color: rgba(0,0,0,0.05);
+  table {
+    tr {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
       }
     }
 
-    td, th{
-      border-color: rgba(255,255,255,0.02);
+    td, th {
+      border-color: rgba(255, 255, 255, 0.02);
     }
 
-    th{
+    th {
       color: $danger;
     }
   }
 
-  #xo-logger-output{
+  #xo-logger-output {
     position: absolute;
     overflow: auto;
-    top: 15px; left: 0; right: 0; bottom: 0;
+    top: 15px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     padding: 15px;
   }
 
-  @include media-breakpoint-up(sm){
-    top: auto; bottom: 0; left: 0; right: 0;
+  @include media-breakpoint-up(sm) {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 300px;
 
-    #xo-logger-tabs{
-      > a{
+    #xo-logger-tabs {
+      > a {
         padding: 10px 15px;
       }
     }
 
-    .close-logger{
+    .close-logger {
       position: absolute;
       top: -40px;
     }
   }
 
-  .logger &{
+  .logger & {
     transform: translateY(0);
 
-    .close-logger .cu-icon{
+    .close-logger .cu-icon {
       transform: rotate(180deg);
     }
   }
 }
 
-.cu-bulk-actions{
+.cu-bulk-actions {
   //background: $lithium-header-bg-color;
   padding: 15px 0 0;
   border-radius: $border-radius;
   margin-bottom: 10px;
 
-  .form-control{
+  .form-control {
     max-width: 200px;
     display: inline-block;
     vertical-align: middle;
@@ -139,62 +149,62 @@
     max-width: none;
   }
 
-  .btn{
+  .btn {
     transition: ease all 250ms;
     text-transform: uppercase;
     font-size: floor($font-size-base * 0.9);
     line-height: ceil($font-size-base * 1.4);
   }
 
-  .btn-default{
+  .btn-default {
     background-color: $lithium-bulk-default-btn-bg;
     color: $lithium-bulk-default-btn-color;
     border: 1px solid $lithium-bulk-default-btn-bg;
     font-weight: 700;
 
-    &:hover{
+    &:hover {
       background-color: darken($lithium-bulk-default-btn-bg, 10%);
       border-color: darken($lithium-bulk-default-btn-bg, 10%);
     }
   }
 
-  .pagination{
+  .pagination {
     margin: 0;
 
-    > li{
+    > li {
 
-      > a, > span{
+      > a, > span {
         margin: 0 2px;
         border-radius: $border-radius;
       }
 
-      > a{
+      > a {
         background-color: $lithium-bulk-default-btn-bg;
         border-color: $lithium-bulk-default-btn-bg;
         color: $lithium-bulk-default-btn-color;
         transition: ease all 250ms;
 
-        &:hover{
+        &:hover {
           background-color: darken($lithium-bulk-default-btn-bg, 10%);
           border-color: darken($lithium-bulk-default-btn-bg, 10%);
         }
       }
 
-      &:first-child{
-        > a, > span{
+      &:first-child {
+        > a, > span {
           margin-left: 0;
         }
       }
 
-      &:last-child{
-        > a, > span{
+      &:last-child {
+        > a, > span {
           margin-right: 0;
         }
       }
 
-      &.active{
-        > span{
-          background-color: rgba(255,255,255,0.2);
+      &.active {
+        > span {
+          background-color: rgba(255, 255, 255, 0.2);
           border-color: transparent;
         }
       }
@@ -203,57 +213,57 @@
 
   }
 
-  .nav-pills{
-    > li{
+  .nav-pills {
+    > li {
 
       font-size: 0.85em;
       text-transform: uppercase;
 
-      a:hover{
-        background-color: rgba(0,0,0,0.2);
+      a:hover {
+        background-color: rgba(0, 0, 0, 0.2);
       }
 
     }
   }
 
-  a:not(.btn){
+  a:not(.btn) {
     color: $lithium-bulk-link-color;
 
-    &:hover{
+    &:hover {
       color: $lithium-bulk-link-color-hover;
     }
   }
 
   // Dropdowns
-  .dropdown-menu{
+  .dropdown-menu {
     background-color: $lithium-header-bg-color;
 
-    a:not(.button){
+    a:not(.button) {
       color: $lithium-bulk-dropdown-link;
       font-size: floor($font-size-base * 0.9);
       text-transform: uppercase;
       padding: 6px 15px 6px 10px;
 
-      .cu-icon{
+      .cu-icon {
         @include cu-icon-size(12px);
         margin-right: 6px;
         vertical-align: inherit;
       }
 
-      &:hover{
-        background-color: rgba(255,255,255,0.05);
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
         color: $lithium-bulk-dropdown-link-hover;
       }
     }
 
-    .active{
-      > a{
+    .active {
+      > a {
         color: $lithium-bulk-dropdown-link-active;
       }
     }
   }
 
-  &.bottom{
+  &.bottom {
     padding: 0 0 15px;
   }
 
@@ -263,34 +273,41 @@
 /*
 AJAX PRELOADER
 ------------------------- */
-.cu-window-blocker{
+.cu-window-blocker {
   background: #000;
   display: none;
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0.8;
   z-index: 1050;
 }
-.cu-window-loader{
+
+.cu-window-loader {
   display: none;
   width: 300px;
   line-height: 48px;
   position: fixed;
-  top: 40%; left: 50%;
+  top: 40%;
+  left: 50%;
   margin-top: -30px;
   margin-left: -150px;
   background: #EBEBEB;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   color: #666;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
   z-index: 1052;
 }
-.cu-window-loader > .loader-container{
+
+.cu-window-loader > .loader-container {
   padding: 10px 10px 10px 48px;
   position: relative;
-  .cu-icon{
+
+  .cu-icon {
     position: absolute;
     top: 50%;
     margin-top: -14px;
@@ -302,13 +319,13 @@ AJAX PRELOADER
 /*
 SPINNER
 ------------------------- */
-.cu-spinner{
+.cu-spinner {
 
-  &.spin{
+  &.spin {
     animation: xo-spin 1.5s infinite linear;
   }
 
-  &.pulse{
+  &.pulse {
     animation: xo-spin 1s infinite steps(12);
   }
 
@@ -324,6 +341,7 @@ SPINNER
     transform: rotate(359deg);
   }
 }
+
 @keyframes cu-spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -338,13 +356,13 @@ SPINNER
 /*
 ITEM OPTIONS
 ------------------------- */
-.cu-item-options{
+.cu-item-options {
   display: block;
   font-size: 0.7em;
   text-transform: uppercase;
   margin: 5px 0 0;
 
-  a{
+  a {
     display: inline-block;
     padding: 5px 8px;
     border-radius: $border-radius;
@@ -352,7 +370,7 @@ ITEM OPTIONS
     color: $lithium-item-option-color;
     transition: ease all 250ms;
 
-    &:hover{
+    &:hover {
       background-color: $lithium-item-option-bg-hover;
       color: $lithium-item-option-color-hover;
     }
@@ -360,15 +378,15 @@ ITEM OPTIONS
 
 }
 
-tr > td > .cu-item-options{
-  @include media-breakpoint-up(md){
+tr > td > .cu-item-options {
+  @include media-breakpoint-up(md) {
     opacity: 0;
     transition: ease all 250ms;
   }
 }
 
-tr:hover > td > .cu-item-options{
-  @include media-breakpoint-up(md){
+tr:hover > td > .cu-item-options {
+  @include media-breakpoint-up(md) {
     opacity: 1;
   }
 }
@@ -376,31 +394,38 @@ tr:hover > td > .cu-item-options{
 /*
 IMAGE MANAGER
 ------------------------- */
-.mgr_blocker{
-  background: rgba(0,0,0,0.7);
-  top: 0; left: 0; right: 0; bottom: 0;
+.mgr_blocker {
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   position: fixed;
   display: none;
   z-index: 1080;
 }
-.imgmgr_container{
+
+.imgmgr_container {
   position: fixed;
-  top: 0; bottom: 0;
-  left: 0; right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 2.5%;
   min-width: 300px;
   border: 0;
   display: none;
   z-index: 1081;
 
-  > iframe{
+  > iframe {
     border: 0;
     width: 100%;
     height: 100%;
   }
 
 }
-.window-title{
+
+.window-title {
   padding: $alert-padding-x $alert-padding-y;
   background-color: $primary;
   color: white;
@@ -412,18 +437,19 @@ IMAGE MANAGER
 /*
  TOP PLUGINS
 -------------------------*/
-.ed-plugins{
+.ed-plugins {
   padding: 4px 0;
-  .plugin{
+
+  .plugin {
     display: inline-block;
-    border: 1px solid rgba(0,0,0,0.0);
+    border: 1px solid rgba(0, 0, 0, 0.0);
     background-color: transparent;
     color: #666;
     outline: 0;
     line-height: 1;
     vertical-align: text-bottom;
 
-    > a, button{
+    > a, button {
       background: transparent;
       line-height: 32px;
       border: 0;
@@ -433,13 +459,13 @@ IMAGE MANAGER
       color: #666;
       font-size: 0.8em;
 
-      > .fa, > .icon, > .glyphicon{
+      > .fa, > .icon, > .glyphicon {
         font-size: 18px;
         line-height: 1;
         vertical-align: middle;
       }
 
-      .caption{
+      .caption {
         display: inline-block;
         margin-left: 3px;
         display: none;
@@ -448,18 +474,19 @@ IMAGE MANAGER
 
     }
 
-    &:hover{
+    &:hover {
       background-color: #FFF;
-      border-color: rgba(0,0,0,0.15);
-      *{
+      border-color: rgba(0, 0, 0, 0.15);
+
+      * {
         color: #444;
       }
     }
   }
 
-  .full-screen, .normal-screen{
+  .full-screen, .normal-screen {
     float: right;
-    line-height: 32px!important;
+    line-height: 32px !important;
     border: 0;
     padding: 0 8px;
     box-shadow: none;
@@ -472,36 +499,37 @@ IMAGE MANAGER
 /*
  AJAX NEWS
 ----------------------------*/
-.cu-ajax-news{
+.cu-ajax-news {
 
-  > li{
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+  > li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-    > small{
+    > small {
       display: inline-block;
       padding: 3px 6px;
-      background-color: rgba(0,0,0,0.1);
+      background-color: rgba(0, 0, 0, 0.1);
       font-size: 0.8em;
       font-weight: 700;
       border-radius: $border-radius;
     }
 
-    > h5{
+    > h5 {
       font-weight: 600;
       margin: 0;
       line-height: 1.4;
     }
 
-    > p{
+    > p {
       color: $gray-300;
       font-size: 0.9em;
     }
 
-    &:nth-child(n+3){
-      > h5{
+    &:nth-child(n+3) {
+      > h5 {
         margin-bottom: 10px;
       }
-      > p{
+
+      > p {
         display: none;
       }
     }
@@ -513,26 +541,32 @@ IMAGE MANAGER
 /*
  SELECTORS
 ----------------------------*/
-.tr-checked{
+.tr-checked {
   background-color: rgba(red($theme-main-color), green($theme-main-color), blue($theme-main-color), 0.1);
 }
 
 /*
  CONTEXTUAL OPTIONS
 ----------------------------*/
-.cu-options{
+.cu-options {
 
-  a, button{
+  a, button {
     display: inline-block;
     padding: 6px 12px;
     border-radius: $border-radius;
     transition: ease all 150ms;
 
-    .cu-icon{
-      @include cu-icon-size(14px);
+    .cu-icon {
+      @include cu-icon-size(20px);
     }
 
-    &.circle{
+    svg {
+      width: pxToRem(20);
+      height: pxToRem(20);
+      fill: currentColor;
+    }
+
+    &.circle {
       border-radius: 50%;
       padding: 0;
       width: 34px;
@@ -542,103 +576,103 @@ IMAGE MANAGER
     }
   }
 
-  .primary{
+  .primary {
     @include options-variation($primary);
   }
 
-  .info{
+  .info {
     @include options-variation($info);
   }
 
-  .success{
+  .success {
     @include options-variation($success);
   }
 
-  .warning{
+  .warning {
     @include options-variation($warning);
   }
 
-  .danger{
+  .danger {
     @include options-variation($danger);
   }
 
-  .red{
+  .red {
     @include options-variation($color-red);
   }
 
-  .pink{
+  .pink {
     @include options-variation($color-pink);
   }
 
-  .purple{
+  .purple {
     @include options-variation($color-purple);
   }
 
-  .deep-purple{
+  .deep-purple {
     @include options-variation($color-deep-purple);
   }
 
-  .indigo{
+  .indigo {
     @include options-variation($color-indigo);
   }
 
-  .blue{
+  .blue {
     @include options-variation($color-blue);
   }
 
-  .light-blue{
+  .light-blue {
     @include options-variation($color-light-blue);
   }
 
-  .cyan{
+  .cyan {
     @include options-variation($color-cyan);
   }
 
-  .teal{
+  .teal {
     @include options-variation($color-teal);
   }
 
-  .green{
+  .green {
     @include options-variation($color-green);
   }
 
-  .light-green{
+  .light-green {
     @include options-variation($color-light-green);
   }
 
-  .light-lime{
+  .light-lime {
     @include options-variation($color-lime);
   }
 
-  .yellow{
+  .yellow {
     @include options-variation($color-yellow);
   }
 
-  .amber{
+  .amber {
     @include options-variation($color-amber);
   }
 
-  .orange{
+  .orange {
     @include options-variation($color-orange);
   }
 
-  .deep-orange{
+  .deep-orange {
     @include options-variation($color-deep-orange);
   }
 
-  .brown{
+  .brown {
     @include options-variation($color-brown);
   }
 
-  .grey{
+  .grey {
     @include options-variation($color-grey);
   }
 
-  .blue-grey{
+  .blue-grey {
     @include options-variation($color-blue-grey);
   }
 
-  .midnight{
+  .midnight {
     @include options-variation($color-midnight);
   }
 
@@ -647,9 +681,9 @@ IMAGE MANAGER
 /*
  MODULES
 ----------------------------*/
-#des-mods-container{
-  .logo{
-    .cu-icon{
+#des-mods-container {
+  .logo {
+    .cu-icon {
       @include cu-icon-size(40px);
     }
   }
