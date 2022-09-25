@@ -112,11 +112,11 @@ $modversion['templates'][2]['description'] = 'Shows the comments form';
 // Settings categories
 $cu_settings = [];
 $cu_settings['categories'] = [
-    'general' => __('General', 'rmcommon'),
-    'appearance' => __('Appearance', 'rmcommon'),
-    'comments' => __('Comentarios', 'rmcommon'),
-    'email' => __('Email', 'rmcommon'),
-    'components' => __('Components', 'rmcommon'),
+    'general' => ['caption' => __('General', 'rmcommon'), 'icon' => 'svg-rmcommon-cog'],
+    'appearance' => ['caption' => __('Appearance', 'rmcommon'), 'icon' => 'svg-rmcommon-appearance'],
+    'comments' => ['caption' => __('Comments', 'rmcommon'), 'icon' => 'svg-rmcommon-speech-bubble'],
+    'email' => ['caption' => __('Email', 'rmcommon'), 'icon' => 'svg-rmcommon-email'],
+    'components' => ['caption' => __('Components', 'rmcommon'), 'icon' => 'svg-rmcommon-components'],
 ];
 
 // Jquery cdn
