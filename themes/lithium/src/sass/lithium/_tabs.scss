@@ -11,13 +11,14 @@
     align-items: center;
 
     .cu-icon {
-      @include cu-icon-size(pxToRem(14));
+      @include cu-icon-size(pxToRem(18));
+      margin-right: pxToRem(5);
     }
 
     svg {
-      width: pxToRem(14);
-      height: pxToRem(14);
-      margin-right: pxToRem(5);
+      width: pxToRem(18);
+      height: pxToRem(18);
+      margin-right: pxToRem(8);
       fill: currentColor;
     }
   }
