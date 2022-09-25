@@ -1,4 +1,6 @@
 #li-toolbar{
+  padding: pxToRem(15) 0;
+  
   .tools{
     margin: 0;
     
@@ -7,11 +9,21 @@
 
       a{
         color: $lithium-toolbar-color;
-        padding: pxToRem(8) pxToRem(15);
+        padding: pxToRem(12) pxToRem(15);
         background-color: $lithium-toolbar-bg;
         border-radius: $border-radius;
-        @include lithium-box-shadow(sm);
+        @include lithium-box-shadow(md);
         transition: ease all 250ms;
+
+        .caption{
+          display: none;
+        }
+
+        svg{
+          width: pxToRem(20);
+          height: pxToRem(20);
+          fill: $lithium-toolbar-color;
+        }
 
         &:hover{
           background-color: $lithium-toolbar-hover-bg;
@@ -22,6 +34,7 @@
   }
 
   @include media-breakpoint-up(md) {
+    padding: pxToRem(10) 0;
     .tools{
       > li {
         a{
@@ -32,6 +45,10 @@
             height: pxToRem(16);
             margin-right: pxToRem(10);
             fill: currentColor;
+          }
+
+          .caption{
+            display: block;
           }
         }
       }
