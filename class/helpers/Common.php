@@ -41,6 +41,7 @@ use RMTemplate;
 use RMTimeFormatter;
 use RMUris;
 use RMUtilities;
+use TextCleaner;
 
 class Common
 {
@@ -378,5 +379,10 @@ class Common
         $crypt = new \Crypt($method, $key);
 
         return $crypt;
+    }
+
+    public function textCleaner()
+    {
+        return TextCleaner::getInstance();
     }
 }
