@@ -66,7 +66,6 @@ class Common
     {
         global $cuSettings;
         $this->settings = $cuSettings;
-        $this->location = new \stdClass();
     }
 
     /**
