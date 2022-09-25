@@ -12,35 +12,35 @@
  * rmcommon constants
  */
 if (!defined('RMCPATH')) {
-    define('RMCPATH', XOOPS_ROOT_PATH . '/modules/rmcommon');
+  define('RMCPATH', XOOPS_ROOT_PATH . '/modules/rmcommon');
 }
 if (!defined('RMCURL')) {
-    define('RMCURL', XOOPS_URL . '/modules/rmcommon');
+  define('RMCURL', XOOPS_URL . '/modules/rmcommon');
 }
-define('ABSURL', XOOPS_URL);
-define('ABSPATH', XOOPS_ROOT_PATH);
-define('RMCVERSION', '2.3.7.5');
+const ABSURL = XOOPS_URL;
+const ABSPATH = XOOPS_ROOT_PATH;
+const RMCVERSION = '2.3.7.5';
 
 /**
  * Welcome Screen
  */
 if (isset($_COOKIE['rmcwelcome'])) {
-    $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);
-    setcookie('rmcwelcome', 1, time() - 3600, '/', $domain);
-    header('location: ' . RMCURL . '/about.php');
-    die();
+  $domain = preg_replace("/http:\/\/|https:\/\//", '', XOOPS_URL);
+  setcookie('rmcwelcome', 1, time() - 3600, '/', $domain);
+  header('location: ' . RMCURL . '/about.php');
+  die();
 }
 
 /**
  * Messages Levels
  */
-define('RMMSG_INFO', 0);
-define('RMMSG_WARN', 1);
-define('RMMSG_SUCCESS', 2);
-define('RMMSG_SAVED', 3);
-define('RMMSG_ERROR', 4);
-define('RMMSG_DANGER', 4);
-define('RMMSG_OTHER', 5);
+const RMMSG_INFO = 0;
+const RMMSG_WARN = 1;
+const RMMSG_SUCCESS = 2;
+const RMMSG_SAVED = 3;
+const RMMSG_ERROR = 4;
+const RMMSG_DANGER = 4;
+const RMMSG_OTHER = 5;
 
 // Render output
 require RMCPATH . '/include/render-output.php';
@@ -104,22 +104,22 @@ $plugins = [];
 $GLOBALS['installed_plugins'] = [];
 
 if (file_exists($file)) {
-    $plugins = json_decode(file_get_contents($file), true);
+  $plugins = json_decode(file_get_contents($file), true);
 }
 
 if (empty($plugins) || !is_array($plugins)) {
-    $result = $db->query('SELECT dir FROM ' . $db->prefix('mod_rmcommon_plugins') . ' WHERE status=1');
-    while (false !== ($row = $db->fetchArray($result))) {
-        $GLOBALS['installed_plugins'][$row['dir']] = true;
-        $plugins[] = $row['dir'];
-        $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $row['dir'], preg_replace('/[^A-Za-z0-9]/', '', $row['dir']) . 'Plugin');
-    }
-    file_put_contents($file, json_encode($plugins));
+  $result = $db->query('SELECT dir FROM ' . $db->prefix('mod_rmcommon_plugins') . ' WHERE status=1');
+  while (false !== ($row = $db->fetchArray($result))) {
+    $GLOBALS['installed_plugins'][$row['dir']] = true;
+    $plugins[] = $row['dir'];
+    $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $row['dir'], preg_replace('/[^A-Za-z0-9]/', '', $row['dir']) . 'Plugin');
+  }
+  file_put_contents($file, json_encode($plugins));
 } else {
-    foreach ($plugins as $p) {
-        $GLOBALS['installed_plugins'][$p] = true;
-        $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $p, ucfirst(preg_replace('/[^A-Za-z0-9]/', '', $p)) . 'Plugin');
-    }
+  foreach ($plugins as $p) {
+    $GLOBALS['installed_plugins'][$p] = true;
+    $rmEvents->load_extra_preloads(RMCPATH . '/plugins/' . $p, ucfirst(preg_replace('/[^A-Za-z0-9]/', '', $p)) . 'Plugin');
+  }
 }
 
 // Load GUI theme events
@@ -146,12 +146,12 @@ require_once __DIR__ . '/api/l10n.php';
 load_mod_locale('rmcommon');
 
 if (isset($xoopsModule) && is_object($xoopsModule) && 'rmcommon' != $xoopsModule->dirname()) {
-    load_mod_locale($xoopsModule->dirname());
+  load_mod_locale($xoopsModule->dirname());
 }
 
 if (!$cuSettings) {
-    _e('Sorry, Red Mexico Common Utilities has not been installed yet!');
-    die();
+  _e('Sorry, Red Mexico Common Utilities has not been installed yet!');
+  die();
 }
 
 $rmEvents->run_event('rmcommon.base.loaded');
@@ -159,29 +159,30 @@ $rmEvents->run_event('rmcommon.base.loaded');
 $rmTpl->add_head_script('var xoUrl = "' . XOOPS_URL . '";');
 
 if ($cuSettings->updates && isset($xoopsOption['pagetype']) && 'admin' == $xoopsOption['pagetype']) {
-    $interval = $cuSettings->updatesinterval <= 0 ? 7 : $cuSettings->updatesinterval;
-    if (file_exists(XOOPS_CACHE_PATH . '/updates.chk')) {
-        $updates = unserialize(base64_decode(file_get_contents(XOOPS_CACHE_PATH . '/updates.chk'), true));
-    } else {
-        $updates = ['date' => 0, 'total' => 0, 'updates' => []];
-    }
+  $interval = $cuSettings->updatesinterval <= 0 ? 7 : $cuSettings->updatesinterval;
+  if (file_exists(XOOPS_CACHE_PATH . '/updates.chk')) {
+    $updates = unserialize(base64_decode(file_get_contents(XOOPS_CACHE_PATH . '/updates.chk'), true));
+  } else {
+    $updates = ['date' => 0, 'total' => 0, 'updates' => []];
+  }
 
-    RMTemplate::getInstance()->add_script('updates.js', 'rmcommon', ['footer' => 1]);
+  RMTemplate::getInstance()->add_script('updates.js', 'rmcommon', ['footer' => 1]);
 
-    if ($updates['date'] < (time() - ($cuSettings->updatesinterval * 86400))) {
-        $rmTpl->add_inline_script('(function(){rmCheckUpdates();})();', 1);
-        define('RMC_CHECK_UPDATES', 1);
-    } else {
-        $rmTpl->add_inline_script('$(document).ready(function(){rmCallNotifier(' . $updates['total'] . ');});', 1);
-    }
+  if ($updates['date'] < (time() - ($cuSettings->updatesinterval * 86400))) {
+    $rmTpl->add_inline_script('(function(){rmCheckUpdates();})();', 1);
+    define('RMC_CHECK_UPDATES', 1);
+  } else {
+    $rmTpl->add_inline_script('$(document).ready(function(){rmCallNotifier(' . $updates['total'] . ');});', 1);
+  }
 }
 
 /**
  * Add ajax controller script
  */
 if (defined('XOOPS_CPFUNC_LOADED') || (isset($xoopsOption) && array_key_exists('pagetype', $xoopsOption) && 'admin' == $xoopsOption['pagetype'])) {
-    $rmTpl->add_script('cu-handler.js', 'rmcommon', ['footer' => 1, 'id' => 'cuhandler']);
-    $rmTpl->add_script('jquery.validate.min.js', 'rmcommon', ['footer' => 1]);
+  define('CU_ADMIN_SECTION', true);
+  $rmTpl->add_script('cu-handler.js', 'rmcommon', ['footer' => 1, 'id' => 'cuhandler']);
+  $rmTpl->add_script('jquery.validate.min.js', 'rmcommon', ['footer' => 1]);
 }
 
 // Services Manager
