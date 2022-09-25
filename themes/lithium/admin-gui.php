@@ -20,7 +20,7 @@ require_once LITHIUM_PATH . '/class/LithiumHelper.class.php';
 $xoFunc = new LithiumHelper();
 
 // Common Utilities module menu
-$mod = RMModules::load_module('rmcommon');
+$mod = RMModules::load('rmcommon');
 $rmcommon_menu = [
     'name' => $mod->getVar('name'),
     'directory' => $mod->getVar('dirname'),
@@ -30,7 +30,7 @@ $rmcommon_menu = [
 ];
 
 // System module menu
-$mod = RMModules::load_module('system');
+$mod = RMModules::load('system');
 $system_menu = [
     'name' => $mod->getVar('name'),
     'directory' => $mod->getVar('dirname'),
@@ -40,16 +40,14 @@ $system_menu = [
 ];
 
 // Current Module Menu
-if ('rmcommon' != $xoopsModule->getVar('dirname')) {
-    $currentModule = [
-        'name' => $xoopsModule->getVar('name'),
-        'directory' => $xoopsModule->getVar('dirname'),
-        'menu' => $xoFunc->moduleMenu($xoopsModule->getVar('dirname')),
-        'native' => $xoopsModule->getInfo('rmnative'),
-        'rewrite' => $xoopsModule->getInfo('rewrite'),
-    ];
-    $currentModule = (object)$currentModule;
-}
+$currentModule = [
+    'name' => $xoopsModule->getVar('name'),
+    'directory' => $xoopsModule->getVar('dirname'),
+    'menu' => $xoFunc->moduleMenu($xoopsModule->getVar('dirname')),
+    'native' => $xoopsModule->getInfo('rmnative'),
+    'rewrite' => $xoopsModule->getInfo('rewrite'),
+];
+$currentModule = (object)$currentModule;
 
 /**
  * Load modules and their menus
@@ -57,7 +55,7 @@ if ('rmcommon' != $xoopsModule->getVar('dirname')) {
 $modulesList = \XoopsLists::getModulesList();
 $activeModules = [];
 foreach ($modulesList as $item) {
-    if ('rmcommon' == $item || 'system' == $item || $item == $xoopsModule->getVar('dirname')) {
+    if ('system' == $item || $item == $xoopsModule->getVar('dirname')) {
         continue;
     }
 
@@ -69,8 +67,10 @@ foreach ($modulesList as $item) {
         continue;
     }
 
+    $name = $module->dirname() == 'rmcommon' ? 'System' : $module->name();
+
     $activeModules[] = (object)[
-        'name' => $module->getVar('name'),
+        'name' => $name,
         'directory' => $module->getVar('dirname'),
         'menu' => $module->getAdminMenu(),
         'native' => $module->getInfo('rmnative'),
