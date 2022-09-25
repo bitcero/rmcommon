@@ -24,12 +24,10 @@
     </div>
 
     <div class="menu-wrapper">
-        <div class="module-search">
-            <input type="text" value="" class="form-control" id="filter-module" placeholder="<?php _e('Search modules...', 'lithium'); ?>">
-        </div>
-
         <div class="sidebar-menu">
-
+            <div class="module-search">
+                <input type="text" value="" class="form-control" id="filter-module" placeholder="<?php _e('Search modules...', 'lithium'); ?>">
+            </div>
             <!-- CURRENT MODULE MENU -->
             <?php if (isset($currentModule) && !empty($currentModule)): ?>
                 <h4 class="menu-heading current-module-head">
