@@ -124,8 +124,9 @@
             </li>
 
             <li class="dropdown<?php if ('system' == $xoopsModule->dirname()): ?> active<?php endif; ?> system-menu">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26">
-                    <?php echo $cuIcons->getIcon('svg-lithium-system', [], false); ?>
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26" title="<?php _e('XOOPS Menu', 'rmcommon'); ?>">
+                    <?php echo $cuIcons->getIcon('svg-lithium-xoops', [], false); ?>
+                    <span class="visually-hidden"><?php _e('XOOPS Menu', 'rmcommon'); ?></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-md-end">
                     <?php foreach ($system_menu['menu'] as $menu): ?>
