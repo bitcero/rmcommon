@@ -4,7 +4,10 @@ class LithiumRmcommonPreload
 {
   public static function eventRmcommonAdditionalOptions($settings)
   {
-    $settings['categories']['lithium'] = __('Lithium', 'lithium');
+    $settings['categories']['lithium'] = [
+      'caption' => __('Lithium', 'lithium'),
+      'icon' => 'svg-lithium-lithium'
+    ];
 
     $af_available = RMFunctions::plugin_installed('advform');
 
