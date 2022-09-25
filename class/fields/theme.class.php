@@ -94,7 +94,7 @@ class RMFormTheme extends RMFormElement
             }
             $rtn .= '</ul>';
         } else {
-            $this->setIfNotSet('class', 'form-control');
+            $this->setIfNotSet('class', 'form-select');
             $attributes = $this->renderAttributeString();
             $rtn = "<select $attributes>";
             foreach ($themes as $k => $name) {
