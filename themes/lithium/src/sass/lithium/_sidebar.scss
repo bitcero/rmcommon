@@ -77,54 +77,54 @@
     left: 0;
     right: 0;
 
-    > .module-search {
-      padding: pxToRem(10) pxToRem(7);
-      margin: 0 pxToRem(15) pxToRem(15);
-
-      > .form-control {
-        border-radius: 50px;
-        background: url(../images/search.png) no-repeat 10px;
-        background-color: $lithium-sidebar-bg;
-        color: $lithium-sidebar-search-color;
-        border: 1px solid $lithium-sidebar-bg;
-        box-shadow: none;
-        transition: ease all 250ms;
-        padding-left: 30px;
-
-        &::-webkit-input-placeholder {
-          color: $lithium-sidebar-search-pholder !important;
-        }
-
-        &::-moz-placeholder {
-          color: $lithium-sidebar-search-pholder !important;
-          opacity: 1;
-        }
-
-        &:-ms-input-placeholder {
-          color: $lithium-sidebar-search-pholder !important;
-        }
-
-        &:focus {
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          background-color: $lithium-sidebar-search-focus-bg;
-          color: $lithium-sidebar-search-focus-color;
-        }
-      }
-
-      .show-sidebar & {
-        padding: pxToRem(10) pxToRem(15);
-        margin: 0 pxToRem(15) pxToRem(15);
-
-        > .form-control {
-          border: 1px solid rgba(0, 0, 0, 0.05);
-          background-color: $lithium-sidebar-search-input;
-        }
-      }
-    }
-
     > .sidebar-menu {
       position: relative;
       height: 100%;
+
+      > .module-search {
+        padding: pxToRem(10) pxToRem(7);
+        margin: 0 pxToRem(15) pxToRem(15);
+
+        > .form-control {
+          border-radius: 50px;
+          background: url(../images/search.png) no-repeat 10px;
+          background-color: $lithium-sidebar-bg;
+          color: $lithium-sidebar-search-color;
+          border: 1px solid $lithium-sidebar-bg;
+          box-shadow: none;
+          transition: ease all 250ms;
+          padding-left: 30px;
+
+          &::-webkit-input-placeholder {
+            color: $lithium-sidebar-search-pholder !important;
+          }
+
+          &::-moz-placeholder {
+            color: $lithium-sidebar-search-pholder !important;
+            opacity: 1;
+          }
+
+          &:-ms-input-placeholder {
+            color: $lithium-sidebar-search-pholder !important;
+          }
+
+          &:focus {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: $lithium-sidebar-search-focus-bg;
+            color: $lithium-sidebar-search-focus-color;
+          }
+        }
+
+        .show-sidebar & {
+          padding: pxToRem(10) pxToRem(15);
+          margin: 0 pxToRem(15) pxToRem(15);
+
+          > .form-control {
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: $lithium-sidebar-search-input;
+          }
+        }
+      }
 
       .menu-heading {
         font-size: 0.85em;

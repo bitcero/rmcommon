@@ -69,7 +69,7 @@ function rm_reload_plugins()
 
 function show_rm_plugins()
 {
-    global $rmTpl;
+    global $rmTpl, $common;
 
     $path = RMCPATH . '/plugins';
     $dir_list = XoopsLists::getDirListAsArray($path);

@@ -661,8 +661,12 @@ $modversion['blocks'][] = [
 $amod = xoops_getActiveModules();
 if (in_array('rmcommon', $amod, true) && class_exists("Common\Core\Helpers\Plugins")) {
     $plugins = Common\Core\Helpers\Plugins::allInstalled();
+
     foreach ($plugins as $plugin) {
         $p = Common\Core\Helpers\Plugins::getInstance()->load($plugin);
+
+        if(false === $p) continue;
+
         if (!method_exists($p, 'blocks')) {
             continue;
         }
