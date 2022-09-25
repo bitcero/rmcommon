@@ -14,7 +14,6 @@
 <div id="upload-container" class="container">
     <div class="form-group">
         <form name="selcat" id="select-category" method="post" action="tiny-images.php">
-            <?php _e('Select the category where you wish to upload images', 'rmcommon'); ?>
             <select name="category" onchange="$('#select-category').submit();" class="form-control">
                 <option value="0"<?php echo $cat->isNew() ? ' selected="selected"' : ''; ?>><?php _e('Select...', 'rmcommon'); ?></option>
                 <?php foreach ($categories as $catego): ?>
@@ -25,6 +24,7 @@
                         value="<?php echo $catego->id(); ?>"<?php echo $cat->id() == $catego->id() ? ' selected="selected"' : ''; ?>><?php echo $catego->getVar('name'); ?></option>
                 <?php endforeach; ?>
             </select>
+            <div class="form-text"><?php _e('Select the category where you wish to upload images', 'rmcommon'); ?></div>
             <input type="hidden" name="type" value="<?php echo $type; ?>">
             <input type="hidden" name="name" value="<?php echo $en; ?>">
             <input type="hidden" name="target" value="<?php echo $target; ?>">

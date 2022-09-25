@@ -4,7 +4,7 @@
 @import "https://raw.githubusercontent.com/bitcero/rmcommon/master/src/helium/less/bootstrap/mixins/buttons.less";
 @import "https://raw.githubusercontent.com/bitcero/rmcommon/master/src/helium/less/bootstrap/mixins/tab-focus.less";
 @import "https://raw.githubusercontent.com/bitcero/rmcommon/master/src/helium/less/bootstrap/mixins/opacity.less";
-@import "https://raw.githubusercontent.com/bitcero/rmcommon/master/src/helium/less/helium/variables.less";
+@import "../../../../src/helium/less/helium/variables.less";
 
 /*
  SVG ICONS
@@ -45,215 +45,250 @@ Datetime Field
 /*
  SVG ICONS
  ================== */
-.cu-icon{
+.cu-icon {
   fill: currentColor;
   display: inline-block;
   line-height: 1;
   vertical-align: text-top;
   vertical-align: middle;
 
-  &.icon2x{
+  &.icon2x {
     .cu-icon-size(32px);
   }
 
-  &.icon3x{
+  &.icon3x {
     .cu-icon-size(48px);
   }
 
-  &.icon4x{
+  &.icon4x {
     .cu-icon-size(64px);
   }
 
-  &.icon5x{
+  &.icon5x {
     .cu-icon-size(96px);
   }
 
-  &.icon6x{
+  &.icon6x {
     .cu-icon-size(128px);
   }
 }
 
 /* Web fonts */
-.rm_webfonts_container{
-    overflow: hidden;
-    background: #f2f2f2;
-    border-radius: @border-radius-base;
+.rm_webfonts_container {
+  overflow: hidden;
+  background: #f2f2f2;
+  border-radius: @border-radius-base;
 }
-.rm_webfonts_container select{
-    width: 100%;
+
+.rm_webfonts_container select {
+  width: 100%;
 }
-.rm_webfonts_container > div.control{
-    overflow: hidden;
-    padding: 5px 0;
-    display: none;
+
+.rm_webfonts_container > div.control {
+  overflow: hidden;
+  padding: 5px 0;
+  display: none;
 }
-.rm_webfonts_container h6{
-    padding: 0 0 5px 0;
-    border-bottom: 1px dashed #ccc;
+
+.rm_webfonts_container h6 {
+  padding: 0 0 5px 0;
+  border-bottom: 1px dashed #ccc;
 }
-.rm_webfonts_container >div > div{
-    overflow: hidden;
+
+.rm_webfonts_container > div > div {
+  overflow: hidden;
 }
-.rm_webfonts_container > div > div label{
-    display: inline-block;
-    vertical-align: text-top;
-    padding: 4px;
+
+.rm_webfonts_container > div > div label {
+  display: inline-block;
+  vertical-align: text-top;
+  padding: 4px;
 }
-.rm_webfonts_container > .font-preview > div{
-    font-size: 2.5em;
-    background: #fff;
-    padding: 10px;
+
+.rm_webfonts_container > .font-preview > div {
+  font-size: 2.5em;
+  background: #fff;
+  padding: 10px;
 }
-.rm_webfonts_container > .font-value > div{
-    background: #FFF;
-    padding: 5px;
+
+.rm_webfonts_container > .font-value > div {
+  background: #FFF;
+  padding: 5px;
 }
 
 /**
 * Image Url Control
 */
-.adv_imgurl > .img-preview{
-    padding: 5px 0;
+.adv_imgurl > .img-preview {
+  padding: 5px 0;
 }
-.adv_imgurl > .img-preview > img{
-    padding: 5px;
-    border: 1px solid #CCC;
-    max-width: 80%;
-    max-height: 200px;
-    display: none;
-    box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -o-box-sizing: border-box;
+
+.adv_imgurl > .img-preview > img {
+  padding: 5px;
+  border: 1px solid #CCC;
+  max-width: 80%;
+  max-height: 200px;
+  display: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -o-box-sizing: border-box;
 }
-.adv_imgurl > div > div > div > input[type="text"].input-loading{
-    background: url(../imgs/loading.gif) no-repeat 5px;
-    padding-left: 25px;
+
+.adv_imgurl > div > div > div > input[type="text"].input-loading {
+  background: url(../imgs/loading.gif) no-repeat 5px;
+  padding-left: 25px;
 }
 
 /**
 * Sliders
 */
 
-.adv-slider-container .data-fields{
-    display: none;
+.adv-slider-container .data-fields {
+  display: none;
 }
-.adv-one-slider{
-    margin-bottom: 5px;
+
+.adv-one-slider {
+  margin-bottom: 5px;
 }
-.adv-one-slider > .the-options > .title{
-    font-size: 1.1em;
+
+.adv-one-slider > .the-options > .title {
+  font-size: 1.1em;
 }
-.adv-one-slider > .the-controls{
-    display: none;
+
+.adv-one-slider > .the-controls {
+  display: none;
 }
-.adv-one-slider .the-buttons{
-    padding: 8px 0 0 0;
-    text-align: right;
-    display: none;
+
+.adv-one-slider .the-buttons {
+  padding: 8px 0 0 0;
+  text-align: right;
+  display: none;
 }
-.slider-expanded{
-    padding: 10px;
-    background: #f2f2f2;
-    border: 1px solid rgba(0,0,0,0.05);
+
+.slider-expanded {
+  padding: 10px;
+  background: #f2f2f2;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
-.slider-collapse{
-    padding: 0;
+
+.slider-collapse {
+  padding: 0;
 }
 
 /**
 * Color Selector
 */
-.adv-color-chooser span{
-    cursor: pointer;
+.adv-color-chooser span {
+  cursor: pointer;
 }
-.adv-color-chooser > div > div > input{
-    text-align: center;
+
+.adv-color-chooser > div > div > input {
+  text-align: center;
 }
 
 /**
 * Image manager popup
 */
-.advmgr_blocker{
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: #000;
-    opacity: 0.8;
-        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-        filter: alpha(opacity=80);
-        -moz-opacity:0.8;
-        -khtml-opacity: 0.8;
-    z-index: 1082;
+.advmgr_blocker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.3;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  z-index: 1082;
 }
-.advmgr_container{
-    min-width: 300px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 2.5%;
-    border: 0;
-    display: none;
-    z-index: 1083;
+
+.advmgr_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3%;
+  border: 0;
+  display: none;
+  z-index: 1083;
 }
-.advmgr_container .window-title{
-    padding: 10px;
-    font-weight: normal;
-    font-size: 1.2em;
-}
-.advmgr_container .window-title span{
+
+.advmgr_container .window-title {
+  padding: 0.714rem 1rem;
+  font-weight: normal;
+  font-size: 1.2em;
+  border-radius: 1rem 1rem 0 0;
+  position: relative;
+
+  span {
     display: block;
     position: absolute;
     width: 18px;
     height: 18px;
-    right: 2.8%;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     background: url(../imgs/closeb.png) no-repeat center;
     cursor: pointer;
+  }
 }
-.advmgr_container iframe{
-    width: 100%;
-    height: 100%;
-    border: 0;
+
+.advmgr_container iframe {
+  width: 100%;
+  height: 90%;
+  border: 0;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 1rem 1rem;
 }
 
 /* Image Selector
 --------------------------------------------------*/
-.adv-images-select{
+.adv-images-select {
 
 }
-.adv-images-select label{
-    display: inline-block;
-    vertical-align: text-top;
-    margin: 3px;
-    position: relative;
+
+.adv-images-select label {
+  display: inline-block;
+  vertical-align: text-top;
+  margin: 3px;
+  position: relative;
 }
-.adv-images-select label span{
-    display: block;
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border: 3px solid #FFF;
-    box-shadow: inset 0 0 0 1px #CCC;
+
+.adv-images-select label span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px solid #FFF;
+  box-shadow: inset 0 0 0 1px #CCC;
 }
-.adv-images-select label input{
-    display: none;
+
+.adv-images-select label input {
+  display: none;
 }
-.adv-images-select label input:checked + span{
-    border-color: #000;
-    box-shadow: none;
+
+.adv-images-select label input:checked + span {
+  border-color: #000;
+  box-shadow: none;
 }
 
 /*              ICONS PICKER
 ===============================================*/
-.adv-icons-picker{
+.adv-icons-picker {
 
-  .adv-icon-selected{
-    .cu-icon{
+  .adv-icon-selected {
+    .cu-icon {
       .cu-icon-size(14px);
     }
   }
 
-  .icons-container{
+  .icons-container {
     padding: 10px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -261,16 +296,16 @@ Datetime Field
     min-width: 285px;
     max-width: 300px;
 
-    ul{
+    ul {
       list-style: none;
       margin: 0;
       padding: 0;
 
-      li{
+      li {
         display: inline-block;
         margin: 2px;
 
-        a{
+        a {
           color: #333;
           font-size: 28px;
           display: block;
@@ -278,17 +313,18 @@ Datetime Field
           line-height: 40px;
           width: 36px;
           text-align: center;
-          border: 1px solid rgba(0,0,0,0.2);
+          border: 1px solid rgba(0, 0, 0, 0.2);
           transition: ease all 250ms;
 
-          &:hover{
+          &:hover {
             background-color: #333;
             color: #FFF;
           }
 
-          > .cu-icon{
+          > .cu-icon {
             font-size: 28px;
-            > *{
+
+            > * {
               width: 28px;
               height: 28px;
             }
@@ -302,15 +338,15 @@ Datetime Field
 
   }
 
-  .dropdown-menu{
+  .dropdown-menu {
     padding-top: 0;
   }
 
-  .icons-switcher{
+  .icons-switcher {
     padding: 5px;
     text-align: center;
     background: #ebebeb;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
 }
@@ -318,16 +354,17 @@ Datetime Field
 /*
 ICONS SELECTOR
 ======================= */
-.adv-icons-selector{
+.adv-icons-selector {
 
   position: relative;
-  padding-left: 40px!important;
+  padding-left: 40px !important;
 
-  button{
+  button {
     position: absolute;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
     border: 0;
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-left: 1px solid @input-border;
     text-align: center;
     padding: 0;
@@ -335,20 +372,20 @@ ICONS SELECTOR
     text-align: center;
     outline: 0;
 
-    &:hover{
+    &:hover {
       color: @link-hover-color;
     }
   }
 
-  .icons-button{
+  .icons-button {
     right: 0;
   }
 
-  .clear-button{
+  .clear-button {
     right: 35px;
   }
 
-  input.icons-caption{
+  input.icons-caption {
 
     border: 0;
     outline: 0;
@@ -358,14 +395,15 @@ ICONS SELECTOR
 
   }
 
-  > .icons-icon{
+  > .icons-icon {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     line-height: @input-height-base;
     padding: 0 10px;
-    > .cu-icon{
+
+    > .cu-icon {
       .cu-icon-size(20px, false);
       vertical-align: text-bottom;
     }
@@ -376,50 +414,51 @@ ICONS SELECTOR
 /*
 ICONS BROWSER
 ====================== */
-.adv-icons-browser{
-  .badge{
+.adv-icons-browser {
+  .badge {
     font-size: 0.85em;
     background-color: #FFF;
     color: @color-blue;
   }
 }
 
-.adv-icons-list{
+.adv-icons-list {
   list-style: none;
   padding: 0;
   margin: 0;
 
-  > li{
+  > li {
     display: inline-block;
     width: 84px;
     height: 84px;
     margin: 2px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 
-    > a{
+    > a {
       display: block;
       line-height: 84px;
       width: 84px;
       text-align: center;
       color: @text-color;
 
-      .cu-icon{
+      .cu-icon {
         .cu-icon-size(40px, false);
       }
 
-      &:hover{
-        background-color: rgba(0,0,0,0.05);
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
         .cu-icon-color(@gray-base);
       }
     }
 
-    &.selected{
+    &.selected {
       border: 1px solid @theme-main-color;
       background-color: lighten(@theme-main-color, 10%);
 
-      > a{
+      > a {
         color: @theme-main-color-text;
-        .cu-icon{
+
+        .cu-icon {
           .cu-icon-color(@theme-main-color-text);
         }
       }
@@ -428,22 +467,22 @@ ICONS BROWSER
 
 }
 
-.adv-icons-browser-controls{
+.adv-icons-browser-controls {
   background-color: lighten(@gray-base, 90%);
   padding: 10px 0;
   margin: 0 -15px;
   overflow: hidden;
 
-  .control-search{
+  .control-search {
     width: 100%;
     padding: 0 25px;
 
-    @media(min-width: @screen-sm-min){
+    @media (min-width: @screen-sm-min) {
       width: 50%;
       float: left;
     }
 
-    @media(min-width: @screen-md-min){
+    @media (min-width: @screen-md-min) {
       width: 30%;
       float: left;
     }
@@ -453,21 +492,21 @@ ICONS BROWSER
 /*
 REPEATER FIELD
 ==============================*/
-.adv-repeater-field{
+.adv-repeater-field {
 
-  > .hidden-fields{
+  > .hidden-fields {
     display: none;
   }
 
   // Fields container
-  > .repeater-fields{
+  > .repeater-fields {
 
   }
 
-  > .repeater-start-controls{
+  > .repeater-start-controls {
     padding: 6px 0;
 
-    button{
+    button {
       display: inline-block;
       margin-bottom: 0; // For input.btn
       font-weight: @btn-font-weight;
@@ -501,7 +540,7 @@ REPEATER FIELD
       &.active {
         outline: 0;
         background-image: none;
-        .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+        .box-shadow(inset 0 3px 5px rgba(0, 0, 0, .125));
       }
 
       &.disabled,
@@ -523,68 +562,70 @@ REPEATER FIELD
     }
   }
 
-  &.layout-horizontal{
+  &.layout-horizontal {
 
     overflow-y: hidden;
     overflow-x: auto;
 
-    .repeater-row{
+    .repeater-row {
 
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       padding: 5px @input-height-base 5px 0;
       white-space: nowrap;
       position: relative;
 
-      &:after{
+      &:after {
         content: '';
         display: block;
         clear: both;
       }
 
-      .repeater-field{
+      .repeater-field {
         display: inline-block;
         vertical-align: text-top;
         width: 30%;
         padding: 5px;
 
-        > label{
+        > label {
           font-weight: 600;
           font-size: 0.9em;
           display: block;
         }
 
-        .help-block{
+        .help-block {
           display: none;
         }
       }
 
-      .repeater-field-controls{
+      .repeater-field-controls {
         width: @input-height-base;
         position: absolute;
-        top: 33px; right: 0; bottom: 0;
+        top: 33px;
+        right: 0;
+        bottom: 0;
 
-        .caption{
+        .caption {
           display: none;
         }
 
-        button{
+        button {
           height: @input-height-base;
           border: 1px solid @btn-default-border;
           width: @input-height-base;
           line-height: @input-height-base;
           outline: 0;
 
-          &.open{
+          &.open {
             display: none;
           }
 
-          &.delete{
+          &.delete {
             background: @brand-danger;
             color: @btn-danger-color;
             border: 1px solid @btn-danger-border;
           }
 
-          .cu-icon{
+          .cu-icon {
             .cu-icon-size(16px);
             display: inline;
           }
@@ -594,42 +635,42 @@ REPEATER FIELD
     }
   }
 
-  &.layout-vertical{
+  &.layout-vertical {
 
-    .repeater-row{
+    .repeater-row {
       border: 1px solid @input-border;
       border-radius: @border-radius-base;
       padding: 0;
       margin-bottom: 5px;
       background-color: lighten(@gray-base, 98%);
 
-      .repeater-field{
+      .repeater-field {
         //margin-bottom: 10px;
         padding: @padding-base-horizontal @padding-base-horizontal @padding-base-horizontal @padding-base-horizontal;
         position: relative;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-        &:after{
+        &:after {
           content: '';
           display: block;
           clear: both;
         }
 
-        > label{
+        > label {
           font-weight: 600;
           font-size: 0.9em;
           display: block;
         }
 
-        .help-block{
+        .help-block {
           margin-bottom: 0;
         }
 
-        @media(min-width: @screen-sm-min){
+        @media (min-width: @screen-sm-min) {
 
           padding: @padding-base-horizontal @padding-base-horizontal @padding-base-horizontal 215px;
 
-          > label{
+          > label {
             width: 200px - @padding-base-horizontal;
             float: left;
             margin-left: -(215px - @padding-base-horizontal);
@@ -637,7 +678,7 @@ REPEATER FIELD
         }
       }
 
-      .repeater-field-controls{
+      .repeater-field-controls {
         //margin: 0 -@padding-base-horizontal -@padding-base-horizontal;
         line-height: @input-height-base;
         padding: 0 @padding-base-horizontal;
@@ -647,30 +688,32 @@ REPEATER FIELD
         margin-top: -1px;
         border-top: 1px solid @input-border;
 
-        button{
+        button {
           position: absolute;
-          top: 0; right: 0; bottom: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
           width: @input-height-base;
           line-height: @input-height-base;
           border: 0;
-          border-left: 1px solid rgba(255,255,255,0.45);
+          border-left: 1px solid rgba(255, 255, 255, 0.45);
           outline: 0;
 
-          .cu-icon{
+          .cu-icon {
             line-height: @input-height-base;
             .cu-icon-size(16px);
-            display: inline!important;
+            display: inline !important;
           }
         }
 
-        .open{
-          background-color: rgba(0,0,0,0.15);
+        .open {
+          background-color: rgba(0, 0, 0, 0.15);
           color: inherit;
           right: @input-height-base;
           transform: rotate(0);
         }
 
-        .delete{
+        .delete {
           right: 0;
           background-color: #FFF;
           color: @brand-danger;
@@ -678,23 +721,24 @@ REPEATER FIELD
         }
       }
 
-      &.collapsed{
+      &.collapsed {
         padding-top: 0;
-        .repeater-field{
+
+        .repeater-field {
           display: none;
         }
 
-        .repeater-field-controls{
+        .repeater-field-controls {
           border-top: 0;
           margin-top: 0;
 
-          .open{
+          .open {
             transform: rotate(180deg);
             border-left: 0;
             border-right: 1px solid @input-border;
           }
 
-          .delete{
+          .delete {
             border-radius: 0 @border-radius-small @border-radius-small 0;
           }
         }
@@ -706,83 +750,108 @@ REPEATER FIELD
 
 }
 
-.layout-vertical .repeater-field-controls{
-  &.default{
-    .control-variation(rgba(0,0,0,0.05), @text-color);
+.layout-vertical .repeater-field-controls {
+  &.default {
+    .control-variation(rgba(0, 0, 0, 0.05), @text-color);
   }
-  &.primary{
+
+  &.primary {
     .control-variation(@brand-primary, @btn-primary-color);
   }
-  &.success{
+
+  &.success {
     .control-variation(@brand-success, @btn-success-color);
   }
-  &.info{
+
+  &.info {
     .control-variation(@brand-info, @btn-info-color);
   }
-  &.warning{
+
+  &.warning {
     .control-variation(@brand-warning, @btn-warning-color);
   }
-  &.danger{
+
+  &.danger {
     .control-variation(@brand-danger, @btn-danger-color);
   }
-  &.red{
+
+  &.red {
     .control-variation(@color-red, @color-text-red);
   }
-  &.pink{
+
+  &.pink {
     .control-variation(@color-pink, @color-text-pink);
   }
-  &.purple{
+
+  &.purple {
     .control-variation(@color-purple, @color-text-purple);
   }
-  &.deep-purple{
+
+  &.deep-purple {
     .control-variation(@color-deep-purple, @color-text-deep-purple);
   }
-  &.indigo{
+
+  &.indigo {
     .control-variation(@color-indigo, @color-text-indigo);
   }
-  &.blue{
+
+  &.blue {
     .control-variation(@color-blue, @color-text-blue);
   }
-  &.light-blue{
+
+  &.light-blue {
     .control-variation(@color-light-blue, @color-text-light-blue);
   }
-  &.cyan{
+
+  &.cyan {
     .control-variation(@color-cyan, @color-text-cyan);
   }
-  &.teal{
+
+  &.teal {
     .control-variation(@color-teal, @color-text-teal);
   }
-  &.green{
+
+  &.green {
     .control-variation(@color-green, @color-text-green);
   }
-  &.light-green{
+
+  &.light-green {
     .control-variation(@color-light-green, @color-text-light-green);
   }
-  &.lime{
+
+  &.lime {
     .control-variation(@color-lime, @color-text-lime);
   }
-  &.yellow{
+
+  &.yellow {
     .control-variation(@color-yellow, @color-text-yellow);
   }
-  &.amber{
+
+  &.amber {
     .control-variation(@color-amber, @color-text-amber);
   }
-  &.orange{
+
+  &.orange {
     .control-variation(@color-orange, @color-text-orange);
   }
-  &.deep-orange{
+
+  &.deep-orange {
     .control-variation(@color-deep-orange, @color-text-deep-orange);
   }
-  &.brown{
+
+  &.brown {
     .control-variation(@color-brown, @color-text-brown);
   }
-  &.grey{
+
+  &.grey {
     .control-variation(@color-grey, @color-text-grey);
   }
-  &.blue-grey{
+
+  &.blue-grey {
     .control-variation(@color-blue-grey, @color-text-blue-grey);
   }
-  &.midnight{
+
+  &.midnight {
     .control-variation(@color-midnight, @color-text-midnight);
   }
 }
