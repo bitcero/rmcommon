@@ -607,6 +607,8 @@ class RMTemplate
       return '';
     }
 
+    $adminSection = defined('XOOPS_CPFUNC_LOADED') || defined('CU_ADMIN_SECTION');
+
     if ($cuSettings->development) {
       $version = date('dmyhis', time());
     } else {
@@ -616,7 +618,7 @@ class RMTemplate
     if ('js' == $type || 'css' == $type) {
       // Possibles paths in order of importance
       // 1. Theme
-      if (defined('XOOPS_CPFUNC_LOADED')) {
+      if ($adminSection) {
         $paths['theme'] = RMCPATH . '/themes/' . $cuSettings->theme . "/$type/" . $element;
         $paths['theme'] .= '' != $directory ? '/' . $directory : '';
       } elseif ($xoopsConfig) {
@@ -624,9 +626,7 @@ class RMTemplate
         $paths['theme'] .= '' != $directory ? '/' . $directory : '';
       }
 
-      if ($xoopsConfig) {
-        $paths['theme'] .= '/' . ltrim($file, '/');
-      }
+      $paths['theme'] .= "/" . ltrim($file, '/');
 
       // 2. Module
       $paths['module'] = XOOPS_ROOT_PATH . '/modules/' . $element;
@@ -636,7 +636,7 @@ class RMTemplate
       $type = 'theme-css' == $type ? 'css' : 'js';
 
       // Add path for theme script|style
-      if (defined('XOOPS_CPFUNC_LOADED')) {
+      if ($adminSection) {
         $paths['theme'] = RMCPATH . '/themes/' . $cuSettings->theme;
       } else {
         $paths['theme'] = XOOPS_THEME_PATH . '/' . $xoopsConfig['theme_set'];
@@ -646,7 +646,7 @@ class RMTemplate
     }
 
     // Allow other components to add new paths where scripts can be searched
-    $paths = RMEvents::get()->run_event('rmcommon.scripts.paths', $paths, $file, $element, $directory, $version);
+    $paths = RMEvents::get()->trigger('rmcommon.scripts.paths', $paths, $file, $element, $directory, $version);
 
     foreach ($paths as $path) {
       if (!file_exists(preg_replace("/(.*)(\?.*)$/", '$1', $path))) {
@@ -654,6 +654,7 @@ class RMTemplate
       }
 
       $url = RMUris::relative_url(str_replace(XOOPS_ROOT_PATH, XOOPS_URL, $path));
+
       // Check if parameter 'version' exists in url
       if (!preg_match("/.*(\?.*)$/", $url)) {
         return $url . '?version=' . $version;
