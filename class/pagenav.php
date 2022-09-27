@@ -10,11 +10,11 @@
 
 class RMPageNav
 {
-    private $total_results;
-    private $items_page;
-    private $current_page;
-    private $steps = 5;
-    private $url = '';
+    public int $total_results;
+    private int $items_page;
+    private int $current_page;
+    private int $steps = 5;
+    private string $url = '';
     private $showing = '';
     private $displayed = false;
     private $rendered = '';
@@ -33,7 +33,7 @@ class RMPageNav
      * @param mixed $current_page
      * @param mixed $steps
      */
-    public function __construct($total_results, $items_page, $current_page, $steps = 5)
+    public function __construct(int $total_results, int $items_page, int $current_page, int $steps = 5)
     {
         $this->total_results = $total_results;
         $this->items_page = $items_page;

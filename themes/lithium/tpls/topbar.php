@@ -20,7 +20,7 @@
                         <?php if (isset($menu['divider'])): ?>
                             <li class="divider"></li>
                         <?php else: ?>
-                            <li<?php if (isset($menu['options'])): ?> class="dropdown-submenu"<?php endif; ?>>
+                            <li>
                                 <a
                                     class="dropdown-item"
                                     href="<?php echo $xoFunc->menuLink((object) $menu, (object) $rmcommon_menu); ?>"<?php if (isset($menu['options'])): ?> tabindex="-1"<?php endif; ?>
@@ -31,23 +31,6 @@
                                         <?php echo $menu['title']; ?>
                                     </span>
                                 </a>
-                                <?php if (isset($menu['options'])): ?>
-                                    <ul class="dropdown-menu">
-                                        <?php foreach ($menu['options'] as $sub): ?>
-                                            <?php if (isset($sub['divider'])): ?>
-                                                <li class="divider"></li>
-                                                <?php continue; endif; ?>
-                                            <li>
-                                                <span class="d-flex align-items-center justify-content-start">
-                                                    <a class="dropdown-item" href="<?php echo $xoFunc->menuLink((object) $sub, (object) $rmcommon_menu); ?>">
-                                                        <?php echo $cuIcons->getIcon($sub['icon'], [], false); ?>
-                                                        <?php echo $sub['title']; ?>
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                <?php endif; ?>
                             </li>
                         <?php endif; ?>
                     <?php endforeach; ?>
@@ -124,8 +107,9 @@
             </li>
 
             <li class="dropdown<?php if ('system' == $xoopsModule->dirname()): ?> active<?php endif; ?> system-menu">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26">
-                    <?php echo $cuIcons->getIcon('svg-lithium-system', [], false); ?>
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,26" title="<?php _e('XOOPS Menu', 'rmcommon'); ?>">
+                    <?php echo $cuIcons->getIcon('svg-lithium-xoops', [], false); ?>
+                    <span class="visually-hidden"><?php _e('XOOPS Menu', 'rmcommon'); ?></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-md-end">
                     <?php foreach ($system_menu['menu'] as $menu): ?>
