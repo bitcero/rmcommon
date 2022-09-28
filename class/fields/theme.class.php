@@ -36,7 +36,7 @@ class RMFormTheme extends RMFormElement
             $this->setWithDefaults('type', 0 == $type ? 'select' : 'radio', 'select');
             $this->setWithDefaults('selected', $selected, []);
             if ('gui' == mb_strtolower($section)) {
-                $this->set('gui', null);
+                $this->set('gui', true);
             }
         }
 
@@ -97,8 +97,13 @@ class RMFormTheme extends RMFormElement
             $this->setIfNotSet('class', 'form-select');
             $attributes = $this->renderAttributeString();
             $rtn = "<select $attributes>";
+
             foreach ($themes as $k => $name) {
-                $rtn .= "<option value='$k'" . (is_array($selected) ? (in_array($k, $selected, true) ? " selected='selected'" : '') : '') . ">$name</option>";
+              if (is_array($selected)) {
+                $rtn .= "<option value='$k' " . (in_array($k, $selected, true) ? " selected" : '') . ">$name</option>";
+              } else {
+                $rtn .= "<option value='$k' " . ($selected == $k ? " selected" : '') . ">$name</option>";
+              }
             }
             $rtn .= '</select>';
         }

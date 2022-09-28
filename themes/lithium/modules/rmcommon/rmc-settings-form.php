@@ -59,7 +59,7 @@
                     <?php if (!isset($category['fields'])): ?>
                         <span class="label label-danger"><?php _e('There are not fields in this category.', 'rmcommon'); ?></span>
                     <?php else: ?>
-                      <?php foreach ($category['fields'] as $id => $field): ?>
+                      <?php foreach ($category['fields'] as $ids => $field): ?>
 
                         <?php if ('hidden' == $field->field): ?>
 
@@ -69,7 +69,7 @@
 
                                 <div class="row mb-4">
                                     <div class="col-12 col-md-4 col-lg-4">
-                                        <label for="<?php echo $id; ?>"><?php echo $field->caption; ?></label>
+                                        <label for="<?php echo $ids; ?>"><?php echo $field->caption; ?></label>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-8">
                                       <?php echo RMSettings::render_field($field); ?>

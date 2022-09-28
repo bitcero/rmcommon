@@ -62,6 +62,7 @@ $modversion['authors'] = [
     'name' => 'Eduardo Cortes',
     'email' => 'i.bitcero@gmail.com',
     'url' => 'https://bitcero.dev',
+    'web' => 'bitcero.dev',
     'aka' => 'bitcero'
   ]
 ];
