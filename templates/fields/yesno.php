@@ -3,13 +3,13 @@
         <input
                 class="form-check-input"
                 type="radio"
-                name="<?php echo $name; ?>"
-                id="<?php echo $id; ?>Yes"
-                <?php echo $attributes; ?>
-                value="yes"
-                <?php echo in_array($value, ['yes', 1]) ? 'checked' : ''; ?>
+                name="<?php echo $this->get('name'); ?>"
+                id="<?php echo $this->get('id'); ?>Yes"
+                <?php echo $this->get('attributes'); ?>
+                value="1"
+                <?php echo in_array($this->get('value'), ['yes', 1]) ? 'checked' : ''; ?>
         >
-        <label class="form-check-label" for="<?php echo $id; ?>Yes">
+        <label class="form-check-label" for="<?php echo $this->get('id'); ?>Yes">
           <?php _e('Yes', 'rmcommon'); ?>
         </label>
     </div>
@@ -17,12 +17,13 @@
         <input
                 class="form-check-input"
                 type="radio"
-                name="<?php echo $name; ?>"
-                id="<?php echo $id; ?>No"
-                <?php echo $attributes; ?>
-                <?php echo in_array($value, ['no', 0]) ? 'checked' : ''; ?>
+                name="<?php echo $this->get('name'); ?>"
+                id="<?php echo $this->get('id'); ?>No"
+                value="0"
+                <?php echo $this->get('attributes'); ?>
+                <?php echo in_array($this->get('value'), ['no', 0]) ? 'checked' : ''; ?>
         >
-        <label class="form-check-label" for="<?php echo $id; ?>No">
+        <label class="form-check-label" for="<?php echo $this->get('id'); ?>No">
           <?php _e('No', 'rmcommon'); ?>
         </label>
     </div>
