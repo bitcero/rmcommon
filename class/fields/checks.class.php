@@ -16,7 +16,7 @@ class RMFormCheck extends RMFormElement
   private $_options = [];
 
   /**
-   * @param string $caption Texto de la etiqueta
+   * @param string|array $caption Texto de la etiqueta
    */
   public function __construct($caption)
   {
@@ -117,7 +117,7 @@ class RMFormRadio extends RMFormElement
   private $_options = [];
 
   /**
-   * @param string $caption Texto de la etiqueta.
+   * @param string|array $caption Texto de la etiqueta.
    * @param string $name Nombre del campo.
    * @param int $inline Show inline controls or as list
    * @param int $type 1 = Tabla, 0 = Lista
@@ -235,7 +235,7 @@ class RMFormYesNo extends RMFormElement
       parent::__construct([]);
       $this->setWithDefaults('caption', $caption, '');
       $this->setWithDefaults('name', $name, 'name_error');
-      $this->setWithDefaults('value', $value);
+      $this->setWithDefaults('value', $value, 0);
     }
 
     $this->suppressList[] = 'value';
@@ -267,7 +267,6 @@ class RMFormYesNo extends RMFormElement
   public function render()
   {
     global $common;
-
     $attributes = $this->renderAttributeString();
     $common->template()->assign('attributes', $attributes);
     $common->template()->assign('name', $this->get('name'));
@@ -275,7 +274,7 @@ class RMFormYesNo extends RMFormElement
     $common->template()->assign('value', $this->get('value'));
 
     ob_start();
-    $common->template()->display('fields/yesno.php', 'module', 'rmcommon');
+    include $common->template()->path('fields/yesno.php', 'module', 'rmcommon');
     return ob_get_clean();
   }
 }
