@@ -3,27 +3,57 @@
   #icons-options{
     margin-bottom: 30px;
 
-    [class*='col-']{
-      margin-bottom: 10px;
-    }
+    > div {
+      &:last-child {
+        text-align: center;
+        display: flex;
+        align-items: center;
 
-    @include media-breakpoint-up(sm){
+        > label {
+          flex: 1;
 
-      [class*='col-']:first-child{
-        margin-bottom: 10px;
+          &:nth-child(2) {
+            margin-right: pxToRem(6);
+          }
+
+          &:last-child {
+            margin-left: pxToRem(6);
+          }
+
+          &:nth-child(4) {
+            margin: 0 pxToRem(3);
+          }
+        }
       }
-
     }
 
     @include media-breakpoint-up(md){
-      [class*='col-']:first-child{
-        margin-bottom: 0;
+
+      display: flex;
+      align-items: center;
+
+      > div {
+        flex: 1;
+
+        &:first-child {
+          margin-right: pxToRem(10);
+        }
+
+        &:last-child {
+          margin-left: pxToRem(10);
+        }
+
+        &:nth-child(2) {
+          margin: 0 pxToRem(5);
+        }
       }
+
     }
 
     #icons-search{
       background: $input-bg url(../../../icons/search.svg) no-repeat;
-      background-position: right 9px bottom 9px;
+      background-position: right 9px bottom 50%;
+      background-size: pxToRem(20);
       padding-right: 32px;
     }
 
@@ -43,7 +73,7 @@
       }
 
       > a{
-        display: block;
+        display: flex;
         width: 64px;
         height: 64px;
         line-height: 64px;
@@ -51,38 +81,46 @@
         color: $body-color;
         transition: ease all 250ms;
         border-radius: $border-radius;
+        align-items: center;
+        justify-content: center;
 
         &:hover{
           background-color: $theme-main-color;
           color: #FFF;
         }
+
+        .cu-icon{
+          svg{
+            vertical-align: inherit;
+          }
+        }
       }
     }
 
-    &[data-size="48"]{
+    &[data-size="64"]{
        > li{
          .cu-icon{
-           @include cu-icon-size(48px);
+           @include cu-icon-size(64px);
          }
 
          > a{
-           width: 96px;
-           height: 96px;
-           line-height: 96px;
+           width: 128px;
+           height: 128px;
+           line-height: 128px;
          }
        }
     }
 
-    &[data-size="64"]{
+    &[data-size="120"]{
       > li{
         .cu-icon{
-          @include cu-icon-size(64px);
+          @include cu-icon-size(120px);
         }
 
         > a{
-          width: 128px;
-          height: 128px;
-          line-height: 128px;
+          width: 200px;
+          height: 200px;
+          line-height: 200px;
         }
       }
     }
@@ -94,73 +132,116 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255,255,255,0.5);
-    z-index: 102;
+    background-color: fade-out($white, 0.3);
+    z-index: 9999;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
 
     .icon-data{
-      background-color: $theme-main-color;
-      color: $theme-main-color-text;
+      background-color: $lithium-icon-details-bg;
+      color: $lithium-icon-details-color;
       padding: 25px;
       width: 95%;
       border-radius: $border-radius-lg;
       position: relative;
+      box-shadow: 0 0 20px fade-out($black, 0.85);
 
       .close{
         position: absolute;
         top: 0;
         right: 0;
         outline: 0;
-        padding: 15px;
-        border-radius: 0 $border-radius-lg $border-radius-lg;
+        padding: 10px;
+        border-radius: 0;
+        border: 0;
+        background-color: transparent;
 
-        &:hover{
-          background-color: rgba(0,0,0,0.15);
+        svg{
+          width: pxToRem(20);
+          height: pxToRem(20);
+          fill: currentColor;
         }
       }
 
       .icon-load{
         padding: 15px;
         display: block;
-        border: 1px solid rgba(0,0,0,0.1);
         text-align: center;
-        margin: 0 10px 0 0;
+      }
+
+      .icon-preview{
+        background-color: $gray-600;
+        color: $white;
+        border-radius: 5px;
+        padding: pxToRem(20) 0;
+        margin-bottom: pxToRem(10);
+
+        svg{
+          fill: currentColor;
+        }
       }
 
       .cu-icon{
-        @include cu-icon-size(56px);
+        @include cu-icon-size(100px);
+      }
+
+      .icon-details {
+        h4{
+          padding: 0 0 pxToRem(10);
+          border-bottom: 1px solid $gray-300;
+          margin-bottom: pxToRem(10);
+          text-align: center;
+        }
+
+        table{
+          border: 0;
+          td, th{
+            border: 0;
+
+            &.copy-text{
+              cursor: pointer;
+            }
+          }
+        }
       }
 
       @include media-breakpoint-up(sm){
-        width: 600px;
-        box-shadow: 0 3px 20px rgba(0,0,0,0.4);
+        width: 800px;
+        max-width: 90%;
         background-color: #FFF;
         color: $body-color;
-      }
 
-      .media-heading{
-        border-bottom: 2px solid rgba(0,0,0,0.1);
-        padding-bottom: 10px;
-        margin-bottom: 10px;
+        .icon-preview{
+          background-color: $gray-600;
+          color: $white;
+          width: 30%;
+          border-radius: 5px;
+          margin-bottom: 0;
 
-        input{
-          border: 0;
-          padding: 0;
-          margin: 0;
-          background-color: transparent;
-          outline: 0;
+          svg{
+            fill: currentColor;
+          }
+        }
+
+        .icon-details{
+          h4{
+            text-align: left;
+          }
         }
       }
+    }
 
-      table{
-        td{padding: 3px 0;}
-        td:first-child{
-          padding-right: 15px;
-        }
-      }
+    .f-copied{
+      background-color: $info;
+      color: $white;
+      position: absolute;
+      right: pxToRem(5);
+      bottom: pxToRem(5);
+      padding: pxToRem(6) pxToRem(10);
+      border-radius: 5px;
+      display: none;
     }
   }
 

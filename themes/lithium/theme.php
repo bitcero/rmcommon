@@ -52,8 +52,11 @@
         <?php echo $lithiumScripts['heads']; ?>
 
         <?php if (1 == $xoopsConfig['debug_mode']): ?>
-        <div id="he-logger-output">
-            <a href="#" class="close-logger"><?php echo $cuIcons->getIcon('svg-rmcommon-double-arrow-up'); ?> <?php _e('Debug Log', 'rmcommon'); ?></a>
+        <div id="li-logger-output">
+            <a href="#" class="close-logger d-flex align-items-center">
+              <?php echo $cuIcons->svg('lithium-warning'); ?>
+                <span class="ms-2"><?php _e('Debug Log', 'rmcommon'); ?></span>
+            </a>
             <!--{xo-logger-output}-->
         </div>
         <?php endif; ?>

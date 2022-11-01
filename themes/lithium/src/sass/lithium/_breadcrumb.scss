@@ -7,6 +7,7 @@
     display: flex;
   }
   a{
+    max-width: pxToRem(200);
     svg{
       width: pxToRem(16);
       height: pxToRem(16);

@@ -30,21 +30,17 @@
 /*
  LOGGER OUTPUT
 ------------------------------*/
-#he-logger-output {
+#li-logger-output {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   top: 50px;
   z-index: 1205;
-  background-color: $color-midnight;
+  background-color: $lithium-logger-bg;
   color: lighten($color-midnight, 50%);
   transform: translateY(100%);
   transition: ease all 300ms;
-
-  a {
-    color: $danger;
-  }
 
   .close-logger {
     display: block;
@@ -53,14 +49,17 @@
     right: 10px;
     line-height: 40px;
     padding: 0 20px;
-    background: $danger;
-    color: $danger;
+    background: $lithium-logger-toggle-bg;
+    color: $lithium-logger-toggle-color;
     font-size: 0.9em;
     text-transform: uppercase;
     font-weight: 700;
+    border-radius: pxToRem(5) pxToRem(5) 0 0;
 
-    .cu-icon {
-      transition: ease all 300ms;
+    svg {
+      width: pxToRem(20);
+      height: pxToRem(20);
+      fill: currentColor;
     }
   }
 
@@ -70,12 +69,13 @@
     > a {
       display: inline-block;
       padding: 5px;
-      background-color: $danger;
-      color: $danger;
+      background-color: $lithium-logger-tabs-bg;
+      color: $lithium-logger-tabs-color;
       font-size: 0.8em;
       text-transform: uppercase;
       border-radius: $border-radius-lg;
       margin: 2px 0;
+      box-shadow: 0 0 10px fade-out($black, 0.9);
     }
   }
 
@@ -91,7 +91,7 @@
     }
 
     th {
-      color: $danger;
+      color: $primary;
     }
   }
 
@@ -105,12 +105,13 @@
     padding: 15px;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     top: auto;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 300px;
+    height: 50%;
+    max-height: 90vh;
 
     #xo-logger-tabs {
       > a {
@@ -126,6 +127,7 @@
 
   .logger & {
     transform: translateY(0);
+    box-shadow: 0 -2px 10px fade-out($black, 0.9);
 
     .close-logger .cu-icon {
       transform: rotate(180deg);

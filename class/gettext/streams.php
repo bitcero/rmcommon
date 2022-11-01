@@ -62,7 +62,7 @@ class StringReader
 
     public function read($bytes)
     {
-        $data = mb_substr($this->_str, $this->_pos, $bytes);
+        $data = mb_substr($this->_str, null == $this->_pos ? 0 : $this->_pos, $bytes);
         $this->_pos += $bytes;
         if (mb_strlen($this->_str) < $this->_pos) {
             $this->_pos = mb_strlen($this->_str);

@@ -158,3 +158,21 @@ $font-secondary: 'Open Sans Condensed', sans-serif;
  */
 $lithium-table-th-bg:                  #f3f2f7;
 $lithium-table-head-color:             lighten($body-color, 40%) !default;
+
+/*
+12. LOGGER
+------------------------------
+ */
+$lithium-logger-toggle-bg:             $danger;
+$lithium-logger-toggle-color:          $white;
+$lithium-logger-bg:                    $gray-100;
+$lithium-logger-color:                 $gray-800;
+$lithium-logger-tabs-bg:               $primary;
+$lithium-logger-tabs-color:            $white;
+
+/*
+12. ICONS
+------------------------------
+ */
+$lithium-icon-details-bg:              $white;
+$lithium-icon-details-color:           $gray-800;
