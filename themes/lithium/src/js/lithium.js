@@ -214,18 +214,6 @@ function updatesNotifier(count) {
         });
       }
     }
-
-    // Debug logger
-    if ($("#he-logger-output").length > 0) {
-
-      $("#he-logger-output .close-logger").click(function () {
-        $("html").toggleClass('logger');
-        return false;
-      });
-
-    }
-
-
   });
 
 })(jQuery, cuLanguage);
@@ -318,5 +306,20 @@ function updatesNotifier(count) {
       e.preventDefault();
       toggleSidebarVisibility();
     });
+  });
+
+  /**
+   * In screen logger controls
+   */
+  document.addEventListener('DOMContentLoaded', function () {
+    const logger = document.querySelector('#li-logger-output');
+
+    if (logger) {
+      const loggerToggle = logger.querySelector('.close-logger');
+      loggerToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector('body').classList.toggle('logger');
+      });
+    }
   });
 })();
