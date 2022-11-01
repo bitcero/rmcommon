@@ -608,6 +608,7 @@ class RMTemplate
     }
 
     $adminSection = defined('XOOPS_CPFUNC_LOADED') || defined('CU_ADMIN_SECTION');
+    $paths = [];
 
     if ($cuSettings->development) {
       $version = date('dmyhis', time());
@@ -626,7 +627,9 @@ class RMTemplate
         $paths['theme'] .= '' != $directory ? '/' . $directory : '';
       }
 
-      $paths['theme'] .= "/" . ltrim($file, '/');
+      if (isset($paths['theme'])) {
+        $paths['theme'] .= "/" . ltrim($file, '/');
+      }
 
       // 2. Module
       $paths['module'] = XOOPS_ROOT_PATH . '/modules/' . $element;
