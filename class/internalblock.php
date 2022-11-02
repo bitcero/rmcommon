@@ -404,7 +404,7 @@ class RMInternalBlock extends RMObject
         }
 
         // Guardamos las secciones
-        if (count($this->sections) > 0) {
+        if (!empty($this->sections)) {
             if (!$this->isNew()) {
                 $this->db->queryF('DELETE FROM ' . $this->db->prefix('mod_rmcommon_blocks_assignations') . " WHERE bid='" . $this->id() . "'");
             }
@@ -425,8 +425,9 @@ class RMInternalBlock extends RMObject
                 $this->addError($this->db->error());
             }
         }
+
         // Guardamos los permisos
-        if (count($this->rgroups) > 0 || count($this->wgroups) > 0) {
+        if (!empty($this->rgroups) || !empty($this->wgroups)) {
             if (!$this->isNew()) {
                 $this->db->queryF('DELETE FROM ' . $this->db->prefix('group_permission') . " WHERE gperm_itemid='" . $this->id() . "' AND gperm_name='rmblock_read'");
             }

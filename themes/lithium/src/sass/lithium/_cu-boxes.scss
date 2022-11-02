@@ -18,7 +18,6 @@
       padding: 15px 15px 0;
       border-bottom-color: transparent;
       background-color: transparent;
-      border-radius: $cu-box-border-radius $cu-box-border-radius 0 0;
 
       > li{
 
@@ -90,7 +89,7 @@
     }
 
     & + .box-content > .nav-tabs{
-      padding-top: 0;
+
     }
 
   }
