@@ -32,6 +32,7 @@ namespace Common\Core\Helpers;
 class Icons extends Attributes
 {
   private $iconsProviders = [];
+  private $providersDetails = [];
   private $noIcon = '';
 
   public function __construct()
@@ -84,6 +85,7 @@ class Icons extends Attributes
       }
 
       $this->iconsProviders[$provider['id']] = $provider['directory'];
+      $this->providersDetails[$provider['id']] = $provider;
     }
   }
 
@@ -116,6 +118,31 @@ class Icons extends Attributes
     }
 
     return $list;
+  }
+
+  public function iconsListByProvider()
+  {
+    $providers = array_keys($this->iconsProviders);
+    $icons_list = [];
+
+    foreach($this->providersDetails as $id => $provider){
+      if (!is_dir($this->iconsProviders[$id])) {
+        continue;
+      }
+
+      $dir = opendir($this->iconsProviders[$id]);
+      $icons_list[$id]['name'] = $provider['name'];
+
+      while (false !== ($file = readdir($dir))) {
+        if ('.' == $file || '..' == $file || '.svg' != mb_substr($file, -4) || '.' == mb_substr($file, 0, 1)) {
+          continue;
+        }
+
+        $icons_list[$id]['icons'][] = 'svg-' . $id . '-' . mb_substr($file, 0, mb_strlen($file) - 4);
+      }
+    }
+
+    return $icons_list;
   }
 
   /**
@@ -196,6 +223,9 @@ class Icons extends Attributes
   {
     // Replace the svg- prefix if exists at the beginning in the icon id
     $icon_id = preg_replace('/^svg-/', '', $icon_id);
+
+    // Replace the .svg extension if exists at the end in the icon id
+    $icon_id = preg_replace('/\.svg$/', '', $icon_id);
 
     return $this->getIcon('svg-' . $icon_id, $attributes, false);
   }

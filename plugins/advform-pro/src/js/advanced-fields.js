@@ -21,7 +21,7 @@ var sliderCounter = [];
 
     $(document).ready(function(){
 
-        $(".adv-icons-picker").advIconPicker({icons:'glyphicons'});
+        $(".adv-icons-picker").advIconPicker({icons:'svg'});
 
         /**
          * WebFonts Control

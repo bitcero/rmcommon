@@ -1,12 +1,21 @@
-.table{
+.table {
   border-top: 1px solid $table-border-color;
-  thead{
-    tr{
-      th{
+
+  thead {
+    tr {
+      th {
         background-color: $lithium-table-th-bg;
         text-transform: uppercase;
         color: $lithium-table-head-color;
       }
+    }
+  }
+
+  td.item-options {
+    svg {
+      width: pxToRem(20);
+      height: pxToRem(20);
+      fill: currentColor;
     }
   }
 }

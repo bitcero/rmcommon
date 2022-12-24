@@ -46,141 +46,17 @@
             </li>
         </ul>
 
-        <div class="tab-content" id="blocks-tab-content">
+        <div class="tab-content no-padding" id="blocks-tab-content">
             <div role="tabpanel" class="tab-pane fade" aria-labelledby="position-tab" id="positions">
 
-                <div id="bks-and-pos" class="row">
-                    <div id="form-pos" class="col-md-3 col-lg-3">
-                        <form name="frmaddpos" id="frm-add-pos" method="post" action="blocks.php">
-                            <fieldset>
-                                <legend>Add Position</legend>
-
-                                <div class="form-group">
-                                    <label><?php _e('Name', 'rmcommon'); ?></label>
-                                    <input type="text" name="posname" value="" class="form-control" required>
-                                    <span class="help-block"><?php _e('Input a name to identify this position (<em>eg. Left blocks</em>)', 'rmcommon'); ?></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <label><?php _e('Tag Name', 'rmcommon'); ?></label>
-                                    <input type="text" name="postag" value="" class="form-control" required>
-                                    <span class="help-block"><?php _e('Specify a name for the smarty tag to use in templates (eg. left_blocks). This tag will be used as Smarty tag (eg. &lt;{$left_blocks}&gt).', 'rmcommon'); ?></span>
-                                </div>
-
-                                <input type="submit" class="btn btn-info btn-large" name="bk_add_pos" id="add-position"
-                                       value="<?php _e('Add Position', 'rmcommon'); ?>">
-                                <input type="hidden" name="action" value="save_position">
-                              <?php echo $xoopsSecurity->getTokenHTML(); ?>
-
-                                <h4><?php _e('How to implement blocks', 'rmcommon'); ?></h4>
-                                <pre>&lt;{foreach item="block" from=$xoBlocks.<em><strong>tag_name</strong></em>}&gt;
-    &lt;{$block.title}&gt;
-    &lt;{$block.content}&gt;
-&lt;{/foreach}&gt;</pre>
-                            </fieldset>
-                        </form>
-                    </div>
-
-                    <!-- Positions -->
-                    <div id="blocks-positions" class="col-md-9 col-lg-9">
-                        <form name="formPos" id="frm-positions" method="post" action="blocks.php" class="form-inline">
-                            <div class="cu-bulk-actions">
-                                <select name="action" id="bulk-top" class="form-control"
-                                        onchange="$('#bulk-bottom').val($(this).val());">
-                                    <option value=""><?php _e('Bulk actions...', 'rmcommon'); ?></option>
-                                    <option value="active"><?php _e('Active', 'rmcommon'); ?></option>
-                                    <option value="inactive"><?php _e('Inactive', 'rmcommon'); ?></option>
-                                    <option value="deletepos"><?php _e('Delete', 'rmcommon'); ?></option>
-                                </select>
-                                <button type="button" class="btn btn-default" id="the-op-topp"
-                                        onclick="before_submit('frm-positions');"><?php _e('Apply', 'rmcommon'); ?></button>
-                            </div>
-                            <table class="table table-striped table-bordered" border="0" id="table-positions">
-                                <thead>
-                                <tr>
-                                    <th width="30"><input type="checkbox" id="checkallp" data-checkbox="positions"
-                                                          data-oncheck="positions"></th>
-                                    <th width="30" align="left"><?php _e('ID', 'rmcommon'); ?></th>
-                                    <th align="left"><?php _e('Name', 'rmcommon'); ?></th>
-                                    <th><?php _e('Smarty Tag', 'rmcommon'); ?></th>
-                                    <th><?php _e('Active', 'rmcommon'); ?></th>
-                                </tr>
-                                <thead>
-                                <tfoot>
-                                <tr>
-                                    <th width="30"><input type="checkbox" id="checkallpb" data-checkbox="positions"
-                                                          data-oncheck="positions"></th>
-                                    <th width="50" align="left"><?php _e('ID', 'rmcommon'); ?></th>
-                                    <th align="left"><?php _e('Name', 'rmcommon'); ?></th>
-                                    <th><?php _e('Smarty Tag', 'rmcommon'); ?></th>
-                                    <th><?php _e('Active', 'rmcommon'); ?></th>
-                                </tr>
-                                <tfoot>
-                                <tbody>
-
-                                <?php if (empty($positions)): ?>
-                                    <tr>
-                                        <td colspan="5" class="text-center">
-                    <span class="label label-info">
-                        <?php _e('There are not positions created yet!', 'rmcommon'); ?>
-                    </span>
-                                        </td>
-                                    </tr>
-                                <?php endif; ?>
-
-                                <?php foreach ($positions as $pos): ?>
-                                    <tr class="<?php echo tpl_cycle('even,odd'); ?>" id="ptr-<?php echo $pos['id']; ?>"
-                                        valign="top">
-                                        <td align="center"><input type="checkbox" name="ids[]"
-                                                                  id="itemp-<?php echo $pos['id']; ?>"
-                                                                  value="<?php echo $pos['id']; ?>"
-                                                                  data-oncheck="positions"></td>
-                                        <td align="left"><strong><?php echo $pos['id']; ?></strong></td>
-                                        <td>
-                                            <span class="name"><?php echo $pos['name']; ?></span>
-                                            <span class="cu-item-options">
-                            <a href="#"
-                               onclick="select_option(<?php echo $pos['id']; ?>, 'delete', 'frm-positions')"><?php _e('Delete', 'rmcommon'); ?></a> |
-                            <a href="#" class="edit_position"><?php _e('Edit', 'rmcommon'); ?></a>
-                        </span>
-                                            <span class="pos_data hide">
-                            <span class="name"><?php echo $pos['name']; ?></span>
-                            <span class="ptag"><?php echo $pos['tag']; ?></span>
-                            <span class="active"><?php echo $pos['active']; ?></span>
-                        </span>
-                                        </td>
-                                        <td align="center">&lt;{$xoBlocks.<span
-                                                    class="ptag"><?php echo $pos['tag']; ?></span>}&gt;
-                                        </td>
-                                        <td align="center"><span
-                                                    class="fa <?php echo 1 == $pos['active'] ? 'fa-check text-success' : 'fa-times text-danger'; ?>"></span>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                            <div class="cu-bulk-actions">
-                                <select name="actionb" class="form-control" id="bulk-bottom"
-                                        onchange="$('#bulk-top').val($(this).val());">
-                                    <option value=""><?php _e('Bulk actions...', 'rmcommon'); ?></option>
-                                    <option value="active"><?php _e('Active', 'rmcommon'); ?></option>
-                                    <option value="inactive"><?php _e('Inactive', 'rmcommon'); ?></option>
-                                    <option value="deletepos"><?php _e('Delete', 'rmcommon'); ?></option>
-                                </select>
-                                <button type="button" class="btn btn-default" id="the-op-topp"
-                                        onclick="before_submit('frm-positions');"><?php _e('Apply', 'rmcommon'); ?></button>
-                            </div>
-                          <?php echo $xoopsSecurity->getTokenHTML(); ?>
-                        </form>
-                    </div>
-                </div>
+                <?php include $common->template()->path('partials/blocks-positions.tpl.php'); ?>
 
             </div>
 
             <div role="tabpanel" class="tab-pane fade show active" aria-labelledby="blocks-tab" id="blocks">
 
                 <!-- Positions Grid -->
-                <div class="row" id="blocks-list">
+                <div class="ps-5 pe-5 pt-2 pb-4" id="blocks-list">
                     <div class="d-flex justify-content-between">
                         <div id="blocks-available">
                           <p><?php _e('Select from the following list the block or blocks you want to add.', 'rmcommon'); ?></p>
@@ -288,8 +164,10 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" aria-labelledby="console-tab" id="console">
-                <div id="blocks-console">
-                    <ul id="bk-messages" class="list-unstyled"></ul>
+                <div class="ps-5 pe-5 pt-2 pb-5">
+                    <div id="blocks-console">
+                        <ul id="bk-messages" class="list-unstyled"></ul>
+                    </div>
                 </div>
             </div>
         </div>

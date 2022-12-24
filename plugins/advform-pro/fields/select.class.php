@@ -79,6 +79,8 @@ class AdvancedSelectField extends RMFormElement
         $options = $this->get('options');
         $selected = $this->get('selected');
 
+        $selected = empty($selected) ? [] : $selected;
+
         foreach($options as $caption => $value){
             $field .= "\n<option value=\"$value\"";
             $field .= in_array($value, $selected) ? ' selected' : '';

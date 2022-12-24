@@ -41,9 +41,9 @@ if(!$xoopsSecurity->check(true, false, 'CUTOKEN')){
 // Include icons list
 require 'icons-lists.php';
 
-RMTemplate::getInstance()->assign('svgIcons', $cuIcons->getIconsList());
-RMTemplate::getInstance()->assign('faIcons', $fontAwesome);
-RMTemplate::getInstance()->assign('glyphIcons', $glyphIcons);
+RMTemplate::getInstance()->assign('svgIcons', $cuIcons->iconsListByProvider());
+//RMTemplate::getInstance()->assign('faIcons', $fontAwesome);
+//RMTemplate::getInstance()->assign('glyphIcons', $glyphIcons);
 RMTemplate::getInstance()->assign('moonIcons', $icomoon);
 
 // Parent
