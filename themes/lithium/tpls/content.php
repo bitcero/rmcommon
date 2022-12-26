@@ -24,12 +24,12 @@
   <?php else: ?>
     <?php echo $content; ?>
   <?php endif; ?>
+</div>
 
-    <div id="he-footer">
-      <?php echo sprintf(
-        __('Powered by %s and %s', 'rmcommon'),
-        '<strong><a href="https://rmcommon.bitcero.dev" target="_blank">' . RMModules::get_module_version('rmcommon') . '</a></strong>',
-        '<a href="http://xoops.org" target="_blank">' . XOOPS_VERSION . '</a>'
-      ); ?>.
-    </div>
+<div id="li-footer">
+  <?php echo sprintf(
+    __('Powered by %s and %s', 'rmcommon'),
+    '<strong><a href="https://rmcommon.bitcero.dev" target="_blank">' . RMModules::get_module_version('rmcommon') . '</a></strong>',
+    '<a href="http://xoops.org" target="_blank">' . XOOPS_VERSION . '</a>'
+  ); ?>.
 </div>

@@ -3,11 +3,12 @@ html{
 }
 #li-main-content{
   margin-left: $lithium-sidebar-collapsed-width;
-  padding: pxToRem(10) 40px 40px;
+  padding: pxToRem(10) 40px pxToRem(60);
   margin-top: pxToRem(94);
   position: relative;
   transition: ease margin-left 300ms;
   z-index: 1;
+  min-height: calc(100vh - #{pxToRem(94)});
 
   .show-sidebar &{
     margin-left: $lithium-sidebar-width;
