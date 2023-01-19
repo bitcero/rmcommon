@@ -10,42 +10,29 @@
 .rmc-position-item {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.15);
-}
 
-.rmc-position-item h3 > .cu-icon {
-  float: right;
-  margin-top: 0px;
-  margin-right: 10px;
-  display: none;
-}
+  > .cu-icon {
+    float: right;
+    margin-top: 0px;
+    margin-right: 10px;
+    display: none;
+  }
 
-.rmc-position-item ol {
-  list-style: none;
-  padding: 5px;
-  margin: 0;
-}
+  ol {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+  }
 
-.rmc-position-item ol li {
-  border: 1px solid $border-color;
-  border-radius: 6px;
-  margin: 0 0 6px 0;
-}
+  li {
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    margin: 0 0 6px 0;
 
-.rmc-position-item ol li > .row > a {
-  display: inline-block;
-  line-height: 30px;
-  padding: 0 7px;
-  border-left: 1px solid #ddd;
-  box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.5);
-}
-
-.rmc-position-item ol li > .row > a:last-child {
-  border-radius: 0 0 0 2px;
-}
-
-.rmc-position-item ol li > .row > a:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
+    a{
+      padding: pxToRem(5);
+    }
+  }
 }
 
 .rmc-position-item ol li > .item-controls,
@@ -91,8 +78,9 @@
   margin: 0;
 }
 
-.rmc-position-item ol li i {
-  font-size: 14px;
+.rmc-position-item ol li svg {
+  @include cu-icon-size(24px);
+  fill: currentColor;
 }
 
 /* NESTABLE */
@@ -386,7 +374,7 @@ AVAILABLE LIST
   background: $gray-100 !important;
 
   .cu-icon {
-    @include cu-icon-size(16px);
+    @include cu-icon-size(24px);
 
     &.rmcommon-icon circle {
       opacity: 1;

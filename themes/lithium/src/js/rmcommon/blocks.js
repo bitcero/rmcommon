@@ -65,7 +65,7 @@ var blocksAjax = {
                             return;
                         }
 
-                        if(data.message!=undefined && data.message!='')
+                        if(data.message!==undefined && data.message!=='')
                             blocksAjax.addMessage(data.message, blocksAjax.messageTypes.info);
 
                         blocksAjax.addToken(data.token);
@@ -125,6 +125,7 @@ var blocksAjax = {
             $("#settings-blocker").fadeOut('fast', function(){
                 $(this).remove();
                 $("#settings-form-window").remove();
+                $('body').css("overflow", '');
             });
         });
     },
@@ -250,9 +251,11 @@ var blocksAjax = {
         }
 
         var html = '<li class="dd-item" data-id="'+block.id+'" id="block-'+block.id+'" data-position="'+block.position+'">';
-        html += '<div class="row item-controls">';
+        html += '<div class="item-controls d-flex justify-content-between align-items-center p-2">';
         html += '<strong class="dd-handle">'+block.title+'</strong>';
-        html += '<a href="#" class="pull-right text-error" data-block="'+block.id+'" data-action="delete" title="'+cuLanguage.deleteBlock+'"><i class="fa fa-minus-circle text-danger"></i></a>';
+        html += '<div class="d-flex align-items-center">' +
+          '<a href="#" class="pull-right text-error" data-block="'+block.id+'" data-action="delete" title="'+cuLanguage.deleteBlock+'">' +
+          '<i class="fa fa-minus-circle text-danger"></i></a></div>';
 
         if(block.visible)
             html += '<a href="#" class="pull-right text-warning" data-block="'+block.id+'" data-action="hide" title="'+cuLanguage.hideBlock+'"><i class="fa fa-eye-slash"></i></a>';
@@ -433,7 +436,6 @@ $(document).ready(function(){
     });
     
     $("#blocks-available li a").click(function(){
-
         var block = $(this).attr("id").replace("block-",'');
         
         var block = block.split("-");
@@ -463,7 +465,7 @@ $(document).ready(function(){
                 return false;
             }
             
-            if(data.message!=undefined && data.message!=''){
+            if(data.message!==undefined && data.message!==''){
                 blocksAjax.addMessage(data.message, blocksAjax.messageTypes.info);
             }
 

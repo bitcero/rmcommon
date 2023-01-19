@@ -112,37 +112,41 @@
                                                       data-position="<?php echo $pos['id']; ?>"
                                                       data-id="<?php echo $block['id']; ?>"
                                                       id="block-<?php echo $block['id']; ?>">
-                                                      <div class="row item-controls">
+                                                      <div class="item-controls d-flex justify-content-between align-items-center p-2">
                                                           <strong class="dd-handle"
                                                                   title="<?php echo sprintf(__('Module: %s', 'rmcommon'), $block['module']['name']); ?>">
                                                             <?php echo $cuIcons->getIcon($block['module']['icon']); ?>
                                                             <?php echo $block['title']; ?>
                                                           </strong>
 
-                                                          <div class="d-flex justify-content-between align-items-center">
-                                                              <a href="#" class="pull-right text-error control-delete"
-                                                                 data-block="<?php echo $block['id']; ?>"
-                                                                 onclick="control_action( 'delete', <?php echo $block['id']; ?> );"
-                                                                 title="<?php _e('Delete Block', 'rmcommon'); ?>"><i
-                                                                          class="fa fa-minus-circle text-danger"></i></a>
+                                                          <div class="d-flex align-items-center">
                                                             <?php if ($block['visible']): ?>
-                                                                <a href="#" class="pull-right text-warning control-visible"
+                                                                <a href="#" class="pull-right text-warning control-visible text-warning"
                                                                    data-block="<?php echo $block['id']; ?>"
                                                                    onclick="control_action( 'hide', <?php echo $block['id']; ?> );"
-                                                                   title="<?php _e('Hide block', 'rmcommon'); ?>"><i
-                                                                            class="fa fa-eye-slash"></i></a>
+                                                                   title="<?php _e('Hide block', 'rmcommon'); ?>">
+                                                                  <?php echo $common->icons()->svg('lithium-hide'); ?>
+                                                                </a>
                                                             <?php else: ?>
-                                                                <a href="#" class="pull-right text-success control-visible"
+                                                                <a href="#" class="pull-right text-success control-visible text-success"
                                                                    data-block="<?php echo $block['id']; ?>"
                                                                    onclick="control_action( 'show', <?php echo $block['id']; ?> );"
-                                                                   title="<?php _e('Show block', 'rmcommon'); ?>"><i
-                                                                            class="fa fa-eye"></i></a>
+                                                                   title="<?php _e('Show block', 'rmcommon'); ?>">
+                                                                  <?php echo $common->icons()->svg('lithium-show'); ?>
+                                                                </a>
                                                             <?php endif; ?>
-                                                              <a href="#" class="pull-right control-settings"
+                                                              <a href="#" class="pull-right control-settings text-blue-grey"
                                                                  data-block="<?php echo $block['id']; ?>"
                                                                  onclick="control_action( 'settings', <?php echo $block['id']; ?> );"
-                                                                 title="<?php _e('Block Settings', 'rmcommon'); ?>"><i
-                                                                          class="fa fa-wrench"></i></a>
+                                                                 title="<?php _e('Block Settings', 'rmcommon'); ?>">
+                                                                <?php echo $common->icons()->svg('lithium-setting'); ?>
+                                                              </a>
+                                                              <a href="#" class="pull-right text-error control-delete text-danger"
+                                                                 data-block="<?php echo $block['id']; ?>"
+                                                                 onclick="control_action( 'delete', <?php echo $block['id']; ?> );"
+                                                                 title="<?php _e('Delete Block', 'rmcommon'); ?>">
+                                                                <?php echo $common->icons()->svg('lithium-remove'); ?>
+                                                              </a>
                                                           </div>
                                                       </div>
                                                   </li>
