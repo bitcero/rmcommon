@@ -88,7 +88,7 @@ function formatSQL()
             $sql = ' level>0';
         }
 
-        $tpl->assign('display_adv', 'display: none;');
+        $tpl->assign('display_adv', false);
         // Extend SQL with plugins
         // API:
         $sql = RMEvents::get()->run_event('rmcommon.users.getsql', $sql);
@@ -170,9 +170,9 @@ function formatSQL()
     }
 
     if ($show) {
-        $tpl->assign('display_adv', '');
+        $tpl->assign('display_adv', true);
     } else {
-        $tpl->assign('display_adv', 'display: none;');
+        $tpl->assign('display_adv', false);
     }
 
     $rtsql = '' != $sql ? "WHERE $sql" : '';
