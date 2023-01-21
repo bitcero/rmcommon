@@ -246,21 +246,21 @@ function save_position($edit = 0)
   $pos->setVar('tag', $tag);
   $pos->setVar('active', 1);
 
-  $sql = 'SELECT COUNT(*) FROM ' . $db->prefix('mod_rmcommon_blocks_positions') . " WHERE name='$name' OR tag='$tag'";
+  $sql = 'SELECT COUNT(*) FROM ' . $db->prefix('mod_rmcommon_blocks_positions') . " WHERE (name='$name' OR tag='$tag')";
   if ($edit) {
-    $sql .= " AND id_position<>$id";
+    $sql .= " AND id_position != $id";
   }
 
   list($num) = $db->fetchRow($db->query($sql));
 
   if ($num > 0) {
-    redirectMsg('blocks.php', __('Already exists another position with same name or same tag!', 'rmcommon'), 1);
+    $common->uris()::redirect_with_message(__('Already exists another position with same name or same tag!', 'rmcommon'), 'blocks.php?from=positions', RMMSG_ERROR);
   }
 
   if ($pos->save()) {
-    redirectMsg('blocks.php?from=positions', __('Database updated successfully!', 'rmcommon'));
+    $common->uris()::redirect_with_message(__('Database updated successfully!', 'rmcommon'), 'blocks.php?from=positions', RMMSG_SUCCESS);
   } else {
-    redirectMsg('blocks.php?from=positions', __('Errors ocurred while trying to save data', 'rmcommon') . '<br>' . $pos->errors());
+    $common->uris()::redirect_with_message(__('Errors ocurred while trying to save data', 'rmcommon') . '<br>' . $pos->errors(), 'blocks.php?from=positions', RMMSG_ERROR);
   }
 }
 
@@ -323,7 +323,7 @@ function delete_positions()
   if ('' != $errors) {
     redirectMsg('blocks.php?from=positions', __('There was some errors:', 'rmcommon') . '<br>' . $error, 1);
   } else {
-    redirectMsg('blocks.php?from=positions', __('Database updated successfully', 'rmcommon'), 0);
+    redirectMsg('blocks.php?from=positions', __('Position deleted successfully', 'rmcommon'), 0);
   }
 }
 
@@ -334,7 +334,7 @@ function activate_position($status)
   if (!$xoopsSecurity->check()) {
     RMUris::redirect_with_message(
       __('Session token is not valid!', 'rmcommon'),
-      'blocks.php',
+      'blocks.php?from=positions',
       RMMSG_ERROR
     );
   }
@@ -344,7 +344,7 @@ function activate_position($status)
   if (!is_array($ids) || empty($ids)) {
     RMUris::redirect_with_message(
       __('No position id has been provided', 'rmcommon'),
-      'blocks.php',
+      'blocks.php?from=positions',
       RMMSG_WARN
     );
   }
@@ -355,13 +355,13 @@ function activate_position($status)
   if ($xoopsDB->queryF($sql)) {
     RMUris::redirect_with_message(
       __('Database updated successully!', 'rmcommon'),
-      'blocks.php',
+      'blocks.php?from=positions',
       RMMSG_SUCCESS
     );
   } else {
     RMUris::redirect_with_message(
       __('Errors ocurrs while trying to update data:', 'rmcommon') . $xoopsDB->error(),
-      'blocks.php',
+      'blocks.php?from=positions',
       RMMSG_ERROR
     );
   }

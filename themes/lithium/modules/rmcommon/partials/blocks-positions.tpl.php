@@ -3,8 +3,7 @@
     <form name="formPos" id="frm-positions" method="post" action="blocks.php" class="form-inline">
         <div class="cu-bulk-actions d-flex justify-content-end">
             <div class="d-flex align-items-center">
-                <select name="action" id="bulk-top" class="form-select me-2"
-                        onchange="$('#bulk-bottom').val($(this).val());">
+                <select name="action" id="bulk-topp" class="form-select me-2">
                     <option value=""><?php _e('Bulk actions...', 'rmcommon'); ?></option>
                     <option value="active"><?php _e('Active', 'rmcommon'); ?></option>
                     <option value="inactive"><?php _e('Inactive', 'rmcommon'); ?></option>

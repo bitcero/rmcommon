@@ -29,19 +29,6 @@
                   <?php _e('Blocks', 'rmcommon'); ?>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button
-                        class="nav-link"
-                        id="console-tab"
-                        type="button"
-                        aria-controls="console"
-                        role="tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#console">
-                  <?php echo $common->icons()->svg('lithium-terminal'); ?>
-                  <?php _e('Console', 'rmcommon'); ?>
-                </button>
-            </li>
         </ul>
 
         <div class="tab-content no-padding" id="blocks-tab-content">
@@ -56,14 +43,6 @@
                 <!-- Positions Grid -->
               <?php include $common->template()->path('partials/blocks-list.tpl.php'); ?>
 
-            </div>
-
-            <div role="tabpanel" class="tab-pane" aria-labelledby="console-tab" id="console">
-                <div class="ps-5 pe-5 pt-2 pb-5">
-                    <div id="blocks-console">
-                        <ul id="bk-messages" class="list-unstyled"></ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

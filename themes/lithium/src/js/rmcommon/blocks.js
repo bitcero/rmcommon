@@ -60,13 +60,9 @@ var blocksAjax = {
                     $("#settings-loading").fadeOut("fast", function(){
 
                         if(data.error){
-                            blocksAjax.addMessage(data.message, blocksAjax.messageTypes.error);
                             blocksAjax.addToken(data.token);
                             return;
                         }
-
-                        if(data.message!==undefined && data.message!=='')
-                            blocksAjax.addMessage(data.message, blocksAjax.messageTypes.info);
 
                         blocksAjax.addToken(data.token);
 
@@ -144,13 +140,9 @@ var blocksAjax = {
                     });
 
                     if(data.error){
-                        blocksAjax.addMessage(data.message, blocksAjax.messageTypes.error);
                         blocksAjax.addToken(data.token);
                         return;
                     }
-
-                    if(data.message!=undefined && data.message!='')
-                        blocksAjax.addMessage(data.message, blocksAjax.messageTypes.info);
 
                     blocksAjax.addToken(data.token);
 
@@ -234,9 +226,7 @@ var blocksAjax = {
             if(data.message != ''){
                 // Position changes applied
                 $("#position-"+data.data.position+" > ol > li").attr("data-position", data.data.position);
-                blocksAjax.addMessage(data.message, blocksAjax.messageTypes.info);
                 blocksAjax.showOkIcon("#position-"+data.data.position);
-
             }
 
         }, 'json');
@@ -246,7 +236,6 @@ var blocksAjax = {
     addBlockToPosition: function(block){
 
         if(block.id == undefined || block.id<=0){
-            blocksAjax.addMessage(cuLanguage.errorShowInPosition, blocksAjax.messageTypes.error);
             return false;
         }
 
@@ -282,6 +271,7 @@ var blocksAjax = {
         return $(positions[0]);
 
     },
+
 
     addMessage: function(message, type){
 
@@ -319,9 +309,6 @@ var blocksAjax = {
 
             if(blocksAjax.handleError(data))
                 return false;
-
-            if(data.message!='')
-                blocksAjax.addMessage(data.message, blocksAjax.messageTypes.info);
 
             blocksAjax.showOkIcon($('#block-' + block).data("position"));
 
@@ -362,7 +349,6 @@ var blocksAjax = {
         token = token==undefined ? true : token;
 
         if(data.error == 1){
-            blocksAjax.addMessage(data.message + '<br>' + data.data.error, blocksAjax.messageTypes.error);
             if(token==true)
                 blocksAjax.addToken(data.token);
             return true;
@@ -387,8 +373,6 @@ var blocksAjax = {
 
             if(blocksAjax.handleError(data, true))
                 return false;
-
-            blocksAjax.addMessage(data.message, blocksAjax.messageTypes.warning);
 
             blocksAjax.addToken(data.token, true);
 
@@ -460,13 +444,8 @@ $(document).ready(function(){
         $.post('ajax/blocks.php', params, function(data){
 
             if(data.error){
-                blocksAjax.addMessage(data.message,  blocksAjax.messageTypes.error);
                 blocksAjax.addToken(data.token);
                 return false;
-            }
-            
-            if(data.message!==undefined && data.message!==''){
-                blocksAjax.addMessage(data.message, blocksAjax.messageTypes.info);
             }
 
             blocksAjax.addToken(data.token);
@@ -543,13 +522,13 @@ function select_option(id,action,form){
 		$("#bulk-topp").val('edit');
 		$("#bulk-bottomp").val('edit');
 		$("#"+form+" input[type=checkbox]").removeAttr("checked");
-		$("#item-"+id).attr("checked","checked");
+		$("#item-"+id).prop("checked","checked");
 		$("#"+form).submit();
 	}else if(action=='delete'){
 		$("#bulk-topp").val('deletepos');
 		$("#bulk-bottomp").val('deletepos');
 		$("#"+form+" input[type=checkbox]").removeAttr("checked");
-		$("#itemp-"+id).attr("checked","checked");
+		$("#itemp-"+id).prop("checked", true);
 		before_submit(form);
 	}
 
