@@ -32,206 +32,206 @@
  */
 class RMUris
 {
-    /**
-     * Encode array keys to make a valid url string
-     *
-     * @param array $array to encode
-     * @param string $name name to generate url
-     * @param string $param_separator A valid URL param separator (&)
-     * @return string
-     */
-    public static function url_encode_array($array, $name, $param_separator = '&')
-    {
-        return http_build_query($array, 'var_', $param_separator);
+  /**
+   * Encode array keys to make a valid url string
+   *
+   * @param array $array to encode
+   * @param string $name name to generate url
+   * @param string $param_separator A valid URL param separator (&)
+   * @return string
+   */
+  public static function url_encode_array($array, $name, $param_separator = '&')
+  {
+    return http_build_query($array, 'var_', $param_separator);
+  }
+
+  /**
+   * Returns the current browser
+   * @return string
+   */
+  public static function current_url()
+  {
+    $pageURL = 'http';
+    if (isset($_SERVER['HTTPS']) && 'on' == mb_strtolower($_SERVER['HTTPS'])) {
+      $pageURL .= 's';
+    }
+    $pageURL .= '://';
+    $pageURL .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+    return $pageURL;
+  }
+
+  public static function anchor($module, $controller = '', $action = '', $parameters = [])
+  {
+    global $cuSettings;
+
+    if ('' == $module) {
+      return null;
     }
 
-    /**
-     * Returns the current browser
-     * @return string
-     */
-    public static function current_url()
-    {
-        $pageURL = 'http';
-        if (isset($_SERVER['HTTPS']) && 'on' == mb_strtolower($_SERVER['HTTPS'])) {
-            $pageURL .= 's';
-        }
-        $pageURL .= '://';
-        $pageURL .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $url = XOOPS_URL;
 
-        return $pageURL;
+    $paths = isset($cuSettings->modules_path) ? $cuSettings->modules_path : [];
+    $path = isset($paths[$module]) ? $paths[$module] : '/' . $module;
+
+    if (defined('XOOPS_CPFUNC_LOADED')) {
+      if ($cuSettings->permalinks && isset($paths[$module])) {
+        $url .= '/admin' . $path;
+      } else {
+        $objModule = XoopsModule::getByDirname($module);
+        $url .= '/modules/' . $module . '/' . $objModule->getInfo('adminindex');
+      }
+    } else {
+      $url .= $cuSettings->permalinks ? $path : '/modules/' . $module;
     }
 
-    public static function anchor($module, $controller = '', $action = '', $parameters = [])
-    {
-        global $cuSettings;
-
-        if ('' == $module) {
-            return null;
-        }
-
-        $url = XOOPS_URL;
-
-        $paths = isset($cuSettings->modules_path) ? $cuSettings->modules_path : [];
-        $path = isset($paths[$module]) ? $paths[$module] : '/' . $module;
-
-        if (defined('XOOPS_CPFUNC_LOADED')) {
-            if ($cuSettings->permalinks && isset($paths[$module])) {
-                $url .= '/admin' . $path;
-            } else {
-                $objModule = XoopsModule::getByDirname($module);
-                $url .= '/modules/' . $module . '/' . $objModule->getInfo('adminindex');
-            }
-        } else {
-            $url .= $cuSettings->permalinks ? $path : '/modules/' . $module;
-        }
-
-        if ('' == $controller) {
-            return $url;
-        }
-
-        $url .= $cuSettings->permalinks ? '/' . $controller . '/' : '/' . $controller . '/';
-        $url .= '' != $action ? $action . '/' : '';
-        $query = '';
-
-        foreach ($parameters as $name => $value) {
-            $query .= $name . '/' . urlencode($value) . '/';
-        }
-
-        return $url . $query;
+    if ('' == $controller) {
+      return $url;
     }
 
-    public static function relative_anchor($module, $controller, $action = '', $parameters = [])
-    {
-        $url = self::anchor($module, $controller, $action, $parameters);
+    $url .= $cuSettings->permalinks ? '/' . $controller . '/' : '/' . $controller . '/';
+    $url .= '' != $action ? $action . '/' : '';
+    $query = '';
 
-        $url = str_replace(XOOPS_URL, '', $url);
-
-        return $url;
+    foreach ($parameters as $name => $value) {
+      $query .= $name . '/' . urlencode($value) . '/';
     }
 
-    /**
-     * Gets a relative URL to file/folder
-     * @param string $path
-     * @return mixed|string
-     */
-    public static function relative_url($path = '')
-    {
-        $url = 'http';
-        if (isset($_SERVER['HTTPS']) && 'on' == mb_strtolower($_SERVER['HTTPS'])) {
-            $url .= 's';
-        }
-        $url .= '://';
-        $url .= $_SERVER['HTTP_HOST'];
+    return $url . $query;
+  }
 
-        if (false === mb_strpos($path, XOOPS_URL)) {
-            $path = XOOPS_URL . '/' . ltrim($path, '/');
-        }
+  public static function relative_anchor($module, $controller, $action = '', $parameters = [])
+  {
+    $url = self::anchor($module, $controller, $action, $parameters);
 
-        $url = str_replace($url, '', $path);
+    $url = str_replace(XOOPS_URL, '', $url);
 
-        /*if ( '' != $path )
-            $url .= '/' . $path;*/
+    return $url;
+  }
 
-        return $url;
+  /**
+   * Gets a relative URL to file/folder
+   * @param string $path
+   * @return mixed|string
+   */
+  public static function relative_url($path = '')
+  {
+    $url = 'http';
+    if (isset($_SERVER['HTTPS']) && 'on' == mb_strtolower($_SERVER['HTTPS'])) {
+      $url .= 's';
+    }
+    $url .= '://';
+    $url .= $_SERVER['HTTP_HOST'];
+
+    if (false === mb_strpos($path, XOOPS_URL)) {
+      $path = XOOPS_URL . '/' . ltrim($path, '/');
     }
 
-    /**
-     * Redirect the browser to a new URL
-     * @param string $message Message to show
-     * @param string $url New URL
-     * @param int $level Warning level
-     * @param string $icon Icon URL (optional)
-     */
-    public static function redirect_with_message($message, $url, $level = RMMSG_WARN, $icon = '')
-    {
-        global $common;
+    $url = str_replace($url, '', $path);
 
-        if ($common->nativeTheme || defined('XOOPS_CPFUNC_LOADED')) {
-            $i = isset($_SESSION['cu_redirect_messages']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
-            $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
-            $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
-            $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
-        } else {
-            // legacy
-            $_SESSION['redirect_message'] = $message;
-        }
+    /*if ( '' != $path )
+        $url .= '/' . $path;*/
 
-        if (!headers_sent()) {
-            header('location: ' . preg_replace('/[&]amp;/i', '&', $url));
-            die();
-        }
+    return $url;
+  }
 
-        $ret = '<script>window.location.href = "' . $url . '";</script><noscript><meta http-equiv="refresh" content="0;url=' . $url . '"></noscript>';
-        echo $ret;
-        die();
+  /**
+   * Redirect the browser to a new URL
+   * @param string $message Message to show
+   * @param string $url New URL
+   * @param int $level Warning level
+   * @param string $icon Icon URL (optional)
+   */
+  public static function redirect_with_message($message, $url, $level = RMMSG_WARN, $icon = '')
+  {
+    global $common;
+
+    if ($common->nativeTheme || defined('XOOPS_CPFUNC_LOADED')) {
+      $i = isset($_SESSION['cu_redirect_messages']) ? count($_SESSION['cu_redirect_messages']) + 1 : 0;
+      $_SESSION['cu_redirect_messages'][$i]['text'] = htmlentities($message);
+      $_SESSION['cu_redirect_messages'][$i]['level'] = $level;
+      $_SESSION['cu_redirect_messages'][$i]['icon'] = $icon;
+    } else {
+      // legacy
+      $_SESSION['redirect_message'] = $message;
     }
 
-    /**
-     * Crea la url para una imagen dada de acuerdo al módulo
-     * @param string $module Directorio del módulo
-     * @param string $image Nombre del archivo de la imagen
-     * @return string URL completa de la imagen
-     */
-    public static function image($module, $image)
-    {
-        if ('' == $module) {
-            return false;
-        }
-
-        $url = XOOPS_URL . '/modules/' . $module . '/images/' . $image;
-
-        return $url;
+    if (!headers_sent()) {
+      header('location: ' . preg_replace('/[&]amp;/i', '&', $url));
+      die();
     }
 
-    /**
-     * Crea la URL para un archivo cualquiera dentro de XOOPS
-     * @param string $module The module directory
-     * @param string $file Name of file inside module/directory
-     * @param string $directory Directory inside module
-     * @return string
-     */
-    public static function file($module, $file, $directory = '')
-    {
-        if ('' == $module || '' == $file) {
-            return '';
-        }
+    $ret = '<script>window.location.href = "' . $url . '";</script><noscript><meta http-equiv="refresh" content="0;url=' . $url . '"></noscript>';
+    echo $ret;
+    die();
+  }
 
-        $partial = trim($module, '/');
-        $partial = trim($partial, '\\');
-
-        if ('' != $directory) {
-            $partial .= trim($directory, '/');
-        }
-
-        $partial .= $file;
-
-        if (!file_exists(XOOPS_ROOT_PATH . '/' . $partial)) {
-            return '';
-        }
-
-        return XOOPS_URL . '/' . $partial;
+  /**
+   * Crea la url para una imagen dada de acuerdo al módulo
+   * @param string $module Directorio del módulo
+   * @param string $image Nombre del archivo de la imagen
+   * @return string URL completa de la imagen
+   */
+  public static function image($module, $image)
+  {
+    if ('' == $module) {
+      return false;
     }
 
-    /**
-     * Gets an URL for a Common Utilities page
-     * @param string $page Page to link
-     * @return string
-     */
-    public static function system_url($page)
-    {
-        global $cuSettings;
+    $url = XOOPS_URL . '/modules/' . $module . '/images/' . $image;
 
-        $url = XOOPS_URL;
+    return $url;
+  }
 
-        switch ($page) {
-            case 'rss':
-                $url .= $cuSettings->permalinks ? '/rss/' : '/backend.php';
-                break;
-            default:
-                $url .= '/' . $page;
-                break;
-        }
-
-        return $url;
+  /**
+   * Crea la URL para un archivo cualquiera dentro de XOOPS
+   * @param string $module The module directory
+   * @param string $file Name of file inside module/directory
+   * @param string $directory Directory inside module
+   * @return string
+   */
+  public static function file($module, $file, $directory = '')
+  {
+    if ('' == $module || '' == $file) {
+      return '';
     }
+
+    $partial = trim($module, '/');
+    $partial = trim($partial, '\\');
+
+    if ('' != $directory) {
+      $partial .= trim($directory, '/');
+    }
+
+    $partial .= $file;
+
+    if (!file_exists(XOOPS_ROOT_PATH . '/' . $partial)) {
+      return '';
+    }
+
+    return XOOPS_URL . '/' . $partial;
+  }
+
+  /**
+   * Gets an URL for a Common Utilities page
+   * @param string $page Page to link
+   * @return string
+   */
+  public static function system_url($page)
+  {
+    global $cuSettings;
+
+    $url = XOOPS_URL;
+
+    switch ($page) {
+      case 'rss':
+        $url .= $cuSettings->permalinks ? '/rss/' : '/backend.php';
+        break;
+      default:
+        $url .= '/' . $page;
+        break;
+    }
+
+    return $url;
+  }
 }

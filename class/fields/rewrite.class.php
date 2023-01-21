@@ -10,44 +10,44 @@
 
 class RMFormRewrite extends RMFormElement
 {
-    private $default = '';
+  private $default = '';
 
-    public function __construct($caption, $name, $default = [])
-    {
-        $this->setCaption($caption);
-        $this->setName($name);
+  public function __construct($caption, $name, $default = [])
+  {
+    $this->setCaption($caption);
+    $this->setName($name);
 
-        $this->default = $default;
+    $this->default = $default;
+  }
+
+  public function id()
+  {
+    return TextCleaner::getInstance()->sweetstring($this->getName());
+  }
+
+  public function render()
+  {
+    /**
+     * Load all modules that supports rewrite feature
+     */
+    $moduleHandler = xoops_getHandler('module');
+    $objects = $moduleHandler->getObjects();
+    $modules = [];
+
+    foreach ($objects as $mod) {
+      if (!$mod->getInfo('rewrite') || 'rmcommon' == $mod->getVar('dirname')) {
+        continue;
+      }
+
+      $modules[] = $mod;
     }
 
-    public function id()
-    {
-        return TextCleaner::getInstance()->sweetstring($this->getName());
-    }
+    unset($objects, $mod);
 
-    public function render()
-    {
-        /**
-         * Load all modules that supports rewrite feature
-         */
-        $moduleHandler = xoops_getHandler('module');
-        $objects = $moduleHandler->getObjects();
-        $modules = [];
+    ob_start();
+    require RMTemplate::get()->get_template('fields/field-rewrite.php', 'module', 'rmcommon');
+    $field = ob_get_clean();
 
-        foreach ($objects as $mod) {
-            if (!$mod->getInfo('rewrite') || 'rmcommon' == $mod->getVar('dirname')) {
-                continue;
-            }
-
-            $modules[] = $mod;
-        }
-
-        unset($objects, $mod);
-
-        ob_start();
-        require RMTemplate::get()->get_template('fields/field-rewrite.php', 'module', 'rmcommon');
-        $field = ob_get_clean();
-
-        return $field;
-    }
+    return $field;
+  }
 }

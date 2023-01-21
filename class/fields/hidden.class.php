@@ -13,52 +13,52 @@
  */
 class RMFormHidden extends RMFormElement
 {
-    /**
-     * Constructor de la clase
-     * @param string $name Nombre del campo
-     * @param string $value Valor del elemento
-     */
-    public function __construct($name, $value)
-    {
-        if (is_array($name)) {
-            parent::__construct($name);
-        } else {
-            parent::__construct([]);
-            $this->setWithDefaults('name', $name, 'name_error');
-            $this->setWithDefaults('value', $value, '');
-        }
-
-        $this->setIfNotSet('id', $name);
+  /**
+   * Constructor de la clase
+   * @param string $name Nombre del campo
+   * @param string $value Valor del elemento
+   */
+  public function __construct($name, $value)
+  {
+    if (is_array($name)) {
+      parent::__construct($name);
+    } else {
+      parent::__construct([]);
+      $this->setWithDefaults('name', $name, 'name_error');
+      $this->setWithDefaults('value', $value, '');
     }
 
-    /**
-     * Establece el valor del elemento.
-     * @param string $value Valor del elemento
-     */
-    public function setValue($value)
-    {
-        $this->set('value', $value);
-    }
+    $this->setIfNotSet('id', $name);
+  }
 
-    /**
-     * Devuelve el valor del elemento
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->get('value');
-    }
+  /**
+   * Establece el valor del elemento.
+   * @param string $value Valor del elemento
+   */
+  public function setValue($value)
+  {
+    $this->set('value', $value);
+  }
 
-    /**
-     * Genera el c?digo HTML para mostrar el elemento
-     * @return string
-     */
-    public function render()
-    {
-        $attributes = $this->renderAttributeString();
+  /**
+   * Devuelve el valor del elemento
+   * @return string
+   */
+  public function getValue()
+  {
+    return $this->get('value');
+  }
 
-        $ret = '<input type="hidden" ' . $attributes . '>';
+  /**
+   * Genera el c?digo HTML para mostrar el elemento
+   * @return string
+   */
+  public function render()
+  {
+    $attributes = $this->renderAttributeString();
 
-        return $ret;
-    }
+    $ret = '<input type="hidden" ' . $attributes . '>';
+
+    return $ret;
+  }
 }

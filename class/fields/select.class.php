@@ -13,169 +13,169 @@
  */
 class RMFormSelect extends RMFormElement
 {
-    private $_rows = 5;
-    private $_multi = 0;
-    private $_options = [];
-    private $_selected = null;
-    private $_groups = [];
-    private $current_group = '';
+  private $_rows = 5;
+  private $_multi = 0;
+  private $_options = [];
+  private $_selected = null;
+  private $_groups = [];
+  private $current_group = '';
 
-    /**
-     * @param string $caption Texto de la etiqueta
-     * @param string $name Nombre del elemento
-     * @param int $multi Seleccion múltiple (0 = Inactivo, 1 = Activo)
-     * @param array $selected Selected option
-     */
-    public function __construct($caption, $name = '', $multi = 0, $selected = null)
-    {
-        if (is_array($caption)) {
-            parent::__construct($caption);
-        } else {
-            parent::__construct([]);
-            $this->setWithDefaults('caption', $caption, '');
-            $this->setWithDefaults('name', $name, 'name_error');
-            if ($multi) {
-                $this->set('multiple', null);
-            }
+  /**
+   * @param string $caption Texto de la etiqueta
+   * @param string $name Nombre del elemento
+   * @param int $multi Seleccion múltiple (0 = Inactivo, 1 = Activo)
+   * @param array $selected Selected option
+   */
+  public function __construct($caption, $name = '', $multi = 0, $selected = null)
+  {
+    if (is_array($caption)) {
+      parent::__construct($caption);
+    } else {
+      parent::__construct([]);
+      $this->setWithDefaults('caption', $caption, '');
+      $this->setWithDefaults('name', $name, 'name_error');
+      if ($multi) {
+        $this->set('multiple', null);
+      }
 
-            if (is_array($selected)) {
-                $this->set('value', $selected);
-            }
-        }
-
-        $this->set('type', 'select');
-        $this->setIfNotSet('value', []);
+      if (is_array($selected)) {
+        $this->set('value', $selected);
+      }
     }
 
-    /**
-     * Establece el número de filas del elemento.
-     * Este valor es utilizado cuando {@link $_multi} esta establecido a 1
-     * @param int $value Número de filas.
-     */
-    public function setRows($value)
-    {
-        $this->_rows = $value;
+    $this->set('type', 'select');
+    $this->setIfNotSet('value', []);
+  }
+
+  /**
+   * Establece el número de filas del elemento.
+   * Este valor es utilizado cuando {@link $_multi} esta establecido a 1
+   * @param int $value Número de filas.
+   */
+  public function setRows($value)
+  {
+    $this->_rows = $value;
+  }
+
+  /**
+   * Devuelve el número de filas del elemento
+   * @return int
+   */
+  public function getRows()
+  {
+    return $this->_rows;
+  }
+
+  /**
+   * Agrega una nueva opción al menú select.
+   * Una nueva opción equivale a <option ...>...</option>.
+   * @param mixed $value Valor de la opción
+   * @param string $text Texto que mostrará la opción
+   * @param int $select 1 selecciona por defecto la opción.
+   * @param bol $disabled Mustra como inactiva esta opción.
+   * @param mixed $caption
+   * @param mixed $style
+   */
+  public function addOption($value, $caption, $select = 0, $disabled = false, $style = '')
+  {
+    $options = $this->get('options');
+    $options[$caption] = $value;
+    $this->set('options', $options);
+  }
+
+  /**
+   * @desc Agrega multiples elementos al campo select
+   * @param array $options array de opciones
+   */
+  public function addOptionsArray($options)
+  {
+    foreach ($options as $k => $v) {
+      $this->addOption($v, $k);
+    }
+  }
+
+  /**
+   * Establece una opción como seleccionada
+   * @param mixed $index
+   */
+  public function setSelected($index)
+  {
+    foreach ($this->_options as $k => $v) {
+      if ($v['value'] == $index) {
+        $this->_options[$k]['select'] = 1;
+        break;
+      }
+    }
+  }
+
+  /**
+   * Devuelve el array de opciones del elemento.
+   * @return array
+   */
+  public function getOptions()
+  {
+    return $this->_options;
+  }
+
+  public function addGroup($label, $id)
+  {
+    if ('' == trim($id) || '' == trim($label)) {
+      return false;
     }
 
-    /**
-     * Devuelve el número de filas del elemento
-     * @return int
-     */
-    public function getRows()
-    {
-        return $this->_rows;
+    $this->_groups[$id] = ['label' => $label, 'options' => []];
+    $this->current_group = $id;
+  }
+
+  /**
+   * Genera el código HTML para este elemento.
+   * @return string
+   */
+  public function render()
+  {
+    $this->setIfNotSet('class', 'form-select');
+    $attributes = $this->renderAttributeString();
+    $selected = $this->get('value');
+
+    $selected = is_array($selected) ? $selected : [$selected];
+
+    $rtn = "<select $attributes>";
+
+    $options = $this->get('options');
+
+    foreach ($options as $k => $v) {
+      $rtn .= "<option value='$v'";
+      if (is_array($selected) && in_array($v, $selected, true)) {
+        $rtn .= " selected='selected'";
+      }
+      $rtn .= ">$k</option>";
     }
 
-    /**
-     * Agrega una nueva opción al menú select.
-     * Una nueva opción equivale a <option ...>...</option>.
-     * @param mixed $value Valor de la opción
-     * @param string $text Texto que mostrará la opción
-     * @param int $select 1 selecciona por defecto la opción.
-     * @param bol $disabled Mustra como inactiva esta opción.
-     * @param mixed $caption
-     * @param mixed $style
-     */
-    public function addOption($value, $caption, $select = 0, $disabled = false, $style = '')
-    {
-        $options = $this->get('options');
-        $options[$caption] = $value;
-        $this->set('options', $options);
-    }
+    // Check if there are Option Groups
+    /*if (!empty($options)) {
 
-    /**
-     * @desc Agrega multiples elementos al campo select
-     * @param array $options array de opciones
-     */
-    public function addOptionsArray($options)
-    {
-        foreach ($options as $k => $v) {
-            $this->addOption($v, $k);
-        }
-    }
+        foreach ($this->_groups as $group) {
+            $rtn .= '<optgroup label="' . $group['label'] . '">';
 
-    /**
-     * Establece una opción como seleccionada
-     * @param mixed $index
-     */
-    public function setSelected($index)
-    {
-        foreach ($this->_options as $k => $v) {
-            if ($v['value'] == $index) {
-                $this->_options[$k]['select'] = 1;
-                break;
-            }
-        }
-    }
-
-    /**
-     * Devuelve el array de opciones del elemento.
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->_options;
-    }
-
-    public function addGroup($label, $id)
-    {
-        if ('' == trim($id) || '' == trim($label)) {
-            return false;
-        }
-
-        $this->_groups[$id] = ['label' => $label, 'options' => []];
-        $this->current_group = $id;
-    }
-
-    /**
-     * Genera el código HTML para este elemento.
-     * @return string
-     */
-    public function render()
-    {
-        $this->setIfNotSet('class', 'form-select');
-        $attributes = $this->renderAttributeString();
-        $selected = $this->get('value');
-
-        $selected = is_array($selected) ? $selected : [$selected];
-
-        $rtn = "<select $attributes>";
-
-        $options = $this->get('options');
-
-        foreach ($options as $k => $v) {
-            $rtn .= "<option value='$v'";
-            if (is_array($selected) && in_array($v, $selected, true)) {
-                $rtn .= " selected='selected'";
-            }
-            $rtn .= ">$k</option>";
-        }
-
-        // Check if there are Option Groups
-        /*if (!empty($options)) {
-
-            foreach ($this->_groups as $group) {
-                $rtn .= '<optgroup label="' . $group['label'] . '">';
-
-                foreach ($group['options'] as $option) {
-                    $rtn .= "<option value='$option[value]'";
-                    if ($option['select'] || (is_array($this->_selected) && in_array($option['value'], $this->_selected))) {
-                        $rtn .= " selected='selected'";
-                    }
-                    if ($option['disabled']) {
-                        $rtn .= " disabled='disabled'";
-                    }
-                    if ($option['style'] != '') $rtn .= " style='$option[style]'";
-                    $rtn .= ">$option[text]</option>";
+            foreach ($group['options'] as $option) {
+                $rtn .= "<option value='$option[value]'";
+                if ($option['select'] || (is_array($this->_selected) && in_array($option['value'], $this->_selected))) {
+                    $rtn .= " selected='selected'";
                 }
-
-                $rtn .= '</optgroup>';
+                if ($option['disabled']) {
+                    $rtn .= " disabled='disabled'";
+                }
+                if ($option['style'] != '') $rtn .= " style='$option[style]'";
+                $rtn .= ">$option[text]</option>";
             }
 
-        }*/
+            $rtn .= '</optgroup>';
+        }
 
-        $rtn .= '</select>';
+    }*/
 
-        return $rtn;
-    }
+    $rtn .= '</select>';
+
+    return $rtn;
+  }
 }

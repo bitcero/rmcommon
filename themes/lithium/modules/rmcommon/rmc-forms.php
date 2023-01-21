@@ -30,10 +30,11 @@
                   ?>
 
                   <?php
-                    $to_float = ['rmformtext', 'rmformselect', 'rmformtimezonefield'];
-                    $floating = in_array(strtolower($data['class']), $to_float);
+                  $to_float = ['rmformtext', 'rmformselect', 'rmformtimezonefield'];
+                  $floating = in_array(strtolower($data['class']), $to_float);
                   ?>
-                    <div id="row_<?php echo $field->getName(); ?>" class="mb-3 <?php echo $floating ? 'form-floating' : ''; ?>">
+                    <div id="row_<?php echo $field->getName(); ?>"
+                         class="mb-3 <?php echo $floating ? 'form-floating' : ''; ?>">
                       <?php echo $floating ? $field->render() : ''; ?>
                       <?php if ('' != $field->getCaption()): ?>
                           <label for="<?php echo $field->getName(); ?>" class="form-label">
