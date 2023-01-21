@@ -191,7 +191,6 @@ function show_users()
     global $xoopsSecurity, $rmTpl, $cuIcons, $common;
 
     define('RMCSUBLOCATION', 'allusers');
-    RMTemplate::get()->add_style('users.css', 'rmcommon');
     RMTemplate::get()->add_style('js-widgets.css');
 
     //Scripts
