@@ -14,59 +14,59 @@
  */
 class RMFormFile extends RMFormElement
 {
-    private $_size = 30;
-    private $_limit = 0;
+  private $_size = 30;
+  private $_limit = 0;
 
-    /**
-     * Constructor de la clase
-     * @param string $caption Texto de la etiqueta
-     * @param string $name Nombre del campo
-     * @param int $size Longitud del campo (Por defecto 30)
-     * @param int Limite en bytes para el tamaño del archivo
-     * @param mixed $limit
-     */
-    public function __construct($caption, $name = '', $size = 30, $limit = 0)
-    {
-        if (is_array($caption)) {
-            parent::__construct($caption);
-        } else {
-            parent::__construct([]);
-            $this->setWithDefaults('caption', $caption, '');
-            $this->setWithDefaults('name', $name, 'name_error');
-            $this->setWithDefaults('size', $size, 10);
-        }
-
-        $this->set('type', 'file');
+  /**
+   * Constructor de la clase
+   * @param string $caption Texto de la etiqueta
+   * @param string $name Nombre del campo
+   * @param int $size Longitud del campo (Por defecto 30)
+   * @param int Limite en bytes para el tamaño del archivo
+   * @param mixed $limit
+   */
+  public function __construct($caption, $name = '', $size = 30, $limit = 0)
+  {
+    if (is_array($caption)) {
+      parent::__construct($caption);
+    } else {
+      parent::__construct([]);
+      $this->setWithDefaults('caption', $caption, '');
+      $this->setWithDefaults('name', $name, 'name_error');
+      $this->setWithDefaults('size', $size, 10);
     }
 
-    /**
-     * Modifica la longitud del campo
-     * @param int $size Longitud
-     */
-    public function setSize($size)
-    {
-        if ($size > 0) {
-            $this->_size = $size;
-        }
-    }
+    $this->set('type', 'file');
+  }
 
-    /**
-     * Devuelve la longitud actual del campo
-     * @return int
-     */
-    public function getSize()
-    {
-        return $this->_size;
+  /**
+   * Modifica la longitud del campo
+   * @param int $size Longitud
+   */
+  public function setSize($size)
+  {
+    if ($size > 0) {
+      $this->_size = $size;
     }
+  }
 
-    /**
-     * Genera el c?digo HTML para mostrar el campo
-     * @return string
-     */
-    public function render()
-    {
-        $attributes = $this->renderAttributeString();
+  /**
+   * Devuelve la longitud actual del campo
+   * @return int
+   */
+  public function getSize()
+  {
+    return $this->_size;
+  }
 
-        return '<input ' . $attributes . '>';
-    }
+  /**
+   * Genera el c?digo HTML para mostrar el campo
+   * @return string
+   */
+  public function render()
+  {
+    $attributes = $this->renderAttributeString();
+
+    return '<input ' . $attributes . '>';
+  }
 }

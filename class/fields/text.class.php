@@ -32,91 +32,91 @@
  */
 class RMFormText extends RMFormElement
 {
-    public $_size = 30;
-    public $_max;
-    public $_value = '';
-    public $_password = false;
-    public $_enabled = true;
+  public $_size = 30;
+  public $_max;
+  public $_value = '';
+  public $_password = false;
+  public $_enabled = true;
 
-    /**
-     * Constructor de la clase
-     * @param string|array $caption Texto de la etiqueta
-     * @param string $name Nombre del campo
-     * @param int $size Longitud del campo
-     * @param int $max Longitud m?xima de car?cteres del campo
-     * @param string $value Valor por defecto
-     * @param bol $password True muestra un campo password
-     * @param mixed $maxlength
-     * @param mixed $enabled
-     */
-    public function __construct($caption, $name = null, $size = 10, $maxlength = 0, $value = '', $password = false, $enabled = true)
-    {
-        if (is_array($caption)) {
-            parent::__construct($caption);
-        } else {
-            parent::__construct([]);
-            $this->setWithDefaults('caption', $caption, '');
-            $this->setWithDefaults('name', $name, 'name_error');
-            $this->setWithDefaults('size', $size, 10);
-            if ($maxlength > 0) {
-                $this->setWithDefaults('maxlength', $maxlength, 64);
-            }
-            $this->set('value', $value);
-            if ($password) {
-                $this->set('type', 'password');
-            } else {
-                $this->set('type', 'text');
-            }
-        }
-
-        $this->setIfNotSet('type', 'text');
-        $this->setIfNotSet('value', '');
-        $this->setIfNotSet('class', 'form-control');
+  /**
+   * Constructor de la clase
+   * @param string|array $caption Texto de la etiqueta
+   * @param string $name Nombre del campo
+   * @param int $size Longitud del campo
+   * @param int $max Longitud m?xima de car?cteres del campo
+   * @param string $value Valor por defecto
+   * @param bol $password True muestra un campo password
+   * @param mixed $maxlength
+   * @param mixed $enabled
+   */
+  public function __construct($caption, $name = null, $size = 10, $maxlength = 0, $value = '', $password = false, $enabled = true)
+  {
+    if (is_array($caption)) {
+      parent::__construct($caption);
+    } else {
+      parent::__construct([]);
+      $this->setWithDefaults('caption', $caption, '');
+      $this->setWithDefaults('name', $name, 'name_error');
+      $this->setWithDefaults('size', $size, 10);
+      if ($maxlength > 0) {
+        $this->setWithDefaults('maxlength', $maxlength, 64);
+      }
+      $this->set('value', $value);
+      if ($password) {
+        $this->set('type', 'password');
+      } else {
+        $this->set('type', 'text');
+      }
     }
 
-    /**
-     * Recupera la longitud del campo
-     * @return int
-     */
-    public function getSize()
-    {
-        return (int)$this->get('size');
+    $this->setIfNotSet('type', 'text');
+    $this->setIfNotSet('value', '');
+    $this->setIfNotSet('class', 'form-control');
+  }
+
+  /**
+   * Recupera la longitud del campo
+   * @return int
+   */
+  public function getSize()
+  {
+    return (int)$this->get('size');
+  }
+
+  /**
+   * Recupera el n?mero de car?cteres
+   * @return int
+   */
+  public function getMax()
+  {
+    return (int)$this->get('maxlength');
+  }
+
+  public function getValue($encoded = false)
+  {
+    if ($encoded) {
+      $value = htmlspecialchars($this->get('value', ''), ENT_QUOTES);
+    } else {
+      $value = $this->get('value', '');
     }
 
-    /**
-     * Recupera el n?mero de car?cteres
-     * @return int
-     */
-    public function getMax()
-    {
-        return (int)$this->get('maxlength');
+    return $value;
+  }
+
+  /**
+   * Devuelve el c?digo HTML para mostrar el campo.
+   * @return string
+   */
+  public function render()
+  {
+    if ($this->has('datalist')) {
+      $this->add('list', 'list_' . $this->getName());
     }
 
-    public function getValue($encoded = false)
-    {
-        if ($encoded) {
-            $value = htmlspecialchars($this->get('value', ''), ENT_QUOTES);
-        } else {
-            $value = $this->get('value', '');
-        }
+    $attributes = $this->renderAttributeString();
 
-        return $value;
-    }
-
-    /**
-     * Devuelve el c?digo HTML para mostrar el campo.
-     * @return string
-     */
-    public function render()
-    {
-        if ($this->has('datalist')) {
-            $this->add('list', 'list_' . $this->getName());
-        }
-
-        $attributes = $this->renderAttributeString();
-
-        return '<input ' . $attributes . ' ' . $this->getExtra() . '>';
-    }
+    return '<input ' . $attributes . ' ' . $this->getExtra() . '>';
+  }
 }
 
 /**
@@ -125,72 +125,72 @@ class RMFormText extends RMFormElement
  */
 class RMFormSubTitle extends RMFormElement
 {
-    public $_type;
+  public $_type;
 
-    /**
-     * @param string $caption Texto del subtitulo
-     * @param int $level Heading level for subtitle. Use '0' for no heading (span)
-     * @param string $class solo si $type = 1
-     * @param string $desc
-     */
-    public function __construct($caption, $level = 0, $class = '', $desc = '')
-    {
-        if (is_array($caption)) {
-            parent::__construct($caption);
-        } else {
-            parent::__construct([]);
-            $this->setWithDefaults('caption', $caption, '');
-            $this->setWithDefaults('description', $desc, '');
-            $this->setWithDefaults('level', $level, '');
-        }
-
-        $this->setIfNotSet('level', '3');
-        $this->suppressList[] = 'caption';
-        $this->suppressList[] = 'description';
+  /**
+   * @param string $caption Texto del subtitulo
+   * @param int $level Heading level for subtitle. Use '0' for no heading (span)
+   * @param string $class solo si $type = 1
+   * @param string $desc
+   */
+  public function __construct($caption, $level = 0, $class = '', $desc = '')
+  {
+    if (is_array($caption)) {
+      parent::__construct($caption);
+    } else {
+      parent::__construct([]);
+      $this->setWithDefaults('caption', $caption, '');
+      $this->setWithDefaults('description', $desc, '');
+      $this->setWithDefaults('level', $level, '');
     }
 
-    /**
-     * Establece el tipo de titulo.
-     * 0 = TH, 1 = TD
-     * @param int $type Tipo de t?tulo
-     * @deprecated
-     */
-    public function setType($type)
-    {
-        return null;
+    $this->setIfNotSet('level', '3');
+    $this->suppressList[] = 'caption';
+    $this->suppressList[] = 'description';
+  }
+
+  /**
+   * Establece el tipo de titulo.
+   * 0 = TH, 1 = TD
+   * @param int $type Tipo de t?tulo
+   * @deprecated
+   */
+  public function setType($type)
+  {
+    return null;
+  }
+
+  /**
+   * Devuelve el tipo de t?tulo
+   * @return int
+   * @deprecated
+   */
+  public function getType()
+  {
+    return $this->_type;
+  }
+
+  /**
+   * Generamos el c?sigo HTML para crear el subt?tulo.
+   * @return string
+   */
+  public function render()
+  {
+    $attributes = $this->renderAttributeString();
+
+    if ($this->get('level') > 0) {
+      $rtn = '<h' . $this->get('level') . " $attributes>";
+      $rtn .= $this->get('caption');
+      if ('' != $this->get('description')) {
+        $rtn .= '<small>' . $this->get('description') . '</small>';
+      }
+      $rtn .= '</h' . $this->get('level') . '>';
+    } else {
+      $rtn = "<span $attributes>" . $this->get('caption') . '</span>';
     }
 
-    /**
-     * Devuelve el tipo de t?tulo
-     * @return int
-     * @deprecated
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
-     * Generamos el c?sigo HTML para crear el subt?tulo.
-     * @return string
-     */
-    public function render()
-    {
-        $attributes = $this->renderAttributeString();
-
-        if ($this->get('level') > 0) {
-            $rtn = '<h' . $this->get('level') . " $attributes>";
-            $rtn .= $this->get('caption');
-            if ('' != $this->get('description')) {
-                $rtn .= '<small>' . $this->get('description') . '</small>';
-            }
-            $rtn .= '</h' . $this->get('level') . '>';
-        } else {
-            $rtn = "<span $attributes>" . $this->get('caption') . '</span>';
-        }
-
-        return $rtn;
-    }
+    return $rtn;
+  }
 }
 
 /**
@@ -198,104 +198,104 @@ class RMFormSubTitle extends RMFormElement
  */
 class RMFormTextArea extends RMFormElement
 {
-    private $_rows = 4;
-    private $_cols = 45;
-    private $_value = '';
-    private $width = '';
-    private $height = '';
+  private $_rows = 4;
+  private $_cols = 45;
+  private $_value = '';
+  private $width = '';
+  private $height = '';
 
-    /**
-     * @param string $caption Texto de la etiqueta
-     * @param string $name Nombre del campo
-     * @param int $rows N?mero de filas del campo
-     * @param int $cols N?mero de columnas del campo
-     * @param string $value Texto inicial del campo
-     * @param string $width Ancho del campo formateado para estilo CSS
-     * @param string $height Alto del campo formateado para estilo CSS
-     */
-    public function __construct($caption, $name = '', $rows = 4, $cols = 45, $value = '', $width = '', $height = '')
-    {
-        if (is_array($caption)) {
-            parent::__construct($caption);
-        } else {
-            parent::__construct([]);
-            $this->setWithDefaults('caption', $caption, '');
-            $this->setWithDefaults('name', $name, 'name_error');
-            $this->setWithDefaults('rows', $rows, 4);
-            $this->setWithDefaults('cols', $cols, 45);
-            $this->set('value', $value);
-        }
-
-        $this->setIfNotSet('rows', 4);
-        $this->setIfNotSet('value', '');
+  /**
+   * @param string $caption Texto de la etiqueta
+   * @param string $name Nombre del campo
+   * @param int $rows N?mero de filas del campo
+   * @param int $cols N?mero de columnas del campo
+   * @param string $value Texto inicial del campo
+   * @param string $width Ancho del campo formateado para estilo CSS
+   * @param string $height Alto del campo formateado para estilo CSS
+   */
+  public function __construct($caption, $name = '', $rows = 4, $cols = 45, $value = '', $width = '', $height = '')
+  {
+    if (is_array($caption)) {
+      parent::__construct($caption);
+    } else {
+      parent::__construct([]);
+      $this->setWithDefaults('caption', $caption, '');
+      $this->setWithDefaults('name', $name, 'name_error');
+      $this->setWithDefaults('rows', $rows, 4);
+      $this->setWithDefaults('cols', $cols, 45);
+      $this->set('value', $value);
     }
 
-    /**
-     * Establece el n?mero de filas del campo.
-     * @param int $rows N?mero de filas
-     */
-    public function setRows($rows)
-    {
-        $this->_rows = $rows;
-    }
+    $this->setIfNotSet('rows', 4);
+    $this->setIfNotSet('value', '');
+  }
 
-    /**
-     * Devuelve el n?mero de filas del campo
-     * @return int
-     */
-    public function getRows()
-    {
-        return $this->_rows;
-    }
+  /**
+   * Establece el n?mero de filas del campo.
+   * @param int $rows N?mero de filas
+   */
+  public function setRows($rows)
+  {
+    $this->_rows = $rows;
+  }
 
-    /**
-     * Establece el n?mero de columnas del campo
-     * @param int $cols N?mero de columnas
-     */
-    public function setCols($cols)
-    {
-        $this->_cols = $cols;
-    }
+  /**
+   * Devuelve el n?mero de filas del campo
+   * @return int
+   */
+  public function getRows()
+  {
+    return $this->_rows;
+  }
 
-    /**
-     * Devuelve el n?mero de columnas del campo
-     * @return int
-     */
-    public function getCols()
-    {
-        return $this->_cols;
-    }
+  /**
+   * Establece el n?mero de columnas del campo
+   * @param int $cols N?mero de columnas
+   */
+  public function setCols($cols)
+  {
+    $this->_cols = $cols;
+  }
 
-    /**
-     * Establece el texto inicial del campo
-     * @param string $value Texto inicial
-     */
-    public function setValue($value)
-    {
-        $this->_value = $value;
-    }
+  /**
+   * Devuelve el n?mero de columnas del campo
+   * @return int
+   */
+  public function getCols()
+  {
+    return $this->_cols;
+  }
 
-    /**
-     * Devuelve el texto inicial del campo
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
+  /**
+   * Establece el texto inicial del campo
+   * @param string $value Texto inicial
+   */
+  public function setValue($value)
+  {
+    $this->_value = $value;
+  }
 
-    /**
-     * Devuelve el código HTML para mostrar el campo
-     * @return string
-     */
-    public function render()
-    {
-        $attributes = $this->renderAttributeString();
+  /**
+   * Devuelve el texto inicial del campo
+   * @return string
+   */
+  public function getValue()
+  {
+    return $this->_value;
+  }
 
-        $ret = "<textarea $attributes>" . (isset($_REQUEST[$this->get('name')]) ? $_REQUEST[$this->get('name')] : $this->get('value')) . '</textarea>';
+  /**
+   * Devuelve el código HTML para mostrar el campo
+   * @return string
+   */
+  public function render()
+  {
+    $attributes = $this->renderAttributeString();
 
-        return $ret;
-    }
+    $ret = "<textarea $attributes>" . (isset($_REQUEST[$this->get('name')]) ? $_REQUEST[$this->get('name')] : $this->get('value')) . '</textarea>';
+
+    return $ret;
+  }
 }
 
 /**
@@ -303,30 +303,30 @@ class RMFormTextArea extends RMFormElement
  */
 class RMFormLabel extends RMFormElement
 {
-    /**
-     * @param string $caption Texto de la etiqueta
-     * @param string $cell Contenido de la celda
-     * @param mixed $id
-     */
-    public function __construct($caption, $cell = '', $id = '')
-    {
-        if (is_array($caption)) {
-            parent::__construct($caption);
-        } else {
-            parent::__construct([]);
-            $this->setWithDefaults('caption', $caption, '');
-            $this->setWithDefaults('content', $cell, '');
-        }
-
-        $this->suppressList[] = 'content';
+  /**
+   * @param string $caption Texto de la etiqueta
+   * @param string $cell Contenido de la celda
+   * @param mixed $id
+   */
+  public function __construct($caption, $cell = '', $id = '')
+  {
+    if (is_array($caption)) {
+      parent::__construct($caption);
+    } else {
+      parent::__construct([]);
+      $this->setWithDefaults('caption', $caption, '');
+      $this->setWithDefaults('content', $cell, '');
     }
 
-    /**
-     * Genera el c?digo HTML para mostrar la etiqueta
-     * @return string
-     */
-    public function render()
-    {
-        return $this->get('content');
-    }
+    $this->suppressList[] = 'content';
+  }
+
+  /**
+   * Genera el c?digo HTML para mostrar la etiqueta
+   * @return string
+   */
+  public function render()
+  {
+    return $this->get('content');
+  }
 }

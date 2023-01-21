@@ -14,23 +14,23 @@
  */
 class RMFormImage extends RMFormElement
 {
-    private $default = '';
-    private $data = [];
+  private $default = '';
+  private $data = [];
 
-    public function __construct($caption, $name, $default = '', $data = [])
-    {
-        $this->setCaption($caption);
-        $this->setName($name);
-        $this->default = $default;
-        $this->data = $data;
+  public function __construct($caption, $name, $default = '', $data = [])
+  {
+    $this->setCaption($caption);
+    $this->setName($name);
+    $this->default = $default;
+    $this->data = $data;
 
-        !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
-    }
+    !defined('RM_FRAME_USERS_CREATED') ? define('RM_FRAME_USERS_CREATED', 1) : '';
+  }
 
-    public function render()
-    {
-        $util = RMUtilities::get();
+  public function render()
+  {
+    $util = RMUtilities::get();
 
-        return $util->image_manager($this->getName(), $this->id(), $this->default, $this->data);
-    }
+    return $util->image_manager($this->getName(), $this->id(), $this->default, $this->data);
+  }
 }
