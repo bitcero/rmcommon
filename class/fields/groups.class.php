@@ -45,7 +45,7 @@ class RMFormGroups extends RMFormElement
                 $this->setWithDefaults('multiple', null, null);
             }
             $this->setWithDefaults('type', 0 == $type ? 'select' : (1 == $multi ? 'checkbox' : 'radio'), 'select');
-            $this->setWithDefaults('value', $selected, []);
+            $this->setWithDefaults('selected', $selected, []);
         }
 
         $this->setIfNotSet('type', 'select');
@@ -186,7 +186,7 @@ class RMFormGroups extends RMFormElement
 
         $typeinput = $this->get('type');
         $name = $this->getName();
-        $selected = $this->get('value');
+        $selected = $this->get('selected');
         $selected = is_array($selected) ? $selected : [$selected];
 
         if ('radio' == $typeinput || 'checkbox' == $typeinput) {

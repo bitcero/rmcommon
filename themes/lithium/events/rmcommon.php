@@ -66,4 +66,20 @@ class LithiumRmcommonPreload
 
     return $providers;
   }
+
+  static function eventRmcommonConstructingField($data){
+    $field = $data['field'];
+
+    $type = strtolower(get_class($field));
+
+    $assignations = [
+      'rmformtext' => 'form-control',
+      'rmformselect' => 'form-select',
+      'rmformtimezonefield' => 'form-select',
+    ];
+
+    if(array_key_exists($type, $assignations)){
+      $field->addClass($assignations[$type]);
+    }
+  }
 }

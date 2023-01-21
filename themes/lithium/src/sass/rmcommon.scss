@@ -6,6 +6,11 @@
 @import "lithium/functions/to-rem";
 
 /*
+ FORMS
+-----------------------------*/
+@import 'rmcommon/form';
+
+/*
  DASHBOARD
 -----------------------------*/
 @import 'rmcommon/dashboard';
@@ -41,3 +46,8 @@
  MODULES PAGE
 -----------------------------*/
 @import 'rmcommon/modules';
+
+/*
+ USERS PAGE
+-----------------------------*/
+@import 'rmcommon/users';

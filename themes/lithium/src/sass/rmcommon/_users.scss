@@ -1,0 +1,121 @@
+div#users-filter-options{
+  padding: 5px 0;
+  display: none;
+
+  .sections{
+    display: block;
+    padding: 0 pxToRem(6) 0 0;
+    margin-bottom: pxToRem(6);
+  }
+
+  &.show{
+    display: block;
+  }
+
+  @include media-breakpoint-up(lg){
+    display: block;
+
+    .sections{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.with-icon{
+  display: flex;
+  align-items: center;
+
+  svg{
+    @include cu-icon-size(pxToRem(20));
+    fill: currentColor;
+    margin-right: pxToRem(8);
+  }
+}
+
+div#users-other-options{
+  display: none;
+
+  > div{
+    margin-bottom: pxToRem(6);
+  }
+
+  @include media-breakpoint-up(lg){
+    display: block;
+
+    > div{
+      margin-bottom: 0;
+    }
+  }
+}
+
+div#users-advanced-options{
+  background-color: $gray-100;
+  padding: pxToRem(20);
+  border-top: 1px solid $border-color;
+  display: none;
+
+  > .filters {
+    .filter-option{
+      margin-bottom: pxToRem(15);
+    }
+  }
+
+  > .controls{
+    margin-top: pxToRem(20);
+  }
+
+  .exmdates_field, .inline{
+    max-width: 130px;
+    display: inline-block;
+  }
+
+  @include media-breakpoint-up(md){
+    > .filters {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      grid-auto-rows: minmax(auto, auto);
+
+      .filter-option{
+        margin: 0;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(lg){
+    > .filters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      grid-auto-rows: minmax(auto, auto);
+    }
+  }
+}
+
+
+div.users_navigation{
+  padding: 4px 0;
+  margin: 5px 0;
+  overflow: hidden;
+  border-bottom: 1px dotted #CCC;
+}
+div.users_navigation:last-child{
+  border-bottom: 0;
+  border-top: 1px dotted #CCC;
+}
+div.users_navigation div.exm_pages_navigation_container{
+  border-left: 1px solid #CCC;
+  padding-left: 10px;
+}
+div.users_navigation div.users_nav_showing{
+  padding: 5px 10px 5px 10px;
+  border-left: 1px solid #CCC;
+}
+div.users_navigation div.users_order_options{
+  padding: 1px 10px 0 10px;
+  border-left: 1px solid #CCC;
+}
+.user_inactive{
+  background: #eee;
+  color: #ff6600;
+}

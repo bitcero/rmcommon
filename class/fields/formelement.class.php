@@ -50,7 +50,9 @@ abstract class RMFormElement extends Attributes
      */
     public function __construct($attributes = [])
     {
+      global $common;
         parent::__construct($attributes);
+        $common->events()->trigger('rmcommon.constructing.field', ['field' => $this, 'attributes', $attributes]);
     }
 
     /**

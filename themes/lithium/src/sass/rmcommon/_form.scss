@@ -1,0 +1,7 @@
+.form_container{
+  @include media-breakpoint-up(lg){
+    max-width: 70%;
+    margin: pxToRem(30) auto !important;
+
+  }
+}

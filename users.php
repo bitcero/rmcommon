@@ -88,7 +88,7 @@ function formatSQL()
             $sql = ' level>0';
         }
 
-        $tpl->assign('display_adv', 'display: none;');
+        $tpl->assign('display_adv', false);
         // Extend SQL with plugins
         // API:
         $sql = RMEvents::get()->run_event('rmcommon.users.getsql', $sql);
@@ -170,9 +170,9 @@ function formatSQL()
     }
 
     if ($show) {
-        $tpl->assign('display_adv', '');
+        $tpl->assign('display_adv', true);
     } else {
-        $tpl->assign('display_adv', 'display: none;');
+        $tpl->assign('display_adv', false);
     }
 
     $rtsql = '' != $sql ? "WHERE $sql" : '';
@@ -191,7 +191,6 @@ function show_users()
     global $xoopsSecurity, $rmTpl, $cuIcons, $common;
 
     define('RMCSUBLOCATION', 'allusers');
-    RMTemplate::get()->add_style('users.css', 'rmcommon');
     RMTemplate::get()->add_style('js-widgets.css');
 
     //Scripts
@@ -343,7 +342,7 @@ function user_form($edit = false)
         'name' => 'groups',
         'multiple' => null,
         'type' => 'checkbox',
-        'selected' => $user->groups(),
+        'selected' => $user->getGroups(),
     ]));
 
     // Other options by API
@@ -384,7 +383,7 @@ function user_form($edit = false)
  */
 function save_data($edit = false)
 {
-    global $xoopsSecurity, $xoopsDB;
+    global $common, $xoopsSecurity, $xoopsDB;
 
     $q = ''; // Query String
     foreach ($_POST as $k => $v) {
@@ -392,24 +391,27 @@ function save_data($edit = false)
         if ('XOOPS_TOKEN_REQUEST' == $k || 'sbt' == $k || 'action' == $k || 'password' == $k || 'passwordc' == $k) {
             continue;
         }
+
+        if(is_array($v)){
+          $v = "[" . implode(",", $v) . "]";
+        }
+
         $q .= '' == $q ? "$k=" . urlencode($v) : "&$k=" . urlencode($v);
     }
 
     if (!$xoopsSecurity->check()) {
-        redirectMsg('users.php?action=' . ($edit ? 'edit' : 'new') . '&' . $q, __('Sorry, you don\'t have permission to add users.', 'rmcommon'), 1);
-        die();
+      $common->uris()::redirect_with_message(__('Sorry, you don\'t have permission to add users.', 'rmcommon'), 'users.php?action=' . ($edit ? 'edit' : 'new') . '&' . $q, RMMSG_ERROR);
+      die("Adios");
     }
 
     if ($edit) {
         if ($uid <= 0) {
-            redirectMsg('users.php', __('The specified user is not valid!', 'rmcommon'), 1);
-            die();
+          $common->uris()::redirect_with_message(__('The specified user is not valid!', 'rmcommon'), 'users.php', RMMSG_ERROR);
         }
 
         $user = new RMUser($uid);
         if ($user->isNew()) {
-            redirectMsg('users.php', __('The specified user does not exists!', 'rmcommon'), 1);
-            die();
+          $common->uris()::redirect_with_message(__('The specified user does not exists!', 'rmcommon'), 'users.php', RMMSG_ERROR);
         }
     } else {
         $user = new RMUser();

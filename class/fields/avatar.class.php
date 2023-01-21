@@ -234,7 +234,7 @@ class RMFormAvatarField extends RMFormElement
             $rtn .= "</div>
 					<select name='$name' id='" . $this->id() . "' onchange='showImageAvatar();'";
             $rtn .= $this->_multi ? " multiple='multiple' size='5'" : '';
-            $rtn .= "><option value='0'";
+            $rtn .= " class='form-control form-select'><option value='0'";
             if (is_array($this->_select)) {
                 if (in_array(0, $this->_select, true)) {
                     $rtn .= " selected='selected'";
