@@ -1,24 +1,14 @@
 <div class="adv-icons-browser" data-parent="<?php echo $parent; ?>">
-    <ul class="nav nav-tabs nav-tabs-color" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" id="browser-icons-tabs">
         <li role="presentation" class="nav-item">
-            <a href="#svg-icons" aria-controls="svg-icons" role="tab" data-toggle="tab" class="nav-link active">
+            <button role="tab" type="button" data-bs-target="#svg-icons" aria-controls="svg-icons" role="tab" data-bs-toggle="tab" class="nav-link active">
                 <?php _e('SVG Icons', 'advform-pro'); ?>
-            </a>
+            </button>
         </li>
         <li role="presentation" class="nav-item">
-            <a href="#fa-icons" aria-controls="fa-icons" role="tab" data-toggle="tab" class="nav-link">
-                <?php _e('FontAwesome', 'advform-pro'); ?>
-            </a>
-        </li>
-        <!--li role="presentation" class="nav-item">
-            <a href="#glyph-icons" aria-controls="glyph-icons" role="tab" data-toggle="tab" class="nav-link">
-                <?php _e('Glyphicons', 'advform-pro'); ?>
-            </a>
-        </li-->
-        <li role="presentation" class="nav-item">
-            <a href="#moon-icons" aria-controls="moon-icons" role="tab" data-toggle="tab" class="nav-link">
+            <button data-bs-target="#moon-icons" type="button" aria-controls="moon-icons" role="tab" data-bs-toggle="tab" class="nav-link">
                 <?php _e('Icomoon Icons', 'advform-pro'); ?>
-            </a>
+            </button>
         </li>
     </ul>
 
@@ -32,39 +22,19 @@
 
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in show active" id="svg-icons">
-            <ul class="adv-icons-list" data-type="svg">
-                <?php foreach($svgIcons as $icon): ?>
-                    <li<?php echo $icon == $selectedIcon ? ' class="selected"' : ''; ?>>
-                        <a href="#" data-icon="<?php echo $icon; ?>" title="<?php echo $icon; ?>">
-                            <?php echo $cuIcons->getIcon($icon); ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+            <?php foreach ($svgIcons as $id => $provider): ?>
+            <h4><?php echo $provider['name']; ?></h4>
 
-        <div role="tabpanel" class="tab-pane fade" id="fa-icons">
-            <ul class="adv-icons-list" data-type="font">
-                <?php foreach($faIcons as $icon): ?>
-                    <li<?php echo 'fa ' . $icon == $selectedIcon ? ' class="selected"' : ''; ?>>
-                        <a href="#" data-icon="<?php echo $icon; ?>" title="<?php echo $icon; ?>">
+                <ul class="adv-icons-list" data-type="svg">
+                  <?php foreach($provider['icons'] as $icon): ?>
+                      <li<?php echo $icon == $selectedIcon ? ' class="selected"' : ''; ?>>
+                          <a href="#" data-icon="<?php echo $icon; ?>" title="<?php echo $icon; ?>">
                             <?php echo $cuIcons->getIcon($icon); ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-
-        <div role="tabpanel" class="tab-pane fade" id="glyph-icons">
-            <ul class="adv-icons-list" data-type="font">
-                <?php foreach($glyphIcons as $icon): ?>
-                    <li<?php echo 'glyphicon ' . $icon == $selectedIcon ? ' class="selected"' : ''; ?>>
-                        <a href="#" data-icon="<?php echo 'glyphicon ' . $icon; ?>" title="<?php echo 'glyphicon ' . $icon; ?>">
-                            <?php echo $cuIcons->getIcon('glyphicon ' . $icon); ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+                          </a>
+                      </li>
+                  <?php endforeach; ?>
+                </ul>
+            <?php endforeach; ?>
         </div>
 
         <div role="tabpanel" class="tab-pane fade" id="moon-icons">

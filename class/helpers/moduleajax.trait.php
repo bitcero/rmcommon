@@ -23,6 +23,7 @@ trait RMModuleAjax
     {
         error_reporting(0);
         XoopsLogger::getInstance()->activated = false;
+        define("RESPONSE_MODE", 'ajax');
     }
 
     /**

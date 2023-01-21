@@ -50,9 +50,11 @@
 
 }
 
-#he-footer {
-  padding: $grid-gutter-width 0;
+#li-footer {
+  padding: 0 $grid-gutter-width $grid-gutter-width;
   font-size: 0.9em;
+  position: absolute;
+  bottom: 0;
 
   a {
     color: #000;

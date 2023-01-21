@@ -8,11 +8,12 @@
 // License: GPL 2.0
 // --------------------------------------------------------------
 
-require  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 // Deactivate the logger
 error_reporting(0);
 $xoopsLogger->activated = false;
+$common->ajax()->prepare();
 
 function response($message, $data = [], $error = 0, $token = 0)
 {
@@ -39,7 +40,7 @@ if (!$xoopsSecurity->checkReferer(1)) {
  */
 function insert_block()
 {
-    global $xoopsSecurity;
+    global $xoopsSecurity, $common;
 
     $mod = RMHttpRequest::post('module', 'string', '');
     $id = RMHttpRequest::post('block', 'string', '');
@@ -54,7 +55,7 @@ function insert_block()
         response(__('The block specified seems to be invalid. Please try again.', 'rmcommon'), [], 1, 0);
     }
 
-    $module = RMModules::load_module($mod);
+    $module = $common->modules()::load($mod);
     if (!$module) {
         response(__('The specified module does not exists!', 'rmcommon'), [], 1, 0);
     }
@@ -190,7 +191,7 @@ function configure_block()
     $block_options = $block->getOptions();
 
     ob_start();
-    include RMTemplate::get()->get_template('rmc-block-form.php', 'module', 'rmcommon');
+    include $common->template()::path('rmc-block-form.php', 'module', 'rmcommon');
     $form = ob_get_clean();
 
     $ret = [

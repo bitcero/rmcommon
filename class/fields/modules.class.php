@@ -209,6 +209,7 @@ class RMFormModules extends RMFormElement
 
         $type = $this->get('type');
         $selected = $this->get('value');
+        $selected = is_array($selected) ? $selected : [$selected];
 
         if ('radio' == $type || 'checkbox' == $type) {
             // Add js script
@@ -277,7 +278,7 @@ class RMFormModules extends RMFormElement
                         foreach ($subpages as $page => $caption) {
                             $rtns .= "<li class='checkbox'>
                                         <label>
-                                            <input type='checkbox' data-parent='" . $k . "' name='" . sprintf($name, $k) . "[subpages][$page]' id='subpages-$k-$page' value='$page'" . (is_array($subpages) && @in_array($page, $selectedSubs[$k], true) ? " checked" : '') . "> $caption</label></li>";
+                                            <input type='checkbox' data-parent='" . $k . "' name='" . sprintf($name, $k) . "[subpages][$page]' id='subpages-$k-$page' value='$page'" . (is_array($subpages) && is_array($selectedSubs[$k]) && in_array($page, $selectedSubs[$k], true) ? " checked" : '') . "> $caption</label></li>";
                             $j++;
                             $cr++;
                         }
