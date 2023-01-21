@@ -11,6 +11,15 @@
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.15);
 
+  h3{
+    svg{
+      fill: $success;
+      @include cu-icon-size(pxToRem(24));
+      margin-right: pxToRem(10);
+      display: none;
+    }
+  }
+
   > .cu-icon {
     float: right;
     margin-top: 0px;
@@ -31,6 +40,11 @@
 
     a{
       padding: pxToRem(5);
+
+      svg{
+        @include cu-icon-size(24);
+        fill: currentColor;
+      }
     }
   }
 }
@@ -41,6 +55,15 @@
   margin-left: 0 !important;
   margin-right: 0 !important;
   border-radius: 6px;
+
+  a{
+    padding: pxToRem(5);
+  }
+  
+  svg {
+    @include cu-icon-size(24px);
+    fill: currentColor;
+  }
 }
 
 .dd-dragel .item-controls,
@@ -58,9 +81,9 @@
   font-size: 1.1em;
   cursor: move;
 
-  .cu-icon {
-    @include cu-icon-size(16px);
-    margin-right: 4px;
+  svg {
+    @include cu-icon-size(24px);
+    fill: currentColor;
   }
 }
 

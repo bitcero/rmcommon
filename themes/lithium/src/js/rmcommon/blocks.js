@@ -347,10 +347,10 @@ var blocksAjax = {
         if(position==undefined || position=='')
             return false;
 
-        $(position+' '+" h3 > .cu-icon").fadeIn('fast', function(){
+        $(position+' '+" h3 > svg").fadeIn('fast', function(){
 
             setTimeout(function(){
-                $(position+" h3 > .cu-icon").fadeOut('fast');
+                $(position+" h3 > svg").fadeOut('fast');
             }, 1000);
 
         });

@@ -98,7 +98,10 @@
                                        data-id="<?php echo $pos['id']; ?>">
                                       <div class="box-header">
                                           <span class="fa fa-caret-up box-handler"></span>
-                                          <h3 class="box-title"><?php echo $pos['name']; ?><?php echo $cuIcons->getIcon('svg-rmcommon-ok-circle text-success'); ?></h3>
+                                          <h3 class="box-title d-flex align-items-center">
+                                            <?php echo $cuIcons->svg('svg-rmcommon-ok-circle', ['class' => 'success-icon']); ?>
+                                            <?php echo $pos['name']; ?>
+                                          </h3>
                                       </div>
                                       <div class="dd box-content collapsable" data-pos="<?php echo $pos['id']; ?>">
 
