@@ -1,7 +1,5 @@
 <h1 class="cu-section-title"><?php _e('Blocks Administration', 'rmcommon'); ?></h1>
 
-<?php $from = 'positions' == $common->httpRequest()::request('from', 'string', '') ? true : false; ?>
-
 <div class="cu-box">
     <div class="box-content no-padding">
         <ul class="nav nav-tabs" role="tablist">

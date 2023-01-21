@@ -70,7 +70,7 @@
                     </td>
                     <td class="item-options">
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="#" class="edit_position btn btn-link text-warning"
+                            <a href="blocks.php?action=edit-position&amp;id_position=<?php echo $pos['id']; ?>" class="btn btn-link edit_position text-warning"
                                title="<?php _e('Edit', 'rmcommon'); ?>">
                               <?php echo $common->icons()->svg('lithium-edit'); ?>
                             </a>
@@ -91,31 +91,40 @@
 
 </div>
 
-<div class="modal attach-to-body fade" id="positions-modal-form">
+<div class="modal attach-to-body fade" <?php echo $edit_position->isNew() ? '' : 'data-cu-show'; ?> id="positions-modal-form">
     <div class="modal-dialog">
         <form name="frmaddpos" id="frm-add-pos" method="post" action="blocks.php">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><?php _e('Add Position', 'rmcommon'); ?></h4>
+                    <h4 class="modal-title">
+                      <?php if($edit_position->isNew()): ?>
+                        <?php _e('Add Position', 'rmcommon'); ?>
+                      <?php else: ?>
+                        <?php _e('Edit Position', 'rmcommon'); ?>
+                      <?php endif; ?>
+                    </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <fieldset>
                         <div class="mb-3">
                             <label class="form-label" for="position-name"><?php _e('Name', 'rmcommon'); ?></label>
-                            <input type="text" id="position-name" name="posname" value="" class="form-control" required>
+                            <input type="text" id="position-name" name="posname" value="<?php echo $edit_position->isNew() ? '' : $edit_position->getVar('name'); ?>" class="form-control" required>
                             <div class="form-text"><?php _e('Input a name to identify this position (<em>eg. Left blocks</em>)', 'rmcommon'); ?></div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label" for="position-tag"><?php _e('Tag Name', 'rmcommon'); ?></label>
-                            <input type="text" id="position-tag" name="postag" value="" class="form-control" required>
+                            <input type="text" id="position-tag" name="postag" value="<?php echo $edit_position->isNew() ? '' : $edit_position->getVar('tag'); ?>" class="form-control" required>
                             <div class="form-text">
                               <?php _e('Specify a name for the smarty tag to use in templates (eg. left_blocks). This tag will be used as Smarty tag (eg. <code>&lt;{$left_blocks}&gt</code>).', 'rmcommon'); ?>
                             </div>
                         </div>
 
-                        <input type="hidden" name="action" value="save_position">
+                        <input type="hidden" name="action" value="<?php echo $edit_position->isNew() ? 'save_position' : 'save_edited'; ?>">
+                      <?php if(!$edit_position->isNew()): ?>
+                          <input type="hidden" name="id_position" value="<?php echo $edit_position->id(); ?>">
+                      <?php endif; ?>
                       <?php echo $xoopsSecurity->getTokenHTML(); ?>
 
                         <hr>

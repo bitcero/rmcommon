@@ -64,7 +64,7 @@ function createSQL()
   return $sql;
 }
 
-function show_rm_blocks()
+function show_rm_blocks($show = null)
 {
   global $xoopsModule,
          $xoopsConfig,
@@ -78,9 +78,17 @@ function show_rm_blocks()
   define('RMCSUBLOCATION', 'blocks');
   $db = XoopsDatabaseFactory::getDatabaseConnection();
 
+  // Get position id if present
+  $id_position = $common->httpRequest()::get('id_position', 'integer', 0);
+  $edit_position = new RMBlockPosition($id_position);
+
+  if($id_position > 0 && $edit_position->isNew()){
+    $common->uris()::redirect_with_message(__('Position does not exists!', 'rmcommon'), 'blocks.php?from=positions', RMMSG_ERROR);
+  }
+
   $modules = RMModules::get_modules_list('active');
 
-  $from = rmc_server_var($_GET, 'from', '');
+  $from = null == $show ? $common->httpRequest()::get('from') : $show;
 
   // ** API Event **
   // Allows other methods to add o modify the list of available widgets
@@ -126,7 +134,7 @@ function show_rm_blocks()
 
   // ** API **
   // Event for manege the used widgets list
-  $used_blocks = RMEvents::get()->run_event('rmcommon.used.blocks.list', $used_blocks);
+  $used_blocks = RMEvents::get()->trigger('rmcommon.used.blocks.list', $used_blocks);
 
   $positions = [];
   foreach ($bpos as $row) {
@@ -138,7 +146,7 @@ function show_rm_blocks()
     ];
   }
 
-  $positions = RMEvents::get()->run_event('rmcommon.block.positions.list', $positions);
+  $positions = RMEvents::get()->trigger('rmcommon.block.positions.list', $positions);
 
   RMTemplate::getInstance()->add_script('jquery.nestable.js', 'rmcommon', ['directory' => 'include']);
 
@@ -383,6 +391,9 @@ switch ($action) {
   case 'active':
   case 'inactive':
     activate_position($action);
+    break;
+  case 'edit-position':
+    show_rm_blocks('positions');
     break;
   default:
     show_rm_blocks();
