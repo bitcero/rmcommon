@@ -88,4 +88,3 @@ foreach ($modules as $mod): ?>
 </a>
 <?php endforeach;
 
-die();

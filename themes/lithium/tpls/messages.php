@@ -38,9 +38,6 @@ if (!empty($lithiumMessages)) {
         } else {
             switch ($msg['level']) {
                 case RMMSG_DANGER:
-                    $icon = 'svg-rmcommon-error';
-                    $type = 'alert-danger';
-                    break;
                 case RMMSG_ERROR:
                     $icon = 'svg-rmcommon-error';
                     $type = 'alert-danger';
