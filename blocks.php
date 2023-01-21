@@ -207,18 +207,18 @@ function show_rm_blocks($show = null)
  */
 function save_position($edit = 0)
 {
-  global $xoopsSecurity;
+  global $xoopsSecurity, $common;
 
   if (!$xoopsSecurity->check()) {
-    redirectMsg('blocks.php', __('You are not allowed to do this action!', 'rmcommon'), 1);
+    $common->uris()::redirect_with_message(__('You are not allowed to do this action!', 'rmcommon'), 'blocks.php?from=positions', RMMSG_ERROR);
     die();
   }
 
-  $name = rmc_server_var($_POST, 'posname', '');
-  $tag = rmc_server_var($_POST, 'postag', '');
+  $name = $common->httpRequest()::post('posname', '');
+  $tag = $common->httpRequest()::post('postag', '');
 
   if ('' == $name) {
-    redirectMsg('blocks.php', __('Please provide a name and tag for this new position!', 'rmcommon'), RMMSG_ERROR);
+    $common->uris()::redirect_with_message(__('Please provide a name and tag for this new position!', 'rmcommon'), 'blocks.php?from=positions', RMMSG_ERROR);
     die();
   }
 
@@ -227,14 +227,14 @@ function save_position($edit = 0)
   }
 
   if ($edit) {
-    $id = rmc_server_var($_POST, 'id', '');
+    $id = $common->httpRequest()::post('id', '');
     if ($id <= 0) {
-      redirectMsg('blocks.php', __('You must specify a valid position ID!', 'rmcommon'), 1);
+      $common->uris()::redirect_with_message(__('You must specify a valid position ID!', 'rmcommon'), 'blocks.php?from=positions', RMMSG_ERROR);
     }
 
     $pos = new RMBlockPosition($id);
     if ($pos->isNew()) {
-      redirectMsg('blocks.php', __('Specified position does not exists!', 'rmcommon'), 1);
+      $common->uris()::redirect_with_message(__('Specified position does not exists!', 'rmcommon'), 'blocks.php?from=positions', RMMSG_ERROR);
     }
   } else {
     $pos = new RMBlockPosition();
@@ -394,6 +394,9 @@ switch ($action) {
     break;
   case 'edit-position':
     show_rm_blocks('positions');
+    break;
+  case 'save_edited':
+    save_position(1);
     break;
   default:
     show_rm_blocks();

@@ -123,7 +123,7 @@
 
                         <input type="hidden" name="action" value="<?php echo $edit_position->isNew() ? 'save_position' : 'save_edited'; ?>">
                       <?php if(!$edit_position->isNew()): ?>
-                          <input type="hidden" name="id_position" value="<?php echo $edit_position->id(); ?>">
+                          <input type="hidden" name="id" value="<?php echo $edit_position->id(); ?>">
                       <?php endif; ?>
                       <?php echo $xoopsSecurity->getTokenHTML(); ?>
 
@@ -139,7 +139,13 @@
                     <button type="button" class="btn btn-default"
                             data-bs-dismiss="modal"><?php _e('Cancel', 'rmcommon'); ?></button>
                     <button type="submit" class="btn btn-primary"
-                            id="save-position"><?php _e('Add Position', 'rmcommon'); ?></button>
+                            id="save-position">
+                        <?php if($edit_position->isNew()): ?>
+                          <?php _e('Add Position', 'rmcommon'); ?>
+                        <?php else: ?>
+                          <?php _e('Edit Position', 'rmcommon'); ?>
+                        <?php endif; ?>
+                    </button>
                 </div>
             </div>
         </form>
