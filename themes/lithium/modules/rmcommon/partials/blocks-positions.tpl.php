@@ -10,8 +10,15 @@
                     <option value="inactive"><?php _e('Inactive', 'rmcommon'); ?></option>
                     <option value="deletepos"><?php _e('Delete', 'rmcommon'); ?></option>
                 </select>
-                <button type="button" class="btn btn-primary" id="the-op-topp" onclick="before_submit('frm-positions');">
+                <button type="button" class="btn btn-primary" id="the-op-topp"
+                        onclick="before_submit('frm-positions');">
                   <?php _e('Apply', 'rmcommon'); ?>
+                </button>
+
+                <button type="button" class="ms-3 btn btn-outline-info d-flex align-items-center" id="add-position"
+                        data-bs-toggle="modal" data-bs-target="#positions-modal-form">
+                  <?php echo $common->icons()->svg('lithium-add'); ?>
+                  <?php _e('Add Position', 'rmcommon'); ?>
                 </button>
             </div>
         </div>
@@ -47,13 +54,13 @@
                                value="<?php echo $pos['id']; ?>"
                                data-oncheck="positions"></td>
                     <td><strong><?php echo $pos['id']; ?></strong></td>
-                    <td>
+                    <td class="positions-data">
                         <span class="name"><?php echo $pos['name']; ?></span>
-                        <span class="pos_data hide">
+                        <div class="pos_data hide">
                             <span class="name"><?php echo $pos['name']; ?></span>
                             <span class="ptag"><?php echo $pos['tag']; ?></span>
                             <span class="active"><?php echo $pos['active']; ?></span>
-                        </span>
+                        </div>
                     </td>
                     <td class="text-center font-monospace">&lt;{$xoBlocks.<span
                                 class="ptag"><?php echo $pos['tag']; ?></span>}&gt;
@@ -63,13 +70,14 @@
                     </td>
                     <td class="item-options">
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="#" class="edit_position btn btn-link text-warning" title="<?php _e('Edit', 'rmcommon'); ?>">
+                            <a href="#" class="edit_position btn btn-link text-warning"
+                               title="<?php _e('Edit', 'rmcommon'); ?>">
                               <?php echo $common->icons()->svg('lithium-edit'); ?>
                             </a>
                             <a href="#"
                                onclick="select_option(<?php echo $pos['id']; ?>, 'delete', 'frm-positions')"
                                title="<?php _e('Delete', 'rmcommon'); ?>"
-                                class="btn btn-link text-danger">
+                               class="btn btn-link text-danger">
                               <?php echo $common->icons()->svg('lithium-delete'); ?>
                             </a>
                         </div>
@@ -120,8 +128,8 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <button type="button" class="btn btn-default"
-                            data-dismiss="modal"><?php _e('Cancel', 'rmcommon'); ?></button>
-                    <button type="button" class="btn btn-primary"
+                            data-bs-dismiss="modal"><?php _e('Cancel', 'rmcommon'); ?></button>
+                    <button type="submit" class="btn btn-primary"
                             id="save-position"><?php _e('Add Position', 'rmcommon'); ?></button>
                 </div>
             </div>

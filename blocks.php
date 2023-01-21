@@ -252,7 +252,7 @@ function save_position($edit = 0)
   if ($pos->save()) {
     redirectMsg('blocks.php?from=positions', __('Database updated successfully!', 'rmcommon'));
   } else {
-    redirectMsg('blocks.php', __('Errors ocurred while trying to save data', 'rmcommon') . '<br>' . $pos->errors());
+    redirectMsg('blocks.php?from=positions', __('Errors ocurred while trying to save data', 'rmcommon') . '<br>' . $pos->errors());
   }
 }
 

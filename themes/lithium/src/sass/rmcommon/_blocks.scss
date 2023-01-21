@@ -409,3 +409,22 @@ AVAILABLE LIST
 #editor-row button {
   margin: 5px 2px 0 0;
 }
+
+#bks-and-pos{
+  #add-position{
+    white-space: nowrap;
+
+    svg{
+      width: pxToRem(24);
+      height: pxToRem(24);
+      fill: currentColor;
+      margin-right: pxToRem(8);
+    }
+  }
+
+  td.positions-data{
+    div.pos_data{
+      display: none;
+    }
+  }
+}
